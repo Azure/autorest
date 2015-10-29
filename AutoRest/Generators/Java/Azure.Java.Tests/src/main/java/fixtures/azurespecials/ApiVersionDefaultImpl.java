@@ -11,6 +11,8 @@
 package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.BaseResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -20,8 +22,12 @@ import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
+import retrofit.Callback;
 import retrofit.Response;
-import fixtures.azurespecials.models.Error;
+import java.io.IOException;
+import retrofit.http.GET;
+import retrofit.http.Query;
+import retrofit.http.Header;
 
 public class ApiVersionDefaultImpl implements ApiVersionDefault {
     private ApiVersionDefaultService service;
@@ -37,15 +43,14 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getMethodGlobalValid() throws ServiceException {
+    public ServiceResponse<Void> getMethodGlobalValid() throws ServiceException {
         if (this.client.getApiVersion() == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getMethodGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getMethodGlobalValidDelegate(call.execute(), null);
-            response.getBody();
+            return getMethodGlobalValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -89,15 +94,14 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getMethodGlobalNotProvidedValid() throws ServiceException {
+    public ServiceResponse<Void> getMethodGlobalNotProvidedValid() throws ServiceException {
         if (this.client.getApiVersion() == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getMethodGlobalNotProvidedValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getMethodGlobalNotProvidedValidDelegate(call.execute(), null);
-            response.getBody();
+            return getMethodGlobalNotProvidedValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -141,15 +145,14 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getPathGlobalValid() throws ServiceException {
+    public ServiceResponse<Void> getPathGlobalValid() throws ServiceException {
         if (this.client.getApiVersion() == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getPathGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getPathGlobalValidDelegate(call.execute(), null);
-            response.getBody();
+            return getPathGlobalValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -193,15 +196,14 @@ public class ApiVersionDefaultImpl implements ApiVersionDefault {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getSwaggerGlobalValid() throws ServiceException {
+    public ServiceResponse<Void> getSwaggerGlobalValid() throws ServiceException {
         if (this.client.getApiVersion() == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getSwaggerGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getSwaggerGlobalValidDelegate(call.execute(), null);
-            response.getBody();
+            return getSwaggerGlobalValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

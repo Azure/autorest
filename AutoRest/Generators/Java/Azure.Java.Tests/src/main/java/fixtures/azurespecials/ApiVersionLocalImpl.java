@@ -11,6 +11,8 @@
 package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.BaseResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -20,8 +22,12 @@ import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
+import retrofit.Callback;
 import retrofit.Response;
-import fixtures.azurespecials.models.Error;
+import java.io.IOException;
+import retrofit.http.GET;
+import retrofit.http.Query;
+import retrofit.http.Header;
 
 public class ApiVersionLocalImpl implements ApiVersionLocal {
     private ApiVersionLocalService service;
@@ -38,15 +44,14 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getMethodLocalValid(String apiVersion) throws ServiceException {
+    public ServiceResponse<Void> getMethodLocalValid(String apiVersion) throws ServiceException {
         if (apiVersion == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getMethodLocalValidDelegate(call.execute(), null);
-            response.getBody();
+            return getMethodLocalValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -92,11 +97,10 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getMethodLocalNull(String apiVersion) throws ServiceException {
+    public ServiceResponse<Void> getMethodLocalNull(String apiVersion) throws ServiceException {
         try {
             Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getMethodLocalNullDelegate(call.execute(), null);
-            response.getBody();
+            return getMethodLocalNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -138,15 +142,14 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getPathLocalValid(String apiVersion) throws ServiceException {
+    public ServiceResponse<Void> getPathLocalValid(String apiVersion) throws ServiceException {
         if (apiVersion == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getPathLocalValidDelegate(call.execute(), null);
-            response.getBody();
+            return getPathLocalValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -192,15 +195,14 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
      * @param apiVersion The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getSwaggerLocalValid(String apiVersion) throws ServiceException {
+    public ServiceResponse<Void> getSwaggerLocalValid(String apiVersion) throws ServiceException {
         if (apiVersion == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getSwaggerLocalValidDelegate(call.execute(), null);
-            response.getBody();
+            return getSwaggerLocalValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

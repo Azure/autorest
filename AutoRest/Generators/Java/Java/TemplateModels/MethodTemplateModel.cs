@@ -144,6 +144,43 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public string LocalMethodParameterInvocation
+        {
+            get
+            {
+                List<string> declarations = new List<string>();
+                foreach (var parameter in LocalParameters)
+                {
+                    if ((parameter.Location != ParameterLocation.Body)
+                         && parameter.Type.NeedsSpecialSerialization())
+                    {
+                        declarations.Add(parameter.ToString(parameter.Name));
+                    }
+                    else
+                    {
+                        declarations.Add(parameter.Name);
+                    }
+                }
+
+                var declaration = string.Join(", ", declarations);
+                return declaration;
+            }
+        }
+
+        public string LocalMethodParameterInvocationWithCallback
+        {
+            get
+            {
+                var parameters = LocalMethodParameterInvocation;
+                if (!parameters.IsNullOrEmpty())
+                {
+                    parameters += ", ";
+                }
+                parameters += string.Format(CultureInfo.InvariantCulture, "new ServiceCallback<" + GenericReturnTypeString + ">()");
+                return parameters;
+            }
+        }
+
         public IEnumerable<ParameterTemplateModel> RequiredNullableParameters
         {
             get
@@ -263,19 +300,6 @@ namespace Microsoft.Rest.Generator.Java
                     return JavaCodeNamer.WrapPrimitiveType(ReturnType).Name;
                 }
                 return "Void";
-            }
-        }
-
-        public string ReturnStatement {
-            get
-            {
-                StringBuilder sb = new StringBuilder();
-                if (this.ReturnType != null)
-                {
-                    sb.Append("return ");
-                }
-                sb.Append("response.getBody();");
-                return sb.ToString();
             }
         }
 

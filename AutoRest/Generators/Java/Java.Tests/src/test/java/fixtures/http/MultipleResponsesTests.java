@@ -47,7 +47,6 @@ public class MultipleResponsesTests {
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(201, ex.getResponse().code());
-            Assert.assertTrue(ex.getMessage().contains("UnrecognizedPropertyException"));
         }
     }
 
@@ -89,7 +88,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = JacksonHelper.getObjectMapper().convertValue(
+            Error model = new JacksonHelper().getObjectMapper().convertValue(
                     ex.getErrorModel(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
@@ -124,7 +123,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = JacksonHelper.getObjectMapper().convertValue(
+            Error model = new JacksonHelper().getObjectMapper().convertValue(
                     ex.getErrorModel(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
@@ -135,7 +134,7 @@ public class MultipleResponsesTests {
     public void get202None204NoneDefaultError202None() throws Exception {
         client.getMultipleResponses().get202None204NoneDefaultError202NoneAsync(new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -152,7 +151,7 @@ public class MultipleResponsesTests {
     public void get202None204NoneDefaultError204None() throws Exception {
         client.getMultipleResponses().get202None204NoneDefaultError204NoneAsync(new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
                 fail();
             }
 
@@ -172,7 +171,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = JacksonHelper.getObjectMapper().convertValue(
+            Error model = new JacksonHelper().getObjectMapper().convertValue(
                     ex.getErrorModel(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
@@ -228,7 +227,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            A model = JacksonHelper.getObjectMapper().convertValue(
+            A model = new JacksonHelper().getObjectMapper().convertValue(
                     ex.getErrorModel(), A.class);
             Assert.assertEquals("400", model.getStatusCode());
         }
@@ -288,13 +287,7 @@ public class MultipleResponsesTests {
 
     @Test
     public void get200ModelA200Invalid() throws Exception {
-        try {
-            client.getMultipleResponses().get200ModelA200Invalid();
-            fail();
-        } catch (ServiceException ex) {
-            Assert.assertEquals(200, ex.getResponse().code());
-            Assert.assertTrue(ex.getMessage().contains("UnrecognizedPropertyException"));
-        }
+        Assert.assertEquals(null, client.getMultipleResponses().get200ModelA200Invalid().getStatusCode());
     }
 
     @Test

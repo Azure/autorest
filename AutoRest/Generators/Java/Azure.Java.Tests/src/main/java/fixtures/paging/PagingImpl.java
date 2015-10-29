@@ -11,6 +11,8 @@
 package fixtures.paging;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.BaseResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -20,9 +22,13 @@ import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
+import retrofit.Callback;
 import retrofit.Response;
+import java.io.IOException;
 import fixtures.paging.models.ProductResult;
-import fixtures.paging.models.CloudError;
+import retrofit.http.GET;
+import retrofit.http.Header;
+import retrofit.http.Path;
 
 public class PagingImpl implements Paging {
     private PagingService service;
@@ -39,11 +45,10 @@ public class PagingImpl implements Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ProductResult getSinglePages() throws ServiceException {
+    public ServiceResponse<ProductResult> getSinglePages() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getSinglePages(this.client.getAcceptLanguage());
-            ServiceResponse<ProductResult> response = getSinglePagesDelegate(call.execute(), null);
-            return response.getBody();
+            return getSinglePagesDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -84,11 +89,10 @@ public class PagingImpl implements Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ProductResult getMultiplePages() throws ServiceException {
+    public ServiceResponse<ProductResult> getMultiplePages() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getMultiplePages(this.client.getAcceptLanguage());
-            ServiceResponse<ProductResult> response = getMultiplePagesDelegate(call.execute(), null);
-            return response.getBody();
+            return getMultiplePagesDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -129,11 +133,10 @@ public class PagingImpl implements Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ProductResult getMultiplePagesRetryFirst() throws ServiceException {
+    public ServiceResponse<ProductResult> getMultiplePagesRetryFirst() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.getAcceptLanguage());
-            ServiceResponse<ProductResult> response = getMultiplePagesRetryFirstDelegate(call.execute(), null);
-            return response.getBody();
+            return getMultiplePagesRetryFirstDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -174,11 +177,10 @@ public class PagingImpl implements Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ProductResult getMultiplePagesRetrySecond() throws ServiceException {
+    public ServiceResponse<ProductResult> getMultiplePagesRetrySecond() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.getAcceptLanguage());
-            ServiceResponse<ProductResult> response = getMultiplePagesRetrySecondDelegate(call.execute(), null);
-            return response.getBody();
+            return getMultiplePagesRetrySecondDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -219,11 +221,10 @@ public class PagingImpl implements Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ProductResult getSinglePagesFailure() throws ServiceException {
+    public ServiceResponse<ProductResult> getSinglePagesFailure() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getSinglePagesFailure(this.client.getAcceptLanguage());
-            ServiceResponse<ProductResult> response = getSinglePagesFailureDelegate(call.execute(), null);
-            return response.getBody();
+            return getSinglePagesFailureDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -264,11 +265,10 @@ public class PagingImpl implements Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ProductResult getMultiplePagesFailure() throws ServiceException {
+    public ServiceResponse<ProductResult> getMultiplePagesFailure() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.getAcceptLanguage());
-            ServiceResponse<ProductResult> response = getMultiplePagesFailureDelegate(call.execute(), null);
-            return response.getBody();
+            return getMultiplePagesFailureDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -309,11 +309,10 @@ public class PagingImpl implements Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ProductResult getMultiplePagesFailureUri() throws ServiceException {
+    public ServiceResponse<ProductResult> getMultiplePagesFailureUri() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.getAcceptLanguage());
-            ServiceResponse<ProductResult> response = getMultiplePagesFailureUriDelegate(call.execute(), null);
-            return response.getBody();
+            return getMultiplePagesFailureUriDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -355,15 +354,14 @@ public class PagingImpl implements Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ProductResult getSinglePagesNext(String nextPageLink) throws ServiceException {
+    public ServiceResponse<ProductResult> getSinglePagesNext(String nextPageLink) throws ServiceException {
         if (nextPageLink == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getSinglePagesNext(nextPageLink, this.client.getAcceptLanguage());
-            ServiceResponse<ProductResult> response = getSinglePagesNextDelegate(call.execute(), null);
-            return response.getBody();
+            return getSinglePagesNextDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -410,15 +408,14 @@ public class PagingImpl implements Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ProductResult getMultiplePagesNext(String nextPageLink) throws ServiceException {
+    public ServiceResponse<ProductResult> getMultiplePagesNext(String nextPageLink) throws ServiceException {
         if (nextPageLink == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, this.client.getAcceptLanguage());
-            ServiceResponse<ProductResult> response = getMultiplePagesNextDelegate(call.execute(), null);
-            return response.getBody();
+            return getMultiplePagesNextDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -465,15 +462,14 @@ public class PagingImpl implements Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ProductResult getMultiplePagesRetryFirstNext(String nextPageLink) throws ServiceException {
+    public ServiceResponse<ProductResult> getMultiplePagesRetryFirstNext(String nextPageLink) throws ServiceException {
         if (nextPageLink == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.getAcceptLanguage());
-            ServiceResponse<ProductResult> response = getMultiplePagesRetryFirstNextDelegate(call.execute(), null);
-            return response.getBody();
+            return getMultiplePagesRetryFirstNextDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -520,15 +516,14 @@ public class PagingImpl implements Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ProductResult getMultiplePagesRetrySecondNext(String nextPageLink) throws ServiceException {
+    public ServiceResponse<ProductResult> getMultiplePagesRetrySecondNext(String nextPageLink) throws ServiceException {
         if (nextPageLink == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.getAcceptLanguage());
-            ServiceResponse<ProductResult> response = getMultiplePagesRetrySecondNextDelegate(call.execute(), null);
-            return response.getBody();
+            return getMultiplePagesRetrySecondNextDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -575,15 +570,14 @@ public class PagingImpl implements Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ProductResult getSinglePagesFailureNext(String nextPageLink) throws ServiceException {
+    public ServiceResponse<ProductResult> getSinglePagesFailureNext(String nextPageLink) throws ServiceException {
         if (nextPageLink == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getSinglePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
-            ServiceResponse<ProductResult> response = getSinglePagesFailureNextDelegate(call.execute(), null);
-            return response.getBody();
+            return getSinglePagesFailureNextDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -630,15 +624,14 @@ public class PagingImpl implements Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ProductResult getMultiplePagesFailureNext(String nextPageLink) throws ServiceException {
+    public ServiceResponse<ProductResult> getMultiplePagesFailureNext(String nextPageLink) throws ServiceException {
         if (nextPageLink == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getMultiplePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
-            ServiceResponse<ProductResult> response = getMultiplePagesFailureNextDelegate(call.execute(), null);
-            return response.getBody();
+            return getMultiplePagesFailureNextDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -685,15 +678,14 @@ public class PagingImpl implements Paging {
      * @return the ProductResult object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ProductResult getMultiplePagesFailureUriNext(String nextPageLink) throws ServiceException {
+    public ServiceResponse<ProductResult> getMultiplePagesFailureUriNext(String nextPageLink) throws ServiceException {
         if (nextPageLink == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.getMultiplePagesFailureUriNext(nextPageLink, this.client.getAcceptLanguage());
-            ServiceResponse<ProductResult> response = getMultiplePagesFailureUriNextDelegate(call.execute(), null);
-            return response.getBody();
+            return getMultiplePagesFailureUriNextDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

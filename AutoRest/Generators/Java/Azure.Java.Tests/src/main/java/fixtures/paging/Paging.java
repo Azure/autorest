@@ -10,10 +10,14 @@
 
 package fixtures.paging;
 
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.BaseResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
 import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import fixtures.paging.models.ProductResult;
 import retrofit.http.GET;
 import retrofit.http.Header;
@@ -75,10 +79,10 @@ public interface Paging {
     /**
      * A paging operation that finishes on the first call without a nextlink
      *
-     * @return the ProductResult object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ProductResult object wrapped in ServiceResponse if successful.
      */
-    ProductResult getSinglePages() throws ServiceException;
+    ServiceResponse<ProductResult> getSinglePages() throws ServiceException;
 
     /**
      * A paging operation that finishes on the first call without a nextlink
@@ -91,10 +95,10 @@ public interface Paging {
     /**
      * A paging operation that includes a nextLink that has 10 pages
      *
-     * @return the ProductResult object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ProductResult object wrapped in ServiceResponse if successful.
      */
-    ProductResult getMultiplePages() throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePages() throws ServiceException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages
@@ -107,10 +111,10 @@ public interface Paging {
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
      *
-     * @return the ProductResult object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ProductResult object wrapped in ServiceResponse if successful.
      */
-    ProductResult getMultiplePagesRetryFirst() throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesRetryFirst() throws ServiceException;
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
@@ -123,10 +127,10 @@ public interface Paging {
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
-     * @return the ProductResult object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ProductResult object wrapped in ServiceResponse if successful.
      */
-    ProductResult getMultiplePagesRetrySecond() throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesRetrySecond() throws ServiceException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
@@ -139,10 +143,10 @@ public interface Paging {
     /**
      * A paging operation that receives a 400 on the first call
      *
-     * @return the ProductResult object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ProductResult object wrapped in ServiceResponse if successful.
      */
-    ProductResult getSinglePagesFailure() throws ServiceException;
+    ServiceResponse<ProductResult> getSinglePagesFailure() throws ServiceException;
 
     /**
      * A paging operation that receives a 400 on the first call
@@ -155,10 +159,10 @@ public interface Paging {
     /**
      * A paging operation that receives a 400 on the second call
      *
-     * @return the ProductResult object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ProductResult object wrapped in ServiceResponse if successful.
      */
-    ProductResult getMultiplePagesFailure() throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesFailure() throws ServiceException;
 
     /**
      * A paging operation that receives a 400 on the second call
@@ -171,10 +175,10 @@ public interface Paging {
     /**
      * A paging operation that receives an invalid nextLink
      *
-     * @return the ProductResult object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ProductResult object wrapped in ServiceResponse if successful.
      */
-    ProductResult getMultiplePagesFailureUri() throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesFailureUri() throws ServiceException;
 
     /**
      * A paging operation that receives an invalid nextLink
@@ -188,10 +192,10 @@ public interface Paging {
      * A paging operation that finishes on the first call without a nextlink
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the ProductResult object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ProductResult object wrapped in ServiceResponse if successful.
      */
-    ProductResult getSinglePagesNext(String nextPageLink) throws ServiceException;
+    ServiceResponse<ProductResult> getSinglePagesNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that finishes on the first call without a nextlink
@@ -206,10 +210,10 @@ public interface Paging {
      * A paging operation that includes a nextLink that has 10 pages
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the ProductResult object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ProductResult object wrapped in ServiceResponse if successful.
      */
-    ProductResult getMultiplePagesNext(String nextPageLink) throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages
@@ -224,10 +228,10 @@ public interface Paging {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the ProductResult object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ProductResult object wrapped in ServiceResponse if successful.
      */
-    ProductResult getMultiplePagesRetryFirstNext(String nextPageLink) throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesRetryFirstNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
@@ -242,10 +246,10 @@ public interface Paging {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the ProductResult object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ProductResult object wrapped in ServiceResponse if successful.
      */
-    ProductResult getMultiplePagesRetrySecondNext(String nextPageLink) throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesRetrySecondNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
@@ -260,10 +264,10 @@ public interface Paging {
      * A paging operation that receives a 400 on the first call
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the ProductResult object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ProductResult object wrapped in ServiceResponse if successful.
      */
-    ProductResult getSinglePagesFailureNext(String nextPageLink) throws ServiceException;
+    ServiceResponse<ProductResult> getSinglePagesFailureNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that receives a 400 on the first call
@@ -278,10 +282,10 @@ public interface Paging {
      * A paging operation that receives a 400 on the second call
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the ProductResult object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ProductResult object wrapped in ServiceResponse if successful.
      */
-    ProductResult getMultiplePagesFailureNext(String nextPageLink) throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesFailureNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that receives a 400 on the second call
@@ -296,10 +300,10 @@ public interface Paging {
      * A paging operation that receives an invalid nextLink
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the ProductResult object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ProductResult object wrapped in ServiceResponse if successful.
      */
-    ProductResult getMultiplePagesFailureUriNext(String nextPageLink) throws ServiceException;
+    ServiceResponse<ProductResult> getMultiplePagesFailureUriNext(String nextPageLink) throws ServiceException;
 
     /**
      * A paging operation that receives an invalid nextLink

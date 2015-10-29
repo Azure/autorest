@@ -11,6 +11,8 @@
 package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.BaseResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -20,8 +22,11 @@ import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
+import retrofit.Callback;
 import retrofit.Response;
-import fixtures.azurespecials.models.Error;
+import java.io.IOException;
+import retrofit.http.GET;
+import retrofit.http.Header;
 
 public class XMsClientRequestIdImpl implements XMsClientRequestId {
     private XMsClientRequestIdService service;
@@ -37,11 +42,10 @@ public class XMsClientRequestIdImpl implements XMsClientRequestId {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void get() throws ServiceException {
+    public ServiceResponse<Void> get() throws ServiceException {
         try {
             Call<ResponseBody> call = service.get(this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = getDelegate(call.execute(), null);
-            response.getBody();
+            return getDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -82,15 +86,14 @@ public class XMsClientRequestIdImpl implements XMsClientRequestId {
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void paramGet(String xMsClientRequestId) throws ServiceException {
+    public ServiceResponse<Void> paramGet(String xMsClientRequestId) throws ServiceException {
         if (xMsClientRequestId == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = paramGetDelegate(call.execute(), null);
-            response.getBody();
+            return paramGetDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

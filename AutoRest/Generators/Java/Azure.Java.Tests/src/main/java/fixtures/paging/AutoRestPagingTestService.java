@@ -11,6 +11,9 @@
 package fixtures.paging;
 
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.BaseResource;
 
 /**
  * The interface for AutoRestPagingTestService class.
@@ -21,6 +24,12 @@ public interface AutoRestPagingTestService {
      * @return The BaseUri value.
      */
     String getBaseUri();
+
+    /**
+     * Gets the {@link AzureClient} used for long running operations.
+     * @return the azure client;
+     */
+    AzureClient getAzureClient();
 
     /**
      * Gets The management credentials for Azure..

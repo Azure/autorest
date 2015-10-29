@@ -11,6 +11,8 @@
 package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.BaseResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -20,8 +22,11 @@ import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Retrofit;
 import retrofit.Call;
+import retrofit.Callback;
 import retrofit.Response;
-import fixtures.azurespecials.models.Error;
+import java.io.IOException;
+import retrofit.http.POST;
+import retrofit.http.Header;
 
 public class HeaderOperationsImpl implements HeaderOperations {
     private HeaderService service;
@@ -38,15 +43,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * @param fooClientRequestId The fooRequestId
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void customNamedRequestId(String fooClientRequestId) throws ServiceException {
+    public ServiceResponse<Void> customNamedRequestId(String fooClientRequestId) throws ServiceException {
         if (fooClientRequestId == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.getAcceptLanguage());
-            ServiceResponse<Void> response = customNamedRequestIdDelegate(call.execute(), null);
-            response.getBody();
+            return customNamedRequestIdDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

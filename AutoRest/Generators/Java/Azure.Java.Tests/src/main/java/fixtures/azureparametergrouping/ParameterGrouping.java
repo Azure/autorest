@@ -10,16 +10,19 @@
 
 package fixtures.azureparametergrouping;
 
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.BaseResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
 import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
-import fixtures.azureparametergrouping.models.FirstParameterGroup;
-import fixtures.azureparametergrouping.models.SecondParameterGroup;
+import java.io.IOException;
 import retrofit.http.POST;
+import retrofit.http.Body;
 import retrofit.http.Header;
+import retrofit.http.Query;
+import retrofit.http.Path;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -32,66 +35,81 @@ public interface ParameterGrouping {
      */
     interface ParameterGroupingService {
         @POST("/parameterGrouping/postRequired/{path}")
-        Call<ResponseBody> postRequired(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> postRequired(@Path("path") String path, @Body int body, @Header("customHeader") String customHeader, @Query("query") Integer query, @Header("accept-language") String acceptLanguage);
 
         @POST("/parameterGrouping/postOptional")
-        Call<ResponseBody> postOptional(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> postOptional(@Header("customHeader") String customHeader, @Query("query") Integer query, @Header("accept-language") String acceptLanguage);
 
         @POST("/parameterGrouping/postMultipleParameterGroups")
-        Call<ResponseBody> postMultipleParameterGroups(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> postMultipleParameterGroups(@Header("header-one") String headerOne, @Query("query-one") Integer queryOne, @Header("header-two") String headerTwo, @Query("query-two") Integer queryTwo, @Header("accept-language") String acceptLanguage);
 
     }
     /**
      * Post a bunch of required parameters grouped
      *
-     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @param path Path parameter
+     * @param body the int value
+     * @param customHeader the String value
+     * @param query Query parameter with default
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
-    void postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) throws ServiceException;
+    ServiceResponse<Void> postRequired(String path, int body, String customHeader, Integer query) throws ServiceException;
 
     /**
      * Post a bunch of required parameters grouped
      *
-     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
+     * @param path Path parameter
+     * @param body the int value
+     * @param customHeader the String value
+     * @param query Query parameter with default
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> postRequiredAsync(String path, int body, String customHeader, Integer query, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post a bunch of optional parameters grouped
      *
-     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @param customHeader the String value
+     * @param query Query parameter with default
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
-    void postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) throws ServiceException;
+    ServiceResponse<Void> postOptional(String customHeader, Integer query) throws ServiceException;
 
     /**
      * Post a bunch of optional parameters grouped
      *
-     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
+     * @param customHeader the String value
+     * @param query Query parameter with default
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> postOptionalAsync(String customHeader, Integer query, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post parameters from multiple different parameter groups
      *
-     * @param firstParameterGroup Additional parameters for the operation
-     * @param secondParameterGroup Additional parameters for the operation
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @param headerOne the String value
+     * @param queryOne Query parameter with default
+     * @param headerTwo the String value
+     * @param queryTwo Query parameter with default
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
-    void postMultipleParameterGroups(FirstParameterGroup firstParameterGroup, SecondParameterGroup secondParameterGroup) throws ServiceException;
+    ServiceResponse<Void> postMultipleParameterGroups(String headerOne, Integer queryOne, String headerTwo, Integer queryTwo) throws ServiceException;
 
     /**
      * Post parameters from multiple different parameter groups
      *
-     * @param firstParameterGroup Additional parameters for the operation
-     * @param secondParameterGroup Additional parameters for the operation
+     * @param headerOne the String value
+     * @param queryOne Query parameter with default
+     * @param headerTwo the String value
+     * @param queryTwo Query parameter with default
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> postMultipleParameterGroupsAsync(FirstParameterGroup firstParameterGroup, SecondParameterGroup secondParameterGroup, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> postMultipleParameterGroupsAsync(String headerOne, Integer queryOne, String headerTwo, Integer queryTwo, final ServiceCallback<Void> serviceCallback);
 
 }

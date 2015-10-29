@@ -11,6 +11,7 @@
 package fixtures.lro.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.rest.BaseResource;
 
 /**
  * The SubProduct model.

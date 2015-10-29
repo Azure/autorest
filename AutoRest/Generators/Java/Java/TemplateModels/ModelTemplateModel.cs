@@ -125,7 +125,7 @@ namespace Microsoft.Rest.Generator.Java
             return false;
         }
 
-        public IEnumerable<String> Imports {
+        public virtual IEnumerable<String> ImportList {
             get
             {
                 HashSet<String> classes = new HashSet<string>();

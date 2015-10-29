@@ -83,7 +83,7 @@ public class IntOperationsTests {
     public void putMax32() throws Exception {
         client.getIntOperations().putMax32Async(Integer.MAX_VALUE, new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {}
+            public void failure(Throwable t) {}
 
             @Override
             public void success(ServiceResponse<Void> response) {
@@ -98,7 +98,7 @@ public class IntOperationsTests {
     public void putMax64() throws Exception {
         client.getIntOperations().putMax64Async(Long.MAX_VALUE, new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
             }
 
             @Override
@@ -114,7 +114,7 @@ public class IntOperationsTests {
     public void putMin32() throws Exception {
         client.getIntOperations().putMin32Async(Integer.MIN_VALUE, new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {}
+            public void failure(Throwable t) {}
 
             @Override
             public void success(ServiceResponse<Void> response) {
@@ -129,7 +129,7 @@ public class IntOperationsTests {
     public void putMin64() throws Exception {
         client.getIntOperations().putMin64Async(Long.MIN_VALUE, new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
             }
 
             @Override

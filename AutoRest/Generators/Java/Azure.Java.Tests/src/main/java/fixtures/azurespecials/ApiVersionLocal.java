@@ -10,10 +10,14 @@
 
 package fixtures.azurespecials;
 
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.BaseResource;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
 import retrofit.Call;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import retrofit.http.GET;
 import retrofit.http.Query;
 import retrofit.http.Header;
@@ -45,9 +49,10 @@ public interface ApiVersionLocal {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
-    void getMethodLocalValid(String apiVersion) throws ServiceException;
+    ServiceResponse<Void> getMethodLocalValid(String apiVersion) throws ServiceException;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
@@ -62,9 +67,10 @@ public interface ApiVersionLocal {
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
-    void getMethodLocalNull(String apiVersion) throws ServiceException;
+    ServiceResponse<Void> getMethodLocalNull(String apiVersion) throws ServiceException;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed
@@ -79,9 +85,10 @@ public interface ApiVersionLocal {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
-    void getPathLocalValid(String apiVersion) throws ServiceException;
+    ServiceResponse<Void> getPathLocalValid(String apiVersion) throws ServiceException;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
@@ -96,9 +103,10 @@ public interface ApiVersionLocal {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
      *
      * @param apiVersion The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
-    void getSwaggerLocalValid(String apiVersion) throws ServiceException;
+    ServiceResponse<Void> getSwaggerLocalValid(String apiVersion) throws ServiceException;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed

@@ -27,6 +27,10 @@ import retrofit.Call;
 import retrofit.Response;
 import java.util.Map;
 import fixtures.azurereport.models.Error;
+import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.CloudError;
+import com.microsoft.rest.BaseResource;
+import retrofit.Callback;
 
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzure class.
@@ -34,6 +38,7 @@ import fixtures.azurereport.models.Error;
 public class AutoRestReportServiceForAzureImpl extends ServiceClient implements AutoRestReportServiceForAzure {
     private AutoRestReportServiceForAzureService service;
     private String baseUri;
+    private AzureClient azureClient;
 
     /**
      * Gets the URI used as the base for all cloud service requests.
@@ -41,6 +46,14 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
      */
     public String getBaseUri() {
         return this.baseUri;
+    }
+
+    /**
+     * Gets the {@link AzureClient} used for long running operations.
+     * @return the azure client;
+     */
+    public AzureClient getAzureClient() {
+        return this.azureClient;
     }
 
     private ServiceClientCredentials credentials;
@@ -130,6 +143,9 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
+        this.azureClient = new AzureClient(client, retrofitBuilder);
+        this.azureClient.setCredentials(this.credentials);
+        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
         service = retrofit.create(AutoRestReportServiceForAzureService.class);
     }
@@ -140,11 +156,10 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
      * @return the Map&lt;String, Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Map<String, Integer> getReport() throws ServiceException {
+    public ServiceResponse<Map<String, Integer>> getReport() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getReport(this.getAcceptLanguage());
-            ServiceResponse<Map<String, Integer>> response = getReportDelegate(call.execute(), null);
-            return response.getBody();
+            return getReportDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

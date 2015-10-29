@@ -43,7 +43,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IEnumerable<string> ImplImports
+        public virtual IEnumerable<string> ImplImports
         {
             get
             {
@@ -93,7 +93,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IEnumerable<string> InterfaceImports
+        public virtual IEnumerable<string> InterfaceImports
         {
             get
             {

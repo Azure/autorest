@@ -11,6 +11,7 @@
 package fixtures.paging.models;
 
 import java.util.List;
+import com.microsoft.rest.BaseResource;
 
 /**
  * The ProductResult model.

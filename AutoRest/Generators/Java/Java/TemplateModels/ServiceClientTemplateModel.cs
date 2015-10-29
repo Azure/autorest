@@ -51,7 +51,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IEnumerable<string> ImplImports
+        public virtual IEnumerable<string> ImplImports
         {
             get
             {
@@ -102,7 +102,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IEnumerable<string> InterfaceImports
+        public virtual IEnumerable<string> InterfaceImports
         {
             get
             {
@@ -123,6 +123,7 @@ namespace Microsoft.Rest.Generator.Java
                     "java.math.BigDecimal",
                     "com.microsoft.rest.ServiceCallback",
                     "com.microsoft.rest.ServiceException",
+                    "com.microsoft.rest.ServiceResponse",
                     "com.microsoft.rest.ServiceResponseCallback",
                     "com.squareup.okhttp.ResponseBody",
                     "retrofit.Call"
