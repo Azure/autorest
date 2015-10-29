@@ -18,7 +18,7 @@ namespace Microsoft.Rest.Generator.Python
             // MethodGroup name and type are always the same but can be 
             // changed in derived classes
             MethodGroupName = methodGroupName;
-            MethodGroupType = methodGroupName.ToPascalCase();
+            MethodGroupType = (methodGroupName + "Operations").ToPascalCase();
             Methods.Where(m => m.Group == MethodGroupName)
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
         }

@@ -61,23 +61,23 @@ namespace Microsoft.Rest.Generator.Python
 
         public override string GetFieldName(string name)
         {
-            return CamelCase(name);
+            return "_" + PythonCase(GetEscapedReservedName(name, "Variable"));
         }
 
         public override string GetPropertyName(string name)
         {
-            return CamelCase(name);
+            return PythonCase(GetEscapedReservedName(name, "Property"));
         }
 
         public override string GetMethodName(string name)
         {
             name = GetEscapedReservedName(name, "Method");
-            return CamelCase(name);
+            return PythonCase(name);
         }
 
         public override string GetEnumMemberName(string name)
         {
-            return CamelCase(name);
+            return PythonCase(GetEscapedReservedName(name, "Enum"));
         }
 
         public override string GetParameterName(string name)
@@ -102,7 +102,7 @@ namespace Microsoft.Rest.Generator.Python
             {
                 if (method.Group != null)
                 {
-                    method.Group = method.Group.ToCamelCase();
+                    method.Group = method.Group.ToPythonCase();
                 }
                 var scope = new ScopeProvider();
                 foreach (var parameter in method.Parameters)
@@ -111,7 +111,7 @@ namespace Microsoft.Rest.Generator.Python
                     {
                         parameter.Name = string.Format(CultureInfo.InvariantCulture,
                             "{0}.{1}",
-                            method.Group == null ? "this" : "this.client",
+                            method.Group == null ? "self" : "self._client",
                             parameter.ClientProperty.Name);
                     }
                     else
@@ -189,51 +189,51 @@ namespace Microsoft.Rest.Generator.Python
         {
             if (primaryType == PrimaryType.Boolean)
             {
-                primaryType.Name = "Boolean";
+                primaryType.Name = "bool";
             }
             else if (primaryType == PrimaryType.ByteArray)
             {
-                primaryType.Name = "Buffer";
+                primaryType.Name = "bytearray";
             }
             else if (primaryType == PrimaryType.Date)
             {
-                primaryType.Name = "Date";
+                primaryType.Name = "date";
             }
             else if (primaryType == PrimaryType.DateTime)
             {
-                primaryType.Name = "Date";
+                primaryType.Name = "datetime";
             }
             else if (primaryType == PrimaryType.DateTimeRfc1123)
             {
-                primaryType.Name = "Date";
+                primaryType.Name = "datetime";
             }
             else if (primaryType == PrimaryType.Double)
             {
-                primaryType.Name = "Number";
+                primaryType.Name = "float";
             }
             else if (primaryType == PrimaryType.Int)
             {
-                primaryType.Name = "Number";
+                primaryType.Name = "int";
             }
             else if (primaryType == PrimaryType.Long)
             {
-                primaryType.Name = "Number";
+                primaryType.Name = "long";
             }
-            else if (primaryType == PrimaryType.Stream)
+            else if (primaryType == PrimaryType.Stream)  // Revisit here
             {
                 primaryType.Name = "Object";
             }
             else if (primaryType == PrimaryType.String)
             {
-                primaryType.Name = "String";
+                primaryType.Name = "str";
             }
             else if (primaryType == PrimaryType.TimeSpan)
             {
-                primaryType.Name = "moment.duration"; 
+                primaryType.Name = "timedelta"; 
             }
-            else if (primaryType == PrimaryType.Object)
+            else if (primaryType == PrimaryType.Object)  // Revisit here
             {
-                primaryType.Name = "Object";
+                primaryType.Name = "object";
             }
 
             return primaryType;
@@ -242,14 +242,14 @@ namespace Microsoft.Rest.Generator.Python
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
             sequenceType.ElementType = NormalizeType(sequenceType.ElementType);
-            sequenceType.NameFormat = "Array";
+            sequenceType.NameFormat = "list";
             return sequenceType;
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
             dictionaryType.ValueType = NormalizeType(dictionaryType.ValueType);
-            dictionaryType.NameFormat = "Object";
+            dictionaryType.NameFormat = "dict";
             return dictionaryType;
         }
     }

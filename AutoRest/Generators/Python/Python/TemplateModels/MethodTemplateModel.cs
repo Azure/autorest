@@ -683,6 +683,32 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        public string GetHttpFunction(HttpMethod method)
+        {
+            switch (method)
+            {
+                case HttpMethod.Delete:
+                    return "delete";
+                case HttpMethod.Get:
+                    return "get";
+                case HttpMethod.Head:
+                    return "head";
+                case HttpMethod.Patch:
+                    return "patch";
+                case HttpMethod.Post:
+                    return "post";
+                case HttpMethod.Put:
+                    return "put";
+                default:
+                    throw new Exception(String.Format(CultureInfo.InvariantCulture, "wrong method {0}", method));
+            }
+        }
+
+        public string GetAcceptStatus()
+        {
+            return "200";
+        }
+
         public string ReturnTypeInfo
         {
             get

@@ -1,0 +1,19 @@
+﻿@using Microsoft.Rest.Generator.Python
+@using Microsoft.Rest.Generator.Python.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ModelInitTemplateModel>
+@{
+  if (Model.ServiceClient.ModelTypes.Any())
+  {
+    foreach (var modelType in Model.ServiceClient.ModelTypes)
+    {
+@:from .@(modelType.Name.ToPythonCase()) import @modelType.Name
+    }
+  }
+
+  if (Model.ServiceClient.EnumTypes.Any())
+  {
+@:from .enums import *
+  }
+}
