@@ -29,14 +29,14 @@ public class MultipleResponsesTests {
 
     @Test
     public void get200Model204NoModelDefaultError200Valid() throws Exception {
-        A result = client.getMultipleResponses().get200Model204NoModelDefaultError200Valid();
+        A result = client.getMultipleResponses().get200Model204NoModelDefaultError200Valid().getBody();
         Assert.assertEquals(A.class, result.getClass());
         Assert.assertEquals("200", result.getStatusCode());
     }
 
     @Test
     public void get200Model204NoModelDefaultError204Valid() throws Exception {
-        A result = client.getMultipleResponses().get200Model204NoModelDefaultError204Valid();
+        A result = client.getMultipleResponses().get200Model204NoModelDefaultError204Valid().getBody();
         Assert.assertNull(result);
     }
 
@@ -53,7 +53,7 @@ public class MultipleResponsesTests {
     @Test
     public void get200Model204NoModelDefaultError202None() throws Exception {
         try {
-            A result = client.getMultipleResponses().get200Model204NoModelDefaultError202None();
+            A result = client.getMultipleResponses().get200Model204NoModelDefaultError202None().getBody();
         } catch (ServiceException ex) {
             Assert.assertEquals(202, ex.getResponse().code());
         }
@@ -71,13 +71,13 @@ public class MultipleResponsesTests {
 
     @Test
     public void get200Model201ModelDefaultError200Valid() throws Exception {
-        A result = client.getMultipleResponses().get200Model201ModelDefaultError200Valid();
+        A result = client.getMultipleResponses().get200Model201ModelDefaultError200Valid().getBody();
         Assert.assertEquals("200", result.getStatusCode());
     }
 
     @Test
     public void get200Model201ModelDefaultError201Valid() throws Exception {
-        A result = client.getMultipleResponses().get200Model201ModelDefaultError201Valid();
+        A result = client.getMultipleResponses().get200Model201ModelDefaultError201Valid().getBody();
         Assert.assertEquals("201", result.getStatusCode());
     }
 
@@ -97,21 +97,21 @@ public class MultipleResponsesTests {
 
     @Test
     public void get200ModelA201ModelC404ModelDDefaultError200Valid() throws Exception {
-        Object result = client.getMultipleResponses().get200ModelA201ModelC404ModelDDefaultError200Valid();
+        Object result = client.getMultipleResponses().get200ModelA201ModelC404ModelDDefaultError200Valid().getBody();
         A actual = (A)result;
         Assert.assertEquals("200", actual.getStatusCode());
     }
 
     @Test
     public void get200ModelA201ModelC404ModelDDefaultError201Valid() throws Exception {
-        Object result = client.getMultipleResponses().get200ModelA201ModelC404ModelDDefaultError201Valid();
+        Object result = client.getMultipleResponses().get200ModelA201ModelC404ModelDDefaultError201Valid().getBody();
         C actual = (C)result;
         Assert.assertEquals("201", actual.getHttpCode());
     }
 
     @Test
     public void get200ModelA201ModelC404ModelDDefaultError404Valid() throws Exception {
-        Object result = client.getMultipleResponses().get200ModelA201ModelC404ModelDDefaultError404Valid();
+        Object result = client.getMultipleResponses().get200ModelA201ModelC404ModelDDefaultError404Valid().getBody();
         D actual = (D)result;
         Assert.assertEquals("404", actual.getHttpStatusCode());
     }
@@ -210,13 +210,13 @@ public class MultipleResponsesTests {
 
     @Test
     public void getDefaultModelA200Valid() throws Exception {
-        A result = client.getMultipleResponses().getDefaultModelA200Valid();
+        A result = client.getMultipleResponses().getDefaultModelA200Valid().getBody();
         Assert.assertEquals("200", result.getStatusCode());
     }
 
     @Test
     public void getDefaultModelA200None() throws Exception {
-        A result = client.getMultipleResponses().getDefaultModelA200None();
+        A result = client.getMultipleResponses().getDefaultModelA200None().getBody();
         Assert.assertNull(result);
     }
 
@@ -275,19 +275,19 @@ public class MultipleResponsesTests {
 
     @Test
     public void get200ModelA200None() throws Exception {
-        A result = client.getMultipleResponses().get200ModelA200None();
+        A result = client.getMultipleResponses().get200ModelA200None().getBody();
         Assert.assertNull(result);
     }
 
     @Test
     public void get200ModelA200Valid() throws Exception {
-        A result = client.getMultipleResponses().get200ModelA200Valid();
+        A result = client.getMultipleResponses().get200ModelA200Valid().getBody();
         Assert.assertEquals("200", result.getStatusCode());
     }
 
     @Test
     public void get200ModelA200Invalid() throws Exception {
-        Assert.assertEquals(null, client.getMultipleResponses().get200ModelA200Invalid().getStatusCode());
+        Assert.assertEquals(null, client.getMultipleResponses().get200ModelA200Invalid().getBody().getStatusCode());
     }
 
     @Test
