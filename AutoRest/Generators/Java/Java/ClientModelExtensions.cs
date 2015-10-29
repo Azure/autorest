@@ -47,12 +47,12 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
             else if (sequence != null)
             {
-                return "JacksonHelper.serializeList(" + reference + 
+                return "JacksonUtils.serializeList(" + reference + 
                     ", CollectionFormat." + parameter.CollectionFormat.ToString().ToUpper(CultureInfo.InvariantCulture) + ")";
             }
             else
             {
-                return "JacksonHelper.serializeRaw(" + reference + ")";
+                return "JacksonUtils.serializeRaw(" + reference + ")";
             }
         }
 
@@ -159,7 +159,7 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
                     sequenceType != null ||
                     type is DictionaryType)
                 {
-                    imports.Add("com.microsoft.rest.serializer.JacksonHelper");
+                    imports.Add("com.microsoft.rest.serializer.JacksonUtils");
                 }
                 if (sequenceType != null)
                 {

@@ -9,7 +9,7 @@ package com.microsoft.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Call;
@@ -331,7 +331,8 @@ public class AzureClient extends ServiceClient {
 
         AzureAsyncOperation body = null;
         if (response.body() != null) {
-            body = JacksonHelper.deserialize(response.body().byteStream(), new TypeReference<AzureAsyncOperation>() {});
+            body = JacksonUtils.deserialize(response.body().byteStream(), new TypeReference<AzureAsyncOperation>() {
+            });
         }
 
         if (body == null || body.getStatus() == null) {
@@ -357,7 +358,8 @@ public class AzureClient extends ServiceClient {
                 try {
                     AzureAsyncOperation body = null;
                     if (result.getBody() != null) {
-                        body = JacksonHelper.deserialize(result.getBody().byteStream(), new TypeReference<AzureAsyncOperation>() {});
+                        body = JacksonUtils.deserialize(result.getBody().byteStream(), new TypeReference<AzureAsyncOperation>() {
+                        });
                     }
                     if (body == null || body.getStatus() == null) {
                         ServiceException exception = new ServiceException("no body");
@@ -387,7 +389,8 @@ public class AzureClient extends ServiceClient {
             ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
             if (response.body() != null) {
-                exception.setErrorModel(JacksonHelper.deserialize(response.body().byteStream(), new TypeReference<Object>() {}));
+                exception.setErrorModel(JacksonUtils.deserialize(response.body().byteStream(), new TypeReference<Object>() {
+                }));
             }
             throw exception;
         }
@@ -414,7 +417,7 @@ public class AzureClient extends ServiceClient {
                         ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
                         exception.setResponse(response);
                         if (response.body() != null) {
-                            exception.setErrorModel(JacksonHelper.deserialize(response.body().byteStream(), new TypeReference<Object>() {
+                            exception.setErrorModel(JacksonUtils.deserialize(response.body().byteStream(), new TypeReference<Object>() {
                             }));
                         }
                         callback.failure(exception);

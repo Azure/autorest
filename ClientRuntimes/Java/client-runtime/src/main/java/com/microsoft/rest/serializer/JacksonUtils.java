@@ -8,13 +8,11 @@
 package com.microsoft.rest.serializer;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
-import com.google.common.reflect.TypeToken;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import retrofit.Converter;
@@ -30,7 +28,7 @@ import java.util.List;
 /**
  * A serialization helper class wrapped around {@link JacksonConverterFactory} and {@link ObjectMapper}.
  */
-public class JacksonHelper {
+public class JacksonUtils {
     private static ObjectMapper objectMapper;
     private static JacksonConverterFactory converterFactory;
 
@@ -76,7 +74,7 @@ public class JacksonHelper {
         if (object == null) return null;
         try {
             StringWriter writer = new StringWriter();
-            new JacksonHelper().getObjectMapper().writeValue(writer, object);
+            new JacksonUtils().getObjectMapper().writeValue(writer, object);
             return writer.toString();
         } catch (Exception e) {
             return null;
@@ -126,7 +124,7 @@ public class JacksonHelper {
     @SuppressWarnings("unchecked")
     public static <T> T deserialize(String value, TypeReference<?> type) throws IOException {
         if (value == null || value.isEmpty()) return null;
-        return (T)new JacksonHelper().getObjectMapper().readValue(value, type);
+        return (T)new JacksonUtils().getObjectMapper().readValue(value, type);
     }
 
     public static <T> T deserialize(String value, final Type type) throws IOException {

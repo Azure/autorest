@@ -8,7 +8,7 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -182,7 +182,7 @@ public class ServiceResponseBuilder<T> {
             if (responseContent.length() <= 0) {
                 return null;
             }
-            return JacksonHelper.deserialize(responseContent, type);
+            return JacksonUtils.deserialize(responseContent, type);
         }
     }
 

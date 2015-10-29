@@ -11,7 +11,7 @@
 package fixtures.url;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -710,7 +710,7 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
         }
         try {
-            Call<ResponseBody> call = service.enumValid(JacksonHelper.serializeRaw(enumPath));
+            Call<ResponseBody> call = service.enumValid(JacksonUtils.serializeRaw(enumPath));
             return enumValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -730,7 +730,7 @@ public class PathsImpl implements Paths {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null.")));
         }
-        Call<ResponseBody> call = service.enumValid(JacksonHelper.serializeRaw(enumPath));
+        Call<ResponseBody> call = service.enumValid(JacksonUtils.serializeRaw(enumPath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -763,7 +763,7 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
         }
         try {
-            Call<ResponseBody> call = service.enumNull(JacksonHelper.serializeRaw(enumPath));
+            Call<ResponseBody> call = service.enumNull(JacksonUtils.serializeRaw(enumPath));
             return enumNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -783,7 +783,7 @@ public class PathsImpl implements Paths {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter enumPath is required and cannot be null.")));
         }
-        Call<ResponseBody> call = service.enumNull(JacksonHelper.serializeRaw(enumPath));
+        Call<ResponseBody> call = service.enumNull(JacksonUtils.serializeRaw(enumPath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -975,7 +975,7 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter datePath is required and cannot be null."));
         }
         try {
-            Call<ResponseBody> call = service.dateValid(JacksonHelper.serializeRaw(datePath));
+            Call<ResponseBody> call = service.dateValid(JacksonUtils.serializeRaw(datePath));
             return dateValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -995,7 +995,7 @@ public class PathsImpl implements Paths {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter datePath is required and cannot be null.")));
         }
-        Call<ResponseBody> call = service.dateValid(JacksonHelper.serializeRaw(datePath));
+        Call<ResponseBody> call = service.dateValid(JacksonUtils.serializeRaw(datePath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1028,7 +1028,7 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter datePath is required and cannot be null."));
         }
         try {
-            Call<ResponseBody> call = service.dateNull(JacksonHelper.serializeRaw(datePath));
+            Call<ResponseBody> call = service.dateNull(JacksonUtils.serializeRaw(datePath));
             return dateNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1048,7 +1048,7 @@ public class PathsImpl implements Paths {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter datePath is required and cannot be null.")));
         }
-        Call<ResponseBody> call = service.dateNull(JacksonHelper.serializeRaw(datePath));
+        Call<ResponseBody> call = service.dateNull(JacksonUtils.serializeRaw(datePath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1081,7 +1081,7 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
         }
         try {
-            Call<ResponseBody> call = service.dateTimeValid(JacksonHelper.serializeRaw(dateTimePath));
+            Call<ResponseBody> call = service.dateTimeValid(JacksonUtils.serializeRaw(dateTimePath));
             return dateTimeValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1101,7 +1101,7 @@ public class PathsImpl implements Paths {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.")));
         }
-        Call<ResponseBody> call = service.dateTimeValid(JacksonHelper.serializeRaw(dateTimePath));
+        Call<ResponseBody> call = service.dateTimeValid(JacksonUtils.serializeRaw(dateTimePath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1134,7 +1134,7 @@ public class PathsImpl implements Paths {
                 new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
         }
         try {
-            Call<ResponseBody> call = service.dateTimeNull(JacksonHelper.serializeRaw(dateTimePath));
+            Call<ResponseBody> call = service.dateTimeNull(JacksonUtils.serializeRaw(dateTimePath));
             return dateTimeNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1154,7 +1154,7 @@ public class PathsImpl implements Paths {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.")));
         }
-        Call<ResponseBody> call = service.dateTimeNull(JacksonHelper.serializeRaw(dateTimePath));
+        Call<ResponseBody> call = service.dateTimeNull(JacksonUtils.serializeRaw(dateTimePath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
