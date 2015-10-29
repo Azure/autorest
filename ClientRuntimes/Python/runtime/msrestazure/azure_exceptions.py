@@ -24,7 +24,7 @@
 #
 #--------------------------------------------------------------------------
 
-from ..msrest.serialization import Deserialized
+from ..msrest.serialization import Deserializer
 
 
 class CloudError(Exception):
@@ -65,7 +65,7 @@ class CloudError(Exception):
                 msg_data = value['value'].split('\n')
                 self._message = msg_data[0]
                 self.request_id = msg_data[1].split(':')[1]
-                self.error_time = Deserialized.deserialize_date(
+                self.error_time = Deserializer.deserialize_date(
                     msg_data[2].split(':')[1])
 
         except (AttributeError, IndexError):

@@ -1,4 +1,4 @@
-﻿from runtime.msrest.utils import *
+﻿
 
 class DetailLevel(object):
     
