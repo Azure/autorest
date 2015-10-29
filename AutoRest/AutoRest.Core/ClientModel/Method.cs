@@ -24,7 +24,7 @@ namespace Microsoft.Rest.Generator.ClientModel
             Parameters = new List<Parameter>();
             RequestHeaders = new Dictionary<string, string>();
             Responses = new Dictionary<HttpStatusCode, IType>();
-            InputParameterMappings = new List<ParameterMapping>();
+            InputParameterTransformation = new List<ParameterTransformation>();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Microsoft.Rest.Generator.ClientModel
             get
             {
                 return Parameters.Where(gp => gp.Location != ParameterLocation.None)
-                    .Union(InputParameterMappings.Select(m => m.OutputParameter));
+                    .Union(InputParameterTransformation.Select(m => m.OutputParameter));
             }
         }
 
@@ -83,9 +83,9 @@ namespace Microsoft.Rest.Generator.ClientModel
         }
 
         /// <summary>
-        /// Gets the list of input Parameter Mappings
+        /// Gets the list of input Parameter transformations
         /// </summary>
-        public List<ParameterMapping> InputParameterMappings { get; private set; }
+        public List<ParameterTransformation> InputParameterTransformation { get; private set; }
 
         /// <summary>
         /// Gets or sets request headers.
@@ -160,10 +160,10 @@ namespace Microsoft.Rest.Generator.ClientModel
             newMethod.Parameters = new List<Parameter>();
             newMethod.RequestHeaders = new Dictionary<string, string>();
             newMethod.Responses = new Dictionary<HttpStatusCode, IType>();
-            newMethod.InputParameterMappings = new List<ParameterMapping>();
+            newMethod.InputParameterTransformation = new List<ParameterTransformation>();
             this.Extensions.ForEach(e => newMethod.Extensions[e.Key] = e.Value);
             this.Parameters.ForEach(p => newMethod.Parameters.Add((Parameter)p.Clone()));
-            this.InputParameterMappings.ForEach(m => newMethod.InputParameterMappings.Add((ParameterMapping)m.Clone()));
+            this.InputParameterTransformation.ForEach(m => newMethod.InputParameterTransformation.Add((ParameterTransformation)m.Clone()));
             this.RequestHeaders.ForEach(r => newMethod.RequestHeaders[r.Key] = r.Value);
             this.Responses.ForEach(r => newMethod.Responses[r.Key] = r.Value);
             return newMethod;

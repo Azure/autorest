@@ -292,13 +292,17 @@ namespace Microsoft.Rest.Generator.Azure
                     foreach (Property property in parameterGroups[parameterGroupName].Keys)
                     {
                         Parameter p = parameterGroups[parameterGroupName][property];
-                        
-                        method.InputParameterMappings.Add(new ParameterMapping
+
+                        var parameterTransformation = new ParameterTransformation
+                        {
+                            OutputParameter = p
+                        };
+                        parameterTransformation.ParameterMappings.Add(new ParameterMapping
                         {
                             InputParameter = parameterGroup,
-                            OutputParameter = p,
                             InputParameterProperty = property.Name
                         });
+                        method.InputParameterTransformation.Add(parameterTransformation);
                         method.Parameters.Remove(p);
                     }
                 }

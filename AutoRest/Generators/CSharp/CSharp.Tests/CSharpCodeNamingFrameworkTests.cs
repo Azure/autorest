@@ -261,7 +261,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         }
 
         [Fact]
-        public void VerifyInputMappings()
+        public void VerifyInputMappingsForFlattening()
         {
             var serviceClient = new ServiceClient();
             serviceClient.Name = "test service client";
@@ -278,33 +278,120 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Name = "B",
                 Type = PrimaryType.String
             });
-
-
-            serviceClient.Methods.Add(new Method
+            var method = new Method
             {
                 Name = "method1",
                 Group = "mGroup",
                 ReturnType = customObjectType
-            });
-
-            serviceClient.Methods[0].Parameters.Add(new Parameter { Name = "paramA", Type = PrimaryType.Boolean, SerializedName = "paramA" });
-            serviceClient.Methods[0].Parameters.Add(new Parameter { Name = "paramB", Type = PrimaryType.String, SerializedName = "paramB" });
-            serviceClient.Methods[0].InputParameterMappings.Add(new ParameterMapping
+            };
+            var outputParameter = new Parameter { Name = "body", Type = customObjectType };
+            serviceClient.Methods.Add(method);
+            method.Parameters.Add(new Parameter { Name = "paramA", Type = PrimaryType.Boolean, SerializedName = "paramA" });
+            method.Parameters.Add(new Parameter { Name = "paramB", Type = PrimaryType.String, SerializedName = "paramB" });
+            method.InputParameterTransformation.Add(new ParameterTransformation
             {
-                InputParameter = serviceClient.Methods[0].Parameters[0],
-                OutputParameter = new Parameter {  Name = "body", Type = customObjectType},
+                OutputParameter = outputParameter
+            });
+            method.InputParameterTransformation[0].ParameterMappings.Add(new ParameterMapping
+            {
+                InputParameter = method.Parameters[0],
                 OutputParameterProperty = "A"
             });
-            serviceClient.Methods[0].InputParameterMappings.Add(new ParameterMapping 
+            method.InputParameterTransformation[0].ParameterMappings.Add(new ParameterMapping 
             { 
-                InputParameter = serviceClient.Methods[0].Parameters[1],
-                OutputParameter = new Parameter { Name = "body", Type = customObjectType },
+                InputParameter = method.Parameters[1],
                 OutputParameterProperty = "B"
             });
 
-            MethodTemplateModel templateModel = new MethodTemplateModel(serviceClient.Methods[0], serviceClient);
+            MethodTemplateModel templateModel = new MethodTemplateModel(method, serviceClient);
             var output = templateModel.BuildInputMappings();
-            Assert.Equal("Foo body = null;\r\nif (paramA != null)\r\n{\r\n    body = default(Foo);\r\n    body.A = paramA;\r\n}\r\n", output);
+            string expected =
+          @"Foo body = null;
+            if (paramA != null || paramB != null)
+            {
+                body = default(Foo);
+                body.A = paramA;
+                body.B = paramB;
+            }";
+
+            MultilineAreEqual(expected, output.Trim());
+        }
+
+        [Fact]
+        public void VerifyInputMappingsForGrouping()
+        {
+            var serviceClient = new ServiceClient();
+            serviceClient.Name = "test service client";
+
+            var customObjectType = new CompositeType();
+            customObjectType.Name = "Foo";
+            customObjectType.Properties.Add(new Property
+            {
+                Name = "A",
+                Type = PrimaryType.Boolean
+            });
+            customObjectType.Properties.Add(new Property
+            {
+                Name = "B",
+                Type = PrimaryType.String
+            });
+            var method = new Method
+            {
+                Name = "method1",
+                Group = "mGroup",
+                ReturnType = customObjectType
+            };
+            var inputParameter = new Parameter { Name = "body", Type = customObjectType };
+            serviceClient.Methods.Add(method);
+            method.Parameters.Add(inputParameter);
+            method.InputParameterTransformation.Add(new ParameterTransformation
+            {
+                OutputParameter = new Parameter { Name = "paramA", Type = PrimaryType.String, SerializedName = "paramA" }
+            });
+            method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
+            {
+                InputParameter = inputParameter,
+                InputParameterProperty = "A"
+            });
+            method.InputParameterTransformation.Add(new ParameterTransformation
+            {
+                OutputParameter = new Parameter { Name = "paramB", Type = PrimaryType.String, SerializedName = "paramB" }
+            });
+            method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
+            {
+                InputParameter = inputParameter,
+                InputParameterProperty = "B"
+            });
+
+            MethodTemplateModel templateModel = new MethodTemplateModel(method, serviceClient);
+            var output = templateModel.BuildInputMappings();
+            string expected =
+          @"String paramA = null;
+            if (body != null)
+            {
+                paramA = body.A;
+            }
+            String paramB = null;
+            if (body != null)
+            {
+                paramB = body.B;
+            }";
+
+            MultilineAreEqual(expected, output.Trim());
+        }
+
+        private static void MultilineAreEqual(string expectedText, string actualText)
+        {
+            string[] expectedLines = expectedText.Split('\n').Select(p => p.TrimEnd('\r')).ToArray();
+            string[] actualLines = actualText.Split('\n').Select(p => p.TrimEnd('\r')).ToArray();
+
+            Assert.Equal(expectedLines.Length, actualLines.Length);
+
+            for (int i = 0; i < expectedLines.Length; i++)
+            {
+                Assert.True(expectedLines[i].Trim().Equals(actualLines[i].Trim()),
+                    string.Format("Difference on line {0}.\r\nExpected: {1}\r\nActual: {2}", i, expectedLines[i], actualLines[i]));
+            }
         }
     }
 }

@@ -31,14 +31,6 @@
 /// </param>
 public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
-    @foreach (var mapping in Model.InputParameterMappings)
-    {
-    @:var @(mapping.OutputParameter.Name) = @string.Format(CultureInfo.InvariantCulture,
-                                 "({0} == null ? default({1}) : {0}.{2})",
-                                 mapping.InputParameter.Name,
-                                 mapping.OutputParameter.Type.Name, mapping.InputParameterProperty);
-    }
-
     @foreach (var parameter in Model.LogicalParameterTemplateModels)
     {
         if (parameter.IsRequired)
@@ -54,6 +46,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name, parameter.Constraints))
         }
     }
+    @Model.BuildInputMappings()
     // Tracing
     bool shouldTrace = ServiceClientTracing.IsEnabled;
     string invocationId = null;

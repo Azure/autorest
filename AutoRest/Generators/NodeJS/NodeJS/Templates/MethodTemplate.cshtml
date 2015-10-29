@@ -54,13 +54,6 @@
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  @foreach (var mapping in Model.InputParameterMappings)
-  {
-  @:var @(mapping.OutputParameter.Name) = @string.Format(CultureInfo.InvariantCulture,
-                           "({0} ? {0}.{1} : undefined)",
-                           mapping.InputParameter.Name,
-                           mapping.InputParameterProperty);
-  }
 
   @if (Model.LogicalParameters.Any())
   {
@@ -77,6 +70,8 @@
   </text>
   }
   }
+
+  @Model.BuildInputMappings()
   @EmptyLine
   // Construct URL
   @if (Model.IsAbsoluteUrl)

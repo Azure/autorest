@@ -465,7 +465,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(false, clientModel.Methods[1].Parameters[4].IsRequired);
             Assert.Equal("String min_product_display_name", clientModel.Methods[1].Parameters[5].ToString());
             Assert.Equal(true, clientModel.Methods[1].Parameters[5].IsRequired);
-            Assert.Equal(3, clientModel.Methods[1].InputParameterMappings.Count);
+            Assert.Equal(1, clientModel.Methods[1].InputParameterTransformation.Count);
+            Assert.Equal(3, clientModel.Methods[1].InputParameterTransformation[0].ParameterMappings.Count);
         }
     }
 }

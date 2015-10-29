@@ -369,64 +369,52 @@ namespace Microsoft.Rest.Generator.CSharp
             return builder.ToString();
         }
 
+        /// <summary>
+        /// Generates input mapping code block.
+        /// </summary>
+        /// <returns></returns>
         public virtual string BuildInputMappings()
         {
             var builder = new IndentedStringBuilder();
-            HashSet<string> initializedVariables = new HashSet<string>();
-            foreach (var mapping in InputParameterMappings)
+            foreach (var transformation in InputParameterTransformation)
             {
-                var output = mapping.OutputParameter.Name;
-                if (!string.IsNullOrEmpty(mapping.OutputParameterProperty))
+                builder.AppendLine("{0} {1} = null;", 
+                        transformation.OutputParameter.Type.Name,
+                        transformation.OutputParameter.Name);
+
+                builder.AppendLine("if ({0})", BuildNullCheckExpression(transformation))
+                       .AppendLine("{").Indent();
+
+                if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)))
                 {
-                    output += "." + mapping.OutputParameterProperty;
+                    builder.AppendLine("{0} = default({1});",
+                        transformation.OutputParameter.Name,
+                        transformation.OutputParameter.Type.Name);
                 }
 
-                var input = mapping.InputParameter.Name;
-                if (!string.IsNullOrEmpty(mapping.InputParameterProperty))
+                foreach(var mapping in transformation.ParameterMappings)
                 {
-                    input += "." + mapping.InputParameterProperty;
+                    builder.AppendLine("{0}{1};",
+                        transformation.OutputParameter.Name,
+                        mapping);
                 }
 
-                if (!initializedVariables.Contains(mapping.OutputParameter.Name))
-                {
-                    builder.AppendLine("{0} {1} = null;", 
-                        mapping.OutputParameter.Type.Name, 
-                        mapping.OutputParameter.Name);
-                    builder.AppendLine("if ({0})", BuildNullCheckExpression(input))
-                           .AppendLine("{")
-                             .Indent();
-                    if (!string.IsNullOrEmpty(mapping.OutputParameterProperty))
-                    {
-                        builder.AppendLine("{0} = default({1});", mapping.OutputParameter.Name, mapping.OutputParameter.Type.Name);
-                    }
-                             
-                    builder.AppendLine("{0} = {1};", output, input)
-                           .Outdent()
-                           .AppendLine("}");
-                }
-                initializedVariables.Add(mapping.OutputParameter.Name);
+                builder.Outdent()
+                       .AppendLine("}");
             }
 
             return builder.ToString();
         }
 
-        private string BuildNullCheckExpression(string propertyPath)
+        private string BuildNullCheckExpression(ParameterTransformation transformation)
         {
-            if (string.IsNullOrEmpty(propertyPath))
+            if (transformation == null)
             {
-                return propertyPath;
+                throw new ArgumentNullException("transformation");
             }
 
-            var builder = new List<string>();
-            var tokens = propertyPath.Split(new [] {'.'}, StringSplitOptions.RemoveEmptyEntries);
-            var currentToken = tokens[0];
-            for (int i = 1; i < tokens.Length; i++)
-            {
-                builder.Add(currentToken + " != null");
-                currentToken += "." + tokens[i];
-            }
-            builder.Add(currentToken + " != null");
-            return string.Join(" && ", builder);
+            return string.Join(" || ",
+                transformation.ParameterMappings.Select(m => m.InputParameter.Name + " != null"));
         }
     }
 }

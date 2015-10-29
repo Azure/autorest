@@ -138,17 +138,23 @@ namespace Microsoft.Rest.Modeler.Swagger
                 var bodyParameterType = bodyParameter.Type as CompositeType;
                 if (bodyParameterType != null && bodyParameterType.Properties.Count <= Settings.PayloadFlatteningThreshold)
                 {
+                    var parameterTransformation = new ParameterTransformation
+                    {
+                        OutputParameter = bodyParameter
+                    };
+                    method.InputParameterTransformation.Add(parameterTransformation);
+
                     foreach (var property in bodyParameterType.Properties)
                     {
                         var newMethodParameter = new Parameter();
                         newMethodParameter.LoadFrom(property);
                         method.Parameters.Add(newMethodParameter);
-                        method.InputParameterMappings.Add(new ParameterMapping 
+
+                        parameterTransformation.ParameterMappings.Add(new ParameterMapping
                         {
                             InputParameter = newMethodParameter,
-                            OutputParameter = bodyParameter,
                             OutputParameterProperty = property.Name
-                        });
+                        });                        
                     }
 
                     method.Parameters.Remove(bodyParameter);

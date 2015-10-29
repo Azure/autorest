@@ -129,25 +129,26 @@ namespace Microsoft.Rest.Generator
                     parameter.Type = NormalizeTypeReference(parameter.Type);
                 }
 
-                foreach (var parameterMapping in method.InputParameterMappings)
+                foreach (var parameterTransformation in method.InputParameterTransformation)
                 {
-                    parameterMapping.InputParameter.Name = GetParameterName(parameterMapping.InputParameter.Name);
-                    parameterMapping.InputParameter.Type = NormalizeTypeReference(parameterMapping.InputParameter.Type);
-                    parameterMapping.OutputParameter.Name = GetParameterName(parameterMapping.OutputParameter.Name);
-                    parameterMapping.OutputParameter.Type = NormalizeTypeReference(parameterMapping.OutputParameter.Type);
+                    parameterTransformation.OutputParameter.Name = GetParameterName(parameterTransformation.OutputParameter.Name);
+                    parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
 
-                    if (parameterMapping.InputParameterProperty != null)
+                    foreach (var parameterMapping in parameterTransformation.ParameterMappings)
                     {
-                        parameterMapping.InputParameterProperty = string.Join(".", 
-                            parameterMapping.InputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
-                                .Select(p => GetPropertyName(p)));
-                    }
+                        if (parameterMapping.InputParameterProperty != null)
+                        {
+                            parameterMapping.InputParameterProperty = string.Join(".",
+                                parameterMapping.InputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
+                                    .Select(p => GetPropertyName(p)));
+                        }
 
-                    if (parameterMapping.OutputParameterProperty != null)
-                    {
-                        parameterMapping.OutputParameterProperty = string.Join(".",
-                            parameterMapping.OutputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
-                                .Select(p => GetPropertyName(p)));
+                        if (parameterMapping.OutputParameterProperty != null)
+                        {
+                            parameterMapping.OutputParameterProperty = string.Join(".",
+                                parameterMapping.OutputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
+                                    .Select(p => GetPropertyName(p)));
+                        }
                     }
                 }
             }
