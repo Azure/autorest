@@ -55,7 +55,7 @@
     throw new Error('callback cannot be null.');
   }
 
-  @if (Model.LogicalParameters.Any())
+  @if (Model.ParameterTemplateModels.Any())
   {
       var validationBlock = Model.ValidationString;
   if (!string.IsNullOrWhiteSpace(validationBlock))

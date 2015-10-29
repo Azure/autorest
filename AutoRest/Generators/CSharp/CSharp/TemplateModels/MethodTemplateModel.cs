@@ -31,7 +31,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public ServiceClient ServiceClient { get; set; }
 
-        protected List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
 
         public List<ParameterTemplateModel> LogicalParameterTemplateModels { get; private set; }
 

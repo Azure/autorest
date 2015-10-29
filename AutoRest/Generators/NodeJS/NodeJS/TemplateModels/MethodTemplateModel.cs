@@ -40,7 +40,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public ServiceClient ServiceClient { get; set; }
 
-        protected List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
 
         protected List<ParameterTemplateModel> GroupedParameterTemplateModels { get; private set; }
 
@@ -441,7 +441,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 var builder = new IndentedStringBuilder("  ");
-                foreach (var parameter in LogicalParameters)
+                foreach (var parameter in ParameterTemplateModels)
                 {
                     if ((HttpMethod == HttpMethod.Patch && parameter.Type is CompositeType))
                     {
@@ -775,8 +775,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             var builder = new IndentedStringBuilder();
             foreach (var transformation in InputParameterTransformation)
             {
-                builder.AppendLine("{0} {1} = null;",
-                        transformation.OutputParameter.Type.Name,
+                builder.AppendLine("var {0};",
                         transformation.OutputParameter.Name);
 
                 builder.AppendLine("if ({0})", BuildNullCheckExpression(transformation))
@@ -811,7 +810,9 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
 
             return string.Join(" || ",
-                transformation.ParameterMappings.Select(m => m.InputParameter.Name + " != null"));
+                transformation.ParameterMappings.Select(m => 
+                    string.Format(CultureInfo.InvariantCulture,
+                    "({0} !== null && {0} !== undefined)", m.InputParameter.Name)));
         }
     }        
 }
