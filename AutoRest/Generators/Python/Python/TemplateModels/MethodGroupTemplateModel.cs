@@ -28,17 +28,31 @@ namespace Microsoft.Rest.Generator.Python
 
         public string MethodGroupType { get; set; }
 
-        public bool ContainsTimeSpan
+        public bool ContainsDecimal
         {
             get
             {
                 Method method = this.MethodTemplateModels.FirstOrDefault(m => m.Parameters.FirstOrDefault(p =>
-                    p.Type == PrimaryType.TimeSpan ||
-                    (p.Type is SequenceType && (p.Type as SequenceType).ElementType == PrimaryType.TimeSpan) ||
-                    (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType == PrimaryType.TimeSpan) ||
-                    (p.Type is CompositeType && (p.Type as CompositeType).ContainsTimeSpan())) != null);
+                    p.Type == PrimaryType.Decimal ||
+                    (p.Type is SequenceType && (p.Type as SequenceType).ElementType == PrimaryType.Decimal) ||
+                    (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType == PrimaryType.Decimal) ||
+                    (p.Type is CompositeType && (p.Type as CompositeType).ContainsDecimal())) != null);
                 
                 return  method != null;
+            }
+        }
+
+        public bool ContainsDatetime
+        {
+            get
+            {
+                Method method = this.MethodTemplateModels.FirstOrDefault(m => m.Parameters.FirstOrDefault(p =>
+                    ClientModelExtensions.PythonDatetimeModuleType.Contains(p.Type) ||
+                    (p.Type is SequenceType && ClientModelExtensions.PythonDatetimeModuleType.Contains((p.Type as SequenceType).ElementType)) ||
+                    (p.Type is DictionaryType && ClientModelExtensions.PythonDatetimeModuleType.Contains((p.Type as DictionaryType).ValueType)) ||
+                    (p.Type is CompositeType && (p.Type as CompositeType).ContainsDecimal())) != null);
+
+                return method != null;
             }
         }
     }
