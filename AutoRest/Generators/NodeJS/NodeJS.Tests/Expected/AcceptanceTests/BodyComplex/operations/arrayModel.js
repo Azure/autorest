@@ -140,10 +140,7 @@ ArrayModel.prototype.getValid = function (options, callback) {
 /**
  * Put complex types with array property
  *
- * @param {object} complexBody Please put an array with 4 items: "1, 2, 3, 4",
- * "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"
- * 
- * @param {array} [complexBody.array]
+ * @param {array} [arrayParameter]
  * 
  * @param {object} [options]
  *
@@ -162,7 +159,7 @@ ArrayModel.prototype.getValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ArrayModel.prototype.putValid = function (complexBody, options, callback) {
+ArrayModel.prototype.putValid = function (arrayParameter, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -173,11 +170,21 @@ ArrayModel.prototype.putValid = function (complexBody, options, callback) {
   }
   // Validate
   try {
-    if (complexBody === null || complexBody === undefined) {
-      throw new Error('complexBody cannot be null or undefined.');
+    if (util.isArray(arrayParameter)) {
+      for (var i = 0; i < arrayParameter.length; i++) {
+        if (arrayParameter[i] !== null && arrayParameter[i] !== undefined && typeof arrayParameter[i].valueOf() !== 'string') {
+          throw new Error('arrayParameter[i] must be of type string.');
+        }
+      }
     }
   } catch (error) {
     return callback(error);
+  }
+  var complexBody;
+  if ((arrayParameter !== null && arrayParameter !== undefined))
+  {
+      complexBody = new client._models['ArrayWrapper']();
+      complexBody.array = arrayParameter;
   }
 
   // Construct URL
@@ -361,9 +368,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
 /**
  * Put complex types with array property which is empty
  *
- * @param {object} complexBody Please put an empty array
- * 
- * @param {array} [complexBody.array]
+ * @param {array} [arrayParameter]
  * 
  * @param {object} [options]
  *
@@ -382,7 +387,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
+ArrayModel.prototype.putEmpty = function (arrayParameter, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -393,11 +398,21 @@ ArrayModel.prototype.putEmpty = function (complexBody, options, callback) {
   }
   // Validate
   try {
-    if (complexBody === null || complexBody === undefined) {
-      throw new Error('complexBody cannot be null or undefined.');
+    if (util.isArray(arrayParameter)) {
+      for (var i = 0; i < arrayParameter.length; i++) {
+        if (arrayParameter[i] !== null && arrayParameter[i] !== undefined && typeof arrayParameter[i].valueOf() !== 'string') {
+          throw new Error('arrayParameter[i] must be of type string.');
+        }
+      }
     }
   } catch (error) {
     return callback(error);
+  }
+  var complexBody;
+  if ((arrayParameter !== null && arrayParameter !== undefined))
+  {
+      complexBody = new client._models['ArrayWrapper']();
+      complexBody.array = arrayParameter;
   }
 
   // Construct URL
