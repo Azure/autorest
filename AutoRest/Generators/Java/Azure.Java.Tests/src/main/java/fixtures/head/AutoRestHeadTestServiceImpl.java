@@ -10,6 +10,7 @@
 
 package fixtures.head;
 
+import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
@@ -20,6 +21,7 @@ import retrofit.Retrofit;
  */
 public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRestHeadTestService {
     private String baseUri;
+    private AzureClient azureClient;
 
     /**
      * Gets the URI used as the base for all cloud service requests.
@@ -27,6 +29,14 @@ public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRe
      */
     public String getBaseUri() {
         return this.baseUri;
+    }
+
+    /**
+     * Gets the {@link AzureClient} used for long running operations.
+     * @return the azure client;
+     */
+    public AzureClient getAzureClient() {
+        return this.azureClient;
     }
 
     private ServiceClientCredentials credentials;
@@ -126,6 +136,9 @@ public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRe
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
+        this.azureClient = new AzureClient(client, retrofitBuilder);
+        this.azureClient.setCredentials(this.credentials);
+        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
         this.httpSuccess = new HttpSuccessImpl(retrofit, this);
     }

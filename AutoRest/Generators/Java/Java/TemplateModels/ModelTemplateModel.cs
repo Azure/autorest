@@ -112,7 +112,7 @@ namespace Microsoft.Rest.Generator.Java
             return false;
         }
 
-        public IEnumerable<String> Imports {
+        public virtual IEnumerable<String> ImportList {
             get
             {
                 HashSet<String> classes = new HashSet<string>();
@@ -128,7 +128,7 @@ namespace Microsoft.Rest.Generator.Java
                     }
                     else if (property.Type is PrimaryType)
                     {
-                        var importedFrom = JavaCodeNamer.ImportedFrom(property.Type as PrimaryType);
+                        var importedFrom = JavaCodeNamer.GetJavaType(property.Type as PrimaryType);
                         if (importedFrom != null)
                         {
                             classes.Add(importedFrom);

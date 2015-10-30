@@ -10,7 +10,6 @@
 
 package fixtures.bodycomplex.models;
 
-import org.apache.commons.codec.binary.Base64;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 

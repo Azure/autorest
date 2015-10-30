@@ -12,14 +12,15 @@ package fixtures.http;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.Error;
-import retrofit.http.HEAD;
-import retrofit.http.GET;
-import retrofit.http.POST;
+import retrofit.Call;
 import retrofit.http.Body;
+import retrofit.http.GET;
+import retrofit.http.HEAD;
 import retrofit.http.HTTP;
+import retrofit.http.POST;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -50,7 +51,7 @@ public interface HttpServerFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Error head501() throws ServiceException;
+    ServiceResponse<Error> head501() throws ServiceException;
 
     /**
      * Return 501 status code - should be represented in the client as an error
@@ -66,7 +67,7 @@ public interface HttpServerFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Error get501() throws ServiceException;
+    ServiceResponse<Error> get501() throws ServiceException;
 
     /**
      * Return 501 status code - should be represented in the client as an error
@@ -83,7 +84,7 @@ public interface HttpServerFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Error post505(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> post505(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 505 status code - should be represented in the client as an error
@@ -101,7 +102,7 @@ public interface HttpServerFailure {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Error delete505(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> delete505(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 505 status code - should be represented in the client as an error

@@ -16,13 +16,12 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
+import fixtures.bodyduration.models.Error;
+import org.joda.time.Period;
 import retrofit.Call;
 import retrofit.Response;
-import org.joda.time.Period;
-import fixtures.bodyduration.models.Error;
+import retrofit.Retrofit;
 
 public class DurationImpl implements Duration {
     private DurationService service;
@@ -39,11 +38,10 @@ public class DurationImpl implements Duration {
      * @return the Period object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Period getNull() throws ServiceException {
+    public ServiceResponse<Period> getNull() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getNull();
-            ServiceResponse<Period> response = getNullDelegate(call.execute(), null);
-            return response.getBody();
+            return getNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -84,15 +82,14 @@ public class DurationImpl implements Duration {
      * @param durationBody the Period value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putPositiveDuration(Period durationBody) throws ServiceException {
+    public ServiceResponse<Void> putPositiveDuration(Period durationBody) throws ServiceException {
         if (durationBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter durationBody is required and cannot be null."));
         }
         try {
             Call<ResponseBody> call = service.putPositiveDuration(durationBody);
-            ServiceResponse<Void> response = putPositiveDurationDelegate(call.execute(), null);
-            response.getBody();
+            return putPositiveDurationDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -138,11 +135,10 @@ public class DurationImpl implements Duration {
      * @return the Period object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Period getPositiveDuration() throws ServiceException {
+    public ServiceResponse<Period> getPositiveDuration() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getPositiveDuration();
-            ServiceResponse<Period> response = getPositiveDurationDelegate(call.execute(), null);
-            return response.getBody();
+            return getPositiveDurationDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -183,11 +179,10 @@ public class DurationImpl implements Duration {
      * @return the Period object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Period getInvalid() throws ServiceException {
+    public ServiceResponse<Period> getInvalid() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getInvalid();
-            ServiceResponse<Period> response = getInvalidDelegate(call.execute(), null);
-            return response.getBody();
+            return getInvalidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

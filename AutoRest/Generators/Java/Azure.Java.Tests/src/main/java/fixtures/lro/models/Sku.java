@@ -10,6 +10,7 @@
 
 package fixtures.lro.models;
 
+import com.microsoft.rest.BaseResource;
 
 /**
  * The Sku model.

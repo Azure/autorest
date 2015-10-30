@@ -12,10 +12,11 @@ package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.http.POST;
+import retrofit.Call;
 import retrofit.http.Header;
+import retrofit.http.POST;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -35,9 +36,10 @@ public interface HeaderOperations {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request
      *
      * @param fooClientRequestId The fooRequestId
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
-    void customNamedRequestId(String fooClientRequestId) throws ServiceException;
+    ServiceResponse<Void> customNamedRequestId(String fooClientRequestId) throws ServiceException;
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request

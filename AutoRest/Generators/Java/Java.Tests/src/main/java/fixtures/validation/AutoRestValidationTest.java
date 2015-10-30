@@ -10,18 +10,17 @@
 
 package fixtures.validation;
 
-import java.math.BigDecimal;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponseCallback;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Call;
 import fixtures.validation.models.Product;
+import retrofit.Call;
+import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.Path;
-import retrofit.http.Query;
 import retrofit.http.PUT;
-import retrofit.http.Body;
+import retrofit.http.Query;
 
 /**
  * The interface for AutoRestValidationTest class.
@@ -82,7 +81,7 @@ public interface AutoRestValidationTest {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product validationOfMethodParameters(String resourceGroupName, int id) throws ServiceException;
+    ServiceResponse<Product> validationOfMethodParameters(String resourceGroupName, int id) throws ServiceException;
 
     /**
      * Validates input parameters on the method. See swagger for details.
@@ -102,7 +101,7 @@ public interface AutoRestValidationTest {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Product validationOfBody(String resourceGroupName, int id, Product body) throws ServiceException;
+    ServiceResponse<Product> validationOfBody(String resourceGroupName, int id, Product body) throws ServiceException;
 
     /**
      * Validates body parameters on the method. See swagger for details.

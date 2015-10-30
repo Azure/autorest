@@ -18,10 +18,10 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
+import fixtures.http.models.Error;
 import retrofit.Call;
 import retrofit.Response;
-import fixtures.http.models.Error;
+import retrofit.Retrofit;
 
 public class HttpRetryImpl implements HttpRetry {
     private HttpRetryService service;
@@ -37,11 +37,10 @@ public class HttpRetryImpl implements HttpRetry {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void head408() throws ServiceException {
+    public ServiceResponse<Void> head408() throws ServiceException {
         try {
             Call<Void> call = service.head408();
-            ServiceResponse<Void> response = head408Delegate(call.execute(), null);
-            response.getBody();
+            return head408Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -82,11 +81,10 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put500(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> put500(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.put500(booleanValue);
-            ServiceResponse<Void> response = put500Delegate(call.execute(), null);
-            response.getBody();
+            return put500Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -128,11 +126,10 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void patch500(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> patch500(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.patch500(booleanValue);
-            ServiceResponse<Void> response = patch500Delegate(call.execute(), null);
-            response.getBody();
+            return patch500Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -173,11 +170,10 @@ public class HttpRetryImpl implements HttpRetry {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void get502() throws ServiceException {
+    public ServiceResponse<Void> get502() throws ServiceException {
         try {
             Call<ResponseBody> call = service.get502();
-            ServiceResponse<Void> response = get502Delegate(call.execute(), null);
-            response.getBody();
+            return get502Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -218,11 +214,10 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post503(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> post503(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.post503(booleanValue);
-            ServiceResponse<Void> response = post503Delegate(call.execute(), null);
-            response.getBody();
+            return post503Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -264,11 +259,10 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void delete503(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> delete503(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.delete503(booleanValue);
-            ServiceResponse<Void> response = delete503Delegate(call.execute(), null);
-            response.getBody();
+            return delete503Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -310,11 +304,10 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put504(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> put504(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.put504(booleanValue);
-            ServiceResponse<Void> response = put504Delegate(call.execute(), null);
-            response.getBody();
+            return put504Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -356,11 +349,10 @@ public class HttpRetryImpl implements HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void patch504(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> patch504(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.patch504(booleanValue);
-            ServiceResponse<Void> response = patch504Delegate(call.execute(), null);
-            response.getBody();
+            return patch504Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

@@ -10,6 +10,7 @@
 
 package fixtures.azurereport.models;
 
+import com.microsoft.rest.BaseResource;
 
 /**
  * The Error model.

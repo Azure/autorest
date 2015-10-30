@@ -17,18 +17,18 @@ public class ByteOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getByteOperations().getNull());
+        Assert.assertNull(client.getByteOperations().getNull().getBody());
     }
 
     @Test
     public void getEmpty() throws Exception {
-        byte[] result = client.getByteOperations().getEmpty();
+        byte[] result = client.getByteOperations().getEmpty().getBody();
         Assert.assertEquals(0, result.length);
     }
 
     @Test
     public void getNonAscii() throws Exception {
-        byte[] result = client.getByteOperations().getNonAscii();
+        byte[] result = client.getByteOperations().getNonAscii().getBody();
         byte[] expected = new byte[] {
                 (byte) 0xff, (byte) 0xfe, (byte) 0xfd, (byte) 0xfc, (byte) 0xfb,
                 (byte) 0xfa, (byte) 0xf9, (byte) 0xf8, (byte) 0xf7, (byte) 0xf6

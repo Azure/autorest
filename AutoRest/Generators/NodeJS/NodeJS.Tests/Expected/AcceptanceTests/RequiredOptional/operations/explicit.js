@@ -274,9 +274,7 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
  * 'value' = null and the client library should throw before the request is
  * sent.
  *
- * @param {object} bodyParameter
- * 
- * @param {number} [bodyParameter.value]
+ * @param {number} value
  * 
  * @param {object} [options]
  *
@@ -296,7 +294,7 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, options, callback) {
+Explicit.prototype.postRequiredIntegerProperty = function (value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -307,11 +305,17 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
   }
   // Validate
   try {
-    if (bodyParameter === null || bodyParameter === undefined) {
-      throw new Error('bodyParameter cannot be null or undefined.');
+    if (value === null || value === undefined || typeof value !== 'number') {
+      throw new Error('value cannot be null or undefined and it must be of type number.');
     }
   } catch (error) {
     return callback(error);
+  }
+  var bodyParameter;
+  if ((value !== null && value !== undefined))
+  {
+      bodyParameter = new client._models['IntWrapper']();
+      bodyParameter.value = value;
   }
 
   // Construct URL
@@ -406,9 +410,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
  * Test explicitly optional integer. Please put a valid int-wrapper with
  * 'value' = null.
  *
- * @param {object} [bodyParameter]
- * 
- * @param {number} [bodyParameter.value]
+ * @param {number} [value]
  * 
  * @param {object} [options]
  *
@@ -427,7 +429,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (bodyParameter, option
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, options, callback) {
+Explicit.prototype.postOptionalIntegerProperty = function (value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -435,6 +437,20 @@ Explicit.prototype.postOptionalIntegerProperty = function (bodyParameter, option
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (value !== null && value !== undefined && typeof value !== 'number') {
+      throw new Error('value must be of type number.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+  var bodyParameter;
+  if ((value !== null && value !== undefined))
+  {
+      bodyParameter = new client._models['IntOptionalWrapper']();
+      bodyParameter.value = value;
   }
 
   // Construct URL
@@ -969,9 +985,7 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
  * 'value' = null and the client library should throw before the request is
  * sent.
  *
- * @param {object} bodyParameter
- * 
- * @param {string} [bodyParameter.value]
+ * @param {string} value
  * 
  * @param {object} [options]
  *
@@ -991,7 +1005,7 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options, callback) {
+Explicit.prototype.postRequiredStringProperty = function (value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1002,11 +1016,17 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
   }
   // Validate
   try {
-    if (bodyParameter === null || bodyParameter === undefined) {
-      throw new Error('bodyParameter cannot be null or undefined.');
+    if (value === null || value === undefined || typeof value.valueOf() !== 'string') {
+      throw new Error('value cannot be null or undefined and it must be of type string.');
     }
   } catch (error) {
     return callback(error);
+  }
+  var bodyParameter;
+  if ((value !== null && value !== undefined))
+  {
+      bodyParameter = new client._models['StringWrapper']();
+      bodyParameter.value = value;
   }
 
   // Construct URL
@@ -1101,9 +1121,7 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
  * Test explicitly optional integer. Please put a valid string-wrapper with
  * 'value' = null.
  *
- * @param {object} [bodyParameter]
- * 
- * @param {string} [bodyParameter.value]
+ * @param {string} [value]
  * 
  * @param {object} [options]
  *
@@ -1122,7 +1140,7 @@ Explicit.prototype.postRequiredStringProperty = function (bodyParameter, options
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options, callback) {
+Explicit.prototype.postOptionalStringProperty = function (value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1130,6 +1148,20 @@ Explicit.prototype.postOptionalStringProperty = function (bodyParameter, options
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (value !== null && value !== undefined && typeof value.valueOf() !== 'string') {
+      throw new Error('value must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+  var bodyParameter;
+  if ((value !== null && value !== undefined))
+  {
+      bodyParameter = new client._models['StringOptionalWrapper']();
+      bodyParameter.value = value;
   }
 
   // Construct URL
@@ -1668,13 +1700,11 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
  * with 'value' = null and the client library should throw before the request
  * is sent.
  *
- * @param {object} bodyParameter
+ * @param {object} value
  * 
- * @param {object} [bodyParameter.value]
+ * @param {number} [value.id]
  * 
- * @param {number} [bodyParameter.value.id]
- * 
- * @param {string} [bodyParameter.value.name]
+ * @param {string} [value.name]
  * 
  * @param {object} [options]
  *
@@ -1694,7 +1724,7 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options, callback) {
+Explicit.prototype.postRequiredClassProperty = function (value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1705,11 +1735,17 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
   }
   // Validate
   try {
-    if (bodyParameter === null || bodyParameter === undefined) {
-      throw new Error('bodyParameter cannot be null or undefined.');
+    if (value === null || value === undefined) {
+      throw new Error('value cannot be null or undefined.');
     }
   } catch (error) {
     return callback(error);
+  }
+  var bodyParameter;
+  if ((value !== null && value !== undefined))
+  {
+      bodyParameter = new client._models['ClassWrapper']();
+      bodyParameter.value = value;
   }
 
   // Construct URL
@@ -1804,13 +1840,11 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
  * Test explicitly optional complex object. Please put a valid class-wrapper
  * with 'value' = null.
  *
- * @param {object} [bodyParameter]
+ * @param {object} [value]
  * 
- * @param {object} [bodyParameter.value]
+ * @param {number} [value.id]
  * 
- * @param {number} [bodyParameter.value.id]
- * 
- * @param {string} [bodyParameter.value.name]
+ * @param {string} [value.name]
  * 
  * @param {object} [options]
  *
@@ -1829,7 +1863,7 @@ Explicit.prototype.postRequiredClassProperty = function (bodyParameter, options,
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options, callback) {
+Explicit.prototype.postOptionalClassProperty = function (value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1837,6 +1871,12 @@ Explicit.prototype.postOptionalClassProperty = function (bodyParameter, options,
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
+  }
+  var bodyParameter;
+  if ((value !== null && value !== undefined))
+  {
+      bodyParameter = new client._models['ClassOptionalWrapper']();
+      bodyParameter.value = value;
   }
 
   // Construct URL
@@ -2176,9 +2216,7 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
  * 'value' = null and the client library should throw before the request is
  * sent.
  *
- * @param {object} bodyParameter
- * 
- * @param {array} [bodyParameter.value]
+ * @param {array} value
  * 
  * @param {object} [options]
  *
@@ -2198,7 +2236,7 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options, callback) {
+Explicit.prototype.postRequiredArrayProperty = function (value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2209,11 +2247,22 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
   }
   // Validate
   try {
-    if (bodyParameter === null || bodyParameter === undefined) {
-      throw new Error('bodyParameter cannot be null or undefined.');
+    if (!util.isArray(value)) {
+      throw new Error('value cannot be null or undefined and it must be of type array.');
+    }
+    for (var i = 0; i < value.length; i++) {
+      if (value[i] !== null && value[i] !== undefined && typeof value[i].valueOf() !== 'string') {
+        throw new Error('value[i] must be of type string.');
+      }
     }
   } catch (error) {
     return callback(error);
+  }
+  var bodyParameter;
+  if ((value !== null && value !== undefined))
+  {
+      bodyParameter = new client._models['ArrayWrapper']();
+      bodyParameter.value = value;
   }
 
   // Construct URL
@@ -2308,9 +2357,7 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
  * Test explicitly optional array. Please put a valid array-wrapper with
  * 'value' = null.
  *
- * @param {object} [bodyParameter]
- * 
- * @param {array} [bodyParameter.value]
+ * @param {array} [value]
  * 
  * @param {object} [options]
  *
@@ -2329,7 +2376,7 @@ Explicit.prototype.postRequiredArrayProperty = function (bodyParameter, options,
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options, callback) {
+Explicit.prototype.postOptionalArrayProperty = function (value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2337,6 +2384,24 @@ Explicit.prototype.postOptionalArrayProperty = function (bodyParameter, options,
   }
   if (!callback) {
     throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (util.isArray(value)) {
+      for (var i = 0; i < value.length; i++) {
+        if (value[i] !== null && value[i] !== undefined && typeof value[i].valueOf() !== 'string') {
+          throw new Error('value[i] must be of type string.');
+        }
+      }
+    }
+  } catch (error) {
+    return callback(error);
+  }
+  var bodyParameter;
+  if ((value !== null && value !== undefined))
+  {
+      bodyParameter = new client._models['ArrayOptionalWrapper']();
+      bodyParameter.value = value;
   }
 
   // Construct URL

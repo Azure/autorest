@@ -14,9 +14,9 @@ public abstract class ServiceCallback<T> {
     /**
      * Override this method to handle REST call failures.
      *
-     * @param exception the exception thrown from the pipeline.
+     * @param t the exception thrown from the pipeline.
      */
-    public abstract void failure(ServiceException exception);
+    public abstract void failure(Throwable t);
 
     /**
      * Override this method to handle successful REST call results.

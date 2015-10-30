@@ -2146,9 +2146,7 @@ Primitive.prototype.getDuration = function (options, callback) {
 /**
  * Put complex types with duration properties
  *
- * @param {object} complexBody Please put 'P123DT22H14M12.011S'
- * 
- * @param {moment.duration} [complexBody.field]
+ * @param {moment.duration} [field]
  * 
  * @param {object} [options]
  *
@@ -2167,7 +2165,7 @@ Primitive.prototype.getDuration = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Primitive.prototype.putDuration = function (complexBody, options, callback) {
+Primitive.prototype.putDuration = function (field, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2178,11 +2176,17 @@ Primitive.prototype.putDuration = function (complexBody, options, callback) {
   }
   // Validate
   try {
-    if (complexBody === null || complexBody === undefined) {
-      throw new Error('complexBody cannot be null or undefined.');
+    if(field && !moment.isDuration(field)) {
+      throw new Error('field must be of type moment.duration.');
     }
   } catch (error) {
     return callback(error);
+  }
+  var complexBody;
+  if ((field !== null && field !== undefined))
+  {
+      complexBody = new client._models['DurationWrapper']();
+      complexBody.field = field;
   }
 
   // Construct URL
@@ -2366,10 +2370,7 @@ Primitive.prototype.getByte = function (options, callback) {
 /**
  * Put complex types with byte properties
  *
- * @param {object} complexBody Please put non-ascii byte string hex(FF FE FD
- * FC 00 FA F9 F8 F7 F6)
- * 
- * @param {buffer} [complexBody.field]
+ * @param {buffer} [field]
  * 
  * @param {object} [options]
  *
@@ -2388,7 +2389,7 @@ Primitive.prototype.getByte = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Primitive.prototype.putByte = function (complexBody, options, callback) {
+Primitive.prototype.putByte = function (field, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2399,11 +2400,17 @@ Primitive.prototype.putByte = function (complexBody, options, callback) {
   }
   // Validate
   try {
-    if (complexBody === null || complexBody === undefined) {
-      throw new Error('complexBody cannot be null or undefined.');
+    if (field && !Buffer.isBuffer(field)) {
+      throw new Error('field must be of type buffer.');
     }
   } catch (error) {
     return callback(error);
+  }
+  var complexBody;
+  if ((field !== null && field !== undefined))
+  {
+      complexBody = new client._models['ByteWrapper']();
+      complexBody.field = field;
   }
 
   // Construct URL

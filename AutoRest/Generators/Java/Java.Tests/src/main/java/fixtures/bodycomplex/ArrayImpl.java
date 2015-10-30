@@ -16,14 +16,13 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.microsoft.rest.Validator;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
-import retrofit.Call;
-import retrofit.Response;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.Error;
-import com.microsoft.rest.Validator;
+import retrofit.Call;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class ArrayImpl implements Array {
     private ArrayService service;
@@ -40,11 +39,10 @@ public class ArrayImpl implements Array {
      * @return the ArrayWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ArrayWrapper getValid() throws ServiceException {
+    public ServiceResponse<ArrayWrapper> getValid() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getValid();
-            ServiceResponse<ArrayWrapper> response = getValidDelegate(call.execute(), null);
-            return response.getBody();
+            return getValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -85,7 +83,7 @@ public class ArrayImpl implements Array {
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putValid(ArrayWrapper complexBody) throws ServiceException {
+    public ServiceResponse<Void> putValid(ArrayWrapper complexBody) throws ServiceException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
@@ -93,8 +91,7 @@ public class ArrayImpl implements Array {
         Validator.validate(complexBody);
         try {
             Call<ResponseBody> call = service.putValid(complexBody);
-            ServiceResponse<Void> response = putValidDelegate(call.execute(), null);
-            response.getBody();
+            return putValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -141,11 +138,10 @@ public class ArrayImpl implements Array {
      * @return the ArrayWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ArrayWrapper getEmpty() throws ServiceException {
+    public ServiceResponse<ArrayWrapper> getEmpty() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getEmpty();
-            ServiceResponse<ArrayWrapper> response = getEmptyDelegate(call.execute(), null);
-            return response.getBody();
+            return getEmptyDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -186,7 +182,7 @@ public class ArrayImpl implements Array {
      * @param complexBody Please put an empty array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putEmpty(ArrayWrapper complexBody) throws ServiceException {
+    public ServiceResponse<Void> putEmpty(ArrayWrapper complexBody) throws ServiceException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
@@ -194,8 +190,7 @@ public class ArrayImpl implements Array {
         Validator.validate(complexBody);
         try {
             Call<ResponseBody> call = service.putEmpty(complexBody);
-            ServiceResponse<Void> response = putEmptyDelegate(call.execute(), null);
-            response.getBody();
+            return putEmptyDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -242,11 +237,10 @@ public class ArrayImpl implements Array {
      * @return the ArrayWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ArrayWrapper getNotProvided() throws ServiceException {
+    public ServiceResponse<ArrayWrapper> getNotProvided() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getNotProvided();
-            ServiceResponse<ArrayWrapper> response = getNotProvidedDelegate(call.execute(), null);
-            return response.getBody();
+            return getNotProvidedDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

@@ -3,14 +3,14 @@
 
 'use strict';
 
-var should = require('should');
-var http = require('http');
-var util = require('util');
-var assert = require('assert');
-var msRest = require('ms-rest');
+import should = require('should');
+import http = require('http');
+import util = require('util');
+import assert = require('assert');
+import msRest = require('ms-rest');
 var _ = require('underscore')
 
-var reportClient = require('../Expected/AcceptanceTests/Report/autoRestReportService');
+import reportClient = require('../Expected/AcceptanceTests/Report/autoRestReportService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
@@ -37,7 +37,7 @@ describe('nodejs', function () {
 
         var total = _.keys(result).length;
         var passed = 0;
-        _.keys(result).forEach(function(item) {
+        _.keys(result).forEach(function(item: string) {
           if (result[item] > 0) {
             passed++;
           } else {

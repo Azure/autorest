@@ -12,13 +12,13 @@ package fixtures.url;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.url.models.UriColor;
-import org.apache.commons.codec.binary.Base64;
-import org.joda.time.LocalDate;
-import org.joda.time.DateTime;
 import java.util.List;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
@@ -141,7 +141,7 @@ public interface Queries {
      * @param boolQuery true boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getBooleanTrue(Boolean boolQuery) throws ServiceException;
+    ServiceResponse<Void> getBooleanTrue(Boolean boolQuery) throws ServiceException;
 
     /**
      * Get true Boolean value on path
@@ -158,7 +158,7 @@ public interface Queries {
      * @param boolQuery false boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getBooleanFalse(Boolean boolQuery) throws ServiceException;
+    ServiceResponse<Void> getBooleanFalse(Boolean boolQuery) throws ServiceException;
 
     /**
      * Get false Boolean value on path
@@ -175,7 +175,7 @@ public interface Queries {
      * @param boolQuery null boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getBooleanNull(Boolean boolQuery) throws ServiceException;
+    ServiceResponse<Void> getBooleanNull(Boolean boolQuery) throws ServiceException;
 
     /**
      * Get null Boolean value on query (query string should be absent)
@@ -192,7 +192,7 @@ public interface Queries {
      * @param intQuery '1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getIntOneMillion(Integer intQuery) throws ServiceException;
+    ServiceResponse<Void> getIntOneMillion(Integer intQuery) throws ServiceException;
 
     /**
      * Get '1000000' integer value
@@ -209,7 +209,7 @@ public interface Queries {
      * @param intQuery '-1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getIntNegativeOneMillion(Integer intQuery) throws ServiceException;
+    ServiceResponse<Void> getIntNegativeOneMillion(Integer intQuery) throws ServiceException;
 
     /**
      * Get '-1000000' integer value
@@ -226,7 +226,7 @@ public interface Queries {
      * @param intQuery null integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getIntNull(Integer intQuery) throws ServiceException;
+    ServiceResponse<Void> getIntNull(Integer intQuery) throws ServiceException;
 
     /**
      * Get null integer value (no query parameter)
@@ -243,7 +243,7 @@ public interface Queries {
      * @param longQuery '10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getTenBillion(Long longQuery) throws ServiceException;
+    ServiceResponse<Void> getTenBillion(Long longQuery) throws ServiceException;
 
     /**
      * Get '10000000000' 64 bit integer value
@@ -260,7 +260,7 @@ public interface Queries {
      * @param longQuery '-10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getNegativeTenBillion(Long longQuery) throws ServiceException;
+    ServiceResponse<Void> getNegativeTenBillion(Long longQuery) throws ServiceException;
 
     /**
      * Get '-10000000000' 64 bit integer value
@@ -277,7 +277,7 @@ public interface Queries {
      * @param longQuery null 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getLongNull(Long longQuery) throws ServiceException;
+    ServiceResponse<Void> getLongNull(Long longQuery) throws ServiceException;
 
     /**
      * Get 'null 64 bit integer value (no query param in uri)
@@ -294,7 +294,7 @@ public interface Queries {
      * @param floatQuery '1.034E+20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void floatScientificPositive(Double floatQuery) throws ServiceException;
+    ServiceResponse<Void> floatScientificPositive(Double floatQuery) throws ServiceException;
 
     /**
      * Get '1.034E+20' numeric value
@@ -311,7 +311,7 @@ public interface Queries {
      * @param floatQuery '-1.034E-20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void floatScientificNegative(Double floatQuery) throws ServiceException;
+    ServiceResponse<Void> floatScientificNegative(Double floatQuery) throws ServiceException;
 
     /**
      * Get '-1.034E-20' numeric value
@@ -328,7 +328,7 @@ public interface Queries {
      * @param floatQuery null numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void floatNull(Double floatQuery) throws ServiceException;
+    ServiceResponse<Void> floatNull(Double floatQuery) throws ServiceException;
 
     /**
      * Get null numeric value (no query parameter)
@@ -345,7 +345,7 @@ public interface Queries {
      * @param doubleQuery '9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void doubleDecimalPositive(Double doubleQuery) throws ServiceException;
+    ServiceResponse<Void> doubleDecimalPositive(Double doubleQuery) throws ServiceException;
 
     /**
      * Get '9999999.999' numeric value
@@ -362,7 +362,7 @@ public interface Queries {
      * @param doubleQuery '-9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void doubleDecimalNegative(Double doubleQuery) throws ServiceException;
+    ServiceResponse<Void> doubleDecimalNegative(Double doubleQuery) throws ServiceException;
 
     /**
      * Get '-9999999.999' numeric value
@@ -379,7 +379,7 @@ public interface Queries {
      * @param doubleQuery null numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void doubleNull(Double doubleQuery) throws ServiceException;
+    ServiceResponse<Void> doubleNull(Double doubleQuery) throws ServiceException;
 
     /**
      * Get null numeric value (no query parameter)
@@ -396,7 +396,7 @@ public interface Queries {
      * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void stringUnicode(String stringQuery) throws ServiceException;
+    ServiceResponse<Void> stringUnicode(String stringQuery) throws ServiceException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
@@ -413,7 +413,7 @@ public interface Queries {
      * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void stringUrlEncoded(String stringQuery) throws ServiceException;
+    ServiceResponse<Void> stringUrlEncoded(String stringQuery) throws ServiceException;
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end
@@ -430,7 +430,7 @@ public interface Queries {
      * @param stringQuery '' string value. Possible values for this parameter include: ''
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void stringEmpty(String stringQuery) throws ServiceException;
+    ServiceResponse<Void> stringEmpty(String stringQuery) throws ServiceException;
 
     /**
      * Get ''
@@ -447,7 +447,7 @@ public interface Queries {
      * @param stringQuery null string value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void stringNull(String stringQuery) throws ServiceException;
+    ServiceResponse<Void> stringNull(String stringQuery) throws ServiceException;
 
     /**
      * Get null (no query parameter in url)
@@ -464,7 +464,7 @@ public interface Queries {
      * @param enumQuery 'green color' enum value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void enumValid(UriColor enumQuery) throws ServiceException;
+    ServiceResponse<Void> enumValid(UriColor enumQuery) throws ServiceException;
 
     /**
      * Get using uri with query parameter 'green color'
@@ -481,7 +481,7 @@ public interface Queries {
      * @param enumQuery null string value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void enumNull(UriColor enumQuery) throws ServiceException;
+    ServiceResponse<Void> enumNull(UriColor enumQuery) throws ServiceException;
 
     /**
      * Get null (no query parameter in url)
@@ -498,7 +498,7 @@ public interface Queries {
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void byteMultiByte(byte[] byteQuery) throws ServiceException;
+    ServiceResponse<Void> byteMultiByte(byte[] byteQuery) throws ServiceException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -515,7 +515,7 @@ public interface Queries {
      * @param byteQuery '' as byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void byteEmpty(byte[] byteQuery) throws ServiceException;
+    ServiceResponse<Void> byteEmpty(byte[] byteQuery) throws ServiceException;
 
     /**
      * Get '' as byte array
@@ -532,7 +532,7 @@ public interface Queries {
      * @param byteQuery null as byte array (no query parameters in uri)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void byteNull(byte[] byteQuery) throws ServiceException;
+    ServiceResponse<Void> byteNull(byte[] byteQuery) throws ServiceException;
 
     /**
      * Get null as byte array (no query parameters in uri)
@@ -549,7 +549,7 @@ public interface Queries {
      * @param dateQuery '2012-01-01' as date
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateValid(LocalDate dateQuery) throws ServiceException;
+    ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ServiceException;
 
     /**
      * Get '2012-01-01' as date
@@ -566,7 +566,7 @@ public interface Queries {
      * @param dateQuery null as date (no query parameters in uri)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateNull(LocalDate dateQuery) throws ServiceException;
+    ServiceResponse<Void> dateNull(LocalDate dateQuery) throws ServiceException;
 
     /**
      * Get null as date - this should result in no query parameters in uri
@@ -583,7 +583,7 @@ public interface Queries {
      * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateTimeValid(DateTime dateTimeQuery) throws ServiceException;
+    ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ServiceException;
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time
@@ -600,7 +600,7 @@ public interface Queries {
      * @param dateTimeQuery null as date-time (no query parameters)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void dateTimeNull(DateTime dateTimeQuery) throws ServiceException;
+    ServiceResponse<Void> dateTimeNull(DateTime dateTimeQuery) throws ServiceException;
 
     /**
      * Get null as date-time, should result in no query parameters in uri
@@ -617,7 +617,7 @@ public interface Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void arrayStringCsvValid(List<String> arrayQuery) throws ServiceException;
+    ServiceResponse<Void> arrayStringCsvValid(List<String> arrayQuery) throws ServiceException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
@@ -634,7 +634,7 @@ public interface Queries {
      * @param arrayQuery a null array of string using the csv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void arrayStringCsvNull(List<String> arrayQuery) throws ServiceException;
+    ServiceResponse<Void> arrayStringCsvNull(List<String> arrayQuery) throws ServiceException;
 
     /**
      * Get a null array of string using the csv-array format
@@ -651,7 +651,7 @@ public interface Queries {
      * @param arrayQuery an empty array [] of string using the csv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException;
+    ServiceResponse<Void> arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException;
 
     /**
      * Get an empty array [] of string using the csv-array format
@@ -668,7 +668,7 @@ public interface Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void arrayStringSsvValid(List<String> arrayQuery) throws ServiceException;
+    ServiceResponse<Void> arrayStringSsvValid(List<String> arrayQuery) throws ServiceException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
@@ -685,7 +685,7 @@ public interface Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void arrayStringTsvValid(List<String> arrayQuery) throws ServiceException;
+    ServiceResponse<Void> arrayStringTsvValid(List<String> arrayQuery) throws ServiceException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
@@ -702,7 +702,7 @@ public interface Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void arrayStringPipesValid(List<String> arrayQuery) throws ServiceException;
+    ServiceResponse<Void> arrayStringPipesValid(List<String> arrayQuery) throws ServiceException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format

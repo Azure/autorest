@@ -20,7 +20,7 @@ public class NumberTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getNumber().getNull());
+        Assert.assertNull(client.getNumber().getNull().getBody());
     }
 
     @Test
@@ -59,13 +59,13 @@ public class NumberTests {
 
     @Test
     public void getBigFloat() throws Exception {
-        double result = client.getNumber().getBigFloat();
+        double result = client.getNumber().getBigFloat().getBody();
         Assert.assertEquals(3.402823e+20, result, 0.0f);
     }
 
     @Test
     public void getBigDouble() throws Exception {
-        double result = client.getNumber().getBigDouble();
+        double result = client.getNumber().getBigDouble().getBody();
         Assert.assertEquals(2.5976931e+101, result, 0.0f);
     }
 
@@ -76,7 +76,7 @@ public class NumberTests {
 
     @Test
     public void getBigDoublePositiveDecimal() throws Exception {
-        double result = client.getNumber().getBigDoublePositiveDecimal();
+        double result = client.getNumber().getBigDoublePositiveDecimal().getBody();
         Assert.assertEquals(99999999.99, result, 0.0f);
     }
 
@@ -87,7 +87,7 @@ public class NumberTests {
 
     @Test
     public void getBigDoubleNegativeDecimal() throws Exception {
-        double result = client.getNumber().getBigDoubleNegativeDecimal();
+        double result = client.getNumber().getBigDoubleNegativeDecimal().getBody();
         Assert.assertEquals(-99999999.99, result, 0.0f);
     }
 
@@ -98,7 +98,7 @@ public class NumberTests {
 
     @Test
     public void getSmallFloat() throws Exception {
-        double result = client.getNumber().getSmallFloat();
+        double result = client.getNumber().getSmallFloat().getBody();
         Assert.assertEquals(3.402823e-20, result, 0.0f);
     }
 
@@ -109,7 +109,7 @@ public class NumberTests {
 
     @Test
     public void getSmallDouble() throws Exception {
-        double result = client.getNumber().getSmallDouble();
+        double result = client.getNumber().getSmallDouble().getBody();
         Assert.assertEquals(2.5976931e-101, result, 0.0f);
     }
 }

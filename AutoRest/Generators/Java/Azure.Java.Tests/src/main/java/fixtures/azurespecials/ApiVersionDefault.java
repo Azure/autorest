@@ -12,11 +12,12 @@ package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import retrofit.Call;
 import retrofit.http.GET;
-import retrofit.http.Query;
 import retrofit.http.Header;
+import retrofit.http.Query;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -44,9 +45,10 @@ public interface ApiVersionDefault {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
-    void getMethodGlobalValid() throws ServiceException;
+    ServiceResponse<Void> getMethodGlobalValid() throws ServiceException;
 
     /**
      * GET method with api-version modeled in global settings.
@@ -59,9 +61,10 @@ public interface ApiVersionDefault {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
-    void getMethodGlobalNotProvidedValid() throws ServiceException;
+    ServiceResponse<Void> getMethodGlobalNotProvidedValid() throws ServiceException;
 
     /**
      * GET method with api-version modeled in global settings.
@@ -74,9 +77,10 @@ public interface ApiVersionDefault {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
-    void getPathGlobalValid() throws ServiceException;
+    ServiceResponse<Void> getPathGlobalValid() throws ServiceException;
 
     /**
      * GET method with api-version modeled in global settings.
@@ -89,9 +93,10 @@ public interface ApiVersionDefault {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
      */
-    void getSwaggerGlobalValid() throws ServiceException;
+    ServiceResponse<Void> getSwaggerGlobalValid() throws ServiceException;
 
     /**
      * GET method with api-version modeled in global settings.

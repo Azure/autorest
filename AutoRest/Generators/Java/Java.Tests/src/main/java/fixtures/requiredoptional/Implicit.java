@@ -12,15 +12,16 @@ package fixtures.requiredoptional;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.requiredoptional.models.Error;
+import retrofit.Call;
+import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Header;
 import retrofit.http.Path;
 import retrofit.http.PUT;
 import retrofit.http.Query;
-import retrofit.http.Header;
-import retrofit.http.Body;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -61,7 +62,7 @@ public interface Implicit {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Error getRequiredPath(String pathParameter) throws ServiceException;
+    ServiceResponse<Error> getRequiredPath(String pathParameter) throws ServiceException;
 
     /**
      * Test implicitly required path parameter
@@ -78,7 +79,7 @@ public interface Implicit {
      * @param queryParameter the String value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putOptionalQuery(String queryParameter) throws ServiceException;
+    ServiceResponse<Void> putOptionalQuery(String queryParameter) throws ServiceException;
 
     /**
      * Test implicitly optional query parameter
@@ -95,7 +96,7 @@ public interface Implicit {
      * @param queryParameter the String value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putOptionalHeader(String queryParameter) throws ServiceException;
+    ServiceResponse<Void> putOptionalHeader(String queryParameter) throws ServiceException;
 
     /**
      * Test implicitly optional header parameter
@@ -112,7 +113,7 @@ public interface Implicit {
      * @param bodyParameter the String value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putOptionalBody(String bodyParameter) throws ServiceException;
+    ServiceResponse<Void> putOptionalBody(String bodyParameter) throws ServiceException;
 
     /**
      * Test implicitly optional body parameter
@@ -129,7 +130,7 @@ public interface Implicit {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Error getRequiredGlobalPath() throws ServiceException;
+    ServiceResponse<Error> getRequiredGlobalPath() throws ServiceException;
 
     /**
      * Test implicitly required path parameter
@@ -145,7 +146,7 @@ public interface Implicit {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Error getRequiredGlobalQuery() throws ServiceException;
+    ServiceResponse<Error> getRequiredGlobalQuery() throws ServiceException;
 
     /**
      * Test implicitly required query parameter
@@ -161,7 +162,7 @@ public interface Implicit {
      * @return the Error object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Error getOptionalGlobalQuery() throws ServiceException;
+    ServiceResponse<Error> getOptionalGlobalQuery() throws ServiceException;
 
     /**
      * Test implicitly optional query parameter

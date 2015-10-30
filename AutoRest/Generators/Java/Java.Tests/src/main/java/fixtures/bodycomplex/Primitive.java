@@ -12,22 +12,23 @@ package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import fixtures.bodycomplex.models.BooleanWrapper;
+import fixtures.bodycomplex.models.ByteWrapper;
+import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
+import fixtures.bodycomplex.models.DatetimeWrapper;
+import fixtures.bodycomplex.models.DateWrapper;
+import fixtures.bodycomplex.models.DoubleWrapper;
+import fixtures.bodycomplex.models.DurationWrapper;
+import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
-import fixtures.bodycomplex.models.FloatWrapper;
-import fixtures.bodycomplex.models.DoubleWrapper;
-import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
-import fixtures.bodycomplex.models.DateWrapper;
-import fixtures.bodycomplex.models.DatetimeWrapper;
-import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
-import fixtures.bodycomplex.models.DurationWrapper;
-import fixtures.bodycomplex.models.ByteWrapper;
+import retrofit.Call;
+import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.PUT;
-import retrofit.http.Body;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -112,7 +113,7 @@ public interface Primitive {
      * @return the IntWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    IntWrapper getInt() throws ServiceException;
+    ServiceResponse<IntWrapper> getInt() throws ServiceException;
 
     /**
      * Get complex types with integer properties
@@ -128,7 +129,7 @@ public interface Primitive {
      * @param complexBody Please put -1 and 2
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putInt(IntWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putInt(IntWrapper complexBody) throws ServiceException;
 
     /**
      * Put complex types with integer properties
@@ -145,7 +146,7 @@ public interface Primitive {
      * @return the LongWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    LongWrapper getLong() throws ServiceException;
+    ServiceResponse<LongWrapper> getLong() throws ServiceException;
 
     /**
      * Get complex types with long properties
@@ -161,7 +162,7 @@ public interface Primitive {
      * @param complexBody Please put 1099511627775 and -999511627788
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putLong(LongWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putLong(LongWrapper complexBody) throws ServiceException;
 
     /**
      * Put complex types with long properties
@@ -178,7 +179,7 @@ public interface Primitive {
      * @return the FloatWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    FloatWrapper getFloat() throws ServiceException;
+    ServiceResponse<FloatWrapper> getFloat() throws ServiceException;
 
     /**
      * Get complex types with float properties
@@ -194,7 +195,7 @@ public interface Primitive {
      * @param complexBody Please put 1.05 and -0.003
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putFloat(FloatWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putFloat(FloatWrapper complexBody) throws ServiceException;
 
     /**
      * Put complex types with float properties
@@ -211,7 +212,7 @@ public interface Primitive {
      * @return the DoubleWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    DoubleWrapper getDouble() throws ServiceException;
+    ServiceResponse<DoubleWrapper> getDouble() throws ServiceException;
 
     /**
      * Get complex types with double properties
@@ -227,7 +228,7 @@ public interface Primitive {
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putDouble(DoubleWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putDouble(DoubleWrapper complexBody) throws ServiceException;
 
     /**
      * Put complex types with double properties
@@ -244,7 +245,7 @@ public interface Primitive {
      * @return the BooleanWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    BooleanWrapper getBool() throws ServiceException;
+    ServiceResponse<BooleanWrapper> getBool() throws ServiceException;
 
     /**
      * Get complex types with bool properties
@@ -260,7 +261,7 @@ public interface Primitive {
      * @param complexBody Please put true and false
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putBool(BooleanWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putBool(BooleanWrapper complexBody) throws ServiceException;
 
     /**
      * Put complex types with bool properties
@@ -277,7 +278,7 @@ public interface Primitive {
      * @return the StringWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    StringWrapper getString() throws ServiceException;
+    ServiceResponse<StringWrapper> getString() throws ServiceException;
 
     /**
      * Get complex types with string properties
@@ -293,7 +294,7 @@ public interface Primitive {
      * @param complexBody Please put 'goodrequest', '', and null
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putString(StringWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putString(StringWrapper complexBody) throws ServiceException;
 
     /**
      * Put complex types with string properties
@@ -310,7 +311,7 @@ public interface Primitive {
      * @return the DateWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    DateWrapper getDate() throws ServiceException;
+    ServiceResponse<DateWrapper> getDate() throws ServiceException;
 
     /**
      * Get complex types with date properties
@@ -326,7 +327,7 @@ public interface Primitive {
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putDate(DateWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putDate(DateWrapper complexBody) throws ServiceException;
 
     /**
      * Put complex types with date properties
@@ -343,7 +344,7 @@ public interface Primitive {
      * @return the DatetimeWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    DatetimeWrapper getDateTime() throws ServiceException;
+    ServiceResponse<DatetimeWrapper> getDateTime() throws ServiceException;
 
     /**
      * Get complex types with datetime properties
@@ -359,7 +360,7 @@ public interface Primitive {
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putDateTime(DatetimeWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putDateTime(DatetimeWrapper complexBody) throws ServiceException;
 
     /**
      * Put complex types with datetime properties
@@ -376,7 +377,7 @@ public interface Primitive {
      * @return the Datetimerfc1123Wrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Datetimerfc1123Wrapper getDateTimeRfc1123() throws ServiceException;
+    ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123() throws ServiceException;
 
     /**
      * Get complex types with datetimeRfc1123 properties
@@ -392,7 +393,7 @@ public interface Primitive {
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ServiceException;
 
     /**
      * Put complex types with datetimeRfc1123 properties
@@ -409,7 +410,7 @@ public interface Primitive {
      * @return the DurationWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    DurationWrapper getDuration() throws ServiceException;
+    ServiceResponse<DurationWrapper> getDuration() throws ServiceException;
 
     /**
      * Get complex types with duration properties
@@ -425,7 +426,7 @@ public interface Primitive {
      * @param complexBody Please put 'P123DT22H14M12.011S'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putDuration(DurationWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putDuration(DurationWrapper complexBody) throws ServiceException;
 
     /**
      * Put complex types with duration properties
@@ -442,7 +443,7 @@ public interface Primitive {
      * @return the ByteWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ByteWrapper getByte() throws ServiceException;
+    ServiceResponse<ByteWrapper> getByte() throws ServiceException;
 
     /**
      * Get complex types with byte properties
@@ -458,7 +459,7 @@ public interface Primitive {
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putByte(ByteWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putByte(ByteWrapper complexBody) throws ServiceException;
 
     /**
      * Put complex types with byte properties

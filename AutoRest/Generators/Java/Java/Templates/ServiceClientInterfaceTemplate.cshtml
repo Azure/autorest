@@ -95,7 +95,7 @@ if(!property.IsReadOnly)
     }
     @: * @@throws ServiceException the exception wrapped in ServiceException if failed.
     @: */
-    @:@method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException;
+    @:ServiceResponse<@method.GenericReturnTypeString> @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException;
     @EmptyLine
     @:/**
     if (!String.IsNullOrEmpty(method.Summary))
