@@ -489,7 +489,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
             for (int i = 0; i < expectedLines.Length; i++)
             {
-                Assert.True(expectedLines[i].Trim().Equals(actualLines[i].Trim()),
+                Assert.True(expectedLines[i].Trim().Equals(actualLines[i].Trim(), System.StringComparison.OrdinalIgnoreCase),
                     string.Format(CultureInfo.InvariantCulture, "Difference on line {0}.\r\nExpected: {1}\r\nActual: {2}", i, expectedLines[i], actualLines[i]));
             }
         }
