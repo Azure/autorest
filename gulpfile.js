@@ -144,7 +144,7 @@ gulp.task('regenerate:expected:nodeazure', function(cb){
     'mappings': nodeAzureMappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.NodeJS',
-    'flatteningThreshold': '1',
+    'flatteningThreshold': '1'
   }, cb);
 })
 
@@ -154,7 +154,8 @@ gulp.task('regenerate:expected:node', function(cb){
     'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
     'mappings': defaultMappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'NodeJS'
+    'codeGenerator': 'NodeJS',
+    'flatteningThreshold': '1'
   }, cb);
 })
 
@@ -165,7 +166,7 @@ gulp.task('regenerate:expected:rubyazure', function(cb){
     'mappings': rubyAzureMappings,
     'outputDir': 'RspecTests/Generated',
     'codeGenerator': 'Azure.Ruby',
-	'nsPrefix': 'MyNamespace'
+	  'nsPrefix': 'MyNamespace'
   }, cb);
 })
 

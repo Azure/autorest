@@ -194,7 +194,7 @@ describe('nodejs', function () {
           should.not.exist(error);
           //should.not.exist(result.field);
           assert.deepEqual(result.field, moment.duration(durationString));
-          testClient.primitive.putDuration({ 'field': moment.duration(durationString) }, function (error, result) {
+          testClient.primitive.putDuration(moment.duration(durationString), function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -206,7 +206,7 @@ describe('nodejs', function () {
         testClient.primitive.getByte(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.field, byteBuffer);
-          testClient.primitive.putByte({ 'field': byteBuffer }, function (error, result) {
+          testClient.primitive.putByte(byteBuffer, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -222,7 +222,7 @@ describe('nodejs', function () {
         testClient.arrayModel.getValid(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.array, testArray);
-          testClient.arrayModel.putValid({ 'array': testArray }, function (error, result) {
+          testClient.arrayModel.putValid(testArray, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -234,7 +234,7 @@ describe('nodejs', function () {
         testClient.arrayModel.getEmpty(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.array, []);
-          testClient.arrayModel.putEmpty({ 'array': [] }, function (error, result) {
+          testClient.arrayModel.putEmpty([], function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -258,7 +258,7 @@ describe('nodejs', function () {
         testClient.dictionary.getValid(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.defaultProgram, testDictionary);
-          testClient.dictionary.putValid({ 'defaultProgram': testDictionary }, function (error, result) {
+          testClient.dictionary.putValid(testDictionary, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -269,7 +269,7 @@ describe('nodejs', function () {
         testClient.dictionary.getEmpty(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.defaultProgram, {});
-          testClient.dictionary.putEmpty({ 'defaultProgram': {} }, function (error, result) {
+          testClient.dictionary.putEmpty({}, function (error, result) {
             should.not.exist(error);
             done();
           });
