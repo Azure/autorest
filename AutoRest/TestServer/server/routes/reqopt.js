@@ -70,7 +70,7 @@ var reqopt = function(coverage) {
                 utils.send400(res, next, 'Please send a null to optional ' + req.params.type + ' body.');
             }
         } else if (req.params.scenario === 'property') {
-            if (req.body && !req.body['value']) {
+            if (!req.body || (req.body && !req.body['value'])) {
                 coverage[covered]++;
                 res.status(200).end();
             } else {
