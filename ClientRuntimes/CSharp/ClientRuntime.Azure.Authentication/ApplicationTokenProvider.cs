@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http.Headers;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
@@ -20,7 +21,7 @@ namespace Microsoft.Rest.Azure.Authentication
     {
         private AuthenticationContext _authenticationContext;
         private string _tokenAudience;
-        private IApplicationCredentialProvider _credentials;
+        private IApplicationAuthenticationProvider _authentications;
         private string _clientId;
         private DateTimeOffset _expiration;
         private string _accessToken;
@@ -49,7 +50,34 @@ namespace Microsoft.Rest.Azure.Authentication
                 throw new ArgumentNullException("authenticationResult");
             }
 
-            Initialize(context, tokenAudience, credential.ClientId, new MemoryApplicationCredentialProvider(credential), authenticationResult, authenticationResult.ExpiresOn);
+            Initialize(context, tokenAudience, credential.ClientId, new MemoryApplicationAuthenticationProvider(credential), authenticationResult, authenticationResult.ExpiresOn);
+        }
+
+        /// <summary>
+        /// Create an application token provider that can retrieve tokens for the given application from the given context, using the given audience 
+        /// and certificate.
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
+        /// </summary>
+        /// <param name="context">The authentication context to use when retrieving tokens.</param>
+        /// <param name="tokenAudience">The token audience to use when retrieving tokens.</param>
+        /// <param name="certificate">The certificate associated with Active Directory application.</param>
+        /// <param name="authenticationResult">The token details provided when authenticating with the client credentials.</param>
+        public ApplicationTokenProvider(AuthenticationContext context, string tokenAudience, ClientAssertionCertificate certificate, AuthenticationResult authenticationResult)
+        {
+            if (certificate == null)
+            {
+                throw new ArgumentNullException("certificate");
+            }
+
+            if (authenticationResult == null)
+            {
+                throw new ArgumentNullException("authenticationResult");
+            }
+
+            Initialize(context, tokenAudience, certificate.ClientId, 
+                new CertificateAuthenticationProvider((clientId) => Task.FromResult(certificate)),
+                authenticationResult, authenticationResult.ExpiresOn);
         }
 
         /// <summary>
@@ -61,17 +89,17 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="context">The authentication context to use when retrieving tokens.</param>
         /// <param name="tokenAudience">The token audience to use when retrieving tokens</param>
         /// <param name="clientId">The client Id for this active directory application</param>
-        /// <param name="credentialStore">The source of authentication information for this application.</param>
+        /// <param name="authenticationStore">The source of authentication information for this application.</param>
         /// <param name="authenticationResult">The authenticationResult of initial authentication with the application credentials.</param>
         public ApplicationTokenProvider(AuthenticationContext context, string tokenAudience, string clientId,
-             IApplicationCredentialProvider credentialStore, AuthenticationResult authenticationResult)
+             IApplicationAuthenticationProvider authenticationStore, AuthenticationResult authenticationResult)
         {
             if (authenticationResult == null)
             {
                 throw new ArgumentNullException("authenticationResult");
             }
 
-            Initialize(context, tokenAudience, clientId, credentialStore, authenticationResult, authenticationResult.ExpiresOn);
+            Initialize(context, tokenAudience, clientId, authenticationStore, authenticationResult, authenticationResult.ExpiresOn);
         }
 
         /// <summary>
@@ -83,23 +111,23 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="context">The authentication context to use when retrieving tokens.</param>
         /// <param name="tokenAudience">The token audience to use when retrieving tokens</param>
         /// <param name="clientId">The client Id for this active directory application</param>
-        /// <param name="credentialStore">The source of authentication information for this application.</param>
+        /// <param name="authenticationStore">The source of authentication information for this application.</param>
         /// <param name="authenticationResult">The authenticationResult of initial authentication with the application credentials.</param>
         /// <param name="tokenExpiration">The date of expiration for the current access token.</param>
         public ApplicationTokenProvider(AuthenticationContext context, string tokenAudience, string clientId,
-            IApplicationCredentialProvider credentialStore, AuthenticationResult authenticationResult, DateTimeOffset tokenExpiration)
+            IApplicationAuthenticationProvider authenticationStore, AuthenticationResult authenticationResult, DateTimeOffset tokenExpiration)
         {
-            Initialize(context, tokenAudience, clientId, credentialStore, authenticationResult, tokenExpiration);
+            Initialize(context, tokenAudience, clientId, authenticationStore, authenticationResult, tokenExpiration);
         }
 
         /// <summary>
-        /// Creates ServiceClientCredentials for authenticating requests as an active directory application. Uses the default token cache and the default 
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using client credentials. Uses the default token cache and the default 
         /// service settings (authority, token audience) for log in to azure resource manager during authentication.
         /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
         /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
-        /// <param name="clientId">The active directory clientId fo the application.</param>
+        /// <param name="clientId">The active directory clientId for the application.</param>
         /// <param name="secret">The secret for this active directory application.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
         public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId, string secret)
@@ -108,13 +136,28 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         /// <summary>
-        /// Creates ServiceClientCredentials for authenticating requests as an active directory application. Uses the default service settings 
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using certificate credentials. Uses the default token cache and the default 
+        /// service settings (authority, token audience) for log in to azure resource manager during authentication.
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
+        /// </summary>
+        /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
+        /// <param name="clientId">The active directory clientId for the application.</param>
+        /// <param name="certificate">The certificate associated with Active Directory application.</param>
+        /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
+        public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId, X509Certificate2 certificate)
+        {
+            return await LoginSilentAsync(domain, clientId, certificate, ActiveDirectoryServiceSettings.Azure, TokenCache.DefaultShared);
+        }
+
+        /// <summary>
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using client credentials. Uses the default service settings 
         /// (authority, token audience) for log in to azure resource manager during authentication.
         /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
         /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
-        /// <param name="clientId">The active directory clientId fo the application.</param>
+        /// <param name="clientId">The active directory clientId for the application.</param>
         /// <param name="secret">The secret for this active directory application.</param>
         /// <param name="cache">The token cache to target during authentication.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
@@ -124,12 +167,29 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         /// <summary>
-        /// Creates ServiceClientCredentials for authenticating requests as an active directory application. Uses the default token cache during authentication.
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using certificate credentials. Uses the default service settings 
+        /// (authority, token audience) for log in to azure resource manager during authentication.
         /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
         /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
-        /// <param name="clientId">The active directory clientId fo the application.</param>
+        /// <param name="clientId">The active directory clientId for the application.</param>
+        /// <param name="certificate">The certificate associated with Active Directory application.</param>
+        /// <param name="cache">The token cache to target during authentication.</param>
+        /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
+        public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId, X509Certificate2 certificate, TokenCache cache)
+        {
+            return await LoginSilentAsync(domain, clientId, certificate, ActiveDirectoryServiceSettings.Azure, cache);
+        }
+
+        /// <summary>
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using client credentials. 
+        /// Uses the default token cache during authentication. 
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/"> Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
+        /// </summary>
+        /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
+        /// <param name="clientId">The active directory clientId for the application.</param>
         /// <param name="secret">The secret for this active directory application.</param>
         /// <param name="settings">The active directory service side settings, including authority and token audience.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
@@ -140,12 +200,29 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         /// <summary>
-        /// Creates ServiceClientCredentials for authenticating requests as an active directory application.
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using certificate credentials. 
+        /// Uses the default token cache during authentication. 
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/"> Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
+        /// </summary>
+        /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
+        /// <param name="clientId">The active directory clientId for the application.</param>
+        /// <param name="certificate">The certificate associated with Active Directory application.</param>
+        /// <param name="settings">The active directory service side settings, including authority and token audience.</param>
+        /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
+        public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId, X509Certificate2 certificate,
+            ActiveDirectoryServiceSettings settings)
+        {
+            return await LoginSilentAsync(domain, clientId, certificate, settings, TokenCache.DefaultShared);
+        }
+
+        /// <summary>
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using client credentials.
         /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
         /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
-        /// <param name="clientId">The active directory clientId fo the application.</param>
+        /// <param name="clientId">The active directory clientId for the application.</param>
         /// <param name="secret">The secret for this active directory application.</param>
         /// <param name="settings">The active directory service side settings, including authority and token audience.</param>
         /// <param name="cache">The token cache to target during authentication.</param>
@@ -157,7 +234,26 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         /// <summary>
-        /// Creates ServiceClientCredentials for authenticating requests as an active directory application. Uses the default token cache and the default 
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using certificate credential.
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
+        /// </summary>
+        /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
+        /// <param name="clientId">The active directory clientId for the application.</param>
+        /// <param name="certificate">The certificate associated with Active Directory application.</param>
+        /// <param name="settings">The active directory service side settings, including authority and token audience.</param>
+        /// <param name="cache">The token cache to target during authentication.</param>
+        /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
+        public static async Task<ServiceClientCredentials> LoginSilentAsync(
+            string domain, string clientId, X509Certificate2 certificate,
+           ActiveDirectoryServiceSettings settings, TokenCache cache)
+        {
+            return await LoginSilentAsync(domain, new ClientAssertionCertificate(clientId, certificate), 
+                settings, cache);
+        }
+
+        /// <summary>
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using a client credential. Uses the default token cache and the default 
         /// service settings for azure resource manager (authority, token audience) during authentication.
         /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
         /// for detailed instructions on creating an Azure Active Directory application.
@@ -169,9 +265,23 @@ namespace Microsoft.Rest.Azure.Authentication
         {
             return await LoginSilentAsync(domain, credential, ActiveDirectoryServiceSettings.Azure, TokenCache.DefaultShared);
         }
+        
+        /// <summary>
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using a certificate credential. Uses the default token cache and the default 
+        /// service settings for azure resource manager (authority, token audience) during authentication.
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
+        /// </summary>
+        /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
+        /// <param name="certificate">The certificate associated with Active Directory application.</param>
+        /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
+        public static async Task<ServiceClientCredentials> LoginSilentWithCertificateAsync(string domain, ClientAssertionCertificate certificate)
+        {
+            return await LoginSilentAsync(domain, certificate, ActiveDirectoryServiceSettings.Azure, TokenCache.DefaultShared);
+        }
 
         /// <summary>
-        /// Creates ServiceClientCredentials for authenticating requests as an active directory application. Uses the default service settings 
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using a client credential. Uses the default service settings 
         /// for azure resource manager (authority, token audience) during authentication.
         /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
         /// for detailed instructions on creating an Azure Active Directory application.
@@ -187,7 +297,23 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         /// <summary>
-        /// Creates ServiceClientCredentials for authenticating requests as an active directory application. Uses the default token cache for authentication.
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using a certificate credential. Uses the default service settings 
+        /// for azure resource manager (authority, token audience) during authentication.
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
+        /// </summary>
+        /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
+        /// <param name="certificate">The certificate associated with Active Directory application.</param>
+        /// <param name="cache">The token cache to target during authentication.</param>
+        /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
+        public static async Task<ServiceClientCredentials> LoginSilentWithCertificateAsync(string domain, ClientAssertionCertificate certificate,
+            TokenCache cache)
+        {
+            return await LoginSilentAsync(domain, certificate, ActiveDirectoryServiceSettings.Azure, cache);
+        }
+
+        /// <summary>
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using a client credential. Uses the default token cache for authentication.
         /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
         /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
@@ -202,7 +328,22 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         /// <summary>
-        /// Creates ServiceClientCredentials for authenticating requests as an active directory application.
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using a certificate credential. Uses the default token cache for authentication.
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
+        /// </summary>
+        /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
+        /// <param name="certificate">The certificate associated with Active Directory application.</param>
+        /// <param name="settings">The active directory service side settings, including authority and token audience.</param>
+        /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
+        public static async Task<ServiceClientCredentials> LoginSilentWithCertificateAsync(string domain, ClientAssertionCertificate certificate,
+            ActiveDirectoryServiceSettings settings)
+        {
+            return await LoginSilentAsync(domain, certificate, settings, TokenCache.DefaultShared);
+        }
+
+        /// <summary>
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using a client credential.
         /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
         /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
@@ -214,8 +355,25 @@ namespace Microsoft.Rest.Azure.Authentication
         public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, ClientCredential credential,
             ActiveDirectoryServiceSettings settings, TokenCache cache)
         {
-            return await LoginSilentAsync(domain, credential.ClientId, new MemoryApplicationCredentialProvider(credential),
+            return await LoginSilentAsync(domain, credential.ClientId, new MemoryApplicationAuthenticationProvider(credential),
                settings, cache);
+        }
+
+        /// <summary>
+        /// Creates ServiceClientCredentials for authenticating requests as an active directory application using a certificate credential.
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
+        /// </summary>
+        /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
+        /// <param name="certificate">The certificate associated with Active Directory application.</param>
+        /// <param name="settings">The active directory service side settings, including authority and token audience.</param>
+        /// <param name="cache">The token cache to target during authentication.</param>
+        /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
+       public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, ClientAssertionCertificate certificate,
+            ActiveDirectoryServiceSettings settings, TokenCache cache)
+        {
+            return await LoginSilentAsync(domain, certificate.ClientId, 
+                new CertificateAuthenticationProvider((clientId) => Task.FromResult(certificate)), settings, cache);
         }
 
         /// <summary>
@@ -225,13 +383,13 @@ namespace Microsoft.Rest.Azure.Authentication
         /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
-        /// <param name="clientId">The active directory clientId fo the application.</param>
-        /// <param name="credentialProvider">A source for the secure secret for this application.</param>
+        /// <param name="clientId">The active directory clientId for the application.</param>
+        /// <param name="authenticationProvider">A source for the secure secret for this application.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
         public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId,
-            IApplicationCredentialProvider credentialProvider)
+            IApplicationAuthenticationProvider authenticationProvider)
         {
-            return await LoginSilentAsync(domain, clientId, credentialProvider, ActiveDirectoryServiceSettings.Azure, TokenCache.DefaultShared);
+            return await LoginSilentAsync(domain, clientId, authenticationProvider, ActiveDirectoryServiceSettings.Azure, TokenCache.DefaultShared);
         }
 
         /// <summary>
@@ -241,14 +399,14 @@ namespace Microsoft.Rest.Azure.Authentication
         /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
-        /// <param name="clientId">The active directory clientId fo the application.</param>
-        /// <param name="credentialProvider">A source for the secure secret for this application.</param>
+        /// <param name="clientId">The active directory clientId for the application.</param>
+        /// <param name="authenticationProvider">A source for the secure secret for this application.</param>
         /// <param name="cache">The token cache to target during authentication.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
         public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId,
-            IApplicationCredentialProvider credentialProvider, TokenCache cache)
+            IApplicationAuthenticationProvider authenticationProvider, TokenCache cache)
         {
-            return await LoginSilentAsync(domain, clientId, credentialProvider, ActiveDirectoryServiceSettings.Azure, cache);
+            return await LoginSilentAsync(domain, clientId, authenticationProvider, ActiveDirectoryServiceSettings.Azure, cache);
         }
 
         /// <summary>
@@ -257,14 +415,14 @@ namespace Microsoft.Rest.Azure.Authentication
         /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
-        /// <param name="clientId">The active directory clientId fo the application.</param>
-        /// <param name="credentialProvider">A source for the secure secret for this application.</param>
+        /// <param name="clientId">The active directory clientId for the application.</param>
+        /// <param name="authenticationProvider">A source for the secure secret for this application.</param>
         /// <param name="settings">The active directory service side settings, including authority and token audience.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
         public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId,
-            IApplicationCredentialProvider credentialProvider, ActiveDirectoryServiceSettings settings)
+            IApplicationAuthenticationProvider authenticationProvider, ActiveDirectoryServiceSettings settings)
         {
-            return await LoginSilentAsync(domain, clientId, credentialProvider, settings, TokenCache.DefaultShared);
+            return await LoginSilentAsync(domain, clientId, authenticationProvider, settings, TokenCache.DefaultShared);
         }
 
         /// <summary>
@@ -273,20 +431,19 @@ namespace Microsoft.Rest.Azure.Authentication
         /// for detailed instructions on creating an Azure Active Directory application.
         /// </summary>
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
-        /// <param name="clientId">The active directory clientId fo the application.</param>
-        /// <param name="credentialProvider">A source for the secure secret for this application.</param>
+        /// <param name="clientId">The active directory clientId for the application.</param>
+        /// <param name="authenticationProvider">A source for the secure secret for this application.</param>
         /// <param name="settings">The active directory service side settings, including authority and token audience.</param>
         /// <param name="cache">The token cache to target during authentication.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
         public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId,
-            IApplicationCredentialProvider credentialProvider, ActiveDirectoryServiceSettings settings, TokenCache cache)
+            IApplicationAuthenticationProvider authenticationProvider, ActiveDirectoryServiceSettings settings, TokenCache cache)
         {
             var audience = settings.TokenAudience.ToString();
             var context = GetAuthenticationContext(domain, settings, cache);
-            var credential = await credentialProvider.GetCredentialAsync(clientId);
-            var authResult = await context.AcquireTokenAsync(audience, credential);
+            var authResult = await authenticationProvider.AuthenticateAsync(clientId, audience, context);
             return new TokenCredentials(new ApplicationTokenProvider(context, audience, clientId,
-                    credentialProvider, authResult));
+                    authenticationProvider, authResult));
         }
 
 #if DEBUG
@@ -294,21 +451,20 @@ namespace Microsoft.Rest.Azure.Authentication
         /// For testing purposes only: allows testing token expiration.
         /// </summary>
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
-        /// <param name="clientId">The active directory clientId fo the application.</param>
-        /// <param name="credentialProvider">A source for the secure secret for this application.</param>
+        /// <param name="clientId">The active directory clientId for the application.</param>
+        /// <param name="authenticationProvider">A source for the secure secret for this application.</param>
         /// <param name="settings">The active directory service side settings, including authority and token audience.</param>
         /// <param name="cache">The token cache to target during authentication.</param>
         /// <param name="expiration">The token expiration.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
         internal static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId,
-            IApplicationCredentialProvider credentialProvider, ActiveDirectoryServiceSettings settings, TokenCache cache, DateTimeOffset expiration)
+            IApplicationAuthenticationProvider authenticationProvider, ActiveDirectoryServiceSettings settings, TokenCache cache, DateTimeOffset expiration)
         {
             var audience = settings.TokenAudience.ToString();
             var context = GetAuthenticationContext(domain, settings, cache);
-            var credential = await credentialProvider.GetCredentialAsync(clientId);
-            var authResult = await context.AcquireTokenAsync(audience, credential);
+            var authResult = await authenticationProvider.AuthenticateAsync(clientId, audience, context);
             return new TokenCredentials(new ApplicationTokenProvider(context, audience, clientId,
-                    credentialProvider, authResult, expiration));
+                    authenticationProvider, authResult, expiration));
         }
 #endif
         /// <summary>
@@ -322,8 +478,7 @@ namespace Microsoft.Rest.Azure.Authentication
                 AuthenticationResult result;
                 if (AccessTokenExpired)
                 {
-                    var credential = await this._credentials.GetCredentialAsync(this._clientId).ConfigureAwait(false);
-                    result = await this._authenticationContext.AcquireTokenAsync(this._tokenAudience, credential).ConfigureAwait(false);
+                    result = await this._authentications.AuthenticateAsync(this._clientId, this._tokenAudience, this._authenticationContext).ConfigureAwait(false);
                     this._accessToken = result.AccessToken;
                     this._accessTokenType = result.AccessTokenType;
                     this._expiration = result.ExpiresOn;
@@ -343,7 +498,7 @@ namespace Microsoft.Rest.Azure.Authentication
         }
 
         private void Initialize(AuthenticationContext context, string tokenAudience, string clientId,
-            IApplicationCredentialProvider credentialStore, AuthenticationResult authenticationResult, DateTimeOffset tokenExpiration)
+            IApplicationAuthenticationProvider authenticationStore, AuthenticationResult authenticationResult, DateTimeOffset tokenExpiration)
         {
             if (context == null)
             {
@@ -360,16 +515,16 @@ namespace Microsoft.Rest.Azure.Authentication
                 throw new ArgumentNullException("clientId");
             }
 
-            if (credentialStore == null)
+            if (authenticationStore == null)
             {
-                throw new ArgumentNullException("credentialStore");
+                throw new ArgumentNullException("authenticationStore");
             }
             if (authenticationResult == null)
             {
                 throw new ArgumentNullException("authenticationResult");
             }
 
-            this._credentials = credentialStore;
+            this._authentications = authenticationStore;
             this._clientId = clientId;
             this._authenticationContext = context;
             this._accessToken = authenticationResult.AccessToken;

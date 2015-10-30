@@ -16,12 +16,11 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
+import fixtures.url.models.Error;
 import retrofit.Call;
 import retrofit.Response;
-import fixtures.url.models.Error;
+import retrofit.Retrofit;
 
 public class PathItemsImpl implements PathItems {
     private PathItemsService service;
@@ -41,7 +40,7 @@ public class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
+    public ServiceResponse<Void> getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
         if (localStringPath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
@@ -56,8 +55,7 @@ public class PathItemsImpl implements PathItems {
         }
         try {
             Call<ResponseBody> call = service.getAllWithValues(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
-            ServiceResponse<Void> response = getAllWithValuesDelegate(call.execute(), null);
-            response.getBody();
+            return getAllWithValuesDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -117,7 +115,7 @@ public class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
+    public ServiceResponse<Void> getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
         if (localStringPath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
@@ -132,8 +130,7 @@ public class PathItemsImpl implements PathItems {
         }
         try {
             Call<ResponseBody> call = service.getGlobalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
-            ServiceResponse<Void> response = getGlobalQueryNullDelegate(call.execute(), null);
-            response.getBody();
+            return getGlobalQueryNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -193,7 +190,7 @@ public class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
+    public ServiceResponse<Void> getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
         if (localStringPath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
@@ -208,8 +205,7 @@ public class PathItemsImpl implements PathItems {
         }
         try {
             Call<ResponseBody> call = service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
-            ServiceResponse<Void> response = getGlobalAndLocalQueryNullDelegate(call.execute(), null);
-            response.getBody();
+            return getGlobalAndLocalQueryNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -269,7 +265,7 @@ public class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery should contain value null
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
+    public ServiceResponse<Void> getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException {
         if (localStringPath == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
@@ -284,8 +280,7 @@ public class PathItemsImpl implements PathItems {
         }
         try {
             Call<ResponseBody> call = service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
-            ServiceResponse<Void> response = getLocalPathItemQueryNullDelegate(call.execute(), null);
-            response.getBody();
+            return getLocalPathItemQueryNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

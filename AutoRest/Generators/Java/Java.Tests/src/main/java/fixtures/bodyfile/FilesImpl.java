@@ -16,13 +16,12 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
+import fixtures.bodyfile.models.Error;
+import java.io.InputStream;
 import retrofit.Call;
 import retrofit.Response;
-import java.io.InputStream;
-import fixtures.bodyfile.models.Error;
+import retrofit.Retrofit;
 
 public class FilesImpl implements Files {
     private FilesService service;
@@ -39,11 +38,10 @@ public class FilesImpl implements Files {
      * @return the InputStream object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public InputStream getFile() throws ServiceException {
+    public ServiceResponse<InputStream> getFile() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getFile();
-            ServiceResponse<InputStream> response = getFileDelegate(call.execute(), null);
-            return response.getBody();
+            return getFileDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -84,11 +82,10 @@ public class FilesImpl implements Files {
      * @return the InputStream object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public InputStream getEmptyFile() throws ServiceException {
+    public ServiceResponse<InputStream> getEmptyFile() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getEmptyFile();
-            ServiceResponse<InputStream> response = getEmptyFileDelegate(call.execute(), null);
-            return response.getBody();
+            return getEmptyFileDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

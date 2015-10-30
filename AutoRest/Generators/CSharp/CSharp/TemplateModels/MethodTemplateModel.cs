@@ -8,6 +8,7 @@ using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -30,7 +31,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public ServiceClient ServiceClient { get; set; }
 
-        protected List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
 
         public List<ParameterTemplateModel> LogicalParameterTemplateModels { get; private set; }
 
@@ -368,13 +369,53 @@ namespace Microsoft.Rest.Generator.CSharp
             return builder.ToString();
         }
 
-        public virtual string RemoveDuplicateForwardSlashes(string urlVariableName)
+        /// <summary>
+        /// Generates input mapping code block.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string BuildInputMappings()
         {
             var builder = new IndentedStringBuilder();
+            foreach (var transformation in InputParameterTransformation)
+            {
+                builder.AppendLine("{0} {1} = null;", 
+                        transformation.OutputParameter.Type.Name,
+                        transformation.OutputParameter.Name);
 
-            builder.AppendLine("// trim all duplicate forward slashes in the url");
-            builder.AppendLine("{0} = Regex.Replace({0}, \"([^:]/)/+\", \"$1\");", urlVariableName);
+                builder.AppendLine("if ({0})", BuildNullCheckExpression(transformation))
+                       .AppendLine("{").Indent();
+
+                if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
+                    transformation.OutputParameter.Type is CompositeType)
+                {
+                    builder.AppendLine("{0} = new {1}();",
+                        transformation.OutputParameter.Name,
+                        transformation.OutputParameter.Type.Name);
+                }
+
+                foreach(var mapping in transformation.ParameterMappings)
+                {
+                    builder.AppendLine("{0}{1};",
+                        transformation.OutputParameter.Name,
+                        mapping);
+                }
+
+                builder.Outdent()
+                       .AppendLine("}");
+            }
+
             return builder.ToString();
+        }
+
+        private static string BuildNullCheckExpression(ParameterTransformation transformation)
+        {
+            if (transformation == null)
+            {
+                throw new ArgumentNullException("transformation");
+            }
+
+            return string.Join(" || ",
+                transformation.ParameterMappings.Select(m => m.InputParameter.Name + " != null"));
         }
     }
 }

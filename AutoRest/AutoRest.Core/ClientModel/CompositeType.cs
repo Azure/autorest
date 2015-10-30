@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Microsoft.Rest.Generator.ClientModel
 {
@@ -28,6 +29,22 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// Gets or sets the list of CompositeType properties.
         /// </summary>
         public IList<Property> Properties { get; private set; }
+
+        /// <summary>
+        /// Gets the union of Parent and current type properties
+        /// </summary>
+        public IEnumerable<Property> ComposedProperties
+        {
+            get
+            {
+                if (BaseModelType != null)
+                {
+                    return BaseModelType.ComposedProperties.Union(Properties);
+                }
+
+                return this.Properties;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the base model type.

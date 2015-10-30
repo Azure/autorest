@@ -10,11 +10,12 @@
 
 package fixtures.lro.models;
 
+import com.microsoft.rest.BaseResource;
 
 /**
  * The SubResource model.
  */
-public class SubResource {
+public class SubResource extends BaseResource {
     /**
      * Sub Resource Id
      */

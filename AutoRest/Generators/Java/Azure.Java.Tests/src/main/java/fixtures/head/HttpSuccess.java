@@ -12,8 +12,9 @@ package fixtures.head;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import retrofit.Call;
 import retrofit.http.HEAD;
 import retrofit.http.Header;
 
@@ -37,10 +38,10 @@ public interface HttpSuccess {
     /**
      * Return 204 status code if successful
      *
-     * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the Boolean object wrapped in ServiceResponse if successful.
      */
-    Boolean head204() throws ServiceException;
+    ServiceResponse<Boolean> head204() throws ServiceException;
 
     /**
      * Return 204 status code if successful
@@ -53,10 +54,10 @@ public interface HttpSuccess {
     /**
      * Return 404 status code if successful
      *
-     * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the Boolean object wrapped in ServiceResponse if successful.
      */
-    Boolean head404() throws ServiceException;
+    ServiceResponse<Boolean> head404() throws ServiceException;
 
     /**
      * Return 404 status code if successful

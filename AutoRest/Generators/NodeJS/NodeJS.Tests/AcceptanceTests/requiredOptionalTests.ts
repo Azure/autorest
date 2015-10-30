@@ -83,7 +83,7 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional integer properties', function (done) {
-        testClient.explicit.postOptionalIntegerProperty({ 'value': null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalIntegerProperty(null, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -132,7 +132,7 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional string properties', function (done) {
-        testClient.explicit.postOptionalStringProperty({ 'value': null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalStringProperty(null, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -182,7 +182,7 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional class properties', function (done) {
-        testClient.explicit.postOptionalClassProperty({ 'value': null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalClassProperty(null, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -216,7 +216,7 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional array properties', function (done) {
-        testClient.explicit.postOptionalArrayProperty({ 'value': null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalArrayProperty(null, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();

@@ -12,8 +12,9 @@ package fixtures.http;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import retrofit.Call;
 import retrofit.http.GET;
 
 /**
@@ -36,7 +37,7 @@ public interface HttpFailure {
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Boolean getEmptyError() throws ServiceException;
+    ServiceResponse<Boolean> getEmptyError() throws ServiceException;
 
     /**
      * Get empty error form server

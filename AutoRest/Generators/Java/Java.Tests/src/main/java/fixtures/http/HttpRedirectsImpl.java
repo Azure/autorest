@@ -18,11 +18,11 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
+import fixtures.http.models.Error;
+import java.util.List;
 import retrofit.Call;
 import retrofit.Response;
-import java.util.List;
-import fixtures.http.models.Error;
+import retrofit.Retrofit;
 
 public class HttpRedirectsImpl implements HttpRedirects {
     private HttpRedirectsService service;
@@ -38,11 +38,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void head300() throws ServiceException {
+    public ServiceResponse<Void> head300() throws ServiceException {
         try {
             Call<Void> call = service.head300();
-            ServiceResponse<Void> response = head300Delegate(call.execute(), null);
-            response.getBody();
+            return head300Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -84,11 +83,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the List&lt;String&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public List<String> get300() throws ServiceException {
+    public ServiceResponse<List<String>> get300() throws ServiceException {
         try {
             Call<ResponseBody> call = service.get300();
-            ServiceResponse<List<String>> response = get300Delegate(call.execute(), null);
-            return response.getBody();
+            return get300Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -129,11 +127,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void head301() throws ServiceException {
+    public ServiceResponse<Void> head301() throws ServiceException {
         try {
             Call<Void> call = service.head301();
-            ServiceResponse<Void> response = head301Delegate(call.execute(), null);
-            response.getBody();
+            return head301Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -174,11 +171,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void get301() throws ServiceException {
+    public ServiceResponse<Void> get301() throws ServiceException {
         try {
             Call<ResponseBody> call = service.get301();
-            ServiceResponse<Void> response = get301Delegate(call.execute(), null);
-            response.getBody();
+            return get301Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -220,11 +216,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put301(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> put301(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.put301(booleanValue);
-            ServiceResponse<Void> response = put301Delegate(call.execute(), null);
-            response.getBody();
+            return put301Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -265,11 +260,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void head302() throws ServiceException {
+    public ServiceResponse<Void> head302() throws ServiceException {
         try {
             Call<Void> call = service.head302();
-            ServiceResponse<Void> response = head302Delegate(call.execute(), null);
-            response.getBody();
+            return head302Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -310,11 +304,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void get302() throws ServiceException {
+    public ServiceResponse<Void> get302() throws ServiceException {
         try {
             Call<ResponseBody> call = service.get302();
-            ServiceResponse<Void> response = get302Delegate(call.execute(), null);
-            response.getBody();
+            return get302Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -356,11 +349,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void patch302(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> patch302(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.patch302(booleanValue);
-            ServiceResponse<Void> response = patch302Delegate(call.execute(), null);
-            response.getBody();
+            return patch302Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -402,11 +394,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post303(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> post303(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.post303(booleanValue);
-            ServiceResponse<Void> response = post303Delegate(call.execute(), null);
-            response.getBody();
+            return post303Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -448,11 +439,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void head307() throws ServiceException {
+    public ServiceResponse<Void> head307() throws ServiceException {
         try {
             Call<Void> call = service.head307();
-            ServiceResponse<Void> response = head307Delegate(call.execute(), null);
-            response.getBody();
+            return head307Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -493,11 +483,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void get307() throws ServiceException {
+    public ServiceResponse<Void> get307() throws ServiceException {
         try {
             Call<ResponseBody> call = service.get307();
-            ServiceResponse<Void> response = get307Delegate(call.execute(), null);
-            response.getBody();
+            return get307Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -539,11 +528,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void put307(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> put307(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.put307(booleanValue);
-            ServiceResponse<Void> response = put307Delegate(call.execute(), null);
-            response.getBody();
+            return put307Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -586,11 +574,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void patch307(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> patch307(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.patch307(booleanValue);
-            ServiceResponse<Void> response = patch307Delegate(call.execute(), null);
-            response.getBody();
+            return patch307Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -633,11 +620,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void post307(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> post307(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.post307(booleanValue);
-            ServiceResponse<Void> response = post307Delegate(call.execute(), null);
-            response.getBody();
+            return post307Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -680,11 +666,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void delete307(Boolean booleanValue) throws ServiceException {
+    public ServiceResponse<Void> delete307(Boolean booleanValue) throws ServiceException {
         try {
             Call<ResponseBody> call = service.delete307(booleanValue);
-            ServiceResponse<Void> response = delete307Delegate(call.execute(), null);
-            response.getBody();
+            return delete307Delegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

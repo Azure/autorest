@@ -10,6 +10,7 @@
 
 package fixtures.subscriptionidapiversion;
 
+import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 
 /**
@@ -21,6 +22,12 @@ public interface MicrosoftAzureTestUrl {
      * @return The BaseUri value.
      */
     String getBaseUri();
+
+    /**
+     * Gets the {@link AzureClient} used for long running operations.
+     * @return the azure client;
+     */
+    AzureClient getAzureClient();
 
     /**
      * Gets The management credentials for Azure..

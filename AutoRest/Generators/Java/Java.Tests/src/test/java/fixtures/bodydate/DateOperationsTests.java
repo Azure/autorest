@@ -19,7 +19,7 @@ public class DateOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getDateOperations().getNull());
+        Assert.assertNull(client.getDateOperations().getNull().getBody());
     }
 
     @Test
@@ -67,7 +67,7 @@ public class DateOperationsTests {
     @Test
     public void getMaxDate() throws Exception {
         LocalDate expected = new LocalDate(9999, 12, 31);
-        LocalDate result = client.getDateOperations().getMaxDate();
+        LocalDate result = client.getDateOperations().getMaxDate().getBody();
         Assert.assertEquals(expected, result);
     }
 
@@ -80,7 +80,7 @@ public class DateOperationsTests {
     @Test
     public void getMinDate() throws Exception {
         LocalDate expected = new LocalDate(1, 1, 1);
-        LocalDate result = client.getDateOperations().getMinDate();
+        LocalDate result = client.getDateOperations().getMinDate().getBody();
         Assert.assertEquals(expected, result);
     }
 }

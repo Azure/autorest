@@ -12,12 +12,13 @@ package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Fish;
+import retrofit.Call;
+import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.PUT;
-import retrofit.http.Body;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -42,7 +43,7 @@ public interface Polymorphicrecursive {
      * @return the Fish object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    Fish getValid() throws ServiceException;
+    ServiceResponse<Fish> getValid() throws ServiceException;
 
     /**
      * Get complex types that are polymorphic and have recursive references
@@ -110,7 +111,7 @@ public interface Polymorphicrecursive {
  }
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putValid(Fish complexBody) throws ServiceException;
+    ServiceResponse<Void> putValid(Fish complexBody) throws ServiceException;
 
     /**
      * Put complex types that are polymorphic and have recursive references

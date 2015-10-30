@@ -12,8 +12,9 @@ package fixtures.url;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -50,7 +51,7 @@ public interface PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException;
+    ServiceResponse<Void> getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException;
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'
@@ -73,7 +74,7 @@ public interface PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException;
+    ServiceResponse<Void> getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException;
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'
@@ -96,7 +97,7 @@ public interface PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException;
+    ServiceResponse<Void> getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException;
 
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null
@@ -119,7 +120,7 @@ public interface PathItems {
      * @param pathItemStringQuery should contain value null
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException;
+    ServiceResponse<Void> getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException;
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null

@@ -12,13 +12,14 @@ package fixtures.subscriptionidapiversion;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
+import retrofit.Call;
 import retrofit.http.GET;
+import retrofit.http.Header;
 import retrofit.http.Path;
 import retrofit.http.Query;
-import retrofit.http.Header;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -38,10 +39,10 @@ public interface Group {
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
-     * @return the SampleResourceGroup object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @return the SampleResourceGroup object wrapped in ServiceResponse if successful.
      */
-    SampleResourceGroup getSampleResourceGroup(String resourceGroupName) throws ServiceException;
+    ServiceResponse<SampleResourceGroup> getSampleResourceGroup(String resourceGroupName) throws ServiceException;
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.

@@ -16,14 +16,13 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
+import com.microsoft.rest.Validator;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
+import fixtures.bodycomplex.models.Error;
+import fixtures.bodycomplex.models.Fish;
 import retrofit.Call;
 import retrofit.Response;
-import fixtures.bodycomplex.models.Fish;
-import fixtures.bodycomplex.models.Error;
-import com.microsoft.rest.Validator;
+import retrofit.Retrofit;
 
 public class PolymorphismImpl implements Polymorphism {
     private PolymorphismService service;
@@ -40,11 +39,10 @@ public class PolymorphismImpl implements Polymorphism {
      * @return the Fish object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Fish getValid() throws ServiceException {
+    public ServiceResponse<Fish> getValid() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getValid();
-            ServiceResponse<Fish> response = getValidDelegate(call.execute(), null);
-            return response.getBody();
+            return getValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -109,7 +107,7 @@ public class PolymorphismImpl implements Polymorphism {
            };
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putValid(Fish complexBody) throws ServiceException {
+    public ServiceResponse<Void> putValid(Fish complexBody) throws ServiceException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
@@ -117,8 +115,7 @@ public class PolymorphismImpl implements Polymorphism {
         Validator.validate(complexBody);
         try {
             Call<ResponseBody> call = service.putValid(complexBody);
-            ServiceResponse<Void> response = putValidDelegate(call.execute(), null);
-            response.getBody();
+            return putValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -214,7 +211,7 @@ public class PolymorphismImpl implements Polymorphism {
      }
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public void putValidMissingRequired(Fish complexBody) throws ServiceException {
+    public ServiceResponse<Void> putValidMissingRequired(Fish complexBody) throws ServiceException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
@@ -222,8 +219,7 @@ public class PolymorphismImpl implements Polymorphism {
         Validator.validate(complexBody);
         try {
             Call<ResponseBody> call = service.putValidMissingRequired(complexBody);
-            ServiceResponse<Void> response = putValidMissingRequiredDelegate(call.execute(), null);
-            response.getBody();
+            return putValidMissingRequiredDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

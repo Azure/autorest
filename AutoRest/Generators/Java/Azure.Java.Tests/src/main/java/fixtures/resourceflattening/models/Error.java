@@ -10,6 +10,7 @@
 
 package fixtures.resourceflattening.models;
 
+import com.microsoft.rest.BaseResource;
 
 /**
  * The Error model.

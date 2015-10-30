@@ -13,19 +13,17 @@ package fixtures.validation;
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.Retrofit;
-import java.math.BigDecimal;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
+import fixtures.validation.models.Error;
+import fixtures.validation.models.Product;
 import retrofit.Call;
 import retrofit.Response;
-import fixtures.validation.models.Product;
-import fixtures.validation.models.Error;
 
 /**
  * Initializes a new instance of the AutoRestValidationTest class.
@@ -126,7 +124,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product validationOfMethodParameters(String resourceGroupName, int id) throws ServiceException {
+    public ServiceResponse<Product> validationOfMethodParameters(String resourceGroupName, int id) throws ServiceException {
         if (this.getSubscriptionId() == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
@@ -141,8 +139,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
         }
         try {
             Call<ResponseBody> call = service.validationOfMethodParameters(this.getSubscriptionId(), resourceGroupName, id, this.getApiVersion());
-            ServiceResponse<Product> response = validationOfMethodParametersDelegate(call.execute(), null);
-            return response.getBody();
+            return validationOfMethodParametersDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -200,7 +197,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Product validationOfBody(String resourceGroupName, int id, Product body) throws ServiceException {
+    public ServiceResponse<Product> validationOfBody(String resourceGroupName, int id, Product body) throws ServiceException {
         if (this.getSubscriptionId() == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
@@ -215,8 +212,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
         }
         try {
             Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
-            ServiceResponse<Product> response = validationOfBodyDelegate(call.execute(), null);
-            return response.getBody();
+            return validationOfBodyDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

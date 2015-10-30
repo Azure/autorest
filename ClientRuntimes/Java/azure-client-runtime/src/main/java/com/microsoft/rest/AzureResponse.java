@@ -9,6 +9,11 @@ package com.microsoft.rest;
 
 import retrofit.Response;
 
+/**
+ * A standard service response including request ID.
+ *
+ * @param <T> the type of the response resource
+ */
 public class AzureResponse<T> extends ServiceResponse<T> {
     /**
      * Instantiate a ServiceResponse instance with a response object and a raw REST response
@@ -20,6 +25,9 @@ public class AzureResponse<T> extends ServiceResponse<T> {
         super(body, response);
     }
 
+    /**
+     * The value that uniquely identifies a request made against the service.
+     */
     private String requestId;
 
     public String getRequestId() {

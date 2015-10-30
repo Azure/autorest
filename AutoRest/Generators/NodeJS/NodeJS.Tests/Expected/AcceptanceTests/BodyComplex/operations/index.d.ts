@@ -453,9 +453,7 @@ export interface Primitive {
     /**
      * Put complex types with duration properties
      *
-     * @param {object} complexBody Please put 'P123DT22H14M12.011S'
-     * 
-     * @param {moment.duration} [complexBody.field]
+     * @param {moment.duration} [field]
      * 
      * @param {object} [options]
      *
@@ -465,8 +463,8 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putDuration(complexBody: models.DurationWrapper, options: RequestOptions, callback: ServiceCallback<void>): void;
-    putDuration(complexBody: models.DurationWrapper, callback: ServiceCallback<void>): void;
+    putDuration(field: moment.Duration, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putDuration(field: moment.Duration, callback: ServiceCallback<void>): void;
 
     /**
      * Get complex types with byte properties
@@ -485,10 +483,7 @@ export interface Primitive {
     /**
      * Put complex types with byte properties
      *
-     * @param {object} complexBody Please put non-ascii byte string hex(FF FE FD
-     * FC 00 FA F9 F8 F7 F6)
-     * 
-     * @param {buffer} [complexBody.field]
+     * @param {buffer} [field]
      * 
      * @param {object} [options]
      *
@@ -498,8 +493,8 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putByte(complexBody: models.ByteWrapper, options: RequestOptions, callback: ServiceCallback<void>): void;
-    putByte(complexBody: models.ByteWrapper, callback: ServiceCallback<void>): void;
+    putByte(field: Buffer, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putByte(field: Buffer, callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -527,10 +522,7 @@ export interface ArrayModel {
     /**
      * Put complex types with array property
      *
-     * @param {object} complexBody Please put an array with 4 items: "1, 2, 3, 4",
-     * "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"
-     * 
-     * @param {array} [complexBody.array]
+     * @param {array} [arrayParameter]
      * 
      * @param {object} [options]
      *
@@ -540,8 +532,8 @@ export interface ArrayModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putValid(complexBody: models.ArrayWrapper, options: RequestOptions, callback: ServiceCallback<void>): void;
-    putValid(complexBody: models.ArrayWrapper, callback: ServiceCallback<void>): void;
+    putValid(arrayParameter: string[], options: RequestOptions, callback: ServiceCallback<void>): void;
+    putValid(arrayParameter: string[], callback: ServiceCallback<void>): void;
 
     /**
      * Get complex types with array property which is empty
@@ -560,9 +552,7 @@ export interface ArrayModel {
     /**
      * Put complex types with array property which is empty
      *
-     * @param {object} complexBody Please put an empty array
-     * 
-     * @param {array} [complexBody.array]
+     * @param {array} [arrayParameter]
      * 
      * @param {object} [options]
      *
@@ -572,8 +562,8 @@ export interface ArrayModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putEmpty(complexBody: models.ArrayWrapper, options: RequestOptions, callback: ServiceCallback<void>): void;
-    putEmpty(complexBody: models.ArrayWrapper, callback: ServiceCallback<void>): void;
+    putEmpty(arrayParameter: string[], options: RequestOptions, callback: ServiceCallback<void>): void;
+    putEmpty(arrayParameter: string[], callback: ServiceCallback<void>): void;
 
     /**
      * Get complex types with array property while server doesn't provide a
@@ -616,10 +606,7 @@ export interface Dictionary {
     /**
      * Put complex types with dictionary property
      *
-     * @param {object} complexBody Please put a dictionary with 5 key-value pairs:
-     * "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
-     * 
-     * @param {object} [complexBody.defaultProgram]
+     * @param {object} [defaultProgram]
      * 
      * @param {object} [options]
      *
@@ -629,8 +616,8 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putValid(complexBody: models.DictionaryWrapper, options: RequestOptions, callback: ServiceCallback<void>): void;
-    putValid(complexBody: models.DictionaryWrapper, callback: ServiceCallback<void>): void;
+    putValid(defaultProgram: { [propertyName: string]: string }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putValid(defaultProgram: { [propertyName: string]: string }, callback: ServiceCallback<void>): void;
 
     /**
      * Get complex types with dictionary property which is empty
@@ -649,9 +636,7 @@ export interface Dictionary {
     /**
      * Put complex types with dictionary property which is empty
      *
-     * @param {object} complexBody Please put an empty dictionary
-     * 
-     * @param {object} [complexBody.defaultProgram]
+     * @param {object} [defaultProgram]
      * 
      * @param {object} [options]
      *
@@ -661,8 +646,8 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putEmpty(complexBody: models.DictionaryWrapper, options: RequestOptions, callback: ServiceCallback<void>): void;
-    putEmpty(complexBody: models.DictionaryWrapper, callback: ServiceCallback<void>): void;
+    putEmpty(defaultProgram: { [propertyName: string]: string }, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putEmpty(defaultProgram: { [propertyName: string]: string }, callback: ServiceCallback<void>): void;
 
     /**
      * Get complex types with dictionary property which is null

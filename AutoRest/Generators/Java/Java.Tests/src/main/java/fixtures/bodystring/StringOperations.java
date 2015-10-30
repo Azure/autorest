@@ -12,11 +12,12 @@ package fixtures.bodystring;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import retrofit.Call;
+import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.PUT;
-import retrofit.http.Body;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -62,7 +63,7 @@ public interface StringOperations {
      * @return the String object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    String getNull() throws ServiceException;
+    ServiceResponse<String> getNull() throws ServiceException;
 
     /**
      * Get null string value value
@@ -78,7 +79,7 @@ public interface StringOperations {
      * @param stringBody Possible values for this parameter include: ''
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putNull(String stringBody) throws ServiceException;
+    ServiceResponse<Void> putNull(String stringBody) throws ServiceException;
 
     /**
      * Set string value null
@@ -95,7 +96,7 @@ public interface StringOperations {
      * @return the String object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    String getEmpty() throws ServiceException;
+    ServiceResponse<String> getEmpty() throws ServiceException;
 
     /**
      * Get empty string value value ''
@@ -111,7 +112,7 @@ public interface StringOperations {
      * @param stringBody Possible values for this parameter include: ''
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putEmpty(String stringBody) throws ServiceException;
+    ServiceResponse<Void> putEmpty(String stringBody) throws ServiceException;
 
     /**
      * Set string value empty ''
@@ -128,7 +129,7 @@ public interface StringOperations {
      * @return the String object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    String getMbcs() throws ServiceException;
+    ServiceResponse<String> getMbcs() throws ServiceException;
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
@@ -144,7 +145,7 @@ public interface StringOperations {
      * @param stringBody Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putMbcs(String stringBody) throws ServiceException;
+    ServiceResponse<Void> putMbcs(String stringBody) throws ServiceException;
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
@@ -161,7 +162,7 @@ public interface StringOperations {
      * @return the String object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    String getWhitespace() throws ServiceException;
+    ServiceResponse<String> getWhitespace() throws ServiceException;
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
@@ -177,7 +178,7 @@ public interface StringOperations {
      * @param stringBody Possible values for this parameter include: '    Now is the time for all good men to come to the aid of their country    '
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void putWhitespace(String stringBody) throws ServiceException;
+    ServiceResponse<Void> putWhitespace(String stringBody) throws ServiceException;
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
@@ -194,7 +195,7 @@ public interface StringOperations {
      * @return the String object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    String getNotProvided() throws ServiceException;
+    ServiceResponse<String> getNotProvided() throws ServiceException;
 
     /**
      * Get String value when no string value is sent in response payload

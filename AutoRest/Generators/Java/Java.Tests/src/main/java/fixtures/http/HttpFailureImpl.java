@@ -16,12 +16,11 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
+import fixtures.http.models.Error;
 import retrofit.Call;
 import retrofit.Response;
-import fixtures.http.models.Error;
+import retrofit.Retrofit;
 
 public class HttpFailureImpl implements HttpFailure {
     private HttpFailureService service;
@@ -38,11 +37,10 @@ public class HttpFailureImpl implements HttpFailure {
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Boolean getEmptyError() throws ServiceException {
+    public ServiceResponse<Boolean> getEmptyError() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getEmptyError();
-            ServiceResponse<Boolean> response = getEmptyErrorDelegate(call.execute(), null);
-            return response.getBody();
+            return getEmptyErrorDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

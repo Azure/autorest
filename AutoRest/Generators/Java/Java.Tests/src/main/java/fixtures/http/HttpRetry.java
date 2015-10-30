@@ -12,15 +12,16 @@ package fixtures.http;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import retrofit.Call;
+import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.http.HEAD;
-import retrofit.http.PUT;
+import retrofit.Call;
 import retrofit.http.Body;
-import retrofit.http.PATCH;
 import retrofit.http.GET;
-import retrofit.http.POST;
+import retrofit.http.HEAD;
 import retrofit.http.HTTP;
+import retrofit.http.PATCH;
+import retrofit.http.POST;
+import retrofit.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -62,7 +63,7 @@ public interface HttpRetry {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void head408() throws ServiceException;
+    ServiceResponse<Void> head408() throws ServiceException;
 
     /**
      * Return 408 status code, then 200 after retry
@@ -78,7 +79,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void put500(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> put500(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 500 status code, then 200 after retry
@@ -95,7 +96,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void patch500(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> patch500(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 500 status code, then 200 after retry
@@ -111,7 +112,7 @@ public interface HttpRetry {
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void get502() throws ServiceException;
+    ServiceResponse<Void> get502() throws ServiceException;
 
     /**
      * Return 502 status code, then 200 after retry
@@ -127,7 +128,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void post503(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> post503(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 503 status code, then 200 after retry
@@ -144,7 +145,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void delete503(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> delete503(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 503 status code, then 200 after retry
@@ -161,7 +162,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void put504(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> put504(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 504 status code, then 200 after retry
@@ -178,7 +179,7 @@ public interface HttpRetry {
      * @param booleanValue Simple boolean value true
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    void patch504(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> patch504(Boolean booleanValue) throws ServiceException;
 
     /**
      * Return 504 status code, then 200 after retry

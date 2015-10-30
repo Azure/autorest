@@ -13,19 +13,17 @@ package fixtures.report;
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.Retrofit;
-import java.math.BigDecimal;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
+import fixtures.report.models.Error;
+import java.util.Map;
 import retrofit.Call;
 import retrofit.Response;
-import java.util.Map;
-import fixtures.report.models.Error;
 
 /**
  * Initializes a new instance of the AutoRestReportService class.
@@ -84,11 +82,10 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * @return the Map&lt;String, Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public Map<String, Integer> getReport() throws ServiceException {
+    public ServiceResponse<Map<String, Integer>> getReport() throws ServiceException {
         try {
             Call<ResponseBody> call = service.getReport();
-            ServiceResponse<Map<String, Integer>> response = getReportDelegate(call.execute(), null);
-            return response.getBody();
+            return getReportDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
         } catch (Exception ex) {

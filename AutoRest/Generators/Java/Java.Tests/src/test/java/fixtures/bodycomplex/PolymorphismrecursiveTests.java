@@ -23,7 +23,7 @@ public class PolymorphismrecursiveTests {
 
     @Test
     public void getValid() throws Exception {
-        Fish result = client.getPolymorphicrecursive().getValid();
+        Fish result = client.getPolymorphicrecursive().getValid().getBody();
         Salmon salmon = (Salmon)result;
         Shark sib1 = (Shark)(salmon.getSiblings().get(0));
         Salmon sib2 = (Salmon)(sib1.getSiblings().get(0));
