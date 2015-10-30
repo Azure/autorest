@@ -50,13 +50,11 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='complexBody'>
-            /// Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y",
-            /// "The quick brown fox jumps over the lazy dog"
+            /// <param name='array'>
             /// </param>
-            public static void PutValid(this IArray operations, ArrayWrapper complexBody)
+            public static void PutValid(this IArray operations, IList<string> array = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutValidAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IArray)s).PutValidAsync(array), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -65,16 +63,14 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='complexBody'>
-            /// Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y",
-            /// "The quick brown fox jumps over the lazy dog"
+            /// <param name='array'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync( this IArray operations, ArrayWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutValidAsync( this IArray operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutValidWithHttpMessagesAsync(array, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -109,12 +105,11 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='complexBody'>
-            /// Please put an empty array
+            /// <param name='array'>
             /// </param>
-            public static void PutEmpty(this IArray operations, ArrayWrapper complexBody)
+            public static void PutEmpty(this IArray operations, IList<string> array = default(IList<string>))
             {
-                Task.Factory.StartNew(s => ((IArray)s).PutEmptyAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IArray)s).PutEmptyAsync(array), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -123,15 +118,14 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='complexBody'>
-            /// Please put an empty array
+            /// <param name='array'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutEmptyAsync( this IArray operations, ArrayWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutEmptyAsync( this IArray operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutEmptyWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutEmptyWithHttpMessagesAsync(array, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>

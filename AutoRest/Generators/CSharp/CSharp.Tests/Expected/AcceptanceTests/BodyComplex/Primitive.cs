@@ -1779,8 +1779,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// Put complex types with duration properties
         /// </summary>
-        /// <param name='complexBody'>
-        /// Please put 'P123DT22H14M12.011S'
+        /// <param name='field'>
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -1788,11 +1787,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutDurationWithHttpMessagesAsync(DurationWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutDurationWithHttpMessagesAsync(TimeSpan? field = default(TimeSpan?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (complexBody == null)
+            DurationWrapper complexBody = null;
+            if (field != null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "complexBody");
+                complexBody = new DurationWrapper();
+                complexBody.Field = field;
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1961,8 +1962,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// Put complex types with byte properties
         /// </summary>
-        /// <param name='complexBody'>
-        /// Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
+        /// <param name='field'>
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -1970,11 +1970,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutByteWithHttpMessagesAsync(ByteWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutByteWithHttpMessagesAsync(byte[] field = default(byte[]), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (complexBody == null)
+            ByteWrapper complexBody = null;
+            if (field != null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "complexBody");
+                complexBody = new ByteWrapper();
+                complexBody.Field = field;
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

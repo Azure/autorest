@@ -57,6 +57,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public override ServiceClient Build()
         {
             PrimaryType.Reset();
@@ -119,7 +120,52 @@ namespace Microsoft.Rest.Modeler.Swagger
                 ServiceClient.ModelTypes.Add(objectType);
             }
 
+            // Flatten request payload
+            foreach (var method in ServiceClient.Methods)
+            {
+                FlattenRequestPayload(method);
+            }
+
             return ServiceClient;
+        }
+
+        /// <summary>
+        /// Flattens the request payload if the number of properties of the 
+        /// payload is less than or equal to the PayloadFlatteningThreshold.
+        /// </summary>
+        /// <param name="method">Method to process</param>
+        private void FlattenRequestPayload(Method method)
+        {
+            var bodyParameter = method.Parameters.FirstOrDefault(
+                p => p.Location == Generator.ClientModel.ParameterLocation.Body);
+
+            if (bodyParameter != null)
+            {
+                var bodyParameterType = bodyParameter.Type as CompositeType;
+                if (bodyParameterType != null && bodyParameterType.ComposedProperties.Count() <= Settings.PayloadFlatteningThreshold)
+                {
+                    var parameterTransformation = new ParameterTransformation
+                    {
+                        OutputParameter = bodyParameter
+                    };
+                    method.InputParameterTransformation.Add(parameterTransformation);
+
+                    foreach (var property in bodyParameterType.ComposedProperties)
+                    {
+                        var newMethodParameter = new Parameter();
+                        newMethodParameter.LoadFrom(property);
+                        method.Parameters.Add(newMethodParameter);
+
+                        parameterTransformation.ParameterMappings.Add(new ParameterMapping
+                        {
+                            InputParameter = newMethodParameter,
+                            OutputParameterProperty = property.Name
+                        });                        
+                    }
+
+                    method.Parameters.Remove(bodyParameter);
+                }
+            }
         }
 
         /// <summary>

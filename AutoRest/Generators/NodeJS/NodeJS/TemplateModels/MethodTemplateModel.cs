@@ -40,7 +40,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public ServiceClient ServiceClient { get; set; }
 
-        protected List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
 
         protected List<ParameterTemplateModel> GroupedParameterTemplateModels { get; private set; }
 
@@ -92,18 +92,18 @@ namespace Microsoft.Rest.Generator.NodeJS
                 return declaration;
             }
         }
-		
+
         /// <summary>
         /// Generate the method parameter declarations for a method, using TypeScript declaration syntax
         /// <param name="includeOptions">whether the ServiceClientOptions parameter should be included</param>
         /// </summary>
         public string MethodParameterDeclarationTS(bool includeOptions)
-		{
+        {
             StringBuilder declarations = new StringBuilder();
 
             bool first = true;
             foreach (var parameter in LocalParameters)
-			{
+            {
                 if (!first)
                     declarations.Append(", ");
 
@@ -146,7 +146,8 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// Generate the method parameter declarations with callback for a method, using TypeScript method syntax
         /// <param name="includeOptions">whether the ServiceClientOptions parameter should be included</param>
         /// </summary>
-        public string MethodParameterDeclarationWithCallbackTS(bool includeOptions) {
+        public string MethodParameterDeclarationWithCallbackTS(bool includeOptions)
+        {
             //var parameters = MethodParameterDeclarationTS(includeOptions);
             var returnTypeTSString = ReturnType == null ? "void" : ReturnType.TSType(false);
 
@@ -198,7 +199,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                     {
                         retValue.Push(param);
                     }
-                    
+
                     if (param.Type is CompositeType)
                     {
                         if (!visitedHash.ContainsKey(param.Type.Name))
@@ -217,7 +218,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                                 propertyParameter.Documentation = property.Documentation;
                                 traversalStack.Push(new ParameterTemplateModel(propertyParameter));
                             }
-                            
+
                             visitedHash.Add(param.Type.Name, new ParameterTemplateModel(param));
                         }
                         else
@@ -237,7 +238,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             return builder.AppendLine(documentation)
                           .AppendLine(" * ").ToString();
         }
-        
+
         /// <summary>
         /// Get the type name for the method's return type
         /// </summary>
@@ -329,7 +330,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             if (primary != null)
             {
                 if (primary == PrimaryType.DateTime ||
-                    primary == PrimaryType.Date || 
+                    primary == PrimaryType.Date ||
                     primary == PrimaryType.DateTimeRfc1123)
                 {
                     builder.AppendLine("{0} = new Date({0});", valueReference);
@@ -347,7 +348,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 builder.AppendLine("for (var i = 0; i < {0}.length; i++) {{", valueReference)
                          .Indent();
-                    
+
                 // Loop through the sequence if each property is Date, DateTime or ByteArray 
                 // as they need special treatment for deserialization
                 if (sequence.ElementType is PrimaryType)
@@ -355,7 +356,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                     builder.AppendLine("if ({0}[i] !== null && {0}[i] !== undefined) {{", valueReference)
                              .Indent();
                     if (sequence.ElementType == PrimaryType.DateTime ||
-                       sequence.ElementType == PrimaryType.Date || 
+                       sequence.ElementType == PrimaryType.Date ||
                         sequence.ElementType == PrimaryType.DateTimeRfc1123)
                     {
                         builder.AppendLine("{0}[i] = new Date({0}[i]);", valueReference);
@@ -391,8 +392,8 @@ namespace Microsoft.Rest.Generator.NodeJS
                 {
                     builder.AppendLine("if ({0}[property] !== null && {0}[property] !== undefined) {{", valueReference)
                              .Indent();
-                    if (dictionary.ValueType == PrimaryType.DateTime || 
-                        dictionary.ValueType == PrimaryType.Date || 
+                    if (dictionary.ValueType == PrimaryType.DateTime ||
+                        dictionary.ValueType == PrimaryType.Date ||
                         dictionary.ValueType == PrimaryType.DateTimeRfc1123)
                     {
                         builder.AppendLine("{0}[property] = new Date({0}[property]);", valueReference);
@@ -437,10 +438,10 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public string ValidationString
         {
-            get 
+            get
             {
                 var builder = new IndentedStringBuilder("  ");
-                foreach (var parameter in LogicalParameters)
+                foreach (var parameter in ParameterTemplateModels)
                 {
                     if ((HttpMethod == HttpMethod.Patch && parameter.Type is CompositeType))
                     {
@@ -505,7 +506,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                      .AppendLine(type.InitializeSerializationType(Scope, valueReference, responseVariable, "client._models"));
             var deserializeBody = this.GetDeserializationString(type, valueReference, responseVariable);
             if (!string.IsNullOrWhiteSpace(deserializeBody))
-            {             
+            {
                 builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", responseVariable)
                          .Indent()
                          .AppendLine(deserializeBody)
@@ -694,9 +695,9 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
-        public virtual string InitializeResult 
-        { 
-            get 
+        public virtual string InitializeResult
+        {
+            get
             {
                 return string.Empty;
             }
@@ -710,7 +711,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 if (ReturnType is EnumType)
                 {
                     string enumValues = "";
-                    for (var i = 0; i <((EnumType)ReturnType).Values.Count; i++)
+                    for (var i = 0; i < ((EnumType)ReturnType).Values.Count; i++)
                     {
                         if (i == ((EnumType)ReturnType).Values.Count - 1)
                         {
@@ -764,5 +765,55 @@ namespace Microsoft.Rest.Generator.NodeJS
                 return typeName.ToLower(CultureInfo.InvariantCulture);
             }
         }
-    }
+
+        /// <summary>
+        /// Generates input mapping code block.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string BuildInputMappings()
+        {
+            var builder = new IndentedStringBuilder();
+            foreach (var transformation in InputParameterTransformation)
+            {
+                builder.AppendLine("var {0};",
+                        transformation.OutputParameter.Name);
+
+                builder.AppendLine("if ({0})", BuildNullCheckExpression(transformation))
+                       .AppendLine("{").Indent();
+
+                if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
+                    transformation.OutputParameter.Type is CompositeType)
+                {
+                    builder.AppendLine("{0} = new client._models['{1}']();",
+                        transformation.OutputParameter.Name,
+                        transformation.OutputParameter.Type.Name);
+                }
+
+                foreach (var mapping in transformation.ParameterMappings)
+                {
+                    builder.AppendLine("{0}{1};",
+                        transformation.OutputParameter.Name,
+                        mapping);
+                }
+
+                builder.Outdent()
+                       .AppendLine("}");
+            }
+
+            return builder.ToString();
+        }
+
+        private static string BuildNullCheckExpression(ParameterTransformation transformation)
+        {
+            if (transformation == null)
+            {
+                throw new ArgumentNullException("transformation");
+            }
+
+            return string.Join(" || ",
+                transformation.ParameterMappings.Select(m => 
+                    string.Format(CultureInfo.InvariantCulture,
+                    "({0} !== null && {0} !== undefined)", m.InputParameter.Name)));
+        }
+    }        
 }

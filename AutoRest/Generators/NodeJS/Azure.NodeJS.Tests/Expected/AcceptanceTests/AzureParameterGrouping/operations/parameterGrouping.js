@@ -74,29 +74,36 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var body = (parameterGroupingPostRequiredParameters ? parameterGroupingPostRequiredParameters.body : undefined);
-  var customHeader = (parameterGroupingPostRequiredParameters ? parameterGroupingPostRequiredParameters.customHeader : undefined);
-  var query = (parameterGroupingPostRequiredParameters ? parameterGroupingPostRequiredParameters.query : undefined);
-  var path = (parameterGroupingPostRequiredParameters ? parameterGroupingPostRequiredParameters.path : undefined);
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
-    if (body === null || body === undefined || typeof body !== 'number') {
-      throw new Error('body cannot be null or undefined and it must be of type number.');
-    }
-    if (customHeader !== null && customHeader !== undefined && typeof customHeader.valueOf() !== 'string') {
-      throw new Error('customHeader must be of type string.');
-    }
-    if (query !== null && query !== undefined && typeof query !== 'number') {
-      throw new Error('query must be of type number.');
-    }
-    if (path === null || path === undefined || typeof path.valueOf() !== 'string') {
-      throw new Error('path cannot be null or undefined and it must be of type string.');
+    if (parameterGroupingPostRequiredParameters === null || parameterGroupingPostRequiredParameters === undefined) {
+      throw new Error('parameterGroupingPostRequiredParameters cannot be null or undefined.');
     }
   } catch (error) {
     return callback(error);
+  }
+  var body;
+  if ((parameterGroupingPostRequiredParameters !== null && parameterGroupingPostRequiredParameters !== undefined))
+  {
+      body = parameterGroupingPostRequiredParameters.body;
+  }
+  var customHeader;
+  if ((parameterGroupingPostRequiredParameters !== null && parameterGroupingPostRequiredParameters !== undefined))
+  {
+      customHeader = parameterGroupingPostRequiredParameters.customHeader;
+  }
+  var query;
+  if ((parameterGroupingPostRequiredParameters !== null && parameterGroupingPostRequiredParameters !== undefined))
+  {
+      query = parameterGroupingPostRequiredParameters.query;
+  }
+  var path;
+  if ((parameterGroupingPostRequiredParameters !== null && parameterGroupingPostRequiredParameters !== undefined))
+  {
+      path = parameterGroupingPostRequiredParameters.path;
   }
 
   // Construct URL
@@ -220,21 +227,23 @@ ParameterGrouping.prototype.postOptional = function (parameterGroupingPostOption
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var customHeader = (parameterGroupingPostOptionalParameters ? parameterGroupingPostOptionalParameters.customHeader : undefined);
-  var query = (parameterGroupingPostOptionalParameters ? parameterGroupingPostOptionalParameters.query : undefined);
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
-    if (customHeader !== null && customHeader !== undefined && typeof customHeader.valueOf() !== 'string') {
-      throw new Error('customHeader must be of type string.');
-    }
-    if (query !== null && query !== undefined && typeof query !== 'number') {
-      throw new Error('query must be of type number.');
-    }
   } catch (error) {
     return callback(error);
+  }
+  var customHeader;
+  if ((parameterGroupingPostOptionalParameters !== null && parameterGroupingPostOptionalParameters !== undefined))
+  {
+      customHeader = parameterGroupingPostOptionalParameters.customHeader;
+  }
+  var query;
+  if ((parameterGroupingPostOptionalParameters !== null && parameterGroupingPostOptionalParameters !== undefined))
+  {
+      query = parameterGroupingPostOptionalParameters.query;
   }
 
   // Construct URL
@@ -350,29 +359,33 @@ ParameterGrouping.prototype.postMultipleParameterGroups = function (firstParamet
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var headerOne = (firstParameterGroup ? firstParameterGroup.headerOne : undefined);
-  var queryOne = (firstParameterGroup ? firstParameterGroup.queryOne : undefined);
-  var headerTwo = (secondParameterGroup ? secondParameterGroup.headerTwo : undefined);
-  var queryTwo = (secondParameterGroup ? secondParameterGroup.queryTwo : undefined);
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
-    if (headerOne !== null && headerOne !== undefined && typeof headerOne.valueOf() !== 'string') {
-      throw new Error('headerOne must be of type string.');
-    }
-    if (queryOne !== null && queryOne !== undefined && typeof queryOne !== 'number') {
-      throw new Error('queryOne must be of type number.');
-    }
-    if (headerTwo !== null && headerTwo !== undefined && typeof headerTwo.valueOf() !== 'string') {
-      throw new Error('headerTwo must be of type string.');
-    }
-    if (queryTwo !== null && queryTwo !== undefined && typeof queryTwo !== 'number') {
-      throw new Error('queryTwo must be of type number.');
-    }
   } catch (error) {
     return callback(error);
+  }
+  var headerOne;
+  if ((firstParameterGroup !== null && firstParameterGroup !== undefined))
+  {
+      headerOne = firstParameterGroup.headerOne;
+  }
+  var queryOne;
+  if ((firstParameterGroup !== null && firstParameterGroup !== undefined))
+  {
+      queryOne = firstParameterGroup.queryOne;
+  }
+  var headerTwo;
+  if ((secondParameterGroup !== null && secondParameterGroup !== undefined))
+  {
+      headerTwo = secondParameterGroup.headerTwo;
+  }
+  var queryTwo;
+  if ((secondParameterGroup !== null && secondParameterGroup !== undefined))
+  {
+      queryTwo = secondParameterGroup.queryTwo;
   }
 
   // Construct URL

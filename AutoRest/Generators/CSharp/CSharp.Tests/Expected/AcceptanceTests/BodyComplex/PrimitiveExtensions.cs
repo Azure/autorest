@@ -567,12 +567,11 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='complexBody'>
-            /// Please put 'P123DT22H14M12.011S'
+            /// <param name='field'>
             /// </param>
-            public static void PutDuration(this IPrimitive operations, DurationWrapper complexBody)
+            public static void PutDuration(this IPrimitive operations, TimeSpan? field = default(TimeSpan?))
             {
-                Task.Factory.StartNew(s => ((IPrimitive)s).PutDurationAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPrimitive)s).PutDurationAsync(field), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -581,15 +580,14 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='complexBody'>
-            /// Please put 'P123DT22H14M12.011S'
+            /// <param name='field'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutDurationAsync( this IPrimitive operations, DurationWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutDurationAsync( this IPrimitive operations, TimeSpan? field = default(TimeSpan?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDurationWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutDurationWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -624,12 +622,11 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='complexBody'>
-            /// Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
+            /// <param name='field'>
             /// </param>
-            public static void PutByte(this IPrimitive operations, ByteWrapper complexBody)
+            public static void PutByte(this IPrimitive operations, byte[] field = default(byte[]))
             {
-                Task.Factory.StartNew(s => ((IPrimitive)s).PutByteAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPrimitive)s).PutByteAsync(field), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -638,15 +635,14 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='complexBody'>
-            /// Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
+            /// <param name='field'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutByteAsync( this IPrimitive operations, ByteWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutByteAsync( this IPrimitive operations, byte[] field = default(byte[]), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutByteWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                await operations.PutByteWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false);
             }
 
     }
