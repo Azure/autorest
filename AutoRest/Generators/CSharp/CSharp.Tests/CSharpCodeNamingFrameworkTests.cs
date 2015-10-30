@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Xunit;
@@ -489,7 +490,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             for (int i = 0; i < expectedLines.Length; i++)
             {
                 Assert.True(expectedLines[i].Trim().Equals(actualLines[i].Trim()),
-                    string.Format("Difference on line {0}.\r\nExpected: {1}\r\nActual: {2}", i, expectedLines[i], actualLines[i]));
+                    string.Format(CultureInfo.InvariantCulture, "Difference on line {0}.\r\nExpected: {1}\r\nActual: {2}", i, expectedLines[i], actualLines[i]));
             }
         }
     }
