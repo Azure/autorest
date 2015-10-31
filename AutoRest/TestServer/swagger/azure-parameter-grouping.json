@@ -60,7 +60,7 @@
             "x-ms-parameter-grouping": {
               "value": true
             }
-          },
+          }
         ],
         "responses": {
           "200": {
@@ -98,7 +98,7 @@
             "description": "Query parameter with default",
             "x-ms-parameter-grouping": {
             }
-          },
+          }
         ],
         "responses": {
           "200": {
@@ -159,7 +159,7 @@
             "x-ms-parameter-grouping": {
               "name": "second-parameter-group"
             }
-          },
+          }
         ],
         "responses": {
           "200": {
@@ -173,7 +173,7 @@
           }
         }
       }
-    },
+    }
   },
   "definitions": {
     "Error": {
