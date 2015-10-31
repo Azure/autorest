@@ -8,6 +8,22 @@ namespace Microsoft.Rest
     /// <summary>
     /// Represents the base return type of all ServiceClient REST operations.
     /// </summary>
+    public class HttpOperationResponse<TBody, THeader> : HttpOperationResponse
+    {
+        /// <summary>
+        /// Gets or sets the response body object.
+        /// </summary>
+        public TBody Body { get; set; }
+
+        /// <summary>
+        /// Gets or sets the response header object.
+        /// </summary>
+        public THeader Headers { get; set; }
+    }
+
+    /// <summary>
+    /// Represents the base return type of all ServiceClient REST operations.
+    /// </summary>
     public class HttpOperationResponse<T> : HttpOperationResponse
     {
         /// <summary>
