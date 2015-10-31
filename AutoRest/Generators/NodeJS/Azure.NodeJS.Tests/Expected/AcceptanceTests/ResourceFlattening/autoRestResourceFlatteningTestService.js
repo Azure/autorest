@@ -810,7 +810,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        error.body = new client._models['CloudError']();
+        error.body = new client._models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
         }
