@@ -16,7 +16,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
         public Schema Schema { get; set; }
 
-        public Dictionary<string, Schema> Headers { get; set; }
+        public Dictionary<string, Header> Headers { get; set; }
 
         public Dictionary<string, object> Examples { get; set; }
     }

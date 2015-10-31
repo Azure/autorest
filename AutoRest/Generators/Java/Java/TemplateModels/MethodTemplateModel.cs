@@ -256,7 +256,7 @@ namespace Microsoft.Rest.Generator.Java
                     parameters += ", ";
                 }
                 parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
-                    ReturnType != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType).ToString() : "Void");
+                    ReturnType != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType.Item1).ToString() : "Void");
                 return parameters;
             }
         }
@@ -283,9 +283,9 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType != null && ReturnType.Item1 != null)
                 {
-                    return JavaCodeNamer.WrapPrimitiveType(ReturnType).Name;
+                    return JavaCodeNamer.WrapPrimitiveType(ReturnType.Item1).Name;
                 }
                 return "void";
             }
@@ -295,9 +295,9 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType != null && ReturnType.Item1 != null)
                 {
-                    return JavaCodeNamer.WrapPrimitiveType(ReturnType).Name;
+                    return JavaCodeNamer.WrapPrimitiveType(ReturnType.Item1).Name;
                 }
                 return "Void";
             }
@@ -349,7 +349,7 @@ namespace Microsoft.Rest.Generator.Java
                 // parameter locations
                 this.Parameters.ForEach(p => imports.Add(p.Location.ImportFrom()));
                 // return type
-                imports.AddRange(this.ReturnType.ImportFrom(ServiceClient.Namespace));
+                imports.AddRange(this.ReturnType.Item1.ImportFrom(ServiceClient.Namespace));
                 // Http verb annotations
                 imports.Add(this.HttpMethod.ImportFrom());
                 return imports.ToList();
@@ -395,10 +395,10 @@ namespace Microsoft.Rest.Generator.Java
                 // parameter utils
                 this.LocalParameters.ForEach(p => imports.AddRange(p.ImportFrom()));
                 // return type
-                imports.AddRange(this.ReturnType.ImportFrom(ServiceClient.Namespace));
+                imports.AddRange(this.ReturnType.Item1.ImportFrom(ServiceClient.Namespace));
                 // response type (can be different from return type)
-                this.Responses.ForEach(r => imports.AddRange(r.Value.ImportFrom(ServiceClient.Namespace)));
-                imports.AddRange(DefaultResponse.ImportFrom(ServiceClient.Namespace));
+                this.Responses.ForEach(r => imports.AddRange(r.Value.Item1.ImportFrom(ServiceClient.Namespace)));
+                imports.AddRange(DefaultResponse.Item1.ImportFrom(ServiceClient.Namespace));
                 return imports.ToList();
             }
         }

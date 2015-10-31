@@ -23,7 +23,7 @@ namespace Microsoft.Rest.Generator.ClientModel
             Extensions = new Dictionary<string, object>();
             Parameters = new List<Parameter>();
             RequestHeaders = new Dictionary<string, string>();
-            Responses = new Dictionary<HttpStatusCode, IType>();
+            Responses = new Dictionary<HttpStatusCode, Tuple<IType, IType>>();
             InputParameterTransformation = new List<ParameterTransformation>();
         }
 
@@ -103,19 +103,22 @@ namespace Microsoft.Rest.Generator.ClientModel
         public SerializationFormat ResponseSerializationFormat { get; set; }
 
         /// <summary>
-        /// Gets or sets response bodies by HttpStatusCode.
+        /// Gets or sets response bodies by HttpStatusCode. The tuple contains a body
+        /// and headers.
         /// </summary>
-        public Dictionary<HttpStatusCode, IType> Responses { get; private set; }
+        public Dictionary<HttpStatusCode, Tuple<IType, IType>> Responses { get; private set; }
 
         /// <summary>
-        /// Gets or sets the default response.
+        /// Gets or sets the default response. The tuple contains a body
+        /// and headers.
         /// </summary>
-        public IType DefaultResponse { get; set; }
+        public Tuple<IType, IType> DefaultResponse { get; set; }
 
         /// <summary>
-        /// Gets or sets the method return type.
+        /// Gets or sets the method return type. The tuple contains a body
+        /// and headers.
         /// </summary>
-        public IType ReturnType { get; set; }
+        public Tuple<IType, IType> ReturnType { get; set; }
 
         /// <summary>
         /// Gets or sets the description.
@@ -159,7 +162,7 @@ namespace Microsoft.Rest.Generator.ClientModel
             newMethod.Extensions = new Dictionary<string, object>();
             newMethod.Parameters = new List<Parameter>();
             newMethod.RequestHeaders = new Dictionary<string, string>();
-            newMethod.Responses = new Dictionary<HttpStatusCode, IType>();
+            newMethod.Responses = new Dictionary<HttpStatusCode, Tuple<IType, IType>>();
             newMethod.InputParameterTransformation = new List<ParameterTransformation>();
             this.Extensions.ForEach(e => newMethod.Extensions[e.Key] = e.Value);
             this.Parameters.ForEach(p => newMethod.Parameters.Add((Parameter)p.Clone()));

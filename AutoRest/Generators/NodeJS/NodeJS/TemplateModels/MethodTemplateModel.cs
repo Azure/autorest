@@ -149,7 +149,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         public string MethodParameterDeclarationWithCallbackTS(bool includeOptions)
         {
             //var parameters = MethodParameterDeclarationTS(includeOptions);
-            var returnTypeTSString = ReturnType == null ? "void" : ReturnType.TSType(false);
+            var returnTypeTSString = ReturnType == null || ReturnType.Item1 == null ? "void" : ReturnType.Item1.TSType(false);
 
             StringBuilder parameters = new StringBuilder();
             parameters.Append(MethodParameterDeclarationTS(includeOptions));
@@ -246,9 +246,9 @@ namespace Microsoft.Rest.Generator.NodeJS
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType != null && ReturnType.Item1 != null)
                 {
-                    return ReturnType.Name;
+                    return ReturnType.Item1.Name;
                 }
                 return "null";
             }
@@ -256,7 +256,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         /// <summary>
         /// The Deserialization Error handling code block that provides a useful Error 
-        /// message when exceptions occure in deserialization along with the request 
+        /// message when exceptions occur in deserialization along with the request 
         /// and response object
         /// </summary>
         public string DeserializationError
@@ -708,24 +708,27 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 string result = null;
-                if (ReturnType is EnumType)
+
+                IType returnBodyType = ReturnType == null ? null : ReturnType.Item1;
+
+                if (returnBodyType is EnumType)
                 {
                     string enumValues = "";
-                    for (var i = 0; i < ((EnumType)ReturnType).Values.Count; i++)
+                    for (var i = 0; i < ((EnumType)returnBodyType).Values.Count; i++)
                     {
-                        if (i == ((EnumType)ReturnType).Values.Count - 1)
+                        if (i == ((EnumType)returnBodyType).Values.Count - 1)
                         {
-                            enumValues += ((EnumType)ReturnType).Values[i].SerializedName;
+                            enumValues += ((EnumType)returnBodyType).Values[i].SerializedName;
                         }
                         else
                         {
-                            enumValues += ((EnumType)ReturnType).Values[i].SerializedName + ", ";
+                            enumValues += ((EnumType)returnBodyType).Values[i].SerializedName + ", ";
                         }
                     }
                     result = string.Format(CultureInfo.InvariantCulture,
                         "Possible values for result are - {0}.", enumValues);
                 }
-                else if (ReturnType is CompositeType)
+                else if (returnBodyType is CompositeType)
                 {
                     result = string.Format(CultureInfo.InvariantCulture,
                         "See {{@link {0}}} for more information.", ReturnTypeString);
@@ -741,23 +744,25 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 string typeName = "object";
-                if (ReturnType == null)
+                IType returnBodyType = ReturnType == null ? null : ReturnType.Item1;
+
+                if (returnBodyType == null)
                 {
                     typeName = "null";
                 }
-                else if (ReturnType is PrimaryType)
+                else if (returnBodyType is PrimaryType)
                 {
-                    typeName = ReturnType.Name;
+                    typeName = returnBodyType.Name;
                 }
-                else if (ReturnType is SequenceType)
+                else if (returnBodyType is SequenceType)
                 {
                     typeName = "array";
                 }
-                else if (ReturnType is EnumType)
+                else if (returnBodyType is EnumType)
                 {
                     typeName = PrimaryType.String.Name;
                 }
-                else if (ReturnType is CompositeType || ReturnType is DictionaryType)
+                else if (returnBodyType is CompositeType || returnBodyType is DictionaryType)
                 {
                     typeName = PrimaryType.Object.Name;
                 }

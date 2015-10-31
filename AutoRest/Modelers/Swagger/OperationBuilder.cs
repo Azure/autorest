@@ -89,22 +89,25 @@ namespace Microsoft.Rest.Modeler.Swagger
                 }
             }
 
+            // Build header object
+            IType headerType = null;
+
             // Response format
             var typesList = new List<Stack<IType>>();
             _operation.Responses.ForEach(response =>
             {
                 if (string.Equals(response.Key, "default", StringComparison.OrdinalIgnoreCase))
                 {
-                    TryBuildDefaultResponse(methodName, response.Value, method);
+                    TryBuildDefaultResponse(methodName, response.Value, method, headerType);
                 }
                 else
                 {
                     if (
                         !(TryBuildResponse(methodName, response.Key.ToHttpStatusCode(), response.Value, method,
-                            typesList) ||
-                          TryBuildStreamResponse(response.Key.ToHttpStatusCode(), response.Value, method, typesList) ||
+                            typesList, headerType) ||
+                          TryBuildStreamResponse(response.Key.ToHttpStatusCode(), response.Value, method, typesList, headerType) ||
                           TryBuildEmptyResponse(methodName, response.Key.ToHttpStatusCode(), response.Value, method,
-                              typesList)))
+                              typesList, headerType)))
                     {
                         throw new InvalidOperationException(
                             string.Format(CultureInfo.InvariantCulture,
@@ -115,7 +118,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 }
             });
 
-            method.ReturnType = BuildMethodReturnType(typesList);
+            method.ReturnType = BuildMethodReturnType(typesList, null);
             if (method.Responses.Count == 0 &&
                 method.DefaultResponse != null)
             {
@@ -165,7 +168,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             types.Add(typeStack);
         }
 
-        private IType BuildMethodReturnType(List<Stack<IType>> types)
+        private Tuple<IType, IType> BuildMethodReturnType(List<Stack<IType>> types, IType headerType)
         {
             IType baseType = PrimaryType.Object;
             // Return null if no response is specified
@@ -176,7 +179,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             // Return first if only one return type
             if (types.Count == 1)
             {
-                return types.First().Pop();
+                return new Tuple<IType, IType>(types.First().Pop(), headerType);
             }
 
             // BuildParameter up type inheritance tree
@@ -206,17 +209,17 @@ namespace Microsoft.Rest.Modeler.Swagger
                     IType t = typeStack.Pop();
                     if (!Equals(t, currentType))
                     {
-                        return baseType;
+                        return new Tuple<IType, IType>(baseType, headerType);
                     }
                 }
                 baseType = currentType;
             }
 
-            return baseType;
+            return new Tuple<IType, IType>(baseType, headerType);
         }
 
         private bool TryBuildStreamResponse(HttpStatusCode responseStatusCode, Response response,
-            Method method, List<Stack<IType>> types)
+            Method method, List<Stack<IType>> types, IType headerType)
         {
             bool handled = false;
             if (SwaggerOperationProducesNotEmpty())
@@ -235,7 +238,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     {
                         VerifyFirstPropertyIsByteArray(compositeType);
                     }
-                    method.Responses[responseStatusCode] = serviceType;
+                    method.Responses[responseStatusCode] = new Tuple<IType, IType>(serviceType, headerType);
                     handled = true;
                 }
             }
@@ -255,7 +258,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         }
 
         private bool TryBuildResponse(string methodName, HttpStatusCode responseStatusCode,
-            Response response, Method method, List<Stack<IType>> types)
+            Response response, Method method, List<Stack<IType>> types, IType headerType)
         {
             bool handled = false;
             IType serviceType;
@@ -264,7 +267,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 if (TryBuildResponseBody(methodName, response,
                     s => GenerateResponseObjectName(s, responseStatusCode), out serviceType))
                 {
-                    method.Responses[responseStatusCode] = serviceType;
+                    method.Responses[responseStatusCode] = new Tuple<IType, IType>(serviceType, headerType);
                     BuildMethodReturnTypeStack(serviceType, types);
                     handled = true;
                 }
@@ -274,7 +277,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         }
 
         private bool TryBuildEmptyResponse(string methodName, HttpStatusCode responseStatusCode,
-            Response response, Method method, List<Stack<IType>> types)
+            Response response, Method method, List<Stack<IType>> types, IType headerType)
         {
             bool handled = false;
 
@@ -287,7 +290,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 if (_operation.Produces.IsNullOrEmpty())
                 {
-                    method.Responses[responseStatusCode] = PrimaryType.Object;
+                    method.Responses[responseStatusCode] = new Tuple<IType, IType>(PrimaryType.Object, headerType);
                     BuildMethodReturnTypeStack(PrimaryType.Object, types);
                     handled = true;
                 }
@@ -304,14 +307,14 @@ namespace Microsoft.Rest.Modeler.Swagger
             return handled;
         }
 
-        private void TryBuildDefaultResponse(string methodName, Response response, Method method)
+        private void TryBuildDefaultResponse(string methodName, Response response, Method method, IType headerType)
         {
             IType errorModel = null;
             if (SwaggerOperationProducesJson())
             {
                 if (TryBuildResponseBody(methodName, response, s => GenerateErrorModelName(s), out errorModel))
                 {
-                    method.DefaultResponse = errorModel;
+                    method.DefaultResponse = new Tuple<IType, IType>(errorModel, headerType);
                 }
             }
         }

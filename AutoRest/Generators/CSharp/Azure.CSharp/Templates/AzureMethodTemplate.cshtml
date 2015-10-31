@@ -79,7 +79,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithHttpMessagesAsync(
         @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
 
-    return await @(Model.ClientReference).GetPutOrPatchOperationResultAsync<@(Model.ReturnType.Name)>(response,
+    return await @(Model.ClientReference).GetPutOrPatchOperationResultAsync<@(Model.ReturnType.Item1.Name)>(response,
         customHeaders,
         cancellationToken);
 }

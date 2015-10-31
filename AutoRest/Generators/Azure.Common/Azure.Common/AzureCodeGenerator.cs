@@ -87,7 +87,14 @@ namespace Microsoft.Rest.Generator.Azure
                     method.Responses.ContainsKey(HttpStatusCode.NoContent) &&
                     method.Responses.ContainsKey(HttpStatusCode.NotFound))
                 {
-                    method.ReturnType = PrimaryType.Boolean;
+                    if (method.ReturnType != null)
+                    {
+                        method.ReturnType = new Tuple<IType, IType>(PrimaryType.Boolean, method.ReturnType.Item2);
+                    }
+                    else
+                    {
+                        method.ReturnType = new Tuple<IType, IType>(PrimaryType.Boolean, null);
+                    }
                 }
                 else
                 {
@@ -127,7 +134,7 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 if (method.DefaultResponse == null && method.ReturnType != null)
                 {
-                    method.DefaultResponse = cloudError;
+                    method.DefaultResponse = new Tuple<IType, IType>(cloudError, method.ReturnType.Item2);
                 }
             }
         }
@@ -471,7 +478,7 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 var typeToDelete = serviceClient.ModelTypes.First(t => t.Name == typeName);
 
-                var isUsedInResponses = serviceClient.Methods.Any(m => m.Responses.Any(r => r.Value == typeToDelete));
+                var isUsedInResponses = serviceClient.Methods.Any(m => m.Responses.Any(r => r.Value != null && r.Value.Item2 == typeToDelete));
                 var isUsedInParameters = serviceClient.Methods.Any(m => m.Parameters.Any(p => p.Type == typeToDelete));
                 var isBaseType = serviceClient.ModelTypes.Any(t => t.BaseModelType == typeToDelete);
                 var isUsedInProperties = serviceClient.ModelTypes.Any(t => t.Properties

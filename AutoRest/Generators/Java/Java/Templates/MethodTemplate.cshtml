@@ -75,7 +75,7 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
-    call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType).Name)>(serviceCallback) {
+    call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType.Item1).Name)>(serviceCallback) {
         @@Override
         public void onResponse(Response<@Model.CallType> response, Retrofit retrofit) {
             try {
@@ -92,11 +92,11 @@ private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Re
     return new ServiceResponseBuilder<@Model.GenericReturnTypeString>()
 @foreach (var response in Model.Responses)
 {
-            @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.WrapPrimitiveType(response.Value).Name>(){}.getType())
+            @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.WrapPrimitiveType(response.Value.Item1).Name>(){}.getType())
 }
 @if (Model.DefaultResponse != null)
 {
-            @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(Model.DefaultResponse).Name)>(){}.getType())
+            @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(Model.DefaultResponse.Item1).Name)>(){}.getType())
 }
 @if (Model.CallType == "Void")
 {

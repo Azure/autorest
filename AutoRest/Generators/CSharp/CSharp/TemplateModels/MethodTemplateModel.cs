@@ -174,8 +174,16 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 if (ReturnType != null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "HttpOperationResponse<{0}>", ReturnType.Name);
+                    if (ReturnType.Item1 != null && ReturnType.Item2 != null)
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                            "HttpOperationResponse<{0},{1}>", ReturnType.Item1.Name, ReturnType.Item2.Name);                        
+                    }
+                    else if (ReturnType.Item1 != null)
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                            "HttpOperationResponse<{0}>", ReturnType.Item1.Name);
+                    }
                 }
                 return "HttpOperationResponse";
             }
@@ -190,8 +198,16 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 if (ReturnType != null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "Task<{0}>", ReturnType.Name);
+                    if (ReturnType.Item1 != null && ReturnType.Item2 != null)
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                            "Task<{0},{1}>", ReturnType.Item1.Name, ReturnType.Item2.Name);
+                    }
+                    else if (ReturnType.Item1 != null)
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                            "Task<{0}>", ReturnType.Item1.Name);
+                    }
                 }
                 return "Task";
             }
@@ -248,9 +264,9 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType != null && ReturnType.Item1 != null)
                 {
-                    return ReturnType.Name;
+                    return ReturnType.Item1.Name;
                 }
                 return "void";
             }

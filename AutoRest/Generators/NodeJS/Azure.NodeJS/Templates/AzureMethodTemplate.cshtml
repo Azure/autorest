@@ -85,14 +85,14 @@ else
       if (responseBody === '') responseBody = null;
       @EmptyLine
       // Deserialize Response
-      @if (Model.ReturnType != null)
+      @if (Model.ReturnType != null && Model.ReturnType.Item1 != null)
       {
-      @:@(Model.DeserializeResponse(Model.ReturnType))
+      @:@(Model.DeserializeResponse(Model.ReturnType.Item1))
       }
 
-      @if (Model.ReturnType != null && Model.DefaultResponse != null && !Model.Responses.Any())
+      @if (Model.ReturnType != null && Model.DefaultResponse != null && Model.DefaultResponse.Item1 != null && !Model.Responses.Any())
       {
-      @:@(Model.DeserializeResponse(Model.DefaultResponse))
+      @:@(Model.DeserializeResponse(Model.DefaultResponse.Item1))
       }
       @EmptyLine
       return callback(null, result, httpRequest, response);

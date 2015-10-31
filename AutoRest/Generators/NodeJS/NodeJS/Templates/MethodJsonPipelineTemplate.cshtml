@@ -18,17 +18,17 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
     var parsedErrorResponse;
     try {
       parsedErrorResponse = JSON.parse(responseBody);
-  @if (Model.DefaultResponse != null)
+  @if (Model.DefaultResponse != null && Model.DefaultResponse.Item1 != null)
   {
-      if (Model.DefaultResponse is CompositeType)
+      if (Model.DefaultResponse.Item1 is CompositeType)
       {
-          if (!string.IsNullOrEmpty(((CompositeType)Model.DefaultResponse).PolymorphicDiscriminator))
+          if (!string.IsNullOrEmpty(((CompositeType)Model.DefaultResponse.Item1).PolymorphicDiscriminator))
           {
-      @:error.body = new client._models.discriminators[parsedErrorResponse['@(((CompositeType)Model.DefaultResponse).PolymorphicDiscriminator)']]();
+      @:error.body = new client._models.discriminators[parsedErrorResponse['@(((CompositeType)Model.DefaultResponse.Item1).PolymorphicDiscriminator)']]();
           }
           else
           {
-      @:error.body = new client._models['@(Model.DefaultResponse.Name)']();
+      @:error.body = new client._models['@(Model.DefaultResponse.Item1.Name)']();
           }
       }
       else
@@ -36,7 +36,7 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
       @:error.body = parsedErrorResponse;
       }
       
-      var deserializeErrorBody = Model.GetDeserializationString(Model.DefaultResponse, "error.body", "parsedErrorResponse");
+      var deserializeErrorBody = Model.GetDeserializationString(Model.DefaultResponse.Item1, "error.body", "parsedErrorResponse");
       if (!string.IsNullOrWhiteSpace(deserializeErrorBody))
       {
 @:      if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
@@ -55,18 +55,18 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
   var result = null;
   if (responseBody === '') responseBody = null;
   @Model.InitializeResult
-  @foreach (var responsePair in Model.Responses.Where(r => r.Value != null))
+  @foreach (var responsePair in Model.Responses.Where(r => r.Value != null && r.Value.Item1 != null))
   {
       <text>
   // Deserialize Response
   if (statusCode === @MethodTemplateModel.GetStatusCodeReference(responsePair.Key)) {
-    @(Model.DeserializeResponse(responsePair.Value))
+    @(Model.DeserializeResponse(responsePair.Value.Item1))
   }
       </text>
   }
-  @if (Model.ReturnType != null && Model.DefaultResponse != null && !Model.Responses.Any())
+  @if (Model.ReturnType != null && Model.DefaultResponse != null && Model.DefaultResponse.Item1 != null && !Model.Responses.Any())
   {
-    @(Model.DeserializeResponse(Model.DefaultResponse))
+    @(Model.DeserializeResponse(Model.DefaultResponse.Item1))
   }
   @EmptyLine
 

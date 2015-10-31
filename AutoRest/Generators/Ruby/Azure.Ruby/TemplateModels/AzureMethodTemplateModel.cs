@@ -240,7 +240,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         {
             get
             {
-                if (DefaultResponse == null || DefaultResponse.Name == "CloudError")
+                if (DefaultResponse == null || DefaultResponse.Item1.Name == "CloudError")
                 {
                     return "MsRestAzure::AzureOperationError";
                 }
