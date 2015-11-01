@@ -53,6 +53,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 throw new ArgumentNullException("model");
             }
+
             // BaseResource and CloudError are specified in the ClientRuntime. 
             // They are required explicitly in a different way. Hence, they
             // are not included in the ordered list.
