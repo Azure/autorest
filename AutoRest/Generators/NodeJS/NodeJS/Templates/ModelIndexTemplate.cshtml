@@ -13,7 +13,7 @@
 @EmptyLine
 'use strict';
 @EmptyLine
-@foreach (var model in Model.ModelTemplateModels)
+@foreach (var model in Model.OrderedModelTemplateModels)
 {
 @:exports.@model.Name = require('./@model.Name.ToCamelCase()');
 }
