@@ -24,7 +24,7 @@ public class PageImpl<T> implements Page<T> {
     /*
      * The list of items.
      */
-    @JsonProperty("value")
+    @JsonProperty("values")
     private List<T> items;
 
     @Override

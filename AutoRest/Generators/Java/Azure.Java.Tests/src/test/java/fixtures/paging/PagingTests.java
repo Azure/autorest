@@ -1,44 +1,95 @@
 package fixtures.paging;
 
-import com.fasterxml.jackson.core.JsonParseException;
+import com.microsoft.rest.Page;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.serializer.AzureJacksonHelper;
-import com.squareup.okhttp.OkHttpClient;
-import fixtures.lro.AutoRestLongRunningOperationTestService;
-import fixtures.lro.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.models.Product;
+import fixtures.paging.models.Product;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import retrofit.JacksonConverterFactory;
-import retrofit.Retrofit;
-
-import java.net.CookieManager;
-import java.net.CookiePolicy;
-import java.net.MalformedURLException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 import static org.junit.Assert.fail;
 
 public class PagingTests {
-    static AutoRestLongRunningOperationTestService client;
+    static AutoRestPagingTestService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost.:3000");
+        client = new AutoRestPagingTestServiceImpl("http://localhost.:3000");
     }
 
     @Test
-    public void putNonRetry400() throws Exception {
-        Product product = new Product();
-        product.setLocation("West US");
+    public void getSinglePages() throws Exception {
+        Page<Product> response = client.getPaging().getSinglePages().getBody();
+        Assert.assertNull(response.getNextPageLink());
+    }
+
+    @Test
+    public void getMultiplePages() throws Exception {
+        Page<Product> response = client.getPaging().getMultiplePages().getBody();
+        Assert.assertNotNull(response.getNextPageLink());
+        int count = 1;
+        while (response.getNextPageLink() != null) {
+            response = client.getPaging().getMultiplePagesNext(response.getNextPageLink()).getBody();
+            count ++;
+        }
+        Assert.assertEquals(10, count);
+    }
+
+    @Test
+    public void getMultiplePagesRetryFirst() throws Exception {
+        Page<Product> response = client.getPaging().getMultiplePagesRetryFirst().getBody();
+        Assert.assertNotNull(response.getNextPageLink());
+        int count = 1;
+        while (response.getNextPageLink() != null) {
+            response = client.getPaging().getMultiplePagesNext(response.getNextPageLink()).getBody();
+            count ++;
+        }
+        Assert.assertEquals(10, count);
+    }
+
+    @Test
+    public void getMultiplePagesRetrySecond() throws Exception {
+        Page<Product> response = client.getPaging().getMultiplePagesRetrySecond().getBody();
+        Assert.assertNotNull(response.getNextPageLink());
+        int count = 1;
+        while (response.getNextPageLink() != null) {
+            response = client.getPaging().getMultiplePagesNext(response.getNextPageLink()).getBody();
+            count ++;
+        }
+        Assert.assertEquals(10, count);
+    }
+
+    @Test
+    public void getSinglePagesFailure() throws Exception {
         try {
-            ServiceResponse<Product> response = client.getLROSADs().putNonRetry400(product);
+            Page<Product> response = client.getPaging().getSinglePagesFailure().getBody();
             fail();
         } catch (ServiceException ex) {
-            Assert.assertEquals(400, ex.getResponse().code());
+            Assert.assertNotNull(ex.getResponse());
+        }
+    }
+
+    @Test
+    public void getMultiplePagesFailure() throws Exception {
+        try {
+            Page<Product> response = client.getPaging().getMultiplePagesFailure().getBody();
+            Assert.assertNotNull(response.getNextPageLink());
+            response = client.getPaging().getMultiplePagesNext(response.getNextPageLink()).getBody();
+            fail();
+        } catch (ServiceException ex) {
+            Assert.assertNotNull(ex.getResponse());
+        }
+    }
+
+    @Test
+    public void getMultiplePagesFailureUri() throws Exception {
+        try {
+            Page<Product> response = client.getPaging().getMultiplePagesFailureUri().getBody();
+            Assert.assertNotNull(response.getNextPageLink());
+            response = client.getPaging().getMultiplePagesFailureUriNext(response.getNextPageLink()).getBody();
+            fail();
+        } catch (ServiceException ex) {
+            Assert.assertNotNull(ex.getResponse());
         }
     }
 }

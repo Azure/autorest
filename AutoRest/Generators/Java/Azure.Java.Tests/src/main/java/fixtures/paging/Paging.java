@@ -19,7 +19,7 @@ import fixtures.paging.models.Product;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
-import retrofit.http.Path;
+import retrofit.http.Url;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -52,26 +52,26 @@ public interface Paging {
         @GET("/paging/multiple/failureuri")
         Call<ResponseBody> getMultiplePagesFailureUri(@Header("accept-language") String acceptLanguage);
 
-        @GET("{nextLink}")
-        Call<ResponseBody> getSinglePagesNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage);
+        @GET
+        Call<ResponseBody> getSinglePagesNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
 
-        @GET("{nextLink}")
-        Call<ResponseBody> getMultiplePagesNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage);
+        @GET
+        Call<ResponseBody> getMultiplePagesNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
 
-        @GET("{nextLink}")
-        Call<ResponseBody> getMultiplePagesRetryFirstNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage);
+        @GET
+        Call<ResponseBody> getMultiplePagesRetryFirstNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
 
-        @GET("{nextLink}")
-        Call<ResponseBody> getMultiplePagesRetrySecondNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage);
+        @GET
+        Call<ResponseBody> getMultiplePagesRetrySecondNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
 
-        @GET("{nextLink}")
-        Call<ResponseBody> getSinglePagesFailureNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage);
+        @GET
+        Call<ResponseBody> getSinglePagesFailureNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
 
-        @GET("{nextLink}")
-        Call<ResponseBody> getMultiplePagesFailureNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage);
+        @GET
+        Call<ResponseBody> getMultiplePagesFailureNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
 
-        @GET("{nextLink}")
-        Call<ResponseBody> getMultiplePagesFailureUriNext(@Path("nextLink") String nextPageLink, @Header("accept-language") String acceptLanguage);
+        @GET
+        Call<ResponseBody> getMultiplePagesFailureUriNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
 
     }
     /**
