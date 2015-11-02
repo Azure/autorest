@@ -1,7 +1,9 @@
 ﻿
+from enum import Enum
 
 
-class PoolState(object):
+
+class PoolState(Enum):
 
     invalid = "Invalid"
     active = "Active"
@@ -9,7 +11,7 @@ class PoolState(object):
     upgrading = "Upgrading"
     unmapped = "Unmapped"
 
-class AllocationState(object):
+class AllocationState(Enum):
 
     invalid = "Invalid"
     steady = "Steady"
@@ -17,7 +19,7 @@ class AllocationState(object):
     stopping = "Stopping"
     unmapped = "Unmapped"
 
-class CertificateState(object):
+class CertificateState(Enum):
 
     invalid = "Invalid"
     active = "Active"
@@ -25,7 +27,7 @@ class CertificateState(object):
     delete_failed = "DeleteFailed"
     unmapped = "Unmapped"
 
-class CertificateFormat(object):
+class CertificateFormat(Enum):
 
     pfx = "Pfx"
     cer = "Cer"
