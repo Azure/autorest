@@ -27,6 +27,7 @@
 import json
 import isodate
 import datetime
+from enum import Enum
 
 from .exceptions import SerializationError, DeserializationError
 
@@ -38,7 +39,7 @@ class Serializer(object):
     def __init__(self):
 
         self.serialize_type = {
-            'iso-date':Serializer.serialize_date,
+            'iso-8601':Serializer.serialize_iso,
             'duration':Serializer.serialize_duration,
             '[]':self.serialize_iter,
             '{}':self.serialize_dict
@@ -90,6 +91,9 @@ class Serializer(object):
             
             if data_type in self.serialize_type:
                 return self.serialize_type[data_type](data)
+
+            if isinstance(data, Enum):
+                return data.value
 
             iter_type = data_type[0] + data_type[-1]
             if iter_type in self.serialize_type:
@@ -157,7 +161,8 @@ class Deserializer(object):
     def __init__(self, classes={}):
 
         self.deserialize_type = {
-            'iso-date':Deserializer.deserialize_date,
+            'iso-8601':Deserializer.deserialize_iso,
+            'rfc-1123':Deserializer.deserialize_rfc,
             'duration':Deserializer.deserialize_duration,
             'time':Deserializer.deserialize_time,
             '[]':self.deserialize_iter,
@@ -215,12 +220,16 @@ class Deserializer(object):
             if iter_type in self.deserialize_type:
                 return self.deserialize_type[iter_type](data, data_type[1:-1])
 
+            obj_type = self.dependencies[data_type]
+            if issubclass(obj_type, Enum):
+                return obj_type(data)
+
+            return self(obj_type, data)
+
         except (ValueError, TypeError) as err:
 
             raise DeserializationError(
                 "Unable to deserialize response data: {0}".format(err))
-
-        return self(self.dependencies[data_type], data)
 
     def _unpack_headers(self, response, raw_data):
 
@@ -280,8 +289,9 @@ class Deserializer(object):
     def deserialize_time(attr):
         return attr #TODO
 
+
     @staticmethod
-    def deserialize_date(attr):
+    def deserialize_iso(attr):
         try:
             date_obj = isodate.parse_datetime(attr)
             t = date_obj.utctimetuple()
