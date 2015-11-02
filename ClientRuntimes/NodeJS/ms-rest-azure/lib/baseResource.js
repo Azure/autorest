@@ -8,7 +8,7 @@
  * Initializes a new instance of the Resource class.
  * @constructor
  */
-function BaseResource(parameters) {
+function BaseResource() {
 }
 
 /**
