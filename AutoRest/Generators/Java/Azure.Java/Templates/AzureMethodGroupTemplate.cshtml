@@ -1,0 +1,35 @@
+﻿@using System
+@using Microsoft.Rest.Generator.Java.Azure
+@using Microsoft.Rest.Generator.Java.Azure.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq;
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.Azure.AzureMethodGroupTemplateModel>
+/**
+@Header(" * ")
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower());
+@EmptyLine
+@foreach (var importClass in Model.ImplImports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+public class @(Model.MethodGroupType)Impl implements @Model.MethodGroupType {
+    private @Model.MethodGroupServiceType service;
+    @Model.Name client;
+    @EmptyLine
+    public @(Model.MethodGroupType)Impl(Retrofit retrofit, @Model.Name client) {
+        this.service = retrofit.create(@(Model.MethodGroupServiceType).class);
+        this.client = client;
+    }
+    @EmptyLine
+
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:@(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
+    @EmptyLine
+    }
+}

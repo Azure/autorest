@@ -24,7 +24,7 @@
 }
  * @@throws ServiceException the exception wrapped in ServiceException if failed.
  */
-public @Model.ReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws ServiceException {
+public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws ServiceException {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -38,8 +38,7 @@ public @Model.ReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) 
 }
     try {
         Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
-        ServiceResponse<@Model.GenericReturnTypeString> response = @(Model.Name)Delegate(call.execute(), null);
-        @Model.ReturnStatement
+        return @(Model.Name)Delegate(call.execute(), null);
     } catch (ServiceException ex) {
         throw ex;
     } catch (Exception ex) {

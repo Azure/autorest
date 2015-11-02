@@ -46,7 +46,7 @@ namespace Microsoft.Rest.Generator.Java
         /// <summary>
         /// Generate the method parameter declarations for a method
         /// </summary>
-        public string MethodParameterApiDeclaration
+        public virtual string MethodParameterApiDeclaration
         {
             get
             {
@@ -140,6 +140,43 @@ namespace Microsoft.Rest.Generator.Java
                     parameters += ", ";
                 }
                 parameters += string.Format(CultureInfo.InvariantCulture, "new ServiceResponseCallback()");
+                return parameters;
+            }
+        }
+
+        public string LocalMethodParameterInvocation
+        {
+            get
+            {
+                List<string> declarations = new List<string>();
+                foreach (var parameter in LocalParameters)
+                {
+                    if ((parameter.Location != ParameterLocation.Body)
+                         && parameter.Type.NeedsSpecialSerialization())
+                    {
+                        declarations.Add(parameter.ToString(parameter.Name));
+                    }
+                    else
+                    {
+                        declarations.Add(parameter.Name);
+                    }
+                }
+
+                var declaration = string.Join(", ", declarations);
+                return declaration;
+            }
+        }
+
+        public string LocalMethodParameterInvocationWithCallback
+        {
+            get
+            {
+                var parameters = LocalMethodParameterInvocation;
+                if (!parameters.IsNullOrEmpty())
+                {
+                    parameters += ", ";
+                }
+                parameters += string.Format(CultureInfo.InvariantCulture, "new ServiceCallback<" + GenericReturnTypeString + ">()");
                 return parameters;
             }
         }
@@ -266,19 +303,6 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string ReturnStatement {
-            get
-            {
-                StringBuilder sb = new StringBuilder();
-                if (this.ReturnType != null)
-                {
-                    sb.Append("return ");
-                }
-                sb.Append("response.getBody();");
-                return sb.ToString();
-            }
-        }
-
         public string CallType
         {
             get
@@ -306,6 +330,76 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     return "ServiceResponseCallback";
                 }
+            }
+        }
+
+        public virtual List<string> InterfaceImports
+        {
+            get
+            {
+                HashSet<string> imports = new HashSet<string>();
+                // static imports
+                imports.Add("retrofit.Call");
+                imports.Add("com.squareup.okhttp.ResponseBody");
+                imports.Add("com.microsoft.rest.ServiceResponse");
+                imports.Add("com.microsoft.rest.ServiceException");
+                imports.Add("com.microsoft.rest.ServiceCallback");
+                // parameter types
+                this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
+                // parameter locations
+                this.Parameters.ForEach(p => imports.Add(p.Location.ImportFrom()));
+                // return type
+                imports.AddRange(this.ReturnType.ImportFrom(ServiceClient.Namespace));
+                // Http verb annotations
+                imports.Add(this.HttpMethod.ImportFrom());
+                return imports.ToList();
+            }
+        }
+
+        public virtual List<string> ImplImports
+        {
+            get
+            {
+                HashSet<string> imports = new HashSet<string>();
+                // static imports
+                imports.Add("retrofit.Call");
+                imports.Add("retrofit.Response");
+                imports.Add("retrofit.Retrofit");
+                imports.Add("com.squareup.okhttp.ResponseBody");
+                imports.Add("com.microsoft.rest.ServiceResponse");
+                imports.Add("com.microsoft.rest.ServiceResponseBuilder");
+                imports.Add("com.microsoft.rest.ServiceException");
+                imports.Add("com.microsoft.rest.ServiceCallback");
+
+                // response type conversion
+                if (this.Responses.Any() || this.DefaultResponse != null)
+                {
+                    imports.Add("com.google.common.reflect.TypeToken");
+                }
+                // validation
+                if (!ParametersToValidate.IsNullOrEmpty())
+                {
+                    imports.Add("com.microsoft.rest.Validator");
+                }
+                // internal callback
+                if (this.CallType == "Void")
+                {
+                    imports.Add("com.microsoft.rest.ServiceResponseEmptyCallback");
+                }
+                else
+                {
+                    imports.Add("com.microsoft.rest.ServiceResponseCallback");
+                }
+                // parameter types
+                this.LocalParameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
+                // parameter utils
+                this.LocalParameters.ForEach(p => imports.AddRange(p.ImportFrom()));
+                // return type
+                imports.AddRange(this.ReturnType.ImportFrom(ServiceClient.Namespace));
+                // response type (can be different from return type)
+                this.Responses.ForEach(r => imports.AddRange(r.Value.ImportFrom(ServiceClient.Namespace)));
+                imports.AddRange(DefaultResponse.ImportFrom(ServiceClient.Namespace));
+                return imports.ToList();
             }
         }
     }

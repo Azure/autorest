@@ -9,6 +9,8 @@ using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Java.Templates;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Generator.Java.Azure.Templates;
+using System.Collections.Generic;
 
 namespace Microsoft.Rest.Generator.Java.Azure
 {
@@ -18,10 +20,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
         private const string ClientRuntimePackage = "com.microsoft.rest:azure-client-runtime:0.0.1-SNAPSHOT";
 
+        // page extensions class dictionary.
+        private IDictionary<KeyValuePair<string, string>, string> pageClasses;
+
         public AzureJavaCodeGenerator(Settings settings) : base(settings)
         {
             _namer = new AzureJavaCodeNamer();
             IsSingleFileGenerationSupported = true;
+            pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
         }
 
         public override string Name
@@ -54,11 +60,33 @@ namespace Microsoft.Rest.Generator.Java.Azure
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            base.NormalizeClientModel(serviceClient);
+            Settings.AddCredentials = true;
+            UpdateHeadMethods(serviceClient);
+            ParseODataExtension(serviceClient);
+            FlattenResourceProperties(serviceClient);
+            AddPageableMethod(serviceClient);
+            AddAzureProperties(serviceClient);
+            SetDefaultResponses(serviceClient);
+            //NormalizeAllModelsToExtendResource(serviceClient);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
-            _namer.NormalizePaginatedMethods(serviceClient);
+            _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
+            ExtendAllResourcesToBaseResource(serviceClient);
+        }
+
+        private static void ExtendAllResourcesToBaseResource(ServiceClient serviceClient)
+        {
+            if (serviceClient != null)
+            {
+                foreach (var model in serviceClient.ModelTypes)
+                {
+                    if (model.Extensions.ContainsKey(AzureResourceExtension) && (bool)model.Extensions[AzureResourceExtension])
+                    {
+                        model.BaseModelType = new CompositeType { Name = "BaseResource", SerializedName = "BaseResource" };
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -68,15 +96,15 @@ namespace Microsoft.Rest.Generator.Java.Azure
         /// <returns></returns>
         public override async Task Generate(ServiceClient serviceClient)
         {
-            var serviceClientTemplateModel = new ServiceClientTemplateModel(serviceClient);
+            var serviceClientTemplateModel = new AzureServiceClientTemplateModel(serviceClient);
             // Service client
-            var serviceClientTemplate = new ServiceClientTemplate
+            var serviceClientTemplate = new AzureServiceClientTemplate
             {
                 Model = serviceClientTemplateModel,
             };
             await Write(serviceClientTemplate, serviceClient.Name.ToPascalCase() + "Impl.java");
 
-            var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate
+            var serviceClientInterfaceTemplate = new AzureServiceClientInterfaceTemplate
             {
                 Model = serviceClientTemplateModel,
             };
@@ -87,6 +115,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
                 {
+                    if (modelType.Extensions.ContainsKey(ExternalExtension) && (bool)modelType.Extensions[ExternalExtension])
+                    {
+                        continue;
+                    }
+
                     var modelTemplate = new ModelTemplate
                     {
                         Model = modelType
@@ -100,14 +133,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 foreach (var methodGroupModel in serviceClientTemplateModel.MethodGroupModels)
                 {
-                    var methodGroupTemplate = new MethodGroupTemplate
+                    var methodGroupTemplate = new AzureMethodGroupTemplate
                     {
-                        Model = methodGroupModel
+                        Model = (AzureMethodGroupTemplateModel)methodGroupModel
                     };
                     await Write(methodGroupTemplate, methodGroupModel.MethodGroupType.ToPascalCase() + "Impl.java");
-                    var methodGroupInterfaceTemplate = new MethodGroupInterfaceTemplate
+                    var methodGroupInterfaceTemplate = new AzureMethodGroupInterfaceTemplate
                     {
-                        Model = methodGroupModel
+                        Model = (AzureMethodGroupTemplateModel)methodGroupModel
                     };
                     await Write(methodGroupInterfaceTemplate, methodGroupModel.MethodGroupType.ToPascalCase() + ".java");
                 }
@@ -121,6 +154,16 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     Model = new EnumTemplateModel(enumType),
                 };
                 await Write(enumTemplate, Path.Combine("models", enumTemplate.Model.Name.ToPascalCase() + ".java"));
+            }
+
+            // Page class
+            foreach (var pageClass in pageClasses)
+            {
+                var pageTemplate = new PageTemplate
+                {
+                    Model = new PageTemplateModel(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
+                };
+                await Write(pageTemplate, Path.Combine("models", pageTemplate.Model.TypeDefinitionName + ".java"));
             }
         }
     }

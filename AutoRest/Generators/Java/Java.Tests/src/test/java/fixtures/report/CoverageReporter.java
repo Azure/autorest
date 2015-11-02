@@ -8,7 +8,7 @@ public class CoverageReporter {
     static AutoRestReportService client = new AutoRestReportServiceImpl("http://localhost:3000");
 
     public static void main(String[] args) throws Exception {
-        Map<String, Integer> report = client.getReport();
+        Map<String, Integer> report = client.getReport().getBody();
 
         // Body cannot be null
         report.put("putStringNull", 1);

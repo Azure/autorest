@@ -17,7 +17,7 @@ public class DurationOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getDuration().getNull());
+        Assert.assertNull(client.getDuration().getNull().getBody());
     }
 
     @Test
