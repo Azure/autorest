@@ -57,6 +57,24 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get { return Extensions.ContainsKey(AzureCodeGenerator.LongRunningExtension); }
         }
 
+        public bool IsPagingNextOperation
+        {
+            get { return Url == "{nextLink}"; }
+        }
+
+        public override string MethodParameterApiDeclaration
+        {
+            get
+            {
+                var declaration = base.MethodParameterApiDeclaration;
+                if (IsPagingNextOperation)
+                {
+                    declaration = declaration.Replace("@Path(\"nextLink\")", "@Url");
+                }
+                return declaration;
+            }
+        }
+
         public string Exceptions
         {
             get
@@ -110,6 +128,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 var imports = base.InterfaceImports;
                 this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex => imports.Add(JavaCodeNamer.GetJavaException(ex)));
+                if (IsPagingNextOperation)
+                {
+                    imports.Remove("retrofit.http.Path");
+                    imports.Add("retrofit.http.Url");
+                }
                 return imports;
             }
         }
