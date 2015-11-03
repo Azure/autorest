@@ -262,16 +262,16 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 }
             }
 
+            // Serialize Request
+            string requestContent = JsonConvert.SerializeObject(resourceArray, this.SerializationSettings);
+            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
+            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
             if (this.Credentials != null)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
             }
-            // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(resourceArray, this.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
             if (shouldTrace)
             {
@@ -488,16 +488,16 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 }
             }
 
+            // Serialize Request
+            string requestContent = JsonConvert.SerializeObject(resourceDictionary, this.SerializationSettings);
+            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
+            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
             if (this.Credentials != null)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
             }
-            // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(resourceDictionary, this.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
             if (shouldTrace)
             {
@@ -714,16 +714,16 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 }
             }
 
+            // Serialize Request
+            string requestContent = JsonConvert.SerializeObject(resourceComplexObject, this.SerializationSettings);
+            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
+            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
             if (this.Credentials != null)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
             }
-            // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(resourceComplexObject, this.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
             if (shouldTrace)
             {
