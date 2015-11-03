@@ -15,7 +15,7 @@ namespace Microsoft.Rest.Generator.Java
     {
         private readonly HashSet<IType> _normalizedTypes;
 
-        public static HashSet<string> PrimaryTypes {get; set;}
+        public static HashSet<string> PrimaryTypes {get; private set;}
 
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
