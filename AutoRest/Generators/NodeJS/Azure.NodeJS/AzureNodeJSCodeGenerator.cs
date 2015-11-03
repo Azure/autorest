@@ -72,6 +72,22 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             NormalizeApiVersion(serviceClient);
             NormalizeCredentials(serviceClient);
+            ExtendAllResourcesToBaseResource(serviceClient);
+        }
+
+        private static void ExtendAllResourcesToBaseResource(ServiceClient serviceClient)
+        {
+            if (serviceClient != null)
+            {
+                foreach (var model in serviceClient.ModelTypes)
+                {
+                    if (model.Extensions.ContainsKey(AzureCodeGenerator.AzureResourceExtension) &&
+                        (bool)model.Extensions[AzureCodeGenerator.AzureResourceExtension])
+                    {
+                        model.BaseModelType = new CompositeType { Name = "BaseResource", SerializedName = "BaseResource" };
+                    }
+                }
+            }
         }
 
         /// <summary>

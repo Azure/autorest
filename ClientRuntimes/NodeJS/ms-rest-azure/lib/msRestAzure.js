@@ -5,8 +5,7 @@
 exports.AzureServiceClient = require('./azureServiceClient');
 exports.UserTokenCredentials = require('./credentials/userTokenCredentials');
 exports.ApplicationTokenCredentials = require('./credentials/applicationTokenCredentials');
-exports.Resource = require('./resource');
-exports.SubResource = require('./subResource');
+exports.BaseResource = require('./baseResource');
 exports.CloudError = require('./cloudError');
 exports.TokenCredentials = require('ms-rest').TokenCredentials;
 exports.generateUuid = require('./utils').generateUuid;
