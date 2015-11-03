@@ -1,5 +1,7 @@
+﻿
+from runtime.msrest.serialization import Model
 
-class TaskSchedulePolicy(object):
+class TaskSchedulePolicy(Model):
 
     _required = ['node_fill_type']
 

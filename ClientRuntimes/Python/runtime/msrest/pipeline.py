@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -30,6 +30,7 @@ Define custom HTTP Adapter
 import requests
 import logging
 import json
+import functools
 
 from requests.packages.urllib3 import Retry
 
@@ -54,8 +55,11 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
         Function decorator to wrap events with hook callbacks.
         """
         def event_wrapper(func):
+
+            @functools.wraps(func)
             def execute_hook(self, *args, **kwargs):
                 return self._client_hooks[event](func, self, *args, **kwargs)
+
             return execute_hook
         return event_wrapper
 

@@ -1,5 +1,7 @@
+﻿
+from runtime.msrest.serialization import Model
 
-class PoolAutoScale(object):
+class PoolAutoScale(Model):
 
     _required = ['auto_scale_formula']
 

@@ -1,5 +1,7 @@
+﻿
+from runtime.msrest.serialization import Model
 
-class PoolOS(object):
+class PoolOS(Model):
 
     _required = ['target_os_version']
 
