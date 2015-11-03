@@ -5,18 +5,15 @@
 @using Microsoft.Rest.Generator.Python
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ModelTemplateModel>
-@if (Model.ContainsDecimal)
+@if (Model.BaseModelType != null)
 {
-@:from decimal import *
-@EmptyLine
+@:class @(Model.Name)(@Model.BaseModelType.Name):
 }
-@if (Model.ContainsDatetime)
+else
 {
-@:from datetime import *
-@EmptyLine
+@:class @(Model.Name)(object):
 }
-class @(Model.Name)(object):
-@* Need to handle the base class, default value, comment*@
+@* Need to handle the Polymorhpic require field, default value, comment*@
 @{
   var requiredFieldList = Model.GetRequiredFieldsList();
   var requiredStr = String.Empty;
