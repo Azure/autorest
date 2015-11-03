@@ -171,44 +171,6 @@ namespace Microsoft.Rest.Generator.Python
                           .AppendLine(" * ").ToString();
         }
 
-        public bool ContainsPropertiesInSequenceType()
-        {
-            var sample = ComposedProperties.FirstOrDefault(p => p.Type is SequenceType);
-            return sample != null;
-        }
-
-        public bool ContainsPropertiesInCompositeType()
-        {
-            var sample = ComposedProperties.FirstOrDefault(p => 
-                p.Type is CompositeType || p.Type is SequenceType && (p.Type as SequenceType).ElementType is CompositeType);
-            return sample != null;
-        }
-
-        public bool ContainsDecimal
-        {
-            get 
-            {
-                Property prop = ComposedProperties.FirstOrDefault(p =>
-                    (p.Type is PrimaryType && (p.Type as PrimaryType) == PrimaryType.Decimal) ||
-                    (p.Type is SequenceType && (p.Type as SequenceType).ElementType == PrimaryType.Decimal) ||
-                    (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType == PrimaryType.Decimal));
-                return prop != null;
-
-            }
-        }
-
-        public bool ContainsDatetime
-        {
-            get 
-            {
-                Property prop = ComposedProperties.FirstOrDefault(p =>
-                    (p.Type is PrimaryType && ClientModelExtensions.PythonDatetimeModuleType.Contains(p.Type as PrimaryType) ||
-                    (p.Type is SequenceType && ClientModelExtensions.PythonDatetimeModuleType.Contains((p.Type as SequenceType).ElementType)) ||
-                    (p.Type is DictionaryType && ClientModelExtensions.PythonDatetimeModuleType.Contains((p.Type as DictionaryType).ValueType))));
-                return prop != null;
-            }
-        }
-
         public IList<string> GetRequiredFieldsList()
         {
             List<string> requiredFields = new List<string>();
@@ -222,6 +184,60 @@ namespace Microsoft.Rest.Generator.Python
             return requiredFields;
         }
 
+        private string GetPythonSerializationType(IType type)
+        {
+            Dictionary<IType, string> typeNameMapping = new Dictionary<IType, string>()
+                        {
+                            { PrimaryType.DateTime, "iso-date" },
+                            { PrimaryType.DateTimeRfc1123, "rfc-date" },
+                            { PrimaryType.TimeSpan, "duration" }
+                        };
+            if (type is PrimaryType)
+            {
+                if (typeNameMapping.ContainsKey(type))
+                {
+                    return typeNameMapping[type];
+                }
+                else 
+                {
+                    return type.Name;
+                }
+            }
+            else if (type is SequenceType)
+            {
+                IType innerType = (type as SequenceType).ElementType;
+                string innerTypeName;
+                if (typeNameMapping.ContainsKey(innerType))
+                {
+                    innerTypeName = typeNameMapping[innerType];
+                }
+                else
+                {
+                    innerTypeName = innerType.Name;
+                }
+                return "[" + innerTypeName +"]";
+            }
+            else if (type is DictionaryType)
+            {
+                IType innerType = (type as DictionaryType).ValueType;
+                string innerTypeName;
+                if (typeNameMapping.ContainsKey(innerType))
+                {
+                    innerTypeName = typeNameMapping[innerType];
+                }
+                else
+                {
+                    innerTypeName = innerType.Name;
+                }
+                return "{" + innerTypeName + "}";
+            }
+            else
+            {
+                // CompositeType or EnumType
+                return type.Name;
+            }
+        }
+
         public string InitializePythonProperty(Property property)
         {
             if (property == null || property.Type == null)
@@ -230,7 +246,7 @@ namespace Microsoft.Rest.Generator.Python
             }
 
             //'id':{'key':'id', 'type':'str'},
-            return string.Format(CultureInfo.InvariantCulture, "'{0}':{{'key':'{1}', 'type':'{2}'}},", property.Name, property.SerializedName, property.Type.ToString());
+            return string.Format(CultureInfo.InvariantCulture, "'{0}':{{'key':'{1}', 'type':'{2}'}},", property.Name, property.SerializedName, GetPythonSerializationType(property.Type));
         }
 
         public string InitializeProperty(string objectName, Property property)
@@ -241,36 +257,6 @@ namespace Microsoft.Rest.Generator.Python
             }
 
             return property.Type.NullInitializeType(_scope, objectName + "." + property.Name);
-        }
-
-        public string SerializeProperty(string objectName, string serializedName, Property property)
-        {
-            if (property == null || property.Type == null)
-            {
-                throw new ArgumentNullException("property");
-            }
-
-            var propertyName = string.Format(CultureInfo.InvariantCulture, 
-                "{0}['{1}']", objectName, property.Name);
-            var serializedPropertyName = string.Format(CultureInfo.InvariantCulture,
-                "{0}['{1}']", serializedName, property.SerializedName.Replace(".", "']['"));
-
-            return property.Type.SerializeType(_scope, propertyName, serializedPropertyName, property.IsRequired, "models");
-        }
-
-        public string DeserializeProperty(string objectName, string valueName, Property property)
-        {
-            if (property == null || property.Type == null)
-            {
-                throw new ArgumentNullException("property");
-            }
-
-            var propertyName = string.Format(CultureInfo.InvariantCulture,
-                "{0}['{1}']", objectName, property.Name);
-            var deserializedPropertyName = string.Format(CultureInfo.InvariantCulture,
-                "{0}['{1}']", valueName, property.SerializedName.Replace(".", "']['"));
-
-            return property.Type.DeserializeType(_scope, propertyName, deserializedPropertyName, "models");
         }
 
         /// <summary>

@@ -72,34 +72,89 @@ namespace Microsoft.Rest.Generator.Python
         /// <summary>
         /// Generate the method parameter declarations for a method
         /// </summary>
-        public string MethodParameterDeclaration
+        /// <param name="addCustomHeaderParameters">If true add the customHeader to the parameters</param>
+        /// <returns>Generated string of parameters</returns>
+        public string MethodParameterDeclaration(bool addCustomHeaderParameters)
         {
-            get
+            List<string> declarations = new List<string>();
+            foreach (var parameter in LocalParameters)
             {
-                List<string> declarations = new List<string>();
-                foreach (var parameter in LocalParameters)
-                {
-                    declarations.Add(parameter.Name);
-                }
-
-                declarations.Add("options");
-                var declaration = string.Join(", ", declarations);
-                declaration += ", ";
-                return declaration;
+                declarations.Add(parameter.Name);
             }
+
+            if (addCustomHeaderParameters)
+            {
+                declarations.Add("customHeaders");
+            }
+
+            var declaration = string.Join(", ", declarations);
+            return declaration;
         }
 		
         /// <summary>
-        /// Generate the method parameter declarations with callback for a method
+        /// Generate code to build the URL from a url expression and method parameters
         /// </summary>
-        public string MethodParameterDeclarationWithCallback
+        /// <param name="variableName">The variable to store the url in.</param>
+        /// <returns></returns>
+        public virtual string BuildUrlPath(string variableName)
         {
-            get
+            var builder = new IndentedStringBuilder("    ");
+
+            var pathParameterList = this.LogicalParameters.Where(p => p.Location == ParameterLocation.Path).ToList();
+            if (pathParameterList.Any())
             {
-                var parameters = MethodParameterDeclaration;
-                parameters += "callback";
-                return parameters;
+                builder.AppendLine("{0} = {0}.format(", variableName).Indent();
+
+                for (int i = 0; i < pathParameterList.Count; i ++)
+                {
+                    builder.AppendLine("{0} = urllib.quote({1}){2}",
+                        pathParameterList[i].SerializedName,
+                        pathParameterList[i].Type.ToString(pathParameterList[i].Name),
+                        i == pathParameterList.Count-1 ? ")" : ",");
+                }
             }
+
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Generate code to build the query of URL from method parameters
+        /// </summary>
+        /// <param name="variableName">The variable to store the query in.</param>
+        /// <returns></returns>
+        public virtual string BuildUrlQuery(string variableName)
+        {
+            var builder = new IndentedStringBuilder("    ");
+
+            foreach (var queryParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Query))
+            {
+                builder.AppendLine("if {0} is not None:", queryParameter.Name)
+                    .Indent()
+                    .AppendLine("{0}['{1}'] = {2}", variableName,
+                        queryParameter.SerializedName, queryParameter.Type.ToString(queryParameter.Name));
+            }
+
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Generate code to build the headers from method parameters
+        /// </summary>
+        /// <param name="variableName">The variable to store the headers in.</param>
+        /// <returns></returns>
+        public virtual string BuildHeaders(string variableName)
+        {
+            var builder = new IndentedStringBuilder("    ");
+
+            foreach (var headerParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Header))
+            {
+                builder.AppendLine("if {0} is not None:", headerParameter.Name)
+                    .Indent()
+                    .AppendLine("{0}['{1}'] = {2}", variableName,
+                        headerParameter.SerializedName, headerParameter.Type.ToString(headerParameter.Name));
+            }
+
+            return builder.ToString();
         }
 
         /// <summary>
@@ -664,7 +719,17 @@ namespace Microsoft.Rest.Generator.Python
 
         public string GetAcceptStatus()
         {
-            return "200";
+            if (Responses.Any())
+            {
+                List<string> predicates = new List<string>();
+                foreach (var responseStatus in Responses.Keys)
+                {
+                    predicates.Add(((int)responseStatus).ToString());
+                }
+
+                return string.Join(" , ", predicates);
+            }
+            return "";
         }
 
         public string ReturnTypeInfo

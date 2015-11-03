@@ -103,37 +103,32 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
         public static string ToString(this IType type, string reference)
         {
             var known = type as PrimaryType;
-            var enumType = type as EnumType;
-            if (enumType != null || known == PrimaryType.String)
-            {
-                return reference;
-            }
 
             if (known == PrimaryType.Date)
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "msRest.serializeObject({0}).replace(/[Tt].*[Zz]/, '')", reference);
+                    "Serialized..serializeObject({0}, \'date\')", reference);
             }
 
             if (known == PrimaryType.DateTimeRfc1123)
             {
-                return string.Format(CultureInfo.InvariantCulture, "{0}.toUTCString()", reference);
+                return string.Format(CultureInfo.InvariantCulture,
+                    "Serialized..serializeObject({0}, \'rfc-date\')", reference);
             }
 
-            if (known == PrimaryType.DateTime || 
-                known == PrimaryType.ByteArray)
+            if (known == PrimaryType.DateTime)
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "msRest.serializeObject({0})", reference);
+                    "Serialized..serializeObject({0}, \'iso-date\')", reference);
             }
 
             if (known == PrimaryType.TimeSpan)
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "{0}.toISOString()", reference);
+                    "Serialized..serializeObject({0}, \'duration\')", reference);
             }
 
-            return string.Format(CultureInfo.InvariantCulture, "{0}.toString()", reference);
+            return reference;
         }
 
         /// <summary>

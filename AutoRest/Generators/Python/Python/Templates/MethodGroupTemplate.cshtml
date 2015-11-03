@@ -3,6 +3,7 @@
 @using System.Linq;
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodGroupTemplateModel>
 import sys
+import urllib
 @if (Model.ContainsDecimal)
 {
 @:from decimal import *
@@ -40,11 +41,6 @@ class @(Model.MethodGroupType)(object):
         self._client = client
         self._config = config
         self._classes = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
-@EmptyLine
-    def _url(self, *extension):
-@EmptyLine
-        path = [x.strip('/') for x in extension if x]
-        return '/' + '/'.join(path)
 @EmptyLine
     def _send(self, request, accept_status, headers, content=None):
 @EmptyLine
