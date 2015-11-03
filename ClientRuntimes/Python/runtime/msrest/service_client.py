@@ -39,7 +39,11 @@ except ImportError:
 
 from .pipeline import ClientHTTPAdapter, ClientRequest
 from .logger import log_request, log_response
-from .exceptions import TokenExpiredError, ClientRequestException
+from .exceptions import (
+    TokenExpiredError,
+    ClientRequestError,
+    raise_with_traceback)
+
 
 class ServiceClient(object):
 
@@ -97,16 +101,29 @@ class ServiceClient(object):
         for protocol in self._protocols:
             session.mount(protocol, self._adapter)
 
-    def send_async(self, request_cmd, callback, *args, **kwargs):
+    @staticmethod
+    def async_request(func):
+
+        def request(self, *args, **kwargs):
+
+            if kwargs.get('callback') and callable(kwargs['callback']):
+                response = self._client.send_async(func, self, *args, **kwargs)
+                response.add_done_callback(kwargs['callback'])
+                return response
+
+            return func(self, *args, **kwargs)
+
+        return request
+
+    def send_async(self, request_cmd, *args, **kwargs):
         """
         Prepare and send request object asynchronously.
         """
         with ThreadPoolExecutor(max_workers=1) as executor:
             future = executor.submit(request_cmd, *args, **kwargs)
-            future.add_done_callback(callback)
             return future
 
-    def send(self, request, **kwargs):
+    def send(self, request, headers, content=None, **kwargs):
         """
         Prepare and send request object according to configuration.
         """
@@ -114,6 +131,10 @@ class ServiceClient(object):
         self._configure_session(session)
 
         kwargs.update(self.config.connection())
+
+        request.add_headers(headers)
+        if content:
+            request.add_content(content)
 
         try:
 
@@ -132,6 +153,7 @@ class ServiceClient(object):
             try:
                 session = self.creds.refresh_session()
                 self._configure_session(session)
+
                 response = session.request(
                     request.method, request.url, request.data,
                     request.headers, params=request.params,
@@ -142,14 +164,15 @@ class ServiceClient(object):
 
             except (oauth2.rfc6749.errors.InvalidGrantError,
                 oauth2.rfc6749.errors.TokenExpiredError) as err:
-                 raise TokenExpiredError(
-                    "Token expired or is invalid: '{0}'".format(err))
+
+                 msg = "Token expired or is invalid."
+                 raise_with_traceback(TokenExpiredError, msg, err)
 
         except (requests.RequestException,
                 oauth2.rfc6749.errors.OAuth2Error) as err:
-            raise ClientRequestException(err)
 
-
+            msg = "Error occurred in request."
+            raise_with_traceback(ClientRequestError, msg, err)
 
     def add_hook(self, event, hook, precall=True, overwrite=False):
         """

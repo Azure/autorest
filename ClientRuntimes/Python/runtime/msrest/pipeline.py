@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -30,6 +30,7 @@ Define custom HTTP Adapter
 import requests
 import logging
 import json
+import functools
 
 from requests.packages.urllib3 import Retry
 
@@ -54,8 +55,11 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
         Function decorator to wrap events with hook callbacks.
         """
         def event_wrapper(func):
+
+            @functools.wraps(func)
             def execute_hook(self, *args, **kwargs):
                 return self._client_hooks[event](func, self, *args, **kwargs)
+
             return execute_hook
         return event_wrapper
 
@@ -173,8 +177,13 @@ class ClientRequest(requests.Request):
             self.add_header(key, value)
 
     def add_content(self, data):
-        self.data = json.dumps(data)
-        self.headers['Content-Length'] = len(self.data)
+
+        if isinstance(data, generator):
+            self.data = data
+
+        else:
+            self.data = json.dumps(data)
+            self.headers['Content-Length'] = len(self.data)
 
 
 class ClientRetryPolicy(object):
@@ -279,6 +288,7 @@ class ClientConnection(object):
         self.timeout = 100
         self.verify = True
         self.cert = None
+        self.data_block_size = 4096
 
     def __call__(self):
         self._log.debug("Configuring request: timeout={}, verify={}, "

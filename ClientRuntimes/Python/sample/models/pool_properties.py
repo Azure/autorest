@@ -1,5 +1,7 @@
+﻿
+from runtime.msrest.serialization import Model
 
-class PoolProperties(object):
+class PoolProperties(Model):
 
     _required = []
 

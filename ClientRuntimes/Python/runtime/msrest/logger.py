@@ -28,9 +28,11 @@ import os
 import shutil
 import logging
 
+from .exceptions import raise_with_traceback
+
 LOGGER = None
 
-def invalid_directory(dirname):
+def check_invalid_directory(dirname):
     """
     Check directory for file log.
     """
@@ -42,17 +44,20 @@ def invalid_directory(dirname):
             test_file.write("All good to go!")
 
         os.remove(os.path.join(dirname, "ms_test"))
-        return False
 
     except (IOError, OSError, EnvironmentError) as exp:
-        return str(exp)
+
+        raise_with_traceback(ValueError,
+            "Log directory '{0}' cannot be accessed.".format(dirname))
 
 def set_stream_handler(logger, format_str):
     """
     Set log console handler.
     """
 
-    current_handlers = [h for h in logger.handlers if isinstance(h, logging.StreamHandler)]
+    current_handlers = [
+        h for h in logger.handlers if isinstance(h, logging.StreamHandler)]
+
     for handler in current_handlers:
         logger.removeHandler(handler)
 
@@ -77,10 +82,7 @@ def set_file_handler(logger, file_dir, format_str):
     if not format_str or not file_dir:
         return format_str
 
-    check = invalid_directory(file_dir)
-    if check:
-        raise ValueError("Log directory '{0}' cannot be accessed: {1}".format(file_dir, check))
-
+    check_invalid_directory(file_dir)
     
     logfile = os.path.join(file_dir, logger.name + '.log')
 

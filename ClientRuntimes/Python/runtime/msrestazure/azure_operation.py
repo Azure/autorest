@@ -22,12 +22,11 @@
 #
 #--------------------------------------------------------------------------
 
-
 from ..msrest.serialization import Deserializer
 from threading import Thread, Event
 import time
 
-class Polled(object):
+class AzureOperationPoller(object):
 
     def __init__(self, response, update_cmd, status_codes, timeout=30):
         """
@@ -73,13 +72,12 @@ class Polled(object):
                 self._done.set()
                 break
 
-        callbacks = list(self._callbacks)
-        for call in callbacks:
-            call(self._response)
+        callbacks, self._callbacks = self._callbacks, []
+        while callbacks:
+            for call in callbacks:
+                call(self._response)
 
-        more_calls = [c for c in self._callbacks if c not in callbacks]
-        for call in more_calls:
-            call(self._response)
+            callbacks, self._callbacks = self._callbacks, []
 
     def result(timeout=None):
         self.wait(timeout)
@@ -94,13 +92,13 @@ class Polled(object):
     def add_done_callback(func):
 
         if self._done.is_set():
-            raise Exception("Process is complete.")
+            raise ValueError("Process is complete.")
         
         self._callbacks.append(func)
 
     def remove_done_callback(func):
 
         if self._done.is_set():
-            raise Exception("Process is complete")
+            raise ValueError("Process is complete.")
         
         self._callbacks = [c for c in self._callbacks if c != func]

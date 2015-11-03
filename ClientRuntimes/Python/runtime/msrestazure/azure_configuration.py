@@ -33,6 +33,7 @@ except ImportError:
     from ConfigParser import NoOptionError
 
 from ..msrest import Configuration
+from ..msrest.exceptions import raise_with_traceback
 
 class AzureConfiguration(Configuration):
 
@@ -41,7 +42,7 @@ class AzureConfiguration(Configuration):
         super(AzureConfiguration, self).__init__(base_url, filepath)
 
         # Authentication
-        self.auth_endpoint = "login.windows.net/"
+        self.auth_endpoint = "//login.microsoftonline.com"
         self.token_uri = "/oauth2/token"
         self.auth_uri = "/oauth2/authorize"
         self.tenant = "common"
@@ -76,11 +77,22 @@ class AzureConfiguration(Configuration):
             self.keyring = self._config.set("Authentication", "keyring")
             self.long_running_operation_timeout = self._config.getint("Azure", "long_running_operation_timeout")
 
-        except (ValueError, EnvironmentError, NoOptionError) as err:
-            raise ValueError(
-                "Supplied config file incompatible: {0}".format(err))
+        except (ValueError, EnvironmentError, NoOptionError):
+            msg = "Supplied config file incompatible"
+            raise_with_traceback(ValueError, msg)
 
         finally:
             self._clear_config()
 
         return super(AzureConfiguration, self).load(filepath)
+
+
+class AzureChinaConfiguration(AzureConfiguration):
+
+    def __init__(self, base_url, filepath=None):
+
+        super(AzureChinaConfiguration, self).__init__(base_url, filepath)
+
+        self.auth_endpoint = "login.chinacloudapi.cn/"
+        self.resource = "https://management.core.chinacloudapi.cn/"
+

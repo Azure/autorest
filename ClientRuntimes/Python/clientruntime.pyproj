@@ -25,7 +25,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="runtime\msrestazure\aad.py">
+    <Compile Include="runtime\msrestazure\azure_active_directory.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="runtime\msrestazure\azure_configuration.py">
@@ -34,16 +34,8 @@
     <Compile Include="runtime\msrestazure\azure_exceptions.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="runtime\msrestazure\azure_operation.py" />
     <Compile Include="runtime\msrest\paging.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="runtime\msrestazure\azure_resource.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="runtime\msrestazure\azure_service_client.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="runtime\msrestazure\polling.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="runtime\msrestazure\test\unittest_auth.py">

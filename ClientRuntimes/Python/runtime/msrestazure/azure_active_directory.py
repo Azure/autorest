@@ -26,7 +26,7 @@
 
 
 from ..msrest.authentication import Authentication, TokenAuthentication
-from ..msrest.exceptions import TokenExpiredError, AuthenticationError
+from ..msrest.exceptions import TokenExpiredError, AuthenticationError, raise_with_traceback
 from .azure_configuration import AzureConfiguration
 
 import requests_oauthlib as oauth
@@ -42,47 +42,42 @@ import ast
 import base64
 import hmac
 import hashlib
+import re
 
 try:
-    from urlparse import urlparse, parse_qs
+    from urlparse import urlparse, parse_qs, urlunparse
 
 except ImportError:
-    from urllib.parse import urlparse, parse_qs
+    from urllib.parse import urlparse, parse_qs, urlunparse
 
-def _http(base_uri, *extra):
+
+def _build_url(uri, paths, scheme):
+
+    path = [str(p).strip('/') for p in paths]
+    combined_path = '/'.join(path)
+
+    parsed_url = urlparse(uri)
+    replaced = parsed_url._replace(scheme=scheme)
+
+    if combined_path:
+        path = '/'.join([replaced.path, combined_path])
+        replaced = replaced._replace(path=path)
+
+    return replaced.geturl()
+
+
+def _http(uri, *extra):
     """
     Convert https URL to http.
     """
+    return _build_url(uri, extra, 'http')
 
-    path = [str(e).strip('/') for e in extra]
-    str_path = '/'.join(path)
-    str_base = str(base_uri)
 
-    if str_base.startswith("http://"):
-        return "{0}/{1}".format(str_base, str_path)
-
-    elif str_base.startswith("https://"):
-        return "{0}/{1}".format(str_base.replace("https:","http:", 1), str_path)
-
-    else:
-        return "http://{0}/{1}".format(str_base, str_path)
-
-def _https(base_uri, *extra):
+def _https(uri, *extra):
     """
     Convert http URL to https.
     """
-    path = [str(e).strip('/') for e in extra]
-    str_path = '/'.join(path)
-    str_base = str(base_uri)
-
-    if str_base.startswith("https://"):
-        return "{0}/{1}".format(str_base, str_path)
-
-    elif str_base.startswith("http://"):
-        return "{0}/{1}".format(str_base.replace("http:","https:", 1), str_path)
-
-    else:
-        return "https://{0}/{1}".format(str_base, str_path)
+    return _build_url(uri, extra, 'https')
 
 
 class AADMixin(object):
@@ -111,17 +106,10 @@ class AADMixin(object):
         """
         Validate state returned by AAD server.
         """
+        state_check = re.compile("[&?][sS][tT][aA][tT][eE]={0}&".format(self.state))
+        match = state_check.search(response+'&')
 
-        state_key = '&state='
-        state_idx = response.find(state_key)
-        if state_idx < 0:
-            return False
-
-        strt_idx = state_idx + len(state_key)
-        end_idx = response.find('&', strt_idx)
-        state_val = response[strt_idx:end_idx]
-
-        return state_val == self.state
+        return bool(match)
 
     def _store_token(self, token):
         """
@@ -149,8 +137,8 @@ class AADMixin(object):
         try:
             keyring.delete_password(self.cred_store, self.id)
 
-        except:
-            raise
+        except keyring.errors.PasswordDeleteError:
+            raise_with_traceback(KeyError, "Unable to clear password.")
 
 
 class UserPassCredentials(TokenAuthentication, AADMixin):
@@ -286,7 +274,8 @@ class InteractiveCredentials(TokenAuthentication, AADMixin):
 
         except (InvalidGrantError, OAuth2Error,
                 MismatchingStateError) as err:
-            raise AuthenticationError(err)
+
+            raise_with_traceback(AuthenticationError, "", err)
 
         self.token = token
         return token
@@ -310,7 +299,7 @@ class InteractiveCredentials(TokenAuthentication, AADMixin):
 
 
         except oauth2.rfc6749.errors.TokenExpiredError as err:
-            raise TokenExpiredError(err)
+            raise_with_traceback(TokenExpiredError, "", err)
 
 
 

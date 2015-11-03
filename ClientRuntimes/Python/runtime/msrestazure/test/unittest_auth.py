@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -41,7 +41,7 @@ import unittest
 import runtime
 
 from runtime.msrestazure import AzureConfiguration
-from runtime.msrestazure.aad import (
+from runtime.msrestazure.azure_active_directory import (
     AADMixin,
     InteractiveCredentials,
     )
@@ -72,7 +72,7 @@ class TestInteractiveCredentials(unittest.TestCase):
         self.assertFalse(mix._check_state("test&state=abcd&"))
         self.assertTrue(mix._check_state("test&state=abc&"))
 
-    @mock.patch('runtime.msrestazure.aad.keyring')
+    @mock.patch('runtime.msrestazure.azure_active_directory.keyring')
     def test_store_token(self, mock_keyring):
 
         mix = AADMixin()
@@ -85,7 +85,7 @@ class TestInteractiveCredentials(unittest.TestCase):
                                                      str({'token_type':'1',
                                                           'access_token':'2'}))
 
-    @mock.patch('runtime.msrestazure.aad.keyring')
+    @mock.patch('runtime.msrestazure.azure_active_directory.keyring')
     def test_clear_token(self, mock_keyring):
 
         mix = AADMixin()
@@ -96,7 +96,7 @@ class TestInteractiveCredentials(unittest.TestCase):
         mock_keyring.delete_password.assert_called_with("store_name",
                                                         "client_id")
 
-    @mock.patch('runtime.msrestazure.aad.keyring')
+    @mock.patch('runtime.msrestazure.azure_active_directory.keyring')
     def test_credentials_get_stored_auth(self, mock_keyring):
 
         mix = AADMixin()
@@ -166,7 +166,7 @@ class TestInteractiveCredentials(unittest.TestCase):
             'expires_in':'2',
             'refresh_token':"test"}
 
-        creds.redirect = "my_service.com"
+        creds.redirect = "//my_service.com"
         creds.token_uri = "token_uri"
         creds._check_state.return_value = True
         creds.verify=True
@@ -187,7 +187,7 @@ class TestInteractiveCredentials(unittest.TestCase):
         with self.assertRaises(AuthenticationError):
             token = InteractiveCredentials.get_token(creds, "response")
 
-    @mock.patch('runtime.msrestazure.aad.oauth')
+    @mock.patch('runtime.msrestazure.azure_active_directory.oauth')
     def test_credentials_signed_session(self, mock_requests):
 
         creds = mock.create_autospec(InteractiveCredentials)

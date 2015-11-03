@@ -27,9 +27,92 @@
 import json
 import isodate
 import datetime
-from enum import Enum
 
-from .exceptions import SerializationError, DeserializationError
+from enum import Enum
+from decimal import Decimal
+
+from .exceptions import (
+    SerializationError,
+    DeserializationError,
+    raise_with_traceback)
+
+
+class Model(object):
+    """
+    Mixin for all client request body/response body models to support
+    serialization and deserialization.
+    """
+    
+    _subtype_map = {}
+    _attribute_map = {}
+    _header_map = {}
+    _response_map = {}
+
+    def __getattribute__(self, attr):
+
+        if attr in ['_attribute_map', '_header_map', '_response_map']:
+            parents = list(self.__class__.__mro__)
+            map = {}
+            for p in reversed(parents):
+                if hasattr(p, attr):
+                    map.update(p.__dict__.get(attr, {}))
+
+            return map
+
+        if attr == '_subtype_map':
+            parents = list(self.__class__.__bases__)
+            for p in parents:
+                if hasattr(p, '_subtype_map') and p._subtype_map:
+                    return p._subtype_map
+
+            return {}
+
+
+        elif attr == '_required':
+            parents = list(self.__class__.__mro__)
+            map = []
+            for p in reversed(parents):
+                if hasattr(p, attr):
+                    map += p.__dict__[attr]
+
+            return map
+
+        else:
+            return object.__getattribute__(self, attr)
+
+    @classmethod
+    def _classify(cls, response, objects):
+        """
+        Check the class _subtype_map for any child classes.
+        We want to ignore any inheirited _subtype_maps.
+        """
+        try:
+            map = cls.__dict__.get('_subtype_map', {})
+
+            for _type, _classes in map.items():
+                classification = response.get(_type)
+
+                try:
+                    return objects[_classes[classification]]
+
+                except KeyError:
+                    pass
+
+                for c in _classes:
+                    try:
+                        _cls = objects[_classes[c]]
+                        return _cls._classify(response, objects)
+
+                    except (KeyError, TypeError):
+                        continue
+
+            raise TypeError("Object cannot be classified futher.")
+
+        except AttributeError:
+            raise TypeError("Object cannot be classified futher.")
+
+ 
+
 
 
 class Serializer(object):
@@ -40,7 +123,13 @@ class Serializer(object):
 
         self.serialize_type = {
             'iso-8601':Serializer.serialize_iso,
+            'rfc-1123':Serializer.serialize_rfc,
             'duration':Serializer.serialize_duration,
+            'time':Serializer.serialize_time,
+            'date':Serializer.serialize_date,
+            'decimal':Serializer.serialize_decimal,
+            'long':Serializer.serialize_long,
+            'bytearray':Serializer.serialize_bytearray,
             '[]':self.serialize_iter,
             '{}':self.serialize_dict
             }
@@ -52,13 +141,17 @@ class Serializer(object):
         class_name = target_obj.__class__.__name__
 
         try:
-            for attr, map in target_obj._attribute_map.items():
+            attributes = target_obj._attribute_map
+            required_attrs = target_obj._required
+            self._classify_data(target_obj, class_name, serialized)
+
+            for attr, map in attributes.items():
                 attr_name = attr
                 try:
                     orig_attr = getattr(target_obj, attr)
-                    attr_type = target_obj._attribute_map[attr]['type']
-                    new_attr = self._serialize_data(
-                        orig_attr, attr_type, attr in target_obj._required)
+                    attr_type = attributes[attr]['type']
+                    new_attr = self.serialize_data(
+                        orig_attr, attr_type, attr in required_attrs)
 
                     serialized[map['key']] = new_attr
 
@@ -66,20 +159,37 @@ class Serializer(object):
                     continue
 
         except (AttributeError, KeyError, TypeError) as err:
+            msg = "Attribute {0} in object {1} cannot be serialized.".format(
+                    attr_name, class_name)
 
-            raise SerializationError(
-                "Attribute {0} in object {1} cannot be serialized: {2}".format(
-                    attr_name, class_name, err))
+            raise_with_traceback(SerializationError, msg, err)
 
-        return serialized
+        else:
+            return serialized
 
-    def _serialize_data(self, data, data_type, required):
+    def _classify_data(self, target_obj, class_name, serialized):
+        """
+        Check whether this object is a child and therefor needs to be
+        classified in the message.
+
+        """
+        try:
+            for _type, _classes in target_obj._subtype_map.items():
+
+                for ref, name in _classes.items():
+                    if name == class_name:
+                        serialized[_type] = ref
+
+        except AttributeError:
+            pass # TargetObj has no _subtype_map, so we don't need to classify
+
+    def serialize_data(self, data, data_type, required=False):
 
         if data is None and required:
             raise AttributeError(
                 "Object missing required attribute")
 
-        if not data:
+        if data in [None, "", [], {}]:
             raise ValueError("No value for given attribute")
         
         if data_type is None:
@@ -100,30 +210,55 @@ class Serializer(object):
                 return self.serialize_type[iter_type](data, data_type[1:-1], required)
 
         except (ValueError, TypeError) as err:
+            msg = "Unable to serialize value: '{0}' as type: '{1}'.".format(
+                    data, data_type)
 
-            raise SerializationError(
-                "Unable to serialize value: '{0}' as type: {1}".format(
-                    data, data_type))
+            raise_with_traceback(SerializationError, msg, err)
 
-        return self(data)
+        else:
+            return self(data)
 
     def serialize_iter(self, data, iter_type, required):
-        return [self._serialize_data(i, iter_type, required) for i in data]
+        return [self.serialize_data(i, iter_type, required) for i in data]
 
     def serialize_dict(self, attr, dict_type, required):
-        return {str(x):self._serialize_data(attr[x], dict_type, required) for x in attr}
+        return {str(x):self.serialize_data(attr[x], dict_type, required) for x in attr}
 
     @staticmethod
-    def serialize_duration(attr):
+    def serialize_bytearray(attr):
         return str(attr) #TODO
 
     @staticmethod
-    def serialize_opc_date(attr):
+    def serialize_decimal(attr):
+        return float(attr)
+
+    @staticmethod
+    def serialize_long(attr):
+        try:
+            return long(attr)
+
+        except NameError:
+            return int(attr)
+
+    @staticmethod
+    def serialize_date(attr):
+        return str(attr) #TODO
+
+    @staticmethod
+    def serialize_time(attr):
+        return str(attr) #TODO
+
+    @staticmethod
+    def serialize_duration(attr):
+        return isodate.duration_isoformat(attr)
+
+    @staticmethod
+    def serialize_rfc(attr):
         date_str = attr.strftime('%a, %d %b %Y %H:%M:%S GMT')
         return date_str
 
     @staticmethod
-    def serialize_date(attr):
+    def serialize_iso(attr):
         if isinstance(attr, str):
             attr = isodate.parse_datetime(attr)
 
@@ -135,9 +270,11 @@ class Serializer(object):
                 utc.tm_year,utc.tm_mon,utc.tm_mday,utc.tm_hour,utc.tm_min,utc.tm_sec)
 
             return date + microseconds + 'Z'
+            #return isodate.datetime_isoformat(attr)
 
         except (ValueError, OverflowError) as err:
-            raise SerializationError("Unable to serialize datetime object: {0}".format(err))
+            msg = "Unable to serialize datetime object."
+            raise_with_traceback(SerializationError, msg, err)
        
 
 class DeserializedGenerator(object):
@@ -165,16 +302,19 @@ class Deserializer(object):
             'rfc-1123':Deserializer.deserialize_rfc,
             'duration':Deserializer.deserialize_duration,
             'time':Deserializer.deserialize_time,
+            'date':Deserializer.deserialize_date,
+            'decimal':Deserializer.deserialize_decimal,
+            'long':Deserializer.deserialize_long,
+            'bytearray':Deserializer.deserialize_bytearray,
             '[]':self.deserialize_iter,
             '{}':self.deserialize_dict
-            # etc
             }
 
         self.dependencies = dict(classes)
 
     def __call__(self, target_obj, response_data):
 
-        response = target_obj() if isinstance(target_obj, type) else target_obj
+        response = self._classify_target(target_obj, response_data)
         class_name = response.__class__.__name__
 
         try:
@@ -182,25 +322,85 @@ class Deserializer(object):
             if data is None:
                 return response
 
-            map_dict = getattr(response, '_attribute_map')
-            for attr in map_dict:
-                attr_type = map_dict[attr]['type']
-                key = map_dict[attr]['key']
+            attributes = response._attribute_map
+            for attr, map in attributes.items():
+                attr_type = map['type']
+                key = map['key']
 
                 raw_value = data.get(key) if key else data
 
-                value = self._deserialize_data(raw_value, attr_type) 
+                value = self.deserialize_data(raw_value, attr_type) 
                 setattr(response, attr, value)
 
         except (AttributeError, TypeError, KeyError) as err:
+            msg = "Unable to deserialize to object: {}.".format(class_name)
+            raise_with_traceback(DeserializationError, msg, err)
 
-            raise DeserializationError(
-                "Unable to deserialize to object: {}. Error: {}".format(
-                    class_name, err))
-                
-        return response
+        else:   
+            return response
 
-    def _deserialize_data(self, data, data_type):
+    def _classify_target(self, target, data):
+
+        if isinstance(target, type):
+            try:
+                target = target._classify(data, self.dependencies)
+
+            except (TypeError, AttributeError):
+                pass # Target has no subclasses, so can't classify further.
+
+        if isinstance(target, str):
+            try:
+                target = self.dependencies[target]
+
+            except KeyError:
+                return target
+
+        try:
+            return target()
+
+        except TypeError:
+            return target
+
+    def _unpack_headers(self, response, raw_data):
+
+        for attr, val in response._header_map.items():
+            attr_type = val['type']
+            attr_name = val['key']
+
+            raw_value = raw_data.headers.get(attr_name)
+            value = self.deserialize_data(raw_value, attr_type) 
+
+            setattr(response, attr, value)
+
+    def _unpack_response_attrs(self, response, raw_data):
+
+        for attr, val in response._response_map.items():
+            attr_type = val['type']
+            attr_name = val['key']
+
+            raw_value = getattr(raw_data, attr_name)
+            value = self.deserialize_data(raw_value, attr_type) 
+
+            setattr(response, attr, value)
+
+    def _unpack_response(self, response, raw_data):
+
+        if hasattr(response, '_header_map'):
+            self._unpack_headers(response, raw_data)
+            
+        if hasattr(response, '_response_map'):
+            self._unpack_response_attrs(response, raw_data)
+
+        if hasattr(raw_data, 'content'):
+            try:
+                return json.loads(raw_data.content)
+
+            except (TypeError, json.JSONDecodeError):
+                return None
+
+        return raw_data
+
+    def deserialize_data(self, data, data_type):
 
         if data is None:
             return data
@@ -224,82 +424,84 @@ class Deserializer(object):
             if issubclass(obj_type, Enum):
                 return obj_type(data)
 
+        except (ValueError, TypeError) as err:
+            msg = "Unable to deserialize response data."
+            raise_with_traceback(DeserializationError, msg, err)
+
+        else:
             return self(obj_type, data)
 
-        except (ValueError, TypeError) as err:
-
-            raise DeserializationError(
-                "Unable to deserialize response data: {0}".format(err))
-
-    def _unpack_headers(self, response, raw_data):
-
-        for attr, val in response._header_map.items():
-            attr_type = val['type']
-            attr_name = val['key']
-
-            raw_value = raw_data.headers.get(attr_name)
-            value = self._deserialize_data(raw_value, attr_type) 
-
-            setattr(response, attr, value)
-
-    def _unpack_response_attrs(self, response, raw_data):
-
-        for attr, val in response._response_map.items():
-            attr_type = val['type']
-            attr_name = val['key']
-
-            raw_value = getattr(raw_data, attr_name)
-            value = self._deserialize_data(raw_value, attr_type) 
-
-            setattr(response, attr, value)
-
-    def _unpack_response(self, response, raw_data):
-
-        if hasattr(response, '_header_map'):
-            self._unpack_headers(response, raw_data)
-            
-        if hasattr(response, '_response_map'):
-            self._unpack_response_attrs(response, raw_data)
-
-        if hasattr(raw_data, 'content'):
-            try:
-                return json.loads(raw_data.content)
-
-            except (TypeError, json.JSONDecodeError):
-                return None
-
-        return raw_data
-
     def deserialize_iter(self, attr, iter_type):
-        return DeserializedGenerator(self._deserialize_data, attr, iter_type)
+        return DeserializedGenerator(self.deserialize_data, attr, iter_type)
 
     def deserialize_dict(self, attr, dict_type):
         if isinstance(attr, list):
-            return {str(x['key']):self._deserialize_data(
+            return {str(x['key']):self.deserialize_data(
                 x['value'], dict_type) for x in attr}
 
-        return {str(x):self._deserialize_data(
+        return {str(x):self.deserialize_data(
             attr[x], dict_type) for x in attr}
 
     @staticmethod
-    def deserialize_duration(attr):
+    def deserialize_bytearray(attr):
         return attr #TODO
+
+    @staticmethod
+    def deserialize_decimal(attr):
+        return Decimal(attr)
+
+    @staticmethod
+    def deserialize_long(attr):
+        try:
+            return long(attr)
+
+        except NameError:
+            return int(attr)
+
+    @staticmethod
+    def deserialize_duration(attr):
+        try:
+            duration = isodate.parse_duration(attr)
+
+        except(ValueError, OverflowError, AttributeError) as err:
+            msg = "Cannot deserialize duration object."
+            raise_with_traceback(DeserializationError, msg, err)
+
+        else:
+            return duration
 
     @staticmethod
     def deserialize_time(attr):
         return attr #TODO
 
+    @staticmethod
+    def deserialize_date(attr):
+        return attr #TODO
+
+    @staticmethod
+    def deserialize_rfc(attr):
+        try:
+            date_obj = datetime.datetime.strptime(
+                attr, "%a, %d %b %Y %H:%M:%S %Z")
+
+        except ValueError as err:
+            msg = "Cannot deserialize to rfc datetime object."
+            raise_with_traceback(DeserializationError, msg, err)
+
+        else:
+            return date_obj
 
     @staticmethod
     def deserialize_iso(attr):
         try:
             date_obj = isodate.parse_datetime(attr)
-            t = date_obj.utctimetuple()
-            return date_obj
+            test_utc = date_obj.utctimetuple()
 
         except(ValueError, OverflowError, AttributeError) as err:
+            msg = "Cannot deserialize datetime object."
+            raise_with_traceback(DeserializationError, msg, err)
 
-            raise DeserializationError(
-                "Cannot deserialize datetime object: {}".format(err))
+        else:
+            return date_obj
 
 

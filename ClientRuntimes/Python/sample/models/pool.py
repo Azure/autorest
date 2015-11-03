@@ -1,5 +1,7 @@
 ﻿
-class Pool(object):
+from runtime.msrest.serialization import Model
+
+class Pool(Model):
 
     _attribute_map = {
             'id':{'key':'id', 'type':'str'},
@@ -19,12 +21,12 @@ class Pool(object):
             'target_os_version': {'key':'targetOSVersion', 'type':'str'},
             'url': {'key':'url', 'type':'str'},
             'e_tag': {'key':'eTag', 'type':'str'},
-            'last_modified': {'key':'lastModifed', 'type':'iso-date'},
-            'creation_time': {'key':'creationTime', 'type':'iso-date'},
-            'state': {'key':'state', 'type':'str'},
-            'state_transition_time': {'key':'stateTransitionTime', 'type':'iso-date'},
-            'allocation_state': {'key':'allocationState', 'type':'str'},
-            'allocation_state_transition_time': {'key':'allocationStateTransitionTime', 'type':'iso-date'},
+            'last_modified': {'key':'lastModifed', 'type':'iso-8601'},
+            'creation_time': {'key':'creationTime', 'type':'iso-8601'},
+            'state': {'key':'state', 'type':'PoolState'},
+            'state_transition_time': {'key':'stateTransitionTime', 'type':'iso-8601'},
+            'allocation_state': {'key':'allocationState', 'type':'AllocationState'},
+            'allocation_state_transition_time': {'key':'allocationStateTransitionTime', 'type':'iso-8601'},
             'resize_error': {'key':'resizeError', 'type':'ResizeError'},
             'current_dedicated': {'key':'currentDedicated', 'type':'int'},
             'auto_scale_run': {'key':'autoScaleRun', 'type':'AutoScaleRun'},
