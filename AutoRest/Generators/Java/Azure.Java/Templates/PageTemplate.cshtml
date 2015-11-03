@@ -1,0 +1,36 @@
+﻿@using System.Linq
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.Java.TemplateModels
+@using Microsoft.Rest.Generator.Utilities
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.Azure.PageTemplateModel>
+/**
+@Header(" * ")
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower()).models;
+@EmptyLine
+@foreach (var importClass in Model.ImportList)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+public class @Model.TypeDefinitionName<T> implements Page<T> {
+    /*
+     * The link to the next page.
+     */
+    @@JsonProperty("@Model.NextLinkName")
+    private String nextPageLink;
+    @EmptyLine
+    /*
+     * The list of items.
+     */
+    @@JsonProperty("@Model.ItemName")
+    private List<T> items;
+    @EmptyLine
+    @@Override
+    public String getNextPageLink() {
+        return this.nextPageLink;
+    }
+}

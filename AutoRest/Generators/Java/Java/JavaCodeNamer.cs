@@ -15,6 +15,8 @@ namespace Microsoft.Rest.Generator.Java
     {
         private readonly HashSet<IType> _normalizedTypes;
 
+        public static HashSet<string> PrimaryTypes {get; private set;}
+
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
         /// </summary>
@@ -39,6 +41,26 @@ namespace Microsoft.Rest.Generator.Java
             }.ForEach(s => ReservedWords.Add(s));
 
             _normalizedTypes = new HashSet<IType>();
+            PrimaryTypes = new HashSet<string>();
+            new HashSet<string>
+            {
+                "int", "Integer",
+                "long", "Long",
+                "object", "Object",
+                "bool", "Boolean",
+                "double", "Double",
+                "float", "Float",
+                "byte", "Byte",
+                "byte[]", "Byte[]",
+                "String",
+                "LocalDate",
+                "DateTime",
+                "DateTimeRfc1123",
+                "Duration",
+                "Period",
+                "BigDecimal",
+                "InputStream"
+            }.ForEach(s => PrimaryTypes.Add(s));
         }
 
         public override string GetFieldName(string name)
