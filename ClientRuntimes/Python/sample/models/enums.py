@@ -2,7 +2,6 @@
 from enum import Enum
 
 
-
 class PoolState(Enum):
 
     invalid = "Invalid"
@@ -10,6 +9,7 @@ class PoolState(Enum):
     deleting = "Deleting"
     upgrading = "Upgrading"
     unmapped = "Unmapped"
+
 
 class AllocationState(Enum):
 
@@ -19,6 +19,7 @@ class AllocationState(Enum):
     stopping = "Stopping"
     unmapped = "Unmapped"
 
+
 class CertificateState(Enum):
 
     invalid = "Invalid"
@@ -26,6 +27,7 @@ class CertificateState(Enum):
     deleting = "Deleting"
     delete_failed = "DeleteFailed"
     unmapped = "Unmapped"
+
 
 class CertificateFormat(Enum):
 

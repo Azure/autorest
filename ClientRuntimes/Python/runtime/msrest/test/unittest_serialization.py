@@ -39,6 +39,7 @@ try:
 except ImportError:
     import mock
 
+from msrest.serialization import Model
 from msrest import Serializer, Deserializer
 from msrest.exceptions import SerializationError, DeserializationError
 
@@ -46,19 +47,19 @@ from requests import Response
 
 class TestRuntimeSerialized(unittest.TestCase):
 
-    class TestObj(object):
+    class TestObj(Model):
+
+        _required = []
+        _attribute_map = {
+            'attr_a': {'key':'id', 'type':'str'},
+            'attr_b': {'key':'AttrB', 'type':'int'},
+            'attr_c': {'key':'Key_C', 'type': 'bool'},
+            'attr_d': {'key':'AttrD', 'type':'[int]'},
+            'attr_e': {'key':'AttrE', 'type': '{float}'}
+            #TODO: Add more here as more types are defined in serialized
+            }
 
         def __init__(self):
-
-            self._required = []
-            self._attribute_map = {
-                'attr_a': {'key':'id', 'type':'str'},
-                'attr_b': {'key':'AttrB', 'type':'int'},
-                'attr_c': {'key':'Key_C', 'type': 'bool'},
-                'attr_d': {'key':'AttrD', 'type':'[int]'},
-                'attr_e': {'key':'AttrE', 'type': '{float}'}
-                #TODO: Add more here as more types are defined in serialized
-                }
 
             self.attr_a = None
             self.attr_b = None
@@ -83,7 +84,7 @@ class TestRuntimeSerialized(unittest.TestCase):
         """
         Test serializing an object with a malformed attribute_map.
         """
-        test_obj = type("BadTestObj", (), {"_attribute_map":None})
+        test_obj = type("BadTestObj", (Model,), {"_attribute_map":None})
 
         with self.assertRaises(SerializationError):
             self.s(test_obj)
@@ -102,7 +103,7 @@ class TestRuntimeSerialized(unittest.TestCase):
         """
         Test serializing an object with mismatching attributes and map.
         """
-        test_obj = type("BadTestObj", (), {"_attribute_map":None})
+        test_obj = type("BadTestObj", (Model,), {"_attribute_map":None})
         test_obj._attribute_map = {"abc":{"key":"ABC", "type":"str"}}
 
         with self.assertRaises(SerializationError):
@@ -123,7 +124,7 @@ class TestRuntimeSerialized(unittest.TestCase):
         Test serializing an object with Int attributes.
         """
         test_obj = self.TestObj()
-        test_obj._required = ['attr_b']
+        self.TestObj._required = ['attr_b']
         test_obj.attr_b = None
 
         with self.assertRaises(SerializationError):
@@ -144,18 +145,20 @@ class TestRuntimeSerialized(unittest.TestCase):
         with self.assertRaises(SerializationError):
             self.s(test_obj)
 
+        self.TestObj._required = []
+
     def test_attr_str(self):
         """
         Test serializing an object with Str attributes.
         """
         test_obj = self.TestObj()
-        test_obj._required = ['attr_a']
+        self.TestObj._required = ['attr_a']
         test_obj.attr_a = None
 
         with self.assertRaises(SerializationError):
             self.s(test_obj)
 
-        test_obj._required = []
+        self.TestObj._required = []
         test_obj.attr_a = "TestString"
 
         message = self.s(test_obj)
@@ -235,13 +238,13 @@ class TestRuntimeSerialized(unittest.TestCase):
         """
         Test serializing an object with a list of complex objects as an attribute.
         """
-        list_obj = type("ListObj", (), {"_attribute_map":None,
+        list_obj = type("ListObj", (Model,), {"_attribute_map":None,
                                         "_required":[],
                                         "abc":None})
         list_obj._attribute_map = {"abc":{"key":"ABC", "type":"int"}}
         list_obj.abc = "123"
 
-        test_obj = type("CmplxTestObj", (), {"_attribute_map":None,
+        test_obj = type("CmplxTestObj", (Model,), {"_attribute_map":None,
                                              "_required":[],
                                              "test_list":None})
 
@@ -251,8 +254,8 @@ class TestRuntimeSerialized(unittest.TestCase):
         message = self.s(test_obj)
         self.assertEqual(message, {'_list':[{'ABC':123}]})
 
-        list_obj = type("BadListObj", (), {"map":None})
-        test_obj.attribute_map = {"test_list":{"key":"_list", "type":"[BadListObj]"}}
+        list_obj = type("BadListObj", (Model,), {"map":None})
+        test_obj._attribute_map = {"test_list":{"key":"_list", "type":"[BadListObj]"}}
         test_obj.test_list = [list_obj]
 
         with self.assertRaises(SerializationError):
@@ -287,50 +290,50 @@ class TestRuntimeSerialized(unittest.TestCase):
     def test_serialize_datetime(self):
 
         date_obj = isodate.parse_datetime('2015-01-01T00:00:00')
-        date_str = Serializer.serialize_date(date_obj)
+        date_str = Serializer.serialize_iso(date_obj)
 
         self.assertEqual(date_str, '2015-01-01T00:00:00.000Z')
 
         date_obj = isodate.parse_datetime('1999-12-31T23:59:59-12:00')
-        date_str = Serializer.serialize_date(date_obj)
+        date_str = Serializer.serialize_iso(date_obj)
 
         self.assertEqual(date_str, '2000-01-01T11:59:59.000Z')
 
         with self.assertRaises(SerializationError):
             date_obj = isodate.parse_datetime('9999-12-31T23:59:59-12:00')
-            date_str = Serializer.serialize_date(date_obj)
+            date_str = Serializer.serialize_iso(date_obj)
 
         with self.assertRaises(SerializationError):
             date_obj = isodate.parse_datetime('0001-01-01T00:00:00+23:59')
-            date_str = Serializer.serialize_date(date_obj)
+            date_str = Serializer.serialize_iso(date_obj)
 
 
         date_obj = isodate.parse_datetime("2015-06-01T16:10:08.0121-07:00")
-        date_str = Serializer.serialize_date(date_obj)
+        date_str = Serializer.serialize_iso(date_obj)
 
         self.assertEqual(date_str, '2015-06-01T23:10:08.0121Z')
 
         date_obj = datetime.min
-        date_str = Serializer.serialize_date(date_obj)
+        date_str = Serializer.serialize_iso(date_obj)
         self.assertEqual(date_str, '0001-01-01T00:00:00.000Z')
 
         date_obj = datetime.max
-        date_str = Serializer.serialize_date(date_obj)
+        date_str = Serializer.serialize_iso(date_obj)
         self.assertEqual(date_str, '9999-12-31T23:59:59.999999Z')
 
 
     def test_serialize_primitive_types(self):
 
-        a = Serializer._serialize_data(Serializer, 1, 'int', True)
+        a = Serializer.serialize_data(Serializer, 1, 'int', True)
         self.assertEqual(a, 1)
 
-        b = Serializer._serialize_data(Serializer, True, 'bool', True)
+        b = Serializer.serialize_data(Serializer, True, 'bool', True)
         self.assertEqual(b, True)
 
-        c = Serializer._serialize_data(Serializer, 'True', 'str', True)
+        c = Serializer.serialize_data(Serializer, 'True', 'str', True)
         self.assertEqual(c, 'True')
 
-        d = Serializer._serialize_data(Serializer, 100.0123, 'float', True)
+        d = Serializer.serialize_data(Serializer, 100.0123, 'float', True)
         self.assertEqual(d, 100.0123)
 
     def test_serialize_empty_iter(self):
@@ -343,15 +346,15 @@ class TestRuntimeSerialized(unittest.TestCase):
 
     def test_serialize_json_obj(self):
 
-        class ComplexId(object):
+        class ComplexId(Model):
 
             _required = []
             _attribute_map = {'id':{'key':'id','type':'int'},
                               'name':{'key':'name','type':'str'},
                               'age':{'key':'age','type':'float'},
                               'male':{'key':'male','type':'bool'},
-                              'birthday':{'key':'birthday','type':'iso-date'},
-                              'anniversary':{'key':'anniversary', 'type':'iso-date'}}
+                              'birthday':{'key':'birthday','type':'iso-8601'},
+                              'anniversary':{'key':'anniversary', 'type':'iso-8601'}}
 
             id = 1
             name = "Joey"
@@ -360,14 +363,14 @@ class TestRuntimeSerialized(unittest.TestCase):
             birthday = '1992-01-01T00:00:00.000Z'
             anniversary = isodate.parse_datetime('2013-12-08T00:00:00')
 
-        class ComplexJson(object):
+        class ComplexJson(Model):
 
             _required = []
             _attribute_map = {'p1':{'key':'p1','type':'str'},
                               'p2':{'key':'p2','type':'str'},
-                              'top_date':{'key':'top_date', 'type':'iso-date'},
-                              'top_dates':{'key':'top_dates', 'type':'[iso-date]'},
-                              'insider':{'key':'insider','type':'{iso-date}'},
+                              'top_date':{'key':'top_date', 'type':'iso-8601'},
+                              'top_dates':{'key':'top_dates', 'type':'[iso-8601]'},
+                              'insider':{'key':'insider','type':'{iso-8601}'},
                               'top_complex':{'key':'top_complex','type':'ComplexId'}}
 
             p1 = 'value1'
@@ -407,36 +410,138 @@ class TestRuntimeSerialized(unittest.TestCase):
         self.maxDiff = None
         self.assertEqual(message, output) 
 
+    def test_polymorphic_serialization(self):
 
+        self.maxDiff = None
+        class Zoo(Model):
 
+            _attribute_map = {
+                "animals":{"key":"Animals", "type":"[Animal]"},
+                }
 
+            def __init__(self):
+                self.animals = None
+
+        class Animal(Model):
+
+            _attribute_map = {
+                "name":{"key":"Name", "type":"str"}
+                }
+
+            _subtype_map = {
+                'dType': {"cat":"Cat", "dog":"Dog"}
+                }
+
+            def __init__(self):
+                self.name = None
+
+        class Dog(Animal):
+
+            _attribute_map = {
+                "likes_dog_food":{"key":"likesDogFood","type":"bool"}
+                }
+
+            def __init__(self):
+                self.likes_dog_food = None
+                super(Dog, self).__init__()
+
+        class Cat(Animal):
+
+            _attribute_map = {
+                "likes_mice":{"key":"likesMice","type":"bool"},
+                "dislikes":{"key":"dislikes","type":"Animal"}
+                }
+
+            _subtype_map = {
+                "dType":{"siamese":"Siamese"}
+                }
+
+            def __init__(self):
+                self.likes_mice = None
+                self.dislikes = None
+                super(Cat, self).__init__()
+
+        class Siamese(Cat):
+
+            _attribute_map = {
+                "color":{"key":"Color", "type":"str"}
+                }
+
+            def __init__(self):
+                self.color = None
+                super(Siamese, self).__init__()
+
+        message = {
+            "Animals": [ 
+            { 
+            "dType": "dog", 
+            "likesDogFood": True, 
+            "Name": "Fido" 
+            }, 
+            { 
+            "dType": "cat", 
+            "likesMice": False, 
+            "dislikes": { 
+            "dType": "dog", 
+            "likesDogFood": True, 
+            "Name": "Angry" 
+            }, 
+            "Name": "Felix" 
+            }, 
+            { 
+            "dType": "siamese", 
+            "Color": "grey", 
+            "likesMice": True, 
+            "Name": "Finch" 
+            }]}
+
+        zoo = Zoo()
+        angry = Dog()
+        angry.name = "Angry"
+        angry.likes_dog_food = True
+
+        fido = Dog()
+        fido.name = "Fido"
+        fido.likes_dog_food = True
+
+        felix = Cat()
+        felix.name = "Felix"
+        felix.likes_mice = False
+        felix.dislikes = angry
+
+        finch = Siamese()
+        finch.name = "Finch"
+        finch.color = "grey"
+        finch.likes_mice = True
+
+        zoo.animals = [fido, felix, finch]
+
+        serialized = self.s(zoo)
+        self.assertEqual(serialized, message)
 
 
 class TestRuntimeDeserialized(unittest.TestCase):
 
     class TestObj(object):
 
-        def __init__(self, **kwargs):
+        _required = []
+        _attribute_map = {
+            'attr_a': {'key':'id', 'type':'str'},
+            'attr_b': {'key':'AttrB', 'type':'int'},
+            'attr_c': {'key':'Key_C', 'type': 'bool'},
+            'attr_d': {'key':'AttrD', 'type':'[int]'},
+            'attr_e': {'key':'AttrE', 'type': '{float}'}
+            #TODO: Add more here as more types are defined in serialized
+            }
 
-            self._required = []
-            self._attribute_map = {
-                'attr_a': {'key':'id', 'type':'str'},
-                'attr_b': {'key':'AttrB', 'type':'int'},
-                'attr_c': {'key':'Key_C', 'type': 'bool'},
-                'attr_d': {'key':'AttrD', 'type':'[int]'},
-                'attr_e': {'key':'AttrE', 'type': '{float}'}
-                #TODO: Add more here as more types are defined in serialized
-                }
+        _header_map = {
+            'client_request_id': {'key': 'client-request-id', 'type':'str'},
+            'e_tag': {'key': 'etag', 'type':'str'},
+            }
 
-            self._header_map = {
-                'client_request_id': {'key': 'client-request-id', 'type':'str'},
-                'e_tag': {'key': 'etag', 'type':'str'},
-                }
-
-            self._response_map = {
-                'status_code': {'key':'status_code', 'type':'str'}
-                }
-            #self.status_code = None
+        _response_map = {
+            'status_code': {'key':'status_code', 'type':'str'}
+            }
 
     def setUp(self):
         self.d = Deserializer()
@@ -663,7 +768,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
 
     def test_deserialize_datetime(self):
 
-        a = Deserializer.deserialize_date('9999-12-31T23:59:59+23:59')
+        a = Deserializer.deserialize_iso('9999-12-31T23:59:59+23:59')
         utc = a.utctimetuple()
 
         self.assertEqual(utc.tm_year, 9999)
@@ -675,9 +780,9 @@ class TestRuntimeDeserialized(unittest.TestCase):
         self.assertEqual(a.microsecond, 0)
 
         with self.assertRaises(DeserializationError):
-            a = Deserializer.deserialize_date('9999-12-31T23:59:59-23:59')
+            a = Deserializer.deserialize_iso('9999-12-31T23:59:59-23:59')
 
-        a = Deserializer.deserialize_date('1999-12-31T23:59:59-23:59')
+        a = Deserializer.deserialize_iso('1999-12-31T23:59:59-23:59')
         utc = a.utctimetuple()
         self.assertEqual(utc.tm_year, 2000)
         self.assertEqual(utc.tm_mon, 1)
@@ -687,7 +792,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
         self.assertEqual(utc.tm_sec, 59)
         self.assertEqual(a.microsecond, 0)
 
-        a = Deserializer.deserialize_date('0001-01-01T23:59:00+23:59')
+        a = Deserializer.deserialize_iso('0001-01-01T23:59:00+23:59')
         utc = a.utctimetuple()
 
         self.assertEqual(utc.tm_year, 1)
@@ -699,49 +804,140 @@ class TestRuntimeDeserialized(unittest.TestCase):
         self.assertEqual(a.microsecond, 0)
 
         #with self.assertRaises(DeserializationError):
-        #    a = Deserialized.deserialize_date(None, '1996-01-01T23:01:54-22:66')
+        #    a = Deserializer.deserialize_iso('1996-01-01T23:01:54-22:66')
 
         with self.assertRaises(DeserializationError):
-            a = Deserializer.deserialize_date('1996-01-01T23:01:54-24:30')
+            a = Deserializer.deserialize_iso('1996-01-01T23:01:54-24:30')
 
         with self.assertRaises(DeserializationError):
-            a = Deserializer.deserialize_date('1996-01-01T23:01:78+00:30')
+            a = Deserializer.deserialize_iso('1996-01-01T23:01:78+00:30')
 
         with self.assertRaises(DeserializationError):
-            a = Deserializer.deserialize_date('1996-01-01T23:60:01+00:30')
+            a = Deserializer.deserialize_iso('1996-01-01T23:60:01+00:30')
 
         with self.assertRaises(DeserializationError):
-            a = Deserializer.deserialize_date('1996-01-01T24:01:01+00:30')
+            a = Deserializer.deserialize_iso('1996-01-01T24:01:01+00:30')
 
         with self.assertRaises(DeserializationError):
-            a = Deserializer.deserialize_date('1996-01-01t01:01:01/00:30')
+            a = Deserializer.deserialize_iso('1996-01-01t01:01:01/00:30')
 
         with self.assertRaises(DeserializationError):
-            a = Deserializer.deserialize_date('1996-01-01F01:01:01+00:30')
+            a = Deserializer.deserialize_iso('1996-01-01F01:01:01+00:30')
 
         with self.assertRaises(DeserializationError):
-            a = Deserializer.deserialize_date('2015-02-32')
+            a = Deserializer.deserialize_iso('2015-02-32')
 
         with self.assertRaises(DeserializationError):
-            a = Deserializer.deserialize_date('2015-22-01')
+            a = Deserializer.deserialize_iso('2015-22-01')
 
         with self.assertRaises(DeserializationError):
-            a = Deserializer.deserialize_date('2010-13-31')
+            a = Deserializer.deserialize_iso('2010-13-31')
 
         with self.assertRaises(DeserializationError):
-            a = Deserializer.deserialize_date('99999-12-31')
+            a = Deserializer.deserialize_iso('99999-12-31')
 
         with self.assertRaises(DeserializationError):
-            a = Deserializer.deserialize_date(True)
+            a = Deserializer.deserialize_iso(True)
 
         with self.assertRaises(DeserializationError):
-            a = Deserializer.deserialize_date(2010)
+            a = Deserializer.deserialize_iso(2010)
 
         with self.assertRaises(DeserializationError):
-            a = Deserializer.deserialize_date(None)
+            a = Deserializer.deserialize_iso(None)
 
         with self.assertRaises(DeserializationError):
-            a = Deserializer.deserialize_date('Happy New Year 2016')
+            a = Deserializer.deserialize_iso('Happy New Year 2016')
+
+    def test_polymorphic_deserialization(self):
+
+        class Zoo(Model):
+
+            _attribute_map = {
+                "animals":{"key":"Animals", "type":"[Animal]"},
+                }
+
+        class Animal(Model):
+
+            _attribute_map = {
+                "name":{"key":"Name", "type":"str"}
+                }
+
+            _test_attr = 123
+
+            _subtype_map = {
+                'dType': {"cat":"Cat", "dog":"Dog"}
+                }
+
+        class Dog(Animal):
+
+            _attribute_map = {
+                "likes_dog_food":{"key":"likesDogFood","type":"bool"}
+                }
+
+        class Cat(Animal):
+
+            _attribute_map = {
+                "likes_mice":{"key":"likesMice","type":"bool"},
+                "dislikes":{"key":"dislikes","type":"Animal"}
+                }
+
+            _subtype_map = {
+                "dType":{"siamese":"Siamese"}
+                }
+
+        class Siamese(Cat):
+
+            _attribute_map = {
+                "color":{"key":"Color", "type":"str"}
+                }
+
+        message = {
+            "Animals": [ 
+            { 
+            "dType": "dog", 
+            "likesDogFood": True, 
+            "Name": "Fido" 
+            }, 
+            { 
+            "dType": "cat", 
+            "likesMice": False, 
+            "dislikes": { 
+            "dType": "dog", 
+            "likesDogFood": True, 
+            "Name": "Angry" 
+            }, 
+            "Name": "Felix" 
+            }, 
+            { 
+            "dType": "siamese", 
+            "Color": "grey", 
+            "likesMice": True, 
+            "Name": "Finch" 
+            }]}
+
+        self.d.dependencies = {
+            'Zoo':Zoo, 'Animal':Animal, 'Dog':Dog,
+             'Cat':Cat, 'Siamese':Siamese}
+
+        zoo = self.d(Zoo, message)
+        animals = [a for a in zoo.animals]
+
+        self.assertEqual(len(animals), 3)
+        self.assertIsInstance(animals[0], Dog)
+        self.assertTrue(animals[0].likes_dog_food)
+        self.assertEqual(animals[0].name, 'Fido')
+
+        self.assertIsInstance(animals[1], Cat)
+        self.assertFalse(animals[1].likes_mice)
+        self.assertIsInstance(animals[1].dislikes, Dog)
+        self.assertEqual(animals[1].dislikes.name, 'Angry')
+        self.assertEqual(animals[1].name, 'Felix')
+
+        self.assertIsInstance(animals[2], Siamese)
+        self.assertEqual(animals[2].color, "grey")
+        self.assertTrue(animals[2].likes_mice)
+
+
 
 
 

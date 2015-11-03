@@ -1,5 +1,7 @@
+﻿
+from runtime.msrest.serialization import Model
 
-class PoolResize(object):
+class PoolResize(Model):
 
     _required = []
 
