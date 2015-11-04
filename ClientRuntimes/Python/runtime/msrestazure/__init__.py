@@ -25,5 +25,4 @@
 #--------------------------------------------------------------------------
 
 
-from .azure_configuration import AzureConfiguration
-from .azure_service_client import AzureServiceClient
+from .azure_configuration import AzureConfiguration, AzureChinaConfiguration

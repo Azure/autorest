@@ -31,10 +31,17 @@ import datetime
 from enum import Enum
 from decimal import Decimal
 
-from .exceptions import SerializationError, DeserializationError
+from .exceptions import (
+    SerializationError,
+    DeserializationError,
+    raise_with_traceback)
 
 
 class Model(object):
+    """
+    Mixin for all client request body/response body models to support
+    serialization and deserialization.
+    """
     
     _subtype_map = {}
     _attribute_map = {}
@@ -75,9 +82,13 @@ class Model(object):
 
     @classmethod
     def _classify(cls, response, objects):
-
+        """
+        Check the class _subtype_map for any child classes.
+        We want to ignore any inheirited _subtype_maps.
+        """
         try:
             map = cls.__dict__.get('_subtype_map', {})
+
             for _type, _classes in map.items():
                 classification = response.get(_type)
 
@@ -146,15 +157,20 @@ class Serializer(object):
                     continue
 
         except (AttributeError, KeyError, TypeError) as err:
+            msg = "Attribute {0} in object {1} cannot be serialized.".format(
+                    attr_name, class_name)
 
-            raise SerializationError(
-                "Attribute {0} in object {1} cannot be serialized: {2}".format(
-                    attr_name, class_name, err))
+            raise_with_traceback(SerializationError, msg, err)
 
-        return serialized
+        else:
+            return serialized
 
     def _classify_data(self, target_obj, class_name, serialized):
+        """
+        Check whether this object is a child and therefor needs to be
+        classified in the message.
 
+        """
         try:
             for _type, _classes in target_obj._subtype_map.items():
 
@@ -163,7 +179,7 @@ class Serializer(object):
                         serialized[_type] = ref
 
         except AttributeError:
-            raise
+            pass # TargetObj has no _subtype_map, so we don't need to classify
 
     def serialize_data(self, data, data_type, required=False):
 
@@ -192,12 +208,13 @@ class Serializer(object):
                 return self.serialize_type[iter_type](data, data_type[1:-1], required)
 
         except (ValueError, TypeError) as err:
+            msg = "Unable to serialize value: '{0}' as type: '{1}'.".format(
+                    data, data_type)
 
-            raise SerializationError(
-                "Unable to serialize value: '{0}' as type: {1}".format(
-                    data, data_type))
+            raise_with_traceback(SerializationError, msg, err)
 
-        return self(data)
+        else:
+            return self(data)
 
     def serialize_iter(self, data, iter_type, required):
         return [self.serialize_data(i, iter_type, required) for i in data]
@@ -240,7 +257,8 @@ class Serializer(object):
             #return isodate.datetime_isoformat(attr)
 
         except (ValueError, OverflowError) as err:
-            raise SerializationError("Unable to serialize datetime object: {0}".format(err))
+            msg = "Unable to serialize datetime object."
+            raise_with_traceback(SerializationError, msg, err)
        
 
 class DeserializedGenerator(object):
@@ -297,12 +315,11 @@ class Deserializer(object):
                 setattr(response, attr, value)
 
         except (AttributeError, TypeError, KeyError) as err:
+            msg = "Unable to deserialize to object: {}.".format(class_name)
+            raise_with_traceback(DeserializationError, msg, err)
 
-            raise DeserializationError(
-                "Unable to deserialize to object: {}. Error: {}".format(
-                    class_name, err))
-                
-        return response
+        else:   
+            return response
 
     def _classify_target(self, target, data):
 
@@ -311,7 +328,7 @@ class Deserializer(object):
                 target = target._classify(data, self.dependencies)
 
             except (TypeError, AttributeError):
-                pass
+                pass # Target has no subclasses, so can't classify further.
 
         if isinstance(target, str):
             try:
@@ -389,12 +406,12 @@ class Deserializer(object):
             if issubclass(obj_type, Enum):
                 return obj_type(data)
 
-            return self(obj_type, data)
-
         except (ValueError, TypeError) as err:
+            msg = "Unable to deserialize response data."
+            raise_with_traceback(DeserializationError, msg, err)
 
-            raise DeserializationError(
-                "Unable to deserialize response data: {0}".format(err))
+        else:
+            return self(obj_type, data)
 
     def deserialize_iter(self, attr, iter_type):
         return DeserializedGenerator(self.deserialize_data, attr, iter_type)
@@ -415,12 +432,13 @@ class Deserializer(object):
     def deserialize_duration(attr):
         try:
             duration = isodate.parse_duration(attr)
-            return duration
 
         except(ValueError, OverflowError, AttributeError) as err:
+            msg = "Cannot deserialize duration object."
+            raise_with_traceback(DeserializationError, msg, err)
 
-            raise DeserializationError(
-                "Cannot deserialize duration object: {}".format(err))
+        else:
+            return duration
 
     @staticmethod
     def deserialize_time(attr):
@@ -437,19 +455,24 @@ class Deserializer(object):
                 attr, "%a, %d %b %Y %H:%M:%S %Z")
 
         except ValueError as err:
-            raise DeserializationError(
-                "Cannot deserialize to rfc datetime object: {0}".format(err))
+            msg = "Cannot deserialize to rfc datetime object."
+            raise_with_traceback(DeserializationError, msg, err)
+
+        else:
+            return date_obj
 
     @staticmethod
     def deserialize_iso(attr):
         try:
             date_obj = isodate.parse_datetime(attr)
-            t = date_obj.utctimetuple()
+            test_utc = date_obj.utctimetuple()
             return date_obj
 
         except(ValueError, OverflowError, AttributeError) as err:
+            msg = "Cannot deserialize datetime object."
+            raise_with_traceback(DeserializationError, msg, err)
 
-            raise DeserializationError(
-                "Cannot deserialize datetime object: {}".format(err))
+        else:
+            return date_obj
 
 

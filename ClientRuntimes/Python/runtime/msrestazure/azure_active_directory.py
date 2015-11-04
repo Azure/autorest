@@ -26,7 +26,7 @@
 
 
 from ..msrest.authentication import Authentication, TokenAuthentication
-from ..msrest.exceptions import TokenExpiredError, AuthenticationError
+from ..msrest.exceptions import TokenExpiredError, AuthenticationError, raise_with_traceback
 from .azure_configuration import AzureConfiguration
 
 import requests_oauthlib as oauth
@@ -137,8 +137,8 @@ class AADMixin(object):
         try:
             keyring.delete_password(self.cred_store, self.id)
 
-        except:
-            raise
+        except keyring.errors.PasswordDeleteError:
+            raise_with_traceback(KeyError, "Unable to clear password.")
 
 
 class UserPassCredentials(TokenAuthentication, AADMixin):
@@ -274,7 +274,8 @@ class InteractiveCredentials(TokenAuthentication, AADMixin):
 
         except (InvalidGrantError, OAuth2Error,
                 MismatchingStateError) as err:
-            raise AuthenticationError(err)
+
+            raise_with_traceback(AuthenticationError, "", err)
 
         self.token = token
         return token
@@ -298,7 +299,7 @@ class InteractiveCredentials(TokenAuthentication, AADMixin):
 
 
         except oauth2.rfc6749.errors.TokenExpiredError as err:
-            raise TokenExpiredError(err)
+            raise_with_traceback(TokenExpiredError, "", err)
 
 
 

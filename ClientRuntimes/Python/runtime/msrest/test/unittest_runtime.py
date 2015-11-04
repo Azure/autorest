@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -52,7 +52,7 @@ from msrest.pipeline import (
     ClientRequest)
 
 from msrest import ServiceClient, Configuration
-from msrest.exceptions import TokenExpiredError, ClientRequestException
+from msrest.exceptions import TokenExpiredError, ClientRequestError
 
 
 class TestRuntime(unittest.TestCase):
@@ -111,7 +111,7 @@ class TestRuntime(unittest.TestCase):
         self.assertEqual(response, "test")
 
         mock_requests.return_value.request.side_effect = requests.RequestException
-        with self.assertRaises(ClientRequestException):
+        with self.assertRaises(ClientRequestError):
             client.send(request)
 
     def test_request_proxy(self):
@@ -292,7 +292,7 @@ class TestRedirect(unittest.TestCase):
                         httpretty.Response(body="", status=307, method='GET', location='/http/redirect1'),
                         ])
 
-        with self.assertRaises(ClientRequestException, msg="Should exceed maximum redirects"):
+        with self.assertRaises(ClientRequestError, msg="Should exceed maximum redirects"):
             response = self.client.send(request)
 
 
@@ -354,7 +354,7 @@ class TestRuntimeRetry(unittest.TestCase):
                                 httpretty.Response(body="retry response", status=502),
                                 ])
 
-        with self.assertRaises(ClientRequestException, msg="Max retries reached"):
+        with self.assertRaises(ClientRequestError, msg="Max retries reached"):
             response = self.client.send(self.request)
         
     @httpretty.activate
