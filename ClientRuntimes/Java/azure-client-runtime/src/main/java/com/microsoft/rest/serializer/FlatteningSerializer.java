@@ -48,7 +48,7 @@ public class FlatteningSerializer<T> extends StdSerializer<T> implements Resolva
             @Override
             public JsonSerializer<?> modifySerializer(SerializationConfig config, BeanDescription beanDesc, JsonSerializer<?> serializer) {
                 if (BaseResource.class.isAssignableFrom(beanDesc.getBeanClass()) && BaseResource.class != beanDesc.getBeanClass())
-                    return new FlatteningSerializer<>(BaseResource.class, serializer);
+                    return new FlatteningSerializer<>(beanDesc.getBeanClass(), serializer);
                 return serializer;
             }
         });
