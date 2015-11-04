@@ -25,7 +25,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="runtime\msrestazure\aad.py">
+    <Compile Include="runtime\msrestazure\azure_active_directory.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="runtime\msrestazure\azure_configuration.py">
