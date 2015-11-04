@@ -22,7 +22,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         private const string ClientRuntimePackage = "ms-rest-azure version 1.0.0";
         public const string LongRunningExtension = "x-ms-long-running-operation";
 
-        // page extensions class dictionary.
+        // List of models with paging extensions.
         private IList<PageTemplateModel> pageModels;
 
         public AzureNodeJSCodeGenerator(Settings settings)
@@ -78,7 +78,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             NormalizeApiVersion(serviceClient);
             NormalizeCredentials(serviceClient);
-            NormalizePaginatedMethods(serviceClient, pageModels);
+            NormalizePaginatedMethods(serviceClient);
             ExtendAllResourcesToBaseResource(serviceClient);
         }
 
@@ -151,15 +151,12 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         /// Changes paginated method signatures to return Page type.
         /// </summary>
         /// <param name="serviceClient"></param>
-        /// <param name="pageModels"></param>
-        public virtual void NormalizePaginatedMethods(ServiceClient serviceClient, IList<PageTemplateModel> pageModels)
+        public virtual void NormalizePaginatedMethods(ServiceClient serviceClient)
         {
             if (serviceClient == null)
             {
                 throw new ArgumentNullException("serviceClient");
             }
-
-            var convertedTypes = new Dictionary<IType, CompositeType>();
 
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension)))
             {
