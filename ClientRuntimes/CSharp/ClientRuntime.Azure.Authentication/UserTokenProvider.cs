@@ -261,33 +261,27 @@ namespace Microsoft.Rest.Azure.Authentication
         public static async Task<ServiceClientCredentials> LoginWithPromptAsync(string domain, ActiveDirectoryClientSettings clientSettings, 
             ActiveDirectoryServiceSettings serviceSettings, UserIdentifier userId, TokenCache cache)
         {
-            var authenticationContext = GetAuthenticationContext(domain, serviceSettings, cache,
-                clientSettings.OwnerWindow);
-            TaskScheduler scheduler = TaskScheduler.FromCurrentSynchronizationContext();
-            var task = new Task<AuthenticationResult>(() =>
+            var authenticationContext = GetAuthenticationContext(domain, serviceSettings, cache);
+
+            AuthenticationResult result = null;
+            try 
             {
-                try
-                {
-                    var result = authenticationContext.AcquireToken(
-                        serviceSettings.TokenAudience.ToString(),
-                        clientSettings.ClientId,
-                        clientSettings.ClientRedirectUri,
-                        clientSettings.PromptBehavior,
-                        userId,
-                        clientSettings.AdditionalQueryParameters);
-                    return result;
-                }
-                catch (Exception e)
-                {
-                    throw new AuthenticationException(
-                        string.Format(CultureInfo.CurrentCulture, Resources.ErrorAcquiringToken,
-                            e.Message), e);
-                }
-            });
-            
-            task.Start(scheduler);
-            var authResult = await task.ConfigureAwait(false);
-            var newUserId = new UserIdentifier(authResult.UserInfo.DisplayableId,
+                result = await authenticationContext.AcquireTokenAsync(
+                     serviceSettings.TokenAudience.ToString(),
+                     clientSettings.ClientId,
+                     clientSettings.ClientRedirectUri,
+                     new PlatformParameters(clientSettings.PromptBehavior, clientSettings.OwnerWindow),
+                     userId,
+                     clientSettings.AdditionalQueryParameters);
+            }
+            catch (AdalException e)
+            {
+                throw new AuthenticationException(
+                    string.Format(CultureInfo.CurrentCulture, Resources.ErrorAcquiringToken,
+                        e.Message), e);
+            }
+
+            var newUserId = new UserIdentifier(result.UserInfo.DisplayableId,
                 UserIdentifierType.RequiredDisplayableId);
             return new TokenCredentials(new UserTokenProvider(authenticationContext, clientSettings.ClientId,
                 serviceSettings.TokenAudience, newUserId));
@@ -352,7 +346,7 @@ namespace Microsoft.Rest.Azure.Authentication
             ActiveDirectoryServiceSettings serviceSettings, TokenCache cache)
         {
             var credentials = new UserCredential(username, password);
-            var authenticationContext = GetAuthenticationContext(domain, serviceSettings, cache, null);
+            var authenticationContext = GetAuthenticationContext(domain, serviceSettings, cache);
             try
             {
                 await authenticationContext.AcquireTokenAsync(serviceSettings.TokenAudience.ToString(),
@@ -362,6 +356,10 @@ namespace Microsoft.Rest.Azure.Authentication
                         serviceSettings.TokenAudience, new UserIdentifier(username, UserIdentifierType.RequiredDisplayableId)));
             }
             catch (AdalException ex)
+            {
+                throw new AuthenticationException(Resources.ErrorAcquiringToken, ex);
+            }
+            catch(FormatException ex)
             {
                 throw new AuthenticationException(Resources.ErrorAcquiringToken, ex);
             }
@@ -428,7 +426,7 @@ namespace Microsoft.Rest.Azure.Authentication
             ActiveDirectoryServiceSettings serviceSettings, TokenCache cache)
         {
             var userId = new UserIdentifier(username, UserIdentifierType.RequiredDisplayableId);
-            var authenticationContext = GetAuthenticationContext(domain, serviceSettings, cache, null);
+            var authenticationContext = GetAuthenticationContext(domain, serviceSettings, cache);
             try
             {
                 await authenticationContext.AcquireTokenSilentAsync(serviceSettings.TokenAudience.ToString(),
@@ -462,18 +460,13 @@ namespace Microsoft.Rest.Azure.Authentication
             }
         }
 
-        private static AuthenticationContext GetAuthenticationContext(string domain, ActiveDirectoryServiceSettings serviceSettings, TokenCache cache, object ownerWindow)
+        private static AuthenticationContext GetAuthenticationContext(string domain, ActiveDirectoryServiceSettings serviceSettings, TokenCache cache)
         {
             var context = (cache == null
                 ? new AuthenticationContext(serviceSettings.AuthenticationEndpoint + domain,
                     serviceSettings.ValidateAuthority)
                 : new AuthenticationContext(serviceSettings.AuthenticationEndpoint + domain,
                     serviceSettings.ValidateAuthority, cache));
-            if (ownerWindow != null)
-            {
-                context.OwnerWindow = ownerWindow;
-            }
-
             return context;
         }
     }

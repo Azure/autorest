@@ -9,9 +9,9 @@ namespace Microsoft.Rest.Azure.Authentication
     {
         private Func<string, Task<ClientAssertionCertificate>> _assertionProvider;
 
-        public CertificateAuthenticationProvider(X509Certificate2 certificate)
+        public CertificateAuthenticationProvider(byte[] certificate, string password)
         {
-            this._assertionProvider = (s) => Task.FromResult(new ClientAssertionCertificate(s, certificate));
+            this._assertionProvider = (s) => Task.FromResult(new ClientAssertionCertificate(s, certificate, password));
         }
 
         /// <summary>
