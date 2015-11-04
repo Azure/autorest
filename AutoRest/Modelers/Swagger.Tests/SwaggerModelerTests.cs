@@ -58,8 +58,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("The product documentation.", clientModel.ModelTypes[0].Documentation);
             Assert.Equal("product_id", clientModel.ModelTypes[0].Properties[0].Name);
             Assert.Equal("product_id", clientModel.ModelTypes[0].Properties[0].SerializedName);
-            Assert.Null(clientModel.Methods[1].ReturnType);
-            Assert.Null(clientModel.Methods[1].Responses[HttpStatusCode.NoContent]);
+            Assert.Null(clientModel.Methods[1].ReturnType.Body);
+            Assert.Null(clientModel.Methods[1].Responses[HttpStatusCode.NoContent].Body);
             Assert.Equal(3, clientModel.Methods[1].Parameters.Count);
             Assert.Equal("subscriptionId", clientModel.Methods[1].Parameters[0].Name);
             Assert.Null(clientModel.Methods[1].Parameters[0].ClientProperty);
@@ -209,7 +209,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("DeleteBlob", clientModel.Methods[4].Name);
             Assert.Equal(PrimaryType.Object, clientModel.Methods[4].ReturnType.Body);
             Assert.Equal(PrimaryType.Object, clientModel.Methods[4].Responses[HttpStatusCode.OK].Body);
-            Assert.Null(clientModel.Methods[4].Responses[HttpStatusCode.BadRequest]);
+            Assert.Null(clientModel.Methods[4].Responses[HttpStatusCode.BadRequest].Body);
         }
 
         [Fact]
@@ -237,7 +237,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("VirtualMachineGetRemoteDesktopFileResponse", clientModel.Methods[6].ReturnType.ToString());
             Assert.Equal("VirtualMachineGetRemoteDesktopFileResponse",
                 clientModel.Methods[6].Responses[HttpStatusCode.OK].ToString());
-            Assert.Null(clientModel.Methods[6].Responses[HttpStatusCode.NoContent]);
+            Assert.Null(clientModel.Methods[6].Responses[HttpStatusCode.NoContent].Body);
         }
 
         [Fact]
@@ -480,23 +480,20 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var clientModel = modeler.Build();
 
             Assert.NotNull(clientModel);
-            Assert.Equal(4, clientModel.Methods[0].Parameters.Count);
-            Assert.Equal("String subscriptionId", clientModel.Methods[0].Parameters[0].ToString());
-            Assert.Equal("String resourceGroupName", clientModel.Methods[0].Parameters[1].ToString());
-            Assert.Equal("String apiVersion", clientModel.Methods[0].Parameters[2].ToString());
-            Assert.Equal("MaxProduct max_product", clientModel.Methods[0].Parameters[3].ToString());
-            Assert.Equal(6, clientModel.Methods[1].Parameters.Count);
-            Assert.Equal("String subscriptionId", clientModel.Methods[1].Parameters[0].ToString());
-            Assert.Equal("String resourceGroupName", clientModel.Methods[1].Parameters[1].ToString());
-            Assert.Equal("String apiVersion", clientModel.Methods[1].Parameters[2].ToString());
-            Assert.Equal("String base_product_id", clientModel.Methods[1].Parameters[3].ToString());
-            Assert.Equal(true, clientModel.Methods[1].Parameters[3].IsRequired);
-            Assert.Equal("String base_product_description", clientModel.Methods[1].Parameters[4].ToString());
-            Assert.Equal(false, clientModel.Methods[1].Parameters[4].IsRequired);
-            Assert.Equal("MaxProduct max_product_reference", clientModel.Methods[1].Parameters[5].ToString());
-            Assert.Equal(false, clientModel.Methods[1].Parameters[5].IsRequired);
-            Assert.Equal(1, clientModel.Methods[1].InputParameterTransformation.Count);
-            Assert.Equal(3, clientModel.Methods[1].InputParameterTransformation[0].ParameterMappings.Count);
+            Assert.Equal(2, clientModel.Methods.Count);
+            Assert.Equal(2, clientModel.Methods[0].Responses.Count);
+            Assert.Equal("ListHeaders", clientModel.Methods[0].Responses[HttpStatusCode.OK].Headers.Name);
+            Assert.Equal(3, ((CompositeType)clientModel.Methods[0].Responses[HttpStatusCode.OK].Headers).Properties.Count);
+            Assert.Equal("ListHeaders", clientModel.Methods[0].Responses[HttpStatusCode.Created].Headers.Name);
+            Assert.Equal(3, ((CompositeType)clientModel.Methods[0].Responses[HttpStatusCode.Created].Headers).Properties.Count);
+            Assert.Equal("ListHeaders", clientModel.Methods[0].ReturnType.Headers.Name);
+            Assert.Equal(3, ((CompositeType)clientModel.Methods[0].ReturnType.Headers).Properties.Count);
+
+            Assert.Equal(1, clientModel.Methods[1].Responses.Count);
+            Assert.Equal("CreateHeaders", clientModel.Methods[1].Responses[HttpStatusCode.OK].Headers.Name);
+            Assert.Equal(3, ((CompositeType)clientModel.Methods[1].Responses[HttpStatusCode.OK].Headers).Properties.Count);
+            Assert.Equal("CreateHeaders", clientModel.Methods[1].ReturnType.Headers.Name);
+            Assert.Equal(3, ((CompositeType)clientModel.Methods[1].ReturnType.Headers).Properties.Count);
         }
     }
 }

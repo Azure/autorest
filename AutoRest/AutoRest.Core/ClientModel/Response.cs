@@ -15,7 +15,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// </summary>
         /// <param name="body">Body type.</param>
         /// <param name="headers">Headers type.</param>
-        public Response(IType body, IType headers)
+        public Response(IType body, IType headers) : this()
         {
             Body = body;
             Headers = headers;
@@ -24,12 +24,12 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the body type.
         /// </summary>
-        public IType Body{ get; }
+        public IType Body{ get; set; }
 
         /// <summary>
         /// Gets or sets the headers type.
         /// </summary>
-        public IType Headers { get; }
+        public IType Headers { get; set; }
 
         /// <summary>
         /// Overrides default Equals method comparing Body and Header properties.

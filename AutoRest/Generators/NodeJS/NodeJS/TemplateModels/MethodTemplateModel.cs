@@ -712,26 +712,26 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 string result = null;
 
-                IType returnBodyType = ReturnType.Body;
-
-                if (returnBodyType is EnumType)
+                if (ReturnType.Body is EnumType)
                 {
+                    var returnBodyType = ReturnType.Body as EnumType;
+
                     string enumValues = "";
-                    for (var i = 0; i < ((EnumType)returnBodyType).Values.Count; i++)
+                    for (var i = 0; i < returnBodyType.Values.Count; i++)
                     {
-                        if (i == ((EnumType)returnBodyType).Values.Count - 1)
+                        if (i == returnBodyType.Values.Count - 1)
                         {
-                            enumValues += ((EnumType)returnBodyType).Values[i].SerializedName;
+                            enumValues += returnBodyType.Values[i].SerializedName;
                         }
                         else
                         {
-                            enumValues += ((EnumType)returnBodyType).Values[i].SerializedName + ", ";
+                            enumValues += returnBodyType.Values[i].SerializedName + ", ";
                         }
                     }
                     result = string.Format(CultureInfo.InvariantCulture,
                         "Possible values for result are - {0}.", enumValues);
                 }
-                else if (returnBodyType is CompositeType)
+                else if (ReturnType.Body is CompositeType)
                 {
                     result = string.Format(CultureInfo.InvariantCulture,
                         "See {{@link {0}}} for more information.", ReturnTypeString);
