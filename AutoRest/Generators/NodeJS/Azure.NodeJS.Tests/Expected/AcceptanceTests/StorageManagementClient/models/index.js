@@ -16,11 +16,11 @@
 
 var msRestAzure = require('ms-rest-azure');
 
-exports.Resource = msRestAzure.Resource;
-exports.SubResource = msRestAzure.SubResource;
+exports.BaseResource = msRestAzure.BaseResource;
 exports.CloudError = msRestAzure.CloudError;
 exports.StorageAccountCheckNameAvailabilityParameters = require('./storageAccountCheckNameAvailabilityParameters');
 exports.CheckNameAvailabilityResult = require('./checkNameAvailabilityResult');
+exports.Resource = require('./resource');
 exports.StorageAccountCreateParameters = require('./storageAccountCreateParameters');
 exports.Endpoints = require('./endpoints');
 exports.Foo = require('./foo');
@@ -28,9 +28,10 @@ exports.Bar = require('./bar');
 exports.CustomDomain = require('./customDomain');
 exports.StorageAccount = require('./storageAccount');
 exports.StorageAccountKeys = require('./storageAccountKeys');
-exports.StorageAccountListResult = require('./storageAccountListResult');
 exports.StorageAccountUpdateParameters = require('./storageAccountUpdateParameters');
 exports.StorageAccountRegenerateKeyParameters = require('./storageAccountRegenerateKeyParameters');
 exports.UsageName = require('./usageName');
 exports.Usage = require('./usage');
 exports.UsageListResult = require('./usageListResult');
+exports.SubResource = require('./subResource');
+exports.StorageAccountListResult = require('./storageAccountListResult');

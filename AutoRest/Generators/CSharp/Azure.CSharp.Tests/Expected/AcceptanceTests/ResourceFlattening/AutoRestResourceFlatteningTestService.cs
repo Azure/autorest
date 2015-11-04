@@ -262,16 +262,16 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 }
             }
 
+            // Serialize Request
+            string requestContent = JsonConvert.SerializeObject(resourceArray, this.SerializationSettings);
+            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
+            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
             if (this.Credentials != null)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
             }
-            // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(resourceArray, this.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
             if (shouldTrace)
             {
@@ -488,16 +488,16 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 }
             }
 
+            // Serialize Request
+            string requestContent = JsonConvert.SerializeObject(resourceDictionary, this.SerializationSettings);
+            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
+            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
             if (this.Credentials != null)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
             }
-            // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(resourceDictionary, this.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
             if (shouldTrace)
             {
@@ -714,16 +714,16 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 }
             }
 
+            // Serialize Request
+            string requestContent = JsonConvert.SerializeObject(resourceComplexObject, this.SerializationSettings);
+            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
+            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
             if (this.Credentials != null)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 await this.Credentials.ProcessHttpRequestAsync(httpRequest, cancellationToken).ConfigureAwait(false);
             }
-            // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(resourceComplexObject, this.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
             if (shouldTrace)
             {
@@ -845,12 +845,11 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.DeserializationSettings);
+                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                 if (errorBody != null)
                 {
-                    ex = new CloudException(errorBody.Message);
                     ex.Body = errorBody;
                 }
                 ex.Request = httpRequest;

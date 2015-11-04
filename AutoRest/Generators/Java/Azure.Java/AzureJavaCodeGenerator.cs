@@ -10,6 +10,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Java.Templates;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Generator.Java.Azure.Templates;
+using System.Collections.Generic;
 
 namespace Microsoft.Rest.Generator.Java.Azure
 {
@@ -19,10 +20,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
         private const string ClientRuntimePackage = "com.microsoft.rest:azure-client-runtime:0.0.1-SNAPSHOT";
 
+        // page extensions class dictionary.
+        private IDictionary<KeyValuePair<string, string>, string> pageClasses;
+
         public AzureJavaCodeGenerator(Settings settings) : base(settings)
         {
             _namer = new AzureJavaCodeNamer();
             IsSingleFileGenerationSupported = true;
+            pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
         }
 
         public override string Name
@@ -66,7 +71,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
-            _namer.NormalizePaginatedMethods(serviceClient);
+            _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
             ExtendAllResourcesToBaseResource(serviceClient);
         }
 
@@ -149,6 +154,16 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     Model = new EnumTemplateModel(enumType),
                 };
                 await Write(enumTemplate, Path.Combine("models", enumTemplate.Model.Name.ToPascalCase() + ".java"));
+            }
+
+            // Page class
+            foreach (var pageClass in pageClasses)
+            {
+                var pageTemplate = new PageTemplate
+                {
+                    Model = new PageTemplateModel(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
+                };
+                await Write(pageTemplate, Path.Combine("models", pageTemplate.Model.TypeDefinitionName + ".java"));
             }
         }
     }
