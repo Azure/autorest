@@ -22,7 +22,6 @@
 #
 #--------------------------------------------------------------------------
 
-
 from ..msrest.serialization import Deserializer
 from threading import Thread, Event
 import time
@@ -93,13 +92,13 @@ class AzureOperationPoller(object):
     def add_done_callback(func):
 
         if self._done.is_set():
-            raise Exception("Process is complete.")
+            raise ValueError("Process is complete.")
         
         self._callbacks.append(func)
 
     def remove_done_callback(func):
 
         if self._done.is_set():
-            raise Exception("Process is complete")
+            raise ValueError("Process is complete.")
         
         self._callbacks = [c for c in self._callbacks if c != func]
