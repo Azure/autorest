@@ -17,6 +17,7 @@ public final class AzureJacksonHelper extends JacksonHelper {
     @Override
     public ObjectMapper getObjectMapper() {
         return super.getObjectMapper()
-                .registerModule(FlatteningDeserializer.getModule());
+                .registerModule(FlatteningDeserializer.getModule())
+                .registerModule(FlatteningSerializer.getModule());
     }
 }
