@@ -2,7 +2,7 @@
 @using Microsoft.Rest.Generator.NodeJS.Templates
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.ServiceClientTemplateModel>
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.NodeJS.AzureServiceClientTemplateModel>
 /*
 @Header(" * ")
  */
@@ -18,6 +18,10 @@ var msRestAzure = require('ms-rest-azure');
 exports.BaseResource = msRestAzure.BaseResource;
 exports.CloudError = msRestAzure.CloudError;
 @foreach (var model in Model.OrderedModelTemplateModels)
+{
+@:exports.@model.Name = require('./@model.Name.ToCamelCase()');
+}
+@foreach (var model in Model.PageTemplateModels)
 {
 @:exports.@model.Name = require('./@model.Name.ToCamelCase()');
 }
