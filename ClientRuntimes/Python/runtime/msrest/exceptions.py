@@ -59,10 +59,6 @@ class DeserializationError(ClientException):
     pass
 
 
-class InvalidOperationError(ClientException):
-    pass
-
-
 class ResponseStatusError(ClientException):
     pass
 
