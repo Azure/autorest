@@ -126,7 +126,7 @@ namespace Microsoft.Rest.Generator
             method.Group = GetMethodGroupName(method.Group);
             method.ReturnType = NormalizeTypeReference(method.ReturnType);
             method.DefaultResponse = NormalizeTypeReference(method.DefaultResponse);
-            var normalizedResponses = new Dictionary<HttpStatusCode, Tuple<IType, IType>>();
+            var normalizedResponses = new Dictionary<HttpStatusCode, Response>();
             foreach (var statusCode in method.Responses.Keys)
             {
                 normalizedResponses[statusCode] = NormalizeTypeReference(method.Responses[statusCode]);
@@ -312,14 +312,10 @@ namespace Microsoft.Rest.Generator
         /// </summary>
         /// <param name="typePair"></param>
         /// <returns></returns>
-        public virtual Tuple<IType, IType> NormalizeTypeReference(Tuple<IType, IType> typePair)
+        public virtual Response NormalizeTypeReference(Response typePair)
         {
-            if (typePair != null)
-            {
-                typePair = new Tuple<IType, IType>(NormalizeTypeReference(typePair.Item1),
-                    NormalizeTypeReference(typePair.Item2));
-            }
-            return typePair;
+            return new Response(NormalizeTypeReference(typePair.Body),
+                                NormalizeTypeReference(typePair.Headers));
         }
 
         /// <summary>

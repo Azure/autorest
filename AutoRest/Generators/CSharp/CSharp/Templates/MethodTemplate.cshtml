@@ -142,16 +142,16 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     if (@(Model.FailureStatusCodePredicate))
     {
         var ex = new @(Model.OperationExceptionTypeString)(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-    @if (Model.DefaultResponse != null)
+    @if (Model.DefaultResponse.Body != null)
     {
-        if (Model.DefaultResponse != null && Model.DefaultResponse.Item1 == PrimaryType.Stream)
+        if (Model.DefaultResponse.Body == PrimaryType.Stream)
         {
-        @:@(Model.DefaultResponse.Item1.Name) errorBody = await httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+        @:@(Model.DefaultResponse.Body.Name) errorBody = await httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
         else
         {
         @:string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-        @:@(Model.DefaultResponse.Item1.Name) errorBody = JsonConvert.DeserializeObject<@(Model.DefaultResponse.Item1.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Item1)));
+        @:@(Model.DefaultResponse.Body.Name) errorBody = JsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
         }
         @:if (errorBody != null)
         @:{
@@ -175,34 +175,34 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     result.Response = httpResponse;
     @(Model.InitializeResponseBody)
 
-    @foreach (var responsePair in Model.Responses.Where(r => r.Value != null && r.Value.Item1 != null))
+    @foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null))
     {
     <text>
     // Deserialize Response
     if ((int)statusCode == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key))
     {
-        @if (responsePair.Value.Item1 == PrimaryType.Stream)
+        @if (responsePair.Value.Body == PrimaryType.Stream)
         {
         @:result.Body = await httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
         else
         {
         @:string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-        @:result.Body = JsonConvert.DeserializeObject<@(responsePair.Value.Item1.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Item1)));
+        @:result.Body = JsonConvert.DeserializeObject<@(responsePair.Value.Body.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
         }
     }
     </text>
     }
-    @if (Model.ReturnType != null && Model.DefaultResponse != null && Model.DefaultResponse.Item1 != null && !Model.Responses.Any())
+    @if (Model.ReturnType.Body != null && Model.DefaultResponse.Body != null && !Model.Responses.Any())
     {
-        if (Model.DefaultResponse.Item1 == PrimaryType.Stream)
+        if (Model.DefaultResponse.Body == PrimaryType.Stream)
         {
             @:result.Body = await httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
         else
         {
             @:string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            @:result.Body = JsonConvert.DeserializeObject<@(Model.DefaultResponse.Item1.Name)>(defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Item1)));
+            @:result.Body = JsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
         }
     }
 

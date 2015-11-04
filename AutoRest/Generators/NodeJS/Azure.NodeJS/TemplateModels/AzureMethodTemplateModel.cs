@@ -50,7 +50,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             {
                 var sb = new IndentedStringBuilder();
                 if (this.HttpMethod == HttpMethod.Head &&
-                    this.ReturnType != null)
+                    this.ReturnType.Body != null)
                 {
                     sb.AppendLine("result = (statusCode === 204);");
                 }

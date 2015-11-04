@@ -84,9 +84,9 @@ namespace Microsoft.Rest.Generator.CSharp
                 var ipageTypeFormat = "IPage<{0}>";
 
                 foreach (var responseStatus in method.Responses
-                    .Where(r => r.Value != null && r.Value.Item1 is CompositeType).Select(s => s.Key).ToArray())
+                    .Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
                 {
-                    var compositType = (CompositeType) method.Responses[responseStatus].Item1;
+                    var compositType = (CompositeType) method.Responses[responseStatus].Body;
                     var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
                     // if the type is a wrapper over page-able response
@@ -102,15 +102,15 @@ namespace Microsoft.Rest.Generator.CSharp
                         pagedResult.Extensions[AzureCodeGenerator.ExternalExtension] = true;
                         pagedResult.Extensions[AzureCodeGenerator.PageableExtension] = ipagableTypeName;
 
-                        convertedTypes[method.Responses[responseStatus].Item1] = pagedResult;
-                        method.Responses[responseStatus] = new Tuple<IType, IType>(pagedResult, method.Responses[responseStatus].Item2);
+                        convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
+                        method.Responses[responseStatus] = new Response(pagedResult, method.Responses[responseStatus].Headers);
                     }
                 }
 
-                if (convertedTypes.ContainsKey(method.ReturnType.Item1))
+                if (convertedTypes.ContainsKey(method.ReturnType.Body))
                 {
-                    method.ReturnType = new Tuple<IType, IType>(convertedTypes[method.ReturnType.Item1], 
-                        method.ReturnType.Item2);
+                    method.ReturnType = new Response(convertedTypes[method.ReturnType.Body], 
+                        method.ReturnType.Headers);
                 }
             }
 

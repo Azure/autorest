@@ -78,7 +78,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
                 Type = PrimaryType.Boolean,
                 IsRequired = true
             });
-            getPet.ReturnType = new System.Tuple<IType, IType>(dog, null);
+            getPet.ReturnType = new Response(dog, null);
 
             var codeGen = new SampleAzureCodeGenerator(new Settings());
             codeGen.NormalizeClientModel(serviceClient);
@@ -88,8 +88,8 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             Assert.True(serviceClient.ModelTypes[0].Properties.Any(p => p.Name == "id"));
             Assert.True(serviceClient.ModelTypes[0].Properties.Any(p => p.Name == "name"));
             Assert.Equal("pedigree", serviceClient.ModelTypes[1].Properties[0].Name);
-            Assert.Equal("dog", serviceClient.Methods[0].ReturnType.Item1.Name);
-            Assert.Equal(serviceClient.ModelTypes[1], serviceClient.Methods[0].ReturnType.Item1);
+            Assert.Equal("dog", serviceClient.Methods[0].ReturnType.Body.Name);
+            Assert.Equal(serviceClient.ModelTypes[1], serviceClient.Methods[0].ReturnType.Body);
         }
 
         [Fact]
@@ -170,7 +170,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
                 Type = PrimaryType.Boolean,
                 IsRequired = true
             });
-            getPet.ReturnType = new System.Tuple<IType, IType>(dog, null);
+            getPet.ReturnType = new Response(dog, null);
 
             var codeGen = new SampleAzureCodeGenerator(new Settings());
             codeGen.NormalizeClientModel(serviceClient);
@@ -180,8 +180,8 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             Assert.True(serviceClient.ModelTypes[1].Properties.Any(p => p.Name == "dogName"));
             Assert.True(serviceClient.ModelTypes[1].Properties.Any(p => p.Name == "dogId"));
             Assert.True(serviceClient.ModelTypes[1].Properties.Any(p => p.Name == "pedigree"));
-            Assert.Equal("dog", serviceClient.Methods[0].ReturnType.Item1.Name);
-            Assert.Equal(serviceClient.ModelTypes[1], serviceClient.Methods[0].ReturnType.Item1);
+            Assert.Equal("dog", serviceClient.Methods[0].ReturnType.Body.Name);
+            Assert.Equal(serviceClient.ModelTypes[1], serviceClient.Methods[0].ReturnType.Body);
         }
 
         [Fact]
@@ -332,7 +332,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
                 Type = PrimaryType.Boolean,
                 IsRequired = true
             });
-            getPet.ReturnType = new System.Tuple<IType, IType>(dog, null);
+            getPet.ReturnType = new Response(dog, null);
 
             var codeGen = new SampleAzureCodeGenerator(new Settings());
             codeGen.NormalizeClientModel(serviceClient);

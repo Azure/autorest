@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -10,7 +11,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
     /// Describes a single response from an API Operation.
     /// </summary>
     [Serializable]
-    public class Response
+    public class OperationResponse
     {
         public string Description { get; set; }
 

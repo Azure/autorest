@@ -166,26 +166,26 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
-        /// Get the return type name for the underlyign interface method
+        /// Get the return type name for the underlying interface method
         /// </summary>
         public virtual string OperationResponseReturnTypeString
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null && ReturnType.Headers != null)
                 {
-                    if (ReturnType.Item1 != null && ReturnType.Item2 != null)
-                    {
-                        return string.Format(CultureInfo.InvariantCulture,
-                            "HttpOperationResponse<{0},{1}>", ReturnType.Item1.Name, ReturnType.Item2.Name);                        
-                    }
-                    else if (ReturnType.Item1 != null)
-                    {
-                        return string.Format(CultureInfo.InvariantCulture,
-                            "HttpOperationResponse<{0}>", ReturnType.Item1.Name);
-                    }
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "HttpOperationResponse<{0},{1}>", ReturnType.Body.Name, ReturnType.Headers.Name);
                 }
-                return "HttpOperationResponse";
+                else if (ReturnType.Body != null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "HttpOperationResponse<{0}>", ReturnType.Body.Name);
+                }
+                else
+                {
+                    return "HttpOperationResponse";
+                }
             }
         }
 
@@ -196,20 +196,20 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null && ReturnType.Headers != null)
                 {
-                    if (ReturnType.Item1 != null && ReturnType.Item2 != null)
-                    {
-                        return string.Format(CultureInfo.InvariantCulture,
-                            "Task<{0},{1}>", ReturnType.Item1.Name, ReturnType.Item2.Name);
-                    }
-                    else if (ReturnType.Item1 != null)
-                    {
-                        return string.Format(CultureInfo.InvariantCulture,
-                            "Task<{0}>", ReturnType.Item1.Name);
-                    }
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "Task<{0},{1}>", ReturnType.Body.Name, ReturnType.Headers.Name);
                 }
-                return "Task";
+                else if (ReturnType.Body != null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "Task<{0}>", ReturnType.Body.Name);
+                }
+                else
+                {
+                    return "Task";
+                }
             }
         }
 
@@ -264,11 +264,14 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                if (ReturnType != null && ReturnType.Item1 != null)
+                if (ReturnType.Body != null)
                 {
-                    return ReturnType.Item1.Name;
+                    return ReturnType.Body.Name;
                 }
-                return "void";
+                else
+                {
+                    return "void";
+                }
             }
         }
 

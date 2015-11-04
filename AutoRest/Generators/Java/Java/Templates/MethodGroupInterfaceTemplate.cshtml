@@ -58,7 +58,7 @@ public interface @Model.MethodGroupType {
     {
     @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
     }
-    if (method.ReturnType != null)
+    if (method.ReturnType.Body != null)
     {
     @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object if successful.
     }

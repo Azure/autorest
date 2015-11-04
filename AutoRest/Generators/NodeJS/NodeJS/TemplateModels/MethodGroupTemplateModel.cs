@@ -46,7 +46,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         {
             get {
                 return this.Methods.Any(m => m.Parameters.FirstOrDefault(p => p.Type == PrimaryType.Stream) != null ||
-                        (m.ReturnType != null && m.ReturnType.Item1 == PrimaryType.Stream)); }
+                        m.ReturnType.Body == PrimaryType.Stream); }
         }
     }
 }

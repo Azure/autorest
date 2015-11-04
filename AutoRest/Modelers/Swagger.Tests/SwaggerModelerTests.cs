@@ -207,8 +207,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var clientModel = modeler.Build();
 
             Assert.Equal("DeleteBlob", clientModel.Methods[4].Name);
-            Assert.Equal(PrimaryType.Object, clientModel.Methods[4].ReturnType.Item1);
-            Assert.Equal(PrimaryType.Object, clientModel.Methods[4].Responses[HttpStatusCode.OK].Item1);
+            Assert.Equal(PrimaryType.Object, clientModel.Methods[4].ReturnType.Body);
+            Assert.Equal(PrimaryType.Object, clientModel.Methods[4].Responses[HttpStatusCode.OK].Body);
             Assert.Null(clientModel.Methods[4].Responses[HttpStatusCode.BadRequest]);
         }
 

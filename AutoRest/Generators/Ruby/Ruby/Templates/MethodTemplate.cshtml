@@ -96,7 +96,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
     status_code = http_response.status
     response_content = http_response.body
     unless (@Model.SuccessStatusCodePredicate)
-      @if (Model.DefaultResponse != null)
+      @if (Model.DefaultResponse.Body != null)
       {
       @:error_model = JSON.load(response_content)
       @:fail @(Model.OperationExceptionTypeString).new(connection, http_response, error_model)
@@ -112,13 +112,13 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
     result = @(Model.OperationResponseReturnTypeString).new(connection, http_response)
     @Model.InitializeResponseBody
 
-    @foreach (var responsePair in Model.Responses.Where(r => r.Value != null && r.Value.Item1 != null && r.Value.Item1.IsSerializable()))
+    @foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null && r.Value.Body.IsSerializable()))
     {
     <text>
     # Deserialize Response
     if status_code == @Model.GetStatusCodeReference(responsePair.Key)
       begin
-        @(Model.CreateDeserializationString("response_content", responsePair.Value.Item1, "result.body"))
+        @(Model.CreateDeserializationString("response_content", responsePair.Value.Body, "result.body"))
       rescue Exception => e
         fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
       end
@@ -126,11 +126,11 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
     </text>
     }
 
-    @if (Model.ReturnType != null && Model.DefaultResponse != null && Model.DefaultResponse.Item1 != null && !Model.Responses.Any() && Model.DefaultResponse.Item1.IsSerializable())
+    @if (Model.ReturnType.Body != null && Model.DefaultResponse.Body != null && !Model.Responses.Any() && Model.DefaultResponse.Body.IsSerializable())
     {
     <text>
     begin
-      @(Model.CreateDeserializationString("response_content", Model.ReturnType.Item1, "result.body"))
+      @(Model.CreateDeserializationString("response_content", Model.ReturnType.Body, "result.body"))
     rescue Exception => e
       fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, response_content)
     end

@@ -149,7 +149,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         public string MethodParameterDeclarationWithCallbackTS(bool includeOptions)
         {
             //var parameters = MethodParameterDeclarationTS(includeOptions);
-            var returnTypeTSString = ReturnType == null || ReturnType.Item1 == null ? "void" : ReturnType.Item1.TSType(false);
+            var returnTypeTSString = ReturnType.Body == null ? "void" : ReturnType.Body.TSType(false);
 
             StringBuilder parameters = new StringBuilder();
             parameters.Append(MethodParameterDeclarationTS(includeOptions));
@@ -246,11 +246,14 @@ namespace Microsoft.Rest.Generator.NodeJS
         {
             get
             {
-                if (ReturnType != null && ReturnType.Item1 != null)
+                if (ReturnType.Body != null)
                 {
-                    return ReturnType.Item1.Name;
+                    return ReturnType.Body.Name;
                 }
-                return "null";
+                else
+                {
+                    return "null";
+                }
             }
         }
 
@@ -709,7 +712,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 string result = null;
 
-                IType returnBodyType = ReturnType == null ? null : ReturnType.Item1;
+                IType returnBodyType = ReturnType.Body;
 
                 if (returnBodyType is EnumType)
                 {
@@ -744,7 +747,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 string typeName = "object";
-                IType returnBodyType = ReturnType == null ? null : ReturnType.Item1;
+                IType returnBodyType = ReturnType.Body;
 
                 if (returnBodyType == null)
                 {

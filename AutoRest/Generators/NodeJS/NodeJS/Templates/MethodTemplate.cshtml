@@ -149,7 +149,7 @@
   </text>
   }
 
-  @if (Model.Responses.Any(r => r.Value != null && r.Value.Item1 == PrimaryType.Stream))
+  @if (Model.Responses.Any(r => r.Value.Body == PrimaryType.Stream))
   {
 @:  @Include(new MethodStreamPipelineTemplate(), Model)
   }

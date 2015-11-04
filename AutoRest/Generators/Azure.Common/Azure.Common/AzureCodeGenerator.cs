@@ -81,20 +81,13 @@ namespace Microsoft.Rest.Generator.Azure
             }
 
             foreach (var method in serviceClient.Methods.Where(m => m.HttpMethod == HttpMethod.Head)
-                                                             .Where(m => m.ReturnType == null))
+                                                              .Where(m => m.ReturnType.Body == null))
             {
                 if (method.Responses.Count == 2 &&
                     method.Responses.ContainsKey(HttpStatusCode.NoContent) &&
                     method.Responses.ContainsKey(HttpStatusCode.NotFound))
                 {
-                    if (method.ReturnType != null)
-                    {
-                        method.ReturnType = new Tuple<IType, IType>(PrimaryType.Boolean, method.ReturnType.Item2);
-                    }
-                    else
-                    {
-                        method.ReturnType = new Tuple<IType, IType>(PrimaryType.Boolean, null);
-                    }
+                    method.ReturnType = new Response(PrimaryType.Boolean, method.ReturnType.Headers);
                 }
                 else
                 {
@@ -132,10 +125,10 @@ namespace Microsoft.Rest.Generator.Azure
             // Set default response if not defined explicitly
             foreach (var method in serviceClient.Methods)
             {
-                if (method.DefaultResponse == null && method.ReturnType != null)
+                if (method.DefaultResponse.Body == null && method.ReturnType.Body != null)
                 {
-                    method.DefaultResponse = new Tuple<IType, IType>(cloudError, method.ReturnType.Item2);
-                }
+                    method.DefaultResponse = new Response(cloudError, method.ReturnType.Headers);
+                }                
             }
         }
 
@@ -478,7 +471,7 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 var typeToDelete = serviceClient.ModelTypes.First(t => t.Name == typeName);
 
-                var isUsedInResponses = serviceClient.Methods.Any(m => m.Responses.Any(r => r.Value != null && r.Value.Item2 == typeToDelete));
+                var isUsedInResponses = serviceClient.Methods.Any(m => m.Responses.Any(r => r.Value.Body == typeToDelete));
                 var isUsedInParameters = serviceClient.Methods.Any(m => m.Parameters.Any(p => p.Type == typeToDelete));
                 var isBaseType = serviceClient.ModelTypes.Any(t => t.BaseModelType == typeToDelete);
                 var isUsedInProperties = serviceClient.ModelTypes.Any(t => t.Properties
