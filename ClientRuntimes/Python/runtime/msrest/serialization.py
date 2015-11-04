@@ -466,7 +466,6 @@ class Deserializer(object):
         try:
             date_obj = isodate.parse_datetime(attr)
             test_utc = date_obj.utctimetuple()
-            return date_obj
 
         except(ValueError, OverflowError, AttributeError) as err:
             msg = "Cannot deserialize datetime object."

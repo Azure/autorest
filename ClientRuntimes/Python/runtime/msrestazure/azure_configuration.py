@@ -42,7 +42,7 @@ class AzureConfiguration(Configuration):
         super(AzureConfiguration, self).__init__(base_url, filepath)
 
         # Authentication
-        self.auth_endpoint = "//login.windows.net"
+        self.auth_endpoint = "//login.microsoftonline.com"
         self.token_uri = "/oauth2/token"
         self.auth_uri = "/oauth2/authorize"
         self.tenant = "common"
