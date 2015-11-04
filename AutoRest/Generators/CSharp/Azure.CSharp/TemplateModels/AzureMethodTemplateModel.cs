@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Azure.Properties;
@@ -176,7 +177,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 if (this.HttpMethod == HttpMethod.Head &&
                     this.ReturnType != null)
                 {
-                     sb.AppendLine("result.Body = (statusCode == HttpStatusCode.NoContent);");
+                    HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureCodeGenerator.HttpHeadStatusCodeSuccessFunc);
+                    sb.AppendFormat("result.Body = (statusCode == HttpStatusCode.{0});", code.ToString()).AppendLine();
                 }
                 sb.AppendLine("if (httpResponse.Headers.Contains(\"{0}\"))", this.RequestIdString)
                     .AppendLine("{").Indent()

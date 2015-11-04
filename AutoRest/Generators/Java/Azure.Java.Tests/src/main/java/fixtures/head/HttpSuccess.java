@@ -28,6 +28,9 @@ public interface HttpSuccess {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpSuccessService {
+        @HEAD("/http/success/200")
+        Call<Void> head200(@Header("accept-language") String acceptLanguage);
+
         @HEAD("/http/success/204")
         Call<Void> head204(@Header("accept-language") String acceptLanguage);
 
@@ -35,6 +38,22 @@ public interface HttpSuccess {
         Call<Void> head404(@Header("accept-language") String acceptLanguage);
 
     }
+    /**
+     * Return 200 status code if successful
+     *
+     * @throws ServiceException exception thrown from REST call
+     * @return the Boolean object wrapped in ServiceResponse if successful.
+     */
+    ServiceResponse<Boolean> head200() throws ServiceException;
+
+    /**
+     * Return 200 status code if successful
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<Void> head200Async(final ServiceCallback<Boolean> serviceCallback);
+
     /**
      * Return 204 status code if successful
      *

@@ -82,6 +82,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 var client = new AutoRestHeadTestService(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
+                Assert.True(client.HttpSuccess.Head200());
                 Assert.True(client.HttpSuccess.Head204());
                 Assert.False(client.HttpSuccess.Head404());
             }
