@@ -1,11 +1,12 @@
 ﻿
 
-from runtime.msrestazure import AzureServiceClient, AzureConfiguration
+from runtime.msrest import ServiceClient
+from runtime.msrestazure import AzureConfiguration
 from .operations.pool_operations import PoolManager
 from .models import *
 
 
-class BatchClient(AzureServiceClient):
+class BatchClient(ServiceClient):
 
     def __init__(self, credentials, config):
 

@@ -166,7 +166,7 @@ class TestInteractiveCredentials(unittest.TestCase):
             'expires_in':'2',
             'refresh_token':"test"}
 
-        creds.redirect = "my_service.com"
+        creds.redirect = "//my_service.com"
         creds.token_uri = "token_uri"
         creds._check_state.return_value = True
         creds.verify=True

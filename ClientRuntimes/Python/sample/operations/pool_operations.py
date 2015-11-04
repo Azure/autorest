@@ -14,9 +14,9 @@ from runtime.msrest.exceptions import (
     SerializationError,
     DeserializationError,
     TokenExpiredError,
-    ClientRequestException)
+    ClientRequestError)
 
-from runtime.msrestazure.polling import Polled
+from runtime.msrestazure.azure_operation import AzureOperationPoller
 
 from ..batch_exception import BatchStatusError
 
@@ -58,7 +58,7 @@ class PoolManager(object):
         except TokenExpiredError:
             raise # If client defines own exception, raise here
 
-        except ClientRequestException:
+        except ClientRequestError:
             raise # If client defines own exception, raise here
 
     def add(self, pool_parameters, raw=False):
@@ -101,7 +101,7 @@ class PoolManager(object):
             #    request.url = status_link
             #    return self._send(request, accept_status)
 
-            #return Polled(response, get_status)
+            #return AzureOperationPoller(response, get_status)
 
         except (SerializationError, DeserializationError):
             raise #TODO: Wrap in client-specific error?

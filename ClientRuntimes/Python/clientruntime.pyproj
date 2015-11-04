@@ -37,15 +37,6 @@
     <Compile Include="runtime\msrest\paging.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="runtime\msrestazure\azure_resource.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="runtime\msrestazure\azure_service_client.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="runtime\msrestazure\polling.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="runtime\msrestazure\test\unittest_auth.py">
       <SubType>Code</SubType>
     </Compile>

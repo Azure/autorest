@@ -30,6 +30,7 @@ Configuration of ServiceClient and session.
 
 import os
 import tempfile
+import sys
 
 try:
     import configparser
@@ -40,6 +41,7 @@ except ImportError:
     from ConfigParser import NoOptionError
 
 from . import logger
+from .exceptions import raise_with_traceback
 from .pipeline import (
     ClientRetryPolicy,
     ClientRedirectPolicy,
@@ -164,8 +166,9 @@ class Configuration(object):
                 self._config.write(configfile)
 
         except (KeyError, EnvironmentError) as err:
-            raise ValueError(
-                "Supplied config filepath invalid: {0}".format(err))
+
+            raise_with_traceback(
+                ValueError, "Supplied config filepath invalid.")
 
         finally:
             self._clear_config()
@@ -199,8 +202,9 @@ class Configuration(object):
             self._log = logger.setup_logger(self)
 
         except (ValueError, EnvironmentError, NoOptionError) as err:
-            raise ValueError(
-                "Supplied config file incompatible: {0}".format(err))
+
+            raise_with_traceback(
+                ValueError, "Supplied config file incompatible.")
 
         finally:
             self._clear_config()
