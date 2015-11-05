@@ -167,6 +167,8 @@ public class MicrosoftAzureTestUrlImpl extends ServiceClient implements Microsof
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
+        this.apiVersion = "2014-04-01-preview";
+        this.acceptLanguage = "en-US";
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
         this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
