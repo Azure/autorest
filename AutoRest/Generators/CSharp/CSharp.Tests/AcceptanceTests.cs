@@ -1550,7 +1550,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             Assert.ThrowsAsync<System.Net.WebException>(async () => await client.HttpRedirects.Get300WithHttpMessagesAsync());
 #else
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head300WithHttpMessagesAsync());
-            EnsureStatusCode<IList<string>>(HttpStatusCode.OK, () => client.HttpRedirects.Get300WithHttpMessagesAsync());
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get300WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head302WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head301WithHttpMessagesAsync());
 #endif
@@ -1723,6 +1723,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             Assert.Equal(response.Response.StatusCode, expectedStatusCode);
         }
         private void EnsureStatusCode<T>(HttpStatusCode expectedStatusCode, Func<Task<HttpOperationResponse<T>>> operation)
+        {
+            var response = operation().GetAwaiter().GetResult();
+            Assert.Equal(response.Response.StatusCode, expectedStatusCode);
+        }
+        private void EnsureStatusCode<TBody, THeader>(HttpStatusCode expectedStatusCode, Func<Task<HttpOperationResponse<TBody, THeader>>> operation)
         {
             var response = operation().GetAwaiter().GetResult();
             Assert.Equal(response.Response.StatusCode, expectedStatusCode);
