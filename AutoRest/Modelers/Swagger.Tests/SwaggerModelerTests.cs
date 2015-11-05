@@ -467,6 +467,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(false, clientModel.Methods[1].Parameters[5].IsRequired);
             Assert.Equal(1, clientModel.Methods[1].InputParameterTransformation.Count);
             Assert.Equal(3, clientModel.Methods[1].InputParameterTransformation[0].ParameterMappings.Count);
+            Assert.Null(clientModel.Methods[0].ReturnType.Headers);
         }
 
         [Fact]
@@ -482,18 +483,20 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.NotNull(clientModel);
             Assert.Equal(2, clientModel.Methods.Count);
             Assert.Equal(2, clientModel.Methods[0].Responses.Count);
-            Assert.Equal("ListHeaders", clientModel.Methods[0].Responses[HttpStatusCode.OK].Headers.Name);
+            Assert.Equal("list-Headers", clientModel.Methods[0].Responses[HttpStatusCode.OK].Headers.Name);
             Assert.Equal(3, ((CompositeType)clientModel.Methods[0].Responses[HttpStatusCode.OK].Headers).Properties.Count);
-            Assert.Equal("ListHeaders", clientModel.Methods[0].Responses[HttpStatusCode.Created].Headers.Name);
+            Assert.Equal("list-Headers", clientModel.Methods[0].Responses[HttpStatusCode.Created].Headers.Name);
             Assert.Equal(3, ((CompositeType)clientModel.Methods[0].Responses[HttpStatusCode.Created].Headers).Properties.Count);
-            Assert.Equal("ListHeaders", clientModel.Methods[0].ReturnType.Headers.Name);
+            Assert.Equal("list-Headers", clientModel.Methods[0].ReturnType.Headers.Name);
             Assert.Equal(3, ((CompositeType)clientModel.Methods[0].ReturnType.Headers).Properties.Count);
 
             Assert.Equal(1, clientModel.Methods[1].Responses.Count);
-            Assert.Equal("CreateHeaders", clientModel.Methods[1].Responses[HttpStatusCode.OK].Headers.Name);
+            Assert.Equal("create-Headers", clientModel.Methods[1].Responses[HttpStatusCode.OK].Headers.Name);
             Assert.Equal(3, ((CompositeType)clientModel.Methods[1].Responses[HttpStatusCode.OK].Headers).Properties.Count);
-            Assert.Equal("CreateHeaders", clientModel.Methods[1].ReturnType.Headers.Name);
+            Assert.Equal("create-Headers", clientModel.Methods[1].ReturnType.Headers.Name);
             Assert.Equal(3, ((CompositeType)clientModel.Methods[1].ReturnType.Headers).Properties.Count);
+            Assert.True(clientModel.ModelTypes.Any(c => c.Name == "list-Headers"));
+            Assert.True(clientModel.ModelTypes.Any(c => c.Name == "create-Headers"));
         }
     }
 }

@@ -90,11 +90,46 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             // Build header object
-            IType headerType = null;
+            var responseHeaders = new Dictionary<string, Header>();
+            foreach (var response in _operation.Responses.Values)
+            {
+                if (response.Headers != null)
+                {
+                    response.Headers.ForEach( h => responseHeaders[h.Key] = h.Value);
+                }
+            }
 
+            var headerTypeName = string.Format(CultureInfo.InvariantCulture,
+                "{0}-{1}-Headers", methodGroup, methodName).Trim('-');
+            var headerType = new CompositeType
+            {
+                Name = headerTypeName,
+                SerializedName = headerTypeName,
+                Documentation = string.Format(CultureInfo.InvariantCulture, "Defines headers for {0} operation.", methodName)
+            };
+            responseHeaders.ForEach(h =>
+            {
+                var property = new Property
+                {
+                    Name = h.Key,
+                    SerializedName = h.Key,
+                    Type = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key),
+                    Documentation = h.Value.Description
+                };
+                headerType.Properties.Add(property);
+            });
+
+            if (headerType.Properties.Any())
+            {
+                _swaggerModeler.GeneratedTypes[headerTypeName] = headerType;
+            }
+            else
+            {
+                headerType = null;
+            }
             // Response format
             var typesList = new List<Stack<IType>>();
-            _operation.Responses.ForEach(response =>
+            foreach (var response in _operation.Responses)
             {
                 if (string.Equals(response.Key, "default", StringComparison.OrdinalIgnoreCase))
                 {
@@ -116,9 +151,9 @@ namespace Microsoft.Rest.Modeler.Swagger
                             response.Key));
                     }
                 }
-            });
+            }
 
-            method.ReturnType = BuildMethodReturnType(typesList, null);
+            method.ReturnType = BuildMethodReturnType(typesList, headerType);
             if (method.Responses.Count == 0)
             {
                 method.ReturnType = method.DefaultResponse;
