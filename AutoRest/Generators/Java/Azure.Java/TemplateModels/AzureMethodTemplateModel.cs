@@ -120,6 +120,13 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 throw new InvalidOperationException("Invalid long running operation HTTP method " + this.HttpMethod);
             }
         }
+        public override string ServiceResponseBuilderArgs
+        {
+            get
+            {
+                return "new AzureJacksonHelper()";
+            }
+        }
 
         public override List<string> InterfaceImports
         {
@@ -154,6 +161,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
                         .SelectMany(t => t.ImportFrom(ServiceClient.Namespace))
                         .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom(ServiceClient.Namespace).Contains(i)))
                         .ForEach(i => imports.Remove(i));
+                }
+                else
+                {
+                    imports.Add("com.microsoft.rest.serializer.AzureJacksonHelper");
                 }
                 return imports;
             }

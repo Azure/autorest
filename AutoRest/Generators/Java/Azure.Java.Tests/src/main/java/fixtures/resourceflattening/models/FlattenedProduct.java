@@ -11,7 +11,6 @@
 package fixtures.resourceflattening.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.microsoft.rest.BaseResource;
 
 /**

@@ -12,6 +12,7 @@ package fixtures.paging;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.CloudError;
+import com.microsoft.rest.serializer.AzureJacksonHelper;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -71,7 +72,7 @@ public class PagingImpl implements Paging {
     }
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<PageImpl<Product>>()
+        return new ServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonHelper())
                 .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
                 .build(response, retrofit);
@@ -115,7 +116,7 @@ public class PagingImpl implements Paging {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<PageImpl<Product>>()
+        return new ServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonHelper())
                 .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
                 .build(response, retrofit);
@@ -159,7 +160,7 @@ public class PagingImpl implements Paging {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<PageImpl<Product>>()
+        return new ServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonHelper())
                 .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
                 .build(response, retrofit);
@@ -203,7 +204,7 @@ public class PagingImpl implements Paging {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<PageImpl<Product>>()
+        return new ServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonHelper())
                 .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
                 .build(response, retrofit);
@@ -247,7 +248,7 @@ public class PagingImpl implements Paging {
     }
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesFailureDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<PageImpl<Product>>()
+        return new ServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonHelper())
                 .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
                 .build(response, retrofit);
@@ -291,7 +292,7 @@ public class PagingImpl implements Paging {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<PageImpl<Product>>()
+        return new ServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonHelper())
                 .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
                 .build(response, retrofit);
@@ -335,7 +336,7 @@ public class PagingImpl implements Paging {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<PageImpl<Product>>()
+        return new ServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonHelper())
                 .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
                 .build(response, retrofit);
@@ -389,7 +390,7 @@ public class PagingImpl implements Paging {
     }
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<PageImpl<Product>>()
+        return new ServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonHelper())
                 .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
                 .build(response, retrofit);
@@ -443,7 +444,7 @@ public class PagingImpl implements Paging {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<PageImpl<Product>>()
+        return new ServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonHelper())
                 .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
                 .build(response, retrofit);
@@ -497,7 +498,7 @@ public class PagingImpl implements Paging {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<PageImpl<Product>>()
+        return new ServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonHelper())
                 .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
                 .build(response, retrofit);
@@ -551,7 +552,7 @@ public class PagingImpl implements Paging {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<PageImpl<Product>>()
+        return new ServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonHelper())
                 .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
                 .build(response, retrofit);
@@ -605,7 +606,7 @@ public class PagingImpl implements Paging {
     }
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesFailureNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<PageImpl<Product>>()
+        return new ServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonHelper())
                 .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
                 .build(response, retrofit);
@@ -659,7 +660,7 @@ public class PagingImpl implements Paging {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<PageImpl<Product>>()
+        return new ServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonHelper())
                 .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
                 .build(response, retrofit);
@@ -713,7 +714,7 @@ public class PagingImpl implements Paging {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<PageImpl<Product>>()
+        return new ServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonHelper())
                 .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
                 .build(response, retrofit);

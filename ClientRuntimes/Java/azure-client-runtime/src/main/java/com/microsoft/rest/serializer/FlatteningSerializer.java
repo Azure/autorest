@@ -28,6 +28,8 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Custom serializer for deserializing {@link BaseResource} with wrapped properties.
@@ -62,25 +64,15 @@ public class FlatteningSerializer<T> extends StdSerializer<T> implements Resolva
             return;
         }
 
-        ObjectMapper mapper = new AzureJacksonHelper().getObjectMapper();
-        final Class<?> tClass = this.defaultSerializer.handledType();
-        ObjectNode root = new ObjectNode(JsonNodeFactory.instance);
-        for (Field field : FieldUtils.getAllFields(tClass)) {
-            field.setAccessible(true);
-            JsonNode propNode = null;
-            try {
-                propNode =mapper.valueToTree(field.get(value));
-            } catch (IllegalAccessException ex) {
-                ex.printStackTrace();
-            }
-            if (propNode == null) {
-                continue;
-            }
-
-            JsonProperty property = field.getAnnotation(JsonProperty.class);
-            if (property != null && property.value().contains(".")) {
-                ObjectNode node = root;
-                String[] values = property.value().split("\\.");
+        ObjectMapper mapper = new JacksonHelper().getObjectMapper();
+        ObjectNode root = mapper.valueToTree(value);
+        ObjectNode res = root.deepCopy();
+        Iterator<Map.Entry<String, JsonNode>> fields = root.fields();
+        while (fields.hasNext()) {
+            Map.Entry<String, JsonNode> field = fields.next();
+            if (field.getKey().contains(".")) {
+                ObjectNode node = res;
+                String[] values = field.getKey().split("\\.");
                 for (int i = 0; i < values.length - 1; ++i) {
                     String val = values[i];
                     if (node.has(val)) {
@@ -91,12 +83,11 @@ public class FlatteningSerializer<T> extends StdSerializer<T> implements Resolva
                         node = child;
                     }
                 }
-                node.set(values[values.length - 1], propNode);
-            } else {
-                root.set(property != null ? property.value() : field.getName(), propNode);
+                node.set(values[values.length - 1], field.getValue());
+                res.remove(field.getKey());
             }
         }
-        jgen.writeTree(root);
+        jgen.writeTree(res);
     }
 
     @Override

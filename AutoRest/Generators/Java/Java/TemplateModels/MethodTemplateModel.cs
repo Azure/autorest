@@ -333,6 +333,13 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual string ServiceResponseBuilderArgs {
+            get
+            {
+                return "";
+            }
+        }
+
         public virtual List<string> InterfaceImports
         {
             get
