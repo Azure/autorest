@@ -11,6 +11,7 @@
 package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.serializer.AzureJacksonHelper;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -76,7 +77,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     }
 
     private ServiceResponse<Void> postMethodGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new ServiceResponseBuilder<Void>(new AzureJacksonHelper())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -127,7 +128,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     }
 
     private ServiceResponse<Void> postMethodGlobalNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new ServiceResponseBuilder<Void>(new AzureJacksonHelper())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -186,7 +187,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     }
 
     private ServiceResponse<Void> postMethodGlobalNotProvidedValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new ServiceResponseBuilder<Void>(new AzureJacksonHelper())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -237,7 +238,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     }
 
     private ServiceResponse<Void> postPathGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new ServiceResponseBuilder<Void>(new AzureJacksonHelper())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -288,7 +289,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     }
 
     private ServiceResponse<Void> postSwaggerGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new ServiceResponseBuilder<Void>(new AzureJacksonHelper())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);

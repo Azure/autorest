@@ -11,6 +11,7 @@
 package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.serializer.AzureJacksonHelper;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -78,7 +79,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
     }
 
     private ServiceResponse<Void> postMethodLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new ServiceResponseBuilder<Void>(new AzureJacksonHelper())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -131,7 +132,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
     }
 
     private ServiceResponse<Void> postMethodLocalNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new ServiceResponseBuilder<Void>(new AzureJacksonHelper())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -184,7 +185,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
     }
 
     private ServiceResponse<Void> postPathLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new ServiceResponseBuilder<Void>(new AzureJacksonHelper())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -237,7 +238,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
     }
 
     private ServiceResponse<Void> postSwaggerLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new ServiceResponseBuilder<Void>(new AzureJacksonHelper())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);

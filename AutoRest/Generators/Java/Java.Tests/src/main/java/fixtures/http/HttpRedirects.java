@@ -83,6 +83,7 @@ public interface HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200
      *
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> head300() throws ServiceException;
@@ -98,7 +99,7 @@ public interface HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200
      *
-     * @return the List&lt;String&gt; object if successful.
+     * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<List<String>> get300() throws ServiceException;
@@ -114,6 +115,7 @@ public interface HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200
      *
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> head301() throws ServiceException;
@@ -129,6 +131,7 @@ public interface HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200
      *
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> get301() throws ServiceException;
@@ -145,6 +148,7 @@ public interface HttpRedirects {
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> put301(Boolean booleanValue) throws ServiceException;
@@ -161,6 +165,7 @@ public interface HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200
      *
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> head302() throws ServiceException;
@@ -176,6 +181,7 @@ public interface HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200
      *
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> get302() throws ServiceException;
@@ -192,6 +198,7 @@ public interface HttpRedirects {
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> patch302(Boolean booleanValue) throws ServiceException;
@@ -209,6 +216,7 @@ public interface HttpRedirects {
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code
      *
      * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> post303(Boolean booleanValue) throws ServiceException;
@@ -225,6 +233,7 @@ public interface HttpRedirects {
     /**
      * Redirect with 307, resulting in a 200 success
      *
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> head307() throws ServiceException;
@@ -240,6 +249,7 @@ public interface HttpRedirects {
     /**
      * Redirect get with 307, resulting in a 200 success
      *
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> get307() throws ServiceException;
@@ -256,6 +266,7 @@ public interface HttpRedirects {
      * Put redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> put307(Boolean booleanValue) throws ServiceException;
@@ -273,6 +284,7 @@ public interface HttpRedirects {
      * Patch redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> patch307(Boolean booleanValue) throws ServiceException;
@@ -290,6 +302,7 @@ public interface HttpRedirects {
      * Post redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> post307(Boolean booleanValue) throws ServiceException;
@@ -307,6 +320,7 @@ public interface HttpRedirects {
      * Delete redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> delete307(Boolean booleanValue) throws ServiceException;
