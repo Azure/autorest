@@ -34,6 +34,10 @@ namespace Microsoft.Rest.Azure
             Dictionary<string, List<string>> customHeaders,
             CancellationToken cancellationToken) where TBody : class
         {
+            if (response == null)
+            {
+                throw new ArgumentNullException("response");
+            }
             var headerlessResponse = new AzureOperationResponse<TBody>
             {
                 Body = response.Body,
@@ -127,6 +131,10 @@ namespace Microsoft.Rest.Azure
             Dictionary<string, List<string>> customHeaders,
             CancellationToken cancellationToken) where TBody : class
         {
+            if (response == null)
+            {
+                throw new ArgumentNullException("response");
+            }
             var headerlessResponse = new AzureOperationResponse<TBody>
             {
                 Body = response.Body,

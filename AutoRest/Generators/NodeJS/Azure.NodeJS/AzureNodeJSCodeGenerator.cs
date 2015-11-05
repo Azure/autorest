@@ -169,9 +169,9 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 
                 nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
                 string itemName = (string)ext["itemName"] ?? "value";
-                foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key).ToArray())
+                foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
                 {
-                    var compositType = (CompositeType)method.Responses[responseStatus];
+                    var compositType = (CompositeType)method.Responses[responseStatus].Body;
                     var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
                     // if the type is a wrapper over page-able response

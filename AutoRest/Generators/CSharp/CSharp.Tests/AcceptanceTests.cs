@@ -1727,6 +1727,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             var response = operation().GetAwaiter().GetResult();
             Assert.Equal(response.Response.StatusCode, expectedStatusCode);
         }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         private void EnsureStatusCode<TBody, THeader>(HttpStatusCode expectedStatusCode, Func<Task<HttpOperationResponse<TBody, THeader>>> operation)
         {
             var response = operation().GetAwaiter().GetResult();
