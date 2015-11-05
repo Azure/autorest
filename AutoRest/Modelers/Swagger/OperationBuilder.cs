@@ -119,14 +119,18 @@ namespace Microsoft.Rest.Modeler.Swagger
                 headerType.Properties.Add(property);
             });
 
-            if (headerType.Properties.Any())
-            {
-                _swaggerModeler.GeneratedTypes[headerTypeName] = headerType;
-            }
-            else
-            {
-                headerType = null;
-            }
+            //if (headerType.Properties.Any())
+            //{
+            //    _swaggerModeler.GeneratedTypes[headerTypeName] = headerType;
+            //}
+            //else
+            //{
+            //    headerType = null;
+            //}
+
+            //TODO: Remove this code to re-enable headers
+            headerType = null;
+
             // Response format
             var typesList = new List<Stack<IType>>();
             foreach (var response in _operation.Responses)

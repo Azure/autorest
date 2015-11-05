@@ -470,7 +470,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Null(clientModel.Methods[0].ReturnType.Headers);
         }
 
-        [Fact]
+        [Fact (Skip = "TODO: Re-enable when headers are re-enabled")]
         public void TestClientModelWithResponseHeaders()
         {
             var modeler = new SwaggerModeler(new Settings

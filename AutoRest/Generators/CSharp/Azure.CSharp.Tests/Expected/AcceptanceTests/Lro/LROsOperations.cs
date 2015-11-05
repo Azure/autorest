@@ -66,7 +66,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut200SucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -211,7 +211,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut200SucceededNoStateWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -357,7 +357,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut202Retry200WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -505,7 +505,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut201CreatingSucceeded200WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -660,7 +660,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut200UpdatingSucceeded204WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -809,7 +809,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut201CreatingFailed200WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -964,7 +964,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut200Acceptedcanceled200WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -1112,7 +1112,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutNoHeaderInRetryWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -1259,7 +1259,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncRetrySucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -1406,7 +1406,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncNoRetrySucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -1553,7 +1553,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncRetryFailedWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -1700,7 +1700,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncNoRetrycanceledWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -1847,7 +1847,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncNoHeaderInRetryWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -1992,7 +1992,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Sku> response = await BeginPutNonResourceWithHttpMessagesAsync(
                 sku, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Sku>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -2135,7 +2135,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Sku> response = await BeginPutAsyncNonResourceWithHttpMessagesAsync(
                 sku, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Sku>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -2278,7 +2278,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<SubProduct> response = await BeginPutSubResourceWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<SubProduct>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -2421,7 +2421,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<SubProduct> response = await BeginPutAsyncSubResourceWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<SubProduct>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
