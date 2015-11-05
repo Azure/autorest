@@ -68,7 +68,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut201CreatingSucceeded200WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -223,7 +223,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetrySucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }

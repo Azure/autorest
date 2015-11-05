@@ -37,7 +37,8 @@ namespace Microsoft.Rest.Generator.NodeJS.Tests
                     Input = SwaggerPath("body-complex.json"),
                     OutputDirectory = "X:\\Output",
                     Header = "MICROSOFT_MIT",
-                    Modeler = "Swagger"
+                    Modeler = "Swagger",
+                    PayloadFlatteningThreshold = 1,
                 }, ExpectedPath("BodyComplex"));
         }
     }

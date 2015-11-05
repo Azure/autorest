@@ -83,9 +83,10 @@ namespace Microsoft.Rest.Generator.CSharp
                 var pageTypeFormat = "{0}<{1}>";
                 var ipageTypeFormat = "IPage<{0}>";
 
-                foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key).ToArray())
+                foreach (var responseStatus in method.Responses
+                    .Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
                 {
-                    var compositType = (CompositeType) method.Responses[responseStatus];
+                    var compositType = (CompositeType) method.Responses[responseStatus].Body;
                     var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
                     // if the type is a wrapper over page-able response
@@ -101,14 +102,15 @@ namespace Microsoft.Rest.Generator.CSharp
                         pagedResult.Extensions[AzureCodeGenerator.ExternalExtension] = true;
                         pagedResult.Extensions[AzureCodeGenerator.PageableExtension] = ipagableTypeName;
 
-                        convertedTypes[method.Responses[responseStatus]] = pagedResult;
-                        method.Responses[responseStatus] = pagedResult;
+                        convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
+                        method.Responses[responseStatus] = new Response(pagedResult, method.Responses[responseStatus].Headers);
                     }
                 }
 
-                if (convertedTypes.ContainsKey(method.ReturnType))
+                if (convertedTypes.ContainsKey(method.ReturnType.Body))
                 {
-                    method.ReturnType = convertedTypes[method.ReturnType];
+                    method.ReturnType = new Response(convertedTypes[method.ReturnType.Body], 
+                        method.ReturnType.Headers);
                 }
             }
 

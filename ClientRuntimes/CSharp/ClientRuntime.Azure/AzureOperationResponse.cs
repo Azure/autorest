@@ -6,6 +6,18 @@ namespace Microsoft.Rest.Azure
     /// <summary>
     /// A standard service response including request ID.
     /// </summary>
+    public class AzureOperationResponse<TBody, THeader> : HttpOperationResponse<TBody, THeader>
+    {
+        /// <summary>
+        /// Gets or sets the value that uniquely identifies a request 
+        /// made against the service.
+        /// </summary>
+        public string RequestId { get; set; }
+    }
+
+    /// <summary>
+    /// A standard service response including request ID.
+    /// </summary>
     public class AzureOperationResponse<T> : HttpOperationResponse<T>
     {
         /// <summary>

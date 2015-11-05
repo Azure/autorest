@@ -126,7 +126,7 @@ namespace Microsoft.Rest.Generator
             method.Group = GetMethodGroupName(method.Group);
             method.ReturnType = NormalizeTypeReference(method.ReturnType);
             method.DefaultResponse = NormalizeTypeReference(method.DefaultResponse);
-            var normalizedResponses = new Dictionary<HttpStatusCode, IType>();
+            var normalizedResponses = new Dictionary<HttpStatusCode, Response>();
             foreach (var statusCode in method.Responses.Keys)
             {
                 normalizedResponses[statusCode] = NormalizeTypeReference(method.Responses[statusCode]);
@@ -305,6 +305,17 @@ namespace Microsoft.Rest.Generator
                 return name;
             }
             return CamelCase(RemoveInvalidCharacters(GetEscapedReservedName(name, "Variable")));
+        }
+
+        /// <summary>
+        /// Returns language specific type reference name.
+        /// </summary>
+        /// <param name="typePair"></param>
+        /// <returns></returns>
+        public virtual Response NormalizeTypeReference(Response typePair)
+        {
+            return new Response(NormalizeTypeReference(typePair.Body),
+                                NormalizeTypeReference(typePair.Headers));
         }
 
         /// <summary>

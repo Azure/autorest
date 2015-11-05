@@ -155,7 +155,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             {
                 Name = " method name with lots of spaces",
                 Group = "#$% group with lots of-weird-characters",
-                ReturnType = customObjectType
+                ReturnType = new Response(customObjectType, null)
             });
 
             var framework = new CSharpCodeNamer();
@@ -163,7 +163,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
             Assert.Equal("Methodnamewithlotsofspaces", serviceClient.Methods[0].Name);
             Assert.Equal("GroupwithlotsofWeirdCharacters", serviceClient.Methods[0].Group);
-            Assert.Equal("Abc", serviceClient.Methods[0].ReturnType.Name);
+            Assert.Equal("Abc", serviceClient.Methods[0].ReturnType.Body.Name);
         }
 
         [Fact]
@@ -182,7 +182,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             {
                 Name = "azure always rocks!",
                 Group = "azure always rocks!",
-                ReturnType = customObjectType
+                ReturnType = new Response(customObjectType, null)
             });
 
             serviceClient.ModelTypes.Add(customObjectType);
@@ -214,7 +214,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             {
                 Name = "azure always rocks!",
                 Group = "azure always rocks!",
-                ReturnType = customObjectType
+                ReturnType = new Response(customObjectType, null)
             });
 
             serviceClient.ModelTypes.Add(customObjectType);
@@ -242,13 +242,13 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             serviceClient.Methods.Add(new Method
             {
                 Name = "List",
-                ReturnType = new SequenceType {ElementType = complexType }
+                ReturnType = new Response(new SequenceType { ElementType = complexType }, null)
             });
 
             serviceClient.Methods.Add(new Method
             {
                 Name = "List2",
-                ReturnType = new DictionaryType { ValueType = complexType }
+                ReturnType = new Response(new DictionaryType { ValueType = complexType }, null)
             });
 
             serviceClient.ModelTypes.Add(complexType);
@@ -257,8 +257,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             codeGenerator.NormalizeClientModel(serviceClient);
 
             Assert.Equal("GreetingsModel", complexType.Name);
-            Assert.Equal("IList<GreetingsModel>", serviceClient.Methods[0].ReturnType.Name);
-            Assert.Equal("IDictionary<string, GreetingsModel>", serviceClient.Methods[1].ReturnType.Name);
+            Assert.Equal("IList<GreetingsModel>", serviceClient.Methods[0].ReturnType.Body.Name);
+            Assert.Equal("IDictionary<string, GreetingsModel>", serviceClient.Methods[1].ReturnType.Body.Name);
         }
 
         [Fact]
@@ -283,7 +283,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             {
                 Name = "method1",
                 Group = "mGroup",
-                ReturnType = customObjectType
+                ReturnType = new Response(customObjectType, null)
             };
             var outputParameter = new Parameter { Name = "body", Type = customObjectType };
             serviceClient.Methods.Add(method);
@@ -340,7 +340,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             {
                 Name = "method1",
                 Group = "mGroup",
-                ReturnType = customObjectType
+                ReturnType = new Response(customObjectType, null)
             };
             var inputParameter = new Parameter { Name = "body", Type = customObjectType };
             serviceClient.Methods.Add(method);
@@ -435,7 +435,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             {
                 Name = "method1",
                 Group = "mGroup",
-                ReturnType = flattenedPropertyType
+                ReturnType = new Response(flattenedPropertyType, null)
             };
             var inputParameter = new Parameter { Name = "prop", Type = flattenedPropertyType };
             serviceClient.Methods.Add(method);

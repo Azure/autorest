@@ -104,9 +104,9 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
     Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Operation.#Security", Justification = "Serialization Type")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
-    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Response.#Headers", Justification = "Serialization Type")]
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.OperationResponse.#Headers", Justification = "Serialization Type")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
-    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Response.#Examples", Justification = "Serialization Type")]
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.OperationResponse.#Examples", Justification = "Serialization Type")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
     Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.Schema.#Properties", Justification = "Serialization Type")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 

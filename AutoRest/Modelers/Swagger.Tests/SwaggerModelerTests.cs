@@ -58,8 +58,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("The product documentation.", clientModel.ModelTypes[0].Documentation);
             Assert.Equal("product_id", clientModel.ModelTypes[0].Properties[0].Name);
             Assert.Equal("product_id", clientModel.ModelTypes[0].Properties[0].SerializedName);
-            Assert.Null(clientModel.Methods[1].ReturnType);
-            Assert.Null(clientModel.Methods[1].Responses[HttpStatusCode.NoContent]);
+            Assert.Null(clientModel.Methods[1].ReturnType.Body);
+            Assert.Null(clientModel.Methods[1].Responses[HttpStatusCode.NoContent].Body);
             Assert.Equal(3, clientModel.Methods[1].Parameters.Count);
             Assert.Equal("subscriptionId", clientModel.Methods[1].Parameters[0].Name);
             Assert.Null(clientModel.Methods[1].Parameters[0].ClientProperty);
@@ -207,9 +207,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var clientModel = modeler.Build();
 
             Assert.Equal("DeleteBlob", clientModel.Methods[4].Name);
-            Assert.Equal(PrimaryType.Object, clientModel.Methods[4].ReturnType);
-            Assert.Equal(PrimaryType.Object, clientModel.Methods[4].Responses[HttpStatusCode.OK]);
-            Assert.Null(clientModel.Methods[4].Responses[HttpStatusCode.BadRequest]);
+            Assert.Equal(PrimaryType.Object, clientModel.Methods[4].ReturnType.Body);
+            Assert.Equal(PrimaryType.Object, clientModel.Methods[4].Responses[HttpStatusCode.OK].Body);
+            Assert.Null(clientModel.Methods[4].Responses[HttpStatusCode.BadRequest].Body);
         }
 
         [Fact]
@@ -237,7 +237,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("VirtualMachineGetRemoteDesktopFileResponse", clientModel.Methods[6].ReturnType.ToString());
             Assert.Equal("VirtualMachineGetRemoteDesktopFileResponse",
                 clientModel.Methods[6].Responses[HttpStatusCode.OK].ToString());
-            Assert.Null(clientModel.Methods[6].Responses[HttpStatusCode.NoContent]);
+            Assert.Null(clientModel.Methods[6].Responses[HttpStatusCode.NoContent].Body);
         }
 
         [Fact]
@@ -467,6 +467,36 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(false, clientModel.Methods[1].Parameters[5].IsRequired);
             Assert.Equal(1, clientModel.Methods[1].InputParameterTransformation.Count);
             Assert.Equal(3, clientModel.Methods[1].InputParameterTransformation[0].ParameterMappings.Count);
+            Assert.Null(clientModel.Methods[0].ReturnType.Headers);
+        }
+
+        [Fact (Skip = "TODO: Re-enable when headers are re-enabled")]
+        public void TestClientModelWithResponseHeaders()
+        {
+            var modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "swagger-response-headers.json")
+            });
+            var clientModel = modeler.Build();
+
+            Assert.NotNull(clientModel);
+            Assert.Equal(2, clientModel.Methods.Count);
+            Assert.Equal(2, clientModel.Methods[0].Responses.Count);
+            Assert.Equal("list-Headers", clientModel.Methods[0].Responses[HttpStatusCode.OK].Headers.Name);
+            Assert.Equal(3, ((CompositeType)clientModel.Methods[0].Responses[HttpStatusCode.OK].Headers).Properties.Count);
+            Assert.Equal("list-Headers", clientModel.Methods[0].Responses[HttpStatusCode.Created].Headers.Name);
+            Assert.Equal(3, ((CompositeType)clientModel.Methods[0].Responses[HttpStatusCode.Created].Headers).Properties.Count);
+            Assert.Equal("list-Headers", clientModel.Methods[0].ReturnType.Headers.Name);
+            Assert.Equal(3, ((CompositeType)clientModel.Methods[0].ReturnType.Headers).Properties.Count);
+
+            Assert.Equal(1, clientModel.Methods[1].Responses.Count);
+            Assert.Equal("create-Headers", clientModel.Methods[1].Responses[HttpStatusCode.OK].Headers.Name);
+            Assert.Equal(3, ((CompositeType)clientModel.Methods[1].Responses[HttpStatusCode.OK].Headers).Properties.Count);
+            Assert.Equal("create-Headers", clientModel.Methods[1].ReturnType.Headers.Name);
+            Assert.Equal(3, ((CompositeType)clientModel.Methods[1].ReturnType.Headers).Properties.Count);
+            Assert.True(clientModel.ModelTypes.Any(c => c.Name == "list-Headers"));
+            Assert.True(clientModel.ModelTypes.Any(c => c.Name == "create-Headers"));
         }
     }
 }
