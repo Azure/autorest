@@ -49,7 +49,7 @@ public interface Array {
     /**
      * Get complex types with array property
      *
-     * @return the ArrayWrapper object if successful.
+     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<ArrayWrapper> getValid() throws ServiceException;
@@ -66,6 +66,7 @@ public interface Array {
      * Put complex types with array property
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putValid(ArrayWrapper complexBody) throws ServiceException;
@@ -82,7 +83,7 @@ public interface Array {
     /**
      * Get complex types with array property which is empty
      *
-     * @return the ArrayWrapper object if successful.
+     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<ArrayWrapper> getEmpty() throws ServiceException;
@@ -99,6 +100,7 @@ public interface Array {
      * Put complex types with array property which is empty
      *
      * @param complexBody Please put an empty array
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putEmpty(ArrayWrapper complexBody) throws ServiceException;
@@ -115,7 +117,7 @@ public interface Array {
     /**
      * Get complex types with array property while server doesn't provide a response payload
      *
-     * @return the ArrayWrapper object if successful.
+     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<ArrayWrapper> getNotProvided() throws ServiceException;

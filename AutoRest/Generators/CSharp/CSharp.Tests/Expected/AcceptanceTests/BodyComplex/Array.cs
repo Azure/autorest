@@ -139,9 +139,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// Put complex types with array property
         /// </summary>
-        /// <param name='complexBody'>
-        /// Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y",
-        /// "The quick brown fox jumps over the lazy dog"
+        /// <param name='array'>
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -149,11 +147,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutValidWithHttpMessagesAsync(ArrayWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutValidWithHttpMessagesAsync(IList<string> array = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (complexBody == null)
+            ArrayWrapper complexBody = null;
+            if (array != null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "complexBody");
+                complexBody = new ArrayWrapper();
+                complexBody.Array = array;
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -322,8 +322,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// Put complex types with array property which is empty
         /// </summary>
-        /// <param name='complexBody'>
-        /// Please put an empty array
+        /// <param name='array'>
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -331,11 +330,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> PutEmptyWithHttpMessagesAsync(ArrayWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutEmptyWithHttpMessagesAsync(IList<string> array = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (complexBody == null)
+            ArrayWrapper complexBody = null;
+            if (array != null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "complexBody");
+                complexBody = new ArrayWrapper();
+                complexBody.Array = array;
             }
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;

@@ -140,10 +140,7 @@ Dictionary.prototype.getValid = function (options, callback) {
 /**
  * Put complex types with dictionary property
  *
- * @param {object} complexBody Please put a dictionary with 5 key-value pairs:
- * "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
- * 
- * @param {object} [complexBody.defaultProgram]
+ * @param {object} [defaultProgram]
  * 
  * @param {object} [options]
  *
@@ -162,7 +159,7 @@ Dictionary.prototype.getValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putValid = function (complexBody, options, callback) {
+Dictionary.prototype.putValid = function (defaultProgram, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -173,11 +170,21 @@ Dictionary.prototype.putValid = function (complexBody, options, callback) {
   }
   // Validate
   try {
-    if (complexBody === null || complexBody === undefined) {
-      throw new Error('complexBody cannot be null or undefined.');
+    if (defaultProgram && typeof defaultProgram === 'object') {
+      for(var valueElement in defaultProgram) {
+        if (defaultProgram[valueElement] !== null && defaultProgram[valueElement] !== undefined && typeof defaultProgram[valueElement].valueOf() !== 'string') {
+          throw new Error('defaultProgram[valueElement] must be of type string.');
+        }
+      }
     }
   } catch (error) {
     return callback(error);
+  }
+  var complexBody;
+  if ((defaultProgram !== null && defaultProgram !== undefined))
+  {
+      complexBody = new client._models['DictionaryWrapper']();
+      complexBody.defaultProgram = defaultProgram;
   }
 
   // Construct URL
@@ -361,9 +368,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
 /**
  * Put complex types with dictionary property which is empty
  *
- * @param {object} complexBody Please put an empty dictionary
- * 
- * @param {object} [complexBody.defaultProgram]
+ * @param {object} [defaultProgram]
  * 
  * @param {object} [options]
  *
@@ -382,7 +387,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putEmpty = function (complexBody, options, callback) {
+Dictionary.prototype.putEmpty = function (defaultProgram, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -393,11 +398,21 @@ Dictionary.prototype.putEmpty = function (complexBody, options, callback) {
   }
   // Validate
   try {
-    if (complexBody === null || complexBody === undefined) {
-      throw new Error('complexBody cannot be null or undefined.');
+    if (defaultProgram && typeof defaultProgram === 'object') {
+      for(var valueElement in defaultProgram) {
+        if (defaultProgram[valueElement] !== null && defaultProgram[valueElement] !== undefined && typeof defaultProgram[valueElement].valueOf() !== 'string') {
+          throw new Error('defaultProgram[valueElement] must be of type string.');
+        }
+      }
     }
   } catch (error) {
     return callback(error);
+  }
+  var complexBody;
+  if ((defaultProgram !== null && defaultProgram !== undefined))
+  {
+      complexBody = new client._models['DictionaryWrapper']();
+      complexBody.defaultProgram = defaultProgram;
   }
 
   // Construct URL

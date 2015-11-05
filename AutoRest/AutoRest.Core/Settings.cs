@@ -116,6 +116,18 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public string ClientName { get; set; }
 
         /// <summary>
+        /// Gets or sets the maximum number of properties in the request body. 
+        /// If the number of properties in the request body is less than or 
+        /// equal to this value, then these properties will be represented as method arguments.
+        /// </summary>
+        [SettingsInfo("The maximum number of properties in the request body. " + 
+                      "If the number of properties in the request body is less " + 
+                      "than or equal to this value, these properties will " + 
+                      "be represented as method arguments.")]
+        [SettingsAlias("ft")]
+        public int PayloadFlatteningThreshold { get; set; }
+
+        /// <summary>
         /// Gets or sets a comment header to include in each generated file.
         /// </summary>
         [SettingsInfo("Text to include as a header comment in generated files. " +

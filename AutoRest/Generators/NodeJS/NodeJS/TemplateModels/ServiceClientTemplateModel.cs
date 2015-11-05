@@ -8,6 +8,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using System.Text;
 using Microsoft.Rest.Generator.NodeJS.TemplateModels;
+using System;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -27,6 +28,58 @@ namespace Microsoft.Rest.Generator.NodeJS
         public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
         public List<ModelTemplateModel> ModelTemplateModels { get; private set; }
+
+        /// <summary>
+        /// Provides an ordered ModelTemplateModel list such that the parent 
+        /// type comes before in the list than its child. This helps when 
+        /// requiring models in index.js
+        /// </summary>
+        public List<ModelTemplateModel> OrderedModelTemplateModels 
+        {
+            get
+            {
+                List<ModelTemplateModel> orderedList = new List<ModelTemplateModel>();
+                foreach (var model in ModelTemplateModels)
+                {
+                    constructOrderedList(model, orderedList);
+                }
+                return orderedList;
+            }
+        }
+
+        private void constructOrderedList(ModelTemplateModel model, List<ModelTemplateModel> orderedList)
+        {
+            if (model == null)
+            {
+                throw new ArgumentNullException("model");
+            }
+
+            // BaseResource and CloudError are specified in the ClientRuntime. 
+            // They are required explicitly in a different way. Hence, they
+            // are not included in the ordered list.
+            if (model.BaseModelType == null ||
+                (model.BaseModelType != null && 
+                 (model.BaseModelType.Name == "BaseResource" || 
+                  model.BaseModelType.Name == "CloudError")))
+            {
+                if (!orderedList.Contains(model))
+                {
+                    orderedList.Add(model);
+                }
+                return;
+            }
+
+            var baseModel = ModelTemplateModels.FirstOrDefault(m => m.Name == model.BaseModelType.Name);
+            if (baseModel != null)
+            {
+                constructOrderedList(baseModel, orderedList);
+            }
+            // Add the child type after the parent type has been added.
+            if (!orderedList.Contains(model))
+            {
+                orderedList.Add(model);
+            }
+        }
 
         public virtual IEnumerable<MethodGroupTemplateModel> MethodGroupModels
         {

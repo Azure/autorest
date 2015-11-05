@@ -59,7 +59,7 @@ public interface Implicit {
      * Test implicitly required path parameter
      *
      * @param pathParameter the String value
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> getRequiredPath(String pathParameter) throws ServiceException;
@@ -77,6 +77,7 @@ public interface Implicit {
      * Test implicitly optional query parameter
      *
      * @param queryParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putOptionalQuery(String queryParameter) throws ServiceException;
@@ -94,6 +95,7 @@ public interface Implicit {
      * Test implicitly optional header parameter
      *
      * @param queryParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putOptionalHeader(String queryParameter) throws ServiceException;
@@ -111,6 +113,7 @@ public interface Implicit {
      * Test implicitly optional body parameter
      *
      * @param bodyParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putOptionalBody(String bodyParameter) throws ServiceException;
@@ -127,7 +130,7 @@ public interface Implicit {
     /**
      * Test implicitly required path parameter
      *
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> getRequiredGlobalPath() throws ServiceException;
@@ -143,7 +146,7 @@ public interface Implicit {
     /**
      * Test implicitly required query parameter
      *
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> getRequiredGlobalQuery() throws ServiceException;
@@ -159,7 +162,7 @@ public interface Implicit {
     /**
      * Test implicitly optional query parameter
      *
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> getOptionalGlobalQuery() throws ServiceException;

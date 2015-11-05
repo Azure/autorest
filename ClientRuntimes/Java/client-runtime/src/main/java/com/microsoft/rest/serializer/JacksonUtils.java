@@ -29,8 +29,19 @@ import java.util.List;
  * A serialization helper class wrapped around {@link JacksonConverterFactory} and {@link ObjectMapper}.
  */
 public class JacksonUtils {
-    private static ObjectMapper objectMapper;
+    private static ObjectMapper mapper;
     private static JacksonConverterFactory converterFactory;
+
+    protected void initializeObjectMapper(ObjectMapper mapper) {
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+                .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .setSerializationInclusion(JsonInclude.Include.NON_NULL)
+                .registerModule(new JodaModule())
+                .registerModule(ByteArraySerializer.getModule())
+                .registerModule(DateTimeSerializer.getModule())
+                .registerModule(DateTimeRfc1123Serializer.getModule());
+    }
 
     /**
      * Gets a static instance of {@link ObjectMapper}.
@@ -38,18 +49,11 @@ public class JacksonUtils {
      * @return an instance of {@link ObjectMapper}.
      */
     public ObjectMapper getObjectMapper() {
-        if (objectMapper == null) {
-            objectMapper = new ObjectMapper()
-                    .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-                    .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)
-                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                    .setSerializationInclusion(JsonInclude.Include.NON_NULL)
-                    .registerModule(new JodaModule())
-                    .registerModule(ByteArraySerializer.getModule())
-                    .registerModule(DateTimeSerializer.getModule())
-                    .registerModule(DateTimeRfc1123Serializer.getModule());
+        if (mapper == null) {
+            mapper = new ObjectMapper();
+            initializeObjectMapper(mapper);
         }
-        return objectMapper;
+        return mapper;
     }
 
     /**
@@ -122,12 +126,12 @@ public class JacksonUtils {
      * @throws IOException exception in deserialization
      */
     @SuppressWarnings("unchecked")
-    public static <T> T deserialize(String value, TypeReference<?> type) throws IOException {
+    public <T> T deserialize(String value, TypeReference<?> type) throws IOException {
         if (value == null || value.isEmpty()) return null;
-        return (T)new JacksonUtils().getObjectMapper().readValue(value, type);
+        return (T)getObjectMapper().readValue(value, type);
     }
 
-    public static <T> T deserialize(String value, final Type type) throws IOException {
+    public <T> T deserialize(String value, final Type type) throws IOException {
         return deserialize(value, new TypeReference<T>() {
             @Override
             public Type getType() {
@@ -144,7 +148,7 @@ public class JacksonUtils {
      * @return the deserialized object.
      * @throws IOException exception in deserialization
      */
-    public static <T> T deserialize(InputStream input, TypeReference<?> type) throws IOException {
+    public <T> T deserialize(InputStream input, TypeReference<?> type) throws IOException {
         if (input == null) return null;
         return deserialize(IOUtils.toString(input), type);
     }

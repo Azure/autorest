@@ -57,6 +57,24 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get { return Extensions.ContainsKey(AzureCodeGenerator.LongRunningExtension); }
         }
 
+        public bool IsPagingNextOperation
+        {
+            get { return Url == "{nextLink}"; }
+        }
+
+        public override string MethodParameterApiDeclaration
+        {
+            get
+            {
+                var declaration = base.MethodParameterApiDeclaration;
+                if (IsPagingNextOperation)
+                {
+                    declaration = declaration.Replace("@Path(\"nextLink\")", "@Url");
+                }
+                return declaration;
+            }
+        }
+
         public string Exceptions
         {
             get
@@ -102,6 +120,13 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 throw new InvalidOperationException("Invalid long running operation HTTP method " + this.HttpMethod);
             }
         }
+        public override string ServiceResponseBuilderArgs
+        {
+            get
+            {
+                return "new AzureJacksonUtils()";
+            }
+        }
 
         public override List<string> InterfaceImports
         {
@@ -110,6 +135,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 var imports = base.InterfaceImports;
                 this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex => imports.Add(JavaCodeNamer.GetJavaException(ex)));
+                if (IsPagingNextOperation)
+                {
+                    imports.Remove("retrofit.http.Path");
+                    imports.Add("retrofit.http.Url");
+                }
                 return imports;
             }
         }
@@ -131,6 +161,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
                         .SelectMany(t => t.ImportFrom(ServiceClient.Namespace))
                         .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom(ServiceClient.Namespace).Contains(i)))
                         .ForEach(i => imports.Remove(i));
+                }
+                else
+                {
+                    imports.Add("com.microsoft.rest.serializer.AzureJacksonUtils");
                 }
                 return imports;
             }

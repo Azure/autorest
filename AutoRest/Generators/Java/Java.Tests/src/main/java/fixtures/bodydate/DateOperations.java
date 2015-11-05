@@ -58,7 +58,7 @@ public interface DateOperations {
     /**
      * Get null date value
      *
-     * @return the LocalDate object if successful.
+     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<LocalDate> getNull() throws ServiceException;
@@ -74,7 +74,7 @@ public interface DateOperations {
     /**
      * Get invalid date value
      *
-     * @return the LocalDate object if successful.
+     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<LocalDate> getInvalidDate() throws ServiceException;
@@ -90,7 +90,7 @@ public interface DateOperations {
     /**
      * Get overflow date value
      *
-     * @return the LocalDate object if successful.
+     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<LocalDate> getOverflowDate() throws ServiceException;
@@ -106,7 +106,7 @@ public interface DateOperations {
     /**
      * Get underflow date value
      *
-     * @return the LocalDate object if successful.
+     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<LocalDate> getUnderflowDate() throws ServiceException;
@@ -123,6 +123,7 @@ public interface DateOperations {
      * Put max date value 9999-12-31
      *
      * @param dateBody the LocalDate value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putMaxDate(LocalDate dateBody) throws ServiceException;
@@ -139,7 +140,7 @@ public interface DateOperations {
     /**
      * Get max date value 9999-12-31
      *
-     * @return the LocalDate object if successful.
+     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<LocalDate> getMaxDate() throws ServiceException;
@@ -156,6 +157,7 @@ public interface DateOperations {
      * Put min date value 0000-01-01
      *
      * @param dateBody the LocalDate value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putMinDate(LocalDate dateBody) throws ServiceException;
@@ -172,7 +174,7 @@ public interface DateOperations {
     /**
      * Get min date value 0000-01-01
      *
-     * @return the LocalDate object if successful.
+     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<LocalDate> getMinDate() throws ServiceException;

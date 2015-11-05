@@ -153,13 +153,13 @@
             "schema": {
               "$ref": "#/definitions/ResourceCollection"
             }
-          }
-        },
-        "default": {
-          "description": "Unexpected error",
-          "schema": {
-            "$ref": "#/definitions/Error"
-          }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          } 
         }
       }
     }
@@ -203,7 +203,7 @@
           "type": "string",
           "description": "Resource Name",
           "readOnly": true
-        },
+        }
       }
     },
     "FlattenedProduct": {

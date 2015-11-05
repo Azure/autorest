@@ -7,9 +7,10 @@ var should = require('should');
 var http = require('http');
 var util = require('util');
 var assert = require('assert');
-var msRest = require('ms-rest');
-var moment = require('moment');
-var complexClient = require('../Expected/AcceptanceTests/BodyComplex/autoRestComplexTestService');
+import msRest = require('ms-rest');
+import moment = require('moment');
+import complexClient = require('../Expected/AcceptanceTests/BodyComplex/autoRestComplexTestService');
+import complexClientModels = require('../Expected/AcceptanceTests/BodyComplex/models');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
@@ -194,7 +195,7 @@ describe('nodejs', function () {
           should.not.exist(error);
           //should.not.exist(result.field);
           assert.deepEqual(result.field, moment.duration(durationString));
-          testClient.primitive.putDuration({ 'field': moment.duration(durationString) }, function (error, result) {
+          testClient.primitive.putDuration(moment.duration(durationString), function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -206,7 +207,7 @@ describe('nodejs', function () {
         testClient.primitive.getByte(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.field, byteBuffer);
-          testClient.primitive.putByte({ 'field': byteBuffer }, function (error, result) {
+          testClient.primitive.putByte(byteBuffer, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -222,7 +223,7 @@ describe('nodejs', function () {
         testClient.arrayModel.getValid(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.array, testArray);
-          testClient.arrayModel.putValid({ 'array': testArray }, function (error, result) {
+          testClient.arrayModel.putValid(testArray, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -234,7 +235,7 @@ describe('nodejs', function () {
         testClient.arrayModel.getEmpty(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.array, []);
-          testClient.arrayModel.putEmpty({ 'array': [] }, function (error, result) {
+          testClient.arrayModel.putEmpty([], function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -254,11 +255,12 @@ describe('nodejs', function () {
     describe('Dictionary Types Operations', function () {
       var testClient = new complexClient(baseUri, clientOptions);
       it('should get and put valid dictionary type properties', function (done) {
-        var testDictionary = { 'txt': 'notepad', 'bmp': 'mspaint', 'xls': 'excel', 'exe': '', '': null };
+        var testDictionary: { [propertyName: string]: string } =
+          { 'txt': 'notepad', 'bmp': 'mspaint', 'xls': 'excel', 'exe': '', '': null };
         testClient.dictionary.getValid(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.defaultProgram, testDictionary);
-          testClient.dictionary.putValid({ 'defaultProgram': testDictionary }, function (error, result) {
+          testClient.dictionary.putValid(testDictionary, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -269,7 +271,7 @@ describe('nodejs', function () {
         testClient.dictionary.getEmpty(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.defaultProgram, {});
-          testClient.dictionary.putEmpty({ 'defaultProgram': {} }, function (error, result) {
+          testClient.dictionary.putEmpty({}, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -382,35 +384,35 @@ describe('nodejs', function () {
     });
 
     describe('Complex Types with recursive definitions', function () {
-      var bigfish = {
+      var bigfish = <complexClientModels.Fish> {
         'dtype': 'salmon',
         'location': 'alaska',
         'iswild': true,
         'species': 'king',
         'length': 1,
         'siblings': [
-          {
+          <complexClientModels.Shark> {
             'dtype': 'shark',
             'age': 6,
             'birthday': new Date('2012-01-05T01:00:00Z'),
             'species': 'predator',
             'length': 20,
             'siblings': [
-              {
+              <complexClientModels.Salmon> {
                 'dtype': 'salmon',
                 'location': 'atlantic',
                 'iswild': true,
                 'species': 'coho',
                 'length': 2,
                 'siblings': [
-                  {
+                  <complexClientModels.Shark> {
                     'dtype': 'shark',
                     'age': 6,
                     'birthday': new Date('2012-01-05T01:00:00Z'),
                     'species': 'predator',
                     'length': 20
                   },
-                  {
+                  <complexClientModels.Sawshark> {
                     'dtype': 'sawshark',
                     'age': 105,
                     'birthday': new Date('1900-01-05T01:00:00Z'),
@@ -420,7 +422,7 @@ describe('nodejs', function () {
                   }
                 ]
               },
-              {
+              <complexClientModels.Sawshark> {
                 'dtype': 'sawshark',
                 'age': 105,
                 'birthday': new Date('1900-01-05T01:00:00Z'),
@@ -431,7 +433,7 @@ describe('nodejs', function () {
               }
             ]
           },
-          {
+          <complexClientModels.Sawshark> {
             'dtype': 'sawshark',
             'age': 105,
             'birthday': new Date('1900-01-05T01:00:00Z'),

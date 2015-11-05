@@ -29,7 +29,7 @@ public class CustomHeaderInterceptor implements Interceptor {
      * Initialize an instance of {@link CustomHeaderInterceptor} class.
      */
     public CustomHeaderInterceptor() {
-        headers = new HashMap<>();
+        headers = new HashMap<String, List<String>>();
     }
 
     /**

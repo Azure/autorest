@@ -27,11 +27,15 @@ public interface @Model.MethodGroupType {
      * used by Retrofit to perform actually REST calls.
      */
     interface @Model.MethodGroupServiceType {
-    @foreach (var method in Model.MethodTemplateModels)
+    @foreach (AzureMethodTemplateModel method in Model.MethodTemplateModels)
     {
     if (method.HttpMethod == Microsoft.Rest.Generator.ClientModel.HttpMethod.Delete)
     {
     @:    @@HTTP(path = "@(method.Url)", method = "DELETE", hasBody = true)
+    }
+    else if (method.IsPagingNextOperation)
+    {
+    @:    @@GET
     }
     else
     {

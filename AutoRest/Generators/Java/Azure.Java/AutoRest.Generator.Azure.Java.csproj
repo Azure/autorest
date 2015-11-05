@@ -40,6 +40,7 @@
     <Compile Include="TemplateModels\AzureMethodTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureServiceClientTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureModelTemplateModel.cs" />
+    <Compile Include="TemplateModels\PageTemplateModel.cs" />
     <Compile Include="Templates\AzureMethodGroupTemplate.cs">
       <DependentUpon>AzureMethodGroupTemplate.cshtml</DependentUpon>
     </Compile>
@@ -54,6 +55,9 @@
     </Compile>
     <Compile Include="Templates\AzureMethodGroupInterfaceTemplate.cs">
       <DependentUpon>AzureMethodGroupInterfaceTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\PageTemplate.cs">
+      <DependentUpon>PageTemplate.cshtml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +91,7 @@
     <None Include="Templates\AzureServiceClientInterfaceTemplate.cshtml" />
     <None Include="Templates\AzureServiceClientTemplate.cshtml" />
     <None Include="Templates\AzureMethodGroupInterfaceTemplate.cshtml" />
+    <None Include="Templates\PageTemplate.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

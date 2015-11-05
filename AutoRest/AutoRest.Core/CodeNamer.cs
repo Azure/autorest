@@ -108,37 +108,51 @@ namespace Microsoft.Rest.Generator
 
             foreach (var method in client.Methods)
             {
-                method.Name = GetMethodName(method.Name);
-                method.Group = GetMethodGroupName(method.Group);
-                method.ReturnType = NormalizeTypeReference(method.ReturnType);
-                method.DefaultResponse = NormalizeTypeReference(method.DefaultResponse);
-                var normalizedResponses = new Dictionary<HttpStatusCode, IType>();
-                foreach (var statusCode in method.Responses.Keys)
-                {
-                    normalizedResponses[statusCode] = NormalizeTypeReference(method.Responses[statusCode]);
-                }
+                NormalizeMethod(method);
+            }
+        }
 
-                method.Responses.Clear();
-                foreach (var statusCode in normalizedResponses.Keys)
-                {
-                    method.Responses[statusCode] = normalizedResponses[statusCode];
-                }
-                foreach (var parameter in method.Parameters)
-                {
-                    parameter.Name = GetParameterName(parameter.Name);
-                    parameter.Type = NormalizeTypeReference(parameter.Type);
-                }
+        /// <summary>
+        /// Normalizes names in the method
+        /// </summary>
+        /// <param name="method"></param>
+        public virtual void NormalizeMethod(Method method)
+        {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+            method.Name = GetMethodName(method.Name);
+            method.Group = GetMethodGroupName(method.Group);
+            method.ReturnType = NormalizeTypeReference(method.ReturnType);
+            method.DefaultResponse = NormalizeTypeReference(method.DefaultResponse);
+            var normalizedResponses = new Dictionary<HttpStatusCode, IType>();
+            foreach (var statusCode in method.Responses.Keys)
+            {
+                normalizedResponses[statusCode] = NormalizeTypeReference(method.Responses[statusCode]);
+            }
 
-                foreach (var parameterMapping in method.InputParameterMappings)
-                {
-                    parameterMapping.InputParameter.Name = GetParameterName(parameterMapping.InputParameter.Name);
-                    parameterMapping.InputParameter.Type = NormalizeTypeReference(parameterMapping.InputParameter.Type);
-                    parameterMapping.OutputParameter.Name = GetParameterName(parameterMapping.OutputParameter.Name);
-                    parameterMapping.OutputParameter.Type = NormalizeTypeReference(parameterMapping.OutputParameter.Type);
+            method.Responses.Clear();
+            foreach (var statusCode in normalizedResponses.Keys)
+            {
+                method.Responses[statusCode] = normalizedResponses[statusCode];
+            }
+            foreach (var parameter in method.Parameters)
+            {
+                parameter.Name = GetParameterName(parameter.Name);
+                parameter.Type = NormalizeTypeReference(parameter.Type);
+            }
 
+            foreach (var parameterTransformation in method.InputParameterTransformation)
+            {
+                parameterTransformation.OutputParameter.Name = GetParameterName(parameterTransformation.OutputParameter.Name);
+                parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
+
+                foreach (var parameterMapping in parameterTransformation.ParameterMappings)
+                {
                     if (parameterMapping.InputParameterProperty != null)
                     {
-                        parameterMapping.InputParameterProperty = string.Join(".", 
+                        parameterMapping.InputParameterProperty = string.Join(".",
                             parameterMapping.InputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
                                 .Select(p => GetPropertyName(p)));
                     }

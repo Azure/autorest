@@ -24,20 +24,32 @@ import java.util.Map;
  */
 public class ServiceResponseBuilder<T> {
     private Map<Integer, TypeReference<?>> responseTypes;
+    private JacksonUtils deserializer;
 
     /**
      * Create a ServiceResponseBuilder instance.
      */
     public ServiceResponseBuilder() {
-        this(new HashMap<Integer, TypeReference<?>>());
+        this(new JacksonUtils());
     }
 
     /**
      * Create a ServiceResponseBuilder instance.
      *
+     * @param deserializer the serialization utils to use for deserialization operations
+     */
+    public ServiceResponseBuilder(JacksonUtils deserializer) {
+        this(deserializer, new HashMap<Integer, TypeReference<?>>());
+    }
+
+    /**
+     * Create a ServiceResponseBuilder instance.
+     *
+     * @param deserializer the serialization utils to use for deserialization operations
      * @param responseTypes a mapping of response status codes and response destination types.
      */
-    public ServiceResponseBuilder(Map<Integer, TypeReference<?>> responseTypes) {
+    public ServiceResponseBuilder(JacksonUtils deserializer, Map<Integer, TypeReference<?>> responseTypes) {
+        this.deserializer = deserializer;
         this.responseTypes = responseTypes;
     }
 
@@ -125,7 +137,7 @@ public class ServiceResponseBuilder<T> {
                     (responseTypes.isEmpty() || (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
                 return new ServiceResponse<T>(buildBody(statusCode, responseBody), response);
             } else {
-                ServiceException exception = new ServiceException();
+                ServiceException exception = new ServiceException("Invalid status code " + statusCode);
                 exception.setResponse(response);
                 exception.setErrorModel(buildBody(statusCode, responseBody));
                 throw exception;
@@ -182,7 +194,7 @@ public class ServiceResponseBuilder<T> {
             if (responseContent.length() <= 0) {
                 return null;
             }
-            return JacksonUtils.deserialize(responseContent, type);
+            return deserializer.deserialize(responseContent, type);
         }
     }
 

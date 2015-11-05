@@ -106,7 +106,7 @@ public interface Number {
     /**
      * Get null Number value
      *
-     * @return the Double object if successful.
+     * @return the Double object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Double> getNull() throws ServiceException;
@@ -122,7 +122,7 @@ public interface Number {
     /**
      * Get invalid float Number value
      *
-     * @return the Double object if successful.
+     * @return the Double object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Double> getInvalidFloat() throws ServiceException;
@@ -138,7 +138,7 @@ public interface Number {
     /**
      * Get invalid double Number value
      *
-     * @return the Double object if successful.
+     * @return the Double object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Double> getInvalidDouble() throws ServiceException;
@@ -154,7 +154,7 @@ public interface Number {
     /**
      * Get invalid decimal Number value
      *
-     * @return the BigDecimal object if successful.
+     * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<BigDecimal> getInvalidDecimal() throws ServiceException;
@@ -171,6 +171,7 @@ public interface Number {
      * Put big float value 3.402823e+20
      *
      * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putBigFloat(double numberBody) throws ServiceException;
@@ -187,7 +188,7 @@ public interface Number {
     /**
      * Get big float value 3.402823e+20
      *
-     * @return the Double object if successful.
+     * @return the Double object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Double> getBigFloat() throws ServiceException;
@@ -204,6 +205,7 @@ public interface Number {
      * Put big double value 2.5976931e+101
      *
      * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putBigDouble(double numberBody) throws ServiceException;
@@ -220,7 +222,7 @@ public interface Number {
     /**
      * Get big double value 2.5976931e+101
      *
-     * @return the Double object if successful.
+     * @return the Double object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Double> getBigDouble() throws ServiceException;
@@ -237,6 +239,7 @@ public interface Number {
      * Put big double value 99999999.99
      *
      * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putBigDoublePositiveDecimal(double numberBody) throws ServiceException;
@@ -253,7 +256,7 @@ public interface Number {
     /**
      * Get big double value 99999999.99
      *
-     * @return the Double object if successful.
+     * @return the Double object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Double> getBigDoublePositiveDecimal() throws ServiceException;
@@ -270,6 +273,7 @@ public interface Number {
      * Put big double value -99999999.99
      *
      * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putBigDoubleNegativeDecimal(double numberBody) throws ServiceException;
@@ -286,7 +290,7 @@ public interface Number {
     /**
      * Get big double value -99999999.99
      *
-     * @return the Double object if successful.
+     * @return the Double object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Double> getBigDoubleNegativeDecimal() throws ServiceException;
@@ -303,6 +307,7 @@ public interface Number {
      * Put big decimal value 2.5976931e+101
      *
      * @param numberBody the BigDecimal value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putBigDecimal(BigDecimal numberBody) throws ServiceException;
@@ -319,7 +324,7 @@ public interface Number {
     /**
      * Get big decimal value 2.5976931e+101
      *
-     * @return the BigDecimal object if successful.
+     * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<BigDecimal> getBigDecimal() throws ServiceException;
@@ -336,6 +341,7 @@ public interface Number {
      * Put big decimal value 99999999.99
      *
      * @param numberBody the BigDecimal value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putBigDecimalPositiveDecimal(BigDecimal numberBody) throws ServiceException;
@@ -352,7 +358,7 @@ public interface Number {
     /**
      * Get big decimal value 99999999.99
      *
-     * @return the BigDecimal object if successful.
+     * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<BigDecimal> getBigDecimalPositiveDecimal() throws ServiceException;
@@ -369,6 +375,7 @@ public interface Number {
      * Put big decimal value -99999999.99
      *
      * @param numberBody the BigDecimal value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putBigDecimalNegativeDecimal(BigDecimal numberBody) throws ServiceException;
@@ -385,7 +392,7 @@ public interface Number {
     /**
      * Get big decimal value -99999999.99
      *
-     * @return the BigDecimal object if successful.
+     * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<BigDecimal> getBigDecimalNegativeDecimal() throws ServiceException;
@@ -402,6 +409,7 @@ public interface Number {
      * Put small float value 3.402823e-20
      *
      * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putSmallFloat(double numberBody) throws ServiceException;
@@ -418,7 +426,7 @@ public interface Number {
     /**
      * Get big double value 3.402823e-20
      *
-     * @return the Double object if successful.
+     * @return the Double object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Double> getSmallFloat() throws ServiceException;
@@ -435,6 +443,7 @@ public interface Number {
      * Put small double value 2.5976931e-101
      *
      * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putSmallDouble(double numberBody) throws ServiceException;
@@ -451,7 +460,7 @@ public interface Number {
     /**
      * Get big double value 2.5976931e-101
      *
-     * @return the Double object if successful.
+     * @return the Double object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Double> getSmallDouble() throws ServiceException;
@@ -468,6 +477,7 @@ public interface Number {
      * Put small decimal value 2.5976931e-101
      *
      * @param numberBody the BigDecimal value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putSmallDecimal(BigDecimal numberBody) throws ServiceException;
@@ -484,7 +494,7 @@ public interface Number {
     /**
      * Get small decimal value 2.5976931e-101
      *
-     * @return the BigDecimal object if successful.
+     * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<BigDecimal> getSmallDecimal() throws ServiceException;

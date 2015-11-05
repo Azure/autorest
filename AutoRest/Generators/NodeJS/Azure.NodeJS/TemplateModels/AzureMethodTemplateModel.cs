@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
+using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS;
 using Microsoft.Rest.Generator.Utilities;
@@ -52,7 +54,8 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 if (this.HttpMethod == HttpMethod.Head &&
                     this.ReturnType != null)
                 {
-                    sb.AppendLine("result = (statusCode === 204);");
+                    HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureCodeGenerator.HttpHeadStatusCodeSuccessFunc);
+                    sb.AppendFormat("result = (statusCode === {0});", (int)code).AppendLine();
                 }
 
                 return sb.ToString();

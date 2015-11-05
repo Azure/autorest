@@ -22,11 +22,6 @@ namespace Microsoft.Rest.Generator.ClientModel
         public string InputParameterProperty { get; set; }
 
         /// <summary>
-        /// Gets or sets the output parameter.
-        /// </summary>
-        public Parameter OutputParameter { get; set; }
-
-        /// <summary>
         /// Gets or sets the output parameter dot separated property path.
         /// </summary>
         public string OutputParameterProperty { get; set; }
@@ -39,7 +34,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// </returns>
         public override string ToString()
         {
-            string outputPath = OutputParameter.Name;
+            string outputPath = "";
             if (OutputParameterProperty != null)
             {
                 outputPath += "." + OutputParameterProperty;

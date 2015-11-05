@@ -12,7 +12,27 @@
     "produces": [ "application/json" ],
     "consumes": [ "application/json" ],
     "paths": {
-       "/http/success/204": {
+       "/http/success/200": {
+            "head": {
+                "operationId": "httpSuccess_head200",
+                "description": "Return 200 status code if successful",
+                "tags": [
+                    "HttpSuccess Operations"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully returns the true boolean value"
+                    },
+                    "404": {
+                        "description": "Successfully returns the false boolean value"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+       },
+	   "/http/success/204": {
             "head": {
                 "operationId": "httpSuccess_head204",
                 "description": "Return 204 status code if successful",

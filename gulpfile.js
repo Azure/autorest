@@ -143,7 +143,8 @@ gulp.task('regenerate:expected:nodeazure', function(cb){
     'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
     'mappings': nodeAzureMappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'Azure.NodeJS'
+    'codeGenerator': 'Azure.NodeJS',
+    'flatteningThreshold': '1'
   }, cb);
 })
 
@@ -153,7 +154,8 @@ gulp.task('regenerate:expected:node', function(cb){
     'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
     'mappings': defaultMappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'NodeJS'
+    'codeGenerator': 'NodeJS',
+    'flatteningThreshold': '1'
   }, cb);
 })
 
@@ -164,7 +166,7 @@ gulp.task('regenerate:expected:rubyazure', function(cb){
     'mappings': rubyAzureMappings,
     'outputDir': 'RspecTests/Generated',
     'codeGenerator': 'Azure.Ruby',
-	'nsPrefix': 'MyNamespace'
+	  'nsPrefix': 'MyNamespace'
   }, cb);
 })
 
@@ -220,7 +222,8 @@ gulp.task('regenerate:expected:csazure', function(cb){
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp',
-    'nsPrefix': 'Fixtures.Azure'
+    'nsPrefix': 'Fixtures.Azure',
+    'flatteningThreshold': '1'
   }, cb);
 });
 
@@ -239,7 +242,8 @@ gulp.task('regenerate:expected:cs', function(cb){
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'CSharp',
-    'nsPrefix': 'Fixtures'
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1'
   }, cb);
 });
 

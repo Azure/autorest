@@ -111,7 +111,7 @@ public interface Explicit {
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the int value
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> postRequiredIntegerParameter(int bodyParameter) throws ServiceException;
@@ -129,6 +129,7 @@ public interface Explicit {
      * Test explicitly optional integer. Please put null.
      *
      * @param bodyParameter the Integer value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> postOptionalIntegerParameter(Integer bodyParameter) throws ServiceException;
@@ -146,7 +147,7 @@ public interface Explicit {
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the IntWrapper value
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> postRequiredIntegerProperty(IntWrapper bodyParameter) throws ServiceException;
@@ -164,6 +165,7 @@ public interface Explicit {
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter the IntOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ServiceException;
@@ -181,7 +183,7 @@ public interface Explicit {
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the int value
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> postRequiredIntegerHeader(int headerParameter) throws ServiceException;
@@ -199,6 +201,7 @@ public interface Explicit {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the Integer value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> postOptionalIntegerHeader(Integer headerParameter) throws ServiceException;
@@ -216,7 +219,7 @@ public interface Explicit {
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the String value
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> postRequiredStringParameter(String bodyParameter) throws ServiceException;
@@ -234,6 +237,7 @@ public interface Explicit {
      * Test explicitly optional string. Please put null.
      *
      * @param bodyParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> postOptionalStringParameter(String bodyParameter) throws ServiceException;
@@ -251,7 +255,7 @@ public interface Explicit {
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the StringWrapper value
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> postRequiredStringProperty(StringWrapper bodyParameter) throws ServiceException;
@@ -269,6 +273,7 @@ public interface Explicit {
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter the StringOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ServiceException;
@@ -286,7 +291,7 @@ public interface Explicit {
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the String value
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> postRequiredStringHeader(String headerParameter) throws ServiceException;
@@ -304,6 +309,7 @@ public interface Explicit {
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> postOptionalStringHeader(String bodyParameter) throws ServiceException;
@@ -321,7 +327,7 @@ public interface Explicit {
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the Product value
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> postRequiredClassParameter(Product bodyParameter) throws ServiceException;
@@ -339,6 +345,7 @@ public interface Explicit {
      * Test explicitly optional complex object. Please put null.
      *
      * @param bodyParameter the Product value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> postOptionalClassParameter(Product bodyParameter) throws ServiceException;
@@ -356,7 +363,7 @@ public interface Explicit {
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ClassWrapper value
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> postRequiredClassProperty(ClassWrapper bodyParameter) throws ServiceException;
@@ -374,6 +381,7 @@ public interface Explicit {
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter the ClassOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ServiceException;
@@ -391,7 +399,7 @@ public interface Explicit {
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the List&lt;String&gt; value
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> postRequiredArrayParameter(List<String> bodyParameter) throws ServiceException;
@@ -409,6 +417,7 @@ public interface Explicit {
      * Test explicitly optional array. Please put null.
      *
      * @param bodyParameter the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> postOptionalArrayParameter(List<String> bodyParameter) throws ServiceException;
@@ -426,7 +435,7 @@ public interface Explicit {
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ArrayWrapper value
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ServiceException;
@@ -444,6 +453,7 @@ public interface Explicit {
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter the ArrayOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ServiceException;
@@ -461,7 +471,7 @@ public interface Explicit {
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the List&lt;String&gt; value
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> postRequiredArrayHeader(List<String> headerParameter) throws ServiceException;
@@ -479,6 +489,7 @@ public interface Explicit {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> postOptionalArrayHeader(List<String> headerParameter) throws ServiceException;

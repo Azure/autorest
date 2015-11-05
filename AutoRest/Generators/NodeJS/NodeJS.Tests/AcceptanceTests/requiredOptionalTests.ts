@@ -3,13 +3,13 @@
 
 'use strict';
 
-var should = require('should');
-var http = require('http');
-var util = require('util');
-var assert = require('assert');
-var msRest = require('ms-rest');
+import should = require('should');
+import http = require('http');
+import util = require('util');
+import assert = require('assert');
+import msRest = require('ms-rest');
 
-var reqOptClient = require('../Expected/AcceptanceTests/RequiredOptional/autoRestRequiredOptionalTestService');
+import reqOptClient = require('../Expected/AcceptanceTests/RequiredOptional/autoRestRequiredOptionalTestService');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
@@ -74,7 +74,7 @@ describe('nodejs', function () {
       });
 
       it('should throw error on null values for required integer properties', function (done) {
-        testClient.explicit.postRequiredIntegerProperty({ 'value': null }, function (error, result) {
+        testClient.explicit.postRequiredIntegerProperty(<any>{ 'value': null }, function (error, result) {
           should.exist(error);
           error.message.should.containEql('value');
           error.message.should.containEql('cannot be null or undefined');
@@ -83,7 +83,7 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional integer properties', function (done) {
-        testClient.explicit.postOptionalIntegerProperty({ 'value': null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalIntegerProperty(null, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -123,7 +123,7 @@ describe('nodejs', function () {
       });
 
       it('should throw error on null values for required string properties', function (done) {
-        testClient.explicit.postRequiredStringProperty({ 'value': null }, function (error, result) {
+        testClient.explicit.postRequiredStringProperty(<any>{ 'value': null }, function (error, result) {
           should.exist(error);
           error.message.should.containEql('value');
           error.message.should.containEql('cannot be null or undefined');
@@ -132,7 +132,7 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional string properties', function (done) {
-        testClient.explicit.postOptionalStringProperty({ 'value': null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalStringProperty(null, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -173,7 +173,7 @@ describe('nodejs', function () {
       });
 
       it('should throw error on null values for required class properties', function (done) {
-        testClient.explicit.postRequiredClassProperty({ 'value': null }, function (error, result) {
+        testClient.explicit.postRequiredClassProperty(<any>{ 'value': null }, function (error, result) {
           should.exist(error);
           error.message.should.containEql('value');
           error.message.should.containEql('cannot be null or undefined');
@@ -182,7 +182,7 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional class properties', function (done) {
-        testClient.explicit.postOptionalClassProperty({ 'value': null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalClassProperty(null, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -207,7 +207,7 @@ describe('nodejs', function () {
       });
 
       it('should throw error on null values for required array properties', function (done) {
-        testClient.explicit.postRequiredArrayProperty({ 'value': null }, function (error, result) {
+        testClient.explicit.postRequiredArrayProperty(<any>{ 'value': null }, function (error, result) {
           should.exist(error);
           error.message.should.containEql('value');
           error.message.should.containEql('cannot be null or undefined');
@@ -216,7 +216,7 @@ describe('nodejs', function () {
       });
 
       it('should accept null values for optional array properties', function (done) {
-        testClient.explicit.postOptionalArrayProperty({ 'value': null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalArrayProperty(null, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();

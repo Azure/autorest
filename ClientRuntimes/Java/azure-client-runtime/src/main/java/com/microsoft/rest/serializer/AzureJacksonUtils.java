@@ -14,9 +14,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * functionality useful for Azure operations.
  */
 public final class AzureJacksonUtils extends JacksonUtils {
+    private ObjectMapper azureObjectMapper;
+
     @Override
     public ObjectMapper getObjectMapper() {
-        return super.getObjectMapper()
-                .registerModule(FlatteningDeserializer.getModule());
+        if (azureObjectMapper == null) {
+            azureObjectMapper = new ObjectMapper();
+            initializeObjectMapper(azureObjectMapper);
+            azureObjectMapper
+                    .registerModule(FlatteningDeserializer.getModule())
+                    .registerModule(FlatteningSerializer.getModule());
+        }
+        return azureObjectMapper;
     }
 }

@@ -34,9 +34,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// Put complex types with dictionary property
         /// </summary>
-        /// <param name='complexBody'>
-        /// Please put a dictionary with 5 key-value pairs: "txt":"notepad",
-        /// "bmp":"mspaint", "xls":"excel", "exe":"", "":null
+        /// <param name='defaultProgram'>
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -44,7 +42,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutValidWithHttpMessagesAsync(DictionaryWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutValidWithHttpMessagesAsync(IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with dictionary property which is empty
         /// </summary>
@@ -58,8 +56,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// Put complex types with dictionary property which is empty
         /// </summary>
-        /// <param name='complexBody'>
-        /// Please put an empty dictionary
+        /// <param name='defaultProgram'>
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -67,7 +64,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutEmptyWithHttpMessagesAsync(DictionaryWrapper complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutEmptyWithHttpMessagesAsync(IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get complex types with dictionary property which is null
         /// </summary>
