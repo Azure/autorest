@@ -12,7 +12,7 @@ package fixtures.head;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.CloudError;
-import com.microsoft.rest.serializer.AzureJacksonHelper;
+import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -70,7 +70,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Boolean> head200Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Boolean>()
+        return new ServiceResponseBuilder<Boolean>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(404, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
@@ -115,7 +115,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Boolean> head204Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Boolean>(new AzureJacksonHelper())
+        return new ServiceResponseBuilder<Boolean>(new AzureJacksonUtils())
                 .register(204, new TypeToken<Void>(){}.getType())
                 .register(404, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
@@ -160,7 +160,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Boolean> head404Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Boolean>(new AzureJacksonHelper())
+        return new ServiceResponseBuilder<Boolean>(new AzureJacksonUtils())
                 .register(204, new TypeToken<Void>(){}.getType())
                 .register(404, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())

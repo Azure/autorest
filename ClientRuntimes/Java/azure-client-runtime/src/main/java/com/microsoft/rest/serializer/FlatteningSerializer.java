@@ -7,7 +7,6 @@
 
 package com.microsoft.rest.serializer;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.BeanDescription;
@@ -24,10 +23,8 @@ import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
 import com.fasterxml.jackson.databind.ser.ResolvableSerializer;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.microsoft.rest.BaseResource;
-import org.apache.commons.lang3.reflect.FieldUtils;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -64,7 +61,7 @@ public class FlatteningSerializer<T> extends StdSerializer<T> implements Resolva
             return;
         }
 
-        ObjectMapper mapper = new JacksonHelper().getObjectMapper();
+        ObjectMapper mapper = new JacksonUtils().getObjectMapper();
         ObjectNode root = mapper.valueToTree(value);
         ObjectNode res = root.deepCopy();
         Iterator<Map.Entry<String, JsonNode>> fields = root.fields();

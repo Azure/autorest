@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * A serialization helper class wrapped around {@link JacksonConverterFactory} and {@link ObjectMapper}.
  */
-public class JacksonHelper {
+public class JacksonUtils {
     private static ObjectMapper mapper;
     private static JacksonConverterFactory converterFactory;
 
@@ -78,7 +78,7 @@ public class JacksonHelper {
         if (object == null) return null;
         try {
             StringWriter writer = new StringWriter();
-            new JacksonHelper().getObjectMapper().writeValue(writer, object);
+            new JacksonUtils().getObjectMapper().writeValue(writer, object);
             return writer.toString();
         } catch (Exception e) {
             return null;

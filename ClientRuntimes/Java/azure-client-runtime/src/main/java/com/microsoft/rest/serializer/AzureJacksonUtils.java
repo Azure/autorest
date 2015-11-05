@@ -10,10 +10,10 @@ package com.microsoft.rest.serializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * A serialization helper class overriding {@link JacksonHelper} with extra
+ * A serialization helper class overriding {@link JacksonUtils} with extra
  * functionality useful for Azure operations.
  */
-public final class AzureJacksonHelper extends JacksonHelper {
+public final class AzureJacksonUtils extends JacksonUtils {
     private ObjectMapper azureObjectMapper;
 
     @Override

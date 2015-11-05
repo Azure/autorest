@@ -124,7 +124,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                return "new AzureJacksonHelper()";
+                return "new AzureJacksonUtils()";
             }
         }
 
@@ -164,7 +164,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 else
                 {
-                    imports.Add("com.microsoft.rest.serializer.AzureJacksonHelper");
+                    imports.Add("com.microsoft.rest.serializer.AzureJacksonUtils");
                 }
                 return imports;
             }

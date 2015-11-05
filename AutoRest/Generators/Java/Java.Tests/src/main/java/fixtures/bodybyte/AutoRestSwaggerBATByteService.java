@@ -10,6 +10,8 @@
 
 package fixtures.bodybyte;
 
+import java.util.List;
+import com.squareup.okhttp.Interceptor;
 
 /**
  * The interface for AutoRestSwaggerBATByteService class.
@@ -17,9 +19,15 @@ package fixtures.bodybyte;
 public interface AutoRestSwaggerBATByteService {
     /**
      * Gets the URI used as the base for all cloud service requests.
-     * @return The BaseUri value.
+     * @return the BaseUri value.
      */
     String getBaseUri();
+
+    /**
+     * Gets the list of interceptors the OkHttp client will execute.
+     * @return the list of interceptors.
+     */
+    List<Interceptor> getClientInterceptors();
 
     /**
      * Gets the ByteOperations object to access its operations.
