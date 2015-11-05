@@ -3,6 +3,8 @@
 
 using System;
 using System.Linq;
+using System.Linq.Expressions;
+using Microsoft.Rest.Azure;
 using Microsoft.Rest.Azure.OData;
 using Newtonsoft.Json;
 using Xunit;
@@ -39,6 +41,28 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         {
             var result = FilterString.Generate<Param1>(p => p.Val != 20);
             Assert.Equal("Val ne 20", result);
+        }
+
+        [Fact]
+        public void CompositePropertyIsSupported()
+        {
+            var result = FilterString.Generate<Param1>(p => p.Param2.Bar == "test" && 
+                p.Param2.Param3.Bar == "test2");
+            Assert.Equal("param2/bar eq 'test' and param2/param3/bar eq 'test2'", result);
+        }
+
+        [Fact]
+        public void NullExpressionReturnsExptyString()
+        {
+            var result = FilterString.Generate<Param1>(null);
+            Assert.Equal("", result);
+        }
+
+        [Fact]
+        public void ResourcePropertyIsSupported()
+        {
+            var result = FilterString.Generate<AzureResource>(p => p.Size > 10);
+            Assert.Equal("properties/size gt 10", result);
         }
 
         [Fact]
@@ -103,14 +127,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void EndsWithWorksInODataFilter()
         {
-            var param = new InputParam2
-            {
-                Param = new InputParam1
-                {
-                    Value = "foo"
-                }
-            };
-            var result = FilterString.Generate<Param1>(p => p.Foo.EndsWith(param.Param.Value));
+            var result = FilterString.Generate<Param1>(p => p.Foo.EndsWith("foo"));
             Assert.Equal("endswith(foo, 'foo')", result);
         }
 
@@ -168,12 +185,65 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void EncodingTheParameters()
         {
-            var param = new Param1
+            var param = new InputParam1
             {
-                Foo = "Microsoft.Web/sites"
+                Value = "Microsoft.Web/sites"
             };
-            var result = FilterString.Generate<Param1>(p => p.Foo == param.Foo);
+            var result = FilterString.Generate<Param1>(p => p.Foo == param.Value);
             Assert.Equal("foo eq 'Microsoft.Web%2Fsites'", result);
+        }
+
+        [Fact]
+        public void ODataQuerySupportsAllParameters()
+        {
+            var query = new ODataQuery<Param1>(p => p.Foo == "bar")
+            {
+                Expand = "param1",
+                OrderBy = "d",
+                Skip = 10,
+                Top = 100
+            };
+            Assert.Equal("$filter=foo eq 'bar'&$orderby=d&$expand=param1&$top=100&$skip=10", query.ToString());
+        }
+
+        [Fact]
+        public void ODataQuerySupportsEmptyState()
+        {
+            var query = new ODataQuery<Param1>();
+            Assert.Equal("", query.ToString());
+        }
+
+        [Fact]
+        public void ODataQuerySupportsPartialState()
+        {
+            var query = new ODataQuery<Param1>(p => p.Foo == "bar")
+            {
+                Top = 100
+            };
+            Assert.Equal("$filter=foo eq 'bar'&$top=100", query.ToString());
+        }
+
+        [Fact]
+        public void ODataQuerySupportsImplicitConversionFromFilterString()
+        {
+            ODataQuery<Param1> query = "foo eq 'bar'";
+            query.Top = 100;
+            Assert.Equal("$filter=foo eq 'bar'&$top=100", query.ToString());
+        }
+
+        [Fact]
+        public void ODataQuerySupportsImplicitConversionFromFullFilterString()
+        {
+            ODataQuery<Param1> query = "$filter=foo eq 'bar'";
+            query.Top = 100;
+            Assert.Equal("$filter=foo eq 'bar'&$top=100", query.ToString());
+        }
+
+        [Fact]
+        public void ODataQuerySupportsImplicitConversionFromQueryString()
+        {
+            ODataQuery<Param1> query = "$filter=foo eq 'bar'&$top=100";
+            Assert.Equal("$filter=foo eq 'bar'&$top=100", query.ToString());
         }
     }
 
@@ -188,6 +258,32 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         public DateTime Date2 { get; set; }
         [JsonProperty("vals")]
         public string[] Values { get; set; }
+        [JsonProperty("param2")]
+        public Param2 Param2 { get; set; }
+    }
+
+    public class Param2
+    {
+        [JsonProperty("bar")]
+        public string Bar { get; set; }
+
+        [JsonProperty("param3")]
+        public Param3 Param3 { get; set; }
+    }
+
+    public class Param3
+    {
+        [JsonProperty("bar")]
+        public string Bar { get; set; }
+    }
+
+    public class AzureResource : IResource
+    {
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        [JsonProperty("properties.size")]
+        public int Size { get; set; }
     }
 
     public class InputParam1

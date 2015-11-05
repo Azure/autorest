@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Microsoft.Rest.Azure.OData
@@ -19,7 +20,11 @@ namespace Microsoft.Rest.Azure.OData
         /// <returns></returns>
         public static string Generate<T>(Expression<Func<T, bool>> filter)
         {
-            UrlExpressionVisitor visitor = new UrlExpressionVisitor();
+            if (filter == null || !filter.Parameters.Any())
+            {
+                return string.Empty;
+            }
+            var visitor = new UrlExpressionVisitor(filter.Parameters.First());
             visitor.Visit(filter);
             return visitor.ToString();
         }

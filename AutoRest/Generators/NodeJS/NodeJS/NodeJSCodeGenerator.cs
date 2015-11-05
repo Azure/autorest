@@ -15,7 +15,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 {
     public class NodeJSCodeGenerator : CodeGenerator
     {
-        private const string ClientRuntimePackage = "ms-rest version 1.1.0";
+        private const string ClientRuntimePackage = "ms-rest version 1.2.0";
         private const bool DisableTypeScriptGeneration = false;    // Change to true if you want to no longer generate the 3 d.ts files, for some reason
 
         public NodeJsCodeNamer Namer { get; private set; }
