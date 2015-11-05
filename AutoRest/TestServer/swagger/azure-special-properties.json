@@ -744,7 +744,7 @@
             "required": true,
             "type": "string",
             "description": "The fooRequestId",
-            "x-ms-client-request-id": { "value": "true" },
+            "x-ms-client-request-id": { "value": "true" }
           }
         ],
         "tags": [

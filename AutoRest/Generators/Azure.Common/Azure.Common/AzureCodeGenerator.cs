@@ -37,6 +37,12 @@ namespace Microsoft.Rest.Generator.Azure
         private const string SubResourceType = "SubResource";
         private const string ResourceProperties = "Properties";
 
+        /// <summary>
+        /// Defines the possible set of valid HTTP status codes for HEAD requests.
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
+        public static readonly Func<HttpStatusCode, bool> HttpHeadStatusCodeSuccessFunc = code => (int)code >= 200 && (int)code < 300;
+
         private static IEnumerable<string> ResourcePropertyNames =  
             new List<string>
             { 
@@ -83,8 +89,10 @@ namespace Microsoft.Rest.Generator.Azure
             foreach (var method in serviceClient.Methods.Where(m => m.HttpMethod == HttpMethod.Head)
                                                               .Where(m => m.ReturnType.Body == null))
             {
+                HttpStatusCode successStatusCode = method.Responses.Keys.FirstOrDefault(AzureCodeGenerator.HttpHeadStatusCodeSuccessFunc);
+
                 if (method.Responses.Count == 2 &&
-                    method.Responses.ContainsKey(HttpStatusCode.NoContent) &&
+                    successStatusCode != default(HttpStatusCode) &&
                     method.Responses.ContainsKey(HttpStatusCode.NotFound))
                 {
                     method.ReturnType = new Response(PrimaryType.Boolean, method.ReturnType.Headers);

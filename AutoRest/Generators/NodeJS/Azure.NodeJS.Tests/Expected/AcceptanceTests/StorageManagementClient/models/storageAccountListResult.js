@@ -26,54 +26,10 @@ var util = require('util');
  * Currently this will always be empty as the API does not support pagination.
  * 
  */
-function StorageAccountListResult(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value) {
-      var tempParametersvalue = [];
-      parameters.value.forEach(function(element) {
-        if (element) {
-          element = new models['StorageAccount'](element);
-        }
-        tempParametersvalue.push(element);
-      });
-      this.value = tempParametersvalue;
-    }
-    if (parameters.nextLink !== undefined) {
-      this.nextLink = parameters.nextLink;
-    }
-  }    
+function StorageAccountListResult() {
 }
 
-
-/**
- * Validate the payload against the StorageAccountListResult schema
- *
- * @param {JSON} payload
- *
- */
-StorageAccountListResult.prototype.serialize = function () {
-  var payload = {};
-  if (util.isArray(this['value'])) {
-    payload['value'] = [];
-    for (var i = 0; i < this['value'].length; i++) {
-      if (this['value'][i]) {
-        if (payload['value'] === null || payload['value'] === undefined) {
-          payload['value'] = {};
-        }
-        payload['value'][i] = this['value'][i].serialize();
-      }
-    }
-  }
-
-  if (this['nextLink'] !== null && this['nextLink'] !== undefined) {
-    if (typeof this['nextLink'].valueOf() !== 'string') {
-      throw new Error('this[\'nextLink\'] must be of type string.');
-    }
-    payload['nextLink'] = this['nextLink'];
-  }
-
-  return payload;
-};
+util.inherits(StorageAccountListResult, Array);
 
 /**
  * Deserialize the instance to StorageAccountListResult schema
@@ -84,18 +40,17 @@ StorageAccountListResult.prototype.serialize = function () {
 StorageAccountListResult.prototype.deserialize = function (instance) {
   if (instance) {
     if (instance['value']) {
-      var tempInstancevalue = [];
-      instance['value'].forEach(function(element1) {
-        if (element1) {
-          element1 = new models['StorageAccount']().deserialize(element1);
+      var deserializedInstancevalue = [];
+        instance['value'].forEach(function(element) {
+        if (element) {
+          element = new models['StorageAccount']().deserialize(element);
         }
-        tempInstancevalue.push(element1);
+        deserializedInstancevalue.push(element);
       });
-      this['value'] = tempInstancevalue;
+      Array.prototype.push.apply(this, deserializedInstancevalue);
     }
-
     if (instance['nextLink'] !== undefined) {
-      this['nextLink'] = instance['nextLink'];
+      this['nextLink'] = instance.nextLink;
     }
   }
 

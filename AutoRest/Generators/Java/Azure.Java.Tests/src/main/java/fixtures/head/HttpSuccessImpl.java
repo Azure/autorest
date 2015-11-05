@@ -32,6 +32,51 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
+     * Return 200 status code if successful
+     *
+     * @return the Boolean object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public ServiceResponse<Boolean> head200() throws ServiceException {
+        try {
+            Call<Void> call = service.head200(this.client.getAcceptLanguage());
+            return head200Delegate(call.execute(), null);
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
+
+    /**
+     * Return 200 status code if successful
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public Call<Void> head200Async(final ServiceCallback<Boolean> serviceCallback) {
+        Call<Void> call = service.head200(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
+            @Override
+            public void onResponse(Response<Void> response, Retrofit retrofit) {
+                try {
+                    serviceCallback.success(head200Delegate(response, retrofit));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<Boolean> head200Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
+        return new ServiceResponseBuilder<Boolean>()
+                .register(200, new TypeToken<Void>(){}.getType())
+                .register(404, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<CloudError>(){}.getType())
+                .buildEmpty(response, retrofit);
+    }
+
+    /**
      * Return 204 status code if successful
      *
      * @return the Boolean object if successful.

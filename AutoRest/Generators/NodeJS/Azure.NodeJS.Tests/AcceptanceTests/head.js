@@ -30,6 +30,14 @@ describe('nodejs', function () {
       testOptions.noRetryPolicy = true;
       var testClient = new headClient(credentials, baseUri, clientOptions);
 
+      it('should return true for 200 status code', function (done) {
+        testClient.httpSuccess.head200(function (error, result) {
+          should.not.exist(error);
+          result.should.be.exactly(true);
+          done();
+        });
+      });
+
       it('should return true for 204 status code', function (done) {
         testClient.httpSuccess.head204(function (error, result) {
           should.not.exist(error);

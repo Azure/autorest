@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using Microsoft.Rest.Generator.Azure.NodeJS.Properties;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby;
@@ -166,7 +167,8 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
                 if (this.HttpMethod == HttpMethod.Head && this.ReturnType.Body != null)
                 {
-                    sb.AppendLine("result.body = (status_code == 204)");
+                    HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureCodeGenerator.HttpHeadStatusCodeSuccessFunc);
+                    sb.AppendLine("result.body = (status_code == {0})", (int)code);
                 }
 
                 sb.AppendLine(

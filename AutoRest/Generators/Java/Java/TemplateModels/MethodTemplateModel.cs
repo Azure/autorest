@@ -46,7 +46,7 @@ namespace Microsoft.Rest.Generator.Java
         /// <summary>
         /// Generate the method parameter declarations for a method
         /// </summary>
-        public string MethodParameterApiDeclaration
+        public virtual string MethodParameterApiDeclaration
         {
             get
             {
