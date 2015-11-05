@@ -17,6 +17,11 @@ describe 'Head' do
     @client = AutoRestHeadTestService.new(@credentials, @base_url)
   end
 
+  it 'send head 200' do
+    result = @client.http_success.head200().value!
+    expect(result.body).to be(true)
+  end
+  
   it 'send head 204' do
     result = @client.http_success.head204().value!
     expect(result.body).to be(true)
