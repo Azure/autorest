@@ -39,7 +39,7 @@ public class ServiceResponseBuilder<T> {
      * @param deserializer the serialization utils to use for deserialization operations
      */
     public ServiceResponseBuilder(JacksonHelper deserializer) {
-        this(deserializer, new HashMap<>());
+        this(deserializer, new HashMap<Integer, TypeReference<?>>());
     }
 
     /**
