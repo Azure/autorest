@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Rest.Azure.Properties;
+using Microsoft.Rest.TransientFaultHandling;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -17,6 +18,32 @@ namespace Microsoft.Rest.Azure
 {
     public static class AzureClientExtensions
     {
+        /// <summary>
+        /// Gets operation result for PUT and PATCH operations.
+        /// </summary>
+        /// <typeparam name="TBody">Type of the resource body</typeparam>
+        /// <typeparam name="THeader">Type of the resource header</typeparam>
+        /// <param name="client">IAzureClient</param>
+        /// <param name="response">Response from the begin operation</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Response with created resource</returns>
+        public static Task<AzureOperationResponse<TBody>> GetPutOrPatchOperationResultAsync<TBody, THeader>(
+            this IAzureClient client,
+            AzureOperationResponse<TBody, THeader> response,
+            Dictionary<string, List<string>> customHeaders,
+            CancellationToken cancellationToken) where TBody : class
+        {
+            var headerlessResponse = new AzureOperationResponse<TBody>
+            {
+                Body = response.Body,
+                Request = response.Request,
+                RequestId = response.RequestId,
+                Response = response.Response
+            };
+            return GetPutOrPatchOperationResultAsync(client, headerlessResponse, customHeaders, cancellationToken);
+        }
+
         /// <summary>
         /// Gets operation result for PUT and PATCH operations.
         /// </summary>
@@ -82,6 +109,32 @@ namespace Microsoft.Rest.Azure
             }
 
             return pollingState.AzureOperationResponse;
+        }
+
+        /// <summary>
+        /// Gets operation result for DELETE and POST operations.
+        /// </summary>
+        /// <typeparam name="TBody">Type of the resource body</typeparam>
+        /// <typeparam name="THeader">Type of the resource header</typeparam>
+        /// <param name="client">IAzureClient</param>
+        /// <param name="response">Response from the begin operation</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Operation response</returns>
+        public static Task<AzureOperationResponse<TBody>> GetPostOrDeleteOperationResultAsync<TBody,THeader>(
+            this IAzureClient client,
+            AzureOperationResponse<TBody, THeader> response,
+            Dictionary<string, List<string>> customHeaders,
+            CancellationToken cancellationToken) where TBody : class
+        {
+            var headerlessResponse = new AzureOperationResponse<TBody>
+            {
+                Body = response.Body,
+                Request = response.Request,
+                RequestId = response.RequestId,
+                Response = response.Response
+            };
+            return GetPostOrDeleteOperationResultAsync(client, headerlessResponse, customHeaders, cancellationToken);
         }
 
         /// <summary>
