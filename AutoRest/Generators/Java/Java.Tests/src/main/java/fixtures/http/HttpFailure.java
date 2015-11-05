@@ -34,7 +34,7 @@ public interface HttpFailure {
     /**
      * Get empty error form server
      *
-     * @return the Boolean object if successful.
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Boolean> getEmptyError() throws ServiceException;

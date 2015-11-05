@@ -30,7 +30,7 @@ public class ServiceResponseBuilder<T> {
      * Create a ServiceResponseBuilder instance.
      */
     public ServiceResponseBuilder() {
-        this(new JacksonHelper(), new HashMap<>());
+        this(new JacksonHelper());
     }
 
     /**

@@ -63,7 +63,7 @@ public interface IntOperations {
     /**
      * Get null Int value
      *
-     * @return the Integer object if successful.
+     * @return the Integer object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Integer> getNull() throws ServiceException;
@@ -79,7 +79,7 @@ public interface IntOperations {
     /**
      * Get invalid Int value
      *
-     * @return the Integer object if successful.
+     * @return the Integer object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Integer> getInvalid() throws ServiceException;
@@ -95,7 +95,7 @@ public interface IntOperations {
     /**
      * Get overflow Int32 value
      *
-     * @return the Integer object if successful.
+     * @return the Integer object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Integer> getOverflowInt32() throws ServiceException;
@@ -111,7 +111,7 @@ public interface IntOperations {
     /**
      * Get underflow Int32 value
      *
-     * @return the Integer object if successful.
+     * @return the Integer object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Integer> getUnderflowInt32() throws ServiceException;
@@ -127,7 +127,7 @@ public interface IntOperations {
     /**
      * Get overflow Int64 value
      *
-     * @return the Long object if successful.
+     * @return the Long object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Long> getOverflowInt64() throws ServiceException;
@@ -143,7 +143,7 @@ public interface IntOperations {
     /**
      * Get underflow Int64 value
      *
-     * @return the Long object if successful.
+     * @return the Long object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Long> getUnderflowInt64() throws ServiceException;
@@ -160,6 +160,7 @@ public interface IntOperations {
      * Put max int32 value
      *
      * @param intBody the int value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putMax32(int intBody) throws ServiceException;
@@ -177,6 +178,7 @@ public interface IntOperations {
      * Put max int64 value
      *
      * @param intBody the long value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putMax64(long intBody) throws ServiceException;
@@ -194,6 +196,7 @@ public interface IntOperations {
      * Put min int32 value
      *
      * @param intBody the int value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putMin32(int intBody) throws ServiceException;
@@ -211,6 +214,7 @@ public interface IntOperations {
      * Put min int64 value
      *
      * @param intBody the long value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putMin64(long intBody) throws ServiceException;

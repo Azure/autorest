@@ -40,7 +40,7 @@ public interface Polymorphicrecursive {
     /**
      * Get complex types that are polymorphic and have recursive references
      *
-     * @return the Fish object if successful.
+     * @return the Fish object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Fish> getValid() throws ServiceException;
@@ -109,6 +109,7 @@ public interface Polymorphicrecursive {
          }
      ]
  }
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putValid(Fish complexBody) throws ServiceException;

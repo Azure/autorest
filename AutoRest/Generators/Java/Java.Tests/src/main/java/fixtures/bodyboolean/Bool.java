@@ -51,7 +51,7 @@ public interface Bool {
     /**
      * Get true Boolean value
      *
-     * @return the Boolean object if successful.
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Boolean> getTrue() throws ServiceException;
@@ -68,6 +68,7 @@ public interface Bool {
      * Set Boolean value true
      *
      * @param boolBody the boolean value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putTrue(boolean boolBody) throws ServiceException;
@@ -84,7 +85,7 @@ public interface Bool {
     /**
      * Get false Boolean value
      *
-     * @return the Boolean object if successful.
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Boolean> getFalse() throws ServiceException;
@@ -101,6 +102,7 @@ public interface Bool {
      * Set Boolean value false
      *
      * @param boolBody the boolean value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putFalse(boolean boolBody) throws ServiceException;
@@ -117,7 +119,7 @@ public interface Bool {
     /**
      * Get null Boolean value
      *
-     * @return the Boolean object if successful.
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Boolean> getNull() throws ServiceException;
@@ -133,7 +135,7 @@ public interface Bool {
     /**
      * Get invalid Boolean value
      *
-     * @return the Boolean object if successful.
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Boolean> getInvalid() throws ServiceException;

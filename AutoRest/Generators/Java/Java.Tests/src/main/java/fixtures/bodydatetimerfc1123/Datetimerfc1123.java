@@ -61,7 +61,7 @@ public interface Datetimerfc1123 {
     /**
      * Get null datetime value
      *
-     * @return the DateTimeRfc1123 object if successful.
+     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<DateTimeRfc1123> getNull() throws ServiceException;
@@ -77,7 +77,7 @@ public interface Datetimerfc1123 {
     /**
      * Get invalid datetime value
      *
-     * @return the DateTimeRfc1123 object if successful.
+     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<DateTimeRfc1123> getInvalid() throws ServiceException;
@@ -93,7 +93,7 @@ public interface Datetimerfc1123 {
     /**
      * Get overflow datetime value
      *
-     * @return the DateTimeRfc1123 object if successful.
+     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<DateTimeRfc1123> getOverflow() throws ServiceException;
@@ -109,7 +109,7 @@ public interface Datetimerfc1123 {
     /**
      * Get underflow datetime value
      *
-     * @return the DateTimeRfc1123 object if successful.
+     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<DateTimeRfc1123> getUnderflow() throws ServiceException;
@@ -126,6 +126,7 @@ public interface Datetimerfc1123 {
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT
      *
      * @param datetimeBody the DateTimeRfc1123 value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putUtcMaxDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException;
@@ -142,7 +143,7 @@ public interface Datetimerfc1123 {
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt
      *
-     * @return the DateTimeRfc1123 object if successful.
+     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<DateTimeRfc1123> getUtcLowercaseMaxDateTime() throws ServiceException;
@@ -158,7 +159,7 @@ public interface Datetimerfc1123 {
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT
      *
-     * @return the DateTimeRfc1123 object if successful.
+     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<DateTimeRfc1123> getUtcUppercaseMaxDateTime() throws ServiceException;
@@ -175,6 +176,7 @@ public interface Datetimerfc1123 {
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT
      *
      * @param datetimeBody the DateTimeRfc1123 value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putUtcMinDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException;
@@ -191,7 +193,7 @@ public interface Datetimerfc1123 {
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT
      *
-     * @return the DateTimeRfc1123 object if successful.
+     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<DateTimeRfc1123> getUtcMinDateTime() throws ServiceException;
