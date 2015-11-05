@@ -29,7 +29,7 @@ from . import logger
 
 def raise_with_traceback(exception, message="", *args):
     exc_type, exc_value, exc_traceback = sys.exc_info()
-    exc_msg = " {}: {}".format(exc_type.__class__.__name__, exc_value)
+    exc_msg = " {}: {}".format(exc_type.__name__, exc_value)
 
     error = exception(str(message) + exc_msg, *args)
 
