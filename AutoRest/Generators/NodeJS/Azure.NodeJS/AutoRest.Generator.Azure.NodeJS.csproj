@@ -54,6 +54,18 @@
     <Compile Include="Templates\PageModelTemplate.cs">
       <DependentUpon>PageModelTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\AzureMethodGroupTemplateTS.cs">
+      <DependentUpon>AzureMethodGroupTemplateTS.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureMethodTemplateTS.cs">
+      <DependentUpon>AzureMethodTemplateTS.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureModelIndexTemplateTS.cs">
+      <DependentUpon>AzureModelIndexTemplateTS.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureServiceClientTemplateTS.cs">
+      <DependentUpon>AzureServiceClientTemplateTS.cshtml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
@@ -81,6 +93,10 @@
     <None Include="Templates\AzureServiceClientTemplate.cshtml" />
     <None Include="Templates\AzureModelIndexTemplate.cshtml" />
     <None Include="Templates\PageModelTemplate.cshtml" />
+    <None Include="Templates\AzureMethodTemplateTS.cshtml" />
+    <None Include="Templates\AzureMethodGroupTemplateTS.cshtml" />
+    <None Include="Templates\AzureServiceClientTemplateTS.cshtml" />
+    <None Include="Templates\AzureModelIndexTemplateTS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\..\..\Tools\CustomDictionary.xml">

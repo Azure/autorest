@@ -290,6 +290,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 return "stream.Readable";
             else if (primary == PrimaryType.TimeSpan)
                 return "moment.Duration"; //TODO: test this, add include for it
+            else if (primary == PrimaryType.Credentials)
+                return "msRest.ServiceClientCredentials"; //TODO: test this, add include for it
             else {
                 throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
                     "Type '{0}' not implemented", primary));
@@ -485,6 +487,9 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         /// <summary>
         /// Return the TypeScript type (as a string) for specified type.
         /// </summary>
+        /// <param name="type">IType to query</param>
+        /// <param name="inModelsModule">Pass true if generating the code for the models module, thus model types don't need a "models." prefix</param>
+        /// <returns>TypeScript type string for type</returns>
         public static string TSType(this IType type, bool inModelsModule) {
             CompositeType composite = type as CompositeType;
             SequenceType sequence = type as SequenceType;
@@ -503,9 +508,14 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             else if (composite != null)
             {
-                if (inModelsModule)
-                    tsType = composite.Name;
-                else tsType = "models." + composite.Name;
+                // ServiceClientCredentials starts with the "msRest." prefix, so strip msRest./msRestAzure. as we import those
+                // types with no module prefix needed
+                var compositeName = composite.Name;
+                if (compositeName.StartsWith("msRest.") || compositeName.StartsWith("msRestAzure."))
+                    tsType = compositeName.Substring(compositeName.IndexOf('.') + 1);
+                else if (inModelsModule || compositeName.Contains('.'))
+                    tsType = compositeName;
+                else tsType = "models." + compositeName;
             }
             else if (sequence != null)
             {

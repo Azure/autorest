@@ -192,6 +192,15 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             };
             await Write(serviceClientTemplate, serviceClient.Name.ToCamelCase() + ".js");
 
+            if (!DisableTypeScriptGeneration)
+            {
+                var serviceClientTemplateTS = new AzureServiceClientTemplateTS
+                {
+                    Model = serviceClientTemplateModel,
+                };
+                await Write(serviceClientTemplateTS, serviceClient.Name.ToCamelCase() + ".d.ts");
+            }
+
             //Models
             if (serviceClient.ModelTypes.Any())
             {
@@ -215,6 +224,16 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                     Model = serviceClientTemplateModel
                 };
                 await Write(modelIndexTemplate, Path.Combine("models", "index.js"));
+
+                if (!DisableTypeScriptGeneration)
+                {
+                    var modelIndexTemplateTS = new AzureModelIndexTemplateTS
+                    {
+                        Model = serviceClientTemplateModel
+                    };
+                    await Write(modelIndexTemplateTS, Path.Combine("models", "index.d.ts"));
+                }
+
                 foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
                 {
                     var modelTemplate = new ModelTemplate
@@ -233,6 +252,16 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                     Model = serviceClientTemplateModel
                 };
                 await Write(methodGroupIndexTemplate, Path.Combine("operations", "index.js"));
+
+                if (!DisableTypeScriptGeneration)
+                {
+                    var methodGroupIndexTemplateTS = new MethodGroupIndexTemplateTS
+                    {
+                        Model = serviceClientTemplateModel
+                    };
+                    await Write(methodGroupIndexTemplateTS, Path.Combine("operations", "index.d.ts"));
+                }
+                
                 foreach (var methodGroupModel in serviceClientTemplateModel.MethodGroupModels)
                 {
                     var methodGroupTemplate = new AzureMethodGroupTemplate
