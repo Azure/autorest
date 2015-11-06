@@ -224,6 +224,54 @@ namespace @Settings.Namespace
         }
         @:}
         @:@EmptyLine
+        
+        @:/// <summary>
+        @:/// Initializes a new instance of the @Model.Name class.
+        @:/// </summary>
+        @:/// <param name='baseUri'>
+        @:/// Optional. The base URI of the service.
+        @:/// </param>
+        foreach (var param in parameters)
+        {
+        @:/// <param name='@(param.Name.ToCamelCase())'>
+        @:/// Required. @(param.Documentation)
+        @:/// </param>
+        }
+        @:/// <param name='rootHandler'>
+        @:/// Optional. The http client handler used to handle http transport.
+        @:/// </param>
+        @:/// <param name='handlers'>
+        @:/// Optional. The delegating handlers to add to the http client pipeline.
+        @:/// </param>
+        @:public @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        @:{
+        @:    if (baseUri == null)
+        @:    {
+        @:        throw new ArgumentNullException("baseUri");
+        @:    }
+        foreach (var param in parameters)
+        {
+        @:    if (@(param.Name.ToCamelCase()) == null)
+        @:    {
+        @:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
+        @:    }
+        }
+        @:    this.BaseUri = baseUri;
+        foreach (var param in parameters)
+        {
+        @:    this.@(param.Name) = @(param.Name.ToCamelCase());
+
+            @if ("Credentials".Equals(param.Name, StringComparison.OrdinalIgnoreCase) &&
+            "ServiceClientCredentials".Equals(param.Type.Name, StringComparison.OrdinalIgnoreCase))
+            {
+            @:if (this.Credentials != null)
+            @:{
+            @:    this.Credentials.InitializeServiceClient(this);
+            @:}
+            }
+        }
+        @:}
+        @:@EmptyLine
         }
     
         /// <summary>

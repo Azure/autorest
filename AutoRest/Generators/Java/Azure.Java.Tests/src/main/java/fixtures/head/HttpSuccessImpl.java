@@ -70,7 +70,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Boolean> head200Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Boolean>()
+        return new ServiceResponseBuilder<Boolean>(new AzureJacksonHelper())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(404, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())

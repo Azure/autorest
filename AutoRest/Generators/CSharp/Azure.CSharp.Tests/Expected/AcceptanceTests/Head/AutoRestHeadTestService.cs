@@ -64,7 +64,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// <summary>
         /// Initializes a new instance of the AutoRestHeadTestService class.
         /// </summary>
-        public AutoRestHeadTestService() : base()
+        protected AutoRestHeadTestService() : base()
         {
             this.Initialize();
         }
@@ -73,10 +73,9 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// Initializes a new instance of the AutoRestHeadTestService class.
         /// </summary>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestHeadTestService(params DelegatingHandler[] handlers) : base(handlers)
+        protected AutoRestHeadTestService(params DelegatingHandler[] handlers) : base(handlers)
         {
             this.Initialize();
         }
@@ -88,31 +87,11 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// Optional. The http client handler used to handle http transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestHeadTestService(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        protected AutoRestHeadTestService(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             this.Initialize();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestHeadTestService class.
-        /// </summary>
-        /// <param name='baseUri'>
-        /// Optional. The base URI of the service.
-        /// </param>
-        /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
-        /// </param>
-        public AutoRestHeadTestService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
-        {
-            if (baseUri == null)
-            {
-                throw new ArgumentNullException("baseUri");
-            }
-            this.BaseUri = baseUri;
         }
 
         /// <summary>
@@ -122,10 +101,34 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// Required. The management credentials for Azure.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
         public AutoRestHeadTestService(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (credentials == null)
+            {
+                throw new ArgumentNullException("credentials");
+            }
+            this.Credentials = credentials;
+            if (this.Credentials != null)
+            {
+                this.Credentials.InitializeServiceClient(this);
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestHeadTestService class.
+        /// </summary>
+        /// <param name='credentials'>
+        /// Required. The management credentials for Azure.
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        public AutoRestHeadTestService(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (credentials == null)
             {
@@ -148,10 +151,42 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// Required. The management credentials for Azure.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
         public AutoRestHeadTestService(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            if (credentials == null)
+            {
+                throw new ArgumentNullException("credentials");
+            }
+            this.BaseUri = baseUri;
+            this.Credentials = credentials;
+            if (this.Credentials != null)
+            {
+                this.Credentials.InitializeServiceClient(this);
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestHeadTestService class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='credentials'>
+        /// Required. The management credentials for Azure.
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        public AutoRestHeadTestService(Uri baseUri, ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {
@@ -191,7 +226,8 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                     }
             };
             SerializationSettings.Converters.Add(new ResourceJsonConverter()); 
-            DeserializationSettings = new JsonSerializerSettings{
+            DeserializationSettings = new JsonSerializerSettings
+            {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
