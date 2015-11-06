@@ -69,19 +69,19 @@ namespace @Settings.Namespace
         /// <summary>
         /// Initializes a new instance of the @Model.Name class.
         /// </summary>
-        public @(Model.Name)() : base()
+        protected @(Model.Name)() : base()
         {
             this.Initialize();
         }
         @EmptyLine
+        
         /// <summary>
         /// Initializes a new instance of the @Model.Name class.
         /// </summary>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public @(Model.Name)(params DelegatingHandler[] handlers) : base(handlers)
+        protected @(Model.Name)(params DelegatingHandler[] handlers) : base(handlers)
         {
             this.Initialize();
         }
@@ -94,32 +94,11 @@ namespace @Settings.Namespace
         /// Optional. The http client handler used to handle http transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public @(Model.Name)(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        protected @(Model.Name)(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             this.Initialize();
-        }
-        @EmptyLine
-
-        /// <summary>
-        /// Initializes a new instance of the @Model.Name class.
-        /// </summary>
-        /// <param name='baseUri'>
-        /// Optional. The base URI of the service.
-        /// </param>
-        /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
-        /// </param>
-        public @(Model.Name)(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
-        {
-            if (baseUri == null)
-            {
-                throw new ArgumentNullException("baseUri");
-            }
-            this.BaseUri = baseUri;
         }
         @EmptyLine
 
@@ -136,8 +115,7 @@ namespace @Settings.Namespace
         @:/// </param>
         }
         @:/// <param name='handlers'>
-        @:/// Optional. The set of delegating handlers to insert in the http
-        @:/// client pipeline.
+        @:/// Optional. The delegating handlers to add to the http client pipeline.
         @:/// </param>
         @:public @(Model.Name)(@(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
         @:{
@@ -151,7 +129,45 @@ namespace @Settings.Namespace
         foreach (var param in parameters)
         {
         @:    this.@(param.Name) = @(param.Name.ToCamelCase());
-
+            @if ("Credentials".Equals(param.Name, StringComparison.OrdinalIgnoreCase) &&
+            "ServiceClientCredentials".Equals(param.Type.Name, StringComparison.OrdinalIgnoreCase))
+            {
+            @:if (this.Credentials != null)
+            @:{
+            @:    this.Credentials.InitializeServiceClient(this);
+            @:}
+            }
+        }
+        @:}
+        @:@EmptyLine
+        
+        @:/// <summary>
+        @:/// Initializes a new instance of the @Model.Name class.
+        @:/// </summary>
+        foreach (var param in parameters)
+        {
+        @:/// <param name='@(param.Name.ToCamelCase())'>
+        @:/// Required. @(param.Documentation)
+        @:/// </param>
+        }
+        @:/// <param name='rootHandler'>
+        @:/// Optional. The http client handler used to handle http transport.
+        @:/// </param>
+        @:/// <param name='handlers'>
+        @:/// Optional. The delegating handlers to add to the http client pipeline.
+        @:/// </param>
+        @:public @(Model.Name)(@(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        @:{
+        foreach (var param in parameters)
+        {
+        @:    if (@(param.Name.ToCamelCase()) == null)
+        @:    {
+        @:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
+        @:    }
+        }
+        foreach (var param in parameters)
+        {
+        @:    this.@(param.Name) = @(param.Name.ToCamelCase());
             @if ("Credentials".Equals(param.Name, StringComparison.OrdinalIgnoreCase) &&
             "ServiceClientCredentials".Equals(param.Type.Name, StringComparison.OrdinalIgnoreCase))
             {
@@ -177,8 +193,7 @@ namespace @Settings.Namespace
         @:/// </param>
         }
         @:/// <param name='handlers'>
-        @:/// Optional. The set of delegating handlers to insert in the http
-        @:/// client pipeline.
+        @:/// Optional. The delegating handlers to add to the http client pipeline.
         @:/// </param>
         @:public @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
         @:{
@@ -197,6 +212,55 @@ namespace @Settings.Namespace
         foreach (var param in parameters)
         {
         @:    this.@(param.Name) = @(param.Name.ToCamelCase());
+
+            @if ("Credentials".Equals(param.Name, StringComparison.OrdinalIgnoreCase) &&
+            "ServiceClientCredentials".Equals(param.Type.Name, StringComparison.OrdinalIgnoreCase))
+            {
+            @:if (this.Credentials != null)
+            @:{
+            @:    this.Credentials.InitializeServiceClient(this);
+            @:}
+            }
+        }
+        @:}
+        @:@EmptyLine
+        
+        @:/// <summary>
+        @:/// Initializes a new instance of the @Model.Name class.
+        @:/// </summary>
+        @:/// <param name='baseUri'>
+        @:/// Optional. The base URI of the service.
+        @:/// </param>
+        foreach (var param in parameters)
+        {
+        @:/// <param name='@(param.Name.ToCamelCase())'>
+        @:/// Required. @(param.Documentation)
+        @:/// </param>
+        }
+        @:/// <param name='rootHandler'>
+        @:/// Optional. The http client handler used to handle http transport.
+        @:/// </param>
+        @:/// <param name='handlers'>
+        @:/// Optional. The delegating handlers to add to the http client pipeline.
+        @:/// </param>
+        @:public @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        @:{
+        @:    if (baseUri == null)
+        @:    {
+        @:        throw new ArgumentNullException("baseUri");
+        @:    }
+        foreach (var param in parameters)
+        {
+        @:    if (@(param.Name.ToCamelCase()) == null)
+        @:    {
+        @:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
+        @:    }
+        }
+        @:    this.BaseUri = baseUri;
+        foreach (var param in parameters)
+        {
+        @:    this.@(param.Name) = @(param.Name.ToCamelCase());
+
             @if ("Credentials".Equals(param.Name, StringComparison.OrdinalIgnoreCase) &&
             "ServiceClientCredentials".Equals(param.Type.Name, StringComparison.OrdinalIgnoreCase))
             {
@@ -224,6 +288,7 @@ namespace @Settings.Namespace
         {
             @:this.@(property.Name) = @(property.DefaultValue);
         }
+
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
@@ -238,7 +303,8 @@ namespace @Settings.Namespace
                     }
             };
             SerializationSettings.Converters.Add(new ResourceJsonConverter()); 
-            DeserializationSettings = new JsonSerializerSettings{
+            DeserializationSettings = new JsonSerializerSettings
+            {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,

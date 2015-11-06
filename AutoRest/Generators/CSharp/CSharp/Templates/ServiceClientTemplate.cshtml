@@ -71,6 +71,7 @@ namespace @Settings.Namespace
             this.Initialize();
         }
         @EmptyLine
+        
         /// <summary>
         /// Initializes a new instance of the @Model.Name class.
         /// </summary>
@@ -117,6 +118,29 @@ namespace @Settings.Namespace
             this.BaseUri = baseUri;
         }
         @EmptyLine
+        
+        /// <summary>
+        /// Initializes a new instance of the @Model.Name class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        public @(Model.Name)(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+
+            this.BaseUri = baseUri;
+        }
+        @EmptyLine
 
         @{var parameters = Model.Properties.Where(p => p.IsRequired && p.IsReadOnly);}
         @if (parameters.Any())
@@ -134,6 +158,45 @@ namespace @Settings.Namespace
         @:/// Optional. The delegating handlers to add to the http client pipeline.
         @:/// </param>
         @:public @(Model.Name)(@(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
+        @:{
+        foreach (var param in parameters)
+        {
+        @:    if (@(param.Name.ToCamelCase()) == null)
+        @:    {
+        @:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
+        @:    }
+        }
+        foreach (var param in parameters)
+        {
+        @:    this.@(param.Name) = @(param.Name.ToCamelCase());
+            @if ("Credentials".Equals(param.Name, StringComparison.OrdinalIgnoreCase) &&
+            "ServiceClientCredentials".Equals(param.Type.Name, StringComparison.OrdinalIgnoreCase))
+            {
+            @:if (this.Credentials != null)
+            @:{
+            @:    this.Credentials.InitializeServiceClient(this);
+            @:}
+            }
+        }
+        @:}
+        @:@EmptyLine
+        
+        @:/// <summary>
+        @:/// Initializes a new instance of the @Model.Name class.
+        @:/// </summary>
+        foreach (var param in parameters)
+        {
+        @:/// <param name='@(param.Name.ToCamelCase())'>
+        @:/// Required. @(param.Documentation)
+        @:/// </param>
+        }
+        @:/// <param name='rootHandler'>
+        @:/// Optional. The http client handler used to handle http transport.
+        @:/// </param>
+        @:/// <param name='handlers'>
+        @:/// Optional. The delegating handlers to add to the http client pipeline.
+        @:/// </param>
+        @:public @(Model.Name)(@(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         @:{
         foreach (var param in parameters)
         {
@@ -198,7 +261,55 @@ namespace @Settings.Namespace
                 @:    this.Credentials.InitializeServiceClient(this);
                 @:}
             }
-    }
+        }
+        @:}
+        @:@EmptyLine
+        
+        @:/// <summary>
+        @:/// Initializes a new instance of the @Model.Name class.
+        @:/// </summary>
+        @:/// <param name='baseUri'>
+        @:/// Optional. The base URI of the service.
+        @:/// </param>
+        foreach (var param in parameters)
+        {
+        @:/// <param name='@(param.Name.ToCamelCase())'>
+        @:/// Required. @(param.Documentation)
+        @:/// </param>
+        }
+        @:/// <param name='rootHandler'>
+        @:/// Optional. The http client handler used to handle http transport.
+        @:/// </param>
+        @:/// <param name='handlers'>
+        @:/// Optional. The delegating handlers to add to the http client pipeline.
+        @:/// </param>
+        @:public @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        @:{
+        @:    if (baseUri == null)
+        @:    {
+        @:        throw new ArgumentNullException("baseUri");
+        @:    }
+        foreach (var param in parameters)
+        {
+        @:    if (@(param.Name.ToCamelCase()) == null)
+        @:    {
+        @:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
+        @:    }
+        }
+        @:    this.BaseUri = baseUri;
+        foreach (var param in parameters)
+        {
+        @:    this.@(param.Name) = @(param.Name.ToCamelCase());
+
+            @if ("Credentials".Equals(param.Name, StringComparison.OrdinalIgnoreCase) &&
+            "ServiceClientCredentials".Equals(param.Type.Name, StringComparison.OrdinalIgnoreCase))
+            {
+                @:if (this.Credentials != null)
+                @:{
+                @:    this.Credentials.InitializeServiceClient(this);
+                @:}
+            }
+        }
         @:}
         @:@EmptyLine
         }

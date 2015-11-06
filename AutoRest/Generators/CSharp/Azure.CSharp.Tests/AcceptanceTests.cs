@@ -695,7 +695,10 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         {
             SwaggerSpecHelper.RunTests<AzureCSharpCodeGenerator>(
                 SwaggerPath("body-duration.json"), ExpectedPath("AzureBodyDuration"));
-            using (var client = new AutoRestDurationTestService(Fixture.Uri))
+            const string validSubscription = "1234-5678-9012-3456";
+
+            using (var client = new AutoRestDurationTestService(Fixture.Uri,
+                new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
             {
                 Assert.Null(client.Duration.GetNull());
                 Assert.Throws<FormatException>(() => client.Duration.GetInvalid());

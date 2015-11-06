@@ -96,6 +96,27 @@ namespace Fixtures.MirrorSequences
         }
 
         /// <summary>
+        /// Initializes a new instance of the SequenceRequestResponseTest class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        public SequenceRequestResponseTest(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            this.BaseUri = baseUri;
+        }
+
+        /// <summary>
         /// Initializes client properties.
         /// </summary>
         private void Initialize()
