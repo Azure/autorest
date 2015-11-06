@@ -12,7 +12,7 @@ package fixtures.requiredoptional;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.serializer.CollectionFormat;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -1034,7 +1034,7 @@ public class ExplicitImpl implements Explicit {
         }
         Validator.validate(headerParameter);
         try {
-            Call<ResponseBody> call = service.postRequiredArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
+            Call<ResponseBody> call = service.postRequiredArrayHeader(JacksonUtils.serializeList(headerParameter, CollectionFormat.CSV));
             return postRequiredArrayHeaderDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1055,7 +1055,7 @@ public class ExplicitImpl implements Explicit {
                 new IllegalArgumentException("Parameter headerParameter is required and cannot be null.")));
         }
         Validator.validate(headerParameter, serviceCallback);
-        Call<ResponseBody> call = service.postRequiredArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.postRequiredArrayHeader(JacksonUtils.serializeList(headerParameter, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1083,7 +1083,7 @@ public class ExplicitImpl implements Explicit {
      */
     public ServiceResponse<Void> postOptionalArrayHeader(List<String> headerParameter) throws ServiceException {
         try {
-            Call<ResponseBody> call = service.postOptionalArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
+            Call<ResponseBody> call = service.postOptionalArrayHeader(JacksonUtils.serializeList(headerParameter, CollectionFormat.CSV));
             return postOptionalArrayHeaderDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1099,7 +1099,7 @@ public class ExplicitImpl implements Explicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.postOptionalArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.postOptionalArrayHeader(JacksonUtils.serializeList(headerParameter, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {

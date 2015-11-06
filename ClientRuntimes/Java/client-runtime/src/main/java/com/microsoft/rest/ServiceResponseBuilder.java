@@ -8,7 +8,7 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -24,13 +24,13 @@ import java.util.Map;
  */
 public class ServiceResponseBuilder<T> {
     private Map<Integer, TypeReference<?>> responseTypes;
-    private JacksonHelper deserializer;
+    private JacksonUtils deserializer;
 
     /**
      * Create a ServiceResponseBuilder instance.
      */
     public ServiceResponseBuilder() {
-        this(new JacksonHelper());
+        this(new JacksonUtils());
     }
 
     /**
@@ -38,7 +38,7 @@ public class ServiceResponseBuilder<T> {
      *
      * @param deserializer the serialization utils to use for deserialization operations
      */
-    public ServiceResponseBuilder(JacksonHelper deserializer) {
+    public ServiceResponseBuilder(JacksonUtils deserializer) {
         this(deserializer, new HashMap<Integer, TypeReference<?>>());
     }
 
@@ -48,7 +48,7 @@ public class ServiceResponseBuilder<T> {
      * @param deserializer the serialization utils to use for deserialization operations
      * @param responseTypes a mapping of response status codes and response destination types.
      */
-    public ServiceResponseBuilder(JacksonHelper deserializer, Map<Integer, TypeReference<?>> responseTypes) {
+    public ServiceResponseBuilder(JacksonUtils deserializer, Map<Integer, TypeReference<?>> responseTypes) {
         this.deserializer = deserializer;
         this.responseTypes = responseTypes;
     }

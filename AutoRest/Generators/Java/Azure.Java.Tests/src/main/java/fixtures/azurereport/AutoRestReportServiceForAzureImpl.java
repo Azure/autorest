@@ -13,7 +13,7 @@ package fixtures.azurereport;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.serializer.AzureJacksonHelper;
+import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.ServiceException;
@@ -139,6 +139,7 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
+        this.acceptLanguage = "en-US";
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
         this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
@@ -184,7 +185,7 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
     }
 
     private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Integer>>(new AzureJacksonHelper())
+        return new ServiceResponseBuilder<Map<String, Integer>>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);

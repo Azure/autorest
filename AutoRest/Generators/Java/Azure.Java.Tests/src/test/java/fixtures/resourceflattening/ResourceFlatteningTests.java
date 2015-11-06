@@ -1,7 +1,7 @@
 package fixtures.resourceflattening;
 
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.serializer.AzureJacksonHelper;
+import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.squareup.okhttp.OkHttpClient;
 import fixtures.lro.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.resourceflattening.models.FlattenedProduct;
@@ -33,7 +33,7 @@ public class ResourceFlatteningTests {
         httpClient.setCookieHandler(cookieManager);
         Executor executor = Executors.newCachedThreadPool();
         Retrofit.Builder builder = new Retrofit.Builder()
-                .addConverterFactory(JacksonConverterFactory.create(new AzureJacksonHelper().getObjectMapper()))
+                .addConverterFactory(JacksonConverterFactory.create(new AzureJacksonUtils().getObjectMapper()))
                 .callbackExecutor(executor);
 
         client = new AutoRestResourceFlatteningTestServiceImpl("http://localhost.:3000", httpClient, builder);
@@ -69,7 +69,7 @@ public class ResourceFlatteningTests {
         List<Resource> body = new ArrayList<>();
         FlattenedProduct product = new FlattenedProduct();
         product.setLocation("West US");
-        product.setTags(new HashMap<>());
+        product.setTags(new HashMap<String, String>());
         product.getTags().put("tag1", "value1");
         product.getTags().put("tag2", "value3");
         body.add(product);
@@ -109,7 +109,7 @@ public class ResourceFlatteningTests {
         Map<String, FlattenedProduct> body = new HashMap<>();
         FlattenedProduct product = new FlattenedProduct();
         product.setLocation("West US");
-        product.setTags(new HashMap<>());
+        product.setTags(new HashMap<String, String>());
         product.getTags().put("tag1", "value1");
         product.getTags().put("tag2", "value3");
         product.setPname("Product1");
@@ -181,7 +181,7 @@ public class ResourceFlatteningTests {
         resources.get("Resource1").setLocation("West US");
         resources.get("Resource1").setPname("Product1");
         resources.get("Resource1").setFlattenedProductType("Flat");
-        resources.get("Resource1").setTags(new HashMap<>());
+        resources.get("Resource1").setTags(new HashMap<String, String>());
         resources.get("Resource1").getTags().put("tag1", "value1");
         resources.get("Resource1").getTags().put("tag2", "value3");
 
@@ -192,7 +192,7 @@ public class ResourceFlatteningTests {
 
         ResourceCollection complexObj = new ResourceCollection();
         complexObj.setDictionaryofresources(resources);
-        complexObj.setArrayofresources(new ArrayList<>());
+        complexObj.setArrayofresources(new ArrayList<FlattenedProduct>());
         complexObj.getArrayofresources().add(resources.get("Resource1"));
         FlattenedProduct p1 = new FlattenedProduct();
         p1.setLocation("East US");

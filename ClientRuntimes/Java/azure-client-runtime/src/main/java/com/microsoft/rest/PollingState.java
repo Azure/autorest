@@ -9,16 +9,12 @@ package com.microsoft.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.serializer.AzureJacksonHelper;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.AzureJacksonUtils;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Response;
 
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
@@ -55,8 +51,8 @@ public class PollingState<T> {
             responseContent = response.body().string();
         }
         if (responseContent != null && !responseContent.isEmpty()) {
-            this.resource = new AzureJacksonHelper().deserialize(responseContent, resourceType);
-            resource = new AzureJacksonHelper().deserialize(responseContent, new TypeReference<PollingResource>() {
+            this.resource = new AzureJacksonUtils().deserialize(responseContent, resourceType);
+            resource = new AzureJacksonUtils().deserialize(responseContent, new TypeReference<PollingResource>() {
             });
         }
         if (resource != null && resource.getProperties() != null &&
@@ -97,7 +93,7 @@ public class PollingState<T> {
             throw exception;
         }
 
-        PollingResource resource = new AzureJacksonHelper().deserialize(responseContent, new TypeReference<PollingResource>() {});
+        PollingResource resource = new AzureJacksonUtils().deserialize(responseContent, new TypeReference<PollingResource>() {});
         if (resource != null && resource.getProperties() != null && resource.getProperties().getProvisioningState() != null) {
             this.setStatus(resource.getProperties().getProvisioningState());
         } else {
@@ -109,7 +105,7 @@ public class PollingState<T> {
         error.setCode(this.getStatus());
         error.setMessage("Long running operation failed");
         this.setResponse(response);
-        this.setResource(new AzureJacksonHelper().<T>deserialize(responseContent, new TypeReference<T>() {
+        this.setResource(new AzureJacksonUtils().<T>deserialize(responseContent, new TypeReference<T>() {
             @Override
             public Type getType() {
                 return resourceType;
@@ -130,7 +126,7 @@ public class PollingState<T> {
         if (response.body() != null) {
             responseContent = response.body().string();
         }
-        this.setResource(new AzureJacksonHelper().<T>deserialize(responseContent, new TypeReference<T>() {
+        this.setResource(new AzureJacksonUtils().<T>deserialize(responseContent, new TypeReference<T>() {
             @Override
             public Type getType() {
                 return resourceType;

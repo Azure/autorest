@@ -12,7 +12,7 @@ package fixtures.url;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.serializer.CollectionFormat;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -901,7 +901,7 @@ public class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> enumValid(UriColor enumQuery) throws ServiceException {
         try {
-            Call<ResponseBody> call = service.enumValid(JacksonHelper.serializeRaw(enumQuery));
+            Call<ResponseBody> call = service.enumValid(JacksonUtils.serializeRaw(enumQuery));
             return enumValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -917,7 +917,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.enumValid(JacksonHelper.serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumValid(JacksonUtils.serializeRaw(enumQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -946,7 +946,7 @@ public class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> enumNull(UriColor enumQuery) throws ServiceException {
         try {
-            Call<ResponseBody> call = service.enumNull(JacksonHelper.serializeRaw(enumQuery));
+            Call<ResponseBody> call = service.enumNull(JacksonUtils.serializeRaw(enumQuery));
             return enumNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -962,7 +962,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.enumNull(JacksonHelper.serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumNull(JacksonUtils.serializeRaw(enumQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1126,7 +1126,7 @@ public class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ServiceException {
         try {
-            Call<ResponseBody> call = service.dateValid(JacksonHelper.serializeRaw(dateQuery));
+            Call<ResponseBody> call = service.dateValid(JacksonUtils.serializeRaw(dateQuery));
             return dateValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1142,7 +1142,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> dateValidAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.dateValid(JacksonHelper.serializeRaw(dateQuery));
+        Call<ResponseBody> call = service.dateValid(JacksonUtils.serializeRaw(dateQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1171,7 +1171,7 @@ public class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> dateNull(LocalDate dateQuery) throws ServiceException {
         try {
-            Call<ResponseBody> call = service.dateNull(JacksonHelper.serializeRaw(dateQuery));
+            Call<ResponseBody> call = service.dateNull(JacksonUtils.serializeRaw(dateQuery));
             return dateNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1187,7 +1187,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.dateNull(JacksonHelper.serializeRaw(dateQuery));
+        Call<ResponseBody> call = service.dateNull(JacksonUtils.serializeRaw(dateQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1216,7 +1216,7 @@ public class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ServiceException {
         try {
-            Call<ResponseBody> call = service.dateTimeValid(JacksonHelper.serializeRaw(dateTimeQuery));
+            Call<ResponseBody> call = service.dateTimeValid(JacksonUtils.serializeRaw(dateTimeQuery));
             return dateTimeValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1232,7 +1232,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> dateTimeValidAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.dateTimeValid(JacksonHelper.serializeRaw(dateTimeQuery));
+        Call<ResponseBody> call = service.dateTimeValid(JacksonUtils.serializeRaw(dateTimeQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1261,7 +1261,7 @@ public class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> dateTimeNull(DateTime dateTimeQuery) throws ServiceException {
         try {
-            Call<ResponseBody> call = service.dateTimeNull(JacksonHelper.serializeRaw(dateTimeQuery));
+            Call<ResponseBody> call = service.dateTimeNull(JacksonUtils.serializeRaw(dateTimeQuery));
             return dateTimeNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1277,7 +1277,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.dateTimeNull(JacksonHelper.serializeRaw(dateTimeQuery));
+        Call<ResponseBody> call = service.dateTimeNull(JacksonUtils.serializeRaw(dateTimeQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1306,7 +1306,7 @@ public class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringCsvValid(List<String> arrayQuery) throws ServiceException {
         try {
-            Call<ResponseBody> call = service.arrayStringCsvValid(JacksonHelper.serializeList(arrayQuery, CollectionFormat.CSV));
+            Call<ResponseBody> call = service.arrayStringCsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
             return arrayStringCsvValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1322,7 +1322,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.arrayStringCsvValid(JacksonHelper.serializeList(arrayQuery, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.arrayStringCsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1351,7 +1351,7 @@ public class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringCsvNull(List<String> arrayQuery) throws ServiceException {
         try {
-            Call<ResponseBody> call = service.arrayStringCsvNull(JacksonHelper.serializeList(arrayQuery, CollectionFormat.CSV));
+            Call<ResponseBody> call = service.arrayStringCsvNull(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
             return arrayStringCsvNullDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1367,7 +1367,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.arrayStringCsvNull(JacksonHelper.serializeList(arrayQuery, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.arrayStringCsvNull(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1396,7 +1396,7 @@ public class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException {
         try {
-            Call<ResponseBody> call = service.arrayStringCsvEmpty(JacksonHelper.serializeList(arrayQuery, CollectionFormat.CSV));
+            Call<ResponseBody> call = service.arrayStringCsvEmpty(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
             return arrayStringCsvEmptyDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1412,7 +1412,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.arrayStringCsvEmpty(JacksonHelper.serializeList(arrayQuery, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.arrayStringCsvEmpty(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1441,7 +1441,7 @@ public class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringSsvValid(List<String> arrayQuery) throws ServiceException {
         try {
-            Call<ResponseBody> call = service.arrayStringSsvValid(JacksonHelper.serializeList(arrayQuery, CollectionFormat.SSV));
+            Call<ResponseBody> call = service.arrayStringSsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.SSV));
             return arrayStringSsvValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1457,7 +1457,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.arrayStringSsvValid(JacksonHelper.serializeList(arrayQuery, CollectionFormat.SSV));
+        Call<ResponseBody> call = service.arrayStringSsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.SSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1486,7 +1486,7 @@ public class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringTsvValid(List<String> arrayQuery) throws ServiceException {
         try {
-            Call<ResponseBody> call = service.arrayStringTsvValid(JacksonHelper.serializeList(arrayQuery, CollectionFormat.TSV));
+            Call<ResponseBody> call = service.arrayStringTsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.TSV));
             return arrayStringTsvValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1502,7 +1502,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.arrayStringTsvValid(JacksonHelper.serializeList(arrayQuery, CollectionFormat.TSV));
+        Call<ResponseBody> call = service.arrayStringTsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.TSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1531,7 +1531,7 @@ public class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringPipesValid(List<String> arrayQuery) throws ServiceException {
         try {
-            Call<ResponseBody> call = service.arrayStringPipesValid(JacksonHelper.serializeList(arrayQuery, CollectionFormat.PIPES));
+            Call<ResponseBody> call = service.arrayStringPipesValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.PIPES));
             return arrayStringPipesValidDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1547,7 +1547,7 @@ public class QueriesImpl implements Queries {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.arrayStringPipesValid(JacksonHelper.serializeList(arrayQuery, CollectionFormat.PIPES));
+        Call<ResponseBody> call = service.arrayStringPipesValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.PIPES));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {

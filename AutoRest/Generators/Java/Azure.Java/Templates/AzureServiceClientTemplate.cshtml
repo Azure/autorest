@@ -124,6 +124,11 @@ if(!property.IsReadOnly)
 @:            this.credentials.applyCredentialsFilter(this.client);
 @:        }
     }
+    
+@foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+{
+        @:this.@(property.Name) = @(property.DefaultValue);
+}
 
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
