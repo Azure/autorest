@@ -43,4 +43,4 @@ CloudError.prototype.deserialize = function (instance) {
   return instance;
 };
 
-module.exports = new CloudError();
+module.exports = CloudError;
