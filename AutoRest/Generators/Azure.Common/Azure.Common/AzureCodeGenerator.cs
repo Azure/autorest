@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator.Azure.Properties;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
 
@@ -622,8 +623,7 @@ namespace Microsoft.Rest.Generator.Azure
 
         private static void CheckAzureResourceProperties(CompositeType compositeType)
         {
-            // If derived from resource with x-ms-azure-resource then resource should have resource properties 
-            // that are in client-runtime, except provisioning state
+            // If derived from resource with x-ms-azure-resource then resource should have resource specific properties
             var extraResourceProperties = compositeType.Properties
                                                        .Select(p => p.Name.ToUpperInvariant())
                                                        .OrderBy(n => n)
@@ -632,10 +632,8 @@ namespace Microsoft.Rest.Generator.Azure
             if (compositeType.Properties.Count() != ResourcePropertyNames.Count() ||
                extraResourceProperties.Count() != 0)
             {
-                throw new InvalidOperationException(
-                    string.Format(CultureInfo.InvariantCulture,
-                    Resources.ResourcePropertyMismatch,
-                    string.Join(", ", ResourcePropertyNames)));
+                Logger.LogWarning(Resources.ResourcePropertyMismatch,
+                    string.Join(", ", ResourcePropertyNames));
             }
         }
     }
