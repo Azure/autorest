@@ -25,7 +25,7 @@
 #--------------------------------------------------------------------------
 
 import sys
-from . import logger
+import logger
 
 def raise_with_traceback(exception, message="", *args):
     exc_type, exc_value, exc_traceback = sys.exc_info()

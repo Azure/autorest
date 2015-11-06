@@ -1,5 +1,6 @@
 ﻿
 import sys
+import functools
 from datetime import datetime
 
 try:
@@ -8,7 +9,7 @@ try:
 except ImportError:
     from urllib.parse import urljoin
 
-from runtime.msrest.serialization import Serializer, Deserializer
+
 from runtime.msrest.paging import Paged
 from runtime.msrest.exceptions import (
     SerializationError,
@@ -17,172 +18,147 @@ from runtime.msrest.exceptions import (
     ClientRequestError)
 
 from runtime.msrestazure.azure_operation import AzureOperationPoller
+from runtime.msrestazure.azure_exceptions import CloudError
+from runtime.msrest.service_client import ServiceClient
 
 from ..batch_exception import BatchStatusError
-
-from .. import models
 from ..models import *
 
 
 class PoolManager(object):
 
-    def __init__(self, client, config):
+    def __init__(self, client, config, serializer, derserializer):
 
         self._client = client
-        self._config = config
-        self._classes = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
+        self._serialize = serializer
+        self._deserialize = derserializer
 
-        self.serializer = Serializer()
-        self.deserializer = Deserializer(self._classes)
+        self.config = config
 
-    def _url(self, *extension):
+    def _verify_response(self, response, accept_status, error):
+        
+        if response.status_code != accept_status:
+            deserialized = self.deserialize(
+                error, response, self._deserialize.dependencies)
+
+            raise deserialized
+
+    def _join_url(self, *extension):
         path = [x.strip('/') for x in extension if x]
         return '/' + '/'.join(path)
 
-    def _send(self, request, accept_status, headers, content=None):
-
-        try:
-            request.add_headers(headers)
-            if content:
-                request.add_content(content)
-
-            response =  self._client.send(request)
-
-            if response.status_code not in accept_status:
-       
-                deserialized = self.deserializer(BatchStatusError, response, self._classes)
-                raise deserialized
-
-            return response
-
-        except TokenExpiredError:
-            raise # If client defines own exception, raise here
-
-        except ClientRequestError:
-            raise # If client defines own exception, raise here
-
-    def add(self, pool_parameters, raw=False):
+    @ServiceClient.async_request
+    def add(self, pool_parameters, raw=False, callback=None):
         """
         Add a new pool.
         """
-        accept_status = [201]
 
         # Validate
         if not pool_parameters:
             raise ValueError("pool cannot be None")
 
-        try:
-            # Construct URL
-            url = self._url('pools')
+        # Construct URL
+        url = self._join_url('pools')
 
-            # Construct parameters
-            query = {}
-            query['api-version'] = self._config.api_version
-            query['timeout'] = self._config.request_timeout
+        # Construct parameters
+        query = {}
+        query['api-version'] = self.config.api_version
+        query['timeout'] = self.config.request_timeout
 
-            # Construct headers
-            headers = {}
-            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
-            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+        # Construct headers
+        headers = {}
+        headers['ocp-date'] = self._serialize.serialize_rfc(datetime.utcnow())
+        headers['Content-Type'] = 'application/json;odata=minimalmetadata'
 
-            # Construct body
-            content = self.serializer(pool_parameters)
+        # Construct body
+        content = self.serializer(pool_parameters)
 
-            # Construct and send request
-            request = self._client.post(url, query)
-            response = self._send(request, accept_status, headers, content)
+        # Construct and send request
+        request = self._client.post(url, query)
+        response = self._client.send(request, headers, content)
 
-            if raw:
-                return response
+        self._verify_response(response, 201, CloudError)
 
-            #def get_status(status_link):
-            #    accept_status = [200, 201, 202, 204]
-            #    request = self._client.get()
-            #    request.url = status_link
-            #    return self._send(request, accept_status)
+        if raw:
+            return None, response
 
-            #return AzureOperationPoller(response, get_status)
+        #def get_status(status_link):
+        #    accept_status = [200, 201, 202, 204]
+        #    request = self._client.get()
+        #    request.url = status_link
+        #    return self._send(request, accept_status)
 
-        except (SerializationError, DeserializationError):
-            raise #TODO: Wrap in client-specific error?
+        #return AzureOperationPoller(response, get_status)
 
-
-    def delete(self, pool_name=None, access=AccessCondition(), raw=False):
+    @ServiceClient.async_request
+    def delete(self, pool_name=None, access=AccessCondition(), raw=False, callback=None):
         """
         Delete a pool.
         """
 
-        accept_status = [201]
-
         # Validate
         if not pool_name:
             raise ValueError('pool_name cannot be None.')
 
-        try:
-            # Construct URL
-            url = self._url('pools', pool_name)
+        # Construct URL
+        url = self._join_url('pools', pool_name)
 
-            # Construct parameters
-            query = {}
-            query['api-version'] = self._config.api_version
-            query['timeout'] = self._config.request_timeout
+        # Construct parameters
+        query = {}
+        query['api-version'] = self.config.api_version
+        query['timeout'] = self.config.request_timeout
 
-            # Construct headers
-            headers = {}
-            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
-            headers.update(access.get_headers())
+        # Construct headers
+        headers = {}
+        headers['ocp-date'] =self._serialize.serialize_rfc(datetime.utcnow())
+        headers.update(access.get_headers())
 
-            # Construct and send request
-            request = self._client.delete(url, query)
-            response = self._send(request, accept_status, headers)
+        # Construct and send request
+        request = self._client.delete(url, query)
+        response = self._client.send(request, headers)
 
-            if raw:
-                return response
+        self._verify_response(response, 201, CloudError)
 
-        except (SerializationError, DeserializationError):
-            raise #TODO: Wrap in client-specific error?
+        if raw:
+            return None, response
 
-    def disable_auto_scale(self, pool_name=None, access=AccessCondition(), raw=False):
+    @ServiceClient.async_request
+    def disable_auto_scale(self, pool_name=None, access=AccessCondition(), raw=False, callback=None):
         """
         Disable auto-scale on a pool.
         """
 
-        accept_status = [202]
-
         # Validate
         if not pool_name:
             raise ValueError('pool_name cannot be None.')
 
-        try:
-            # Construct URL
-            url = self._url('pools', pool_name, 'disableautoscale')
+        # Construct URL
+        url = self._join_url('pools', pool_name, 'disableautoscale')
 
-            # Construct parameters
-            query = {}
-            query['api-version'] = self._config.api_version
-            query['timeout'] = self._config.request_timeout
+        # Construct parameters
+        query = {}
+        query['api-version'] = self.config.api_version
+        query['timeout'] = self.config.request_timeout
 
-            # Construct headers
-            headers = {}
-            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
-            headers.update(access.get_headers())
+        # Construct headers
+        headers = {}
+        headers['ocp-date'] = self._serialize.serialize_rfc(datetime.utcnow())
+        headers.update(access.get_headers())
 
-            # Construct and send request
-            request = self._client.post(url, query)
-            response = self._send(request, accept_status, headers)
+        # Construct and send request
+        request = self._client.post(url, query)
+        response = self._client.send(request, headers)
 
-            if raw:
-                return response
+        self._verify_response(response, 202, CloudError)
 
-        except (SerializationError, DeserializationError):
-            raise #TODO: Wrap in client-specific error?
+        if raw:
+            return None, response
 
-    def enable_auto_scale(self, auto_scale_parameters, pool_name=None, access=AccessCondition(), raw=False):
+    @ServiceClient.async_request
+    def enable_auto_scale(self, auto_scale_parameters, pool_name=None, access=AccessCondition(), raw=False, callback=None):
         """
         Enable auto-scale on a pool using given formula.
         """
-
-        accept_status = [202]
 
         # Validate
         if not pool_name:
@@ -191,40 +167,37 @@ class PoolManager(object):
         if not auto_scale_parameters:
             raise ValueError('auto_scale_parameters cannot be None.')
 
-        try:
-            # Construct URL
-            url = self._url('pools', pool_name, 'enableautoscale')
+        # Construct URL
+        url = self._join_url('pools', pool_name, 'enableautoscale')
 
-            # Construct parameters
-            query = {}
-            query['api-version'] = self._config.api_version
-            query['timeout'] = self._config.request_timeout
+        # Construct parameters
+        query = {}
+        query['api-version'] = self.config.api_version
+        query['timeout'] = self.config.request_timeout
 
-            # Construct headers
-            headers = {}
-            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
-            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
-            headers.update(access.get_headers())
+        # Construct headers
+        headers = {}
+        headers['ocp-date'] = self._serialize.serialize_rfc(datetime.utcnow())
+        headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+        headers.update(access.get_headers())
 
-            # Construct body
-            content = self.serializer(auto_scale_parameters)
+        # Construct body
+        content = self._serialize(auto_scale_parameters)
 
-            # Construct and send request
-            request = self._client.post(url, query)
-            response = self._send(request, accept_status, headers, content)
+        # Construct and send request
+        request = self._client.post(url, query)
+        response = self._client.send(request, headers, content)
 
-            if raw:
-                return response
+        self._verify_response(response, 202, CloudError)
 
-        except (SerializationError, DeserializationError):
-            raise #TODO: Wrap in client-specific error?
+        if raw:
+            return None, response
 
-    def evaluate_auto_scale(self, evaluation_parameters, pool_name=None, access=AccessCondition(), raw=False):
+    @ServiceClient.async_request
+    def evaluate_auto_scale(self, evaluation_parameters, pool_name=None, access=AccessCondition(), raw=False, callback=None):
         """
         Evaluate pool auto-scale formula.
         """
-
-        accept_status = [202]
 
         # Validate
         if (pool_name is None):
@@ -233,125 +206,120 @@ class PoolManager(object):
         if (evaluation_parameters is None):
             raise ValueError('parameters cannot be None.')
 
-        try:
-            # Construct URL
-            url = self._url('pools', pool_name, 'evaluateautoscale')
+        # Construct URL
+        url = self._join_url('pools', pool_name, 'evaluateautoscale')
 
-            # Construct parameters
-            query = {}
-            query['api-version'] = self._config.api_version
-            query['timeout'] = self._config.request_timeout
+        # Construct parameters
+        query = {}
+        query['api-version'] = self.config.api_version
+        query['timeout'] = self.config.request_timeout
 
-            # Construct headers
-            headers = {}
-            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
-            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
-            headers.update(access.get_headers())
+        # Construct headers
+        headers = {}
+        headers['ocp-date'] = self._serialize.serialize_rfc(datetime.utcnow())
+        headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+        headers.update(access.get_headers())
 
-            # Construct body
-            content = self.serializer(evaluation_parameters)
+        # Construct body
+        content = self._serialize(evaluation_parameters)
 
-            # Construct and send request
-            request = self._client.post(url, query)
-            response = self._send(request, accept_status, headers, content)
+        # Construct and send request
+        request = self._client.post(url, query)
+        response = self._client.send(request, headers, content)
 
-            if raw:
-                return response
+        self._verify_response(response, 202, CloudError)
 
-        except (SerializationError, DeserializationError):
-            raise #TODO: Wrap in client-specific error?
+        if raw:
+            return None, response
 
-    def get(self, pool_name=None, filter=DetailLevel(), access=AccessCondition(), raw=False):
+    @ServiceClient.async_request
+    def get(self, pool_name=None, filter=DetailLevel(), access=AccessCondition(), raw=False, callback=None):
         """
         Get details on a pool.
         """
-        accept_status = [200]
 
         # Validate
         if not pool_name:
             raise ValueError('pool_name cannot be None.')
 
-        try:
-            # Construct URL
-            url = self._url('pools', pool_name)
+        # Construct URL
+        url = self._join_url('pools', pool_name)
 
-            # Construct parameters
-            query = {}
-            query['api-version'] = self._config.api_version
-            query['timeout'] = self._config.request_timeout
-            query.update(filter.get_parameters())
+        # Construct parameters
+        query = {}
+        query['api-version'] = self.config.api_version
+        query['timeout'] = self.config.request_timeout
+        query.update(filter.get_parameters())
 
-            # Construct headers
-            headers = {}
-            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
-            headers.update(access.get_headers())
+        # Construct headers
+        headers = {}
+        headers['ocp-date'] = self._serialize.serialize_rfc(datetime.utcnow())
+        headers.update(access.get_headers())
 
-            # Construct and send request
-            request = self._client.get(url, query)
-            response = self._send(request, accept_status, headers)
+        # Construct and send request
+        request = self._client.get(url, query)
+        response = self._client.send(request, headers)
 
-            if raw:
-                return response
+        self._verify_response(response, 200, CloudError)
 
-            # Deserialize response
-            return self.deserializer(Pool, response, self._classes)
+        # Deserialize response
+        deserialized = self._deserialize(Pool, response)
+            
+        if raw:
+            return deserialized, response
 
-        except (SerializationError, DeserializationError):
-            raise #TODO: Wrap in client-specific error?
+        return deserialized
 
-    def list(self, max_results=None, filter=DetailLevel(), access=AccessCondition(), raw=False):
+    @ServiceClient.async_request
+    def list(self, max_results=None, filter=DetailLevel(), access=AccessCondition(), raw=False, callback=None):
         """
         List pools in account.
         """
 
         def paging(next=None, raw=False):
 
-            accept_status = [200]
+            if next is None:
+                # Construct URL
+                url = self._join_url('pools')
 
-            try:
-                if next is None:
-                    # Construct URL
-                    url = self._url('pools')
+                # Construct parameters
+                query = {}
+                query['api-version'] = self.config.api_version
+                query['timeout'] = self.config.request_timeout
+                query.update(filter.get_parameters())
+                if max_results:
+                    query['maxresults'] = str(max_results)
 
-                    # Construct parameters
-                    query = {}
-                    query['api-version'] = self._config.api_version
-                    query['timeout'] = self._config.request_timeout
-                    query.update(filter.get_parameters())
-                    if max_results:
-                        query['maxresults'] = str(max_results)
+                request = self._client.get(url, query)
 
-                    request = self._client.get(url, query)
+            else:
+                request = self._client.get()
+                request.url = next
 
-                else:
-                    request = self._client.get()
-                    request.url = next
+            # Construct headers
+            headers = {}
+            headers['ocp-date'] = self._serialize.serialize_rfc(datetime.utcnow())
+            headers.update(access.get_headers())
 
-                # Construct headers
-                headers = {}
-                headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
-                headers.update(access.get_headers())
+            # Construct and send request
+            response = self._client.send(request, headers)
 
-                # Construct and send request
-                response = self._send(request, accept_status, headers)
+            self._verify_response(response, 200, CloudError)
                     
-                return response
-
-            except (SerializationError, DeserializationError):
-                raise #TODO: Wrap in client-specific error?
+            return response
 
         response = paging()
 
+        # Deserialize response
+        deserialized = PoolsPaged(response, paging, self._deserialize.dependencies)
+
         if raw:
-            return response
+            return deserialized, response
 
-        return PoolsPaged(response, paging, self._classes)
+        return deserialized
 
-        
-
-    def patch(self, patch_parameters, pool_name=None, access=AccessCondition(), raw=False):
-
-        accept_status = [200]
+    @ServiceClient.async_request
+    def patch(self, patch_parameters, pool_name=None, access=AccessCondition(), raw=False, callback=None):
 
         # Validate
         if not pool_name:
@@ -360,37 +328,34 @@ class PoolManager(object):
         if not patch_parameters:
             raise ValueError('patch_parameters cannot be None.')
 
-        try:
-            # Construct URL
-            url = self._url('pools', pool_name)
+        # Construct URL
+        url = self._join_url('pools', pool_name)
 
-            # Construct parameters
-            query = {}
-            query['api-version'] = self._config.api_version
-            query['timeout'] = self._config.request_timeout
+        # Construct parameters
+        query = {}
+        query['api-version'] = self.config.api_version
+        query['timeout'] = self.config.request_timeout
 
-            # Construct headers
-            headers = {}
-            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
-            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
-            headers.update(access.get_headers())
+        # Construct headers
+        headers = {}
+        headers['ocp-date'] = self._serialize.serialize_rfc(datetime.utcnow())
+        headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+        headers.update(access.get_headers())
 
-            # Construct body
-            content = self.serializer(patch_parameters)
+        # Construct body
+        content = self._serialize(patch_parameters)
 
-            # Construct and send request
-            request = self._client.patch(url, query)
-            response = self._send(request, accept_status, headers, content)
+        # Construct and send request
+        request = self._client.patch(url, query)
+        response = self._client.send(request, headers, content)
 
-            if raw:
-                return response
+        self._verify_response(response, 200, CloudError)
 
-        except (SerializationError, DeserializationError):
-            raise #TODO: Wrap in client-specific error?
+        if raw:
+            return None, response
 
-    def resize(self, resize_parameters, pool_name=None, access=AccessCondition(), raw=False):
-
-        accept_status = [202]
+    @ServiceClient.async_request
+    def resize(self, resize_parameters, pool_name=None, access=AccessCondition(), raw=False, callback=None):
 
         # Validate
         if not pool_name:
@@ -399,70 +364,64 @@ class PoolManager(object):
         if not resize_parameters:
             raise ValueError('resize_parameters cannot be None.')
 
-        try:
-            # Construct URL
-            url = self._url('pools', pool_name, 'resize')
+        # Construct URL
+        url = self._join_url('pools', pool_name, 'resize')
 
-            # Construct parameters
-            query = {}
-            query['api-version'] = self._config.api_version
-            query['timeout'] = self._config.request_timeout
+        # Construct parameters
+        query = {}
+        query['api-version'] = self.config.api_version
+        query['timeout'] = self.config.request_timeout
 
-            # Construct headers
-            headers = {}
-            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
-            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
-            headers.update(access.get_headers())
+        # Construct headers
+        headers = {}
+        headers['ocp-date'] = self._serialize.serialize_rfc(datetime.utcnow())
+        headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+        headers.update(access.get_headers())
 
-            # Construct body
-            content = self.serializer(resize_parameters)
+        # Construct body
+        content = self._serialize(resize_parameters)
 
-            # Construct and send request
-            request = self._client.post(url, query)
-            response = self._send(request, accept_status, headers, content)
+        # Construct and send request
+        request = self._client.post(url, query)
+        response = self._client.send(request, headers, content)
 
-            if raw:
-                return response
+        self._verify_response(response, 202, CloudError)
 
-        except (SerializationError, DeserializationError):
-            raise #TODO: Wrap in client-specific error?
+        if raw:
+            return None, response
 
-    def stop_resize(self, pool_name=None, access=AccessCondition(), raw=False):
-
-        accept_status = [202]
+    @ServiceClient.async_request
+    def stop_resize(self, pool_name=None, access=AccessCondition(), raw=False, callback=None):
 
         # Validate
         if not pool_name:
             raise ValueError('pool_name cannot be None.')
 
-        try:
-            # Construct URL
-            url = self._url('pools', pool_name, 'stopresize')
+        # Construct URL
+        url = self._join_url('pools', pool_name, 'stopresize')
 
-            # Construct parameters
-            query = {}
-            query['api-version'] = self._config.api_version
-            query['timeout'] = self._config.request_timeout
+        # Construct parameters
+        query = {}
+        query['api-version'] = self.config.api_version
+        query['timeout'] = self.config.request_timeout
 
-            # Construct headers
-            headers = {}
-            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
-            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
-            headers.update(access.get_headers())
+        # Construct headers
+        headers = {}
+        headers['ocp-date'] = self._serialize.serialize_rfc(datetime.utcnow())
+        headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+        headers.update(access.get_headers())
 
-            # Construct and send request
-            request = self._client.post(url, query)
-            response = self._send(request, accept_status, headers)
+        # Construct and send request
+        request = self._client.post(url, query)
+        response = self._client.send(request, headers)
 
-            if raw:
-                return response
-           
-        except (SerializationError, DeserializationError):
-            raise #TODO: Wrap in client-specific error?
+        self._verify_response(response, 202, CloudError)
 
-    def update_properties(self, update_properties, pool_name=None, access=AccessCondition(), raw=False):
+        if raw:
+            return None, response
 
-        accept_status = [204]
+    @ServiceClient.async_request
+    def update_properties(self, update_properties, pool_name=None, access=AccessCondition(), raw=False, callback=None):
 
         # Validate
         if not pool_name:
@@ -471,37 +430,34 @@ class PoolManager(object):
         if not update_properties:
             raise ValueError('update_properties cannot be None.')
 
-        try:
-            # Construct URL
-            url = self._url('pools', pool_name, 'updateproperties')
+        # Construct URL
+        url = self._join_url('pools', pool_name, 'updateproperties')
 
-            # Construct parameters
-            query = {}
-            query['api-version'] = self._config.api_version
-            query['timeout'] = self._config.request_timeout
+        # Construct parameters
+        query = {}
+        query['api-version'] = self.config.api_version
+        query['timeout'] = self.config.request_timeout
 
-            # Construct headers
-            headers = {}
-            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
-            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
-            headers.update(access.get_headers())
+        # Construct headers
+        headers = {}
+        headers['ocp-date'] = self._serialize.serialize_rfc(datetime.utcnow())
+        headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+        headers.update(access.get_headers())
 
-            # Construct body
-            content = self.serializer(update_properties)
+        # Construct body
+        content = self._serialize(update_properties)
 
-            # Construct and send request
-            request = self._client.post(url, query)
-            response = self._send(request, accept_status, headers, content)
+        # Construct and send request
+        request = self._client.post(url, query)
+        response = self._client.send(request, headers, content)
 
-            if raw:
-                return response
+        self._verify_response(response, 204, CloudError)
 
-        except (SerializationError, DeserializationError):
-            raise #TODO: Wrap in client-specific error?
+        if raw:
+            return None, response
 
-    def upgrade_os(self, os_parameters, pool_name=None, access=AccessCondition(), raw=False):
-
-        accept_status = [202]
+    @ServiceClient.async_request
+    def upgrade_os(self, os_parameters, pool_name=None, access=AccessCondition(), raw=False, callback=None):
 
         # Validate
         if not pool_name:
@@ -510,33 +466,109 @@ class PoolManager(object):
         if not os_parameters:
             raise ValueError('os_parameters cannot be None.')
 
-        try:
-            # Construct URL
-            url = self._url('pools', pool_name, 'upgradeos')
+        # Construct URL
+        url = self._join_url('pools', pool_name, 'upgradeos')
 
-            # Construct parameters
-            query = {}
-            query['api-version'] = self._config.api_version
-            query['timeout'] = self._config.request_timeout
+        # Construct parameters
+        query = {}
+        query['api-version'] = self.config.api_version
+        query['timeout'] = self.config.request_timeout
 
-            # Construct headers
-            headers = {}
-            headers['ocp-date'] = self.serializer.serialize_opc_date(datetime.utcnow())
-            headers['Content-Type'] = 'application/json;odata=minimalmetadata'
-            headers.update(access.get_headers())
+        # Construct headers
+        headers = {}
+        headers['ocp-date'] = self._serialize.serialize_rfc(datetime.utcnow())
+        headers['Content-Type'] = 'application/json;odata=minimalmetadata'
+        headers.update(access.get_headers())
 
-            # Construct body
-            content = self.serializer(os_parameters)
+        # Construct body
+        content = self._serialize(os_parameters)
 
-            # Construct and send request
-            request = self._client.post(url, query)
-            response = self._send(request, accept_status, headers, content)
+        # Construct and send request
+        request = self._client.post(url, query)
+        response = self._client.send(request, headers, content)
 
-            if raw:
-                return response
+        self._verify_response(response, 202, CloudError)
 
-        except (SerializationError, DeserializationError):
-            raise #TODO: Wrap in client-specific error?
+        if raw:
+            return None, response
+
+    #@ServiceClient.async_request
+    #def stream_download(self, parameters, raw=False, callback=None):
+
+    #    if not parameters:
+    #        raise ValueError()
+
+    #    try:
+    #        url = self._url('pools')
+
+    #        query = {}
+    #        query['api-version'] = self.config.api_version
+    #        query['timeout'] = self.config.request_timeout
+
+    #        headers = {}
+    #        headers['ocp-date'] = self._client.serializer.serialize_rfc(datetime.utcnow())
+
+    #        request = self._client.get(url, query)
+    #        response = self._client.send(request, headers, stream=True)
+
+    #        self._verify_response(response, 201, CloudError)
+
+    #        def download_gen():
+
+    #            for data in response.iter_content(self.config.connection.data_block_size):
+
+    #                if not data:
+    #                    break
+
+    #                if callback and callable(callback):
+    #                    callback(data=data)
+
+    #                yield data
+
+    #        if raw:
+    #            return download_gen(), response
+
+    #        return download_gen()
+
+
+    #    except:
+    #        raise
+
+    #@ServiceClient.async_request
+    #def stream_upload(self, file_obj, parameters, raw=False, callback=None):
+
+    #    if not parameters:
+    #        raise ValueError()
+
+    #    def upload_gen(file_handle):    
+    #        while True:
+    #            data = file_handle.read(self.config.connection.data_block_size)
+
+    #            if not data:
+    #                break
+
+    #            if callback and callable(callback):
+    #                callback(data=data)
+
+    #            yield data
+
+    #    url = self._url('pools')
+
+    #    query = {}
+    #    query['api-version'] = self.config.api_version
+    #    query['timeout'] = self.config.request_timeout
+
+    #    headers = {}
+    #    headers['ocp-date'] = self._client.serializer.serialize_rfc(datetime.utcnow())
+
+    #    request = self._client.put(url, query)
+    #    response = self._client.send(request, headers, upload_gen(file_obj))
+
+    #    self._verify_response(response, 201, CloudError)
+
+    #    return response
+
+
 
 
 

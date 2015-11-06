@@ -44,6 +44,7 @@ from .exceptions import (
     ClientRequestError,
     raise_with_traceback)
 
+
 class ServiceClient(object):
 
     def __init__(self, creds, config):
@@ -100,16 +101,29 @@ class ServiceClient(object):
         for protocol in self._protocols:
             session.mount(protocol, self._adapter)
 
-    def send_async(self, request_cmd, callback, *args, **kwargs):
+    @staticmethod
+    def async_request(func):
+
+        def request(self, *args, **kwargs):
+
+            if kwargs.get('callback') and callable(kwargs['callback']):
+                response = self._client.send_async(func, self, *args, **kwargs)
+                response.add_done_callback(kwargs['callback'])
+                return response
+
+            return func(self, *args, **kwargs)
+
+        return request
+
+    def send_async(self, request_cmd, *args, **kwargs):
         """
         Prepare and send request object asynchronously.
         """
         with ThreadPoolExecutor(max_workers=1) as executor:
             future = executor.submit(request_cmd, *args, **kwargs)
-            future.add_done_callback(callback)
             return future
 
-    def send(self, request, **kwargs):
+    def send(self, request, headers, content=None, **kwargs):
         """
         Prepare and send request object according to configuration.
         """
@@ -117,6 +131,10 @@ class ServiceClient(object):
         self._configure_session(session)
 
         kwargs.update(self.config.connection())
+
+        request.add_headers(headers)
+        if content:
+            request.add_content(content)
 
         try:
 

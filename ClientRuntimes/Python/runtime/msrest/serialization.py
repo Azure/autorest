@@ -128,6 +128,8 @@ class Serializer(object):
             'time':Serializer.serialize_time,
             'date':Serializer.serialize_date,
             'decimal':Serializer.serialize_decimal,
+            'long':Serializer.serialize_long,
+            'bytearray':Serializer.serialize_bytearray,
             '[]':self.serialize_iter,
             '{}':self.serialize_dict
             }
@@ -222,8 +224,22 @@ class Serializer(object):
     def serialize_dict(self, attr, dict_type, required):
         return {str(x):self.serialize_data(attr[x], dict_type, required) for x in attr}
 
+    @staticmethod
+    def serialize_bytearray(attr):
+        return str(attr) #TODO
+
+    @staticmethod
     def serialize_decimal(attr):
         return float(attr)
+
+    @staticmethod
+    def serialize_long(attr):
+        try:
+            return long(attr)
+
+        except NameError:
+            return int(attr)
+
     @staticmethod
     def serialize_date(attr):
         return str(attr) #TODO
@@ -288,6 +304,8 @@ class Deserializer(object):
             'time':Deserializer.deserialize_time,
             'date':Deserializer.deserialize_date,
             'decimal':Deserializer.deserialize_decimal,
+            'long':Deserializer.deserialize_long,
+            'bytearray':Deserializer.deserialize_bytearray,
             '[]':self.deserialize_iter,
             '{}':self.deserialize_dict
             }
@@ -425,8 +443,20 @@ class Deserializer(object):
             attr[x], dict_type) for x in attr}
 
     @staticmethod
+    def deserialize_bytearray(attr):
+        return attr #TODO
+
+    @staticmethod
     def deserialize_decimal(attr):
         return Decimal(attr)
+
+    @staticmethod
+    def deserialize_long(attr):
+        try:
+            return long(attr)
+
+        except NameError:
+            return int(attr)
 
     @staticmethod
     def deserialize_duration(attr):

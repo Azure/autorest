@@ -2,15 +2,21 @@
 
 from runtime.msrest import ServiceClient
 from runtime.msrestazure import AzureConfiguration
-from .operations.pool_operations import PoolManager
-from .models import *
+from operations.pool_operations import PoolManager
+from runtime.msrest.serialization import Serializer, Deserializer
+
+import models   
 
 
-class BatchClient(ServiceClient):
+class BatchClient(object):
 
     def __init__(self, credentials, config):
 
-        super(BatchClient, self).__init__(credentials, config)
+        self._client = ServiceClient(credentials, config)
+        
+        client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
+        self._serialize = Serializer()
+        self._deserialize = Deserializer(client_models)
 
-        self.pools = PoolManager(self, config)
-
+        self.config = config
+        self.pools = PoolManager(self._client, self.config, self._serialize, self._deserialize)
