@@ -24,6 +24,7 @@ namespace Microsoft.Rest.Generator.ClientModel
             Methods = new List<Method>();
             ModelTypes = new List<CompositeType>();
             EnumTypes = new List<EnumType>();
+            Exceptions = new HashSet<string>();
         }
 
         /// <summary>
@@ -69,6 +70,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// Gets the methods.
         /// </summary>
         public IList<Method> Methods { get; private set; }
+
+        /// <summary>
+        /// Gets the exceptions.
+        /// </summary>
+        public ISet<string> Exceptions { get; private set; }
 
         /// <summary>
         /// Gets the method groups.

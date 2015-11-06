@@ -109,6 +109,11 @@ namespace Microsoft.Rest.Generator
             foreach (var method in client.Methods)
             {
                 NormalizeMethod(method);
+                if (method.DefaultResponse != null)
+                {
+                    client.Exceptions.Add(method.DefaultResponse.Name);
+                }
+                // TODO: Check the status code of Response.Keys
             }
         }
 
