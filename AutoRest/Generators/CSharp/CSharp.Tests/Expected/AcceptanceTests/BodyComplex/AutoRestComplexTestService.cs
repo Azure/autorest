@@ -167,8 +167,8 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                         new Iso8601TimeSpanConverter()
                     }
             };
-            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Fish>("dtype"));
-            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Fish>("dtype"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Fish>("fishtype"));
+            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Fish>("fishtype"));
         }    
     }
 }

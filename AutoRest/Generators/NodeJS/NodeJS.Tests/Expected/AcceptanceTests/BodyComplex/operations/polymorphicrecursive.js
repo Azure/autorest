@@ -120,7 +120,7 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse) {
-          result = new client._models.discriminators[parsedResponse['dtype']](parsedResponse);
+          result = new client._models.discriminators[parsedResponse['fishtype']](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
@@ -142,7 +142,7 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
  *
  * @param {object} complexBody Please put a salmon that looks like this:
  * {
- * "dtype": "salmon",
+ * "fishtype": "salmon",
  * "species": "king",
  * "length": 1,
  * "age": 1,
@@ -150,13 +150,13 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
  * "iswild": true,
  * "siblings": [
  * {
- * "dtype": "shark",
+ * "fishtype": "shark",
  * "species": "predator",
  * "length": 20,
  * "age": 6,
  * "siblings": [
  * {
- * "dtype": "salmon",
+ * "fishtype": "salmon",
  * "species": "coho",
  * "length": 2,
  * "age": 2,
@@ -164,13 +164,13 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
  * "iswild": true,
  * "siblings": [
  * {
- * "dtype": "shark",
+ * "fishtype": "shark",
  * "species": "predator",
  * "length": 20,
  * "age": 6
  * },
  * {
- * "dtype": "sawshark",
+ * "fishtype": "sawshark",
  * "species": "dangerous",
  * "length": 10,
  * "age": 105
@@ -178,7 +178,7 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
  * ]
  * },
  * {
- * "dtype": "sawshark",
+ * "fishtype": "sawshark",
  * "species": "dangerous",
  * "length": 10,
  * "age": 105
@@ -186,7 +186,7 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
  * ]
  * },
  * {
- * "dtype": "sawshark",
+ * "fishtype": "sawshark",
  * "species": "dangerous",
  * "length": 10,
  * "age": 105
@@ -200,7 +200,7 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
  * 
  * @param {array} [complexBody.siblings]
  * 
- * @param {string} [complexBody.dtype] Polymorhpic Discriminator
+ * @param {string} [complexBody.fishtype] Polymorhpic Discriminator
  * 
  * @param {object} [options]
  *
@@ -263,7 +263,7 @@ Polymorphicrecursive.prototype.putValid = function (complexBody, options, callba
   var requestModel = null;
   try {
     if (complexBody) {
-      requestModel = new client._models.discriminators[complexBody['dtype']](complexBody);
+      requestModel = new client._models.discriminators[complexBody['fishtype']](complexBody);
     }
     if (requestModel !== null && requestModel !== undefined) {
       requestContent = JSON.stringify(requestModel.serialize());

@@ -101,14 +101,14 @@ export interface Siamese extends Cat {
  * 
  * @member {array} [siblings]
  * 
- * @member {string} dtype Polymorhpic Discriminator
+ * @member {string} fishtype Polymorhpic Discriminator
  * 
  */
 export interface Fish {
     species?: string;
     length: number;
     siblings?: Fish[];
-    dtype: string;
+    fishtype: string;
 }
 
 /**

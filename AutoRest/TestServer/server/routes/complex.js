@@ -309,21 +309,21 @@ var complex = function(coverage) {
      */
     var rawFish =
       {
-        'dtype':'salmon',
+        'fishtype':'salmon',
         'location':'alaska',
         'iswild':true,
         'species':'king',
         'length':1.0,
         'siblings':[
           {
-            'dtype':'shark',
+            'fishtype':'shark',
             'age':6,
             'birthday': '2012-01-05T01:00:00Z',
             'length':20.0,
             'species':'predator',
           },
           {
-            'dtype':'sawshark',
+            'fishtype':'sawshark',
             'age':105,
             'birthday': '1900-01-05T01:00:00Z',
             'length':10.0,
@@ -365,35 +365,35 @@ var complex = function(coverage) {
      * Put and get for recursive reference.
      */
     var bigfishRaw = {
-        "dtype":"salmon",
+        "fishtype":"salmon",
         "location":"alaska",
         "iswild":true,
         "species":"king",
         "length":1,
         "siblings":[
           {
-            "dtype":"shark",
+            "fishtype":"shark",
             "age":6,
             'birthday': '2012-01-05T01:00:00Z',
             "species":"predator",
             "length":20,
             "siblings":[
                 {
-                    "dtype":"salmon",
+                    "fishtype":"salmon",
                     "location":"atlantic",
                     "iswild":true,
                     "species":"coho",
                     "length":2,
                     "siblings":[
                       {
-                        "dtype":"shark",
+                        "fishtype":"shark",
                         "age":6,
                         'birthday': '2012-01-05T01:00:00Z',
                         "species":"predator",
                         "length":20
                       },
                       {
-                        "dtype":"sawshark",
+                        "fishtype":"sawshark",
                         "age":105,
                         'birthday': '1900-01-05T01:00:00Z',
                         'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
@@ -403,7 +403,7 @@ var complex = function(coverage) {
                     ]
                 },
                 {
-                    "dtype":"sawshark",
+                    "fishtype":"sawshark",
                     "age":105,
                     'birthday': '1900-01-05T01:00:00Z',
                     'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
@@ -414,7 +414,7 @@ var complex = function(coverage) {
             ]
           },
           {
-            "dtype":"sawshark",
+            "fishtype":"sawshark",
             "age":105,
             'birthday': '1900-01-05T01:00:00Z',
             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),

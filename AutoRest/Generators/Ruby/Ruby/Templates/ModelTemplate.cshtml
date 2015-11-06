@@ -75,7 +75,7 @@ module @(Settings.Namespace)
         @if (Model.IsPolymorphic)
         {
         @EmptyLine
-        @:output_object['dtype'] = object.dtype
+        @:output_object['@Model.PolymorphicDiscriminatorProperty'] = object.@Model.PolymorphicDiscriminatorProperty
         }
 
         @EmptyLine
@@ -104,7 +104,7 @@ module @(Settings.Namespace)
         @if (Model.IsPolymorphic)
         {
         @EmptyLine
-        @:output_object.dtype = object['dtype']
+        @:output_object.@Model.PolymorphicDiscriminatorProperty = object['@Model.PolymorphicDiscriminatorProperty']
         }
 
         @EmptyLine
@@ -118,10 +118,10 @@ module @(Settings.Namespace)
       {
       @EmptyLine
       @:def initialize
-      @:  @@dtype = "@Model.Name.ToLower()"
+      @:  @@@Model.PolymorphicDiscriminatorProperty = "@Model.Name.ToLower()"
       @:end
       @EmptyLine
-      @:attr_accessor :dtype
+      @:attr_accessor :@Model.PolymorphicDiscriminatorProperty
       }
     end
   end

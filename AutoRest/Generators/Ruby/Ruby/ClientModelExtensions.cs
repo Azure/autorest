@@ -372,10 +372,11 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             {
                 if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
                 {
+                    string discriminator = composite.PolymorphicDiscriminator;
                     builder
-                        .AppendLine("unless {0}['dtype'].nil?", valueReference)
+                        .AppendLine("unless {0}['{1}'].nil?", valueReference, discriminator)
                         .Indent()
-                            .AppendLine("class_name = {0}['dtype'].capitalize", valueReference)
+                            .AppendLine("class_name = {0}['{1}'].capitalize", valueReference, discriminator)
                             .AppendLine("class_instance = Models.const_get(class_name)");
 
                     foreach (var ns in namespacesToLookForClasses)
@@ -490,10 +491,11 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             {
                 if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
                 {
+                    string discriminator = composite.PolymorphicDiscriminator;
                     builder
-                        .AppendLine("unless {0}.dtype.nil?", valueReference)
+                        .AppendLine("unless {0}.{1}.nil?", valueReference, discriminator)
                         .Indent()
-                        .AppendLine("class_name = {0}.dtype.capitalize", valueReference)
+                        .AppendLine("class_name = {0}.{1}.capitalize", valueReference, discriminator)
                         .AppendLine("class_instance = Models.const_get(class_name)");
 
                     foreach (var ns in namespacesToLookForClasses)
