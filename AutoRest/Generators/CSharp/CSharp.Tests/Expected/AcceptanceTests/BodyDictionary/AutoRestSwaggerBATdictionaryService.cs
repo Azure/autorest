@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -44,14 +45,6 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         public virtual IDictionary Dictionary { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestSwaggerBATdictionaryService class.
-        /// </summary>
-        public AutoRestSwaggerBATdictionaryService() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestSwaggerBATdictionaryService class.

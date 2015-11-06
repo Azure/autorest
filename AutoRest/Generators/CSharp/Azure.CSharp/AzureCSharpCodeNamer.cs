@@ -58,6 +58,19 @@ namespace Microsoft.Rest.Generator.CSharp
             return pageClasses[keypair];
         }
 
+        protected override IType NormalizePrimaryType(PrimaryType primaryType)
+        {
+            if (primaryType != null && primaryType == PrimaryType.Credentials)
+            {
+                primaryType.Name = "ServiceClientCredentials";
+                return primaryType;
+            }
+            else
+            {
+                return base.NormalizePrimaryType(primaryType);
+            }
+        }
+
         /// <summary>
         /// Changes paginated method signatures to return Page type.
         /// </summary>

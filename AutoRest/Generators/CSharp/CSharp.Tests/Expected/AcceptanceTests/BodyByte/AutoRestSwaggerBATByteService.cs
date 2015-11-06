@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -44,14 +45,6 @@ namespace Fixtures.AcceptanceTestsBodyByte
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         public virtual IByteModel ByteModel { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestSwaggerBATByteService class.
-        /// </summary>
-        public AutoRestSwaggerBATByteService() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestSwaggerBATByteService class.
