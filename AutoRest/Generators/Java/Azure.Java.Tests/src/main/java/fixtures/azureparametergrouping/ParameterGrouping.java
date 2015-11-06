@@ -15,9 +15,9 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azureparametergrouping.models.FirstParameterGroup;
+import fixtures.azureparametergrouping.models.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
-import fixtures.azureparametergrouping.models.SecondParameterGroup;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.Header;
@@ -43,6 +43,9 @@ public interface ParameterGrouping {
 
         @POST("/parameterGrouping/postMultipleParameterGroups")
         Call<ResponseBody> postMultipleParameterGroups(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") int queryOne, @Header("header-two") String headerTwo, @Query("query-two") int queryTwo);
+
+        @POST("/parameterGrouping/sharedParameterGroupObject")
+        Call<ResponseBody> postSharedParameterGroupObject(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") int queryOne);
 
     }
     /**
@@ -85,20 +88,38 @@ public interface ParameterGrouping {
      * Post parameters from multiple different parameter groups
      *
      * @param firstParameterGroup Additional parameters for the operation
-     * @param secondParameterGroup Additional parameters for the operation
+     * @param parameterGroupingPostMultipleParameterGroupsSecondParameterGroup Additional parameters for the operation
      * @throws ServiceException exception thrown from REST call
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> postMultipleParameterGroups(FirstParameterGroup firstParameterGroup, SecondParameterGroup secondParameterGroup) throws ServiceException;
+    ServiceResponse<Void> postMultipleParameterGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup) throws ServiceException;
 
     /**
      * Post parameters from multiple different parameter groups
      *
      * @param firstParameterGroup Additional parameters for the operation
-     * @param secondParameterGroup Additional parameters for the operation
+     * @param parameterGroupingPostMultipleParameterGroupsSecondParameterGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> postMultipleParameterGroupsAsync(FirstParameterGroup firstParameterGroup, SecondParameterGroup secondParameterGroup, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> postMultipleParameterGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Post parameters with a shared parameter group object
+     *
+     * @param firstParameterGroup Additional parameters for the operation
+     * @throws ServiceException exception thrown from REST call
+     * @return the ServiceResponse object if successful.
+     */
+    ServiceResponse<Void> postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) throws ServiceException;
+
+    /**
+     * Post parameters with a shared parameter group object
+     *
+     * @param firstParameterGroup Additional parameters for the operation
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, final ServiceCallback<Void> serviceCallback);
 
 }

@@ -19,17 +19,21 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
     /// <summary>
     /// Additional parameters for the postMultipleParameterGroups operation.
     /// </summary>
-    public partial class SecondParameterGroup
+    public partial class ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup
     {
         /// <summary>
-        /// Initializes a new instance of the SecondParameterGroup class.
+        /// Initializes a new instance of the
+        /// ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup
+        /// class.
         /// </summary>
-        public SecondParameterGroup() { }
+        public ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup() { }
 
         /// <summary>
-        /// Initializes a new instance of the SecondParameterGroup class.
+        /// Initializes a new instance of the
+        /// ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup
+        /// class.
         /// </summary>
-        public SecondParameterGroup(string headerTwo = default(string), int? queryTwo = default(int?))
+        public ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup(string headerTwo = default(string), int? queryTwo = default(int?))
         {
             HeaderTwo = headerTwo;
             QueryTwo = queryTwo;
