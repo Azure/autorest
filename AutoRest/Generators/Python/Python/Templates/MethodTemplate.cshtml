@@ -6,6 +6,7 @@
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Python.Templates
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodTemplateModel>
+    @@ServiceClient.async_request
     def @(Model.Name.ToPythonCase())(self, @(Model.MethodParameterDeclaration(true))):
         """
 @if (!String.IsNullOrEmpty(Model.Summary))
@@ -19,67 +20,57 @@
 }
         """
 @EmptyLine
-@if (Model.ParameterTemplateModels.Any())
-{
-  var validationBlock = Model.ValidationString;
-  if (!string.IsNullOrWhiteSpace(validationBlock))
-  {
-@:        # Validate
-@:        @(validationBlock)
+        # Construct URL
+        url = '@(Model.Url)'
+        @(Model.BuildUrlPath("url"))
 @EmptyLine
-  }
-}
-        try:
-    @*if (Model.IsAbsoluteUrl) *@
-            # Construct URL
-@if (Model.IsAbsoluteUrl)
-{
-@:            url = '@(Model.Url)'
-}
-else
-{
-@:            url = @(Model.ClientReference).baseUri + '@(Model.Url)'
-}
-            @(Model.BuildUrlPath("url"))
+        # Construct parameters
+        query = {}
+        @(Model.BuildUrlQuery("query"))
 @EmptyLine
-            # Construct parameters
-            query = {}
-            @(Model.BuildUrlQuery("query"))
-@EmptyLine
-            # Construct headers
-            headers = {}
-            @(Model.BuildHeaders("query"))
-            if customHeaders is not None:
-                headers.update(customHeaders)
-            headers['Content-Type'] = '@(Model.ContentType)'
+        # Construct headers
+        headers = {}
+        @(Model.BuildHeaders("query"))
+        headers.update(custom_headers)
+        headers['Content-Type'] = '@(Model.ContentType)'
 @* Add Credentials *@
 @EmptyLine
 @if (Model.RequestBody != null)
 {
-@:            # Construct body
-@:            content = Serialized(@Model.RequestBody.Name)
+@:        # Construct body
+@:        content = self._serialize(@Model.RequestBody.Name)
 @EmptyLine
 }
 @*stream handler*@
-            # Construct and send request
-            request = self._client.@(Model.GetHttpFunction(Model.HttpMethod))(url, query)
+        # Construct and send request
+        request = self._client.@(Model.GetHttpFunction(Model.HttpMethod))(url, query)
 @if (Model.RequestBody != null)
 {
-@:            response = self._send(request, headers, content)
+@:        response = self._client.send(request, headers, content)
 }
 else
 {
-@:            response = self._send(request, headers)
+@:        response = self._client.send(request, headers)
 }
 @EmptyLine
-            if response.status_code not in [@Model.GetAcceptStatus()]:
+        self._verify_response(response, [@Model.GetAcceptStatus()], @Model.GetExceptionType())
 @EmptyLine
-                deserialize = Deserialized(BatchStatusError, response, self)
-                deserialized = deserialize(response.content, self._classes)
-                raise deserialized
+@if (Model.Responses.Any())
+{
+  foreach (var responsePair in Model.Responses.Where(r => r.Value != null))
+  {
+@*stream handler*@
+@:        if response.status_code == @responsePair.Key :
+@:            deserialized = self._deserialize('@responsePair.Value.ToPythonRuntimeTypeString()', response)
+  }
+}
+else
+{
+@:        deserialized = None
+}
 @EmptyLine
-            return response
+        if raw:
+            return deserialized, response
 @EmptyLine
-        except (SerializationError, DeserializationError):
-            raise #TODO: Wrap in client-specific error?    
+        return deserialized
 @EmptyLine

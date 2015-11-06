@@ -107,30 +107,73 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             if (known == PrimaryType.Date)
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "Serialized..serializeObject({0}, \'date\')", reference);
+                    "Serialized.serializeObject({0}, \'date\')", reference);
             }
 
             if (known == PrimaryType.DateTimeRfc1123)
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "Serialized..serializeObject({0}, \'rfc-date\')", reference);
+                    "Serialized.serializeObject({0}, \'rfc-date\')", reference);
             }
 
             if (known == PrimaryType.DateTime)
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "Serialized..serializeObject({0}, \'iso-date\')", reference);
+                    "Serialized.serializeObject({0}, \'iso-date\')", reference);
             }
 
             if (known == PrimaryType.TimeSpan)
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "Serialized..serializeObject({0}, \'duration\')", reference);
+                    "Serialized.serializeObject({0}, \'duration\')", reference);
             }
 
             return reference;
         }
 
+        /// <summary>
+        /// Simple conversion of the type to string
+        /// </summary>
+        /// <param name="type">The type to convert</param>
+        /// <returns></returns>
+        public static string ToPythonRuntimeTypeString(this IType type)
+        {
+            var known = type as PrimaryType;
+
+            if (known == PrimaryType.Date)
+            {
+                return "date";
+            }
+
+            if (known == PrimaryType.DateTimeRfc1123)
+            {
+                return "rfc-date";
+            }
+
+            if (known == PrimaryType.DateTime)
+            {
+                return "iso-date"; 
+            }
+
+            if (known == PrimaryType.TimeSpan)
+            {
+                return "duration";
+            }
+
+            if (type is SequenceType)
+            {
+                var sequenceType = type as SequenceType;
+                return "[" + sequenceType.ElementType.ToPythonRuntimeTypeString() + "]";
+            }
+
+            if (type is DictionaryType)
+            {
+                var dictionaryType = type as DictionaryType;
+                return "{{" + dictionaryType.ValueType.ToPythonRuntimeTypeString() + "}}";
+            }
+
+            return type.Name;
+        }
         /// <summary>
         /// Returns a Javascript Array containing the values in a string enum type
         /// </summary>
@@ -193,11 +236,11 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             {
                 if (isRequired)
                 {
-                    builder.AppendLine("if {0} is not None or isinstance({0}, {1}):", valueReference, lowercaseTypeName);
+                    builder.AppendLine("if {0} or isinstance({0}, {1}):", valueReference, lowercaseTypeName);
                     return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
                 }
 
-                builder.AppendLine("if {0} is not None and type({0}) is not {1}:", valueReference, lowercaseTypeName);
+                builder.AppendLine("if {0} and type({0}) is not {1}:", valueReference, lowercaseTypeName);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
             else

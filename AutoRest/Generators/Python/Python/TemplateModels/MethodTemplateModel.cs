@@ -84,9 +84,11 @@ namespace Microsoft.Rest.Generator.Python
 
             if (addCustomHeaderParameters)
             {
-                declarations.Add("customHeaders");
+                declarations.Add("custom_headers = {}");
             }
 
+            declarations.Add("raw = False");
+            declarations.Add("callback = None");
             var declaration = string.Join(", ", declarations);
             return declaration;
         }
@@ -107,9 +109,10 @@ namespace Microsoft.Rest.Generator.Python
 
                 for (int i = 0; i < pathParameterList.Count; i ++)
                 {
-                    builder.AppendLine("{0} = urllib.quote({1}){2}",
+                    builder.AppendLine("{0} = self._parse_url(\"{1}\", {1}, '{2}'){3}",
                         pathParameterList[i].SerializedName,
-                        pathParameterList[i].Type.ToString(pathParameterList[i].Name),
+                        pathParameterList[i].Name,
+                        pathParameterList[i].Type.ToPythonRuntimeTypeString(),
                         i == pathParameterList.Count-1 ? ")" : ",");
                 }
             }
@@ -130,8 +133,9 @@ namespace Microsoft.Rest.Generator.Python
             {
                 builder.AppendLine("if {0} is not None:", queryParameter.Name)
                     .Indent()
-                    .AppendLine("{0}['{1}'] = {2}", variableName,
-                        queryParameter.SerializedName, queryParameter.Type.ToString(queryParameter.Name));
+                    .AppendLine("{0}['{1}'] = self._parse_url(\"{2}\", {2}, '{3}')", variableName,
+                        queryParameter.SerializedName, queryParameter.Name, queryParameter.Type.ToPythonRuntimeTypeString())
+                    .Outdent();
             }
 
             return builder.ToString();
@@ -247,6 +251,19 @@ namespace Microsoft.Rest.Generator.Python
                     return ReturnType.Name;
                 }
                 return "null";
+            }
+        }
+
+        public string GetExceptionType()
+        {
+            if (DefaultResponse != null)
+            {
+                return DefaultResponse.Name + "Exception";
+            }
+            else
+            {
+                // Base exception name
+                return "HttpOperationException";
             }
         }
 
