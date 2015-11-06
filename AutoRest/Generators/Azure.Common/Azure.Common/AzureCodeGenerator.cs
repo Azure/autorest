@@ -567,6 +567,13 @@ namespace Microsoft.Rest.Generator.Azure
                     };
                     nextLinkParameter.Extensions[SkipUrlEncodingExtension] = true;
                     newMethod.Parameters.Add(nextLinkParameter);
+
+                    // Need copy all the header parameters from List method to ListNext method
+                    foreach (var param in method.Parameters.Where(p => p.Location == ParameterLocation.Header))
+                    {
+                        newMethod.Parameters.Add((Parameter)param.Clone());
+                    }
+
                     serviceClient.Methods.Add(newMethod);
                 }
             }
