@@ -492,81 +492,71 @@ class PoolManager(object):
         if raw:
             return None, response
 
-    #@ServiceClient.async_request
-    #def stream_download(self, parameters, raw=False, callback=None):
+    @ServiceClient.async_request
+    def stream_download(self, parameters, raw=False, callback=None):
 
-    #    if not parameters:
-    #        raise ValueError()
+        if not parameters:
+            raise ValueError()
 
-    #    try:
-    #        url = self._url('pools')
+        url = self._join_url('pools')
 
-    #        query = {}
-    #        query['api-version'] = self.config.api_version
-    #        query['timeout'] = self.config.request_timeout
+        query = {}
+        query['api-version'] = self.config.api_version
+        query['timeout'] = self.config.request_timeout
 
-    #        headers = {}
-    #        headers['ocp-date'] = self._client.serializer.serialize_rfc(datetime.utcnow())
+        headers = {}
+        headers['ocp-date'] = self._client.serializer.serialize_rfc(datetime.utcnow())
 
-    #        request = self._client.get(url, query)
-    #        response = self._client.send(request, headers, stream=True)
+        request = self._client.get(url, query)
+        response = self._client.send(request, headers, stream=True)
 
-    #        self._verify_response(response, 201, CloudError)
+        self._verify_response(response, 200, CloudError)
 
-    #        def download_gen():
+        def download_gen():
+            for data in response.iter_content(self.config.connection.data_block_size):
+                if not data:
+                    break
 
-    #            for data in response.iter_content(self.config.connection.data_block_size):
+                yield data
 
-    #                if not data:
-    #                    break
+        if raw:
+            return download_gen(), response
 
-    #                if callback and callable(callback):
-    #                    callback(data=data)
+        return download_gen()
 
-    #                yield data
+    @ServiceClient.async_request
+    def stream_upload(self, file_obj, parameters, raw=False, callback=None):
 
-    #        if raw:
-    #            return download_gen(), response
+        if not parameters:
+            raise ValueError()
 
-    #        return download_gen()
+        def upload_gen(file_handle):    
+            while True:
+                data = file_handle.read(self.config.connection.data_block_size)
 
+                if not data:
+                    break
 
-    #    except:
-    #        raise
+                if callback and callable(callback):
+                    callback(None, data=data)
 
-    #@ServiceClient.async_request
-    #def stream_upload(self, file_obj, parameters, raw=False, callback=None):
+                yield data
 
-    #    if not parameters:
-    #        raise ValueError()
+        url = self._join_url('pools')
 
-    #    def upload_gen(file_handle):    
-    #        while True:
-    #            data = file_handle.read(self.config.connection.data_block_size)
+        query = {}
+        query['api-version'] = self.config.api_version
+        query['timeout'] = self.config.request_timeout
 
-    #            if not data:
-    #                break
+        headers = {}
+        headers['ocp-date'] = self._client.serializer.serialize_rfc(datetime.utcnow())
 
-    #            if callback and callable(callback):
-    #                callback(data=data)
+        request = self._client.put(url, query)
+        response = self._client.send(request, headers, upload_gen(file_obj))
 
-    #            yield data
+        self._verify_response(response, 200, CloudError)
 
-    #    url = self._url('pools')
-
-    #    query = {}
-    #    query['api-version'] = self.config.api_version
-    #    query['timeout'] = self.config.request_timeout
-
-    #    headers = {}
-    #    headers['ocp-date'] = self._client.serializer.serialize_rfc(datetime.utcnow())
-
-    #    request = self._client.put(url, query)
-    #    response = self._client.send(request, headers, upload_gen(file_obj))
-
-    #    self._verify_response(response, 201, CloudError)
-
-    #    return response
+        return response
 
 
 
