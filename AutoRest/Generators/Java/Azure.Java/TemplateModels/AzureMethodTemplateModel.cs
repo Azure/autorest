@@ -120,6 +120,15 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 throw new InvalidOperationException("Invalid long running operation HTTP method " + this.HttpMethod);
             }
         }
+
+        public override string ResponseBuilder
+        {
+            get
+            {
+                return "AzureServiceResponseBuilder";
+            }
+        }
+
         public override string ServiceResponseBuilderArgs
         {
             get
@@ -155,7 +164,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
                     imports.Remove("com.microsoft.rest.ServiceResponseCallback");
-                    imports.Remove("com.microsoft.rest.ServiceResponseBuilder");
+                    imports.Remove("com.microsoft.rest.AzureServiceResponseBuilder");
                     imports.Add("retrofit.Callback");
                     this.Responses.Select(r => r.Value).Concat(new IType[]{ DefaultResponse })
                         .SelectMany(t => t.ImportFrom(ServiceClient.Namespace))

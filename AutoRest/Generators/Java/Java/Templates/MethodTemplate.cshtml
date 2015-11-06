@@ -89,7 +89,7 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
 }
 @EmptyLine
 private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws ServiceException {
-    return new ServiceResponseBuilder<@Model.GenericReturnTypeString>(@Model.ServiceResponseBuilderArgs)
+    return new @Model.ResponseBuilder<@Model.GenericReturnTypeString>(@Model.ServiceResponseBuilderArgs)
 @foreach (var response in Model.Responses)
 {
             @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.WrapPrimitiveType(response.Value).Name>(){}.getType())
@@ -98,7 +98,7 @@ private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Re
 {
             @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(Model.DefaultResponse).Name)>(){}.getType())
 }
-@if (Model.CallType == "Void")
+@if (Model.HttpMethod == HttpMethod.Head)
 {
             @:.buildEmpty(response, retrofit);
 }

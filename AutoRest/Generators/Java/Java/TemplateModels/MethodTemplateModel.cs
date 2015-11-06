@@ -333,7 +333,16 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public virtual string ServiceResponseBuilderArgs {
+        public virtual string ResponseBuilder
+        {
+            get
+            {
+                return "ServiceResponseBuilder";
+            }
+        }
+
+        public virtual string ServiceResponseBuilderArgs
+        {
             get
             {
                 return "";
@@ -374,7 +383,7 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add("retrofit.Retrofit");
                 imports.Add("com.squareup.okhttp.ResponseBody");
                 imports.Add("com.microsoft.rest.ServiceResponse");
-                imports.Add("com.microsoft.rest.ServiceResponseBuilder");
+                imports.Add("com.microsoft.rest." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceException");
                 imports.Add("com.microsoft.rest.ServiceCallback");
 

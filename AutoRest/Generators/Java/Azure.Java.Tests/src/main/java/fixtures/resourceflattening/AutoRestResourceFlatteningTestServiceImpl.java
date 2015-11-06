@@ -12,13 +12,13 @@ package fixtures.resourceflattening;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.AzureServiceResponseBuilder;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.ResponseBody;
@@ -190,7 +190,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -234,7 +234,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<List<FlattenedProduct>>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<List<FlattenedProduct>>(new AzureJacksonUtils())
                 .register(200, new TypeToken<List<FlattenedProduct>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -279,7 +279,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     private ServiceResponse<Void> putDictionaryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -323,7 +323,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     private ServiceResponse<Map<String, FlattenedProduct>> getDictionaryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, FlattenedProduct>>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Map<String, FlattenedProduct>>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Map<String, FlattenedProduct>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -368,7 +368,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     private ServiceResponse<Void> putResourceCollectionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -412,7 +412,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     private ServiceResponse<ResourceCollection> getResourceCollectionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<ResourceCollection>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<ResourceCollection>(new AzureJacksonUtils())
                 .register(200, new TypeToken<ResourceCollection>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
