@@ -11,6 +11,7 @@ namespace Fixtures.PetstoreV2
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -46,14 +47,6 @@ namespace Fixtures.PetstoreV2
         /// Gets or sets json deserialization settings.
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
-
-        /// <summary>
-        /// Initializes a new instance of the SwaggerPetstoreV2 class.
-        /// </summary>
-        public SwaggerPetstoreV2() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the SwaggerPetstoreV2 class.

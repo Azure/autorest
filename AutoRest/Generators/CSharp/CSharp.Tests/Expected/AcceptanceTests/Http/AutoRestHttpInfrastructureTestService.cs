@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsHttp
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -56,14 +57,6 @@ namespace Fixtures.AcceptanceTestsHttp
         public virtual IHttpRetry HttpRetry { get; private set; }
 
         public virtual IMultipleResponses MultipleResponses { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
-        /// </summary>
-        public AutoRestHttpInfrastructureTestService() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestHttpInfrastructureTestService class.

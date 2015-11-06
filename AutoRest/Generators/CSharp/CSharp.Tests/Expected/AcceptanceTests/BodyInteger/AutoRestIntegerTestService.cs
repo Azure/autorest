@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -44,14 +45,6 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         public virtual IIntModel IntModel { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestIntegerTestService class.
-        /// </summary>
-        public AutoRestIntegerTestService() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestIntegerTestService class.

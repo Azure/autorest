@@ -68,6 +68,9 @@
     <Compile Include="Templates\ModelTemplate.cs">
       <DependentUpon>ModelTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\ServiceClientBodyTemplate.cs">
+      <DependentUpon>ServiceClientBodyTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\ServiceClientInterfaceTemplate.cs">
       <DependentUpon>ServiceClientInterfaceTemplate.cshtml</DependentUpon>
     </Compile>
@@ -80,6 +83,7 @@
     <None Include="Templates\ServiceClientInterfaceTemplate.cshtml" />
     <None Include="Templates\MethodGroupTemplate.cshtml" />
     <None Include="Templates\MethodGroupInterfaceTemplate.cshtml" />
+    <None Include="Templates\ServiceClientBodyTemplate.cshtml" />
     <None Include="Templates\ServiceClientTemplate.cshtml" />
     <None Include="Templates\MethodTemplate.cshtml" />
     <None Include="Templates\ModelTemplate.cshtml" />

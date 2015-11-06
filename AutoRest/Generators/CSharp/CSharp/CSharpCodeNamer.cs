@@ -109,42 +109,13 @@ namespace Microsoft.Rest.Generator.CSharp
                 "Type {0} is not supported.", type.GetType()));
         }
 
-        public override IType NormalizeTypeReference(IType type)
+        protected virtual IType NormalizePrimaryType(PrimaryType primaryType)
         {
-            var enumType = type as EnumType;
-            if (enumType != null && enumType.ModelAsString)
+            if (primaryType == null)
             {
-                return PrimaryType.String;
-            }
-            return NormalizeTypeDeclaration(type);
-        }
-
-        private IType NormalizeCompositeType(CompositeType compositeType)
-        {
-            compositeType.Name = GetTypeName(compositeType.Name);
-
-            foreach (var property in compositeType.Properties)
-            {
-                property.Name = GetPropertyName(property.Name);
-                property.Type = NormalizeTypeReference(property.Type);
+                return null;
             }
 
-            return compositeType;
-        }
-
-        private IType NormalizeEnumType(EnumType enumType)
-        {
-            enumType.Name = GetTypeName(enumType.Name) + "?";
-
-            for (int i = 0; i < enumType.Values.Count; i++)
-            {
-                enumType.Values[i].Name = GetEnumMemberName(enumType.Values[i].Name);
-            }
-            return enumType;
-        }
-
-        private static IType NormalizePrimaryType(PrimaryType primaryType)
-        {
             if (primaryType == PrimaryType.Boolean)
             {
                 primaryType.Name = "bool?";
@@ -197,9 +168,47 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 primaryType.Name = "object";
             }
+            else if (primaryType == PrimaryType.Credentials)
+            {
+                primaryType.Name = "ServiceClientCredentials";
+            }
 
             return primaryType;
         }
+
+        public override IType NormalizeTypeReference(IType type)
+        {
+            var enumType = type as EnumType;
+            if (enumType != null && enumType.ModelAsString)
+            {
+                return PrimaryType.String;
+            }
+            return NormalizeTypeDeclaration(type);
+        }
+
+        private IType NormalizeCompositeType(CompositeType compositeType)
+        {
+            compositeType.Name = GetTypeName(compositeType.Name);
+
+            foreach (var property in compositeType.Properties)
+            {
+                property.Name = GetPropertyName(property.Name);
+                property.Type = NormalizeTypeReference(property.Type);
+            }
+
+            return compositeType;
+        }
+
+        private IType NormalizeEnumType(EnumType enumType)
+        {
+            enumType.Name = GetTypeName(enumType.Name) + "?";
+
+            for (int i = 0; i < enumType.Values.Count; i++)
+            {
+                enumType.Values[i].Name = GetEnumMemberName(enumType.Values[i].Name);
+            }
+            return enumType;
+        }        
 
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {

@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsValidation
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -53,14 +54,6 @@ namespace Fixtures.AcceptanceTestsValidation
         /// Required string following pattern \\\\d{2}-\\\\d{2}-\\\\d{4}
         /// </summary>
         public string ApiVersion { get; set; }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestValidationTest class.
-        /// </summary>
-        public AutoRestValidationTest() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestValidationTest class.

@@ -64,14 +64,6 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// <summary>
         /// Initializes a new instance of the AutoRestHeadTestService class.
         /// </summary>
-        protected AutoRestHeadTestService() : base()
-        {
-            this.Initialize();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestHeadTestService class.
-        /// </summary>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
@@ -92,6 +84,45 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         protected AutoRestHeadTestService(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             this.Initialize();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestHeadTestService class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        protected AutoRestHeadTestService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            this.BaseUri = baseUri;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestHeadTestService class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        protected AutoRestHeadTestService(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            this.BaseUri = baseUri;
         }
 
         /// <summary>
@@ -165,10 +196,10 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             }
             this.BaseUri = baseUri;
             this.Credentials = credentials;
-            if (this.Credentials != null)
-            {
-                this.Credentials.InitializeServiceClient(this);
-            }
+                if (this.Credentials != null)
+                {
+                    this.Credentials.InitializeServiceClient(this);
+                }
         }
 
         /// <summary>
@@ -198,10 +229,10 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             }
             this.BaseUri = baseUri;
             this.Credentials = credentials;
-            if (this.Credentials != null)
-            {
-                this.Credentials.InitializeServiceClient(this);
-            }
+                if (this.Credentials != null)
+                {
+                    this.Credentials.InitializeServiceClient(this);
+                }
         }
 
         /// <summary>

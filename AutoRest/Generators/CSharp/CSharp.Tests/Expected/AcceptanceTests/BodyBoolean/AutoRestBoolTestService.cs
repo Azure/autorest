@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -44,14 +45,6 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         public virtual IBoolModel BoolModel { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestBoolTestService class.
-        /// </summary>
-        public AutoRestBoolTestService() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestBoolTestService class.

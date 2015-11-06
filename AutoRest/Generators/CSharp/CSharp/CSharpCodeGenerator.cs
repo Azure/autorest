@@ -63,10 +63,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 serviceClient.Properties.Add(new Property
                 {
                     Name = "Credentials",
-                    Type = new CompositeType
-                    {
-                        Name = "ServiceClientCredentials"
-                    },
+                    Type = PrimaryType.Credentials,
                     IsRequired = true,
                     Documentation = "Subscription credentials which uniquely identify client subscription."
                 });

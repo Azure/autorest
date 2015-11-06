@@ -374,10 +374,7 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 Name = "Credentials",
                 SerializedName = "credentials",
-                Type = new CompositeType
-                {
-                    Name = "ServiceClientCredentials"
-                },
+                Type = PrimaryType.Credentials,
                 IsRequired = true,
                 IsReadOnly = true,
                 Documentation = "The management credentials for Azure."

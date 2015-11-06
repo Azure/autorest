@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -44,14 +45,6 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         public virtual INumber Number { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestNumberTestService class.
-        /// </summary>
-        public AutoRestNumberTestService() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestNumberTestService class.

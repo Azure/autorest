@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -61,14 +62,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         public virtual IImplicitModel ImplicitModel { get; private set; }
 
         public virtual IExplicitModel ExplicitModel { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestRequiredOptionalTestService class.
-        /// </summary>
-        public AutoRestRequiredOptionalTestService() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestRequiredOptionalTestService class.
