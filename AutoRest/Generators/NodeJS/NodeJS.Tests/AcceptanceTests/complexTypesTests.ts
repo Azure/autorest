@@ -314,21 +314,21 @@ describe('nodejs', function () {
 
     describe('Complex Types with Polymorphism Operations', function () {
       var fish = {
-        'dtype': 'salmon',
+        'fishtype': 'salmon',
         'location': 'alaska',
         'iswild': true,
         'species': 'king',
         'length': 1.0,
         'siblings': [
           {
-            'dtype': 'shark',
+            'fishtype': 'shark',
             'age': 6,
             'birthday': new Date('2012-01-05T01:00:00Z'),
             'length': 20.0,
             'species': 'predator'
           },
           {
-            'dtype': 'sawshark',
+            'fishtype': 'sawshark',
             'age': 105,
             'birthday': new Date('1900-01-05T01:00:00Z'),
             'length': 10.0,
@@ -349,7 +349,7 @@ describe('nodejs', function () {
         });
       });
       var badfish = {
-        'dtype': 'sawshark',
+        'fishtype': 'sawshark',
         'species': 'snaggle toothed',
         'length': 18.5,
         'age': 2,
@@ -358,14 +358,14 @@ describe('nodejs', function () {
         'picture': new Buffer([255, 255, 255, 255, 254]),
         'siblings': [
           {
-            'dtype': 'shark',
+            'fishtype': 'shark',
             'species': 'predator',
             'birthday': new Date('2012-01-05T01:00:00Z'),
             'length': 20,
             'age': 6
           },
           {
-            'dtype': 'sawshark',
+            'fishtype': 'sawshark',
             'species': 'dangerous',
             'picture': new Buffer([255, 255, 255, 255, 254]),
             'length': 10,
@@ -385,35 +385,35 @@ describe('nodejs', function () {
 
     describe('Complex Types with recursive definitions', function () {
       var bigfish = <complexClientModels.Fish> {
-        'dtype': 'salmon',
+        'fishtype': 'salmon',
         'location': 'alaska',
         'iswild': true,
         'species': 'king',
         'length': 1,
         'siblings': [
           <complexClientModels.Shark> {
-            'dtype': 'shark',
+            'fishtype': 'shark',
             'age': 6,
             'birthday': new Date('2012-01-05T01:00:00Z'),
             'species': 'predator',
             'length': 20,
             'siblings': [
               <complexClientModels.Salmon> {
-                'dtype': 'salmon',
+                'fishtype': 'salmon',
                 'location': 'atlantic',
                 'iswild': true,
                 'species': 'coho',
                 'length': 2,
                 'siblings': [
                   <complexClientModels.Shark> {
-                    'dtype': 'shark',
+                    'fishtype': 'shark',
                     'age': 6,
                     'birthday': new Date('2012-01-05T01:00:00Z'),
                     'species': 'predator',
                     'length': 20
                   },
                   <complexClientModels.Sawshark> {
-                    'dtype': 'sawshark',
+                    'fishtype': 'sawshark',
                     'age': 105,
                     'birthday': new Date('1900-01-05T01:00:00Z'),
                     'picture': new Buffer([255, 255, 255, 255, 254]),
@@ -423,7 +423,7 @@ describe('nodejs', function () {
                 ]
               },
               <complexClientModels.Sawshark> {
-                'dtype': 'sawshark',
+                'fishtype': 'sawshark',
                 'age': 105,
                 'birthday': new Date('1900-01-05T01:00:00Z'),
                 'picture': new Buffer([255, 255, 255, 255, 254]),
@@ -434,7 +434,7 @@ describe('nodejs', function () {
             ]
           },
           <complexClientModels.Sawshark> {
-            'dtype': 'sawshark',
+            'fishtype': 'sawshark',
             'age': 105,
             'birthday': new Date('1900-01-05T01:00:00Z'),
             'picture': new Buffer([255, 255, 255, 255, 254]),

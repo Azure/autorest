@@ -82,6 +82,22 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
+        /// Gets the polymorphic discriminator to use for the current object, or its parent's if it doesn't have one.
+        /// </summary>
+        public string PolymorphicDiscriminatorProperty
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(this.PolymorphicDiscriminator) && this.parent != null)
+                {
+                    return this.parent.PolymorphicDiscriminatorProperty;
+                }
+
+                return this.PolymorphicDiscriminator;
+            }
+        }
+
+        /// <summary>
         /// Initializes a new instance of the ModelTemplateModel class.
         /// </summary>
         /// <param name="source">The object to create model from.</param>
