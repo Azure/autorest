@@ -4,29 +4,29 @@ from enum import Enum
 
 class PoolState(Enum):
 
-    invalid = "Invalid"
-    active = "Active"
-    deleting = "Deleting"
-    upgrading = "Upgrading"
-    unmapped = "Unmapped"
+    invalid = "invalid"
+    active = "active"
+    deleting = "deleting"
+    upgrading = "upgrading"
+    unmapped = "unmapped"
 
 
 class AllocationState(Enum):
 
-    invalid = "Invalid"
-    steady = "Steady"
-    resizing = "Resizing"
-    stopping = "Stopping"
-    unmapped = "Unmapped"
+    invalid = "invalid"
+    steady = "steady"
+    resizing = "resizing"
+    stopping = "stopping"
+    unmapped = "unmapped"
 
 
 class CertificateState(Enum):
 
-    invalid = "Invalid"
-    active = "Active"
-    deleting = "Deleting"
-    delete_failed = "DeleteFailed"
-    unmapped = "Unmapped"
+    invalid = "invalid"
+    active = "active"
+    deleting = "deleting"
+    delete_failed = "deleteFailed"
+    unmapped = "unmapped"
 
 
 class CertificateFormat(Enum):

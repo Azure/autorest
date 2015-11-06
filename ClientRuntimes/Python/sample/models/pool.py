@@ -24,7 +24,7 @@ class Pool(Model):
             'last_modified': {'key':'lastModifed', 'type':'iso-8601'},
             'creation_time': {'key':'creationTime', 'type':'iso-8601'},
             'state': {'key':'state', 'type':'PoolState'},
-            'state_transition_time': {'key':'stateTransitionTime', 'type':'rfc-18743958437'},
+            'state_transition_time': {'key':'stateTransitionTime', 'type':'iso-8601'},
             'allocation_state': {'key':'allocationState', 'type':'AllocationState'},
             'allocation_state_transition_time': {'key':'allocationStateTransitionTime', 'type':'iso-8601'},
             'resize_error': {'key':'resizeError', 'type':'ResizeError'},

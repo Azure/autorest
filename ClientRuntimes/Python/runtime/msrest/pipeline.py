@@ -177,8 +177,13 @@ class ClientRequest(requests.Request):
             self.add_header(key, value)
 
     def add_content(self, data):
-        self.data = json.dumps(data)
-        self.headers['Content-Length'] = len(self.data)
+
+        if isinstance(data, generator):
+            self.data = data
+
+        else:
+            self.data = json.dumps(data)
+            self.headers['Content-Length'] = len(self.data)
 
 
 class ClientRetryPolicy(object):
@@ -283,6 +288,7 @@ class ClientConnection(object):
         self.timeout = 100
         self.verify = True
         self.cert = None
+        self.data_block_size = 4096
 
     def __call__(self):
         self._log.debug("Configuring request: timeout={}, verify={}, "
