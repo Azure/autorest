@@ -40,6 +40,14 @@ namespace Microsoft.Rest.Generator.CSharp
             }
         }
 
+        public bool ContainsCredentials
+        {
+            get
+            {
+                return Properties.Any(p => p.Type == PrimaryType.Credentials);
+            }
+        }
+
         public string RequiredConstructorParameters
         {
             get

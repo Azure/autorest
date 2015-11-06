@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -44,14 +45,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         public virtual IDatetime Datetime { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestDateTimeTestService class.
-        /// </summary>
-        public AutoRestDateTimeTestService() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestDateTimeTestService class.

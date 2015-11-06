@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -44,14 +45,6 @@ namespace Fixtures.AcceptanceTestsBodyFile
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         public virtual IFiles Files { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestSwaggerBATFileService class.
-        /// </summary>
-        public AutoRestSwaggerBATFileService() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestSwaggerBATFileService class.

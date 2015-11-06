@@ -75,14 +75,6 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// <summary>
         /// Initializes a new instance of the MicrosoftAzureTestUrl class.
         /// </summary>
-        protected MicrosoftAzureTestUrl() : base()
-        {
-            this.Initialize();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the MicrosoftAzureTestUrl class.
-        /// </summary>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
@@ -103,6 +95,45 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         protected MicrosoftAzureTestUrl(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             this.Initialize();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the MicrosoftAzureTestUrl class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        protected MicrosoftAzureTestUrl(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            this.BaseUri = baseUri;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the MicrosoftAzureTestUrl class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        protected MicrosoftAzureTestUrl(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            this.BaseUri = baseUri;
         }
 
         /// <summary>
@@ -176,10 +207,10 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
             }
             this.BaseUri = baseUri;
             this.Credentials = credentials;
-            if (this.Credentials != null)
-            {
-                this.Credentials.InitializeServiceClient(this);
-            }
+                if (this.Credentials != null)
+                {
+                    this.Credentials.InitializeServiceClient(this);
+                }
         }
 
         /// <summary>
@@ -209,10 +240,10 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
             }
             this.BaseUri = baseUri;
             this.Credentials = credentials;
-            if (this.Credentials != null)
-            {
-                this.Credentials.InitializeServiceClient(this);
-            }
+                if (this.Credentials != null)
+                {
+                    this.Credentials.InitializeServiceClient(this);
+                }
         }
 
         /// <summary>

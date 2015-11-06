@@ -57,8 +57,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 HashSet<string> classes = new HashSet<string>();
 
-                if (this.Properties.Any(p => p.Type != null &&
-                                             p.Type.Name.Equals("ServiceClientCredentials", System.StringComparison.OrdinalIgnoreCase)))
+                if (this.Properties.Any(p => p.Type == PrimaryType.Credentials))
                 {
                     classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
                 }
@@ -89,8 +88,7 @@ namespace Microsoft.Rest.Generator.Java
                 HashSet<string> classes = new HashSet<string>();
                 classes.Add("java.util.List");
                 classes.Add("com.squareup.okhttp.Interceptor");
-                if (this.Properties.Any(p => p.Type != null &&
-                                             p.Type.Name.Equals("ServiceClientCredentials", System.StringComparison.OrdinalIgnoreCase)))
+                if (this.Properties.Any(p => p.Type == PrimaryType.Credentials))
                 {
                     classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
                 }

@@ -77,7 +77,6 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             base.NormalizeClientModel(serviceClient);
             AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             NormalizeApiVersion(serviceClient);
-            NormalizeCredentials(serviceClient);
             NormalizePaginatedMethods(serviceClient);
             ExtendAllResourcesToBaseResource(serviceClient);
         }
@@ -125,17 +124,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 }
             }
         }
-
-        private static void NormalizeCredentials(ServiceClient serviceClient)
-        {
-            var property = serviceClient.Properties.FirstOrDefault(
-                p => p.Name.Equals("credentials", StringComparison.OrdinalIgnoreCase));
-            if (property != null)
-            {
-                ((CompositeType) property.Type).Name = "ServiceClientCredentials";
-            }
-        }
-
+        
         private static void NormalizeApiVersion(ServiceClient serviceClient)
         {
             serviceClient.Properties.Where(
