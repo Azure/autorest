@@ -129,7 +129,7 @@ if(!property.IsReadOnly)
 {
         @:this.@(property.Name) = @(property.DefaultValue);
 }
-
+        @Model.SetDefaultHeaders
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
         this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);

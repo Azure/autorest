@@ -12,8 +12,10 @@ package fixtures.subscriptionidapiversion;
 
 import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.CustomHeaderInterceptor;
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
+import java.util.UUID;
 import retrofit.Retrofit;
 
 /**
@@ -169,6 +171,7 @@ public class MicrosoftAzureTestUrlImpl extends ServiceClient implements Microsof
         }
         this.apiVersion = "2014-04-01-preview";
         this.acceptLanguage = "en-US";
+        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
         this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);

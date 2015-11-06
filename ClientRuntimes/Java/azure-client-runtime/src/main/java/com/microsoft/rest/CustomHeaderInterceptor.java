@@ -13,6 +13,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +31,17 @@ public class CustomHeaderInterceptor implements Interceptor {
      */
     public CustomHeaderInterceptor() {
         headers = new HashMap<String, List<String>>();
+    }
+
+    /**
+     * Initialize an instance of {@link CustomHeaderInterceptor} class.
+     *
+     * @param key the key for the header
+     * @param value the value of the header
+     */
+    public CustomHeaderInterceptor(String key, String value) {
+        this();
+        addHeader(key, value);
     }
 
     /**

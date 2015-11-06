@@ -13,6 +13,7 @@ package fixtures.azurereport;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.CustomHeaderInterceptor;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceClient;
@@ -24,6 +25,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azurereport.models.Error;
 import java.util.Map;
+import java.util.UUID;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -140,6 +142,7 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
             this.credentials.applyCredentialsFilter(this.client);
         }
         this.acceptLanguage = "en-US";
+        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
         this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
