@@ -3,7 +3,13 @@
 @using System.Linq;
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodGroupTemplateModel>
 import sys
-import urllib
+@EmptyLine
+try:
+    from urllib import quote
+@EmptyLine
+except ImportError:
+    from urllib.parse import quote
+@EmptyLine
 @if (Model.ContainsDecimal)
 {
 @:from decimal import *
@@ -19,39 +25,50 @@ try:
 except ImportError:
     from urllib.parse import urljoin
 @EmptyLine
-from runtime.msrest.serialization import Serialized, Deserialized
+from runtime.msrest.service_client import ServiceClient
+from runtime.msrest.serialization import Serializer, Deserializer
 from runtime.msrest.exceptions import (
     SerializationError,
     DeserializationError,
     TokenExpiredError,
-    ClientRequestException)
+    ClientRequestError)
 @EmptyLine
 from runtime.msrestazure.azure_handlers import Paged, Polled
 @EmptyLine
-@*from ..batch_exception import BatchStatusError*@
-@EmptyLine
-from .. import models
-@EmptyLine
+@*from ..batch_exception import BatchStatusError, @EmptyLine*@
 from ..models import *
 @EmptyLine
 class @(Model.MethodGroupType)(object):
 @EmptyLine
-    def __init__(self, client, config):
+    def __init__(self, client, config, serializer, derserializer):
 @EmptyLine
         self._client = client
-        self._config = config
-        self._classes = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
+        self._serialize = serializer
+        self._deserialize = derserializer
 @EmptyLine
-    def _send(self, request, accept_status, headers, content=None):
+        self.config = config
 @EmptyLine
-        try:
-            request.add_headers(headers)
-            if content:
-                request.add_content(content)
+    def _verify_response(self, response, accept_status, error):
 @EmptyLine
-            response =  self._client.send(request)
+        if response.status_code != accept_status:
+            deserialized = self.deserialize(
+                error, response, self._deserialize.dependencies)
 @EmptyLine
-            return response
+            raise deserialized
+@EmptyLine
+	def _parse_url(self, name, value, datatype):
+@EmptyLine
+		try:
+			value = self._serialize.serialize_data(value, str(datatype))
+@EmptyLine
+		except ValueError:
+			raise ValueError("{} must not be None.".format(name))
+@EmptyLine
+		except DeserializationError:
+			raise TypeError("{} must by type {}.".format(name, datatype))
+@EmptyLine
+		else:
+			return quote(value)
 @EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
 {

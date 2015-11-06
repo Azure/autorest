@@ -3,10 +3,7 @@
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ServiceClientTemplateModel>
-from runtime.msrestazure import AzureConfiguration
-from runtime.msrestazure.aad import (
-    UserPassCredentials,
-    InteractiveCredentials,
-    ServicePrincipalCredentials)
+from runtime.msrest import Configuration
 @EmptyLine
-from .@(Model.Name.ToPythonCase()) import @(Model.Name)
+from .@(Model.Name.ToPythonCase()) import @(Model.Name), @(Model.Name)Configuration
+

@@ -3,7 +3,6 @@
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ServiceClientTemplateModel>
-import urllib
 @if (Model.ContainsDecimal)
 {
 @:from decimal import *
@@ -12,6 +11,12 @@ import urllib
 {
 @:from datetime import *
 }
+@EmptyLine
+try:
+    from urllib import quote
+@EmptyLine
+except ImportError:
+    from urllib.parse import quote
 @EmptyLine
 from runtime.msrest import ServiceClient, Configuration
 @{
@@ -38,20 +43,46 @@ class @(Model.Name)Configuration(Configuration):
 *@
 @EmptyLine
 @EmptyLine
-class @(Model.Name)(ServiceClient):
+class @(Model.Name)(object):
 @EmptyLine
-    def __init__(self, credentials, config=Configuration()):
+    def __init__(self, credentials, config):
 @EmptyLine
-        super(@(Model.Name), self).__init__(credentials, config)
+        self._client = ServiceClient(credentials, config) 
 @EmptyLine
+        client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
+        self._serialize = Serializer()
+        self._deserialize = Deserializer(client_models)
+@EmptyLine
+        self.config = config
   @foreach (var methodGroup in Model.MethodGroupModels)
   {
-        @:self.@(methodGroup.MethodGroupName) = @(methodGroup.MethodGroupType)(self, config)
+        @:self.@(methodGroup.MethodGroupName) = @(methodGroup.MethodGroupType)(self._client, self.config, self._serialize, self._deserialize)
   }
 @EmptyLine
 @if (Model.MethodTemplateModels.Any())
 {
 <text>
+	def _verify_response(self, response, accept_status, error):
+@EmptyLine
+        if response.status_code != accept_status:
+            deserialized = self.deserialize(
+                error, response, self._deserialize.dependencies)
+@EmptyLine
+            raise deserialized
+@EmptyLine
+	def _parse_url(self, name, value, datatype):
+@EmptyLine
+		try:
+			value = self._serialize.serialize_data(value, str(datatype))
+@EmptyLine
+		except ValueError:
+			raise ValueError("{} must not be None.".format(name))
+@EmptyLine
+		except DeserializationError:
+			raise TypeError("{} must by type {}.".format(name, datatype))
+@EmptyLine
+		else:
+			return quote(value)
 @EmptyLine
     def _send(self, request, accept_status, headers, content=None):
 @EmptyLine
