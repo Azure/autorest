@@ -6,7 +6,7 @@
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Python.Templates
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodTemplateModel>
-	@@ServiceClient.async_request
+    @@ServiceClient.async_request
     def @(Model.Name.ToPythonCase())(self, @(Model.MethodParameterDeclaration(true))):
         """
 @if (!String.IsNullOrEmpty(Model.Summary))
@@ -20,26 +20,9 @@
 }
         """
 @EmptyLine
-@if (Model.ParameterTemplateModels.Any())
-{
-  var validationBlock = Model.ValidationString;
-  if (!string.IsNullOrWhiteSpace(validationBlock))
-  {
-@:        # Validate
-@:        @(validationBlock)
-@EmptyLine
-  }
-}
     @*if (Model.IsAbsoluteUrl) *@
         # Construct URL
-@if (Model.IsAbsoluteUrl)
-{
-@:        url = '@(Model.Url)'
-}
-else
-{
-@:        url = self.config.base_url + '@(Model.Url)'
-}
+        url = '@(Model.Url)'
         @(Model.BuildUrlPath("url"))
 @EmptyLine
         # Construct parameters
@@ -49,7 +32,7 @@ else
         # Construct headers
         headers = {}
         @(Model.BuildHeaders("query"))
-        headers.update(customHeaders)
+        headers.update(custom_headers)
         headers['Content-Type'] = '@(Model.ContentType)'
 @* Add Credentials *@
 @EmptyLine
@@ -71,12 +54,12 @@ else
 @:        response = self._client.send(request, headers)
 }
 @EmptyLine
-		self._verify_response(response, [@Model.GetAcceptStatus()], BatchStatusError@*Get correct error type*@)
+        self._verify_response(response, [@Model.GetAcceptStatus()], BatchStatusError@*Get correct error type*@)
 @EmptyLine
-		deserialized = self._deserialize(ResponseObj, response)
+        deserialized = self._deserialize(ResponseObj, response)
 @EmptyLine
-		if raw:
-			return deserialized, response
+        if raw:
+            return deserialized, response
 @EmptyLine
-		return deserialized
+        return deserialized
 @EmptyLine

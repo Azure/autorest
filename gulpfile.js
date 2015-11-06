@@ -118,7 +118,8 @@ gulp.task('regenerate:expected', function(cb){
       'regenerate:expected:ruby',
       'regenerate:expected:rubyazure',
       'regenerate:expected:java',
-      'regenerate:expected:javaazure'
+      'regenerate:expected:javaazure',
+      'regenerate:expected:python'
     ],
     cb);
 });
@@ -130,7 +131,8 @@ gulp.task('regenerate:delete', function(cb){
     'AutoRest/Generators/NodeJS/NodeJS.Tests/Expected',
     'AutoRest/Generators/NodeJS/Azure.NodeJS.Tests/Expected',
     'AutoRest/Generators/Java/Java.Tests/src/main/java',
-    'AutoRest/Generators/Java/Azure.Java.Tests/src/main/java'
+    'AutoRest/Generators/Java/Azure.Java.Tests/src/main/java',
+    'AutoRest/Generators/Python/Python.Tests/Expected'
   ], cb);
 });
 
@@ -157,6 +159,16 @@ gulp.task('regenerate:expected:node', function(cb){
     'outputDir': 'Expected',
     'codeGenerator': 'NodeJS',
     'flatteningThreshold': '1'
+  }, cb);
+})
+
+gulp.task('regenerate:expected:python', function(cb){
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/Python/Python.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': defaultMappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'Python'
   }, cb);
 })
 

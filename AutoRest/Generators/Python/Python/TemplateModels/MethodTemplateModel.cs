@@ -133,8 +133,9 @@ namespace Microsoft.Rest.Generator.Python
             {
                 builder.AppendLine("if {0} is not None:", queryParameter.Name)
                     .Indent()
-                    .AppendLine("{0}['{1}'] = {2}", variableName,
-                        queryParameter.SerializedName, queryParameter.Type.ToString(queryParameter.Name));
+                    .AppendLine("{0}['{1}'] = self._parse_url(\"{2}\", {2}, '{3}')", variableName,
+                        queryParameter.SerializedName, queryParameter.Name, queryParameter.Type.ToPythonRuntimeTypeString())
+                    .Outdent();
             }
 
             return builder.ToString();
