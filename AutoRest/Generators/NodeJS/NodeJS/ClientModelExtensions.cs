@@ -511,7 +511,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 // ServiceClientCredentials starts with the "msRest." prefix, so strip msRest./msRestAzure. as we import those
                 // types with no module prefix needed
                 var compositeName = composite.Name;
-                if (compositeName.StartsWith("msRest.") || compositeName.StartsWith("msRestAzure."))
+                if (compositeName.StartsWith("msRest.", StringComparison.Ordinal) || compositeName.StartsWith("msRestAzure.", StringComparison.Ordinal))
                     tsType = compositeName.Substring(compositeName.IndexOf('.') + 1);
                 else if (inModelsModule || compositeName.Contains('.'))
                     tsType = compositeName;
