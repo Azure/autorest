@@ -160,6 +160,18 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                 return "duration";
             }
 
+            if (type is SequenceType)
+            {
+                var sequenceType = type as SequenceType;
+                return "[" + sequenceType.ElementType.ToPythonRuntimeTypeString() + "]";
+            }
+
+            if (type is DictionaryType)
+            {
+                var dictionaryType = type as DictionaryType;
+                return "{{" + dictionaryType.ValueType.ToPythonRuntimeTypeString() + "}}";
+            }
+
             return type.Name;
         }
         /// <summary>

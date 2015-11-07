@@ -20,26 +20,9 @@
 }
         """
 @EmptyLine
-@if (Model.ParameterTemplateModels.Any())
-{
-  var validationBlock = Model.ValidationString;
-  if (!string.IsNullOrWhiteSpace(validationBlock))
-  {
-@:        # Validate
-@:        @(validationBlock)
-@EmptyLine
-  }
-}
     @*if (Model.IsAbsoluteUrl) *@
         # Construct URL
-@if (Model.IsAbsoluteUrl)
-{
-@:        url = '@(Model.Url)'
-}
-else
-{
-@:        url = self.config.base_url + '@(Model.Url)'
-}
+        url = '@(Model.Url)'
         @(Model.BuildUrlPath("url"))
 @EmptyLine
         # Construct parameters
@@ -49,7 +32,7 @@ else
         # Construct headers
         headers = {}
         @(Model.BuildHeaders("query"))
-        headers.update(customHeaders)
+        headers.update(custom_headers)
         headers['Content-Type'] = '@(Model.ContentType)'
 @* Add Credentials *@
 @EmptyLine

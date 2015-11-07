@@ -4,12 +4,6 @@
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodGroupTemplateModel>
 import sys
 @EmptyLine
-try:
-    from urllib import quote
-@EmptyLine
-except ImportError:
-    from urllib.parse import quote
-@EmptyLine
 @if (Model.ContainsDecimal)
 {
 @:from decimal import *
@@ -50,7 +44,7 @@ class @(Model.MethodGroupType)(object):
 @EmptyLine
     def _verify_response(self, response, accept_status, error):
 @EmptyLine
-        if response.status_code != accept_status:
+        if response.status_code not in accept_status:
             deserialized = self.deserialize(
                 error, response, self._deserialize.dependencies)
 @EmptyLine
@@ -65,10 +59,10 @@ class @(Model.MethodGroupType)(object):
 			raise ValueError("{} must not be None.".format(name))
 @EmptyLine
 		except DeserializationError:
-			raise TypeError("{} must by type {}.".format(name, datatype))
+			raise TypeError("{} must be type {}.".format(name, datatype))
 @EmptyLine
 		else:
-			return quote(value)
+			return value
 @EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
 {

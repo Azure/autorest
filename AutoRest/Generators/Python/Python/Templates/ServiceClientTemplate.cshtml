@@ -12,12 +12,6 @@
 @:from datetime import *
 }
 @EmptyLine
-try:
-    from urllib import quote
-@EmptyLine
-except ImportError:
-    from urllib.parse import quote
-@EmptyLine
 from runtime.msrest import ServiceClient, Configuration
 @{
   if (Model.MethodGroupModels.Any())
@@ -32,7 +26,8 @@ from .models import *
 @EmptyLine
 class @(Model.Name)Configuration(Configuration):
 @EmptyLine
-    def __init__(self, base_url=None, filepath=None, @(Model.RequiredConstructorParameters)):
+    def __init__(self, base_url=None, filepath=None):
+@*(Model.RequiredConstructorParameters)*@
 @EmptyLine
          if (not base_url):
              base_url = '@Model.BaseUrl'
@@ -64,7 +59,7 @@ class @(Model.Name)(object):
 <text>
 	def _verify_response(self, response, accept_status, error):
 @EmptyLine
-        if response.status_code != accept_status:
+        if response.status_code not in accept_status:
             deserialized = self.deserialize(
                 error, response, self._deserialize.dependencies)
 @EmptyLine
@@ -79,21 +74,10 @@ class @(Model.Name)(object):
 			raise ValueError("{} must not be None.".format(name))
 @EmptyLine
 		except DeserializationError:
-			raise TypeError("{} must by type {}.".format(name, datatype))
+			raise TypeError("{} must be type {}.".format(name, datatype))
 @EmptyLine
 		else:
-			return quote(value)
-@EmptyLine
-    def _send(self, request, accept_status, headers, content=None):
-@EmptyLine
-        try:
-            request.add_headers(headers)
-            if content:
-                request.add_content(content)
-@EmptyLine
-            response =  self._client.send(request)
-@EmptyLine
-            return response
+			return value
 @EmptyLine
 </text>
   foreach (var method in Model.MethodTemplateModels)
