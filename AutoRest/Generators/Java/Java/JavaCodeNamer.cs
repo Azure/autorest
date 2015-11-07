@@ -410,7 +410,7 @@ namespace Microsoft.Rest.Generator.Java
                 case "InterruptedException":
                     return "java.lang.InterruptedException";
                 default:
-                    return null;
+                    return "java.lang.Exception";
             }
         }
     }

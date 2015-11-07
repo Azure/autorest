@@ -354,7 +354,14 @@ namespace Microsoft.Rest.Generator.Java
                 // parameter types
                 this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
                 // parameter locations
-                this.Parameters.ForEach(p => imports.Add(p.Location.ImportFrom()));
+                this.Parameters.ForEach(p =>
+                {
+                    string locationImport = p.Location.ImportFrom();
+                    if (!string.IsNullOrEmpty(locationImport))
+                    {
+                        imports.Add(p.Location.ImportFrom());
+                    }
+                });
                 // return type
                 imports.AddRange(this.ReturnType.ImportFrom(ServiceClient.Namespace));
                 // Http verb annotations
