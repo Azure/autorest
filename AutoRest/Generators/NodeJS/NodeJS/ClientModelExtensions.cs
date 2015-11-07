@@ -291,7 +291,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             else if (primary == PrimaryType.TimeSpan)
                 return "moment.Duration"; //TODO: test this, add include for it
             else if (primary == PrimaryType.Credentials)
-                return "msRest.ServiceClientCredentials"; //TODO: test this, add include for it
+                return "ServiceClientCredentials"; //TODO: test this, add include for it
             else {
                 throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
                     "Type '{0}' not implemented", primary));
