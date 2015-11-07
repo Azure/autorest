@@ -122,8 +122,28 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param baseUri the base URI of the host
      */
     public AutoRestResourceFlatteningTestServiceImpl(String baseUri) {
+        this(baseUri, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestResourceFlatteningTestService client.
+     *
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestResourceFlatteningTestServiceImpl(ServiceClientCredentials credentials) {
+        this("http://localhost", credentials);
+    }
+
+    /**
+     * Initializes an instance of AutoRestResourceFlatteningTestService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestResourceFlatteningTestServiceImpl(String baseUri, ServiceClientCredentials credentials) {
         super();
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -131,12 +151,14 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      *
      * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
      * @param client the {@link OkHttpClient} client to use for REST calls
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestResourceFlatteningTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+    public AutoRestResourceFlatteningTestServiceImpl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 

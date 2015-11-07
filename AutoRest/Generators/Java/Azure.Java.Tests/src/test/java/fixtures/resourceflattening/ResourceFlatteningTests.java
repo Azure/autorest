@@ -36,7 +36,7 @@ public class ResourceFlatteningTests {
                 .addConverterFactory(JacksonConverterFactory.create(new AzureJacksonUtils().getObjectMapper()))
                 .callbackExecutor(executor);
 
-        client = new AutoRestResourceFlatteningTestServiceImpl("http://localhost.:3000", httpClient, builder);
+        client = new AutoRestResourceFlatteningTestServiceImpl("http://localhost.:3000", null, httpClient, builder);
         client.setLongRunningOperationRetryTimeout(0);
     }
 

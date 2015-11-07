@@ -115,8 +115,28 @@ public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRe
      * @param baseUri the base URI of the host
      */
     public AutoRestHeadTestServiceImpl(String baseUri) {
+        this(baseUri, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestHeadTestService client.
+     *
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestHeadTestServiceImpl(ServiceClientCredentials credentials) {
+        this("http://localhost", credentials);
+    }
+
+    /**
+     * Initializes an instance of AutoRestHeadTestService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestHeadTestServiceImpl(String baseUri, ServiceClientCredentials credentials) {
         super();
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -124,12 +144,14 @@ public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRe
      * Initializes an instance of AutoRestHeadTestService client.
      *
      * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
      * @param client the {@link OkHttpClient} client to use for REST calls
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestHeadTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+    public AutoRestHeadTestServiceImpl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 

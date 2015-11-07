@@ -206,8 +206,28 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
      * @param baseUri the base URI of the host
      */
     public AutoRestAzureSpecialParametersTestClientImpl(String baseUri) {
+        this(baseUri, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
+     *
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestAzureSpecialParametersTestClientImpl(ServiceClientCredentials credentials) {
+        this("http://localhost", credentials);
+    }
+
+    /**
+     * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
+     *
+     * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestAzureSpecialParametersTestClientImpl(String baseUri, ServiceClientCredentials credentials) {
         super();
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -215,12 +235,14 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
      * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
      *
      * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
      * @param client the {@link OkHttpClient} client to use for REST calls
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestAzureSpecialParametersTestClientImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+    public AutoRestAzureSpecialParametersTestClientImpl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 

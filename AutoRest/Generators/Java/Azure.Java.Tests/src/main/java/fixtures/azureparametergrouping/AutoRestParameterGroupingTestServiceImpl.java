@@ -115,8 +115,28 @@ public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient impl
      * @param baseUri the base URI of the host
      */
     public AutoRestParameterGroupingTestServiceImpl(String baseUri) {
+        this(baseUri, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestParameterGroupingTestService client.
+     *
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestParameterGroupingTestServiceImpl(ServiceClientCredentials credentials) {
+        this("https://localhost", credentials);
+    }
+
+    /**
+     * Initializes an instance of AutoRestParameterGroupingTestService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestParameterGroupingTestServiceImpl(String baseUri, ServiceClientCredentials credentials) {
         super();
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -124,12 +144,14 @@ public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient impl
      * Initializes an instance of AutoRestParameterGroupingTestService client.
      *
      * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
      * @param client the {@link OkHttpClient} client to use for REST calls
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestParameterGroupingTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+    public AutoRestParameterGroupingTestServiceImpl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
