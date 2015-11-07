@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 /**
  * The Fish model.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "dtype")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("fish")
 @JsonSubTypes({
     @JsonSubTypes.Type(name="salmon", value=Salmon.class),

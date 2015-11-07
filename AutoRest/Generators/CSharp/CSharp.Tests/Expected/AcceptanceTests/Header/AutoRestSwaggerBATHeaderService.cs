@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsHeader
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -44,14 +45,6 @@ namespace Fixtures.AcceptanceTestsHeader
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         public virtual IHeader Header { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestSwaggerBATHeaderService class.
-        /// </summary>
-        public AutoRestSwaggerBATHeaderService() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestSwaggerBATHeaderService class.

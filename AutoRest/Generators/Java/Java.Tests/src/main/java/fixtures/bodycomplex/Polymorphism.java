@@ -61,21 +61,21 @@ public interface Polymorphism {
      *
      * @param complexBody Please put a salmon that looks like this:
  {
-         'dtype':'Salmon',
+         'fishtype':'Salmon',
          'location':'alaska',
          'iswild':true,
          'species':'king',
          'length':1.0,
          'siblings':[
            {
-             'dtype':'Shark',
+             'fishtype':'Shark',
              'age':6,
              'birthday': '2012-01-05T01:00:00Z',
              'length':20.0,
              'species':'predator',
            },
            {
-             'dtype':'Sawshark',
+             'fishtype':'Sawshark',
              'age':105,
              'birthday': '1900-01-05T01:00:00Z',
              'length':10.0,
@@ -94,21 +94,21 @@ public interface Polymorphism {
      *
      * @param complexBody Please put a salmon that looks like this:
  {
-         'dtype':'Salmon',
+         'fishtype':'Salmon',
          'location':'alaska',
          'iswild':true,
          'species':'king',
          'length':1.0,
          'siblings':[
            {
-             'dtype':'Shark',
+             'fishtype':'Shark',
              'age':6,
              'birthday': '2012-01-05T01:00:00Z',
              'length':20.0,
              'species':'predator',
            },
            {
-             'dtype':'Sawshark',
+             'fishtype':'Sawshark',
              'age':105,
              'birthday': '1900-01-05T01:00:00Z',
              'length':10.0,
@@ -127,7 +127,7 @@ public interface Polymorphism {
      *
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
  {
-     "dtype": "sawshark",
+     "fishtype": "sawshark",
      "species": "snaggle toothed",
      "length": 18.5,
      "age": 2,
@@ -136,14 +136,14 @@ public interface Polymorphism {
      "picture": base64(FF FF FF FF FE),
      "siblings": [
          {
-             "dtype": "shark",
+             "fishtype": "shark",
              "species": "predator",
              "birthday": "2012-01-05T01:00:00Z",
              "length": 20,
              "age": 6
          },
          {
-             "dtype": "sawshark",
+             "fishtype": "sawshark",
              "species": "dangerous",
              "picture": base64(FF FF FF FF FE),
              "length": 10,
@@ -161,7 +161,7 @@ public interface Polymorphism {
      *
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
  {
-     "dtype": "sawshark",
+     "fishtype": "sawshark",
      "species": "snaggle toothed",
      "length": 18.5,
      "age": 2,
@@ -170,14 +170,14 @@ public interface Polymorphism {
      "picture": base64(FF FF FF FF FE),
      "siblings": [
          {
-             "dtype": "shark",
+             "fishtype": "shark",
              "species": "predator",
              "birthday": "2012-01-05T01:00:00Z",
              "length": 20,
              "age": 6
          },
          {
-             "dtype": "sawshark",
+             "fishtype": "sawshark",
              "species": "dangerous",
              "picture": base64(FF FF FF FF FE),
              "length": 10,

@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -44,14 +45,6 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         public virtual IDatetimerfc1123 Datetimerfc1123 { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestRFC1123DateTimeTestService class.
-        /// </summary>
-        public AutoRestRFC1123DateTimeTestService() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestRFC1123DateTimeTestService class.

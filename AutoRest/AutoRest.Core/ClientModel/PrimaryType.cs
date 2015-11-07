@@ -108,6 +108,11 @@ namespace Microsoft.Rest.Generator.ClientModel
             get { return KnownTypes[SupportedPrimaryType.Boolean]; }
         }
 
+        public static PrimaryType Credentials
+        {
+            get { return KnownTypes[SupportedPrimaryType.Credentials]; }
+        }
+
         /// <summary>
         /// Gets or sets the model type name.
         /// </summary>
@@ -170,7 +175,8 @@ namespace Microsoft.Rest.Generator.ClientModel
             DateTime,
             DateTimeRfc1123,
             TimeSpan,
-            Boolean
+            Boolean,
+            Credentials
         }
     }
 }

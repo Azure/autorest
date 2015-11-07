@@ -12,10 +12,7 @@
 
 var util = require('util');
 var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
 var WebResource = msRest.WebResource;
-
-var models = require('../models');
 
 /**
  * @class
@@ -120,7 +117,7 @@ Polymorphism.prototype.getValid = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse) {
-          result = new client._models.discriminators[parsedResponse['dtype']](parsedResponse);
+          result = new client._models.discriminators[parsedResponse['fishtype']](parsedResponse);
         }
         if (parsedResponse !== null && parsedResponse !== undefined) {
           result.deserialize(parsedResponse);
@@ -142,21 +139,21 @@ Polymorphism.prototype.getValid = function (options, callback) {
  *
  * @param {object} complexBody Please put a salmon that looks like this:
  * {
- * 'dtype':'Salmon',
+ * 'fishtype':'Salmon',
  * 'location':'alaska',
  * 'iswild':true,
  * 'species':'king',
  * 'length':1.0,
  * 'siblings':[
  * {
- * 'dtype':'Shark',
+ * 'fishtype':'Shark',
  * 'age':6,
  * 'birthday': '2012-01-05T01:00:00Z',
  * 'length':20.0,
  * 'species':'predator',
  * },
  * {
- * 'dtype':'Sawshark',
+ * 'fishtype':'Sawshark',
  * 'age':105,
  * 'birthday': '1900-01-05T01:00:00Z',
  * 'length':10.0,
@@ -173,7 +170,7 @@ Polymorphism.prototype.getValid = function (options, callback) {
  * 
  * @param {array} [complexBody.siblings]
  * 
- * @param {string} [complexBody.dtype] Polymorhpic Discriminator
+ * @param {string} [complexBody.fishtype] Polymorhpic Discriminator
  * 
  * @param {object} [options]
  *
@@ -236,7 +233,7 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
   var requestModel = null;
   try {
     if (complexBody) {
-      requestModel = new client._models.discriminators[complexBody['dtype']](complexBody);
+      requestModel = new client._models.discriminators[complexBody['fishtype']](complexBody);
     }
     if (requestModel !== null && requestModel !== undefined) {
       requestContent = JSON.stringify(requestModel.serialize());
@@ -289,7 +286,7 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
  * @param {object} complexBody Please attempt put a sawshark that looks like
  * this, the client should not allow this data to be sent:
  * {
- * "dtype": "sawshark",
+ * "fishtype": "sawshark",
  * "species": "snaggle toothed",
  * "length": 18.5,
  * "age": 2,
@@ -298,14 +295,14 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
  * "picture": base64(FF FF FF FF FE),
  * "siblings": [
  * {
- * "dtype": "shark",
+ * "fishtype": "shark",
  * "species": "predator",
  * "birthday": "2012-01-05T01:00:00Z",
  * "length": 20,
  * "age": 6
  * },
  * {
- * "dtype": "sawshark",
+ * "fishtype": "sawshark",
  * "species": "dangerous",
  * "picture": base64(FF FF FF FF FE),
  * "length": 10,
@@ -320,7 +317,7 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
  * 
  * @param {array} [complexBody.siblings]
  * 
- * @param {string} [complexBody.dtype] Polymorhpic Discriminator
+ * @param {string} [complexBody.fishtype] Polymorhpic Discriminator
  * 
  * @param {object} [options]
  *
@@ -383,7 +380,7 @@ Polymorphism.prototype.putValidMissingRequired = function (complexBody, options,
   var requestModel = null;
   try {
     if (complexBody) {
-      requestModel = new client._models.discriminators[complexBody['dtype']](complexBody);
+      requestModel = new client._models.discriminators[complexBody['fishtype']](complexBody);
     }
     if (requestModel !== null && requestModel !== undefined) {
       requestContent = JSON.stringify(requestModel.serialize());

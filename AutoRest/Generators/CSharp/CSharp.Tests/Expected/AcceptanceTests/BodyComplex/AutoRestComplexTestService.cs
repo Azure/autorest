@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -56,14 +57,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         public virtual IPolymorphism Polymorphism { get; private set; }
 
         public virtual IPolymorphicrecursive Polymorphicrecursive { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestComplexTestService class.
-        /// </summary>
-        public AutoRestComplexTestService() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestComplexTestService class.
@@ -167,8 +160,8 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                         new Iso8601TimeSpanConverter()
                     }
             };
-            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Fish>("dtype"));
-            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Fish>("dtype"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Fish>("fishtype"));
+            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Fish>("fishtype"));
         }    
     }
 }

@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -44,14 +45,6 @@ namespace Fixtures.AcceptanceTestsBodyArray
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         public virtual IArray Array { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestSwaggerBATArrayService class.
-        /// </summary>
-        public AutoRestSwaggerBATArrayService() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestSwaggerBATArrayService class.

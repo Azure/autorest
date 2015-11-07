@@ -300,6 +300,10 @@ namespace Microsoft.Rest.Generator.Java
             {
                 primaryType.Name = "Object";
             }
+            else if (primaryType == PrimaryType.Credentials)
+            {
+                primaryType.Name = "ServiceClientCredentials";
+            }
 
             return primaryType;
         }

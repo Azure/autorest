@@ -12,10 +12,7 @@
 
 var util = require('util');
 var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
 var WebResource = msRest.WebResource;
-
-var models = require('../models');
 var moment = require('moment');
 
 /**

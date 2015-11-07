@@ -28,7 +28,7 @@ var operations = require('./operations');
  * Initializes a new instance of the AutoRestLongRunningOperationTestService class.
  * @constructor
  *
- * @param {ServiceClientCredentials} credentials The management credentials for Azure.
+ * @param {Credentials} credentials The management credentials for Azure.
  *
  * @param {string} [baseUri] - The base URI of the service.
  *

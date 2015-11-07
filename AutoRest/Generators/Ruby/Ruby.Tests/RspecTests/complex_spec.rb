@@ -277,6 +277,7 @@ describe 'Complex' do
 
     expect(result.body.location).to eq("alaska")
 
+    expect(result.body.siblings.length).to eq(2)
     expect(result.body.siblings[0].is_a? ComplexModule::Models::Shark).to be_truthy
     expect(result.body.siblings[1].is_a? ComplexModule::Models::Sawshark).to be_truthy
 
@@ -304,6 +305,9 @@ describe 'Complex' do
     polymorphism_request.species = "king"
     polymorphism_request.location = "alaska"
     polymorphism_request.siblings = [shark, sawshark]
+	
+	result = @client.polymorphism.put_valid(polymorphism_request).value!
+	expect(result.response.status).to eq(200)
   end
 
   # Primitive tests

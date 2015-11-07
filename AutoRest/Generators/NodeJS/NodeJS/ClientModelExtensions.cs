@@ -313,18 +313,21 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                             .Indent()
                                 .AppendLine("throw new Error({0} + ' is not a valid value. The valid values are: ' + {1});", valueReference, allowedValues)
                             .Outdent()
-                            .AppendLine("}")
-                        .Outdent()
-                        .AppendLine("}");
+                            .AppendLine("}");
             if (isRequired)
             {
-                builder.Append(" else {")
+                var escapedValueReference = valueReference.EscapeSingleQuotes();
+                builder.Outdent().AppendLine("} else {")
                     .Indent()
-                        .AppendLine("throw new Error('{0} cannot be null or undefined.');", valueReference)
+                        .AppendLine("throw new Error('{0} cannot be null or undefined.');", escapedValueReference)
                     .Outdent()
                     .AppendLine("}");
             }
-
+            else
+            {
+                builder.Outdent().AppendLine("}");
+            }
+            
             return builder.ToString();
         }
 
@@ -727,18 +730,20 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                 .Outdent()
                                 .AppendLine("}");
                         builder = ConstructBasePropertyCheck(builder, valueReference);
-                        builder.AppendLine("{0} = {1};", valueReference, objectReference)
-                              .Outdent()
-                              .AppendLine("}");
+                        builder.AppendLine("{0} = {1};", valueReference, objectReference);
             if (isRequired)
             {
-                builder.Append(" else {")
+                var escapedObjectReference = objectReference.EscapeSingleQuotes();
+                builder.Outdent().AppendLine("} else {")
                     .Indent()
-                        .AppendLine("throw new Error('{0} cannot be null or undefined.');", objectReference)
+                        .AppendLine("throw new Error('{0} cannot be null or undefined.');", escapedObjectReference)
                     .Outdent()
                     .AppendLine("}");
             }
-
+            else
+            {
+                builder.Outdent().AppendLine("}");
+            }
             return builder.ToString();
         }
 
