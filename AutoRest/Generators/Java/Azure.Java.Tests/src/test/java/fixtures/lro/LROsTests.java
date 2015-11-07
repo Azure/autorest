@@ -241,16 +241,16 @@ public class LROsTests {
 
     @Test
     public void deleteProvisioning202DeletingFailed200() throws Exception {
-        ServiceResponse<Product> response = client.getLROs().deleteProvisioning202Accepted200Succeeded();
+        ServiceResponse<Product> response = client.getLROs().deleteProvisioning202DeletingFailed200();
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Failed", response.getBody().getProvisioningState());
     }
 
     @Test
     public void deleteProvisioning202Deletingcanceled200() throws Exception {
-        ServiceResponse<Product> response = client.getLROs().deleteProvisioning202Accepted200Succeeded();
+        ServiceResponse<Product> response = client.getLROs().deleteProvisioning202Deletingcanceled200();
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Canceled", response.getBody().getProvisioningState());
     }
 
     @Test
