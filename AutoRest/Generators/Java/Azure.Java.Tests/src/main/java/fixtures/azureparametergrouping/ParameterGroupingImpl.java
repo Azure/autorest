@@ -50,8 +50,12 @@ public class ParameterGroupingImpl implements ParameterGrouping {
                 new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null."));
         }
         Validator.validate(parameterGroupingPostRequiredParameters);
+        int body = parameterGroupingPostRequiredParameters.getBody();
+        String customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
+        int query = parameterGroupingPostRequiredParameters.getQuery();
+        String path = parameterGroupingPostRequiredParameters.getPath();
         try {
-            Call<ResponseBody> call = service.postRequired(this.client.getAcceptLanguage());
+            Call<ResponseBody> call = service.postRequired(path, this.client.getAcceptLanguage(), body, customHeader, query);
             return postRequiredDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -70,9 +74,14 @@ public class ParameterGroupingImpl implements ParameterGrouping {
         if (parameterGroupingPostRequiredParameters == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null.")));
+            return null;
         }
         Validator.validate(parameterGroupingPostRequiredParameters, serviceCallback);
-        Call<ResponseBody> call = service.postRequired(this.client.getAcceptLanguage());
+        int body = parameterGroupingPostRequiredParameters.getBody();
+        String customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
+        int query = parameterGroupingPostRequiredParameters.getQuery();
+        String path = parameterGroupingPostRequiredParameters.getPath();
+        Call<ResponseBody> call = service.postRequired(path, this.client.getAcceptLanguage(), body, customHeader, query);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -100,8 +109,10 @@ public class ParameterGroupingImpl implements ParameterGrouping {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Void> postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) throws ServiceException {
+        String customHeader = parameterGroupingPostOptionalParameters.getCustomHeader();
+        int query = parameterGroupingPostOptionalParameters.getQuery();
         try {
-            Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage());
+            Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
             return postOptionalDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -117,7 +128,9 @@ public class ParameterGroupingImpl implements ParameterGrouping {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage());
+        String customHeader = parameterGroupingPostOptionalParameters.getCustomHeader();
+        int query = parameterGroupingPostOptionalParameters.getQuery();
+        Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -146,8 +159,12 @@ public class ParameterGroupingImpl implements ParameterGrouping {
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Void> postMultipleParameterGroups(FirstParameterGroup firstParameterGroup, SecondParameterGroup secondParameterGroup) throws ServiceException {
+        String headerOne = firstParameterGroup.getHeaderOne();
+        int queryOne = firstParameterGroup.getQueryOne();
+        String headerTwo = secondParameterGroup.getHeaderTwo();
+        int queryTwo = secondParameterGroup.getQueryTwo();
         try {
-            Call<ResponseBody> call = service.postMultipleParameterGroups(this.client.getAcceptLanguage());
+            Call<ResponseBody> call = service.postMultipleParameterGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
             return postMultipleParameterGroupsDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -164,7 +181,11 @@ public class ParameterGroupingImpl implements ParameterGrouping {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> postMultipleParameterGroupsAsync(FirstParameterGroup firstParameterGroup, SecondParameterGroup secondParameterGroup, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.postMultipleParameterGroups(this.client.getAcceptLanguage());
+        String headerOne = firstParameterGroup.getHeaderOne();
+        int queryOne = firstParameterGroup.getQueryOne();
+        String headerTwo = secondParameterGroup.getHeaderTwo();
+        int queryTwo = secondParameterGroup.getQueryTwo();
+        Call<ResponseBody> call = service.postMultipleParameterGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {

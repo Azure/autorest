@@ -106,6 +106,7 @@ public class XMsClientRequestIdImpl implements XMsClientRequestId {
         if (xMsClientRequestId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

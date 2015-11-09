@@ -19,8 +19,11 @@ import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParam
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
 import fixtures.azureparametergrouping.models.SecondParameterGroup;
 import retrofit.Call;
+import retrofit.http.Body;
 import retrofit.http.Header;
+import retrofit.http.Path;
 import retrofit.http.POST;
+import retrofit.http.Query;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -33,13 +36,13 @@ public interface ParameterGrouping {
      */
     interface ParameterGroupingService {
         @POST("/parameterGrouping/postRequired/{path}")
-        Call<ResponseBody> postRequired(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> postRequired(@Path("path") String path, @Header("accept-language") String acceptLanguage, @Body int body, @Header("customHeader") String customHeader, @Query("query") int query);
 
         @POST("/parameterGrouping/postOptional")
-        Call<ResponseBody> postOptional(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> postOptional(@Header("accept-language") String acceptLanguage, @Header("customHeader") String customHeader, @Query("query") int query);
 
         @POST("/parameterGrouping/postMultipleParameterGroups")
-        Call<ResponseBody> postMultipleParameterGroups(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> postMultipleParameterGroups(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") int queryOne, @Header("header-two") String headerTwo, @Query("query-two") int queryTwo);
 
     }
     /**

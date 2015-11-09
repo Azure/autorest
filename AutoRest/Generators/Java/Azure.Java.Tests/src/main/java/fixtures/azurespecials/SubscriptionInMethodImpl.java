@@ -63,6 +63,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
         if (subscriptionId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -116,6 +117,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
         if (subscriptionId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -169,6 +171,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
         if (subscriptionId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -222,6 +225,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
         if (subscriptionId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
