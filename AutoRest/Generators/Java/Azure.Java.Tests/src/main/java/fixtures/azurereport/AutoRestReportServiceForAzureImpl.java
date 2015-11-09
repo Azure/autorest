@@ -13,6 +13,7 @@ package fixtures.azurereport;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.CustomHeaderInterceptor;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceClient;
@@ -24,6 +25,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azurereport.models.Error;
 import java.util.Map;
+import java.util.UUID;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -116,8 +118,28 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
      * @param baseUri the base URI of the host
      */
     public AutoRestReportServiceForAzureImpl(String baseUri) {
+        this(baseUri, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestReportServiceForAzure client.
+     *
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestReportServiceForAzureImpl(ServiceClientCredentials credentials) {
+        this("http://localhost", credentials);
+    }
+
+    /**
+     * Initializes an instance of AutoRestReportServiceForAzure client.
+     *
+     * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestReportServiceForAzureImpl(String baseUri, ServiceClientCredentials credentials) {
         super();
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -125,12 +147,14 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
      * Initializes an instance of AutoRestReportServiceForAzure client.
      *
      * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
      * @param client the {@link OkHttpClient} client to use for REST calls
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestReportServiceForAzureImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+    public AutoRestReportServiceForAzureImpl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -140,6 +164,7 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
             this.credentials.applyCredentialsFilter(this.client);
         }
         this.acceptLanguage = "en-US";
+        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
         this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);

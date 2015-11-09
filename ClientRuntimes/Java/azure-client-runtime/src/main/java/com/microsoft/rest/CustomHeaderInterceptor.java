@@ -13,6 +13,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -33,14 +34,43 @@ public class CustomHeaderInterceptor implements Interceptor {
     }
 
     /**
-     * Add a single header key-value pair.
+     * Initialize an instance of {@link CustomHeaderInterceptor} class.
+     *
+     * @param key the key for the header
+     * @param value the value of the header
+     */
+    public CustomHeaderInterceptor(String key, String value) {
+        this();
+        addHeader(key, value);
+    }
+
+    /**
+     * Add a single header key-value pair. If one with the name already exists,
+     * it gets replaced.
+     *
+     * @param name the name of the header.
+     * @param value the value of the header.
+     * @return the interceptor instance itself.
+     */
+    public CustomHeaderInterceptor replaceHeader(String name, String value) {
+        this.headers.put(name, Collections.singletonList(value));
+        return this;
+    }
+
+    /**
+     * Add a single header key-value pair. If one with the name already exists,
+     * both stay in the header map.
      *
      * @param name the name of the header.
      * @param value the value of the header.
      * @return the interceptor instance itself.
      */
     public CustomHeaderInterceptor addHeader(String name, String value) {
-        this.headers.put(name, Collections.singletonList(value));
+        if (this.headers.containsKey(name)) {
+            this.headers.get(name).add(value);
+        } else {
+            this.headers.put(name, Collections.singletonList(value));
+        }
         return this;
     }
 
@@ -95,7 +125,7 @@ public class CustomHeaderInterceptor implements Interceptor {
         Request.Builder builder = chain.request().newBuilder();
         for (Map.Entry<String, List<String>> header : headers.entrySet()) {
             for (String value : header.getValue()) {
-                builder = builder.addHeader(header.getKey(), value);
+                builder = builder.header(header.getKey(), value);
             }
         }
         return chain.proceed(builder.build());
