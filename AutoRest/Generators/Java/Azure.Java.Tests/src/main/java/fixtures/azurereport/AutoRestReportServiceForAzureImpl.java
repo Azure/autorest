@@ -12,6 +12,7 @@ package fixtures.azurereport;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.AzureServiceResponseBuilder;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.CustomHeaderInterceptor;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
@@ -19,7 +20,6 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.ResponseBody;
@@ -210,7 +210,7 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
     }
 
     private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Integer>>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Map<String, Integer>>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);

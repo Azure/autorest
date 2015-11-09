@@ -11,11 +11,11 @@
 package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.AzureServiceResponseBuilder;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.Error;
@@ -79,7 +79,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
     }
 
     private ServiceResponse<Void> getMethodPathValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -132,7 +132,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
     }
 
     private ServiceResponse<Void> getPathPathValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -185,7 +185,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
     }
 
     private ServiceResponse<Void> getSwaggerPathValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -238,7 +238,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
     }
 
     private ServiceResponse<Void> getMethodQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -283,7 +283,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
     }
 
     private ServiceResponse<Void> getMethodQueryNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -336,7 +336,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
     }
 
     private ServiceResponse<Void> getPathQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -381,7 +381,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
     }
 
     private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
