@@ -2,6 +2,10 @@
 @using Microsoft.Rest.Generator.Python.Templates
 @using System.Linq;
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodGroupTemplateModel>
+#--------------------------------------------------------------------------
+@Header("# ")
+#--------------------------------------------------------------------------
+@EmptyLine
 import sys
 @EmptyLine
 @if (Model.ContainsDecimal)
@@ -13,12 +17,6 @@ import sys
 @:from datetime import *
 }
 @EmptyLine
-try:
-    from urlparse import urljoin
-@EmptyLine
-except ImportError:
-    from urllib.parse import urljoin
-@EmptyLine
 from runtime.msrest.service_client import ServiceClient
 from runtime.msrest.serialization import Serializer, Deserializer
 from runtime.msrest.exceptions import (
@@ -26,8 +24,7 @@ from runtime.msrest.exceptions import (
     DeserializationError,
     TokenExpiredError,
     ClientRequestError)
-@EmptyLine
-from runtime.msrestazure.azure_handlers import Paged, Polled
+from runtime.msrest.paging import Paged
 @EmptyLine
 @*from ..batch_exception import BatchStatusError, @EmptyLine*@
 from ..models import *
@@ -45,8 +42,8 @@ class @(Model.MethodGroupType)(object):
     def _verify_response(self, response, accept_status, error):
 @EmptyLine
         if response.status_code not in accept_status:
-            deserialized = self.deserialize(
-                error, response, self._deserialize.dependencies)
+            deserialized = self._deserialize(
+                error, response)
 @EmptyLine
             raise deserialized
 @EmptyLine

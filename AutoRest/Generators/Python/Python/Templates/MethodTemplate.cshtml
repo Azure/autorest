@@ -20,7 +20,6 @@
 }
         """
 @EmptyLine
-    @*if (Model.IsAbsoluteUrl) *@
         # Construct URL
         url = '@(Model.Url)'
         @(Model.BuildUrlPath("url"))
@@ -39,7 +38,7 @@
 @if (Model.RequestBody != null)
 {
 @:        # Construct body
-@:        content = Serialized(@Model.RequestBody.Name)
+@:        content = self._serialize(@Model.RequestBody.Name)
 @EmptyLine
 }
 @*stream handler*@
@@ -54,9 +53,21 @@ else
 @:        response = self._client.send(request, headers)
 }
 @EmptyLine
-        self._verify_response(response, [@Model.GetAcceptStatus()], BatchStatusError@*Get correct error type*@)
+        self._verify_response(response, [@Model.GetAcceptStatus()], @Model.GetExceptionType())
 @EmptyLine
-        deserialized = self._deserialize(ResponseObj, response)
+@if (Model.Responses.Any())
+{
+  foreach (var responsePair in Model.Responses.Where(r => r.Value != null))
+  {
+@*stream handler*@
+@:        if response.status_code == @responsePair.Key :
+@:            deserialized = self._deserialize('@responsePair.Value.ToPythonRuntimeTypeString()', response)
+  }
+}
+else
+{
+@:        deserialized = None
+}
 @EmptyLine
         if raw:
             return deserialized, response
