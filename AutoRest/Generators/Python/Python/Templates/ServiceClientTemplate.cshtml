@@ -57,7 +57,7 @@ class @(Model.Name)(object):
 @if (Model.MethodTemplateModels.Any())
 {
 <text>
-	def _verify_response(self, response, accept_status, error):
+    def _verify_response(self, response, accept_status, error):
 @EmptyLine
         if response.status_code not in accept_status:
             deserialized = self.deserialize(
@@ -65,19 +65,19 @@ class @(Model.Name)(object):
 @EmptyLine
             raise deserialized
 @EmptyLine
-	def _parse_url(self, name, value, datatype):
+    def _parse_url(self, name, value, datatype):
 @EmptyLine
-		try:
-			value = self._serialize.serialize_data(value, str(datatype))
+        try:
+            value = self._serialize.serialize_data(value, str(datatype))
 @EmptyLine
-		except ValueError:
-			raise ValueError("{} must not be None.".format(name))
+        except ValueError:
+            raise ValueError("{} must not be None.".format(name))
 @EmptyLine
-		except DeserializationError:
-			raise TypeError("{} must be type {}.".format(name, datatype))
+        except DeserializationError:
+            raise TypeError("{} must be type {}.".format(name, datatype))
 @EmptyLine
-		else:
-			return value
+        else:
+            return value
 @EmptyLine
 </text>
   foreach (var method in Model.MethodTemplateModels)
