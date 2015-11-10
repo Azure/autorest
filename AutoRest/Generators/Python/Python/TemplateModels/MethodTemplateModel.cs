@@ -254,6 +254,19 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        public string GetExceptionType()
+        {
+            if (DefaultResponse != null)
+            {
+                return DefaultResponse.Name + "Exception";
+            }
+            else
+            {
+                // Base exception name
+                return "HttpOperationException";
+            }
+        }
+
         /// <summary>
         /// The Deserialization Error handling code block that provides a useful Error 
         /// message when exceptions occure in deserialization along with the request 

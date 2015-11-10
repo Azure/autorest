@@ -17,6 +17,13 @@
 }
 @EmptyLine
 from runtime.msrest import ServiceClient, Configuration
+from runtime.msrest import Serializer, Deserializer
+from runtime.msrest.exceptions import (
+    SerializationError,
+    DeserializationError,
+    TokenExpiredError,
+    ClientRequestError)
+from runtime.msrest.paging import Paged
 @{
   if (Model.MethodGroupModels.Any())
   {
@@ -26,7 +33,7 @@ from runtime.msrest import ServiceClient, Configuration
     }
   }
 }
-from .models import *
+import models
 @EmptyLine
 class @(Model.Name)Configuration(Configuration):
 @EmptyLine
@@ -64,8 +71,8 @@ class @(Model.Name)(object):
     def _verify_response(self, response, accept_status, error):
 @EmptyLine
         if response.status_code not in accept_status:
-            deserialized = self.deserialize(
-                error, response, self._deserialize.dependencies)
+            deserialized = self._deserialize(
+                error, response)
 @EmptyLine
             raise deserialized
 @EmptyLine
