@@ -2,12 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Configuration;
 using System.Globalization;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Rest.Azure.Authentication.Properties;
+using ClientRuntime.Azure.Authentication.Properties;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace Microsoft.Rest.Azure.Authentication
@@ -63,7 +62,8 @@ namespace Microsoft.Rest.Azure.Authentication
             this._tokenAudience = tokenAudience.ToString();
             this._userid = userId;
         }
-
+// Interactive authentication is not implemented for Dnx.
+#if !PORTABLE
         /// <summary>
         /// Log in to Azure active directory common tenant with user account and authentication provided by the user.  Authentication is automatically scoped to the default azure management endpoint. 
         /// This call may display a credentials dialog, depending on the supplied client settings and the state of the token cache and user cookies.
@@ -286,7 +286,7 @@ namespace Microsoft.Rest.Azure.Authentication
             return new TokenCredentials(new UserTokenProvider(authenticationContext, clientSettings.ClientId,
                 serviceSettings.TokenAudience, newUserId));
         }
-
+#endif
         /// <summary>
         /// Log in to azure active directory in non-interactive mode using organizational id credentials and the default token cache. Default service 
         /// settings (authority, audience) for logging in to azure resource manager are used.

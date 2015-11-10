@@ -5,12 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http.Headers;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
-using Microsoft.Rest.Azure.Authentication.Properties;
+using ClientRuntime.Azure.Authentication.Properties;
 
 namespace Microsoft.Rest.Azure.Authentication
 {
