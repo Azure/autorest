@@ -32,8 +32,8 @@ except ImportError:
     import ConfigParser as configparser
     from ConfigParser import NoOptionError
 
-from ..msrest import Configuration
-from ..msrest.exceptions import raise_with_traceback
+from msrest import Configuration
+from msrest.exceptions import raise_with_traceback
 
 class AzureConfiguration(Configuration):
 

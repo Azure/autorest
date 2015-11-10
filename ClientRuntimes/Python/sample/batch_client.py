@@ -1,9 +1,9 @@
 ﻿
 
-from runtime.msrest import ServiceClient
-from runtime.msrestazure import AzureConfiguration
+from msrest import ServiceClient
+from msrestazure import AzureConfiguration
 from operations.pool_operations import PoolManager
-from runtime.msrest.serialization import Serializer, Deserializer
+from msrest.serialization import Serializer, Deserializer
 
 import models   
 

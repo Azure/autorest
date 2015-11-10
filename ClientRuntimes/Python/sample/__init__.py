@@ -1,6 +1,6 @@
 ﻿
-from runtime.msrestazure import AzureConfiguration
-from runtime.msrestazure.azure_active_directory import (
+from msrestazure import AzureConfiguration
+from msrestazure.azure_active_directory import (
     UserPassCredentials,
     InteractiveCredentials,
     ServicePrincipalCredentials)

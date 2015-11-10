@@ -322,7 +322,7 @@ class Deserializer(object):
         try:
             data = self._unpack_response(response, response_data)
 
-        except (TypeError, ValueError, AttributeError, json.JSONDecodeError) as err:
+        except (TypeError, ValueError, AttributeError) as err:
             msg = "Unable to deserialize to object: {}.".format(class_name)
             raise_with_traceback(DeserializationError, msg, err)
 

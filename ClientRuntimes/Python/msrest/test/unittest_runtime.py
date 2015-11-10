@@ -27,13 +27,15 @@
 import json
 import httpretty
 import requests
-import http
 import re
 import os
 
-from http.server import HTTPServer, BaseHTTPRequestHandler
-#from BaseHTTPServer import HTTPServer
-#from BaseHTTPServer import BaseHTTPRequestHandler
+try:
+    from http.server import HTTPServer, BaseHTTPRequestHandler
+
+except ImportError:
+    from BaseHTTPServer import HTTPServer
+    from BaseHTTPServer import BaseHTTPRequestHandler
 
 try:
     import unittest2 as unittest
@@ -155,7 +157,7 @@ class TestRedirect(unittest.TestCase):
 
         self.client = ServiceClient(creds, cfg)
 
-        return super().setUp()
+        return super(TestRedirect, self).setUp()
 
     @httpretty.activate
     def test_request_redirect_post(self):
@@ -306,7 +308,7 @@ class TestRuntimeRetry(unittest.TestCase):
 
         self.client = ServiceClient(creds, cfg)
         self.request = self.client.get("/get_endpoint", {'check':True})
-        return super().setUp()
+        return super(TestRuntimeRetry, self).setUp()
 
     @httpretty.activate
     def test_request_retry_502(self):
@@ -391,7 +393,5 @@ class TestRuntimeRetry(unittest.TestCase):
         self.assertEqual(response.status_code, 505, msg="Shouldn't retry on 505")
 
         
-
-
-
-
+if __name__ == '__main__':
+    unittest.main()

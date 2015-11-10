@@ -1,5 +1,5 @@
 ﻿
-from runtime.msrestazure import AzureConfiguration
+from msrestazure import AzureConfiguration
 try:
     import configparser
     from configparser import NoOptionError

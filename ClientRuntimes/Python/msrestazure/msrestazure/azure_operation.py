@@ -22,7 +22,7 @@
 #
 #--------------------------------------------------------------------------
 
-from ..msrest.serialization import Deserializer
+from msrest.serialization import Deserializer
 from threading import Thread, Event
 import time
 
