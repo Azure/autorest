@@ -9,7 +9,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
+#if PORTABLE
 using ClientRuntime.Azure.Authentication.Properties;
+#else
+using Microsoft.Rest.Azure.Authentication.Properties;
+#endif
 
 namespace Microsoft.Rest.Azure.Authentication
 {
