@@ -73,6 +73,8 @@ class ServiceClient(object):
        
         url = quote(url)
         url = url.lstrip('/')
+
+        #TODO: Check for absolute
         url = urljoin(self.config.base_url, url)
         return url
 
@@ -124,7 +126,7 @@ class ServiceClient(object):
             future = executor.submit(request_cmd, *args, **kwargs)
             return future
 
-    def send(self, request, headers, content=None, **kwargs):
+    def send(self, request, headers={}, content=None, **kwargs):
         """
         Prepare and send request object according to configuration.
         """

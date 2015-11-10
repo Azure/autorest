@@ -625,7 +625,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
         self.assertIsNone(response.client_request_id)
         self.assertIsNone(response.e_tag)
 
-        self.assertFalse(hasattr(response, 'attr_a'))
+        self.assertIsNone(response.attr_a)
         self.assertIsInstance(response, self.TestObj)
 
     def test_attr_int(self):

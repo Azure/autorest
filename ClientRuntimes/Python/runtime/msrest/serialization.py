@@ -317,17 +317,20 @@ class Deserializer(object):
 
     def __call__(self, target_obj, response_data):
 
-        if isintance(target_obj, str):
-            return self.deserialize_data(response_data, target_obj)
-
-        response = self._classify_target(target_obj, response_data)
-        class_name = response.__class__.__name__
+        response, class_name = self._classify_target(target_obj, response_data)
 
         try:
             data = self._unpack_response(response, response_data)
-            if data is None:
-                return response
 
+        except (TypeError, ValueError, AttributeError, json.JSONDecodeError) as err:
+            msg = "Unable to deserialize to object: {}.".format(class_name)
+            raise_with_traceback(DeserializationError, msg, err)
+
+        if isinstance(target_obj, str):
+            return self.deserialize_data(data, target_obj)
+
+
+        try:
             attributes = response._attribute_map
             for attr, map in attributes.items():
                 attr_type = map['type']
@@ -347,6 +350,9 @@ class Deserializer(object):
 
     def _classify_target(self, target, data):
 
+        if not target:
+            return None, None
+
         if isinstance(target, type):
             try:
                 target = target._classify(data, self.dependencies)
@@ -359,13 +365,14 @@ class Deserializer(object):
                 target = self.dependencies[target]
 
             except KeyError:
-                return target
+                return target, target
 
         try:
-            return target()
+            target_obj = target()
+            return target_obj, target_obj.__class__.__name__
 
         except TypeError:
-            return target
+            return target, None
 
     def _unpack_headers(self, response, raw_data):
 
@@ -398,11 +405,10 @@ class Deserializer(object):
             self._unpack_response_attrs(response, raw_data)
 
         if hasattr(raw_data, 'content'):
-            try:
-                return json.loads(raw_data.content)
+            if not raw_data.content:
+                return {}
 
-            except (TypeError, json.JSONDecodeError):
-                return None
+            return json.loads(raw_data.content)
 
         return raw_data
 
