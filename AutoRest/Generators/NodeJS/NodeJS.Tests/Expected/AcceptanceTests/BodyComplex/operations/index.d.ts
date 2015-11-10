@@ -775,6 +775,14 @@ export interface Polymorphism {
      * 'picture': new Buffer([255, 255, 255, 255,
      * 254]).toString('base64'),
      * 'species':'dangerous',
+     * },
+     * {
+     * 'fishtype': 'goblin',
+     * 'age': 1,
+     * 'birthday': '2015-08-08T00:00:00Z',
+     * 'length': 30.0,
+     * 'species': 'scary',
+     * 'jawsize': 5
      * }
      * ]
      * };

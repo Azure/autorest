@@ -120,7 +120,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
                 var modelTemplate = new ModelTemplate
                 {
-                    Model = new AzureModelTemplateModel(model),
+                    Model = new AzureModelTemplateModel(model, serviceClient.ModelTypes),
                 };
 
                 await Write(modelTemplate, Path.Combine(modelsPath, RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
