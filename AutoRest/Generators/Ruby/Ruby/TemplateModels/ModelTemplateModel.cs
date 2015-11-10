@@ -25,6 +25,11 @@ namespace Microsoft.Rest.Generator.Ruby
         private readonly ModelTemplateModel parent = null;
 
         /// <summary>
+        /// List of all model types.
+        /// </summary>
+        private readonly IList<CompositeType> allTypes;
+
+        /// <summary>
         /// Gets the list of own properties of the object.
         /// </summary>
         public List<PropertyTemplateModel> PropertyTemplateModels { get; private set; }
@@ -98,10 +103,22 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
+        /// Gets the list of all model types derived directly or indirectly from this type.
+        /// </summary>
+        public IList<CompositeType> DerivedTypes
+        {
+            get
+            {
+                return allTypes.Where(t => t.DerivesFrom(this)).ToList();
+            }
+        }
+
+        /// <summary>
         /// Initializes a new instance of the ModelTemplateModel class.
         /// </summary>
         /// <param name="source">The object to create model from.</param>
-        public ModelTemplateModel(CompositeType source)
+        /// <param name="allTypes">The list of all model types; Used to implement polymorphism.</param>
+        public ModelTemplateModel(CompositeType source, IList<CompositeType> allTypes)
         {
             this.LoadFrom(source);
             PropertyTemplateModels = new List<PropertyTemplateModel>();
@@ -109,8 +126,10 @@ namespace Microsoft.Rest.Generator.Ruby
 
             if (source.BaseModelType != null)
             {
-                parent = new ModelTemplateModel(source.BaseModelType);
+                this.parent = new ModelTemplateModel(source.BaseModelType, allTypes);
             }
+
+            this.allTypes = allTypes;
         }
 
         /// <summary>
@@ -123,7 +142,7 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             var builder = new IndentedStringBuilder("  ");
 
-            string serializationLogic = type.SerializeType(this.Scope, variableName, ClassNamespaces);
+            string serializationLogic = type.SerializeType(this.Scope, variableName);
             builder.AppendLine(serializationLogic);
 
             return builder.ToString();
@@ -139,7 +158,7 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             var builder = new IndentedStringBuilder("  ");
 
-            string serializationLogic = type.DeserializeType(this.Scope, variableName, ClassNamespaces);
+            string serializationLogic = type.DeserializeType(this.Scope, variableName);
             return builder.AppendLine(serializationLogic).ToString();
         }
 

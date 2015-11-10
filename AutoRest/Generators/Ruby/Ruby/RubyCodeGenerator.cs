@@ -151,7 +151,7 @@ namespace Microsoft.Rest.Generator.Ruby
             {
                 var modelTemplate = new ModelTemplate
                 {
-                    Model = new ModelTemplateModel(model)
+                    Model = new ModelTemplateModel(model, serviceClient.ModelTypes)
                 };
                 await Write(modelTemplate,
                     Path.Combine(modelsPath, RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
