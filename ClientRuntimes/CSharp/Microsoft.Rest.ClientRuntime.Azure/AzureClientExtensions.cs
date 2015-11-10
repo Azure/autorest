@@ -9,7 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Rest.Azure.Properties;
+using Microsoft.Rest.ClientRuntime.Azure.Properties;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

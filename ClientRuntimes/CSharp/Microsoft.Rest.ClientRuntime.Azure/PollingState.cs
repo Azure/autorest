@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using Microsoft.Rest.Azure.Properties;
+using Microsoft.Rest.ClientRuntime.Azure.Properties;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
