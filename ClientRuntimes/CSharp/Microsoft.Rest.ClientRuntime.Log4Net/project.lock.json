@@ -1,0 +1,172 @@
+{
+  "locked": false,
+  "version": 2,
+  "targets": {
+    ".NETFramework,Version=v4.5": {
+      "log4net/2.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net40-full/log4net.dll": {}
+        },
+        "runtime": {
+          "lib/net40-full/log4net.dll": {}
+        }
+      },
+      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5",
+        "dependencies": {
+          "Newtonsoft.Json": "7.0.1"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Net",
+          "System.Net.Http",
+          "System.Net.Http.WebRequest",
+          "System.Xml"
+        ]
+      },
+      "Newtonsoft.Json/7.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.5/win7-x86": {
+      "log4net/2.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net40-full/log4net.dll": {}
+        },
+        "runtime": {
+          "lib/net40-full/log4net.dll": {}
+        }
+      },
+      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5",
+        "dependencies": {
+          "Newtonsoft.Json": "7.0.1"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Net",
+          "System.Net.Http",
+          "System.Net.Http.WebRequest",
+          "System.Xml"
+        ]
+      },
+      "Newtonsoft.Json/7.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.5/win7-x64": {
+      "log4net/2.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net40-full/log4net.dll": {}
+        },
+        "runtime": {
+          "lib/net40-full/log4net.dll": {}
+        }
+      },
+      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5",
+        "dependencies": {
+          "Newtonsoft.Json": "7.0.1"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Net",
+          "System.Net.Http",
+          "System.Net.Http.WebRequest",
+          "System.Xml"
+        ]
+      },
+      "Newtonsoft.Json/7.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "type": "project",
+      "path": "../Microsoft.Rest.ClientRuntime/project.json"
+    },
+    "log4net/2.0.3": {
+      "type": "package",
+      "sha512": "rxMHzK5efGPo5XtRnuUGO4tfW5l74Aji6kVmtMAt2SgcB5PHBNtNY7yj2LCI2VtKrLPO7kCKR6kH6lIZggq3Gg==",
+      "files": [
+        "lib/net10-full/log4net.dll",
+        "lib/net10-full/log4net.xml",
+        "lib/net11-full/log4net.dll",
+        "lib/net11-full/log4net.xml",
+        "lib/net20-full/log4net.dll",
+        "lib/net20-full/log4net.xml",
+        "lib/net35-client/log4net.dll",
+        "lib/net35-client/log4net.xml",
+        "lib/net35-full/log4net.dll",
+        "lib/net35-full/log4net.xml",
+        "lib/net40-client/log4net.dll",
+        "lib/net40-client/log4net.xml",
+        "lib/net40-full/log4net.dll",
+        "lib/net40-full/log4net.xml",
+        "log4net.2.0.3.nupkg",
+        "log4net.2.0.3.nupkg.sha512",
+        "log4net.nuspec"
+      ]
+    },
+    "Newtonsoft.Json/7.0.1": {
+      "type": "package",
+      "sha512": "q3V4KLetMLnt1gpAVWgtXnHjKs0UG/RalBc29u2ZKxd5t5Ze4JBL5WiiYIklJyK/5CRiIiNwigVQUo0FgbsuWA==",
+      "files": [
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
+        "Newtonsoft.Json.7.0.1.nupkg",
+        "Newtonsoft.Json.7.0.1.nupkg.sha512",
+        "Newtonsoft.Json.nuspec",
+        "tools/install.ps1"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "Microsoft.Rest.ClientRuntime ",
+      "log4net >= 2.0.3"
+    ],
+    ".NETFramework,Version=v4.5": [
+      "fx/System ",
+      "fx/System.Net ",
+      "fx/System.Net.Http ",
+      "fx/System.Net.Http.WebRequest ",
+      "fx/System.Xml "
+    ]
+  }
+}
