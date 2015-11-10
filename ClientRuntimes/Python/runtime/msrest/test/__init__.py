@@ -27,6 +27,12 @@
 import sys
 import os
 
+from .unittest_auth import TestAuthentication
+from .unittest_client import TestServiceClient
+from .unittest_pipeline import TestClientRequest, TestPipelineHooks
+from .unittest_runtime import TestRedirect, TestRuntime, TestRuntimeRetry
+from .unittest_serialization import TestRuntimeSerialized, TestRuntimeDeserialized
+
 if sys.version_info[:2] < (2, 7, ):
     try:
         import unittest2

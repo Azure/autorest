@@ -28,7 +28,6 @@ import os
 import shutil
 import logging
 
-from .exceptions import raise_with_traceback
 
 LOGGER = None
 
@@ -46,9 +45,8 @@ def check_invalid_directory(dirname):
         os.remove(os.path.join(dirname, "ms_test"))
 
     except (IOError, OSError, EnvironmentError) as exp:
-
-        raise_with_traceback(ValueError,
-            "Log directory '{0}' cannot be accessed.".format(dirname))
+        raise ValueError("Log directory '{0}' cannot be accessed:1{".format(
+            dirname, exp))
 
 def set_stream_handler(logger, format_str):
     """

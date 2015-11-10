@@ -134,11 +134,14 @@ class Serializer(object):
             '{}':self.serialize_dict
             }
 
-    def __call__(self, target_obj):
+    def __call__(self, target_obj, data_type=None):
 
         serialized = {}
         attr_name = None
         class_name = target_obj.__class__.__name__
+
+        if data_type:
+            return self.serialize_data(target_obj, data_type, required=True)
 
         try:
             attributes = target_obj._attribute_map
@@ -313,6 +316,9 @@ class Deserializer(object):
         self.dependencies = dict(classes)
 
     def __call__(self, target_obj, response_data):
+
+        if isintance(target_obj, str):
+            return self.deserialize_data(response_data, target_obj)
 
         response = self._classify_target(target_obj, response_data)
         class_name = response.__class__.__name__
