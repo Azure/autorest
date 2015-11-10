@@ -24,11 +24,11 @@
 #
 #--------------------------------------------------------------------------
 
+import re
 import os
 import shutil
 import logging
 
-from .exceptions import raise_with_traceback
 
 LOGGER = None
 
@@ -46,9 +46,8 @@ def check_invalid_directory(dirname):
         os.remove(os.path.join(dirname, "ms_test"))
 
     except (IOError, OSError, EnvironmentError) as exp:
-
-        raise_with_traceback(ValueError,
-            "Log directory '{0}' cannot be accessed.".format(dirname))
+        raise ValueError("Log directory '{0}' cannot be accessed:1{".format(
+            dirname, exp))
 
 def set_stream_handler(logger, format_str):
     """
@@ -154,7 +153,13 @@ def log_request(adapter, request, *args, **kwargs):
         for header, value in request.headers.items():
             LOGGER.debug("    {0}: {1}".format(header, value))
         LOGGER.debug("Request body:")
-        LOGGER.debug(str(request.body))
+
+        # We don't want to log the binary data of a file upload
+        if isinstance(request.body, generator):
+            LOGGER.debug("File upload")
+
+        else:
+            LOGGER.debug(str(request.body))
 
     except Exception as err:
         LOGGER.debug("Failed to log request: '{}'".format(err))
@@ -167,8 +172,18 @@ def log_response(adapter, request, response, *args, **kwargs):
         LOGGER.debug("Response headers:")
         for header, value in result.headers.items():
             LOGGER.debug("    {0}: {1}".format(header, value))
+
+        # We don't want to log binary data if the response is a file
         LOGGER.debug("Response content:")
-        LOGGER.debug(str(result.content))
+        pattern = re.compile("attachment; ?filename=[\"\w.]+", re.IGNORECASE)
+        header = result.headers.get('content-disposition')
+
+        if header and pattern.match(header):
+            filename = header.split('=')[1]
+            LOGGER.debug("File attachments: {}".format(filename))
+        
+        else:
+            LOGGER.debug(str(result.content))
         return result
 
     except Exception as err:

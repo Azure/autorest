@@ -7,7 +7,7 @@ import hmac
 import hashlib
 
 from requests.auth import AuthBase
-from runtime.msrest.authentication import Authentication
+from msrest.authentication import Authentication
 
 try:
     from urlparse import urlparse, parse_qs

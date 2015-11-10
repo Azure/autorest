@@ -37,6 +37,7 @@ try:
 except ImportError:
     from urllib.parse import urljoin, quote
 
+from .authentication import Authentication
 from .pipeline import ClientHTTPAdapter, ClientRequest
 from .logger import log_request, log_response
 from .exceptions import (
@@ -57,7 +58,7 @@ class ServiceClient(object):
 
         """
         self.config = config
-        self.creds = creds
+        self.creds = creds if creds else Authentication()
 
         self._log = logging.getLogger(config.log_name)
 
@@ -72,6 +73,8 @@ class ServiceClient(object):
        
         url = quote(url)
         url = url.lstrip('/')
+
+        #TODO: Check for absolute
         url = urljoin(self.config.base_url, url)
         return url
 
@@ -123,7 +126,7 @@ class ServiceClient(object):
             future = executor.submit(request_cmd, *args, **kwargs)
             return future
 
-    def send(self, request, headers, content=None, **kwargs):
+    def send(self, request, headers={}, content=None, **kwargs):
         """
         Prepare and send request object according to configuration.
         """

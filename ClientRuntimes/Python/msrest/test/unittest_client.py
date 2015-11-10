@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -54,7 +54,7 @@ class TestServiceClient(unittest.TestCase):
         self.cfg.log_name = "test_log_name"
         self.cfg.base_url = "https://my_endpoint.com"
         self.creds = mock.create_autospec(TokenAuthentication)
-        return super().setUp()
+        return super(TestServiceClient, self).setUp()
 
     def test_client_request(self):
 
@@ -118,3 +118,6 @@ class TestServiceClient(unittest.TestCase):
         client.remove_hook("request", hook)
         self.assertFalse(hook in client._adapter._client_hooks['request'].precalls)
         self.assertFalse(hook in client._adapter._client_hooks['request'].postcalls)
+
+if __name__ == '__main__':
+    unittest.main()

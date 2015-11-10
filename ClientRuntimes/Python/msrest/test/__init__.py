@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -27,6 +27,12 @@
 import sys
 import os
 
+from .unittest_auth import TestAuthentication
+from .unittest_client import TestServiceClient
+from .unittest_pipeline import TestClientRequest, TestPipelineHooks
+from .unittest_runtime import TestRedirect, TestRuntime, TestRuntimeRetry
+from .unittest_serialization import TestRuntimeSerialized, TestRuntimeDeserialized
+
 if sys.version_info[:2] < (2, 7, ):
     try:
         import unittest2
@@ -54,12 +60,11 @@ else:
 
 if __name__ == '__main__':
 
+
+    runner = TextTestRunner(verbosity=2)
     test_dir = os.path.dirname(__file__)
-    top_dir = os.path.dirname(os.path.dirname(os.path.dirname(test_dir)))
-    sys.path.append(top_dir)
-
-    from runtime.msrestazure.test import unittest_auth
-
-    unittest.main(unittest_auth)
 
 
+    test_loader = TestLoader()
+    suite = test_loader.discover(test_dir, pattern="unittest_*.py")
+    runner.run(suite)

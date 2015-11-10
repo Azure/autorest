@@ -1,5 +1,5 @@
 ﻿import json
-from runtime.msrestazure.azure_exceptions import CloudError
+from msrestazure.azure_exceptions import CloudError
 
 
 class BatchException(CloudError):

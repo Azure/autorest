@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>671bdd39-3489-484e-b489-8dfb4db226e2</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>batch_configuration.py</StartupFile>
+    <SearchPath>.</SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>sample_client</Name>
+    <RootNamespace>sample_client</RootNamespace>
+    <InterpreterId>{d84f20fd-0008-4984-be36-039ba1375663}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="batch_auth.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="batch_client.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="batch_configuration.py" />
+    <Compile Include="batch_exception.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\certificate.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\enums.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\pool.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\pool_autoscale.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\pool_os.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\pool_parameters.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\pool_resize.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\param_groups.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\pool_page.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\task_reschedule_policy.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="models\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="operations\pool_operations.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="operations\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="test_script.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="models\" />
+    <Folder Include="operations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="..\..\..\PythonEnv\Python27-64-ENV\">
+      <Id>{d84f20fd-0008-4984-be36-039ba1375663}</Id>
+      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
+      <Version>2.7</Version>
+      <Description>Python27-64-ENV (Python 64-bit 2.7)</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <LibraryPath>Lib\</LibraryPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>Amd64</Architecture>
+    </Interpreter>
+    <Interpreter Include="..\..\..\PythonEnv\Python35-64-ENV\">
+      <Id>{c713ae69-eff3-4814-a3dc-0ee4bb342268}</Id>
+      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
+      <Version>3.5</Version>
+      <Description>Python35-64-ENV (Python 64-bit 3.5)</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <LibraryPath>Lib\</LibraryPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>Amd64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <Import Condition="Exists($(PtvsTargetsFile))" Project="$(PtvsTargetsFile)" />
+  <Import Condition="!Exists($(PtvsTargetsFile))" Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

@@ -31,6 +31,7 @@ import requests
 import logging
 import json
 import functools
+import types
 
 from requests.packages.urllib3 import Retry
 
@@ -178,7 +179,7 @@ class ClientRequest(requests.Request):
 
     def add_content(self, data):
 
-        if isinstance(data, generator):
+        if isinstance(data, types.GeneratorType):
             self.data = data
 
         else:

@@ -24,49 +24,52 @@
 #
 #--------------------------------------------------------------------------
 
-from ..msrest.serialization import Deserializer
+import sys
+from . import logger
+
+def raise_with_traceback(exception, message="", *args):
+    exc_type, exc_value, exc_traceback = sys.exc_info()
+    exc_msg = " {}: {}".format(exc_type.__name__, exc_value)
+
+    error = exception(str(message) + exc_msg, *args)
+
+    try:
+        raise error.with_traceback(exc_traceback)
+
+    except AttributeError:
+        error.__traceback__ = exc_traceback
+        raise error
+
+   
+class ClientException(Exception):
+    
+    def __init__(self, message, inner_exception=None, *args):
+
+        self.inner_exception = inner_exception
+
+        logger.LOGGER.debug(message)
+        super(ClientException, self).__init__(message, *args)
 
 
-class CloudError(Exception):
-
-    _response_map = {
-        'status_code': {'key':'status_code', 'type':'str'}
-        }
-
-    _attribute_map = {
-        'error': {'key':'code', 'type':'str'},
-        'message': {'key':'message', 'type':'{str}'},
-        'data': {'key':'values', 'type':'{str}'}
-        }
+class SerializationError(ClientException):
+    pass
 
 
-    def __init__(self, *args, **kwargs):
+class DeserializationError(ClientException):
+    pass
 
-        self.error = None
-        self.status_code = None
-        self._message = None
-        self.request_id = None
-        self.error_time = None
-        self.data = None
 
-        super(CloudError, self).__init__(*args)
+class ResponseStatusError(ClientException):
+    pass
 
-    def __str__(self):
-        return self._message
 
-    @property
-    def message(self):
-        return self._message
+class TokenExpiredError(ClientException):
+    pass
 
-    @message.setter
-    def message(self,value):
-        try:
-            if value.get('value'):
-                msg_data = value['value'].split('\n')
-                self._message = msg_data[0]
-                self.request_id = msg_data[1].split(':')[1]
-                self.error_time = Deserializer.deserialize_iso(
-                    msg_data[2].split(':')[1])
 
-        except (AttributeError, IndexError):
-            self._message = value
+class ClientRequestError(ClientException):
+    pass
+
+
+class AuthenticationError(ClientException):
+    pass
