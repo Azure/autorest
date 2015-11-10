@@ -29,7 +29,7 @@ namespace Microsoft.Rest.TransientFaultHandling
 
             if (errorDetectionStrategy == null)
             {
-                throw new InvalidOperationException(Properties.Resources.ITransientErrorDetectionStrategyNotImplemented);
+                throw new InvalidOperationException(ClientRuntime.Properties.Resources.ITransientErrorDetectionStrategyNotImplemented);
             }
 
             this.RetryStrategy = retryStrategy;

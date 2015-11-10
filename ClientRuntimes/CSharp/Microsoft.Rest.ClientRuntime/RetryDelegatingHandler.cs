@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Rest.Properties;
+using Microsoft.Rest.ClientRuntime.Properties;
 using Microsoft.Rest.TransientFaultHandling;
 
 namespace Microsoft.Rest

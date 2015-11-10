@@ -141,7 +141,7 @@ namespace Microsoft.Rest
             }
             else
             {
-                throw new InvalidOperationException(Properties.Resources.ExceptionRetryHandlerMissing);
+                throw new InvalidOperationException(ClientRuntime.Properties.Resources.ExceptionRetryHandlerMissing);
             }
         }
 

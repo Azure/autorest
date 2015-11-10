@@ -8,35 +8,30 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
 {
-    public class FakeHttpHandler : HttpClientHandler
+    public class BadResponseDelegatingHandler : DelegatingHandler
     {
-        public FakeHttpHandler()
+        public BadResponseDelegatingHandler()
         {
             StatusCodeToReturn = HttpStatusCode.InternalServerError;
             NumberOfTimesToFail = int.MaxValue;
         }
 
-        public int NumberOfTimesToFail { get; set; }
-
         public int NumberOfTimesFailedSoFar { get; private set; }
+
+        public int NumberOfTimesToFail { get; set; }
 
         public HttpStatusCode StatusCodeToReturn { get; set; }
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
-            var response = new HttpResponseMessage(HttpStatusCode.OK);
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             if (NumberOfTimesToFail > NumberOfTimesFailedSoFar)
             {
                 response = new HttpResponseMessage(StatusCodeToReturn);
                 NumberOfTimesFailedSoFar++;
             }
-
-#if NET45
             return Task.Run(() => response);
-#else
-            return TaskEx.Run(() => response);
-#endif
         }
     }
 }

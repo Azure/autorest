@@ -5,7 +5,7 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Rest.Properties;
+using Microsoft.Rest.ClientRuntime.Properties;
 
 namespace Microsoft.Rest.TransientFaultHandling
 {

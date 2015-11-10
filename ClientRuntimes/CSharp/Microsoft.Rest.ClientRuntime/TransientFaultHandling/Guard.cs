@@ -3,7 +3,7 @@
 
 using System;
 using System.Globalization;
-using Microsoft.Rest.Properties;
+using Microsoft.Rest.ClientRuntime.Properties;
 
 namespace Microsoft.Rest.TransientFaultHandling
 {

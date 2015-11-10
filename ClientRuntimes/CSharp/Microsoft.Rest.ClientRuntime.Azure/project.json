@@ -1,13 +1,14 @@
 {
   "version": "2.2.0-preview",
-  "description": "Microsoft.Rest.ClientRuntime.Azure",
+  "copyright": "Copyright (c) Microsoft Corporation",
+  "iconUrl": "http://go.microsoft.com/fwlink/?LinkID=288890",
+  "title": "Client Runtime for Microsoft Azure Libraries",
+  "summary": "Client infrastructure for Azure client libraries.",
+  "description": "Provides common error handling, tracing, and HTTP/REST-based pipeline manipulation. \nSupported Platforms:\n  -   Portable Class Libraries\n  -   .NET Framework 4.5\n  -   Windows 8\n  -   Windows Phone 8.1\n  -   DotNet Core",
   "authors": [ "Microsoft" ],
-  "tags": [ "Microsoft AutoRest ClientRuntime Azure REST" ],
+  "tags": [ "Microsoft Azure AutoRest ClientRuntime REST azureofficial" ],
   "projectUrl": "https://github.com/Azure/AutoRest",
   "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
-
-  "commands": {
-  },
 
   "frameworks": {
     "net45": {

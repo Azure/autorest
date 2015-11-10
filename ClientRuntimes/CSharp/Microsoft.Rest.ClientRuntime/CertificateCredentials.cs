@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
-using Microsoft.Rest.Properties;
+using Microsoft.Rest.ClientRuntime.Properties;
 
 namespace Microsoft.Rest
 {

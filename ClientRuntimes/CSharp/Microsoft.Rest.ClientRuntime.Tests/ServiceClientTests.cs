@@ -15,7 +15,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         [Fact]
         public void ClientAddHandlerToPipelineAddsHandler()
         {
-            var fakeClient = new FakeServiceClient(new WebRequestHandler(), new BadResponseDelegatingHandler());
+            var fakeClient = new FakeServiceClient(new HttpClientHandler(), new BadResponseDelegatingHandler());
             var result2 = fakeClient.DoStuffSync();
             Assert.Equal(HttpStatusCode.InternalServerError, result2.StatusCode);
         }
@@ -23,7 +23,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         [Fact]
         public void ClientAddHandlersToPipelineAddSingleHandler()
         {
-            var fakeClient = new FakeServiceClient(new WebRequestHandler(),
+            var fakeClient = new FakeServiceClient(new HttpClientHandler(),
                 new BadResponseDelegatingHandler()
                 );
 
@@ -34,7 +34,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         [Fact]
         public void ClientAddHandlersToPipelineAddMultipleHandler()
         {
-            var fakeClient = new FakeServiceClient(new WebRequestHandler(),
+            var fakeClient = new FakeServiceClient(new HttpClientHandler(),
                 new AddHeaderResponseDelegatingHandler("foo", "bar"),
                 new BadResponseDelegatingHandler()
                 );
@@ -51,7 +51,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             var handlerB = new AppenderDelegatingHandler("B");
             var handlerC = new AppenderDelegatingHandler("C");
 
-            var fakeClient = new FakeServiceClient(new WebRequestHandler(),
+            var fakeClient = new FakeServiceClient(new HttpClientHandler(),
                 handlerA, handlerB, handlerC,
                 new MirrorDelegatingHandler());
 
@@ -72,7 +72,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             handlerD.InnerHandler = handlerE;
             handlerE.InnerHandler = new MirrorMessageHandler("F");
 
-            var fakeClient = new FakeServiceClient(new WebRequestHandler(),
+            var fakeClient = new FakeServiceClient(new HttpClientHandler(),
                 handlerA, handlerD,
                 new MirrorDelegatingHandler());
 
@@ -83,7 +83,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         [Fact]
         public void ClientWithoutHandlerWorks()
         {
-            var fakeClient = new FakeServiceClient(new WebRequestHandler(),
+            var fakeClient = new FakeServiceClient(new HttpClientHandler(),
                 new MirrorDelegatingHandler());
 
             var response = fakeClient.DoStuffSync("Text").Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
