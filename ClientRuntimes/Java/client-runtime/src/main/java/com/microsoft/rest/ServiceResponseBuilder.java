@@ -23,8 +23,8 @@ import java.util.Map;
  * The builder for building a {@link ServiceResponse}.
  */
 public class ServiceResponseBuilder<T> {
-    private Map<Integer, TypeReference<?>> responseTypes;
-    private JacksonUtils deserializer;
+    protected Map<Integer, TypeReference<?>> responseTypes;
+    protected JacksonUtils deserializer;
 
     /**
      * Create a ServiceResponseBuilder instance.
@@ -166,7 +166,7 @@ public class ServiceResponseBuilder<T> {
     }
 
     @SuppressWarnings("unchecked")
-    private T buildBody(int statusCode, ResponseBody responseBody) throws IOException {
+    protected T buildBody(int statusCode, ResponseBody responseBody) throws IOException {
         if (responseBody == null) {
             return null;
         }

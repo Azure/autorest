@@ -11,11 +11,11 @@
 package fixtures.azureparametergrouping;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.AzureServiceResponseBuilder;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azureparametergrouping.models.Error;
@@ -85,7 +85,7 @@ public class ParameterGroupingImpl implements ParameterGrouping {
     }
 
     private ServiceResponse<Void> postRequiredDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -132,7 +132,7 @@ public class ParameterGroupingImpl implements ParameterGrouping {
     }
 
     private ServiceResponse<Void> postOptionalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -183,7 +183,7 @@ public class ParameterGroupingImpl implements ParameterGrouping {
     }
 
     private ServiceResponse<Void> postMultipleParameterGroupsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);

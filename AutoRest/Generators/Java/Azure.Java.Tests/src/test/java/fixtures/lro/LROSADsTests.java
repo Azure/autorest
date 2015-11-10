@@ -34,7 +34,7 @@ public class LROSADsTests {
                 .addConverterFactory(JacksonConverterFactory.create(new AzureJacksonUtils().getObjectMapper()))
                 .callbackExecutor(executor);
 
-        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost.:3000", httpClient, builder);
+        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost.:3000", null, httpClient, builder);
         client.setLongRunningOperationRetryTimeout(0);
     }
 
