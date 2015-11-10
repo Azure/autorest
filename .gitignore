@@ -236,6 +236,7 @@ ClientRuntimes/Python/Python35-64-ENV/pyvenv.cfg
 ClientRuntimes/Python/Python35-64-ENV/Scripts/activate.bat
 ClientRuntimes/Python/Python35-64-ENV/Scripts/Activate.ps1
 ClientRuntimes/Python/Python35-64-ENV/Scripts/deactivate.bat
+*.pyc
 
 #dnx installation
 dnx-clr-win-x86*/

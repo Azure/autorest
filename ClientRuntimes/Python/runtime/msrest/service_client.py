@@ -37,6 +37,7 @@ try:
 except ImportError:
     from urllib.parse import urljoin, quote
 
+from .authentication import Authentication
 from .pipeline import ClientHTTPAdapter, ClientRequest
 from .logger import log_request, log_response
 from .exceptions import (
@@ -57,7 +58,7 @@ class ServiceClient(object):
 
         """
         self.config = config
-        self.creds = creds
+        self.creds = creds if creds else Authentication()
 
         self._log = logging.getLogger(config.log_name)
 

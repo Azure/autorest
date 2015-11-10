@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -44,7 +44,7 @@ from msrest.pipeline import (
 from msrest import Configuration
 
 
-class TestPiplineHooks(unittest.TestCase):
+class TestPipelineHooks(unittest.TestCase):
 
     def event_hook(event):
         def event_wrapper(func):

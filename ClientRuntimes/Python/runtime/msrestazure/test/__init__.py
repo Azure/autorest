@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -26,6 +26,8 @@
 
 import sys
 import os
+
+from .unittest_auth import TestInteractiveCredentials
 
 if sys.version_info[:2] < (2, 7, ):
     try:
