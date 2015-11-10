@@ -3,16 +3,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>671bdd39-3489-484e-b489-8dfb4db226e2</ProjectGuid>
-    <ProjectHome>.</ProjectHome>
-    <StartupFile>batch_configuration.py</StartupFile>
-    <SearchPath>.</SearchPath>
+    <ProjectGuid>{b80e5ecc-dcdc-4d31-b3be-8c32dea8e864}</ProjectGuid>
+    <ProjectHome>
+    </ProjectHome>
+    <StartupFile>msrestazure\__init__.py</StartupFile>
+    <SearchPath>..\msrest\;.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>sample_client</Name>
-    <RootNamespace>sample_client</RootNamespace>
-    <InterpreterId>{d84f20fd-0008-4984-be36-039ba1375663}</InterpreterId>
-    <InterpreterVersion>2.7</InterpreterVersion>
+    <Name>clientruntime</Name>
+    <RootNamespace>client_runtime</RootNamespace>
+    <InterpreterId>{12c1f77c-3a20-4e2d-8df2-6f587311ea06}</InterpreterId>
+    <InterpreterVersion>3.5</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,73 +24,33 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="sample\batch_auth.py">
+    <Compile Include="msrestazure\azure_active_directory.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="sample\batch_client.py">
+    <Compile Include="msrestazure\azure_configuration.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="sample\batch_configuration.py" />
-    <Compile Include="sample\batch_exception.py">
+    <Compile Include="msrestazure\azure_exceptions.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="sample\models\certificate.py">
+    <Compile Include="msrestazure\azure_operation.py" />
+    <Compile Include="test\unittest_auth.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="sample\models\enums.py">
+    <Compile Include="test\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="sample\models\pool.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample\models\pool_autoscale.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample\models\pool_os.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample\models\pool_parameters.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample\models\pool_properties.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample\models\pool_resize.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample\models\param_groups.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample\models\pool_page.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample\models\task_reschedule_policy.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample\models\__init__.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample\operations\pool_operations.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample\operations\__init__.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample\test_script.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="sample\__init__.py">
+    <Compile Include="msrestazure\__init__.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="sample\" />
-    <Folder Include="sample\models\" />
-    <Folder Include="sample\operations\" />
+    <Folder Include="msrestazure\" />
+    <Folder Include="test\" />
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="..\..\..\PythonEnv\Python27-64-ENV\">
-      <Id>{d84f20fd-0008-4984-be36-039ba1375663}</Id>
+    <Interpreter Include="..\..\..\..\PythonEnv\Python27-64-ENV\">
+      <Id>{5cdbe86c-f1f4-45a4-ad13-453be6b2cc3e}</Id>
       <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
       <Version>2.7</Version>
       <Description>Python27-64-ENV (Python 64-bit 2.7)</Description>
@@ -99,8 +60,8 @@
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
       <Architecture>Amd64</Architecture>
     </Interpreter>
-    <Interpreter Include="..\..\..\PythonEnv\Python35-64-ENV\">
-      <Id>{c713ae69-eff3-4814-a3dc-0ee4bb342268}</Id>
+    <Interpreter Include="..\..\..\..\PythonEnv\Python35-64-ENV\">
+      <Id>{12c1f77c-3a20-4e2d-8df2-6f587311ea06}</Id>
       <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
       <Version>3.5</Version>
       <Description>Python35-64-ENV (Python 64-bit 3.5)</Description>

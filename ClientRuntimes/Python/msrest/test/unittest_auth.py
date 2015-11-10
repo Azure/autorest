@@ -24,6 +24,7 @@
 #
 #--------------------------------------------------------------------------
 
+import os
 import sys
 import json
 import isodate
@@ -62,7 +63,7 @@ class TestAuthentication(unittest.TestCase):
         self.request.params = {}
         self.request.hooks = {}
 
-        return super().setUp()
+        return super(TestAuthentication, self).setUp()
 
     def test_basic_auth(self):
 
@@ -81,6 +82,6 @@ class TestAuthentication(unittest.TestCase):
         self.assertEqual(session.token, {"my_token":123})
 
         
-
-
+if __name__ == '__main__':
+    unittest.main()
 

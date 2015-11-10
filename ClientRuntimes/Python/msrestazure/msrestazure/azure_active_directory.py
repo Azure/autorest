@@ -25,8 +25,8 @@
 #--------------------------------------------------------------------------
 
 
-from ..msrest.authentication import Authentication, TokenAuthentication
-from ..msrest.exceptions import TokenExpiredError, AuthenticationError, raise_with_traceback
+from msrest.authentication import Authentication, TokenAuthentication
+from msrest.exceptions import TokenExpiredError, AuthenticationError, raise_with_traceback
 from .azure_configuration import AzureConfiguration
 
 import requests_oauthlib as oauth

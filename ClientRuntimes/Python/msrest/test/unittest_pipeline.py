@@ -70,7 +70,7 @@ class TestPipelineHooks(unittest.TestCase):
         self.adp.send = self.mock_send
         self.adp.build_response = self.mock_response
 
-        return super().setUp()
+        return super(TestPipelineHooks, self).setUp()
     
     def test_adding_hook(self):
 
@@ -167,7 +167,5 @@ class TestClientRequest(unittest.TestCase):
         self.assertEqual(request.data, json.dumps("Lots of dataaaa"))
         self.assertEqual(request.headers.get('Content-Length'), 17)
 
-
-
-
-
+if __name__ == '__main__':
+    unittest.main()

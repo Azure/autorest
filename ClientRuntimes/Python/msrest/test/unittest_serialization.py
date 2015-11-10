@@ -27,6 +27,7 @@
 import sys
 import json
 import isodate
+import logging
 from datetime import datetime
 
 try:
@@ -39,6 +40,7 @@ try:
 except ImportError:
     import mock
 
+from msrest import logger
 from msrest.serialization import Model
 from msrest import Serializer, Deserializer
 from msrest.exceptions import SerializationError, DeserializationError
@@ -68,6 +70,7 @@ class TestRuntimeSerialized(unittest.TestCase):
             self.attr_e = None
 
     def setUp(self):
+        logger.LOGGER = logging.getLogger("TestSuite")
         self.s = Serializer()
         return super(TestRuntimeSerialized, self).setUp()
 
@@ -324,24 +327,24 @@ class TestRuntimeSerialized(unittest.TestCase):
 
     def test_serialize_primitive_types(self):
 
-        a = Serializer.serialize_data(Serializer, 1, 'int', True)
+        a = self.s.serialize_data(1, 'int', True)
         self.assertEqual(a, 1)
 
-        b = Serializer.serialize_data(Serializer, True, 'bool', True)
+        b = self.s.serialize_data(True, 'bool', True)
         self.assertEqual(b, True)
 
-        c = Serializer.serialize_data(Serializer, 'True', 'str', True)
+        c = self.s.serialize_data('True', 'str', True)
         self.assertEqual(c, 'True')
 
-        d = Serializer.serialize_data(Serializer, 100.0123, 'float', True)
+        d = self.s.serialize_data(100.0123, 'float', True)
         self.assertEqual(d, 100.0123)
 
     def test_serialize_empty_iter(self):
 
-        a = Serializer.serialize_dict(Serializer, {}, 'int', False)
+        a = self.s.serialize_dict({}, 'int', False)
         self.assertEqual(a, {})
 
-        b = Serializer.serialize_iter(Serializer, [], 'int', False)
+        b = self.s.serialize_iter([], 'int', False)
         self.assertEqual(b, [])
 
     def test_serialize_json_obj(self):
@@ -544,8 +547,9 @@ class TestRuntimeDeserialized(unittest.TestCase):
             }
 
     def setUp(self):
+        logger.LOGGER = logging.getLogger("TestSuite")
         self.d = Deserializer()
-        return super().setUp()
+        return super(TestRuntimeDeserialized, self).setUp()
 
     def test_obj_with_no_attr(self):
         """
@@ -937,7 +941,5 @@ class TestRuntimeDeserialized(unittest.TestCase):
         self.assertEqual(animals[2].color, "grey")
         self.assertTrue(animals[2].likes_mice)
 
-
-
-
-
+if __name__ == '__main__':
+    unittest.main()
