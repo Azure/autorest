@@ -3,7 +3,11 @@
 
 using System;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
+#if PORTABLE
+using ClientRuntime.Azure.Authentication.Properties;
+#else
 using Microsoft.Rest.Azure.Authentication.Properties;
+#endif
 
 namespace Microsoft.Rest.Azure.Authentication
 {
