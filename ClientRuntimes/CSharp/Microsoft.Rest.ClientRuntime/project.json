@@ -1,0 +1,63 @@
+{
+  "version": "1.4.2-preview",
+  "description": "Microsoft.Rest.ClientRuntime",
+  "authors": [ "Microsoft" ],
+  "tags": [ "Microsoft AutoRest ClientRuntime REST" ],
+  "projectUrl": "https://github.com/Azure/AutoRest",
+  "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+
+  "commands": {
+  },
+
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+        "System": "",
+        "System.Net": "",
+        "System.Net.Http": "",
+        "System.Net.Http.WebRequest": "",
+        "System.Xml": ""
+      }
+    },
+    ".NETPortable,Version=v4.5,Profile=Profile111": {
+      "compilationOptions": { "define": [ "PORTABLE" ] },
+      "frameworkAssemblies": {
+        "System": "",
+        "System.Collections": "",
+        "System.Diagnostics.Debug": "",
+        "System.Diagnostics.Tools": "",
+        "System.Globalization": "",
+        "System.IO": "",
+        "System.Linq": "",
+        "System.Net": "",
+        "System.Net.Http": "",
+        "System.Net.Primitives": "",
+        "System.ObjectModel": "",
+        "System.Reflection": "",
+        "System.Reflection.Extensions": "",
+        "System.Resources.ResourceManager": "",
+        "System.Runtime": "",
+        "System.Runtime.Extensions": "",
+        "System.Runtime.Serialization": "",
+        "System.Text.Encoding": "",
+        "System.Threading": "",
+        "System.Threading.Tasks": "",
+        "System.Xml": "",
+        "System.Xml.ReaderWriter": ""
+      }
+    },
+    "dnxcore50": {
+      "dependencies": {
+        "System.Diagnostics.Tools": "4.0.0",
+        "System.Net.Http": "4.0.0",
+        "System.Threading.Tasks": "4.0.10",
+        "System.Xml.ReaderWriter": "4.0.10",
+        "Microsoft.CSharp": "4.0.0"
+      }
+    }
+  },
+
+  "dependencies": {
+    "Newtonsoft.Json": "7.0.1"
+  }
+}

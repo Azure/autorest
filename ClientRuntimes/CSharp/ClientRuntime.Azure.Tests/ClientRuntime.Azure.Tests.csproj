@@ -51,14 +51,6 @@
       <Project>{70F45D72-01FC-4540-AD48-44973A7E855B}</Project>
       <Name>ClientRuntime.Azure.Authentication</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ClientRuntime.Azure\ClientRuntime.Azure.csproj">
-      <Project>{856A1D19-C3BF-439A-BEBF-E822A332BC12}</Project>
-      <Name>ClientRuntime.Azure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ClientRuntime\ClientRuntime.csproj">
-      <Project>{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}</Project>
-      <Name>ClientRuntime</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

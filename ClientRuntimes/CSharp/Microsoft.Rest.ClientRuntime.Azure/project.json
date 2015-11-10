@@ -1,0 +1,57 @@
+{
+  "version": "2.2.0-preview",
+  "description": "Microsoft.Rest.ClientRuntime.Azure",
+  "authors": [ "Microsoft" ],
+  "tags": [ "Microsoft AutoRest ClientRuntime Azure REST" ],
+  "projectUrl": "https://github.com/Azure/AutoRest",
+  "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+
+  "commands": {
+  },
+
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+        "System": "",
+        "System.Net": "",
+        "System.Net.Http": "",
+        "System.Net.Http.WebRequest": "",
+        "System.Xml": ""
+      }
+    },
+    ".NETPortable,Version=v4.5,Profile=Profile111": {
+      "compilationOptions": { "define": [ "PORTABLE" ] },
+      "frameworkAssemblies": {
+        "System": "",
+        "System.Collections": "",
+        "System.Diagnostics.Debug": "",
+        "System.Diagnostics.Tools": "",
+        "System.Globalization": "",
+        "System.IO": "",
+        "System.Linq": "",
+        "System.Linq.Expressions": "",
+        "System.Net": "",
+        "System.Net.Http": "",
+        "System.Net.Primitives": "",
+        "System.ObjectModel": "",
+        "System.Reflection": "",
+        "System.Reflection.Extensions": "",
+        "System.Resources.ResourceManager": "",
+        "System.Runtime": "",
+        "System.Runtime.Extensions": "",
+        "System.Runtime.Serialization": "",
+        "System.Text.Encoding": "",
+        "System.Threading": "",
+        "System.Threading.Tasks": "",
+        "System.Xml": "",
+        "System.Xml.XmlSerializer": ""
+      }
+    },
+    "dnxcore50": {
+    }
+  },
+
+  "dependencies": {
+    "Microsoft.Rest.ClientRuntime": ""
+  }
+}

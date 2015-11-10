@@ -45,12 +45,6 @@
     <Compile Include="AuthenticationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ClientRuntime\ClientRuntime.csproj">
-      <Project>{7F524559-93F9-4F3F-9E2C-AF41A0C2E6F4}</Project>
-      <Name>ClientRuntime</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup Condition=" '$(LibraryFxTarget)' == 'net45' ">
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory">
       <HintPath>$(CommonNugetPackageFolder)\Microsoft.IdentityModel.Clients.ActiveDirectory.2.18.206251556\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>

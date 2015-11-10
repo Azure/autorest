@@ -2,6 +2,73 @@
   "locked": false,
   "version": 2,
   "targets": {
+    ".NETFramework,Version=v4.5": {
+      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5",
+        "dependencies": {
+          "Newtonsoft.Json": "7.0.1"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Net",
+          "System.Net.Http",
+          "System.Net.Http.WebRequest",
+          "System.Xml"
+        ]
+      },
+      "Newtonsoft.Json/7.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      }
+    },
+    ".NETPortable,Version=v4.5,Profile=Profile111": {
+      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+        "type": "project",
+        "framework": ".NETPortable,Version=v4.5,Profile=Profile111",
+        "dependencies": {
+          "Newtonsoft.Json": "7.0.1"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Collections",
+          "System.Diagnostics.Debug",
+          "System.Diagnostics.Tools",
+          "System.Globalization",
+          "System.IO",
+          "System.Linq",
+          "System.Net",
+          "System.Net.Http",
+          "System.Net.Primitives",
+          "System.ObjectModel",
+          "System.Reflection",
+          "System.Reflection.Extensions",
+          "System.Resources.ResourceManager",
+          "System.Runtime",
+          "System.Runtime.Extensions",
+          "System.Runtime.Serialization",
+          "System.Text.Encoding",
+          "System.Threading",
+          "System.Threading.Tasks",
+          "System.Xml",
+          "System.Xml.ReaderWriter"
+        ]
+      },
+      "Newtonsoft.Json/7.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        }
+      }
+    },
     "DNXCore,Version=v5.0": {
       "Microsoft.CSharp/4.0.0": {
         "type": "package",
@@ -30,12 +97,12 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Rest.ClientRuntime/2.0.0-preview": {
+      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "Microsoft.CSharp": "4.0.0",
-          "Newtonsoft.Json": "6.0.8",
+          "Newtonsoft.Json": "7.0.1",
           "System.Diagnostics.Tools": "4.0.0",
           "System.Net.Http": "4.0.0",
           "System.Threading.Tasks": "4.0.10",
@@ -55,13 +122,13 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/6.0.8": {
+      "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
       "System.Collections/4.0.10": {
@@ -590,6 +657,140 @@
         }
       }
     },
+    ".NETFramework,Version=v4.5/win7-x86": {
+      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5",
+        "dependencies": {
+          "Newtonsoft.Json": "7.0.1"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Net",
+          "System.Net.Http",
+          "System.Net.Http.WebRequest",
+          "System.Xml"
+        ]
+      },
+      "Newtonsoft.Json/7.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.5/win7-x64": {
+      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5",
+        "dependencies": {
+          "Newtonsoft.Json": "7.0.1"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Net",
+          "System.Net.Http",
+          "System.Net.Http.WebRequest",
+          "System.Xml"
+        ]
+      },
+      "Newtonsoft.Json/7.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      }
+    },
+    ".NETPortable,Version=v4.5,Profile=Profile111/win7-x86": {
+      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+        "type": "project",
+        "framework": ".NETPortable,Version=v4.5,Profile=Profile111",
+        "dependencies": {
+          "Newtonsoft.Json": "7.0.1"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Collections",
+          "System.Diagnostics.Debug",
+          "System.Diagnostics.Tools",
+          "System.Globalization",
+          "System.IO",
+          "System.Linq",
+          "System.Net",
+          "System.Net.Http",
+          "System.Net.Primitives",
+          "System.ObjectModel",
+          "System.Reflection",
+          "System.Reflection.Extensions",
+          "System.Resources.ResourceManager",
+          "System.Runtime",
+          "System.Runtime.Extensions",
+          "System.Runtime.Serialization",
+          "System.Text.Encoding",
+          "System.Threading",
+          "System.Threading.Tasks",
+          "System.Xml",
+          "System.Xml.ReaderWriter"
+        ]
+      },
+      "Newtonsoft.Json/7.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        }
+      }
+    },
+    ".NETPortable,Version=v4.5,Profile=Profile111/win7-x64": {
+      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+        "type": "project",
+        "framework": ".NETPortable,Version=v4.5,Profile=Profile111",
+        "dependencies": {
+          "Newtonsoft.Json": "7.0.1"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Collections",
+          "System.Diagnostics.Debug",
+          "System.Diagnostics.Tools",
+          "System.Globalization",
+          "System.IO",
+          "System.Linq",
+          "System.Net",
+          "System.Net.Http",
+          "System.Net.Primitives",
+          "System.ObjectModel",
+          "System.Reflection",
+          "System.Reflection.Extensions",
+          "System.Resources.ResourceManager",
+          "System.Runtime",
+          "System.Runtime.Extensions",
+          "System.Runtime.Serialization",
+          "System.Text.Encoding",
+          "System.Threading",
+          "System.Threading.Tasks",
+          "System.Xml",
+          "System.Xml.ReaderWriter"
+        ]
+      },
+      "Newtonsoft.Json/7.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        }
+      }
+    },
     "DNXCore,Version=v5.0/win7-x86": {
       "Microsoft.CSharp/4.0.0": {
         "type": "package",
@@ -618,12 +819,12 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Rest.ClientRuntime/2.0.0-preview": {
+      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "Microsoft.CSharp": "4.0.0",
-          "Newtonsoft.Json": "6.0.8",
+          "Newtonsoft.Json": "7.0.1",
           "System.Diagnostics.Tools": "4.0.0",
           "System.Net.Http": "4.0.0",
           "System.Threading.Tasks": "4.0.10",
@@ -643,13 +844,13 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/6.0.8": {
+      "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
       "System.Collections/4.0.10": {
@@ -1212,12 +1413,12 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Rest.ClientRuntime/2.0.0-preview": {
+      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "Microsoft.CSharp": "4.0.0",
-          "Newtonsoft.Json": "6.0.8",
+          "Newtonsoft.Json": "7.0.1",
           "System.Diagnostics.Tools": "4.0.0",
           "System.Net.Http": "4.0.0",
           "System.Threading.Tasks": "4.0.10",
@@ -1237,13 +1438,13 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/6.0.8": {
+      "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
       "System.Collections/4.0.10": {
@@ -1780,9 +1981,9 @@
     }
   },
   "libraries": {
-    "Microsoft.Rest.ClientRuntime/2.0.0-preview": {
+    "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
       "type": "project",
-      "path": "../../ClientRuntime/Microsoft.Rest.ClientRuntime/project.json"
+      "path": "../Microsoft.Rest.ClientRuntime/project.json"
     },
     "Microsoft.CSharp/4.0.0": {
       "type": "package",
@@ -1857,9 +2058,9 @@
         "ref/xamarinmac20/_._"
       ]
     },
-    "Newtonsoft.Json/6.0.8": {
+    "Newtonsoft.Json/7.0.1": {
       "type": "package",
-      "sha512": "7ut47NDedTW19EbL0JpFDYUP62fcuz27hJrehCDNajdCS5NtqL+E39+7Um3OkNc2wl2ym7K8Ln5eNuLus6mVGQ==",
+      "sha512": "q3V4KLetMLnt1gpAVWgtXnHjKs0UG/RalBc29u2ZKxd5t5Ze4JBL5WiiYIklJyK/5CRiIiNwigVQUo0FgbsuWA==",
       "files": [
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
@@ -1869,14 +2070,12 @@
         "lib/net40/Newtonsoft.Json.xml",
         "lib/net45/Newtonsoft.Json.dll",
         "lib/net45/Newtonsoft.Json.xml",
-        "lib/netcore45/Newtonsoft.Json.dll",
-        "lib/netcore45/Newtonsoft.Json.xml",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll",
-        "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.xml",
-        "Newtonsoft.Json.6.0.8.nupkg",
-        "Newtonsoft.Json.6.0.8.nupkg.sha512",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
+        "Newtonsoft.Json.7.0.1.nupkg",
+        "Newtonsoft.Json.7.0.1.nupkg.sha512",
         "Newtonsoft.Json.nuspec",
         "tools/install.ps1"
       ]
@@ -3108,13 +3307,38 @@
     "": [
       "Microsoft.Rest.ClientRuntime "
     ],
-    "DNXCore,Version=v5.0": [
-      "System.Diagnostics.Tools >= 4.0.0",
-      "System.Net.Http >= 4.0.0",
-      "System.Threading.Tasks >= 4.0.10",
-      "System.Xml.ReaderWriter >= 4.0.10",
-      "Microsoft.CSharp >= 4.0.0",
-      "Newtonsoft.Json >= 6.0.8"
-    ]
+    ".NETFramework,Version=v4.5": [
+      "fx/System ",
+      "fx/System.Net ",
+      "fx/System.Net.Http ",
+      "fx/System.Net.Http.WebRequest ",
+      "fx/System.Xml "
+    ],
+    ".NETPortable,Version=v4.5,Profile=Profile111": [
+      "fx/System ",
+      "fx/System.Collections ",
+      "fx/System.Diagnostics.Debug ",
+      "fx/System.Diagnostics.Tools ",
+      "fx/System.Globalization ",
+      "fx/System.IO ",
+      "fx/System.Linq ",
+      "fx/System.Linq.Expressions ",
+      "fx/System.Net ",
+      "fx/System.Net.Http ",
+      "fx/System.Net.Primitives ",
+      "fx/System.ObjectModel ",
+      "fx/System.Reflection ",
+      "fx/System.Reflection.Extensions ",
+      "fx/System.Resources.ResourceManager ",
+      "fx/System.Runtime ",
+      "fx/System.Runtime.Extensions ",
+      "fx/System.Runtime.Serialization ",
+      "fx/System.Text.Encoding ",
+      "fx/System.Threading ",
+      "fx/System.Threading.Tasks ",
+      "fx/System.Xml ",
+      "fx/System.Xml.XmlSerializer "
+    ],
+    "DNXCore,Version=v5.0": []
   }
 }
