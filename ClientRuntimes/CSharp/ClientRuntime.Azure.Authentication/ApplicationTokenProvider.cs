@@ -449,7 +449,7 @@ namespace Microsoft.Rest.Azure.Authentication
                     authenticationProvider, authResult));
         }
 
-#if DEBUG
+#if DEBUG && !PORTABLE
         /// <summary>
         /// For testing purposes only: allows testing token expiration.
         /// </summary>

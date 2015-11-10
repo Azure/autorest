@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Runtime.Serialization;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
-#if (!PORTABLE && !DNXCORE50)
+#if !PORTABLE
 using System.Security.Permissions;
 #endif
 
@@ -58,7 +58,7 @@ namespace Microsoft.Rest.Azure.Authentication
         {
         }
 
-#if (!PORTABLE && !DNXCORE50)
+#if !PORTABLE
         /// <summary>
         /// Initializes a new instance of the AuthenticationException class.
         /// </summary>

@@ -24,22 +24,15 @@
     <dependencies>
       <group targetFramework="net45">
         <dependency id="Microsoft.Rest.ClientRuntime" version="[1.4.1,2)"/>
-        <dependency id="Microsoft.IdentityModel.Clients.ActiveDirectory" version="[3.5,4)"/>
+        <dependency id="Microsoft.IdentityModel.Clients.ActiveDirectory" version="3.6.210231457-alpha"/>
       </group>
       <group targetFramework="portable-net45+win8+wpa81">
         <dependency id="Microsoft.Rest.ClientRuntime" version="[1.4.1,2)"/>
-        <dependency id="Microsoft.IdentityModel.Clients.ActiveDirectory" version="[3.5,4)"/>
+        <dependency id="Microsoft.IdentityModel.Clients.ActiveDirectory" version="3.6.210231457-alpha"/>
       </group>
       <group targetFramework="dotnet">
-        <dependency id="System.Diagnostics.Tools" version="4.0.0" />
-        <dependency id="System.Net.Http" version="4.0.0" />
-        <dependency id="System.Threading.Tasks" version="4.0.10" />
-        <dependency id="System.Xml.ReaderWriter" version="4.0.10" />
-        <!-- <dependency id="System.Runtime.Serialization.Primitives" version="4.0.10" /> -->
-        <dependency id="System.Runtime" version="4.0.21-beta-23409" />
-        <dependency id="Microsoft.CSharp" version="4.0.0" />
         <dependency id="Microsoft.Rest.ClientRuntime" version="[1.4.1,2)"/>
-        <dependency id="Microsoft.IdentityModel.Clients.ActiveDirectory" version="[3.5,4)"/>
+        <dependency id="Microsoft.IdentityModel.Clients.ActiveDirectory" version="3.6.210231457-alpha"/>
         <dependency id="Microsoft.Cci" version="4.0.0-beta-23409"/>
       </group>
     </dependencies>
