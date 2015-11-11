@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using Microsoft.Framework.Logging;
+using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
 
 namespace AutoRest.Generator.CSharp.Tests.Utilities

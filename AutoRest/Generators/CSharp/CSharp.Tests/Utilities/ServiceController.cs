@@ -89,18 +89,15 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             var paths = Environment.GetEnvironmentVariable("PATH");
             foreach (var path in paths.Split(new[] {Path.PathSeparator}, StringSplitOptions.RemoveEmptyEntries))
             {
-                var fullPath = "";
-                if(ServiceController.IsUnix)
+                var fullPath = Path.Combine(path, Path.GetFileName(executableName));
+                if (File.Exists(fullPath))
                 {
-                    var ext = Path.GetExtension(executableName);
-                    var exec = (ext == ".cmd" || ext == ".exe") ? Path.GetFileNameWithoutExtension(executableName) : executableName;
-                    fullPath = Path.Combine(path, exec);
-                }
-                else
-                {
-                    fullPath = Path.Combine(path, Path.GetFileName(executableName));
+                    return fullPath;
                 }
 
+                var ext = Path.GetExtension(executableName);
+                var exec = (ext == ".cmd" || ext == ".exe") ? Path.GetFileNameWithoutExtension(executableName) : executableName;
+                fullPath = Path.Combine(path, exec);
                 if (File.Exists(fullPath))
                 {
                     return fullPath;
@@ -108,18 +105,6 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             }
 
             return null;
-        }
-
-        private static bool IsUnix
-        {
-          get
-          {
-#if MONO
-                return true;
-#else
-                return false;
-#endif
-          }
         }
 
         private static int GetRandomPortNumber()
