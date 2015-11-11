@@ -63,6 +63,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (fooClientRequestId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

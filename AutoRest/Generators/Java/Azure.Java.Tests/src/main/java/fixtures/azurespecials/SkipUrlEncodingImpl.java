@@ -63,6 +63,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
         if (unencodedPathParam == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -116,6 +117,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
         if (unencodedPathParam == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -169,6 +171,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
         if (unencodedPathParam == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -222,6 +225,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
         if (q1 == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter q1 is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -320,6 +324,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
         if (q1 == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter q1 is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
