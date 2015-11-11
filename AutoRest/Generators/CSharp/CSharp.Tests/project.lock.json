@@ -657,6 +657,20 @@
           "lib/DNXCore50/System.Runtime.InteropServices.dll": {}
         }
       },
+      "System.Runtime.Loader/4.0.0-beta-23409": {
+        "type": "package",
+        "dependencies": {
+          "System.IO": "4.0.0",
+          "System.Reflection": "4.0.0",
+          "System.Runtime": "4.0.0"
+        },
+        "compile": {
+          "ref/dotnet/System.Runtime.Loader.dll": {}
+        },
+        "runtime": {
+          "lib/DNXCore50/System.Runtime.Loader.dll": {}
+        }
+      },
       "System.Runtime.Serialization.Primitives/4.0.10": {
         "type": "package",
         "dependencies": {
@@ -1925,6 +1939,20 @@
         },
         "runtime": {
           "lib/DNXCore50/System.Runtime.InteropServices.dll": {}
+        }
+      },
+      "System.Runtime.Loader/4.0.0-beta-23409": {
+        "type": "package",
+        "dependencies": {
+          "System.IO": "4.0.0",
+          "System.Reflection": "4.0.0",
+          "System.Runtime": "4.0.0"
+        },
+        "compile": {
+          "ref/dotnet/System.Runtime.Loader.dll": {}
+        },
+        "runtime": {
+          "lib/DNXCore50/System.Runtime.Loader.dll": {}
         }
       },
       "System.Runtime.Serialization.Primitives/4.0.10": {
@@ -3213,6 +3241,20 @@
           "lib/DNXCore50/System.Runtime.InteropServices.dll": {}
         }
       },
+      "System.Runtime.Loader/4.0.0-beta-23409": {
+        "type": "package",
+        "dependencies": {
+          "System.IO": "4.0.0",
+          "System.Reflection": "4.0.0",
+          "System.Runtime": "4.0.0"
+        },
+        "compile": {
+          "ref/dotnet/System.Runtime.Loader.dll": {}
+        },
+        "runtime": {
+          "lib/DNXCore50/System.Runtime.Loader.dll": {}
+        }
+      },
       "System.Runtime.Serialization.Primitives/4.0.10": {
         "type": "package",
         "dependencies": {
@@ -3593,7 +3635,7 @@
   "libraries": {
     "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
       "type": "project",
-      "path": "../Microsoft.Rest.ClientRuntime/project.json"
+      "path": "../../../../ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime/project.json"
     },
     "Microsoft.CSharp/4.0.0": {
       "type": "package",
@@ -5372,6 +5414,18 @@
         "System.Runtime.InteropServices.nuspec"
       ]
     },
+    "System.Runtime.Loader/4.0.0-beta-23409": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "XG+fUkWS81xwkBnhEhfmGZsXHnEcIpUXfnURzG+O1HcJYDltAmTrSKojo1ptM0SZSP9r6QQs7BUKFDmlIjFkBw==",
+      "files": [
+        "lib/DNXCore50/System.Runtime.Loader.dll",
+        "ref/dotnet/System.Runtime.Loader.dll",
+        "System.Runtime.Loader.4.0.0-beta-23409.nupkg",
+        "System.Runtime.Loader.4.0.0-beta-23409.nupkg.sha512",
+        "System.Runtime.Loader.nuspec"
+      ]
+    },
     "System.Runtime.Serialization.Primitives/4.0.10": {
       "type": "package",
       "serviceable": true,
@@ -5935,6 +5989,8 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.Rest.ClientRuntime ",
+      "System.Runtime.Serialization.Primitives >= 4.0.10",
+      "System.Runtime.Loader >= 4.0.0-beta-23409",
       "xunit >= 2.1.0"
     ],
     "DNXCore,Version=v5.0": [

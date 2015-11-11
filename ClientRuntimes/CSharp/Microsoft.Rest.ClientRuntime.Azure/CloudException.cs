@@ -3,20 +3,12 @@
 
 using System;
 using System.Net.Http;
-using System.Runtime.Serialization;
-#if !PORTABLE && !DNXCORE50
-using System.Security.Permissions;
-#endif
-using Microsoft.Rest;
 
 namespace Microsoft.Rest.Azure
 {
     /// <summary>
     /// An exception generated from an http response returned from a Microsoft Azure service
     /// </summary>
-#if !PORTABLE && !DNXCORE50
-    [Serializable]
-#endif
     public class CloudException : RestException
     {
         /// <summary>
@@ -57,36 +49,5 @@ namespace Microsoft.Rest.Azure
         public CloudException(string message, Exception innerException) : base(message, innerException)
         {
         }
-
-#if !PORTABLE && !DNXCORE50       
-        /// <summary>
-        /// Initializes a new instance of the CloudException class.
-        /// </summary>
-        /// <param name="info">Serialization info.</param>
-        /// <param name="context">Streaming context.</param>
-        protected CloudException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-
-        /// <summary>
-        /// Serializes content of the exception.
-        /// </summary>
-        /// <param name="info">Serialization info.</param>
-        /// <param name="context">Streaming context.</param>
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData(info, context);
-            if (info == null)
-            {
-                throw new ArgumentNullException("info");
-            }
-
-            info.AddValue("Request", Request);
-            info.AddValue("Response", Response);
-            info.AddValue("Body", Body);
-        }
-#endif
     }
 }

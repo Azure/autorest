@@ -35,7 +35,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             get
             {
                 var serverPath = Environment.GetEnvironmentVariable("AUTOREST_TEST_SERVER_PATH") ??
-                    @"..\..\..\..\..\..\AutoRest\TestServer";
+                    @"..\..\..\..\AutoRest\TestServer";
                 return Path.Combine(serverPath, "server");
             }
         }
@@ -114,13 +114,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         {
           get
           {
-            int p = (int) Environment.OSVersion.Platform;
-            if ((p == 4) || (p == 128))
-            {
+#if MONO
                 return true;
-            }
-
-            return false;
+#else
+                return false;
+#endif
           }
         }
 
@@ -185,7 +183,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             startInfo.UseShellExecute = false;
             startInfo.FileName = path;
             startInfo.Arguments = arguments;
-            startInfo.EnvironmentVariables["PORT"] = Port.ToString(CultureInfo.InvariantCulture);
+            startInfo.Environment["PORT"] = Port.ToString(CultureInfo.InvariantCulture);
             process.OutputDataReceived += _listener.ProcessOutput;
             process.ErrorDataReceived += _listener.ProcessError;
             process.Start();

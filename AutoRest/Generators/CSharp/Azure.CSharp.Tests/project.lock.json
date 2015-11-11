@@ -3,6 +3,22 @@
   "version": 2,
   "targets": {
     "DNXCore,Version=v5.0": {
+      "CSharp.Tests/1.4.2-preview": {
+        "type": "project",
+        "framework": "DNXCore,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.0",
+          "Microsoft.Rest.ClientRuntime": null,
+          "System.Diagnostics.Tools": "4.0.0",
+          "System.Net.Http": "4.0.0",
+          "System.Runtime.Loader": "4.0.0-beta-23409",
+          "System.Runtime.Serialization.Primitives": "4.0.10",
+          "System.Threading.Tasks": "4.0.10",
+          "System.Xml.ReaderWriter": "4.0.10",
+          "xunit": "2.1.0",
+          "xunit.runner.dnx": "2.1.0-beta6-build191"
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -168,6 +184,13 @@
           "System.Runtime.Serialization.Primitives": "4.0.10",
           "System.Threading.Tasks": "4.0.10",
           "System.Xml.ReaderWriter": "4.0.10"
+        }
+      },
+      "Microsoft.Rest.ClientRuntime.Azure/2.2.0-preview": {
+        "type": "project",
+        "framework": "DNXCore,Version=v5.0",
+        "dependencies": {
+          "Microsoft.Rest.ClientRuntime": null
         }
       },
       "Microsoft.Win32.Primitives/4.0.0": {
@@ -657,6 +680,20 @@
           "lib/DNXCore50/System.Runtime.InteropServices.dll": {}
         }
       },
+      "System.Runtime.Loader/4.0.0-beta-23409": {
+        "type": "package",
+        "dependencies": {
+          "System.IO": "4.0.0",
+          "System.Reflection": "4.0.0",
+          "System.Runtime": "4.0.0"
+        },
+        "compile": {
+          "ref/dotnet/System.Runtime.Loader.dll": {}
+        },
+        "runtime": {
+          "lib/DNXCore50/System.Runtime.Loader.dll": {}
+        }
+      },
       "System.Runtime.Serialization.Primitives/4.0.10": {
         "type": "package",
         "dependencies": {
@@ -768,7 +805,7 @@
           "ref/dotnet/System.Threading.dll": {}
         }
       },
-      "System.Threading.Tasks/4.0.10": {
+      "System.Threading.Tasks/4.0.11-beta-23409": {
         "type": "package",
         "dependencies": {
           "System.Runtime": "4.0.0"
@@ -1018,6 +1055,22 @@
       }
     },
     "DNXCore,Version=v5.0/win7-x86": {
+      "CSharp.Tests/1.4.2-preview": {
+        "type": "project",
+        "framework": "DNXCore,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.0",
+          "Microsoft.Rest.ClientRuntime": null,
+          "System.Diagnostics.Tools": "4.0.0",
+          "System.Net.Http": "4.0.0",
+          "System.Runtime.Loader": "4.0.0-beta-23409",
+          "System.Runtime.Serialization.Primitives": "4.0.10",
+          "System.Threading.Tasks": "4.0.10",
+          "System.Xml.ReaderWriter": "4.0.10",
+          "xunit": "2.1.0",
+          "xunit.runner.dnx": "2.1.0-beta6-build191"
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -1183,6 +1236,13 @@
           "System.Runtime.Serialization.Primitives": "4.0.10",
           "System.Threading.Tasks": "4.0.10",
           "System.Xml.ReaderWriter": "4.0.10"
+        }
+      },
+      "Microsoft.Rest.ClientRuntime.Azure/2.2.0-preview": {
+        "type": "project",
+        "framework": "DNXCore,Version=v5.0",
+        "dependencies": {
+          "Microsoft.Rest.ClientRuntime": null
         }
       },
       "Microsoft.Win32.Primitives/4.0.0": {
@@ -1927,6 +1987,20 @@
           "lib/DNXCore50/System.Runtime.InteropServices.dll": {}
         }
       },
+      "System.Runtime.Loader/4.0.0-beta-23409": {
+        "type": "package",
+        "dependencies": {
+          "System.IO": "4.0.0",
+          "System.Reflection": "4.0.0",
+          "System.Runtime": "4.0.0"
+        },
+        "compile": {
+          "ref/dotnet/System.Runtime.Loader.dll": {}
+        },
+        "runtime": {
+          "lib/DNXCore50/System.Runtime.Loader.dll": {}
+        }
+      },
       "System.Runtime.Serialization.Primitives/4.0.10": {
         "type": "package",
         "dependencies": {
@@ -2054,7 +2128,7 @@
           "lib/DNXCore50/System.Threading.Overlapped.dll": {}
         }
       },
-      "System.Threading.Tasks/4.0.10": {
+      "System.Threading.Tasks/4.0.11-beta-23409": {
         "type": "package",
         "dependencies": {
           "System.Runtime": "4.0.0"
@@ -2304,6 +2378,22 @@
       }
     },
     "DNXCore,Version=v5.0/win7-x64": {
+      "CSharp.Tests/1.4.2-preview": {
+        "type": "project",
+        "framework": "DNXCore,Version=v5.0",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.0",
+          "Microsoft.Rest.ClientRuntime": null,
+          "System.Diagnostics.Tools": "4.0.0",
+          "System.Net.Http": "4.0.0",
+          "System.Runtime.Loader": "4.0.0-beta-23409",
+          "System.Runtime.Serialization.Primitives": "4.0.10",
+          "System.Threading.Tasks": "4.0.10",
+          "System.Xml.ReaderWriter": "4.0.10",
+          "xunit": "2.1.0",
+          "xunit.runner.dnx": "2.1.0-beta6-build191"
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -2469,6 +2559,13 @@
           "System.Runtime.Serialization.Primitives": "4.0.10",
           "System.Threading.Tasks": "4.0.10",
           "System.Xml.ReaderWriter": "4.0.10"
+        }
+      },
+      "Microsoft.Rest.ClientRuntime.Azure/2.2.0-preview": {
+        "type": "project",
+        "framework": "DNXCore,Version=v5.0",
+        "dependencies": {
+          "Microsoft.Rest.ClientRuntime": null
         }
       },
       "Microsoft.Win32.Primitives/4.0.0": {
@@ -3213,6 +3310,20 @@
           "lib/DNXCore50/System.Runtime.InteropServices.dll": {}
         }
       },
+      "System.Runtime.Loader/4.0.0-beta-23409": {
+        "type": "package",
+        "dependencies": {
+          "System.IO": "4.0.0",
+          "System.Reflection": "4.0.0",
+          "System.Runtime": "4.0.0"
+        },
+        "compile": {
+          "ref/dotnet/System.Runtime.Loader.dll": {}
+        },
+        "runtime": {
+          "lib/DNXCore50/System.Runtime.Loader.dll": {}
+        }
+      },
       "System.Runtime.Serialization.Primitives/4.0.10": {
         "type": "package",
         "dependencies": {
@@ -3340,7 +3451,7 @@
           "lib/DNXCore50/System.Threading.Overlapped.dll": {}
         }
       },
-      "System.Threading.Tasks/4.0.10": {
+      "System.Threading.Tasks/4.0.11-beta-23409": {
         "type": "package",
         "dependencies": {
           "System.Runtime": "4.0.0"
@@ -3591,9 +3702,17 @@
     }
   },
   "libraries": {
+    "CSharp.Tests/1.4.2-preview": {
+      "type": "project",
+      "path": "../CSharp.Tests/project.json"
+    },
     "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
       "type": "project",
-      "path": "../Microsoft.Rest.ClientRuntime/project.json"
+      "path": "../../../../ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime/project.json"
+    },
+    "Microsoft.Rest.ClientRuntime.Azure/2.2.0-preview": {
+      "type": "project",
+      "path": "../../../../ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure/project.json"
     },
     "Microsoft.CSharp/4.0.0": {
       "type": "package",
@@ -5372,6 +5491,18 @@
         "System.Runtime.InteropServices.nuspec"
       ]
     },
+    "System.Runtime.Loader/4.0.0-beta-23409": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "XG+fUkWS81xwkBnhEhfmGZsXHnEcIpUXfnURzG+O1HcJYDltAmTrSKojo1ptM0SZSP9r6QQs7BUKFDmlIjFkBw==",
+      "files": [
+        "lib/DNXCore50/System.Runtime.Loader.dll",
+        "ref/dotnet/System.Runtime.Loader.dll",
+        "System.Runtime.Loader.4.0.0-beta-23409.nupkg",
+        "System.Runtime.Loader.4.0.0-beta-23409.nupkg.sha512",
+        "System.Runtime.Loader.nuspec"
+      ]
+    },
     "System.Runtime.Serialization.Primitives/4.0.10": {
       "type": "package",
       "serviceable": true,
@@ -5626,37 +5757,57 @@
         "System.Threading.Overlapped.nuspec"
       ]
     },
-    "System.Threading.Tasks/4.0.10": {
+    "System.Threading.Tasks/4.0.11-beta-23409": {
       "type": "package",
       "serviceable": true,
-      "sha512": "NOwJGDfk79jR0bnzosbXLVD/PdI8KzBeESoa3CofEM5v9R5EBfcI0Jyf18stx+0IYV9okmDIDxVtxq9TbnR9bQ==",
+      "sha512": "PhdzC4vUeWMDoroEAKXwGq5uymvEEPa7Zx+qCgO/Lp8YGvK1hTDWepGDsKtdvJH0pCR/gmjzwAMbkwUN4GvYUw==",
       "files": [
+        "lib/DNXCore50/de/System.Threading.Tasks.xml",
+        "lib/DNXCore50/es/System.Threading.Tasks.xml",
+        "lib/DNXCore50/fr/System.Threading.Tasks.xml",
+        "lib/DNXCore50/it/System.Threading.Tasks.xml",
+        "lib/DNXCore50/ja/System.Threading.Tasks.xml",
+        "lib/DNXCore50/ko/System.Threading.Tasks.xml",
+        "lib/DNXCore50/ru/System.Threading.Tasks.xml",
         "lib/DNXCore50/System.Threading.Tasks.dll",
+        "lib/DNXCore50/System.Threading.Tasks.xml",
+        "lib/DNXCore50/zh-hans/System.Threading.Tasks.xml",
+        "lib/DNXCore50/zh-hant/System.Threading.Tasks.xml",
         "lib/MonoAndroid10/_._",
         "lib/MonoTouch10/_._",
         "lib/net46/_._",
+        "lib/netcore50/de/System.Threading.Tasks.xml",
+        "lib/netcore50/es/System.Threading.Tasks.xml",
+        "lib/netcore50/fr/System.Threading.Tasks.xml",
+        "lib/netcore50/it/System.Threading.Tasks.xml",
+        "lib/netcore50/ja/System.Threading.Tasks.xml",
+        "lib/netcore50/ko/System.Threading.Tasks.xml",
+        "lib/netcore50/ru/System.Threading.Tasks.xml",
         "lib/netcore50/System.Threading.Tasks.dll",
+        "lib/netcore50/System.Threading.Tasks.xml",
+        "lib/netcore50/zh-hans/System.Threading.Tasks.xml",
+        "lib/netcore50/zh-hant/System.Threading.Tasks.xml",
         "lib/xamarinios10/_._",
         "lib/xamarinmac20/_._",
-        "ref/dotnet/de/System.Threading.Tasks.xml",
-        "ref/dotnet/es/System.Threading.Tasks.xml",
-        "ref/dotnet/fr/System.Threading.Tasks.xml",
-        "ref/dotnet/it/System.Threading.Tasks.xml",
-        "ref/dotnet/ja/System.Threading.Tasks.xml",
-        "ref/dotnet/ko/System.Threading.Tasks.xml",
-        "ref/dotnet/ru/System.Threading.Tasks.xml",
         "ref/dotnet/System.Threading.Tasks.dll",
-        "ref/dotnet/System.Threading.Tasks.xml",
-        "ref/dotnet/zh-hans/System.Threading.Tasks.xml",
-        "ref/dotnet/zh-hant/System.Threading.Tasks.xml",
         "ref/MonoAndroid10/_._",
         "ref/MonoTouch10/_._",
         "ref/net46/_._",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
+        "runtimes/win8-aot/lib/netcore50/de/System.Threading.Tasks.xml",
+        "runtimes/win8-aot/lib/netcore50/es/System.Threading.Tasks.xml",
+        "runtimes/win8-aot/lib/netcore50/fr/System.Threading.Tasks.xml",
+        "runtimes/win8-aot/lib/netcore50/it/System.Threading.Tasks.xml",
+        "runtimes/win8-aot/lib/netcore50/ja/System.Threading.Tasks.xml",
+        "runtimes/win8-aot/lib/netcore50/ko/System.Threading.Tasks.xml",
+        "runtimes/win8-aot/lib/netcore50/ru/System.Threading.Tasks.xml",
         "runtimes/win8-aot/lib/netcore50/System.Threading.Tasks.dll",
-        "System.Threading.Tasks.4.0.10.nupkg",
-        "System.Threading.Tasks.4.0.10.nupkg.sha512",
+        "runtimes/win8-aot/lib/netcore50/System.Threading.Tasks.xml",
+        "runtimes/win8-aot/lib/netcore50/zh-hans/System.Threading.Tasks.xml",
+        "runtimes/win8-aot/lib/netcore50/zh-hant/System.Threading.Tasks.xml",
+        "System.Threading.Tasks.4.0.11-beta-23409.nupkg",
+        "System.Threading.Tasks.4.0.11-beta-23409.nupkg.sha512",
         "System.Threading.Tasks.nuspec"
       ]
     },
@@ -5933,17 +6084,13 @@
     }
   },
   "projectFileDependencyGroups": {
-    "": [
-      "Microsoft.Rest.ClientRuntime ",
-      "xunit >= 2.1.0"
-    ],
+    "": [],
     "DNXCore,Version=v5.0": [
-      "System.Diagnostics.Tools >= 4.0.0",
-      "System.Net.Http >= 4.0.0",
-      "System.Threading.Tasks >= 4.0.10",
-      "System.Xml.ReaderWriter >= 4.0.10",
-      "Microsoft.CSharp >= 4.0.0",
-      "xunit.runner.dnx >= 2.1.0-beta6-build191"
+      "xunit.runner.dnx >= 2.1.0-beta6-build191",
+      "Microsoft.Rest.ClientRuntime ",
+      "Microsoft.Rest.ClientRuntime.Azure ",
+      "CSharp.Tests ",
+      "xunit >= 2.1.0"
     ]
   }
 }

@@ -12,7 +12,6 @@ using Fixtures.MirrorPolymorphic.Models;
 using Fixtures.MirrorPrimitives;
 using Fixtures.MirrorSequences;
 using Fixtures.MirrorSequences.Models;
-using Microsoft.Rest.Modeler.Swagger.Tests;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
@@ -53,7 +52,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         public void CanSerializeAndDeserializePrimitiveTypes()
         {
             // first regen the spec
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("swagger-mirror-primitives.json"), ExpectedPath("Mirror.Primitives"));
 
             //Now run mocked tests using the client
@@ -68,7 +67,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void CanRoundTripSequences()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("swagger-mirror-sequences.json"), ExpectedPath("Mirror.Sequences"));
             using (var sequenceClient = MirrorTestHelpers.CreateSequenceClient())
             {
@@ -250,9 +249,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             }
 
             string typeName = value.GetType().Name;
-            if (value.GetType().GetCustomAttributes<JsonObjectAttribute>().Any())
+            if (value.GetType().GetTypeInfo().GetCustomAttributes<JsonObjectAttribute>().Any())
             {
-                typeName = value.GetType().GetCustomAttribute<JsonObjectAttribute>().Id;
+                typeName = value.GetType().GetTypeInfo().GetCustomAttribute<JsonObjectAttribute>().Id;
             }
 
             writer.WriteStartObject();
@@ -293,13 +292,13 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         {
             JObject item = JObject.Load(reader);
             string typeDiscriminator = (string) item[_discriminatorField];
-            foreach (Type type in typeof (T).Assembly.GetTypes()
+            foreach (Type type in typeof (T).GetTypeInfo().Assembly.GetTypes()
                 .Where(t => t.Namespace == typeof (T).Namespace && t != typeof (T)))
             {
                 string typeName = type.Name;
-                if (type.GetCustomAttributes<JsonObjectAttribute>().Any())
+                if (type.GetTypeInfo().GetCustomAttributes<JsonObjectAttribute>().Any())
                 {
-                    typeName = type.GetCustomAttribute<JsonObjectAttribute>().Id;
+                    typeName = type.GetTypeInfo().GetCustomAttribute<JsonObjectAttribute>().Id;
                 }
                 if (typeName.Equals(typeDiscriminator, StringComparison.OrdinalIgnoreCase))
                 {
