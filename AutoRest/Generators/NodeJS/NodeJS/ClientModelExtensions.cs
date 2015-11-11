@@ -1235,8 +1235,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 return false;
             }
 
-            return parameter.Extensions.ContainsKey(CodeGenerator.SkipUrlEncodingExtension) &&
-                   (bool)parameter.Extensions[CodeGenerator.SkipUrlEncodingExtension];
+            return parameter.Extensions.ContainsKey(Extensions.SkipUrlEncodingExtension) &&
+                   (bool)parameter.Extensions[Extensions.SkipUrlEncodingExtension];
         }
 
         public static bool ContainsTimeSpan(this CompositeType type)

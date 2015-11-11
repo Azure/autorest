@@ -6,8 +6,8 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("AutoRest.Generator.Azure.Common")]
-[assembly: AssemblyDescription("Azure specific code generation extensions for AutoRest.")]
+[assembly: AssemblyTitle("AutoRest.Generator.Azure.Extensions")]
+[assembly: AssemblyDescription("Generic code generation extensions for AutoRest.")]
 [assembly: AssemblyCompany("Microsoft Corporation")]
 [assembly: AssemblyProduct("Microsoft AutoRest")]
 [assembly: AssemblyCopyright("Copyright (c) Microsoft Corporation")]

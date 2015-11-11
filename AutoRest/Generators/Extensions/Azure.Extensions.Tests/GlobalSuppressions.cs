@@ -9,27 +9,27 @@
 // You do not need to add suppressions to this file manually.
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.Azure.Common.Tests.AzureServiceClientNormalizerTests.#ResourceIsFlattenedForSimpleResource()", 
+    Target = "Microsoft.Rest.Generator.Azure.Extensions.Tests.AzureServiceClientNormalizerTests.#ResourceIsFlattenedForSimpleResource()", 
     Justification = "Test methods must not be static to allow suite-level fixtures")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.Azure.Common.Tests.AzureServiceClientNormalizerTests.#ResourceIsFlattenedForComplexResource()", 
+    Target = "Microsoft.Rest.Generator.Azure.Extensions.Tests.AzureServiceClientNormalizerTests.#ResourceIsFlattenedForComplexResource()", 
     Justification = "Test methods must not be static to allow suite-level fixtures")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.Azure.Common.Tests.AzureServiceClientNormalizerTests.#SwaggerODataSpecParsingTest()", 
+    Target = "Microsoft.Rest.Generator.Azure.Extensions.Tests.AzureServiceClientNormalizerTests.#SwaggerODataSpecParsingTest()", 
     Justification = "Test methods must not be static to allow suite-level fixtures")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.Azure.Common.Tests.AzureServiceClientNormalizerTests.#SwaggerResourceExternalFalseTest()", 
+    Target = "Microsoft.Rest.Generator.Azure.Extensions.Tests.AzureServiceClientNormalizerTests.#SwaggerResourceExternalFalseTest()", 
     Justification = "Test methods must not be static to allow suite-level fixtures")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.Azure.Common.Tests.AzureServiceClientNormalizerTests.#AzureParameterTest()", 
+    Target = "Microsoft.Rest.Generator.Azure.Extensions.Tests.AzureServiceClientNormalizerTests.#AzureParameterTest()", 
     Justification = "Test methods must not be static to allow suite-level fixtures")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.Azure.Common.Tests.AzureServiceClientNormalizerTests.#PageableTest()", 
+    Target = "Microsoft.Rest.Generator.Azure.Extensions.Tests.AzureServiceClientNormalizerTests.#PageableTest()", 
     Justification = "Test methods must not be static to allow suite-level fixtures")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.Azure.Common.Tests.AzureServiceClientNormalizerTests.#ExternalResourceTypeIsNullSafe()", 
+    Target = "Microsoft.Rest.Generator.Azure.Extensions.Tests.AzureServiceClientNormalizerTests.#ExternalResourceTypeIsNullSafe()", 
     Justification = "Test methods must not be static to allow suite-level fixtures")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", 
-    Target = "Microsoft.Rest.Generator.Azure.Common.Tests.AzureServiceClientNormalizerTests.#ResourceIsFlattenedForConflictingResource()",
+    Target = "Microsoft.Rest.Generator.Azure.Extensions.Tests.AzureServiceClientNormalizerTests.#ResourceIsFlattenedForConflictingResource()",
     Justification = "Test methods must not be static to allow suite-level fixtures")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Generator.Azure.Common.Tests.AzureServiceClientNormalizerTests.#FlatteningTest()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Generator.Azure.Extensions.Tests.AzureServiceClientNormalizerTests.#FlatteningTest()")]

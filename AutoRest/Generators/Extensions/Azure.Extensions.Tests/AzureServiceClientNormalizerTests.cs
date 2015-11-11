@@ -7,7 +7,7 @@ using Microsoft.Rest.Modeler.Swagger.Azure.Tests;
 using System.Linq;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.Azure.Common.Tests
+namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
 {
     [Collection("AutoRest Tests")]
     public class AzureServiceClientNormalizerTests
@@ -32,7 +32,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             serviceClient.ModelTypes.Add(dog);
 
             resource.Name = "resource";
-            resource.Extensions[AzureCodeGenerator.AzureResourceExtension] = true;
+            resource.Extensions[AzureExtensions.AzureResourceExtension] = true;
             resource.Properties.Add(new Property
             {
                 Name = "id",
@@ -112,7 +112,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             serviceClient.ModelTypes.Add(dog);
 
             resource.Name = "resource";
-            resource.Extensions[AzureCodeGenerator.AzureResourceExtension] = true;
+            resource.Extensions[AzureExtensions.AzureResourceExtension] = true;
             resource.Properties.Add(new Property
             {
                 Name = "id",
@@ -230,7 +230,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
                  Type = PrimaryType.String,
                  IsRequired = true
             });
-            resource.Extensions[AzureCodeGenerator.AzureResourceExtension] = null;
+            resource.Extensions[AzureExtensions.AzureResourceExtension] = null;
             resourceProperties.Name = "resourceProperties";
             resourceProperties.Properties.Add(new Property
             {
@@ -296,7 +296,7 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
                  Type = PrimaryType.String,
                  IsRequired = true
             });
-            resource.Extensions[AzureCodeGenerator.AzureResourceExtension] = null;
+            resource.Extensions[AzureExtensions.AzureResourceExtension] = null;
             resourceProperties.Name = "resourceProperties";
             resourceProperties.Properties.Add(new Property
             {
@@ -384,8 +384,8 @@ namespace Microsoft.Rest.Generator.Azure.Common.Tests
             Assert.NotNull(serviceClient);
             var resource = serviceClient.ModelTypes.First(m =>
                 m.Name.Equals("Resource", System.StringComparison.OrdinalIgnoreCase));
-            Assert.True(resource.Extensions.ContainsKey(AzureCodeGenerator.AzureResourceExtension));
-            Assert.False((bool)resource.Extensions[AzureCodeGenerator.AzureResourceExtension]);
+            Assert.True(resource.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension));
+            Assert.False((bool)resource.Extensions[AzureExtensions.AzureResourceExtension]);
             var flattenedProduct = serviceClient.ModelTypes.First(m =>
                 m.Name.Equals("FlattenedProduct", System.StringComparison.OrdinalIgnoreCase));
             Assert.True(flattenedProduct.BaseModelType.Equals(resource));

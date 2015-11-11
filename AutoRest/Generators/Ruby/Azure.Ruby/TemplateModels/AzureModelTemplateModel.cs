@@ -32,8 +32,8 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             {
                 string typeName = this.BaseModelType.Name;
 
-                if (this.BaseModelType.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension) ||
-                    this.BaseModelType.Extensions.ContainsKey(AzureCodeGenerator.AzureResourceExtension))
+                if (this.BaseModelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) ||
+                    this.BaseModelType.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension))
                 {
                     typeName = "MsRestAzure::" + typeName;
                 }

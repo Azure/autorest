@@ -18,7 +18,7 @@ namespace Microsoft.Rest.Generator.Azure
     /// Base code generator for Azure.
     /// Normalizes the ServiceClient according to Azure conventions and Swagger extensions.
     /// </summary>
-    public abstract class AzureCodeGenerator : CodeGenerator
+    public abstract class AzureExtensions : Extensions
     {
         public const string LongRunningExtension = "x-ms-long-running-operation";
         public const string PageableExtension = "x-ms-pageable";
@@ -26,7 +26,7 @@ namespace Microsoft.Rest.Generator.Azure
         public const string AzureResourceExtension = "x-ms-azure-resource";
         public const string ODataExtension = "x-ms-odata";
         public const string ClientRequestIdExtension = "x-ms-client-request-id";
-        
+
         //TODO: Ideally this would be the same extension as the ClientRequestIdExtension and have it specified on the response headers,
         //TODO: But the response headers aren't currently used at all so we put an extension on the operation for now
         public const string RequestIdExtension = "x-ms-request-id";
@@ -54,18 +54,13 @@ namespace Microsoft.Rest.Generator.Azure
                 "Tags"
             }.OrderBy(s=> s);
 
-        protected AzureCodeGenerator(Settings settings) : base(settings)
-        {
-        }
-
         /// <summary>
         /// Normalizes client model using Azure-specific extensions.
         /// </summary>
         /// <param name="serviceClient">Service client</param>
         /// <returns></returns>
-        public override void NormalizeClientModel(ServiceClient serviceClient)
+        public static void NormalizeClientModel(ServiceClient serviceClient)
         {
-            Settings.AddCredentials = true;
             UpdateHeadMethods(serviceClient);
             ParseODataExtension(serviceClient);
             FlattenResourceProperties(serviceClient);
@@ -90,7 +85,7 @@ namespace Microsoft.Rest.Generator.Azure
             foreach (var method in serviceClient.Methods.Where(m => m.HttpMethod == HttpMethod.Head)
                                                              .Where(m => m.ReturnType == null))
             {
-                HttpStatusCode successStatusCode = method.Responses.Keys.FirstOrDefault(AzureCodeGenerator.HttpHeadStatusCodeSuccessFunc);
+                HttpStatusCode successStatusCode = method.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
 
                 if (method.Responses.Count == 2 &&
                     successStatusCode != default(HttpStatusCode) &&
@@ -442,7 +437,7 @@ namespace Microsoft.Rest.Generator.Azure
                 }
             }
 
-            AzureCodeGenerator.RemoveUnreferencedTypes(serviceClient, typesToDelete);
+            AzureExtensions.RemoveUnreferencedTypes(serviceClient, typesToDelete);
         }
 
         /// <summary>

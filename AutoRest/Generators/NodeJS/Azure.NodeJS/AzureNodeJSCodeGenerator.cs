@@ -13,7 +13,6 @@ using Microsoft.Rest.Generator.NodeJS;
 using Microsoft.Rest.Generator.NodeJS.Templates;
 using Microsoft.Rest.Generator.Utilities;
 using System.Collections.Generic;
-using Microsoft.Rest.Generator.Azure.NodeJS;
 
 namespace Microsoft.Rest.Generator.Azure.NodeJS
 {
@@ -64,18 +63,18 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         {
             //please do not change the following sequence as it may have undesirable results.
 
-            //TODO: Why is this list duplicated from AzureCodeGenerator.NormalizeClientModel?
+            //TODO: Why is this list duplicated from AzureExtensions.NormalizeClientModel?
 
             Settings.AddCredentials = true;
-            AzureCodeGenerator.UpdateHeadMethods(serviceClient);
-            AzureCodeGenerator.ParseODataExtension(serviceClient);
-            AzureCodeGenerator.FlattenResourceProperties(serviceClient);
-            AzureCodeGenerator.AddPageableMethod(serviceClient);
-            AzureCodeGenerator.AddAzureProperties(serviceClient);
-            AzureCodeGenerator.SetDefaultResponses(serviceClient);
-            AzureCodeGenerator.AddParameterGroups(serviceClient);
+            AzureExtensions.UpdateHeadMethods(serviceClient);
+            AzureExtensions.ParseODataExtension(serviceClient);
+            AzureExtensions.FlattenResourceProperties(serviceClient);
+            AzureExtensions.AddPageableMethod(serviceClient);
+            AzureExtensions.AddAzureProperties(serviceClient);
+            AzureExtensions.SetDefaultResponses(serviceClient);
+            AzureExtensions.AddParameterGroups(serviceClient);
             base.NormalizeClientModel(serviceClient);
-            AzureCodeGenerator.AddLongRunningOperations(serviceClient);
+            AzureExtensions.AddLongRunningOperations(serviceClient);
             NormalizeApiVersion(serviceClient);
             NormalizePaginatedMethods(serviceClient);
             ExtendAllResourcesToBaseResource(serviceClient);
@@ -87,8 +86,8 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             {
                 foreach (var model in serviceClient.ModelTypes)
                 {
-                    if (model.Extensions.ContainsKey(AzureCodeGenerator.AzureResourceExtension) &&
-                        (bool)model.Extensions[AzureCodeGenerator.AzureResourceExtension])
+                    if (model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
+                        (bool)model.Extensions[AzureExtensions.AzureResourceExtension])
                     {
                         model.BaseModelType = new CompositeType { Name = "BaseResource", SerializedName = "BaseResource" };
                     }
@@ -128,11 +127,11 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         private static void NormalizeApiVersion(ServiceClient serviceClient)
         {
             serviceClient.Properties.Where(
-                p => p.SerializedName.Equals(AzureCodeGenerator.ApiVersion, StringComparison.OrdinalIgnoreCase))
+                p => p.SerializedName.Equals(AzureExtensions.ApiVersion, StringComparison.OrdinalIgnoreCase))
                 .ForEach(p => p.DefaultValue = p.DefaultValue.Replace("\"", "'"));
 
             serviceClient.Properties.Where(
-                p => p.SerializedName.Equals(AzureCodeGenerator.AcceptLanguage, StringComparison.OrdinalIgnoreCase))
+                p => p.SerializedName.Equals(AzureExtensions.AcceptLanguage, StringComparison.OrdinalIgnoreCase))
                 .ForEach(p => p.DefaultValue = p.DefaultValue.Replace("\"", "'"));
         }
 
@@ -147,10 +146,10 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 throw new ArgumentNullException("serviceClient");
             }
 
-            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension)))
+            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
                 string nextLinkName = null;
-                var ext = method.Extensions[AzureCodeGenerator.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+                var ext = method.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
                 if (ext == null)
                 {
                     continue;
@@ -166,7 +165,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                     // if the type is a wrapper over page-able response
                     if (sequenceType != null)
                     {
-                        compositType.Extensions[AzureCodeGenerator.PageableExtension] = true;
+                        compositType.Extensions[AzureExtensions.PageableExtension] = true;
                         var pageTemplateModel = new PageTemplateModel(compositType, serviceClient, nextLinkName, itemName);
                         if (!pageModels.Contains(pageTemplateModel))
                         {

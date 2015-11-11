@@ -5,16 +5,16 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Java.Templates;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Generator.Java.Azure.Templates;
 using System.Collections.Generic;
+using Microsoft.Rest.Generator.Azure;
 
 namespace Microsoft.Rest.Generator.Java.Azure
 {
-    public class AzureJavaCodeGenerator : AzureCodeGenerator
+    public class AzureJavaCodeGenerator : JavaCodeGenerator
     {
         private readonly AzureJavaCodeNamer _namer;
 
@@ -61,13 +61,13 @@ namespace Microsoft.Rest.Generator.Java.Azure
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             Settings.AddCredentials = true;
-            UpdateHeadMethods(serviceClient);
-            ParseODataExtension(serviceClient);
-            FlattenResourceProperties(serviceClient);
-            AddPageableMethod(serviceClient);
-            AddAzureProperties(serviceClient);
-            SetDefaultResponses(serviceClient);
-            AddParameterGroups(serviceClient);
+            AzureExtensions.UpdateHeadMethods(serviceClient);
+            AzureExtensions.ParseODataExtension(serviceClient);
+            AzureExtensions.FlattenResourceProperties(serviceClient);
+            AzureExtensions.AddPageableMethod(serviceClient);
+            AzureExtensions.AddAzureProperties(serviceClient);
+            AzureExtensions.SetDefaultResponses(serviceClient);
+            AzureExtensions.AddParameterGroups(serviceClient);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
@@ -81,7 +81,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 foreach (var model in serviceClient.ModelTypes)
                 {
-                    if (model.Extensions.ContainsKey(AzureResourceExtension) && (bool)model.Extensions[AzureResourceExtension])
+                    if (model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) && 
+                        (bool)model.Extensions[AzureExtensions.AzureResourceExtension])
                     {
                         model.BaseModelType = new CompositeType { Name = "BaseResource", SerializedName = "BaseResource" };
                     }
@@ -115,7 +116,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
                 {
-                    if (modelType.Extensions.ContainsKey(ExternalExtension) && (bool)modelType.Extensions[ExternalExtension])
+                    if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) && 
+                        (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
                     {
                         continue;
                     }
