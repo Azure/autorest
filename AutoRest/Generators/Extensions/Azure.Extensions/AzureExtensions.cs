@@ -58,12 +58,24 @@ namespace Microsoft.Rest.Generator.Azure
         /// Normalizes client model using Azure-specific extensions.
         /// </summary>
         /// <param name="serviceClient">Service client</param>
+        /// <param name="settings">AutoRest settings</param>
         /// <returns></returns>
-        public static void NormalizeClientModel(ServiceClient serviceClient)
+        public static void NormalizeAzureClientModel(ServiceClient serviceClient, Settings settings)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+
+            settings.AddCredentials = true;
             UpdateHeadMethods(serviceClient);
             ParseODataExtension(serviceClient);
             FlattenResourceProperties(serviceClient);
+            FlattenRequestPayload(serviceClient, settings);
             AddPageableMethod(serviceClient);
             AddLongRunningOperations(serviceClient);
             AddAzureProperties(serviceClient);

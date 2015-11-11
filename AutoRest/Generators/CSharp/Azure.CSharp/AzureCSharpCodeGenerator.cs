@@ -60,8 +60,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            Settings.AddCredentials = true;
-            AzureExtensions.NormalizeClientModel(serviceClient);
+            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
