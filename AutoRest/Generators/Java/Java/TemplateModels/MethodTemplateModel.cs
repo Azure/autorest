@@ -43,6 +43,15 @@ namespace Microsoft.Rest.Generator.Java
             get { return _scopeProvider; }
         }
 
+        public IEnumerable<Parameter> OrderedLogicalParameters
+        {
+            get
+            {
+                return LogicalParameters.Where(p => p.Location == ParameterLocation.Path)
+                    .Union(LogicalParameters.Where(p => p.Location != ParameterLocation.Path));
+            }
+        }
+
         /// <summary>
         /// Generate the method parameter declarations for a method
         /// </summary>
@@ -51,7 +60,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in ParameterTemplateModels.Where(p => p.Location != ParameterLocation.None))
+                foreach (var parameter in OrderedLogicalParameters)
                 {
                     StringBuilder declarationBuilder = new StringBuilder();
                     if (Url.Contains("{" + parameter.Name + "}"))
@@ -112,7 +121,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in ParameterTemplateModels.Where(p => p.Location != ParameterLocation.None))
+                foreach (var parameter in OrderedLogicalParameters)
                 {
                     if ((parameter.Location != ParameterLocation.Body)
                          && parameter.Type.NeedsSpecialSerialization())
@@ -363,7 +372,14 @@ namespace Microsoft.Rest.Generator.Java
                 // parameter types
                 this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
                 // parameter locations
-                this.Parameters.ForEach(p => imports.Add(p.Location.ImportFrom()));
+                this.LogicalParameters.ForEach(p =>
+                {
+                    string locationImport = p.Location.ImportFrom();
+                    if (!string.IsNullOrEmpty(locationImport))
+                    {
+                        imports.Add(p.Location.ImportFrom());
+                    }
+                });
                 // return type
                 imports.AddRange(this.ReturnType.ImportFrom(ServiceClient.Namespace));
                 // Http verb annotations

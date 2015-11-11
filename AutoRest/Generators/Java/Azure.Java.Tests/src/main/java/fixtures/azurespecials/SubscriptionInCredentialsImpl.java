@@ -61,6 +61,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.postMethodGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -112,6 +113,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.postMethodGlobalNull(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -167,10 +169,12 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.")));
+            return null;
         }
         if (this.client.getApiVersion() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.postMethodGlobalNotProvidedValid(this.client.getSubscriptionId(), this.client.getApiVersion(), this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -222,6 +226,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.postPathGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -273,6 +278,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.postSwaggerGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

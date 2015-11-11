@@ -73,14 +73,17 @@ public class GroupImpl implements Group {
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.")));
+            return null;
         }
         if (resourceGroupName == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.")));
+            return null;
         }
         if (this.client.getApiVersion() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getSampleResourceGroup(this.client.getSubscriptionId(), resourceGroupName, this.client.getApiVersion(), this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<SampleResourceGroup>(serviceCallback) {
