@@ -334,6 +334,14 @@ describe('nodejs', function () {
             'length': 10.0,
             'picture': new Buffer([255, 255, 255, 255, 254]),
             'species': 'dangerous'
+          },
+          {
+            'fishtype': 'goblin',
+            'age': 1,
+            'length': 30,
+            'species': 'scary',
+            'birthday': new Date('2015-08-08T00:00:00Z'),
+            'jawsize': 5
           }
         ]
       };

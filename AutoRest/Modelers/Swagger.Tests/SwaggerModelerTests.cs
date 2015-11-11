@@ -167,6 +167,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("Cat", clientModel.ModelTypes[1].Name);
             Assert.Equal("Pet", clientModel.ModelTypes[1].BaseModelType.Name);
             Assert.Equal(1, clientModel.ModelTypes[1].Properties.Count);
+            Assert.Equal("Lizard", clientModel.ModelTypes[8].Name);
+            Assert.Equal("lzd", clientModel.ModelTypes[8].SerializedName);
         }
 
         [Fact]

@@ -152,6 +152,17 @@ export interface Sawshark extends Shark {
 
 /**
  * @class
+ * Initializes a new instance of the Goblinshark class.
+ * @constructor
+ * @member {number} [jawsize]
+ * 
+ */
+export interface Goblinshark extends Shark {
+    jawsize?: number;
+}
+
+/**
+ * @class
  * Initializes a new instance of the IntWrapper class.
  * @constructor
  * @member {number} [field1]

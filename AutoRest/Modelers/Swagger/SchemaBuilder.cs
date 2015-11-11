@@ -15,6 +15,8 @@ namespace Microsoft.Rest.Modeler.Swagger
     /// </summary>
     public class SchemaBuilder : ObjectBuilder
     {
+        private const string DiscriminatorValueExtension = "x-ms-discriminator-value";
+
         private Schema _schema;
 
         public SchemaBuilder(Schema schema, SwaggerModeler modeler)
@@ -116,9 +118,21 @@ namespace Microsoft.Rest.Modeler.Swagger
             // Copy over extensions
             _schema.Extensions.ForEach(e => objectType.Extensions[e.Key] = e.Value);
 
-            // Put this in the extended type serializationProperty for building method return type in the end
             if (_schema.Extends != null)
             {
+                // Optionally override the discriminator value for polymorphic types. We expect this concept to be
+                // added to Swagger at some point, but until it is, we use an extension.
+                object discriminatorValueExtension;
+                if (objectType.Extensions.TryGetValue(DiscriminatorValueExtension, out discriminatorValueExtension))
+                {
+                    string discriminatorValue = discriminatorValueExtension as string;
+                    if (discriminatorValue != null)
+                    {
+                        objectType.SerializedName = discriminatorValue;
+                    }
+                }
+
+                // Put this in the extended type serializationProperty for building method return type in the end
                 Modeler.ExtendedTypes[serviceTypeName] = _schema.Extends.StripDefinitionPath();
             }
 
