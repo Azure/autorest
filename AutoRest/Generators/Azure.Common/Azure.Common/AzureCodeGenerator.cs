@@ -406,21 +406,10 @@ namespace Microsoft.Rest.Generator.Azure
                 if (IsAzureResource(compositeType))
                 {
                     CheckAzureResourceProperties(compositeType);
-                }
-
-                if (IsDerivedFromAzureResource(compositeType))
-                {
+                    
                     // First find "properties" property
-                    var propertiesProperty = compositeType.Properties.FirstOrDefault(
+                    var propertiesProperty = compositeType.ComposedProperties.FirstOrDefault(
                         p => p.Name.Equals(ResourceProperties, StringComparison.OrdinalIgnoreCase));
-                    if (propertiesProperty == null &&
-                        compositeType.BaseModelType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase))
-                    {
-                        throw new InvalidOperationException(
-                            string.Format(CultureInfo.InvariantCulture, 
-                            Resources.MissingProperties,
-                            compositeType.Name));
-                    }
 
                     // Sub resource does not need to have properties
                     if (propertiesProperty != null)
@@ -493,23 +482,6 @@ namespace Microsoft.Rest.Generator.Azure
             }
         }
 
-        public static bool IsDerivedFromAzureResource(CompositeType compositeType)
-        {
-            if (compositeType == null)
-            {
-                return false;
-            }
-
-            if (compositeType.BaseModelType != null &&
-                compositeType.BaseModelType.Extensions.ContainsKey(AzureResourceExtension))
-            {
-                var external = compositeType.BaseModelType.Extensions[AzureResourceExtension] as bool?;
-                return (external == null || external.Value);
-            }
-
-            return false;
-        }
-
         /// <summary>
         /// Determines a composite type as an External Resource if it's name equals "Resource" 
         /// and it has an extension named "x-ms-azure-resource" marked as true.
@@ -523,10 +495,9 @@ namespace Microsoft.Rest.Generator.Azure
                 return false;
             }
 
-            if (compositeType.Extensions.ContainsKey(AzureResourceExtension) &&
-                compositeType.Name.Equals(ResourceType, StringComparison.OrdinalIgnoreCase))
+            if (compositeType.ComposedExtensions.ContainsKey(AzureResourceExtension))
             {
-                var external = compositeType.Extensions[AzureResourceExtension] as bool?;
+                var external = compositeType.ComposedExtensions[AzureResourceExtension] as bool?;
                 return (external == null || external.Value);
             }
 
@@ -564,6 +535,13 @@ namespace Microsoft.Rest.Generator.Azure
                     };
                     nextLinkParameter.Extensions[SkipUrlEncodingExtension] = true;
                     newMethod.Parameters.Add(nextLinkParameter);
+
+                    // Need copy all the header parameters from List method to ListNext method
+                    foreach (var param in method.Parameters.Where(p => p.Location == ParameterLocation.Header))
+                    {
+                        newMethod.Parameters.Add((Parameter)param.Clone());
+                    }
+
                     serviceClient.Methods.Add(newMethod);
                 }
             }
@@ -621,7 +599,7 @@ namespace Microsoft.Rest.Generator.Azure
         private static void CheckAzureResourceProperties(CompositeType compositeType)
         {
             // If derived from resource with x-ms-azure-resource then resource should have resource specific properties
-            var extraResourceProperties = compositeType.Properties
+            var extraResourceProperties = compositeType.ComposedProperties
                                                        .Select(p => p.Name.ToUpperInvariant())
                                                        .OrderBy(n => n)
                                                        .Except(ResourcePropertyNames.Select(n => n.ToUpperInvariant()));

@@ -11,11 +11,11 @@
 package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.AzureServiceResponseBuilder;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.Error;
@@ -63,6 +63,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
         if (unencodedPathParam == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -79,7 +80,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
     }
 
     private ServiceResponse<Void> getMethodPathValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -116,6 +117,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
         if (unencodedPathParam == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -132,7 +134,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
     }
 
     private ServiceResponse<Void> getPathPathValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -169,6 +171,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
         if (unencodedPathParam == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -185,7 +188,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
     }
 
     private ServiceResponse<Void> getSwaggerPathValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -222,6 +225,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
         if (q1 == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter q1 is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -238,7 +242,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
     }
 
     private ServiceResponse<Void> getMethodQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -283,7 +287,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
     }
 
     private ServiceResponse<Void> getMethodQueryNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -320,6 +324,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
         if (q1 == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter q1 is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -336,7 +341,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
     }
 
     private ServiceResponse<Void> getPathQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -381,7 +386,7 @@ public class SkipUrlEncodingImpl implements SkipUrlEncoding {
     }
 
     private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);

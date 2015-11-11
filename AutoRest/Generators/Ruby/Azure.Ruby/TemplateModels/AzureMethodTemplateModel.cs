@@ -152,7 +152,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         {
             var builder = new IndentedStringBuilder("  ");
 
-            string serializationLogic = type.DeserializeType(this.Scope, variableName, ClassNamespaces);
+            string serializationLogic = type.DeserializeType(this.Scope, variableName);
             return builder.AppendLine(serializationLogic).ToString();
         }
 

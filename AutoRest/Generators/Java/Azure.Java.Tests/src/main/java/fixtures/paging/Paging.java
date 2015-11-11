@@ -35,7 +35,7 @@ public interface Paging {
         Call<ResponseBody> getSinglePages(@Header("accept-language") String acceptLanguage);
 
         @GET("/paging/multiple")
-        Call<ResponseBody> getMultiplePages(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMultiplePages(@Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage);
 
         @GET("/paging/multiple/retryfirst")
         Call<ResponseBody> getMultiplePagesRetryFirst(@Header("accept-language") String acceptLanguage);
@@ -56,7 +56,7 @@ public interface Paging {
         Call<ResponseBody> getSinglePagesNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
 
         @GET
-        Call<ResponseBody> getMultiplePagesNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMultiplePagesNext(@Url String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage);
 
         @GET
         Call<ResponseBody> getMultiplePagesRetryFirstNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
@@ -93,18 +93,20 @@ public interface Paging {
     /**
      * A paging operation that includes a nextLink that has 10 pages
      *
+     * @param clientRequestId the String value
      * @throws ServiceException exception thrown from REST call
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePages() throws ServiceException;
+    ServiceResponse<PageImpl<Product>> getMultiplePages(String clientRequestId) throws ServiceException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages
      *
+     * @param clientRequestId the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> getMultiplePagesAsync(final ServiceCallback<PageImpl<Product>> serviceCallback);
+    Call<ResponseBody> getMultiplePagesAsync(String clientRequestId, final ServiceCallback<PageImpl<Product>> serviceCallback);
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
@@ -208,19 +210,21 @@ public interface Paging {
      * A paging operation that includes a nextLink that has 10 pages
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
      * @throws ServiceException exception thrown from REST call
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePagesNext(String nextPageLink) throws ServiceException;
+    ServiceResponse<PageImpl<Product>> getMultiplePagesNext(String nextPageLink, String clientRequestId) throws ServiceException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> getMultiplePagesNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback);
+    Call<ResponseBody> getMultiplePagesNextAsync(String nextPageLink, String clientRequestId, final ServiceCallback<PageImpl<Product>> serviceCallback);
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages

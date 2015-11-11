@@ -57,7 +57,17 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 var imports = base.ImplImports.ToList();
                 imports.Add("com.microsoft.rest.AzureClient");
+                imports.Add("com.microsoft.rest.CustomHeaderInterceptor");
+                imports.Add("java.util.UUID");
                 return imports.OrderBy(i => i).ToList();
+            }
+        }
+
+        public string SetDefaultHeaders
+        {
+            get
+            {
+                return "this.getClientInterceptors().add(new CustomHeaderInterceptor(\"x-ms-client-request-id\", UUID.randomUUID().toString()));";
             }
         }
     }
