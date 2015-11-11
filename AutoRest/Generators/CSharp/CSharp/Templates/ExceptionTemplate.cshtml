@@ -27,14 +27,14 @@ namespace @(Settings.Namespace).Models
         /// Gets or sets the error object.
         /// </summary>
         public @Model.Name Error { get; set; }
-
+@EmptyLine
         /// <summary>
         /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
         /// </summary>
         public @(@Model.ExceptionTypeDefinitionName)()
         {
         }
-
+@EmptyLine
         /// <summary>
         /// Initializes a new instance of the @(@Model.ExceptionTypeDefinitionName) class.
         /// </summary>
@@ -43,7 +43,7 @@ namespace @(Settings.Namespace).Models
             : this(message, (Exception)null)
         {
         }
-
+@EmptyLine
         /// <summary>
         /// Initializes a new instance of the @(@Model.ExceptionTypeDefinitionName) class.
         /// </summary>
@@ -53,7 +53,7 @@ namespace @(Settings.Namespace).Models
             : base(message, innerException)
         {
         }
-
+@EmptyLine
         /// <summary>
         /// Initializes a new instance of the @(@Model.ExceptionTypeDefinitionName) class.
         /// </summary>
@@ -64,7 +64,7 @@ namespace @(Settings.Namespace).Models
         {
             Error = error;
         }
-
+@EmptyLine
 #if !PORTABLE && !DNXCORE50
         /// <summary>
         /// Initializes a new instance of the @(@Model.ExceptionTypeDefinitionName) class.
@@ -75,7 +75,7 @@ namespace @(Settings.Namespace).Models
             : base(info, context)
         {
         }
-
+@EmptyLine
         /// <summary>
         /// Serializes content of the exception.
         /// </summary>
@@ -89,7 +89,7 @@ namespace @(Settings.Namespace).Models
             {
                 throw new ArgumentNullException("info");
             }
-
+@EmptyLine
             info.AddValue("Request", Request);
             info.AddValue("Response", Response);
             info.AddValue("Error", Error);
