@@ -1577,7 +1577,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         private static void TestSuccessStatusCodes(AutoRestHttpInfrastructureTestService client)
         {
-            var ex = Assert.Throws<HttpOperationException>(() => client.HttpFailure.GetEmptyError());
+            var ex = Assert.Throws<Fixtures.AcceptanceTestsHttp.Models.ErrorException>(() => client.HttpFailure.GetEmptyError());
             Assert.Equal("Operation returned an invalid status code 'BadRequest'", ex.Message);
             client.HttpSuccess.Head200();
             Assert.True(client.HttpSuccess.Get200());

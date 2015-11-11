@@ -66,6 +66,10 @@ namespace Microsoft.Rest.Generator.CSharp
             }
         }
 
+        public virtual string ExceptionTypeDefinitionName
+        {
+            get { return this.Name + "Exception"; }
+        }
 
         public virtual IEnumerable<string> Usings
         {

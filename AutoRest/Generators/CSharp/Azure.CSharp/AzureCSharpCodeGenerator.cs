@@ -166,6 +166,21 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 };
                 await Write(pageTemplate, Path.Combine("Models", pageTemplate.Model.TypeDefinitionName + ".cs"));
             }
+
+            // Exceptions
+            foreach (var exceptionType in serviceClient.Exceptions)
+            {
+                if (exceptionType.Name == "CloudError")
+                {
+                    continue;
+                }
+
+                var exceptionTemplate = new ExceptionTemplate
+                {
+                    Model = new ModelTemplateModel(exceptionType),
+                };
+                await Write(exceptionTemplate, Path.Combine("Models", exceptionTemplate.Model.ExceptionTypeDefinitionName + ".cs"));
+            }
         }
     }
 }

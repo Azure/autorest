@@ -142,6 +142,16 @@ namespace Microsoft.Rest.Generator.CSharp
                 };
                 await Write(enumTemplate, Path.Combine("Models", enumTemplate.Model.TypeDefinitionName + ".cs"));
             }
+
+            // Exception
+            foreach (var exceptionType in serviceClient.Exceptions)
+            {
+                var exceptionTemplate = new ExceptionTemplate
+                {
+                    Model = new ModelTemplateModel(exceptionType),
+                };
+                await Write(exceptionTemplate, Path.Combine("Models", exceptionTemplate.Model.ExceptionTypeDefinitionName + ".cs"));
+            }
         }
     }
 }

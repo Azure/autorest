@@ -204,7 +204,14 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                return "HttpOperationException";
+                if (this.DefaultResponse is CompositeType)
+                {
+                    return this.DefaultResponse.Name + "Exception";
+                }
+                else
+                {
+                    return "HttpOperationException";
+                }
             }
         }
 
@@ -215,7 +222,14 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                return string.Empty;
+                if (this.DefaultResponse is CompositeType)
+                {
+                    return "ex.Error = errorBody;";
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
 
