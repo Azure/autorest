@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using AutoRest.Generator.CSharp.Tests.Utilities;
 using Fixtures.AcceptanceTestsBodyArray;
 using Fixtures.AcceptanceTestsBodyArray.Models;
 using Fixtures.AcceptanceTestsBodyBoolean;
@@ -40,6 +41,7 @@ using Fixtures.AcceptanceTestsValidation;
 using Microsoft.Rest.Serialization;
 using Newtonsoft.Json;
 using Xunit;
+using Xunit.Abstractions;
 using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
 
 
@@ -50,9 +52,14 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         "AutoRest.Generator.CSharp.Tests")]
     public class AcceptanceTests : IClassFixture<ServiceController>
     {
+        private readonly TestTracingInterceptor _interceptor;
+
         public AcceptanceTests(ServiceController data)
         {
             this.Fixture = data;
+            _interceptor = new TestTracingInterceptor();
+            ServiceClientTracing.AddTracingInterceptor(_interceptor);
+            ServiceClientTracing.IsEnabled = true;
         }
 
         public ServiceController Fixture { get; set; }

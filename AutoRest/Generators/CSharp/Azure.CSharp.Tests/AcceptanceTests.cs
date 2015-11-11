@@ -24,6 +24,8 @@ using Microsoft.Rest.Generator.CSharp.Tests;
 using Xunit;
 using Xunit.Abstractions;
 using Microsoft.Rest.Azure;
+using AutoRest.Generator.CSharp.Tests.Utilities;
+using Microsoft.Framework.Logging;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 {
@@ -32,12 +34,14 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         "AutoRest.Generator.CSharp.Tests")]
     public class AcceptanceTests : IClassFixture<ServiceController>
     {
-        private readonly ITestOutputHelper _output;
+        private readonly TestTracingInterceptor _interceptor;
 
-        public AcceptanceTests(ServiceController data, ITestOutputHelper output)
+        public AcceptanceTests(ServiceController data)
         {
             this.Fixture = data;
-            _output = output;
+            _interceptor = new TestTracingInterceptor();
+            ServiceClientTracing.AddTracingInterceptor(_interceptor);
+            ServiceClientTracing.IsEnabled = true;
         }
 
         public ServiceController Fixture { get; set; }
@@ -382,10 +386,10 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 {
                     foreach (var r in report)
                     {
-                        _output.WriteLine(string.Format(CultureInfo.CurrentCulture,
+                        _interceptor.Information(string.Format(CultureInfo.CurrentCulture,
                             Resources.TestCoverageReportItemFormat, r.Key, r.Value));
                     }
-                    _output.WriteLine(string.Format(CultureInfo.CurrentCulture,
+                    _interceptor.Information(string.Format(CultureInfo.CurrentCulture,
                         Resources.TestCoverageReportSummaryFormat,
                         executedTests, totalTests));
                     Assert.Equal(executedTests, totalTests);

@@ -19,5 +19,8 @@
       }
     }
   },
-  "exclude": ["CSharpAzureCodeNamingFrameworkTests.*"]
+  "exclude": [ "CSharpAzureCodeNamingFrameworkTests.*" ],
+  "dependencies": {
+    "Microsoft.Framework.Logging.Console": "1.0.0-beta8"
+  }
 }
