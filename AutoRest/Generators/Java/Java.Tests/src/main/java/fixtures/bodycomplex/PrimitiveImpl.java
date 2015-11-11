@@ -119,6 +119,7 @@ public class PrimitiveImpl implements Primitive {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putInt(complexBody);
@@ -218,6 +219,7 @@ public class PrimitiveImpl implements Primitive {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putLong(complexBody);
@@ -317,6 +319,7 @@ public class PrimitiveImpl implements Primitive {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putFloat(complexBody);
@@ -416,6 +419,7 @@ public class PrimitiveImpl implements Primitive {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putDouble(complexBody);
@@ -515,6 +519,7 @@ public class PrimitiveImpl implements Primitive {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putBool(complexBody);
@@ -614,6 +619,7 @@ public class PrimitiveImpl implements Primitive {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putString(complexBody);
@@ -713,6 +719,7 @@ public class PrimitiveImpl implements Primitive {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putDate(complexBody);
@@ -812,6 +819,7 @@ public class PrimitiveImpl implements Primitive {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTime(complexBody);
@@ -911,6 +919,7 @@ public class PrimitiveImpl implements Primitive {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTimeRfc1123(complexBody);
@@ -1010,6 +1019,7 @@ public class PrimitiveImpl implements Primitive {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putDuration(complexBody);
@@ -1109,6 +1119,7 @@ public class PrimitiveImpl implements Primitive {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putByte(complexBody);
