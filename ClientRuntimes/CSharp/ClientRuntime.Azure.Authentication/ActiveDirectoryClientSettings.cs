@@ -3,7 +3,11 @@
 
 using System;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
+#if PORTABLE
+using ClientRuntime.Azure.Authentication.Properties;
+#else
 using Microsoft.Rest.Azure.Authentication.Properties;
+#endif
 
 namespace Microsoft.Rest.Azure.Authentication
 {
@@ -17,33 +21,12 @@ namespace Microsoft.Rest.Azure.Authentication
         /// </summary>
         public const string EnableEbdMagicCookie = "site_id=501358&display=popup";
 
-        /// <summary>
-        /// Initializes default active directory dialog parameters.
-        /// </summary>
-        public ActiveDirectoryClientSettings()
-        {
-            this.PromptBehavior = PromptBehavior.Auto;
-            this.AdditionalQueryParameters = EnableEbdMagicCookie;
-        }
-
-        /// <summary>
-        /// Initializes active directory client settings with the application specific properties
-        /// for client id and client redirect uri.
-        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
-        /// for detailed instructions on creating an Azure Active Directory application.
-        /// </summary>
-        /// <param name="clientId">The active directory client id.</param>
-        /// <param name="clientRedirectUri">The client redirect uri defined for this application in active directory.</param>
-        public ActiveDirectoryClientSettings(string clientId, Uri clientRedirectUri) : this()
-        {
-            this.ClientId = clientId;
-            this.ClientRedirectUri = clientRedirectUri;
-        }
-
+#if !PORTABLE
         /// <summary>
         /// Gets or sets prompt behavior.
         /// </summary>
         public PromptBehavior PromptBehavior { get; set; }
+#endif
 
         /// <summary>
         /// Gets or sets owner window.
@@ -64,6 +47,31 @@ namespace Microsoft.Rest.Azure.Authentication
         /// The client redirect uri associated with this application.
         /// </summary>
         public Uri ClientRedirectUri { get; set; }
+        
+        /// <summary>
+        /// Initializes default active directory dialog parameters.
+        /// </summary>
+        public ActiveDirectoryClientSettings()
+        {
+#if !PORTABLE
+            this.PromptBehavior = PromptBehavior.Auto;
+#endif
+            this.AdditionalQueryParameters = EnableEbdMagicCookie;
+        }
+
+        /// <summary>
+        /// Initializes active directory client settings with the application specific properties
+        /// for client id and client redirect uri.
+        /// See <see href="https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/">Active Directory Quickstart for .Net</see> 
+        /// for detailed instructions on creating an Azure Active Directory application.
+        /// </summary>
+        /// <param name="clientId">The active directory client id.</param>
+        /// <param name="clientRedirectUri">The client redirect uri defined for this application in active directory.</param>
+        public ActiveDirectoryClientSettings(string clientId, Uri clientRedirectUri) : this()
+        {
+            this.ClientId = clientId;
+            this.ClientRedirectUri = clientRedirectUri;
+        }
 
         /// <summary>
         /// Returns active directory cient settings that suppress user credential prompts. Authentication 
@@ -77,7 +85,9 @@ namespace Microsoft.Rest.Azure.Authentication
         {
             return new ActiveDirectoryClientSettings(clientId, clientRedirectUri)
             {
+#if !PORTABLE
                 PromptBehavior = PromptBehavior.Never,
+#endif
             };
         }
 
@@ -94,7 +104,9 @@ namespace Microsoft.Rest.Azure.Authentication
         {
             return new ActiveDirectoryClientSettings(clientId , clientRedirectUri)
             {
+#if !PORTABLE
                 PromptBehavior = PromptBehavior.Auto,
+#endif
             };
         }
 
@@ -109,7 +121,9 @@ namespace Microsoft.Rest.Azure.Authentication
         {
             return new ActiveDirectoryClientSettings(clientId, clientRedirectUri)
             {
+#if !PORTABLE
                 PromptBehavior = PromptBehavior.Always
+#endif
             };
         }
 

@@ -16,6 +16,5 @@
 
 var msRestAzure = require('ms-rest-azure');
 
-exports.Resource = msRestAzure.Resource;
-exports.SubResource = msRestAzure.SubResource;
+exports.BaseResource = msRestAzure.BaseResource;
 exports.CloudError = msRestAzure.CloudError;

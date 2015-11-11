@@ -125,7 +125,7 @@ public class ServiceResponseBuilder<T> {
                     (responseTypes.isEmpty() || (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
                 return new ServiceResponse<T>(buildBody(statusCode, responseBody), response);
             } else {
-                ServiceException exception = new ServiceException();
+                ServiceException exception = new ServiceException("Invalid status code " + statusCode);
                 exception.setResponse(response);
                 exception.setErrorModel(buildBody(statusCode, responseBody));
                 throw exception;

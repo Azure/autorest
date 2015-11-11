@@ -1,0 +1,91 @@
+@using System.Linq
+@using System.Collections.Generic
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.NodeJS
+@using Microsoft.Rest.Generator.Azure.NodeJS
+@using Microsoft.Rest.Generator.Azure.NodeJS.Templates
+@using Microsoft.Rest.Generator.Utilities
+@inherits Microsoft.Rest.Generator.Template<PageTemplateModel>
+/*
+@Header(" * ")
+ */
+@EmptyLine
+'use strict';
+@EmptyLine
+@if (Model.ContainsPropertiesInCompositeType() || Model.BaseModelType != null)
+{
+@:var models = require('./index');
+@EmptyLine
+}
+var util = require('util');
+@EmptyLine
+@if (Model.ContainsDurationProperty())
+{
+@:var moment = require('moment');
+@EmptyLine
+}
+/**
+ * @@class
+ * Initializes a new instance of the @(Model.Name) class.
+ * @@constructor
+@WrapComment(" * ", Model.Documentation)
+@foreach (var property in Model.DocumentationPropertyList)
+{
+    @PageTemplateModel.ConstructPropertyDocumentation(
+                          WrapComment(" * ", "@member {" + PageTemplateModel.GetPropertyDocumentationType(property)
+                                                         + "} " + PageTemplateModel.GetPropertyDocumentationName(property)
+                                             + " " + property.Documentation))
+}
+ */
+function @(Model.Name)() {
+}
+@EmptyLine
+util.inherits(@(Model.Name), Array);
+@EmptyLine
+/**
+ * Deserialize the instance to @Model.Name schema
+ *
+ * @@param {JSON} instance
+ *
+ */
+@(Model.Name).prototype.deserialize = function (instance) {
+@{
+var properties = Model.Properties;
+if (properties.Count > 0)
+{
+<text>
+  if (instance) {
+  @{
+  if (Model.ItemName != null)
+  {
+  <text>
+    if (instance['@(Model.ItemName)']) {
+      var deserializedInstance@(Model.ItemName) = [];
+        instance['@(Model.ItemName)'].forEach(function(element) {
+        if (element) {
+          element = new models['@(Model.ItemType.Name)']().deserialize(element);
+        }
+        deserializedInstance@(Model.ItemName).push(element);
+      });
+      Array.prototype.push.apply(this, deserializedInstance@(Model.ItemName));
+    }
+  </text>
+  }
+  if (Model.NextLinkName != null)
+  {
+  <text>
+    if (instance['@(Model.NextLinkName)'] !== undefined) {
+      this['@(Model.NextLinkName)'] = instance.@(Model.NextLinkName);
+    }
+  </text>
+  }
+  }
+  }
+</text>
+  }
+  @EmptyLine
+  @:return this;
+}
+};
+@EmptyLine
+module.exports = @(Model.Name);

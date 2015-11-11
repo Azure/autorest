@@ -30,18 +30,6 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Rest.ClientRuntime/2.0.0-preview": {
-        "type": "project",
-        "framework": "DNXCore,Version=v5.0",
-        "dependencies": {
-          "Microsoft.CSharp": "4.0.0",
-          "Newtonsoft.Json": "6.0.8",
-          "System.Diagnostics.Tools": "4.0.0",
-          "System.Net.Http": "4.0.0",
-          "System.Threading.Tasks": "4.0.10",
-          "System.Xml.ReaderWriter": "4.0.10"
-        }
-      },
       "Microsoft.Win32.Primitives/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -616,18 +604,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.CSharp.dll": {}
-        }
-      },
-      "Microsoft.Rest.ClientRuntime/2.0.0-preview": {
-        "type": "project",
-        "framework": "DNXCore,Version=v5.0",
-        "dependencies": {
-          "Microsoft.CSharp": "4.0.0",
-          "Newtonsoft.Json": "6.0.8",
-          "System.Diagnostics.Tools": "4.0.0",
-          "System.Net.Http": "4.0.0",
-          "System.Threading.Tasks": "4.0.10",
-          "System.Xml.ReaderWriter": "4.0.10"
         }
       },
       "Microsoft.Win32.Primitives/4.0.0": {
@@ -1212,18 +1188,6 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Rest.ClientRuntime/2.0.0-preview": {
-        "type": "project",
-        "framework": "DNXCore,Version=v5.0",
-        "dependencies": {
-          "Microsoft.CSharp": "4.0.0",
-          "Newtonsoft.Json": "6.0.8",
-          "System.Diagnostics.Tools": "4.0.0",
-          "System.Net.Http": "4.0.0",
-          "System.Threading.Tasks": "4.0.10",
-          "System.Xml.ReaderWriter": "4.0.10"
-        }
-      },
       "Microsoft.Win32.Primitives/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -1780,10 +1744,6 @@
     }
   },
   "libraries": {
-    "Microsoft.Rest.ClientRuntime/2.0.0-preview": {
-      "type": "project",
-      "path": "../../ClientRuntime/Microsoft.Rest.ClientRuntime/project.json"
-    },
     "Microsoft.CSharp/4.0.0": {
       "type": "package",
       "serviceable": true,

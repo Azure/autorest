@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 
 namespace Microsoft.Rest.Generator.Java.TemplateModels
@@ -105,10 +106,13 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
                 imports.Add("java.util.Map");
                 imports.AddRange(dictionaryType.ValueType.ImportFrom(ns));
             }
-            else if ((compositeType != null || type is EnumType) && ns != null)
+            else if (compositeType != null && ns != null)
             {
-                if (compositeType != null &&
-                    compositeType.Extensions.ContainsKey(ExternalExtension) &&
+                if (type.Name.Contains('<'))
+                {
+                    imports.AddRange(compositeType.ParseGenericType().SelectMany(t => t.ImportFrom(ns)));
+                }
+                else if (compositeType.Extensions.ContainsKey(ExternalExtension) &&
                     (bool)compositeType.Extensions[ExternalExtension])
                 {
                     imports.Add(string.Join(
@@ -124,6 +128,14 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
                         "models",
                         type.Name));
                 }
+            }
+            else if (type is EnumType && ns != null)
+            {
+                imports.Add(string.Join(
+                    ".",
+                    ns.ToLower(CultureInfo.InvariantCulture),
+                    "models",
+                    type.Name));
             }
             else if (primaryType != null)
             {
@@ -190,6 +202,17 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
                 return "retrofit.http." + parameterLocation.ToString();
             else
                 return null;
+        }
+
+        public static IEnumerable<IType> ParseGenericType(this CompositeType type)
+        {
+            string name = type.Name;
+            string[] types = type.Name.Split(new String[]{"<", ">", ",", ", "}, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var innerType in types.Where(t => !string.IsNullOrWhiteSpace(t))) {
+                if (!JavaCodeNamer.PrimaryTypes.Contains(innerType.Trim())) {
+                    yield return new CompositeType() { Name = innerType.Trim() };
+                }
+            }
         }
     }
 }

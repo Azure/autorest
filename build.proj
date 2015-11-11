@@ -116,7 +116,7 @@
             Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
             Targets="Build"
             Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime') and '$(OS)' == 'Windows_NT'" />
-    <CallTarget Targets="BuildDnx" Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime') "/>
+    <!-- <CallTarget Targets="BuildDnx" Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime') "/> -->
     <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " />
   </Target>
   

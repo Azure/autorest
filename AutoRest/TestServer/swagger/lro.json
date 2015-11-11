@@ -803,7 +803,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Response after completion, with ProvisioningState='Succeeded'",
+            "description": "Response after completion, with ProvisioningState='Succeeded'"
           },
           "default": {
             "description": "Unexpected error",
