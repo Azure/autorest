@@ -29,12 +29,14 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// Gets or sets the error object.
         /// </summary>
         public Error2 Error { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the Error2Exception class.
         /// </summary>
         public Error2Exception()
         {
         }
+
         /// <summary>
         /// Initializes a new instance of the Error2Exception class.
         /// </summary>
@@ -43,6 +45,7 @@ namespace Fixtures.MirrorPolymorphic.Models
             : this(message, (Exception)null)
         {
         }
+
         /// <summary>
         /// Initializes a new instance of the Error2Exception class.
         /// </summary>
@@ -52,6 +55,7 @@ namespace Fixtures.MirrorPolymorphic.Models
             : base(message, innerException)
         {
         }
+
         /// <summary>
         /// Initializes a new instance of the Error2Exception class.
         /// </summary>
@@ -62,6 +66,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         {
             Error = error;
         }
+
 #if !PORTABLE && !DNXCORE50
         /// <summary>
         /// Initializes a new instance of the Error2Exception class.
@@ -72,6 +77,7 @@ namespace Fixtures.MirrorPolymorphic.Models
             : base(info, context)
         {
         }
+
         /// <summary>
         /// Serializes content of the exception.
         /// </summary>
@@ -85,6 +91,7 @@ namespace Fixtures.MirrorPolymorphic.Models
             {
                 throw new ArgumentNullException("info");
             }
+
             info.AddValue("Request", Request);
             info.AddValue("Response", Response);
             info.AddValue("Error", Error);
