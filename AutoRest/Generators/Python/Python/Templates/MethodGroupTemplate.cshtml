@@ -17,14 +17,15 @@ import sys
 @:from datetime import *
 }
 @EmptyLine
-from runtime.msrest.service_client import ServiceClient
-from runtime.msrest.serialization import Serializer, Deserializer
-from runtime.msrest.exceptions import (
+from msrest.service_client import ServiceClient
+from msrest.serialization import Serializer, Deserializer
+from msrest.exceptions import (
     SerializationError,
     DeserializationError,
     TokenExpiredError,
-    ClientRequestError)
-from runtime.msrest.paging import Paged
+    ClientRequestError,
+    ServerError)
+from msrest.paging import Paged
 @EmptyLine
 @*from ..batch_exception import BatchStatusError, @EmptyLine*@
 from ..models import *
@@ -39,14 +40,6 @@ class @(Model.MethodGroupType)(object):
 @EmptyLine
         self.config = config
 @EmptyLine
-    def _verify_response(self, response, accept_status, error):
-@EmptyLine
-        if response.status_code not in accept_status:
-            deserialized = self._deserialize(
-                error, response)
-@EmptyLine
-            raise deserialized
-@EmptyLine
     def _parse_url(self, name, value, datatype):
 @EmptyLine
         try:
@@ -60,10 +53,8 @@ class @(Model.MethodGroupType)(object):
 @EmptyLine
         else:
             return value
-@EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
 {
+@EmptyLine
 @:@(Include(new MethodTemplate(), method))
-@EmptyLine
 }
-@EmptyLine

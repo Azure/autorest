@@ -9,6 +9,11 @@
 @Header("# ")
 #--------------------------------------------------------------------------
 @EmptyLine
+@if (Model.IsException)
+{
+@:from msrest.exceptions import ServerException
+@EmptyLine
+}
 @if (Model.BaseModelType != null)
 {
 @:class @(Model.Name)(@Model.BaseModelType.Name):
@@ -61,4 +66,13 @@ else
         for k in kwargs:
             if hasattr(self, k):
                 setattr(self, k, kwargs[k])
+@if (Model.IsException)
+{
+@EmptyLine
+@:class @(Model.Name)Exception(ServerException):
+@EmptyLine
+    @:def __init__(self, response, *args):
+@EmptyLine
+        @:super(@(Model.Name)Exception, self).__init__(response, '@(Model.Name)', *args)
+}
 

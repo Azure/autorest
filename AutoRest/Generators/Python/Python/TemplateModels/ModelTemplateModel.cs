@@ -16,6 +16,7 @@ namespace Microsoft.Rest.Generator.Python
     {
         private readonly IScopeProvider _scope = new ScopeProvider();
         private ModelTemplateModel _parent = null;
+        private bool isException = false;
         
         public ModelTemplateModel(CompositeType source, ServiceClient serviceClient)
         {
@@ -36,10 +37,21 @@ namespace Microsoft.Rest.Generator.Python
             }
             this.LoadFrom(source);
             ServiceClient = serviceClient;
+            
+            if (ServiceClient.Exceptions.Contains(source))
+            {
+                isException = true;
+            }
+
             if (source.BaseModelType != null)
             {
                 _parent = new ModelTemplateModel(source.BaseModelType, serviceClient);
             }
+        }
+
+        public bool IsException
+        {
+            get { return isException; }
         }
 
         public IScopeProvider Scope
@@ -48,11 +60,6 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         public ServiceClient ServiceClient { get; set; }
-
-        public virtual IEnumerable<string> Usings
-        {
-            get { return Enumerable.Empty<string>(); }
-        }
 
         public IEnumerable<Property> ComposedProperties
         {
