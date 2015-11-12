@@ -44,8 +44,7 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                return (!string.IsNullOrEmpty(PolymorphicDiscriminator) && Name != SerializedName) ||
-                       (_baseModel != null && _baseModel.NeedsPolymorphicConverter);
+                return this.IsPolymorphicType && Name != SerializedName;
             }
         }
 
@@ -74,6 +73,15 @@ namespace Microsoft.Rest.Generator.CSharp
         public virtual IEnumerable<string> Usings
         {
             get { return Enumerable.Empty<string>(); }
+        }
+
+        private bool IsPolymorphicType
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(PolymorphicDiscriminator) ||
+                    (_baseModel != null && _baseModel.IsPolymorphicType);
+            }
         }
     }
 }

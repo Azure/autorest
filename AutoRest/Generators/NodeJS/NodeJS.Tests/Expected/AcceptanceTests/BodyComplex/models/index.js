@@ -39,7 +39,7 @@ exports.ByteWrapper = require('./byteWrapper');
 exports.ArrayWrapper = require('./arrayWrapper');
 exports.DictionaryWrapper = require('./dictionaryWrapper');
 exports.discriminators = {
-  'fish' : exports.Fish,
+  'Fish' : exports.Fish,
   'salmon' : exports.Salmon,
   'shark' : exports.Shark,
   'sawshark' : exports.Sawshark,

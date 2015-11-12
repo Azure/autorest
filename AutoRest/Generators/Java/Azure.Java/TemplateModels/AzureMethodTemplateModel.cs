@@ -23,8 +23,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 throw new ArgumentNullException("source");
             }
 
-            this.ClientRequestIdString = AzureCodeGenerator.GetClientRequestIdString(source);
-            this.RequestIdString = AzureCodeGenerator.GetRequestIdString(source);
+            this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
+            this.RequestIdString = AzureExtensions.GetRequestIdString(source);
         }
 
         public string ClientRequestIdString { get; private set; }
@@ -54,7 +54,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         /// </summary>
         public bool IsLongRunningOperation
         {
-            get { return Extensions.ContainsKey(AzureCodeGenerator.LongRunningExtension); }
+            get { return Extensions.ContainsKey(AzureExtensions.LongRunningExtension); }
         }
 
         public bool IsPagingNextOperation

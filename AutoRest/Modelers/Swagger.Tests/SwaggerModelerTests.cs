@@ -438,37 +438,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(2, clientModel.ModelTypes[0].Properties[3].Constraints.Count);
             Assert.Equal("100", clientModel.ModelTypes[0].Properties[3].Constraints[Constraint.ExclusiveMaximum]);
             Assert.Equal("0", clientModel.ModelTypes[0].Properties[3].Constraints[Constraint.ExclusiveMinimum]);
-        }
-
-        [Fact]
-        public void TestClientModelWithPayloadFlattening()
-        {
-            var modeler = new SwaggerModeler(new Settings
-            {
-                Namespace = "Test",
-                Input = Path.Combine("Swagger", "swagger-payload-flatten.json"),
-                PayloadFlatteningThreshold = 3
-            });
-            var clientModel = modeler.Build();
-
-            Assert.NotNull(clientModel);
-            Assert.Equal(4, clientModel.Methods[0].Parameters.Count);
-            Assert.Equal("String subscriptionId", clientModel.Methods[0].Parameters[0].ToString());
-            Assert.Equal("String resourceGroupName", clientModel.Methods[0].Parameters[1].ToString());
-            Assert.Equal("String apiVersion", clientModel.Methods[0].Parameters[2].ToString());
-            Assert.Equal("MaxProduct max_product", clientModel.Methods[0].Parameters[3].ToString());
-            Assert.Equal(6, clientModel.Methods[1].Parameters.Count);
-            Assert.Equal("String subscriptionId", clientModel.Methods[1].Parameters[0].ToString());
-            Assert.Equal("String resourceGroupName", clientModel.Methods[1].Parameters[1].ToString());
-            Assert.Equal("String apiVersion", clientModel.Methods[1].Parameters[2].ToString());
-            Assert.Equal("String base_product_id", clientModel.Methods[1].Parameters[3].ToString());
-            Assert.Equal(true, clientModel.Methods[1].Parameters[3].IsRequired);
-            Assert.Equal("String base_product_description", clientModel.Methods[1].Parameters[4].ToString());
-            Assert.Equal(false, clientModel.Methods[1].Parameters[4].IsRequired);
-            Assert.Equal("MaxProduct max_product_reference", clientModel.Methods[1].Parameters[5].ToString());
-            Assert.Equal(false, clientModel.Methods[1].Parameters[5].IsRequired);
-            Assert.Equal(1, clientModel.Methods[1].InputParameterTransformation.Count);
-            Assert.Equal(3, clientModel.Methods[1].InputParameterTransformation[0].ParameterMappings.Count);
-        }
+        }        
     }
 }

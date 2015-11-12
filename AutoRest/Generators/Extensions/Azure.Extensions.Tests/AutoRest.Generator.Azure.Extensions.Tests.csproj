@@ -11,8 +11,8 @@
     <ProjectGuid>{2C062B51-EFD0-4FDC-8F75-3D76161FBCB5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microsoft.Rest.Generator.Azure.Common.Tests</RootNamespace>
-    <AssemblyName>AutoRest.Generator.Azure.Common.Tests</AssemblyName>
+    <RootNamespace>Microsoft.Rest.Generator.Azure.Extensions.Tests</RootNamespace>
+    <AssemblyName>AutoRest.Generator.Azure.Extensions.Tests</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <RestorePackages>true</RestorePackages>
     <AutoRestTest>true</AutoRestTest>
@@ -53,13 +53,17 @@
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Azure.Common\AutoRest.Generator.Azure.Common.csproj">
-      <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
-      <Name>AutoRest.Generator.Azure.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Modelers\Swagger\AutoRest.Modeler.Swagger.csproj">
       <Project>{9517265e-5127-460c-9dde-fe017d73121c}</Project>
       <Name>AutoRest.Modeler.Swagger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Azure.Extensions\AutoRest.Generator.Azure.Extensions.csproj">
+      <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
+      <Name>AutoRest.Generator.Azure.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Extensions\AutoRest.Generator.Extensions.csproj">
+      <Project>{7dd043eb-5e53-4180-b123-cc3cc5022e34}</Project>
+      <Name>AutoRest.Generator.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
