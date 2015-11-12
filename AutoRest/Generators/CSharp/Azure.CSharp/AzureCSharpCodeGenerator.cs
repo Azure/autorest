@@ -170,7 +170,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             }
 
             // Exceptions
-            foreach (var exceptionType in serviceClient.Exceptions)
+            foreach (var exceptionType in serviceClient.ErrorTypes)
             {
                 if (exceptionType.Name == "CloudError")
                 {

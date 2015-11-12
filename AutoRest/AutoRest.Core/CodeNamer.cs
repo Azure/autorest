@@ -109,10 +109,6 @@ namespace Microsoft.Rest.Generator
             foreach (var method in client.Methods)
             {
                 NormalizeMethod(method);
-                if (method.DefaultResponse != null && method.DefaultResponse is CompositeType)
-                {
-                    client.Exceptions.Add((CompositeType)method.DefaultResponse);
-                }
             }
         }
 
