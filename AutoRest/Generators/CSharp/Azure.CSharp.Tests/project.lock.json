@@ -255,7 +255,7 @@
           "lib/dnxcore50/Microsoft.Framework.Logging.Console.dll": {}
         }
       },
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -268,11 +268,11 @@
           "System.Xml.ReaderWriter": "4.0.10"
         }
       },
-      "Microsoft.Rest.ClientRuntime.Azure/2.2.0-preview": {
+      "Microsoft.Rest.ClientRuntime.Azure/2.2.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "Microsoft.Rest.ClientRuntime": null
+          "Microsoft.Rest.ClientRuntime": "[1.5.0, 2.0.0)"
         }
       },
       "Microsoft.Win32.Primitives/4.0.0": {
@@ -1326,7 +1326,7 @@
           "lib/dnxcore50/Microsoft.Framework.Logging.Console.dll": {}
         }
       },
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -1339,11 +1339,11 @@
           "System.Xml.ReaderWriter": "4.0.10"
         }
       },
-      "Microsoft.Rest.ClientRuntime.Azure/2.2.0-preview": {
+      "Microsoft.Rest.ClientRuntime.Azure/2.2.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "Microsoft.Rest.ClientRuntime": null
+          "Microsoft.Rest.ClientRuntime": "[1.5.0, 2.0.0)"
         }
       },
       "Microsoft.Win32.Primitives/4.0.0": {
@@ -2755,7 +2755,7 @@
           "lib/dnxcore50/Microsoft.Framework.Logging.Console.dll": {}
         }
       },
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -2768,11 +2768,11 @@
           "System.Xml.ReaderWriter": "4.0.10"
         }
       },
-      "Microsoft.Rest.ClientRuntime.Azure/2.2.0-preview": {
+      "Microsoft.Rest.ClientRuntime.Azure/2.2.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "Microsoft.Rest.ClientRuntime": null
+          "Microsoft.Rest.ClientRuntime": "[1.5.0, 2.0.0)"
         }
       },
       "Microsoft.Win32.Primitives/4.0.0": {
@@ -3937,11 +3937,11 @@
       "type": "project",
       "path": "../CSharp.Tests/project.json"
     },
-    "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+    "Microsoft.Rest.ClientRuntime/1.5.0": {
       "type": "project",
       "path": "../../../../ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime/project.json"
     },
-    "Microsoft.Rest.ClientRuntime.Azure/2.2.0-preview": {
+    "Microsoft.Rest.ClientRuntime.Azure/2.2.0": {
       "type": "project",
       "path": "../../../../ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure/project.json"
     },

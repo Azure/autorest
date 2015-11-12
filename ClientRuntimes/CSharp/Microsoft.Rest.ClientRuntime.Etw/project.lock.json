@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     ".NETFramework,Version=v4.5": {
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -28,7 +28,7 @@
       }
     },
     ".NETFramework,Version=v4.5/win7-x86": {
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -53,7 +53,7 @@
       }
     },
     ".NETFramework,Version=v4.5/win7-x64": {
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -79,7 +79,7 @@
     }
   },
   "libraries": {
-    "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+    "Microsoft.Rest.ClientRuntime/1.5.0": {
       "type": "project",
       "path": "../Microsoft.Rest.ClientRuntime/project.json"
     },

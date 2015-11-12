@@ -8,8 +8,8 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>eddb6367-5c7b-428c-b54c-96bcd90f6e6c</ProjectGuid>
     <RootNamespace>Microsoft.Rest.ClientRuntime</RootNamespace>
-    <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
-    <OutputPath Condition="'$(OutputPath)'=='' ">bin\$(MSBuildProjectName)\</OutputPath>
+    <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">obj\$(Configuration)</BaseIntermediateOutputPath>
+    <OutputPath Condition="'$(OutputPath)'=='' ">bin</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>

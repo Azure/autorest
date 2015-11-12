@@ -1,5 +1,5 @@
 {
-  "version": "2.2.0-preview",
+  "version": "2.2.0",
   "copyright": "Copyright (c) Microsoft Corporation",
   "iconUrl": "http://go.microsoft.com/fwlink/?LinkID=288890",
   "title": "Client Runtime for Microsoft Azure Libraries",
@@ -9,6 +9,11 @@
   "tags": [ "Microsoft Azure AutoRest ClientRuntime REST azureofficial" ],
   "projectUrl": "https://github.com/Azure/AutoRest",
   "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+  
+  "compilationOptions": {
+    "useOssSigning": true,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk"
+  },
 
   "frameworks": {
     "net45": {
@@ -53,6 +58,6 @@
   },
 
   "dependencies": {
-    "Microsoft.Rest.ClientRuntime": ""
+    "Microsoft.Rest.ClientRuntime": "[1.5,2.0)"
   }
 }

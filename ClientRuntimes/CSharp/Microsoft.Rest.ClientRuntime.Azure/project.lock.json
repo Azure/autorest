@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     ".NETFramework,Version=v4.5": {
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -28,7 +28,7 @@
       }
     },
     ".NETPortable,Version=v4.5,Profile=Profile111": {
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": ".NETPortable,Version=v4.5,Profile=Profile111",
         "dependencies": {
@@ -97,7 +97,7 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -672,7 +672,7 @@
       }
     },
     ".NETFramework,Version=v4.5/win7-x86": {
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -697,7 +697,7 @@
       }
     },
     ".NETFramework,Version=v4.5/win7-x64": {
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -722,7 +722,7 @@
       }
     },
     ".NETPortable,Version=v4.5,Profile=Profile111/win7-x86": {
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": ".NETPortable,Version=v4.5,Profile=Profile111",
         "dependencies": {
@@ -764,7 +764,7 @@
       }
     },
     ".NETPortable,Version=v4.5,Profile=Profile111/win7-x64": {
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": ".NETPortable,Version=v4.5,Profile=Profile111",
         "dependencies": {
@@ -833,7 +833,7 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -1441,7 +1441,7 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -2023,7 +2023,7 @@
     }
   },
   "libraries": {
-    "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+    "Microsoft.Rest.ClientRuntime/1.5.0": {
       "type": "project",
       "path": "../Microsoft.Rest.ClientRuntime/project.json"
     },
@@ -3379,7 +3379,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.Rest.ClientRuntime "
+      "Microsoft.Rest.ClientRuntime >= 1.5.0 < 2.0.0"
     ],
     ".NETFramework,Version=v4.5": [
       "fx/System ",

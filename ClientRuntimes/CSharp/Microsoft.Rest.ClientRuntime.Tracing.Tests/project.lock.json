@@ -21,7 +21,7 @@
           "lib/net40/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {}
         }
       },
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -35,7 +35,7 @@
           "System.Xml"
         ]
       },
-      "Microsoft.Rest.ClientRuntime.Etw/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime.Etw/1.0.0-preview": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -45,7 +45,7 @@
           "System"
         ]
       },
-      "Microsoft.Rest.ClientRuntime.Log4Net/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime.Log4Net/1.0.0-preview": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -150,7 +150,7 @@
           "lib/net40/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {}
         }
       },
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -164,7 +164,7 @@
           "System.Xml"
         ]
       },
-      "Microsoft.Rest.ClientRuntime.Etw/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime.Etw/1.0.0-preview": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -174,7 +174,7 @@
           "System"
         ]
       },
-      "Microsoft.Rest.ClientRuntime.Log4Net/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime.Log4Net/1.0.0-preview": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -279,7 +279,7 @@
           "lib/net40/Microsoft.Diagnostics.Tracing.TraceEvent.dll": {}
         }
       },
-      "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime/1.5.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -293,7 +293,7 @@
           "System.Xml"
         ]
       },
-      "Microsoft.Rest.ClientRuntime.Etw/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime.Etw/1.0.0-preview": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -303,7 +303,7 @@
           "System"
         ]
       },
-      "Microsoft.Rest.ClientRuntime.Log4Net/1.4.2-preview": {
+      "Microsoft.Rest.ClientRuntime.Log4Net/1.0.0-preview": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -391,15 +391,15 @@
     }
   },
   "libraries": {
-    "Microsoft.Rest.ClientRuntime/1.4.2-preview": {
+    "Microsoft.Rest.ClientRuntime/1.5.0": {
       "type": "project",
       "path": "../Microsoft.Rest.ClientRuntime/project.json"
     },
-    "Microsoft.Rest.ClientRuntime.Etw/1.4.2-preview": {
+    "Microsoft.Rest.ClientRuntime.Etw/1.0.0-preview": {
       "type": "project",
       "path": "../Microsoft.Rest.ClientRuntime.Etw/project.json"
     },
-    "Microsoft.Rest.ClientRuntime.Log4Net/1.4.2-preview": {
+    "Microsoft.Rest.ClientRuntime.Log4Net/1.0.0-preview": {
       "type": "project",
       "path": "../Microsoft.Rest.ClientRuntime.Log4Net/project.json"
     },
