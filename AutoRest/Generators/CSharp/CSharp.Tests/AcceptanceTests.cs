@@ -59,7 +59,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             this.Fixture = data;
             _interceptor = new TestTracingInterceptor();
             ServiceClientTracing.AddTracingInterceptor(_interceptor);
-            ServiceClientTracing.IsEnabled = true;
+            ServiceClientTracing.IsEnabled = false;
         }
 
         public ServiceController Fixture { get; set; }

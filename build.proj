@@ -70,8 +70,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <LibraryFxTargetList Condition=" '$(FxTargetList)' == '' and '$(Scope)' == 'ClientRuntime' " Include="portable;net45" />
-    <LibraryFxTargetList Condition=" '$(FxTargetList)' == '' and '$(Scope)' == 'all' " Include="portable;net45" />
     <LibraryFxTargetList Condition=" '$(FxTargetList)' == '' and '$(Scope)' == 'CodeGenerator' " Include="net45" />
     <LibraryFxTargetList Condition=" '$(FxTargetList)' != '' " Include="$(FxTargetList)" />
   </ItemGroup>
@@ -119,41 +117,40 @@
       such as "The imported project ....build\Microsoft.Bcl.Build.targets was not found. " -->
   <Target Name="Clean">
     <MSBuild Projects="$(ClientRuntimeSolution)"
-             Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU"
+             Properties="Configuration=$(Configuration)"
              Targets="Clean"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
     <MSBuild Projects="$(CodeGeneratorSolution)"
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU"
              Targets="Clean"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
-    <MSBuild Projects="$(ClientRuntimeWindowsSolution)"
-           Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
-           Targets="Clean"
-           Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime') and '$(OS)' == 'Windows_NT'" />
     <RemoveDir Directories="$(BinariesFolder)" />
     <RemoveDir Directories="$(TestResultsFolder)" />
   </Target>
 
   <Target Name="CodeAnalysis" DependsOnTargets="RestoreNugetPackages">
     <!--Note, we use "Rebuild" rather "Build", because code analysis happens during the build, and this ensures the build is not skipped-->
-    <MSBuild Projects="$(ClientRuntimeSolution)"
+    <!-- DNX project currently do not have support for code analysis -->
+    <!--<MSBuild Projects="$(ClientRuntimeSolution)"
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
              Targets="Rebuild"
-             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
-
+             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />-->
     <MSBuild Projects="$(CodeGeneratorSolution)"
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
              Targets="Rebuild"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
-    <MSBuild Projects="$(ClientRuntimeWindowsSolution)"
-          Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
-          Targets="Rebuild"
-          Condition=" ('$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime') and '$(OS)' == 'Windows_NT'" />
   </Target>
 
   <!-- Run tests. -->
   <Target Name="Test" DependsOnTargets="RestoreNugetPackages">
-    <Exec Command="gulp test"/>
+    <ItemGroup>
+      <DnxLibraries Include="$(LibraryRoot)AutoRest\Generators\CSharp\Azure.CSharp.Tests\*.xproj" />
+      <DnxLibraries Include="$(LibraryRoot)AutoRest\Generators\CSharp\CSharp.Tests\*.xproj" />
+      <DnxLibraries Include="$(LibraryRoot)ClientRuntimes\CSharp\ClientRuntime.Azure.Tests\*.xproj" />
+      <DnxLibraries Include="$(LibraryRoot)ClientRuntimes\CSharp\ClientRuntime.Tests\*.xproj" />
+    </ItemGroup>
+    <!--<Exec Command="gulp test"/>-->
+    <Exec Command="dnx test -verbose -xml &quot;$(MSBuildProjectDirectory)\TestResults\%(DnxLibraries.Filename).xml&quot;" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"  />
   </Target>
 
   <PropertyGroup>
