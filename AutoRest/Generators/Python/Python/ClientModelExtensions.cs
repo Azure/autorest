@@ -4,6 +4,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using System.Text.RegularExpressions;
@@ -225,8 +226,8 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                 return false;
             }
 
-            return parameter.Extensions.ContainsKey(CodeGenerator.SkipUrlEncodingExtension) &&
-                   (bool)parameter.Extensions[CodeGenerator.SkipUrlEncodingExtension];
+            return parameter.Extensions.ContainsKey(Extensions.SkipUrlEncodingExtension) &&
+                   (bool)parameter.Extensions[Extensions.SkipUrlEncodingExtension];
         }
 
         public static bool ContainsDecimal(this CompositeType type)
