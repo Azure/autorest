@@ -35,8 +35,8 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             ParameterTemplateModels.Clear();
             source.Parameters.ForEach(p => ParameterTemplateModels.Add(new AzureParameterTemplateModel(p)));
 
-            this.ClientRequestIdString = AzureCodeGenerator.GetClientRequestIdString(source);
-            this.RequestIdString = AzureCodeGenerator.GetRequestIdString(source);
+            this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
+            this.RequestIdString = AzureExtensions.GetRequestIdString(source);
         }
 
         public string ClientRequestIdString { get; private set; }
@@ -48,7 +48,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// </summary>
         public bool IsLongRunningOperation
         {
-            get { return Extensions.ContainsKey(AzureCodeGenerator.LongRunningExtension); }
+            get { return Extensions.ContainsKey(AzureExtensions.LongRunningExtension); }
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                     pathParameter.SerializedName,
                     variableName);
 
-                if (pathParameter.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
+                if (pathParameter.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension))
                 {
                     addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = {2} if {0}.include?('{{{1}}}')",
                         inputVariableName,
@@ -120,7 +120,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
             foreach (var param in queryParametres)
             {
-                bool hasSkipUrlExtension = param.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension);
+                bool hasSkipUrlExtension = param.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension);
 
                 if (hasSkipUrlExtension)
                 {
@@ -167,7 +167,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
                 if (this.HttpMethod == HttpMethod.Head && this.ReturnType != null)
                 {
-                    HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureCodeGenerator.HttpHeadStatusCodeSuccessFunc);
+                    HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
                     sb.AppendLine("result.body = (status_code == {0})", (int)code);
                 }
 

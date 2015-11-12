@@ -107,6 +107,7 @@ public class EnumOperationsImpl implements EnumOperations {
         if (stringBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter stringBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putNotExpandable(stringBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

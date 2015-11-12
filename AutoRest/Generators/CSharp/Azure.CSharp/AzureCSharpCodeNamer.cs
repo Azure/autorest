@@ -28,7 +28,7 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             // default value
             nextLinkName = null;
-            var ext = extensions[AzureCodeGenerator.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+            var ext = extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
             if (ext == null)
             {
                 return null;
@@ -85,7 +85,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
             var convertedTypes = new Dictionary<IType, CompositeType>();
 
-            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension)))
+            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
                 string nextLinkString;
                 string pageClassName = GetPagingSetting(method.Extensions, pageClasses, out nextLinkString);
@@ -111,8 +111,8 @@ namespace Microsoft.Rest.Generator.CSharp
                         {
                             Name = pagableTypeName
                         };
-                        pagedResult.Extensions[AzureCodeGenerator.ExternalExtension] = true;
-                        pagedResult.Extensions[AzureCodeGenerator.PageableExtension] = ipagableTypeName;
+                        pagedResult.Extensions[AzureExtensions.ExternalExtension] = true;
+                        pagedResult.Extensions[AzureExtensions.PageableExtension] = ipagableTypeName;
 
                         convertedTypes[method.Responses[responseStatus]] = pagedResult;
                         method.Responses[responseStatus] = pagedResult;
@@ -125,7 +125,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 }
             }
 
-            AzureCodeGenerator.RemoveUnreferencedTypes(serviceClient, convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name));
+            AzureExtensions.RemoveUnreferencedTypes(serviceClient, convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name));
         }
     }
 }

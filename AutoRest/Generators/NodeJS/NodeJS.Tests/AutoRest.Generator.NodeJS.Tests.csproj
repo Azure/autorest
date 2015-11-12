@@ -61,10 +61,6 @@
       <Project>{9517265e-5127-460c-9dde-fe017d73121c}</Project>
       <Name>AutoRest.Modeler.Swagger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Azure.Common\Azure.Common\AutoRest.Generator.Azure.Common.csproj">
-      <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
-      <Name>AutoRest.Generator.Azure.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NodeJS\AutoRest.Generator.NodeJS.csproj">
       <Project>{77E73F37-9586-44EA-91B0-F244D08467D2}</Project>
       <Name>AutoRest.Generator.NodeJS</Name>
