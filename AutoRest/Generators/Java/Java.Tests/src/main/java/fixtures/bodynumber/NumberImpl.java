@@ -595,6 +595,7 @@ public class NumberImpl implements Number {
         if (numberBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter numberBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putBigDecimal(numberBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -692,6 +693,7 @@ public class NumberImpl implements Number {
         if (numberBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter numberBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putBigDecimalPositiveDecimal(numberBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -789,6 +791,7 @@ public class NumberImpl implements Number {
         if (numberBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter numberBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putBigDecimalNegativeDecimal(numberBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1064,6 +1067,7 @@ public class NumberImpl implements Number {
         if (numberBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter numberBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putSmallDecimal(numberBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

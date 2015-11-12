@@ -109,6 +109,7 @@ public class BasicOperationsImpl implements BasicOperations {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putValid(complexBody);

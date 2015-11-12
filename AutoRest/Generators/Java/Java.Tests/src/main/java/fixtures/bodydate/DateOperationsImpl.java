@@ -239,6 +239,7 @@ public class DateOperationsImpl implements DateOperations {
         if (dateBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter dateBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putMaxDate(dateBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -336,6 +337,7 @@ public class DateOperationsImpl implements DateOperations {
         if (dateBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter dateBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putMinDate(dateBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

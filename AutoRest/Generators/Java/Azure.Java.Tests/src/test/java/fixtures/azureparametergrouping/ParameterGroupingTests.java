@@ -2,9 +2,9 @@ package fixtures.azureparametergrouping;
 
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azureparametergrouping.models.FirstParameterGroup;
+import fixtures.azureparametergrouping.models.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
-import fixtures.azureparametergrouping.models.SecondParameterGroup;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -43,9 +43,17 @@ public class ParameterGroupingTests {
         FirstParameterGroup first = new FirstParameterGroup();
         first.setQueryOne(21);
         first.setHeaderOne("header");
-        SecondParameterGroup second = new SecondParameterGroup();
+        ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup second = new ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup();
         second.setHeaderTwo("header2");
         second.setQueryTwo(42);
         ServiceResponse<Void> group = client.getParameterGrouping().postMultipleParameterGroups(first, second);
+    }
+
+    @Test
+    public void postParameterGroupWithSharedParameter() throws Exception {
+        FirstParameterGroup first = new FirstParameterGroup();
+        first.setQueryOne(21);
+        first.setHeaderOne("header");
+        ServiceResponse<Void> group = client.getParameterGrouping().postSharedParameterGroupObject(first);
     }
 }

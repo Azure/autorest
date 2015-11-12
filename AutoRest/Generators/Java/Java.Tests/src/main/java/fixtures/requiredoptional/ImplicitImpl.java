@@ -63,6 +63,7 @@ public class ImplicitImpl implements Implicit {
         if (pathParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter pathParameter is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getRequiredPath(pathParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
@@ -249,6 +250,7 @@ public class ImplicitImpl implements Implicit {
         if (this.client.getRequiredGlobalPath() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getRequiredGlobalPath(this.client.getRequiredGlobalPath());
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
@@ -300,6 +302,7 @@ public class ImplicitImpl implements Implicit {
         if (this.client.getRequiredGlobalQuery() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getRequiredGlobalQuery(this.client.getRequiredGlobalQuery());
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {

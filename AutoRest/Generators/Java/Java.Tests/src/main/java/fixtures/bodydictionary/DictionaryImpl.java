@@ -159,6 +159,7 @@ public class DictionaryImpl implements Dictionary {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putEmpty(arrayBody);
@@ -434,6 +435,7 @@ public class DictionaryImpl implements Dictionary {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putBooleanTfft(arrayBody);
@@ -621,6 +623,7 @@ public class DictionaryImpl implements Dictionary {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putIntegerValid(arrayBody);
@@ -808,6 +811,7 @@ public class DictionaryImpl implements Dictionary {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putLongValid(arrayBody);
@@ -995,6 +999,7 @@ public class DictionaryImpl implements Dictionary {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putFloatValid(arrayBody);
@@ -1182,6 +1187,7 @@ public class DictionaryImpl implements Dictionary {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDoubleValid(arrayBody);
@@ -1369,6 +1375,7 @@ public class DictionaryImpl implements Dictionary {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putStringValid(arrayBody);
@@ -1556,6 +1563,7 @@ public class DictionaryImpl implements Dictionary {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDateValid(arrayBody);
@@ -1743,6 +1751,7 @@ public class DictionaryImpl implements Dictionary {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTimeValid(arrayBody);
@@ -1930,6 +1939,7 @@ public class DictionaryImpl implements Dictionary {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
@@ -2029,6 +2039,7 @@ public class DictionaryImpl implements Dictionary {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDurationValid(arrayBody);
@@ -2128,6 +2139,7 @@ public class DictionaryImpl implements Dictionary {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putByteValid(arrayBody);
@@ -2447,6 +2459,7 @@ public class DictionaryImpl implements Dictionary {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putComplexValid(arrayBody);
@@ -2722,6 +2735,7 @@ public class DictionaryImpl implements Dictionary {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putArrayValid(arrayBody);
@@ -2997,6 +3011,7 @@ public class DictionaryImpl implements Dictionary {
         if (arrayBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDictionaryValid(arrayBody);
