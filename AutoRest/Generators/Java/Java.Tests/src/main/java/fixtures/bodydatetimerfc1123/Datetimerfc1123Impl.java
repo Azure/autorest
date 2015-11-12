@@ -239,6 +239,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
         if (datetimeBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -380,6 +381,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
         if (datetimeBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

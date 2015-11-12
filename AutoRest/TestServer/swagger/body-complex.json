@@ -946,7 +946,7 @@
           "200": {
             "description": "Returns an object like this: {\n        'fishtype':'Salmon',\n        'location':'alaska',\n        'iswild':true,\n        'species':'king',\n        'length':1.0,\n        'siblings':[\n          {\n            'fishtype':'Shark',\n            'age':6,\n            'birthday': '2012-01-05T01:00:00Z',\n            'length':20.0,\n            'species':'predator',\n          },\n          {\n            'fishtype':'Sawshark',\n            'age':105,\n            'birthday': '1900-01-05T01:00:00Z',\n            'length':10.0,\n            'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),\n            'species':'dangerous',\n          },\n          {\n            'fishtype': 'goblin',\n            'age': 1,\n            'birthday': '2015-08-08T00:00:00Z',\n            'length': 30.0,\n            'species': 'scary',\n            'jawsize': 5\n          }\n        ]\n      };",
             "schema": {
-              "$ref": "#/definitions/fish"
+              "$ref": "#/definitions/Fish"
             }
           },
           "default": {
@@ -966,7 +966,7 @@
             "in": "body",
             "description": "Please put a salmon that looks like this:\n{\n        'fishtype':'Salmon',\n        'location':'alaska',\n        'iswild':true,\n        'species':'king',\n        'length':1.0,\n        'siblings':[\n          {\n            'fishtype':'Shark',\n            'age':6,\n            'birthday': '2012-01-05T01:00:00Z',\n            'length':20.0,\n            'species':'predator',\n          },\n          {\n            'fishtype':'Sawshark',\n            'age':105,\n            'birthday': '1900-01-05T01:00:00Z',\n            'length':10.0,\n            'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),\n            'species':'dangerous',\n          },\n          {\n            'fishtype': 'goblin',\n            'age': 1,\n            'birthday': '2015-08-08T00:00:00Z',\n            'length': 30.0,\n            'species': 'scary',\n            'jawsize': 5\n          }\n        ]\n      };",
             "schema": {
-              "$ref": "#/definitions/fish"
+              "$ref": "#/definitions/Fish"
             },
             "required": true
           }
@@ -994,7 +994,7 @@
             "in": "body",
             "description": "Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:\n{\n    \"fishtype\": \"sawshark\",\n    \"species\": \"snaggle toothed\",\n    \"length\": 18.5,\n    \"age\": 2,\n    \"birthday\": \"2013-06-01T01:00:00Z\",\n    \"location\": \"alaska\",\n    \"picture\": base64(FF FF FF FF FE),\n    \"siblings\": [\n        {\n            \"fishtype\": \"shark\",\n            \"species\": \"predator\",\n            \"birthday\": \"2012-01-05T01:00:00Z\",\n            \"length\": 20,\n            \"age\": 6\n        },\n        {\n            \"fishtype\": \"sawshark\",\n            \"species\": \"dangerous\",\n            \"picture\": base64(FF FF FF FF FE),\n            \"length\": 10,\n            \"age\": 105\n        }\n    ]\n}",
             "schema": {
-              "$ref": "#/definitions/fish"
+              "$ref": "#/definitions/Fish"
             },
             "required": true
           }
@@ -1020,7 +1020,7 @@
           "200": {
             "description": "Complex object that extends cat and pet, returns a Salmon like this:\n{\n        'fishtype':'Salmon',\n        'location':'alaska',\n        'iswild':true,\n        'species':'king',\n        'length':1,\n        'siblings':[\n          {\n            'fishtype':'Shark',\n            'age':6,\n            'birthday': '2012-01-05T01:00:00Z',\n            'species':'predator',\n            'length':20,\n            'siblings':[\n                {\n                    'fishtype':'Salmon',\n                    'location':'atlantic',\n                    'iswild':true,\n                    'species':'coho',\n                    'length':2,\n                    'siblings':[\n                      {\n                        'fishtype':'Shark',\n                        'age':6,\n                        'birthday': '2012-01-05T01:00:00Z',\n                        'species':'predator',\n                        'length':20\n                      },\n                      {\n                        'fishtype':'Sawshark',\n                        'age':105,\n                        'birthday': '1900-01-05T01:00:00Z',\n                        'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),\n                        'species':'dangerous',\n                        'length':10\n                      }\n                    ]\n                },\n                {\n                    'fishtype':'Sawshark',\n                    'age':105,\n                    'birthday': '1900-01-05T01:00:00Z',\n                    'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),\n                    'species':'dangerous',\n                    'length':10,\n                    'siblings':[]\n                }\n            ]\n          },\n          {\n            'fishtype':'Sawshark',\n            'age':105,\n            'birthday': '1900-01-05T01:00:00Z',\n            'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),\n            'species':'dangerous',\n            'length':10,'siblings':[]\n          }\n        ]\n    };",
             "schema": {
-              "$ref": "#/definitions/fish"
+              "$ref": "#/definitions/Fish"
             }
           },
           "default": {
@@ -1040,7 +1040,7 @@
             "in": "body",
             "description": "Please put a salmon that looks like this:\n{\n    \"fishtype\": \"salmon\",\n    \"species\": \"king\",\n    \"length\": 1,\n    \"age\": 1,\n    \"location\": \"alaska\",\n    \"iswild\": true,\n    \"siblings\": [\n        {\n            \"fishtype\": \"shark\",\n            \"species\": \"predator\",\n            \"length\": 20,\n            \"age\": 6,\n            \"siblings\": [\n                {\n                    \"fishtype\": \"salmon\",\n                    \"species\": \"coho\",\n                    \"length\": 2,\n                    \"age\": 2,\n                    \"location\": \"atlantic\",\n                    \"iswild\": true,\n                    \"siblings\": [\n                        {\n                            \"fishtype\": \"shark\",\n                            \"species\": \"predator\",\n                            \"length\": 20,\n                            \"age\": 6\n                        },\n                        {\n                            \"fishtype\": \"sawshark\",\n                            \"species\": \"dangerous\",\n                            \"length\": 10,\n                            \"age\": 105\n                        }\n                    ]\n                },\n                {\n                    \"fishtype\": \"sawshark\",\n                    \"species\": \"dangerous\",\n                    \"length\": 10,\n                    \"age\": 105\n                }\n            ]\n        },\n        {\n            \"fishtype\": \"sawshark\",\n            \"species\": \"dangerous\",\n            \"length\": 10,\n            \"age\": 105\n        }\n    ]\n}",
             "schema": {
-              "$ref": "#/definitions/fish"
+              "$ref": "#/definitions/Fish"
             },
             "required": true
           }
@@ -1138,7 +1138,7 @@
         }
       }
     },
-    "fish": {
+    "Fish": {
       "discriminator": "fishtype",
       "required": [ "fishtype", "length" ],
       "properties": {
@@ -1155,7 +1155,7 @@
         "siblings": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/fish"
+            "$ref": "#/definitions/Fish"
           }
         }
       }
@@ -1163,7 +1163,7 @@
     "salmon": {
       "allOf": [
         {
-          "$ref": "#/definitions/fish"
+          "$ref": "#/definitions/Fish"
         }
       ],
       "properties": {
@@ -1178,7 +1178,7 @@
     "shark": {
       "allOf": [
         {
-          "$ref": "#/definitions/fish"
+          "$ref": "#/definitions/Fish"
         }
       ],
       "required": [ "birthday" ],
