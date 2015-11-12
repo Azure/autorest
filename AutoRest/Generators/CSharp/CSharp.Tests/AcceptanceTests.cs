@@ -1336,7 +1336,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
                 // POST param/existingkey
 #if MONO
-                Assert.Throws<Microsoft.Rest.HttpOperationException>(
+                Assert.Throws<Fixtures.AcceptanceTestsHeader.Models.ErrorException>(
                     () => client.Header.ParamExistingKey("overwrite"));
 #else
                 client.Header.ParamExistingKey("overwrite");
