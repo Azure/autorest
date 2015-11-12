@@ -12,7 +12,7 @@
 
 /**
  * @class
- * Initializes a new instance of the SecondParameterGroup class.
+ * Initializes a new instance of the ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup class.
  * @constructor
  * Additional parameters for the postMultipleParameterGroups operation.
  * @member {string} [headerTwo]
@@ -20,7 +20,7 @@
  * @member {number} [queryTwo] Query parameter with default
  * 
  */
-function SecondParameterGroup(parameters) {
+function ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup(parameters) {
   if (parameters !== null && parameters !== undefined) {
     if (parameters.headerTwo !== undefined) {
       this.headerTwo = parameters.headerTwo;
@@ -33,4 +33,4 @@ function SecondParameterGroup(parameters) {
 
 
 
-module.exports = SecondParameterGroup;
+module.exports = ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup;
