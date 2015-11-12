@@ -22,11 +22,11 @@ import retrofit.http.Query;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in SkipUrlEncoding.
+ * in SkipUrlEncodingOperations.
  */
-public interface SkipUrlEncoding {
+public interface SkipUrlEncodingOperations {
     /**
-     * The interface defining all the services for SkipUrlEncoding to be
+     * The interface defining all the services for SkipUrlEncodingOperations to be
      * used by Retrofit to perform actually REST calls.
      */
     interface SkipUrlEncodingService {

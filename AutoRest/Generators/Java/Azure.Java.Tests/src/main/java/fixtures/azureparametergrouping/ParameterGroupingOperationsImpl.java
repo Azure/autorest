@@ -29,11 +29,11 @@ import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class ParameterGroupingImpl implements ParameterGrouping {
+public class ParameterGroupingOperationsImpl implements ParameterGroupingOperations {
     private ParameterGroupingService service;
     AutoRestParameterGroupingTestService client;
 
-    public ParameterGroupingImpl(Retrofit retrofit, AutoRestParameterGroupingTestService client) {
+    public ParameterGroupingOperationsImpl(Retrofit retrofit, AutoRestParameterGroupingTestService client) {
         this.service = retrofit.create(ParameterGroupingService.class);
         this.client = client;
     }

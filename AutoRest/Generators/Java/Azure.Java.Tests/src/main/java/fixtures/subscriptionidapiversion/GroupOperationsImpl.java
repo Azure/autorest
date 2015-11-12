@@ -24,11 +24,11 @@ import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class GroupImpl implements Group {
+public class GroupOperationsImpl implements GroupOperations {
     private GroupService service;
     MicrosoftAzureTestUrl client;
 
-    public GroupImpl(Retrofit retrofit, MicrosoftAzureTestUrl client) {
+    public GroupOperationsImpl(Retrofit retrofit, MicrosoftAzureTestUrl client) {
         this.service = retrofit.create(GroupService.class);
         this.client = client;
     }

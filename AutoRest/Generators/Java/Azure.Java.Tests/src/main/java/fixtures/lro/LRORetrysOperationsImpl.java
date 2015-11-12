@@ -23,11 +23,11 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class LRORetrysImpl implements LRORetrys {
+public class LRORetrysOperationsImpl implements LRORetrysOperations {
     private LRORetrysService service;
     AutoRestLongRunningOperationTestService client;
 
-    public LRORetrysImpl(Retrofit retrofit, AutoRestLongRunningOperationTestService client) {
+    public LRORetrysOperationsImpl(Retrofit retrofit, AutoRestLongRunningOperationTestService client) {
         this.service = retrofit.create(LRORetrysService.class);
         this.client = client;
     }

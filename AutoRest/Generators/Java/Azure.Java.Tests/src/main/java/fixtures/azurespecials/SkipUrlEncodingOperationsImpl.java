@@ -23,11 +23,11 @@ import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class SkipUrlEncodingImpl implements SkipUrlEncoding {
+public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations {
     private SkipUrlEncodingService service;
     AutoRestAzureSpecialParametersTestClient client;
 
-    public SkipUrlEncodingImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+    public SkipUrlEncodingOperationsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
         this.service = retrofit.create(SkipUrlEncodingService.class);
         this.client = client;
     }

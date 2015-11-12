@@ -23,11 +23,11 @@ import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials {
+public class SubscriptionInCredentialsOperationsImpl implements SubscriptionInCredentialsOperations {
     private SubscriptionInCredentialsService service;
     AutoRestAzureSpecialParametersTestClient client;
 
-    public SubscriptionInCredentialsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+    public SubscriptionInCredentialsOperationsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
         this.service = retrofit.create(SubscriptionInCredentialsService.class);
         this.client = client;
     }

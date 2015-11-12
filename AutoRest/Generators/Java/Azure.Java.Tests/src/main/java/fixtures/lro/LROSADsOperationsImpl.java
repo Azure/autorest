@@ -23,11 +23,11 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class LROSADsImpl implements LROSADs {
+public class LROSADsOperationsImpl implements LROSADsOperations {
     private LROSADsService service;
     AutoRestLongRunningOperationTestService client;
 
-    public LROSADsImpl(Retrofit retrofit, AutoRestLongRunningOperationTestService client) {
+    public LROSADsOperationsImpl(Retrofit retrofit, AutoRestLongRunningOperationTestService client) {
         this.service = retrofit.create(LROSADsService.class);
         this.client = client;
     }

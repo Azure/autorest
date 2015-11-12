@@ -10,6 +10,7 @@
 
 package fixtures.lro;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -18,34 +19,19 @@ import fixtures.lro.models.Product;
 import java.io.IOException;
 import java.lang.InterruptedException;
 import retrofit.Call;
-import retrofit.http.Body;
-import retrofit.http.Header;
-import retrofit.http.POST;
-import retrofit.http.PUT;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
-/**
- * An instance of this class provides access to all the operations defined
- * in LROsCustomHeader.
- */
-public interface LROsCustomHeader {
-    /**
-     * The interface defining all the services for LROsCustomHeader to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface LROsCustomHeaderService {
-        @PUT("/lro/customheader/putasync/retry/succeeded")
-        Call<ResponseBody> putAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
+public class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOperations {
+    private LROsCustomHeaderService service;
+    AutoRestLongRunningOperationTestService client;
 
-        @PUT("/lro/customheader/put/201/creating/succeeded/200")
-        Call<ResponseBody> put201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage);
-
-        @POST("/lro/customheader/post/202/retry/200")
-        Call<ResponseBody> post202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage);
-
-        @POST("/lro/customheader/postasync/retry/succeeded")
-        Call<ResponseBody> postAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
-
+    public LROsCustomHeaderOperationsImpl(Retrofit retrofit, AutoRestLongRunningOperationTestService client) {
+        this.service = retrofit.create(LROsCustomHeaderService.class);
+        this.client = client;
     }
+
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
@@ -55,16 +41,29 @@ public interface LROsCustomHeader {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<Product> putAsyncRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException;
+    public ServiceResponse<Product> putAsyncRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException {
+        Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() {}.getType());
+    }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
      */
-    Call<ResponseBody> putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    public Call<ResponseBody> putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onFailure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() {}.getType(), serviceCallback);
+            }
+        });
+        return call;
+    }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
@@ -75,16 +74,29 @@ public interface LROsCustomHeader {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<Product> put201CreatingSucceeded200(Product product) throws ServiceException, IOException, InterruptedException;
+    public ServiceResponse<Product> put201CreatingSucceeded200(Product product) throws ServiceException, IOException, InterruptedException {
+        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage()).execute();
+        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() {}.getType());
+    }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
      */
-    Call<ResponseBody> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
+    public Call<ResponseBody> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onFailure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() {}.getType(), serviceCallback);
+            }
+        });
+        return call;
+    }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
@@ -95,16 +107,29 @@ public interface LROsCustomHeader {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> post202Retry200(Product product) throws ServiceException, IOException, InterruptedException;
+    public ServiceResponse<Void> post202Retry200(Product product) throws ServiceException, IOException, InterruptedException {
+        Response<ResponseBody> result = service.post202Retry200(product, this.client.getAcceptLanguage()).execute();
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
+    }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
      */
-    Call<ResponseBody> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
+    public Call<ResponseBody> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.post202Retry200(product, this.client.getAcceptLanguage());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onFailure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() {}.getType(), serviceCallback);
+            }
+        });
+        return call;
+    }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
@@ -115,15 +140,28 @@ public interface LROsCustomHeader {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> postAsyncRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException;
+    public ServiceResponse<Void> postAsyncRetrySucceeded(Product product) throws ServiceException, IOException, InterruptedException {
+        Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() {}.getType());
+    }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
      */
-    Call<ResponseBody> postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback);
+    public Call<ResponseBody> postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onFailure(Throwable t) { serviceCallback.failure(t); }
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() {}.getType(), serviceCallback);
+            }
+        });
+        return call;
+    }
 
 }

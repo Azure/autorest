@@ -23,11 +23,11 @@ import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class ApiVersionDefaultImpl implements ApiVersionDefault {
+public class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultOperations {
     private ApiVersionDefaultService service;
     AutoRestAzureSpecialParametersTestClient client;
 
-    public ApiVersionDefaultImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+    public ApiVersionDefaultOperationsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
         this.service = retrofit.create(ApiVersionDefaultService.class);
         this.client = client;
     }

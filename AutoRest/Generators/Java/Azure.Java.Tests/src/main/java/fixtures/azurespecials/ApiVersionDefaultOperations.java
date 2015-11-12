@@ -21,11 +21,11 @@ import retrofit.http.Query;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in ApiVersionDefault.
+ * in ApiVersionDefaultOperations.
  */
-public interface ApiVersionDefault {
+public interface ApiVersionDefaultOperations {
     /**
-     * The interface defining all the services for ApiVersionDefault to be
+     * The interface defining all the services for ApiVersionDefaultOperations to be
      * used by Retrofit to perform actually REST calls.
      */
     interface ApiVersionDefaultService {

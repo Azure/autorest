@@ -25,11 +25,11 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class LROsImpl implements LROs {
+public class LROsOperationsImpl implements LROsOperations {
     private LROsService service;
     AutoRestLongRunningOperationTestService client;
 
-    public LROsImpl(Retrofit retrofit, AutoRestLongRunningOperationTestService client) {
+    public LROsOperationsImpl(Retrofit retrofit, AutoRestLongRunningOperationTestService client) {
         this.service = retrofit.create(LROsService.class);
         this.client = client;
     }

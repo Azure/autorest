@@ -20,11 +20,11 @@ import retrofit.http.Header;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in XMsClientRequestId.
+ * in XMsClientRequestIdOperations.
  */
-public interface XMsClientRequestId {
+public interface XMsClientRequestIdOperations {
     /**
-     * The interface defining all the services for XMsClientRequestId to be
+     * The interface defining all the services for XMsClientRequestIdOperations to be
      * used by Retrofit to perform actually REST calls.
      */
     interface XMsClientRequestIdService {

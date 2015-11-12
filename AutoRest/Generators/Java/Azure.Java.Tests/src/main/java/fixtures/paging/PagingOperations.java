@@ -23,11 +23,11 @@ import retrofit.http.Url;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in Paging.
+ * in PagingOperations.
  */
-public interface Paging {
+public interface PagingOperations {
     /**
-     * The interface defining all the services for Paging to be
+     * The interface defining all the services for PagingOperations to be
      * used by Retrofit to perform actually REST calls.
      */
     interface PagingService {

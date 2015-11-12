@@ -23,11 +23,11 @@ import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class HttpSuccessImpl implements HttpSuccess {
+public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     private HttpSuccessService service;
     AutoRestHeadTestService client;
 
-    public HttpSuccessImpl(Retrofit retrofit, AutoRestHeadTestService client) {
+    public HttpSuccessOperationsImpl(Retrofit retrofit, AutoRestHeadTestService client) {
         this.service = retrofit.create(HttpSuccessService.class);
         this.client = client;
     }

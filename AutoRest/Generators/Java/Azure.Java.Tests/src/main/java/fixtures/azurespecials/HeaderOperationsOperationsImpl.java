@@ -23,12 +23,12 @@ import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class HeaderOperationsImpl implements HeaderOperations {
-    private HeaderService service;
+public class HeaderOperationsOperationsImpl implements HeaderOperationsOperations {
+    private HeaderOperationsService service;
     AutoRestAzureSpecialParametersTestClient client;
 
-    public HeaderOperationsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
-        this.service = retrofit.create(HeaderService.class);
+    public HeaderOperationsOperationsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+        this.service = retrofit.create(HeaderOperationsService.class);
         this.client = client;
     }
 

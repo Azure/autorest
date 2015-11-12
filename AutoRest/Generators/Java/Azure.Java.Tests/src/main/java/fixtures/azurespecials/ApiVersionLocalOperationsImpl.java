@@ -23,11 +23,11 @@ import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class ApiVersionLocalImpl implements ApiVersionLocal {
+public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations {
     private ApiVersionLocalService service;
     AutoRestAzureSpecialParametersTestClient client;
 
-    public ApiVersionLocalImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+    public ApiVersionLocalOperationsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
         this.service = retrofit.create(ApiVersionLocalService.class);
         this.client = client;
     }

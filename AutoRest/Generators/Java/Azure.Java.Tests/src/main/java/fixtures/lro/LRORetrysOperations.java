@@ -26,11 +26,11 @@ import retrofit.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in LRORetrys.
+ * in LRORetrysOperations.
  */
-public interface LRORetrys {
+public interface LRORetrysOperations {
     /**
-     * The interface defining all the services for LRORetrys to be
+     * The interface defining all the services for LRORetrysOperations to be
      * used by Retrofit to perform actually REST calls.
      */
     interface LRORetrysService {

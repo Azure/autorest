@@ -20,14 +20,14 @@ import retrofit.http.POST;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in HeaderOperations.
+ * in HeaderOperationsOperations.
  */
-public interface HeaderOperations {
+public interface HeaderOperationsOperations {
     /**
-     * The interface defining all the services for HeaderOperations to be
+     * The interface defining all the services for HeaderOperationsOperations to be
      * used by Retrofit to perform actually REST calls.
      */
-    interface HeaderService {
+    interface HeaderOperationsService {
         @POST("/azurespecials/customNamedRequestId")
         Call<ResponseBody> customNamedRequestId(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage);
 

@@ -94,45 +94,45 @@ public interface AutoRestAzureSpecialParametersTestClient {
     void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
-     * Gets the XMsClientRequestId object to access its operations.
+     * Gets the XMsClientRequestIdOperations object to access its operations.
      * @return the xMsClientRequestId value.
      */
-    XMsClientRequestId getXMsClientRequestId();
+    XMsClientRequestIdOperations getXMsClientRequestId();
 
     /**
-     * Gets the SubscriptionInCredentials object to access its operations.
+     * Gets the SubscriptionInCredentialsOperations object to access its operations.
      * @return the subscriptionInCredentials value.
      */
-    SubscriptionInCredentials getSubscriptionInCredentials();
+    SubscriptionInCredentialsOperations getSubscriptionInCredentials();
 
     /**
-     * Gets the SubscriptionInMethod object to access its operations.
+     * Gets the SubscriptionInMethodOperations object to access its operations.
      * @return the subscriptionInMethod value.
      */
-    SubscriptionInMethod getSubscriptionInMethod();
+    SubscriptionInMethodOperations getSubscriptionInMethod();
 
     /**
-     * Gets the ApiVersionDefault object to access its operations.
+     * Gets the ApiVersionDefaultOperations object to access its operations.
      * @return the apiVersionDefault value.
      */
-    ApiVersionDefault getApiVersionDefault();
+    ApiVersionDefaultOperations getApiVersionDefault();
 
     /**
-     * Gets the ApiVersionLocal object to access its operations.
+     * Gets the ApiVersionLocalOperations object to access its operations.
      * @return the apiVersionLocal value.
      */
-    ApiVersionLocal getApiVersionLocal();
+    ApiVersionLocalOperations getApiVersionLocal();
 
     /**
-     * Gets the SkipUrlEncoding object to access its operations.
+     * Gets the SkipUrlEncodingOperations object to access its operations.
      * @return the skipUrlEncoding value.
      */
-    SkipUrlEncoding getSkipUrlEncoding();
+    SkipUrlEncodingOperations getSkipUrlEncoding();
 
     /**
-     * Gets the HeaderOperations object to access its operations.
+     * Gets the HeaderOperationsOperations object to access its operations.
      * @return the headerOperations value.
      */
-    HeaderOperations getHeaderOperations();
+    HeaderOperationsOperations getHeaderOperations();
 
 }

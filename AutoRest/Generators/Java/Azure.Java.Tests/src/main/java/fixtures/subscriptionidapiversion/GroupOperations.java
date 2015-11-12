@@ -23,11 +23,11 @@ import retrofit.http.Query;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in Group.
+ * in GroupOperations.
  */
-public interface Group {
+public interface GroupOperations {
     /**
-     * The interface defining all the services for Group to be
+     * The interface defining all the services for GroupOperations to be
      * used by Retrofit to perform actually REST calls.
      */
     interface GroupService {

@@ -21,11 +21,11 @@ import retrofit.http.Query;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in ApiVersionLocal.
+ * in ApiVersionLocalOperations.
  */
-public interface ApiVersionLocal {
+public interface ApiVersionLocalOperations {
     /**
-     * The interface defining all the services for ApiVersionLocal to be
+     * The interface defining all the services for ApiVersionLocalOperations to be
      * used by Retrofit to perform actually REST calls.
      */
     interface ApiVersionLocalService {

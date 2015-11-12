@@ -27,11 +27,11 @@ import retrofit.http.Query;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in ParameterGrouping.
+ * in ParameterGroupingOperations.
  */
-public interface ParameterGrouping {
+public interface ParameterGroupingOperations {
     /**
-     * The interface defining all the services for ParameterGrouping to be
+     * The interface defining all the services for ParameterGroupingOperations to be
      * used by Retrofit to perform actually REST calls.
      */
     interface ParameterGroupingService {

@@ -22,11 +22,11 @@ import retrofit.http.Query;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in SubscriptionInCredentials.
+ * in SubscriptionInCredentialsOperations.
  */
-public interface SubscriptionInCredentials {
+public interface SubscriptionInCredentialsOperations {
     /**
-     * The interface defining all the services for SubscriptionInCredentials to be
+     * The interface defining all the services for SubscriptionInCredentialsOperations to be
      * used by Retrofit to perform actually REST calls.
      */
     interface SubscriptionInCredentialsService {

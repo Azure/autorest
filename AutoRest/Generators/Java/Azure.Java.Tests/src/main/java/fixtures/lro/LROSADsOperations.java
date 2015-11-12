@@ -26,11 +26,11 @@ import retrofit.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in LROSADs.
+ * in LROSADsOperations.
  */
-public interface LROSADs {
+public interface LROSADsOperations {
     /**
-     * The interface defining all the services for LROSADs to be
+     * The interface defining all the services for LROSADsOperations to be
      * used by Retrofit to perform actually REST calls.
      */
     interface LROSADsService {

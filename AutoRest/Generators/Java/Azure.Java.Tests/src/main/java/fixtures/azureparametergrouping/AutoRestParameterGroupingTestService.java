@@ -73,9 +73,9 @@ public interface AutoRestParameterGroupingTestService {
     void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
-     * Gets the ParameterGrouping object to access its operations.
+     * Gets the ParameterGroupingOperations object to access its operations.
      * @return the parameterGrouping value.
      */
-    ParameterGrouping getParameterGrouping();
+    ParameterGroupingOperations getParameterGrouping();
 
 }

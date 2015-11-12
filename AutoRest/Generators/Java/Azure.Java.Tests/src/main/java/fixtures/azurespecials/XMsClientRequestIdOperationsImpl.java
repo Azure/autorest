@@ -23,11 +23,11 @@ import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class XMsClientRequestIdImpl implements XMsClientRequestId {
+public class XMsClientRequestIdOperationsImpl implements XMsClientRequestIdOperations {
     private XMsClientRequestIdService service;
     AutoRestAzureSpecialParametersTestClient client;
 
-    public XMsClientRequestIdImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+    public XMsClientRequestIdOperationsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
         this.service = retrofit.create(XMsClientRequestIdService.class);
         this.client = client;
     }

@@ -21,11 +21,11 @@ import retrofit.http.POST;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in SubscriptionInMethod.
+ * in SubscriptionInMethodOperations.
  */
-public interface SubscriptionInMethod {
+public interface SubscriptionInMethodOperations {
     /**
-     * The interface defining all the services for SubscriptionInMethod to be
+     * The interface defining all the services for SubscriptionInMethodOperations to be
      * used by Retrofit to perform actually REST calls.
      */
     interface SubscriptionInMethodService {

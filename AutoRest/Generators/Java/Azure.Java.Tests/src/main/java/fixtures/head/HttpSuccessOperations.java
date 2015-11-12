@@ -20,11 +20,11 @@ import retrofit.http.Header;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in HttpSuccess.
+ * in HttpSuccessOperations.
  */
-public interface HttpSuccess {
+public interface HttpSuccessOperations {
     /**
-     * The interface defining all the services for HttpSuccess to be
+     * The interface defining all the services for HttpSuccessOperations to be
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpSuccessService {

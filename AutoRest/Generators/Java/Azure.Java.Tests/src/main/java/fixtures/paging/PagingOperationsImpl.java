@@ -25,11 +25,11 @@ import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class PagingImpl implements Paging {
+public class PagingOperationsImpl implements PagingOperations {
     private PagingService service;
     AutoRestPagingTestService client;
 
-    public PagingImpl(Retrofit retrofit, AutoRestPagingTestService client) {
+    public PagingOperationsImpl(Retrofit retrofit, AutoRestPagingTestService client) {
         this.service = retrofit.create(PagingService.class);
         this.client = client;
     }
