@@ -7,8 +7,7 @@
 @Header("# ")
 #--------------------------------------------------------------------------
 @EmptyLine
-from runtime.msrest import Configuration
-from runtime.msrest.exceptions import *
+from msrest import Configuration
+from msrest.exceptions import *
 @EmptyLine
 from .@(Model.Name.ToPythonCase()) import @(Model.Name), @(Model.Name)Configuration
-

@@ -59,10 +59,6 @@ class DeserializationError(ClientException):
     pass
 
 
-class ResponseStatusError(ClientException):
-    pass
-
-
 class TokenExpiredError(ClientException):
     pass
 
@@ -73,3 +69,10 @@ class ClientRequestError(ClientException):
 
 class AuthenticationError(ClientException):
     pass
+
+class HttpOperationError(ClientException):
+
+    def __init__(self, deserialize, response, resp_type, *args):
+
+        self.error = deserialize(resp_type, response)
+        super(HttpOperationError, self).__init__(str(self.error), *args)

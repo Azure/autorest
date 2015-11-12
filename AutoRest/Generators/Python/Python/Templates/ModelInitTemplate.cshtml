@@ -12,7 +12,7 @@
   {
     foreach (var modelType in Model.ServiceClient.ModelTypes)
     {
-@:from .@(modelType.Name.ToPythonCase()) import @modelType.Name
+@:from .@(modelType.Name.ToPythonCase()) import @modelType.Name@Model.GetExceptionNameIfExist(modelType)
     }
   }
 

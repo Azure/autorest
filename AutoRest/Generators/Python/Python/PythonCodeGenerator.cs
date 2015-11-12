@@ -63,7 +63,6 @@ namespace Microsoft.Rest.Generator.Python
 
         private void PopulateAdditionalProperties(ServiceClient serviceClient)
         {
-            // TODO???
             if (Settings.AddCredentials)
             {
                 if (serviceClient.Properties.FirstOrDefault(

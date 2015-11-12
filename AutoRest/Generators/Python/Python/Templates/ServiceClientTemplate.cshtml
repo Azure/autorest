@@ -16,14 +16,14 @@
 @:from datetime import *
 }
 @EmptyLine
-from runtime.msrest import ServiceClient, Configuration
-from runtime.msrest import Serializer, Deserializer
-from runtime.msrest.exceptions import (
+from msrest import ServiceClient, Configuration
+from msrest import Serializer, Deserializer
+from msrest.exceptions import (
     SerializationError,
     DeserializationError,
     TokenExpiredError,
-    ClientRequestError)
-from runtime.msrest.paging import Paged
+    ClientRequestError,
+    HttpOperationError)
 @{
   if (Model.MethodGroupModels.Any())
   {
@@ -40,8 +40,8 @@ class @(Model.Name)Configuration(Configuration):
     def __init__(self, base_url=None, filepath=None):
 @*(Model.RequiredConstructorParameters)*@
 @EmptyLine
-         if (not base_url):
-             base_url = '@Model.BaseUrl'
+        if not base_url:
+            base_url = '@Model.BaseUrl'
 @EmptyLine
         super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
 @*EmptyLine
@@ -68,13 +68,6 @@ class @(Model.Name)(object):
 @if (Model.MethodTemplateModels.Any())
 {
 <text>
-    def _verify_response(self, response, accept_status, error):
-@EmptyLine
-        if response.status_code not in accept_status:
-            deserialized = self._deserialize(
-                error, response)
-@EmptyLine
-            raise deserialized
 @EmptyLine
     def _parse_url(self, name, value, datatype):
 @EmptyLine
@@ -89,14 +82,10 @@ class @(Model.Name)(object):
 @EmptyLine
         else:
             return value
-@EmptyLine
 </text>
   foreach (var method in Model.MethodTemplateModels)
   {
-@(Include(new MethodTemplate(), method))
 @EmptyLine
-@:
+@(Include(new MethodTemplate(), method))
   }
 }
-
-

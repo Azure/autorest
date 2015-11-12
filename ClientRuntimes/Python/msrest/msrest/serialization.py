@@ -143,6 +143,10 @@ class Serializer(object):
         if data_type:
             return self.serialize_data(target_obj, data_type, required=True)
 
+        if not hasattr(target_obj, "_attribute_map"):
+            data_type = type(target_obj).__name__
+            return self.serialize_data(target_obj, data_type, required=True)
+
         try:
             attributes = target_obj._attribute_map
             required_attrs = target_obj._required
