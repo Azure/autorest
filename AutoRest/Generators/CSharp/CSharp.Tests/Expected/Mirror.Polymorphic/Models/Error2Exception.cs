@@ -9,9 +9,8 @@
 namespace Fixtures.MirrorPolymorphic.Models
 {
     using Microsoft.Rest;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
     using System;
+    using System.Net.Http;
     using System.Runtime.Serialization;
 #if !PORTABLE && !DNXCORE50
     using System.Security.Permissions;
@@ -23,12 +22,22 @@ namespace Fixtures.MirrorPolymorphic.Models
 #if !PORTABLE && !DNXCORE50
     [Serializable]
 #endif
-    public class Error2Exception : HttpOperationException
+    public class Error2Exception : RestException
     {
         /// <summary>
-        /// Gets or sets the error object.
+        /// Gets information about the associated HTTP request.
         /// </summary>
-        public Error2 Error { get; set; }
+        public HttpRequestMessage Request { get; set; }
+
+        /// <summary>
+        /// Gets information about the associated HTTP response.
+        /// </summary>
+        public HttpResponseMessage Response { get; set; }
+
+        /// <summary>
+        /// Gets or sets the body object.
+        /// </summary>
+        public Error2 Body { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the Error2Exception class.
@@ -42,7 +51,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// </summary>
         /// <param name="message">The exception message.</param>
         public Error2Exception(string message)
-            : this(message, (Exception)null)
+            : this(message, null)
         {
         }
 
@@ -50,21 +59,10 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// Initializes a new instance of the Error2Exception class.
         /// </summary>
         /// <param name="message">The exception message.</param>
-        /// <param name="innerException">The inner exception.</param>
+        /// <param name="innerException">Inner exception.</param>
         public Error2Exception(string message, Exception innerException)
             : base(message, innerException)
         {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the Error2Exception class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        /// <param name="error">The response content as Error2 type.</param>
-        public Error2Exception(string message, Error2 error)
-            : base(message, null)
-        {
-            Error = error;
         }
 
 #if !PORTABLE && !DNXCORE50
@@ -94,7 +92,7 @@ namespace Fixtures.MirrorPolymorphic.Models
 
             info.AddValue("Request", Request);
             info.AddValue("Response", Response);
-            info.AddValue("Error", Error);
+            info.AddValue("Body", Body);
         }
 #endif
     }

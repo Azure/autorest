@@ -2795,6 +2795,9 @@
       }
     },
     "A": {
+      "x-ms-exception": {
+        "name": "MyException"
+      },
       "properties": {
         "statusCode": {
           "type": "string"

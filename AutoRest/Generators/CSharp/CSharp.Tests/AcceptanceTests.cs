@@ -1753,12 +1753,28 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 operation();
                 throw new InvalidOperationException("Operation did not throw as expected");
             }
-            catch (HttpOperationException exception)
+            catch (Fixtures.AcceptanceTestsHttp.Models.ErrorException exception)
             {
                 Assert.Equal(expectedStatusCode, exception.Response.StatusCode);
                 if (errorValidator != null)
                 {
                     errorValidator(exception.Body as T);
+                }
+            }
+            catch (MyException exception1)
+            {
+                Assert.Equal(expectedStatusCode, exception1.Response.StatusCode);
+                if (errorValidator != null)
+                {
+                    errorValidator(exception1.Body as T);
+                }
+            }
+            catch (HttpOperationException exception2)
+            {
+                Assert.Equal(expectedStatusCode, exception2.Response.StatusCode);
+                if (errorValidator != null)
+                {
+                    errorValidator(exception2.Body as T);
                 }
             }
         }

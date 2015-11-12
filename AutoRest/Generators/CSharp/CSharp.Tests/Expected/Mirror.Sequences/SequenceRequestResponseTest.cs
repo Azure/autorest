@@ -224,7 +224,6 @@ namespace Fixtures.MirrorSequences
                 ErrorModel errorBody = JsonConvert.DeserializeObject<ErrorModel>(responseContent, this.DeserializationSettings);
                 if (errorBody != null)
                 {
-                    ex.Error = errorBody;
                     ex.Body = errorBody;
                 }
                 ex.Request = httpRequest;

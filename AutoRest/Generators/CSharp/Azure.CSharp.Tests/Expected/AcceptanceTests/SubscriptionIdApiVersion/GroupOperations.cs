@@ -151,7 +151,6 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
                 {
-                    ex.Error = errorBody;
                     ex.Body = errorBody;
                 }
                 ex.Request = httpRequest;

@@ -215,7 +215,6 @@ namespace Fixtures.MirrorPolymorphic
                 Error2 errorBody = JsonConvert.DeserializeObject<Error2>(responseContent, this.DeserializationSettings);
                 if (errorBody != null)
                 {
-                    ex.Error = errorBody;
                     ex.Body = errorBody;
                 }
                 ex.Request = httpRequest;

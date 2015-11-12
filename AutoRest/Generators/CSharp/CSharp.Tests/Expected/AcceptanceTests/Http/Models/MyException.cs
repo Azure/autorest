@@ -9,9 +9,8 @@
 namespace Fixtures.AcceptanceTestsHttp.Models
 {
     using Microsoft.Rest;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
     using System;
+    using System.Net.Http;
     using System.Runtime.Serialization;
 #if !PORTABLE && !DNXCORE50
     using System.Security.Permissions;
@@ -23,57 +22,56 @@ namespace Fixtures.AcceptanceTestsHttp.Models
 #if !PORTABLE && !DNXCORE50
     [Serializable]
 #endif
-    public class AException : HttpOperationException
+    public class MyException : RestException
     {
         /// <summary>
-        /// Gets or sets the error object.
+        /// Gets information about the associated HTTP request.
         /// </summary>
-        public A Error { get; set; }
+        public HttpRequestMessage Request { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the AException class.
+        /// Gets information about the associated HTTP response.
         /// </summary>
-        public AException()
+        public HttpResponseMessage Response { get; set; }
+
+        /// <summary>
+        /// Gets or sets the body object.
+        /// </summary>
+        public A Body { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the MyException class.
+        /// </summary>
+        public MyException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the AException class.
+        /// Initializes a new instance of the MyException class.
         /// </summary>
         /// <param name="message">The exception message.</param>
-        public AException(string message)
-            : this(message, (Exception)null)
+        public MyException(string message)
+            : this(message, null)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the AException class.
+        /// Initializes a new instance of the MyException class.
         /// </summary>
         /// <param name="message">The exception message.</param>
-        /// <param name="innerException">The inner exception.</param>
-        public AException(string message, Exception innerException)
+        /// <param name="innerException">Inner exception.</param>
+        public MyException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the AException class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        /// <param name="error">The response content as A type.</param>
-        public AException(string message, A error)
-            : base(message, null)
-        {
-            Error = error;
-        }
-
 #if !PORTABLE && !DNXCORE50
         /// <summary>
-        /// Initializes a new instance of the AException class.
+        /// Initializes a new instance of the MyException class.
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>
-        protected AException(SerializationInfo info, StreamingContext context)
+        protected MyException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
@@ -94,7 +92,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
 
             info.AddValue("Request", Request);
             info.AddValue("Response", Response);
-            info.AddValue("Error", Error);
+            info.AddValue("Body", Body);
         }
 #endif
     }

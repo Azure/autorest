@@ -9,9 +9,8 @@
 namespace Fixtures.MirrorSequences.Models
 {
     using Microsoft.Rest;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
     using System;
+    using System.Net.Http;
     using System.Runtime.Serialization;
 #if !PORTABLE && !DNXCORE50
     using System.Security.Permissions;
@@ -23,12 +22,22 @@ namespace Fixtures.MirrorSequences.Models
 #if !PORTABLE && !DNXCORE50
     [Serializable]
 #endif
-    public class ErrorModelException : HttpOperationException
+    public class ErrorModelException : RestException
     {
         /// <summary>
-        /// Gets or sets the error object.
+        /// Gets information about the associated HTTP request.
         /// </summary>
-        public ErrorModel Error { get; set; }
+        public HttpRequestMessage Request { get; set; }
+
+        /// <summary>
+        /// Gets information about the associated HTTP response.
+        /// </summary>
+        public HttpResponseMessage Response { get; set; }
+
+        /// <summary>
+        /// Gets or sets the body object.
+        /// </summary>
+        public ErrorModel Body { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the ErrorModelException class.
@@ -42,7 +51,7 @@ namespace Fixtures.MirrorSequences.Models
         /// </summary>
         /// <param name="message">The exception message.</param>
         public ErrorModelException(string message)
-            : this(message, (Exception)null)
+            : this(message, null)
         {
         }
 
@@ -50,21 +59,10 @@ namespace Fixtures.MirrorSequences.Models
         /// Initializes a new instance of the ErrorModelException class.
         /// </summary>
         /// <param name="message">The exception message.</param>
-        /// <param name="innerException">The inner exception.</param>
+        /// <param name="innerException">Inner exception.</param>
         public ErrorModelException(string message, Exception innerException)
             : base(message, innerException)
         {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the ErrorModelException class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        /// <param name="error">The response content as ErrorModel type.</param>
-        public ErrorModelException(string message, ErrorModel error)
-            : base(message, null)
-        {
-            Error = error;
         }
 
 #if !PORTABLE && !DNXCORE50
@@ -94,7 +92,7 @@ namespace Fixtures.MirrorSequences.Models
 
             info.AddValue("Request", Request);
             info.AddValue("Response", Response);
-            info.AddValue("Error", Error);
+            info.AddValue("Body", Body);
         }
 #endif
     }

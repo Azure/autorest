@@ -67,7 +67,18 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public virtual string ExceptionTypeDefinitionName
         {
-            get { return this.Name + "Exception"; }
+            get 
+            {
+                if (this.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ExceptionExtension))
+                {
+                    var ext = this.Extensions[Microsoft.Rest.Generator.Extensions.ExceptionExtension] as Newtonsoft.Json.Linq.JContainer;
+                    if (ext != null && ext["name"] != null)
+                    {
+                        return (string)ext["name"];
+                    }
+                }
+                return this.Name + "Exception";
+            }
         }
 
         public virtual IEnumerable<string> Usings

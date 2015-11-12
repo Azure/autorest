@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -8,7 +9,6 @@ using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using System;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -206,7 +206,16 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 if (this.DefaultResponse is CompositeType)
                 {
-                    return this.DefaultResponse.Name + "Exception";
+                    CompositeType type = this.DefaultResponse as CompositeType;
+                    if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ExceptionExtension))
+                    {
+                        var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.ExceptionExtension] as Newtonsoft.Json.Linq.JContainer;
+                        if (ext != null && ext["name"] != null)
+                        {
+                            return (string)ext["name"];
+                        }
+                    }
+                    return type.Name + "Exception";
                 }
                 else
                 {
@@ -222,14 +231,7 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                if (this.DefaultResponse is CompositeType)
-                {
-                    return "ex.Error = errorBody;";
-                }
-                else
-                {
-                    return string.Empty;
-                }
+                return string.Empty;
             }
         }
 

@@ -9,9 +9,8 @@
 namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123.Models
 {
     using Microsoft.Rest;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
     using System;
+    using System.Net.Http;
     using System.Runtime.Serialization;
 #if !PORTABLE && !DNXCORE50
     using System.Security.Permissions;
@@ -23,12 +22,22 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123.Models
 #if !PORTABLE && !DNXCORE50
     [Serializable]
 #endif
-    public class ErrorException : HttpOperationException
+    public class ErrorException : RestException
     {
         /// <summary>
-        /// Gets or sets the error object.
+        /// Gets information about the associated HTTP request.
         /// </summary>
-        public Error Error { get; set; }
+        public HttpRequestMessage Request { get; set; }
+
+        /// <summary>
+        /// Gets information about the associated HTTP response.
+        /// </summary>
+        public HttpResponseMessage Response { get; set; }
+
+        /// <summary>
+        /// Gets or sets the body object.
+        /// </summary>
+        public Error Body { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the ErrorException class.
@@ -42,7 +51,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123.Models
         /// </summary>
         /// <param name="message">The exception message.</param>
         public ErrorException(string message)
-            : this(message, (Exception)null)
+            : this(message, null)
         {
         }
 
@@ -50,21 +59,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123.Models
         /// Initializes a new instance of the ErrorException class.
         /// </summary>
         /// <param name="message">The exception message.</param>
-        /// <param name="innerException">The inner exception.</param>
+        /// <param name="innerException">Inner exception.</param>
         public ErrorException(string message, Exception innerException)
             : base(message, innerException)
         {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the ErrorException class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        /// <param name="error">The response content as Error type.</param>
-        public ErrorException(string message, Error error)
-            : base(message, null)
-        {
-            Error = error;
         }
 
 #if !PORTABLE && !DNXCORE50
@@ -94,7 +92,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123.Models
 
             info.AddValue("Request", Request);
             info.AddValue("Response", Response);
-            info.AddValue("Error", Error);
+            info.AddValue("Body", Body);
         }
 #endif
     }

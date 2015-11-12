@@ -240,7 +240,6 @@ namespace Fixtures.MirrorRecursiveTypes
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                 if (errorBody != null)
                 {
-                    ex.Error = errorBody;
                     ex.Body = errorBody;
                 }
                 ex.Request = httpRequest;

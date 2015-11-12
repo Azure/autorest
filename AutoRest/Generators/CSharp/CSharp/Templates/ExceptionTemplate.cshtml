@@ -7,9 +7,8 @@
 namespace @(Settings.Namespace).Models
 {
     using Microsoft.Rest;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
     using System;
+    using System.Net.Http;
     using System.Runtime.Serialization;
 #if !PORTABLE && !DNXCORE50
     using System.Security.Permissions;
@@ -21,12 +20,22 @@ namespace @(Settings.Namespace).Models
 #if !PORTABLE && !DNXCORE50
     [Serializable]
 #endif
-    public class @Model.ExceptionTypeDefinitionName : HttpOperationException
+    public class @Model.ExceptionTypeDefinitionName : RestException
     {
         /// <summary>
-        /// Gets or sets the error object.
+        /// Gets information about the associated HTTP request.
         /// </summary>
-        public @Model.Name Error { get; set; }
+        public HttpRequestMessage Request { get; set; }
+@EmptyLine
+        /// <summary>
+        /// Gets information about the associated HTTP response.
+        /// </summary>
+        public HttpResponseMessage Response { get; set; }
+@EmptyLine
+        /// <summary>
+        /// Gets or sets the body object.
+        /// </summary>
+        public @Model.Name Body { get; set; }
 @EmptyLine
         /// <summary>
         /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
@@ -36,38 +45,27 @@ namespace @(Settings.Namespace).Models
         }
 @EmptyLine
         /// <summary>
-        /// Initializes a new instance of the @(@Model.ExceptionTypeDefinitionName) class.
+        /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
         /// </summary>
         /// <param name="message">The exception message.</param>
         public @(Model.ExceptionTypeDefinitionName)(string message)
-            : this(message, (Exception)null)
+            : this(message, null)
         {
         }
 @EmptyLine
         /// <summary>
-        /// Initializes a new instance of the @(@Model.ExceptionTypeDefinitionName) class.
+        /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
         /// </summary>
         /// <param name="message">The exception message.</param>
-        /// <param name="innerException">The inner exception.</param>
+        /// <param name="innerException">Inner exception.</param>
         public @(Model.ExceptionTypeDefinitionName)(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 @EmptyLine
-        /// <summary>
-        /// Initializes a new instance of the @(@Model.ExceptionTypeDefinitionName) class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        /// <param name="error">The response content as @Model.Name type.</param>
-        public @(Model.ExceptionTypeDefinitionName)(string message, @Model.Name error)
-            : base(message, null)
-        {
-            Error = error;
-        }
-@EmptyLine
 #if !PORTABLE && !DNXCORE50
         /// <summary>
-        /// Initializes a new instance of the @(@Model.ExceptionTypeDefinitionName) class.
+        /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>
@@ -92,7 +90,7 @@ namespace @(Settings.Namespace).Models
 @EmptyLine
             info.AddValue("Request", Request);
             info.AddValue("Response", Response);
-            info.AddValue("Error", Error);
+            info.AddValue("Body", Body);
         }
 #endif
     }
