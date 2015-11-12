@@ -37,6 +37,8 @@ export interface Paging {
     /**
      * A paging operation that includes a nextLink that has 10 pages
      *
+     * @param {string} [clientRequestId]
+     * 
      * @param {object} [options]
      *
      * @param {object} [options.customHeaders] headers that will be added to
@@ -45,8 +47,8 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMultiplePages(options: RequestOptions, callback: ServiceCallback<models.ProductResult>): void;
-    getMultiplePages(callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePages(clientRequestId: string, options: RequestOptions, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePages(clientRequestId: string, callback: ServiceCallback<models.ProductResult>): void;
 
     /**
      * A paging operation that fails on the first call with 500 and then retries
@@ -144,6 +146,8 @@ export interface Paging {
      * @param {string} nextPageLink The NextLink from the previous successful call
      * to List operation.
      * 
+     * @param {string} [clientRequestId]
+     * 
      * @param {object} [options]
      *
      * @param {object} [options.customHeaders] headers that will be added to
@@ -152,8 +156,8 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMultiplePagesNext(nextPageLink: string, options: RequestOptions, callback: ServiceCallback<models.ProductResult>): void;
-    getMultiplePagesNext(nextPageLink: string, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePagesNext(nextPageLink: string, clientRequestId: string, options: RequestOptions, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePagesNext(nextPageLink: string, clientRequestId: string, callback: ServiceCallback<models.ProductResult>): void;
 
     /**
      * A paging operation that fails on the first call with 500 and then retries
