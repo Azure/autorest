@@ -760,7 +760,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     HeaderOne = headerParameter,
                     QueryOne = queryParameter
                 };
-                SecondParameterGroup secondGroup = new SecondParameterGroup
+                var secondGroup = new ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup
                 {
                     HeaderTwo = "header2",
                     QueryTwo = 42
@@ -773,12 +773,14 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 {
                     HeaderOne = headerParameter
                 };
-                secondGroup = new SecondParameterGroup
+                secondGroup = new ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup
                 {
                     QueryTwo = 42
                 };
 
                 client.ParameterGrouping.PostMultipleParameterGroups(firstGroup, secondGroup);
+
+                client.ParameterGrouping.PostSharedParameterGroupObject(firstGroup);
             }
         }
     }

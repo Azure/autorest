@@ -234,6 +234,8 @@ namespace Microsoft.Rest.Generator.Azure
                 throw new ArgumentNullException("serviceClient");
             }
 
+            HashSet<CompositeType> generatedParameterGroups = new HashSet<CompositeType>();
+
             foreach (Method method in serviceClient.Methods)
             {
                 //This group name is normalized by each languages code generator later, so it need not happen here.
@@ -246,9 +248,18 @@ namespace Microsoft.Rest.Generator.Azure
                         Newtonsoft.Json.Linq.JContainer extensionObject = parameter.Extensions[ParameterGroupExtension] as Newtonsoft.Json.Linq.JContainer;
                         if (extensionObject != null)
                         {
-                            string parameterGroupName = method.Group + "-" + method.Name + "-" + "Parameters";
-                            parameterGroupName = extensionObject.Value<string>("name") ?? parameterGroupName;
-                            
+                            string specifiedGroupName = extensionObject.Value<string>("name");
+                            string parameterGroupName;
+                            if (specifiedGroupName == null)
+                            {
+                                string postfix = extensionObject.Value<string>("postfix") ?? "Parameters";
+                                parameterGroupName = method.Group + "-" + method.Name + "-" + postfix;
+                            }
+                            else
+                            {
+                                parameterGroupName = specifiedGroupName;
+                            }
+
                             if (!parameterGroups.ContainsKey(parameterGroupName))
                             {
                                 parameterGroups.Add(parameterGroupName, new Dictionary<Property, Parameter>());
@@ -273,22 +284,48 @@ namespace Microsoft.Rest.Generator.Azure
 
                 foreach (string parameterGroupName in parameterGroups.Keys)
                 {
-                    //Define the new parameter group type (it's always a composite type)
-                    CompositeType parameterGroupType = new CompositeType()
-                        {
-                            Name = parameterGroupName,
-                            Documentation = "Additional parameters for the " + method.Name + " operation."
-                        };
+                    CompositeType parameterGroupType =
+                        generatedParameterGroups.FirstOrDefault(item => item.Name == parameterGroupName);
+                    bool createdNewCompositeType = false;
+                    if (parameterGroupType == null)
+                    { 
+                        parameterGroupType = new CompositeType()
+                            {
+                                Name = parameterGroupName,
+                                Documentation = "Additional parameters for the " + method.Name + " operation."
+                            };
+                        generatedParameterGroups.Add(parameterGroupType);
+
+                        //Populate the parameter group type with properties.
+                        
+                        //Add to the service client
+                        serviceClient.ModelTypes.Add(parameterGroupType);
+                        createdNewCompositeType = true;
+                    }
                     
-                    //Populate the parameter group type with properties.
                     foreach (Property property in parameterGroups[parameterGroupName].Keys)
                     {
-                        parameterGroupType.Properties.Add(property);
+                        //Either the paramter group is "empty" since it is new, or it is "full" and we don't allow different schemas
+                        if (createdNewCompositeType)
+                        {
+                            parameterGroupType.Properties.Add(property);
+                        }
+                        else
+                        {
+                            Property matchingProperty = parameterGroupType.Properties.FirstOrDefault(
+                                item => item.Name == property.Name &&
+                                        item.IsReadOnly == property.IsReadOnly &&
+                                        item.DefaultValue == property.DefaultValue &&
+                                        item.SerializedName == property.SerializedName);
+
+                            if (matchingProperty == null)
+                            {
+                                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Property {0} was specified on group {1} but it is not on shared parameter group object {2}",
+                                    property.Name, method.Name, parameterGroupType.Name));
+                            }
+                        }
                     }
-
-                    //Add to the service client
-                    serviceClient.ModelTypes.Add(parameterGroupType);
-
+                    
                     bool isGroupParameterRequired = parameterGroupType.Properties.Any(p => p.IsRequired);
 
                     //Create the new parameter object based on the parameter group type

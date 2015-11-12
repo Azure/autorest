@@ -16,7 +16,7 @@ import com.microsoft.rest.BaseResource;
 /**
  * Additional parameters for the postMultipleParameterGroups operation.
  */
-public class SecondParameterGroup {
+public class ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup {
     /**
      * The headerTwo property.
      */
