@@ -53,10 +53,8 @@ class @(Model.MethodGroupType)(object):
 @EmptyLine
         else:
             return value
-@EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
 {
+@EmptyLine
 @:@(Include(new MethodTemplate(), method))
-@EmptyLine
 }
-@EmptyLine

@@ -54,7 +54,7 @@ else
         @:response = self._client.send(request, headers)
 }
 @EmptyLine
-        if @Model.FailureStatusCodePredicate :
+        if @Model.FailureStatusCodePredicate:
             raise @Model.RaisedException
 @EmptyLine
 @if (Model.HasAnyResponse)
@@ -64,7 +64,7 @@ else
   foreach (var responsePair in Model.Responses.Where(r => r.Value != null))
   {
 @*stream handler*@
-        @:if response.status_code == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key)) :
+        @:if response.status_code == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key):
             @:deserialized = self._deserialize('@responsePair.Value.ToPythonRuntimeTypeString()', response)
   }
 @EmptyLine

@@ -41,8 +41,8 @@ class @(Model.Name)Configuration(Configuration):
     def __init__(self, base_url=None, filepath=None):
 @*(Model.RequiredConstructorParameters)*@
 @EmptyLine
-         if (not base_url):
-             base_url = '@Model.BaseUrl'
+        if not base_url:
+            base_url = '@Model.BaseUrl'
 @EmptyLine
         super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
 @*EmptyLine
@@ -83,14 +83,10 @@ class @(Model.Name)(object):
 @EmptyLine
         else:
             return value
-@EmptyLine
 </text>
   foreach (var method in Model.MethodTemplateModels)
   {
-@(Include(new MethodTemplate(), method))
 @EmptyLine
-@:
+@(Include(new MethodTemplate(), method))
   }
 }
-
-
