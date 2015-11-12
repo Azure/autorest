@@ -61,20 +61,8 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            //please do not change the following sequence as it may have undesirable results.
-
-            //TODO: Why is this list duplicated from AzureExtensions.NormalizeClientModel?
-
-            Settings.AddCredentials = true;
-            AzureExtensions.UpdateHeadMethods(serviceClient);
-            AzureExtensions.ParseODataExtension(serviceClient);
-            AzureExtensions.FlattenResourceProperties(serviceClient);
-            AzureExtensions.AddPageableMethod(serviceClient);
-            AzureExtensions.AddAzureProperties(serviceClient);
-            AzureExtensions.SetDefaultResponses(serviceClient);
-            AzureExtensions.AddParameterGroups(serviceClient);
+            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
             base.NormalizeClientModel(serviceClient);
-            AzureExtensions.AddLongRunningOperations(serviceClient);
             NormalizeApiVersion(serviceClient);
             NormalizePaginatedMethods(serviceClient);
             ExtendAllResourcesToBaseResource(serviceClient);
