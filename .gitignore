@@ -238,8 +238,17 @@ ClientRuntimes/Python/Python35-64-ENV/Scripts/Activate.ps1
 ClientRuntimes/Python/Python35-64-ENV/Scripts/deactivate.bat
 *.pyc
 
+#tox directory
+*.tox
+
+#python code coverage
+*.coverage
+
 #dnx installation
 dnx-clr-win-x86*/
 dnx-coreclr-win-x86*/
 *.lock.json
 /dnx
+
+
+

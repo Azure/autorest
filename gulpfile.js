@@ -327,9 +327,12 @@ gulp.task('syncDependencies:nuspec', function() {
     .pipe(gulp.dest('.'));
 });
 
-gulp.task('syncDependencies:runtime', ['syncDependencies:runtime:cs', 'syncDependencies:runtime:csazure', 'syncDependencies:runtime:node', 'syncDependencies:runtime:nodeazure', 'syncDependencies:runtime:ruby', 'syncDependencies:runtime:rubyazure']);
+gulp.task('syncDependencies:runtime', ['syncDependencies:runtime:cs', 'syncDependencies:runtime:csazure', 'syncDependencies:runtime:node', 'syncDependencies:runtime:nodeazure', 'syncDependencies:runtime:ruby', 'syncDependencies:runtime:rubyazure', 'syncDependencies:runtime:python', 'syncDependencies:runtime:pythonazure']);
 
 gulp.task('syncDependencies', ['syncDependencies:nugetProj', 'syncDependencies:nuspec', 'syncDependencies:runtime']);
+
+gulp.task('syncDependencies:runtime:python', shell.task('pip install tox', { verbosity: 3 }));
+gulp.task('syncDependencies:runtime:pythonazure', shell.task('pip install tox', { verbosity: 3 }));
 
 gulp.task('build', function(cb) {
   // warning 0219 is for unused variables, which causes the build to fail on xbuild
@@ -360,10 +363,14 @@ gulp.task('test:clientruntime:ruby', ['syncDependencies:runtime:ruby'], shell.ta
 gulp.task('test:clientruntime:rubyazure', ['syncDependencies:runtime:rubyazure'], shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest-azure/', verbosity: 3 }));
 gulp.task('test:clientruntime:java', shell.task(basePathOrThrow() + '/gradlew :client-runtime:check', { cwd: './', verbosity: 3 }));
 gulp.task('test:clientruntime:javaazure', shell.task(basePathOrThrow() + '/gradlew :azure-client-runtime:check', { cwd: './', verbosity: 3 }));
+gulp.task('test:clientruntime:python', ['syncDependencies:runtime:python'], shell.task('tox', { cwd: './ClientRuntimes/python/msrest/', verbosity: 3 }));
+gulp.task('test:clientruntime:pythonazure', ['syncDependencies:runtime:python'], shell.task('tox', { cwd: './ClientRuntimes/python/msrestazure/', verbosity: 3 }));
+
 gulp.task('test:clientruntime', function (cb) {
   runSequence('test:clientruntime:node', 'test:clientruntime:nodeazure',
     'test:clientruntime:ruby', 'test:clientruntime:rubyazure',
-    'test:clientruntime:java', 'test:clientruntime:javaazure', cb);
+    'test:clientruntime:java', 'test:clientruntime:javaazure', 
+    'test:clientruntime:python', 'test:clientruntime:pythonazure', cb);
 });
 
 gulp.task('test:node', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/NodeJS.Tests/', verbosity: 3}));
