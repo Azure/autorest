@@ -65,6 +65,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Null(clientModel.Methods[1].Parameters[0].ClientProperty);
             Assert.Equal("resourceGroupName", clientModel.Methods[1].Parameters[1].Name);
             Assert.Equal("apiVersion", clientModel.Methods[1].Parameters[2].Name);
+
+            Assert.Equal("capacity", clientModel.ModelTypes[0].Properties[3].Name);
+            Assert.Equal("100", clientModel.ModelTypes[0].Properties[3].DefaultValue);
         }
 
         [Fact]
