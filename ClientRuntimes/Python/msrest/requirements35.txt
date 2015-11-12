@@ -1,4 +1,3 @@
-enum34==1.0.4
 funcsigs==0.4
 futures==3.0.3
 httpretty==0.8.10
