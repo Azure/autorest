@@ -1,4 +1,4 @@
-@using System
+@using System;
 @using System.Linq;
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.Utilities
@@ -32,6 +32,7 @@
         headers = {}
         @(Model.BuildHeaders("query"))
         headers.update(custom_headers)
+        @(Model.SetDefaultHeaders)
         headers['Content-Type'] = '@(Model.ContentType)'
 @* Add Credentials *@
 @EmptyLine
@@ -46,31 +47,35 @@
         request = self._client.@(Model.GetHttpFunction(Model.HttpMethod))(url, query)
 @if (Model.RequestBody != null)
 {
-@:        response = self._client.send(request, headers, content)
+        @:response = self._client.send(request, headers, content)
 }
 else
 {
-@:        response = self._client.send(request, headers)
+        @:response = self._client.send(request, headers)
 }
 @EmptyLine
-        self._verify_response(response, [@Model.GetAcceptStatus()], @Model.GetExceptionType())
+        if @Model.FailureStatusCodePredicate :
+            raise @Model.RaisedException
 @EmptyLine
-@if (Model.Responses.Any())
+@if (Model.HasAnyResponse)
 {
+        @:deserialized = None
+@EmptyLine
   foreach (var responsePair in Model.Responses.Where(r => r.Value != null))
   {
 @*stream handler*@
-@:        if response.status_code == @responsePair.Key :
-@:            deserialized = self._deserialize('@responsePair.Value.ToPythonRuntimeTypeString()', response)
+        @:if response.status_code == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key)) :
+            @:deserialized = self._deserialize('@responsePair.Value.ToPythonRuntimeTypeString()', response)
   }
+@EmptyLine
+        @:if raw:
+            @:return deserialized, response
+@EmptyLine
+        @:return deserialized
 }
 else
 {
-@:        deserialized = None
+        @:if raw:
+            @:return None, response
 }
-@EmptyLine
-        if raw:
-            return deserialized, response
-@EmptyLine
-        return deserialized
-@EmptyLine
+
