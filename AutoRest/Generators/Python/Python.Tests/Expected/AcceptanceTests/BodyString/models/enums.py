@@ -10,7 +10,7 @@
 
 from enum import Enum
 
-class Colors(Enum)
+class Colors(Enum):
 
     red color = "red color"
     green-color = "green-color"
