@@ -10,9 +10,9 @@
 
 from enum import Enum
 
-class GreyscaleColors(Enum)
+class GreyscaleColors(Enum):
 
-    White = "White"
+    white = "White"
     black = "black"
-    GREY = "GREY"
+    grey = "GREY"
 

@@ -71,8 +71,13 @@ namespace Microsoft.Rest.Generator.Python
                 var requireParams = new List<string>();
                 this.Properties.Where(p => p.IsRequired)
                     .ForEach(p => requireParams.Add(p.Name.ToPythonCase()));
-                requireParams.Add("baseUri");
-                return string.Join(", ", requireParams);
+                //requireParams.Add("baseUri");
+                var param = string.Join(", ", requireParams);
+                if (!string.IsNullOrEmpty(param))
+                {
+                    param += ", ";
+                }
+                return param;
             }
         }
 

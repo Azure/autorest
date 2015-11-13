@@ -12,7 +12,7 @@ from enum import Enum
 @{
   foreach (var enumType in @Model.EnumTypes)
   {
-@:class @(enumType.Name)(Enum)
+@:class @(enumType.Name)(Enum):
 @EmptyLine
     for (int i = 0; i < enumType.Values.Count; i++)
     {

@@ -55,8 +55,9 @@ class ImplicitOperations(object):
 
         # Construct URL
         url = '/reqopt/implicit/required/path/{pathParameter}'
-        url = url.format(
-            pathParameter = self._parse_url("path_parameter", path_parameter, 'str', False))
+        path_format_arguments = {
+            'pathParameter' : self._parse_url("path_parameter", path_parameter, 'str', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -176,8 +177,9 @@ class ImplicitOperations(object):
 
         # Construct URL
         url = '/reqopt/global/required/path/{required-global-path}'
-        url = url.format(
-            required-global-path = self._parse_url("self._client.required-global-path", self._client.required-global-path, 'str', False))
+        path_format_arguments = {
+            'required-global-path' : self._parse_url("self.config.requiredglobalpath", self.config.requiredglobalpath, 'str', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -209,8 +211,8 @@ class ImplicitOperations(object):
 
         # Construct parameters
         query = {}
-        if self._client.required-global-query is not None:
-            query['required-global-query'] = self._parse_url("self._client.required-global-query", self._client.required-global-query, 'str', False)
+        if self.config.requiredglobalquery is not None:
+            query['required-global-query'] = self._parse_url("self.config.requiredglobalquery", self.config.requiredglobalquery, 'str', False)
 
         # Construct headers
         headers = {}
@@ -239,8 +241,8 @@ class ImplicitOperations(object):
 
         # Construct parameters
         query = {}
-        if self._client.optional-global-query is not None:
-            query['optional-global-query'] = self._parse_url("self._client.optional-global-query", self._client.optional-global-query, 'int', False)
+        if self.config.optionalglobalquery is not None:
+            query['optional-global-query'] = self._parse_url("self.config.optionalglobalquery", self.config.optionalglobalquery, 'int', False)
 
         # Construct headers
         headers = {}

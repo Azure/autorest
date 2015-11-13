@@ -427,6 +427,16 @@ namespace Microsoft.Rest.Generator
         }
 
         /// <summary>
+        /// Removes invalid characters from the name. Everything but alpha-numeral, underscore.
+        /// </summary>
+        /// <param name="name">String to parse.</param>
+        /// <returns>Name with invalid characters removed.</returns>
+        public static string RemoveInvalidPythonCharacters(string name)
+        {
+            return GetValidName(name, '_');
+        }
+
+        /// <summary>
         /// Removes invalid characters from the namespace. Everything but alpha-numeral, underscore,
         /// period, and dash.
         /// </summary>

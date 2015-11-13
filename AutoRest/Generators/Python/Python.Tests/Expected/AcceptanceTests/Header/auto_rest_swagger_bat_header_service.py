@@ -28,14 +28,15 @@ class AutoRestSwaggerBATHeaderServiceConfiguration(Configuration):
         if not base_url:
             base_url = 'http://localhost'
 
-        super(AutoRestSwaggerBATHeaderServiceConfiguration, self).__init__(base_url, filepath)
+        super(AutoRestSwaggerBATHeaderServiceConfiguration, self).__init__(None, base_url, filepath)
+
 
 
 class AutoRestSwaggerBATHeaderService(object):
 
-    def __init__(self, credentials, config):
+    def __init__(self, config):
 
-        self._client = ServiceClient(credentials, config) 
+        self._client = ServiceClient(config) 
 
         client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
