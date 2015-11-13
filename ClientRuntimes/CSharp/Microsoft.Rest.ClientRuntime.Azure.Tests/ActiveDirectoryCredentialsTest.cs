@@ -25,6 +25,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         private string _applicationId;
         private string _secret;
         private string _domain;
+        private string _certificatePassword;
 
         public ActiveDirectoryCredentialsTest()
         {
@@ -38,10 +39,11 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 connectionProperties.TryGetValue("applicationid", out this._applicationId);
                 connectionProperties.TryGetValue("secret", out this._secret);
                 connectionProperties.TryGetValue("domain", out this._domain);
+                connectionProperties.TryGetValue("certificatePassword", out this._certificatePassword);
             }
         }
 
-        [Fact(Skip = "Should only run with user interaction")]
+        [EnvironmentDependentFact]
         public void CertificateTokenProviderRefreshWorks()
         {
             var thumbprint = "F064B7C7EACC942D10662A5115E047E94FA18498";
@@ -49,10 +51,12 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.True(TryFindCertificatesInStore(thumbprint, StoreLocation.LocalMachine, out certificates));
 
             var cache = new TestTokenCache();
+            byte[] certificate = certificates[0].Export(X509ContentType.Pkcs12, _certificatePassword);
             var credentials = ApplicationTokenProvider.LoginSilentAsync(
                                 "1449d5b7-8a83-47db-ae4c-9b03e888bad0", 
                                 "20c58db7-4501-44e8-8e76-6febdb400c6b",
-                                certificates[0])
+                                certificate,
+                                _certificatePassword)
                             .GetAwaiter().GetResult();
             cache.ForceTokenExpiry();
             var client = new HttpClient();
@@ -64,7 +68,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [EnvironmentDependentFact(Skip="Should only run with user interaction")]
+        [EnvironmentDependentFact]
         public void UserCredentialsPopsDialog()
         {
             var cache = new TestTokenCache();
@@ -229,7 +233,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 IDictionary dictionary = dictionaryProperty.GetValue(this) as IDictionary;
                 foreach (var authValue in dictionary.Values)
                 {
-                    var authResult = authValue as AuthenticationResult;
+                    var authResult = authValue.GetType().GetProperty("Result").GetValue(authValue) as AuthenticationResult;
                     var expiresOnProperty = typeof (AuthenticationResult).GetProperty("ExpiresOn");
                     expiresOnProperty.SetValue(authResult, expired);
                 }
@@ -244,11 +248,14 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 ParseConnectionString(Environment.GetEnvironmentVariable("ARM_Connection_String"));
 
             if (connectionProperties == null ||
-                (!(connectionProperties.ContainsKey("username") && connectionProperties.ContainsKey("password") &&
-                connectionProperties.ContainsKey("applicationid") && connectionProperties.ContainsKey("secret")
-                && connectionProperties.ContainsKey("domain"))))
+                (!(connectionProperties.ContainsKey("username") && 
+                   connectionProperties.ContainsKey("password") &&
+                   connectionProperties.ContainsKey("applicationid") && 
+                   connectionProperties.ContainsKey("secret") && 
+                   connectionProperties.ContainsKey("domain") &&
+                   connectionProperties.ContainsKey("certificatePassword"))))
             {
-                Skip = "An environment variable: ARM_Connection_String=username=<username>;password=<password>;applicationid=<applicationId>;secret=<secret>;domain=<domain> is required to run this test";
+                Skip = "An environment variable: ARM_Connection_String=username=<username>;password=<password>;applicationid=<applicationId>;secret=<secret>;domain=<domain>;certificatePassword=<certificatePassword> is required to run this test";
             }
 
         }

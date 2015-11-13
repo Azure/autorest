@@ -5,12 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http.Headers;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
+#if PORTABLE
+using ClientRuntime.Azure.Authentication.Properties;
+#else
 using Microsoft.Rest.Azure.Authentication.Properties;
+#endif
 
 namespace Microsoft.Rest.Azure.Authentication
 {
@@ -144,10 +147,11 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
         /// <param name="clientId">The active directory clientId for the application.</param>
         /// <param name="certificate">The certificate associated with Active Directory application.</param>
+        /// <param name="password">The certificate password.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
-        public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId, X509Certificate2 certificate)
+        public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId, byte[] certificate, string password)
         {
-            return await LoginSilentAsync(domain, clientId, certificate, ActiveDirectoryServiceSettings.Azure, TokenCache.DefaultShared);
+            return await LoginSilentAsync(domain, clientId, certificate, password, ActiveDirectoryServiceSettings.Azure, TokenCache.DefaultShared);
         }
 
         /// <summary>
@@ -175,11 +179,12 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
         /// <param name="clientId">The active directory clientId for the application.</param>
         /// <param name="certificate">The certificate associated with Active Directory application.</param>
+        /// <param name="password">The certificate password.</param>
         /// <param name="cache">The token cache to target during authentication.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
-        public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId, X509Certificate2 certificate, TokenCache cache)
+        public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId, byte[] certificate, string password, TokenCache cache)
         {
-            return await LoginSilentAsync(domain, clientId, certificate, ActiveDirectoryServiceSettings.Azure, cache);
+            return await LoginSilentAsync(domain, clientId, certificate, password, ActiveDirectoryServiceSettings.Azure, cache);
         }
 
         /// <summary>
@@ -208,12 +213,13 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
         /// <param name="clientId">The active directory clientId for the application.</param>
         /// <param name="certificate">The certificate associated with Active Directory application.</param>
+        /// <param name="password">The certificate password.</param>
         /// <param name="settings">The active directory service side settings, including authority and token audience.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
-        public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId, X509Certificate2 certificate,
+        public static async Task<ServiceClientCredentials> LoginSilentAsync(string domain, string clientId, byte[] certificate, string password,
             ActiveDirectoryServiceSettings settings)
         {
-            return await LoginSilentAsync(domain, clientId, certificate, settings, TokenCache.DefaultShared);
+            return await LoginSilentAsync(domain, clientId, certificate, password, settings, TokenCache.DefaultShared);
         }
 
         /// <summary>
@@ -241,14 +247,15 @@ namespace Microsoft.Rest.Azure.Authentication
         /// <param name="domain">The active directory domain or tenantId to authenticate with.</param>
         /// <param name="clientId">The active directory clientId for the application.</param>
         /// <param name="certificate">The certificate associated with Active Directory application.</param>
+        /// <param name="password">The certificate password.</param>
         /// <param name="settings">The active directory service side settings, including authority and token audience.</param>
         /// <param name="cache">The token cache to target during authentication.</param>
         /// <returns>A ServiceClientCredentials object that can authenticate http requests as the given application.</returns>
         public static async Task<ServiceClientCredentials> LoginSilentAsync(
-            string domain, string clientId, X509Certificate2 certificate,
+            string domain, string clientId, byte[] certificate, string password,
            ActiveDirectoryServiceSettings settings, TokenCache cache)
         {
-            return await LoginSilentAsync(domain, new ClientAssertionCertificate(clientId, certificate), 
+            return await LoginSilentAsync(domain, new ClientAssertionCertificate(clientId, certificate, password), 
                 settings, cache);
         }
 
@@ -446,7 +453,7 @@ namespace Microsoft.Rest.Azure.Authentication
                     authenticationProvider, authResult));
         }
 
-#if DEBUG
+#if DEBUG && !PORTABLE
         /// <summary>
         /// For testing purposes only: allows testing token expiration.
         /// </summary>

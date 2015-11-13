@@ -143,14 +143,7 @@
 
   <!-- Run tests. -->
   <Target Name="Test" DependsOnTargets="RestoreNugetPackages">
-    <ItemGroup>
-      <DnxLibraries Include="$(LibraryRoot)AutoRest\Generators\CSharp\Azure.CSharp.Tests\*.xproj" />
-      <DnxLibraries Include="$(LibraryRoot)AutoRest\Generators\CSharp\CSharp.Tests\*.xproj" />
-      <DnxLibraries Include="$(LibraryRoot)ClientRuntimes\CSharp\ClientRuntime.Azure.Tests\*.xproj" />
-      <DnxLibraries Include="$(LibraryRoot)ClientRuntimes\CSharp\ClientRuntime.Tests\*.xproj" />
-    </ItemGroup>
     <Exec Command="gulp test"/>
-    <Exec Command="dnx test -verbose -xml &quot;$(MSBuildProjectDirectory)\TestResults\%(DnxLibraries.Filename).xml&quot;" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"  />
   </Target>
 
   <PropertyGroup>
