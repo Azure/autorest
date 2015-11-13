@@ -2795,7 +2795,7 @@
       }
     },
     "A": {
-      "x-ms-exception": {
+      "x-ms-client-name": {
         "name": "MyException"
       },
       "properties": {

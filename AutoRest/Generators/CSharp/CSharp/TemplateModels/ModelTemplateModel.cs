@@ -67,14 +67,14 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public virtual string ExceptionTypeDefinitionName
         {
-            get 
+            get
             {
-                if (this.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ExceptionExtension))
+                if (this.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
                 {
-                    var ext = this.Extensions[Microsoft.Rest.Generator.Extensions.ExceptionExtension] as Newtonsoft.Json.Linq.JContainer;
+                    var ext = this.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
                     if (ext != null && ext["name"] != null)
                     {
-                        return (string)ext["name"];
+                        return ext["name"].ToString();
                     }
                 }
                 return this.Name + "Exception";

@@ -15,7 +15,7 @@ namespace Microsoft.Rest.Generator
     public abstract class Extensions
     {
         public const string SkipUrlEncodingExtension = "x-ms-skip-url-encoding";
-        public const string ExceptionExtension = "x-ms-exception";
+        public const string NameOverrideExtension = "x-ms-client-name";
 
         /// <summary>
         /// Normalizes client model using generic extensions.

@@ -207,12 +207,12 @@ namespace Microsoft.Rest.Generator.CSharp
                 if (this.DefaultResponse is CompositeType)
                 {
                     CompositeType type = this.DefaultResponse as CompositeType;
-                    if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ExceptionExtension))
+                    if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
                     {
-                        var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.ExceptionExtension] as Newtonsoft.Json.Linq.JContainer;
+                        var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
                         if (ext != null && ext["name"] != null)
                         {
-                            return (string)ext["name"];
+                            return ext["name"].ToString();
                         }
                     }
                     return type.Name + "Exception";
