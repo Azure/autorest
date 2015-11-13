@@ -63,6 +63,7 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
         if (apiVersion == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -161,6 +162,7 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
         if (apiVersion == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -214,6 +216,7 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
         if (apiVersion == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

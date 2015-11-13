@@ -17,7 +17,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     /// <summary>
     /// </summary>
-    [JsonObject("fish")]
     public partial class Fish
     {
         /// <summary>

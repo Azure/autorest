@@ -145,7 +145,7 @@
             "type": "string",
             "required": false,
             "x-ms-parameter-grouping": {
-              "name": "second-parameter-group"
+              "postfix": "second-parameter-group"
             }
           },
           {
@@ -157,7 +157,47 @@
             "default": 30,
             "description": "Query parameter with default",
             "x-ms-parameter-grouping": {
-              "name": "second-parameter-group"
+              "postfix": "second-parameter-group"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/parameterGrouping/sharedParameterGroupObject": {
+      "post": {
+        "operationId": "parameterGrouping_postSharedParameterGroupObject",
+        "description": "Post parameters with a shared parameter group object",
+        "parameters": [
+          {
+            "name": "header-one",
+            "in": "header",
+            "type": "string",
+            "required": false,
+            "x-ms-parameter-grouping": {
+              "name": "first-parameter-group"
+            }
+          },
+          {
+            "name": "query-one",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "Query parameter with default",
+            "x-ms-parameter-grouping": {
+              "name": "first-parameter-group"
             }
           }
         ],

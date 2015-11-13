@@ -239,6 +239,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         if (datetimeBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -380,6 +381,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         if (datetimeBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putLocalPositiveOffsetMaxDateTime(datetimeBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -521,6 +523,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         if (datetimeBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putLocalNegativeOffsetMaxDateTime(datetimeBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -662,6 +665,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         if (datetimeBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -759,6 +763,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         if (datetimeBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putLocalPositiveOffsetMinDateTime(datetimeBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -856,6 +861,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
         if (datetimeBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putLocalNegativeOffsetMinDateTime(datetimeBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

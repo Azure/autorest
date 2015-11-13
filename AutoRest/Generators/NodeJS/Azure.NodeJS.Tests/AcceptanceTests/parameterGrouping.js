@@ -98,5 +98,14 @@ describe('nodejs', function () {
       });
     });
 
+    it('should allow parameter group objects to be shared between operations', function (done) {
+      testClient.parameterGrouping.postSharedParameterGroupObject({headerOne: header}, {queryOne: 42}, 
+        function (error, result, request, response) {
+          should.not.exist(error);
+          response.statusCode.should.equal(200);
+          done();
+      });
+    });
+
   });
 });

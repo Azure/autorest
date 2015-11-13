@@ -102,6 +102,14 @@ public class PolymorphismImpl implements Polymorphism {
                  'length':10.0,
                  'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
                  'species':'dangerous',
+               },
+               {
+                 'fishtype': 'goblin',
+                 'age': 1,
+                 'birthday': '2015-08-08T00:00:00Z',
+                 'length': 30.0,
+                 'species': 'scary',
+                 'jawsize': 5
                }
              ]
            };
@@ -148,6 +156,14 @@ public class PolymorphismImpl implements Polymorphism {
                  'length':10.0,
                  'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
                  'species':'dangerous',
+               },
+               {
+                 'fishtype': 'goblin',
+                 'age': 1,
+                 'birthday': '2015-08-08T00:00:00Z',
+                 'length': 30.0,
+                 'species': 'scary',
+                 'jawsize': 5
                }
              ]
            };
@@ -157,6 +173,7 @@ public class PolymorphismImpl implements Polymorphism {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putValid(complexBody);
@@ -262,6 +279,7 @@ public class PolymorphismImpl implements Polymorphism {
         if (complexBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putValidMissingRequired(complexBody);

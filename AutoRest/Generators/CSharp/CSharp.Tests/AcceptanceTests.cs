@@ -1034,10 +1034,13 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 var polymorphismResult = client.Polymorphism.GetValid() as Salmon;
                 Assert.NotNull(polymorphismResult);
                 Assert.Equal("alaska", polymorphismResult.Location);
-                Assert.True(polymorphismResult.Siblings[0] is Shark);
-                Assert.True(polymorphismResult.Siblings[1] is Sawshark);
+                Assert.Equal(3, polymorphismResult.Siblings.Count);
+                Assert.IsType(typeof(Shark), polymorphismResult.Siblings[0]);
+                Assert.IsType(typeof(Sawshark), polymorphismResult.Siblings[1]);
+                Assert.IsType(typeof(Goblinshark), polymorphismResult.Siblings[2]);
                 Assert.Equal(6, ((Shark) polymorphismResult.Siblings[0]).Age);
                 Assert.Equal(105, ((Sawshark) polymorphismResult.Siblings[1]).Age);
+                Assert.Equal(1, ((Goblinshark)polymorphismResult.Siblings[2]).Age);
                 // PUT polymorphism/valid
                 var polymorphismRequest = new Salmon
                 {
@@ -1061,6 +1064,14 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                             Species = "dangerous",
                             Birthday = new DateTime(1900, 1, 5, 1, 0, 0, DateTimeKind.Utc),
                             Picture = new byte[] {255, 255, 255, 255, 254}
+                        },
+                        new Goblinshark()
+                        {
+                            Age = 1,
+                            Length = 30,
+                            Species = "scary",
+                            Birthday = new DateTime(2015, 8, 8, 0, 0, 0, DateTimeKind.Utc),
+                            Jawsize = 5
                         }
                     }
                 };
