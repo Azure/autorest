@@ -57,6 +57,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         public AcceptanceTests(ServiceController data)
         {
             this.Fixture = data;
+            this.Fixture.TearDown = EnsureTestCoverage;
             _interceptor = new TestTracingInterceptor();
             ServiceClientTracing.AddTracingInterceptor(_interceptor);
             ServiceClientTracing.IsEnabled = false;
@@ -1530,8 +1531,6 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             EnsureThrowsWithStatusCode(HttpStatusCode.NotFound, () => client.HttpClientFailure.Put404(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.MethodNotAllowed, () => client.HttpClientFailure.Patch405(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.NotAcceptable, () => client.HttpClientFailure.Post406(true));
-            EnsureThrowsWithStatusCode(HttpStatusCode.ProxyAuthenticationRequired,
-                () => client.HttpClientFailure.Delete407(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.Conflict, () => client.HttpClientFailure.Put409(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.Gone, () => client.HttpClientFailure.Head410());
             EnsureThrowsWithStatusCode(HttpStatusCode.LengthRequired, () => client.HttpClientFailure.Get411());
@@ -1692,8 +1691,6 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             }
         }
 
-        [Trait("Report", "true")]
-        [Fact]
         public void EnsureTestCoverage()
         {
             SwaggerSpecRunner.RunTests(

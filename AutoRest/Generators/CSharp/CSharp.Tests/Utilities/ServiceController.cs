@@ -17,7 +17,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         private const string NpmArgument = "install";
         private const string NodeCommand = "node.exe";
         private const string NodeArgument = "./startup/www";
-
+        
         private ProcessOutputListener _listener;
 
         private object _sync = new object();
@@ -41,13 +41,18 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         }
 
         /// <summary>
+        /// Teardown action
+        /// </summary>
+        public Action TearDown { get; set; }
+
+        /// <summary>
         /// Port number the service is listenig on.
         /// </summary>
         private int Port { get; set; }
 
         public Uri Uri
         {
-            get { return new Uri(string.Format(CultureInfo.InvariantCulture, "http://localhost:{0}", Port)); }
+            get { return new Uri(string.Format(CultureInfo.InvariantCulture, "http://localhost.:{0}", Port)); }
         }
 
         /// <summary>
@@ -57,6 +62,10 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public void Dispose()
         {
+            if (TearDown != null)
+            {
+                TearDown();
+            }
             Dispose(true);
             GC.SuppressFinalize(this);
         }

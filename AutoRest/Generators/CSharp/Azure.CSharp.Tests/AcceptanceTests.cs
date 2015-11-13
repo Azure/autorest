@@ -39,6 +39,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         public AcceptanceTests(ServiceController data)
         {
             this.Fixture = data;
+            this.Fixture.TearDown = EnsureTestCoverage;
             _interceptor = new TestTracingInterceptor();
             ServiceClientTracing.AddTracingInterceptor(_interceptor);
             ServiceClientTracing.IsEnabled = false;
@@ -362,11 +363,6 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             }
         }
 
-        /// <summary>
-        /// This test should not be run standalone. It calculates test coverage and will fail if not executed after entire test suite.
-        /// </summary>
-        [Trait("Report", "true")]
-        [Fact]
         public void EnsureTestCoverage()
         {
             SwaggerSpecRunner.RunTests(
