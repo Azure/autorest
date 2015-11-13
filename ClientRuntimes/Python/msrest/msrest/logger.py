@@ -28,7 +28,7 @@ import re
 import os
 import shutil
 import logging
-
+import types
 
 LOGGER = None
 
@@ -155,7 +155,7 @@ def log_request(adapter, request, *args, **kwargs):
         LOGGER.debug("Request body:")
 
         # We don't want to log the binary data of a file upload
-        if isinstance(request.body, generator):
+        if isinstance(request.body, types.GeneratorType):
             LOGGER.debug("File upload")
 
         else:

@@ -175,7 +175,8 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj.attr_a = list()
 
         message = self.s(test_obj)
-        self.assertFalse('id' in message)
+        self.assertEqual(message['id'], '[]')
+        #self.assertFalse('id' in message)
 
         test_obj.attr_a = [1]
 
@@ -215,7 +216,8 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj.attr_d = []
 
         message = self.s(test_obj)
-        self.assertFalse('AttrD' in message)
+        #self.assertFalse('AttrD' in message)
+        self.assertEqual(message['AttrD'], [])
 
         test_obj.attr_d = [1,2,3]
 
@@ -236,6 +238,12 @@ class TestRuntimeSerialized(unittest.TestCase):
 
         with self.assertRaises(SerializationError):
             self.s(test_obj)
+
+    def test_empty_list(self):
+
+        input = []
+        output = self.s(input, '[str]')
+        self.assertEqual(output, [])
 
     def test_attr_list_complex(self):
         """

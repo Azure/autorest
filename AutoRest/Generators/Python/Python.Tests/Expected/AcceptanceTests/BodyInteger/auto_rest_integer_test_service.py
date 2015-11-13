@@ -30,11 +30,12 @@ class AutoRestIntegerTestServiceConfiguration(Configuration):
         super(AutoRestIntegerTestServiceConfiguration, self).__init__(base_url, filepath)
 
 
+
 class AutoRestIntegerTestService(object):
 
-    def __init__(self, credentials, config):
+    def __init__(self, config):
 
-        self._client = ServiceClient(credentials, config) 
+        self._client = ServiceClient(None, config) 
 
         client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()

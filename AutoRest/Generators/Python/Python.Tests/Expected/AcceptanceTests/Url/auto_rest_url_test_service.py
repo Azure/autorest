@@ -25,19 +25,21 @@ import models
 
 class AutoRestUrlTestServiceConfiguration(Configuration):
 
-    def __init__(self, base_url=None, filepath=None):
+    def __init__(self, global_string_path, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
 
         super(AutoRestUrlTestServiceConfiguration, self).__init__(base_url, filepath)
 
+        self.global_string_path = global_string_path;
+
 
 class AutoRestUrlTestService(object):
 
-    def __init__(self, credentials, config):
+    def __init__(self, config):
 
-        self._client = ServiceClient(credentials, config) 
+        self._client = ServiceClient(None, config) 
 
         client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()

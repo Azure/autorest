@@ -21,19 +21,22 @@ import models
 
 class AutoRestValidationTestConfiguration(Configuration):
 
-    def __init__(self, base_url=None, filepath=None):
+    def __init__(self, subscription_id, api_version, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
 
         super(AutoRestValidationTestConfiguration, self).__init__(base_url, filepath)
 
+        self.subscription_id = subscription_id;
+        self.api_version = api_version;
+
 
 class AutoRestValidationTest(object):
 
-    def __init__(self, credentials, config):
+    def __init__(self, config):
 
-        self._client = ServiceClient(credentials, config) 
+        self._client = ServiceClient(None, config) 
 
         client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
@@ -65,15 +68,16 @@ class AutoRestValidationTest(object):
 
         # Construct URL
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}'
-        url = url.format(
-            subscriptionId = self._parse_url("self.subscription_id", self.subscription_id, 'str', False),
-            resourceGroupName = self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            id = self._parse_url("id", id, 'int', False))
+        path_format_arguments = {
+            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False),
+            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'id' : self._parse_url("id", id, 'int', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
-        if self.api_version is not None:
-            query['apiVersion'] = self._parse_url("self.api_version", self.api_version, 'str', False)
+        if self.config.api_version is not None:
+            query['apiVersion'] = self._parse_url("self.config.api_version", self.config.api_version, 'str', False)
 
         # Construct headers
         headers = {}
@@ -106,15 +110,16 @@ class AutoRestValidationTest(object):
 
         # Construct URL
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}'
-        url = url.format(
-            subscriptionId = self._parse_url("self.subscription_id", self.subscription_id, 'str', False),
-            resourceGroupName = self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            id = self._parse_url("id", id, 'int', False))
+        path_format_arguments = {
+            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False),
+            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'id' : self._parse_url("id", id, 'int', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
-        if self.api_version is not None:
-            query['apiVersion'] = self._parse_url("self.api_version", self.api_version, 'str', False)
+        if self.config.api_version is not None:
+            query['apiVersion'] = self._parse_url("self.config.api_version", self.config.api_version, 'str', False)
 
         # Construct headers
         headers = {}

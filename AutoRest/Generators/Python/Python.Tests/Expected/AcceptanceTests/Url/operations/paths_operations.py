@@ -56,8 +56,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/bool/true/{boolPath}'
-        url = url.format(
-            boolPath = self._parse_url("bool_path", bool_path, 'bool', False))
+        path_format_arguments = {
+            'boolPath' : self._parse_url("bool_path", bool_path, 'bool', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -86,8 +87,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/bool/false/{boolPath}'
-        url = url.format(
-            boolPath = self._parse_url("bool_path", bool_path, 'bool', False))
+        path_format_arguments = {
+            'boolPath' : self._parse_url("bool_path", bool_path, 'bool', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -116,8 +118,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/int/1000000/{intPath}'
-        url = url.format(
-            intPath = self._parse_url("int_path", int_path, 'int', False))
+        path_format_arguments = {
+            'intPath' : self._parse_url("int_path", int_path, 'int', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -146,8 +149,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/int/-1000000/{intPath}'
-        url = url.format(
-            intPath = self._parse_url("int_path", int_path, 'int', False))
+        path_format_arguments = {
+            'intPath' : self._parse_url("int_path", int_path, 'int', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -176,8 +180,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/long/10000000000/{longPath}'
-        url = url.format(
-            longPath = self._parse_url("long_path", long_path, 'long', False))
+        path_format_arguments = {
+            'longPath' : self._parse_url("long_path", long_path, 'long', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -206,8 +211,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/long/-10000000000/{longPath}'
-        url = url.format(
-            longPath = self._parse_url("long_path", long_path, 'long', False))
+        path_format_arguments = {
+            'longPath' : self._parse_url("long_path", long_path, 'long', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -236,8 +242,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/float/1.034E+20/{floatPath}'
-        url = url.format(
-            floatPath = self._parse_url("float_path", float_path, 'float', False))
+        path_format_arguments = {
+            'floatPath' : self._parse_url("float_path", float_path, 'float', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -266,8 +273,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/float/-1.034E-20/{floatPath}'
-        url = url.format(
-            floatPath = self._parse_url("float_path", float_path, 'float', False))
+        path_format_arguments = {
+            'floatPath' : self._parse_url("float_path", float_path, 'float', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -296,8 +304,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/double/9999999.999/{doublePath}'
-        url = url.format(
-            doublePath = self._parse_url("double_path", double_path, 'float', False))
+        path_format_arguments = {
+            'doublePath' : self._parse_url("double_path", double_path, 'float', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -326,8 +335,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/double/-9999999.999/{doublePath}'
-        url = url.format(
-            doublePath = self._parse_url("double_path", double_path, 'float', False))
+        path_format_arguments = {
+            'doublePath' : self._parse_url("double_path", double_path, 'float', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -356,8 +366,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/string/unicode/{stringPath}'
-        url = url.format(
-            stringPath = self._parse_url("string_path", string_path, 'str', False))
+        path_format_arguments = {
+            'stringPath' : self._parse_url("string_path", string_path, 'str', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -386,8 +397,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}'
-        url = url.format(
-            stringPath = self._parse_url("string_path", string_path, 'str', False))
+        path_format_arguments = {
+            'stringPath' : self._parse_url("string_path", string_path, 'str', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -416,8 +428,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/string/empty/{stringPath}'
-        url = url.format(
-            stringPath = self._parse_url("string_path", string_path, 'str', False))
+        path_format_arguments = {
+            'stringPath' : self._parse_url("string_path", string_path, 'str', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -446,8 +459,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/string/null/{stringPath}'
-        url = url.format(
-            stringPath = self._parse_url("string_path", string_path, 'str', False))
+        path_format_arguments = {
+            'stringPath' : self._parse_url("string_path", string_path, 'str', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -476,8 +490,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/enum/green%20color/{enumPath}'
-        url = url.format(
-            enumPath = self._parse_url("enum_path", enum_path, 'UriColor', False))
+        path_format_arguments = {
+            'enumPath' : self._parse_url("enum_path", enum_path, 'UriColor', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -507,8 +522,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/string/null/{enumPath}'
-        url = url.format(
-            enumPath = self._parse_url("enum_path", enum_path, 'UriColor', False))
+        path_format_arguments = {
+            'enumPath' : self._parse_url("enum_path", enum_path, 'UriColor', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -537,8 +553,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/byte/multibyte/{bytePath}'
-        url = url.format(
-            bytePath = self._parse_url("byte_path", byte_path, 'bytearray', False))
+        path_format_arguments = {
+            'bytePath' : self._parse_url("byte_path", byte_path, 'bytearray', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -567,8 +584,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/byte/empty/{bytePath}'
-        url = url.format(
-            bytePath = self._parse_url("byte_path", byte_path, 'bytearray', False))
+        path_format_arguments = {
+            'bytePath' : self._parse_url("byte_path", byte_path, 'bytearray', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -597,8 +615,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/byte/null/{bytePath}'
-        url = url.format(
-            bytePath = self._parse_url("byte_path", byte_path, 'bytearray', False))
+        path_format_arguments = {
+            'bytePath' : self._parse_url("byte_path", byte_path, 'bytearray', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -627,8 +646,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/date/2012-01-01/{datePath}'
-        url = url.format(
-            datePath = self._parse_url("date_path", date_path, 'date', False))
+        path_format_arguments = {
+            'datePath' : self._parse_url("date_path", date_path, 'date', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -658,8 +678,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/date/null/{datePath}'
-        url = url.format(
-            datePath = self._parse_url("date_path", date_path, 'date', False))
+        path_format_arguments = {
+            'datePath' : self._parse_url("date_path", date_path, 'date', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -688,8 +709,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}'
-        url = url.format(
-            dateTimePath = self._parse_url("date_time_path", date_time_path, 'iso-date', False))
+        path_format_arguments = {
+            'dateTimePath' : self._parse_url("date_time_path", date_time_path, 'iso-date', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -719,8 +741,9 @@ class PathsOperations(object):
 
         # Construct URL
         url = '/paths/datetime/null/{dateTimePath}'
-        url = url.format(
-            dateTimePath = self._parse_url("date_time_path", date_time_path, 'iso-date', False))
+        path_format_arguments = {
+            'dateTimePath' : self._parse_url("date_time_path", date_time_path, 'iso-date', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
