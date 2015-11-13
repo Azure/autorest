@@ -371,8 +371,8 @@ var xunitTestsDlls = [
 var xunitDnxXproj = [
   'AutoRest/Generators/CSharp/Azure.CSharp.Tests/project.json',
   'AutoRest/Generators/CSharp/CSharp.Tests/project.json',
-  'ClientRuntimes/CSharp/ClientRuntime.Azure.Tests/project.json',
-  'ClientRuntimes/CSharp/ClientRuntime.Tests/project.json'
+  'ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Tests/project.json',
+  'ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure.Tests/project.json'
 ];
 
 var defaultShellOptions = {
@@ -400,13 +400,13 @@ var xunit = function(template, options){
   return execClrCmd(xunitRunner + ' ' + template, options);
 }
 
-var xunit2 = function(options){
+var xunitdnx = function(options){
   options.templateData = {
     f: function (s) {
       return path.basename(path.dirname(s))
     }
   };
-  return execClrCmd('dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml"', options);
+  return shell('dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml"', options);
 }
 
 gulp.task('test:xunit', ['test:xunit:dnx'], function () {
@@ -414,7 +414,7 @@ gulp.task('test:xunit', ['test:xunit:dnx'], function () {
 });
 
 gulp.task('test:xunit:dnx', function () {
-  return gulp.src(xunitDnxXproj).pipe(xunit2(defaultShellOptions));
+  return gulp.src(xunitDnxXproj).pipe(xunitdnx(defaultShellOptions));
 });
 
 var nugetPath = path.resolve('Tools/NuGet.exe');

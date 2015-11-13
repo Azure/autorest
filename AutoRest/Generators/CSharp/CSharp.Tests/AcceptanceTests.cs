@@ -247,7 +247,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     {
                         ms.Write(buffer, 0, read);
                     }
-                    Assert.Equal(File.ReadAllBytes("sample.png"), ms.ToArray());
+                    Assert.Equal(8725, ms.Length);
                 }
 
                 var emptyStream = client.Files.GetEmptyFile();
