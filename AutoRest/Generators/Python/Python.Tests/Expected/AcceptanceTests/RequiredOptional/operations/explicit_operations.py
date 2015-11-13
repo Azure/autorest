@@ -18,7 +18,7 @@ from msrest.exceptions import (
     DeserializationError,
     TokenExpiredError,
     ClientRequestError,
-    ServerError)
+    HttpOperationError)
 
 from ..models import *
 
@@ -73,7 +73,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -104,7 +104,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -137,7 +137,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -169,7 +169,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -201,7 +201,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -232,7 +232,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -264,7 +264,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -295,7 +295,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -328,7 +328,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -360,7 +360,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -392,7 +392,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -423,7 +423,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -455,7 +455,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -486,7 +486,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -519,7 +519,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -551,7 +551,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -583,7 +583,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -614,7 +614,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -647,7 +647,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -679,7 +679,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -711,7 +711,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -742,7 +742,7 @@ class ExplicitOperations(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response

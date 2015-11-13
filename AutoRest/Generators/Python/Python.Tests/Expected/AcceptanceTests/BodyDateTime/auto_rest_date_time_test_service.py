@@ -17,7 +17,7 @@ from msrest.exceptions import (
     DeserializationError,
     TokenExpiredError,
     ClientRequestError,
-    ServerError)
+    HttpOperationError)
 from .operations.datetime_model_operations import DatetimeModelOperations
 import models
 

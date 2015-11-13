@@ -11,7 +11,7 @@
 @EmptyLine
 @if (Model.IsException)
 {
-@:from msrest.exceptions import ServerException
+@:from msrest.exceptions import HttpOperationError
 @EmptyLine
 }
 @if (Model.BaseModelType != null)
@@ -69,10 +69,10 @@ else
 @if (Model.IsException)
 {
 @EmptyLine
-@:class @(Model.Name)Exception(ServerException):
+@:class @(Model.Name)Exception(HttpOperationError):
 @EmptyLine
-    @:def __init__(self, response, *args):
+    @:def __init__(self, deserialize, response, *args):
 @EmptyLine
-        @:super(@(Model.Name)Exception, self).__init__(response, '@(Model.Name)', *args)
+        @:super(@(Model.Name)Exception, self).__init__(deserialize, response, '@(Model.Name)', *args)
 }
 

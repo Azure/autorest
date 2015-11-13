@@ -17,7 +17,7 @@ from msrest.exceptions import (
     DeserializationError,
     TokenExpiredError,
     ClientRequestError,
-    ServerError)
+    HttpOperationError)
 from .operations.paths_operations import PathsOperations
 from .operations.queries_operations import QueriesOperations
 from .operations.path_items_operations import PathItemsOperations

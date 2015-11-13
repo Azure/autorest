@@ -18,7 +18,7 @@ from msrest.exceptions import (
     DeserializationError,
     TokenExpiredError,
     ClientRequestError,
-    ServerError)
+    HttpOperationError)
 
 from ..models import *
 
@@ -84,7 +84,7 @@ class PathItemsOperations(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -126,7 +126,7 @@ class PathItemsOperations(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -167,7 +167,7 @@ class PathItemsOperations(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -209,7 +209,7 @@ class PathItemsOperations(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response

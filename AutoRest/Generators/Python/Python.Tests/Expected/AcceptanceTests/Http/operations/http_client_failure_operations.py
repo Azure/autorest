@@ -18,7 +18,7 @@ from msrest.exceptions import (
     DeserializationError,
     TokenExpiredError,
     ClientRequestError,
-    ServerError)
+    HttpOperationError)
 
 from ..models import *
 
@@ -70,7 +70,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -99,7 +99,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -131,7 +131,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -163,7 +163,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -195,7 +195,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -227,7 +227,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -256,7 +256,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -285,7 +285,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -314,7 +314,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -346,7 +346,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -378,7 +378,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -410,7 +410,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -442,7 +442,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -474,7 +474,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -503,7 +503,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -532,7 +532,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -561,7 +561,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -593,7 +593,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -625,7 +625,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -657,7 +657,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -686,7 +686,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -718,7 +718,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers, content)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -747,7 +747,7 @@ class HttpClientFailureOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
             return None, response

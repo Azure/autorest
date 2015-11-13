@@ -16,7 +16,7 @@ from msrest.exceptions import (
     DeserializationError,
     TokenExpiredError,
     ClientRequestError,
-    ServerError)
+    HttpOperationError)
 import models
 
 class AutoRestValidationTestConfiguration(Configuration):
@@ -85,7 +85,7 @@ class AutoRestValidationTest(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         deserialized = None
 
@@ -129,7 +129,7 @@ class AutoRestValidationTest(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         deserialized = None
 
