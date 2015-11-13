@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Reflection;
 using Fixtures.MirrorPolymorphic;
 using Fixtures.MirrorPolymorphic.Models;
 using Fixtures.MirrorPrimitives;
@@ -103,7 +104,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void CanRoundtripPolymorphicTypes()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("swagger-mirror-polymorphic.json"),
                 ExpectedPath("Mirror.Polymorphic"));
             
@@ -205,111 +206,6 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     Assert.Equal(expectedValue, actualValue);
                 }
             }
-        }
-    }
-
-    public class PolymorphicJsonSerializer<T> : JsonConverter
-    {
-        private readonly string _discriminatorField = "$type";
-
-        public PolymorphicJsonSerializer(string discriminatorField)
-        {
-            _discriminatorField = discriminatorField;
-        }
-
-        public override bool CanConvert(Type objectType)
-        {
-            return typeof (T).IsAssignableFrom(objectType);
-        }
-
-        public override object ReadJson(JsonReader reader,
-            Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            throw new NotSupportedException();
-        }
-
-        public override void WriteJson(JsonWriter writer,
-            object value, JsonSerializer serializer)
-        {
-            if (value == null)
-            {
-                throw new ArgumentNullException("value");
-            }
-
-            if (writer == null)
-            {
-                throw new ArgumentNullException("writer");
-            }
-
-            if (serializer == null)
-            {
-                throw new ArgumentNullException("serializer");
-            }
-
-            string typeName = value.GetType().Name;
-            if (value.GetType().GetTypeInfo().GetCustomAttributes<JsonObjectAttribute>().Any())
-            {
-                typeName = value.GetType().GetTypeInfo().GetCustomAttribute<JsonObjectAttribute>().Id;
-            }
-
-            writer.WriteStartObject();
-            writer.WritePropertyName(_discriminatorField);
-            writer.WriteValue(typeName);
-
-            PropertyInfo[] properties = value.GetType().GetProperties();
-            foreach (var property in properties.Where(p => p.SetMethod != null))
-            {
-                string propertyName = property.Name;
-                if (property.GetCustomAttributes<JsonPropertyAttribute>().Any())
-                {
-                    propertyName = property.GetCustomAttribute<JsonPropertyAttribute>().PropertyName;
-                }
-                writer.WritePropertyName(propertyName);
-                serializer.Serialize(writer, property.GetValue(value, null));
-            }
-            writer.WriteEndObject();
-        }
-    }
-
-    public class PolymorphicJsonDeserializer<T> : JsonConverter
-    {
-        private readonly string _discriminatorField = "$type";
-
-        public PolymorphicJsonDeserializer(string discriminatorField)
-        {
-            _discriminatorField = discriminatorField;
-        }
-
-        public override bool CanConvert(Type objectType)
-        {
-            return typeof (T) == objectType;
-        }
-
-        public override object ReadJson(JsonReader reader,
-            Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            JObject item = JObject.Load(reader);
-            string typeDiscriminator = (string) item[_discriminatorField];
-            foreach (Type type in typeof (T).GetTypeInfo().Assembly.GetTypes()
-                .Where(t => t.Namespace == typeof (T).Namespace && t != typeof (T)))
-            {
-                string typeName = type.Name;
-                if (type.GetTypeInfo().GetCustomAttributes<JsonObjectAttribute>().Any())
-                {
-                    typeName = type.GetTypeInfo().GetCustomAttribute<JsonObjectAttribute>().Id;
-                }
-                if (typeName.Equals(typeDiscriminator, StringComparison.OrdinalIgnoreCase))
-                {
-                    return item.ToObject(type, serializer);
-                }
-            }
-            return item.ToObject(objectType);
-        }
-
-        public override void WriteJson(JsonWriter writer,
-            object value, JsonSerializer serializer)
-        {
-            throw new NotSupportedException();
         }
     }
 }

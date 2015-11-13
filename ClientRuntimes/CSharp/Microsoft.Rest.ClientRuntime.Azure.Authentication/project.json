@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0-preview",
+  "title": "Authentication for Azure Management Clients",
+  "description": "Provides ADAL based authentication for Azure management client libraries \nSupported Platforms:\n  -   Portable Class Libraries\n  -   .NET Framework 4.5\n  -   Windows 8\n  -   Windows Phone 8.1\n  -   DotNet Core",
+  "authors": [ "Microsoft" ],
+  "tags": [ "Microsoft AutoRest ClientRuntime REST adal" ],
+  "projectUrl": "https://github.com/Azure/AutoRest",
+  "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+  "copyright": "Copyright (c) Microsoft Corporation",
+  "requireLicenseAcceptance":  true,
+
+  "dependencies": {
+    "Microsoft.Rest.ClientRuntime": "[1.5,2.0)",
+    "Microsoft.IdentityModel.Clients.ActiveDirectory": "3.6.210231457-alpha"
+   },
+
+  "frameworks": {
+    "dnxcore50": {
+      "compilationOptions": { "define": [ "PORTABLE" ] },
+      "dependencies": {
+        "Microsoft.Cci": "4.0.0-beta-23409"
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@
   "tags": [ "Microsoft Azure AutoRest ClientRuntime REST azureofficial" ],
   "projectUrl": "https://github.com/Azure/AutoRest",
   "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+  "requireLicenseAcceptance":  true,
   
   "compilationOptions": {
     "useOssSigning": true,
@@ -54,6 +55,7 @@
       }
     },
     "dnxcore50": {
+      "compilationOptions": { "define": [ "PORTABLE" ] },
     }
   },
 

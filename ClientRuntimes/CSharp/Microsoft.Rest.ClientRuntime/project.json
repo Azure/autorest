@@ -9,6 +9,7 @@
   "tags": [ "Microsoft AutoRest ClientRuntime REST" ],
   "projectUrl": "https://github.com/Azure/AutoRest",
   "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+  "requireLicenseAcceptance":  true,
 
   "compilationOptions": {
     "useOssSigning": true,
@@ -53,6 +54,7 @@
       }
     },
     "dnxcore50": {
+      "compilationOptions": { "define": [ "PORTABLE" ] },
       "dependencies": {
         "Microsoft.CSharp": "4.0.0",
         "System.Diagnostics.Tools": "4.0.0",
