@@ -16,7 +16,7 @@ from msrest.exceptions import (
     DeserializationError,
     TokenExpiredError,
     ClientRequestError,
-    ServerError)
+    HttpOperationError)
 from .operations.bool_model_operations import BoolModelOperations
 import models
 

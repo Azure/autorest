@@ -17,7 +17,7 @@ from msrest.exceptions import (
     DeserializationError,
     TokenExpiredError,
     ClientRequestError,
-    ServerError)
+    HttpOperationError)
 from .operations.datetimerfc1123_operations import Datetimerfc1123Operations
 import models
 

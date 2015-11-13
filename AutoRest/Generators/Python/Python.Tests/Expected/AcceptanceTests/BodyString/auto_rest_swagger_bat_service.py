@@ -16,7 +16,7 @@ from msrest.exceptions import (
     DeserializationError,
     TokenExpiredError,
     ClientRequestError,
-    ServerError)
+    HttpOperationError)
 from .operations.string_operations import StringOperations
 from .operations.enum_operations import EnumOperations
 import models

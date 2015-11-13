@@ -16,7 +16,7 @@ from msrest.exceptions import (
     DeserializationError,
     TokenExpiredError,
     ClientRequestError,
-    ServerError)
+    HttpOperationError)
 from .operations.basic_operations_operations import BasicOperationsOperations
 from .operations.primitive_operations import PrimitiveOperations
 from .operations.array_operations import ArrayOperations

@@ -16,7 +16,7 @@ from msrest.exceptions import (
     DeserializationError,
     TokenExpiredError,
     ClientRequestError,
-    ServerError)
+    HttpOperationError)
 import models
 
 class AutoRestReportServiceConfiguration(Configuration):
@@ -79,7 +79,7 @@ class AutoRestReportService(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise ErrorException(response)
+            raise ErrorException(self._deserialize, response)
 
         deserialized = None
 

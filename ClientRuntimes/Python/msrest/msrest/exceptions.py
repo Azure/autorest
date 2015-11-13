@@ -70,9 +70,9 @@ class ClientRequestError(ClientException):
 class AuthenticationError(ClientException):
     pass
 
-class HTTPOperationError(ClientException):
+class HttpOperationError(ClientException):
 
     def __init__(self, deserialize, response, resp_type, *args):
 
         self.error = deserialize(resp_type, response)
-        super(HTTPOperationError, self).__init__(str(self.error), *args)
+        super(HttpOperationError, self).__init__(str(self.error), *args)

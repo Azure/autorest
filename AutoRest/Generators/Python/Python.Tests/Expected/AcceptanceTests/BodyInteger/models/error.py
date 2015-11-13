@@ -8,7 +8,7 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from msrest.exceptions import ServerException
+from msrest.exceptions import HttpOperationError
 
 class Error(object):
 
@@ -28,8 +28,8 @@ class Error(object):
             if hasattr(self, k):
                 setattr(self, k, kwargs[k])
 
-class ErrorException(ServerException):
+class ErrorException(HttpOperationError):
 
-    def __init__(self, response, *args):
+    def __init__(self, deserialize, response, *args):
 
-        super(ErrorException, self).__init__(response, 'Error', *args)
+        super(ErrorException, self).__init__(deserialize, response, 'Error', *args)

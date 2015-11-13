@@ -74,15 +74,15 @@ namespace Microsoft.Rest.Generator.Python
             {
                 if (DefaultResponse == null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "ServerException(response)");
+                    return string.Format(CultureInfo.InvariantCulture, "HttpOperationException(self._deserialize, response)");
                 }
                 else if (DefaultResponse is CompositeType)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}Exception(response)", DefaultResponse.Name);
+                    return string.Format(CultureInfo.InvariantCulture, "{0}Exception(self._deserialize, response)", DefaultResponse.Name);
                 }
                 else
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "ServerException(response, '{0}')", DefaultResponse.ToPythonRuntimeTypeString());
+                    return string.Format(CultureInfo.InvariantCulture, "HttpOperationException(self._deserialize, response, '{0}')", DefaultResponse.ToPythonRuntimeTypeString());
                 }
             }
         }

@@ -16,7 +16,7 @@ from msrest.exceptions import (
     DeserializationError,
     TokenExpiredError,
     ClientRequestError,
-    ServerError)
+    HttpOperationError)
 from .operations.dictionary_operations import DictionaryOperations
 import models
 
