@@ -83,7 +83,9 @@ namespace Microsoft.Rest.Modeler.Swagger
                             Name = name,
                             SerializedName = name,
                             Type = propertyType,
-                            IsRequired = property.Value.IsRequired
+                            IsRequired = property.Value.IsRequired,
+                            IsReadOnly = property.Value.ReadOnly,
+                            DefaultValue = property.Value.Default
                         };
                         SetConstraints(propertyObj.Constraints, property.Value);
 
@@ -105,7 +107,6 @@ namespace Microsoft.Rest.Modeler.Swagger
                                                            string.Format(CultureInfo.InvariantCulture, 
                                                            "'{0}'", v.Name))) + ".";
                         }
-                        propertyObj.IsReadOnly = property.Value.ReadOnly;
                         objectType.Properties.Add(propertyObj);
                     }
                     else

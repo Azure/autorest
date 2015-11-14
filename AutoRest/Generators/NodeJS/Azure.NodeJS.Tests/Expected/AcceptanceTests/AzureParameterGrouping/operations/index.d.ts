@@ -79,12 +79,16 @@ export interface ParameterGrouping {
      * 
      * @param {number} [firstParameterGroup.queryOne] Query parameter with default
      * 
-     * @param {object} [secondParameterGroup] Additional parameters for the
-     * operation
+     * @param {object}
+     * [parameterGroupingPostMultipleParameterGroupsSecondParameterGroup]
+     * Additional parameters for the operation
      * 
-     * @param {string} [secondParameterGroup.headerTwo]
+     * @param {string}
+     * [parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.headerTwo]
      * 
-     * @param {number} [secondParameterGroup.queryTwo] Query parameter with default
+     * @param {number}
+     * [parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.queryTwo]
+     * Query parameter with default
      * 
      * @param {object} [options]
      *
@@ -94,6 +98,27 @@ export interface ParameterGrouping {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postMultipleParameterGroups(firstParameterGroup: models.FirstParameterGroup, secondParameterGroup: models.SecondParameterGroup, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postMultipleParameterGroups(firstParameterGroup: models.FirstParameterGroup, secondParameterGroup: models.SecondParameterGroup, callback: ServiceCallback<void>): void;
+    postMultipleParameterGroups(firstParameterGroup: models.FirstParameterGroup, parameterGroupingPostMultipleParameterGroupsSecondParameterGroup: models.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup, options: RequestOptions, callback: ServiceCallback<void>): void;
+    postMultipleParameterGroups(firstParameterGroup: models.FirstParameterGroup, parameterGroupingPostMultipleParameterGroupsSecondParameterGroup: models.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup, callback: ServiceCallback<void>): void;
+
+    /**
+     * Post parameters with a shared parameter group object
+     *
+     * @param {object} [firstParameterGroup] Additional parameters for the
+     * operation
+     * 
+     * @param {string} [firstParameterGroup.headerOne]
+     * 
+     * @param {number} [firstParameterGroup.queryOne] Query parameter with default
+     * 
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    postSharedParameterGroupObject(firstParameterGroup: models.FirstParameterGroup, options: RequestOptions, callback: ServiceCallback<void>): void;
+    postSharedParameterGroupObject(firstParameterGroup: models.FirstParameterGroup, callback: ServiceCallback<void>): void;
 }
