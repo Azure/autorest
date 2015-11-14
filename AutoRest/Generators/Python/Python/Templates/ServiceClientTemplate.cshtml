@@ -45,9 +45,9 @@ class @(Model.Name)Configuration(Configuration):
             base_url = '@Model.BaseUrl'
 @EmptyLine
 @{var parameters = Model.Properties.Where(p => p.IsRequired);}
-        super(@(Model.Name)Configuration, self).__init__(@(parameters.Any(p => p.Type == PrimaryType.Credentials) ? "credentials" : "None"), base_url, filepath)
+        super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
 @EmptyLine
-@foreach (var param in parameters)
+@foreach (var param in Model.Properties.Where(p => p.IsRequired))
 {
         @:self.@(param.Name) = @(param.Name);
 }
@@ -60,7 +60,7 @@ class @(Model.Name)(object):
 @EmptyLine
     def __init__(self, config):
 @EmptyLine
-        self._client = ServiceClient(config) 
+        self._client = ServiceClient(@(Model.Properties.Any(p => p.Type == PrimaryType.Credentials) ? "config.credentials" : "None"), config) 
 @EmptyLine
         client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
