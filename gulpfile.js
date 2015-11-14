@@ -253,7 +253,7 @@ var msbuildDefaults = {
   maxBuffer: MAX_BUFFER,
   verbosity: 'minimal',
   errorOnFail: true,
-  toolsVersion: 12.0
+  toolsVersion: 14.0
 };
 
 gulp.task('clean:node_modules', function(cb) {
