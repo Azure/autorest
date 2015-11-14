@@ -60,10 +60,11 @@ class PathItemsOperations(object):
 
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery'
-        url = url.format(
-            localStringPath = self._parse_url("local_string_path", local_string_path, 'str', False),
-            pathItemStringPath = self._parse_url("path_item_string_path", path_item_string_path, 'str', False),
-            globalStringPath = self._parse_url("self._client.global_string_path", self._client.global_string_path, 'str', False))
+        path_format_arguments = {
+            'localStringPath' : self._parse_url("local_string_path", local_string_path, 'str', False),
+            'pathItemStringPath' : self._parse_url("path_item_string_path", path_item_string_path, 'str', False),
+            'globalStringPath' : self._parse_url("self.config.global_string_path", self.config.global_string_path, 'str', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -71,8 +72,8 @@ class PathItemsOperations(object):
             query['localStringQuery'] = self._parse_url("local_string_query", local_string_query, 'str', False)
         if path_item_string_query is not None:
             query['pathItemStringQuery'] = self._parse_url("path_item_string_query", path_item_string_query, 'str', False)
-        if self._client.global_string_query is not None:
-            query['globalStringQuery'] = self._parse_url("self._client.global_string_query", self._client.global_string_query, 'str', False)
+        if self.config.global_string_query is not None:
+            query['globalStringQuery'] = self._parse_url("self.config.global_string_query", self.config.global_string_query, 'str', False)
 
         # Construct headers
         headers = {}
@@ -102,10 +103,11 @@ class PathItemsOperations(object):
 
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery'
-        url = url.format(
-            localStringPath = self._parse_url("local_string_path", local_string_path, 'str', False),
-            pathItemStringPath = self._parse_url("path_item_string_path", path_item_string_path, 'str', False),
-            globalStringPath = self._parse_url("self._client.global_string_path", self._client.global_string_path, 'str', False))
+        path_format_arguments = {
+            'localStringPath' : self._parse_url("local_string_path", local_string_path, 'str', False),
+            'pathItemStringPath' : self._parse_url("path_item_string_path", path_item_string_path, 'str', False),
+            'globalStringPath' : self._parse_url("self.config.global_string_path", self.config.global_string_path, 'str', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -113,8 +115,8 @@ class PathItemsOperations(object):
             query['localStringQuery'] = self._parse_url("local_string_query", local_string_query, 'str', False)
         if path_item_string_query is not None:
             query['pathItemStringQuery'] = self._parse_url("path_item_string_query", path_item_string_query, 'str', False)
-        if self._client.global_string_query is not None:
-            query['globalStringQuery'] = self._parse_url("self._client.global_string_query", self._client.global_string_query, 'str', False)
+        if self.config.global_string_query is not None:
+            query['globalStringQuery'] = self._parse_url("self.config.global_string_query", self.config.global_string_query, 'str', False)
 
         # Construct headers
         headers = {}
@@ -143,10 +145,11 @@ class PathItemsOperations(object):
 
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null'
-        url = url.format(
-            localStringPath = self._parse_url("local_string_path", local_string_path, 'str', False),
-            pathItemStringPath = self._parse_url("path_item_string_path", path_item_string_path, 'str', False),
-            globalStringPath = self._parse_url("self._client.global_string_path", self._client.global_string_path, 'str', False))
+        path_format_arguments = {
+            'localStringPath' : self._parse_url("local_string_path", local_string_path, 'str', False),
+            'pathItemStringPath' : self._parse_url("path_item_string_path", path_item_string_path, 'str', False),
+            'globalStringPath' : self._parse_url("self.config.global_string_path", self.config.global_string_path, 'str', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -154,8 +157,8 @@ class PathItemsOperations(object):
             query['localStringQuery'] = self._parse_url("local_string_query", local_string_query, 'str', False)
         if path_item_string_query is not None:
             query['pathItemStringQuery'] = self._parse_url("path_item_string_query", path_item_string_query, 'str', False)
-        if self._client.global_string_query is not None:
-            query['globalStringQuery'] = self._parse_url("self._client.global_string_query", self._client.global_string_query, 'str', False)
+        if self.config.global_string_query is not None:
+            query['globalStringQuery'] = self._parse_url("self.config.global_string_query", self.config.global_string_query, 'str', False)
 
         # Construct headers
         headers = {}
@@ -185,10 +188,11 @@ class PathItemsOperations(object):
 
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null'
-        url = url.format(
-            localStringPath = self._parse_url("local_string_path", local_string_path, 'str', False),
-            pathItemStringPath = self._parse_url("path_item_string_path", path_item_string_path, 'str', False),
-            globalStringPath = self._parse_url("self._client.global_string_path", self._client.global_string_path, 'str', False))
+        path_format_arguments = {
+            'localStringPath' : self._parse_url("local_string_path", local_string_path, 'str', False),
+            'pathItemStringPath' : self._parse_url("path_item_string_path", path_item_string_path, 'str', False),
+            'globalStringPath' : self._parse_url("self.config.global_string_path", self.config.global_string_path, 'str', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
@@ -196,8 +200,8 @@ class PathItemsOperations(object):
             query['localStringQuery'] = self._parse_url("local_string_query", local_string_query, 'str', False)
         if path_item_string_query is not None:
             query['pathItemStringQuery'] = self._parse_url("path_item_string_query", path_item_string_query, 'str', False)
-        if self._client.global_string_query is not None:
-            query['globalStringQuery'] = self._parse_url("self._client.global_string_query", self._client.global_string_query, 'str', False)
+        if self.config.global_string_query is not None:
+            query['globalStringQuery'] = self._parse_url("self.config.global_string_query", self.config.global_string_query, 'str', False)
 
         # Construct headers
         headers = {}

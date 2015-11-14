@@ -12,7 +12,7 @@ from enum import Enum
 
 class Colors(Enum):
 
-    red color = "red color"
-    green-color = "green-color"
+    redcolor = "red color"
+    greencolor = "green-color"
     blue_color = "blue_color"
 

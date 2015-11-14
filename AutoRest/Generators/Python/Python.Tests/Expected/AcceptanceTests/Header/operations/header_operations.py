@@ -48,7 +48,7 @@ class HeaderOperations(object):
             return value
 
     @ServiceClient.async_request
-    def param_existing_key(self, user-_agent, custom_headers = {}, raw = False, callback = None):
+    def param_existing_key(self, user_agent, custom_headers = {}, raw = False, callback = None):
         """
 
         Send a post request with header value "User-Agent": "overwrite"
@@ -62,8 +62,8 @@ class HeaderOperations(object):
 
         # Construct headers
         headers = {}
-        if user-_agent is not None:
-            query['User-Agent'] = user-_agent
+        if user_agent is not None:
+            query['User-Agent'] = user_agent
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -106,7 +106,7 @@ class HeaderOperations(object):
             return None, response
 
     @ServiceClient.async_request
-    def param_protected_key(self, content-_type, custom_headers = {}, raw = False, callback = None):
+    def param_protected_key(self, content_type, custom_headers = {}, raw = False, callback = None):
         """
 
         Send a post request with header value "Content-Type": "text/html"
@@ -120,8 +120,8 @@ class HeaderOperations(object):
 
         # Construct headers
         headers = {}
-        if content-_type is not None:
-            query['Content-Type'] = content-_type
+        if content_type is not None:
+            query['Content-Type'] = content_type
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 

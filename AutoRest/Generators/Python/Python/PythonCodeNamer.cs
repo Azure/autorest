@@ -72,35 +72,52 @@ namespace Microsoft.Rest.Generator.Python
             _normalizedTypes = new HashSet<IType>();
         }
 
+        /// <summary>
+        /// Removes invalid characters from the name.
+        /// </summary>
+        /// <param name="name">String to parse.</param>
+        /// <param name="allowerCharacters">Allowed characters.</param>
+        /// <returns>Name with invalid characters removed.</returns>
+        private static string RemoveInvalidCharacters(string name, params char[] allowerCharacters)
+        {
+            return new string(name.Replace("[]", "Sequence")
+                   .Where(c => char.IsLetterOrDigit(c) || allowerCharacters.Contains(c))
+                   .ToArray());
+        }
+
+        private string GetValidPythonName(string name, string padString)
+        {
+            return PythonCase(GetEscapedReservedName(RemoveInvalidPythonCharacters(name), padString));
+        }
+
         public override string GetFieldName(string name)
         {
-            return "_" + PythonCase(GetEscapedReservedName(name, "Variable"));
+            return "_" + GetValidPythonName(name, "Variable");
         }
 
         public override string GetPropertyName(string name)
         {
-            return PythonCase(GetEscapedReservedName(name, "Property"));
+            return GetValidPythonName(name, "Property");
         }
 
         public override string GetMethodName(string name)
         {
-            name = GetEscapedReservedName(name, "Method");
-            return PythonCase(name);
+            return GetValidPythonName(name, "Method");
         }
 
         public override string GetEnumMemberName(string name)
         {
-            return PythonCase(GetEscapedReservedName(name, "Enum"));
+            return GetValidPythonName(name, "Enum");
         }
 
         public override string GetParameterName(string name)
         {
-            return PythonCase(GetEscapedReservedName(name, "Parameter"));
+            return GetValidPythonName(name, "Parameter");
         }
 
         public override string GetVariableName(string name)
         {
-            return PythonCase(GetEscapedReservedName(name, "Variable"));
+            return GetValidPythonName(name, "Variable");
         }
 
         public override void NormalizeClientModel(ServiceClient client)
@@ -123,8 +140,7 @@ namespace Microsoft.Rest.Generator.Python
                     if (parameter.ClientProperty != null)
                     {
                         parameter.Name = string.Format(CultureInfo.InvariantCulture,
-                            "{0}.{1}",
-                            method.Group == null ? "self" : "self._client",
+                            "self.config.{0}",
                             parameter.ClientProperty.Name);
                     }
                     else
@@ -185,8 +201,12 @@ namespace Microsoft.Rest.Generator.Python
                 "Type {0} is not supported.", type.GetType()));
         }
 
-        private static IType NormalizeEnumType(EnumType enumType)
+        private IType NormalizeEnumType(EnumType enumType)
         {
+            for (int i = 0; i < enumType.Values.Count; i++)
+            {
+                enumType.Values[i].Name = GetEnumMemberName(enumType.Values[i].Name);
+            }
             return enumType;
         }
 

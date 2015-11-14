@@ -12,7 +12,7 @@ from enum import Enum
 
 class UriColor(Enum):
 
-    red color = "red color"
-    green color = "green color"
-    blue color = "blue color"
+    redcolor = "red color"
+    greencolor = "green color"
+    bluecolor = "blue color"
 

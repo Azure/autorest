@@ -123,17 +123,21 @@ namespace Microsoft.Rest.Generator.Python
             var pathParameterList = this.LogicalParameters.Where(p => p.Location == ParameterLocation.Path).ToList();
             if (pathParameterList.Any())
             {
-                builder.AppendLine("{0} = {0}.format(", variableName).Indent();
+                builder.AppendLine("path_format_arguments = {").Indent();
+                //builder.AppendLine("{0} = {0}.format(", variableName).Indent();
 
                 for (int i = 0; i < pathParameterList.Count; i ++)
                 {
-                    builder.AppendLine("{0} = self._parse_url(\"{1}\", {1}, '{2}', {3}){4}",
+                    builder.AppendLine("'{0}' : self._parse_url(\"{1}\", {1}, '{2}', {3}){4}",
                         pathParameterList[i].SerializedName,
                         pathParameterList[i].Name,
                         pathParameterList[i].Type.ToPythonRuntimeTypeString(),
                         pathParameterList[i].SkipUrlEncoding(),
-                        i == pathParameterList.Count-1 ? ")" : ",");
+                        i == pathParameterList.Count-1 ? "}" : ",");
                 }
+
+                builder.Outdent();
+                builder.AppendLine("{0} = {0}.format(**path_format_arguments)", variableName);
             }
 
             return builder.ToString();
