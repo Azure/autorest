@@ -145,7 +145,8 @@ class Serializer(object):
 
         if not hasattr(target_obj, "_attribute_map"):
             data_type = type(target_obj).__name__
-            return self.serialize_data(target_obj, data_type, required=True)
+            if data_type in self.basic_types:
+                return self.serialize_data(target_obj, data_type, required=True)
 
         try:
             attributes = target_obj._attribute_map
@@ -196,7 +197,7 @@ class Serializer(object):
             raise AttributeError(
                 "Object missing required attribute")
 
-        if data in [None, "", [], {}]:
+        if data in [None, ""]:
             raise ValueError("No value for given attribute")
         
         if data_type is None:
@@ -271,6 +272,9 @@ class Serializer(object):
 
         try:
             utc = attr.utctimetuple()
+            if utc.tm_year > 9999 or utc.tm_year < 1:
+                raise OverflowError("Hit max or min date")
+
             microseconds = str(float(attr.microsecond)*1e-6)[1:].ljust(4, '0')
 
             date = "{:04}-{:02}-{:02}T{:02}:{:02}:{:02}".format(
@@ -512,6 +516,8 @@ class Deserializer(object):
         try:
             date_obj = isodate.parse_datetime(attr)
             test_utc = date_obj.utctimetuple()
+            if test_utc.tm_year > 9999 or test_utc.tm_year < 1:
+                raise OverflowError("Hit max or min date")
 
         except(ValueError, OverflowError, AttributeError) as err:
             msg = "Cannot deserialize datetime object."

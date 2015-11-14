@@ -27,7 +27,7 @@ class AutoRestSwaggerBATdictionaryServiceConfiguration(Configuration):
         if not base_url:
             base_url = 'http://localhost'
 
-        super(AutoRestSwaggerBATdictionaryServiceConfiguration, self).__init__(None, base_url, filepath)
+        super(AutoRestSwaggerBATdictionaryServiceConfiguration, self).__init__(base_url, filepath)
 
 
 
@@ -35,7 +35,7 @@ class AutoRestSwaggerBATdictionaryService(object):
 
     def __init__(self, config):
 
-        self._client = ServiceClient(config) 
+        self._client = ServiceClient(None, config) 
 
         client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
