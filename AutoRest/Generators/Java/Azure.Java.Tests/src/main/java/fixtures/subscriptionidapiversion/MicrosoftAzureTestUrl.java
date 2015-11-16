@@ -94,9 +94,9 @@ public interface MicrosoftAzureTestUrl {
     void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
-     * Gets the Group object to access its operations.
+     * Gets the GroupOperations object to access its operations.
      * @return the group value.
      */
-    Group getGroup();
+    GroupOperations getGroup();
 
 }

@@ -123,73 +123,73 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private XMsClientRequestId xMsClientRequestId;
+    private XMsClientRequestIdOperations xMsClientRequestId;
 
     /**
-     * Gets the XMsClientRequestId object to access its operations.
+     * Gets the XMsClientRequestIdOperations object to access its operations.
      * @return the xMsClientRequestId value.
      */
-    public XMsClientRequestId getXMsClientRequestId() {
+    public XMsClientRequestIdOperations getXMsClientRequestId() {
         return this.xMsClientRequestId;
     }
 
-    private SubscriptionInCredentials subscriptionInCredentials;
+    private SubscriptionInCredentialsOperations subscriptionInCredentials;
 
     /**
-     * Gets the SubscriptionInCredentials object to access its operations.
+     * Gets the SubscriptionInCredentialsOperations object to access its operations.
      * @return the subscriptionInCredentials value.
      */
-    public SubscriptionInCredentials getSubscriptionInCredentials() {
+    public SubscriptionInCredentialsOperations getSubscriptionInCredentials() {
         return this.subscriptionInCredentials;
     }
 
-    private SubscriptionInMethod subscriptionInMethod;
+    private SubscriptionInMethodOperations subscriptionInMethod;
 
     /**
-     * Gets the SubscriptionInMethod object to access its operations.
+     * Gets the SubscriptionInMethodOperations object to access its operations.
      * @return the subscriptionInMethod value.
      */
-    public SubscriptionInMethod getSubscriptionInMethod() {
+    public SubscriptionInMethodOperations getSubscriptionInMethod() {
         return this.subscriptionInMethod;
     }
 
-    private ApiVersionDefault apiVersionDefault;
+    private ApiVersionDefaultOperations apiVersionDefault;
 
     /**
-     * Gets the ApiVersionDefault object to access its operations.
+     * Gets the ApiVersionDefaultOperations object to access its operations.
      * @return the apiVersionDefault value.
      */
-    public ApiVersionDefault getApiVersionDefault() {
+    public ApiVersionDefaultOperations getApiVersionDefault() {
         return this.apiVersionDefault;
     }
 
-    private ApiVersionLocal apiVersionLocal;
+    private ApiVersionLocalOperations apiVersionLocal;
 
     /**
-     * Gets the ApiVersionLocal object to access its operations.
+     * Gets the ApiVersionLocalOperations object to access its operations.
      * @return the apiVersionLocal value.
      */
-    public ApiVersionLocal getApiVersionLocal() {
+    public ApiVersionLocalOperations getApiVersionLocal() {
         return this.apiVersionLocal;
     }
 
-    private SkipUrlEncoding skipUrlEncoding;
+    private SkipUrlEncodingOperations skipUrlEncoding;
 
     /**
-     * Gets the SkipUrlEncoding object to access its operations.
+     * Gets the SkipUrlEncodingOperations object to access its operations.
      * @return the skipUrlEncoding value.
      */
-    public SkipUrlEncoding getSkipUrlEncoding() {
+    public SkipUrlEncodingOperations getSkipUrlEncoding() {
         return this.skipUrlEncoding;
     }
 
-    private HeaderOperations headerOperations;
+    private HeaderOperationsOperations headerOperations;
 
     /**
-     * Gets the HeaderOperations object to access its operations.
+     * Gets the HeaderOperationsOperations object to access its operations.
      * @return the headerOperations value.
      */
-    public HeaderOperations getHeaderOperations() {
+    public HeaderOperationsOperations getHeaderOperations() {
         return this.headerOperations;
     }
 
@@ -258,12 +258,12 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
         this.azureClient.setCredentials(this.credentials);
         this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.xMsClientRequestId = new XMsClientRequestIdImpl(retrofit, this);
-        this.subscriptionInCredentials = new SubscriptionInCredentialsImpl(retrofit, this);
-        this.subscriptionInMethod = new SubscriptionInMethodImpl(retrofit, this);
-        this.apiVersionDefault = new ApiVersionDefaultImpl(retrofit, this);
-        this.apiVersionLocal = new ApiVersionLocalImpl(retrofit, this);
-        this.skipUrlEncoding = new SkipUrlEncodingImpl(retrofit, this);
-        this.headerOperations = new HeaderOperationsImpl(retrofit, this);
+        this.xMsClientRequestId = new XMsClientRequestIdOperationsImpl(retrofit, this);
+        this.subscriptionInCredentials = new SubscriptionInCredentialsOperationsImpl(retrofit, this);
+        this.subscriptionInMethod = new SubscriptionInMethodOperationsImpl(retrofit, this);
+        this.apiVersionDefault = new ApiVersionDefaultOperationsImpl(retrofit, this);
+        this.apiVersionLocal = new ApiVersionLocalOperationsImpl(retrofit, this);
+        this.skipUrlEncoding = new SkipUrlEncodingOperationsImpl(retrofit, this);
+        this.headerOperations = new HeaderOperationsOperationsImpl(retrofit, this);
     }
 }

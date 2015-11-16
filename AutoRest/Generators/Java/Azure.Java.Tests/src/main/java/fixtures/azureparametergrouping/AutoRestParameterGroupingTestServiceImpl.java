@@ -92,13 +92,13 @@ public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient impl
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private ParameterGrouping parameterGrouping;
+    private ParameterGroupingOperations parameterGrouping;
 
     /**
-     * Gets the ParameterGrouping object to access its operations.
+     * Gets the ParameterGroupingOperations object to access its operations.
      * @return the parameterGrouping value.
      */
-    public ParameterGrouping getParameterGrouping() {
+    public ParameterGroupingOperations getParameterGrouping() {
         return this.parameterGrouping;
     }
 
@@ -166,6 +166,6 @@ public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient impl
         this.azureClient.setCredentials(this.credentials);
         this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.parameterGrouping = new ParameterGroupingImpl(retrofit, this);
+        this.parameterGrouping = new ParameterGroupingOperationsImpl(retrofit, this);
     }
 }

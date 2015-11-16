@@ -92,13 +92,13 @@ public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRe
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private HttpSuccess httpSuccess;
+    private HttpSuccessOperations httpSuccess;
 
     /**
-     * Gets the HttpSuccess object to access its operations.
+     * Gets the HttpSuccessOperations object to access its operations.
      * @return the httpSuccess value.
      */
-    public HttpSuccess getHttpSuccess() {
+    public HttpSuccessOperations getHttpSuccess() {
         return this.httpSuccess;
     }
 
@@ -166,6 +166,6 @@ public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRe
         this.azureClient.setCredentials(this.credentials);
         this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.httpSuccess = new HttpSuccessImpl(retrofit, this);
+        this.httpSuccess = new HttpSuccessOperationsImpl(retrofit, this);
     }
 }
