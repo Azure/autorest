@@ -46,6 +46,9 @@
     <Compile Include="TemplateModels\MethodTemplateModel.cs" />
     <Compile Include="ClientModelExtensions.cs" />
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
+    <Compile Include="Templates\SetupTemplate.cs">
+      <DependentUpon>SetupTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\EnumTemplate.cs">
       <DependentUpon>EnumTemplate.cshtml</DependentUpon>
     </Compile>
@@ -70,6 +73,7 @@
     <Compile Include="Templates\ServiceClientInitTemplate.cs">
       <DependentUpon>ServiceClientInitTemplate.cshtml</DependentUpon>
     </Compile>
+    <None Include="Templates\SetupTemplate.cshtml" />
     <None Include="Templates\EnumTemplate.cshtml" />
     <None Include="Templates\MethodGroupTemplate.cshtml" />
     <None Include="Templates\ModelTemplate.cshtml" />
