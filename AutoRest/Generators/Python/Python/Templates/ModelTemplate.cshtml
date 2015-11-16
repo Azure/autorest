@@ -9,6 +9,7 @@
 @Header("# ")
 #--------------------------------------------------------------------------
 @EmptyLine
+from msrest.serialization import Model
 @if (Model.IsException)
 {
 @:from msrest.exceptions import HttpOperationError
@@ -20,9 +21,8 @@
 }
 else
 {
-@:class @(Model.Name)(object):
+@:class @(Model.Name)(Model):
 }
-@* Need to handle the Polymorhpic require field, default value, comment*@
 @{
   var requiredFieldList = Model.GetRequiredFieldsList();
   var requiredStr = String.Empty;
@@ -32,7 +32,7 @@ else
     {
       requiredFieldList[i] = "'" + requiredFieldList[i] + "'";
     }
-    requiredStr = string.Join(",", requiredFieldList);
+    requiredStr = string.Join(", ", requiredFieldList);
   }
 @EmptyLine
     @:_required = [@requiredStr]
@@ -50,6 +50,15 @@ else
   }
 }
     }
+@if (Model.SubModelTypes.Any())
+{
+<text>
+@EmptyLine
+    _subtype_map = {
+        '@(Model.GetPolymorphicDiscriminator())':{@Model.GetSubModelTypeList()}
+    }
+</text>
+}
 @EmptyLine
     def __init__(self, *args, **kwargs):
 @EmptyLine
@@ -62,17 +71,17 @@ else
     }
   }
 }
-@EmptyLine
-        for k in kwargs:
-            if hasattr(self, k):
-                setattr(self, k, kwargs[k])
+@if (Model.BaseModelType != null)
+{
+        @:super(@(Model.Name), self).__init__()
+}
 @if (Model.IsException)
 {
 @EmptyLine
-@:class @(Model.Name)Exception(HttpOperationError):
+@:class @(Model.ExceptionTypeDefinitionName)(HttpOperationError):
 @EmptyLine
     @:def __init__(self, deserialize, response, *args):
 @EmptyLine
-        @:super(@(Model.Name)Exception, self).__init__(deserialize, response, '@(Model.Name)', *args)
+        @:super(@(Model.ExceptionTypeDefinitionName), self).__init__(deserialize, response, '@(Model.Name)', *args)
 }
 

@@ -1,14 +1,14 @@
-﻿#--------------------------------------------------------------------------
+﻿# --------------------------------------------------------------------------
 #
-# Copyright (c) Microsoft Corporation. All rights reserved. 
+# Copyright (c) Microsoft Corporation. All rights reserved.
 #
 # The MIT License (MIT)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the ""Software""), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
+# of this software and associated documentation files (the ""Software""), to
+# deal in the Software without restriction, including without limitation the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+# sell copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
 #
 # The above copyright notice and this permission notice shall be included in
@@ -18,11 +18,11 @@
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-# THE SOFTWARE.
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+# IN THE SOFTWARE.
 #
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 
 """
 Define custom HTTP Adapter
@@ -40,14 +40,13 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
     """
     HTTP Adapter to customize REST pipeline in Requests.
     """
-    
 
     def __init__(self, config):
 
         self._log = logging.getLogger(config.log_name)
         self._client_hooks = {
-            'request':ClientPipelineHook(),
-            'response':ClientPipelineHook()}
+            'request': ClientPipelineHook(),
+            'response': ClientPipelineHook()}
 
         super(ClientHTTPAdapter, self).__init__()
 
@@ -117,7 +116,7 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
                 "Event: '{0}' is not able to be hooked.".format(event))
 
     @event_hook("request")
-    def send(self, request, stream=False, timeout=None, verify=True, 
+    def send(self, request, stream=False, timeout=None, verify=True,
              cert=None, proxies=None):
         """
         Sends the request object.
@@ -132,7 +131,7 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
         """
         return super(ClientHTTPAdapter, self).build_response(req, resp)
 
-  
+
 class ClientPipelineHook(object):
     """
     Pipeline hook to wrap a specific event.
@@ -156,7 +155,7 @@ class ClientPipelineHook(object):
 
         if not self.overwrite_call:
             # Execute original event
-            result = func(*args, **kwargs) 
+            result = func(*args, **kwargs)
 
         for call in self.postcalls:
             # Execute any post-event callbacks
@@ -205,7 +204,6 @@ class ClientRetryPolicy(object):
         safe_codes = [i for i in range(501) if i != 408]
         safe_codes.append(501)
         safe_codes.append(505)
-        
 
         retry_codes = [i for i in range(999) if i not in safe_codes]
         self.policy.status_forcelist = retry_codes
@@ -260,6 +258,7 @@ class ClientRedirectPolicy(object):
             self.allow, self.max_redirects))
         return self.max_redirects
 
+
 class ClientProxies(object):
 
     def __init__(self, log_name):
@@ -270,7 +269,7 @@ class ClientProxies(object):
 
     def __call__(self):
         proxy_string = "\n".join(
-            ["    "+k+": "+v for k,v in self.proxies.items()])
+            ["    "+k+": "+v for k, v in self.proxies.items()])
 
         self._log.debug("Configuring proxies:{}".format(proxy_string))
         self._log.debug("Evaluate proxies against ENV settings: {}".format(
@@ -280,6 +279,7 @@ class ClientProxies(object):
 
     def add(self, key, value):
         self.proxies[key] = value
+
 
 class ClientConnection(object):
 
@@ -297,4 +297,3 @@ class ClientConnection(object):
         return {'timeout': self.timeout,
                 'verify': self.verify,
                 'cert': self.cert}
-

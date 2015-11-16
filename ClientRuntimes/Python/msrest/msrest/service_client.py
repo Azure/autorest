@@ -1,14 +1,14 @@
-﻿#--------------------------------------------------------------------------
+﻿# --------------------------------------------------------------------------
 #
-# Copyright (c) Microsoft Corporation. All rights reserved. 
+# Copyright (c) Microsoft Corporation. All rights reserved.
 #
 # The MIT License (MIT)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the ""Software""), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
+# of this software and associated documentation files (the ""Software""), to
+# deal in the Software without restriction, including without limitation the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+# sell copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
 #
 # The above copyright notice and this permission notice shall be included in
@@ -18,11 +18,11 @@
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-# THE SOFTWARE.
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+# IN THE SOFTWARE.
 #
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 
 import logging
 import requests
@@ -70,7 +70,7 @@ class ServiceClient(object):
         self._adapter.add_hook("response", log_response, precall=False)
 
     def _format_url(self, url, skip_quote):
-       
+
         parsed = urlparse(url)
 
         if not parsed.scheme or not parsed.netloc:
@@ -151,14 +151,15 @@ class ServiceClient(object):
                 return session.request(
                     request.method, request.url, data=request.data,
                     headers=request.headers, params=request.params,
-                    allow_redirects=bool(self.config.redirect_policy), **kwargs)
+                    allow_redirects=bool(self.config.redirect_policy),
+                    **kwargs)
 
             except (oauth2.rfc6749.errors.InvalidGrantError,
-                oauth2.rfc6749.errors.TokenExpiredError) as err:
+                    oauth2.rfc6749.errors.TokenExpiredError) as err:
 
                 self._log.warning(
                     "Token expired or is invalid. Attempting to refresh.")
-        
+
             try:
                 session = self.creds.refresh_session()
                 self._configure_session(session)
@@ -166,16 +167,17 @@ class ServiceClient(object):
                 response = session.request(
                     request.method, request.url, request.data,
                     request.headers, params=request.params,
-                    allow_redirects=bool(self.config.redirect_policy), **kwargs)
+                    allow_redirects=bool(self.config.redirect_policy),
+                    **kwargs)
 
                 response.raise_for_status()
                 return response
 
             except (oauth2.rfc6749.errors.InvalidGrantError,
-                oauth2.rfc6749.errors.TokenExpiredError) as err:
+                    oauth2.rfc6749.errors.TokenExpiredError) as err:
 
-                 msg = "Token expired or is invalid."
-                 raise_with_traceback(TokenExpiredError, msg, err)
+                msg = "Token expired or is invalid."
+                raise_with_traceback(TokenExpiredError, msg, err)
 
         except (requests.RequestException,
                 oauth2.rfc6749.errors.OAuth2Error) as err:
@@ -207,7 +209,7 @@ class ServiceClient(object):
 
     def add_header(self, header, value):
         """
-        Add a persistent header - this header will be applied to all 
+        Add a persistent header - this header will be applied to all
         requests sent during the current client session.
 
         :Args:

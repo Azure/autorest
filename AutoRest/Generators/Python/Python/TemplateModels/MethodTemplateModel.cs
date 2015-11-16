@@ -78,7 +78,7 @@ namespace Microsoft.Rest.Generator.Python
                 }
                 else if (DefaultResponse is CompositeType)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}Exception(self._deserialize, response)", DefaultResponse.Name);
+                    return string.Format(CultureInfo.InvariantCulture, "{0}(self._deserialize, response)", ((CompositeType)DefaultResponse).GetExceptionDefineType());
                 }
                 else
                 {
@@ -202,68 +202,12 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        /// <summary>
-        /// Returns list of parameters and their properties in (alphabetical order) that needs to be documented over a method.
-        /// This property does simple tree traversal using stack and hashtable for already visited complex types.
-        /// </summary>
         public IEnumerable<ParameterTemplateModel> DocumentationParameters
         {
             get
             {
-                var traversalStack = new Stack<ParameterTemplateModel>();
-                var visitedHash = new Dictionary<string, ParameterTemplateModel>();
-                var retValue = new Stack<ParameterTemplateModel>();
-
-                foreach (var param in LocalParameters)
-                {
-                    traversalStack.Push(param);
-                }
-
-                while (traversalStack.Count() != 0)
-                {
-                    var param = traversalStack.Pop();
-                    if (!(param.Type is CompositeType))
-                    {
-                        retValue.Push(param);
-                    }
-                    
-                    if (param.Type is CompositeType)
-                    {
-                        if (!visitedHash.ContainsKey(param.Type.Name))
-                        {
-                            traversalStack.Push(param);
-                            foreach (var property in param.ComposedProperties)
-                            {
-                                if (property.IsReadOnly)
-                                {
-                                    continue;
-                                }
-
-                                var propertyParameter = new Parameter();
-                                propertyParameter.Type = property.Type;
-                                propertyParameter.Name = param.Name + "." + property.Name;
-                                propertyParameter.Documentation = property.Documentation;
-                                traversalStack.Push(new ParameterTemplateModel(propertyParameter));
-                            }
-                            
-                            visitedHash.Add(param.Type.Name, new ParameterTemplateModel(param));
-                        }
-                        else
-                        {
-                            retValue.Push(param);
-                        }
-                    }
-                }
-
-                return retValue.ToList();
+                return this.LocalParameters;
             }
-        }
-
-        public static string ConstructParameterDocumentation(string documentation)
-        {
-            var builder = new IndentedStringBuilder("    ");
-            return builder.AppendLine(documentation)
-                          .AppendLine(" * ").ToString();
         }
 
         /// <summary>
@@ -281,50 +225,36 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
         
-        /// <summary>
-        /// Provides the parameter name in the correct jsdoc notation depending on 
-        /// whether it is required or optional
-        /// </summary>
-        /// <param name="parameter">Parameter to be documented</param>
-        /// <returns>Parameter name in the correct jsdoc notation</returns>
-        public static string GetParameterDocumentationName(Parameter parameter)
-        {
-            if (parameter == null)
-            {
-                throw new ArgumentNullException("parameter");
-            }
-            if (parameter.IsRequired)
-            {
-                return parameter.Name;
-            }
-            else
-            {
-                return string.Format(CultureInfo.InvariantCulture, "[{0}]", parameter.Name);
-            }
-        }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        public static string GetParameterDocumentationType(Parameter parameter)
+        public static string GetDocumentationType(IType type, bool isRequired = true)
         {
-            if (parameter == null)
+            if (type == null)
             {
-                throw new ArgumentNullException("parameter");
-            }
-            string typeName = PrimaryType.Object.Name;
-            if (parameter.Type is PrimaryType)
-            {
-                typeName = parameter.Type.Name;
-            }
-            else if (parameter.Type is SequenceType)
-            {
-                typeName = "array";
-            }
-            else if (parameter.Type is EnumType)
-            {
-                typeName = PrimaryType.String.Name;
+                return "None";
             }
 
-            return typeName.ToLower(CultureInfo.InvariantCulture);
+            string result = PrimaryType.Object.Name;
+
+            if (type is PrimaryType)
+            {
+                result = type.Name;
+            }
+            else if (type is SequenceType)
+            {
+                result = "list";
+            }
+            else if (type is EnumType)
+            {
+                result = PrimaryType.String.Name;
+            }
+
+            //If None is allowed
+            if (!isRequired)
+            {
+                result += " or None";
+            }
+
+            return result.ToLower(CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -441,37 +371,6 @@ namespace Microsoft.Rest.Generator.Python
                 }
 
                 return result;
-            }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        public string DocumentReturnTypeString
-        {
-            get
-            {
-                string typeName = "object";
-                if (ReturnType == null)
-                {
-                    typeName = "null";
-                }
-                else if (ReturnType is PrimaryType)
-                {
-                    typeName = ReturnType.Name;
-                }
-                else if (ReturnType is SequenceType)
-                {
-                    typeName = "array";
-                }
-                else if (ReturnType is EnumType)
-                {
-                    typeName = PrimaryType.String.Name;
-                }
-                else if (ReturnType is CompositeType || ReturnType is DictionaryType)
-                {
-                    typeName = PrimaryType.Object.Name;
-                }
-
-                return typeName.ToLower(CultureInfo.InvariantCulture);
             }
         }
     }

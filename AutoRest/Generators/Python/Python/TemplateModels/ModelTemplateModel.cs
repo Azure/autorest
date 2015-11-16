@@ -16,7 +16,8 @@ namespace Microsoft.Rest.Generator.Python
     {
         private readonly IScopeProvider _scope = new ScopeProvider();
         private ModelTemplateModel _parent = null;
-        private bool isException = false;
+        private bool _isException = false;
+        private readonly IList<CompositeType> _subModelTypes = new List<CompositeType>();
         
         public ModelTemplateModel(CompositeType source, ServiceClient serviceClient)
         {
@@ -40,18 +41,37 @@ namespace Microsoft.Rest.Generator.Python
             
             if (ServiceClient.Exceptions.Contains(source))
             {
-                isException = true;
+                _isException = true;
             }
 
             if (source.BaseModelType != null)
             {
                 _parent = new ModelTemplateModel(source.BaseModelType, serviceClient);
             }
+
+            if (this.IsPolymorphic)
+            {
+                foreach (var modelType in ServiceClient.ModelTypes)
+                {
+                    if (modelType.BaseModelType == source)
+                    {
+                        _subModelTypes.Add(modelType);
+                    }
+                }
+            }
+        }
+
+        public IList<CompositeType> SubModelTypes
+        {
+            get
+            {
+                return _subModelTypes;
+            }
         }
 
         public bool IsException
         {
-            get { return isException; }
+            get { return _isException; }
         }
 
         public IScopeProvider Scope
@@ -189,6 +209,42 @@ namespace Microsoft.Rest.Generator.Python
                 }
             }
             return requiredFields;
+        }
+
+        public string GetPolymorphicDiscriminator()
+        {
+            CompositeType type = this;
+            while (type != null)
+            {
+                if (!string.IsNullOrEmpty(type.PolymorphicDiscriminator))
+                {
+                    return type.PolymorphicDiscriminator;
+                }
+                type = type.BaseModelType;
+            }
+            throw new Exception(string.Format(CultureInfo.InvariantCulture, "No PolymorphicDiscriminator defined for type {0}", this.Name));
+        }
+
+        public string GetSubModelTypeList()
+        {
+            List<string> typeTuple = new List<string>();
+            foreach (var modelType in this.SubModelTypes)
+            {
+                typeTuple.Add(
+                    string.Format(CultureInfo.InvariantCulture, "'{0}':'{1}'",
+                        modelType.SerializedName, modelType.Name
+                    ));
+            }
+
+            return string.Join(", ", typeTuple);
+        }
+
+        public virtual string ExceptionTypeDefinitionName
+        {
+            get
+            {
+                return this.GetExceptionDefineType();
+            }
         }
 
         private string GetPythonSerializationType(IType type)

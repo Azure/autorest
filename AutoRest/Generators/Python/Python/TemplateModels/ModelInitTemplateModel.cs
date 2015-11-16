@@ -21,13 +21,15 @@ namespace Microsoft.Rest.Generator.Python
 
         public ServiceClient ServiceClient { get; set; }
 
-        public string GetExceptionNameIfExist(IType type)
+        public virtual string GetExceptionNameIfExist(IType type)
         {
             if (type is CompositeType)
             {
-                if (ServiceClient.Exceptions.Contains((CompositeType)type))
+                CompositeType compType = type as CompositeType;
+
+                if (ServiceClient.ErrorTypes.Contains(compType))
                 {
-                    return ", " + type.Name + "Exception";
+                    return ", " + compType.GetExceptionDefineType();
                 }
             }
 
