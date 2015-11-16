@@ -712,7 +712,7 @@ class MultipleResponsesOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise AException(self._deserialize, response)
+            raise MyException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -740,7 +740,7 @@ class MultipleResponsesOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise AException(self._deserialize, response)
+            raise MyException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -768,7 +768,7 @@ class MultipleResponsesOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise AException(self._deserialize, response)
+            raise MyException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -796,7 +796,7 @@ class MultipleResponsesOperations(object):
         response = self._client.send(request, headers)
 
         if reponse.status_code < 200 or reponse.status_code >= 300:
-            raise AException(self._deserialize, response)
+            raise MyException(self._deserialize, response)
 
         if raw:
             return None, response

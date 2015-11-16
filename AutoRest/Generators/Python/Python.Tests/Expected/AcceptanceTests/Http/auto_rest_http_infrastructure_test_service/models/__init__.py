@@ -9,7 +9,7 @@
 #--------------------------------------------------------------------------
 
 from .error import Error, ErrorException
-from .a import A, AException
+from .a import A, MyException
 from .b import B
 from .c import C
 from .d import D

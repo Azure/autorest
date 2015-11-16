@@ -191,6 +191,14 @@ namespace Microsoft.Rest.Generator.Python
             return requiredFields;
         }
 
+        public virtual string ExceptionTypeDefinitionName
+        {
+            get
+            {
+                return this.GetExceptionDefineType();
+            }
+        }
+
         private string GetPythonSerializationType(IType type)
         {
             Dictionary<IType, string> typeNameMapping = new Dictionary<IType, string>()

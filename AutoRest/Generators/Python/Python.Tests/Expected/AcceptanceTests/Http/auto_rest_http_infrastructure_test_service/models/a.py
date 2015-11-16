@@ -23,8 +23,8 @@ class A(Model):
 
         self.status_code = None
 
-class AException(HttpOperationError):
+class MyException(HttpOperationError):
 
     def __init__(self, deserialize, response, *args):
 
-        super(AException, self).__init__(deserialize, response, 'A', *args)
+        super(MyException, self).__init__(deserialize, response, 'A', *args)

@@ -70,10 +70,10 @@ else
 @if (Model.IsException)
 {
 @EmptyLine
-@:class @(Model.Name)Exception(HttpOperationError):
+@:class @(Model.ExceptionTypeDefinitionName)(HttpOperationError):
 @EmptyLine
     @:def __init__(self, deserialize, response, *args):
 @EmptyLine
-        @:super(@(Model.Name)Exception, self).__init__(deserialize, response, '@(Model.Name)', *args)
+        @:super(@(Model.ExceptionTypeDefinitionName), self).__init__(deserialize, response, '@(Model.Name)', *args)
 }
 

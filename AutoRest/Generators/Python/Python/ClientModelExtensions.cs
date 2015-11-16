@@ -245,6 +245,19 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             return prop != null;
         }
 
+        public static string GetExceptionDefineType(this CompositeType type)
+        {
+            if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
+            {
+                var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
+                if (ext != null && ext["name"] != null)
+                {
+                    return ext["name"].ToString();
+                }
+            }
+            return type.Name + "Exception";
+        }
+
         public static bool ContainsDatetime(this CompositeType type)
         {
             if (type == null)
