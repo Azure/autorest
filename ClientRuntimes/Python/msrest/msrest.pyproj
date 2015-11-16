@@ -12,8 +12,8 @@
     <OutputPath>.</OutputPath>
     <Name>msrest</Name>
     <RootNamespace>msrest</RootNamespace>
-    <InterpreterId>{6cc907bb-654a-4e5e-91c6-921fb8fa31f1}</InterpreterId>
-    <InterpreterVersion>3.5</InterpreterVersion>
+    <InterpreterId>{b1f88e86-b479-4c8d-822f-74588ef05dd7}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +46,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="msrest\service_client.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="setup.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="test\unittest_auth.py">
@@ -98,8 +101,10 @@
       <Architecture>Amd64</Architecture>
     </Interpreter>
   </ItemGroup>
-   <ItemGroup>
-    <Content Include="requirements.txt" />
+  <ItemGroup>
+    <Content Include="readme.rst">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
