@@ -1,14 +1,14 @@
-﻿#--------------------------------------------------------------------------
+﻿# --------------------------------------------------------------------------
 #
-# Copyright (c) Microsoft Corporation. All rights reserved. 
+# Copyright (c) Microsoft Corporation. All rights reserved.
 #
 # The MIT License (MIT)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the ""Software""), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
+# of this software and associated documentation files (the ""Software""), to
+# deal in the Software without restriction, including without limitation the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+# sell copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
 #
 # The above copyright notice and this permission notice shall be included in
@@ -18,11 +18,11 @@
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-# THE SOFTWARE.
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+# IN THE SOFTWARE.
 #
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 
 import re
 import os
@@ -31,6 +31,7 @@ import logging
 import types
 
 LOGGER = None
+
 
 def check_invalid_directory(dirname):
     """
@@ -48,6 +49,7 @@ def check_invalid_directory(dirname):
     except (IOError, OSError, EnvironmentError) as exp:
         raise ValueError("Log directory '{0}' cannot be accessed:1{".format(
             dirname, exp))
+
 
 def set_stream_handler(logger, format_str):
     """
@@ -69,12 +71,15 @@ def set_stream_handler(logger, format_str):
 
     return format_str
 
+
 def set_file_handler(logger, file_dir, format_str):
     """
     Set log file handler.
     """
 
-    current_handlers = [h for h in logger.handlers if isinstance(h, logging.FileHandler)]
+    current_handlers = \
+        [h for h in logger.handlers if isinstance(h, logging.FileHandler)]
+
     for handler in current_handlers:
         logger.removeHandler(handler)
 
@@ -82,7 +87,7 @@ def set_file_handler(logger, file_dir, format_str):
         return format_str
 
     check_invalid_directory(file_dir)
-    
+
     logfile = os.path.join(file_dir, logger.name + '.log')
 
     if os.path.isfile(logfile) and os.path.getsize(logfile) > 10485760:
@@ -99,6 +104,7 @@ def set_file_handler(logger, file_dir, format_str):
     handler.setFormatter(formatter)
     logger.addHandler(handler)
     return format_str
+
 
 def set_log_level(logger, level):
     """
@@ -120,6 +126,7 @@ def set_log_level(logger, level):
         raise
 
     return logger.level
+
 
 def setup_logger(config):
     """
@@ -164,6 +171,7 @@ def log_request(adapter, request, *args, **kwargs):
     except Exception as err:
         LOGGER.debug("Failed to log request: '{}'".format(err))
 
+
 def log_response(adapter, request, response, *args, **kwargs):
 
     try:
@@ -181,7 +189,7 @@ def log_response(adapter, request, response, *args, **kwargs):
         if header and pattern.match(header):
             filename = header.split('=')[1]
             LOGGER.debug("File attachments: {}".format(filename))
-        
+
         else:
             LOGGER.debug(str(result.content))
         return result
