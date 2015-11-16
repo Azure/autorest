@@ -136,7 +136,7 @@ class ServiceClient(object):
         kwargs.update(self.config.connection())
 
         request.add_headers(headers)
-        if content:
+        if content is not None:
             request.add_content(content)
 
         try:
