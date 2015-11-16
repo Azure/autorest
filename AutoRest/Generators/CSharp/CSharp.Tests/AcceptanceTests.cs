@@ -1336,7 +1336,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
                 // POST param/existingkey
 #if MONO
-                Assert.Throws<Microsoft.Rest.HttpOperationException>(
+                Assert.Throws<Fixtures.AcceptanceTestsHeader.Models.ErrorException>(
                     () => client.Header.ParamExistingKey("overwrite"));
 #else
                 client.Header.ParamExistingKey("overwrite");
@@ -1588,7 +1588,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         private static void TestSuccessStatusCodes(AutoRestHttpInfrastructureTestService client)
         {
-            var ex = Assert.Throws<HttpOperationException>(() => client.HttpFailure.GetEmptyError());
+            var ex = Assert.Throws<Fixtures.AcceptanceTestsHttp.Models.ErrorException>(() => client.HttpFailure.GetEmptyError());
             Assert.Equal("Operation returned an invalid status code 'BadRequest'", ex.Message);
             client.HttpSuccess.Head200();
             Assert.True(client.HttpSuccess.Get200());
@@ -1753,12 +1753,28 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 operation();
                 throw new InvalidOperationException("Operation did not throw as expected");
             }
-            catch (HttpOperationException exception)
+            catch (Fixtures.AcceptanceTestsHttp.Models.ErrorException exception)
             {
                 Assert.Equal(expectedStatusCode, exception.Response.StatusCode);
                 if (errorValidator != null)
                 {
                     errorValidator(exception.Body as T);
+                }
+            }
+            catch (MyException exception1)
+            {
+                Assert.Equal(expectedStatusCode, exception1.Response.StatusCode);
+                if (errorValidator != null)
+                {
+                    errorValidator(exception1.Body as T);
+                }
+            }
+            catch (HttpOperationException exception2)
+            {
+                Assert.Equal(expectedStatusCode, exception2.Response.StatusCode);
+                if (errorValidator != null)
+                {
+                    errorValidator(exception2.Body as T);
                 }
             }
         }
