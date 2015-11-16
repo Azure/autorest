@@ -1,14 +1,14 @@
-﻿#--------------------------------------------------------------------------
+﻿# --------------------------------------------------------------------------
 #
-# Copyright (c) Microsoft Corporation. All rights reserved. 
+# Copyright (c) Microsoft Corporation. All rights reserved.
 #
 # The MIT License (MIT)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the ""Software""), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
+# of this software and associated documentation files (the ""Software""), to
+# deal in the Software without restriction, including without limitation the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+# sell copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
 #
 # The above copyright notice and this permission notice shall be included in
@@ -18,11 +18,11 @@
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-# THE SOFTWARE.
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+# IN THE SOFTWARE.
 #
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 
 import json
 import isodate
@@ -42,7 +42,7 @@ class Model(object):
     Mixin for all client request body/response body models to support
     serialization and deserialization.
     """
-    
+
     _subtype_map = {}
     _attribute_map = {}
     _header_map = {}
@@ -66,7 +66,6 @@ class Model(object):
                     return p._subtype_map
 
             return {}
-
 
         elif attr == '_required':
             parents = list(self.__class__.__mro__)
@@ -111,9 +110,6 @@ class Model(object):
         except AttributeError:
             raise TypeError("Object cannot be classified futher.")
 
- 
-
-
 
 class Serializer(object):
 
@@ -122,16 +118,16 @@ class Serializer(object):
     def __init__(self):
 
         self.serialize_type = {
-            'iso-8601':Serializer.serialize_iso,
-            'rfc-1123':Serializer.serialize_rfc,
-            'duration':Serializer.serialize_duration,
-            'time':Serializer.serialize_time,
-            'date':Serializer.serialize_date,
-            'decimal':Serializer.serialize_decimal,
-            'long':Serializer.serialize_long,
-            'bytearray':Serializer.serialize_bytearray,
-            '[]':self.serialize_iter,
-            '{}':self.serialize_dict
+            'iso-8601': Serializer.serialize_iso,
+            'rfc-1123': Serializer.serialize_rfc,
+            'duration': Serializer.serialize_duration,
+            'time': Serializer.serialize_time,
+            'date': Serializer.serialize_date,
+            'decimal': Serializer.serialize_decimal,
+            'long': Serializer.serialize_long,
+            'bytearray': Serializer.serialize_bytearray,
+            '[]': self.serialize_iter,
+            '{}': self.serialize_dict
             }
 
     def __call__(self, target_obj, data_type=None):
@@ -145,8 +141,10 @@ class Serializer(object):
 
         if not hasattr(target_obj, "_attribute_map"):
             data_type = type(target_obj).__name__
+
             if data_type in self.basic_types:
-                return self.serialize_data(target_obj, data_type, required=True)
+                return self.serialize_data(
+                    target_obj, data_type, required=True)
 
         try:
             attributes = target_obj._attribute_map
@@ -168,7 +166,7 @@ class Serializer(object):
 
         except (AttributeError, KeyError, TypeError) as err:
             msg = "Attribute {0} in object {1} cannot be serialized.".format(
-                    attr_name, class_name)
+                attr_name, class_name)
 
             raise_with_traceback(SerializationError, msg, err)
 
@@ -189,7 +187,7 @@ class Serializer(object):
                         serialized[_type] = ref
 
         except AttributeError:
-            pass # TargetObj has no _subtype_map, so we don't need to classify
+            pass  # TargetObj has no _subtype_map so we don't need to classify
 
     def serialize_data(self, data, data_type, required=False):
 
@@ -199,14 +197,14 @@ class Serializer(object):
 
         if data in [None, ""]:
             raise ValueError("No value for given attribute")
-        
+
         if data_type is None:
             return data
 
         try:
             if data_type in self.basic_types:
                 return eval(data_type)(data)
-            
+
             if data_type in self.serialize_type:
                 return self.serialize_type[data_type](data)
 
@@ -215,11 +213,13 @@ class Serializer(object):
 
             iter_type = data_type[0] + data_type[-1]
             if iter_type in self.serialize_type:
-                return self.serialize_type[iter_type](data, data_type[1:-1], required)
+
+                return self.serialize_type[iter_type](
+                    data, data_type[1:-1], required)
 
         except (ValueError, TypeError) as err:
             msg = "Unable to serialize value: '{0}' as type: '{1}'.".format(
-                    data, data_type)
+                data, data_type)
 
             raise_with_traceback(SerializationError, msg, err)
 
@@ -227,14 +227,17 @@ class Serializer(object):
             return self(data)
 
     def serialize_iter(self, data, iter_type, required):
+
         return [self.serialize_data(i, iter_type, required) for i in data]
 
     def serialize_dict(self, attr, dict_type, required):
-        return {str(x):self.serialize_data(attr[x], dict_type, required) for x in attr}
+
+        return {str(x): self.serialize_data(
+            attr[x], dict_type, required) for x in attr}
 
     @staticmethod
     def serialize_bytearray(attr):
-        return str(attr) #TODO
+        return str(attr)  # TODO
 
     @staticmethod
     def serialize_decimal(attr):
@@ -250,11 +253,11 @@ class Serializer(object):
 
     @staticmethod
     def serialize_date(attr):
-        return str(attr) #TODO
+        return str(attr)  # TODO
 
     @staticmethod
     def serialize_time(attr):
-        return str(attr) #TODO
+        return str(attr)  # TODO
 
     @staticmethod
     def serialize_duration(attr):
@@ -278,18 +281,19 @@ class Serializer(object):
             microseconds = str(float(attr.microsecond)*1e-6)[1:].ljust(4, '0')
 
             date = "{:04}-{:02}-{:02}T{:02}:{:02}:{:02}".format(
-                utc.tm_year,utc.tm_mon,utc.tm_mday,utc.tm_hour,utc.tm_min,utc.tm_sec)
+                utc.tm_year, utc.tm_mon, utc.tm_mday,
+                utc.tm_hour, utc.tm_min, utc.tm_sec)
 
             return date + microseconds + 'Z'
-            #return isodate.datetime_isoformat(attr)
+            # return isodate.datetime_isoformat(attr)
 
         except (ValueError, OverflowError) as err:
             msg = "Unable to serialize datetime object."
             raise_with_traceback(SerializationError, msg, err)
-       
+
 
 class DeserializedGenerator(object):
-   
+
     def __init__(self, deserialize, resp_lst, resp_type):
 
         self._command = deserialize
@@ -309,16 +313,16 @@ class Deserializer(object):
     def __init__(self, classes={}):
 
         self.deserialize_type = {
-            'iso-8601':Deserializer.deserialize_iso,
-            'rfc-1123':Deserializer.deserialize_rfc,
-            'duration':Deserializer.deserialize_duration,
-            'time':Deserializer.deserialize_time,
-            'date':Deserializer.deserialize_date,
-            'decimal':Deserializer.deserialize_decimal,
-            'long':Deserializer.deserialize_long,
-            'bytearray':Deserializer.deserialize_bytearray,
-            '[]':self.deserialize_iter,
-            '{}':self.deserialize_dict
+            'iso-8601': Deserializer.deserialize_iso,
+            'rfc-1123': Deserializer.deserialize_rfc,
+            'duration': Deserializer.deserialize_duration,
+            'time': Deserializer.deserialize_time,
+            'date': Deserializer.deserialize_date,
+            'decimal': Deserializer.deserialize_decimal,
+            'long': Deserializer.deserialize_long,
+            'bytearray': Deserializer.deserialize_bytearray,
+            '[]': self.deserialize_iter,
+            '{}': self.deserialize_dict
             }
 
         self.dependencies = dict(classes)
@@ -337,7 +341,6 @@ class Deserializer(object):
         if isinstance(target_obj, str):
             return self.deserialize_data(data, target_obj)
 
-
         try:
             attributes = response._attribute_map
             for attr, map in attributes.items():
@@ -346,14 +349,14 @@ class Deserializer(object):
 
                 raw_value = data.get(key) if key else data
 
-                value = self.deserialize_data(raw_value, attr_type) 
+                value = self.deserialize_data(raw_value, attr_type)
                 setattr(response, attr, value)
 
         except (AttributeError, TypeError, KeyError) as err:
             msg = "Unable to deserialize to object: {}.".format(class_name)
             raise_with_traceback(DeserializationError, msg, err)
 
-        else:   
+        else:
             return response
 
     def _classify_target(self, target, data):
@@ -366,7 +369,7 @@ class Deserializer(object):
                 target = target._classify(data, self.dependencies)
 
             except (TypeError, AttributeError):
-                pass # Target has no subclasses, so can't classify further.
+                pass  # Target has no subclasses, so can't classify further.
 
         if isinstance(target, str):
             try:
@@ -389,7 +392,7 @@ class Deserializer(object):
             attr_name = val['key']
 
             raw_value = raw_data.headers.get(attr_name)
-            value = self.deserialize_data(raw_value, attr_type) 
+            value = self.deserialize_data(raw_value, attr_type)
 
             setattr(response, attr, value)
 
@@ -400,7 +403,7 @@ class Deserializer(object):
             attr_name = val['key']
 
             raw_value = getattr(raw_data, attr_name)
-            value = self.deserialize_data(raw_value, attr_type) 
+            value = self.deserialize_data(raw_value, attr_type)
 
             setattr(response, attr, value)
 
@@ -408,7 +411,7 @@ class Deserializer(object):
 
         if hasattr(response, '_header_map'):
             self._unpack_headers(response, raw_data)
-            
+
         if hasattr(response, '_response_map'):
             self._unpack_response_attrs(response, raw_data)
 
@@ -456,15 +459,15 @@ class Deserializer(object):
 
     def deserialize_dict(self, attr, dict_type):
         if isinstance(attr, list):
-            return {str(x['key']):self.deserialize_data(
+            return {str(x['key']): self.deserialize_data(
                 x['value'], dict_type) for x in attr}
 
-        return {str(x):self.deserialize_data(
+        return {str(x): self.deserialize_data(
             attr[x], dict_type) for x in attr}
 
     @staticmethod
     def deserialize_bytearray(attr):
-        return attr #TODO
+        return attr  # TODO
 
     @staticmethod
     def deserialize_decimal(attr):
@@ -492,11 +495,11 @@ class Deserializer(object):
 
     @staticmethod
     def deserialize_time(attr):
-        return attr #TODO
+        return attr  # TODO
 
     @staticmethod
     def deserialize_date(attr):
-        return attr #TODO
+        return attr  # TODO
 
     @staticmethod
     def deserialize_rfc(attr):
@@ -525,5 +528,3 @@ class Deserializer(object):
 
         else:
             return date_obj
-
-
