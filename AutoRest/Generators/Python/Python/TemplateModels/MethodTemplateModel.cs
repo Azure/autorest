@@ -78,7 +78,7 @@ namespace Microsoft.Rest.Generator.Python
                 }
                 else if (DefaultResponse is CompositeType)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}Exception(self._deserialize, response)", DefaultResponse.Name);
+                    return string.Format(CultureInfo.InvariantCulture, "{0}(self._deserialize, response)", ((CompositeType)DefaultResponse).GetExceptionDefineType());
                 }
                 else
                 {

@@ -39,7 +39,7 @@
 @if (Model.RequestBody != null)
 {
 @:        # Construct body
-@:        content = self._serialize(@Model.RequestBody.Name)
+@:        content = self._serialize(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
 @EmptyLine
 }
 @*stream handler*@
