@@ -119,5 +119,26 @@ class TestServiceClient(unittest.TestCase):
         self.assertFalse(hook in client._adapter._client_hooks['request'].precalls)
         self.assertFalse(hook in client._adapter._client_hooks['request'].postcalls)
 
+    def test_format_url(self):
+
+        url = "/bool/test true"
+
+        mock_client = mock.create_autospec(ServiceClient)
+        mock_client.config = mock.Mock(base_url = "http://localhost:3000")
+
+        formatted = ServiceClient._format_url(mock_client, url, False)
+        self.assertEqual(formatted, "http://localhost:3000/bool/test%20true")
+
+        formatted = ServiceClient._format_url(mock_client, url, True)
+        self.assertEqual(formatted, "http://localhost:3000/bool/test true")
+
+        url = "https://absolute_url.com/my/test/path"
+        formatted = ServiceClient._format_url(mock_client, url, False)
+        self.assertEqual(formatted, "https://absolute_url.com/my/test/path")
+
+        url = "test"
+        formatted = ServiceClient._format_url(mock_client, url, False)
+        self.assertEqual(formatted, "http://localhost:3000/test")
+
 if __name__ == '__main__':
     unittest.main()
