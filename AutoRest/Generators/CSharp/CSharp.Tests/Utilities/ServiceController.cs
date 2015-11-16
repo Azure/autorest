@@ -177,7 +177,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             startInfo.UseShellExecute = false;
             startInfo.FileName = path;
             startInfo.Arguments = arguments;
+#if PORTABLE
             startInfo.Environment["PORT"] = Port.ToString(CultureInfo.InvariantCulture);
+#else
+            startInfo.EnvironmentVariables["PORT"] = Port.ToString(CultureInfo.InvariantCulture);
+#endif
             process.OutputDataReceived += _listener.ProcessOutput;
             process.ErrorDataReceived += _listener.ProcessError;
             process.Start();
