@@ -145,7 +145,8 @@ class Serializer(object):
 
         if not hasattr(target_obj, "_attribute_map"):
             data_type = type(target_obj).__name__
-            return self.serialize_data(target_obj, data_type, required=True)
+            if data_type in self.basic_types:
+                return self.serialize_data(target_obj, data_type, required=True)
 
         try:
             attributes = target_obj._attribute_map
@@ -196,7 +197,7 @@ class Serializer(object):
             raise AttributeError(
                 "Object missing required attribute")
 
-        if data in [None, "", [], {}]:
+        if data in [None, ""]: #, [], {}
             raise ValueError("No value for given attribute")
         
         if data_type is None:
