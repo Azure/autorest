@@ -11,4 +11,4 @@
 from msrest import Configuration
 from msrest.exceptions import *
 
-from .auto_rest_rfc1123_date_time_test_service import AutoRestRFC1123DateTimeTestService, AutoRestRFC1123DateTimeTestServiceConfiguration
+from .api_client import AutoRestRFC1123DateTimeTestService, AutoRestRFC1123DateTimeTestServiceConfiguration

@@ -11,4 +11,4 @@
 from msrest import Configuration
 from msrest.exceptions import *
 
-from .auto_rest_swagger_bat_byte_service import AutoRestSwaggerBATByteService, AutoRestSwaggerBATByteServiceConfiguration
+from .api_client import AutoRestSwaggerBATByteService, AutoRestSwaggerBATByteServiceConfiguration

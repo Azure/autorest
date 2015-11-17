@@ -11,4 +11,4 @@
 from msrest import Configuration
 from msrest.exceptions import *
 
-from .auto_rest_duration_test_service import AutoRestDurationTestService, AutoRestDurationTestServiceConfiguration
+from .api_client import AutoRestDurationTestService, AutoRestDurationTestServiceConfiguration
