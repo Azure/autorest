@@ -51,6 +51,17 @@ class HttpFailureOperations(object):
         """
 
         Get empty error form server
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: bool or (bool, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL

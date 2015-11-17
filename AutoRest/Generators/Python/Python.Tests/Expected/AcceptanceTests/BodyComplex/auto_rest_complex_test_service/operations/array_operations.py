@@ -51,6 +51,18 @@ class ArrayOperations(object):
         """
 
         Get complex types with array property
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -86,6 +98,20 @@ class ArrayOperations(object):
         """
 
         Put complex types with array property
+
+        :param complex_body: Please put an array with 4 items: "1, 2, 3, 4",
+        "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type complex_body: object
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -117,6 +143,18 @@ class ArrayOperations(object):
         """
 
         Get complex types with array property which is empty
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -152,6 +190,19 @@ class ArrayOperations(object):
         """
 
         Put complex types with array property which is empty
+
+        :param complex_body: Please put an empty array
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type complex_body: object
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -184,6 +235,18 @@ class ArrayOperations(object):
 
         Get complex types with array property while server doesn't provide a
         response payload
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL

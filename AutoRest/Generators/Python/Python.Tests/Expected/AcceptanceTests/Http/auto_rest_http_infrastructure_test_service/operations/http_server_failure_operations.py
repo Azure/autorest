@@ -52,6 +52,18 @@ class HttpServerFailureOperations(object):
 
         Return 501 status code - should be represented in the client as an
         error
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -81,6 +93,18 @@ class HttpServerFailureOperations(object):
 
         Return 501 status code - should be represented in the client as an
         error
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -110,6 +134,20 @@ class HttpServerFailureOperations(object):
 
         Return 505 status code - should be represented in the client as an
         error
+
+        :param boolean_value: Simple boolean value true
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type boolean_value: bool or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -142,6 +180,20 @@ class HttpServerFailureOperations(object):
 
         Return 505 status code - should be represented in the client as an
         error
+
+        :param boolean_value: Simple boolean value true
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type boolean_value: bool or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL

@@ -52,6 +52,19 @@ class QueriesOperations(object):
         """
 
         Get true Boolean value on path
+
+        :param bool_query: true boolean value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type bool_query: bool or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -82,6 +95,19 @@ class QueriesOperations(object):
         """
 
         Get false Boolean value on path
+
+        :param bool_query: false boolean value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type bool_query: bool or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -112,6 +138,19 @@ class QueriesOperations(object):
         """
 
         Get null Boolean value on query (query string should be absent)
+
+        :param bool_query: null boolean value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type bool_query: bool or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -142,6 +181,19 @@ class QueriesOperations(object):
         """
 
         Get '1000000' integer value
+
+        :param int_query: '1000000' integer value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type int_query: int or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -172,6 +224,19 @@ class QueriesOperations(object):
         """
 
         Get '-1000000' integer value
+
+        :param int_query: '-1000000' integer value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type int_query: int or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -202,6 +267,19 @@ class QueriesOperations(object):
         """
 
         Get null integer value (no query parameter)
+
+        :param int_query: null integer value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type int_query: int or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -232,6 +310,19 @@ class QueriesOperations(object):
         """
 
         Get '10000000000' 64 bit integer value
+
+        :param long_query: '10000000000' 64 bit integer value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type long_query: long or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -262,6 +353,19 @@ class QueriesOperations(object):
         """
 
         Get '-10000000000' 64 bit integer value
+
+        :param long_query: '-10000000000' 64 bit integer value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type long_query: long or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -292,6 +396,19 @@ class QueriesOperations(object):
         """
 
         Get 'null 64 bit integer value (no query param in uri)
+
+        :param long_query: null 64 bit integer value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type long_query: long or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -322,6 +439,19 @@ class QueriesOperations(object):
         """
 
         Get '1.034E+20' numeric value
+
+        :param float_query: '1.034E+20'numeric value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type float_query: float or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -352,6 +482,19 @@ class QueriesOperations(object):
         """
 
         Get '-1.034E-20' numeric value
+
+        :param float_query: '-1.034E-20'numeric value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type float_query: float or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -382,6 +525,19 @@ class QueriesOperations(object):
         """
 
         Get null numeric value (no query parameter)
+
+        :param float_query: null numeric value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type float_query: float or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -412,6 +568,19 @@ class QueriesOperations(object):
         """
 
         Get '9999999.999' numeric value
+
+        :param double_query: '9999999.999'numeric value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type double_query: float or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -442,6 +611,19 @@ class QueriesOperations(object):
         """
 
         Get '-9999999.999' numeric value
+
+        :param double_query: '-9999999.999'numeric value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type double_query: float or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -472,6 +654,19 @@ class QueriesOperations(object):
         """
 
         Get null numeric value (no query parameter)
+
+        :param double_query: null numeric value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type double_query: float or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -502,6 +697,20 @@ class QueriesOperations(object):
         """
 
         Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
+
+        :param string_query: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible
+        values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type string_query: str or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -532,6 +741,21 @@ class QueriesOperations(object):
         """
 
         Get 'begin!*'();:@ &=+$,/?#[]end
+
+        :param string_query: 'begin!*'();:@ &=+$,/?#[]end' url encoded string
+        value. Possible values for this parameter include: 'begin!*'();:@
+        &=+$,/?#[]end'
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type string_query: str or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -562,6 +786,20 @@ class QueriesOperations(object):
         """
 
         Get ''
+
+        :param string_query: '' string value. Possible values for this
+        parameter include: ''
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type string_query: str or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -592,6 +830,19 @@ class QueriesOperations(object):
         """
 
         Get null (no query parameter in url)
+
+        :param string_query: null string value
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type string_query: str or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -622,6 +873,20 @@ class QueriesOperations(object):
         """
 
         Get using uri with query parameter 'green color'
+
+        :param enum_query: 'green color' enum value. Possible values for this
+        parameter include: 'red color', 'green color', 'blue color'
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type enum_query: str or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -652,6 +917,20 @@ class QueriesOperations(object):
         """
 
         Get null (no query parameter in url)
+
+        :param enum_query: null string value. Possible values for this
+        parameter include: 'red color', 'green color', 'blue color'
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type enum_query: str or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -682,6 +961,20 @@ class QueriesOperations(object):
         """
 
         Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+
+        :param byte_query: '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte
+        array
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type byte_query: bytearray or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -712,6 +1005,19 @@ class QueriesOperations(object):
         """
 
         Get '' as byte array
+
+        :param byte_query: '' as byte array
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type byte_query: bytearray or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -742,6 +1048,19 @@ class QueriesOperations(object):
         """
 
         Get null as byte array (no query parameters in uri)
+
+        :param byte_query: null as byte array (no query parameters in uri)
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type byte_query: bytearray or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -772,6 +1091,19 @@ class QueriesOperations(object):
         """
 
         Get '2012-01-01' as date
+
+        :param date_query: '2012-01-01' as date
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type date_query: date or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -802,6 +1134,19 @@ class QueriesOperations(object):
         """
 
         Get null as date - this should result in no query parameters in uri
+
+        :param date_query: null as date (no query parameters in uri)
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type date_query: date or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -832,6 +1177,19 @@ class QueriesOperations(object):
         """
 
         Get '2012-01-01T01:01:01Z' as date-time
+
+        :param date_time_query: '2012-01-01T01:01:01Z' as date-time
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type date_time_query: datetime or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -862,6 +1220,19 @@ class QueriesOperations(object):
         """
 
         Get null as date-time, should result in no query parameters in uri
+
+        :param date_time_query: null as date-time (no query parameters)
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type date_time_query: datetime or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -893,6 +1264,20 @@ class QueriesOperations(object):
 
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
         null, ''] using the csv-array format
+
+        :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
+        &=+$,/?#[]end' , null, ''] using the csv-array format
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type array_query: list or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -923,6 +1308,19 @@ class QueriesOperations(object):
         """
 
         Get a null array of string using the csv-array format
+
+        :param array_query: a null array of string using the csv-array format
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type array_query: list or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -953,6 +1351,20 @@ class QueriesOperations(object):
         """
 
         Get an empty array [] of string using the csv-array format
+
+        :param array_query: an empty array [] of string using the csv-array
+        format
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type array_query: list or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -984,6 +1396,20 @@ class QueriesOperations(object):
 
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
         null, ''] using the ssv-array format
+
+        :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
+        &=+$,/?#[]end' , null, ''] using the ssv-array format
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type array_query: list or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -1015,6 +1441,20 @@ class QueriesOperations(object):
 
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
         null, ''] using the tsv-array format
+
+        :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
+        &=+$,/?#[]end' , null, ''] using the tsv-array format
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type array_query: list or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -1046,6 +1486,20 @@ class QueriesOperations(object):
 
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
         null, ''] using the pipes-array format
+
+        :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
+        &=+$,/?#[]end' , null, ''] using the pipes-array format
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type array_query: list or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL

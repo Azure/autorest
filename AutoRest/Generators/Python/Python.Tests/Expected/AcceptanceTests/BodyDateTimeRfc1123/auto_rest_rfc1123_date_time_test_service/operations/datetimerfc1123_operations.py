@@ -52,6 +52,18 @@ class Datetimerfc1123Operations(object):
         """
 
         Get null datetime value
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: datetime or (datetime, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -87,6 +99,18 @@ class Datetimerfc1123Operations(object):
         """
 
         Get invalid datetime value
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: datetime or (datetime, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -122,6 +146,18 @@ class Datetimerfc1123Operations(object):
         """
 
         Get overflow datetime value
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: datetime or (datetime, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -157,6 +193,18 @@ class Datetimerfc1123Operations(object):
         """
 
         Get underflow datetime value
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: datetime or (datetime, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -192,6 +240,19 @@ class Datetimerfc1123Operations(object):
         """
 
         Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT
+
+        :param datetime_body:
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type datetime_body: datetime
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -223,6 +284,18 @@ class Datetimerfc1123Operations(object):
         """
 
         Get max datetime value fri, 31 dec 9999 23:59:59 gmt
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: datetime or (datetime, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -258,6 +331,18 @@ class Datetimerfc1123Operations(object):
         """
 
         Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: datetime or (datetime, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -293,6 +378,19 @@ class Datetimerfc1123Operations(object):
         """
 
         Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT
+
+        :param datetime_body:
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type datetime_body: datetime
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -324,6 +422,18 @@ class Datetimerfc1123Operations(object):
         """
 
         Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: datetime or (datetime, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL

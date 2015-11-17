@@ -64,6 +64,23 @@ class AutoRestValidationTest(object):
         """
 
         Validates input parameters on the method. See swagger for details.
+
+        :param resource_group_name: Required string between 3 and 10 chars
+        with pattern [a-zA-Z0-9]+.
+        :param id: Required int multiple of 10 from 100 to 1000.
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type resource_group_name: str
+        :type id: int
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -106,6 +123,25 @@ class AutoRestValidationTest(object):
         """
 
         Validates body parameters on the method. See swagger for details.
+
+        :param resource_group_name: Required string between 3 and 10 chars
+        with pattern [a-zA-Z0-9]+.
+        :param id: Required int multiple of 10 from 100 to 1000.
+        :param body:
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type resource_group_name: str
+        :type id: int
+        :type body: object or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL

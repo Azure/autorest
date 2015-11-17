@@ -51,6 +51,18 @@ class BasicOperationsOperations(object):
         """
 
         Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -86,6 +98,19 @@ class BasicOperationsOperations(object):
         """
 
         Please put {id: 2, name: 'abc', color: 'Magenta'}
+
+        :param complex_body: Please put {id: 2, name: 'abc', color: 'Magenta'}
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type complex_body: object
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -117,6 +142,18 @@ class BasicOperationsOperations(object):
         """
 
         Get a basic complex type that is invalid for the local strong type
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -152,6 +189,18 @@ class BasicOperationsOperations(object):
         """
 
         Get a basic complex type that is empty
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -187,6 +236,18 @@ class BasicOperationsOperations(object):
         """
 
         Get a basic complex type whose properties are null
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -223,6 +284,18 @@ class BasicOperationsOperations(object):
 
         Get a basic complex type while the server doesn't provide a response
         payload
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
