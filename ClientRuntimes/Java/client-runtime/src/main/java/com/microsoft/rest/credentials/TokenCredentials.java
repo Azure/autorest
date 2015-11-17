@@ -45,6 +45,13 @@ public class TokenCredentials implements ServiceClientCredentials {
     }
 
     /**
+     * Set the secure token.
+     */
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    /**
      * Get the authentication scheme.
      *
      * @return the authentication scheme
