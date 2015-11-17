@@ -51,6 +51,18 @@ class PolymorphicrecursiveOperations(object):
         """
 
         Get complex types that are polymorphic and have recursive references
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -86,6 +98,71 @@ class PolymorphicrecursiveOperations(object):
         """
 
         Put complex types that are polymorphic and have recursive references
+
+        :param complex_body: Please put a salmon that looks like this:
+        {
+        "fishtype": "salmon",
+        "species": "king",
+        "length": 1,
+        "age": 1,
+        "location": "alaska",
+        "iswild": true,
+        "siblings": [
+        {
+        "fishtype": "shark",
+        "species": "predator",
+        "length": 20,
+        "age": 6,
+        "siblings": [
+        {
+        "fishtype": "salmon",
+        "species": "coho",
+        "length": 2,
+        "age": 2,
+        "location": "atlantic",
+        "iswild": true,
+        "siblings": [
+        {
+        "fishtype": "shark",
+        "species": "predator",
+        "length": 20,
+        "age": 6
+        },
+        {
+        "fishtype": "sawshark",
+        "species": "dangerous",
+        "length": 10,
+        "age": 105
+        }
+        ]
+        },
+        {
+        "fishtype": "sawshark",
+        "species": "dangerous",
+        "length": 10,
+        "age": 105
+        }
+        ]
+        },
+        {
+        "fishtype": "sawshark",
+        "species": "dangerous",
+        "length": 10,
+        "age": 105
+        }
+        ]
+        }
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type complex_body: object
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL

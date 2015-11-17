@@ -56,6 +56,27 @@ class PathItemsOperations(object):
         globalStringQuery='globalStringQuery',
         pathItemStringQuery='pathItemStringQuery',
         localStringQuery='localStringQuery'
+
+        :param local_string_path: should contain value 'localStringPath'
+        :param path_item_string_path: A string value 'pathItemStringPath' that
+        appears in the path
+        :param local_string_query: should contain value 'localStringQuery'
+        :param path_item_string_query: A string value 'pathItemStringQuery'
+        that appears as a query parameter
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type local_string_path: str
+        :type path_item_string_path: str
+        :type local_string_query: str or none
+        :type path_item_string_query: str or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -99,6 +120,27 @@ class PathItemsOperations(object):
         localStringPath='localStringPath', globalStringQuery=null,
         pathItemStringQuery='pathItemStringQuery',
         localStringQuery='localStringQuery'
+
+        :param local_string_path: should contain value 'localStringPath'
+        :param path_item_string_path: A string value 'pathItemStringPath' that
+        appears in the path
+        :param local_string_query: should contain value 'localStringQuery'
+        :param path_item_string_query: A string value 'pathItemStringQuery'
+        that appears as a query parameter
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type local_string_path: str
+        :type path_item_string_path: str
+        :type local_string_query: str or none
+        :type path_item_string_query: str or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -141,6 +183,27 @@ class PathItemsOperations(object):
         pathItemStringPath='pathItemStringPath',
         localStringPath='localStringPath', globalStringQuery=null,
         pathItemStringQuery='pathItemStringQuery', localStringQuery=null
+
+        :param local_string_path: should contain value 'localStringPath'
+        :param path_item_string_path: A string value 'pathItemStringPath' that
+        appears in the path
+        :param local_string_query: should contain null value
+        :param path_item_string_query: A string value 'pathItemStringQuery'
+        that appears as a query parameter
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type local_string_path: str
+        :type path_item_string_path: str
+        :type local_string_query: str or none
+        :type path_item_string_query: str or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -184,6 +247,26 @@ class PathItemsOperations(object):
         localStringPath='localStringPath',
         globalStringQuery='globalStringQuery', pathItemStringQuery=null,
         localStringQuery=null
+
+        :param local_string_path: should contain value 'localStringPath'
+        :param path_item_string_path: A string value 'pathItemStringPath' that
+        appears in the path
+        :param local_string_query: should contain value null
+        :param path_item_string_query: should contain value null
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type local_string_path: str
+        :type path_item_string_path: str
+        :type local_string_query: str or none
+        :type path_item_string_query: str or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL

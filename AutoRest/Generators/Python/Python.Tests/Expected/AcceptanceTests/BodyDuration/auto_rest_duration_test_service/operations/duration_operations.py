@@ -52,6 +52,18 @@ class DurationOperations(object):
         """
 
         Get null duration value
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: timedelta or (timedelta, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -87,6 +99,19 @@ class DurationOperations(object):
         """
 
         Put a positive duration value
+
+        :param duration_body:
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type duration_body: timedelta
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -118,6 +143,18 @@ class DurationOperations(object):
         """
 
         Get a positive duration value
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: timedelta or (timedelta, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -153,6 +190,18 @@ class DurationOperations(object):
         """
 
         Get an invalid duration value
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: timedelta or (timedelta, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL

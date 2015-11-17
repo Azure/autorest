@@ -51,6 +51,18 @@ class ByteOperations(object):
         """
 
         Get null byte value
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: bytearray or (bytearray, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -86,6 +98,18 @@ class ByteOperations(object):
         """
 
         Get empty byte value ''
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: bytearray or (bytearray, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -121,6 +145,18 @@ class ByteOperations(object):
         """
 
         Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: bytearray or (bytearray, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -156,6 +192,20 @@ class ByteOperations(object):
         """
 
         Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+
+        :param byte_body: Base64-encoded non-ascii byte string hex(FF FE FD FC
+        FB FA F9 F8 F7 F6)
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type byte_body: bytearray
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -187,6 +237,18 @@ class ByteOperations(object):
         """
 
         Get invalid byte value ':::SWAGGER::::'
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: bytearray or (bytearray, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL

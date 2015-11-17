@@ -52,6 +52,17 @@ class EnumOperations(object):
 
         Get enum value 'red color' from enumeration of 'red color',
         'green-color', 'blue_color'.
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: str or (str, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -88,6 +99,20 @@ class EnumOperations(object):
 
         Sends value 'red color' from enumeration of 'red color',
         'green-color', 'blue_color'
+
+        :param string_body: Possible values for this parameter include: 'red
+        color', 'green-color', 'blue_color'
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type string_body: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL

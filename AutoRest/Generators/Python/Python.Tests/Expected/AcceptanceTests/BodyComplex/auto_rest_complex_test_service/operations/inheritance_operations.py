@@ -51,6 +51,18 @@ class InheritanceOperations(object):
         """
 
         Get complex types that extend others
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
@@ -86,6 +98,22 @@ class InheritanceOperations(object):
         """
 
         Put complex types that extend others
+
+        :param complex_body: Please put a siamese with id=2, name="Siameee",
+        color=green, breed=persion, which hates 2 dogs, the 1st one named
+        "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato"
+        with id=-1 and food="french fries".
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type complex_body: object
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL

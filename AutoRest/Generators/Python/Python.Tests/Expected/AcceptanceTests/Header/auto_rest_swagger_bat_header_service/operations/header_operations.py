@@ -52,6 +52,20 @@ class HeaderOperations(object):
         """
 
         Send a post request with header value "User-Agent": "overwrite"
+
+        :param user_agent: Send a post request with header value "User-Agent":
+        "overwrite"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type user_agent: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -82,6 +96,17 @@ class HeaderOperations(object):
         """
 
         Get a response with header value "User-Agent": "overwrite"
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -110,6 +135,20 @@ class HeaderOperations(object):
         """
 
         Send a post request with header value "Content-Type": "text/html"
+
+        :param content_type: Send a post request with header value
+        "Content-Type": "text/html"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type content_type: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -140,6 +179,17 @@ class HeaderOperations(object):
         """
 
         Get a response with header value "Content-Type": "text/html"
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -169,6 +219,22 @@ class HeaderOperations(object):
 
         Send a post request with header values "scenario": "positive",
         "value": 1 or "scenario": "negative", "value": -2
+
+        :param scenario: Send a post request with header values "scenario":
+        "positive" or "negative"
+        :param value: Send a post request with header values 1 or -2
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type value: int
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -201,6 +267,20 @@ class HeaderOperations(object):
         """
 
         Get a response with header value "value": 1 or -2
+
+        :param scenario: Send a post request with header values "scenario":
+        "positive" or "negative"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -232,6 +312,22 @@ class HeaderOperations(object):
 
         Send a post request with header values "scenario": "positive",
         "value": 105 or "scenario": "negative", "value": -2
+
+        :param scenario: Send a post request with header values "scenario":
+        "positive" or "negative"
+        :param value: Send a post request with header values 105 or -2
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type value: long
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -264,6 +360,20 @@ class HeaderOperations(object):
         """
 
         Get a response with header value "value": 105 or -2
+
+        :param scenario: Send a post request with header values "scenario":
+        "positive" or "negative"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -295,6 +405,22 @@ class HeaderOperations(object):
 
         Send a post request with header values "scenario": "positive",
         "value": 0.07 or "scenario": "negative", "value": -3.0
+
+        :param scenario: Send a post request with header values "scenario":
+        "positive" or "negative"
+        :param value: Send a post request with header values 0.07 or -3.0
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type value: float
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -327,6 +453,20 @@ class HeaderOperations(object):
         """
 
         Get a response with header value "value": 0.07 or -3.0
+
+        :param scenario: Send a post request with header values "scenario":
+        "positive" or "negative"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -358,6 +498,22 @@ class HeaderOperations(object):
 
         Send a post request with header values "scenario": "positive",
         "value": 7e120 or "scenario": "negative", "value": -3.0
+
+        :param scenario: Send a post request with header values "scenario":
+        "positive" or "negative"
+        :param value: Send a post request with header values 7e120 or -3.0
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type value: float
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -390,6 +546,20 @@ class HeaderOperations(object):
         """
 
         Get a response with header value "value": 7e120 or -3.0
+
+        :param scenario: Send a post request with header values "scenario":
+        "positive" or "negative"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -421,6 +591,22 @@ class HeaderOperations(object):
 
         Send a post request with header values "scenario": "true", "value":
         true or "scenario": "false", "value": false
+
+        :param scenario: Send a post request with header values "scenario":
+        "true" or "false"
+        :param value: Send a post request with header values true or false
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type value: bool
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -453,6 +639,20 @@ class HeaderOperations(object):
         """
 
         Get a response with header value "value": true or false
+
+        :param scenario: Send a post request with header values "scenario":
+        "true" or "false"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -485,6 +685,23 @@ class HeaderOperations(object):
         Send a post request with header values "scenario": "valid", "value":
         "The quick brown fox jumps over the lazy dog" or "scenario": "null",
         "value": null or "scenario": "empty", "value": ""
+
+        :param scenario: Send a post request with header values "scenario":
+        "valid" or "null" or "empty"
+        :param value: Send a post request with header values "The quick brown
+        fox jumps over the lazy dog" or null or ""
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type value: str or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -518,6 +735,20 @@ class HeaderOperations(object):
 
         Get a response with header values "The quick brown fox jumps over the
         lazy dog" or null or ""
+
+        :param scenario: Send a post request with header values "scenario":
+        "valid" or "null" or "empty"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -549,6 +780,23 @@ class HeaderOperations(object):
 
         Send a post request with header values "scenario": "valid", "value":
         "2010-01-01" or "scenario": "min", "value": "0001-01-01"
+
+        :param scenario: Send a post request with header values "scenario":
+        "valid" or "min"
+        :param value: Send a post request with header values "2010-01-01" or
+        "0001-01-01"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type value: date
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -581,6 +829,20 @@ class HeaderOperations(object):
         """
 
         Get a response with header values "2010-01-01" or "0001-01-01"
+
+        :param scenario: Send a post request with header values "scenario":
+        "valid" or "min"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -613,6 +875,23 @@ class HeaderOperations(object):
         Send a post request with header values "scenario": "valid", "value":
         "2010-01-01T12:34:56Z" or "scenario": "min", "value":
         "0001-01-01T00:00:00Z"
+
+        :param scenario: Send a post request with header values "scenario":
+        "valid" or "min"
+        :param value: Send a post request with header values
+        "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type value: datetime
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -646,6 +925,20 @@ class HeaderOperations(object):
 
         Get a response with header values "2010-01-01T12:34:56Z" or
         "0001-01-01T00:00:00Z"
+
+        :param scenario: Send a post request with header values "scenario":
+        "valid" or "min"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -678,6 +971,23 @@ class HeaderOperations(object):
         Send a post request with header values "scenario": "valid", "value":
         "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon,
         01 Jan 0001 00:00:00 GMT"
+
+        :param scenario: Send a post request with header values "scenario":
+        "valid" or "min"
+        :param value: Send a post request with header values "Wed, 01 Jan 2010
+        12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type value: datetime or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -711,6 +1021,20 @@ class HeaderOperations(object):
 
         Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or
         "Mon, 01 Jan 0001 00:00:00 GMT"
+
+        :param scenario: Send a post request with header values "scenario":
+        "valid" or "min"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -742,6 +1066,23 @@ class HeaderOperations(object):
 
         Send a post request with header values "scenario": "valid", "value":
         "P123DT22H14M12.011S"
+
+        :param scenario: Send a post request with header values "scenario":
+        "valid"
+        :param value: Send a post request with header values
+        "P123DT22H14M12.011S"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type value: timedelta
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -774,6 +1115,20 @@ class HeaderOperations(object):
         """
 
         Get a response with header values "P123DT22H14M12.011S"
+
+        :param scenario: Send a post request with header values "scenario":
+        "valid"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -805,6 +1160,22 @@ class HeaderOperations(object):
 
         Send a post request with header values "scenario": "valid", "value":
         "啊齄丂狛狜隣郎隣兀﨩"
+
+        :param scenario: Send a post request with header values "scenario":
+        "valid"
+        :param value: Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type value: bytearray
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -837,6 +1208,20 @@ class HeaderOperations(object):
         """
 
         Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
+
+        :param scenario: Send a post request with header values "scenario":
+        "valid"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -868,6 +1253,23 @@ class HeaderOperations(object):
 
         Send a post request with header values "scenario": "valid", "value":
         "GREY" or "scenario": "null", "value": null
+
+        :param scenario: Send a post request with header values "scenario":
+        "valid" or "null" or "empty"
+        :param value: Send a post request with header values 'GREY' . Possible
+        values for this parameter include: 'White', 'black', 'GREY'
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type value: str or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -900,6 +1302,20 @@ class HeaderOperations(object):
         """
 
         Get a response with header values "GREY" or null
+
+        :param scenario: Send a post request with header values "scenario":
+        "valid" or "null" or "empty"
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type scenario: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -931,6 +1347,17 @@ class HeaderOperations(object):
 
         Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in
         the header of the request
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
