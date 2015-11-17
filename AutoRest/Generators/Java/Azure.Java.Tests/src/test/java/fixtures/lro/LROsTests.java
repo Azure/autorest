@@ -29,16 +29,7 @@ public class LROsTests {
 
     @BeforeClass
     public static void setup() {
-        OkHttpClient httpClient = new OkHttpClient();
-        CookieManager cookieManager = new CookieManager();
-        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-        httpClient.setCookieHandler(cookieManager);
-        Executor executor = Executors.newCachedThreadPool();
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .addConverterFactory(JacksonConverterFactory.create(new AzureJacksonUtils().getObjectMapper()))
-                .callbackExecutor(executor);
-
-        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost.:3000", null, httpClient, builder);
+        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost.:3000");
         client.setLongRunningOperationRetryTimeout(0);
     }
 

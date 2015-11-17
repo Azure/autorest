@@ -79,6 +79,15 @@ javadoc {
     options.encoding = 'UTF-8'
 }
 
+task sourcesJar(type: Jar, dependsOn:classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}
+
 test {
     reports.getHtml()
     reports.html.destination = file("${projectDir}/../../../TestResults/JavaAzureRuntime")

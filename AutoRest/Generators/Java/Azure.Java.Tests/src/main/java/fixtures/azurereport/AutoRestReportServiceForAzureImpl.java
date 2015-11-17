@@ -12,12 +12,12 @@ package fixtures.azurereport;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.AzureServiceClient;
 import com.microsoft.rest.AzureServiceResponseBuilder;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.CustomHeaderInterceptor;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -33,7 +33,7 @@ import retrofit.Retrofit;
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzure class.
  */
-public class AutoRestReportServiceForAzureImpl extends ServiceClient implements AutoRestReportServiceForAzure {
+public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implements AutoRestReportServiceForAzure {
     private AutoRestReportServiceForAzureService service;
     private String baseUri;
     private AzureClient azureClient;
@@ -167,7 +167,6 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
         service = retrofit.create(AutoRestReportServiceForAzureService.class);
     }

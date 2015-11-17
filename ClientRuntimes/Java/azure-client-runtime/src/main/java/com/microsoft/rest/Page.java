@@ -7,13 +7,23 @@
 
 package com.microsoft.rest;
 
+import java.util.List;
+
 /**
  * Defines a page interface in Azure responses.
  */
 public interface Page<E> {
     /**
      * Gets the link to the next page.
+     *
      * @return the link.
      */
     String getNextPageLink();
+
+    /**
+     * Gets the list of items.
+     *
+     * @return the list of items.
+     */
+    List<E> getItems();
 }

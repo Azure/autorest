@@ -11,9 +11,9 @@
 package fixtures.head;
 
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.CustomHeaderInterceptor;
-import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import java.util.UUID;
 import retrofit.Retrofit;
@@ -21,7 +21,7 @@ import retrofit.Retrofit;
 /**
  * Initializes a new instance of the AutoRestHeadTestService class.
  */
-public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRestHeadTestService {
+public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements AutoRestHeadTestService {
     private String baseUri;
     private AzureClient azureClient;
 
@@ -164,7 +164,6 @@ public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRe
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
         this.httpSuccess = new HttpSuccessOperationsImpl(retrofit, this);
     }

@@ -30,8 +30,8 @@ import java.util.concurrent.TimeUnit;
  * An instance of this class defines a ServiceClient that handles polling and
  * retrying for long running operations when accessing Azure resources.
  */
-public class AzureClient extends ServiceClient {
-    private int longRunningOperationRetryTimeout;
+public class AzureClient extends AzureServiceClient {
+    private Integer longRunningOperationRetryTimeout;
     private ServiceClientCredentials credentials;
     private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
@@ -379,8 +379,10 @@ public class AzureClient extends ServiceClient {
     private Response<ResponseBody> poll(String url) throws ServiceException, IOException {
         URL endpoint;
         endpoint = new URL(url);
+        int port = endpoint.getPort();
+        if (port == -1) port = endpoint.getDefaultPort();
         AsyncService service = this.retrofitBuilder
-                .baseUrl(endpoint.getProtocol() + "://" + endpoint.getHost() + ":" + endpoint.getPort()).build().create(AsyncService.class);
+                .baseUrl(endpoint.getProtocol() + "://" + endpoint.getHost() + ":" + port).build().create(AsyncService.class);
         Response<ResponseBody> response = service.get(endpoint.getFile()).execute();
         int statusCode = response.code();
         if (statusCode != 200 && statusCode != 201 && statusCode != 202 && statusCode != 204) {
@@ -402,8 +404,10 @@ public class AzureClient extends ServiceClient {
             callback.failure(e);
             return null;
         }
+        int port = endpoint.getPort();
+        if (port == -1) port = endpoint.getDefaultPort();
         AsyncService service = this.retrofitBuilder
-                .baseUrl(endpoint.getProtocol() + "://" + endpoint.getHost() + ":" + endpoint.getPort()).build().create(AsyncService.class);
+                .baseUrl(endpoint.getProtocol() + "://" + endpoint.getHost() + ":" + port).build().create(AsyncService.class);
         Call<ResponseBody> call = service.get(endpoint.getFile());
         call.enqueue(new ServiceResponseCallback<ResponseBody>(callback) {
             @Override
@@ -428,11 +432,11 @@ public class AzureClient extends ServiceClient {
         return call;
     }
 
-    public int getLongRunningOperationRetryTimeout() {
+    public Integer getLongRunningOperationRetryTimeout() {
         return longRunningOperationRetryTimeout;
     }
 
-    public void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public void setLongRunningOperationRetryTimeout(Integer longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 

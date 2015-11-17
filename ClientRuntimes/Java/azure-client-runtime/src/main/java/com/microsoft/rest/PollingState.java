@@ -40,7 +40,7 @@ public class PollingState<T> {
      * @param resourceType the type of the resource the long running operation returns
      * @throws IOException thrown by deserialization
      */
-    public PollingState(Response<ResponseBody> response, int retryTimeout, Type resourceType) throws IOException {
+    public PollingState(Response<ResponseBody> response, Integer retryTimeout, Type resourceType) throws IOException {
         this.retryTimeout = retryTimeout;
         this.setResponse(response);
         this.resourceType = resourceType;
@@ -145,7 +145,7 @@ public class PollingState<T> {
             return this.retryTimeout * 1000;
         }
         if (this.response != null) {
-            return Integer.parseInt(response.headers().get("Retry-After"));
+            return Integer.parseInt(response.headers().get("Retry-After")) * 1000;
         }
         return AzureAsyncOperation.defaultDelay * 1000;
     }

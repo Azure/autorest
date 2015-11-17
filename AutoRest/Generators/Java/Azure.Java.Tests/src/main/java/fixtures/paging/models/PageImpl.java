@@ -12,7 +12,6 @@ package fixtures.paging.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.Page;
-
 import java.util.List;
 
 public class PageImpl<T> implements Page<T> {
@@ -25,7 +24,7 @@ public class PageImpl<T> implements Page<T> {
     /*
      * The list of items.
      */
-    @JsonProperty("values")
+    @JsonProperty("value")
     private List<T> items;
 
     @Override
@@ -33,6 +32,7 @@ public class PageImpl<T> implements Page<T> {
         return this.nextPageLink;
     }
 
+    @Override
     public List<T> getItems() {
         return items;
     }

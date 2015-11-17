@@ -21,7 +21,7 @@ package @(Settings.Namespace.ToLower());
 /**
  * Initializes a new instance of the @Model.Name class.
  */
-public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
+public class @(Model.Name)Impl extends AzureServiceClient implements @Model.Name {
 @if (Model.MethodTemplateModels.Any())
 {
 @:    private @Model.ServiceClientServiceType service;
@@ -177,7 +177,6 @@ else
         @Model.SetDefaultHeaders
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
 
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
 @if (Model.MethodTemplateModels.Any())

@@ -11,9 +11,9 @@
 package fixtures.azurespecials;
 
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.CustomHeaderInterceptor;
-import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import java.util.UUID;
 import retrofit.Retrofit;
@@ -21,7 +21,7 @@ import retrofit.Retrofit;
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
  */
-public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient implements AutoRestAzureSpecialParametersTestClient {
+public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceClient implements AutoRestAzureSpecialParametersTestClient {
     private String baseUri;
     private AzureClient azureClient;
 
@@ -256,7 +256,6 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
         this.xMsClientRequestId = new XMsClientRequestIdOperationsImpl(retrofit, this);
         this.subscriptionInCredentials = new SubscriptionInCredentialsOperationsImpl(retrofit, this);
