@@ -10,16 +10,16 @@ except ImportError:
     from urllib.parse import urljoin
 
 
-from runtime.msrest.paging import Paged
-from runtime.msrest.exceptions import (
+from msrest.paging import Paged
+from msrest.exceptions import (
     SerializationError,
     DeserializationError,
     TokenExpiredError,
     ClientRequestError)
 
-from runtime.msrestazure.azure_operation import AzureOperationPoller
-from runtime.msrestazure.azure_exceptions import CloudError
-from runtime.msrest.service_client import ServiceClient
+from msrestazure.azure_operation import AzureOperationPoller
+from msrestazure.azure_exceptions import CloudError
+from msrest.service_client import ServiceClient, async_request
 
 from ..batch_exception import BatchStatusError
 from ..models import *
@@ -47,7 +47,7 @@ class PoolManager(object):
         path = [x.strip('/') for x in extension if x]
         return '/' + '/'.join(path)
 
-    @ServiceClient.async_request
+    @async_request
     def add(self, pool_parameters, raw=False, callback=None):
         """
         Add a new pool.
@@ -90,7 +90,7 @@ class PoolManager(object):
 
         #return AzureOperationPoller(response, get_status)
 
-    @ServiceClient.async_request
+    @async_request
     def delete(self, pool_name=None, access=AccessCondition(), raw=False, callback=None):
         """
         Delete a pool.
@@ -122,7 +122,7 @@ class PoolManager(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def disable_auto_scale(self, pool_name=None, access=AccessCondition(), raw=False, callback=None):
         """
         Disable auto-scale on a pool.
@@ -154,7 +154,7 @@ class PoolManager(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def enable_auto_scale(self, auto_scale_parameters, pool_name=None, access=AccessCondition(), raw=False, callback=None):
         """
         Enable auto-scale on a pool using given formula.
@@ -193,7 +193,7 @@ class PoolManager(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def evaluate_auto_scale(self, evaluation_parameters, pool_name=None, access=AccessCondition(), raw=False, callback=None):
         """
         Evaluate pool auto-scale formula.
@@ -232,7 +232,7 @@ class PoolManager(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get(self, pool_name=None, filter=DetailLevel(), access=AccessCondition(), raw=False, callback=None):
         """
         Get details on a pool.
@@ -270,7 +270,7 @@ class PoolManager(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def list(self, max_results=None, filter=DetailLevel(), access=AccessCondition(), raw=False, callback=None):
         """
         List pools in account.
@@ -318,7 +318,7 @@ class PoolManager(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def patch(self, patch_parameters, pool_name=None, access=AccessCondition(), raw=False, callback=None):
 
         # Validate
@@ -354,7 +354,7 @@ class PoolManager(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def resize(self, resize_parameters, pool_name=None, access=AccessCondition(), raw=False, callback=None):
 
         # Validate
@@ -390,7 +390,7 @@ class PoolManager(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def stop_resize(self, pool_name=None, access=AccessCondition(), raw=False, callback=None):
 
         # Validate
@@ -420,7 +420,7 @@ class PoolManager(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def update_properties(self, update_properties, pool_name=None, access=AccessCondition(), raw=False, callback=None):
 
         # Validate
@@ -456,7 +456,7 @@ class PoolManager(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def upgrade_os(self, os_parameters, pool_name=None, access=AccessCondition(), raw=False, callback=None):
 
         # Validate
@@ -492,7 +492,7 @@ class PoolManager(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def stream_download(self, parameters, raw=False, callback=None):
 
         if not parameters:
@@ -524,7 +524,7 @@ class PoolManager(object):
 
         return download_gen()
 
-    @ServiceClient.async_request
+    @async_request
     def stream_upload(self, file_obj, parameters, raw=False, callback=None):
 
         if not parameters:

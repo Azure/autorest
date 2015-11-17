@@ -27,6 +27,7 @@
 import logging
 import requests
 from oauthlib import oauth2
+import functools
 
 from concurrent.futures import ThreadPoolExecutor
 
@@ -44,6 +45,21 @@ from .exceptions import (
     TokenExpiredError,
     ClientRequestError,
     raise_with_traceback)
+
+
+def async_request(func):
+
+    @functools.wraps(func)
+    def request(self, *args, **kwargs):
+
+        if kwargs.get('callback') and callable(kwargs['callback']):
+            response = self._client.send_async(func, self, *args, **kwargs)
+            response.add_done_callback(kwargs['callback'])
+            return response
+
+        return func(self, *args, **kwargs)
+
+    return request
 
 
 class ServiceClient(object):
@@ -109,20 +125,6 @@ class ServiceClient(object):
 
         for protocol in self._protocols:
             session.mount(protocol, self._adapter)
-
-    @staticmethod
-    def async_request(func):
-
-        def request(self, *args, **kwargs):
-
-            if kwargs.get('callback') and callable(kwargs['callback']):
-                response = self._client.send_async(func, self, *args, **kwargs)
-                response.add_done_callback(kwargs['callback'])
-                return response
-
-            return func(self, *args, **kwargs)
-
-        return request
 
     def send_async(self, request_cmd, *args, **kwargs):
         """
