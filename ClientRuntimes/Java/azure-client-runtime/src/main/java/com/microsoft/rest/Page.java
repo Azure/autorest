@@ -7,8 +7,6 @@
 
 package com.microsoft.rest;
 
-import java.util.List;
-
 /**
  * Defines a page interface in Azure responses.
  */
