@@ -126,25 +126,27 @@ class Serializer(object):
             'decimal': Serializer.serialize_decimal,
             'long': Serializer.serialize_long,
             'bytearray': Serializer.serialize_bytearray,
+            'sequence': Serializer.serialize_sequence,
             '[]': self.serialize_iter,
             '{}': self.serialize_dict
             }
 
-    def __call__(self, target_obj, data_type=None):
+    def __call__(self, target_obj, data_type=None, **kwargs):
 
         serialized = {}
         attr_name = None
         class_name = target_obj.__class__.__name__
 
         if data_type:
-            return self.serialize_data(target_obj, data_type, required=True)
+            return self.serialize_data(
+                target_obj, data_type, required=True, **kwargs)
 
         if not hasattr(target_obj, "_attribute_map"):
             data_type = type(target_obj).__name__
 
             if data_type in self.basic_types:
                 return self.serialize_data(
-                    target_obj, data_type, required=True)
+                    target_obj, data_type, required=True, **kwargs)
 
         try:
             attributes = target_obj._attribute_map
@@ -156,8 +158,10 @@ class Serializer(object):
                 try:
                     orig_attr = getattr(target_obj, attr)
                     attr_type = attributes[attr]['type']
+
                     new_attr = self.serialize_data(
-                        orig_attr, attr_type, attr in required_attrs)
+                        orig_attr, attr_type,
+                        attr in required_attrs, **kwargs)
 
                     serialized[map['key']] = new_attr
 
@@ -189,7 +193,7 @@ class Serializer(object):
         except AttributeError:
             pass  # TargetObj has no _subtype_map so we don't need to classify
 
-    def serialize_data(self, data, data_type, required=False):
+    def serialize_data(self, data, data_type, required=False, **kwargs):
 
         if data is None and required:
             raise AttributeError(
@@ -206,7 +210,7 @@ class Serializer(object):
                 return eval(data_type)(data)
 
             if data_type in self.serialize_type:
-                return self.serialize_type[data_type](data)
+                return self.serialize_type[data_type](data, **kwargs)
 
             if isinstance(data, Enum):
                 return data.value
@@ -215,7 +219,7 @@ class Serializer(object):
             if iter_type in self.serialize_type:
 
                 return self.serialize_type[iter_type](
-                    data, data_type[1:-1], required)
+                    data, data_type[1:-1], required, **kwargs)
 
         except (ValueError, TypeError) as err:
             msg = "Unable to serialize value: '{0}' as type: '{1}'.".format(
@@ -224,27 +228,32 @@ class Serializer(object):
             raise_with_traceback(SerializationError, msg, err)
 
         else:
-            return self(data)
+            return self(data, **kwargs)
 
-    def serialize_iter(self, data, iter_type, required):
+    def serialize_iter(self, data, iter_type, required, **kwargs):
 
-        return [self.serialize_data(i, iter_type, required) for i in data]
+        return [self.serialize_data(
+            i, iter_type, required, **kwargs) for i in data]
 
-    def serialize_dict(self, attr, dict_type, required):
+    def serialize_dict(self, attr, dict_type, required, **kwargs):
 
         return {str(x): self.serialize_data(
-            attr[x], dict_type, required) for x in attr}
+            attr[x], dict_type, required, **kwargs) for x in attr}
 
     @staticmethod
-    def serialize_bytearray(attr):
+    def serialize_bytearray(attr, **kwargs):
         return str(attr)  # TODO
 
     @staticmethod
-    def serialize_decimal(attr):
+    def serialize_sequence(attr, div='|', **kwargs):
+        return div.join([str(a) for a in attr])
+
+    @staticmethod
+    def serialize_decimal(attr, **kwargs):
         return float(attr)
 
     @staticmethod
-    def serialize_long(attr):
+    def serialize_long(attr, **kwargs):
         try:
             return long(attr)
 
@@ -252,24 +261,24 @@ class Serializer(object):
             return int(attr)
 
     @staticmethod
-    def serialize_date(attr):
+    def serialize_date(attr, **kwargs):
         return str(attr)  # TODO
 
     @staticmethod
-    def serialize_time(attr):
+    def serialize_time(attr, **kwargs):
         return str(attr)  # TODO
 
     @staticmethod
-    def serialize_duration(attr):
+    def serialize_duration(attr, **kwargs):
         return isodate.duration_isoformat(attr)
 
     @staticmethod
-    def serialize_rfc(attr):
+    def serialize_rfc(attr, **kwargs):
         date_str = attr.strftime('%a, %d %b %Y %H:%M:%S GMT')
         return date_str
 
     @staticmethod
-    def serialize_iso(attr):
+    def serialize_iso(attr, **kwargs):
         if isinstance(attr, str):
             attr = isodate.parse_datetime(attr)
 

@@ -208,6 +208,19 @@ class TestRuntimeSerialized(unittest.TestCase):
         message = self.s(test_obj)
         self.assertEqual(message['Key_C'], True)
 
+    def test_attr_sequence(self):
+        """
+        Test serializing a sequence.
+        """
+
+        test_obj = ["A", "B", "C"]
+        output = self.s(test_obj, 'sequence')
+        self.assertEqual(output, "A|B|C")
+
+        test_obj = [1,2,3]
+        output = self.s(test_obj, 'sequence', div=',')
+        self.assertEqual(output, "1,2,3")
+
     def test_attr_list_simple(self):
         """
         Test serializing an object with simple-typed list attributes
