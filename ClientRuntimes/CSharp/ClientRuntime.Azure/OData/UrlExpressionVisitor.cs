@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
@@ -248,7 +249,23 @@ namespace Microsoft.Rest.Azure.OData
                 return node;
             }
 
-            throw new NotSupportedException("Method call " + node.Method.Name + " is not supported.");
+            var methodName = node.Method.Name;
+            if (node.Method.GetCustomAttributes<ODataMethodAttribute>().Any())
+            {
+                methodName = node.Method.GetCustomAttribute<ODataMethodAttribute>().MethodName;
+            }
+            _generatedUrl.Append(methodName + "(");
+            for (var i = 0; i < node.Arguments.Count; i++)
+            {
+                var argument = node.Arguments[i];
+                Visit(argument);
+                if (i != node.Arguments.Count - 1)
+                {
+                    _generatedUrl.Append(", ");
+                }
+            }
+            _generatedUrl.Append(")");
+            return node;
         }
 
         /// <summary>
