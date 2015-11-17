@@ -18,6 +18,10 @@ class Shark(Fish):
         'birthday':{'key':'birthday', 'type':'iso-date'},
     }
 
+    _subtype_map = {
+        'fishtype':{'sawshark':'Sawshark', 'goblin':'Goblinshark'}
+    }
+
     def __init__(self, *args, **kwargs):
 
         self.age = None
