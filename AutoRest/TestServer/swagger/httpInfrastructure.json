@@ -2795,6 +2795,9 @@
       }
     },
     "A": {
+      "x-ms-client-name": {
+        "name": "MyException"
+      },
       "properties": {
         "statusCode": {
           "type": "string"

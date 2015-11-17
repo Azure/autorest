@@ -170,6 +170,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
                         .SelectMany(t => t.ImportFrom(ServiceClient.Namespace))
                         .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom(ServiceClient.Namespace).Contains(i)))
                         .ForEach(i => imports.Remove(i));
+                    // return type may have been removed as a side effect
+                    imports.AddRange(this.ReturnType.ImportFrom(ServiceClient.Namespace));
                 }
                 else
                 {

@@ -92,13 +92,13 @@ public class AutoRestPagingTestServiceImpl extends ServiceClient implements Auto
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private Paging paging;
+    private PagingOperations paging;
 
     /**
-     * Gets the Paging object to access its operations.
+     * Gets the PagingOperations object to access its operations.
      * @return the paging value.
      */
-    public Paging getPaging() {
+    public PagingOperations getPaging() {
         return this.paging;
     }
 
@@ -166,6 +166,6 @@ public class AutoRestPagingTestServiceImpl extends ServiceClient implements Auto
         this.azureClient.setCredentials(this.credentials);
         this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.paging = new PagingImpl(retrofit, this);
+        this.paging = new PagingOperationsImpl(retrofit, this);
     }
 }

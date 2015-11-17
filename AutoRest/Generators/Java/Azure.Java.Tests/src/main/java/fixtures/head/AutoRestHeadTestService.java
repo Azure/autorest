@@ -73,9 +73,9 @@ public interface AutoRestHeadTestService {
     void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
-     * Gets the HttpSuccess object to access its operations.
+     * Gets the HttpSuccessOperations object to access its operations.
      * @return the httpSuccess value.
      */
-    HttpSuccess getHttpSuccess();
+    HttpSuccessOperations getHttpSuccess();
 
 }

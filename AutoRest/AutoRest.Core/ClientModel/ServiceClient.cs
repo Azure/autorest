@@ -22,8 +22,10 @@ namespace Microsoft.Rest.Generator.ClientModel
             Extensions = new Dictionary<string, object>();
             Properties = new List<Property>();
             Methods = new List<Method>();
+            // TODO: Change ModelTypes and EnumTypes to HashSet too
             ModelTypes = new List<CompositeType>();
             EnumTypes = new List<EnumType>();
+            ErrorTypes = new HashSet<CompositeType>();
         }
 
         /// <summary>
@@ -69,6 +71,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// Gets the methods.
         /// </summary>
         public IList<Method> Methods { get; private set; }
+
+        /// <summary>
+        /// Gets the list of error type for customize exceptions.
+        /// </summary>
+        public ISet<CompositeType> ErrorTypes { get; private set; }
 
         /// <summary>
         /// Gets the method groups.

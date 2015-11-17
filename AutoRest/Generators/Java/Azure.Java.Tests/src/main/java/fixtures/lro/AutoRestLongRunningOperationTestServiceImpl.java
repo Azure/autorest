@@ -92,43 +92,43 @@ public class AutoRestLongRunningOperationTestServiceImpl extends ServiceClient i
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private LROs lROs;
+    private LROsOperations lROs;
 
     /**
-     * Gets the LROs object to access its operations.
+     * Gets the LROsOperations object to access its operations.
      * @return the lROs value.
      */
-    public LROs getLROs() {
+    public LROsOperations getLROs() {
         return this.lROs;
     }
 
-    private LRORetrys lRORetrys;
+    private LRORetrysOperations lRORetrys;
 
     /**
-     * Gets the LRORetrys object to access its operations.
+     * Gets the LRORetrysOperations object to access its operations.
      * @return the lRORetrys value.
      */
-    public LRORetrys getLRORetrys() {
+    public LRORetrysOperations getLRORetrys() {
         return this.lRORetrys;
     }
 
-    private LROSADs lROSADs;
+    private LROSADsOperations lROSADs;
 
     /**
-     * Gets the LROSADs object to access its operations.
+     * Gets the LROSADsOperations object to access its operations.
      * @return the lROSADs value.
      */
-    public LROSADs getLROSADs() {
+    public LROSADsOperations getLROSADs() {
         return this.lROSADs;
     }
 
-    private LROsCustomHeader lROsCustomHeader;
+    private LROsCustomHeaderOperations lROsCustomHeader;
 
     /**
-     * Gets the LROsCustomHeader object to access its operations.
+     * Gets the LROsCustomHeaderOperations object to access its operations.
      * @return the lROsCustomHeader value.
      */
-    public LROsCustomHeader getLROsCustomHeader() {
+    public LROsCustomHeaderOperations getLROsCustomHeader() {
         return this.lROsCustomHeader;
     }
 
@@ -196,9 +196,9 @@ public class AutoRestLongRunningOperationTestServiceImpl extends ServiceClient i
         this.azureClient.setCredentials(this.credentials);
         this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.lROs = new LROsImpl(retrofit, this);
-        this.lRORetrys = new LRORetrysImpl(retrofit, this);
-        this.lROSADs = new LROSADsImpl(retrofit, this);
-        this.lROsCustomHeader = new LROsCustomHeaderImpl(retrofit, this);
+        this.lROs = new LROsOperationsImpl(retrofit, this);
+        this.lRORetrys = new LRORetrysOperationsImpl(retrofit, this);
+        this.lROSADs = new LROSADsOperationsImpl(retrofit, this);
+        this.lROsCustomHeader = new LROsCustomHeaderOperationsImpl(retrofit, this);
     }
 }

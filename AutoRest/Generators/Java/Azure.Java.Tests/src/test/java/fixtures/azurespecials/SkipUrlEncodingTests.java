@@ -13,7 +13,7 @@ public class SkipUrlEncodingTests {
     private static String unencodedPath = "path1/path2/path3";
     private static String unencodedQuery = "value1&q2=value2&q3=value3";
 
-    static SkipUrlEncoding client;
+    static SkipUrlEncodingOperations client;
 
     @BeforeClass
     public static void setup() {

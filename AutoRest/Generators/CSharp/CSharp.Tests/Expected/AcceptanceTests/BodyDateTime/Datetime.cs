@@ -104,7 +104,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -192,7 +192,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -280,7 +280,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -368,7 +368,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -467,7 +467,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -549,7 +549,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -637,7 +637,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -737,7 +737,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -820,7 +820,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -909,7 +909,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -1009,7 +1009,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -1092,7 +1092,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -1181,7 +1181,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -1280,7 +1280,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -1362,7 +1362,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -1461,7 +1461,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -1543,7 +1543,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -1642,7 +1642,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -1724,7 +1724,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)

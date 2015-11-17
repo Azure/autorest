@@ -73,9 +73,9 @@ public interface AutoRestPagingTestService {
     void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
-     * Gets the Paging object to access its operations.
+     * Gets the PagingOperations object to access its operations.
      * @return the paging value.
      */
-    Paging getPaging();
+    PagingOperations getPaging();
 
 }

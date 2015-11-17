@@ -47,6 +47,9 @@
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
     <Compile Include="TemplateModels\PropertyTemplateModel.cs" />
     <Compile Include="TemplateModels\ModelTemplateModel.cs" />
+    <Compile Include="Templates\ExceptionTemplate.cs">
+      <DependentUpon>ExceptionTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\EnumTemplate.cs">
       <DependentUpon>EnumTemplate.cshtml</DependentUpon>
     </Compile>
@@ -77,6 +80,7 @@
     <Compile Include="Templates\ServiceClientTemplate.cs">
       <DependentUpon>ServiceClientTemplate.cshtml</DependentUpon>
     </Compile>
+    <None Include="Templates\ExceptionTemplate.cshtml" />
     <None Include="Templates\ExtensionMethodTemplate.cshtml" />
     <None Include="Templates\ExtensionsTemplate.cshtml" />
     <None Include="Templates\EnumTemplate.cshtml" />

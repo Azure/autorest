@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using System.Xml;
 using Newtonsoft.Json;
 
 namespace Microsoft.Rest.Azure.OData
@@ -269,6 +270,7 @@ namespace Microsoft.Rest.Azure.OData
         /// Helper method to print constant.
         /// </summary>
         /// <param name="val">Object to print.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
         private void PrintConstant(object val)
         {
             if (val == null)
@@ -284,6 +286,11 @@ namespace Microsoft.Rest.Azure.OData
                     formattedString = string.Format(CultureInfo.InvariantCulture, 
                         "{0:" + DefaultDateTimeFormat + "}", val);
                 }
+                else if (val is TimeSpan)
+                {
+                    formattedString = string.Format(CultureInfo.InvariantCulture, 
+                        "duration'{0}'", XmlConvert.ToString((TimeSpan)val));
+                }
                 else
                 {
                     formattedString = string.Format(CultureInfo.InvariantCulture, 
@@ -296,6 +303,10 @@ namespace Microsoft.Rest.Azure.OData
                     val is short)
                 {
                     _generatedUrl.Append(formattedString.ToLowerInvariant());
+                }
+                else if (val is TimeSpan)
+                {
+                    _generatedUrl.Append(formattedString);
                 }
                 else
                 {

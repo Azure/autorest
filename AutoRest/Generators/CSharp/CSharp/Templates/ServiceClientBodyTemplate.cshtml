@@ -219,13 +219,13 @@ foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());
 
-    @if (param.Type == PrimaryType.Credentials)
-    {
-        @:if (this.Credentials != null)
-        @:{
-        @:    this.Credentials.InitializeServiceClient(this);
-        @:}
-    }
+@if (param.Type == PrimaryType.Credentials)
+{
+    @:if (this.Credentials != null)
+    @:{
+    @:    this.Credentials.InitializeServiceClient(this);
+    @:}
+}
 }
 @:}
 @:@EmptyLine
@@ -266,13 +266,13 @@ foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());
 
-    @if (param.Type == PrimaryType.Credentials)
-    {
-        @:if (this.Credentials != null)
-        @:{
-        @:    this.Credentials.InitializeServiceClient(this);
-        @:}
-    }
+@if (param.Type == PrimaryType.Credentials)
+{
+    @:if (this.Credentials != null)
+    @:{
+    @:    this.Credentials.InitializeServiceClient(this);
+    @:}
+}
 }
 @:}
 @:@EmptyLine

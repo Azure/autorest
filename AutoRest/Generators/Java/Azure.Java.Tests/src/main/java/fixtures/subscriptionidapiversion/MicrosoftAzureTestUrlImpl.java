@@ -123,13 +123,13 @@ public class MicrosoftAzureTestUrlImpl extends ServiceClient implements Microsof
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private Group group;
+    private GroupOperations group;
 
     /**
-     * Gets the Group object to access its operations.
+     * Gets the GroupOperations object to access its operations.
      * @return the group value.
      */
-    public Group getGroup() {
+    public GroupOperations getGroup() {
         return this.group;
     }
 
@@ -198,6 +198,6 @@ public class MicrosoftAzureTestUrlImpl extends ServiceClient implements Microsof
         this.azureClient.setCredentials(this.credentials);
         this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.group = new GroupImpl(retrofit, this);
+        this.group = new GroupOperationsImpl(retrofit, this);
     }
 }

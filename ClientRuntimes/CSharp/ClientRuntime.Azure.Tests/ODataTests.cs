@@ -245,6 +245,50 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             ODataQuery<Param1> query = "$filter=foo eq 'bar'&$top=100";
             Assert.Equal("$filter=foo eq 'bar'&$top=100", query.ToString());
         }
+
+        [Fact]
+        public void FilterStringTimeSpan()
+        {
+            var timeSpan = TimeSpan.FromMinutes(5);
+            var filterString = FilterString.Generate<Parameters>(parameters => parameters.TimeGrain == timeSpan);
+ 
+            Assert.Equal(filterString, "timeGrain eq duration'PT5M'");
+        }
+ 
+        [Fact]
+        public void FilterStringEnum()
+        {
+            var timeSpan = TimeSpan.FromMinutes(5);
+            var filterString = FilterString.Generate<Parameters>(parameters => parameters.EventChannels == EventChannels.Admin);
+            Console.WriteLine(filterString);
+
+            Assert.Equal(filterString, "eventChannels eq 'Admin'");
+        }
+    }
+
+    [Flags]
+    public enum EventChannels
+    {
+        Admin = 1,
+        Operation = 2,
+        Debug = 4,
+        Analytics = 8
+    }
+
+    public class Parameters
+    {
+        [JsonProperty("startTime")]
+        public DateTime? StartTime { get; set; }
+
+        [JsonProperty("eventChannels")]
+        public EventChannels? EventChannels { get; set; }
+
+        [JsonProperty("status")]
+        public string Status { get; set; }
+
+        [JsonProperty("timeGrain")]
+        public TimeSpan? TimeGrain { get; set; }
+
     }
 
     public class Param1
