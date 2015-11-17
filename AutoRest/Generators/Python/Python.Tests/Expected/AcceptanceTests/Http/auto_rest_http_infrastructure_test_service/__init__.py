@@ -11,4 +11,4 @@
 from msrest import Configuration
 from msrest.exceptions import *
 
-from .auto_rest_http_infrastructure_test_service import AutoRestHttpInfrastructureTestService, AutoRestHttpInfrastructureTestServiceConfiguration
+from .api_client import AutoRestHttpInfrastructureTestService, AutoRestHttpInfrastructureTestServiceConfiguration

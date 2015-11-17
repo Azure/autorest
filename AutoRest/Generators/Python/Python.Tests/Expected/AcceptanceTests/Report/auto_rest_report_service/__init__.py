@@ -11,4 +11,4 @@
 from msrest import Configuration
 from msrest.exceptions import *
 
-from .auto_rest_report_service import AutoRestReportService, AutoRestReportServiceConfiguration
+from .api_client import AutoRestReportService, AutoRestReportServiceConfiguration

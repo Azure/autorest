@@ -11,4 +11,4 @@
 from msrest import Configuration
 from msrest.exceptions import *
 
-from .auto_rest_validation_test import AutoRestValidationTest, AutoRestValidationTestConfiguration
+from .api_client import AutoRestValidationTest, AutoRestValidationTestConfiguration

@@ -11,4 +11,4 @@
 from msrest import Configuration
 from msrest.exceptions import *
 
-from .auto_rest_required_optional_test_service import AutoRestRequiredOptionalTestService, AutoRestRequiredOptionalTestServiceConfiguration
+from .api_client import AutoRestRequiredOptionalTestService, AutoRestRequiredOptionalTestServiceConfiguration
