@@ -25,7 +25,7 @@
     "mocha": "2.2.5",
     "should": "5.2.0",
     "underscore": "*",
-    "adal-node": "0.1.13"
+    "adal-node": "0.1.16"
   },
   "homepage": "https://github.com/Azure/AutoRest",
   "repository": {
