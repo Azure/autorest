@@ -11,13 +11,17 @@
 from msrest.serialization import Model
 class Fish(Model):
 
-    _required = ['length','fishtype']
+    _required = ['length', 'fishtype']
 
     _attribute_map = {
         'species':{'key':'species', 'type':'str'},
         'length':{'key':'length', 'type':'float'},
         'siblings':{'key':'siblings', 'type':'[Fish]'},
         'fishtype':{'key':'fishtype', 'type':'str'},
+    }
+
+    _subtype_map = {
+        'fishtype':{'salmon':'Salmon', 'shark':'Shark'}
     }
 
     def __init__(self, *args, **kwargs):
