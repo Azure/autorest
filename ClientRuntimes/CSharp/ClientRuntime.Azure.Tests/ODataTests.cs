@@ -3,7 +3,6 @@
 
 using System;
 using System.Linq;
-using System.Linq.Expressions;
 using Microsoft.Rest.Azure;
 using Microsoft.Rest.Azure.OData;
 using Newtonsoft.Json;
@@ -132,20 +131,6 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         }
 
         [Fact]
-        public void UnsupportedMethodThrowsNotSupportedException()
-        {
-			new InputParam2
-            {
-                Param = new InputParam1
-                {
-                    Value = "foo"
-                }
-            };
-            Assert.Throws<NotSupportedException>(
-                () => FilterString.Generate<Param1>(p => p.Foo.Replace(" ", "") == "abc"));
-        }
-
-        [Fact]
         public void StringContainsWorksInODataFilter()
         {
             var param = new InputParam2
@@ -247,7 +232,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         }
 
         [Fact]
-        public void FilterStringTimeSpan()
+        public void ODataQuerySupportsTimeSpan()
         {
             var timeSpan = TimeSpan.FromMinutes(5);
             var filterString = FilterString.Generate<Parameters>(parameters => parameters.TimeGrain == timeSpan);
@@ -256,13 +241,26 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         }
  
         [Fact]
-        public void FilterStringEnum()
+        public void ODataQuerySupportsEnum()
         {
             var timeSpan = TimeSpan.FromMinutes(5);
             var filterString = FilterString.Generate<Parameters>(parameters => parameters.EventChannels == EventChannels.Admin);
             Console.WriteLine(filterString);
 
             Assert.Equal(filterString, "eventChannels eq 'Admin'");
+        }
+
+        [Fact]
+        public void ODataQuerySupportsMethod()
+        {
+            var param = new InputParam1
+            {
+                Value = "Microsoft.Web/sites"
+            };
+            var filterString = FilterString.Generate<Param1>(parameters => parameters.AtScope() && 
+                parameters.AssignedTo(param.Value));
+
+            Assert.Equal(filterString, "atScope() and assignedTo('Microsoft.Web%2Fsites')");
         }
     }
 
@@ -304,6 +302,17 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         public string[] Values { get; set; }
         [JsonProperty("param2")]
         public Param2 Param2 { get; set; }
+
+        [ODataMethodAttribute("assignedTo")]
+        public bool AssignedTo(string parameter)
+        {
+            return true;
+        }
+        [ODataMethodAttribute("atScope")]
+        public bool AtScope()
+        {
+            return true;
+        }
     }
 
     public class Param2
