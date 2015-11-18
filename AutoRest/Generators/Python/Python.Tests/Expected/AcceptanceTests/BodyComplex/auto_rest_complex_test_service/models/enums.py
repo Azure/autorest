@@ -8,18 +8,12 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from msrest.serialization import Model
+from enum import Enum
 
-class Datetimerfc1123Wrapper(Model):
+class CMYKColors(Enum):
 
-    _required = []
+    cyan = "cyan"
+    magenta = "Magenta"
+    yellow = "YELLOW"
+    blac_k = "blacK"
 
-    _attribute_map = {
-        'field':{'key':'field', 'type':'rfc-date'},
-        'now':{'key':'now', 'type':'rfc-date'},
-    }
-
-    def __init__(self, *args, **kwargs):
-
-        self.field = None
-        self.now = None

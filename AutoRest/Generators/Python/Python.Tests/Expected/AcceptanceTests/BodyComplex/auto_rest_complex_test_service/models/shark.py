@@ -9,6 +9,8 @@
 #--------------------------------------------------------------------------
 
 from msrest.serialization import Model
+from .fish import Fish
+
 class Shark(Fish):
 
     _required = ['birthday']

@@ -905,7 +905,7 @@ class HeaderOperations(object):
         if scenario is not None:
             query['scenario'] = scenario
             if value is not None:
-                query['value'] = Serialized.serializeObject(value, 'iso-date')
+                query['value'] = Serialized.serializeObject(value, 'iso-8601')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -1001,7 +1001,7 @@ class HeaderOperations(object):
         if scenario is not None:
             query['scenario'] = scenario
             if value is not None:
-                query['value'] = Serialized.serializeObject(value, 'rfc-date')
+                query['value'] = Serialized.serializeObject(value, 'rfc-1123')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
