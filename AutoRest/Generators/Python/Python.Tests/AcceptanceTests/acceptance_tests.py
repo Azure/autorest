@@ -20,10 +20,14 @@ from auto_rest_bool_test_service.models import ErrorException as BoolException
 from auto_rest_complex_test_service.models import CMYKColors, Basic, IntWrapper, LongWrapper, FloatWrapper, DoubleWrapper, BooleanWrapper, StringWrapper, DatetimeWrapper, DateWrapper, DurationWrapper, Datetimerfc1123Wrapper
 
 class AcceptanceTests(unittest.TestCase):
+
     def setUp(self):
-        #subprocess.call("node startup/www.js", shell=True)
-        #return super(Test_test1, self).setUp()
-        pass
+        self.server = subprocess.Popen("node ../../../../AutoRest/TestServer/server/startup/www.js")
+        return super(AcceptanceTests, self).setUp()
+
+    def tearDown(self):
+        self.server.kill()
+        return super(AcceptanceTests, self).tearDown()
 
     def test_bool(self):
 
@@ -35,7 +39,7 @@ class AcceptanceTests(unittest.TestCase):
         client.bool_model.get_null()
         client.bool_model.put_false(False)
         client.bool_model.put_true(True)
-        with self.assertRaises(BoolException):
+        with self.assertRaises(ErrorException):
             client.bool_model.put_true(False)
         with self.assertRaises(DeserializationError):
             client.bool_model.get_invalid()

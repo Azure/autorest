@@ -554,7 +554,8 @@ class TestRuntimeDeserialized(unittest.TestCase):
             'attr_b': {'key':'AttrB', 'type':'int'},
             'attr_c': {'key':'Key_C', 'type': 'bool'},
             'attr_d': {'key':'AttrD', 'type':'[int]'},
-            'attr_e': {'key':'AttrE', 'type': '{float}'}
+            'attr_e': {'key':'AttrE', 'type': '{float}'},
+            'attr_f': {'key':'AttrF', 'type': '[[str]]'}
             #TODO: Add more here as more types are defined in serialized
             }
 
@@ -571,6 +572,45 @@ class TestRuntimeDeserialized(unittest.TestCase):
         logger.LOGGER = logging.getLogger("TestSuite")
         self.d = Deserializer()
         return super(TestRuntimeDeserialized, self).setUp()
+
+    def test_non_obj_deserialization(self):
+        """
+        Test direct deserialization of simple types.
+        """
+        response_data = mock.create_autospec(Response)
+
+        response_data.content = json.dumps({})
+        response = self.d("[str]", response_data)
+        self.assertIsNone(response)
+
+        response_data.content = ""
+        response = self.d("[str]", response_data)
+        self.assertIsNone(response)
+
+        response_data.content = None
+        response = self.d("[str]", response_data)
+        self.assertIsNone(response)
+
+        response_data.content = json.dumps(["a","b","b"])
+        response = self.d("[str]", response_data)
+        self.assertEqual(response, ["a","b","b"])
+
+        response_data.content = json.dumps(12345)
+        with self.assertRaises(DeserializationError):
+            response = self.d("[str]", response_data)
+
+        response_data.content = True
+        response = self.d('bool', response_data)
+        self.assertEqual(response, True)
+
+        response_data.content = json.dumps(1)
+        response = self.d('bool', response_data)
+        self.assertEqual(response, True)
+
+        response_data.content = json.dumps("true1")
+        with self.assertRaises(DeserializationError):
+            response = self.d('bool', response_data)
+
 
     def test_obj_with_no_attr(self):
         """
@@ -717,16 +757,16 @@ class TestRuntimeDeserialized(unittest.TestCase):
         self.assertEqual(response.attr_c, True)
 
         response_data.content = json.dumps({'Key_C':[]})
-        response = self.d(self.TestObj, response_data)
-        self.assertEqual(response.attr_c, False)
+        with self.assertRaises(DeserializationError):
+            response = self.d(self.TestObj, response_data)
 
         response_data.content = json.dumps({'Key_C':0})
         response = self.d(self.TestObj, response_data)
         self.assertEqual(response.attr_c, False)
 
         response_data.content = json.dumps({'Key_C':"value"})
-        response = self.d(self.TestObj, response_data)
-        self.assertEqual(response.attr_c, True)
+        with self.assertRaises(DeserializationError):
+            response = self.d(self.TestObj, response_data)
 
     def test_attr_list_simple(self):
         """
@@ -760,6 +800,47 @@ class TestRuntimeDeserialized(unittest.TestCase):
         with self.assertRaises(DeserializationError):
             response = self.d(self.TestObj, response_data)
             deserialized_list = [d for d in response.attr_d]
+
+    def test_attr_list_in_list(self):
+        """
+        Test deserializing a list of lists
+        """
+        response_data = mock.create_autospec(Response)
+        response_data.status_code = 200
+        response_data.headers = {'client-request-id': 'a', 'etag': 'b'}
+        response_data.content = json.dumps({'AttrF':[]})
+
+        response = self.d(self.TestObj, response_data)
+        self.assertTrue(hasattr(response, 'attr_f'))
+        self.assertEqual(response.attr_f, [])
+
+        response_data.content = json.dumps({'AttrF':None})
+
+        response = self.d(self.TestObj, response_data)
+        self.assertTrue(hasattr(response, 'attr_f'))
+        self.assertEqual(response.attr_f, None)
+
+        response_data.content = json.dumps({})
+
+        response = self.d(self.TestObj, response_data)
+        self.assertTrue(hasattr(response, 'attr_f'))
+        self.assertEqual(response.attr_f, None)
+
+        response_data.content = json.dumps({'AttrF':[[]]})
+
+        response = self.d(self.TestObj, response_data)
+        self.assertTrue(hasattr(response, 'attr_f'))
+        self.assertEqual(response.attr_f, [[]])
+
+        response_data.content = json.dumps({'AttrF':[[1,2,3], ['a','b','c']]})
+
+        response = self.d(self.TestObj, response_data)
+        self.assertTrue(hasattr(response, 'attr_f'))
+        self.assertEqual(response.attr_f, [['1','2','3'], ['a','b','c']])
+
+        with self.assertRaises(DeserializationError):
+            response_data.content = json.dumps({'AttrF':[1,2,3]})
+            response = self.d(self.TestObj, response_data)
 
     def test_attr_list_complex(self):
         """
