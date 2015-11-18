@@ -214,11 +214,11 @@ class TestRuntimeSerialized(unittest.TestCase):
         """
 
         test_obj = ["A", "B", "C"]
-        output = self.s(test_obj, 'sequence')
+        output = self.s(test_obj, '[str]', div='|')
         self.assertEqual(output, "A|B|C")
 
         test_obj = [1,2,3]
-        output = self.s(test_obj, 'sequence', div=',')
+        output = self.s(test_obj, '[str]', div=',')
         self.assertEqual(output, "1,2,3")
 
     def test_attr_list_simple(self):

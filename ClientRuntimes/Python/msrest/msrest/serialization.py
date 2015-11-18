@@ -126,7 +126,6 @@ class Serializer(object):
             'decimal': Serializer.serialize_decimal,
             'long': Serializer.serialize_long,
             'bytearray': Serializer.serialize_bytearray,
-            'sequence': Serializer.serialize_sequence,
             '[]': self.serialize_iter,
             '{}': self.serialize_dict
             }
@@ -230,7 +229,11 @@ class Serializer(object):
         else:
             return self(data, **kwargs)
 
-    def serialize_iter(self, data, iter_type, required, **kwargs):
+    def serialize_iter(self, data, iter_type, required, div=None, **kwargs):
+
+        if div:
+            return div.join([self.serialize_data(
+            i, iter_type, required, **kwargs) for i in data])
 
         return [self.serialize_data(
             i, iter_type, required, **kwargs) for i in data]
@@ -243,10 +246,6 @@ class Serializer(object):
     @staticmethod
     def serialize_bytearray(attr, **kwargs):
         return str(attr)  # TODO
-
-    @staticmethod
-    def serialize_sequence(attr, div='|', **kwargs):
-        return div.join([str(a) for a in attr])
 
     @staticmethod
     def serialize_decimal(attr, **kwargs):
