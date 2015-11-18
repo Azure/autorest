@@ -27,7 +27,8 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// <summary>
         /// Initializes a new instance of the B class.
         /// </summary>
-        public B(string textStatusCode = default(string))
+        public B(string statusCode = default(string), string textStatusCode = default(string))
+            : base(statusCode)
         {
             TextStatusCode = textStatusCode;
         }

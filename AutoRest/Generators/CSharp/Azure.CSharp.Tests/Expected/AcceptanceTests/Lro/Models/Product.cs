@@ -28,7 +28,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product(string provisioningState = default(string), string provisioningStateValues = default(string))
+        public Product(string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string location = default(string), string name = default(string), string provisioningState = default(string), string provisioningStateValues = default(string))
+            : base(id, type, tags, location, name)
         {
             ProvisioningState = provisioningState;
             ProvisioningStateValues = provisioningStateValues;

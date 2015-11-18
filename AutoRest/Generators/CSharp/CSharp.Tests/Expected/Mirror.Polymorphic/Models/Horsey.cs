@@ -27,7 +27,8 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the Horsey class.
         /// </summary>
-        public Horsey(string breed = default(string))
+        public Horsey(string id = default(string), string description = default(string), string breed = default(string))
+            : base(id, description)
         {
             Breed = breed;
         }

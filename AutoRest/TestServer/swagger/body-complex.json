@@ -1082,7 +1082,10 @@
         "color": {
           "type": "string",
           "enum": [ "cyan", "Magenta", "YELLOW", "blacK" ],
-          "x-ms-enum": { "name": "CMYKColors", "modelAsString": true }
+          "x-ms-enum": {
+            "name": "CMYKColors",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1218,6 +1221,13 @@
           "type": "integer"
         }
       }
+    },
+    "cookiecuttershark": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/shark"
+        }
+      ]
     },
     "int-wrapper": {
       "properties": {
