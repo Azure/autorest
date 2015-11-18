@@ -5,8 +5,9 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>312b07bc-a830-4289-91b4-c53a2ec37d58</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>AcceptanceTests\test.py</StartupFile>
-    <SearchPath>..\..\..\..\ClientRuntimes\Python\msrest\;Expected\AcceptanceTests\BodyArray\;Expected\AcceptanceTests\BodyBoolean\;Expected\AcceptanceTests\BodyByte\;Expected\AcceptanceTests\BodyComplex\</SearchPath>
+    <StartupFile>AcceptanceTests\acceptance_tests.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>Python.Tests</Name>
@@ -21,7 +22,6 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AcceptanceTests\test.py" />
     <Compile Include="AcceptanceTests\acceptance_tests.py">
       <SubType>Code</SubType>
     </Compile>

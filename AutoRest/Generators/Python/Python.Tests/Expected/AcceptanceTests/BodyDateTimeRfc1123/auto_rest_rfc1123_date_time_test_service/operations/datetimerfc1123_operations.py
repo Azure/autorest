@@ -87,7 +87,7 @@ class Datetimerfc1123Operations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('rfc-date', response)
+            deserialized = self._deserialize('rfc-1123', response)
 
         if raw:
             return deserialized, response
@@ -134,7 +134,7 @@ class Datetimerfc1123Operations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('rfc-date', response)
+            deserialized = self._deserialize('rfc-1123', response)
 
         if raw:
             return deserialized, response
@@ -181,7 +181,7 @@ class Datetimerfc1123Operations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('rfc-date', response)
+            deserialized = self._deserialize('rfc-1123', response)
 
         if raw:
             return deserialized, response
@@ -228,7 +228,7 @@ class Datetimerfc1123Operations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('rfc-date', response)
+            deserialized = self._deserialize('rfc-1123', response)
 
         if raw:
             return deserialized, response
@@ -267,7 +267,7 @@ class Datetimerfc1123Operations(object):
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(datetime_body, 'rfc-date')
+        content = self._serialize(datetime_body, 'rfc-1123')
 
         # Construct and send request
         request = self._client.put(url, query)
@@ -319,7 +319,7 @@ class Datetimerfc1123Operations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('rfc-date', response)
+            deserialized = self._deserialize('rfc-1123', response)
 
         if raw:
             return deserialized, response
@@ -366,7 +366,7 @@ class Datetimerfc1123Operations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('rfc-date', response)
+            deserialized = self._deserialize('rfc-1123', response)
 
         if raw:
             return deserialized, response
@@ -405,7 +405,7 @@ class Datetimerfc1123Operations(object):
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(datetime_body, 'rfc-date')
+        content = self._serialize(datetime_body, 'rfc-1123')
 
         # Construct and send request
         request = self._client.put(url, query)
@@ -457,7 +457,7 @@ class Datetimerfc1123Operations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('rfc-date', response)
+            deserialized = self._deserialize('rfc-1123', response)
 
         if raw:
             return deserialized, response

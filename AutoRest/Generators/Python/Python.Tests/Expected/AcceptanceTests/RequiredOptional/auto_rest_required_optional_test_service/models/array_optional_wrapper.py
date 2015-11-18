@@ -9,6 +9,7 @@
 #--------------------------------------------------------------------------
 
 from msrest.serialization import Model
+
 class ArrayOptionalWrapper(Model):
 
     _required = []

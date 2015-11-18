@@ -1714,7 +1714,7 @@ class DictionaryOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('{iso-date}', response)
+            deserialized = self._deserialize('{iso-8601}', response)
 
         if raw:
             return deserialized, response
@@ -1754,7 +1754,7 @@ class DictionaryOperations(object):
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(array_body, '{iso-date}')
+        content = self._serialize(array_body, '{iso-8601}')
 
         # Construct and send request
         request = self._client.put(url, query)
@@ -1806,7 +1806,7 @@ class DictionaryOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('{iso-date}', response)
+            deserialized = self._deserialize('{iso-8601}', response)
 
         if raw:
             return deserialized, response
@@ -1854,7 +1854,7 @@ class DictionaryOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('{iso-date}', response)
+            deserialized = self._deserialize('{iso-8601}', response)
 
         if raw:
             return deserialized, response
@@ -1903,7 +1903,7 @@ class DictionaryOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('{rfc-date}', response)
+            deserialized = self._deserialize('{rfc-1123}', response)
 
         if raw:
             return deserialized, response
@@ -1943,7 +1943,7 @@ class DictionaryOperations(object):
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(array_body, '{rfc-date}')
+        content = self._serialize(array_body, '{rfc-1123}')
 
         # Construct and send request
         request = self._client.put(url, query)

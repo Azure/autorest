@@ -114,13 +114,13 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             if (known == PrimaryType.DateTimeRfc1123)
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "Serialized.serializeObject({0}, \'rfc-date\')", reference);
+                    "Serialized.serializeObject({0}, \'rfc-1123\')", reference);
             }
 
             if (known == PrimaryType.DateTime)
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "Serialized.serializeObject({0}, \'iso-date\')", reference);
+                    "Serialized.serializeObject({0}, \'iso-8601\')", reference);
             }
 
             if (known == PrimaryType.TimeSpan)
@@ -148,12 +148,12 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
 
             if (known == PrimaryType.DateTimeRfc1123)
             {
-                return "rfc-date";
+                return "rfc-1123";
             }
 
             if (known == PrimaryType.DateTime)
             {
-                return "iso-date"; 
+                return "iso-8601"; 
             }
 
             if (known == PrimaryType.TimeSpan)

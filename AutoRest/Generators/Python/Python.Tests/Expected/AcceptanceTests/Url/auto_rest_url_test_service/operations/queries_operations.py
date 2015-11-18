@@ -1198,7 +1198,7 @@ class QueriesOperations(object):
         # Construct parameters
         query = {}
         if date_time_query is not None:
-            query['dateTimeQuery'] = self._parse_url("date_time_query", date_time_query, 'iso-date', False)
+            query['dateTimeQuery'] = self._parse_url("date_time_query", date_time_query, 'iso-8601', False)
 
         # Construct headers
         headers = {}
@@ -1241,7 +1241,7 @@ class QueriesOperations(object):
         # Construct parameters
         query = {}
         if date_time_query is not None:
-            query['dateTimeQuery'] = self._parse_url("date_time_query", date_time_query, 'iso-date', False)
+            query['dateTimeQuery'] = self._parse_url("date_time_query", date_time_query, 'iso-8601', False)
 
         # Construct headers
         headers = {}

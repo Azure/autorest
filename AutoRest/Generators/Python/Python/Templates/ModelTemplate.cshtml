@@ -4,17 +4,22 @@
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.Python
 @using Microsoft.Rest.Generator.Python.TemplateModels
+@using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ModelTemplateModel>
 #--------------------------------------------------------------------------
 @Header("# ")
 #--------------------------------------------------------------------------
 @EmptyLine
 from msrest.serialization import Model
+@if (Model.BaseModelType != null)
+{
+@:from .@Model.BaseModelType.Name.ToPythonCase() import @Model.BaseModelType.Name
+}
 @if (Model.IsException)
 {
 @:from msrest.exceptions import HttpOperationError
-@EmptyLine
 }
+@EmptyLine
 @if (Model.BaseModelType != null)
 {
 @:class @(Model.Name)(@Model.BaseModelType.Name):

@@ -9,6 +9,8 @@
 #--------------------------------------------------------------------------
 
 from msrest.serialization import Model
+from .a import A
+
 class B(A):
 
     _required = []
