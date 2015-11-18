@@ -56,7 +56,7 @@ public class FlatteningDeserializer<T> extends StdDeserializer<T> implements Res
     @SuppressWarnings("unchecked")
     @Override
     public T deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-        JsonNode root = new JacksonUtils().getObjectMapper().readTree(jp);
+        JsonNode root = new AzureJacksonUtils().getObjectMapper().readTree(jp);
         final Class<?> tClass = this.defaultDeserializer.handledType();
         for (Field field : tClass.getDeclaredFields()) {
             JsonNode node = root;
