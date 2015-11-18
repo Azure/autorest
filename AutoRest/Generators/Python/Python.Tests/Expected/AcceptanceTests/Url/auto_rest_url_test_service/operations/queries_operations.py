@@ -12,7 +12,7 @@ import sys
 
 from datetime import *
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -47,7 +47,7 @@ class QueriesOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_boolean_true(self, bool_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -90,7 +90,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_boolean_false(self, bool_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -133,7 +133,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_boolean_null(self, bool_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -176,7 +176,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_int_one_million(self, int_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -219,7 +219,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_int_negative_one_million(self, int_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -262,7 +262,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_int_null(self, int_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -305,7 +305,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_ten_billion(self, long_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -348,7 +348,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_negative_ten_billion(self, long_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -391,7 +391,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_long_null(self, long_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -434,7 +434,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def float_scientific_positive(self, float_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -477,7 +477,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def float_scientific_negative(self, float_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -520,7 +520,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def float_null(self, float_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -563,7 +563,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def double_decimal_positive(self, double_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -606,7 +606,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def double_decimal_negative(self, double_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -649,7 +649,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def double_null(self, double_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -692,7 +692,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def string_unicode(self, string_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -736,7 +736,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def string_url_encoded(self, string_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -781,7 +781,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def string_empty(self, string_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -825,7 +825,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def string_null(self, string_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -868,7 +868,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def enum_valid(self, enum_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -912,7 +912,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def enum_null(self, enum_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -956,7 +956,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def byte_multi_byte(self, byte_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1000,7 +1000,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def byte_empty(self, byte_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1043,7 +1043,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def byte_null(self, byte_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1086,7 +1086,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def date_valid(self, date_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1129,7 +1129,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def date_null(self, date_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1172,7 +1172,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def date_time_valid(self, date_time_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1215,7 +1215,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def date_time_null(self, date_time_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1258,7 +1258,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def array_string_csv_valid(self, array_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1303,7 +1303,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def array_string_csv_null(self, array_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1346,7 +1346,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def array_string_csv_empty(self, array_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1390,7 +1390,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def array_string_ssv_valid(self, array_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1435,7 +1435,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def array_string_tsv_valid(self, array_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1480,7 +1480,7 @@ class QueriesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def array_string_pipes_valid(self, array_query, custom_headers = {}, raw = False, callback = None):
         """
 

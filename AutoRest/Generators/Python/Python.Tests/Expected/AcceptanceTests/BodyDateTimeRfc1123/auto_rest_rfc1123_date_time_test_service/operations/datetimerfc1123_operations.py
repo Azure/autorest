@@ -12,7 +12,7 @@ import sys
 
 from datetime import *
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -47,7 +47,7 @@ class Datetimerfc1123Operations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -94,7 +94,7 @@ class Datetimerfc1123Operations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -141,7 +141,7 @@ class Datetimerfc1123Operations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_overflow(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -188,7 +188,7 @@ class Datetimerfc1123Operations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_underflow(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -235,7 +235,7 @@ class Datetimerfc1123Operations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_utc_max_date_time(self, datetime_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -279,7 +279,7 @@ class Datetimerfc1123Operations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_utc_lowercase_max_date_time(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -326,7 +326,7 @@ class Datetimerfc1123Operations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_utc_uppercase_max_date_time(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -373,7 +373,7 @@ class Datetimerfc1123Operations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_utc_min_date_time(self, datetime_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -417,7 +417,7 @@ class Datetimerfc1123Operations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_utc_min_date_time(self, custom_headers = {}, raw = False, callback = None):
         """
 

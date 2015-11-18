@@ -22,4 +22,5 @@ class Goblinshark(Shark):
     def __init__(self, *args, **kwargs):
 
         self.jawsize = None
-        super(Goblinshark, self).__init__()
+
+        super(Goblinshark, self).__init__(*args, **kwargs)

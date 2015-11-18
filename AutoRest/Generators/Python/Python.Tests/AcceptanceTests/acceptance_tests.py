@@ -57,8 +57,9 @@ class AcceptanceTests(unittest.TestCase):
         config = AutoRestSwaggerBATArrayServiceConfiguration("http://localhost:3000")
         config.log_level = 10
         client = AutoRestSwaggerBATArrayService(config)
-        self.assertListEqual([], list(client.array.get_array_empty()))
-        #self.assertIsNone(list(client.array.get_array_null()))
+        self.assertListEqual([], client.array.get_array_empty())
+        self.assertIsNone(client.array.get_array_null())
+        pass
 
     def test_complex(self):
         """

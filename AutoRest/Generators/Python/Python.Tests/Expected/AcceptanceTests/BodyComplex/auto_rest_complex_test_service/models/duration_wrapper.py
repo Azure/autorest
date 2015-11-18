@@ -21,3 +21,5 @@ class DurationWrapper(Model):
     def __init__(self, *args, **kwargs):
 
         self.field = None
+
+        super(DurationWrapper, self).__init__(*args, **kwargs)

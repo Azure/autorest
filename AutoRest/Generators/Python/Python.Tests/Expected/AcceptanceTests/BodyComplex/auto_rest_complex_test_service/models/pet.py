@@ -23,3 +23,5 @@ class Pet(Model):
 
         self.id = None
         self.name = None
+
+        super(Pet, self).__init__(*args, **kwargs)

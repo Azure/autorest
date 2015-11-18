@@ -11,7 +11,7 @@
 import sys
 
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -46,7 +46,7 @@ class BoolModelOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_true(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -92,7 +92,7 @@ class BoolModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_true(self, bool_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -136,7 +136,7 @@ class BoolModelOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_false(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -182,7 +182,7 @@ class BoolModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_false(self, bool_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -226,7 +226,7 @@ class BoolModelOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -272,7 +272,7 @@ class BoolModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 

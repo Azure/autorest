@@ -9,8 +9,8 @@
 #--------------------------------------------------------------------------
 
 
-from msrest import ServiceClient, Configuration
-from msrest import Serializer, Deserializer
+from msrest.service_client import ServiceClient, async_request
+from msrest import Configuration, Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
     DeserializationError,
@@ -24,7 +24,7 @@ from .operations.http_client_failure_operations import HttpClientFailureOperatio
 from .operations.http_server_failure_operations import HttpServerFailureOperations
 from .operations.http_retry_operations import HttpRetryOperations
 from .operations.multiple_responses_operations import MultipleResponsesOperations
-import models
+from . import models
 
 class AutoRestHttpInfrastructureTestServiceConfiguration(Configuration):
 

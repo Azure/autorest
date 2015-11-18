@@ -21,3 +21,5 @@ class IntWrapper(Model):
     def __init__(self, *args, **kwargs):
 
         self.value = None
+
+        super(IntWrapper, self).__init__(*args, **kwargs)

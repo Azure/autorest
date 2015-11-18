@@ -23,3 +23,5 @@ class IntWrapper(Model):
 
         self.field1 = None
         self.field2 = None
+
+        super(IntWrapper, self).__init__(*args, **kwargs)

@@ -21,3 +21,5 @@ class ByteWrapper(Model):
     def __init__(self, *args, **kwargs):
 
         self.field = None
+
+        super(ByteWrapper, self).__init__(*args, **kwargs)

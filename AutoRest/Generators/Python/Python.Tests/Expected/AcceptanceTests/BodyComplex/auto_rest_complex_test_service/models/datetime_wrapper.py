@@ -23,3 +23,5 @@ class DatetimeWrapper(Model):
 
         self.field = None
         self.now = None
+
+        super(DatetimeWrapper, self).__init__(*args, **kwargs)

@@ -11,7 +11,7 @@
 import sys
 
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -46,7 +46,7 @@ class MultipleResponsesOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model204_no_model_default_error200_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -93,7 +93,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model204_no_model_default_error204_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -140,7 +140,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model204_no_model_default_error201_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -187,7 +187,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model204_no_model_default_error202_none(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -234,7 +234,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model204_no_model_default_error400_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -282,7 +282,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model201_model_default_error200_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -331,7 +331,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model201_model_default_error201_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -381,7 +381,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model201_model_default_error400_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -431,7 +431,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model_a201_model_c404_model_ddefault_error200_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -482,7 +482,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model_a201_model_c404_model_ddefault_error201_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -533,7 +533,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model_a201_model_c404_model_ddefault_error404_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -584,7 +584,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model_a201_model_c404_model_ddefault_error400_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -636,7 +636,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get202_none204_none_default_error202_none(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -675,7 +675,7 @@ class MultipleResponsesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get202_none204_none_default_error204_none(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -714,7 +714,7 @@ class MultipleResponsesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get202_none204_none_default_error400_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -754,7 +754,7 @@ class MultipleResponsesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get202_none204_none_default_none202_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -793,7 +793,7 @@ class MultipleResponsesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get202_none204_none_default_none204_none(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -832,7 +832,7 @@ class MultipleResponsesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get202_none204_none_default_none400_none(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -871,7 +871,7 @@ class MultipleResponsesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get202_none204_none_default_none400_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -910,7 +910,7 @@ class MultipleResponsesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_default_model_a200_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -950,7 +950,7 @@ class MultipleResponsesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_default_model_a200_none(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -990,7 +990,7 @@ class MultipleResponsesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_default_model_a400_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1030,7 +1030,7 @@ class MultipleResponsesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_default_model_a400_none(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1070,7 +1070,7 @@ class MultipleResponsesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_default_none200_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1109,7 +1109,7 @@ class MultipleResponsesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_default_none200_none(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1148,7 +1148,7 @@ class MultipleResponsesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_default_none400_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1187,7 +1187,7 @@ class MultipleResponsesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_default_none400_none(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1226,7 +1226,7 @@ class MultipleResponsesOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model_a200_none(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1274,7 +1274,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model_a200_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1321,7 +1321,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model_a200_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1368,7 +1368,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model_a400_none(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1416,7 +1416,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model_a400_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1463,7 +1463,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model_a400_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1510,7 +1510,7 @@ class MultipleResponsesOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get200_model_a202_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 

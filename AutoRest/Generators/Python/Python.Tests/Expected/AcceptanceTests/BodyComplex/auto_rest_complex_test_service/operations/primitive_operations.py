@@ -11,7 +11,7 @@
 import sys
 
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -46,7 +46,7 @@ class PrimitiveOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_int(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -93,7 +93,7 @@ class PrimitiveOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_int(self, complex_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -137,7 +137,7 @@ class PrimitiveOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_long(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -184,7 +184,7 @@ class PrimitiveOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_long(self, complex_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -228,7 +228,7 @@ class PrimitiveOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_float(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -275,7 +275,7 @@ class PrimitiveOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_float(self, complex_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -319,7 +319,7 @@ class PrimitiveOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_double(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -366,7 +366,7 @@ class PrimitiveOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_double(self, complex_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -411,7 +411,7 @@ class PrimitiveOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_bool(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -458,7 +458,7 @@ class PrimitiveOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_bool(self, complex_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -502,7 +502,7 @@ class PrimitiveOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_string(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -549,7 +549,7 @@ class PrimitiveOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_string(self, complex_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -593,7 +593,7 @@ class PrimitiveOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_date(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -640,7 +640,7 @@ class PrimitiveOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_date(self, complex_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -684,7 +684,7 @@ class PrimitiveOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_date_time(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -731,7 +731,7 @@ class PrimitiveOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_date_time(self, complex_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -776,7 +776,7 @@ class PrimitiveOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_date_time_rfc1123(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -823,7 +823,7 @@ class PrimitiveOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_date_time_rfc1123(self, complex_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -868,7 +868,7 @@ class PrimitiveOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_duration(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -915,7 +915,7 @@ class PrimitiveOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_duration(self, complex_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -959,7 +959,7 @@ class PrimitiveOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_byte(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1006,7 +1006,7 @@ class PrimitiveOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_byte(self, complex_body, custom_headers = {}, raw = False, callback = None):
         """
 

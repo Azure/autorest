@@ -23,3 +23,5 @@ class Datetimerfc1123Wrapper(Model):
 
         self.field = None
         self.now = None
+
+        super(Datetimerfc1123Wrapper, self).__init__(*args, **kwargs)

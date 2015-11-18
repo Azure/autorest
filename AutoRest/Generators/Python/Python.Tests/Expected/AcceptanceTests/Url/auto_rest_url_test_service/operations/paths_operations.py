@@ -12,7 +12,7 @@ import sys
 
 from datetime import *
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -47,7 +47,7 @@ class PathsOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_boolean_true(self, bool_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -91,7 +91,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_boolean_false(self, bool_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -135,7 +135,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_int_one_million(self, int_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -179,7 +179,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_int_negative_one_million(self, int_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -223,7 +223,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_ten_billion(self, long_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -267,7 +267,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_negative_ten_billion(self, long_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -311,7 +311,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def float_scientific_positive(self, float_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -355,7 +355,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def float_scientific_negative(self, float_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -399,7 +399,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def double_decimal_positive(self, double_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -443,7 +443,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def double_decimal_negative(self, double_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -487,7 +487,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def string_unicode(self, string_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -532,7 +532,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def string_url_encoded(self, string_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -578,7 +578,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def string_empty(self, string_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -623,7 +623,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def string_null(self, string_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -667,7 +667,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def enum_valid(self, enum_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -712,7 +712,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def enum_null(self, enum_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -758,7 +758,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def byte_multi_byte(self, byte_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -803,7 +803,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def byte_empty(self, byte_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -847,7 +847,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def byte_null(self, byte_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -891,7 +891,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def date_valid(self, date_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -935,7 +935,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def date_null(self, date_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -980,7 +980,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def date_time_valid(self, date_time_path, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1024,7 +1024,7 @@ class PathsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def date_time_null(self, date_time_path, custom_headers = {}, raw = False, callback = None):
         """
 

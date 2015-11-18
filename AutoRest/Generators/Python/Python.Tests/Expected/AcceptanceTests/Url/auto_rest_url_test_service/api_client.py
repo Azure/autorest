@@ -10,8 +10,8 @@
 
 from datetime import *
 
-from msrest import ServiceClient, Configuration
-from msrest import Serializer, Deserializer
+from msrest.service_client import ServiceClient, async_request
+from msrest import Configuration, Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
     DeserializationError,
@@ -21,7 +21,7 @@ from msrest.exceptions import (
 from .operations.paths_operations import PathsOperations
 from .operations.queries_operations import QueriesOperations
 from .operations.path_items_operations import PathItemsOperations
-import models
+from . import models
 
 class AutoRestUrlTestServiceConfiguration(Configuration):
 

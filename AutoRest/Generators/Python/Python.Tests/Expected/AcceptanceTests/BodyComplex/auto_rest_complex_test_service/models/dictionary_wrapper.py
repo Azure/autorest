@@ -21,3 +21,5 @@ class DictionaryWrapper(Model):
     def __init__(self, *args, **kwargs):
 
         self.default_program = {}
+
+        super(DictionaryWrapper, self).__init__(*args, **kwargs)

@@ -24,4 +24,5 @@ class Cat(Pet):
 
         self.color = None
         self.hates = []
-        super(Cat, self).__init__()
+
+        super(Cat, self).__init__(*args, **kwargs)

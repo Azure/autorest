@@ -25,3 +25,5 @@ class Product(Model):
         self.display_names = []
         self.capacity = None
         self.image = None
+
+        super(Product, self).__init__(*args, **kwargs)

@@ -23,3 +23,5 @@ class DateWrapper(Model):
 
         self.field = None
         self.leap = None
+
+        super(DateWrapper, self).__init__(*args, **kwargs)

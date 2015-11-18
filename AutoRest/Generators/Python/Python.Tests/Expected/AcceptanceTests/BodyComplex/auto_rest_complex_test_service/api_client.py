@@ -9,8 +9,8 @@
 #--------------------------------------------------------------------------
 
 
-from msrest import ServiceClient, Configuration
-from msrest import Serializer, Deserializer
+from msrest.service_client import ServiceClient, async_request
+from msrest import Configuration, Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
     DeserializationError,
@@ -24,7 +24,7 @@ from .operations.dictionary_operations import DictionaryOperations
 from .operations.inheritance_operations import InheritanceOperations
 from .operations.polymorphism_operations import PolymorphismOperations
 from .operations.polymorphicrecursive_operations import PolymorphicrecursiveOperations
-import models
+from . import models
 
 class AutoRestComplexTestServiceConfiguration(Configuration):
 

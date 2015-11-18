@@ -11,7 +11,7 @@
 import sys
 
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -46,7 +46,7 @@ class HttpRedirectsOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def head300(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -85,7 +85,7 @@ class HttpRedirectsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get300(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -131,7 +131,7 @@ class HttpRedirectsOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def head301(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -170,7 +170,7 @@ class HttpRedirectsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get301(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -209,7 +209,7 @@ class HttpRedirectsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put301(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -255,7 +255,7 @@ class HttpRedirectsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def head302(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -294,7 +294,7 @@ class HttpRedirectsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get302(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -333,7 +333,7 @@ class HttpRedirectsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def patch302(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -379,7 +379,7 @@ class HttpRedirectsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post303(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -425,7 +425,7 @@ class HttpRedirectsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def head307(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -464,7 +464,7 @@ class HttpRedirectsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get307(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -503,7 +503,7 @@ class HttpRedirectsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put307(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -547,7 +547,7 @@ class HttpRedirectsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def patch307(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -591,7 +591,7 @@ class HttpRedirectsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post307(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -635,7 +635,7 @@ class HttpRedirectsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def delete307(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 

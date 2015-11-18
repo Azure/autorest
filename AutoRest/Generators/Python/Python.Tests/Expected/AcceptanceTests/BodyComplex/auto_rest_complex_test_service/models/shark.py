@@ -28,4 +28,5 @@ class Shark(Fish):
 
         self.age = None
         self.birthday = None
-        super(Shark, self).__init__()
+
+        super(Shark, self).__init__(*args, **kwargs)

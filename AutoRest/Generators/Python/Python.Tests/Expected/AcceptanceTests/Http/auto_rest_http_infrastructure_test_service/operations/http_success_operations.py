@@ -11,7 +11,7 @@
 import sys
 
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -46,7 +46,7 @@ class HttpSuccessOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def head200(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -85,7 +85,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get200(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -131,7 +131,7 @@ class HttpSuccessOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put200(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -175,7 +175,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def patch200(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -219,7 +219,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post200(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -263,7 +263,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def delete200(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -307,7 +307,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put201(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -351,7 +351,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post201(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -395,7 +395,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put202(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -439,7 +439,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def patch202(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -483,7 +483,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post202(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -527,7 +527,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def delete202(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -571,7 +571,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def head204(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -610,7 +610,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put204(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -654,7 +654,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def patch204(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -698,7 +698,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post204(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -742,7 +742,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def delete204(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -786,7 +786,7 @@ class HttpSuccessOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def head404(self, custom_headers = {}, raw = False, callback = None):
         """
 

@@ -11,7 +11,7 @@
 import sys
 
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -46,7 +46,7 @@ class HttpServerFailureOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def head501(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -87,7 +87,7 @@ class HttpServerFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get501(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -128,7 +128,7 @@ class HttpServerFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post505(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -174,7 +174,7 @@ class HttpServerFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def delete505(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 

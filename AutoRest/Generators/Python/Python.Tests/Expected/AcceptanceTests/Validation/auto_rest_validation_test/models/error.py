@@ -27,6 +27,8 @@ class Error(Model):
         self.message = None
         self.fields = None
 
+        super(Error, self).__init__(*args, **kwargs)
+
 class ErrorException(HttpOperationError):
 
     def __init__(self, deserialize, response, *args):

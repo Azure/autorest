@@ -9,15 +9,15 @@
 #--------------------------------------------------------------------------
 
 
-from msrest import ServiceClient, Configuration
-from msrest import Serializer, Deserializer
+from msrest.service_client import ServiceClient, async_request
+from msrest import Configuration, Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
     DeserializationError,
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-import models
+from . import models
 
 class AutoRestValidationTestConfiguration(Configuration):
 
@@ -59,7 +59,7 @@ class AutoRestValidationTest(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def validation_of_method_parameters(self, resource_group_name, id, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -118,7 +118,7 @@ class AutoRestValidationTest(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def validation_of_body(self, resource_group_name, id, body, custom_headers = {}, raw = False, callback = None):
         """
 

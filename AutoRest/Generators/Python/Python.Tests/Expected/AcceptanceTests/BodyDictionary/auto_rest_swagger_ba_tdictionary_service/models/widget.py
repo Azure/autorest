@@ -23,3 +23,5 @@ class Widget(Model):
 
         self.integer = None
         self.string = None
+
+        super(Widget, self).__init__(*args, **kwargs)
