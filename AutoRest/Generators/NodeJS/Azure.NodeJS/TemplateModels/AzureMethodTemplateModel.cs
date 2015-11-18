@@ -20,8 +20,8 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 throw new ArgumentNullException("source");
             }
             
-            this.ClientRequestIdString = AzureCodeGenerator.GetClientRequestIdString(source);
-            this.RequestIdString = AzureCodeGenerator.GetRequestIdString(source);
+            this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
+            this.RequestIdString = AzureExtensions.GetRequestIdString(source);
         }
         
         public string ClientRequestIdString { get; private set; }
@@ -33,7 +33,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         /// </summary>
         public bool IsLongRunningOperation
         {
-            get { return Extensions.ContainsKey(AzureCodeGenerator.LongRunningExtension); }
+            get { return Extensions.ContainsKey(AzureExtensions.LongRunningExtension); }
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 if (this.HttpMethod == HttpMethod.Head &&
                     this.ReturnType.Body != null)
                 {
-                    HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureCodeGenerator.HttpHeadStatusCodeSuccessFunc);
+                    HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
                     sb.AppendFormat("result = (statusCode === {0});", (int)code).AppendLine();
                 }
 

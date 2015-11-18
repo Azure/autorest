@@ -28,6 +28,12 @@ public interface @Model.Name {
     String getBaseUri();
 @EmptyLine
     /**
+     * Gets the list of interceptors the OkHttp client will execute.
+     * @@return the list of interceptors.
+     */
+    List<Interceptor> getClientInterceptors();
+@EmptyLine
+    /**
      * Gets the {@@link AzureClient} used for long running operations.
      * @@return the azure client;
      */

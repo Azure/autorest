@@ -12,8 +12,10 @@ package fixtures.azureparametergrouping;
 
 import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.CustomHeaderInterceptor;
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
+import java.util.UUID;
 import retrofit.Retrofit;
 
 /**
@@ -90,13 +92,13 @@ public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient impl
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private ParameterGrouping parameterGrouping;
+    private ParameterGroupingOperations parameterGrouping;
 
     /**
-     * Gets the ParameterGrouping object to access its operations.
+     * Gets the ParameterGroupingOperations object to access its operations.
      * @return the parameterGrouping value.
      */
-    public ParameterGrouping getParameterGrouping() {
+    public ParameterGroupingOperations getParameterGrouping() {
         return this.parameterGrouping;
     }
 
@@ -113,8 +115,28 @@ public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient impl
      * @param baseUri the base URI of the host
      */
     public AutoRestParameterGroupingTestServiceImpl(String baseUri) {
+        this(baseUri, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestParameterGroupingTestService client.
+     *
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestParameterGroupingTestServiceImpl(ServiceClientCredentials credentials) {
+        this("https://localhost", credentials);
+    }
+
+    /**
+     * Initializes an instance of AutoRestParameterGroupingTestService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestParameterGroupingTestServiceImpl(String baseUri, ServiceClientCredentials credentials) {
         super();
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -122,12 +144,14 @@ public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient impl
      * Initializes an instance of AutoRestParameterGroupingTestService client.
      *
      * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
      * @param client the {@link OkHttpClient} client to use for REST calls
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestParameterGroupingTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+    public AutoRestParameterGroupingTestServiceImpl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -136,10 +160,12 @@ public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient impl
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
+        this.acceptLanguage = "en-US";
+        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
         this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.parameterGrouping = new ParameterGroupingImpl(retrofit, this);
+        this.parameterGrouping = new ParameterGroupingOperationsImpl(retrofit, this);
     }
 }

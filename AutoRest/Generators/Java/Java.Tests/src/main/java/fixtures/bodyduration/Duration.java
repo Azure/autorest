@@ -46,7 +46,7 @@ public interface Duration {
     /**
      * Get null duration value
      *
-     * @return the Period object if successful.
+     * @return the Period object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Period> getNull() throws ServiceException;
@@ -63,6 +63,7 @@ public interface Duration {
      * Put a positive duration value
      *
      * @param durationBody the Period value
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putPositiveDuration(Period durationBody) throws ServiceException;
@@ -79,7 +80,7 @@ public interface Duration {
     /**
      * Get a positive duration value
      *
-     * @return the Period object if successful.
+     * @return the Period object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Period> getPositiveDuration() throws ServiceException;
@@ -95,7 +96,7 @@ public interface Duration {
     /**
      * Get an invalid duration value
      *
-     * @return the Period object if successful.
+     * @return the Period object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Period> getInvalid() throws ServiceException;

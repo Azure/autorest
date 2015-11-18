@@ -12,10 +12,7 @@
 
 var util = require('util');
 var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
 var WebResource = msRest.WebResource;
-
-var models = require('../models');
 
 /**
  * @class
@@ -1432,8 +1429,8 @@ Paths.prototype.enumValid = function (enumPath, options, callback) {
       if (!allowedValues.some( function(item) { return item === enumPath; })) {
         throw new Error(enumPath + ' is not a valid value. The valid values are: ' + allowedValues);
       }
-    }
-     else {  throw new Error('enumPath cannot be null or undefined.');
+    } else {
+      throw new Error('enumPath cannot be null or undefined.');
     }
   } catch (error) {
     return callback(error);
@@ -1535,8 +1532,8 @@ Paths.prototype.enumNull = function (enumPath, options, callback) {
       if (!allowedValues.some( function(item) { return item === enumPath; })) {
         throw new Error(enumPath + ' is not a valid value. The valid values are: ' + allowedValues);
       }
-    }
-     else {  throw new Error('enumPath cannot be null or undefined.');
+    } else {
+      throw new Error('enumPath cannot be null or undefined.');
     }
   } catch (error) {
     return callback(error);

@@ -13,14 +13,7 @@
 var util = require('util');
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
-var ServiceClient = msRest.ServiceClient;
 var WebResource = msRest.WebResource;
-
-@if (Model.ModelTypes.Any())
-{
-@EmptyLine
-@:var models = require('../models');
-}
 @EmptyLine
 /**
  * @@class

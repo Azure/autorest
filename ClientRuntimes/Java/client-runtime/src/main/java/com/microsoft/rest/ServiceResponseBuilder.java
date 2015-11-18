@@ -8,7 +8,7 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -23,21 +23,33 @@ import java.util.Map;
  * The builder for building a {@link ServiceResponse}.
  */
 public class ServiceResponseBuilder<T> {
-    private Map<Integer, TypeReference<?>> responseTypes;
+    protected Map<Integer, TypeReference<?>> responseTypes;
+    protected JacksonUtils deserializer;
 
     /**
      * Create a ServiceResponseBuilder instance.
      */
     public ServiceResponseBuilder() {
-        this(new HashMap<Integer, TypeReference<?>>());
+        this(new JacksonUtils());
     }
 
     /**
      * Create a ServiceResponseBuilder instance.
      *
+     * @param deserializer the serialization utils to use for deserialization operations
+     */
+    public ServiceResponseBuilder(JacksonUtils deserializer) {
+        this(deserializer, new HashMap<Integer, TypeReference<?>>());
+    }
+
+    /**
+     * Create a ServiceResponseBuilder instance.
+     *
+     * @param deserializer the serialization utils to use for deserialization operations
      * @param responseTypes a mapping of response status codes and response destination types.
      */
-    public ServiceResponseBuilder(Map<Integer, TypeReference<?>> responseTypes) {
+    public ServiceResponseBuilder(JacksonUtils deserializer, Map<Integer, TypeReference<?>> responseTypes) {
+        this.deserializer = deserializer;
         this.responseTypes = responseTypes;
     }
 
@@ -154,7 +166,7 @@ public class ServiceResponseBuilder<T> {
     }
 
     @SuppressWarnings("unchecked")
-    private T buildBody(int statusCode, ResponseBody responseBody) throws IOException {
+    protected T buildBody(int statusCode, ResponseBody responseBody) throws IOException {
         if (responseBody == null) {
             return null;
         }
@@ -182,7 +194,7 @@ public class ServiceResponseBuilder<T> {
             if (responseContent.length() <= 0) {
                 return null;
             }
-            return JacksonHelper.deserialize(responseContent, type);
+            return deserializer.deserialize(responseContent, type);
         }
     }
 

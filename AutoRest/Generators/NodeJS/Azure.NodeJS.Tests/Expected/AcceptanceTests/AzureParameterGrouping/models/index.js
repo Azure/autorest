@@ -22,4 +22,4 @@ exports.ErrorModel = require('./errorModel');
 exports.ParameterGroupingPostRequiredParameters = require('./parameterGroupingPostRequiredParameters');
 exports.ParameterGroupingPostOptionalParameters = require('./parameterGroupingPostOptionalParameters');
 exports.FirstParameterGroup = require('./firstParameterGroup');
-exports.SecondParameterGroup = require('./secondParameterGroup');
+exports.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup = require('./parameterGroupingPostMultipleParameterGroupsSecondParameterGroup');

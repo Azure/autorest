@@ -104,7 +104,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)
@@ -142,7 +142,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='complexBody'>
         /// Please put a salmon that looks like this:
         /// {
-        /// "dtype": "salmon",
+        /// "fishtype": "salmon",
         /// "species": "king",
         /// "length": 1,
         /// "age": 1,
@@ -150,13 +150,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// "iswild": true,
         /// "siblings": [
         /// {
-        /// "dtype": "shark",
+        /// "fishtype": "shark",
         /// "species": "predator",
         /// "length": 20,
         /// "age": 6,
         /// "siblings": [
         /// {
-        /// "dtype": "salmon",
+        /// "fishtype": "salmon",
         /// "species": "coho",
         /// "length": 2,
         /// "age": 2,
@@ -164,13 +164,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// "iswild": true,
         /// "siblings": [
         /// {
-        /// "dtype": "shark",
+        /// "fishtype": "shark",
         /// "species": "predator",
         /// "length": 20,
         /// "age": 6
         /// },
         /// {
-        /// "dtype": "sawshark",
+        /// "fishtype": "sawshark",
         /// "species": "dangerous",
         /// "length": 10,
         /// "age": 105
@@ -178,7 +178,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// ]
         /// },
         /// {
-        /// "dtype": "sawshark",
+        /// "fishtype": "sawshark",
         /// "species": "dangerous",
         /// "length": 10,
         /// "age": 105
@@ -186,7 +186,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// ]
         /// },
         /// {
-        /// "dtype": "sawshark",
+        /// "fishtype": "sawshark",
         /// "species": "dangerous",
         /// "length": 10,
         /// "age": 105
@@ -260,7 +260,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                 if (errorBody != null)

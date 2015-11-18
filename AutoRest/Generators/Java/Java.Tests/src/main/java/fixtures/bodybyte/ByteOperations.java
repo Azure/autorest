@@ -48,7 +48,7 @@ public interface ByteOperations {
     /**
      * Get null byte value
      *
-     * @return the byte[] object if successful.
+     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<byte[]> getNull() throws ServiceException;
@@ -64,7 +64,7 @@ public interface ByteOperations {
     /**
      * Get empty byte value ''
      *
-     * @return the byte[] object if successful.
+     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<byte[]> getEmpty() throws ServiceException;
@@ -80,7 +80,7 @@ public interface ByteOperations {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
-     * @return the byte[] object if successful.
+     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<byte[]> getNonAscii() throws ServiceException;
@@ -97,6 +97,7 @@ public interface ByteOperations {
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putNonAscii(byte[] byteBody) throws ServiceException;
@@ -113,7 +114,7 @@ public interface ByteOperations {
     /**
      * Get invalid byte value ':::SWAGGER::::'
      *
-     * @return the byte[] object if successful.
+     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<byte[]> getInvalid() throws ServiceException;

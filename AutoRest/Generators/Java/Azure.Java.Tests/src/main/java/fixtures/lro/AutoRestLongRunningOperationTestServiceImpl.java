@@ -12,8 +12,10 @@ package fixtures.lro;
 
 import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.CustomHeaderInterceptor;
 import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
+import java.util.UUID;
 import retrofit.Retrofit;
 
 /**
@@ -90,43 +92,43 @@ public class AutoRestLongRunningOperationTestServiceImpl extends ServiceClient i
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private LROs lROs;
+    private LROsOperations lROs;
 
     /**
-     * Gets the LROs object to access its operations.
+     * Gets the LROsOperations object to access its operations.
      * @return the lROs value.
      */
-    public LROs getLROs() {
+    public LROsOperations getLROs() {
         return this.lROs;
     }
 
-    private LRORetrys lRORetrys;
+    private LRORetrysOperations lRORetrys;
 
     /**
-     * Gets the LRORetrys object to access its operations.
+     * Gets the LRORetrysOperations object to access its operations.
      * @return the lRORetrys value.
      */
-    public LRORetrys getLRORetrys() {
+    public LRORetrysOperations getLRORetrys() {
         return this.lRORetrys;
     }
 
-    private LROSADs lROSADs;
+    private LROSADsOperations lROSADs;
 
     /**
-     * Gets the LROSADs object to access its operations.
+     * Gets the LROSADsOperations object to access its operations.
      * @return the lROSADs value.
      */
-    public LROSADs getLROSADs() {
+    public LROSADsOperations getLROSADs() {
         return this.lROSADs;
     }
 
-    private LROsCustomHeader lROsCustomHeader;
+    private LROsCustomHeaderOperations lROsCustomHeader;
 
     /**
-     * Gets the LROsCustomHeader object to access its operations.
+     * Gets the LROsCustomHeaderOperations object to access its operations.
      * @return the lROsCustomHeader value.
      */
-    public LROsCustomHeader getLROsCustomHeader() {
+    public LROsCustomHeaderOperations getLROsCustomHeader() {
         return this.lROsCustomHeader;
     }
 
@@ -143,8 +145,28 @@ public class AutoRestLongRunningOperationTestServiceImpl extends ServiceClient i
      * @param baseUri the base URI of the host
      */
     public AutoRestLongRunningOperationTestServiceImpl(String baseUri) {
+        this(baseUri, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestLongRunningOperationTestService client.
+     *
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestLongRunningOperationTestServiceImpl(ServiceClientCredentials credentials) {
+        this("http://localhost", credentials);
+    }
+
+    /**
+     * Initializes an instance of AutoRestLongRunningOperationTestService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestLongRunningOperationTestServiceImpl(String baseUri, ServiceClientCredentials credentials) {
         super();
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -152,12 +174,14 @@ public class AutoRestLongRunningOperationTestServiceImpl extends ServiceClient i
      * Initializes an instance of AutoRestLongRunningOperationTestService client.
      *
      * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
      * @param client the {@link OkHttpClient} client to use for REST calls
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestLongRunningOperationTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+    public AutoRestLongRunningOperationTestServiceImpl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -166,13 +190,15 @@ public class AutoRestLongRunningOperationTestServiceImpl extends ServiceClient i
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
+        this.acceptLanguage = "en-US";
+        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
         this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
         Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.lROs = new LROsImpl(retrofit, this);
-        this.lRORetrys = new LRORetrysImpl(retrofit, this);
-        this.lROSADs = new LROSADsImpl(retrofit, this);
-        this.lROsCustomHeader = new LROsCustomHeaderImpl(retrofit, this);
+        this.lROs = new LROsOperationsImpl(retrofit, this);
+        this.lRORetrys = new LRORetrysOperationsImpl(retrofit, this);
+        this.lROSADs = new LROSADsOperationsImpl(retrofit, this);
+        this.lROsCustomHeader = new LROsCustomHeaderOperationsImpl(retrofit, this);
     }
 }

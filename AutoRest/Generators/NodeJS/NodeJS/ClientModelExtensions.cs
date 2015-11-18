@@ -290,6 +290,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 return "stream.Readable";
             else if (primary == PrimaryType.TimeSpan)
                 return "moment.Duration"; //TODO: test this, add include for it
+            else if (primary == PrimaryType.Credentials)
+                return "ServiceClientCredentials"; //TODO: test this, add include for it
             else {
                 throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
                     "Type '{0}' not implemented", primary));
@@ -313,18 +315,21 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                             .Indent()
                                 .AppendLine("throw new Error({0} + ' is not a valid value. The valid values are: ' + {1});", valueReference, allowedValues)
                             .Outdent()
-                            .AppendLine("}")
-                        .Outdent()
-                        .AppendLine("}");
+                            .AppendLine("}");
             if (isRequired)
             {
-                builder.Append(" else {")
+                var escapedValueReference = valueReference.EscapeSingleQuotes();
+                builder.Outdent().AppendLine("} else {")
                     .Indent()
-                        .AppendLine("throw new Error('{0} cannot be null or undefined.');", valueReference)
+                        .AppendLine("throw new Error('{0} cannot be null or undefined.');", escapedValueReference)
                     .Outdent()
                     .AppendLine("}");
             }
-
+            else
+            {
+                builder.Outdent().AppendLine("}");
+            }
+            
             return builder.ToString();
         }
 
@@ -482,6 +487,9 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         /// <summary>
         /// Return the TypeScript type (as a string) for specified type.
         /// </summary>
+        /// <param name="type">IType to query</param>
+        /// <param name="inModelsModule">Pass true if generating the code for the models module, thus model types don't need a "models." prefix</param>
+        /// <returns>TypeScript type string for type</returns>
         public static string TSType(this IType type, bool inModelsModule) {
             CompositeType composite = type as CompositeType;
             SequenceType sequence = type as SequenceType;
@@ -500,9 +508,14 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             else if (composite != null)
             {
-                if (inModelsModule)
-                    tsType = composite.Name;
-                else tsType = "models." + composite.Name;
+                // ServiceClientCredentials starts with the "msRest." prefix, so strip msRest./msRestAzure. as we import those
+                // types with no module prefix needed
+                var compositeName = composite.Name;
+                if (compositeName.StartsWith("msRest.", StringComparison.Ordinal) || compositeName.StartsWith("msRestAzure.", StringComparison.Ordinal))
+                    tsType = compositeName.Substring(compositeName.IndexOf('.') + 1);
+                else if (inModelsModule || compositeName.Contains('.'))
+                    tsType = compositeName;
+                else tsType = "models." + compositeName;
             }
             else if (sequence != null)
             {
@@ -727,18 +740,20 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                 .Outdent()
                                 .AppendLine("}");
                         builder = ConstructBasePropertyCheck(builder, valueReference);
-                        builder.AppendLine("{0} = {1};", valueReference, objectReference)
-                              .Outdent()
-                              .AppendLine("}");
+                        builder.AppendLine("{0} = {1};", valueReference, objectReference);
             if (isRequired)
             {
-                builder.Append(" else {")
+                var escapedObjectReference = objectReference.EscapeSingleQuotes();
+                builder.Outdent().AppendLine("} else {")
                     .Indent()
-                        .AppendLine("throw new Error('{0} cannot be null or undefined.');", objectReference)
+                        .AppendLine("throw new Error('{0} cannot be null or undefined.');", escapedObjectReference)
                     .Outdent()
                     .AppendLine("}");
             }
-
+            else
+            {
+                builder.Outdent().AppendLine("}");
+            }
             return builder.ToString();
         }
 
@@ -1230,8 +1245,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 return false;
             }
 
-            return parameter.Extensions.ContainsKey(CodeGenerator.SkipUrlEncodingExtension) &&
-                   (bool)parameter.Extensions[CodeGenerator.SkipUrlEncodingExtension];
+            return parameter.Extensions.ContainsKey(Extensions.SkipUrlEncodingExtension) &&
+                   (bool)parameter.Extensions[Extensions.SkipUrlEncodingExtension];
         }
 
         public static bool ContainsTimeSpan(this CompositeType type)

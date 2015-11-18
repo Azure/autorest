@@ -40,7 +40,7 @@ public interface EnumOperations {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return the Colors object if successful.
+     * @return the Colors object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Colors> getNotExpandable() throws ServiceException;
@@ -57,6 +57,7 @@ public interface EnumOperations {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
      *
      * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putNotExpandable(Colors stringBody) throws ServiceException;

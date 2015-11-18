@@ -195,6 +195,7 @@ public class StringOperationsImpl implements StringOperations {
         if (stringBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter stringBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putEmpty(stringBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -292,6 +293,7 @@ public class StringOperationsImpl implements StringOperations {
         if (stringBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter stringBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putMbcs(stringBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -389,6 +391,7 @@ public class StringOperationsImpl implements StringOperations {
         if (stringBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter stringBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putWhitespace(stringBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

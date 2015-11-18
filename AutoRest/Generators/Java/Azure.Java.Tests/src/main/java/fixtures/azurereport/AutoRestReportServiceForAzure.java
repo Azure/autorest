@@ -15,7 +15,9 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
+import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.ResponseBody;
+import java.util.List;
 import java.util.Map;
 import retrofit.Call;
 import retrofit.http.GET;
@@ -30,6 +32,12 @@ public interface AutoRestReportServiceForAzure {
      * @return The BaseUri value.
      */
     String getBaseUri();
+
+    /**
+     * Gets the list of interceptors the OkHttp client will execute.
+     * @return the list of interceptors.
+     */
+    List<Interceptor> getClientInterceptors();
 
     /**
      * Gets the {@link AzureClient} used for long running operations.

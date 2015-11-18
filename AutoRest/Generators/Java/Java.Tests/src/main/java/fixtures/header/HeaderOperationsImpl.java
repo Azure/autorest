@@ -12,7 +12,7 @@ package fixtures.header;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.DateTimeRfc1123;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -69,6 +69,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (userAgent == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter userAgent is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.paramExistingKey(userAgent);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -165,6 +166,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (contentType == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter contentType is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.paramProtectedKey(contentType);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -263,6 +265,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.paramInteger(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -316,6 +319,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.responseInteger(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -371,6 +375,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.paramLong(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -424,6 +429,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.responseLong(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -479,6 +485,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.paramFloat(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -532,6 +539,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.responseFloat(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -587,6 +595,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.paramDouble(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -640,6 +649,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.responseDouble(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -695,6 +705,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.paramBool(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -748,6 +759,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.responseBool(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -803,6 +815,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.paramString(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -856,6 +869,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.responseString(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -895,7 +909,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
                 new IllegalArgumentException("Parameter value is required and cannot be null."));
         }
         try {
-            Call<ResponseBody> call = service.paramDate(scenario, JacksonHelper.serializeRaw(value));
+            Call<ResponseBody> call = service.paramDate(scenario, JacksonUtils.serializeRaw(value));
             return paramDateDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -915,12 +929,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         if (value == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter value is required and cannot be null.")));
+            return null;
         }
-        Call<ResponseBody> call = service.paramDate(scenario, JacksonHelper.serializeRaw(value));
+        Call<ResponseBody> call = service.paramDate(scenario, JacksonUtils.serializeRaw(value));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -972,6 +988,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.responseDate(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1011,7 +1028,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
                 new IllegalArgumentException("Parameter value is required and cannot be null."));
         }
         try {
-            Call<ResponseBody> call = service.paramDatetime(scenario, JacksonHelper.serializeRaw(value));
+            Call<ResponseBody> call = service.paramDatetime(scenario, JacksonUtils.serializeRaw(value));
             return paramDatetimeDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1031,12 +1048,14 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         if (value == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter value is required and cannot be null.")));
+            return null;
         }
-        Call<ResponseBody> call = service.paramDatetime(scenario, JacksonHelper.serializeRaw(value));
+        Call<ResponseBody> call = service.paramDatetime(scenario, JacksonUtils.serializeRaw(value));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1088,6 +1107,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.responseDatetime(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1143,6 +1163,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1196,6 +1217,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.responseDatetimeRfc1123(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1255,10 +1277,12 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         if (value == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter value is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.paramDuration(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1312,6 +1336,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.responseDuration(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1371,10 +1396,12 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         if (value == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter value is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.paramByte(scenario, Base64.encodeBase64String(value));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1428,6 +1455,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.responseByte(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1463,7 +1491,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
                 new IllegalArgumentException("Parameter scenario is required and cannot be null."));
         }
         try {
-            Call<ResponseBody> call = service.paramEnum(scenario, JacksonHelper.serializeRaw(value));
+            Call<ResponseBody> call = service.paramEnum(scenario, JacksonUtils.serializeRaw(value));
             return paramEnumDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1483,8 +1511,9 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
-        Call<ResponseBody> call = service.paramEnum(scenario, JacksonHelper.serializeRaw(value));
+        Call<ResponseBody> call = service.paramEnum(scenario, JacksonUtils.serializeRaw(value));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1536,6 +1565,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.responseEnum(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

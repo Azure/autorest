@@ -3,7 +3,7 @@ package fixtures.http;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import fixtures.http.models.A;
 import fixtures.http.models.C;
 import fixtures.http.models.D;
@@ -12,7 +12,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -88,7 +87,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = new JacksonHelper().getObjectMapper().convertValue(
+            Error model = new JacksonUtils().getObjectMapper().convertValue(
                     ex.getErrorModel(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
@@ -123,7 +122,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = new JacksonHelper().getObjectMapper().convertValue(
+            Error model = new JacksonUtils().getObjectMapper().convertValue(
                     ex.getErrorModel(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
@@ -171,7 +170,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = new JacksonHelper().getObjectMapper().convertValue(
+            Error model = new JacksonUtils().getObjectMapper().convertValue(
                     ex.getErrorModel(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
@@ -227,7 +226,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            A model = new JacksonHelper().getObjectMapper().convertValue(
+            A model = new JacksonUtils().getObjectMapper().convertValue(
                     ex.getErrorModel(), A.class);
             Assert.assertEquals("400", model.getStatusCode());
         }

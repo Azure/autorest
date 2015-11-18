@@ -28,7 +28,8 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Shark class.
         /// </summary>
-        public Shark(DateTime? birthday, int? age = default(int?))
+        public Shark(double? length, DateTime? birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?))
+            : base(length, species, siblings)
         {
             Age = age;
             Birthday = birthday;

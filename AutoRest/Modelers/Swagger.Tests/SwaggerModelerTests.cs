@@ -65,6 +65,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Null(clientModel.Methods[1].Parameters[0].ClientProperty);
             Assert.Equal("resourceGroupName", clientModel.Methods[1].Parameters[1].Name);
             Assert.Equal("apiVersion", clientModel.Methods[1].Parameters[2].Name);
+
+            Assert.Equal("capacity", clientModel.ModelTypes[0].Properties[3].Name);
+            Assert.Equal("100", clientModel.ModelTypes[0].Properties[3].DefaultValue);
         }
 
         [Fact]
@@ -167,6 +170,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("Cat", clientModel.ModelTypes[1].Name);
             Assert.Equal("Pet", clientModel.ModelTypes[1].BaseModelType.Name);
             Assert.Equal(1, clientModel.ModelTypes[1].Properties.Count);
+            Assert.Equal("Lizard", clientModel.ModelTypes[8].Name);
+            Assert.Equal("lzd", clientModel.ModelTypes[8].SerializedName);
         }
 
         [Fact]

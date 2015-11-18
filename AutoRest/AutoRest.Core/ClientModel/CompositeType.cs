@@ -67,6 +67,24 @@ namespace Microsoft.Rest.Generator.ClientModel
         public Dictionary<string, object> Extensions { get; private set; }
 
         /// <summary>
+        /// Gets the union of Parent and current type properties
+        /// </summary>
+        public IDictionary<string, object> ComposedExtensions
+        {
+            get
+            {
+                if (BaseModelType != null)
+                {
+                    return Extensions.Concat(BaseModelType.ComposedExtensions
+                        .Where(pair => !Extensions.Keys.Contains(pair.Key)))
+                        .ToDictionary(pair => pair.Key, pair => pair.Value);
+                }
+
+                return this.Extensions;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the CompositeType name.
         /// </summary>
         public string Name { get; set; }

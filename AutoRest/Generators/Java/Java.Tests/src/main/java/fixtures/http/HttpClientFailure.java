@@ -107,7 +107,7 @@ public interface HttpClientFailure {
     /**
      * Return 400 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> head400() throws ServiceException;
@@ -123,7 +123,7 @@ public interface HttpClientFailure {
     /**
      * Return 400 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> get400() throws ServiceException;
@@ -140,7 +140,7 @@ public interface HttpClientFailure {
      * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> put400(Boolean booleanValue) throws ServiceException;
@@ -158,7 +158,7 @@ public interface HttpClientFailure {
      * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> patch400(Boolean booleanValue) throws ServiceException;
@@ -176,7 +176,7 @@ public interface HttpClientFailure {
      * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> post400(Boolean booleanValue) throws ServiceException;
@@ -194,7 +194,7 @@ public interface HttpClientFailure {
      * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> delete400(Boolean booleanValue) throws ServiceException;
@@ -211,7 +211,7 @@ public interface HttpClientFailure {
     /**
      * Return 401 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> head401() throws ServiceException;
@@ -227,7 +227,7 @@ public interface HttpClientFailure {
     /**
      * Return 402 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> get402() throws ServiceException;
@@ -243,7 +243,7 @@ public interface HttpClientFailure {
     /**
      * Return 403 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> get403() throws ServiceException;
@@ -260,7 +260,7 @@ public interface HttpClientFailure {
      * Return 404 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> put404(Boolean booleanValue) throws ServiceException;
@@ -278,7 +278,7 @@ public interface HttpClientFailure {
      * Return 405 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> patch405(Boolean booleanValue) throws ServiceException;
@@ -296,7 +296,7 @@ public interface HttpClientFailure {
      * Return 406 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> post406(Boolean booleanValue) throws ServiceException;
@@ -314,7 +314,7 @@ public interface HttpClientFailure {
      * Return 407 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> delete407(Boolean booleanValue) throws ServiceException;
@@ -332,7 +332,7 @@ public interface HttpClientFailure {
      * Return 409 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> put409(Boolean booleanValue) throws ServiceException;
@@ -349,7 +349,7 @@ public interface HttpClientFailure {
     /**
      * Return 410 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> head410() throws ServiceException;
@@ -365,7 +365,7 @@ public interface HttpClientFailure {
     /**
      * Return 411 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> get411() throws ServiceException;
@@ -381,7 +381,7 @@ public interface HttpClientFailure {
     /**
      * Return 412 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> get412() throws ServiceException;
@@ -398,7 +398,7 @@ public interface HttpClientFailure {
      * Return 413 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> put413(Boolean booleanValue) throws ServiceException;
@@ -416,7 +416,7 @@ public interface HttpClientFailure {
      * Return 414 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> patch414(Boolean booleanValue) throws ServiceException;
@@ -434,7 +434,7 @@ public interface HttpClientFailure {
      * Return 415 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> post415(Boolean booleanValue) throws ServiceException;
@@ -451,7 +451,7 @@ public interface HttpClientFailure {
     /**
      * Return 416 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> get416() throws ServiceException;
@@ -468,7 +468,7 @@ public interface HttpClientFailure {
      * Return 417 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> delete417(Boolean booleanValue) throws ServiceException;
@@ -485,7 +485,7 @@ public interface HttpClientFailure {
     /**
      * Return 429 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> head429() throws ServiceException;

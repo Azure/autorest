@@ -2,7 +2,7 @@
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="..\..\..\..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props" Condition="Exists('..\..\..\..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props')" />
-   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -61,10 +61,6 @@
       <Project>{9517265e-5127-460c-9dde-fe017d73121c}</Project>
       <Name>AutoRest.Modeler.Swagger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Azure.Common\Azure.Common\AutoRest.Generator.Azure.Common.csproj">
-      <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
-      <Name>AutoRest.Generator.Azure.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NodeJS\AutoRest.Generator.NodeJS.csproj">
       <Project>{77E73F37-9586-44EA-91B0-F244D08467D2}</Project>
       <Name>AutoRest.Generator.NodeJS</Name>
@@ -117,6 +113,14 @@
     <None Include="Expected\AcceptanceTests\BodyComplex\operations\index.d.ts">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="AcceptanceTests\acceptanceTests.ts" />
+    <TypeScriptCompile Include="AcceptanceTests\complexTypesTests.ts" />
+    <TypeScriptCompile Include="AcceptanceTests\coverageTest.ts" />
+    <TypeScriptCompile Include="AcceptanceTests\headerTests.ts" />
+    <TypeScriptCompile Include="AcceptanceTests\requiredOptionalTests.ts" />
+    <TypeScriptCompile Include="AcceptanceTests\startServer.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

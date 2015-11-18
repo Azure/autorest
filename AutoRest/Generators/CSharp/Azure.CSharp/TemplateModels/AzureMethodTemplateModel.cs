@@ -33,8 +33,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 MethodGroupName = MethodGroupName + "Operations";
             }
 
-            this.ClientRequestIdString = AzureCodeGenerator.GetClientRequestIdString(source);
-            this.RequestIdString = AzureCodeGenerator.GetRequestIdString(source);
+            this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
+            this.RequestIdString = AzureExtensions.GetRequestIdString(source);
         }
 
         public string ClientRequestIdString { get; private set; }
@@ -79,7 +79,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         /// </summary>
         public bool IsLongRunningOperation
         {
-            get { return Extensions.ContainsKey(AzureCodeGenerator.LongRunningExtension); }
+            get { return Extensions.ContainsKey(AzureExtensions.LongRunningExtension); }
         }
 
         private string ReturnTypePageInterfaceName
@@ -90,9 +90,9 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 {
                     // Special handle Page class with IPage interface
                     CompositeType compositeType = ReturnType.Body as CompositeType;
-                    if (compositeType.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension))
+                    if (compositeType.Extensions.ContainsKey(AzureExtensions.PageableExtension))
                     {
-                        return (string)compositeType.Extensions[AzureCodeGenerator.PageableExtension];
+                        return (string)compositeType.Extensions[AzureExtensions.PageableExtension];
                     }
                 }
                 return null;
@@ -177,7 +177,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 if (this.HttpMethod == HttpMethod.Head &&
                     this.ReturnType.Body != null)
                 {
-                    HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureCodeGenerator.HttpHeadStatusCodeSuccessFunc);
+                    HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
                     sb.AppendFormat("result.Body = (statusCode == HttpStatusCode.{0});", code.ToString()).AppendLine();
                 }
                 sb.AppendLine("if (httpResponse.Headers.Contains(\"{0}\"))", this.RequestIdString)
@@ -255,7 +255,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                         queryParametersAddString =
                             "queryParameters.Add(string.Format(\"{0}={{0}}\", FilterString.Generate(filter)));";
                     }
-                    else if (queryParameter.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
+                    else if (queryParameter.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension))
                     {
                         queryParametersAddString = "queryParameters.Add(string.Format(\"{0}={{0}}\", {1}));";
                     }
@@ -280,7 +280,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             foreach (var pathParameter in LogicalParameters.Where(p => p.Location == ParameterLocation.Path))
             {
                 string replaceString = "{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));";
-                if (pathParameter.Extensions.ContainsKey(AzureCodeGenerator.SkipUrlEncodingExtension))
+                if (pathParameter.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension))
                 {
                     replaceString = "{0} = {0}.Replace(\"{{{1}}}\", {2});";
                 }

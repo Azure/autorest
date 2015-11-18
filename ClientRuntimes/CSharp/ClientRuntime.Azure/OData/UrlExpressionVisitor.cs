@@ -2,11 +2,13 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using System.Xml;
 using Newtonsoft.Json;
 
 namespace Microsoft.Rest.Azure.OData
@@ -17,8 +19,19 @@ namespace Microsoft.Rest.Azure.OData
     public class UrlExpressionVisitor : ExpressionVisitor
     {
         private const string DefaultDateTimeFormat = "yyyy-MM-ddTHH:mm:ssZ";
+        private const string PropertiesNode = "properties";
         private readonly StringBuilder _generatedUrl = new StringBuilder();
         private PropertyInfo _currentProperty;
+        private readonly Expression _baseExpression;
+
+        /// <summary>
+        /// Initializes a new instance of UrlExpressionVisitor.
+        /// </summary>
+        /// <param name="baseExpression">Base expression.</param>
+        public UrlExpressionVisitor(Expression baseExpression)
+        {
+            _baseExpression = baseExpression;
+        }
 
         /// <summary>
         /// Visits binary expression (e.g. ==, &amp;&amp;, >, etc).
@@ -119,17 +132,20 @@ namespace Microsoft.Rest.Azure.OData
                 throw new ArgumentNullException("node");
             }
             // Assumes that left side expression parameters are properties like p.Foo
-            if (node.Expression.NodeType == ExpressionType.Parameter)
+            if (ShouldBuildExpression(node))
             {
-                var nodeMemberProperty = node.Member as PropertyInfo;
-                if (nodeMemberProperty != null)
+                if (node.Expression.NodeType == ExpressionType.Parameter)
                 {
-                    _currentProperty = nodeMemberProperty;
-                    _generatedUrl.Append(GetPropertyName(nodeMemberProperty));
+                    var nodeMemberProperty = node.Member as PropertyInfo;
+                    PrintProperty(nodeMemberProperty);
                 }
                 else
                 {
-                    throw new NotSupportedException("Only properties are supported as parameters.");
+                    this.Visit(node.Expression);
+                    _generatedUrl.Append("/");
+
+                    var nodeMemberProperty = node.Member as PropertyInfo;
+                    PrintProperty(nodeMemberProperty);
                 }
             }
             else
@@ -144,6 +160,23 @@ namespace Microsoft.Rest.Azure.OData
             }
 
             return node;
+        }
+
+        /// <summary>
+        /// Visits object property.
+        /// </summary>
+        /// <param name="property">Property to print.</param>
+        private void PrintProperty(PropertyInfo property)
+        {
+            if (property != null)
+            {
+                _currentProperty = property;
+                _generatedUrl.Append(GetPropertyName(property));
+            }
+            else
+            {
+                throw new NotSupportedException("Only properties are supported as parameters.");
+            }
         }
 
         /// <summary>
@@ -216,7 +249,23 @@ namespace Microsoft.Rest.Azure.OData
                 return node;
             }
 
-            throw new NotSupportedException("Method call " + node.Method.Name + " is not supported.");
+            var methodName = node.Method.Name;
+            if (node.Method.GetCustomAttributes<ODataMethodAttribute>().Any())
+            {
+                methodName = node.Method.GetCustomAttribute<ODataMethodAttribute>().MethodName;
+            }
+            _generatedUrl.Append(methodName + "(");
+            for (var i = 0; i < node.Arguments.Count; i++)
+            {
+                var argument = node.Arguments[i];
+                Visit(argument);
+                if (i != node.Arguments.Count - 1)
+                {
+                    _generatedUrl.Append(", ");
+                }
+            }
+            _generatedUrl.Append(")");
+            return node;
         }
 
         /// <summary>
@@ -238,6 +287,7 @@ namespace Microsoft.Rest.Azure.OData
         /// Helper method to print constant.
         /// </summary>
         /// <param name="val">Object to print.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
         private void PrintConstant(object val)
         {
             if (val == null)
@@ -253,6 +303,11 @@ namespace Microsoft.Rest.Azure.OData
                     formattedString = string.Format(CultureInfo.InvariantCulture, 
                         "{0:" + DefaultDateTimeFormat + "}", val);
                 }
+                else if (val is TimeSpan)
+                {
+                    formattedString = string.Format(CultureInfo.InvariantCulture, 
+                        "duration'{0}'", XmlConvert.ToString((TimeSpan)val));
+                }
                 else
                 {
                     formattedString = string.Format(CultureInfo.InvariantCulture, 
@@ -265,6 +320,10 @@ namespace Microsoft.Rest.Azure.OData
                     val is short)
                 {
                     _generatedUrl.Append(formattedString.ToLowerInvariant());
+                }
+                else if (val is TimeSpan)
+                {
+                    _generatedUrl.Append(formattedString);
                 }
                 else
                 {
@@ -284,11 +343,16 @@ namespace Microsoft.Rest.Azure.OData
             {
                 return string.Empty;
             }
+            string propertyName = propertyInfo.Name;
             if (propertyInfo.GetCustomAttributes<JsonPropertyAttribute>().Any())
             {
-                return propertyInfo.GetCustomAttribute<JsonPropertyAttribute>().PropertyName;
+                propertyName = propertyInfo.GetCustomAttribute<JsonPropertyAttribute>().PropertyName;
             }
-            return propertyInfo.Name;
+            if (typeof(IResource).GetTypeInfo().IsAssignableFrom(propertyInfo.DeclaringType.GetTypeInfo()))
+            {
+                propertyName = propertyName.Replace(PropertiesNode + ".", PropertiesNode + "/");
+            }
+            return propertyName;
         }
 
         /// <summary>
@@ -337,6 +401,25 @@ namespace Microsoft.Rest.Azure.OData
                 default:
                     throw new System.NotSupportedException("Cannot get name for: " + exprType);
             }
+        }
+
+        /// <summary>
+        /// Returns true if base expression matches _baseExpression
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        private bool ShouldBuildExpression(MemberExpression expression)
+        {
+            var parentExpression = expression.Expression as MemberExpression;
+            if (parentExpression != null)
+            {
+                return ShouldBuildExpression(parentExpression);
+            }
+            if (expression.Expression == _baseExpression)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
