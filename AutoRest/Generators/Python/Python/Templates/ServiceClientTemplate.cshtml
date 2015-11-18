@@ -4,9 +4,9 @@
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ServiceClientTemplateModel>
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 @Header("# ")
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 @EmptyLine
 @if (Model.ContainsDecimal)
 {
@@ -36,6 +36,7 @@ from msrest.exceptions import (
 }
 from . import models
 @EmptyLine
+@EmptyLine
 class @(Model.Name)Configuration(Configuration):
 @EmptyLine
     def __init__(self, @(Model.RequiredConstructorParameters)base_url=None, filepath=None):
@@ -44,25 +45,27 @@ class @(Model.Name)Configuration(Configuration):
         if not base_url:
             base_url = '@Model.BaseUrl'
 @EmptyLine
-@{var parameters = Model.Properties.Where(p => p.IsRequired);}
         super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
+@{
+  var parameters = Model.Properties.Where(p => p.IsRequired);
+  if (parameters.Any())
+  {
 @EmptyLine
-@foreach (var param in Model.Properties.Where(p => p.IsRequired))
-{
-        @:self.@(param.Name) = @(param.Name);
+    foreach (var param in Model.Properties.Where(p => p.IsRequired))
+    {
+        @:self.@(param.Name) = @(param.Name)
+    }
+  }
 }
-@*EmptyLine
-        self.api_version = '2015-06-01.2.0'
-*@
 @EmptyLine
 @EmptyLine
 class @(Model.Name)(object):
 @EmptyLine
     def __init__(self, config):
 @EmptyLine
-        self._client = ServiceClient(@(Model.Properties.Any(p => p.Type == PrimaryType.Credentials) ? "config.credentials" : "None"), config) 
+        self._client = ServiceClient(@(Model.Properties.Any(p => p.Type == PrimaryType.Credentials) ? "config.credentials" : "None"), config)
 @EmptyLine
-        client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 @EmptyLine
@@ -71,7 +74,6 @@ class @(Model.Name)(object):
   {
         @:self.@(methodGroup.MethodGroupName) = @(methodGroup.MethodGroupType)(self._client, self.config, self._serialize, self._deserialize)
   }
-@EmptyLine
 @if (Model.MethodTemplateModels.Any())
 {
 <text>

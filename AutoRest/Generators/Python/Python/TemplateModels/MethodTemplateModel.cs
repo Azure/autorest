@@ -61,7 +61,7 @@ namespace Microsoft.Rest.Generator.Python
                         predicates.Add(((int)responseStatus).ToString(CultureInfo.InvariantCulture));
                     }
 
-                    return string.Format(CultureInfo.InvariantCulture, "response.status_code not in [{0}]", string.Join(" , ", predicates));
+                    return string.Format(CultureInfo.InvariantCulture, "response.status_code not in [{0}]", string.Join(", ", predicates));
                 }
 
                 return "reponse.status_code < 200 or reponse.status_code >= 300";
@@ -102,11 +102,11 @@ namespace Microsoft.Rest.Generator.Python
 
             if (addCustomHeaderParameters)
             {
-                declarations.Add("custom_headers = {}");
+                declarations.Add("custom_headers={}");
             }
 
-            declarations.Add("raw = False");
-            declarations.Add("callback = None");
+            declarations.Add("raw=False");
+            declarations.Add("callback=None");
             var declaration = string.Join(", ", declarations);
             return declaration;
         }
@@ -129,7 +129,7 @@ namespace Microsoft.Rest.Generator.Python
 
                 for (int i = 0; i < pathParameterList.Count; i ++)
                 {
-                    builder.AppendLine("'{0}' : self._parse_url(\"{1}\", {1}, '{2}', {3}){4}",
+                    builder.AppendLine("'{0}': self._parse_url(\"{1}\", {1}, '{2}', {3}){4}",
                         pathParameterList[i].SerializedName,
                         pathParameterList[i].Name,
                         pathParameterList[i].Type.ToPythonRuntimeTypeString(),

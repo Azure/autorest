@@ -3,12 +3,11 @@
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ServiceClientTemplateModel>
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 @Header("# ")
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 # coding: utf-8
 @EmptyLine
-import sys
 from setuptools import setup, find_packages
 @EmptyLine
 NAME = "@(Model.Name.ToPythonCase())"

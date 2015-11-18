@@ -2,9 +2,9 @@
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.EnumTemplateModel>
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 @Header("# ")
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 @EmptyLine
 @*header*@
 from enum import Enum
@@ -12,12 +12,12 @@ from enum import Enum
 @{
   foreach (var enumType in @Model.EnumTypes)
   {
+@EmptyLine
 @:class @(enumType.Name)(Enum):
 @EmptyLine
     for (int i = 0; i < enumType.Values.Count; i++)
     {
 @:    @(enumType.Values[i].Name) = "@enumType.Values[i].SerializedName"
     }
-@EmptyLine
   }
 }

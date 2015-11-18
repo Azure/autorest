@@ -240,7 +240,7 @@ namespace Microsoft.Rest.Generator.Python
                 foreach (var modelType in this.SubModelTypes)
                 {
                     typeTuple.Add(
-                        string.Format(CultureInfo.InvariantCulture, "'{0}':'{1}'",
+                        string.Format(CultureInfo.InvariantCulture, "'{0}': '{1}'",
                             modelType.SerializedName, modelType.Name
                         ));
                 }
@@ -321,7 +321,7 @@ namespace Microsoft.Rest.Generator.Python
             }
 
             //'id':{'key':'id', 'type':'str'},
-            return string.Format(CultureInfo.InvariantCulture, "'{0}':{{'key':'{1}', 'type':'{2}'}},", property.Name, property.SerializedName, GetPythonSerializationType(property.Type));
+            return string.Format(CultureInfo.InvariantCulture, "'{0}': {{'key': '{1}', 'type': '{2}'}},", property.Name, property.SerializedName, GetPythonSerializationType(property.Type));
         }
 
         public string InitializeProperty(string objectName, Property property)
