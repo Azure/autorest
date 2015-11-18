@@ -9,6 +9,8 @@
 #--------------------------------------------------------------------------
 
 from msrest.serialization import Model
+from .cat import Cat
+
 class Siamese(Cat):
 
     _required = []

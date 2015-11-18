@@ -163,7 +163,7 @@ namespace Microsoft.Rest.Generator.Python
                 return null;
             }
             var enumType = type as EnumType;
-            if (enumType != null && enumType.ModelAsString)
+            if (enumType != null && enumType.Name == string.Empty && enumType.ModelAsString)
             {
                 type = PrimaryType.String;
             }

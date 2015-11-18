@@ -9,6 +9,7 @@
 #--------------------------------------------------------------------------
 
 from msrest.serialization import Model
+
 class LongWrapper(Model):
 
     _required = []

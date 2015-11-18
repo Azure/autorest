@@ -9,6 +9,7 @@
 #--------------------------------------------------------------------------
 
 from msrest.serialization import Model
+
 class StringWrapper(Model):
 
     _required = ['value']

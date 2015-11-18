@@ -9,6 +9,8 @@
 #--------------------------------------------------------------------------
 
 from msrest.serialization import Model
+from .shark import Shark
+
 class Sawshark(Shark):
 
     _required = []

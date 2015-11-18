@@ -9,6 +9,7 @@
 #--------------------------------------------------------------------------
 
 from msrest.serialization import Model
+
 class Fish(Model):
 
     _required = ['length', 'fishtype']
