@@ -463,7 +463,8 @@ class Deserializer(object):
             return self(obj_type, data)
 
     def deserialize_iter(self, attr, iter_type):
-        return DeserializedGenerator(self.deserialize_data, attr, iter_type)
+        #return DeserializedGenerator(self.deserialize_data, attr, iter_type)
+        return [self.deserialize_data(a, iter_type) for a in attr]
 
     def deserialize_dict(self, attr, dict_type):
         if isinstance(attr, list):
