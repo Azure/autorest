@@ -1,4 +1,4 @@
-﻿@using System
+﻿@using System;
 @using System.Linq
 @using System.Collections.Generic
 @using Microsoft.Rest.Generator.ClientModel
@@ -6,9 +6,9 @@
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ModelTemplateModel>
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 @Header("# ")
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 @EmptyLine
 from msrest.serialization import Model
 @if (Model.BaseModelType != null)
@@ -20,6 +20,7 @@ from msrest.serialization import Model
 @:from msrest.exceptions import HttpOperationError
 }
 @EmptyLine
+@EmptyLine
 @if (Model.BaseModelType != null)
 {
 @:class @(Model.Name)(@Model.BaseModelType.Name):
@@ -29,7 +30,7 @@ else
 @:class @(Model.Name)(Model):
 }
 @{
-  var requiredFieldList = Model.GetRequiredFieldsList();
+  var requiredFieldList = Model.RequiredFieldsList;
   var requiredStr = String.Empty;
   if (requiredFieldList.Count > 0)
   {
@@ -50,7 +51,7 @@ else
   {
     for (int i = 0; i < propertyList.Count; i++) 
     {
-        @:@(Model.InitializePythonProperty(propertyList[i]))
+        @:@(ModelTemplateModel.InitializePythonProperty(propertyList[i]))
     }
   }
 }
@@ -60,7 +61,7 @@ else
 <text>
 @EmptyLine
     _subtype_map = {
-        '@(Model.GetPolymorphicDiscriminator())':{@Model.GetSubModelTypeList()}
+        '@Model.BasePolymorphicDiscriminator': {@Model.SubModelTypeList}
     }
 </text>
 }
@@ -74,14 +75,13 @@ else
     {
         @:@(Model.InitializeProperty("self", propertyList[i]))
     }
+@EmptyLine
   }
 }
-@if (Model.BaseModelType != null)
-{
-        @:super(@(Model.Name), self).__init__()
-}
+        super(@(Model.Name), self).__init__(*args, **kwargs)
 @if (Model.IsException)
 {
+@EmptyLine
 @EmptyLine
 @:class @(Model.ExceptionTypeDefinitionName)(HttpOperationError):
 @EmptyLine

@@ -58,23 +58,23 @@ namespace Microsoft.Rest.Generator.Python
                     List<string> predicates = new List<string>();
                     foreach (var responseStatus in Responses.Keys)
                     {
-                        predicates.Add(((int)responseStatus).ToString());
+                        predicates.Add(((int)responseStatus).ToString(CultureInfo.InvariantCulture));
                     }
 
-                    return string.Format(CultureInfo.InvariantCulture, "response.status_code not in [{0}]", string.Join(" , ", predicates));
+                    return string.Format(CultureInfo.InvariantCulture, "response.status_code not in [{0}]", string.Join(", ", predicates));
                 }
 
                 return "reponse.status_code < 200 or reponse.status_code >= 300";
             }
         }
 
-        public string RaisedException
+        public virtual string RaisedException
         {
             get
             {
                 if (DefaultResponse == null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "HttpOperationException(self._deserialize, response)");
+                    return "HttpOperationException(self._deserialize, response)";
                 }
                 else if (DefaultResponse is CompositeType)
                 {
@@ -92,7 +92,7 @@ namespace Microsoft.Rest.Generator.Python
         /// </summary>
         /// <param name="addCustomHeaderParameters">If true add the customHeader to the parameters</param>
         /// <returns>Generated string of parameters</returns>
-        public string MethodParameterDeclaration(bool addCustomHeaderParameters)
+        public virtual string MethodParameterDeclaration(bool addCustomHeaderParameters)
         {
             List<string> declarations = new List<string>();
             foreach (var parameter in LocalParameters)
@@ -102,11 +102,11 @@ namespace Microsoft.Rest.Generator.Python
 
             if (addCustomHeaderParameters)
             {
-                declarations.Add("custom_headers = {}");
+                declarations.Add("custom_headers={}");
             }
 
-            declarations.Add("raw = False");
-            declarations.Add("callback = None");
+            declarations.Add("raw=False");
+            declarations.Add("callback=None");
             var declaration = string.Join(", ", declarations);
             return declaration;
         }
@@ -116,6 +116,7 @@ namespace Microsoft.Rest.Generator.Python
         /// </summary>
         /// <param name="variableName">The variable to store the url in.</param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "pathformatarguments"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings")]
         public virtual string BuildUrlPath(string variableName)
         {
             var builder = new IndentedStringBuilder("    ");
@@ -128,7 +129,7 @@ namespace Microsoft.Rest.Generator.Python
 
                 for (int i = 0; i < pathParameterList.Count; i ++)
                 {
-                    builder.AppendLine("'{0}' : self._parse_url(\"{1}\", {1}, '{2}', {3}){4}",
+                    builder.AppendLine("'{0}': self._parse_url(\"{1}\", {1}, '{2}', {3}){4}",
                         pathParameterList[i].SerializedName,
                         pathParameterList[i].Name,
                         pathParameterList[i].Type.ToPythonRuntimeTypeString(),
@@ -148,6 +149,7 @@ namespace Microsoft.Rest.Generator.Python
         /// </summary>
         /// <param name="variableName">The variable to store the query in.</param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings")]
         public virtual string BuildUrlQuery(string variableName)
         {
             var builder = new IndentedStringBuilder("    ");
@@ -224,8 +226,8 @@ namespace Microsoft.Rest.Generator.Python
                 return "null";
             }
         }
-        
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public static string GetDocumentationType(IType type, bool isRequired = true)
         {
             if (type == null)
@@ -258,34 +260,6 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         /// <summary>
-        /// If the element type of a sequenece or value type of a dictionary 
-        /// contains one of the following special types then it needs to be 
-        /// processed. The special types are: Date, DateTime, ByteArray 
-        /// and CompositeType
-        /// </summary>
-        /// <param name="type">The type to determine if special deserialization is required</param>
-        /// <returns>True if special deserialization is required. False, otherwise.</returns>
-        private static bool IsSpecialProcessingRequired(IType type)
-        {
-            PrimaryType[] validTypes = new PrimaryType[] { PrimaryType.DateTime, PrimaryType.Date, PrimaryType.DateTimeRfc1123, PrimaryType.ByteArray, PrimaryType.TimeSpan };
-            SequenceType sequence = type as SequenceType;
-            DictionaryType dictionary = type as DictionaryType;
-            bool result = false;
-            if (sequence != null &&
-                (validTypes.Any(t => t == sequence.ElementType) || sequence.ElementType is CompositeType))
-            {
-                result = true;
-            }
-            else if (dictionary != null &&
-                (validTypes.Any(t => t == dictionary.ValueType) || dictionary.ValueType is CompositeType))
-            {
-                result = true;
-            }
-
-            return result;
-        }
-
-        /// <summary>
         /// Get the method's request body (or null if there is no request body)
         /// </summary>
         public ParameterTemplateModel RequestBody
@@ -309,7 +283,7 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        public string GetHttpFunction(HttpMethod method)
+        public static string GetHttpFunction(HttpMethod method)
         {
             switch (method)
             {
@@ -326,7 +300,7 @@ namespace Microsoft.Rest.Generator.Python
                 case HttpMethod.Put:
                     return "put";
                 default:
-                    throw new Exception(String.Format(CultureInfo.InvariantCulture, "wrong method {0}", method));
+                    throw new ArgumentException(String.Format(CultureInfo.InvariantCulture, "wrong method {0}", method));
             }
         }
 

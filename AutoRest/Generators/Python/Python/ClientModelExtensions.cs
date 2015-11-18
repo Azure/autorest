@@ -16,7 +16,7 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
         /// <summary>
         /// The set contain the primary types which require datetime module
         /// </summary>
-        public static HashSet<PrimaryType> PythonDatetimeModuleType = new HashSet<PrimaryType>() { PrimaryType.Date, PrimaryType.DateTime, PrimaryType.DateTimeRfc1123, PrimaryType.TimeSpan };
+        internal static HashSet<PrimaryType> PythonDateTimeModuleType = new HashSet<PrimaryType>() { PrimaryType.Date, PrimaryType.DateTime, PrimaryType.DateTimeRfc1123, PrimaryType.TimeSpan };
 
         /// <summary>
         /// Format the value of a sequence given the modeled element format.  Note that only sequences of strings are supported
@@ -78,23 +78,6 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             }
         }
 
-        private static string NormalizeValueReference(this string valueReference)
-        {
-            Regex pattern = new Regex("['.\\[\\]]");
-            return pattern.Replace(valueReference, "");
-        }
-
-        private static string GetBasePropertyFromUnflattenedProperty(this string property)
-        {
-            string result = null;
-            if (property.Contains("]["))
-            {
-                result = property.Substring(0, property.IndexOf("][", StringComparison.OrdinalIgnoreCase) + 1);
-            }
-            
-            return result;
-        }
-
         /// <summary>
         /// Simple conversion of the type to string
         /// </summary>
@@ -139,6 +122,11 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
         /// <returns></returns>
         public static string ToPythonRuntimeTypeString(this IType type)
         {
+            if (type == null)
+            {
+                return string.Empty;
+            }
+
             var known = type as PrimaryType;
 
             if (known == PrimaryType.Date)
@@ -161,15 +149,15 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                 return "duration";
             }
 
-            if (type is SequenceType)
+            var sequenceType = type as SequenceType;
+            if (sequenceType != null)
             {
-                var sequenceType = type as SequenceType;
                 return "[" + sequenceType.ElementType.ToPythonRuntimeTypeString() + "]";
             }
 
-            if (type is DictionaryType)
+            var dictionaryType = type as DictionaryType;
+            if (dictionaryType != null)
             {
-                var dictionaryType = type as DictionaryType;
                 return "{" + dictionaryType.ValueType.ToPythonRuntimeTypeString() + "}";
             }
 
@@ -192,7 +180,7 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                 type.Values.Select(p => string.Format(CultureInfo.InvariantCulture, "'{0}'", p.Name))));
         }
 
-        public static string NullInitializeType(this IType type, IScopeProvider scope, string objectReference, string modelReference = "models")
+        public static string NullInitializeType(this IType type, IScopeProvider scope, string objectReference)
         {
             if (scope == null)
             {
@@ -247,6 +235,11 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
 
         public static string GetExceptionDefineType(this CompositeType type)
         {
+            if (type == null)
+            {
+                return string.Empty;
+            }
+
             if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
             {
                 var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
@@ -258,7 +251,7 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             return type.Name + "Exception";
         }
 
-        public static bool ContainsDatetime(this CompositeType type)
+        public static bool ContainsDateTime(this CompositeType type)
         {
             if (type == null)
             {
@@ -266,9 +259,9 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             }
 
             Property prop = type.Properties.FirstOrDefault(p =>
-                PythonDatetimeModuleType.Contains(p.Type) ||
-                (p.Type is SequenceType && PythonDatetimeModuleType.Contains((p.Type as SequenceType).ElementType)) ||
-                (p.Type is DictionaryType && PythonDatetimeModuleType.Contains((p.Type as DictionaryType).ValueType)));
+                PythonDateTimeModuleType.Contains(p.Type) ||
+                (p.Type is SequenceType && PythonDateTimeModuleType.Contains((p.Type as SequenceType).ElementType)) ||
+                (p.Type is DictionaryType && PythonDateTimeModuleType.Contains((p.Type as DictionaryType).ValueType)));
 
             return prop != null;
         }

@@ -23,10 +23,9 @@ namespace Microsoft.Rest.Generator.Python
 
         public virtual string GetExceptionNameIfExist(IType type)
         {
-            if (type is CompositeType)
+            CompositeType compType = type as CompositeType;
+            if (compType != null)
             {
-                CompositeType compType = type as CompositeType;
-
                 if (ServiceClient.ErrorTypes.Contains(compType))
                 {
                     return ", " + compType.GetExceptionDefineType();

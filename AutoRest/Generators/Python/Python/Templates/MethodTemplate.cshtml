@@ -6,7 +6,7 @@
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Python.Templates
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodTemplateModel>
-    @@ServiceClient.async_request
+    @@async_request
     def @(Model.Name.ToPythonCase())(self, @(Model.MethodParameterDeclaration(true))):
         """
 @if (!String.IsNullOrEmpty(Model.Summary))
@@ -64,7 +64,7 @@
 }
 @*stream handler*@
         # Construct and send request
-        request = self._client.@(Model.GetHttpFunction(Model.HttpMethod))(url, query)
+        request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query)
 @if (Model.RequestBody != null)
 {
         @:response = self._client.send(request, headers, content)

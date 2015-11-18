@@ -3,11 +3,10 @@
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ServiceClientTemplateModel>
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 @Header("# ")
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 @EmptyLine
-from msrest import Configuration
 from msrest.exceptions import *
 @EmptyLine
 from .api_client import @(Model.Name), @(Model.Name)Configuration

@@ -90,12 +90,12 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        public bool ContainsDatetime
+        public bool ContainsDateTime
         {
             get
             {
                 return this.Methods.FirstOrDefault(
-                    m => m.Parameters.FirstOrDefault(p => ClientModelExtensions.PythonDatetimeModuleType.Contains(p.Type)) != null) != null;
+                    m => m.Parameters.FirstOrDefault(p => ClientModelExtensions.PythonDateTimeModuleType.Contains(p.Type)) != null) != null;
             }
         }
     }
