@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using Microsoft.Rest.Generator.NodeJS;
 using Microsoft.Rest.Generator.Azure.Properties;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Logging;
@@ -77,7 +78,7 @@ namespace Microsoft.Rest.Generator.Azure
             FlattenResourceProperties(serviceClient);
             FlattenRequestPayload(serviceClient, settings);
             AddPageableMethod(serviceClient);
-            AddLongRunningOperations(serviceClient);
+            AddLongRunningOperations(serviceClient, settings);
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);
             AddParameterGroups(serviceClient);
@@ -198,11 +199,18 @@ namespace Microsoft.Rest.Generator.Azure
         /// Creates long running operation methods.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public static void AddLongRunningOperations(ServiceClient serviceClient)
+        /// <param name="settings"></param>
+        public static void AddLongRunningOperations(ServiceClient serviceClient, Settings settings = null)
         {
             if (serviceClient == null)
             {
                 throw new ArgumentNullException("serviceClient");
+            }
+
+            CodeNamer codeNamer = null;
+            if (settings != null && settings.CodeGenerator == "Azure.NodeJS")
+            {
+                codeNamer = new NodeJsCodeNamer();
             }
 
             for (int i = 0; i < serviceClient.Methods.Count; i++)
@@ -214,7 +222,15 @@ namespace Microsoft.Rest.Generator.Azure
                     if (isLongRunning is bool && (bool)isLongRunning)
                     {
                         serviceClient.Methods.Insert(i, (Method) method.Clone());
-                        method.Name = "Begin" + method.Name.ToPascalCase();
+                        if (codeNamer != null)
+                        {
+                            method.Name = "Begin" + codeNamer.GetMethodName(method.Name).ToPascalCase();
+                        }
+                        else
+                        {
+                            method.Name = "Begin" + method.Name.ToPascalCase();
+                        }
+                        
                         i++;
                    }
                    

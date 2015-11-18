@@ -4,6 +4,7 @@
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS.Properties;
 using Microsoft.Rest.Generator.NodeJS.Templates;
+using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.Utilities;
 using System;
 using System.Globalization;
@@ -58,7 +59,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            Extensions.NormalizeClientModel(serviceClient, Settings);
+            Microsoft.Rest.Generator.Extensions.NormalizeClientModel(serviceClient, Settings);
             PopulateAdditionalProperties(serviceClient);
             Namer.NormalizeClientModel(serviceClient);
             Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
