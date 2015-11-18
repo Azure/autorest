@@ -12,7 +12,7 @@ import sys
 
 from datetime import *
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -47,7 +47,7 @@ class ArrayOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -93,7 +93,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -139,7 +139,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_empty(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -185,7 +185,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_empty(self, array_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -229,7 +229,7 @@ class ArrayOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_boolean_tfft(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -275,7 +275,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_boolean_tfft(self, array_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -319,7 +319,7 @@ class ArrayOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_boolean_invalid_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -365,7 +365,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_boolean_invalid_string(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -411,7 +411,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_integer_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -457,7 +457,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_integer_valid(self, array_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -501,7 +501,7 @@ class ArrayOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_int_invalid_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -547,7 +547,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_int_invalid_string(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -593,7 +593,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_long_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -639,7 +639,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_long_valid(self, array_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -683,7 +683,7 @@ class ArrayOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_long_invalid_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -729,7 +729,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_long_invalid_string(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -775,7 +775,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_float_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -821,7 +821,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_float_valid(self, array_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -865,7 +865,7 @@ class ArrayOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_float_invalid_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -911,7 +911,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_float_invalid_string(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -957,7 +957,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_double_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1003,7 +1003,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_double_valid(self, array_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1047,7 +1047,7 @@ class ArrayOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_double_invalid_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1093,7 +1093,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_double_invalid_string(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1139,7 +1139,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_string_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1185,7 +1185,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_string_valid(self, array_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1229,7 +1229,7 @@ class ArrayOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_string_with_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1275,7 +1275,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_string_with_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1321,7 +1321,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_date_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1367,7 +1367,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_date_valid(self, array_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1411,7 +1411,7 @@ class ArrayOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_date_invalid_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1457,7 +1457,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_date_invalid_chars(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1503,7 +1503,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_date_time_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1550,7 +1550,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_date_time_valid(self, array_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1595,7 +1595,7 @@ class ArrayOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_date_time_invalid_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1641,7 +1641,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_date_time_invalid_chars(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1687,7 +1687,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_date_time_rfc1123_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1734,7 +1734,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_date_time_rfc1123_valid(self, array_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1779,7 +1779,7 @@ class ArrayOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_duration_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1825,7 +1825,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_duration_valid(self, array_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1869,7 +1869,7 @@ class ArrayOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_byte_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1916,7 +1916,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_byte_valid(self, array_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1961,7 +1961,7 @@ class ArrayOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_byte_invalid_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2008,7 +2008,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_complex_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2054,7 +2054,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_complex_empty(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2100,7 +2100,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_complex_item_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2147,7 +2147,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_complex_item_empty(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2194,7 +2194,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_complex_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2241,7 +2241,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_complex_valid(self, array_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2286,7 +2286,7 @@ class ArrayOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_array_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2332,7 +2332,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_array_empty(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2378,7 +2378,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_array_item_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2425,7 +2425,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_array_item_empty(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2471,7 +2471,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_array_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2518,7 +2518,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_array_valid(self, array_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2563,7 +2563,7 @@ class ArrayOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_dictionary_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2609,7 +2609,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_dictionary_empty(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2655,7 +2655,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_dictionary_item_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2703,7 +2703,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_dictionary_item_empty(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2751,7 +2751,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_dictionary_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -2799,7 +2799,7 @@ class ArrayOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_dictionary_valid(self, array_body, custom_headers = {}, raw = False, callback = None):
         """
 

@@ -11,7 +11,7 @@
 import sys
 
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -46,7 +46,7 @@ class StringOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -92,7 +92,7 @@ class StringOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_null(self, string_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -136,7 +136,7 @@ class StringOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_empty(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -182,7 +182,7 @@ class StringOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_empty(self, string_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -226,7 +226,7 @@ class StringOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_mbcs(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -274,7 +274,7 @@ class StringOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_mbcs(self, string_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -322,7 +322,7 @@ class StringOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_whitespace(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -370,7 +370,7 @@ class StringOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_whitespace(self, string_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -418,7 +418,7 @@ class StringOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_not_provided(self, custom_headers = {}, raw = False, callback = None):
         """
 

@@ -11,7 +11,7 @@
 import sys
 
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -46,7 +46,7 @@ class IntModelOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -92,7 +92,7 @@ class IntModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -138,7 +138,7 @@ class IntModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_overflow_int32(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -184,7 +184,7 @@ class IntModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_underflow_int32(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -230,7 +230,7 @@ class IntModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_overflow_int64(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -276,7 +276,7 @@ class IntModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_underflow_int64(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -322,7 +322,7 @@ class IntModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_max32(self, int_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -366,7 +366,7 @@ class IntModelOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put_max64(self, int_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -410,7 +410,7 @@ class IntModelOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put_min32(self, int_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -454,7 +454,7 @@ class IntModelOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put_min64(self, int_body, custom_headers = {}, raw = False, callback = None):
         """
 

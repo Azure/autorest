@@ -22,4 +22,5 @@ class Dog(Pet):
     def __init__(self, *args, **kwargs):
 
         self.food = None
-        super(Dog, self).__init__()
+
+        super(Dog, self).__init__(*args, **kwargs)

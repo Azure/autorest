@@ -11,7 +11,7 @@
 import sys
 
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -46,7 +46,7 @@ class ImplicitOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_required_path(self, path_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -91,7 +91,7 @@ class ImplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put_optional_query(self, query_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -134,7 +134,7 @@ class ImplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put_optional_header(self, query_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -177,7 +177,7 @@ class ImplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put_optional_body(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -221,7 +221,7 @@ class ImplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_required_global_path(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -264,7 +264,7 @@ class ImplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_required_global_query(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -306,7 +306,7 @@ class ImplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_optional_global_query(self, custom_headers = {}, raw = False, callback = None):
         """
 

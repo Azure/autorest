@@ -23,3 +23,5 @@ class Product(Model):
 
         self.id = None
         self.name = None
+
+        super(Product, self).__init__(*args, **kwargs)

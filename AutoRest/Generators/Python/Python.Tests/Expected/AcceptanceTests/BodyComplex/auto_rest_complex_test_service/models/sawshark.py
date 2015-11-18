@@ -22,4 +22,5 @@ class Sawshark(Shark):
     def __init__(self, *args, **kwargs):
 
         self.picture = None
-        super(Sawshark, self).__init__()
+
+        super(Sawshark, self).__init__(*args, **kwargs)

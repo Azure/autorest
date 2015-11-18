@@ -25,3 +25,5 @@ class StringWrapper(Model):
         self.field = None
         self.empty = None
         self.null = None
+
+        super(StringWrapper, self).__init__(*args, **kwargs)

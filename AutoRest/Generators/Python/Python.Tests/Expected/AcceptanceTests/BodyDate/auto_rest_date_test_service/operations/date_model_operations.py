@@ -12,7 +12,7 @@ import sys
 
 from datetime import *
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -47,7 +47,7 @@ class DateModelOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -93,7 +93,7 @@ class DateModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_invalid_date(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -139,7 +139,7 @@ class DateModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_overflow_date(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -185,7 +185,7 @@ class DateModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_underflow_date(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -231,7 +231,7 @@ class DateModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_max_date(self, date_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -275,7 +275,7 @@ class DateModelOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_max_date(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -321,7 +321,7 @@ class DateModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_min_date(self, date_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -365,7 +365,7 @@ class DateModelOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_min_date(self, custom_headers = {}, raw = False, callback = None):
         """
 

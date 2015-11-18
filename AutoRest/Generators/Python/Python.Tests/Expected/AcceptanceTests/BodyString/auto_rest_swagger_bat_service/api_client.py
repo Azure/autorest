@@ -9,8 +9,8 @@
 #--------------------------------------------------------------------------
 
 
-from msrest import ServiceClient, Configuration
-from msrest import Serializer, Deserializer
+from msrest.service_client import ServiceClient, async_request
+from msrest import Configuration, Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
     DeserializationError,
@@ -19,7 +19,7 @@ from msrest.exceptions import (
     HttpOperationError)
 from .operations.string_operations import StringOperations
 from .operations.enum_operations import EnumOperations
-import models
+from . import models
 
 class AutoRestSwaggerBATServiceConfiguration(Configuration):
 

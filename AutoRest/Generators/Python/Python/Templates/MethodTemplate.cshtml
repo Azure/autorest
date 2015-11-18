@@ -6,7 +6,7 @@
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Python.Templates
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodTemplateModel>
-    @@ServiceClient.async_request
+    @@async_request
     def @(Model.Name.ToPythonCase())(self, @(Model.MethodParameterDeclaration(true))):
         """
 @if (!String.IsNullOrEmpty(Model.Summary))

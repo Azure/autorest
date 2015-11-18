@@ -74,12 +74,10 @@ else
     {
         @:@(Model.InitializeProperty("self", propertyList[i]))
     }
+@EmptyLine
   }
 }
-@if (Model.BaseModelType != null)
-{
-        @:super(@(Model.Name), self).__init__()
-}
+        super(@(Model.Name), self).__init__(*args, **kwargs)
 @if (Model.IsException)
 {
 @EmptyLine

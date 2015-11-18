@@ -11,7 +11,7 @@
 import sys
 
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -46,7 +46,7 @@ class InheritanceOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_valid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -93,7 +93,7 @@ class InheritanceOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_valid(self, complex_body, custom_headers = {}, raw = False, callback = None):
         """
 

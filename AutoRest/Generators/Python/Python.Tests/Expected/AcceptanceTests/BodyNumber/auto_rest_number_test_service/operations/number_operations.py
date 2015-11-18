@@ -12,7 +12,7 @@ import sys
 
 from decimal import *
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -47,7 +47,7 @@ class NumberOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -94,7 +94,7 @@ class NumberOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_invalid_float(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -141,7 +141,7 @@ class NumberOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_invalid_double(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -188,7 +188,7 @@ class NumberOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_invalid_decimal(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -235,7 +235,7 @@ class NumberOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_big_float(self, number_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -279,7 +279,7 @@ class NumberOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_big_float(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -326,7 +326,7 @@ class NumberOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_big_double(self, number_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -370,7 +370,7 @@ class NumberOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_big_double(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -417,7 +417,7 @@ class NumberOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_big_double_positive_decimal(self, number_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -461,7 +461,7 @@ class NumberOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_big_double_positive_decimal(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -508,7 +508,7 @@ class NumberOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_big_double_negative_decimal(self, number_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -552,7 +552,7 @@ class NumberOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_big_double_negative_decimal(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -599,7 +599,7 @@ class NumberOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_big_decimal(self, number_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -643,7 +643,7 @@ class NumberOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_big_decimal(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -690,7 +690,7 @@ class NumberOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_big_decimal_positive_decimal(self, number_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -734,7 +734,7 @@ class NumberOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_big_decimal_positive_decimal(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -781,7 +781,7 @@ class NumberOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_big_decimal_negative_decimal(self, number_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -825,7 +825,7 @@ class NumberOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_big_decimal_negative_decimal(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -872,7 +872,7 @@ class NumberOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_small_float(self, number_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -916,7 +916,7 @@ class NumberOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_small_float(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -963,7 +963,7 @@ class NumberOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_small_double(self, number_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1007,7 +1007,7 @@ class NumberOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_small_double(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1054,7 +1054,7 @@ class NumberOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_small_decimal(self, number_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1098,7 +1098,7 @@ class NumberOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_small_decimal(self, custom_headers = {}, raw = False, callback = None):
         """
 

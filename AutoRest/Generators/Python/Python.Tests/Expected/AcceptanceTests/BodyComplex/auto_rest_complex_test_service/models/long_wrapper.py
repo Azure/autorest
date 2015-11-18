@@ -23,3 +23,5 @@ class LongWrapper(Model):
 
         self.field1 = None
         self.field2 = None
+
+        super(LongWrapper, self).__init__(*args, **kwargs)

@@ -23,3 +23,5 @@ class FloatWrapper(Model):
 
         self.field1 = None
         self.field2 = None
+
+        super(FloatWrapper, self).__init__(*args, **kwargs)

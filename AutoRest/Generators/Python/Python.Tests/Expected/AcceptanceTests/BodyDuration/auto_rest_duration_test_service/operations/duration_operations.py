@@ -12,7 +12,7 @@ import sys
 
 from datetime import *
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -47,7 +47,7 @@ class DurationOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -94,7 +94,7 @@ class DurationOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_positive_duration(self, duration_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -138,7 +138,7 @@ class DurationOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_positive_duration(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -185,7 +185,7 @@ class DurationOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 

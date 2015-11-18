@@ -11,7 +11,7 @@
 import sys
 
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -46,7 +46,7 @@ class HttpClientFailureOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def head400(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -87,7 +87,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get400(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -128,7 +128,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put400(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -174,7 +174,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def patch400(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -220,7 +220,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post400(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -266,7 +266,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def delete400(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -312,7 +312,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def head401(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -353,7 +353,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get402(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -394,7 +394,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get403(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -435,7 +435,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put404(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -481,7 +481,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def patch405(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -527,7 +527,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post406(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -573,7 +573,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def delete407(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -619,7 +619,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put409(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -665,7 +665,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def head410(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -706,7 +706,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get411(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -747,7 +747,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get412(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -788,7 +788,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put413(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -834,7 +834,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def patch414(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -880,7 +880,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post415(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -926,7 +926,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get416(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -967,7 +967,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def delete417(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1013,7 +1013,7 @@ class HttpClientFailureOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def head429(self, custom_headers = {}, raw = False, callback = None):
         """
 

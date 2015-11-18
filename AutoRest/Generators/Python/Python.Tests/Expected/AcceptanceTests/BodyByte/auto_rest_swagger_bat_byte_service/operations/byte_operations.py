@@ -11,7 +11,7 @@
 import sys
 
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -46,7 +46,7 @@ class ByteOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -93,7 +93,7 @@ class ByteOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_empty(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -140,7 +140,7 @@ class ByteOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_non_ascii(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -187,7 +187,7 @@ class ByteOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_non_ascii(self, byte_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -232,7 +232,7 @@ class ByteOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 

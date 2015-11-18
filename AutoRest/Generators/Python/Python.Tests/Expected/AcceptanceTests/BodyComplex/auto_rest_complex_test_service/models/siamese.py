@@ -22,4 +22,5 @@ class Siamese(Cat):
     def __init__(self, *args, **kwargs):
 
         self.breed = None
-        super(Siamese, self).__init__()
+
+        super(Siamese, self).__init__(*args, **kwargs)

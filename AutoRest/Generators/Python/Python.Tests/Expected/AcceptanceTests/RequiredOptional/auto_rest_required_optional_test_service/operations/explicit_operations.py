@@ -11,7 +11,7 @@
 import sys
 
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -46,7 +46,7 @@ class ExplicitOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def post_required_integer_parameter(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -92,7 +92,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_optional_integer_parameter(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -136,7 +136,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_required_integer_property(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -183,7 +183,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_optional_integer_property(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -228,7 +228,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_required_integer_header(self, header_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -274,7 +274,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_optional_integer_header(self, header_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -318,7 +318,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_required_string_parameter(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -364,7 +364,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_optional_string_parameter(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -408,7 +408,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_required_string_property(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -455,7 +455,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_optional_string_property(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -500,7 +500,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_required_string_header(self, header_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -546,7 +546,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_optional_string_header(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -590,7 +590,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_required_class_parameter(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -636,7 +636,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_optional_class_parameter(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -680,7 +680,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_required_class_property(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -727,7 +727,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_optional_class_property(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -772,7 +772,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_required_array_parameter(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -818,7 +818,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_optional_array_parameter(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -862,7 +862,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_required_array_property(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -909,7 +909,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_optional_array_property(self, body_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -954,7 +954,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_required_array_header(self, header_parameter, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -1000,7 +1000,7 @@ class ExplicitOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post_optional_array_header(self, header_parameter, custom_headers = {}, raw = False, callback = None):
         """
 

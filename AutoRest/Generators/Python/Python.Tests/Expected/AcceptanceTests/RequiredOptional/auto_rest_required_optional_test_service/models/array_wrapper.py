@@ -21,3 +21,5 @@ class ArrayWrapper(Model):
     def __init__(self, *args, **kwargs):
 
         self.value = []
+
+        super(ArrayWrapper, self).__init__(*args, **kwargs)

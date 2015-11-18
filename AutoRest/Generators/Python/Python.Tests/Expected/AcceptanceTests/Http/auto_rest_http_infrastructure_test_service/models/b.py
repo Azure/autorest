@@ -22,4 +22,5 @@ class B(A):
     def __init__(self, *args, **kwargs):
 
         self.text_status_code = None
-        super(B, self).__init__()
+
+        super(B, self).__init__(*args, **kwargs)

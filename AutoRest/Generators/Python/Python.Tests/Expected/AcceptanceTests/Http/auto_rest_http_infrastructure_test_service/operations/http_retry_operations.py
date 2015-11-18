@@ -11,7 +11,7 @@
 import sys
 
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -46,7 +46,7 @@ class HttpRetryOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def head408(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -85,7 +85,7 @@ class HttpRetryOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put500(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -129,7 +129,7 @@ class HttpRetryOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def patch500(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -173,7 +173,7 @@ class HttpRetryOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get502(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -212,7 +212,7 @@ class HttpRetryOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def post503(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -256,7 +256,7 @@ class HttpRetryOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def delete503(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -300,7 +300,7 @@ class HttpRetryOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def put504(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -344,7 +344,7 @@ class HttpRetryOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def patch504(self, boolean_value, custom_headers = {}, raw = False, callback = None):
         """
 

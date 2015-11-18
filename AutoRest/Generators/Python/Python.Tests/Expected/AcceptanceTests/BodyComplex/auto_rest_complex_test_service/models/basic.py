@@ -25,3 +25,5 @@ class Basic(Model):
         self.id = None
         self.name = None
         self.color = None
+
+        super(Basic, self).__init__(*args, **kwargs)

@@ -11,7 +11,7 @@
 import sys
 
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -46,7 +46,7 @@ class PathItemsOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_all_with_values(self, local_string_path, path_item_string_path, local_string_query, path_item_string_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -111,7 +111,7 @@ class PathItemsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_global_query_null(self, local_string_path, path_item_string_path, local_string_query, path_item_string_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -175,7 +175,7 @@ class PathItemsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_global_and_local_query_null(self, local_string_path, path_item_string_path, local_string_query, path_item_string_query, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -238,7 +238,7 @@ class PathItemsOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_local_path_item_query_null(self, local_string_path, path_item_string_path, local_string_query, path_item_string_query, custom_headers = {}, raw = False, callback = None):
         """
 

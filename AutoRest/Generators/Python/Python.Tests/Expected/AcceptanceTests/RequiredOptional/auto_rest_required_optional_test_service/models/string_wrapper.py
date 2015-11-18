@@ -21,3 +21,5 @@ class StringWrapper(Model):
     def __init__(self, *args, **kwargs):
 
         self.value = None
+
+        super(StringWrapper, self).__init__(*args, **kwargs)

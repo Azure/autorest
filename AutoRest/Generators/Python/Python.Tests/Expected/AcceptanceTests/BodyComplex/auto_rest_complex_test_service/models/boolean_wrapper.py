@@ -23,3 +23,5 @@ class BooleanWrapper(Model):
 
         self.field_true = None
         self.field_false = None
+
+        super(BooleanWrapper, self).__init__(*args, **kwargs)

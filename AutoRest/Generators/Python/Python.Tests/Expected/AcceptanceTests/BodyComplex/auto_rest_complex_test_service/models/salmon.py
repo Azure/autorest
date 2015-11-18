@@ -24,4 +24,5 @@ class Salmon(Fish):
 
         self.location = None
         self.iswild = None
-        super(Salmon, self).__init__()
+
+        super(Salmon, self).__init__(*args, **kwargs)

@@ -17,7 +17,7 @@ import sys
 @:from datetime import *
 }
 @EmptyLine
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -26,7 +26,6 @@ from msrest.exceptions import (
     ClientRequestError,
     HttpOperationError)
 @EmptyLine
-@*from ..batch_exception import BatchStatusError, @EmptyLine*@
 from ..models import *
 @EmptyLine
 class @(Model.MethodGroupType)(object):

@@ -12,7 +12,7 @@ import sys
 
 from datetime import *
 
-from msrest.service_client import ServiceClient
+from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -47,7 +47,7 @@ class DatetimeModelOperations(object):
         else:
             return value
 
-    @ServiceClient.async_request
+    @async_request
     def get_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -94,7 +94,7 @@ class DatetimeModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -141,7 +141,7 @@ class DatetimeModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_overflow(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -188,7 +188,7 @@ class DatetimeModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_underflow(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -235,7 +235,7 @@ class DatetimeModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_utc_max_date_time(self, datetime_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -279,7 +279,7 @@ class DatetimeModelOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_utc_lowercase_max_date_time(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -326,7 +326,7 @@ class DatetimeModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_utc_uppercase_max_date_time(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -373,7 +373,7 @@ class DatetimeModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_local_positive_offset_max_date_time(self, datetime_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -418,7 +418,7 @@ class DatetimeModelOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_local_positive_offset_lowercase_max_date_time(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -466,7 +466,7 @@ class DatetimeModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_local_positive_offset_uppercase_max_date_time(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -514,7 +514,7 @@ class DatetimeModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_local_negative_offset_max_date_time(self, datetime_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -559,7 +559,7 @@ class DatetimeModelOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_local_negative_offset_uppercase_max_date_time(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -607,7 +607,7 @@ class DatetimeModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def get_local_negative_offset_lowercase_max_date_time(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -655,7 +655,7 @@ class DatetimeModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_utc_min_date_time(self, datetime_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -699,7 +699,7 @@ class DatetimeModelOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_utc_min_date_time(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -746,7 +746,7 @@ class DatetimeModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_local_positive_offset_min_date_time(self, datetime_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -790,7 +790,7 @@ class DatetimeModelOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_local_positive_offset_min_date_time(self, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -837,7 +837,7 @@ class DatetimeModelOperations(object):
 
         return deserialized
 
-    @ServiceClient.async_request
+    @async_request
     def put_local_negative_offset_min_date_time(self, datetime_body, custom_headers = {}, raw = False, callback = None):
         """
 
@@ -881,7 +881,7 @@ class DatetimeModelOperations(object):
         if raw:
             return None, response
 
-    @ServiceClient.async_request
+    @async_request
     def get_local_negative_offset_min_date_time(self, custom_headers = {}, raw = False, callback = None):
         """
 

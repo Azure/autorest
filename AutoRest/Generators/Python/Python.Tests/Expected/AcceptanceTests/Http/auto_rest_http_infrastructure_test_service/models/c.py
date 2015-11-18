@@ -21,3 +21,5 @@ class C(Model):
     def __init__(self, *args, **kwargs):
 
         self.http_code = None
+
+        super(C, self).__init__(*args, **kwargs)
