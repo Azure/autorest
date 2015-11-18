@@ -87,7 +87,7 @@ class DatetimeModelOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('iso-date', response)
+            deserialized = self._deserialize('iso-8601', response)
 
         if raw:
             return deserialized, response
@@ -134,7 +134,7 @@ class DatetimeModelOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('iso-date', response)
+            deserialized = self._deserialize('iso-8601', response)
 
         if raw:
             return deserialized, response
@@ -181,7 +181,7 @@ class DatetimeModelOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('iso-date', response)
+            deserialized = self._deserialize('iso-8601', response)
 
         if raw:
             return deserialized, response
@@ -228,7 +228,7 @@ class DatetimeModelOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('iso-date', response)
+            deserialized = self._deserialize('iso-8601', response)
 
         if raw:
             return deserialized, response
@@ -267,7 +267,7 @@ class DatetimeModelOperations(object):
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(datetime_body, 'iso-date')
+        content = self._serialize(datetime_body, 'iso-8601')
 
         # Construct and send request
         request = self._client.put(url, query)
@@ -319,7 +319,7 @@ class DatetimeModelOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('iso-date', response)
+            deserialized = self._deserialize('iso-8601', response)
 
         if raw:
             return deserialized, response
@@ -366,7 +366,7 @@ class DatetimeModelOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('iso-date', response)
+            deserialized = self._deserialize('iso-8601', response)
 
         if raw:
             return deserialized, response
@@ -406,7 +406,7 @@ class DatetimeModelOperations(object):
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(datetime_body, 'iso-date')
+        content = self._serialize(datetime_body, 'iso-8601')
 
         # Construct and send request
         request = self._client.put(url, query)
@@ -459,7 +459,7 @@ class DatetimeModelOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('iso-date', response)
+            deserialized = self._deserialize('iso-8601', response)
 
         if raw:
             return deserialized, response
@@ -507,7 +507,7 @@ class DatetimeModelOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('iso-date', response)
+            deserialized = self._deserialize('iso-8601', response)
 
         if raw:
             return deserialized, response
@@ -547,7 +547,7 @@ class DatetimeModelOperations(object):
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(datetime_body, 'iso-date')
+        content = self._serialize(datetime_body, 'iso-8601')
 
         # Construct and send request
         request = self._client.put(url, query)
@@ -600,7 +600,7 @@ class DatetimeModelOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('iso-date', response)
+            deserialized = self._deserialize('iso-8601', response)
 
         if raw:
             return deserialized, response
@@ -648,7 +648,7 @@ class DatetimeModelOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('iso-date', response)
+            deserialized = self._deserialize('iso-8601', response)
 
         if raw:
             return deserialized, response
@@ -687,7 +687,7 @@ class DatetimeModelOperations(object):
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(datetime_body, 'iso-date')
+        content = self._serialize(datetime_body, 'iso-8601')
 
         # Construct and send request
         request = self._client.put(url, query)
@@ -739,7 +739,7 @@ class DatetimeModelOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('iso-date', response)
+            deserialized = self._deserialize('iso-8601', response)
 
         if raw:
             return deserialized, response
@@ -778,7 +778,7 @@ class DatetimeModelOperations(object):
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(datetime_body, 'iso-date')
+        content = self._serialize(datetime_body, 'iso-8601')
 
         # Construct and send request
         request = self._client.put(url, query)
@@ -830,7 +830,7 @@ class DatetimeModelOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('iso-date', response)
+            deserialized = self._deserialize('iso-8601', response)
 
         if raw:
             return deserialized, response
@@ -869,7 +869,7 @@ class DatetimeModelOperations(object):
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(datetime_body, 'iso-date')
+        content = self._serialize(datetime_body, 'iso-8601')
 
         # Construct and send request
         request = self._client.put(url, query)
@@ -921,7 +921,7 @@ class DatetimeModelOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('iso-date', response)
+            deserialized = self._deserialize('iso-8601', response)
 
         if raw:
             return deserialized, response

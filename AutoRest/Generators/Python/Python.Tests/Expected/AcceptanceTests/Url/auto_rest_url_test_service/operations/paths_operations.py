@@ -1003,7 +1003,7 @@ class PathsOperations(object):
         # Construct URL
         url = '/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}'
         path_format_arguments = {
-            'dateTimePath' : self._parse_url("date_time_path", date_time_path, 'iso-date', False)}
+            'dateTimePath' : self._parse_url("date_time_path", date_time_path, 'iso-8601', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -1048,7 +1048,7 @@ class PathsOperations(object):
         # Construct URL
         url = '/paths/datetime/null/{dateTimePath}'
         path_format_arguments = {
-            'dateTimePath' : self._parse_url("date_time_path", date_time_path, 'iso-date', False)}
+            'dateTimePath' : self._parse_url("date_time_path", date_time_path, 'iso-8601', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
