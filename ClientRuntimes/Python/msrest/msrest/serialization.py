@@ -339,15 +339,16 @@ class Deserializer(object):
 
         response, class_name = self._classify_target(target_obj, response_data)
 
+        if isinstance(response, str):
+            data = self._unpack_content(response_data, default=None)
+            return self.deserialize_data(data, response)
+
         try:
             data = self._unpack_response(response, response_data)
 
         except (TypeError, ValueError, AttributeError) as err:
             msg = "Unable to deserialize to object: {}.".format(class_name)
             raise_with_traceback(DeserializationError, msg, err)
-
-        if isinstance(target_obj, str):
-            return self.deserialize_data(data, target_obj)
 
         try:
             attributes = response._attribute_map
@@ -415,6 +416,37 @@ class Deserializer(object):
 
             setattr(response, attr, value)
 
+    def _unpack_content(self, raw_data, default={}):
+
+        if isinstance(raw_data, bytes):
+            data = raw_data.decode
+
+        else:
+            data = raw_data
+
+        if hasattr(raw_data, 'content'):
+            if not raw_data.content:
+                return default
+
+            if isinstance(raw_data.content, bytes):
+                data = raw_data.content.decode()
+
+            else:
+                data = raw_data.content
+
+            try:
+                
+                content = json.loads(data)
+                if content == {}:
+                    return default
+
+                return content
+
+            except (ValueError, TypeError) as err:
+                return data
+
+        return data
+
     def _unpack_response(self, response, raw_data):
 
         if hasattr(response, '_header_map'):
@@ -423,13 +455,7 @@ class Deserializer(object):
         if hasattr(response, '_response_map'):
             self._unpack_response_attrs(response, raw_data)
 
-        if hasattr(raw_data, 'content'):
-            if not raw_data.content:
-                return {}
-
-            return json.loads(raw_data.content)
-
-        return raw_data
+        return self._unpack_content(raw_data)
 
     def deserialize_data(self, data, data_type):
 
@@ -441,7 +467,7 @@ class Deserializer(object):
                 return data
 
             if data_type in self.basic_types:
-                return eval(data_type)(data)
+                return self.deserialize_basic(data, data_type)
 
             if data_type in self.deserialize_type:
                 data_val = self.deserialize_type[data_type](data)
@@ -473,6 +499,22 @@ class Deserializer(object):
 
         return {str(x): self.deserialize_data(
             attr[x], dict_type) for x in attr}
+
+    def deserialize_basic(self, attr, data_type):
+
+        if data_type == 'bool':
+            if attr in [True, False, 1, 0]:
+                return bool(attr)
+
+            elif isinstance(attr, str) and attr.lower() in ['true', '1']:
+                return True
+
+            elif isinstance(attr, str) and attr.lower() in ['false', '0']:
+                return False
+
+            raise TypeError("Invalid boolean value: {0}".format(attr))
+
+        return eval(data_type)(attr)
 
     @staticmethod
     def deserialize_bytearray(attr):
