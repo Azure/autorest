@@ -144,7 +144,7 @@ public class PollingState<T> {
         if (this.retryTimeout != null) {
             return this.retryTimeout * 1000;
         }
-        if (this.response != null) {
+        if (this.response != null && response.headers().get("Retry-After") != null) {
             return Integer.parseInt(response.headers().get("Retry-After")) * 1000;
         }
         return AzureAsyncOperation.defaultDelay * 1000;

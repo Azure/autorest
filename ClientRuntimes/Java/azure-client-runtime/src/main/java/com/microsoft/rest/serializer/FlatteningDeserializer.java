@@ -69,8 +69,8 @@ public class FlatteningDeserializer<T> extends StdDeserializer<T> implements Res
                         node = node.get(val);
                         if (node == null) break;
                     }
+                    ((ObjectNode)root).put(value, node);
                 }
-                ((ObjectNode)root).put(value, node);
             }
         }
         JsonParser parser = new JsonFactory().createParser(root.toString());

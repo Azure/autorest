@@ -30,7 +30,7 @@ public class LROsTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost.:3000");
-        client.setLongRunningOperationRetryTimeout(0);
+        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
     }
 
     @Test
