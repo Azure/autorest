@@ -11,6 +11,7 @@ namespace Fixtures.AcceptanceTestsBodyString
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -50,14 +51,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// <summary>
         /// Initializes a new instance of the AutoRestSwaggerBATService class.
         /// </summary>
-        public AutoRestSwaggerBATService() : base()
-        {
-            this.Initialize();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestSwaggerBATService class.
-        /// </summary>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
@@ -90,6 +83,27 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
         public AutoRestSwaggerBATService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            this.BaseUri = baseUri;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestSwaggerBATService class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        public AutoRestSwaggerBATService(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {

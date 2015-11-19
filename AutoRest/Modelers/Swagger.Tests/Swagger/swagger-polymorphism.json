@@ -82,7 +82,7 @@
       }
     },
     "Cat": {
-      "AllOf": [ { "$ref":  "Pet" } ],
+      "AllOf": [ { "$ref": "Pet" } ],
       "properties": {
         "color": {
           "type": "string",
@@ -91,7 +91,7 @@
       }
     },
     "Seamise": {
-      "AllOf": [ { "$ref":  "Cat" } ],
+      "AllOf": [ { "$ref": "Cat" } ],
       "properties": {
         "length": {
           "type": "integer",
@@ -100,7 +100,7 @@
       }
     },
     "Burmese": {
-      "AllOf": [ { "$ref":  "Seamise" } ],
+      "AllOf": [ { "$ref": "Seamise" } ],
       "properties": {
         "nickName": {
           "type": "integer",
@@ -109,7 +109,7 @@
       }
     },
     "Himalayan": {
-      "AllOf": [ { "$ref":  "Seamise" } ],
+      "AllOf": [ { "$ref": "Seamise" } ],
       "properties": {
         "hairLength": {
           "type": "integer",
@@ -118,7 +118,7 @@
       }
     },
     "Persian": {
-      "AllOf": [ { "$ref":  "Cat" } ],
+      "AllOf": [ { "$ref": "Cat" } ],
       "properties": {
         "size": {
           "type": "integer",
@@ -128,7 +128,7 @@
     },
     "Dog": {
       "id": "Dog",
-      "AllOf": [ { "$ref":  "#/definitions/Pet" } ],
+      "AllOf": [ { "$ref": "#/definitions/Pet" } ],
       "properties": {
         "name": {
           "type": "string",
@@ -138,11 +138,22 @@
     },
     "Horse": {
       "id": "Horse",
-      "AllOf": [ { "$ref":  "Pet" } ],
+      "AllOf": [ { "$ref": "Pet" } ],
       "properties": {
         "breed": {
           "type": "string",
           "description": "horse breed"
+        }
+      }
+    },
+    "Lizard": {
+      "x-ms-discriminator-value": "lzd",
+      "AllOf": [ { "$ref": "Pet" } ],
+      "properties": {
+        "tailSize": {
+          "type": "number",
+          "format": "float",
+          "description": "length of tail"
         }
       }
     },

@@ -195,6 +195,7 @@ public class ByteOperationsImpl implements ByteOperations {
         if (byteBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter byteBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putNonAscii(byteBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

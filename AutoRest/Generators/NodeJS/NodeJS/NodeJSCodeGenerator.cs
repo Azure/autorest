@@ -15,8 +15,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 {
     public class NodeJSCodeGenerator : CodeGenerator
     {
-        private const string ClientRuntimePackage = "ms-rest version 1.1.0";
-        private const bool DisableTypeScriptGeneration = false;    // Change to true if you want to no longer generate the 3 d.ts files, for some reason
+        private const string ClientRuntimePackage = "ms-rest version 1.2.0";
 
         public NodeJsCodeNamer Namer { get; private set; }
 
@@ -24,6 +23,9 @@ namespace Microsoft.Rest.Generator.NodeJS
         {
             Namer = new NodeJsCodeNamer();
         }
+
+        [SettingsInfo("Disables TypeScript generation.")]
+        public bool DisableTypeScriptGeneration {get; set;}            // Change to true if you want to no longer generate the 3 d.ts files, for some reason
 
         public override string Name
         {
@@ -56,6 +58,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
+            Extensions.NormalizeClientModel(serviceClient, Settings);
             PopulateAdditionalProperties(serviceClient);
             Namer.NormalizeClientModel(serviceClient);
             Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
@@ -66,18 +69,13 @@ namespace Microsoft.Rest.Generator.NodeJS
         {
             if (Settings.AddCredentials)
             {
-                if (serviceClient.Properties.FirstOrDefault(
-                    p => p.Name.Equals("Credentials", StringComparison.OrdinalIgnoreCase) &&
-                         p.SerializedName.Equals("credentials", StringComparison.OrdinalIgnoreCase)) == null)
+                if (!serviceClient.Properties.Any(p => p.Type == PrimaryType.Credentials))
                 {
                     serviceClient.Properties.Add(new Property
                     {
                         Name = "credentials",
                         SerializedName = "credentials",
-                        Type = new CompositeType
-                        {
-                            Name = "ServiceClientCredentials"
-                        },
+                        Type = PrimaryType.Credentials,
                         IsRequired = true,
                         Documentation = "Subscription credentials which uniquely identify client subscription."
                     });

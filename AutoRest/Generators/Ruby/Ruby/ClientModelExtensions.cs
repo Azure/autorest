@@ -266,13 +266,11 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         /// <param name="type">Type of object needs to be deserialized.</param>
         /// <param name="scope">Current scope.</param>
         /// <param name="valueReference">Reference to object which needs to be deserialized.</param>
-        /// <param name="namespacesToLookForClasses">List of namespaces where classes for polymorphic serialization can be found.</param>
         /// <returns>Generated Ruby code in form of string.</returns>
         public static string DeserializeType(
             this IType type,
             IScopeProvider scope,
-            string valueReference,
-            List<string> namespacesToLookForClasses)
+            string valueReference)
         {
             var composite = type as CompositeType;
             var sequence = type as SequenceType;
@@ -329,7 +327,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (sequence != null)
             {
                 var elementVar = scope.GetVariableName("element");
-                var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar, namespacesToLookForClasses);
+                var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar);
 
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
@@ -353,7 +351,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (dictionary != null)
             {
                 var valueVar = scope.GetVariableName("valueElement");
-                var innerSerialization = dictionary.ValueType.DeserializeType(scope, valueVar, namespacesToLookForClasses);
+                var innerSerialization = dictionary.ValueType.DeserializeType(scope, valueVar);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
                     return builder.AppendLine("unless {0}.nil?", valueReference)
@@ -370,32 +368,6 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (composite != null)
             {
-                if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
-                {
-                    builder
-                        .AppendLine("unless {0}['dtype'].nil?", valueReference)
-                        .Indent()
-                            .AppendLine("class_name = {0}['dtype'].capitalize", valueReference)
-                            .AppendLine("class_instance = Models.const_get(class_name)");
-
-                    foreach (var ns in namespacesToLookForClasses)
-                    {
-                        builder
-                            .AppendLine("class_instance = {0}.const_get(class_name) if class_instance.nil?", ns);
-                    }
-
-                    builder
-                        .AppendLine("{0} = class_instance.deserialize_object({0})", valueReference)
-                        .Outdent()
-                        .AppendLine("else")
-                        .Indent()
-                            .AppendLine("{0} = {1}.deserialize_object({0})", valueReference, composite.Name)
-                        .Outdent()
-                        .AppendLine("end");
-
-                    return builder.ToString();
-                }
-
                 return builder.AppendLine("unless {0}.nil?", valueReference)
                     .Indent()
                         .AppendLine("{0} = {1}.deserialize_object({0})", valueReference, composite.Name)
@@ -412,13 +384,11 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         /// <param name="type">Type of object needs to be serialized.</param>
         /// <param name="scope">Current scope.</param>
         /// <param name="valueReference">Reference to object which needs to serialized.</param>
-        /// <param name="namespacesToLookForClasses">List of namespaces where classes for polymorphic deserialization can be found.</param>
         /// <returns>Generated Ruby code in form of string.</returns>
         public static string SerializeType(
             this IType type,
             IScopeProvider scope,
-            string valueReference,
-            List<string> namespacesToLookForClasses)
+            string valueReference)
         {
             var composite = type as CompositeType;
             var sequence = type as SequenceType;
@@ -447,7 +417,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (sequence != null)
             {
                 var elementVar = scope.GetVariableName("element");
-                var innerSerialization = sequence.ElementType.SerializeType(scope, elementVar, namespacesToLookForClasses);
+                var innerSerialization = sequence.ElementType.SerializeType(scope, elementVar);
 
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
@@ -471,7 +441,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             else if (dictionary != null)
             {
                 var valueVar = scope.GetVariableName("valueElement");
-                var innerSerialization = dictionary.ValueType.SerializeType(scope, valueVar, namespacesToLookForClasses);
+                var innerSerialization = dictionary.ValueType.SerializeType(scope, valueVar);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
                     return builder.AppendLine("unless {0}.nil?", valueReference)
@@ -488,32 +458,6 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (composite != null)
             {
-                if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
-                {
-                    builder
-                        .AppendLine("unless {0}.dtype.nil?", valueReference)
-                        .Indent()
-                        .AppendLine("class_name = {0}.dtype.capitalize", valueReference)
-                        .AppendLine("class_instance = Models.const_get(class_name)");
-
-                    foreach (var ns in namespacesToLookForClasses)
-                    {
-                        builder
-                            .AppendLine("class_instance = {0}.const_get(class_name) if class_instance.nil?", ns);
-                    }
-
-                    builder
-                        .AppendLine("{0} = class_instance.serialize_object({0})", valueReference)
-                        .Outdent()
-                        .AppendLine("else")
-                        .Indent()
-                        .AppendLine("{0} = {1}.serialize_object({0})", valueReference, composite.Name)
-                        .Outdent()
-                        .AppendLine("end");
-
-                    return builder.ToString();
-                }
-
                 return builder.AppendLine("unless {0}.nil?", valueReference)
                     .Indent()
                         .AppendLine("{0} = {1}.serialize_object({0})", valueReference, composite.Name)
@@ -522,6 +466,20 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
 
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Determines whether one composite type derives directly or indirectly from another.
+        /// </summary>
+        /// <param name="type">Type to test.</param>
+        /// <param name="possibleAncestorType">Type that may be an ancestor of this type.</param>
+        /// <returns>true if the type is an ancestor, false otherwise.</returns>
+        public static bool DerivesFrom(this CompositeType type, CompositeType possibleAncestorType)
+        {
+            return
+                type.BaseModelType != null &&
+                (type.BaseModelType.Equals(possibleAncestorType) || 
+                 type.BaseModelType.DerivesFrom(possibleAncestorType));
         }
     }
 }

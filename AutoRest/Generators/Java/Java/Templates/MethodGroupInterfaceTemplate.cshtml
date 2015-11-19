@@ -60,7 +60,11 @@ public interface @Model.MethodGroupType {
     }
     if (method.ReturnType != null)
     {
-    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object if successful.
+    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link ServiceResponse} if successful.
+    }
+    else
+    {
+    @: * @@return the {@@link ServiceResponse} object if successful.
     }
     @: * @@throws ServiceException the exception wrapped in ServiceException if failed.
     @: */

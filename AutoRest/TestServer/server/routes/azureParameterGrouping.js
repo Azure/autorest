@@ -7,6 +7,7 @@ var parameterGrouping = function(coverage) {
   coverage['postParameterGroupingOptionalParameters'] = 0;
   coverage['postParameterGroupingRequiredParameters'] = 0;
   coverage['postParameterGroupingMultipleParameterGroups'] = 0;
+  coverage['postParameterGroupingSharedParameterGroupObject'] = 0;
 
     router.post('/postRequired/:path', function(req, res, next) {
         if (req.body === 1234 && req.params.path === 'path' && 
@@ -41,6 +42,16 @@ var parameterGrouping = function(coverage) {
         } else {
             utils.send400(res, next, "Did not like the values in the req. headerOne: " + req.get('headerOne') + ", queryOne: " + req.query['queryOne'] + 
               ", headerTwo: " + req.get('headerTwo') + ", queryTwo: " + req.get('queryTwo'));
+        }
+    });
+    
+    router.post('/sharedParameterGroupObject', function(req, res, next) {
+        if ((req.get('headerOne') === 'header' || req.get('headerOne') === undefined) && 
+            (req.query['queryOne'] === '21' || req.query['queryOne'] === undefined)) {
+            coverage['postParameterGroupingSharedParameterGroupObject']++;
+            res.status(200).end();
+        } else {
+            utils.send400(res, next, "Did not like the values in the req. headerOne: " + req.get('headerOne') + ", queryOne: " + req.query['queryOne']);
         }
     });
 }

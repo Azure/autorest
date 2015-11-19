@@ -11,10 +11,11 @@
 package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.AzureServiceResponseBuilder;
+import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.Error;
@@ -62,6 +63,7 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
         if (apiVersion == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -78,7 +80,7 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
     }
 
     private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -123,7 +125,7 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
     }
 
     private ServiceResponse<Void> getMethodLocalNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -160,6 +162,7 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
         if (apiVersion == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -176,7 +179,7 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
     }
 
     private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -213,6 +216,7 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
         if (apiVersion == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -229,7 +233,7 @@ public class ApiVersionLocalImpl implements ApiVersionLocal {
     }
 
     private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);

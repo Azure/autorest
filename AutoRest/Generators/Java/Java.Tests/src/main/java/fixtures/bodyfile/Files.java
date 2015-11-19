@@ -38,7 +38,7 @@ public interface Files {
     /**
      * Get file
      *
-     * @return the InputStream object if successful.
+     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<InputStream> getFile() throws ServiceException;
@@ -54,7 +54,7 @@ public interface Files {
     /**
      * Get empty file
      *
-     * @return the InputStream object if successful.
+     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<InputStream> getEmptyFile() throws ServiceException;

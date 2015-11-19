@@ -15,19 +15,10 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
     {
         public ProcessOutputListener()
         {
-            EnsureDebugListeners();
             this.ProcessStarted = new ManualResetEvent(false);
         }
 
         public ManualResetEvent ProcessStarted { get; private set; }
-
-        public static void EnsureDebugListeners()
-        {
-            if (Debug.Listeners == null || Debug.Listeners.Count < 1)
-            {
-                Debug.Listeners.Add(new DefaultTraceListener());
-            }
-        }
 
         public void ProcessOutput(object sendingProcess, DataReceivedEventArgs data)
         {

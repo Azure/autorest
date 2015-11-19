@@ -11,10 +11,11 @@
 package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.AzureServiceResponseBuilder;
+import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.Error;
@@ -62,6 +63,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
         if (subscriptionId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -78,7 +80,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
     }
 
     private ServiceResponse<Void> postMethodLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -115,6 +117,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
         if (subscriptionId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -131,7 +134,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
     }
 
     private ServiceResponse<Void> postMethodLocalNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -168,6 +171,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
         if (subscriptionId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -184,7 +188,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
     }
 
     private ServiceResponse<Void> postPathLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -221,6 +225,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
         if (subscriptionId == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -237,7 +242,7 @@ public class SubscriptionInMethodImpl implements SubscriptionInMethod {
     }
 
     private ServiceResponse<Void> postSwaggerLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Void>()
+        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);

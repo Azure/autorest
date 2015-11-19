@@ -11,10 +11,11 @@
 package fixtures.subscriptionidapiversion;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.AzureServiceResponseBuilder;
+import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.subscriptionidapiversion.models.Error;
@@ -72,14 +73,17 @@ public class GroupImpl implements Group {
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.")));
+            return null;
         }
         if (resourceGroupName == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.")));
+            return null;
         }
         if (this.client.getApiVersion() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.getSampleResourceGroup(this.client.getSubscriptionId(), resourceGroupName, this.client.getApiVersion(), this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<SampleResourceGroup>(serviceCallback) {
@@ -96,7 +100,7 @@ public class GroupImpl implements Group {
     }
 
     private ServiceResponse<SampleResourceGroup> getSampleResourceGroupDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<SampleResourceGroup>()
+        return new AzureServiceResponseBuilder<SampleResourceGroup>(new AzureJacksonUtils())
                 .register(200, new TypeToken<SampleResourceGroup>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);

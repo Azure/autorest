@@ -10,6 +10,8 @@
 
 package fixtures.bodyboolean;
 
+import java.util.List;
+import com.squareup.okhttp.Interceptor;
 
 /**
  * The interface for AutoRestBoolTestService class.
@@ -17,9 +19,15 @@ package fixtures.bodyboolean;
 public interface AutoRestBoolTestService {
     /**
      * Gets the URI used as the base for all cloud service requests.
-     * @return The BaseUri value.
+     * @return the BaseUri value.
      */
     String getBaseUri();
+
+    /**
+     * Gets the list of interceptors the OkHttp client will execute.
+     * @return the list of interceptors.
+     */
+    List<Interceptor> getClientInterceptors();
 
     /**
      * Gets the Bool object to access its operations.

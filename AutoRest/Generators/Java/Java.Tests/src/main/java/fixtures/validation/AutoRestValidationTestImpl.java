@@ -158,14 +158,17 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
         if (this.getSubscriptionId() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null.")));
+            return null;
         }
         if (resourceGroupName == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.")));
+            return null;
         }
         if (this.getApiVersion() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.validationOfMethodParameters(this.getSubscriptionId(), resourceGroupName, id, this.getApiVersion());
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
@@ -232,14 +235,17 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
         if (this.getSubscriptionId() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null.")));
+            return null;
         }
         if (resourceGroupName == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.")));
+            return null;
         }
         if (this.getApiVersion() == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {

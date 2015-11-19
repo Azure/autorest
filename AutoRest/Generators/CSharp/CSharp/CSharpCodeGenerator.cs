@@ -51,6 +51,7 @@ namespace Microsoft.Rest.Generator.CSharp
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             PopulateAdditionalProperties(serviceClient);
+            Extensions.NormalizeClientModel(serviceClient, Settings);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
@@ -63,10 +64,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 serviceClient.Properties.Add(new Property
                 {
                     Name = "Credentials",
-                    Type = new CompositeType
-                    {
-                        Name = "ServiceClientCredentials"
-                    },
+                    Type = PrimaryType.Credentials,
                     IsRequired = true,
                     Documentation = "Subscription credentials which uniquely identify client subscription."
                 });

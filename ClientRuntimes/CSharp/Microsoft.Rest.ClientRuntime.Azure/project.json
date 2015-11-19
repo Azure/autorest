@@ -1,0 +1,65 @@
+{
+  "version": "2.2.0",
+  "copyright": "Copyright (c) Microsoft Corporation",
+  "iconUrl": "http://go.microsoft.com/fwlink/?LinkID=288890",
+  "title": "Client Runtime for Microsoft Azure Libraries",
+  "summary": "Client infrastructure for Azure client libraries.",
+  "description": "Provides common error handling, tracing, and HTTP/REST-based pipeline manipulation. \nSupported Platforms:\n  -   Portable Class Libraries\n  -   .NET Framework 4.5\n  -   Windows 8\n  -   Windows Phone 8.1\n  -   DotNet Core",
+  "authors": [ "Microsoft" ],
+  "tags": [ "Microsoft Azure AutoRest ClientRuntime REST azureofficial" ],
+  "projectUrl": "https://github.com/Azure/AutoRest",
+  "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+  "requireLicenseAcceptance":  true,
+  
+  "compilationOptions": {
+    "useOssSigning": true,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk"
+  },
+
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+        "System": "",
+        "System.Net": "",
+        "System.Net.Http": "",
+        "System.Net.Http.WebRequest": "",
+        "System.Xml": ""
+      }
+    },
+    ".NETPortable,Version=v4.5,Profile=Profile111": {
+      "compilationOptions": { "define": [ "PORTABLE" ] },
+      "frameworkAssemblies": {
+        "System": "",
+        "System.Collections": "",
+        "System.Diagnostics.Debug": "",
+        "System.Diagnostics.Tools": "",
+        "System.Globalization": "",
+        "System.IO": "",
+        "System.Linq": "",
+        "System.Linq.Expressions": "",
+        "System.Net": "",
+        "System.Net.Http": "",
+        "System.Net.Primitives": "",
+        "System.ObjectModel": "",
+        "System.Reflection": "",
+        "System.Reflection.Extensions": "",
+        "System.Resources.ResourceManager": "",
+        "System.Runtime": "",
+        "System.Runtime.Extensions": "",
+        "System.Runtime.Serialization": "",
+        "System.Text.Encoding": "",
+        "System.Threading": "",
+        "System.Threading.Tasks": "",
+        "System.Xml": "",
+        "System.Xml.XmlSerializer": ""
+      }
+    },
+    "dnxcore50": {
+      "compilationOptions": { "define": [ "PORTABLE" ] },
+    }
+  },
+
+  "dependencies": {
+    "Microsoft.Rest.ClientRuntime": "[1.5,2.0)"
+  }
+}

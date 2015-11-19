@@ -60,7 +60,7 @@ public interface StringOperations {
     /**
      * Get null string value value
      *
-     * @return the String object if successful.
+     * @return the String object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<String> getNull() throws ServiceException;
@@ -77,6 +77,7 @@ public interface StringOperations {
      * Set string value null
      *
      * @param stringBody Possible values for this parameter include: ''
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putNull(String stringBody) throws ServiceException;
@@ -93,7 +94,7 @@ public interface StringOperations {
     /**
      * Get empty string value value ''
      *
-     * @return the String object if successful.
+     * @return the String object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<String> getEmpty() throws ServiceException;
@@ -110,6 +111,7 @@ public interface StringOperations {
      * Set string value empty ''
      *
      * @param stringBody Possible values for this parameter include: ''
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putEmpty(String stringBody) throws ServiceException;
@@ -126,7 +128,7 @@ public interface StringOperations {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      *
-     * @return the String object if successful.
+     * @return the String object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<String> getMbcs() throws ServiceException;
@@ -143,6 +145,7 @@ public interface StringOperations {
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      *
      * @param stringBody Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putMbcs(String stringBody) throws ServiceException;
@@ -159,7 +162,7 @@ public interface StringOperations {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
      *
-     * @return the String object if successful.
+     * @return the String object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<String> getWhitespace() throws ServiceException;
@@ -176,6 +179,7 @@ public interface StringOperations {
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
      *
      * @param stringBody Possible values for this parameter include: '    Now is the time for all good men to come to the aid of their country    '
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putWhitespace(String stringBody) throws ServiceException;
@@ -192,7 +196,7 @@ public interface StringOperations {
     /**
      * Get String value when no string value is sent in response payload
      *
-     * @return the String object if successful.
+     * @return the String object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<String> getNotProvided() throws ServiceException;

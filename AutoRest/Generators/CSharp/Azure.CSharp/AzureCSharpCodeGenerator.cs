@@ -6,19 +6,19 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Azure.Templates;
 using Microsoft.Rest.Generator.CSharp.Templates;
 using System.Collections.Generic;
+using Microsoft.Rest.Generator.Azure;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure
 {
-    public class AzureCSharpCodeGenerator : AzureCodeGenerator
+    public class AzureCSharpCodeGenerator : CSharpCodeGenerator
     {
         private readonly AzureCSharpCodeNamer _namer;
 
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.2.0.0";
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.2.1.0";
 
         // page extensions class dictionary.
         private IDictionary<KeyValuePair<string, string>, string> pageClasses;
@@ -60,7 +60,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            base.NormalizeClientModel(serviceClient);
+            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
@@ -70,7 +70,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             {
                 foreach (var model in serviceClient.ModelTypes)
                 {
-                    if (model.Extensions.ContainsKey(AzureResourceExtension) && (bool)model.Extensions[AzureResourceExtension])
+                    if (model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) && 
+                        (bool)model.Extensions[AzureExtensions.AzureResourceExtension])
                     {
                         model.BaseModelType = new CompositeType { Name = "IResource", SerializedName = "IResource" };
                     }
@@ -134,7 +135,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             // Models
             foreach (var model in serviceClient.ModelTypes)
             {
-                if (model.Extensions.ContainsKey(ExternalExtension) && (bool) model.Extensions[ExternalExtension])
+                if (model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) && 
+                    (bool) model.Extensions[AzureExtensions.ExternalExtension])
                 {
                     continue;
                 }

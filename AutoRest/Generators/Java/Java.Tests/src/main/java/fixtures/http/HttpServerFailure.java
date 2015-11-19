@@ -48,7 +48,7 @@ public interface HttpServerFailure {
     /**
      * Return 501 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> head501() throws ServiceException;
@@ -64,7 +64,7 @@ public interface HttpServerFailure {
     /**
      * Return 501 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> get501() throws ServiceException;
@@ -81,7 +81,7 @@ public interface HttpServerFailure {
      * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> post505(Boolean booleanValue) throws ServiceException;
@@ -99,7 +99,7 @@ public interface HttpServerFailure {
      * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Error> delete505(Boolean booleanValue) throws ServiceException;

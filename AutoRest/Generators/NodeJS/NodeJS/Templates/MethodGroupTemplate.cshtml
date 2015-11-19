@@ -10,14 +10,8 @@
 @EmptyLine
 var util = require('util');
 var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
 var WebResource = msRest.WebResource;
 
-@if (Model.ModelTypes.Any())
-{
-@EmptyLine
-@:var models = require('../models');
-}
 @if (Model.ContainsTimeSpan)
 {
 @:var moment = require('moment');

@@ -11,6 +11,7 @@ namespace Fixtures.MirrorPolymorphic
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
@@ -42,14 +43,6 @@ namespace Fixtures.MirrorPolymorphic
         /// Gets or sets json deserialization settings.
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
-
-        /// <summary>
-        /// Initializes a new instance of the PolymorphicAnimalStore class.
-        /// </summary>
-        public PolymorphicAnimalStore() : base()
-        {
-            this.Initialize();
-        }
 
         /// <summary>
         /// Initializes a new instance of the PolymorphicAnimalStore class.
@@ -86,6 +79,27 @@ namespace Fixtures.MirrorPolymorphic
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
         public PolymorphicAnimalStore(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            this.BaseUri = baseUri;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the PolymorphicAnimalStore class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        public PolymorphicAnimalStore(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {

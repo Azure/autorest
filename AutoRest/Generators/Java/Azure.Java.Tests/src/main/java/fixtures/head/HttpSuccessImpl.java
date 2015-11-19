@@ -11,11 +11,12 @@
 package fixtures.head;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.AzureServiceResponseBuilder;
 import com.microsoft.rest.CloudError;
+import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Call;
@@ -29,6 +30,51 @@ public class HttpSuccessImpl implements HttpSuccess {
     public HttpSuccessImpl(Retrofit retrofit, AutoRestHeadTestService client) {
         this.service = retrofit.create(HttpSuccessService.class);
         this.client = client;
+    }
+
+    /**
+     * Return 200 status code if successful
+     *
+     * @return the Boolean object if successful.
+     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     */
+    public ServiceResponse<Boolean> head200() throws ServiceException {
+        try {
+            Call<Void> call = service.head200(this.client.getAcceptLanguage());
+            return head200Delegate(call.execute(), null);
+        } catch (ServiceException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ServiceException(ex);
+        }
+    }
+
+    /**
+     * Return 200 status code if successful
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     */
+    public Call<Void> head200Async(final ServiceCallback<Boolean> serviceCallback) {
+        Call<Void> call = service.head200(this.client.getAcceptLanguage());
+        call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
+            @Override
+            public void onResponse(Response<Void> response, Retrofit retrofit) {
+                try {
+                    serviceCallback.success(head200Delegate(response, retrofit));
+                } catch (ServiceException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<Boolean> head200Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
+        return new AzureServiceResponseBuilder<Boolean>(new AzureJacksonUtils())
+                .register(200, new TypeToken<Void>(){}.getType())
+                .register(404, new TypeToken<Void>(){}.getType())
+                .registerError(new TypeToken<CloudError>(){}.getType())
+                .buildEmpty(response, retrofit);
     }
 
     /**
@@ -69,7 +115,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Boolean> head204Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Boolean>()
+        return new AzureServiceResponseBuilder<Boolean>(new AzureJacksonUtils())
                 .register(204, new TypeToken<Void>(){}.getType())
                 .register(404, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())
@@ -114,7 +160,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Boolean> head404Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Boolean>()
+        return new AzureServiceResponseBuilder<Boolean>(new AzureJacksonUtils())
                 .register(204, new TypeToken<Void>(){}.getType())
                 .register(404, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<CloudError>(){}.getType())

@@ -71,19 +71,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <summary>
         /// Initializes a new instance of the AutoRestLongRunningOperationTestService class.
         /// </summary>
-        public AutoRestLongRunningOperationTestService() : base()
-        {
-            this.Initialize();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestLongRunningOperationTestService class.
-        /// </summary>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestLongRunningOperationTestService(params DelegatingHandler[] handlers) : base(handlers)
+        protected AutoRestLongRunningOperationTestService(params DelegatingHandler[] handlers) : base(handlers)
         {
             this.Initialize();
         }
@@ -95,10 +86,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Optional. The http client handler used to handle http transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestLongRunningOperationTestService(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        protected AutoRestLongRunningOperationTestService(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             this.Initialize();
         }
@@ -110,10 +100,30 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestLongRunningOperationTestService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        protected AutoRestLongRunningOperationTestService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            this.BaseUri = baseUri;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestLongRunningOperationTestService class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        protected AutoRestLongRunningOperationTestService(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {
@@ -129,8 +139,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Required. The management credentials for Azure.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
         public AutoRestLongRunningOperationTestService(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
@@ -148,6 +157,31 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <summary>
         /// Initializes a new instance of the AutoRestLongRunningOperationTestService class.
         /// </summary>
+        /// <param name='credentials'>
+        /// Required. The management credentials for Azure.
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        public AutoRestLongRunningOperationTestService(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        {
+            if (credentials == null)
+            {
+                throw new ArgumentNullException("credentials");
+            }
+            this.Credentials = credentials;
+            if (this.Credentials != null)
+            {
+                this.Credentials.InitializeServiceClient(this);
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestLongRunningOperationTestService class.
+        /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
         /// </param>
@@ -155,8 +189,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Required. The management credentials for Azure.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
         public AutoRestLongRunningOperationTestService(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
@@ -170,10 +203,43 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             this.BaseUri = baseUri;
             this.Credentials = credentials;
-            if (this.Credentials != null)
+                if (this.Credentials != null)
+                {
+                    this.Credentials.InitializeServiceClient(this);
+                }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestLongRunningOperationTestService class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='credentials'>
+        /// Required. The management credentials for Azure.
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        public AutoRestLongRunningOperationTestService(Uri baseUri, ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        {
+            if (baseUri == null)
             {
-                this.Credentials.InitializeServiceClient(this);
+                throw new ArgumentNullException("baseUri");
             }
+            if (credentials == null)
+            {
+                throw new ArgumentNullException("credentials");
+            }
+            this.BaseUri = baseUri;
+            this.Credentials = credentials;
+                if (this.Credentials != null)
+                {
+                    this.Credentials.InitializeServiceClient(this);
+                }
         }
 
         /// <summary>
@@ -201,7 +267,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                     }
             };
             SerializationSettings.Converters.Add(new ResourceJsonConverter()); 
-            DeserializationSettings = new JsonSerializerSettings{
+            DeserializationSettings = new JsonSerializerSettings
+            {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,

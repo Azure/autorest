@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Modeler.Swagger;
 using Xunit;
 using System.Collections.Generic;
 

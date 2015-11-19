@@ -10,6 +10,8 @@
 
 package fixtures.report;
 
+import java.util.List;
+import com.squareup.okhttp.Interceptor;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -24,9 +26,15 @@ import retrofit.http.GET;
 public interface AutoRestReportService {
     /**
      * Gets the URI used as the base for all cloud service requests.
-     * @return The BaseUri value.
+     * @return the BaseUri value.
      */
     String getBaseUri();
+
+    /**
+     * Gets the list of interceptors the OkHttp client will execute.
+     * @return the list of interceptors.
+     */
+    List<Interceptor> getClientInterceptors();
 
     /**
      * The interface defining all the services for AutoRestReportService to be

@@ -10,6 +10,8 @@
 
 package fixtures.bodyinteger;
 
+import java.util.List;
+import com.squareup.okhttp.Interceptor;
 
 /**
  * The interface for AutoRestIntegerTestService class.
@@ -17,9 +19,15 @@ package fixtures.bodyinteger;
 public interface AutoRestIntegerTestService {
     /**
      * Gets the URI used as the base for all cloud service requests.
-     * @return The BaseUri value.
+     * @return the BaseUri value.
      */
     String getBaseUri();
+
+    /**
+     * Gets the list of interceptors the OkHttp client will execute.
+     * @return the list of interceptors.
+     */
+    List<Interceptor> getClientInterceptors();
 
     /**
      * Gets the IntOperations object to access its operations.

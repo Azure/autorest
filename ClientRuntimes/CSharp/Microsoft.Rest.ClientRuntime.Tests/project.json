@@ -1,0 +1,28 @@
+{
+  "version": "1.4.2-preview",
+  "summary": "ClientRuntime Tests.",
+  "authors": [ "Microsoft" ],
+  "tags": [ "Microsoft AutoRest ClientRuntime REST" ],
+  "projectUrl": "https://github.com/Azure/AutoRest",
+  "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+  "commands": {
+    "test": "xunit.runner.dnx"
+  },
+  "frameworks": {
+    "dnxcore50": {
+      "dependencies": {
+        "System.Diagnostics.Tools": "4.0.0",
+        "System.Net.Http": "4.0.0",
+        "System.Threading.Tasks": "4.0.10",
+        "System.Xml.ReaderWriter": "4.0.10",
+        "Microsoft.CSharp": "4.0.0",
+        "xunit.runner.dnx": "2.1.0-rc1-build198"
+      }
+    }
+  },
+
+  "dependencies": {
+    "Microsoft.Rest.ClientRuntime": "",
+    "xunit": "2.1.0"
+  }
+}

@@ -52,7 +52,7 @@ public interface BasicOperations {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
      *
-     * @return the Basic object if successful.
+     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Basic> getValid() throws ServiceException;
@@ -69,6 +69,7 @@ public interface BasicOperations {
      * Please put {id: 2, name: 'abc', color: 'Magenta'}
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putValid(Basic complexBody) throws ServiceException;
@@ -85,7 +86,7 @@ public interface BasicOperations {
     /**
      * Get a basic complex type that is invalid for the local strong type
      *
-     * @return the Basic object if successful.
+     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Basic> getInvalid() throws ServiceException;
@@ -101,7 +102,7 @@ public interface BasicOperations {
     /**
      * Get a basic complex type that is empty
      *
-     * @return the Basic object if successful.
+     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Basic> getEmpty() throws ServiceException;
@@ -117,7 +118,7 @@ public interface BasicOperations {
     /**
      * Get a basic complex type whose properties are null
      *
-     * @return the Basic object if successful.
+     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Basic> getNull() throws ServiceException;
@@ -133,7 +134,7 @@ public interface BasicOperations {
     /**
      * Get a basic complex type while the server doesn't provide a response payload
      *
-     * @return the Basic object if successful.
+     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Basic> getNotProvided() throws ServiceException;

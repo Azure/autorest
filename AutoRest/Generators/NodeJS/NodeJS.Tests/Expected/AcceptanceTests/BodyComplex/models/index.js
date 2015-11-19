@@ -24,6 +24,7 @@ exports.Fish = require('./fish');
 exports.Salmon = require('./salmon');
 exports.Shark = require('./shark');
 exports.Sawshark = require('./sawshark');
+exports.Goblinshark = require('./goblinshark');
 exports.IntWrapper = require('./intWrapper');
 exports.LongWrapper = require('./longWrapper');
 exports.FloatWrapper = require('./floatWrapper');
@@ -38,8 +39,9 @@ exports.ByteWrapper = require('./byteWrapper');
 exports.ArrayWrapper = require('./arrayWrapper');
 exports.DictionaryWrapper = require('./dictionaryWrapper');
 exports.discriminators = {
-  'fish' : exports.Fish,
+  'Fish' : exports.Fish,
   'salmon' : exports.Salmon,
   'shark' : exports.Shark,
-  'sawshark' : exports.Sawshark
+  'sawshark' : exports.Sawshark,
+  'goblin' : exports.Goblinshark
 };

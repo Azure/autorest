@@ -12,7 +12,7 @@ package fixtures.requiredoptional;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.serializer.CollectionFormat;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -167,6 +167,7 @@ public class ExplicitImpl implements Explicit {
         if (bodyParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredIntegerProperty(bodyParameter);
@@ -356,6 +357,7 @@ public class ExplicitImpl implements Explicit {
         if (bodyParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.postRequiredStringParameter(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
@@ -455,6 +457,7 @@ public class ExplicitImpl implements Explicit {
         if (bodyParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredStringProperty(bodyParameter);
@@ -554,6 +557,7 @@ public class ExplicitImpl implements Explicit {
         if (headerParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter headerParameter is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.postRequiredStringHeader(headerParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
@@ -653,6 +657,7 @@ public class ExplicitImpl implements Explicit {
         if (bodyParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredClassParameter(bodyParameter);
@@ -753,6 +758,7 @@ public class ExplicitImpl implements Explicit {
         if (bodyParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredClassProperty(bodyParameter);
@@ -853,6 +859,7 @@ public class ExplicitImpl implements Explicit {
         if (bodyParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredArrayParameter(bodyParameter);
@@ -953,6 +960,7 @@ public class ExplicitImpl implements Explicit {
         if (bodyParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredArrayProperty(bodyParameter);
@@ -1034,7 +1042,7 @@ public class ExplicitImpl implements Explicit {
         }
         Validator.validate(headerParameter);
         try {
-            Call<ResponseBody> call = service.postRequiredArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
+            Call<ResponseBody> call = service.postRequiredArrayHeader(JacksonUtils.serializeList(headerParameter, CollectionFormat.CSV));
             return postRequiredArrayHeaderDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1053,9 +1061,10 @@ public class ExplicitImpl implements Explicit {
         if (headerParameter == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter headerParameter is required and cannot be null.")));
+            return null;
         }
         Validator.validate(headerParameter, serviceCallback);
-        Call<ResponseBody> call = service.postRequiredArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.postRequiredArrayHeader(JacksonUtils.serializeList(headerParameter, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1083,7 +1092,7 @@ public class ExplicitImpl implements Explicit {
      */
     public ServiceResponse<Void> postOptionalArrayHeader(List<String> headerParameter) throws ServiceException {
         try {
-            Call<ResponseBody> call = service.postOptionalArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
+            Call<ResponseBody> call = service.postOptionalArrayHeader(JacksonUtils.serializeList(headerParameter, CollectionFormat.CSV));
             return postOptionalArrayHeaderDelegate(call.execute(), null);
         } catch (ServiceException ex) {
             throw ex;
@@ -1099,7 +1108,7 @@ public class ExplicitImpl implements Explicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.postOptionalArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.postOptionalArrayHeader(JacksonUtils.serializeList(headerParameter, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {

@@ -39,6 +39,14 @@
         "x-ms-pageable": { "nextLinkName": "nextLink" },
         "operationId": "Paging_getMultiplePages",
         "description": "A paging operation that includes a nextLink that has 10 pages",
+        "parameters": [
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+          },
+		],
         "responses": {
           "200": {
             "description": "Initial response with ProvisioningState='Canceled'",

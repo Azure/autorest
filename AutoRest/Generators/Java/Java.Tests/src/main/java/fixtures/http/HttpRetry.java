@@ -61,6 +61,7 @@ public interface HttpRetry {
     /**
      * Return 408 status code, then 200 after retry
      *
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> head408() throws ServiceException;
@@ -77,6 +78,7 @@ public interface HttpRetry {
      * Return 500 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> put500(Boolean booleanValue) throws ServiceException;
@@ -94,6 +96,7 @@ public interface HttpRetry {
      * Return 500 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> patch500(Boolean booleanValue) throws ServiceException;
@@ -110,6 +113,7 @@ public interface HttpRetry {
     /**
      * Return 502 status code, then 200 after retry
      *
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> get502() throws ServiceException;
@@ -126,6 +130,7 @@ public interface HttpRetry {
      * Return 503 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> post503(Boolean booleanValue) throws ServiceException;
@@ -143,6 +148,7 @@ public interface HttpRetry {
      * Return 503 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> delete503(Boolean booleanValue) throws ServiceException;
@@ -160,6 +166,7 @@ public interface HttpRetry {
      * Return 504 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> put504(Boolean booleanValue) throws ServiceException;
@@ -177,6 +184,7 @@ public interface HttpRetry {
      * Return 504 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> patch504(Boolean booleanValue) throws ServiceException;

@@ -10,6 +10,8 @@
 
 package fixtures.bodydatetime;
 
+import java.util.List;
+import com.squareup.okhttp.Interceptor;
 
 /**
  * The interface for AutoRestDateTimeTestService class.
@@ -17,9 +19,15 @@ package fixtures.bodydatetime;
 public interface AutoRestDateTimeTestService {
     /**
      * Gets the URI used as the base for all cloud service requests.
-     * @return The BaseUri value.
+     * @return the BaseUri value.
      */
     String getBaseUri();
+
+    /**
+     * Gets the list of interceptors the OkHttp client will execute.
+     * @return the list of interceptors.
+     */
+    List<Interceptor> getClientInterceptors();
 
     /**
      * Gets the DatetimeOperations object to access its operations.

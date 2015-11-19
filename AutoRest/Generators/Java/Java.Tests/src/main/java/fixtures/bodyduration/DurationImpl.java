@@ -107,6 +107,7 @@ public class DurationImpl implements Duration {
         if (durationBody == null) {
             serviceCallback.failure(new ServiceException(
                 new IllegalArgumentException("Parameter durationBody is required and cannot be null.")));
+            return null;
         }
         Call<ResponseBody> call = service.putPositiveDuration(durationBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

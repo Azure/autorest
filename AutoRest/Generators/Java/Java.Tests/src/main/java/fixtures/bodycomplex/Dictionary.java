@@ -52,7 +52,7 @@ public interface Dictionary {
     /**
      * Get complex types with dictionary property
      *
-     * @return the DictionaryWrapper object if successful.
+     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<DictionaryWrapper> getValid() throws ServiceException;
@@ -69,6 +69,7 @@ public interface Dictionary {
      * Put complex types with dictionary property
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putValid(DictionaryWrapper complexBody) throws ServiceException;
@@ -85,7 +86,7 @@ public interface Dictionary {
     /**
      * Get complex types with dictionary property which is empty
      *
-     * @return the DictionaryWrapper object if successful.
+     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<DictionaryWrapper> getEmpty() throws ServiceException;
@@ -102,6 +103,7 @@ public interface Dictionary {
      * Put complex types with dictionary property which is empty
      *
      * @param complexBody Please put an empty dictionary
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putEmpty(DictionaryWrapper complexBody) throws ServiceException;
@@ -118,7 +120,7 @@ public interface Dictionary {
     /**
      * Get complex types with dictionary property which is null
      *
-     * @return the DictionaryWrapper object if successful.
+     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<DictionaryWrapper> getNull() throws ServiceException;
@@ -134,7 +136,7 @@ public interface Dictionary {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload
      *
-     * @return the DictionaryWrapper object if successful.
+     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<DictionaryWrapper> getNotProvided() throws ServiceException;

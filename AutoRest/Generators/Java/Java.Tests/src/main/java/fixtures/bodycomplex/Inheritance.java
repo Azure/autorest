@@ -40,7 +40,7 @@ public interface Inheritance {
     /**
      * Get complex types that extend others
      *
-     * @return the Siamese object if successful.
+     * @return the Siamese object wrapped in {@link ServiceResponse} if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Siamese> getValid() throws ServiceException;
@@ -57,6 +57,7 @@ public interface Inheritance {
      * Put complex types that extend others
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @return the {@link ServiceResponse} object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     ServiceResponse<Void> putValid(Siamese complexBody) throws ServiceException;
