@@ -105,7 +105,7 @@
   <Target Name="Build" DependsOnTargets="RestoreNugetPackages">
     <CallTarget Targets="BuildMsBuildTask" />
     <CallTarget Targets="BuildServerPreparation" Condition=" '$(CodeSign)' == 'true' " />
-    <Exec Command="dnvm use $(DnxVersion) -r coreclr" ContinueOnError="false"/>
+    <Exec Command="dnvm use $(DnxVersion) -r coreclr -a x64" ContinueOnError="false"/>
     <!--
     The solution file contains configurations for each platform such as Portable-Debug, Net45-Release, etc
         When invoking msbuild, provide the right configuration name.
@@ -129,7 +129,7 @@
   </Target>
   
   <Target Name="BuildDnxLibraries" DependsOnTargets="RestoreNugetPackages">
-    <Exec Command="dnvm use $(DnxVersion) -r coreclr" ContinueOnError="false"/>
+    <Exec Command="dnvm use $(DnxVersion) -r coreclr -a x64" ContinueOnError="false"/>
     <Exec Command="dnu build" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"/>
     <Exec Command="dnu pack" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"/>
     <ItemGroup>

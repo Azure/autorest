@@ -20,6 +20,7 @@ runSequence = require('run-sequence'),
 requireDir = require('require-dir')('./Tools/gulp');
 
 const DEFAULT_ASSEMBLY_VERSION = '0.9.0.0';
+const DNX_VERSION = '1.0.0-rc1-final';
 const MAX_BUFFER = 1024 * 4096;
 var isWindows = (process.platform.lastIndexOf('win') === 0);
 process.env.MSBUILDDISABLENODEREUSE = 1;
@@ -406,7 +407,7 @@ var xunitdnx = function(options){
       return path.basename(path.dirname(s))
     }
   };
-  return shell('dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml"', options);
+  return shell('dnvm use ' + DNX_VERSION + ' -r coreclr -a x64 && dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml"', options);
 }
 
 gulp.task('test:xunit', ['test:xunit:dnx'], function () {
