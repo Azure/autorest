@@ -7,12 +7,12 @@
 
 package com.microsoft.rest;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.serializer.JacksonUtils;
 import retrofit.Response;
 import retrofit.Retrofit;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +33,7 @@ public class AzureServiceResponseBuilder<T> extends ServiceResponseBuilder<T> {
      * @param deserializer the serialization utils to use for deserialization operations
      */
     public AzureServiceResponseBuilder(JacksonUtils deserializer) {
-        this(deserializer, new HashMap<Integer, TypeReference<?>>());
+        this(deserializer, new HashMap<Integer, Type>());
     }
 
     /**
@@ -42,7 +42,7 @@ public class AzureServiceResponseBuilder<T> extends ServiceResponseBuilder<T> {
      * @param deserializer the serialization utils to use for deserialization operations
      * @param responseTypes a mapping of response status codes and response destination types.
      */
-    public AzureServiceResponseBuilder(JacksonUtils deserializer, Map<Integer, TypeReference<?>> responseTypes) {
+    public AzureServiceResponseBuilder(JacksonUtils deserializer, Map<Integer, Type> responseTypes) {
         super(deserializer, responseTypes);
     }
 

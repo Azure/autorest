@@ -23,7 +23,7 @@ import java.util.Map;
  * The builder for building a {@link ServiceResponse}.
  */
 public class ServiceResponseBuilder<T> {
-    protected Map<Integer, TypeReference<?>> responseTypes;
+    protected Map<Integer, Type> responseTypes;
     protected JacksonUtils deserializer;
 
     /**
@@ -39,7 +39,7 @@ public class ServiceResponseBuilder<T> {
      * @param deserializer the serialization utils to use for deserialization operations
      */
     public ServiceResponseBuilder(JacksonUtils deserializer) {
-        this(deserializer, new HashMap<Integer, TypeReference<?>>());
+        this(deserializer, new HashMap<Integer, Type>());
     }
 
     /**
@@ -48,7 +48,7 @@ public class ServiceResponseBuilder<T> {
      * @param deserializer the serialization utils to use for deserialization operations
      * @param responseTypes a mapping of response status codes and response destination types.
      */
-    public ServiceResponseBuilder(JacksonUtils deserializer, Map<Integer, TypeReference<?>> responseTypes) {
+    public ServiceResponseBuilder(JacksonUtils deserializer, Map<Integer, Type> responseTypes) {
         this.deserializer = deserializer;
         this.responseTypes = responseTypes;
     }
@@ -62,12 +62,7 @@ public class ServiceResponseBuilder<T> {
      * @return the same builder instance.
      */
     public <V> ServiceResponseBuilder<T> register(int statusCode, final Type type) {
-        this.responseTypes.put(statusCode, new TypeReference<V>() {
-            @Override
-            public Type getType() {
-                return type;
-            }
-        });
+        this.responseTypes.put(statusCode, type);
         return this;
     }
 
@@ -79,12 +74,7 @@ public class ServiceResponseBuilder<T> {
      * @return the same builder instance.
      */
     public <V> ServiceResponseBuilder<T> registerError(final Type type) {
-        this.responseTypes.put(0, new TypeReference<V>() {
-            @Override
-            public Type getType() {
-                return type;
-            }
-        });
+        this.responseTypes.put(0, type);
         return this;
     }
 
@@ -95,7 +85,7 @@ public class ServiceResponseBuilder<T> {
      * @param responseTypes the mapping from response status codes to response types.
      * @return the same builder instance.
      */
-    public ServiceResponseBuilder<T> registerAll(Map<Integer, TypeReference<?>> responseTypes) {
+    public ServiceResponseBuilder<T> registerAll(Map<Integer, Type> responseTypes) {
         this.responseTypes.putAll(responseTypes);
         return this;
     }
@@ -171,21 +161,21 @@ public class ServiceResponseBuilder<T> {
             return null;
         }
 
-        TypeReference<?> type = null;
+        Type type;
         if (responseTypes.containsKey(statusCode)) {
             type = responseTypes.get(statusCode);
         } else if (responseTypes.containsKey(0)) {
             type = responseTypes.get(0);
         } else {
-            type = new TypeReference<T>() {};
+            type = new TypeReference<T>() {}.getType();
         }
 
         // Void response
-        if (type.getType() == new TypeReference<Void>(){}.getType()) {
+        if (type == Void.class) {
             return null;
         }
         // Return raw response if InputStream is the target type
-        else if (type.getType() == new TypeReference<InputStream>(){}.getType()) {
+        else if (type == InputStream.class) {
             return (T)responseBody.byteStream();
         }
         // Deserialize

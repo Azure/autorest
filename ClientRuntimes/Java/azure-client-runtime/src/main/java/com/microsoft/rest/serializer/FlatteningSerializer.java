@@ -35,9 +35,10 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * Custom serializer for deserializing {@link BaseResource} with wrapped properties.
+ * Custom serializer for serializing {@link BaseResource} with wrapped properties.
  * For example, a property with annotation @JsonProperty(value = "properties.name")
- * will be mapped to a top level "name" property in the POJO model.
+ * will be mapped from a top level "name" property in the POJO model to
+ * {'properties' : { 'name' : 'my_name' }} in the serialized payload.
  */
 public class FlatteningSerializer<T> extends StdSerializer<T> implements ResolvableSerializer {
     private final JsonSerializer<?> defaultSerializer;
@@ -67,6 +68,7 @@ public class FlatteningSerializer<T> extends StdSerializer<T> implements Resolva
             return;
         }
 
+        // BFS for all collapsed properties
         ObjectMapper mapper = new JacksonUtils().getObjectMapper();
         ObjectNode root = mapper.valueToTree(value);
         ObjectNode res = root.deepCopy();

@@ -37,7 +37,7 @@ public abstract class AzureServiceClient extends ServiceClient {
 
         Executor executor = Executors.newCachedThreadPool();
         this.retrofitBuilder = this.retrofitBuilder
-                .addConverterFactory(JacksonConverterFactory.create(new AzureJacksonUtils().getObjectMapper()))
+                .addConverterFactory(new AzureJacksonUtils().getConverterFactory())
                 .callbackExecutor(executor);
     }
 

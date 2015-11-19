@@ -38,7 +38,7 @@ public abstract class ServiceClient {
 
         Executor executor = Executors.newCachedThreadPool();
         this.retrofitBuilder = this.retrofitBuilder
-                .addConverterFactory(JacksonConverterFactory.create(new JacksonUtils().getObjectMapper()))
+                .addConverterFactory(new JacksonUtils().getConverterFactory())
                 .callbackExecutor(executor);
     }
 
