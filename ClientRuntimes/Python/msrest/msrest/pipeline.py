@@ -176,7 +176,7 @@ class ClientRequest(requests.Request):
         for key, value in headers.items():
             self.add_header(key, value)
 
-    def add_content(self, data):
+    def add_content(self, data, **kwargs):
 
         if isinstance(data, types.GeneratorType):
             self.data = data
@@ -184,6 +184,7 @@ class ClientRequest(requests.Request):
         else:
             self.data = json.dumps(data)
             self.headers['Content-Length'] = len(self.data)
+        return kwargs
 
 
 class ClientRetryPolicy(object):

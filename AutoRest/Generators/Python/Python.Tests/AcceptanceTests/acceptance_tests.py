@@ -1,6 +1,8 @@
-﻿import unittest
+import unittest
+import isodate
 import subprocess
 import sys
+import datetime
 from os.path import dirname, realpath, sep, pardir
 
 sys.path.append(dirname(realpath(__file__)) + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + "ClientRuntimes" + sep + "Python" + sep + "msrest")
@@ -17,7 +19,10 @@ from auto_rest_complex_test_service import AutoRestComplexTestService, AutoRestC
 from auto_rest_report_service import AutoRestReportService, AutoRestReportServiceConfiguration
 
 from auto_rest_bool_test_service.models import ErrorException as BoolException
-from auto_rest_complex_test_service.models import CMYKColors, Basic, IntWrapper, LongWrapper, FloatWrapper, DoubleWrapper, BooleanWrapper, StringWrapper, DatetimeWrapper, DateWrapper, DurationWrapper, Datetimerfc1123Wrapper
+from auto_rest_complex_test_service.models import (
+    CMYKColors, Basic, IntWrapper, LongWrapper, FloatWrapper,
+    DoubleWrapper, BooleanWrapper, StringWrapper, DatetimeWrapper,
+    DateWrapper, DurationWrapper, Datetimerfc1123Wrapper, ByteWrapper)
 
 def sort_test(_, x, y):
 
@@ -29,19 +34,29 @@ def sort_test(_, x, y):
 
 unittest.TestLoader.sortTestMethodsUsing = sort_test
 
+class UTC(datetime.tzinfo): 
+    def utcoffset(self,dt): 
+        return datetime.timedelta(hours=0,minutes=0) 
+
+    def tzname(self,dt): 
+        return "Z" 
+
+    def dst(self,dt): 
+        return datetime.timedelta(0) 
+
 class AcceptanceTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
+    #@classmethod
+    #def setUpClass(cls):
 
-        cls.server = subprocess.Popen("node ../../../../AutoRest/TestServer/server/startup/www.js")
+    #    cls.server = subprocess.Popen("node ../../../../AutoRest/TestServer/server/startup/www.js")
 
-    @classmethod
-    def tearDownClass(cls):
+    #@classmethod
+    #def tearDownClass(cls):
 
-        cls.server.kill()
+    #    cls.server.kill()
 
     def test_bool(self):
-
+        self.skipTest("temp")
         config = AutoRestBoolTestServiceConfiguration("http://localhost:3000")
         config.log_level = 10
         client = AutoRestBoolTestService(config)
@@ -57,7 +72,6 @@ class AcceptanceTests(unittest.TestCase):
         pass
 
     def test_array(self):
-
         config = AutoRestSwaggerBATArrayServiceConfiguration("http://localhost:3000")
         config.log_level = 10
         client = AutoRestSwaggerBATArrayService(config)
@@ -93,8 +107,7 @@ class AcceptanceTests(unittest.TestCase):
         self.assertIsNone(basic_result.name)
         # GET basic/notprovided
         basic_result = client.basicOperations.get_not_provided()
-        # TODO: investigage!!!
-        #self.assertIsNone(basic_result)
+        self.assertIsNone(basic_result)
         # GET basic/invalid
         with self.assertRaises(DeserializationError):
             client.basicOperations.get_invalid()
@@ -157,34 +170,36 @@ class AcceptanceTests(unittest.TestCase):
         stringRequest.null = None
         stringRequest.empty = ""
         stringRequest.field = 'goodrequest'
-        # TODO: investigate !!! empty is not set
-        #client.primitive.put_string(stringRequest);
+
+        client.primitive.put_string(stringRequest);
         # GET primitive/date
         dateResult = client.primitive.get_date()
-        self.assertEqual(u"0001-01-01", dateResult.field)
-        self.assertEqual(u"2016-02-29", dateResult.leap)
+        self.assertEqual(isodate.parse_date("0001-01-01"), dateResult.field)
+        self.assertEqual(isodate.parse_date("2016-02-29"), dateResult.leap)
         dateRequest = DateWrapper
-        dateRequest.field = u'0001-01-01'
-        dateRequest.leap = u'2016-02-29'
+        dateRequest.field = isodate.parse_date('0001-01-01')
+        dateRequest.leap = isodate.parse_date('2016-02-29')
         client.primitive.put_date(dateRequest)
         # GET primitive/datetime
-        # TODO: investigage!!!
-        #datetimeResult = client.primitive.get_date_time()
-        #Assert.Equal(DateTime.MinValue, datetimeResult.Field);
-        #datetimeRequest = DatetimeWrapper(field : d
-        #client.primitive.put_date_time(new DatetimeWrapper
-        #{
-        #    Field = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-        #    Now = new DateTime(2015, 05, 18, 18, 38, 0, DateTimeKind.Utc)
-        #});
+        datetimeResult = client.primitive.get_date_time()
+        min_date = datetime.datetime.min
+        min_date = min_date.replace(tzinfo=UTC())
+        self.assertEqual(min_date, datetimeResult.field)
+        
+        datetime_request = DatetimeWrapper(
+            field=isodate.parse_datetime("0001-01-01T00:00:00Z"),
+            now=isodate.parse_datetime("2015-05-18T18:38:00Z"))
+        client.primitive.put_date_time(datetime_request)
+        
         # GET primitive/datetimerfc1123
-        #datetimeRfc1123Result = client.primitive.get_date_time_rfc1123()
-        #Assert.Equal(DateTime.MinValue, datetimeRfc1123Result.Field);
-        #client.primitive.PutDateTimeRfc1123(new Datetimerfc1123Wrapper()
-        #{
-        #    Field = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-        #    Now = new DateTime(2015, 05, 18, 11, 38, 0, DateTimeKind.Utc)
-        #});
+        datetimeRfc1123Result = client.primitive.get_date_time_rfc1123()
+        self.assertEqual(min_date, datetimeRfc1123Result.field)
+
+        datetime_request = Datetimerfc1123Wrapper(
+            field=isodate.parse_datetime("0001-01-01T00:00:00Z"),
+            now=isodate.parse_datetime("2015-05-18T11:38:00Z"))
+        client.primitive.put_date_time_rfc1123(datetime_request)
+
         # GET primitive/duration
         #TimeSpan expectedDuration = new TimeSpan(123, 22, 14, 12, 11);
         durationResult = client.primitive.get_duration();
@@ -197,11 +212,11 @@ class AcceptanceTests(unittest.TestCase):
         client.primitive.put_duration(durationRequest);
         # GET primitive/byte
         byteResult = client.primitive.get_byte()
-        # TODO: investigage!!!
-        #var bytes = new byte[] {0x0FF, 0x0FE, 0x0FD, 0x0FC, 0x000, 0x0FA, 0x0F9, 0x0F8, 0x0F7, 0x0F6};
-        #Assert.Equal(bytes, byteResult.Field);
+        valid_bytes = bytearray([0x0FF, 0x0FE, 0x0FD, 0x0FC, 0x000, 0x0FA, 0x0F9, 0x0F8, 0x0F7, 0x0F6])
+        self.assertEqual(valid_bytes, byteResult.field)
         # PUT primitive/byte
-        #client.Primitive.PutByte(bytes);
+        byte_body = ByteWrapper(field=valid_bytes)
+        client.primitive.put_byte(byte_body)
 
         """
         COMPLEX TYPE WITH ARRAY PROPERTIES
@@ -267,15 +282,11 @@ class AcceptanceTests(unittest.TestCase):
         inheritanceResult = client.inheritance.get_valid()
         self.assertEqual(2, inheritanceResult.id)
         self.assertEqual("Siameeee", inheritanceResult.name)
-        #TODO:investigate!!!
-        #self.assertEqual(-1, inheritanceResult.hates[1].id)
-        #self.assertEqual("Tomato", inheritanceResult.hates[1].name)
+        self.assertEqual(-1, inheritanceResult.hates[1].id)
+        self.assertEqual("Tomato", inheritanceResult.hates[1].name)
 
-        pass
-
-    @unittest.skip("For now, skip this test since it'll always fail")
     def test_ensure_coverage(self):
-        
+        self.skipTest("temp")
         config = AutoRestReportServiceConfiguration("http://localhost:3000")
         config.log_level = 10
         client = AutoRestReportService(config)

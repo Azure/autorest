@@ -27,7 +27,10 @@
 import json
 import isodate
 import datetime
+import cPickle
+import chardet
 
+from base64 import b64decode, b64encode
 from enum import Enum
 from decimal import Decimal
 
@@ -53,6 +56,17 @@ class Model(object):
         for k in kwargs:
             if hasattr(self, k):
                 setattr(self, k, kwargs[k])
+
+    def __eq__(self, value):
+
+        for key,val in self.__dict__.items():
+            if not hasattr(value, key):
+                return False
+
+            if val != getattr(value, key):
+                return False
+
+        return True
 
     def __getattribute__(self, attr):
 
@@ -204,7 +218,7 @@ class Serializer(object):
             raise AttributeError(
                 "Object missing required attribute")
 
-        if data in [None, ""]:
+        if data is None: #in [None, ""]:
             raise ValueError("No value for given attribute")
 
         if data_type is None:
@@ -246,12 +260,17 @@ class Serializer(object):
 
     def serialize_dict(self, attr, dict_type, required, **kwargs):
 
-        return {str(x): self.serialize_data(
-            attr[x], dict_type, required, **kwargs) for x in attr}
+        #return {str(x): self.serialize_data(
+        #    attr[x], dict_type, required, **kwargs) for x in attr}
+        r = {}
+        for x,t in attr.items():
+            kwargs["char"] = ""
+            r[str(x)] = self.serialize_data(t, dict_type, required, **kwargs)
+        return r
 
     @staticmethod
-    def serialize_bytearray(attr, **kwargs):
-        return str(attr)  # TODO
+    def serialize_bytearray(attr, char="\"", **kwargs):
+        return char + b64encode(attr) + char
 
     @staticmethod
     def serialize_decimal(attr, **kwargs):
@@ -267,7 +286,8 @@ class Serializer(object):
 
     @staticmethod
     def serialize_date(attr, **kwargs):
-        return str(attr)  # TODO
+        t =  "{:04}-{:02}-{:02}".format(attr.year, attr.month, attr.day)
+        return t
 
     @staticmethod
     def serialize_time(attr, **kwargs):
@@ -279,7 +299,15 @@ class Serializer(object):
 
     @staticmethod
     def serialize_rfc(attr, **kwargs):
-        date_str = attr.strftime('%a, %d %b %Y %H:%M:%S GMT')
+        utc = attr.utctimetuple()
+
+        days = {0:"Mon", 1:"Tue", 2:"Wed", 3:"Thu", 4:"Fri", 5:"Sat", 6:"Sun"}
+        months = {1:"Jan", 2:"Feb", 3:"Mar", 4:"Apr", 5:"May", 6:"Jun", 7:"Jul", 8:"Aug", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"}
+        
+        date_str = "{}, {:02} {} {:04} {:02}:{:02}:{:02} GMT".format(
+            days[utc.tm_wday], utc.tm_mday, months[utc.tm_mon], utc.tm_year, utc.tm_hour,
+            utc.tm_min, utc.tm_sec)
+        
         return date_str
 
     @staticmethod
@@ -346,11 +374,13 @@ class Deserializer(object):
         response, class_name = self._classify_target(target_obj, response_data)
 
         if isinstance(response, str):
-            data = self._unpack_content(response_data, default=None)
+            data = self._unpack_content(response_data)
             return self.deserialize_data(data, response)
 
         try:
             data = self._unpack_response(response, response_data)
+            if data == None:
+                return data
 
         except (TypeError, ValueError, AttributeError) as err:
             msg = "Unable to deserialize to object: {}.".format(class_name)
@@ -422,7 +452,7 @@ class Deserializer(object):
 
             setattr(response, attr, value)
 
-    def _unpack_content(self, raw_data, default={}):
+    def _unpack_content(self, raw_data):
 
         if isinstance(raw_data, bytes):
             data = raw_data.decode
@@ -432,7 +462,7 @@ class Deserializer(object):
 
         if hasattr(raw_data, 'content'):
             if not raw_data.content:
-                return default
+                return None
 
             if isinstance(raw_data.content, bytes):
                 data = raw_data.content.decode()
@@ -442,11 +472,7 @@ class Deserializer(object):
 
             try:
                 
-                content = json.loads(data)
-                if content == {}:
-                    return default
-
-                return content
+                return json.loads(data)
 
             except (ValueError, TypeError) as err:
                 return data
@@ -487,7 +513,7 @@ class Deserializer(object):
             if issubclass(obj_type, Enum):
                 return obj_type(data)
 
-        except (ValueError, TypeError) as err:
+        except (ValueError, TypeError, AttributeError) as err:
             msg = "Unable to deserialize response data."
             raise_with_traceback(DeserializationError, msg, err)
 
@@ -495,6 +521,8 @@ class Deserializer(object):
             return self(obj_type, data)
 
     def deserialize_iter(self, attr, iter_type):
+        if not attr and not isinstance(attr, list):
+            return None
         #return DeserializedGenerator(self.deserialize_data, attr, iter_type)
         return [self.deserialize_data(a, iter_type) for a in attr]
 
@@ -503,8 +531,14 @@ class Deserializer(object):
             return {str(x['key']): self.deserialize_data(
                 x['value'], dict_type) for x in attr}
 
-        return {str(x): self.deserialize_data(
-            attr[x], dict_type) for x in attr}
+        v = {}
+        for x,t in attr.items():
+            d = self.deserialize_data(t, dict_type)
+            v[x] = d
+
+        return(v)
+        #return {str(x): self.deserialize_data(
+        #    attr[x], dict_type) for x in attr}
 
     def deserialize_basic(self, attr, data_type):
 
@@ -524,7 +558,7 @@ class Deserializer(object):
 
     @staticmethod
     def deserialize_bytearray(attr):
-        return attr  # TODO
+        return bytearray(b64decode(attr))
 
     @staticmethod
     def deserialize_decimal(attr):
@@ -556,13 +590,14 @@ class Deserializer(object):
 
     @staticmethod
     def deserialize_date(attr):
-        return attr  # TODO
+        return isodate.parse_date(attr)
 
     @staticmethod
     def deserialize_rfc(attr):
         try:
             date_obj = datetime.datetime.strptime(
                 attr, "%a, %d %b %Y %H:%M:%S %Z")
+            date_obj = date_obj.replace(tzinfo=UTC())
 
         except ValueError as err:
             msg = "Cannot deserialize to rfc datetime object."
@@ -574,6 +609,7 @@ class Deserializer(object):
     @staticmethod
     def deserialize_iso(attr):
         try:
+            attr = attr.upper()
             date_obj = isodate.parse_datetime(attr)
             test_utc = date_obj.utctimetuple()
             if test_utc.tm_year > 9999 or test_utc.tm_year < 1:
@@ -585,3 +621,23 @@ class Deserializer(object):
 
         else:
             return date_obj
+
+class UTC(datetime.tzinfo): 
+    def utcoffset(self,dt): 
+        return datetime.timedelta(hours=0,minutes=0) 
+
+    def tzname(self,dt): 
+        return "Z" 
+
+    def dst(self,dt): 
+        return datetime.timedelta(0) 
+
+class GMT(datetime.tzinfo): 
+    def utcoffset(self,dt): 
+        return datetime.timedelta(hours=0,minutes=0) 
+
+    def tzname(self,dt): 
+        return "GMT" 
+
+    def dst(self,dt): 
+        return datetime.timedelta(0) 
