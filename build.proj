@@ -67,6 +67,7 @@
     <!-- Only set set this to true for testing the code sign workflow locally. -->
     <DelaySign Condition =" '$(DelaySign)' == '' ">false</DelaySign>
     <Scope Condition=" '$(Scope)' == '' ">all</Scope>
+    <ZipExe>$(LibraryToolsFolder)\7-Zip\7z.exe</ZipExe>
     <DnxVersion>1.0.0-rc1-final</DnxVersion>
   </PropertyGroup>
 
@@ -96,9 +97,15 @@
   <UsingTask Condition=" $(OnPremiseBuild) " TaskName="CorporateValidation" AssemblyFile="$(CIToolsPath)\Microsoft.WindowsAzure.Tools.Build.Tasks.OnPremise.dll" />
   <Import Condition=" $(OnPremiseBuild) " Project="$(CIToolsPath)\Microsoft.WindowsAzure.Build.OnPremise.msbuild" />
 
+  <ItemGroup>
+    <DnxLibraries Include="$(LibraryRoot)/ClientRuntimes/CSharp/**/project.json" />
+    <DnxLibraries Include="$(LibraryRoot)/AutoRest/Generators/**/project.json" />
+  </ItemGroup>
+    
   <Target Name="Build" DependsOnTargets="RestoreNugetPackages">
     <CallTarget Targets="BuildMsBuildTask" />
     <CallTarget Targets="BuildServerPreparation" Condition=" '$(CodeSign)' == 'true' " />
+    <Exec Command="dnvm use $(DnxVersion) -r coreclr" ContinueOnError="false"/>
     <!--
     The solution file contains configurations for each platform such as Portable-Debug, Net45-Release, etc
         When invoking msbuild, provide the right configuration name.
@@ -111,17 +118,24 @@
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
              Targets="Build"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
+    <ItemGroup>
+      <_OriginalDnxPackages Include="$(LibraryRoot)/ClientRuntimes/CSharp/**/bin/$(Configuration)/*.nupkg" />
+    </ItemGroup>  
+    <Copy SourceFiles="@(_OriginalDnxPackages)" DestinationFolder="$(LibraryRoot)\dnx" 
+        Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'"/>
+    <Copy SourceFiles="@(_OriginalDnxPackages)" DestinationFolder="$(PackageOutputDir)" 
+        Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'"/>
     <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " />
   </Target>
   
   <Target Name="BuildDnxLibraries" DependsOnTargets="RestoreNugetPackages">
-    <ItemGroup>
-      <DnxLibraries Include="$(LibraryRoot)/ClientRuntimes/CSharp/**/project.json" />
-      <DnxLibraries Include="$(LibraryRoot)/AutoRest/Generators/**/project.json" />
-    </ItemGroup>
     <Exec Command="dnvm use $(DnxVersion) -r coreclr" ContinueOnError="false"/>
     <Exec Command="dnu build" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"/>
     <Exec Command="dnu pack" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"/>
+    <ItemGroup>
+      <_OriginalDnxPackages Include="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)\bin\*\*.nupkg" />
+    </ItemGroup>  
+    <Copy SourceFiles="@(_OriginalDnxPackages)" DestinationFolder="$(LibraryRoot)\dnx" />
   </Target>
   
   <!-- Project files import some targets coming from nuget packages, so need to restore them first to avoid errors
@@ -164,6 +178,7 @@
     <CorporateScanPaths>$(LibrarySourceFolder)ClientRuntimes;$(LibrarySourceFolder)AutoRest</CorporateScanPaths>
     <BinscopeScanPath>$(BinariesFolder)</BinscopeScanPath>
   </PropertyGroup>
+  
   <Target Name="SignBinariesForAFxTarget">
     <PropertyGroup>
       <!-- Public token of MSSharedLibKey.snk. -->
@@ -257,4 +272,62 @@
 
   <Import Project="tools\NuGet.targets"/>
 
+  <Target Name="SignAssembliesInDnxPackages">
+    <ItemGroup>
+      <_DnxPackages Include="$(LibraryRoot)\dnx\*.nupkg" />
+    </ItemGroup> 
+    <PropertyGroup>
+      <_UnsignedFolder>$(PackageOutputDir)\unsigned</_UnsignedFolder>
+      <_SignedFolder>$(PackageOutputDir)\signed</_SignedFolder>
+    </PropertyGroup>  
+    
+    <Message Text="%(_DnxPackages.Identity)" Importance="low" />
+    
+    <RemoveDir Directories="$(_UnsignedFolder);$(_SignedFolder)" ContinueOnError="false" />
+    <RemoveDir Directories="@(_DnxPackages->'$(PackageOutputDir)\%(Filename)')" ContinueOnError="false" />
+
+    <MakeDir Directories="$(_UnsignedFolder);$(_SignedFolder)" />
+    
+    <Exec Command="$(ZipExe) x -y -scsUTF-8 -o@(_DnxPackages->'$(PackageOutputDir)\%(Filename)') %(_DnxPackages.Identity)" />
+
+    <RemoveDir Directories="@(_DnxPackages->'%(RootDir)%(Directory)\%(Filename)\_rels')" />
+    <Delete Files="@(_DnxPackages->'%(RootDir)%(Directory)\%(Filename)\[Content_Types].xml')" />
+
+    <ItemGroup>
+      <_TempBinaries Include="$(PackageOutputDir)\**\*.dll"/>
+      <_PackageBinaries Include="@(_TempBinaries)">
+        <!-- Flattened file for signing -->
+        <UnsignedFlatFileName>$(_UnsignedFolder)\$([System.String]::new('%(RecursiveDir)%(FileName)%(Extension)').Replace('\', '__'))</UnsignedFlatFileName>
+        <SignedFlatFileName>$(_SignedFolder)\$([System.String]::new('%(RecursiveDir)%(FileName)%(Extension)').Replace('\', '__'))</SignedFlatFileName>
+      </_PackageBinaries>
+    </ItemGroup>
+
+    <Copy SourceFiles="@(_PackageBinaries)" DestinationFiles="@(_PackageBinaries->'%(UnsignedFlatFileName)')"></Copy>
+
+    <CodeSigningTask
+      Description="Microsoft Azure SDK"
+      Keywords="Microsoft Azure .NET SDK"
+      UnsignedFiles="@(_PackageBinaries->'%(UnsignedFlatFileName)')"
+      DestinationPath="$(_SignedFolder)"
+      SigningLogPath="$(PackageOutputDir)\signing.log"
+      ToolsPath="$(CIToolsPath)"
+      Condition="!$(DelaySign)"/>
+
+    <!--If we are testing locally then we copy the binaries and do not submit to the code sign server-->
+    <Copy SourceFiles="@(_PackageBinaries->'%(UnsignedFlatFileName)')" DestinationFolder="$(_SignedFolder)" Condition="$(DelaySign)" />
+
+    <GetFrameworkSdkPath>
+      <Output TaskParameter="Path" PropertyName="WindowsSdkPath"/>
+    </GetFrameworkSdkPath>
+    <ValidateStrongNameSignatureTask
+        WindowsSdkPath="$(WindowsSdkPath)"
+        Assembly="%(_PackageBinaries.SignedFlatFileName)"
+        ExpectedTokenSignature="$(StrongNameToken)"
+        ExpectedDelaySigned="false"
+        ContinueOnError="false"
+        Condition="!$(DelaySign)"/>
+
+    <Copy SourceFiles="@(_PackageBinaries->'%(SignedFlatFileName)')" DestinationFiles="@(_PackageBinaries->'%(FullPath)')"></Copy>
+    <Exec Command="$(ZipExe) a -tzip -mx9 -r -y $(PackageOutputDir)\%(_DnxPackages.Filename).nupkg" WorkingDirectory="$(PackageOutputDir)\%(_DnxPackages.Filename)" />
+  </Target>
 </Project>
