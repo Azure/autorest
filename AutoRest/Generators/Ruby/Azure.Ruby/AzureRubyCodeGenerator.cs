@@ -54,13 +54,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <param name="serviceClient">The service client.</param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            Settings.AddCredentials = true;
-            AzureExtensions.UpdateHeadMethods(serviceClient);
-            AzureExtensions.ParseODataExtension(serviceClient);
-            AzureExtensions.AddPageableMethod(serviceClient);
-            AzureExtensions.AddLongRunningOperations(serviceClient);
-            AzureExtensions.AddAzureProperties(serviceClient);
-            AzureExtensions.SetDefaultResponses(serviceClient);
+            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
             CorrectFilterParameters(serviceClient);
             base.NormalizeClientModel(serviceClient);
         }
