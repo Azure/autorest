@@ -8,6 +8,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+import sys
+
+
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
@@ -16,11 +19,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class parameter_grouping(object):
+class api_version_localOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -45,25 +49,21 @@ class parameter_grouping(object):
             return value
 
     @async_request
-    def post_required(self, body, path, custom_header, query, custom_headers={}, raw=False, callback=None):
+    def get_method_local_valid(self, apiversion, custom_headers={}, raw=False, callback=None):
         """
 
-        Post a bunch of required parameters grouped
+        Get method with api-version modeled in the method.  pass in
+        api-version = '2.0' to succeed
 
-        :param body:
-        :param path: Path parameter
-        :param custom_header:
-        :param query: Query parameter with default
+        :param apiversion: This should appear as a method parameter, use value
+        '2.0'. Possible values for this parameter include: '2.0'
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type body: int
-        :type path: str
-        :type custom_header: str or none
-        :type query: int or none
+        :type apiversion: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -71,75 +71,23 @@ class parameter_grouping(object):
         """
 
         # Construct URL
-        url = '/parameterGrouping/postRequired/{path}'
-        path_format_arguments = {
-            'path': self._parse_url("path", path, 'str', False)}
-        url = url.format(**path_format_arguments)
+        url = '/azurespecials/apiVersion/method/string/none/query/local/2.0'
 
         # Construct parameters
         query = {}
-        if query is not None:
-            query['query'] = self._parse_url("query", query, 'int', False)
+        if apiversion is not None:
+            query['api-version'] = self._parse_url("apiversion", apiversion, 'str', False)
 
         # Construct headers
         headers = {}
-        if custom_header is not None:
-            query['customHeader'] = custom_header
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
-
-        # Construct body
-        content = self._serialize(body, 'int')
-
-        # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
-
-        if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
-
-        if raw:
-            return None, response
-
-    @async_request
-    def post_optional(self, custom_header, query, custom_headers={}, raw=False, callback=None):
-        """
-
-        Post a bunch of optional parameters grouped
-
-        :param custom_header:
-        :param query: Query parameter with default
-        :param custom_headers: headers that will be added to the request
-        :param raw: returns the direct response alongside the deserialized
-        response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type custom_header: str or none
-        :type query: int or none
-        :type custom_headers: dict
-        :type raw: boolean
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
-        """
-
-        # Construct URL
-        url = '/parameterGrouping/postOptional'
-
-        # Construct parameters
-        query = {}
-        if query is not None:
-            query['query'] = self._parse_url("query", query, 'int', False)
-
-        # Construct headers
-        headers = {}
-        if custom_header is not None:
-            query['customHeader'] = custom_header
-        headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.post(url, query)
+        request = self._client.get(url, query)
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
@@ -149,25 +97,21 @@ class parameter_grouping(object):
             return None, response
 
     @async_request
-    def post_multiple_parameter_groups(self, headerone, queryone, headertwo, querytwo, custom_headers={}, raw=False, callback=None):
+    def get_method_local_null(self, apiversion, custom_headers={}, raw=False, callback=None):
         """
 
-        Post parameters from multiple different parameter groups
+        Get method with api-version modeled in the method.  pass in
+        api-version = null to succeed
 
-        :param headerone:
-        :param queryone: Query parameter with default
-        :param headertwo:
-        :param querytwo: Query parameter with default
+        :param apiversion: This should appear as a method parameter, use value
+        null, this should result in no serialized parameter
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type headerone: str or none
-        :type queryone: int or none
-        :type headertwo: str or none
-        :type querytwo: int or none
+        :type apiversion: str or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -175,26 +119,23 @@ class parameter_grouping(object):
         """
 
         # Construct URL
-        url = '/parameterGrouping/postMultipleParameterGroups'
+        url = '/azurespecials/apiVersion/method/string/none/query/local/null'
 
         # Construct parameters
         query = {}
-        if queryone is not None:
-            query['query-one'] = self._parse_url("queryone", queryone, 'int', False)
-        if querytwo is not None:
-            query['query-two'] = self._parse_url("querytwo", querytwo, 'int', False)
+        if apiversion is not None:
+            query['api-version'] = self._parse_url("apiversion", apiversion, 'str', False)
 
         # Construct headers
         headers = {}
-        if headerone is not None:
-            query['header-one'] = headerone
-            if headertwo is not None:
-                query['header-two'] = headertwo
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.post(url, query)
+        request = self._client.get(url, query)
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
@@ -204,21 +145,21 @@ class parameter_grouping(object):
             return None, response
 
     @async_request
-    def post_shared_parameter_group_object(self, headerone, queryone, custom_headers={}, raw=False, callback=None):
+    def get_path_local_valid(self, apiversion, custom_headers={}, raw=False, callback=None):
         """
 
-        Post parameters with a shared parameter group object
+        Get method with api-version modeled in the method.  pass in
+        api-version = '2.0' to succeed
 
-        :param headerone:
-        :param queryone: Query parameter with default
+        :param apiversion: This should appear as a method parameter, use value
+        '2.0'. Possible values for this parameter include: '2.0'
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type headerone: str or none
-        :type queryone: int or none
+        :type apiversion: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -226,22 +167,72 @@ class parameter_grouping(object):
         """
 
         # Construct URL
-        url = '/parameterGrouping/sharedParameterGroupObject'
+        url = '/azurespecials/apiVersion/path/string/none/query/local/2.0'
 
         # Construct parameters
         query = {}
-        if queryone is not None:
-            query['query-one'] = self._parse_url("queryone", queryone, 'int', False)
+        if apiversion is not None:
+            query['api-version'] = self._parse_url("apiversion", apiversion, 'str', False)
 
         # Construct headers
         headers = {}
-        if headerone is not None:
-            query['header-one'] = headerone
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.post(url, query)
+        request = self._client.get(url, query)
+        response = self._client.send(request, headers)
+
+        if response.status_code not in [200]:
+            raise ErrorException(self._deserialize, response)
+
+        if raw:
+            return None, response
+
+    @async_request
+    def get_swagger_local_valid(self, apiversion, custom_headers={}, raw=False, callback=None):
+        """
+
+        Get method with api-version modeled in the method.  pass in
+        api-version = '2.0' to succeed
+
+        :param apiversion: The api version, which appears in the query, the
+        value is always '2.0'. Possible values for this parameter include:
+        '2.0'
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type apiversion: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
+        """
+
+        # Construct URL
+        url = '/azurespecials/apiVersion/swagger/string/none/query/local/2.0'
+
+        # Construct parameters
+        query = {}
+        if apiversion is not None:
+            query['api-version'] = self._parse_url("apiversion", apiversion, 'str', False)
+
+        # Construct headers
+        headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
+        headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
+        headers['Content-Type'] = 'application/json; charset=utf-8'
+
+        # Construct and send request
+        request = self._client.get(url, query)
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:

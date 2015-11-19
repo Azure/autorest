@@ -8,4 +8,4 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .group import group
+from .group_operations import groupOperations

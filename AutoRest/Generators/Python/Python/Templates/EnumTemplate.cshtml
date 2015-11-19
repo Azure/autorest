@@ -8,10 +8,10 @@
 @EmptyLine
 @*header*@
 from enum import Enum
-@EmptyLine
 @{
   foreach (var enumType in @Model.EnumTypes)
   {
+@EmptyLine
 @EmptyLine
 @:class @(enumType.Name)(Enum):
 @EmptyLine

@@ -9,9 +9,10 @@
 # --------------------------------------------------------------------------
 
 from msrest.serialization import Model
+from .base_resource import BaseResource
 
 
-class Resource(Model):
+class Resource(BaseResource):
 
     _required = ['location']
 

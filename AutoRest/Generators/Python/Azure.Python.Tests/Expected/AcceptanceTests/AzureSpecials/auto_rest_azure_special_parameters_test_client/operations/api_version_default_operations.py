@@ -8,7 +8,8 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from datetime import *
+import sys
+
 
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
@@ -18,11 +19,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class duration(object):
+class api_version_defaultOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -47,10 +49,10 @@ class duration(object):
             return value
 
     @async_request
-    def get_null(self, custom_headers={}, raw=False, callback=None):
+    def get_method_global_valid(self, custom_headers={}, raw=False, callback=None):
         """
 
-        Get null duration value
+        GET method with api-version modeled in global settings.
 
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
@@ -58,55 +60,6 @@ class duration(object):
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type custom_headers: dict
-        :type raw: boolean
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: timedelta or (timedelta, requests.response) or
-        concurrent.futures.Future
-        """
-
-        # Construct URL
-        url = '/duration/null'
-
-        # Construct parameters
-        query = {}
-
-        # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
-
-        # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
-
-        if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('duration', response)
-
-        if raw:
-            return deserialized, response
-
-        return deserialized
-
-    @async_request
-    def put_positive_duration(self, duration_body, custom_headers={}, raw=False, callback=None):
-        """
-
-        Put a positive duration value
-
-        :param duration_body:
-        :param custom_headers: headers that will be added to the request
-        :param raw: returns the direct response alongside the deserialized
-        response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type duration_body: timedelta
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -114,22 +67,24 @@ class duration(object):
         """
 
         # Construct URL
-        url = '/duration/positiveduration'
+        url = '/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview'
 
         # Construct parameters
         query = {}
+        if self.config.apiversion is not None:
+            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
-        # Construct body
-        content = self._serialize(duration_body, 'duration')
-
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.get(url, query)
+        response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -138,10 +93,10 @@ class duration(object):
             return None, response
 
     @async_request
-    def get_positive_duration(self, custom_headers={}, raw=False, callback=None):
+    def get_method_global_not_provided_valid(self, custom_headers={}, raw=False, callback=None):
         """
 
-        Get a positive duration value
+        GET method with api-version modeled in global settings.
 
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
@@ -152,19 +107,23 @@ class duration(object):
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: timedelta or (timedelta, requests.response) or
-        concurrent.futures.Future
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
-        url = '/duration/positiveduration'
+        url = '/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview'
 
         # Construct parameters
         query = {}
+        if self.config.apiversion is not None:
+            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -174,21 +133,14 @@ class duration(object):
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
 
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('duration', response)
-
         if raw:
-            return deserialized, response
-
-        return deserialized
+            return None, response
 
     @async_request
-    def get_invalid(self, custom_headers={}, raw=False, callback=None):
+    def get_path_global_valid(self, custom_headers={}, raw=False, callback=None):
         """
 
-        Get an invalid duration value
+        GET method with api-version modeled in global settings.
 
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
@@ -199,19 +151,23 @@ class duration(object):
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: timedelta or (timedelta, requests.response) or
-        concurrent.futures.Future
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
-        url = '/duration/invalid'
+        url = '/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview'
 
         # Construct parameters
         query = {}
+        if self.config.apiversion is not None:
+            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -221,12 +177,49 @@ class duration(object):
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
 
-        deserialized = None
+        if raw:
+            return None, response
 
-        if response.status_code == 200:
-            deserialized = self._deserialize('duration', response)
+    @async_request
+    def get_swagger_global_valid(self, custom_headers={}, raw=False, callback=None):
+        """
+
+        GET method with api-version modeled in global settings.
+
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
+        """
+
+        # Construct URL
+        url = '/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview'
+
+        # Construct parameters
+        query = {}
+        if self.config.apiversion is not None:
+            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
+
+        # Construct headers
+        headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
+        headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
+        headers['Content-Type'] = 'application/json; charset=utf-8'
+
+        # Construct and send request
+        request = self._client.get(url, query)
+        response = self._client.send(request, headers)
+
+        if response.status_code not in [200]:
+            raise ErrorException(self._deserialize, response)
 
         if raw:
-            return deserialized, response
-
-        return deserialized
+            return None, response

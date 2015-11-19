@@ -8,6 +8,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+import sys
+
+
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
@@ -16,11 +19,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class group(object):
+class usageOperationsOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -45,20 +49,18 @@ class group(object):
             return value
 
     @async_request
-    def get_sample_resource_group(self, resource_group_name, custom_headers={}, raw=False, callback=None):
+    def list(self, custom_headers={}, raw=False, callback=None):
         """
 
-        Provides a resouce group with name 'testgroup101' and location 'West
-        US'.
+        Gets the current usage count and the limit for the resources under the
+        subscription.
 
-        :param resource_group_name: Resource Group name 'testgroup101'.
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type resource_group_name: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -67,10 +69,9 @@ class group(object):
         """
 
         # Construct URL
-        url = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}'
+        url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages'
         path_format_arguments = {
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False),
-            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False)}
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -80,7 +81,10 @@ class group(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -88,12 +92,12 @@ class group(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise CloudException(self._deserialize, response)
 
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('SampleResourceGroup', response)
+            deserialized = self._deserialize('UsageListResult', response)
 
         if raw:
             return deserialized, response

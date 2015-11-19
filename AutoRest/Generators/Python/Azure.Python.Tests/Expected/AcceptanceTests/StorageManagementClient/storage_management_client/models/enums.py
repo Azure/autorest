@@ -16,6 +16,7 @@ class Reason(Enum):
     account_name_invalid = "AccountNameInvalid"
     already_exists = "AlreadyExists"
 
+
 class AccountType(Enum):
 
     standard_lrs = "Standard_LRS"
@@ -24,21 +25,25 @@ class AccountType(Enum):
     standard_ragrs = "Standard_RAGRS"
     premium_lrs = "Premium_LRS"
 
+
 class ProvisioningState(Enum):
 
     creating = "Creating"
     resolving_dns = "ResolvingDNS"
     succeeded = "Succeeded"
 
+
 class AccountStatus(Enum):
 
     available = "Available"
     unavailable = "Unavailable"
 
+
 class KeyName(Enum):
 
     key1 = "key1"
     key2 = "key2"
+
 
 class UsageUnit(Enum):
 

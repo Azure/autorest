@@ -8,6 +8,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+import sys
+
+
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
@@ -16,11 +19,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class header(object):
+class xms_client_request_idOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -45,20 +49,18 @@ class header(object):
             return value
 
     @async_request
-    def custom_named_request_id(self, fooclientrequestid, custom_headers={}, raw=False, callback=None):
+    def get(self, custom_headers={}, raw=False, callback=None):
         """
 
-        Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in
-        the header of the request
+        Get method that overwrites x-ms-client-request header with value
+        9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 
-        :param fooclientrequestid: The fooRequestId
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type fooclientrequestid: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -66,20 +68,69 @@ class header(object):
         """
 
         # Construct URL
-        url = '/azurespecials/customNamedRequestId'
+        url = '/azurespecials/overwrite/x-ms-client-request-id/method/'
 
         # Construct parameters
         query = {}
 
         # Construct headers
         headers = {}
-        if fooclientrequestid is not None:
-            query['foo-client-request-id'] = fooclientrequestid
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.post(url, query)
+        request = self._client.get(url, query)
+        response = self._client.send(request, headers)
+
+        if response.status_code not in [200]:
+            raise ErrorException(self._deserialize, response)
+
+        if raw:
+            return None, response
+
+    @async_request
+    def param_get(self, xmsclientrequestid, custom_headers={}, raw=False, callback=None):
+        """
+
+        Get method that overwrites x-ms-client-request header with value
+        9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+
+        :param xmsclientrequestid: This should appear as a method parameter,
+        use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type xmsclientrequestid: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
+        """
+
+        # Construct URL
+        url = '/azurespecials/overwrite/x-ms-client-request-id/via-param/method/'
+
+        # Construct parameters
+        query = {}
+
+        # Construct headers
+        headers = {}
+        if xmsclientrequestid is not None:
+            query['x-ms-client-request-id'] = xmsclientrequestid
+            if self.config.acceptlanguage is not None:
+                query['accept-language'] = self.config.acceptlanguage
+        headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
+        headers['Content-Type'] = 'application/json; charset=utf-8'
+
+        # Construct and send request
+        request = self._client.get(url, query)
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:

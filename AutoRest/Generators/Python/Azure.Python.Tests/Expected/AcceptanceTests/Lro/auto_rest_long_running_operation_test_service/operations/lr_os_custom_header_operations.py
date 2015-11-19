@@ -8,6 +8,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+import sys
+
+
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
@@ -16,11 +19,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class lro_retrys(object):
+class lr_os_custom_headerOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -45,13 +49,14 @@ class lro_retrys(object):
             return value
 
     @async_request
-    def put201_creating_succeeded200(self, product, custom_headers={}, raw=False, callback=None):
+    def put_async_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
         """
 
-        Long running put request, service returns a 500, then a 201 to the
-        initial request, with an entity that contains
-        ProvisioningState=’Creating’.  Polls return this value until the last
-        poll returns a ‘200’ with ProvisioningState=’Succeeded’
+        x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
+        required message header for all requests. Long running put request,
+        service returns a 200 to the initial request, with an entity that
+        contains ProvisioningState=’Creating’. Poll the endpoint indicated in
+        the Azure-AsyncOperation header for operation status
 
         :param product: Product to put
         :param custom_headers: headers that will be added to the request
@@ -69,14 +74,135 @@ class lro_retrys(object):
         """
 
         # Construct URL
-        url = '/lro/retryerror/put/201/creating/succeeded/200'
+        url = '/lro/customheader/putasync/retry/succeeded'
 
         # Construct parameters
         query = {}
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
+        headers['Content-Type'] = 'application/json; charset=utf-8'
+
+        # Construct body
+        content = self._serialize(product, 'Product')
+
+        # Construct and send request
+        request = self._client.put(url, query)
+        response = self._client.send(request, headers, content)
+
+        if response.status_code not in [200]:
+            raise CloudException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('Product', response)
+
+        if raw:
+            return deserialized, response
+
+        return deserialized
+
+    @async_request
+    def begin_put_async_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+        """
+
+        x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
+        required message header for all requests. Long running put request,
+        service returns a 200 to the initial request, with an entity that
+        contains ProvisioningState=’Creating’. Poll the endpoint indicated in
+        the Azure-AsyncOperation header for operation status
+
+        :param product: Product to put
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type product: object or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
+        """
+
+        # Construct URL
+        url = '/lro/customheader/putasync/retry/succeeded'
+
+        # Construct parameters
+        query = {}
+
+        # Construct headers
+        headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
+        headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
+        headers['Content-Type'] = 'application/json; charset=utf-8'
+
+        # Construct body
+        content = self._serialize(product, 'Product')
+
+        # Construct and send request
+        request = self._client.put(url, query)
+        response = self._client.send(request, headers, content)
+
+        if response.status_code not in [200]:
+            raise CloudException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('Product', response)
+
+        if raw:
+            return deserialized, response
+
+        return deserialized
+
+    @async_request
+    def put201_creating_succeeded200(self, product, custom_headers={}, raw=False, callback=None):
+        """
+
+        x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
+        required message header for all requests. Long running put request,
+        service returns a 201 to the initial request, with an entity that
+        contains ProvisioningState=’Creating’.  Polls return this value until
+        the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
+
+        :param product: Product to put
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type product: object or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
+        """
+
+        # Construct URL
+        url = '/lro/customheader/put/201/creating/succeeded/200'
+
+        # Construct parameters
+        query = {}
+
+        # Construct headers
+        headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
+        headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
@@ -87,7 +213,7 @@ class lro_retrys(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [200, 201]:
-            raise CloudErrorException(self._deserialize, response)
+            raise CloudException(self._deserialize, response)
 
         deserialized = None
 
@@ -102,13 +228,14 @@ class lro_retrys(object):
         return deserialized
 
     @async_request
-    def put_async_relative_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put201_creating_succeeded200(self, product, custom_headers={}, raw=False, callback=None):
         """
 
-        Long running put request, service returns a 500, then a 200 to the
-        initial request, with an entity that contains
-        ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        Azure-AsyncOperation header for operation status
+        x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
+        required message header for all requests. Long running put request,
+        service returns a 201 to the initial request, with an entity that
+        contains ProvisioningState=’Creating’.  Polls return this value until
+        the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
 
         :param product: Product to put
         :param custom_headers: headers that will be added to the request
@@ -126,14 +253,17 @@ class lro_retrys(object):
         """
 
         # Construct URL
-        url = '/lro/retryerror/putasync/retry/succeeded'
+        url = '/lro/customheader/put/201/creating/succeeded/200'
 
         # Construct parameters
         query = {}
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
@@ -143,160 +273,30 @@ class lro_retrys(object):
         request = self._client.put(url, query)
         response = self._client.send(request, headers, content)
 
-        if response.status_code not in [200]:
-            raise CloudErrorException(self._deserialize, response)
+        if response.status_code not in [200, 201]:
+            raise CloudException(self._deserialize, response)
 
         deserialized = None
 
         if response.status_code == 200:
+            deserialized = self._deserialize('Product', response)
+        if response.status_code == 201:
             deserialized = self._deserialize('Product', response)
 
         if raw:
             return deserialized, response
 
         return deserialized
-
-    @async_request
-    def delete_provisioning202_accepted200_succeeded(self, custom_headers={}, raw=False, callback=None):
-        """
-
-        Long running delete request, service returns a 500, then a  202 to the
-        initial request, with an entity that contains
-        ProvisioningState=’Accepted’.  Polls return this value until the last
-        poll returns a ‘200’ with ProvisioningState=’Succeeded’
-
-        :param custom_headers: headers that will be added to the request
-        :param raw: returns the direct response alongside the deserialized
-        response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type custom_headers: dict
-        :type raw: boolean
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: object or (object, requests.response) or
-        concurrent.futures.Future
-        """
-
-        # Construct URL
-        url = '/lro/retryerror/delete/provisioning/202/accepted/200/succeeded'
-
-        # Construct parameters
-        query = {}
-
-        # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
-
-        # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
-
-        if response.status_code not in [200, 202]:
-            raise CloudErrorException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('Product', response)
-        if response.status_code == 202:
-            deserialized = self._deserialize('Product', response)
-
-        if raw:
-            return deserialized, response
-
-        return deserialized
-
-    @async_request
-    def delete202_retry200(self, custom_headers={}, raw=False, callback=None):
-        """
-
-        Long running delete request, service returns a 500, then a 202 to the
-        initial request. Polls return this value until the last poll returns
-        a ‘200’ with ProvisioningState=’Succeeded’
-
-        :param custom_headers: headers that will be added to the request
-        :param raw: returns the direct response alongside the deserialized
-        response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type custom_headers: dict
-        :type raw: boolean
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
-        """
-
-        # Construct URL
-        url = '/lro/retryerror/delete/202/retry/200'
-
-        # Construct parameters
-        query = {}
-
-        # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
-
-        # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
-
-        if response.status_code not in [202]:
-            raise CloudErrorException(self._deserialize, response)
-
-        if raw:
-            return None, response
-
-    @async_request
-    def delete_async_relative_retry_succeeded(self, custom_headers={}, raw=False, callback=None):
-        """
-
-        Long running delete request, service returns a 500, then a 202 to the
-        initial request. Poll the endpoint indicated in the
-        Azure-AsyncOperation header for operation status
-
-        :param custom_headers: headers that will be added to the request
-        :param raw: returns the direct response alongside the deserialized
-        response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type custom_headers: dict
-        :type raw: boolean
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
-        """
-
-        # Construct URL
-        url = '/lro/retryerror/deleteasync/retry/succeeded'
-
-        # Construct parameters
-        query = {}
-
-        # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
-
-        # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
-
-        if response.status_code not in [202]:
-            raise CloudErrorException(self._deserialize, response)
-
-        if raw:
-            return None, response
 
     @async_request
     def post202_retry200(self, product, custom_headers={}, raw=False, callback=None):
         """
 
-        Long running post request, service returns a 500, then a 202 to the
-        initial request, with 'Location' and 'Retry-After' headers, Polls
-        return a 200 with a response body after success
+        x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
+        required message header for all requests. Long running post request,
+        service returns a 202 to the initial request, with 'Location' and
+        'Retry-After' headers, Polls return a 200 with a response body after
+        success
 
         :param product: Product to put
         :param custom_headers: headers that will be added to the request
@@ -313,14 +313,17 @@ class lro_retrys(object):
         """
 
         # Construct URL
-        url = '/lro/retryerror/post/202/retry/200'
+        url = '/lro/customheader/post/202/retry/200'
 
         # Construct parameters
         query = {}
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
@@ -331,19 +334,20 @@ class lro_retrys(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [202]:
-            raise CloudErrorException(self._deserialize, response)
+            raise CloudException(self._deserialize, response)
 
         if raw:
             return None, response
 
     @async_request
-    def post_async_relative_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post202_retry200(self, product, custom_headers={}, raw=False, callback=None):
         """
 
-        Long running post request, service returns a 500, then a 202 to the
-        initial request, with an entity that contains
-        ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        Azure-AsyncOperation header for operation status
+        x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
+        required message header for all requests. Long running post request,
+        service returns a 202 to the initial request, with 'Location' and
+        'Retry-After' headers, Polls return a 200 with a response body after
+        success
 
         :param product: Product to put
         :param custom_headers: headers that will be added to the request
@@ -360,14 +364,17 @@ class lro_retrys(object):
         """
 
         # Construct URL
-        url = '/lro/retryerror/postasync/retry/succeeded'
+        url = '/lro/customheader/post/202/retry/200'
 
         # Construct parameters
         query = {}
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
@@ -378,7 +385,109 @@ class lro_retrys(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [202]:
-            raise CloudErrorException(self._deserialize, response)
+            raise CloudException(self._deserialize, response)
+
+        if raw:
+            return None, response
+
+    @async_request
+    def post_async_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+        """
+
+        x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
+        required message header for all requests. Long running post request,
+        service returns a 202 to the initial request, with an entity that
+        contains ProvisioningState=’Creating’. Poll the endpoint indicated in
+        the Azure-AsyncOperation header for operation status
+
+        :param product: Product to put
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type product: object or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
+        """
+
+        # Construct URL
+        url = '/lro/customheader/postasync/retry/succeeded'
+
+        # Construct parameters
+        query = {}
+
+        # Construct headers
+        headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
+        headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
+        headers['Content-Type'] = 'application/json; charset=utf-8'
+
+        # Construct body
+        content = self._serialize(product, 'Product')
+
+        # Construct and send request
+        request = self._client.post(url, query)
+        response = self._client.send(request, headers, content)
+
+        if response.status_code not in [202]:
+            raise CloudException(self._deserialize, response)
+
+        if raw:
+            return None, response
+
+    @async_request
+    def begin_post_async_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+        """
+
+        x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
+        required message header for all requests. Long running post request,
+        service returns a 202 to the initial request, with an entity that
+        contains ProvisioningState=’Creating’. Poll the endpoint indicated in
+        the Azure-AsyncOperation header for operation status
+
+        :param product: Product to put
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type product: object or none
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
+        """
+
+        # Construct URL
+        url = '/lro/customheader/postasync/retry/succeeded'
+
+        # Construct parameters
+        query = {}
+
+        # Construct headers
+        headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
+        headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
+        headers['Content-Type'] = 'application/json; charset=utf-8'
+
+        # Construct body
+        content = self._serialize(product, 'Product')
+
+        # Construct and send request
+        request = self._client.post(url, query)
+        response = self._client.send(request, headers, content)
+
+        if response.status_code not in [202]:
+            raise CloudException(self._deserialize, response)
 
         if raw:
             return None, response

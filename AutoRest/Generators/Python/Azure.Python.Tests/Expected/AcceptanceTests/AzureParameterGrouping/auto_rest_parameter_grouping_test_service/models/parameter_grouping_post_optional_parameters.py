@@ -11,22 +11,18 @@
 from msrest.serialization import Model
 
 
-class FlattenedProductProperties(Model):
+class ParameterGroupingPostOptionalParameters(Model):
 
     _required = []
 
     _attribute_map = {
-        'pname': {'key': 'pname', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'provisioning_state_values': {'key': 'provisioningStateValues', 'type': 'str'},
-        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
+        'custom_header': {'key': '', 'type': 'str'},
+        'query': {'key': '', 'type': 'int'},
     }
 
     def __init__(self, *args, **kwargs):
 
-        self.pname = None
-        self.type = None
-        self.provisioning_state_values = None
-        self.provisioning_state = None
+        self.custom_header = None
+        self.query = None
 
-        super(FlattenedProductProperties, self).__init__(*args, **kwargs)
+        super(ParameterGroupingPostOptionalParameters, self).__init__(*args, **kwargs)

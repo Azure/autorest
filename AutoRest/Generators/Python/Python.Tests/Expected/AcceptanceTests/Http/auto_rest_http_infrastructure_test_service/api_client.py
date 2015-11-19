@@ -11,12 +11,6 @@
 
 from msrest.service_client import ServiceClient, async_request
 from msrest import Configuration, Serializer, Deserializer
-from msrest.exceptions import (
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    HttpOperationError)
 from .operations.http_failure import http_failure
 from .operations.http_success import http_success
 from .operations.http_redirects import http_redirects

@@ -9,28 +9,24 @@
 # --------------------------------------------------------------------------
 
 from msrest.serialization import Model
-from msrest.exceptions import HttpOperationError
 
 
-class CloudError(Model):
+class ParameterGroupingPostRequiredParameters(Model):
 
-    _required = []
+    _required = ['body', 'path']
 
     _attribute_map = {
-        'status': {'key': 'status', 'type': 'int'},
-        'message': {'key': 'message', 'type': 'str'},
+        'body': {'key': '', 'type': 'int'},
+        'custom_header': {'key': '', 'type': 'str'},
+        'query': {'key': '', 'type': 'int'},
+        'path': {'key': '', 'type': 'str'},
     }
 
     def __init__(self, *args, **kwargs):
 
-        self.status = None
-        self.message = None
+        self.body = None
+        self.custom_header = None
+        self.query = None
+        self.path = None
 
-        super(CloudError, self).__init__(*args, **kwargs)
-
-
-class CloudErrorException(HttpOperationError):
-
-    def __init__(self, deserialize, response, *args):
-
-        super(CloudErrorException, self).__init__(deserialize, response, 'CloudError', *args)
+        super(ParameterGroupingPostRequiredParameters, self).__init__(*args, **kwargs)

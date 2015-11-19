@@ -11,38 +11,32 @@
 
 from msrest.service_client import ServiceClient, async_request
 from msrest import Configuration, Serializer, Deserializer
-from msrest.exceptions import (
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    HttpOperationError)
-from .operations.group import group
+from .operations.group_operations import groupOperations
 from . import models
 
 
 class MicrosoftAzureTestUrlConfiguration(Configuration):
 
-    def __init__(self, subscription_id, apiversion, base_url=None, filepath=None):
+    def __init__(self, credentials, subscription_id, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'https://management.azure.com/'
 
         super(MicrosoftAzureTestUrlConfiguration, self).__init__(base_url, filepath)
 
+        self.credentials = credentials
         self.subscription_id = subscription_id
-        self.apiversion = apiversion
 
 
 class MicrosoftAzureTestUrl(object):
 
     def __init__(self, config):
 
-        self._client = ServiceClient(None, config)
+        self._client = ServiceClient(config.credentials, config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.group = group(self._client, self.config, self._serialize, self._deserialize)
+        self.group = groupOperations(self._client, self.config, self._serialize, self._deserialize)

@@ -11,40 +11,34 @@
 
 from msrest.service_client import ServiceClient, async_request
 from msrest import Configuration, Serializer, Deserializer
-from msrest.exceptions import (
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    HttpOperationError)
-from .operations.storage_accounts import storage_accounts
-from .operations.usage_operations import usageOperations
+from .operations.storage_accounts_operations import storage_accountsOperations
+from .operations.usage_operations_operations import usageOperationsOperations
 from . import models
 
 
 class StorageManagementClientConfiguration(Configuration):
 
-    def __init__(self, subscription_id, apiversion, base_url=None, filepath=None):
+    def __init__(self, credentials, subscription_id, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'https://management.azure.com'
 
         super(StorageManagementClientConfiguration, self).__init__(base_url, filepath)
 
+        self.credentials = credentials
         self.subscription_id = subscription_id
-        self.apiversion = apiversion
 
 
 class StorageManagementClient(object):
 
     def __init__(self, config):
 
-        self._client = ServiceClient(None, config)
+        self._client = ServiceClient(config.credentials, config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.storage_accounts = storage_accounts(self._client, self.config, self._serialize, self._deserialize)
-        self.usageOperations = usageOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.storage_accounts = storage_accountsOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.usageOperations = usageOperationsOperations(self._client, self.config, self._serialize, self._deserialize)

@@ -185,7 +185,7 @@ gulp.task('regenerate:expected:pythonazure', function(cb){
     'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'Python'
+    'codeGenerator': 'Azure.Python'
   }, cb);
 })
 

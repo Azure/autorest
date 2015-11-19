@@ -11,12 +11,6 @@
 
 from msrest.service_client import ServiceClient, async_request
 from msrest import Configuration, Serializer, Deserializer
-from msrest.exceptions import (
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    HttpOperationError)
 from .operations.basic_operations import basicOperations
 from .operations.primitive import primitive
 from .operations.array import array

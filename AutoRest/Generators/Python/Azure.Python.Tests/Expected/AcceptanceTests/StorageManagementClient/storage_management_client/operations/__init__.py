@@ -8,5 +8,5 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .storage_accounts import storage_accounts
-from .usage_operations import usageOperations
+from .storage_accounts_operations import storage_accountsOperations
+from .usage_operations_operations import usageOperationsOperations

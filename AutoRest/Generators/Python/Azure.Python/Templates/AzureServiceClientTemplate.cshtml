@@ -19,19 +19,23 @@
 @EmptyLine
 from msrest.service_client import ServiceClient, async_request
 from msrest import Configuration, Serializer, Deserializer
+@if (Model.MethodTemplateModels.Any())
+{
+<text>
 from msrest.exceptions import (
     SerializationError,
     DeserializationError,
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-@{
-  if (Model.MethodGroupModels.Any())
+import uuid
+</text>
+}
+@if (Model.MethodGroupModels.Any())
+{
+  foreach (var modelGroupType in Model.MethodGroupModels)
   {
-    foreach (var modelGroupType in Model.MethodGroupModels)
-    {
 @:from .operations.@(modelGroupType.MethodGroupType.ToPythonCase()) import @modelGroupType.MethodGroupType
-    }
   }
 }
 from . import models
@@ -50,20 +54,17 @@ class @(Model.Name)Configuration(Configuration):
 @EmptyLine
 @foreach (var param in Model.Properties.Where(p => p.IsRequired))
 {
-        @:self.@(param.Name) = @(param.Name);
+        @:self.@(param.Name) = @(param.Name)
 }
-@*EmptyLine
-        self.api_version = '2015-06-01.2.0'
-*@
 @EmptyLine
 @EmptyLine
 class @(Model.Name)(object):
 @EmptyLine
     def __init__(self, config):
 @EmptyLine
-        self._client = ServiceClient(@(Model.Properties.Any(p => p.Type == PrimaryType.Credentials) ? "config.credentials" : "None"), config) 
+        self._client = ServiceClient(@(Model.Properties.Any(p => p.Type == PrimaryType.Credentials) ? "config.credentials" : "None"), config)
 @EmptyLine
-        client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 @EmptyLine
@@ -72,7 +73,6 @@ class @(Model.Name)(object):
   {
         @:self.@(methodGroup.MethodGroupName) = @(methodGroup.MethodGroupType)(self._client, self.config, self._serialize, self._deserialize)
   }
-@EmptyLine
 @if (Model.MethodTemplateModels.Any())
 {
 <text>

@@ -8,6 +8,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+import sys
+
+
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
@@ -16,11 +19,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class subscription_in_credentials(object):
+class parameter_groupingOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -45,18 +49,20 @@ class subscription_in_credentials(object):
             return value
 
     @async_request
-    def post_method_global_valid(self, custom_headers={}, raw=False, callback=None):
+    def post_required(self, parameter_groupingpost_required_parameters, custom_headers={}, raw=False, callback=None):
         """
 
-        POST method with subscriptionId modeled in credentials.  Set the
-        credential subscriptionId to '1234-5678-9012-3456' to succeed
+        Post a bunch of required parameters grouped
 
+        :param parameter_groupingpost_required_parameters: Additional
+        parameters for the operation
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
+        :type parameter_groupingpost_required_parameters: object
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -64,17 +70,24 @@ class subscription_in_credentials(object):
         """
 
         # Construct URL
-        url = '/azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}'
+        url = '/parameterGrouping/postRequired/{path}'
         path_format_arguments = {
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'path': self._parse_url("path", path, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
+        if query is not None:
+            query['query'] = self._parse_url("query", query, 'int', False)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
+            if custom_header is not None:
+                query['customHeader'] = custom_header
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -88,19 +101,20 @@ class subscription_in_credentials(object):
             return None, response
 
     @async_request
-    def post_method_global_null(self, custom_headers={}, raw=False, callback=None):
+    def post_optional(self, parameter_groupingpost_optional_parameters, custom_headers={}, raw=False, callback=None):
         """
 
-        POST method with subscriptionId modeled in credentials.  Set the
-        credential subscriptionId to null, and client-side validation should
-        prevent you from making this call
+        Post a bunch of optional parameters grouped
 
+        :param parameter_groupingpost_optional_parameters: Additional
+        parameters for the operation
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
+        :type parameter_groupingpost_optional_parameters: object or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -108,17 +122,21 @@ class subscription_in_credentials(object):
         """
 
         # Construct URL
-        url = '/azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}'
-        path_format_arguments = {
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
-        url = url.format(**path_format_arguments)
+        url = '/parameterGrouping/postOptional'
 
         # Construct parameters
         query = {}
+        if query is not None:
+            query['query'] = self._parse_url("query", query, 'int', False)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
+            if custom_header is not None:
+                query['customHeader'] = custom_header
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -132,18 +150,25 @@ class subscription_in_credentials(object):
             return None, response
 
     @async_request
-    def post_method_global_not_provided_valid(self, custom_headers={}, raw=False, callback=None):
+    def post_multiple_parameter_groups(self, firstparametergroup, parameter_groupingpost_multiple_parameter_groupssecondparametergroup, custom_headers={}, raw=False, callback=None):
         """
 
-        POST method with subscriptionId modeled in credentials.  Set the
-        credential subscriptionId to '1234-5678-9012-3456' to succeed
+        Post parameters from multiple different parameter groups
 
+        :param firstparametergroup: Additional parameters for the operation
+        :param
+        parameter_groupingpost_multiple_parameter_groupssecondparametergroup:
+        Additional parameters for the operation
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
+        :type firstparametergroup: object or none
+        :type
+        parameter_groupingpost_multiple_parameter_groupssecondparametergroup:
+        object or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -151,19 +176,25 @@ class subscription_in_credentials(object):
         """
 
         # Construct URL
-        url = '/azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}'
-        path_format_arguments = {
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
-        url = url.format(**path_format_arguments)
+        url = '/parameterGrouping/postMultipleParameterGroups'
 
         # Construct parameters
         query = {}
-        if self.config.apiversion is not None:
-            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
+        if queryone is not None:
+            query['query-one'] = self._parse_url("queryone", queryone, 'int', False)
+        if querytwo is not None:
+            query['query-two'] = self._parse_url("querytwo", querytwo, 'int', False)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
+            if headerone is not None:
+                query['header-one'] = headerone
+                if headertwo is not None:
+                    query['header-two'] = headertwo
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -177,18 +208,19 @@ class subscription_in_credentials(object):
             return None, response
 
     @async_request
-    def post_path_global_valid(self, custom_headers={}, raw=False, callback=None):
+    def post_shared_parameter_group_object(self, firstparametergroup, custom_headers={}, raw=False, callback=None):
         """
 
-        POST method with subscriptionId modeled in credentials.  Set the
-        credential subscriptionId to '1234-5678-9012-3456' to succeed
+        Post parameters with a shared parameter group object
 
+        :param firstparametergroup: Additional parameters for the operation
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
+        :type firstparametergroup: object or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -196,60 +228,21 @@ class subscription_in_credentials(object):
         """
 
         # Construct URL
-        url = '/azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}'
-        path_format_arguments = {
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
-        url = url.format(**path_format_arguments)
+        url = '/parameterGrouping/sharedParameterGroupObject'
 
         # Construct parameters
         query = {}
+        if queryone is not None:
+            query['query-one'] = self._parse_url("queryone", queryone, 'int', False)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
+            if headerone is not None:
+                query['header-one'] = headerone
         headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
-
-        # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
-
-        if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
-
-        if raw:
-            return None, response
-
-    @async_request
-    def post_swagger_global_valid(self, custom_headers={}, raw=False, callback=None):
-        """
-
-        POST method with subscriptionId modeled in credentials.  Set the
-        credential subscriptionId to '1234-5678-9012-3456' to succeed
-
-        :param custom_headers: headers that will be added to the request
-        :param raw: returns the direct response alongside the deserialized
-        response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type custom_headers: dict
-        :type raw: boolean
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
-        """
-
-        # Construct URL
-        url = '/azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}'
-        path_format_arguments = {
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
-        url = url.format(**path_format_arguments)
-
-        # Construct parameters
-        query = {}
-
-        # Construct headers
-        headers = {}
-        headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request

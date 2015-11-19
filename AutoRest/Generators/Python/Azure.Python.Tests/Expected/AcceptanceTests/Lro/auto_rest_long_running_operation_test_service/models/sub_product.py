@@ -17,11 +17,13 @@ class SubProduct(SubResource):
     _required = []
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'SubProductProperties'},
+        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
     }
 
     def __init__(self, *args, **kwargs):
 
-        self.properties = None
+        self.provisioning_state = None
+        self.provisioning_state_values = None
 
         super(SubProduct, self).__init__(*args, **kwargs)

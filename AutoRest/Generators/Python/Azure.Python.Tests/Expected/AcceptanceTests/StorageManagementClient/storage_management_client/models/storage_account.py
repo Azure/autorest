@@ -17,11 +17,31 @@ class StorageAccount(Resource):
     _required = []
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'StorageAccountProperties'},
+        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'ProvisioningState'},
+        'account_type': {'key': 'properties.accountType', 'type': 'AccountType'},
+        'primary_endpoints': {'key': 'properties.primaryEndpoints', 'type': 'Endpoints'},
+        'primary_location': {'key': 'properties.primaryLocation', 'type': 'str'},
+        'status_of_primary': {'key': 'properties.statusOfPrimary', 'type': 'AccountStatus'},
+        'last_geo_failover_time': {'key': 'properties.lastGeoFailoverTime', 'type': 'iso-11'},
+        'secondary_location': {'key': 'properties.secondaryLocation', 'type': 'str'},
+        'status_of_secondary': {'key': 'properties.statusOfSecondary', 'type': 'AccountStatus'},
+        'creation_time': {'key': 'properties.creationTime', 'type': 'iso-11'},
+        'custom_domain': {'key': 'properties.customDomain', 'type': 'CustomDomain'},
+        'secondary_endpoints': {'key': 'properties.secondaryEndpoints', 'type': 'Endpoints'},
     }
 
     def __init__(self, *args, **kwargs):
 
-        self.properties = None
+        self.provisioning_state = None
+        self.account_type = None
+        self.primary_endpoints = None
+        self.primary_location = None
+        self.status_of_primary = None
+        self.last_geo_failover_time = None
+        self.secondary_location = None
+        self.status_of_secondary = None
+        self.creation_time = None
+        self.custom_domain = None
+        self.secondary_endpoints = None
 
         super(StorageAccount, self).__init__(*args, **kwargs)

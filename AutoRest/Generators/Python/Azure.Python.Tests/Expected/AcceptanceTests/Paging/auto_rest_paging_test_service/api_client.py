@@ -11,35 +11,31 @@
 
 from msrest.service_client import ServiceClient, async_request
 from msrest import Configuration, Serializer, Deserializer
-from msrest.exceptions import (
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    HttpOperationError)
-from .operations.paging import paging
+from .operations.paging_operations import pagingOperations
 from . import models
 
 
 class AutoRestPagingTestServiceConfiguration(Configuration):
 
-    def __init__(self, base_url=None, filepath=None):
+    def __init__(self, credentials, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
 
         super(AutoRestPagingTestServiceConfiguration, self).__init__(base_url, filepath)
 
+        self.credentials = credentials
+
 
 class AutoRestPagingTestService(object):
 
     def __init__(self, config):
 
-        self._client = ServiceClient(None, config)
+        self._client = ServiceClient(config.credentials, config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.paging = paging(self._client, self.config, self._serialize, self._deserialize)
+        self.paging = pagingOperations(self._client, self.config, self._serialize, self._deserialize)

@@ -19,19 +19,22 @@
 @EmptyLine
 from msrest.service_client import ServiceClient, async_request
 from msrest import Configuration, Serializer, Deserializer
+@if (Model.MethodTemplateModels.Any())
+{
+<text>
 from msrest.exceptions import (
     SerializationError,
     DeserializationError,
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-@{
-  if (Model.MethodGroupModels.Any())
+</text>
+}
+@if (Model.MethodGroupModels.Any())
+{
+  foreach (var modelGroupType in Model.MethodGroupModels)
   {
-    foreach (var modelGroupType in Model.MethodGroupModels)
-    {
 @:from .operations.@(modelGroupType.MethodGroupType.ToPythonCase()) import @modelGroupType.MethodGroupType
-    }
   }
 }
 from . import models

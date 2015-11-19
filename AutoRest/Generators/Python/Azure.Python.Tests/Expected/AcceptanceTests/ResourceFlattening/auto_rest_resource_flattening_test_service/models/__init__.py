@@ -11,5 +11,4 @@
 from .error import Error, ErrorException
 from .resource import Resource
 from .flattened_product import FlattenedProduct
-from .flattened_product_properties import FlattenedProductProperties
 from .resource_collection import ResourceCollection

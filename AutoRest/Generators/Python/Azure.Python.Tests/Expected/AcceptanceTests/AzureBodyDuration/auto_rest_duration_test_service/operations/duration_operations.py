@@ -8,6 +8,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+import sys
+
+from datetime import *
+
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
@@ -16,11 +20,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class api_version_local(object):
+class durationOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -45,21 +50,69 @@ class api_version_local(object):
             return value
 
     @async_request
-    def get_method_local_valid(self, apiversion, custom_headers={}, raw=False, callback=None):
+    def get_null(self, custom_headers={}, raw=False, callback=None):
         """
 
-        Get method with api-version modeled in the method.  pass in
-        api-version = '2.0' to succeed
+        Get null duration value
 
-        :param apiversion: This should appear as a method parameter, use value
-        '2.0'. Possible values for this parameter include: '2.0'
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type apiversion: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: timedelta or (timedelta, requests.response) or
+        concurrent.futures.Future
+        """
+
+        # Construct URL
+        url = '/duration/null'
+
+        # Construct parameters
+        query = {}
+
+        # Construct headers
+        headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
+        headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
+        headers['Content-Type'] = 'application/json; charset=utf-8'
+
+        # Construct and send request
+        request = self._client.get(url, query)
+        response = self._client.send(request, headers)
+
+        if response.status_code not in [200]:
+            raise ErrorException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('duration', response)
+
+        if raw:
+            return deserialized, response
+
+        return deserialized
+
+    @async_request
+    def put_positive_duration(self, duration_body, custom_headers={}, raw=False, callback=None):
+        """
+
+        Put a positive duration value
+
+        :param duration_body:
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type duration_body: timedelta
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -67,21 +120,25 @@ class api_version_local(object):
         """
 
         # Construct URL
-        url = '/azurespecials/apiVersion/method/string/none/query/local/2.0'
+        url = '/duration/positiveduration'
 
         # Construct parameters
         query = {}
-        if apiversion is not None:
-            query['api-version'] = self._parse_url("apiversion", apiversion, 'str', False)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
+        # Construct body
+        content = self._serialize(duration_body, 'duration')
+
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.put(url, query)
+        response = self._client.send(request, headers, content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -90,38 +147,36 @@ class api_version_local(object):
             return None, response
 
     @async_request
-    def get_method_local_null(self, apiversion, custom_headers={}, raw=False, callback=None):
+    def get_positive_duration(self, custom_headers={}, raw=False, callback=None):
         """
 
-        Get method with api-version modeled in the method.  pass in
-        api-version = null to succeed
+        Get a positive duration value
 
-        :param apiversion: This should appear as a method parameter, use value
-        null, this should result in no serialized parameter
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type apiversion: str or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+        :rtype: timedelta or (timedelta, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
-        url = '/azurespecials/apiVersion/method/string/none/query/local/null'
+        url = '/duration/positiveduration'
 
         # Construct parameters
         query = {}
-        if apiversion is not None:
-            query['api-version'] = self._parse_url("apiversion", apiversion, 'str', False)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -131,42 +186,47 @@ class api_version_local(object):
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
 
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('duration', response)
+
         if raw:
-            return None, response
+            return deserialized, response
+
+        return deserialized
 
     @async_request
-    def get_path_local_valid(self, apiversion, custom_headers={}, raw=False, callback=None):
+    def get_invalid(self, custom_headers={}, raw=False, callback=None):
         """
 
-        Get method with api-version modeled in the method.  pass in
-        api-version = '2.0' to succeed
+        Get an invalid duration value
 
-        :param apiversion: This should appear as a method parameter, use value
-        '2.0'. Possible values for this parameter include: '2.0'
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type apiversion: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+        :rtype: timedelta or (timedelta, requests.response) or
+        concurrent.futures.Future
         """
 
         # Construct URL
-        url = '/azurespecials/apiVersion/path/string/none/query/local/2.0'
+        url = '/duration/invalid'
 
         # Construct parameters
         query = {}
-        if apiversion is not None:
-            query['api-version'] = self._parse_url("apiversion", apiversion, 'str', False)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -176,51 +236,12 @@ class api_version_local(object):
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
 
-        if raw:
-            return None, response
+        deserialized = None
 
-    @async_request
-    def get_swagger_local_valid(self, apiversion, custom_headers={}, raw=False, callback=None):
-        """
-
-        Get method with api-version modeled in the method.  pass in
-        api-version = '2.0' to succeed
-
-        :param apiversion: The api version, which appears in the query, the
-        value is always '2.0'. Possible values for this parameter include:
-        '2.0'
-        :param custom_headers: headers that will be added to the request
-        :param raw: returns the direct response alongside the deserialized
-        response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type apiversion: str
-        :type custom_headers: dict
-        :type raw: boolean
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
-        """
-
-        # Construct URL
-        url = '/azurespecials/apiVersion/swagger/string/none/query/local/2.0'
-
-        # Construct parameters
-        query = {}
-        if apiversion is not None:
-            query['api-version'] = self._parse_url("apiversion", apiversion, 'str', False)
-
-        # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
-
-        # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
-
-        if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+        if response.status_code == 200:
+            deserialized = self._deserialize('duration', response)
 
         if raw:
-            return None, response
+            return deserialized, response
+
+        return deserialized

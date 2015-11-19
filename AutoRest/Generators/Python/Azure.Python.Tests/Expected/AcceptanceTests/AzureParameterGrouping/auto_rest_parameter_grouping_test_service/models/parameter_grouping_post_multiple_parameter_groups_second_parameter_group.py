@@ -11,18 +11,18 @@
 from msrest.serialization import Model
 
 
-class SubProductProperties(Model):
+class ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup(Model):
 
     _required = []
 
     _attribute_map = {
-        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
-        'provisioning_state_values': {'key': 'provisioningStateValues', 'type': 'str'},
+        'headertwo': {'key': '', 'type': 'str'},
+        'querytwo': {'key': '', 'type': 'int'},
     }
 
     def __init__(self, *args, **kwargs):
 
-        self.provisioning_state = None
-        self.provisioning_state_values = None
+        self.headertwo = None
+        self.querytwo = None
 
-        super(SubProductProperties, self).__init__(*args, **kwargs)
+        super(ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup, self).__init__(*args, **kwargs)

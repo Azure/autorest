@@ -17,11 +17,11 @@ class StorageAccountCreateParameters(Resource):
     _required = []
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'StorageAccountPropertiesCreateParameters'},
+        'account_type': {'key': 'properties.accountType', 'type': 'AccountType'},
     }
 
     def __init__(self, *args, **kwargs):
 
-        self.properties = None
+        self.account_type = None
 
         super(StorageAccountCreateParameters, self).__init__(*args, **kwargs)

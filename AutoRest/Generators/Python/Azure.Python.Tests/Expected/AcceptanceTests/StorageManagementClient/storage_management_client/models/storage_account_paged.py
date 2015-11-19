@@ -8,19 +8,16 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.serialization import Model
+from runtime.msrest.paging import Paged
 
 
-class StorageAccountPropertiesCreateParameters(Model):
-
-    _required = []
+class StorageAccountPaged(Paged):
 
     _attribute_map = {
-        'account_type': {'key': 'accountType', 'type': 'AccountType'},
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+        'items': {'key': 'value', 'type': '[StorageAccount]'}
     }
 
     def __init__(self, *args, **kwargs):
 
-        self.account_type = None
-
-        super(StorageAccountPropertiesCreateParameters, self).__init__(*args, **kwargs)
+        super(StorageAccountPaged, self).__init__(*args, **kwargs)
