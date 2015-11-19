@@ -13,6 +13,7 @@ package fixtures.paging;
 import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import java.util.List;
 
 /**
@@ -30,6 +31,13 @@ public interface AutoRestPagingTestService {
      * @return the list of interceptors.
      */
     List<Interceptor> getClientInterceptors();
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum.
+     */
+    void setLogLevel(Level logLevel);
 
     /**
      * Gets the {@link AzureClient} used for long running operations.

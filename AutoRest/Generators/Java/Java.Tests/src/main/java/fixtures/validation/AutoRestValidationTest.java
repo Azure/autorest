@@ -12,6 +12,7 @@ package fixtures.validation;
 
 import java.util.List;
 import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -30,15 +31,24 @@ import retrofit.http.Query;
 public interface AutoRestValidationTest {
     /**
      * Gets the URI used as the base for all cloud service requests.
+     *
      * @return the BaseUri value.
      */
     String getBaseUri();
 
     /**
      * Gets the list of interceptors the OkHttp client will execute.
+     *
      * @return the list of interceptors.
      */
     List<Interceptor> getClientInterceptors();
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum.
+     */
+    void setLogLevel(Level logLevel);
 
     /**
      * Gets Subscription ID..
