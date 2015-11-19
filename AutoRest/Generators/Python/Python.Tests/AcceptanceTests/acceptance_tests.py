@@ -31,10 +31,15 @@ unittest.TestLoader.sortTestMethodsUsing = sort_test
 
 class AcceptanceTests(unittest.TestCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
 
-        self.server = subprocess.Popen("node ../../../../AutoRest/TestServer/server/startup/www.js")
-        return super(AcceptanceTests, self).setUp()
+        cls.server = subprocess.Popen("node ../../../../AutoRest/TestServer/server/startup/www.js")
+
+    @classmethod
+    def tearDownClass(cls):
+
+        cls.server.kill()
 
     def test_bool(self):
 
@@ -281,12 +286,8 @@ class AcceptanceTests(unittest.TestCase):
             print "SKIPPED {0}".format(s)
 
         totalTests = len(report)
-        print "The test coverage is {0}/{1}.".format(totalTests - len(skipped), totalTests)
+        print ("The test coverage is {0}/{1}.".format(totalTests - len(skipped), totalTests))
         self.assertEqual(0, len(skipped))
-
-    def tearDown(self):
-        self.server.kill()
-        return super(AcceptanceTests, self).tearDown() 
 
 if __name__ == '__main__':
     unittest.main()
