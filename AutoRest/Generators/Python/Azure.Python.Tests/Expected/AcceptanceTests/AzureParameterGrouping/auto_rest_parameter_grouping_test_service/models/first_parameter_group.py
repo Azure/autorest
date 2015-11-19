@@ -11,18 +11,18 @@
 from msrest.serialization import Model
 
 
-class StorageAccountPropertiesUpdateParameters(Model):
+class FirstParameterGroup(Model):
 
     _required = []
 
     _attribute_map = {
-        'account_type': {'key': 'accountType', 'type': 'AccountType'},
-        'custom_domain': {'key': 'customDomain', 'type': 'CustomDomain'},
+        'headerone': {'key': '', 'type': 'str'},
+        'queryone': {'key': '', 'type': 'int'},
     }
 
     def __init__(self, *args, **kwargs):
 
-        self.account_type = None
-        self.custom_domain = None
+        self.headerone = None
+        self.queryone = None
 
-        super(StorageAccountPropertiesUpdateParameters, self).__init__(*args, **kwargs)
+        super(FirstParameterGroup, self).__init__(*args, **kwargs)

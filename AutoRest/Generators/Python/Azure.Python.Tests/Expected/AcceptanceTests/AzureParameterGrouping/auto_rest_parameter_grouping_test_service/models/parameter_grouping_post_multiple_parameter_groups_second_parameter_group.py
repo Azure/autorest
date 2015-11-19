@@ -9,19 +9,20 @@
 # --------------------------------------------------------------------------
 
 from msrest.serialization import Model
-from .resource import Resource
 
 
-class StorageAccountCreateParameters(Resource):
+class ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup(Model):
 
     _required = []
 
     _attribute_map = {
-        'account_type': {'key': 'properties.accountType', 'type': 'AccountType'},
+        'headertwo': {'key': '', 'type': 'str'},
+        'querytwo': {'key': '', 'type': 'int'},
     }
 
     def __init__(self, *args, **kwargs):
 
-        self.account_type = None
+        self.headertwo = None
+        self.querytwo = None
 
-        super(StorageAccountCreateParameters, self).__init__(*args, **kwargs)
+        super(ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup, self).__init__(*args, **kwargs)

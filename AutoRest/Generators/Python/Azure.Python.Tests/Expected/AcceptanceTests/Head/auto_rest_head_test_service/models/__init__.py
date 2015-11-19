@@ -8,19 +8,3 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.serialization import Model
-
-
-class StorageAccountPropertiesCreateParameters(Model):
-
-    _required = []
-
-    _attribute_map = {
-        'account_type': {'key': 'accountType', 'type': 'AccountType'},
-    }
-
-    def __init__(self, *args, **kwargs):
-
-        self.account_type = None
-
-        super(StorageAccountPropertiesCreateParameters, self).__init__(*args, **kwargs)

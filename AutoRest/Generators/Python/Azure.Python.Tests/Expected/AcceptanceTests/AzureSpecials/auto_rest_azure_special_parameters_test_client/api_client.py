@@ -10,51 +10,45 @@
 
 
 from msrest.service_client import ServiceClient, async_request
-from msrest import Configuration, Serializer, Deserializer
-from msrest.exceptions import (
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    HttpOperationError)
-from .operations.xms_client_request_id import xms_client_request_id
-from .operations.subscription_in_credentials import subscription_in_credentials
-from .operations.subscription_in_method import subscription_in_method
-from .operations.api_version_default import api_version_default
-from .operations.api_version_local import api_version_local
-from .operations.skip_url_encoding import skip_url_encoding
-from .operations.header import header
+from .operations.xms_client_request_id_operations import xms_client_request_idOperations
+from .operations.subscription_in_credentials_operations import subscription_in_credentialsOperations
+from .operations.subscription_in_method_operations import subscription_in_methodOperations
+from .operations.api_version_default_operations import api_version_defaultOperations
+from .operations.api_version_local_operations import api_version_localOperations
+from .operations.skip_url_encoding_operations import skip_url_encodingOperations
+from .operations.header_operations import headerOperations
 from . import models
 
 
 class AutoRestAzureSpecialParametersTestClientConfiguration(Configuration):
 
-    def __init__(self, subscription_id, apiversion, base_url=None, filepath=None):
+    def __init__(self, credentials, subscription_id, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
 
         super(AutoRestAzureSpecialParametersTestClientConfiguration, self).__init__(base_url, filepath)
 
-        self.subscription_id = subscription_id
-        self.apiversion = apiversion
+        self.credentials = credentials;
+        self.subscription_id = subscription_id;
 
 
 class AutoRestAzureSpecialParametersTestClient(object):
 
     def __init__(self, config):
 
-        self._client = ServiceClient(None, config)
+        self._client = ServiceClient(config.credentials, config) 
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.xms_client_request_id = xms_client_request_id(self._client, self.config, self._serialize, self._deserialize)
-        self.subscription_in_credentials = subscription_in_credentials(self._client, self.config, self._serialize, self._deserialize)
-        self.subscription_in_method = subscription_in_method(self._client, self.config, self._serialize, self._deserialize)
-        self.api_version_default = api_version_default(self._client, self.config, self._serialize, self._deserialize)
-        self.api_version_local = api_version_local(self._client, self.config, self._serialize, self._deserialize)
-        self.skip_url_encoding = skip_url_encoding(self._client, self.config, self._serialize, self._deserialize)
-        self.header = header(self._client, self.config, self._serialize, self._deserialize)
+        self.xms_client_request_id = xms_client_request_idOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.subscription_in_credentials = subscription_in_credentialsOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.subscription_in_method = subscription_in_methodOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.api_version_default = api_version_defaultOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.api_version_local = api_version_localOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.skip_url_encoding = skip_url_encodingOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.header = headerOperations(self._client, self.config, self._serialize, self._deserialize)
+

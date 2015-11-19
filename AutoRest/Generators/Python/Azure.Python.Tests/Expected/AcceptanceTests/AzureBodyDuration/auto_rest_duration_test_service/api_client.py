@@ -11,36 +11,32 @@
 from datetime import *
 
 from msrest.service_client import ServiceClient, async_request
-from msrest import Configuration, Serializer, Deserializer
-from msrest.exceptions import (
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    HttpOperationError)
-from .operations.duration import duration
+from .operations.duration_operations import durationOperations
 from . import models
 
 
 class AutoRestDurationTestServiceConfiguration(Configuration):
 
-    def __init__(self, base_url=None, filepath=None):
+    def __init__(self, credentials, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'https://localhost'
 
         super(AutoRestDurationTestServiceConfiguration, self).__init__(base_url, filepath)
 
+        self.credentials = credentials;
+
 
 class AutoRestDurationTestService(object):
 
     def __init__(self, config):
 
-        self._client = ServiceClient(None, config)
+        self._client = ServiceClient(config.credentials, config) 
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.duration = duration(self._client, self.config, self._serialize, self._deserialize)
+        self.duration = durationOperations(self._client, self.config, self._serialize, self._deserialize)
+

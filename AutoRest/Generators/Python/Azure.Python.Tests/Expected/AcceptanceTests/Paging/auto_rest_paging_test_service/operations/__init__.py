@@ -8,4 +8,4 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .paging import paging
+from .paging_operations import pagingOperations

@@ -8,6 +8,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+import sys
+
+
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
@@ -16,11 +19,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class http_success(object):
+class http_successOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -45,7 +49,7 @@ class http_success(object):
             return value
 
     @async_request
-    def head200(self, custom_headers={}, raw=False, callback=None):
+    def head200(self, custom_headers = {}, raw = False, callback = None):
         """
 
         Return 200 status code if successful
@@ -59,7 +63,7 @@ class http_success(object):
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+        :rtype: bool or (bool, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -70,7 +74,10 @@ class http_success(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -78,13 +85,13 @@ class http_success(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200, 404]:
-            raise HttpOperationException(self._deserialize, response)
+            raise CloudException(self._deserialize, response)
 
         if raw:
             return None, response
 
     @async_request
-    def head204(self, custom_headers={}, raw=False, callback=None):
+    def head204(self, custom_headers = {}, raw = False, callback = None):
         """
 
         Return 204 status code if successful
@@ -98,7 +105,7 @@ class http_success(object):
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+        :rtype: bool or (bool, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -109,7 +116,10 @@ class http_success(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -117,13 +127,13 @@ class http_success(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [204, 404]:
-            raise HttpOperationException(self._deserialize, response)
+            raise CloudException(self._deserialize, response)
 
         if raw:
             return None, response
 
     @async_request
-    def head404(self, custom_headers={}, raw=False, callback=None):
+    def head404(self, custom_headers = {}, raw = False, callback = None):
         """
 
         Return 404 status code if successful
@@ -137,7 +147,7 @@ class http_success(object):
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+        :rtype: bool or (bool, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
@@ -148,7 +158,10 @@ class http_success(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -156,7 +169,7 @@ class http_success(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [204, 404]:
-            raise HttpOperationException(self._deserialize, response)
+            raise CloudException(self._deserialize, response)
 
         if raw:
             return None, response

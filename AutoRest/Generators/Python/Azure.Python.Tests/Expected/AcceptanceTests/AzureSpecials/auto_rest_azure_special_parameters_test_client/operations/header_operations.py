@@ -8,6 +8,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+import sys
+
+
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
@@ -16,11 +19,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class header(object):
+class headerOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -45,7 +49,7 @@ class header(object):
             return value
 
     @async_request
-    def custom_named_request_id(self, fooclientrequestid, custom_headers={}, raw=False, callback=None):
+    def custom_named_request_id(self, fooclientrequestid, custom_headers = {}, raw = False, callback = None):
         """
 
         Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in
@@ -75,7 +79,10 @@ class header(object):
         headers = {}
         if fooclientrequestid is not None:
             query['foo-client-request-id'] = fooclientrequestid
+            if self.config.acceptlanguage is not None:
+                query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['foo-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request

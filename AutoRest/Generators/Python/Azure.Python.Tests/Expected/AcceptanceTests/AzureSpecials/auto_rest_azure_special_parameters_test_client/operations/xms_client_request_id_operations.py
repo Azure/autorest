@@ -8,6 +8,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+import sys
+
+
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
@@ -16,11 +19,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class xms_client_request_id(object):
+class xms_client_request_idOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -45,7 +49,7 @@ class xms_client_request_id(object):
             return value
 
     @async_request
-    def get(self, custom_headers={}, raw=False, callback=None):
+    def get(self, custom_headers = {}, raw = False, callback = None):
         """
 
         Get method that overwrites x-ms-client-request header with value
@@ -71,7 +75,10 @@ class xms_client_request_id(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -85,7 +92,7 @@ class xms_client_request_id(object):
             return None, response
 
     @async_request
-    def param_get(self, xmsclientrequestid, custom_headers={}, raw=False, callback=None):
+    def param_get(self, xmsclientrequestid, custom_headers = {}, raw = False, callback = None):
         """
 
         Get method that overwrites x-ms-client-request header with value
@@ -116,7 +123,10 @@ class xms_client_request_id(object):
         headers = {}
         if xmsclientrequestid is not None:
             query['x-ms-client-request-id'] = xmsclientrequestid
+            if self.config.acceptlanguage is not None:
+                query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request

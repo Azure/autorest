@@ -20,16 +20,13 @@ namespace Microsoft.Rest.Generator.Azure.Python
     {
         private const string ClientRuntimePackage = "runtime.msrestazure version 1.1.0";
 
-        private AzurePythonCodeNamer _namer;
-
         // page extensions class dictionary.
-        private IDictionary<Tuple<string, string>, Tuple<string, string>> pageClasses;
+        private IList<PageTemplateModel> pageModels;
 
         public AzurePythonCodeGenerator(Settings settings)
             : base(settings)
         {
-            _namer = new AzurePythonCodeNamer();
-            pageClasses = new Dictionary<Tuple<string, string>, Tuple<string, string>>();
+            pageModels = new List<PageTemplateModel>();
         }
 
         public override string Name
@@ -59,10 +56,10 @@ namespace Microsoft.Rest.Generator.Azure.Python
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
-            _namer.NormalizeClientModel(serviceClient);
-            _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
+            Namer.NormalizeClientModel(serviceClient);
+            Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + "_models");
-            _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
+            NormalizePaginatedMethods(serviceClient);
 
             if (serviceClient != null)
             {
@@ -71,10 +68,101 @@ namespace Microsoft.Rest.Generator.Azure.Python
                     if (model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
                         (bool)model.Extensions[AzureExtensions.AzureResourceExtension])
                     {
-                        model.BaseModelType = new CompositeType { Name = "IResource", SerializedName = "IResource" };
+                        model.BaseModelType = new CompositeType { Name = "BaseResource", SerializedName = "BaseResource" };
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Creates long running operation methods.
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        public void AddLongRunningOperations(ServiceClient serviceClient)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            for (int i = 0; i < serviceClient.Methods.Count; i++)
+            {
+                var method = serviceClient.Methods[i];
+                if (method.Extensions.ContainsKey(AzureExtensions.LongRunningExtension))
+                {
+                    var isLongRunning = method.Extensions[AzureExtensions.LongRunningExtension];
+                    if (isLongRunning is bool && (bool)isLongRunning)
+                    {
+                        serviceClient.Methods.Insert(i, (Method)method.Clone());
+                        method.Name = "begin" + Namer.GetMethodName(method.Name.ToPascalCase());
+                        i++;
+                    }
+
+                    method.Extensions.Remove(AzureExtensions.LongRunningExtension);
+                }
+            }
+        }
+
+        private void GetPagingSetting(Dictionary<string, object> extensions, string valueTypeName)
+        {
+            var ext = extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+
+            string nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
+            string itemName = (string)ext["itemName"] ?? "value";
+            string className = (string)ext["className"];
+            if (string.IsNullOrEmpty(className))
+            {
+                className = valueTypeName + "Paged";
+                ext["className"] = className;
+            }
+
+            var pageModel = new PageTemplateModel(className, nextLinkName, itemName, valueTypeName);
+            if (!pageModels.Contains(pageModel))
+            {
+                pageModels.Add(pageModel);
+            }
+        }
+
+        /// <summary>
+        /// Changes paginated method signatures to return Page type.
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        private void NormalizePaginatedMethods(ServiceClient serviceClient)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            var convertedTypes = new HashSet<CompositeType>();
+
+            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
+            {
+                bool hasReturnType = false;
+
+                foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key))
+                {
+                    var compositType = (CompositeType)method.Responses[responseStatus];
+                    var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
+
+                    // if the type is a wrapper over page-able response
+                    if (sequenceType != null)
+                    {
+                        GetPagingSetting(method.Extensions, sequenceType.ElementType.Name);
+                        convertedTypes.Add(compositType);
+                        hasReturnType = true;
+                        break;
+                    }
+                }
+
+                if (!hasReturnType)
+                {
+                    // Somehow the page method doesn't have correct response type
+                    method.Extensions.Remove(AzureExtensions.PageableExtension);
+                }
+            }
+
+            AzureExtensions.RemoveUnreferencedTypes(serviceClient, convertedTypes.Select(t => t.Name));
         }
 
         /// <summary>
@@ -111,7 +199,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 {
                     var modelInitTemplate = new AzureModelInitTemplate
                     {
-                        Model = new AzureModelInitTemplateModel(serviceClient, pageClasses.Values)
+                        Model = new AzureModelInitTemplateModel(serviceClient, pageModels.Select(t => t.TypeDefinitionName))
                     };
                     await Write(modelInitTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "models", "__init__.py"));
 
@@ -155,13 +243,13 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 }
 
                 // Page class
-                foreach (var pageClass in pageClasses)
+                foreach (var pageModel in pageModels)
                 {
                     var pageTemplate = new PageTemplate
                     {
-                        Model = new PageTemplateModel(pageClass.Value.Item1, pageClass.Key.Item1, pageClass.Key.Item2, pageClass.Value.Item2),
+                        Model = pageModel
                     };
-                    await Write(pageTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "models",  pageTemplate.Model.TypeDefinitionName.ToPythonCase() + ".py"));
+                    await Write(pageTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "models", pageModel.TypeDefinitionName.ToPythonCase() + ".py"));
                 }
             }
             catch (Exception ex)

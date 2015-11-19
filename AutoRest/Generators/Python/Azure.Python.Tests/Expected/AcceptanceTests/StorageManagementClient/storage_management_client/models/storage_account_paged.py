@@ -8,21 +8,16 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.serialization import Model
+from runtime.msrest.paging import Paged
 
 
-class SubProductProperties(Model):
-
-    _required = []
+class StorageAccountPaged(Paged):
 
     _attribute_map = {
-        'provisioning_state': {'key': 'provisioningState', 'type': 'str'},
-        'provisioning_state_values': {'key': 'provisioningStateValues', 'type': 'str'},
+        'next_link': {'key':'nextLink', 'type':'str'},
+        'items': {'key':'value', 'type': '[StorageAccount]'}
     }
 
     def __init__(self, *args, **kwargs):
 
-        self.provisioning_state = None
-        self.provisioning_state_values = None
-
-        super(SubProductProperties, self).__init__(*args, **kwargs)
+        super(StorageAccountPaged, self).__init__(*args, **kwargs)

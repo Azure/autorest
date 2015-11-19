@@ -17,11 +17,17 @@ class FlattenedProduct(Resource):
     _required = []
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'FlattenedProductProperties'},
+        'pname': {'key': 'properties.pname', 'type': 'str'},
+        'flattened_product_type': {'key': 'properties.type', 'type': 'str'},
+        'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
+        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
     }
 
     def __init__(self, *args, **kwargs):
 
-        self.properties = None
+        self.pname = None
+        self.flattened_product_type = None
+        self.provisioning_state_values = None
+        self.provisioning_state = None
 
         super(FlattenedProduct, self).__init__(*args, **kwargs)

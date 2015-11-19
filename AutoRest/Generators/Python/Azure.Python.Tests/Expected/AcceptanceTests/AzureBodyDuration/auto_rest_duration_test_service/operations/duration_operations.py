@@ -8,6 +8,8 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+import sys
+
 from datetime import *
 
 from msrest.service_client import ServiceClient, async_request
@@ -18,11 +20,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class duration(object):
+class durationOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -47,7 +50,7 @@ class duration(object):
             return value
 
     @async_request
-    def get_null(self, custom_headers={}, raw=False, callback=None):
+    def get_null(self, custom_headers = {}, raw = False, callback = None):
         """
 
         Get null duration value
@@ -73,7 +76,10 @@ class duration(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -94,7 +100,7 @@ class duration(object):
         return deserialized
 
     @async_request
-    def put_positive_duration(self, duration_body, custom_headers={}, raw=False, callback=None):
+    def put_positive_duration(self, duration_body, custom_headers = {}, raw = False, callback = None):
         """
 
         Put a positive duration value
@@ -121,7 +127,10 @@ class duration(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
@@ -138,7 +147,7 @@ class duration(object):
             return None, response
 
     @async_request
-    def get_positive_duration(self, custom_headers={}, raw=False, callback=None):
+    def get_positive_duration(self, custom_headers = {}, raw = False, callback = None):
         """
 
         Get a positive duration value
@@ -164,7 +173,10 @@ class duration(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -185,7 +197,7 @@ class duration(object):
         return deserialized
 
     @async_request
-    def get_invalid(self, custom_headers={}, raw=False, callback=None):
+    def get_invalid(self, custom_headers = {}, raw = False, callback = None):
         """
 
         Get an invalid duration value
@@ -211,7 +223,10 @@ class duration(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request

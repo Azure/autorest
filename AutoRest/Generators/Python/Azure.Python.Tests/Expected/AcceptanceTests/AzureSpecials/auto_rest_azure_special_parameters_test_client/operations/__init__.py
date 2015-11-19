@@ -8,10 +8,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .xms_client_request_id import xms_client_request_id
-from .subscription_in_credentials import subscription_in_credentials
-from .subscription_in_method import subscription_in_method
-from .api_version_default import api_version_default
-from .api_version_local import api_version_local
-from .skip_url_encoding import skip_url_encoding
-from .header import header
+from .xms_client_request_id_operations import xms_client_request_idOperations
+from .subscription_in_credentials_operations import subscription_in_credentialsOperations
+from .subscription_in_method_operations import subscription_in_methodOperations
+from .api_version_default_operations import api_version_defaultOperations
+from .api_version_local_operations import api_version_localOperations
+from .skip_url_encoding_operations import skip_url_encodingOperations
+from .header_operations import headerOperations

@@ -20,6 +20,12 @@ namespace Microsoft.Rest.Generator.Azure.Python
         public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
             : base(source, serviceClient)
         {
+            if (source == null)
+            {
+                throw new ArgumentNullException("source");
+            }
+            
+            this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
         }
 
         public bool IsPagingMethod
@@ -38,6 +44,16 @@ namespace Microsoft.Rest.Generator.Azure.Python
 
                 return (string)ext["className"];
             }
+        }
+
+        public string ClientRequestIdString { get; private set; }
+
+        /// <summary>
+        /// Returns true if method has x-ms-long-running-operation extension.
+        /// </summary>
+        public bool IsLongRunningOperation
+        {
+            get { return Extensions.ContainsKey(AzureExtensions.LongRunningExtension); }
         }
 
         public override string RaisedException
@@ -162,7 +178,9 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             get
             {
-                return string.Empty;
+                var sb = new IndentedStringBuilder();
+                sb.Append(base.SetDefaultHeaders).AppendLine("headers['{0}'] = str(uuid.uuid1())", this.ClientRequestIdString);
+                return sb.ToString();
             }
         }
     }

@@ -15,19 +15,12 @@ namespace Microsoft.Rest.Generator.Azure.Python
 {
     public class AzureModelInitTemplateModel : ModelInitTemplateModel
     {
-        public AzureModelInitTemplateModel(ServiceClient serviceClient, ICollection<Tuple<string, string>> pageClass)
+        public AzureModelInitTemplateModel(ServiceClient serviceClient, IEnumerable<string> pageClass)
             : base(serviceClient)
         {
-            this.PagedClasses = new List<string>();
-            if (pageClass != null)
-            {
-                foreach (var pair in pageClass)
-                {
-                    this.PagedClasses.Add(pair.Item1);
-                }
-            }
+            PagedClasses = pageClass;
         }
 
-        public IList<string> PagedClasses { get; private set; }
+        public IEnumerable<string> PagedClasses { get; private set; }
     }
 }

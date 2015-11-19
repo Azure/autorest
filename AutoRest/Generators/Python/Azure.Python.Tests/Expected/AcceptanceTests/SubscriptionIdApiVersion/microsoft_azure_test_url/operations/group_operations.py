@@ -8,6 +8,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+import sys
+
+
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
@@ -16,11 +19,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class group(object):
+class groupOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -45,7 +49,7 @@ class group(object):
             return value
 
     @async_request
-    def get_sample_resource_group(self, resource_group_name, custom_headers={}, raw=False, callback=None):
+    def get_sample_resource_group(self, resource_group_name, custom_headers = {}, raw = False, callback = None):
         """
 
         Provides a resouce group with name 'testgroup101' and location 'West
@@ -69,8 +73,8 @@ class group(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}'
         path_format_arguments = {
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False),
-            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False)}
+            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False),
+            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -80,7 +84,10 @@ class group(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request

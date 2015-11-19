@@ -8,6 +8,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+import sys
+
+
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
@@ -16,11 +19,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class api_version_default(object):
+class subscription_in_methodOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -45,17 +49,21 @@ class api_version_default(object):
             return value
 
     @async_request
-    def get_method_global_valid(self, custom_headers={}, raw=False, callback=None):
+    def post_method_local_valid(self, subscription_id, custom_headers = {}, raw = False, callback = None):
         """
 
-        GET method with api-version modeled in global settings.
+        POST method with subscriptionId modeled in the method.  pass in
+        subscription id = '1234-5678-9012-3456' to succeed
 
+        :param subscription_id: This should appear as a method parameter, use
+        value '1234-5678-9012-3456'
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
+        :type subscription_id: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -63,20 +71,24 @@ class api_version_default(object):
         """
 
         # Construct URL
-        url = '/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview'
+        url = '/azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}'
+        path_format_arguments = {
+            'subscriptionId' : self._parse_url("subscription_id", subscription_id, 'str', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
-        if self.config.apiversion is not None:
-            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
+        request = self._client.post(url, query)
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
@@ -86,17 +98,22 @@ class api_version_default(object):
             return None, response
 
     @async_request
-    def get_method_global_not_provided_valid(self, custom_headers={}, raw=False, callback=None):
+    def post_method_local_null(self, subscription_id, custom_headers = {}, raw = False, callback = None):
         """
 
-        GET method with api-version modeled in global settings.
+        POST method with subscriptionId modeled in the method.  pass in
+        subscription id = null, client-side validation should prevent you
+        from making this call
 
+        :param subscription_id: This should appear as a method parameter, use
+        value null, client-side validation should prvenet the call
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
+        :type subscription_id: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -104,20 +121,24 @@ class api_version_default(object):
         """
 
         # Construct URL
-        url = '/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview'
+        url = '/azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}'
+        path_format_arguments = {
+            'subscriptionId' : self._parse_url("subscription_id", subscription_id, 'str', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
-        if self.config.apiversion is not None:
-            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
+        request = self._client.post(url, query)
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
@@ -127,17 +148,21 @@ class api_version_default(object):
             return None, response
 
     @async_request
-    def get_path_global_valid(self, custom_headers={}, raw=False, callback=None):
+    def post_path_local_valid(self, subscription_id, custom_headers = {}, raw = False, callback = None):
         """
 
-        GET method with api-version modeled in global settings.
+        POST method with subscriptionId modeled in the method.  pass in
+        subscription id = '1234-5678-9012-3456' to succeed
 
+        :param subscription_id: Should appear as a method parameter -use value
+        '1234-5678-9012-3456'
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
+        :type subscription_id: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -145,20 +170,24 @@ class api_version_default(object):
         """
 
         # Construct URL
-        url = '/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview'
+        url = '/azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}'
+        path_format_arguments = {
+            'subscriptionId' : self._parse_url("subscription_id", subscription_id, 'str', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
-        if self.config.apiversion is not None:
-            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
+        request = self._client.post(url, query)
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
@@ -168,17 +197,21 @@ class api_version_default(object):
             return None, response
 
     @async_request
-    def get_swagger_global_valid(self, custom_headers={}, raw=False, callback=None):
+    def post_swagger_local_valid(self, subscription_id, custom_headers = {}, raw = False, callback = None):
         """
 
-        GET method with api-version modeled in global settings.
+        POST method with subscriptionId modeled in the method.  pass in
+        subscription id = '1234-5678-9012-3456' to succeed
 
+        :param subscription_id: The subscriptionId, which appears in the path,
+        the value is always '1234-5678-9012-3456'
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
+        :type subscription_id: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -186,20 +219,24 @@ class api_version_default(object):
         """
 
         # Construct URL
-        url = '/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview'
+        url = '/azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}'
+        path_format_arguments = {
+            'subscriptionId' : self._parse_url("subscription_id", subscription_id, 'str', False)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
-        if self.config.apiversion is not None:
-            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
+        request = self._client.post(url, query)
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:

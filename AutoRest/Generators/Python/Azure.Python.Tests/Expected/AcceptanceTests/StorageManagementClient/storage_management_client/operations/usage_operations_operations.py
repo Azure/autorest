@@ -8,6 +8,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+import sys
+
+
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
@@ -16,11 +19,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class usageOperations(object):
+class usageOperationsOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -45,7 +49,7 @@ class usageOperations(object):
             return value
 
     @async_request
-    def list(self, custom_headers={}, raw=False, callback=None):
+    def list(self, custom_headers = {}, raw = False, callback = None):
         """
 
         Gets the current usage count and the limit for the resources under the
@@ -67,7 +71,7 @@ class usageOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages'
         path_format_arguments = {
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -77,7 +81,10 @@ class usageOperations(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -85,7 +92,7 @@ class usageOperations(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
+            raise CloudException(self._deserialize, response)
 
         deserialized = None
 

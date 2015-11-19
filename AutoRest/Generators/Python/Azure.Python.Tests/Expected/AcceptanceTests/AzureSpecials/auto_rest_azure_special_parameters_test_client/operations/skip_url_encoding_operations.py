@@ -8,6 +8,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+import sys
+
+
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
@@ -16,11 +19,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class paging(object):
+class skip_url_encodingOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -45,33 +49,41 @@ class paging(object):
             return value
 
     @async_request
-    def get_single_pages(self, custom_headers={}, raw=False, callback=None):
+    def get_method_path_valid(self, unencoded_path_param, custom_headers = {}, raw = False, callback = None):
         """
 
-        A paging operation that finishes on the first call without a nextlink
+        Get method with unencoded path parameter with value 'path1/path2/path3'
 
+        :param unencoded_path_param: Unencoded path parameter with value
+        'path1/path2/path3'
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
+        :type unencoded_path_param: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: object or (object, requests.response) or
-        concurrent.futures.Future
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
-        url = '/paging/single'
+        url = '/azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}'
+        path_format_arguments = {
+            'unencodedPathParam' : self._parse_url("unencoded_path_param", unencoded_path_param, 'str', True)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -79,50 +91,47 @@ class paging(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('ProductResult', response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
-            return deserialized, response
-
-        return deserialized
+            return None, response
 
     @async_request
-    def get_multiple_pages(self, clientrequestid, custom_headers={}, raw=False, callback=None):
+    def get_path_path_valid(self, unencoded_path_param, custom_headers = {}, raw = False, callback = None):
         """
 
-        A paging operation that includes a nextLink that has 10 pages
+        Get method with unencoded path parameter with value 'path1/path2/path3'
 
-        :param clientrequestid:
+        :param unencoded_path_param: Unencoded path parameter with value
+        'path1/path2/path3'
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type clientrequestid: str or none
+        :type unencoded_path_param: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: object or (object, requests.response) or
-        concurrent.futures.Future
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
-        url = '/paging/multiple'
+        url = '/azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}'
+        path_format_arguments = {
+            'unencodedPathParam' : self._parse_url("unencoded_path_param", unencoded_path_param, 'str', True)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
 
         # Construct headers
         headers = {}
-        if clientrequestid is not None:
-            query['client-request-id'] = clientrequestid
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -130,47 +139,48 @@ class paging(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('ProductResult', response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
-            return deserialized, response
-
-        return deserialized
+            return None, response
 
     @async_request
-    def get_multiple_pages_retry_first(self, custom_headers={}, raw=False, callback=None):
+    def get_swagger_path_valid(self, unencoded_path_param, custom_headers = {}, raw = False, callback = None):
         """
 
-        A paging operation that fails on the first call with 500 and then
-        retries and then get a response including a nextLink that has 10 pages
+        Get method with unencoded path parameter with value 'path1/path2/path3'
 
+        :param unencoded_path_param: An unencoded path parameter with value
+        'path1/path2/path3'. Possible values for this parameter include:
+        'path1/path2/path3'
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
+        :type unencoded_path_param: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: object or (object, requests.response) or
-        concurrent.futures.Future
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
-        url = '/paging/multiple/retryfirst'
+        url = '/azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}'
+        path_format_arguments = {
+            'unencodedPathParam' : self._parse_url("unencoded_path_param", unencoded_path_param, 'str', True)}
+        url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -178,48 +188,47 @@ class paging(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('ProductResult', response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
-            return deserialized, response
-
-        return deserialized
+            return None, response
 
     @async_request
-    def get_multiple_pages_retry_second(self, custom_headers={}, raw=False, callback=None):
+    def get_method_query_valid(self, q1, custom_headers = {}, raw = False, callback = None):
         """
 
-        A paging operation that includes a nextLink that has 10 pages, of
-        which the 2nd call fails first with 500. The client should retry and
-        finish all 10 pages eventually.
+        Get method with unencoded query parameter with value
+        'value1&q2=value2&q3=value3'
 
+        :param q1: Unencoded query parameter with value
+        'value1&q2=value2&q3=value3'
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
+        :type q1: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: object or (object, requests.response) or
-        concurrent.futures.Future
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
-        url = '/paging/multiple/retrysecond'
+        url = '/azurespecials/skipUrlEncoding/method/query/valid'
 
         # Construct parameters
         query = {}
+        if q1 is not None:
+            query['q1'] = self._parse_url("q1", q1, 'str', True)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -227,46 +236,45 @@ class paging(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('ProductResult', response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
-            return deserialized, response
-
-        return deserialized
+            return None, response
 
     @async_request
-    def get_single_pages_failure(self, custom_headers={}, raw=False, callback=None):
+    def get_method_query_null(self, q1, custom_headers = {}, raw = False, callback = None):
         """
 
-        A paging operation that receives a 400 on the first call
+        Get method with unencoded query parameter with value null
 
+        :param q1: Unencoded query parameter with value null
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
+        :type q1: str or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: object or (object, requests.response) or
-        concurrent.futures.Future
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
-        url = '/paging/single/failure'
+        url = '/azurespecials/skipUrlEncoding/method/query/null'
 
         # Construct parameters
         query = {}
+        if q1 is not None:
+            query['q1'] = self._parse_url("q1", q1, 'str', True)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -274,46 +282,47 @@ class paging(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('ProductResult', response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
-            return deserialized, response
-
-        return deserialized
+            return None, response
 
     @async_request
-    def get_multiple_pages_failure(self, custom_headers={}, raw=False, callback=None):
+    def get_path_query_valid(self, q1, custom_headers = {}, raw = False, callback = None):
         """
 
-        A paging operation that receives a 400 on the second call
+        Get method with unencoded query parameter with value
+        'value1&q2=value2&q3=value3'
 
+        :param q1: Unencoded query parameter with value
+        'value1&q2=value2&q3=value3'
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
+        :type q1: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: object or (object, requests.response) or
-        concurrent.futures.Future
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
-        url = '/paging/multiple/failure'
+        url = '/azurespecials/skipUrlEncoding/path/query/valid'
 
         # Construct parameters
         query = {}
+        if q1 is not None:
+            query['q1'] = self._parse_url("q1", q1, 'str', True)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -321,46 +330,48 @@ class paging(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('ProductResult', response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
-            return deserialized, response
-
-        return deserialized
+            return None, response
 
     @async_request
-    def get_multiple_pages_failure_uri(self, custom_headers={}, raw=False, callback=None):
+    def get_swagger_query_valid(self, q1, custom_headers = {}, raw = False, callback = None):
         """
 
-        A paging operation that receives an invalid nextLink
+        Get method with unencoded query parameter with value
+        'value1&q2=value2&q3=value3'
 
+        :param q1: An unencoded query parameter with value
+        'value1&q2=value2&q3=value3'. Possible values for this parameter
+        include: 'value1&q2=value2&q3=value3'
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
+        :type q1: str or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: object or (object, requests.response) or
-        concurrent.futures.Future
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
-        url = '/paging/multiple/failureuri'
+        url = '/azurespecials/skipUrlEncoding/swagger/query/valid'
 
         # Construct parameters
         query = {}
+        if q1 is not None:
+            query['q1'] = self._parse_url("q1", q1, 'str', True)
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -368,14 +379,7 @@ class paging(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
-
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('ProductResult', response)
+            raise ErrorException(self._deserialize, response)
 
         if raw:
-            return deserialized, response
-
-        return deserialized
+            return None, response

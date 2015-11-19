@@ -18,6 +18,9 @@
 }
 @EmptyLine
 from msrest.service_client import ServiceClient, async_request
+@if (Model.MethodTemplateModels.Any())
+{
+<text>
 from msrest import Configuration, Serializer, Deserializer
 from msrest.exceptions import (
     SerializationError,
@@ -25,6 +28,9 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
+</text>
+}
 @{
   if (Model.MethodGroupModels.Any())
   {

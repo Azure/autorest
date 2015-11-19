@@ -8,7 +8,7 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .lr_os import lr_os
-from .lro_retrys import lro_retrys
-from .lrosa_ds import lrosa_ds
-from .lr_os_custom_header import lr_os_custom_header
+from .lr_os_operations import lr_osOperations
+from .lro_retrys_operations import lro_retrysOperations
+from .lrosa_ds_operations import lrosa_dsOperations
+from .lr_os_custom_header_operations import lr_os_custom_headerOperations

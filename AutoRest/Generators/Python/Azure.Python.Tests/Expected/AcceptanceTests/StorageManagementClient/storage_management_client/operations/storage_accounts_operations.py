@@ -8,6 +8,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+import sys
+
+
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
@@ -16,11 +19,12 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
+import uuid
 
 from ..models import *
 
 
-class storage_accounts(object):
+class storage_accountsOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -45,7 +49,7 @@ class storage_accounts(object):
             return value
 
     @async_request
-    def check_name_availability(self, account_name, custom_headers={}, raw=False, callback=None):
+    def check_name_availability(self, account_name, custom_headers = {}, raw = False, callback = None):
         """
 
         Checks that account name is valid and is not in use.
@@ -70,7 +74,7 @@ class storage_accounts(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability'
         path_format_arguments = {
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -80,7 +84,10 @@ class storage_accounts(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
@@ -91,7 +98,7 @@ class storage_accounts(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
+            raise CloudException(self._deserialize, response)
 
         deserialized = None
 
@@ -104,7 +111,7 @@ class storage_accounts(object):
         return deserialized
 
     @async_request
-    def create(self, resource_group_name, account_name, parameters, custom_headers={}, raw=False, callback=None):
+    def create(self, resource_group_name, account_name, parameters, custom_headers = {}, raw = False, callback = None):
         """
 
         Asynchronously creates a new storage account with the specified
@@ -138,9 +145,9 @@ class storage_accounts(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            'accountName': self._parse_url("account_name", account_name, 'str', False),
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'accountName' : self._parse_url("account_name", account_name, 'str', False),
+            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -150,7 +157,10 @@ class storage_accounts(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
@@ -161,7 +171,7 @@ class storage_accounts(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [200, 202]:
-            raise HttpOperationException(self._deserialize, response)
+            raise CloudException(self._deserialize, response)
 
         deserialized = None
 
@@ -174,7 +184,80 @@ class storage_accounts(object):
         return deserialized
 
     @async_request
-    def delete(self, resource_group_name, account_name, custom_headers={}, raw=False, callback=None):
+    def begin_create(self, resource_group_name, account_name, parameters, custom_headers = {}, raw = False, callback = None):
+        """
+
+        Asynchronously creates a new storage account with the specified
+        parameters. Existing accounts cannot be updated with this API and
+        should instead use the Update Storage Account API. If an account is
+        already created and subsequent PUT request is issued with exact same
+        set of properties, then HTTP 200 would be returned.
+
+        :param resource_group_name: The name of the resource group within the
+        user’s subscription.
+        :param account_name: The name of the storage account within the
+        specified resource group. Storage account names must be between 3 and
+        24 characters in length and use numbers and lower-case letters only.
+        :param parameters: The parameters to provide for the created account.
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type resource_group_name: str
+        :type account_name: str
+        :type parameters: object
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
+        """
+
+        # Construct URL
+        url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
+        path_format_arguments = {
+            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'accountName' : self._parse_url("account_name", account_name, 'str', False),
+            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+        url = url.format(**path_format_arguments)
+
+        # Construct parameters
+        query = {}
+        if self.config.apiversion is not None:
+            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
+
+        # Construct headers
+        headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
+        headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
+        headers['Content-Type'] = 'application/json; charset=utf-8'
+
+        # Construct body
+        content = self._serialize(parameters, 'StorageAccountCreateParameters')
+
+        # Construct and send request
+        request = self._client.put(url, query)
+        response = self._client.send(request, headers, content)
+
+        if response.status_code not in [200, 202]:
+            raise CloudException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('StorageAccount', response)
+
+        if raw:
+            return deserialized, response
+
+        return deserialized
+
+    @async_request
+    def delete(self, resource_group_name, account_name, custom_headers = {}, raw = False, callback = None):
         """
 
         Deletes a storage account in Microsoft Azure.
@@ -201,9 +284,9 @@ class storage_accounts(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            'accountName': self._parse_url("account_name", account_name, 'str', False),
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'accountName' : self._parse_url("account_name", account_name, 'str', False),
+            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -213,7 +296,10 @@ class storage_accounts(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -227,7 +313,7 @@ class storage_accounts(object):
             return None, response
 
     @async_request
-    def get_properties(self, resource_group_name, account_name, custom_headers={}, raw=False, callback=None):
+    def get_properties(self, resource_group_name, account_name, custom_headers = {}, raw = False, callback = None):
         """
 
         Returns the properties for the specified storage account including but
@@ -257,9 +343,9 @@ class storage_accounts(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            'accountName': self._parse_url("account_name", account_name, 'str', False),
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'accountName' : self._parse_url("account_name", account_name, 'str', False),
+            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -269,7 +355,10 @@ class storage_accounts(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -277,7 +366,7 @@ class storage_accounts(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
+            raise CloudException(self._deserialize, response)
 
         deserialized = None
 
@@ -290,7 +379,7 @@ class storage_accounts(object):
         return deserialized
 
     @async_request
-    def update(self, resource_group_name, account_name, parameters, custom_headers={}, raw=False, callback=None):
+    def update(self, resource_group_name, account_name, parameters, custom_headers = {}, raw = False, callback = None):
         """
 
         Updates the account type or tags for a storage account. It can also be
@@ -330,9 +419,9 @@ class storage_accounts(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            'accountName': self._parse_url("account_name", account_name, 'str', False),
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'accountName' : self._parse_url("account_name", account_name, 'str', False),
+            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -342,7 +431,10 @@ class storage_accounts(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
@@ -353,7 +445,7 @@ class storage_accounts(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
+            raise CloudException(self._deserialize, response)
 
         deserialized = None
 
@@ -366,7 +458,7 @@ class storage_accounts(object):
         return deserialized
 
     @async_request
-    def list_keys(self, resource_group_name, account_name, custom_headers={}, raw=False, callback=None):
+    def list_keys(self, resource_group_name, account_name, custom_headers = {}, raw = False, callback = None):
         """
 
         Lists the access keys for the specified storage account.
@@ -391,9 +483,9 @@ class storage_accounts(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
         path_format_arguments = {
-            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            'accountName': self._parse_url("account_name", account_name, 'str', False),
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'accountName' : self._parse_url("account_name", account_name, 'str', False),
+            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -403,7 +495,10 @@ class storage_accounts(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
@@ -411,7 +506,7 @@ class storage_accounts(object):
         response = self._client.send(request, headers)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
+            raise CloudException(self._deserialize, response)
 
         deserialized = None
 
@@ -424,7 +519,7 @@ class storage_accounts(object):
         return deserialized
 
     @async_request
-    def list(self, custom_headers={}, raw=False, callback=None):
+    def list(self, custom_headers = {}, raw = False, callback = None):
         """
 
         Lists all the storage accounts available under the subscription. Note
@@ -444,33 +539,45 @@ class storage_accounts(object):
         concurrent.futures.Future
         """
 
-        # Construct URL
-        url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts'
-        path_format_arguments = {
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
-        url = url.format(**path_format_arguments)
+        def paging(next_link=None, raw=False):
 
-        # Construct parameters
-        query = {}
-        if self.config.apiversion is not None:
-            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
+            if next_link is None:
+                # Construct URL
+                url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts'
+                path_format_arguments = {
+                    'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+                url = url.format(**path_format_arguments)
 
-        # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+                # Construct parameters
+                query = {}
+                if self.config.apiversion is not None:
+                    query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
 
-        # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+            else:
+                url = next_link
+                query = {}
 
-        if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
+            # Construct headers
+            headers = {}
+            if self.config.acceptlanguage is not None:
+                query['accept-language'] = self.config.acceptlanguage
+            headers.update(custom_headers)
+            headers['x-ms-client-request-id'] = str(uuid.uuid1())
+            headers['Content-Type'] = 'application/json; charset=utf-8'
 
-        deserialized = None
+            # Construct and send request
+            request = self._client.get(url, query)
+            response = self._client.send(request, headers)
 
-        if response.status_code == 200:
-            deserialized = self._deserialize('StorageAccountListResult', response)
+            if response.status_code not in [200]:
+                raise CloudException(self._deserialize, response)
+
+            return response
+
+        response = paging()
+
+        # Deserialize response
+        deserialized = StorageAccountPaged(response, paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -478,7 +585,7 @@ class storage_accounts(object):
         return deserialized
 
     @async_request
-    def list_by_resource_group(self, resource_group_name, custom_headers={}, raw=False, callback=None):
+    def list_by_resource_group(self, resource_group_name, custom_headers = {}, raw = False, callback = None):
         """
 
         Lists all the storage accounts available under the given resource
@@ -501,34 +608,46 @@ class storage_accounts(object):
         concurrent.futures.Future
         """
 
-        # Construct URL
-        url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts'
-        path_format_arguments = {
-            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
-        url = url.format(**path_format_arguments)
+        def paging(next_link=None, raw=False):
 
-        # Construct parameters
-        query = {}
-        if self.config.apiversion is not None:
-            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
+            if next_link is None:
+                # Construct URL
+                url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts'
+                path_format_arguments = {
+                    'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
+                    'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+                url = url.format(**path_format_arguments)
 
-        # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+                # Construct parameters
+                query = {}
+                if self.config.apiversion is not None:
+                    query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
 
-        # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+            else:
+                url = next_link
+                query = {}
 
-        if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
+            # Construct headers
+            headers = {}
+            if self.config.acceptlanguage is not None:
+                query['accept-language'] = self.config.acceptlanguage
+            headers.update(custom_headers)
+            headers['x-ms-client-request-id'] = str(uuid.uuid1())
+            headers['Content-Type'] = 'application/json; charset=utf-8'
 
-        deserialized = None
+            # Construct and send request
+            request = self._client.get(url, query)
+            response = self._client.send(request, headers)
 
-        if response.status_code == 200:
-            deserialized = self._deserialize('StorageAccountListResult', response)
+            if response.status_code not in [200]:
+                raise CloudException(self._deserialize, response)
+
+            return response
+
+        response = paging()
+
+        # Deserialize response
+        deserialized = StorageAccountPaged(response, paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -536,7 +655,7 @@ class storage_accounts(object):
         return deserialized
 
     @async_request
-    def regenerate_key(self, resource_group_name, account_name, regenerate_key, custom_headers={}, raw=False, callback=None):
+    def regenerate_key(self, resource_group_name, account_name, regenerate_key, custom_headers = {}, raw = False, callback = None):
         """
 
         Regenerates the access keys for the specified storage account.
@@ -567,9 +686,9 @@ class storage_accounts(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'
         path_format_arguments = {
-            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            'accountName': self._parse_url("account_name", account_name, 'str', False),
-            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'accountName' : self._parse_url("account_name", account_name, 'str', False),
+            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -579,7 +698,10 @@ class storage_accounts(object):
 
         # Construct headers
         headers = {}
+        if self.config.acceptlanguage is not None:
+            query['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
+        headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
@@ -590,12 +712,146 @@ class storage_accounts(object):
         response = self._client.send(request, headers, content)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
+            raise CloudException(self._deserialize, response)
 
         deserialized = None
 
         if response.status_code == 200:
             deserialized = self._deserialize('StorageAccountKeys', response)
+
+        if raw:
+            return deserialized, response
+
+        return deserialized
+
+    @async_request
+    def list_next(self, next_page_link, custom_headers = {}, raw = False, callback = None):
+        """
+
+        Lists all the storage accounts available under the subscription. Note
+        that storage keys are not returned; use the ListKeys operation for
+        this.
+
+        :param next_page_link: The NextLink from the previous successful call
+        to List operation.
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type next_page_link: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
+        """
+
+        def paging(next_link=None, raw=False):
+
+            if next_link is None:
+                # Construct URL
+                url = '{nextLink}'
+                path_format_arguments = {
+                    'nextLink' : self._parse_url("next_page_link", next_page_link, 'str', True)}
+                url = url.format(**path_format_arguments)
+
+                # Construct parameters
+                query = {}
+
+            else:
+                url = next_link
+                query = {}
+
+            # Construct headers
+            headers = {}
+            if self.config.acceptlanguage is not None:
+                query['accept-language'] = self.config.acceptlanguage
+            headers.update(custom_headers)
+            headers['x-ms-client-request-id'] = str(uuid.uuid1())
+            headers['Content-Type'] = 'application/json; charset=utf-8'
+
+            # Construct and send request
+            request = self._client.get(url, query)
+            response = self._client.send(request, headers)
+
+            if response.status_code not in [200]:
+                raise CloudException(self._deserialize, response)
+
+            return response
+
+        response = paging()
+
+        # Deserialize response
+        deserialized = StorageAccountPaged(response, paging, self._deserialize.dependencies)
+
+        if raw:
+            return deserialized, response
+
+        return deserialized
+
+    @async_request
+    def list_by_resource_group_next(self, next_page_link, custom_headers = {}, raw = False, callback = None):
+        """
+
+        Lists all the storage accounts available under the given resource
+        group. Note that storage keys are not returned; use the ListKeys
+        operation for this.
+
+        :param next_page_link: The NextLink from the previous successful call
+        to List operation.
+        :param custom_headers: headers that will be added to the request
+        :param raw: returns the direct response alongside the deserialized
+        response
+        :param callback: if provided, the call will run asynchronously and
+        call the callback when complete.  When specified the function returns
+        a concurrent.futures.Future
+        :type next_page_link: str
+        :type custom_headers: dict
+        :type raw: boolean
+        :type callback: Callable[[concurrent.futures.Future], None] or None
+        :rtype: object or (object, requests.response) or
+        concurrent.futures.Future
+        """
+
+        def paging(next_link=None, raw=False):
+
+            if next_link is None:
+                # Construct URL
+                url = '{nextLink}'
+                path_format_arguments = {
+                    'nextLink' : self._parse_url("next_page_link", next_page_link, 'str', True)}
+                url = url.format(**path_format_arguments)
+
+                # Construct parameters
+                query = {}
+
+            else:
+                url = next_link
+                query = {}
+
+            # Construct headers
+            headers = {}
+            if self.config.acceptlanguage is not None:
+                query['accept-language'] = self.config.acceptlanguage
+            headers.update(custom_headers)
+            headers['x-ms-client-request-id'] = str(uuid.uuid1())
+            headers['Content-Type'] = 'application/json; charset=utf-8'
+
+            # Construct and send request
+            request = self._client.get(url, query)
+            response = self._client.send(request, headers)
+
+            if response.status_code not in [200]:
+                raise CloudException(self._deserialize, response)
+
+            return response
+
+        response = paging()
+
+        # Deserialize response
+        deserialized = StorageAccountPaged(response, paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response

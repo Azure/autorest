@@ -10,7 +10,7 @@ using Microsoft.Rest.Generator.Azure;
 
 namespace Microsoft.Rest.Generator.Azure.Python
 {
-    public class PageTemplateModel
+    public class PageTemplateModel : IEquatable<PageTemplateModel>
     {
         public PageTemplateModel(string className, string nextLinkName, string itemName, string itemType)
         {
@@ -27,5 +27,15 @@ namespace Microsoft.Rest.Generator.Azure.Python
         public string TypeDefinitionName { get; private set; }
 
         public string ItemType { get; private set; }
+
+        public bool Equals(PageTemplateModel other)
+        {
+            if (this.NextLinkName == other.NextLinkName && this.TypeDefinitionName == other.TypeDefinitionName &&
+                this.ItemName == other.ItemName)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

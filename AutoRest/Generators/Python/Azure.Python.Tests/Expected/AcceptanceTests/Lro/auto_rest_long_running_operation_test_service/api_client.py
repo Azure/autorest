@@ -10,42 +10,38 @@
 
 
 from msrest.service_client import ServiceClient, async_request
-from msrest import Configuration, Serializer, Deserializer
-from msrest.exceptions import (
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    HttpOperationError)
-from .operations.lr_os import lr_os
-from .operations.lro_retrys import lro_retrys
-from .operations.lrosa_ds import lrosa_ds
-from .operations.lr_os_custom_header import lr_os_custom_header
+from .operations.lr_os_operations import lr_osOperations
+from .operations.lro_retrys_operations import lro_retrysOperations
+from .operations.lrosa_ds_operations import lrosa_dsOperations
+from .operations.lr_os_custom_header_operations import lr_os_custom_headerOperations
 from . import models
 
 
 class AutoRestLongRunningOperationTestServiceConfiguration(Configuration):
 
-    def __init__(self, base_url=None, filepath=None):
+    def __init__(self, credentials, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
 
         super(AutoRestLongRunningOperationTestServiceConfiguration, self).__init__(base_url, filepath)
 
+        self.credentials = credentials;
+
 
 class AutoRestLongRunningOperationTestService(object):
 
     def __init__(self, config):
 
-        self._client = ServiceClient(None, config)
+        self._client = ServiceClient(config.credentials, config) 
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.lr_os = lr_os(self._client, self.config, self._serialize, self._deserialize)
-        self.lro_retrys = lro_retrys(self._client, self.config, self._serialize, self._deserialize)
-        self.lrosa_ds = lrosa_ds(self._client, self.config, self._serialize, self._deserialize)
-        self.lr_os_custom_header = lr_os_custom_header(self._client, self.config, self._serialize, self._deserialize)
+        self.lr_os = lr_osOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.lro_retrys = lro_retrysOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.lrosa_ds = lrosa_dsOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.lr_os_custom_header = lr_os_custom_headerOperations(self._client, self.config, self._serialize, self._deserialize)
+

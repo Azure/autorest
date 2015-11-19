@@ -17,11 +17,13 @@ class StorageAccountUpdateParameters(Resource):
     _required = []
 
     _attribute_map = {
-        'properties': {'key': 'properties', 'type': 'StorageAccountPropertiesUpdateParameters'},
+        'account_type': {'key': 'properties.accountType', 'type': 'AccountType'},
+        'custom_domain': {'key': 'properties.customDomain', 'type': 'CustomDomain'},
     }
 
     def __init__(self, *args, **kwargs):
 
-        self.properties = None
+        self.account_type = None
+        self.custom_domain = None
 
         super(StorageAccountUpdateParameters, self).__init__(*args, **kwargs)

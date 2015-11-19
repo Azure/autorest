@@ -17,12 +17,12 @@ namespace Microsoft.Rest.Generator.Python
     {
         private const string ClientRuntimePackage = "runtime.msrest version 1.1.0";
 
-        private PythonCodeNamer _namer;
-
         public PythonCodeGenerator(Settings settings) : base(settings)
         {
-            _namer = new PythonCodeNamer();
+            Namer = new PythonCodeNamer();
         }
+
+        public PythonCodeNamer Namer { get; set; }
 
         public override string Name
         {
@@ -56,8 +56,8 @@ namespace Microsoft.Rest.Generator.Python
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             PopulateAdditionalProperties(serviceClient);
-            _namer.NormalizeClientModel(serviceClient);
-            _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
+            Namer.NormalizeClientModel(serviceClient);
+            Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + "_models");
         }
 
