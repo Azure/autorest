@@ -119,17 +119,10 @@ namespace Microsoft.Rest.Modeler.Swagger
                 headerType.Properties.Add(property);
             });
 
-            //if (headerType.Properties.Any())
-            //{
-            //    _swaggerModeler.GeneratedTypes[headerTypeName] = headerType;
-            //}
-            //else
-            //{
-            //    headerType = null;
-            //}
-
-            //TODO: Remove this code to re-enable headers
-            headerType = null;
+            if (!headerType.Properties.Any())
+            {
+                headerType = null;
+            }
 
             // Response format
             var typesList = new List<Stack<IType>>();
@@ -161,6 +154,11 @@ namespace Microsoft.Rest.Modeler.Swagger
             if (method.Responses.Count == 0)
             {
                 method.ReturnType = method.DefaultResponse;
+            }
+
+            if (method.ReturnType.Body != null && method.ReturnType.Headers != null)
+            {
+                _swaggerModeler.GeneratedTypes[method.ReturnType.Headers.Name] = method.ReturnType.Headers as CompositeType;
             }
 
             // Copy extensions

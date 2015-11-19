@@ -198,13 +198,18 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     {
         if (Model.DefaultResponse.Body == PrimaryType.Stream)
         {
-            @:result.Body = await httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+    @:result.Body = await httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
         else
         {
-            @:string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            @:result.Body = JsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+    @:string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+    @:result.Body = JsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
         }
+    }
+
+    @if (Model.ReturnType.Body != null && Model.ReturnType.Headers != null)
+    {
+    @:result.Headers = httpResponse.Headers.ToJson().ToObject<@(Model.ReturnType.Headers.Name)>(JsonSerializer.Create(@(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body))));
     }
 
     if (shouldTrace)

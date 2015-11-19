@@ -174,8 +174,16 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 if (ReturnType.Body != null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "HttpOperationResponse<{0}>", ReturnType.Body.Name);
+                    if (ReturnType.Headers != null)
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                            "HttpOperationResponse<{0},{1}>", ReturnType.Body.Name, ReturnType.Headers.Name);
+                    }
+                    else
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                            "HttpOperationResponse<{0}>", ReturnType.Body.Name);
+                    }
                 }
                 else
                 {
@@ -191,7 +199,7 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                 if (ReturnType.Body != null)
+                if (ReturnType.Body != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
                         "Task<{0}>", ReturnType.Body.Name);
