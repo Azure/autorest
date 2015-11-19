@@ -10,6 +10,7 @@
 
 
 from msrest.service_client import ServiceClient, async_request
+from msrest import Configuration, Serializer, Deserializer
 from .operations.http_success_operations import http_successOperations
 from . import models
 
@@ -23,19 +24,18 @@ class AutoRestHeadTestServiceConfiguration(Configuration):
 
         super(AutoRestHeadTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.credentials = credentials;
+        self.credentials = credentials
 
 
 class AutoRestHeadTestService(object):
 
     def __init__(self, config):
 
-        self._client = ServiceClient(config.credentials, config) 
+        self._client = ServiceClient(config.credentials, config)
 
-        client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 
         self.config = config
         self.http_success = http_successOperations(self._client, self.config, self._serialize, self._deserialize)
-

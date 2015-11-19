@@ -16,8 +16,8 @@ from runtime.msrest.paging import Paged
 class @(Model.TypeDefinitionName)(Paged):
 @EmptyLine
     _attribute_map = {
-        'next_link': {'key':'@Model.NextLinkName', 'type':'str'},
-        'items': {'key':'@Model.ItemName', 'type': '[@Model.ItemType]'}
+        'next_link': {'key': '@Model.NextLinkName', 'type': 'str'},
+        'items': {'key': '@Model.ItemName', 'type': '[@Model.ItemType]'}
     }
 @EmptyLine
     def __init__(self, *args, **kwargs):

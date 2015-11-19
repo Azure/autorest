@@ -49,7 +49,7 @@ class skip_url_encodingOperations(object):
             return value
 
     @async_request
-    def get_method_path_valid(self, unencoded_path_param, custom_headers = {}, raw = False, callback = None):
+    def get_method_path_valid(self, unencoded_path_param, custom_headers={}, raw=False, callback=None):
         """
 
         Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -72,7 +72,7 @@ class skip_url_encodingOperations(object):
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}'
         path_format_arguments = {
-            'unencodedPathParam' : self._parse_url("unencoded_path_param", unencoded_path_param, 'str', True)}
+            'unencodedPathParam': self._parse_url("unencoded_path_param", unencoded_path_param, 'str', True)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -97,7 +97,7 @@ class skip_url_encodingOperations(object):
             return None, response
 
     @async_request
-    def get_path_path_valid(self, unencoded_path_param, custom_headers = {}, raw = False, callback = None):
+    def get_path_path_valid(self, unencoded_path_param, custom_headers={}, raw=False, callback=None):
         """
 
         Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -120,7 +120,7 @@ class skip_url_encodingOperations(object):
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}'
         path_format_arguments = {
-            'unencodedPathParam' : self._parse_url("unencoded_path_param", unencoded_path_param, 'str', True)}
+            'unencodedPathParam': self._parse_url("unencoded_path_param", unencoded_path_param, 'str', True)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -145,7 +145,7 @@ class skip_url_encodingOperations(object):
             return None, response
 
     @async_request
-    def get_swagger_path_valid(self, unencoded_path_param, custom_headers = {}, raw = False, callback = None):
+    def get_swagger_path_valid(self, unencoded_path_param, custom_headers={}, raw=False, callback=None):
         """
 
         Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -169,7 +169,7 @@ class skip_url_encodingOperations(object):
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}'
         path_format_arguments = {
-            'unencodedPathParam' : self._parse_url("unencoded_path_param", unencoded_path_param, 'str', True)}
+            'unencodedPathParam': self._parse_url("unencoded_path_param", unencoded_path_param, 'str', True)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -194,7 +194,7 @@ class skip_url_encodingOperations(object):
             return None, response
 
     @async_request
-    def get_method_query_valid(self, q1, custom_headers = {}, raw = False, callback = None):
+    def get_method_query_valid(self, q1, custom_headers={}, raw=False, callback=None):
         """
 
         Get method with unencoded query parameter with value
@@ -242,7 +242,7 @@ class skip_url_encodingOperations(object):
             return None, response
 
     @async_request
-    def get_method_query_null(self, q1, custom_headers = {}, raw = False, callback = None):
+    def get_method_query_null(self, q1, custom_headers={}, raw=False, callback=None):
         """
 
         Get method with unencoded query parameter with value null
@@ -288,7 +288,7 @@ class skip_url_encodingOperations(object):
             return None, response
 
     @async_request
-    def get_path_query_valid(self, q1, custom_headers = {}, raw = False, callback = None):
+    def get_path_query_valid(self, q1, custom_headers={}, raw=False, callback=None):
         """
 
         Get method with unencoded query parameter with value
@@ -336,7 +336,7 @@ class skip_url_encodingOperations(object):
             return None, response
 
     @async_request
-    def get_swagger_query_valid(self, q1, custom_headers = {}, raw = False, callback = None):
+    def get_swagger_query_valid(self, q1, custom_headers={}, raw=False, callback=None):
         """
 
         Get method with unencoded query parameter with value

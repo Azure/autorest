@@ -49,7 +49,7 @@ class groupOperations(object):
             return value
 
     @async_request
-    def get_sample_resource_group(self, resource_group_name, custom_headers = {}, raw = False, callback = None):
+    def get_sample_resource_group(self, resource_group_name, custom_headers={}, raw=False, callback=None):
         """
 
         Provides a resouce group with name 'testgroup101' and location 'West
@@ -73,8 +73,8 @@ class groupOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}'
         path_format_arguments = {
-            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False),
-            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False)}
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False),
+            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters

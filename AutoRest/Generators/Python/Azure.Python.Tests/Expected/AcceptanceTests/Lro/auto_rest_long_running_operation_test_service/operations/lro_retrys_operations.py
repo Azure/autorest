@@ -49,7 +49,7 @@ class lro_retrysOperations(object):
             return value
 
     @async_request
-    def put201_creating_succeeded200(self, product, custom_headers = {}, raw = False, callback = None):
+    def put201_creating_succeeded200(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 500, then a 201 to the
@@ -109,7 +109,7 @@ class lro_retrysOperations(object):
         return deserialized
 
     @async_request
-    def begin_put201_creating_succeeded200(self, product, custom_headers = {}, raw = False, callback = None):
+    def begin_put201_creating_succeeded200(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 500, then a 201 to the
@@ -169,7 +169,7 @@ class lro_retrysOperations(object):
         return deserialized
 
     @async_request
-    def put_async_relative_retry_succeeded(self, product, custom_headers = {}, raw = False, callback = None):
+    def put_async_relative_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 500, then a 200 to the
@@ -227,7 +227,7 @@ class lro_retrysOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_async_relative_retry_succeeded(self, product, custom_headers = {}, raw = False, callback = None):
+    def begin_put_async_relative_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 500, then a 200 to the
@@ -285,7 +285,7 @@ class lro_retrysOperations(object):
         return deserialized
 
     @async_request
-    def delete_provisioning202_accepted200_succeeded(self, custom_headers = {}, raw = False, callback = None):
+    def delete_provisioning202_accepted200_succeeded(self, custom_headers={}, raw=False, callback=None):
         """
 
         Long running delete request, service returns a 500, then a  202 to the
@@ -340,7 +340,7 @@ class lro_retrysOperations(object):
         return deserialized
 
     @async_request
-    def begin_delete_provisioning202_accepted200_succeeded(self, custom_headers = {}, raw = False, callback = None):
+    def begin_delete_provisioning202_accepted200_succeeded(self, custom_headers={}, raw=False, callback=None):
         """
 
         Long running delete request, service returns a 500, then a  202 to the
@@ -395,7 +395,7 @@ class lro_retrysOperations(object):
         return deserialized
 
     @async_request
-    def delete202_retry200(self, custom_headers = {}, raw = False, callback = None):
+    def delete202_retry200(self, custom_headers={}, raw=False, callback=None):
         """
 
         Long running delete request, service returns a 500, then a 202 to the
@@ -439,7 +439,7 @@ class lro_retrysOperations(object):
             return None, response
 
     @async_request
-    def begin_delete202_retry200(self, custom_headers = {}, raw = False, callback = None):
+    def begin_delete202_retry200(self, custom_headers={}, raw=False, callback=None):
         """
 
         Long running delete request, service returns a 500, then a 202 to the
@@ -483,7 +483,7 @@ class lro_retrysOperations(object):
             return None, response
 
     @async_request
-    def delete_async_relative_retry_succeeded(self, custom_headers = {}, raw = False, callback = None):
+    def delete_async_relative_retry_succeeded(self, custom_headers={}, raw=False, callback=None):
         """
 
         Long running delete request, service returns a 500, then a 202 to the
@@ -527,7 +527,7 @@ class lro_retrysOperations(object):
             return None, response
 
     @async_request
-    def begin_delete_async_relative_retry_succeeded(self, custom_headers = {}, raw = False, callback = None):
+    def begin_delete_async_relative_retry_succeeded(self, custom_headers={}, raw=False, callback=None):
         """
 
         Long running delete request, service returns a 500, then a 202 to the
@@ -571,7 +571,7 @@ class lro_retrysOperations(object):
             return None, response
 
     @async_request
-    def post202_retry200(self, product, custom_headers = {}, raw = False, callback = None):
+    def post202_retry200(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 500, then a 202 to the
@@ -620,7 +620,7 @@ class lro_retrysOperations(object):
             return None, response
 
     @async_request
-    def begin_post202_retry200(self, product, custom_headers = {}, raw = False, callback = None):
+    def begin_post202_retry200(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 500, then a 202 to the
@@ -669,7 +669,7 @@ class lro_retrysOperations(object):
             return None, response
 
     @async_request
-    def post_async_relative_retry_succeeded(self, product, custom_headers = {}, raw = False, callback = None):
+    def post_async_relative_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 500, then a 202 to the
@@ -719,7 +719,7 @@ class lro_retrysOperations(object):
             return None, response
 
     @async_request
-    def begin_post_async_relative_retry_succeeded(self, product, custom_headers = {}, raw = False, callback = None):
+    def begin_post_async_relative_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 500, then a 202 to the

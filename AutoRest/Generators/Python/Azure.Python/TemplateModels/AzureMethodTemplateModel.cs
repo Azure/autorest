@@ -84,11 +84,11 @@ namespace Microsoft.Rest.Generator.Azure.Python
 
             if (addCustomHeaderParameters)
             {
-                declarations.Add("custom_headers = {}");
+                declarations.Add("custom_headers={}");
             }
 
-            declarations.Add("raw = False");
-            declarations.Add("callback = None");
+            declarations.Add("raw=False");
+            declarations.Add("callback=None");
             var declaration = string.Join(", ", declarations);
             return declaration;
         }
@@ -111,7 +111,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
 
                 for (int i = 0; i < pathParameterList.Count; i ++)
                 {
-                    builder.AppendLine("'{0}' : self._parse_url(\"{1}\", {1}, '{2}', {3}){4}",
+                    builder.AppendLine("'{0}': self._parse_url(\"{1}\", {1}, '{2}', {3}){4}",
                         pathParameterList[i].SerializedName,
                         pathParameterList[i].Name,
                         pathParameterList[i].Type.ToPythonRuntimeTypeString(),

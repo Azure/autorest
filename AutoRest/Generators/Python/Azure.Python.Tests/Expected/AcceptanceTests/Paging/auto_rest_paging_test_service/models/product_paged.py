@@ -14,8 +14,8 @@ from runtime.msrest.paging import Paged
 class ProductPaged(Paged):
 
     _attribute_map = {
-        'next_link': {'key':'nextLink', 'type':'str'},
-        'items': {'key':'value', 'type': '[Product]'}
+        'next_link': {'key': 'nextLink', 'type': 'str'},
+        'items': {'key': 'value', 'type': '[Product]'}
     }
 
     def __init__(self, *args, **kwargs):

@@ -12,12 +12,6 @@ from datetime import *
 
 from msrest.service_client import ServiceClient, async_request
 from msrest import Configuration, Serializer, Deserializer
-from msrest.exceptions import (
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    HttpOperationError)
 from .operations.datetimerfc1123 import datetimerfc1123
 from . import models
 

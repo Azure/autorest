@@ -30,21 +30,20 @@ class AutoRestReportServiceForAzureConfiguration(Configuration):
 
         super(AutoRestReportServiceForAzureConfiguration, self).__init__(base_url, filepath)
 
-        self.credentials = credentials;
+        self.credentials = credentials
 
 
 class AutoRestReportServiceForAzure(object):
 
     def __init__(self, config):
 
-        self._client = ServiceClient(config.credentials, config) 
+        self._client = ServiceClient(config.credentials, config)
 
-        client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-
 
     def _parse_url(self, name, value, datatype):
 
@@ -61,7 +60,7 @@ class AutoRestReportServiceForAzure(object):
             return value
 
     @async_request
-    def get_report(self, custom_headers = {}, raw = False, callback = None):
+    def get_report(self, custom_headers={}, raw=False, callback=None):
         """
 
         Get test coverage report

@@ -49,7 +49,7 @@ class lr_os_custom_headerOperations(object):
             return value
 
     @async_request
-    def put_async_retry_succeeded(self, product, custom_headers = {}, raw = False, callback = None):
+    def put_async_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
@@ -108,7 +108,7 @@ class lr_os_custom_headerOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_async_retry_succeeded(self, product, custom_headers = {}, raw = False, callback = None):
+    def begin_put_async_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
@@ -167,7 +167,7 @@ class lr_os_custom_headerOperations(object):
         return deserialized
 
     @async_request
-    def put201_creating_succeeded200(self, product, custom_headers = {}, raw = False, callback = None):
+    def put201_creating_succeeded200(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
@@ -228,7 +228,7 @@ class lr_os_custom_headerOperations(object):
         return deserialized
 
     @async_request
-    def begin_put201_creating_succeeded200(self, product, custom_headers = {}, raw = False, callback = None):
+    def begin_put201_creating_succeeded200(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
@@ -289,7 +289,7 @@ class lr_os_custom_headerOperations(object):
         return deserialized
 
     @async_request
-    def post202_retry200(self, product, custom_headers = {}, raw = False, callback = None):
+    def post202_retry200(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
@@ -340,7 +340,7 @@ class lr_os_custom_headerOperations(object):
             return None, response
 
     @async_request
-    def begin_post202_retry200(self, product, custom_headers = {}, raw = False, callback = None):
+    def begin_post202_retry200(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
@@ -391,7 +391,7 @@ class lr_os_custom_headerOperations(object):
             return None, response
 
     @async_request
-    def post_async_retry_succeeded(self, product, custom_headers = {}, raw = False, callback = None):
+    def post_async_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
@@ -442,7 +442,7 @@ class lr_os_custom_headerOperations(object):
             return None, response
 
     @async_request
-    def begin_post_async_retry_succeeded(self, product, custom_headers = {}, raw = False, callback = None):
+    def begin_post_async_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is

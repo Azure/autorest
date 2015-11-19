@@ -49,7 +49,7 @@ class parameter_groupingOperations(object):
             return value
 
     @async_request
-    def post_required(self, parameter_groupingpost_required_parameters, custom_headers = {}, raw = False, callback = None):
+    def post_required(self, parameter_groupingpost_required_parameters, custom_headers={}, raw=False, callback=None):
         """
 
         Post a bunch of required parameters grouped
@@ -72,7 +72,7 @@ class parameter_groupingOperations(object):
         # Construct URL
         url = '/parameterGrouping/postRequired/{path}'
         path_format_arguments = {
-            'path' : self._parse_url("path", path, 'str', False)}
+            'path': self._parse_url("path", path, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -101,7 +101,7 @@ class parameter_groupingOperations(object):
             return None, response
 
     @async_request
-    def post_optional(self, parameter_groupingpost_optional_parameters, custom_headers = {}, raw = False, callback = None):
+    def post_optional(self, parameter_groupingpost_optional_parameters, custom_headers={}, raw=False, callback=None):
         """
 
         Post a bunch of optional parameters grouped
@@ -150,7 +150,7 @@ class parameter_groupingOperations(object):
             return None, response
 
     @async_request
-    def post_multiple_parameter_groups(self, firstparametergroup, parameter_groupingpost_multiple_parameter_groupssecondparametergroup, custom_headers = {}, raw = False, callback = None):
+    def post_multiple_parameter_groups(self, firstparametergroup, parameter_groupingpost_multiple_parameter_groupssecondparametergroup, custom_headers={}, raw=False, callback=None):
         """
 
         Post parameters from multiple different parameter groups
@@ -208,7 +208,7 @@ class parameter_groupingOperations(object):
             return None, response
 
     @async_request
-    def post_shared_parameter_group_object(self, firstparametergroup, custom_headers = {}, raw = False, callback = None):
+    def post_shared_parameter_group_object(self, firstparametergroup, custom_headers={}, raw=False, callback=None):
         """
 
         Post parameters with a shared parameter group object

@@ -49,7 +49,7 @@ class storage_accountsOperations(object):
             return value
 
     @async_request
-    def check_name_availability(self, account_name, custom_headers = {}, raw = False, callback = None):
+    def check_name_availability(self, account_name, custom_headers={}, raw=False, callback=None):
         """
 
         Checks that account name is valid and is not in use.
@@ -74,7 +74,7 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability'
         path_format_arguments = {
-            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -111,7 +111,7 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def create(self, resource_group_name, account_name, parameters, custom_headers = {}, raw = False, callback = None):
+    def create(self, resource_group_name, account_name, parameters, custom_headers={}, raw=False, callback=None):
         """
 
         Asynchronously creates a new storage account with the specified
@@ -145,9 +145,9 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            'accountName' : self._parse_url("account_name", account_name, 'str', False),
-            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'accountName': self._parse_url("account_name", account_name, 'str', False),
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -184,7 +184,7 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def begin_create(self, resource_group_name, account_name, parameters, custom_headers = {}, raw = False, callback = None):
+    def begin_create(self, resource_group_name, account_name, parameters, custom_headers={}, raw=False, callback=None):
         """
 
         Asynchronously creates a new storage account with the specified
@@ -218,9 +218,9 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            'accountName' : self._parse_url("account_name", account_name, 'str', False),
-            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'accountName': self._parse_url("account_name", account_name, 'str', False),
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -257,7 +257,7 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def delete(self, resource_group_name, account_name, custom_headers = {}, raw = False, callback = None):
+    def delete(self, resource_group_name, account_name, custom_headers={}, raw=False, callback=None):
         """
 
         Deletes a storage account in Microsoft Azure.
@@ -284,9 +284,9 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            'accountName' : self._parse_url("account_name", account_name, 'str', False),
-            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'accountName': self._parse_url("account_name", account_name, 'str', False),
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -313,7 +313,7 @@ class storage_accountsOperations(object):
             return None, response
 
     @async_request
-    def get_properties(self, resource_group_name, account_name, custom_headers = {}, raw = False, callback = None):
+    def get_properties(self, resource_group_name, account_name, custom_headers={}, raw=False, callback=None):
         """
 
         Returns the properties for the specified storage account including but
@@ -343,9 +343,9 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            'accountName' : self._parse_url("account_name", account_name, 'str', False),
-            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'accountName': self._parse_url("account_name", account_name, 'str', False),
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -379,7 +379,7 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def update(self, resource_group_name, account_name, parameters, custom_headers = {}, raw = False, callback = None):
+    def update(self, resource_group_name, account_name, parameters, custom_headers={}, raw=False, callback=None):
         """
 
         Updates the account type or tags for a storage account. It can also be
@@ -419,9 +419,9 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            'accountName' : self._parse_url("account_name", account_name, 'str', False),
-            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'accountName': self._parse_url("account_name", account_name, 'str', False),
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -458,7 +458,7 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def list_keys(self, resource_group_name, account_name, custom_headers = {}, raw = False, callback = None):
+    def list_keys(self, resource_group_name, account_name, custom_headers={}, raw=False, callback=None):
         """
 
         Lists the access keys for the specified storage account.
@@ -483,9 +483,9 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
         path_format_arguments = {
-            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            'accountName' : self._parse_url("account_name", account_name, 'str', False),
-            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'accountName': self._parse_url("account_name", account_name, 'str', False),
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -519,7 +519,7 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def list(self, custom_headers = {}, raw = False, callback = None):
+    def list(self, custom_headers={}, raw=False, callback=None):
         """
 
         Lists all the storage accounts available under the subscription. Note
@@ -545,7 +545,7 @@ class storage_accountsOperations(object):
                 # Construct URL
                 url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts'
                 path_format_arguments = {
-                    'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+                    'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
                 url = url.format(**path_format_arguments)
 
                 # Construct parameters
@@ -585,7 +585,7 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def list_by_resource_group(self, resource_group_name, custom_headers = {}, raw = False, callback = None):
+    def list_by_resource_group(self, resource_group_name, custom_headers={}, raw=False, callback=None):
         """
 
         Lists all the storage accounts available under the given resource
@@ -614,8 +614,8 @@ class storage_accountsOperations(object):
                 # Construct URL
                 url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts'
                 path_format_arguments = {
-                    'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
-                    'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+                    'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False),
+                    'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
                 url = url.format(**path_format_arguments)
 
                 # Construct parameters
@@ -655,7 +655,7 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def regenerate_key(self, resource_group_name, account_name, regenerate_key, custom_headers = {}, raw = False, callback = None):
+    def regenerate_key(self, resource_group_name, account_name, regenerate_key, custom_headers={}, raw=False, callback=None):
         """
 
         Regenerates the access keys for the specified storage account.
@@ -686,9 +686,9 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'
         path_format_arguments = {
-            'resourceGroupName' : self._parse_url("resource_group_name", resource_group_name, 'str', False),
-            'accountName' : self._parse_url("account_name", account_name, 'str', False),
-            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'resourceGroupName': self._parse_url("resource_group_name", resource_group_name, 'str', False),
+            'accountName': self._parse_url("account_name", account_name, 'str', False),
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -725,7 +725,7 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def list_next(self, next_page_link, custom_headers = {}, raw = False, callback = None):
+    def list_next(self, next_page_link, custom_headers={}, raw=False, callback=None):
         """
 
         Lists all the storage accounts available under the subscription. Note
@@ -754,7 +754,7 @@ class storage_accountsOperations(object):
                 # Construct URL
                 url = '{nextLink}'
                 path_format_arguments = {
-                    'nextLink' : self._parse_url("next_page_link", next_page_link, 'str', True)}
+                    'nextLink': self._parse_url("next_page_link", next_page_link, 'str', True)}
                 url = url.format(**path_format_arguments)
 
                 # Construct parameters
@@ -792,7 +792,7 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def list_by_resource_group_next(self, next_page_link, custom_headers = {}, raw = False, callback = None):
+    def list_by_resource_group_next(self, next_page_link, custom_headers={}, raw=False, callback=None):
         """
 
         Lists all the storage accounts available under the given resource
@@ -821,7 +821,7 @@ class storage_accountsOperations(object):
                 # Construct URL
                 url = '{nextLink}'
                 path_format_arguments = {
-                    'nextLink' : self._parse_url("next_page_link", next_page_link, 'str', True)}
+                    'nextLink': self._parse_url("next_page_link", next_page_link, 'str', True)}
                 url = url.format(**path_format_arguments)
 
                 # Construct parameters

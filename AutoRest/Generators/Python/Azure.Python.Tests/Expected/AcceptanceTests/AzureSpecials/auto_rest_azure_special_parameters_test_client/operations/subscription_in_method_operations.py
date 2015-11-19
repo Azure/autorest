@@ -49,7 +49,7 @@ class subscription_in_methodOperations(object):
             return value
 
     @async_request
-    def post_method_local_valid(self, subscription_id, custom_headers = {}, raw = False, callback = None):
+    def post_method_local_valid(self, subscription_id, custom_headers={}, raw=False, callback=None):
         """
 
         POST method with subscriptionId modeled in the method.  pass in
@@ -73,7 +73,7 @@ class subscription_in_methodOperations(object):
         # Construct URL
         url = '/azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}'
         path_format_arguments = {
-            'subscriptionId' : self._parse_url("subscription_id", subscription_id, 'str', False)}
+            'subscriptionId': self._parse_url("subscription_id", subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -98,7 +98,7 @@ class subscription_in_methodOperations(object):
             return None, response
 
     @async_request
-    def post_method_local_null(self, subscription_id, custom_headers = {}, raw = False, callback = None):
+    def post_method_local_null(self, subscription_id, custom_headers={}, raw=False, callback=None):
         """
 
         POST method with subscriptionId modeled in the method.  pass in
@@ -123,7 +123,7 @@ class subscription_in_methodOperations(object):
         # Construct URL
         url = '/azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}'
         path_format_arguments = {
-            'subscriptionId' : self._parse_url("subscription_id", subscription_id, 'str', False)}
+            'subscriptionId': self._parse_url("subscription_id", subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -148,7 +148,7 @@ class subscription_in_methodOperations(object):
             return None, response
 
     @async_request
-    def post_path_local_valid(self, subscription_id, custom_headers = {}, raw = False, callback = None):
+    def post_path_local_valid(self, subscription_id, custom_headers={}, raw=False, callback=None):
         """
 
         POST method with subscriptionId modeled in the method.  pass in
@@ -172,7 +172,7 @@ class subscription_in_methodOperations(object):
         # Construct URL
         url = '/azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}'
         path_format_arguments = {
-            'subscriptionId' : self._parse_url("subscription_id", subscription_id, 'str', False)}
+            'subscriptionId': self._parse_url("subscription_id", subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -197,7 +197,7 @@ class subscription_in_methodOperations(object):
             return None, response
 
     @async_request
-    def post_swagger_local_valid(self, subscription_id, custom_headers = {}, raw = False, callback = None):
+    def post_swagger_local_valid(self, subscription_id, custom_headers={}, raw=False, callback=None):
         """
 
         POST method with subscriptionId modeled in the method.  pass in
@@ -221,7 +221,7 @@ class subscription_in_methodOperations(object):
         # Construct URL
         url = '/azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}'
         path_format_arguments = {
-            'subscriptionId' : self._parse_url("subscription_id", subscription_id, 'str', False)}
+            'subscriptionId': self._parse_url("subscription_id", subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters

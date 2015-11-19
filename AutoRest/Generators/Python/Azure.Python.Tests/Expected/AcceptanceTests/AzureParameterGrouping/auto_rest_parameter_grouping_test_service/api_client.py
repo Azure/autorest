@@ -10,6 +10,7 @@
 
 
 from msrest.service_client import ServiceClient, async_request
+from msrest import Configuration, Serializer, Deserializer
 from .operations.parameter_grouping_operations import parameter_groupingOperations
 from . import models
 
@@ -23,19 +24,18 @@ class AutoRestParameterGroupingTestServiceConfiguration(Configuration):
 
         super(AutoRestParameterGroupingTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.credentials = credentials;
+        self.credentials = credentials
 
 
 class AutoRestParameterGroupingTestService(object):
 
     def __init__(self, config):
 
-        self._client = ServiceClient(config.credentials, config) 
+        self._client = ServiceClient(config.credentials, config)
 
-        client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 
         self.config = config
         self.parameter_grouping = parameter_groupingOperations(self._client, self.config, self._serialize, self._deserialize)
-

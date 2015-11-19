@@ -49,7 +49,7 @@ class subscription_in_credentialsOperations(object):
             return value
 
     @async_request
-    def post_method_global_valid(self, custom_headers = {}, raw = False, callback = None):
+    def post_method_global_valid(self, custom_headers={}, raw=False, callback=None):
         """
 
         POST method with subscriptionId modeled in credentials.  Set the
@@ -70,7 +70,7 @@ class subscription_in_credentialsOperations(object):
         # Construct URL
         url = '/azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}'
         path_format_arguments = {
-            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -95,7 +95,7 @@ class subscription_in_credentialsOperations(object):
             return None, response
 
     @async_request
-    def post_method_global_null(self, custom_headers = {}, raw = False, callback = None):
+    def post_method_global_null(self, custom_headers={}, raw=False, callback=None):
         """
 
         POST method with subscriptionId modeled in credentials.  Set the
@@ -117,7 +117,7 @@ class subscription_in_credentialsOperations(object):
         # Construct URL
         url = '/azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}'
         path_format_arguments = {
-            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -142,7 +142,7 @@ class subscription_in_credentialsOperations(object):
             return None, response
 
     @async_request
-    def post_method_global_not_provided_valid(self, custom_headers = {}, raw = False, callback = None):
+    def post_method_global_not_provided_valid(self, custom_headers={}, raw=False, callback=None):
         """
 
         POST method with subscriptionId modeled in credentials.  Set the
@@ -163,7 +163,7 @@ class subscription_in_credentialsOperations(object):
         # Construct URL
         url = '/azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}'
         path_format_arguments = {
-            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -190,7 +190,7 @@ class subscription_in_credentialsOperations(object):
             return None, response
 
     @async_request
-    def post_path_global_valid(self, custom_headers = {}, raw = False, callback = None):
+    def post_path_global_valid(self, custom_headers={}, raw=False, callback=None):
         """
 
         POST method with subscriptionId modeled in credentials.  Set the
@@ -211,7 +211,7 @@ class subscription_in_credentialsOperations(object):
         # Construct URL
         url = '/azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}'
         path_format_arguments = {
-            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -236,7 +236,7 @@ class subscription_in_credentialsOperations(object):
             return None, response
 
     @async_request
-    def post_swagger_global_valid(self, custom_headers = {}, raw = False, callback = None):
+    def post_swagger_global_valid(self, custom_headers={}, raw=False, callback=None):
         """
 
         POST method with subscriptionId modeled in credentials.  Set the
@@ -257,7 +257,7 @@ class subscription_in_credentialsOperations(object):
         # Construct URL
         url = '/azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}'
         path_format_arguments = {
-            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters

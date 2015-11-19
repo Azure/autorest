@@ -11,12 +11,6 @@
 
 from msrest.service_client import ServiceClient, async_request
 from msrest import Configuration, Serializer, Deserializer
-from msrest.exceptions import (
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    HttpOperationError)
 from .operations.bool_model import bool_model
 from . import models
 

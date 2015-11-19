@@ -49,7 +49,7 @@ class usageOperationsOperations(object):
             return value
 
     @async_request
-    def list(self, custom_headers = {}, raw = False, callback = None):
+    def list(self, custom_headers={}, raw=False, callback=None):
         """
 
         Gets the current usage count and the limit for the resources under the
@@ -71,7 +71,7 @@ class usageOperationsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages'
         path_format_arguments = {
-            'subscriptionId' : self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
+            'subscriptionId': self._parse_url("self.config.subscription_id", self.config.subscription_id, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters

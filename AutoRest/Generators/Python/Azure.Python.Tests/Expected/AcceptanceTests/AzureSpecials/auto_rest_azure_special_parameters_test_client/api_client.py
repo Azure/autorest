@@ -10,6 +10,7 @@
 
 
 from msrest.service_client import ServiceClient, async_request
+from msrest import Configuration, Serializer, Deserializer
 from .operations.xms_client_request_id_operations import xms_client_request_idOperations
 from .operations.subscription_in_credentials_operations import subscription_in_credentialsOperations
 from .operations.subscription_in_method_operations import subscription_in_methodOperations
@@ -29,17 +30,17 @@ class AutoRestAzureSpecialParametersTestClientConfiguration(Configuration):
 
         super(AutoRestAzureSpecialParametersTestClientConfiguration, self).__init__(base_url, filepath)
 
-        self.credentials = credentials;
-        self.subscription_id = subscription_id;
+        self.credentials = credentials
+        self.subscription_id = subscription_id
 
 
 class AutoRestAzureSpecialParametersTestClient(object):
 
     def __init__(self, config):
 
-        self._client = ServiceClient(config.credentials, config) 
+        self._client = ServiceClient(config.credentials, config)
 
-        client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 
@@ -51,4 +52,3 @@ class AutoRestAzureSpecialParametersTestClient(object):
         self.api_version_local = api_version_localOperations(self._client, self.config, self._serialize, self._deserialize)
         self.skip_url_encoding = skip_url_encodingOperations(self._client, self.config, self._serialize, self._deserialize)
         self.header = headerOperations(self._client, self.config, self._serialize, self._deserialize)
-

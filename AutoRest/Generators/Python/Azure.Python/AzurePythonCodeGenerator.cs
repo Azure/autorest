@@ -195,7 +195,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 await Write(serviceClientTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "api_client.py"));
 
                 //Models
-                if (serviceClient.ModelTypes.Any())
+                if (serviceClientTemplateModel.ModelTemplateModels.Any())
                 {
                     var modelInitTemplate = new AzureModelInitTemplate
                     {

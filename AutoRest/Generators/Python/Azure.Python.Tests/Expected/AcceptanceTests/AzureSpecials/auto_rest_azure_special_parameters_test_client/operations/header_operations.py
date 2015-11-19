@@ -49,7 +49,7 @@ class headerOperations(object):
             return value
 
     @async_request
-    def custom_named_request_id(self, fooclientrequestid, custom_headers = {}, raw = False, callback = None):
+    def custom_named_request_id(self, fooclientrequestid, custom_headers={}, raw=False, callback=None):
         """
 
         Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in

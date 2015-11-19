@@ -49,7 +49,7 @@ class pagingOperations(object):
             return value
 
     @async_request
-    def get_single_pages(self, custom_headers = {}, raw = False, callback = None):
+    def get_single_pages(self, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that finishes on the first call without a nextlink
@@ -108,7 +108,7 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages(self, clientrequestid, custom_headers = {}, raw = False, callback = None):
+    def get_multiple_pages(self, clientrequestid, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that includes a nextLink that has 10 pages
@@ -171,7 +171,7 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages_retry_first(self, custom_headers = {}, raw = False, callback = None):
+    def get_multiple_pages_retry_first(self, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that fails on the first call with 500 and then
@@ -231,7 +231,7 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages_retry_second(self, custom_headers = {}, raw = False, callback = None):
+    def get_multiple_pages_retry_second(self, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that includes a nextLink that has 10 pages, of
@@ -292,7 +292,7 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_single_pages_failure(self, custom_headers = {}, raw = False, callback = None):
+    def get_single_pages_failure(self, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that receives a 400 on the first call
@@ -351,7 +351,7 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages_failure(self, custom_headers = {}, raw = False, callback = None):
+    def get_multiple_pages_failure(self, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that receives a 400 on the second call
@@ -410,7 +410,7 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages_failure_uri(self, custom_headers = {}, raw = False, callback = None):
+    def get_multiple_pages_failure_uri(self, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that receives an invalid nextLink
@@ -469,7 +469,7 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_single_pages_next(self, next_page_link, custom_headers = {}, raw = False, callback = None):
+    def get_single_pages_next(self, next_page_link, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that finishes on the first call without a nextlink
@@ -496,7 +496,7 @@ class pagingOperations(object):
                 # Construct URL
                 url = '{nextLink}'
                 path_format_arguments = {
-                    'nextLink' : self._parse_url("next_page_link", next_page_link, 'str', True)}
+                    'nextLink': self._parse_url("next_page_link", next_page_link, 'str', True)}
                 url = url.format(**path_format_arguments)
 
                 # Construct parameters
@@ -534,7 +534,7 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages_next(self, next_page_link, clientrequestid, custom_headers = {}, raw = False, callback = None):
+    def get_multiple_pages_next(self, next_page_link, clientrequestid, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that includes a nextLink that has 10 pages
@@ -563,7 +563,7 @@ class pagingOperations(object):
                 # Construct URL
                 url = '{nextLink}'
                 path_format_arguments = {
-                    'nextLink' : self._parse_url("next_page_link", next_page_link, 'str', True)}
+                    'nextLink': self._parse_url("next_page_link", next_page_link, 'str', True)}
                 url = url.format(**path_format_arguments)
 
                 # Construct parameters
@@ -603,7 +603,7 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages_retry_first_next(self, next_page_link, custom_headers = {}, raw = False, callback = None):
+    def get_multiple_pages_retry_first_next(self, next_page_link, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that fails on the first call with 500 and then
@@ -631,7 +631,7 @@ class pagingOperations(object):
                 # Construct URL
                 url = '{nextLink}'
                 path_format_arguments = {
-                    'nextLink' : self._parse_url("next_page_link", next_page_link, 'str', True)}
+                    'nextLink': self._parse_url("next_page_link", next_page_link, 'str', True)}
                 url = url.format(**path_format_arguments)
 
                 # Construct parameters
@@ -669,7 +669,7 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages_retry_second_next(self, next_page_link, custom_headers = {}, raw = False, callback = None):
+    def get_multiple_pages_retry_second_next(self, next_page_link, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that includes a nextLink that has 10 pages, of
@@ -698,7 +698,7 @@ class pagingOperations(object):
                 # Construct URL
                 url = '{nextLink}'
                 path_format_arguments = {
-                    'nextLink' : self._parse_url("next_page_link", next_page_link, 'str', True)}
+                    'nextLink': self._parse_url("next_page_link", next_page_link, 'str', True)}
                 url = url.format(**path_format_arguments)
 
                 # Construct parameters
@@ -736,7 +736,7 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_single_pages_failure_next(self, next_page_link, custom_headers = {}, raw = False, callback = None):
+    def get_single_pages_failure_next(self, next_page_link, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that receives a 400 on the first call
@@ -763,7 +763,7 @@ class pagingOperations(object):
                 # Construct URL
                 url = '{nextLink}'
                 path_format_arguments = {
-                    'nextLink' : self._parse_url("next_page_link", next_page_link, 'str', True)}
+                    'nextLink': self._parse_url("next_page_link", next_page_link, 'str', True)}
                 url = url.format(**path_format_arguments)
 
                 # Construct parameters
@@ -801,7 +801,7 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages_failure_next(self, next_page_link, custom_headers = {}, raw = False, callback = None):
+    def get_multiple_pages_failure_next(self, next_page_link, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that receives a 400 on the second call
@@ -828,7 +828,7 @@ class pagingOperations(object):
                 # Construct URL
                 url = '{nextLink}'
                 path_format_arguments = {
-                    'nextLink' : self._parse_url("next_page_link", next_page_link, 'str', True)}
+                    'nextLink': self._parse_url("next_page_link", next_page_link, 'str', True)}
                 url = url.format(**path_format_arguments)
 
                 # Construct parameters
@@ -866,7 +866,7 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages_failure_uri_next(self, next_page_link, custom_headers = {}, raw = False, callback = None):
+    def get_multiple_pages_failure_uri_next(self, next_page_link, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that receives an invalid nextLink
@@ -893,7 +893,7 @@ class pagingOperations(object):
                 # Construct URL
                 url = '{nextLink}'
                 path_format_arguments = {
-                    'nextLink' : self._parse_url("next_page_link", next_page_link, 'str', True)}
+                    'nextLink': self._parse_url("next_page_link", next_page_link, 'str', True)}
                 url = url.format(**path_format_arguments)
 
                 # Construct parameters

@@ -10,6 +10,7 @@
 
 
 from msrest.service_client import ServiceClient, async_request
+from msrest import Configuration, Serializer, Deserializer
 from .operations.group_operations import groupOperations
 from . import models
 
@@ -23,20 +24,19 @@ class MicrosoftAzureTestUrlConfiguration(Configuration):
 
         super(MicrosoftAzureTestUrlConfiguration, self).__init__(base_url, filepath)
 
-        self.credentials = credentials;
-        self.subscription_id = subscription_id;
+        self.credentials = credentials
+        self.subscription_id = subscription_id
 
 
 class MicrosoftAzureTestUrl(object):
 
     def __init__(self, config):
 
-        self._client = ServiceClient(config.credentials, config) 
+        self._client = ServiceClient(config.credentials, config)
 
-        client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 
         self.config = config
         self.group = groupOperations(self._client, self.config, self._serialize, self._deserialize)
-

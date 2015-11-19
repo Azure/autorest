@@ -30,21 +30,20 @@ class AutoRestResourceFlatteningTestServiceConfiguration(Configuration):
 
         super(AutoRestResourceFlatteningTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.credentials = credentials;
+        self.credentials = credentials
 
 
 class AutoRestResourceFlatteningTestService(object):
 
     def __init__(self, config):
 
-        self._client = ServiceClient(config.credentials, config) 
+        self._client = ServiceClient(config.credentials, config)
 
-        client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-
 
     def _parse_url(self, name, value, datatype):
 
@@ -61,7 +60,7 @@ class AutoRestResourceFlatteningTestService(object):
             return value
 
     @async_request
-    def put_array(self, resource_array, custom_headers = {}, raw = False, callback = None):
+    def put_array(self, resource_array, custom_headers={}, raw=False, callback=None):
         """
 
         Put External Resource as an Array
@@ -108,7 +107,7 @@ class AutoRestResourceFlatteningTestService(object):
             return None, response
 
     @async_request
-    def get_array(self, custom_headers = {}, raw = False, callback = None):
+    def get_array(self, custom_headers={}, raw=False, callback=None):
         """
 
         Get External Resource as an Array
@@ -157,7 +156,7 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     @async_request
-    def put_dictionary(self, resource_dictionary, custom_headers = {}, raw = False, callback = None):
+    def put_dictionary(self, resource_dictionary, custom_headers={}, raw=False, callback=None):
         """
 
         Put External Resource as a Dictionary
@@ -204,7 +203,7 @@ class AutoRestResourceFlatteningTestService(object):
             return None, response
 
     @async_request
-    def get_dictionary(self, custom_headers = {}, raw = False, callback = None):
+    def get_dictionary(self, custom_headers={}, raw=False, callback=None):
         """
 
         Get External Resource as a Dictionary
@@ -254,7 +253,7 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     @async_request
-    def put_resource_collection(self, resource_complex_object, custom_headers = {}, raw = False, callback = None):
+    def put_resource_collection(self, resource_complex_object, custom_headers={}, raw=False, callback=None):
         """
 
         Put External Resource as a ResourceCollection
@@ -302,7 +301,7 @@ class AutoRestResourceFlatteningTestService(object):
             return None, response
 
     @async_request
-    def get_resource_collection(self, custom_headers = {}, raw = False, callback = None):
+    def get_resource_collection(self, custom_headers={}, raw=False, callback=None):
         """
 
         Get External Resource as a ResourceCollection

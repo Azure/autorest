@@ -10,6 +10,7 @@
 
 
 from msrest.service_client import ServiceClient, async_request
+from msrest import Configuration, Serializer, Deserializer
 from .operations.storage_accounts_operations import storage_accountsOperations
 from .operations.usage_operations_operations import usageOperationsOperations
 from . import models
@@ -24,21 +25,20 @@ class StorageManagementClientConfiguration(Configuration):
 
         super(StorageManagementClientConfiguration, self).__init__(base_url, filepath)
 
-        self.credentials = credentials;
-        self.subscription_id = subscription_id;
+        self.credentials = credentials
+        self.subscription_id = subscription_id
 
 
 class StorageManagementClient(object):
 
     def __init__(self, config):
 
-        self._client = ServiceClient(config.credentials, config) 
+        self._client = ServiceClient(config.credentials, config)
 
-        client_models = {k:v for k,v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 
         self.config = config
         self.storage_accounts = storage_accountsOperations(self._client, self.config, self._serialize, self._deserialize)
         self.usageOperations = usageOperationsOperations(self._client, self.config, self._serialize, self._deserialize)
-

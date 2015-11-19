@@ -50,7 +50,7 @@ class durationOperations(object):
             return value
 
     @async_request
-    def get_null(self, custom_headers = {}, raw = False, callback = None):
+    def get_null(self, custom_headers={}, raw=False, callback=None):
         """
 
         Get null duration value
@@ -100,7 +100,7 @@ class durationOperations(object):
         return deserialized
 
     @async_request
-    def put_positive_duration(self, duration_body, custom_headers = {}, raw = False, callback = None):
+    def put_positive_duration(self, duration_body, custom_headers={}, raw=False, callback=None):
         """
 
         Put a positive duration value
@@ -147,7 +147,7 @@ class durationOperations(object):
             return None, response
 
     @async_request
-    def get_positive_duration(self, custom_headers = {}, raw = False, callback = None):
+    def get_positive_duration(self, custom_headers={}, raw=False, callback=None):
         """
 
         Get a positive duration value
@@ -197,7 +197,7 @@ class durationOperations(object):
         return deserialized
 
     @async_request
-    def get_invalid(self, custom_headers = {}, raw = False, callback = None):
+    def get_invalid(self, custom_headers={}, raw=False, callback=None):
         """
 
         Get an invalid duration value
