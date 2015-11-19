@@ -145,7 +145,7 @@ class ServiceClient(object):
 
         request.add_headers(headers)
         if content is not None:
-            request.add_content(content)
+            kwargs = request.add_content(content, **kwargs)
 
         try:
 
