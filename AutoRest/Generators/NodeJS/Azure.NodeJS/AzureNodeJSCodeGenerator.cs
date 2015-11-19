@@ -82,35 +82,6 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 }
             }
         }
-
-        /// <summary>
-        /// Creates long running operation methods.
-        /// </summary>
-        /// <param name="serviceClient"></param>
-        public void AddLongRunningOperations(ServiceClient serviceClient)
-        {
-            if (serviceClient == null)
-            {
-                throw new ArgumentNullException("serviceClient");
-            }
-
-            for (int i = 0; i < serviceClient.Methods.Count; i++)
-            {
-                var method = serviceClient.Methods[i];
-                if (method.Extensions.ContainsKey(LongRunningExtension))
-                {
-                    var isLongRunning = method.Extensions[LongRunningExtension];
-                    if (isLongRunning is bool && (bool)isLongRunning)
-                    {
-                        serviceClient.Methods.Insert(i, (Method)method.Clone());
-                        method.Name = "begin" + Namer.GetMethodName(method.Name.ToPascalCase());
-                        i++;
-                    }
-
-                    method.Extensions.Remove(LongRunningExtension);
-                }
-            }
-        }
         
         private static void NormalizeApiVersion(ServiceClient serviceClient)
         {

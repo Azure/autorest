@@ -205,7 +205,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <param name="codeNamer"></param>
-        public static void AddLongRunningOperations(ServiceClient serviceClient, CodeNamer codeNamer = default(CodeNamer))
+        public static void AddLongRunningOperations(ServiceClient serviceClient, CodeNamer codeNamer)
         {
             if (serviceClient == null)
             {
