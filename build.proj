@@ -98,8 +98,8 @@
   <Import Condition=" $(OnPremiseBuild) " Project="$(CIToolsPath)\Microsoft.WindowsAzure.Build.OnPremise.msbuild" />
 
   <ItemGroup>
-    <DnxLibraries Include="$(LibraryRoot)/ClientRuntimes/CSharp/**/project.json" />
-    <DnxLibraries Include="$(LibraryRoot)/AutoRest/Generators/**/project.json" />
+    <DnxLibraries Include="$(LibraryRoot)/ClientRuntimes/CSharp/*/project.json" />
+    <DnxLibraries Include="$(LibraryRoot)/AutoRest/Generators/CSharp/*/project.json" />
   </ItemGroup>
     
   <Target Name="Build" DependsOnTargets="RestoreNugetPackages">
@@ -188,7 +188,7 @@
       <Output TaskParameter="Path" PropertyName="SdkPath"/>
     </GetFrameworkSdkPath>
     <ItemGroup>
-      <DelaySignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\unsigned\*.*" />
+      <DelaySignedAssembliesToValidate Include="binaries\net45\unsigned\*.*" />
     </ItemGroup>
     <ValidateStrongNameSignatureTask
         SdkPath="$(SdkPath)"
@@ -200,15 +200,15 @@
         Description="Microsoft AutoRest"
         Keywords="Microsoft AutoRest"
         UnsignedFiles="@(DelaySignedAssembliesToValidate)"
-        DestinationPath="binaries\$(LibraryFxTarget)"
-        SigningLogPath="binaries\$(LibraryFxTarget)\signing.log"
+        DestinationPath="binaries\net45"
+        SigningLogPath="binaries\net45\signing.log"
         ToolsPath="$(CIToolsPath)"
         Condition="!$(DelaySign)"/>
     <!-- DelaySigned binaries copied locally for testing and not submitted to codesign service. -->
-    <Copy SourceFiles="@(DelaySignedAssembliesToValidate)" DestinationFolder="binaries\$(LibraryFxTarget)" Condition="$(DelaySign)" />
+    <Copy SourceFiles="@(DelaySignedAssembliesToValidate)" DestinationFolder="binaries\net45" Condition="$(DelaySign)" />
     <ItemGroup>
-      <AfterSignedAssembliesToValidate Include="binaries\$(LibraryFxTarget)\*.dll;binaries\$(LibraryFxTarget)\*.exe"
-        Exclude="binaries\$(LibraryFxTarget)\Newtonsoft.*.dll" />
+      <AfterSignedAssembliesToValidate Include="binaries\net45\*.dll;binaries\net45\*.exe"
+        Exclude="binaries\net45\Newtonsoft.*.dll" />
     </ItemGroup>
     <ValidateStrongNameSignatureTask
         SdkPath="$(SdkPath)"
@@ -217,7 +217,7 @@
         ExpectedDelaySigned="false"
         ContinueOnError="false"
         Condition="!$(DelaySign)"/>
-    <RemoveDir Directories="binaries\$(LibraryFxTarget)\unsigned;" ContinueOnError="true" />
+    <RemoveDir Directories="binaries\net45\unsigned;" ContinueOnError="true" />
   </Target>
 
   <Target Name="CodeSignBinaries">
@@ -225,7 +225,7 @@
     <Message Text="Code signing" Importance="high" />
     <MSBuild Projects="$(MSBuildProjectFullPath)"
              Targets="SignBinariesForAFxTarget"
-             Properties="LibraryFxTarget=%(LibraryFxTargetList.Identity);StrongNameToken=$(StrongNameToken)">
+             Properties="StrongNameToken=$(StrongNameToken)">
     </MSBuild>
     <CallTarget Targets="ValidateCorporateCompliance" Condition="!$(DelaySign)"/>
   </Target>
@@ -244,7 +244,7 @@
 
   <Target Name="RestoreNugetPackages">
     <Exec Command="dnvm use $(DnxVersion) -r coreclr" ContinueOnError="false"/>
-    <Exec Command="dnu restore" ContinueOnError="false"/>
+    <Exec Command="dnu restore %(DnxLibraries.FullPath)" ContinueOnError="false"/>
     <Exec Command="$(NuGetCommand) install xunit.runner.console -Version 2.1.0 -OutputDirectory $(LibraryRoot)packages" ContinueOnError="false"/>
     <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
   </Target>
