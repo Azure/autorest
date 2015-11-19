@@ -19,12 +19,15 @@ namespace Microsoft.Rest.Generator.Azure.Python
             : base(serviceClient)
         {
             this.PagedClasses = new List<string>();
-            foreach (var pair in pageClass)
+            if (pageClass != null)
             {
-                this.PagedClasses.Add(pair.Item1);
+                foreach (var pair in pageClass)
+                {
+                    this.PagedClasses.Add(pair.Item1);
+                }
             }
         }
 
-        public List<string> PagedClasses { get; set; }
+        public IList<string> PagedClasses { get; private set; }
     }
 }

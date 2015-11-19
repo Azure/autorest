@@ -32,11 +32,12 @@ namespace Microsoft.Rest.Generator
 
         // "joined_lower" for functions, methods, attributes
         // do not invoke this for a class name which should be "StudlyCaps"
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public static string PythonCase(string name)
         {
             name = Regex.Replace(name, @"[A-Z]+", m =>
             {
-                string matchedStr = m.ToString().ToLower();
+                string matchedStr = m.ToString().ToLowerInvariant();
                 if (m.Index > 0 && name[m.Index - 1] == '_')
                 {
                     //we are good if a '_' already exists 

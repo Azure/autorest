@@ -78,7 +78,7 @@ else
 @* Add Credentials *@
 @*stream handler*@
             # Construct and send request
-            request = self._client.@(Model.GetHttpFunction(Model.HttpMethod))(url, query)
+            request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query)
 @if (Model.RequestBody != null)
 {
             @:response = self._client.send(request, headers, content)

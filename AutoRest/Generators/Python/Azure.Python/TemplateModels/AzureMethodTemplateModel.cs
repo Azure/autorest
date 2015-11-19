@@ -82,6 +82,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         /// </summary>
         /// <param name="variableName">The variable to store the url in.</param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "pathformatarguments")]
         public override string BuildUrlPath(string variableName)
         {
             var builder = new IndentedStringBuilder("    ");
@@ -152,34 +153,6 @@ namespace Microsoft.Rest.Generator.Azure.Python
             }
 
             return builder.ToString();
-        }
-
-        /// <summary>
-        /// If the element type of a sequenece or value type of a dictionary 
-        /// contains one of the following special types then it needs to be 
-        /// processed. The special types are: Date, DateTime, ByteArray 
-        /// and CompositeType
-        /// </summary>
-        /// <param name="type">The type to determine if special deserialization is required</param>
-        /// <returns>True if special deserialization is required. False, otherwise.</returns>
-        private static bool IsSpecialProcessingRequired(IType type)
-        {
-            PrimaryType[] validTypes = new PrimaryType[] { PrimaryType.DateTime, PrimaryType.Date, PrimaryType.DateTimeRfc1123, PrimaryType.ByteArray, PrimaryType.TimeSpan };
-            SequenceType sequence = type as SequenceType;
-            DictionaryType dictionary = type as DictionaryType;
-            bool result = false;
-            if (sequence != null &&
-                (validTypes.Any(t => t == sequence.ElementType) || sequence.ElementType is CompositeType))
-            {
-                result = true;
-            }
-            else if (dictionary != null &&
-                (validTypes.Any(t => t == dictionary.ValueType) || dictionary.ValueType is CompositeType))
-            {
-                result = true;
-            }
-
-            return result;
         }
 
         /// <summary>

@@ -42,14 +42,14 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        public bool ContainsDatetime
+        public bool ContainsDateTime
         {
             get
             {
                 Method method = this.MethodTemplateModels.FirstOrDefault(m => m.Parameters.FirstOrDefault(p =>
-                    ClientModelExtensions.PythonDatetimeModuleType.Contains(p.Type) ||
-                    (p.Type is SequenceType && ClientModelExtensions.PythonDatetimeModuleType.Contains((p.Type as SequenceType).ElementType)) ||
-                    (p.Type is DictionaryType && ClientModelExtensions.PythonDatetimeModuleType.Contains((p.Type as DictionaryType).ValueType)) ||
+                    ClientModelExtensions.PythonDateTimeModuleType.Contains(p.Type) ||
+                    (p.Type is SequenceType && ClientModelExtensions.PythonDateTimeModuleType.Contains((p.Type as SequenceType).ElementType)) ||
+                    (p.Type is DictionaryType && ClientModelExtensions.PythonDateTimeModuleType.Contains((p.Type as DictionaryType).ValueType)) ||
                     (p.Type is CompositeType && (p.Type as CompositeType).ContainsDecimal())) != null);
 
                 return method != null;

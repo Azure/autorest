@@ -1,4 +1,4 @@
-﻿@using System
+﻿@using System;
 @using System.Linq
 @using System.Collections.Generic
 @using Microsoft.Rest.Generator.ClientModel
@@ -29,7 +29,7 @@ else
 @:class @(Model.Name)(Model):
 }
 @{
-  var requiredFieldList = Model.GetRequiredFieldsList();
+  var requiredFieldList = Model.RequiredFieldsList;
   var requiredStr = String.Empty;
   if (requiredFieldList.Count > 0)
   {
@@ -50,7 +50,7 @@ else
   {
     for (int i = 0; i < propertyList.Count; i++) 
     {
-        @:@(Model.InitializePythonProperty(propertyList[i]))
+        @:@(ModelTemplateModel.InitializePythonProperty(propertyList[i]))
     }
   }
 }
@@ -60,7 +60,7 @@ else
 <text>
 @EmptyLine
     _subtype_map = {
-        '@(Model.GetPolymorphicDiscriminator())':{@Model.GetSubModelTypeList()}
+        '@Model.BasePolymorphicDiscriminator':{@Model.SubModelTypeList}
     }
 </text>
 }

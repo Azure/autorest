@@ -13,14 +13,11 @@ namespace Microsoft.Rest.Generator.Azure.Python
 {
     public class AzurePythonCodeNamer : PythonCodeNamer
     {
-        private readonly HashSet<IType> _normalizedTypes;
-
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
         /// </summary>
         public AzurePythonCodeNamer()
         {
-            _normalizedTypes = new HashSet<IType>();
         }
 
         private static void GetPagingSetting(Dictionary<string, object> extensions, string valueTypeName, IDictionary<Tuple<string, string>, Tuple<string, string>> pageClasses)
@@ -54,8 +51,6 @@ namespace Microsoft.Rest.Generator.Azure.Python
             {
                 throw new ArgumentNullException("serviceClient");
             }
-
-            var convertedTypes = new Dictionary<IType, CompositeType>();
 
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
