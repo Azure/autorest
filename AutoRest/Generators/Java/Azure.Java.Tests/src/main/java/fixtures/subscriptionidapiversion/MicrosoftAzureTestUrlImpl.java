@@ -123,14 +123,12 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private GroupOperations group;
-
     /**
      * Gets the GroupOperations object to access its operations.
      * @return the group value.
      */
     public GroupOperations getGroup() {
-        return this.group;
+        return new GroupOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -196,7 +194,6 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.group = new GroupOperationsImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

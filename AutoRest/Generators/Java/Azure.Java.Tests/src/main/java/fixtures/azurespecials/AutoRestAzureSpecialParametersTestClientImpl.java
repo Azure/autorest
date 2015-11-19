@@ -123,74 +123,60 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private XMsClientRequestIdOperations xMsClientRequestId;
-
     /**
      * Gets the XMsClientRequestIdOperations object to access its operations.
      * @return the xMsClientRequestId value.
      */
     public XMsClientRequestIdOperations getXMsClientRequestId() {
-        return this.xMsClientRequestId;
+        return new XMsClientRequestIdOperationsImpl(this.retrofitBuilder.build(), this);
     }
-
-    private SubscriptionInCredentialsOperations subscriptionInCredentials;
 
     /**
      * Gets the SubscriptionInCredentialsOperations object to access its operations.
      * @return the subscriptionInCredentials value.
      */
     public SubscriptionInCredentialsOperations getSubscriptionInCredentials() {
-        return this.subscriptionInCredentials;
+        return new SubscriptionInCredentialsOperationsImpl(this.retrofitBuilder.build(), this);
     }
-
-    private SubscriptionInMethodOperations subscriptionInMethod;
 
     /**
      * Gets the SubscriptionInMethodOperations object to access its operations.
      * @return the subscriptionInMethod value.
      */
     public SubscriptionInMethodOperations getSubscriptionInMethod() {
-        return this.subscriptionInMethod;
+        return new SubscriptionInMethodOperationsImpl(this.retrofitBuilder.build(), this);
     }
-
-    private ApiVersionDefaultOperations apiVersionDefault;
 
     /**
      * Gets the ApiVersionDefaultOperations object to access its operations.
      * @return the apiVersionDefault value.
      */
     public ApiVersionDefaultOperations getApiVersionDefault() {
-        return this.apiVersionDefault;
+        return new ApiVersionDefaultOperationsImpl(this.retrofitBuilder.build(), this);
     }
-
-    private ApiVersionLocalOperations apiVersionLocal;
 
     /**
      * Gets the ApiVersionLocalOperations object to access its operations.
      * @return the apiVersionLocal value.
      */
     public ApiVersionLocalOperations getApiVersionLocal() {
-        return this.apiVersionLocal;
+        return new ApiVersionLocalOperationsImpl(this.retrofitBuilder.build(), this);
     }
-
-    private SkipUrlEncodingOperations skipUrlEncoding;
 
     /**
      * Gets the SkipUrlEncodingOperations object to access its operations.
      * @return the skipUrlEncoding value.
      */
     public SkipUrlEncodingOperations getSkipUrlEncoding() {
-        return this.skipUrlEncoding;
+        return new SkipUrlEncodingOperationsImpl(this.retrofitBuilder.build(), this);
     }
-
-    private HeaderOperationsOperations headerOperations;
 
     /**
      * Gets the HeaderOperationsOperations object to access its operations.
      * @return the headerOperations value.
      */
     public HeaderOperationsOperations getHeaderOperations() {
-        return this.headerOperations;
+        return new HeaderOperationsOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -256,13 +242,6 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.xMsClientRequestId = new XMsClientRequestIdOperationsImpl(retrofit, this);
-        this.subscriptionInCredentials = new SubscriptionInCredentialsOperationsImpl(retrofit, this);
-        this.subscriptionInMethod = new SubscriptionInMethodOperationsImpl(retrofit, this);
-        this.apiVersionDefault = new ApiVersionDefaultOperationsImpl(retrofit, this);
-        this.apiVersionLocal = new ApiVersionLocalOperationsImpl(retrofit, this);
-        this.skipUrlEncoding = new SkipUrlEncodingOperationsImpl(retrofit, this);
-        this.headerOperations = new HeaderOperationsOperationsImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

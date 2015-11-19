@@ -28,14 +28,12 @@ public class AutoRestNumberTestServiceImpl extends ServiceClient implements Auto
         return this.baseUri;
     }
 
-    private Number number;
-
     /**
      * Gets the Number object to access its operations.
      * @return the number value.
      */
     public Number getNumber() {
-        return this.number;
+        return new NumberImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -70,7 +68,6 @@ public class AutoRestNumberTestServiceImpl extends ServiceClient implements Auto
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.number = new NumberImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

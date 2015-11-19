@@ -28,14 +28,12 @@ public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements
         return this.baseUri;
     }
 
-    private Array array;
-
     /**
      * Gets the Array object to access its operations.
      * @return the array value.
      */
     public Array getArray() {
-        return this.array;
+        return new ArrayImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -70,7 +68,6 @@ public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.array = new ArrayImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

@@ -92,14 +92,12 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private ParameterGroupingOperations parameterGrouping;
-
     /**
      * Gets the ParameterGroupingOperations object to access its operations.
      * @return the parameterGrouping value.
      */
     public ParameterGroupingOperations getParameterGrouping() {
-        return this.parameterGrouping;
+        return new ParameterGroupingOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -164,7 +162,6 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.parameterGrouping = new ParameterGroupingOperationsImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

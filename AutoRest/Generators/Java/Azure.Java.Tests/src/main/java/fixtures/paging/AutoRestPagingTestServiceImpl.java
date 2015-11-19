@@ -92,14 +92,12 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private PagingOperations paging;
-
     /**
      * Gets the PagingOperations object to access its operations.
      * @return the paging value.
      */
     public PagingOperations getPaging() {
-        return this.paging;
+        return new PagingOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -164,7 +162,6 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.paging = new PagingOperationsImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

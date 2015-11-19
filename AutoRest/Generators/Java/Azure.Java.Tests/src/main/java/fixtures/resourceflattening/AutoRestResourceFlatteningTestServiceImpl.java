@@ -171,8 +171,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        service = retrofit.create(AutoRestResourceFlatteningTestServiceService.class);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        service = this.retrofitBuilder.build().create(AutoRestResourceFlatteningTestServiceService.class);
     }
 
     /**

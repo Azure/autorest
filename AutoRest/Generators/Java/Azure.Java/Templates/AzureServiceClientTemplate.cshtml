@@ -74,14 +74,12 @@ if(!property.IsReadOnly)
 @foreach (var operation in Model.Operations)
 {
 @EmptyLine
-@:    private @(operation.MethodGroupType) @(operation.MethodGroupName.ToCamelCase());
-@EmptyLine
 @:    /**
 @:     * Gets the @(operation.MethodGroupType) object to access its operations.
 @:     * @@return the @(operation.MethodGroupName) value.
 @:     */
 @:    public @(operation.MethodGroupType) get@(operation.MethodGroupName.ToPascalCase())() {
-@:        return this.@(operation.MethodGroupName.ToCamelCase());
+@:        return new @(operation.MethodGroupType)Impl(this.retrofitBuilder.build(), this);
 @:    }
 }
 @EmptyLine
@@ -178,14 +176,10 @@ else
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
 
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
 @if (Model.MethodTemplateModels.Any())
 {
-@:        service = retrofit.create(@(Model.ServiceClientServiceType).class);
-}
-@foreach (var operation in Model.Operations)
-{
-@:        this.@(operation.MethodGroupName.ToCamelCase()) = new @(operation.MethodGroupType)Impl(retrofit, this);
+@:        service = this.retrofitBuilder.build().create(@(Model.ServiceClientServiceType).class);
 }
     }
 @if (Model.MethodTemplateModels.Any())

@@ -28,14 +28,12 @@ public class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implem
         return this.baseUri;
     }
 
-    private Datetimerfc1123 datetimerfc1123;
-
     /**
      * Gets the Datetimerfc1123 object to access its operations.
      * @return the datetimerfc1123 value.
      */
     public Datetimerfc1123 getDatetimerfc1123() {
-        return this.datetimerfc1123;
+        return new Datetimerfc1123Impl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -70,7 +68,6 @@ public class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implem
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.datetimerfc1123 = new Datetimerfc1123Impl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

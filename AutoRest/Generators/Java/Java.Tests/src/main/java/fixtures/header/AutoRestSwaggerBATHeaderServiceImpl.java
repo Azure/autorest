@@ -28,14 +28,12 @@ public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient implement
         return this.baseUri;
     }
 
-    private HeaderOperations headerOperations;
-
     /**
      * Gets the HeaderOperations object to access its operations.
      * @return the headerOperations value.
      */
     public HeaderOperations getHeaderOperations() {
-        return this.headerOperations;
+        return new HeaderOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -70,7 +68,6 @@ public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient implement
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.headerOperations = new HeaderOperationsImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

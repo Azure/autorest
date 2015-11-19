@@ -28,74 +28,60 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
         return this.baseUri;
     }
 
-    private BasicOperations basicOperations;
-
     /**
      * Gets the BasicOperations object to access its operations.
      * @return the basicOperations value.
      */
     public BasicOperations getBasicOperations() {
-        return this.basicOperations;
+        return new BasicOperationsImpl(this.retrofitBuilder.build(), this);
     }
-
-    private Primitive primitive;
 
     /**
      * Gets the Primitive object to access its operations.
      * @return the primitive value.
      */
     public Primitive getPrimitive() {
-        return this.primitive;
+        return new PrimitiveImpl(this.retrofitBuilder.build(), this);
     }
-
-    private Array array;
 
     /**
      * Gets the Array object to access its operations.
      * @return the array value.
      */
     public Array getArray() {
-        return this.array;
+        return new ArrayImpl(this.retrofitBuilder.build(), this);
     }
-
-    private Dictionary dictionary;
 
     /**
      * Gets the Dictionary object to access its operations.
      * @return the dictionary value.
      */
     public Dictionary getDictionary() {
-        return this.dictionary;
+        return new DictionaryImpl(this.retrofitBuilder.build(), this);
     }
-
-    private Inheritance inheritance;
 
     /**
      * Gets the Inheritance object to access its operations.
      * @return the inheritance value.
      */
     public Inheritance getInheritance() {
-        return this.inheritance;
+        return new InheritanceImpl(this.retrofitBuilder.build(), this);
     }
-
-    private Polymorphism polymorphism;
 
     /**
      * Gets the Polymorphism object to access its operations.
      * @return the polymorphism value.
      */
     public Polymorphism getPolymorphism() {
-        return this.polymorphism;
+        return new PolymorphismImpl(this.retrofitBuilder.build(), this);
     }
-
-    private Polymorphicrecursive polymorphicrecursive;
 
     /**
      * Gets the Polymorphicrecursive object to access its operations.
      * @return the polymorphicrecursive value.
      */
     public Polymorphicrecursive getPolymorphicrecursive() {
-        return this.polymorphicrecursive;
+        return new PolymorphicrecursiveImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -130,13 +116,6 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.basicOperations = new BasicOperationsImpl(retrofit, this);
-        this.primitive = new PrimitiveImpl(retrofit, this);
-        this.array = new ArrayImpl(retrofit, this);
-        this.dictionary = new DictionaryImpl(retrofit, this);
-        this.inheritance = new InheritanceImpl(retrofit, this);
-        this.polymorphism = new PolymorphismImpl(retrofit, this);
-        this.polymorphicrecursive = new PolymorphicrecursiveImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

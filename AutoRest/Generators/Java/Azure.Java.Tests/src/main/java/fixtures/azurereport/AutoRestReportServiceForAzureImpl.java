@@ -167,8 +167,8 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        service = retrofit.create(AutoRestReportServiceForAzureService.class);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        service = this.retrofitBuilder.build().create(AutoRestReportServiceForAzureService.class);
     }
 
     /**

@@ -92,14 +92,12 @@ public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements A
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private HttpSuccessOperations httpSuccess;
-
     /**
      * Gets the HttpSuccessOperations object to access its operations.
      * @return the httpSuccess value.
      */
     public HttpSuccessOperations getHttpSuccess() {
-        return this.httpSuccess;
+        return new HttpSuccessOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -164,7 +162,6 @@ public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements A
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.httpSuccess = new HttpSuccessOperationsImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

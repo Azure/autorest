@@ -7,17 +7,12 @@
 
 package com.microsoft.rest;
 
-import com.microsoft.rest.retry.RetryHandler;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
-import com.microsoft.rest.serializer.JacksonUtils;
-import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.JacksonConverterFactory;
 import retrofit.Retrofit;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
-import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 

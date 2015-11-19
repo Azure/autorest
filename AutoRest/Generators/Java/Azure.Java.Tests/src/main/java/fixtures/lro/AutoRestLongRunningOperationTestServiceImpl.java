@@ -92,44 +92,36 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private LROsOperations lROs;
-
     /**
      * Gets the LROsOperations object to access its operations.
      * @return the lROs value.
      */
     public LROsOperations getLROs() {
-        return this.lROs;
+        return new LROsOperationsImpl(this.retrofitBuilder.build(), this);
     }
-
-    private LRORetrysOperations lRORetrys;
 
     /**
      * Gets the LRORetrysOperations object to access its operations.
      * @return the lRORetrys value.
      */
     public LRORetrysOperations getLRORetrys() {
-        return this.lRORetrys;
+        return new LRORetrysOperationsImpl(this.retrofitBuilder.build(), this);
     }
-
-    private LROSADsOperations lROSADs;
 
     /**
      * Gets the LROSADsOperations object to access its operations.
      * @return the lROSADs value.
      */
     public LROSADsOperations getLROSADs() {
-        return this.lROSADs;
+        return new LROSADsOperationsImpl(this.retrofitBuilder.build(), this);
     }
-
-    private LROsCustomHeaderOperations lROsCustomHeader;
 
     /**
      * Gets the LROsCustomHeaderOperations object to access its operations.
      * @return the lROsCustomHeader value.
      */
     public LROsCustomHeaderOperations getLROsCustomHeader() {
-        return this.lROsCustomHeader;
+        return new LROsCustomHeaderOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -194,10 +186,6 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.lROs = new LROsOperationsImpl(retrofit, this);
-        this.lRORetrys = new LRORetrysOperationsImpl(retrofit, this);
-        this.lROSADs = new LROSADsOperationsImpl(retrofit, this);
-        this.lROsCustomHeader = new LROsCustomHeaderOperationsImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }
