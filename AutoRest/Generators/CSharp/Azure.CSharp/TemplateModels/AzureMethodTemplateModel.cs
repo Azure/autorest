@@ -113,8 +113,16 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                     {
                         bodyName = ReturnTypePageInterfaceName;
                     }
-                    return string.Format(CultureInfo.InvariantCulture,
-                                "AzureOperationResponse<{0}>", bodyName);
+                    if (ReturnType.Headers != null)
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                                    "AzureOperationResponse<{0},{1}>", bodyName, ReturnType.Headers.Name);
+                    }
+                    else
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                                    "AzureOperationResponse<{0}>", bodyName);
+                    }
                 }
                 else
                 {

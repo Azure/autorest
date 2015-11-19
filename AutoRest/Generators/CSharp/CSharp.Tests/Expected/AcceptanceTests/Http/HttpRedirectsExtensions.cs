@@ -65,7 +65,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static async Task<IList<string>> Get300Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IList<string>> result = await operations.Get300WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<IList<string>,HttpRedirectsGet300Headers> result = await operations.Get300WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

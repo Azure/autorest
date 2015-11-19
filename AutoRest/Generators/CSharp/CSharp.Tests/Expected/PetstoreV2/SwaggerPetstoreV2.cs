@@ -1471,7 +1471,7 @@ namespace Fixtures.PetstoreV2
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<string>> LoginUserWithHttpMessagesAsync(string username, string password, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<string,LoginUserHeaders>> LoginUserWithHttpMessagesAsync(string username, string password, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (username == null)
             {
@@ -1551,7 +1551,7 @@ namespace Fixtures.PetstoreV2
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<string>();
+            var result = new HttpOperationResponse<string,LoginUserHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
@@ -1560,6 +1560,7 @@ namespace Fixtures.PetstoreV2
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<string>(responseContent, this.DeserializationSettings);
             }
+            result.Headers = httpResponse.Headers.ToJson().ToObject<LoginUserHeaders>(JsonSerializer.Create(this.DeserializationSettings));
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);

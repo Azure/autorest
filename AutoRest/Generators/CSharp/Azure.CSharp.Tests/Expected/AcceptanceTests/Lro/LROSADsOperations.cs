@@ -362,10 +362,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetry400Headers>> PutAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetry400Headers> response = await BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
@@ -386,7 +386,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetry400Headers>> BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -475,7 +475,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetry400Headers>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -488,6 +488,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
+            result.Headers = httpResponse.Headers.ToJson().ToObject<LROSADsPutAsyncRelativeRetry400Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -1445,10 +1446,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryNoStatusHeaders>> PutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryNoStatusHeaders> response = await BeginPutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
@@ -1469,7 +1470,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryNoStatusHeaders>> BeginPutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1558,7 +1559,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryNoStatusHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -1571,6 +1572,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
+            result.Headers = httpResponse.Headers.ToJson().ToObject<LROSADsPutAsyncRelativeRetryNoStatusHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -1592,10 +1594,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>> PutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> response = await BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
@@ -1616,7 +1618,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>> BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1705,7 +1707,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -1718,6 +1720,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
+            result.Headers = httpResponse.Headers.ToJson().ToObject<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -2414,10 +2417,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>> PutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> response = await BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
@@ -2438,7 +2441,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>> BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2527,7 +2530,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -2540,6 +2543,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
+            result.Headers = httpResponse.Headers.ToJson().ToObject<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -2561,10 +2565,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>> PutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> response = await BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
@@ -2585,7 +2589,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>> BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2674,7 +2678,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -2687,6 +2691,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
+            result.Headers = httpResponse.Headers.ToJson().ToObject<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);

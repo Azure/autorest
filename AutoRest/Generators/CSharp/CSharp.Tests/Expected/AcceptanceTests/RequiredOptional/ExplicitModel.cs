@@ -135,8 +135,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             var result = new HttpOperationResponse<Error>();
             result.Request = httpRequest;
             result.Response = httpResponse;
-                        string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
+                string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -327,8 +327,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             var result = new HttpOperationResponse<Error>();
             result.Request = httpRequest;
             result.Response = httpResponse;
-                        string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
+                string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -523,8 +523,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             var result = new HttpOperationResponse<Error>();
             result.Request = httpRequest;
             result.Response = httpResponse;
-                        string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
+                string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -713,8 +713,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             var result = new HttpOperationResponse<Error>();
             result.Request = httpRequest;
             result.Response = httpResponse;
-                        string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
+                string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -905,8 +905,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             var result = new HttpOperationResponse<Error>();
             result.Request = httpRequest;
             result.Response = httpResponse;
-                        string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
+                string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -1101,8 +1101,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             var result = new HttpOperationResponse<Error>();
             result.Request = httpRequest;
             result.Response = httpResponse;
-                        string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
+                string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -1295,8 +1295,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             var result = new HttpOperationResponse<Error>();
             result.Request = httpRequest;
             result.Response = httpResponse;
-                        string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
+                string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -1495,8 +1495,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             var result = new HttpOperationResponse<Error>();
             result.Request = httpRequest;
             result.Response = httpResponse;
-                        string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
+                string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -1691,8 +1691,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             var result = new HttpOperationResponse<Error>();
             result.Request = httpRequest;
             result.Response = httpResponse;
-                        string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
+                string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -1883,8 +1883,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             var result = new HttpOperationResponse<Error>();
             result.Request = httpRequest;
             result.Response = httpResponse;
-                        string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
+                string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -2079,8 +2079,8 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             var result = new HttpOperationResponse<Error>();
             result.Request = httpRequest;
             result.Response = httpResponse;
-                        string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
+                string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            result.Body = JsonConvert.DeserializeObject<Error>(defaultResponseContent, this.Client.DeserializationSettings);
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);

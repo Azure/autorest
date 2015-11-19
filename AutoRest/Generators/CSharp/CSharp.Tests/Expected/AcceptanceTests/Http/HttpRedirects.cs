@@ -139,7 +139,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IList<string>>> Get300WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<IList<string>,HttpRedirectsGet300Headers>> Get300WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -202,7 +202,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<IList<string>>();
+            var result = new HttpOperationResponse<IList<string>,HttpRedirectsGet300Headers>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
@@ -211,6 +211,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<IList<string>>(responseContent, this.Client.DeserializationSettings);
             }
+            result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsGet300Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);

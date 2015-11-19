@@ -218,10 +218,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRelativeRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LRORetrysPutAsyncRelativeRetrySucceededHeaders>> PutAsyncRelativeRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRelativeRetrySucceededWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LRORetrysPutAsyncRelativeRetrySucceededHeaders> response = await BeginPutAsyncRelativeRetrySucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
@@ -243,7 +243,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRelativeRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LRORetrysPutAsyncRelativeRetrySucceededHeaders>> BeginPutAsyncRelativeRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -332,7 +332,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LRORetrysPutAsyncRelativeRetrySucceededHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -345,6 +345,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
+            result.Headers = httpResponse.Headers.ToJson().ToObject<LRORetrysPutAsyncRelativeRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -364,10 +365,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> DeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>> DeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse<Product> response = await BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> response = await BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -384,7 +385,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>> BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -468,7 +469,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -487,6 +488,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
+            result.Headers = httpResponse.Headers.ToJson().ToObject<LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);

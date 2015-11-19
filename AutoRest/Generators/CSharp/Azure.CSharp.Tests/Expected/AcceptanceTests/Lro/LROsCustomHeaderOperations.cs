@@ -64,10 +64,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsCustomHeaderPutAsyncRetrySucceededHeaders>> PutAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRetrySucceededWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROsCustomHeaderPutAsyncRetrySucceededHeaders> response = await BeginPutAsyncRetrySucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
@@ -90,7 +90,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsCustomHeaderPutAsyncRetrySucceededHeaders>> BeginPutAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -179,7 +179,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROsCustomHeaderPutAsyncRetrySucceededHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -192,6 +192,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
             }
+            result.Headers = httpResponse.Headers.ToJson().ToObject<LROsCustomHeaderPutAsyncRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
