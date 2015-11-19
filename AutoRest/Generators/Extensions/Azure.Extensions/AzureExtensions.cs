@@ -78,12 +78,7 @@ namespace Microsoft.Rest.Generator.Azure
             FlattenResourceProperties(serviceClient);
             FlattenRequestPayload(serviceClient, settings);
             AddPageableMethod(serviceClient);
-            CodeNamer codeNamer = default(CodeNamer);
-            if (settings != null && settings.CodeGenerator == "Azure.NodeJS")
-            {
-                codeNamer = new NodeJsCodeNamer();
-            }
-            AddLongRunningOperations(serviceClient, codeNamer);
+            AddLongRunningOperations(serviceClient);
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);
             AddParameterGroups(serviceClient);
@@ -204,8 +199,7 @@ namespace Microsoft.Rest.Generator.Azure
         /// Creates long running operation methods.
         /// </summary>
         /// <param name="serviceClient"></param>
-        /// <param name="codeNamer"></param>
-        public static void AddLongRunningOperations(ServiceClient serviceClient, CodeNamer codeNamer)
+        public static void AddLongRunningOperations(ServiceClient serviceClient)
         {
             if (serviceClient == null)
             {
@@ -221,15 +215,7 @@ namespace Microsoft.Rest.Generator.Azure
                     if (isLongRunning is bool && (bool)isLongRunning)
                     {
                         serviceClient.Methods.Insert(i, (Method) method.Clone());
-                        if (codeNamer != null)
-                        {
-                            method.Name = "Begin" + codeNamer.GetMethodName(method.Name).ToPascalCase();
-                        }
-                        else
-                        {
-                            method.Name = "Begin" + method.Name.ToPascalCase();
-                        }
-                        
+                        method.Name = "Begin" + method.Name.ToPascalCase(); 
                         i++;
                    }
                    

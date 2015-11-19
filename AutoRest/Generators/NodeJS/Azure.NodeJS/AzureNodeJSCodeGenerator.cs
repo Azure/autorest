@@ -61,6 +61,10 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
+            // MethodNames are normalized explicitly to provide a consitent method name while 
+            // generating cloned methods for long running operations with reserved words. For
+            // example - beginDeleteMethod() insteadof beginDelete() as delete is a reserved word.
+            Namer.NormalizeMethodNames(serviceClient);
             AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
             base.NormalizeClientModel(serviceClient);
             NormalizeApiVersion(serviceClient);
