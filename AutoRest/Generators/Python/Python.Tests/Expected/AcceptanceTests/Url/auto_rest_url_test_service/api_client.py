@@ -18,9 +18,9 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.paths_operations import PathsOperations
-from .operations.queries_operations import QueriesOperations
-from .operations.path_items_operations import PathItemsOperations
+from .operations.paths import paths
+from .operations.queries import queries
+from .operations.path_items import path_items
 from . import models
 
 class AutoRestUrlTestServiceConfiguration(Configuration):
@@ -46,7 +46,7 @@ class AutoRestUrlTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.paths = PathsOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.queries = QueriesOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.path_items = PathItemsOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.paths = paths(self._client, self.config, self._serialize, self._deserialize)
+        self.queries = queries(self._client, self.config, self._serialize, self._deserialize)
+        self.path_items = path_items(self._client, self.config, self._serialize, self._deserialize)
 

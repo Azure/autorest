@@ -8,10 +8,10 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .http_failure_operations import HttpFailureOperations
-from .http_success_operations import HttpSuccessOperations
-from .http_redirects_operations import HttpRedirectsOperations
-from .http_client_failure_operations import HttpClientFailureOperations
-from .http_server_failure_operations import HttpServerFailureOperations
-from .http_retry_operations import HttpRetryOperations
-from .multiple_responses_operations import MultipleResponsesOperations
+from .http_failure import http_failure
+from .http_success import http_success
+from .http_redirects import http_redirects
+from .http_client_failure import http_client_failure
+from .http_server_failure import http_server_failure
+from .http_retry import http_retry
+from .multiple_responses import multiple_responses

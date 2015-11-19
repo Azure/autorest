@@ -18,7 +18,7 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.duration_operations import DurationOperations
+from .operations.duration import duration
 from . import models
 
 class AutoRestDurationTestServiceConfiguration(Configuration):
@@ -43,5 +43,5 @@ class AutoRestDurationTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.duration = DurationOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.duration = duration(self._client, self.config, self._serialize, self._deserialize)
 

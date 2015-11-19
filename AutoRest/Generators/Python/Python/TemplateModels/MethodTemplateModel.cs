@@ -68,13 +68,13 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        public string RaisedException
+        public virtual string RaisedException
         {
             get
             {
                 if (DefaultResponse == null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "HttpOperationException(self._deserialize, response)");
+                    return "HttpOperationException(self._deserialize, response)";
                 }
                 else if (DefaultResponse is CompositeType)
                 {
@@ -92,7 +92,7 @@ namespace Microsoft.Rest.Generator.Python
         /// </summary>
         /// <param name="addCustomHeaderParameters">If true add the customHeader to the parameters</param>
         /// <returns>Generated string of parameters</returns>
-        public string MethodParameterDeclaration(bool addCustomHeaderParameters)
+        public virtual string MethodParameterDeclaration(bool addCustomHeaderParameters)
         {
             List<string> declarations = new List<string>();
             foreach (var parameter in LocalParameters)

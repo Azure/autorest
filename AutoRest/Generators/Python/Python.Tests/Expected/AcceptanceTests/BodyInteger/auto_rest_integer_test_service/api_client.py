@@ -17,7 +17,7 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.int_model_operations import IntModelOperations
+from .operations.int_model import int_model
 from . import models
 
 class AutoRestIntegerTestServiceConfiguration(Configuration):
@@ -42,5 +42,5 @@ class AutoRestIntegerTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.int_model = IntModelOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.int_model = int_model(self._client, self.config, self._serialize, self._deserialize)
 

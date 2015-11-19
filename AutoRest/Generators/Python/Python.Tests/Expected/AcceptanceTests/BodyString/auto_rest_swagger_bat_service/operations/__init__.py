@@ -8,5 +8,5 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .string_operations import StringOperations
-from .enum_operations import EnumOperations
+from .string import string
+from .enum import enum

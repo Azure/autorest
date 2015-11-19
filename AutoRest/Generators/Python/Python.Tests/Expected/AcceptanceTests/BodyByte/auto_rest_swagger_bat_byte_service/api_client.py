@@ -17,7 +17,7 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.byte_operations import ByteOperations
+from .operations.byte import byte
 from . import models
 
 class AutoRestSwaggerBATByteServiceConfiguration(Configuration):
@@ -42,5 +42,5 @@ class AutoRestSwaggerBATByteService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.byte = ByteOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.byte = byte(self._client, self.config, self._serialize, self._deserialize)
 

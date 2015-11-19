@@ -18,7 +18,7 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.datetime_model_operations import DatetimeModelOperations
+from .operations.datetime_model import datetime_model
 from . import models
 
 class AutoRestDateTimeTestServiceConfiguration(Configuration):
@@ -43,5 +43,5 @@ class AutoRestDateTimeTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.datetime_model = DatetimeModelOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.datetime_model = datetime_model(self._client, self.config, self._serialize, self._deserialize)
 

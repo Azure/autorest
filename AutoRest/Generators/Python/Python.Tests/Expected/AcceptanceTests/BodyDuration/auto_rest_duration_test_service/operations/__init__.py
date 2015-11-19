@@ -8,4 +8,4 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .duration_operations import DurationOperations
+from .duration import duration

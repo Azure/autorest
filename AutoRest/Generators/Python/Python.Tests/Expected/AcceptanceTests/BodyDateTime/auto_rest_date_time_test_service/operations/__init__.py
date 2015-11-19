@@ -8,4 +8,4 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .datetime_model_operations import DatetimeModelOperations
+from .datetime_model import datetime_model

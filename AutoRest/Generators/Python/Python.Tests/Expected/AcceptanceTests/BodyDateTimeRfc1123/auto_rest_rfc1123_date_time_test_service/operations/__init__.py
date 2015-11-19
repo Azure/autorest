@@ -8,4 +8,4 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .datetimerfc1123_operations import Datetimerfc1123Operations
+from .datetimerfc1123 import datetimerfc1123

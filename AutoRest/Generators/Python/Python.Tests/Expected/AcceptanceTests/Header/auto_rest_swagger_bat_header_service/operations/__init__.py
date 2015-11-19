@@ -8,4 +8,4 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .header_operations import HeaderOperations
+from .header import header

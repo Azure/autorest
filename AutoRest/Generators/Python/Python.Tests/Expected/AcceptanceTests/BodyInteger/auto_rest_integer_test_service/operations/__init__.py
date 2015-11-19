@@ -8,4 +8,4 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .int_model_operations import IntModelOperations
+from .int_model import int_model
