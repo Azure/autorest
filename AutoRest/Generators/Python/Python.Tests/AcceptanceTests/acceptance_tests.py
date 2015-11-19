@@ -1,4 +1,4 @@
-import unittest
+﻿import unittest
 import subprocess
 import sys
 from os.path import dirname, realpath, sep, pardir
@@ -283,7 +283,7 @@ class AcceptanceTests(unittest.TestCase):
         skipped = [k for k, v in report.items() if v == 0]
 
         for s in skipped:
-            print "SKIPPED {0}".format(s)
+            print("SKIPPED {0}".format(s))
 
         totalTests = len(report)
         print ("The test coverage is {0}/{1}.".format(totalTests - len(skipped), totalTests))
