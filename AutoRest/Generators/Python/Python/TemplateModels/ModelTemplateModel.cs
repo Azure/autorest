@@ -198,45 +198,55 @@ namespace Microsoft.Rest.Generator.Python
                           .AppendLine(" * ").ToString();
         }
 
-        public IList<string> GetRequiredFieldsList()
+        public IList<string> RequiredFieldsList
         {
-            List<string> requiredFields = new List<string>();
-            foreach (var property in Properties)
+            get
             {
-                if (property.IsRequired)
+                List<string> requiredFields = new List<string>();
+                foreach (var property in Properties)
                 {
-                    requiredFields.Add(property.Name);
+                    if (property.IsRequired)
+                    {
+                        requiredFields.Add(property.Name);
+                    }
                 }
+                return requiredFields;
             }
-            return requiredFields;
         }
 
-        public string GetPolymorphicDiscriminator()
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "PolymorphicDiscriminator")]
+        public string BasePolymorphicDiscriminator
         {
-            CompositeType type = this;
-            while (type != null)
+            get
             {
-                if (!string.IsNullOrEmpty(type.PolymorphicDiscriminator))
+                CompositeType type = this;
+                while (type != null)
                 {
-                    return type.PolymorphicDiscriminator;
+                    if (!string.IsNullOrEmpty(type.PolymorphicDiscriminator))
+                    {
+                        return type.PolymorphicDiscriminator;
+                    }
+                    type = type.BaseModelType;
                 }
-                type = type.BaseModelType;
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "No PolymorphicDiscriminator defined for type {0}", this.Name));
             }
-            throw new Exception(string.Format(CultureInfo.InvariantCulture, "No PolymorphicDiscriminator defined for type {0}", this.Name));
         }
 
-        public string GetSubModelTypeList()
+        public string SubModelTypeList
         {
-            List<string> typeTuple = new List<string>();
-            foreach (var modelType in this.SubModelTypes)
+            get
             {
-                typeTuple.Add(
-                    string.Format(CultureInfo.InvariantCulture, "'{0}':'{1}'",
-                        modelType.SerializedName, modelType.Name
-                    ));
-            }
+                List<string> typeTuple = new List<string>();
+                foreach (var modelType in this.SubModelTypes)
+                {
+                    typeTuple.Add(
+                        string.Format(CultureInfo.InvariantCulture, "'{0}':'{1}'",
+                            modelType.SerializedName, modelType.Name
+                        ));
+                }
 
-            return string.Join(", ", typeTuple);
+                return string.Join(", ", typeTuple);
+            }
         }
 
         public virtual string ExceptionTypeDefinitionName
@@ -247,12 +257,12 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        private string GetPythonSerializationType(IType type)
+        private static string GetPythonSerializationType(IType type)
         {
             Dictionary<IType, string> typeNameMapping = new Dictionary<IType, string>()
                         {
-                            { PrimaryType.DateTime, "iso-date" },
-                            { PrimaryType.DateTimeRfc1123, "rfc-date" },
+                            { PrimaryType.DateTime, "iso-11" },
+                            { PrimaryType.DateTimeRfc1123, "rfc-8601" },
                             { PrimaryType.TimeSpan, "duration" }
                         };
             if (type is PrimaryType)
@@ -266,9 +276,11 @@ namespace Microsoft.Rest.Generator.Python
                     return type.Name;
                 }
             }
-            else if (type is SequenceType)
+            
+            SequenceType sequenceType = type as SequenceType;
+            if (sequenceType != null)
             {
-                IType innerType = (type as SequenceType).ElementType;
+                IType innerType = sequenceType.ElementType;
                 string innerTypeName;
                 if (typeNameMapping.ContainsKey(innerType))
                 {
@@ -280,9 +292,11 @@ namespace Microsoft.Rest.Generator.Python
                 }
                 return "[" + innerTypeName +"]";
             }
-            else if (type is DictionaryType)
+
+            DictionaryType dictType = type as DictionaryType;
+            if (dictType != null)
             {
-                IType innerType = (type as DictionaryType).ValueType;
+                IType innerType = dictType.ValueType;
                 string innerTypeName;
                 if (typeNameMapping.ContainsKey(innerType))
                 {
@@ -294,14 +308,12 @@ namespace Microsoft.Rest.Generator.Python
                 }
                 return "{" + innerTypeName + "}";
             }
-            else
-            {
-                // CompositeType or EnumType
-                return type.Name;
-            }
+
+            // CompositeType or EnumType
+            return type.Name;
         }
 
-        public string InitializePythonProperty(Property property)
+        public static string InitializePythonProperty(Property property)
         {
             if (property == null || property.Type == null)
             {

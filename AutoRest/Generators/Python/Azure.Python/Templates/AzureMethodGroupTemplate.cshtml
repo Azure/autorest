@@ -1,0 +1,58 @@
+﻿@using Microsoft.Rest.Generator.Python
+@using Microsoft.Rest.Generator.Python.Templates
+@using System.Linq;
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Python.AzureMethodGroupTemplateModel>
+#--------------------------------------------------------------------------
+@Header("# ")
+#--------------------------------------------------------------------------
+@EmptyLine
+import sys
+@EmptyLine
+@if (Model.ContainsDecimal)
+{
+@:from decimal import *
+}
+@if (Model.ContainsDateTime)
+{
+@:from datetime import *
+}
+@EmptyLine
+from msrest.service_client import ServiceClient, async_request
+from msrest.serialization import Serializer, Deserializer
+from msrest.exceptions import (
+    SerializationError,
+    DeserializationError,
+    TokenExpiredError,
+    ClientRequestError,
+    HttpOperationError)
+@EmptyLine
+from ..models import *
+@EmptyLine
+class @(Model.MethodGroupType)(object):
+@EmptyLine
+    def __init__(self, client, config, serializer, derserializer):
+@EmptyLine
+        self._client = client
+        self._serialize = serializer
+        self._deserialize = derserializer
+@EmptyLine
+        self.config = config
+@EmptyLine
+    def _parse_url(self, name, value, datatype):
+@EmptyLine
+        try:
+            value = self._serialize.serialize_data(value, str(datatype))
+@EmptyLine
+        except ValueError:
+            raise ValueError("{} must not be None.".format(name))
+@EmptyLine
+        except DeserializationError:
+            raise TypeError("{} must be type {}.".format(name, datatype))
+@EmptyLine
+        else:
+            return value
+@foreach (var method in Model.MethodTemplateModels)
+{
+@EmptyLine
+@:@(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
+}

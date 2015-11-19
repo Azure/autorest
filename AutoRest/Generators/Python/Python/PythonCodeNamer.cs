@@ -72,19 +72,6 @@ namespace Microsoft.Rest.Generator.Python
             _normalizedTypes = new HashSet<IType>();
         }
 
-        /// <summary>
-        /// Removes invalid characters from the name.
-        /// </summary>
-        /// <param name="name">String to parse.</param>
-        /// <param name="allowerCharacters">Allowed characters.</param>
-        /// <returns>Name with invalid characters removed.</returns>
-        private static string RemoveInvalidCharacters(string name, params char[] allowerCharacters)
-        {
-            return new string(name.Replace("[]", "Sequence")
-                   .Where(c => char.IsLetterOrDigit(c) || allowerCharacters.Contains(c))
-                   .ToArray());
-        }
-
         private string GetValidPythonName(string name, string padString)
         {
             return PythonCase(GetEscapedReservedName(RemoveInvalidPythonCharacters(name), padString));
@@ -163,7 +150,7 @@ namespace Microsoft.Rest.Generator.Python
                 return null;
             }
             var enumType = type as EnumType;
-            if (enumType != null && enumType.Name == string.Empty && enumType.ModelAsString)
+            if (enumType != null && enumType.Name.Length == 0 && enumType.ModelAsString)
             {
                 type = PrimaryType.String;
             }
