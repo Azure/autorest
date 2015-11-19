@@ -57,6 +57,17 @@ class Model(object):
             if hasattr(self, k):
                 setattr(self, k, kwargs[k])
 
+    def __eq__(self, value):
+
+        for key,val in self.__dict__.items():
+            if not hasattr(value, key):
+                return False
+
+            if val != getattr(value, key):
+                return False
+
+        return True
+
     def __getattribute__(self, attr):
 
         if attr in ['_attribute_map', '_header_map', '_response_map']:
@@ -253,7 +264,8 @@ class Serializer(object):
         #    attr[x], dict_type, required, **kwargs) for x in attr}
         r = {}
         for x,t in attr.items():
-            r[str(x)] = self.serialize_data(t, dict_type, required, char="", **kwargs)
+            kwargs["char"] = ""
+            r[str(x)] = self.serialize_data(t, dict_type, required, **kwargs)
         return r
 
     @staticmethod
@@ -362,7 +374,7 @@ class Deserializer(object):
         response, class_name = self._classify_target(target_obj, response_data)
 
         if isinstance(response, str):
-            data = self._unpack_content(response_data, default=None)
+            data = self._unpack_content(response_data)
             return self.deserialize_data(data, response)
 
         try:
@@ -440,7 +452,7 @@ class Deserializer(object):
 
             setattr(response, attr, value)
 
-    def _unpack_content(self, raw_data, default={}):
+    def _unpack_content(self, raw_data):
 
         if isinstance(raw_data, bytes):
             data = raw_data.decode
@@ -460,11 +472,7 @@ class Deserializer(object):
 
             try:
                 
-                content = json.loads(data)
-                if content == {}:
-                    return default
-
-                return content
+                return json.loads(data)
 
             except (ValueError, TypeError) as err:
                 return data
@@ -505,7 +513,7 @@ class Deserializer(object):
             if issubclass(obj_type, Enum):
                 return obj_type(data)
 
-        except (ValueError, TypeError) as err:
+        except (ValueError, TypeError, AttributeError) as err:
             msg = "Unable to deserialize response data."
             raise_with_traceback(DeserializationError, msg, err)
 
@@ -513,6 +521,8 @@ class Deserializer(object):
             return self(obj_type, data)
 
     def deserialize_iter(self, attr, iter_type):
+        if not attr and not isinstance(attr, list):
+            return None
         #return DeserializedGenerator(self.deserialize_data, attr, iter_type)
         return [self.deserialize_data(a, iter_type) for a in attr]
 
