@@ -27,7 +27,8 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the Doggy class.
         /// </summary>
-        public Doggy(string name = default(string))
+        public Doggy(string id = default(string), string description = default(string), string name = default(string))
+            : base(id, description)
         {
             Name = name;
         }

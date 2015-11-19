@@ -27,7 +27,8 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the BurmeseCat class.
         /// </summary>
-        public BurmeseCat(int? nickName = default(int?))
+        public BurmeseCat(string id = default(string), string description = default(string), string color = default(string), int? length = default(int?), int? nickName = default(int?))
+            : base(id, description, color, length)
         {
             NickName = nickName;
         }

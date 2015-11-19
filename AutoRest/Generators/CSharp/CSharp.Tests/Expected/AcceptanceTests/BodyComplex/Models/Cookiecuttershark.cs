@@ -17,27 +17,21 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     /// <summary>
     /// </summary>
-    [JsonObject("goblin")]
-    public partial class Goblinshark : Shark
+    [JsonObject("cookiecuttershark")]
+    public partial class Cookiecuttershark : Shark
     {
         /// <summary>
-        /// Initializes a new instance of the Goblinshark class.
+        /// Initializes a new instance of the Cookiecuttershark class.
         /// </summary>
-        public Goblinshark() { }
+        public Cookiecuttershark() { }
 
         /// <summary>
-        /// Initializes a new instance of the Goblinshark class.
+        /// Initializes a new instance of the Cookiecuttershark class.
         /// </summary>
-        public Goblinshark(double? length, DateTime? birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?), int? jawsize = default(int?))
+        public Cookiecuttershark(double? length, DateTime? birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?))
             : base(length, birthday, species, siblings, age)
         {
-            Jawsize = jawsize;
         }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "jawsize")]
-        public int? Jawsize { get; set; }
 
         /// <summary>
         /// Validate the object. Throws ArgumentException or ArgumentNullException if validation fails.

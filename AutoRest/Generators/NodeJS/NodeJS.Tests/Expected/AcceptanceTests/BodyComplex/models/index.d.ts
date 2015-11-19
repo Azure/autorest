@@ -163,6 +163,14 @@ export interface Goblinshark extends Shark {
 
 /**
  * @class
+ * Initializes a new instance of the Cookiecuttershark class.
+ * @constructor
+ */
+export interface Cookiecuttershark extends Shark {
+}
+
+/**
+ * @class
  * Initializes a new instance of the IntWrapper class.
  * @constructor
  * @member {number} [field1]

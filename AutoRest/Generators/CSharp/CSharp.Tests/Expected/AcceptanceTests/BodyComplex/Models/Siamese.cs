@@ -27,7 +27,8 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Siamese class.
         /// </summary>
-        public Siamese(string breed = default(string))
+        public Siamese(int? id = default(int?), string name = default(string), string color = default(string), IList<Dog> hates = default(IList<Dog>), string breed = default(string))
+            : base(id, name, color, hates)
         {
             Breed = breed;
         }
