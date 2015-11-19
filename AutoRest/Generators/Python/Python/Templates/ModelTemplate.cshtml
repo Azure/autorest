@@ -6,9 +6,9 @@
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ModelTemplateModel>
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 @Header("# ")
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 @EmptyLine
 from msrest.serialization import Model
 @if (Model.BaseModelType != null)
@@ -19,6 +19,7 @@ from msrest.serialization import Model
 {
 @:from msrest.exceptions import HttpOperationError
 }
+@EmptyLine
 @EmptyLine
 @if (Model.BaseModelType != null)
 {
@@ -60,7 +61,7 @@ else
 <text>
 @EmptyLine
     _subtype_map = {
-        '@Model.BasePolymorphicDiscriminator':{@Model.SubModelTypeList}
+        '@Model.BasePolymorphicDiscriminator': {@Model.SubModelTypeList}
     }
 </text>
 }
@@ -80,6 +81,7 @@ else
         super(@(Model.Name), self).__init__(*args, **kwargs)
 @if (Model.IsException)
 {
+@EmptyLine
 @EmptyLine
 @:class @(Model.ExceptionTypeDefinitionName)(HttpOperationError):
 @EmptyLine

@@ -4,9 +4,9 @@
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Python.AzureServiceClientTemplateModel>
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 @Header("# ")
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 @EmptyLine
 @if (Model.ContainsDecimal)
 {
@@ -35,6 +35,7 @@ from msrest.exceptions import (
   }
 }
 from . import models
+@EmptyLine
 @EmptyLine
 class @(Model.Name)Configuration(Configuration):
 @EmptyLine

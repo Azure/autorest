@@ -2,11 +2,9 @@
 @using Microsoft.Rest.Generator.Python.Templates
 @using System.Linq;
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodGroupTemplateModel>
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 @Header("# ")
-#--------------------------------------------------------------------------
-@EmptyLine
-import sys
+# --------------------------------------------------------------------------
 @EmptyLine
 @if (Model.ContainsDecimal)
 {
@@ -16,7 +14,10 @@ import sys
 {
 @:from datetime import *
 }
+@if (Model.ContainsDateTime || Model.ContainsDecimal)
+{
 @EmptyLine
+}
 from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
 from msrest.exceptions import (
@@ -27,6 +28,7 @@ from msrest.exceptions import (
     HttpOperationError)
 @EmptyLine
 from ..models import *
+@EmptyLine
 @EmptyLine
 class @(Model.MethodGroupType)(object):
 @EmptyLine
