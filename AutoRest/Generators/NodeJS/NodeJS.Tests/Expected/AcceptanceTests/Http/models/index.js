@@ -19,3 +19,4 @@ exports.A = require('./a');
 exports.B = require('./b');
 exports.C = require('./c');
 exports.D = require('./d');
+exports.HttpRedirectsGet300Headers = require('./httpRedirectsGet300Headers');
