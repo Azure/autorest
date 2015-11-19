@@ -17,7 +17,7 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.files_operations import FilesOperations
+from .operations.files import files
 from . import models
 
 class AutoRestSwaggerBATFileServiceConfiguration(Configuration):
@@ -42,5 +42,5 @@ class AutoRestSwaggerBATFileService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.files = FilesOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.files = files(self._client, self.config, self._serialize, self._deserialize)
 

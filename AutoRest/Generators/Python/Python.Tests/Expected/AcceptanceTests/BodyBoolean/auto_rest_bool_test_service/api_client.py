@@ -17,7 +17,7 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.bool_model_operations import BoolModelOperations
+from .operations.bool_model import bool_model
 from . import models
 
 class AutoRestBoolTestServiceConfiguration(Configuration):
@@ -42,5 +42,5 @@ class AutoRestBoolTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.bool_model = BoolModelOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.bool_model = bool_model(self._client, self.config, self._serialize, self._deserialize)
 

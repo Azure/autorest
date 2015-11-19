@@ -8,6 +8,6 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .paths_operations import PathsOperations
-from .queries_operations import QueriesOperations
-from .path_items_operations import PathItemsOperations
+from .paths import paths
+from .queries import queries
+from .path_items import path_items

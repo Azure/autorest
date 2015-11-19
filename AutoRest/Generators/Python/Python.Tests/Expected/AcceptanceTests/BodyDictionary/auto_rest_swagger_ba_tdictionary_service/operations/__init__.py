@@ -8,4 +8,4 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .dictionary_operations import DictionaryOperations
+from .dictionary import dictionary

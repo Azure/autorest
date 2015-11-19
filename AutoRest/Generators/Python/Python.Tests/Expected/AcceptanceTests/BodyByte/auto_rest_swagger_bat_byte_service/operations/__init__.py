@@ -8,4 +8,4 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .byte_operations import ByteOperations
+from .byte import byte

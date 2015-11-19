@@ -8,4 +8,4 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .bool_model_operations import BoolModelOperations
+from .bool_model import bool_model

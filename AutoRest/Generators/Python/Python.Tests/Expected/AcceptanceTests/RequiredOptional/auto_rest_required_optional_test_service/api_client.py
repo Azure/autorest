@@ -17,8 +17,8 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.implicit_operations import ImplicitOperations
-from .operations.explicit_operations import ExplicitOperations
+from .operations.implicit import implicit
+from .operations.explicit import explicit
 from . import models
 
 class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
@@ -45,6 +45,6 @@ class AutoRestRequiredOptionalTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.implicit = ImplicitOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.explicit = ExplicitOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.implicit = implicit(self._client, self.config, self._serialize, self._deserialize)
+        self.explicit = explicit(self._client, self.config, self._serialize, self._deserialize)
 

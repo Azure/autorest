@@ -8,10 +8,10 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .basic_operations_operations import BasicOperationsOperations
-from .primitive_operations import PrimitiveOperations
-from .array_operations import ArrayOperations
-from .dictionary_operations import DictionaryOperations
-from .inheritance_operations import InheritanceOperations
-from .polymorphism_operations import PolymorphismOperations
-from .polymorphicrecursive_operations import PolymorphicrecursiveOperations
+from .basic_operations import basicOperations
+from .primitive import primitive
+from .array import array
+from .dictionary import dictionary
+from .inheritance import inheritance
+from .polymorphism import polymorphism
+from .polymorphicrecursive import polymorphicrecursive

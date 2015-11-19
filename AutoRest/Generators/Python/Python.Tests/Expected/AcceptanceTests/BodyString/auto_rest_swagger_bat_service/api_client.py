@@ -17,8 +17,8 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.string_operations import StringOperations
-from .operations.enum_operations import EnumOperations
+from .operations.string import string
+from .operations.enum import enum
 from . import models
 
 class AutoRestSwaggerBATServiceConfiguration(Configuration):
@@ -43,6 +43,6 @@ class AutoRestSwaggerBATService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.string = StringOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.enum = EnumOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.string = string(self._client, self.config, self._serialize, self._deserialize)
+        self.enum = enum(self._client, self.config, self._serialize, self._deserialize)
 

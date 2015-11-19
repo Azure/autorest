@@ -18,7 +18,7 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.number_operations import NumberOperations
+from .operations.number import number
 from . import models
 
 class AutoRestNumberTestServiceConfiguration(Configuration):
@@ -43,5 +43,5 @@ class AutoRestNumberTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.number = NumberOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.number = number(self._client, self.config, self._serialize, self._deserialize)
 

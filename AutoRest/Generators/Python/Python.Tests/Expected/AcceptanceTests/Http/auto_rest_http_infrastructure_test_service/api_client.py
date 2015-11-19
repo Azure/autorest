@@ -17,13 +17,13 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.http_failure_operations import HttpFailureOperations
-from .operations.http_success_operations import HttpSuccessOperations
-from .operations.http_redirects_operations import HttpRedirectsOperations
-from .operations.http_client_failure_operations import HttpClientFailureOperations
-from .operations.http_server_failure_operations import HttpServerFailureOperations
-from .operations.http_retry_operations import HttpRetryOperations
-from .operations.multiple_responses_operations import MultipleResponsesOperations
+from .operations.http_failure import http_failure
+from .operations.http_success import http_success
+from .operations.http_redirects import http_redirects
+from .operations.http_client_failure import http_client_failure
+from .operations.http_server_failure import http_server_failure
+from .operations.http_retry import http_retry
+from .operations.multiple_responses import multiple_responses
 from . import models
 
 class AutoRestHttpInfrastructureTestServiceConfiguration(Configuration):
@@ -48,11 +48,11 @@ class AutoRestHttpInfrastructureTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.http_failure = HttpFailureOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.http_success = HttpSuccessOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.http_redirects = HttpRedirectsOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.http_client_failure = HttpClientFailureOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.http_server_failure = HttpServerFailureOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.http_retry = HttpRetryOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.multiple_responses = MultipleResponsesOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.http_failure = http_failure(self._client, self.config, self._serialize, self._deserialize)
+        self.http_success = http_success(self._client, self.config, self._serialize, self._deserialize)
+        self.http_redirects = http_redirects(self._client, self.config, self._serialize, self._deserialize)
+        self.http_client_failure = http_client_failure(self._client, self.config, self._serialize, self._deserialize)
+        self.http_server_failure = http_server_failure(self._client, self.config, self._serialize, self._deserialize)
+        self.http_retry = http_retry(self._client, self.config, self._serialize, self._deserialize)
+        self.multiple_responses = multiple_responses(self._client, self.config, self._serialize, self._deserialize)
 

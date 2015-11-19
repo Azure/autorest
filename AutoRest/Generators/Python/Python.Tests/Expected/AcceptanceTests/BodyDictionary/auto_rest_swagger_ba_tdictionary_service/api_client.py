@@ -17,7 +17,7 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.dictionary_operations import DictionaryOperations
+from .operations.dictionary import dictionary
 from . import models
 
 class AutoRestSwaggerBATdictionaryServiceConfiguration(Configuration):
@@ -42,5 +42,5 @@ class AutoRestSwaggerBATdictionaryService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.dictionary = DictionaryOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.dictionary = dictionary(self._client, self.config, self._serialize, self._deserialize)
 

@@ -17,7 +17,7 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.array_operations import ArrayOperations
+from .operations.array import array
 from . import models
 
 class AutoRestSwaggerBATArrayServiceConfiguration(Configuration):
@@ -42,5 +42,5 @@ class AutoRestSwaggerBATArrayService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.array = ArrayOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.array = array(self._client, self.config, self._serialize, self._deserialize)
 

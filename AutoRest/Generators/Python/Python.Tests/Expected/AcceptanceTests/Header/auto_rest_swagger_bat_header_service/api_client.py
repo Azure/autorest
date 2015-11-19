@@ -18,7 +18,7 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.header_operations import HeaderOperations
+from .operations.header import header
 from . import models
 
 class AutoRestSwaggerBATHeaderServiceConfiguration(Configuration):
@@ -43,5 +43,5 @@ class AutoRestSwaggerBATHeaderService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.header = HeaderOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.header = header(self._client, self.config, self._serialize, self._deserialize)
 

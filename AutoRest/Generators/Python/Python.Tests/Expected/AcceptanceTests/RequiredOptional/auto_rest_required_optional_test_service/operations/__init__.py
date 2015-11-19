@@ -8,5 +8,5 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .implicit_operations import ImplicitOperations
-from .explicit_operations import ExplicitOperations
+from .implicit import implicit
+from .explicit import explicit

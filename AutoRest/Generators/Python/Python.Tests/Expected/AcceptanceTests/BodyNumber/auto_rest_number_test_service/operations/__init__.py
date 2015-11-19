@@ -8,4 +8,4 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .number_operations import NumberOperations
+from .number import number

@@ -8,4 +8,4 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .date_model_operations import DateModelOperations
+from .date_model import date_model

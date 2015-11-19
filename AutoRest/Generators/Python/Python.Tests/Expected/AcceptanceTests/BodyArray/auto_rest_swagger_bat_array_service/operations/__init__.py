@@ -8,4 +8,4 @@
 # regenerated.
 #--------------------------------------------------------------------------
 
-from .array_operations import ArrayOperations
+from .array import array

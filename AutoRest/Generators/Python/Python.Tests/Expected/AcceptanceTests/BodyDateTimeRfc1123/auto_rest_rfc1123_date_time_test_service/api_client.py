@@ -18,7 +18,7 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.datetimerfc1123_operations import Datetimerfc1123Operations
+from .operations.datetimerfc1123 import datetimerfc1123
 from . import models
 
 class AutoRestRFC1123DateTimeTestServiceConfiguration(Configuration):
@@ -43,5 +43,5 @@ class AutoRestRFC1123DateTimeTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.datetimerfc1123 = Datetimerfc1123Operations(self._client, self.config, self._serialize, self._deserialize)
+        self.datetimerfc1123 = datetimerfc1123(self._client, self.config, self._serialize, self._deserialize)
 

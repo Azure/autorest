@@ -17,13 +17,13 @@ from msrest.exceptions import (
     TokenExpiredError,
     ClientRequestError,
     HttpOperationError)
-from .operations.basic_operations_operations import BasicOperationsOperations
-from .operations.primitive_operations import PrimitiveOperations
-from .operations.array_operations import ArrayOperations
-from .operations.dictionary_operations import DictionaryOperations
-from .operations.inheritance_operations import InheritanceOperations
-from .operations.polymorphism_operations import PolymorphismOperations
-from .operations.polymorphicrecursive_operations import PolymorphicrecursiveOperations
+from .operations.basic_operations import basicOperations
+from .operations.primitive import primitive
+from .operations.array import array
+from .operations.dictionary import dictionary
+from .operations.inheritance import inheritance
+from .operations.polymorphism import polymorphism
+from .operations.polymorphicrecursive import polymorphicrecursive
 from . import models
 
 class AutoRestComplexTestServiceConfiguration(Configuration):
@@ -48,11 +48,11 @@ class AutoRestComplexTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.basicOperations = BasicOperationsOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.primitive = PrimitiveOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.array = ArrayOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.dictionary = DictionaryOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.inheritance = InheritanceOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.polymorphism = PolymorphismOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.polymorphicrecursive = PolymorphicrecursiveOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.basicOperations = basicOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.primitive = primitive(self._client, self.config, self._serialize, self._deserialize)
+        self.array = array(self._client, self.config, self._serialize, self._deserialize)
+        self.dictionary = dictionary(self._client, self.config, self._serialize, self._deserialize)
+        self.inheritance = inheritance(self._client, self.config, self._serialize, self._deserialize)
+        self.polymorphism = polymorphism(self._client, self.config, self._serialize, self._deserialize)
+        self.polymorphicrecursive = polymorphicrecursive(self._client, self.config, self._serialize, self._deserialize)
 
