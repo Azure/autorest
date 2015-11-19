@@ -46,17 +46,6 @@ public class AzureServiceResponseBuilder<T> extends ServiceResponseBuilder<T> {
         super(deserializer, responseTypes);
     }
 
-    public ServiceResponse<Boolean> buildHead(Response<Void> response, Retrofit retrofit) throws ServiceException {
-        int statusCode = response.code();
-        if (responseTypes.containsKey(statusCode)) {
-            return new ServiceResponse<Boolean>(responseTypes.keySet().iterator().next() == response.code(), response);
-        } else {
-            ServiceException exception = new ServiceException();
-            exception.setResponse(response);
-            throw exception;
-        }
-    }
-
     @SuppressWarnings("unchecked")
     @Override
     public ServiceResponse<T> buildEmpty(Response<Void> response, Retrofit retrofit) throws ServiceException {

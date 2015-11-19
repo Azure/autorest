@@ -7,7 +7,6 @@
 
 package com.microsoft.rest;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.squareup.okhttp.OkHttpClient;
@@ -22,7 +21,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -71,9 +69,18 @@ public class AzureClient extends AzureServiceClient {
         }
 
         int statusCode = response.code();
+        ResponseBody responseBody;
+        if (response.isSuccess()) {
+            responseBody = response.body();
+        } else {
+            responseBody = response.errorBody();
+        }
         if (statusCode != 200 && statusCode != 201 && statusCode!= 202) {
             ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
+            if (responseBody != null) {
+                exception.setErrorModel(new AzureJacksonUtils().deserialize(responseBody.string(), Object.class));
+            }
             throw exception;
         }
 
@@ -124,9 +131,20 @@ public class AzureClient extends AzureServiceClient {
         }
 
         int statusCode = response.code();
+        ResponseBody responseBody;
+        if (response.isSuccess()) {
+            responseBody = response.body();
+        } else {
+            responseBody = response.errorBody();
+        }
         if (statusCode != 200 && statusCode != 201 && statusCode!= 202) {
             ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
+            try {
+                if (responseBody != null) {
+                    exception.setErrorModel(new AzureJacksonUtils().deserialize(responseBody.string(), Object.class));
+                }
+            } catch (Exception e) {/* ignore serialization errors on top of service errors */}
             callback.failure(exception);
             return null;
         }
@@ -164,9 +182,18 @@ public class AzureClient extends AzureServiceClient {
         }
 
         int statusCode = response.code();
+        ResponseBody responseBody;
+        if (response.isSuccess()) {
+            responseBody = response.body();
+        } else {
+            responseBody = response.errorBody();
+        }
         if (statusCode != 200 && statusCode != 202 && statusCode != 204) {
             ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
+            if (responseBody != null) {
+                exception.setErrorModel(new AzureJacksonUtils().deserialize(responseBody.string(), Object.class));
+            }
             throw exception;
         }
 
@@ -216,9 +243,20 @@ public class AzureClient extends AzureServiceClient {
         }
 
         int statusCode = response.code();
+        ResponseBody responseBody;
+        if (response.isSuccess()) {
+            responseBody = response.body();
+        } else {
+            responseBody = response.errorBody();
+        }
         if (statusCode != 200 && statusCode != 201 && statusCode!= 202) {
             ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
+            try {
+                if (responseBody != null) {
+                    exception.setErrorModel(new AzureJacksonUtils().deserialize(responseBody.string(), Object.class));
+                }
+            } catch (Exception e) {/* ignore serialization errors on top of service errors */}
             callback.failure(exception);
             return null;
         }
@@ -338,6 +376,9 @@ public class AzureClient extends AzureServiceClient {
         if (body == null || body.getStatus() == null) {
             ServiceException exception = new ServiceException("no body");
             exception.setResponse(response);
+            if (response.errorBody() != null) {
+                exception.setErrorModel(new AzureJacksonUtils().deserialize(response.errorBody().string(), Object.class));
+            }
             throw exception;
         }
 
@@ -363,6 +404,9 @@ public class AzureClient extends AzureServiceClient {
                     if (body == null || body.getStatus() == null) {
                         ServiceException exception = new ServiceException("no body");
                         exception.setResponse(result.getResponse());
+                        if (result.getResponse().errorBody() != null) {
+                            exception.setErrorModel(new AzureJacksonUtils().deserialize(result.getResponse().errorBody().string(), Object.class));
+                        }
                         failure(exception);
                     } else {
                         pollingState.setStatus(body.getStatus());
