@@ -67,6 +67,7 @@
     <!-- Only set set this to true for testing the code sign workflow locally. -->
     <DelaySign Condition =" '$(DelaySign)' == '' ">false</DelaySign>
     <Scope Condition=" '$(Scope)' == '' ">all</Scope>
+    <DnxVersion>1.0.0-rc1-final</DnxVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -118,6 +119,7 @@
       <DnxLibraries Include="$(LibraryRoot)/ClientRuntimes/CSharp/**/project.json" />
       <DnxLibraries Include="$(LibraryRoot)/AutoRest/Generators/**/project.json" />
     </ItemGroup>
+    <Exec Command="dnvm use $(DnxVersion) -r coreclr" ContinueOnError="false"/>
     <Exec Command="dnu build" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"/>
     <Exec Command="dnu pack" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"/>
   </Target>
@@ -226,6 +228,7 @@
   </Target>
 
   <Target Name="RestoreNugetPackages">
+    <Exec Command="dnvm use $(DnxVersion) -r coreclr" ContinueOnError="false"/>
     <Exec Command="dnu restore" ContinueOnError="false"/>
     <Exec Command="$(NuGetCommand) install xunit.runner.console -Version 2.1.0 -OutputDirectory $(LibraryRoot)packages" ContinueOnError="false"/>
     <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
