@@ -48,6 +48,12 @@ class Model(object):
     _header_map = {}
     _response_map = {}
 
+    def __init__(self, *args, **kwargs):
+
+        for k in kwargs:
+            if hasattr(self, k):
+                setattr(self, k, kwargs[k])
+
     def __getattribute__(self, attr):
 
         if attr in ['_attribute_map', '_header_map', '_response_map']:
