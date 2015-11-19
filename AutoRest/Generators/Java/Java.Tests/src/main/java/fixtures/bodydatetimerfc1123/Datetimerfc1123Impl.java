@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodydatetimerfc1123.models.Error;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -38,15 +39,9 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
      * @return the DateTimeRfc1123 object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<DateTimeRfc1123> getNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getNull();
-            return getNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<DateTimeRfc1123> getNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getNull();
+        return getNullDelegate(call.execute(), null);
     }
 
     /**
@@ -61,7 +56,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -69,7 +64,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
         return call;
     }
 
-    private ServiceResponse<DateTimeRfc1123> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<DateTimeRfc1123> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<DateTimeRfc1123>()
                 .register(200, new TypeToken<DateTimeRfc1123>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -82,15 +77,9 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
      * @return the DateTimeRfc1123 object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<DateTimeRfc1123> getInvalid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getInvalid();
-            return getInvalidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<DateTimeRfc1123> getInvalid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getInvalid();
+        return getInvalidDelegate(call.execute(), null);
     }
 
     /**
@@ -105,7 +94,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getInvalidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -113,7 +102,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
         return call;
     }
 
-    private ServiceResponse<DateTimeRfc1123> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<DateTimeRfc1123> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<DateTimeRfc1123>()
                 .register(200, new TypeToken<DateTimeRfc1123>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -126,15 +115,9 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
      * @return the DateTimeRfc1123 object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<DateTimeRfc1123> getOverflow() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getOverflow();
-            return getOverflowDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<DateTimeRfc1123> getOverflow() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getOverflow();
+        return getOverflowDelegate(call.execute(), null);
     }
 
     /**
@@ -149,7 +132,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getOverflowDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -157,7 +140,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
         return call;
     }
 
-    private ServiceResponse<DateTimeRfc1123> getOverflowDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<DateTimeRfc1123> getOverflowDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<DateTimeRfc1123>()
                 .register(200, new TypeToken<DateTimeRfc1123>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -170,15 +153,9 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
      * @return the DateTimeRfc1123 object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<DateTimeRfc1123> getUnderflow() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getUnderflow();
-            return getUnderflowDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<DateTimeRfc1123> getUnderflow() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getUnderflow();
+        return getUnderflowDelegate(call.execute(), null);
     }
 
     /**
@@ -193,7 +170,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getUnderflowDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -201,7 +178,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
         return call;
     }
 
-    private ServiceResponse<DateTimeRfc1123> getUnderflowDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<DateTimeRfc1123> getUnderflowDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<DateTimeRfc1123>()
                 .register(200, new TypeToken<DateTimeRfc1123>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -214,19 +191,13 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
      * @param datetimeBody the DateTimeRfc1123 value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putUtcMaxDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException {
+    public ServiceResponse<Void> putUtcMaxDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException, IOException {
         if (datetimeBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
-        try {
-            Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBody);
-            return putUtcMaxDateTimeDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBody);
+        return putUtcMaxDateTimeDelegate(call.execute(), null);
     }
 
     /**
@@ -247,7 +218,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putUtcMaxDateTimeDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -255,7 +226,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
         return call;
     }
 
-    private ServiceResponse<Void> putUtcMaxDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putUtcMaxDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -268,15 +239,9 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
      * @return the DateTimeRfc1123 object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<DateTimeRfc1123> getUtcLowercaseMaxDateTime() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getUtcLowercaseMaxDateTime();
-            return getUtcLowercaseMaxDateTimeDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<DateTimeRfc1123> getUtcLowercaseMaxDateTime() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getUtcLowercaseMaxDateTime();
+        return getUtcLowercaseMaxDateTimeDelegate(call.execute(), null);
     }
 
     /**
@@ -291,7 +256,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getUtcLowercaseMaxDateTimeDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -299,7 +264,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
         return call;
     }
 
-    private ServiceResponse<DateTimeRfc1123> getUtcLowercaseMaxDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<DateTimeRfc1123> getUtcLowercaseMaxDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<DateTimeRfc1123>()
                 .register(200, new TypeToken<DateTimeRfc1123>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -312,15 +277,9 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
      * @return the DateTimeRfc1123 object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<DateTimeRfc1123> getUtcUppercaseMaxDateTime() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getUtcUppercaseMaxDateTime();
-            return getUtcUppercaseMaxDateTimeDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<DateTimeRfc1123> getUtcUppercaseMaxDateTime() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getUtcUppercaseMaxDateTime();
+        return getUtcUppercaseMaxDateTimeDelegate(call.execute(), null);
     }
 
     /**
@@ -335,7 +294,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getUtcUppercaseMaxDateTimeDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -343,7 +302,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
         return call;
     }
 
-    private ServiceResponse<DateTimeRfc1123> getUtcUppercaseMaxDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<DateTimeRfc1123> getUtcUppercaseMaxDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<DateTimeRfc1123>()
                 .register(200, new TypeToken<DateTimeRfc1123>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -356,19 +315,13 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
      * @param datetimeBody the DateTimeRfc1123 value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putUtcMinDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException {
+    public ServiceResponse<Void> putUtcMinDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException, IOException {
         if (datetimeBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
         }
-        try {
-            Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBody);
-            return putUtcMinDateTimeDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBody);
+        return putUtcMinDateTimeDelegate(call.execute(), null);
     }
 
     /**
@@ -389,7 +342,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putUtcMinDateTimeDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -397,7 +350,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
         return call;
     }
 
-    private ServiceResponse<Void> putUtcMinDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putUtcMinDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -410,15 +363,9 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
      * @return the DateTimeRfc1123 object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<DateTimeRfc1123> getUtcMinDateTime() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getUtcMinDateTime();
-            return getUtcMinDateTimeDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<DateTimeRfc1123> getUtcMinDateTime() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getUtcMinDateTime();
+        return getUtcMinDateTimeDelegate(call.execute(), null);
     }
 
     /**
@@ -433,7 +380,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getUtcMinDateTimeDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -441,7 +388,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
         return call;
     }
 
-    private ServiceResponse<DateTimeRfc1123> getUtcMinDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<DateTimeRfc1123> getUtcMinDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<DateTimeRfc1123>()
                 .register(200, new TypeToken<DateTimeRfc1123>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

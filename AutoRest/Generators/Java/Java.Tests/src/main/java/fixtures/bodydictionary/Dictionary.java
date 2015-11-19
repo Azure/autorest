@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodydictionary.models.Widget;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import org.joda.time.DateTime;
@@ -232,10 +233,11 @@ public interface Dictionary {
     /**
      * Get null dictionary value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Integer>> getNull() throws ServiceException;
+    ServiceResponse<Map<String, Integer>> getNull() throws ServiceException, IOException;
 
     /**
      * Get null dictionary value
@@ -248,10 +250,11 @@ public interface Dictionary {
     /**
      * Get empty dictionary value {}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Integer>> getEmpty() throws ServiceException;
+    ServiceResponse<Map<String, Integer>> getEmpty() throws ServiceException, IOException;
 
     /**
      * Get empty dictionary value {}
@@ -265,10 +268,11 @@ public interface Dictionary {
      * Set dictionary value empty {}
      *
      * @param arrayBody the Map&lt;String, String&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putEmpty(Map<String, String> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putEmpty(Map<String, String> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set dictionary value empty {}
@@ -282,10 +286,11 @@ public interface Dictionary {
     /**
      * Get Dictionary with null value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, String>> getNullValue() throws ServiceException;
+    ServiceResponse<Map<String, String>> getNullValue() throws ServiceException, IOException;
 
     /**
      * Get Dictionary with null value
@@ -298,10 +303,11 @@ public interface Dictionary {
     /**
      * Get Dictionary with null key
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, String>> getNullKey() throws ServiceException;
+    ServiceResponse<Map<String, String>> getNullKey() throws ServiceException, IOException;
 
     /**
      * Get Dictionary with null key
@@ -314,10 +320,11 @@ public interface Dictionary {
     /**
      * Get Dictionary with key as empty string
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, String>> getEmptyStringKey() throws ServiceException;
+    ServiceResponse<Map<String, String>> getEmptyStringKey() throws ServiceException, IOException;
 
     /**
      * Get Dictionary with key as empty string
@@ -330,10 +337,11 @@ public interface Dictionary {
     /**
      * Get invalid Dictionary value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, String>> getInvalid() throws ServiceException;
+    ServiceResponse<Map<String, String>> getInvalid() throws ServiceException, IOException;
 
     /**
      * Get invalid Dictionary value
@@ -346,10 +354,11 @@ public interface Dictionary {
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Boolean>> getBooleanTfft() throws ServiceException;
+    ServiceResponse<Map<String, Boolean>> getBooleanTfft() throws ServiceException, IOException;
 
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
@@ -363,10 +372,11 @@ public interface Dictionary {
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putBooleanTfft(Map<String, Boolean> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putBooleanTfft(Map<String, Boolean> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
@@ -380,10 +390,11 @@ public interface Dictionary {
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Boolean>> getBooleanInvalidNull() throws ServiceException;
+    ServiceResponse<Map<String, Boolean>> getBooleanInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }
@@ -396,10 +407,11 @@ public interface Dictionary {
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Boolean>> getBooleanInvalidString() throws ServiceException;
+    ServiceResponse<Map<String, Boolean>> getBooleanInvalidString() throws ServiceException, IOException;
 
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
@@ -412,10 +424,11 @@ public interface Dictionary {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Integer>> getIntegerValid() throws ServiceException;
+    ServiceResponse<Map<String, Integer>> getIntegerValid() throws ServiceException, IOException;
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -429,10 +442,11 @@ public interface Dictionary {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
      *
      * @param arrayBody the Map&lt;String, Integer&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putIntegerValid(Map<String, Integer> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putIntegerValid(Map<String, Integer> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -446,10 +460,11 @@ public interface Dictionary {
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Integer>> getIntInvalidNull() throws ServiceException;
+    ServiceResponse<Map<String, Integer>> getIntInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}
@@ -462,10 +477,11 @@ public interface Dictionary {
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Integer>> getIntInvalidString() throws ServiceException;
+    ServiceResponse<Map<String, Integer>> getIntInvalidString() throws ServiceException, IOException;
 
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
@@ -478,10 +494,11 @@ public interface Dictionary {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Long>> getLongValid() throws ServiceException;
+    ServiceResponse<Map<String, Long>> getLongValid() throws ServiceException, IOException;
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -495,10 +512,11 @@ public interface Dictionary {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
      *
      * @param arrayBody the Map&lt;String, Long&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putLongValid(Map<String, Long> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putLongValid(Map<String, Long> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -512,10 +530,11 @@ public interface Dictionary {
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Long>> getLongInvalidNull() throws ServiceException;
+    ServiceResponse<Map<String, Long>> getLongInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}
@@ -528,10 +547,11 @@ public interface Dictionary {
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Long>> getLongInvalidString() throws ServiceException;
+    ServiceResponse<Map<String, Long>> getLongInvalidString() throws ServiceException, IOException;
 
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}
@@ -544,10 +564,11 @@ public interface Dictionary {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Double>> getFloatValid() throws ServiceException;
+    ServiceResponse<Map<String, Double>> getFloatValid() throws ServiceException, IOException;
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -561,10 +582,11 @@ public interface Dictionary {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putFloatValid(Map<String, Double> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putFloatValid(Map<String, Double> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -578,10 +600,11 @@ public interface Dictionary {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Double>> getFloatInvalidNull() throws ServiceException;
+    ServiceResponse<Map<String, Double>> getFloatInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
@@ -594,10 +617,11 @@ public interface Dictionary {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Double>> getFloatInvalidString() throws ServiceException;
+    ServiceResponse<Map<String, Double>> getFloatInvalidString() throws ServiceException, IOException;
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
@@ -610,10 +634,11 @@ public interface Dictionary {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Double>> getDoubleValid() throws ServiceException;
+    ServiceResponse<Map<String, Double>> getDoubleValid() throws ServiceException, IOException;
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -627,10 +652,11 @@ public interface Dictionary {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDoubleValid(Map<String, Double> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putDoubleValid(Map<String, Double> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -644,10 +670,11 @@ public interface Dictionary {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Double>> getDoubleInvalidNull() throws ServiceException;
+    ServiceResponse<Map<String, Double>> getDoubleInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
@@ -660,10 +687,11 @@ public interface Dictionary {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Double>> getDoubleInvalidString() throws ServiceException;
+    ServiceResponse<Map<String, Double>> getDoubleInvalidString() throws ServiceException, IOException;
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
@@ -676,10 +704,11 @@ public interface Dictionary {
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, String>> getStringValid() throws ServiceException;
+    ServiceResponse<Map<String, String>> getStringValid() throws ServiceException, IOException;
 
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
@@ -693,10 +722,11 @@ public interface Dictionary {
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
      *
      * @param arrayBody the Map&lt;String, String&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putStringValid(Map<String, String> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putStringValid(Map<String, String> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
@@ -710,10 +740,11 @@ public interface Dictionary {
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, String>> getStringWithNull() throws ServiceException;
+    ServiceResponse<Map<String, String>> getStringWithNull() throws ServiceException, IOException;
 
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
@@ -726,10 +757,11 @@ public interface Dictionary {
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, String>> getStringWithInvalid() throws ServiceException;
+    ServiceResponse<Map<String, String>> getStringWithInvalid() throws ServiceException, IOException;
 
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
@@ -742,10 +774,11 @@ public interface Dictionary {
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, LocalDate>> getDateValid() throws ServiceException;
+    ServiceResponse<Map<String, LocalDate>> getDateValid() throws ServiceException, IOException;
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
@@ -759,10 +792,11 @@ public interface Dictionary {
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDateValid(Map<String, LocalDate> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putDateValid(Map<String, LocalDate> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
@@ -776,10 +810,11 @@ public interface Dictionary {
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, LocalDate>> getDateInvalidNull() throws ServiceException;
+    ServiceResponse<Map<String, LocalDate>> getDateInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
@@ -792,10 +827,11 @@ public interface Dictionary {
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, LocalDate>> getDateInvalidChars() throws ServiceException;
+    ServiceResponse<Map<String, LocalDate>> getDateInvalidChars() throws ServiceException, IOException;
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}
@@ -808,10 +844,11 @@ public interface Dictionary {
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, DateTime>> getDateTimeValid() throws ServiceException;
+    ServiceResponse<Map<String, DateTime>> getDateTimeValid() throws ServiceException, IOException;
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
@@ -825,10 +862,11 @@ public interface Dictionary {
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDateTimeValid(Map<String, DateTime> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putDateTimeValid(Map<String, DateTime> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
@@ -842,10 +880,11 @@ public interface Dictionary {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, DateTime>> getDateTimeInvalidNull() throws ServiceException;
+    ServiceResponse<Map<String, DateTime>> getDateTimeInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
@@ -858,10 +897,11 @@ public interface Dictionary {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, DateTime>> getDateTimeInvalidChars() throws ServiceException;
+    ServiceResponse<Map<String, DateTime>> getDateTimeInvalidChars() throws ServiceException, IOException;
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
@@ -874,10 +914,11 @@ public interface Dictionary {
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTimeRfc1123&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, DateTimeRfc1123>> getDateTimeRfc1123Valid() throws ServiceException;
+    ServiceResponse<Map<String, DateTimeRfc1123>> getDateTimeRfc1123Valid() throws ServiceException, IOException;
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
@@ -891,10 +932,11 @@ public interface Dictionary {
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
      *
      * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDateTimeRfc1123Valid(Map<String, DateTimeRfc1123> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putDateTimeRfc1123Valid(Map<String, DateTimeRfc1123> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
@@ -908,10 +950,11 @@ public interface Dictionary {
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Period&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Period>> getDurationValid() throws ServiceException;
+    ServiceResponse<Map<String, Period>> getDurationValid() throws ServiceException, IOException;
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
@@ -925,10 +968,11 @@ public interface Dictionary {
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
      *
      * @param arrayBody the Map&lt;String, Period&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDurationValid(Map<String, Period> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putDurationValid(Map<String, Period> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
@@ -942,10 +986,11 @@ public interface Dictionary {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, byte[]>> getByteValid() throws ServiceException;
+    ServiceResponse<Map<String, byte[]>> getByteValid() throws ServiceException, IOException;
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64
@@ -959,10 +1004,11 @@ public interface Dictionary {
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putByteValid(Map<String, byte[]> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putByteValid(Map<String, byte[]> arrayBody) throws ServiceException, IOException;
 
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64
@@ -976,10 +1022,11 @@ public interface Dictionary {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, byte[]>> getByteInvalidNull() throws ServiceException;
+    ServiceResponse<Map<String, byte[]>> getByteInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded
@@ -992,10 +1039,11 @@ public interface Dictionary {
     /**
      * Get dictionary of complex type null value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Widget>> getComplexNull() throws ServiceException;
+    ServiceResponse<Map<String, Widget>> getComplexNull() throws ServiceException, IOException;
 
     /**
      * Get dictionary of complex type null value
@@ -1008,10 +1056,11 @@ public interface Dictionary {
     /**
      * Get empty dictionary of complex type {}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Widget>> getComplexEmpty() throws ServiceException;
+    ServiceResponse<Map<String, Widget>> getComplexEmpty() throws ServiceException, IOException;
 
     /**
      * Get empty dictionary of complex type {}
@@ -1024,10 +1073,11 @@ public interface Dictionary {
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Widget>> getComplexItemNull() throws ServiceException;
+    ServiceResponse<Map<String, Widget>> getComplexItemNull() throws ServiceException, IOException;
 
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
@@ -1040,10 +1090,11 @@ public interface Dictionary {
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Widget>> getComplexItemEmpty() throws ServiceException;
+    ServiceResponse<Map<String, Widget>> getComplexItemEmpty() throws ServiceException, IOException;
 
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
@@ -1056,10 +1107,11 @@ public interface Dictionary {
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Widget>> getComplexValid() throws ServiceException;
+    ServiceResponse<Map<String, Widget>> getComplexValid() throws ServiceException, IOException;
 
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
@@ -1073,10 +1125,11 @@ public interface Dictionary {
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putComplexValid(Map<String, Widget> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putComplexValid(Map<String, Widget> arrayBody) throws ServiceException, IOException;
 
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
@@ -1090,10 +1143,11 @@ public interface Dictionary {
     /**
      * Get a null array
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, List<String>>> getArrayNull() throws ServiceException;
+    ServiceResponse<Map<String, List<String>>> getArrayNull() throws ServiceException, IOException;
 
     /**
      * Get a null array
@@ -1106,10 +1160,11 @@ public interface Dictionary {
     /**
      * Get an empty dictionary {}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, List<String>>> getArrayEmpty() throws ServiceException;
+    ServiceResponse<Map<String, List<String>>> getArrayEmpty() throws ServiceException, IOException;
 
     /**
      * Get an empty dictionary {}
@@ -1122,10 +1177,11 @@ public interface Dictionary {
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, List<String>>> getArrayItemNull() throws ServiceException;
+    ServiceResponse<Map<String, List<String>>> getArrayItemNull() throws ServiceException, IOException;
 
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}
@@ -1138,10 +1194,11 @@ public interface Dictionary {
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, List<String>>> getArrayItemEmpty() throws ServiceException;
+    ServiceResponse<Map<String, List<String>>> getArrayItemEmpty() throws ServiceException, IOException;
 
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}
@@ -1154,10 +1211,11 @@ public interface Dictionary {
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, List<String>>> getArrayValid() throws ServiceException;
+    ServiceResponse<Map<String, List<String>>> getArrayValid() throws ServiceException, IOException;
 
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
@@ -1171,10 +1229,11 @@ public interface Dictionary {
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putArrayValid(Map<String, List<String>> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putArrayValid(Map<String, List<String>> arrayBody) throws ServiceException, IOException;
 
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
@@ -1188,10 +1247,11 @@ public interface Dictionary {
     /**
      * Get an dictionaries of dictionaries with value null
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Map<String, String>>> getDictionaryNull() throws ServiceException;
+    ServiceResponse<Map<String, Map<String, String>>> getDictionaryNull() throws ServiceException, IOException;
 
     /**
      * Get an dictionaries of dictionaries with value null
@@ -1204,10 +1264,11 @@ public interface Dictionary {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Map<String, String>>> getDictionaryEmpty() throws ServiceException;
+    ServiceResponse<Map<String, Map<String, String>>> getDictionaryEmpty() throws ServiceException, IOException;
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}
@@ -1220,10 +1281,11 @@ public interface Dictionary {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemNull() throws ServiceException;
+    ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemNull() throws ServiceException, IOException;
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}
@@ -1236,10 +1298,11 @@ public interface Dictionary {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemEmpty() throws ServiceException;
+    ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemEmpty() throws ServiceException, IOException;
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
@@ -1252,10 +1315,11 @@ public interface Dictionary {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Map<String, String>>> getDictionaryValid() throws ServiceException;
+    ServiceResponse<Map<String, Map<String, String>>> getDictionaryValid() throws ServiceException, IOException;
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
@@ -1269,10 +1333,11 @@ public interface Dictionary {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ServiceException, IOException;
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}

@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.DictionaryWrapper;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -52,10 +53,11 @@ public interface Dictionary {
     /**
      * Get complex types with dictionary property
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<DictionaryWrapper> getValid() throws ServiceException;
+    ServiceResponse<DictionaryWrapper> getValid() throws ServiceException, IOException;
 
     /**
      * Get complex types with dictionary property
@@ -69,10 +71,11 @@ public interface Dictionary {
      * Put complex types with dictionary property
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putValid(DictionaryWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putValid(DictionaryWrapper complexBody) throws ServiceException, IOException;
 
     /**
      * Put complex types with dictionary property
@@ -86,10 +89,11 @@ public interface Dictionary {
     /**
      * Get complex types with dictionary property which is empty
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<DictionaryWrapper> getEmpty() throws ServiceException;
+    ServiceResponse<DictionaryWrapper> getEmpty() throws ServiceException, IOException;
 
     /**
      * Get complex types with dictionary property which is empty
@@ -103,10 +107,11 @@ public interface Dictionary {
      * Put complex types with dictionary property which is empty
      *
      * @param complexBody Please put an empty dictionary
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putEmpty(DictionaryWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putEmpty(DictionaryWrapper complexBody) throws ServiceException, IOException;
 
     /**
      * Put complex types with dictionary property which is empty
@@ -120,10 +125,11 @@ public interface Dictionary {
     /**
      * Get complex types with dictionary property which is null
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<DictionaryWrapper> getNull() throws ServiceException;
+    ServiceResponse<DictionaryWrapper> getNull() throws ServiceException, IOException;
 
     /**
      * Get complex types with dictionary property which is null
@@ -136,10 +142,11 @@ public interface Dictionary {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<DictionaryWrapper> getNotProvided() throws ServiceException;
+    ServiceResponse<DictionaryWrapper> getNotProvided() throws ServiceException, IOException;
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload

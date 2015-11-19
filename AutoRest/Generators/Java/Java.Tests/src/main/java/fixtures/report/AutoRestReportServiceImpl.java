@@ -21,6 +21,7 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.report.models.Error;
+import java.io.IOException;
 import java.util.Map;
 import retrofit.Call;
 import retrofit.Response;
@@ -82,15 +83,9 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * @return the Map&lt;String, Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Integer>> getReport() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getReport();
-            return getReportDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Integer>> getReport() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getReport();
+        return getReportDelegate(call.execute(), null);
     }
 
     /**
@@ -105,7 +100,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getReportDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -113,7 +108,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
         return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Integer>>()
                 .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

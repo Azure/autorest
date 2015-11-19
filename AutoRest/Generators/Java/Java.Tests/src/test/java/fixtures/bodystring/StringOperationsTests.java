@@ -3,13 +3,10 @@ package fixtures.bodystring;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodyinteger.AutoRestIntegerTestService;
-import fixtures.bodyinteger.AutoRestIntegerTestServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -32,8 +29,8 @@ public class StringOperationsTests {
         try {
             client.getStringOperations().putNull(null);
         } catch (Exception ex) {
-            Assert.assertEquals(ServiceException.class, ex.getClass());
-            Assert.assertTrue(ex.getCause().getMessage().contains("Body parameter value must not be null"));
+            Assert.assertEquals(IllegalArgumentException.class, ex.getClass());
+            Assert.assertTrue(ex.getMessage().contains("Body parameter value must not be null"));
         }
     }
 

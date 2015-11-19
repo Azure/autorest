@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodyfile.models.Error;
 import java.io.InputStream;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -38,15 +39,9 @@ public class FilesImpl implements Files {
      * @return the InputStream object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<InputStream> getFile() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getFile();
-            return getFileDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<InputStream> getFile() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getFile();
+        return getFileDelegate(call.execute(), null);
     }
 
     /**
@@ -61,7 +56,7 @@ public class FilesImpl implements Files {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getFileDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -69,7 +64,7 @@ public class FilesImpl implements Files {
         return call;
     }
 
-    private ServiceResponse<InputStream> getFileDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<InputStream> getFileDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<InputStream>()
                 .register(200, new TypeToken<InputStream>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -82,15 +77,9 @@ public class FilesImpl implements Files {
      * @return the InputStream object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<InputStream> getEmptyFile() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getEmptyFile();
-            return getEmptyFileDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<InputStream> getEmptyFile() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getEmptyFile();
+        return getEmptyFileDelegate(call.execute(), null);
     }
 
     /**
@@ -105,7 +94,7 @@ public class FilesImpl implements Files {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getEmptyFileDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -113,7 +102,7 @@ public class FilesImpl implements Files {
         return call;
     }
 
-    private ServiceResponse<InputStream> getEmptyFileDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<InputStream> getEmptyFileDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<InputStream>()
                 .register(200, new TypeToken<InputStream>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

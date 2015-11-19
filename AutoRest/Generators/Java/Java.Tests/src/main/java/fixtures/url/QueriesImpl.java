@@ -21,6 +21,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.url.models.Error;
 import fixtures.url.models.UriColor;
+import java.io.IOException;
 import java.util.List;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
@@ -44,15 +45,9 @@ public class QueriesImpl implements Queries {
      * @param boolQuery true boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> getBooleanTrue(Boolean boolQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getBooleanTrue(boolQuery);
-            return getBooleanTrueDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> getBooleanTrue(Boolean boolQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getBooleanTrue(boolQuery);
+        return getBooleanTrueDelegate(call.execute(), null);
     }
 
     /**
@@ -68,7 +63,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBooleanTrueDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -76,7 +71,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getBooleanTrueDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getBooleanTrueDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -89,15 +84,9 @@ public class QueriesImpl implements Queries {
      * @param boolQuery false boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> getBooleanFalse(Boolean boolQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getBooleanFalse(boolQuery);
-            return getBooleanFalseDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> getBooleanFalse(Boolean boolQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getBooleanFalse(boolQuery);
+        return getBooleanFalseDelegate(call.execute(), null);
     }
 
     /**
@@ -113,7 +102,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBooleanFalseDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -121,7 +110,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getBooleanFalseDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getBooleanFalseDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -134,15 +123,9 @@ public class QueriesImpl implements Queries {
      * @param boolQuery null boolean value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> getBooleanNull(Boolean boolQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getBooleanNull(boolQuery);
-            return getBooleanNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> getBooleanNull(Boolean boolQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getBooleanNull(boolQuery);
+        return getBooleanNullDelegate(call.execute(), null);
     }
 
     /**
@@ -158,7 +141,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBooleanNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -166,7 +149,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getBooleanNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getBooleanNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -179,15 +162,9 @@ public class QueriesImpl implements Queries {
      * @param intQuery '1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> getIntOneMillion(Integer intQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getIntOneMillion(intQuery);
-            return getIntOneMillionDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> getIntOneMillion(Integer intQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getIntOneMillion(intQuery);
+        return getIntOneMillionDelegate(call.execute(), null);
     }
 
     /**
@@ -203,7 +180,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getIntOneMillionDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -211,7 +188,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getIntOneMillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getIntOneMillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -224,15 +201,9 @@ public class QueriesImpl implements Queries {
      * @param intQuery '-1000000' integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> getIntNegativeOneMillion(Integer intQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getIntNegativeOneMillion(intQuery);
-            return getIntNegativeOneMillionDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> getIntNegativeOneMillion(Integer intQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getIntNegativeOneMillion(intQuery);
+        return getIntNegativeOneMillionDelegate(call.execute(), null);
     }
 
     /**
@@ -248,7 +219,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getIntNegativeOneMillionDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -256,7 +227,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -269,15 +240,9 @@ public class QueriesImpl implements Queries {
      * @param intQuery null integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> getIntNull(Integer intQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getIntNull(intQuery);
-            return getIntNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> getIntNull(Integer intQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getIntNull(intQuery);
+        return getIntNullDelegate(call.execute(), null);
     }
 
     /**
@@ -293,7 +258,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getIntNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -301,7 +266,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getIntNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getIntNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -314,15 +279,9 @@ public class QueriesImpl implements Queries {
      * @param longQuery '10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> getTenBillion(Long longQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getTenBillion(longQuery);
-            return getTenBillionDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> getTenBillion(Long longQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getTenBillion(longQuery);
+        return getTenBillionDelegate(call.execute(), null);
     }
 
     /**
@@ -338,7 +297,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getTenBillionDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -346,7 +305,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getTenBillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getTenBillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -359,15 +318,9 @@ public class QueriesImpl implements Queries {
      * @param longQuery '-10000000000' 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> getNegativeTenBillion(Long longQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getNegativeTenBillion(longQuery);
-            return getNegativeTenBillionDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> getNegativeTenBillion(Long longQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getNegativeTenBillion(longQuery);
+        return getNegativeTenBillionDelegate(call.execute(), null);
     }
 
     /**
@@ -383,7 +336,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNegativeTenBillionDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -391,7 +344,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getNegativeTenBillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getNegativeTenBillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -404,15 +357,9 @@ public class QueriesImpl implements Queries {
      * @param longQuery null 64 bit integer value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> getLongNull(Long longQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getLongNull(longQuery);
-            return getLongNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> getLongNull(Long longQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getLongNull(longQuery);
+        return getLongNullDelegate(call.execute(), null);
     }
 
     /**
@@ -428,7 +375,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getLongNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -436,7 +383,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getLongNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getLongNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -449,15 +396,9 @@ public class QueriesImpl implements Queries {
      * @param floatQuery '1.034E+20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> floatScientificPositive(Double floatQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.floatScientificPositive(floatQuery);
-            return floatScientificPositiveDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> floatScientificPositive(Double floatQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.floatScientificPositive(floatQuery);
+        return floatScientificPositiveDelegate(call.execute(), null);
     }
 
     /**
@@ -473,7 +414,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(floatScientificPositiveDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -481,7 +422,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> floatScientificPositiveDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> floatScientificPositiveDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -494,15 +435,9 @@ public class QueriesImpl implements Queries {
      * @param floatQuery '-1.034E-20'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> floatScientificNegative(Double floatQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.floatScientificNegative(floatQuery);
-            return floatScientificNegativeDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> floatScientificNegative(Double floatQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.floatScientificNegative(floatQuery);
+        return floatScientificNegativeDelegate(call.execute(), null);
     }
 
     /**
@@ -518,7 +453,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(floatScientificNegativeDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -526,7 +461,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> floatScientificNegativeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> floatScientificNegativeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -539,15 +474,9 @@ public class QueriesImpl implements Queries {
      * @param floatQuery null numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> floatNull(Double floatQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.floatNull(floatQuery);
-            return floatNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> floatNull(Double floatQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.floatNull(floatQuery);
+        return floatNullDelegate(call.execute(), null);
     }
 
     /**
@@ -563,7 +492,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(floatNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -571,7 +500,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> floatNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> floatNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -584,15 +513,9 @@ public class QueriesImpl implements Queries {
      * @param doubleQuery '9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> doubleDecimalPositive(Double doubleQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.doubleDecimalPositive(doubleQuery);
-            return doubleDecimalPositiveDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> doubleDecimalPositive(Double doubleQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.doubleDecimalPositive(doubleQuery);
+        return doubleDecimalPositiveDelegate(call.execute(), null);
     }
 
     /**
@@ -608,7 +531,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(doubleDecimalPositiveDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -616,7 +539,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -629,15 +552,9 @@ public class QueriesImpl implements Queries {
      * @param doubleQuery '-9999999.999'numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> doubleDecimalNegative(Double doubleQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.doubleDecimalNegative(doubleQuery);
-            return doubleDecimalNegativeDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> doubleDecimalNegative(Double doubleQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.doubleDecimalNegative(doubleQuery);
+        return doubleDecimalNegativeDelegate(call.execute(), null);
     }
 
     /**
@@ -653,7 +570,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(doubleDecimalNegativeDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -661,7 +578,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -674,15 +591,9 @@ public class QueriesImpl implements Queries {
      * @param doubleQuery null numeric value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> doubleNull(Double doubleQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.doubleNull(doubleQuery);
-            return doubleNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> doubleNull(Double doubleQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.doubleNull(doubleQuery);
+        return doubleNullDelegate(call.execute(), null);
     }
 
     /**
@@ -698,7 +609,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(doubleNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -706,7 +617,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> doubleNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> doubleNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -719,15 +630,9 @@ public class QueriesImpl implements Queries {
      * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> stringUnicode(String stringQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.stringUnicode(stringQuery);
-            return stringUnicodeDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> stringUnicode(String stringQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.stringUnicode(stringQuery);
+        return stringUnicodeDelegate(call.execute(), null);
     }
 
     /**
@@ -743,7 +648,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(stringUnicodeDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -751,7 +656,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -764,15 +669,9 @@ public class QueriesImpl implements Queries {
      * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> stringUrlEncoded(String stringQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.stringUrlEncoded(stringQuery);
-            return stringUrlEncodedDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> stringUrlEncoded(String stringQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.stringUrlEncoded(stringQuery);
+        return stringUrlEncodedDelegate(call.execute(), null);
     }
 
     /**
@@ -788,7 +687,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(stringUrlEncodedDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -796,7 +695,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -809,15 +708,9 @@ public class QueriesImpl implements Queries {
      * @param stringQuery '' string value. Possible values for this parameter include: ''
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> stringEmpty(String stringQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.stringEmpty(stringQuery);
-            return stringEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> stringEmpty(String stringQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.stringEmpty(stringQuery);
+        return stringEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -833,7 +726,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(stringEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -841,7 +734,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -854,15 +747,9 @@ public class QueriesImpl implements Queries {
      * @param stringQuery null string value
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> stringNull(String stringQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.stringNull(stringQuery);
-            return stringNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> stringNull(String stringQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.stringNull(stringQuery);
+        return stringNullDelegate(call.execute(), null);
     }
 
     /**
@@ -878,7 +765,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(stringNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -886,7 +773,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -899,15 +786,9 @@ public class QueriesImpl implements Queries {
      * @param enumQuery 'green color' enum value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> enumValid(UriColor enumQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.enumValid(JacksonUtils.serializeRaw(enumQuery));
-            return enumValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> enumValid(UriColor enumQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.enumValid(JacksonUtils.serializeRaw(enumQuery));
+        return enumValidDelegate(call.execute(), null);
     }
 
     /**
@@ -923,7 +804,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(enumValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -931,7 +812,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -944,15 +825,9 @@ public class QueriesImpl implements Queries {
      * @param enumQuery null string value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> enumNull(UriColor enumQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.enumNull(JacksonUtils.serializeRaw(enumQuery));
-            return enumNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> enumNull(UriColor enumQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.enumNull(JacksonUtils.serializeRaw(enumQuery));
+        return enumNullDelegate(call.execute(), null);
     }
 
     /**
@@ -968,7 +843,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(enumNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -976,7 +851,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -989,15 +864,9 @@ public class QueriesImpl implements Queries {
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> byteMultiByte(byte[] byteQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(byteQuery));
-            return byteMultiByteDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> byteMultiByte(byte[] byteQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(byteQuery));
+        return byteMultiByteDelegate(call.execute(), null);
     }
 
     /**
@@ -1013,7 +882,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(byteMultiByteDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1021,7 +890,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1034,15 +903,9 @@ public class QueriesImpl implements Queries {
      * @param byteQuery '' as byte array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> byteEmpty(byte[] byteQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(byteQuery));
-            return byteEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> byteEmpty(byte[] byteQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(byteQuery));
+        return byteEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -1058,7 +921,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(byteEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1066,7 +929,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1079,15 +942,9 @@ public class QueriesImpl implements Queries {
      * @param byteQuery null as byte array (no query parameters in uri)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> byteNull(byte[] byteQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(byteQuery));
-            return byteNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> byteNull(byte[] byteQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(byteQuery));
+        return byteNullDelegate(call.execute(), null);
     }
 
     /**
@@ -1103,7 +960,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(byteNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1111,7 +968,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1124,15 +981,9 @@ public class QueriesImpl implements Queries {
      * @param dateQuery '2012-01-01' as date
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.dateValid(JacksonUtils.serializeRaw(dateQuery));
-            return dateValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.dateValid(JacksonUtils.serializeRaw(dateQuery));
+        return dateValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1148,7 +999,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(dateValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1156,7 +1007,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1169,15 +1020,9 @@ public class QueriesImpl implements Queries {
      * @param dateQuery null as date (no query parameters in uri)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> dateNull(LocalDate dateQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.dateNull(JacksonUtils.serializeRaw(dateQuery));
-            return dateNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> dateNull(LocalDate dateQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.dateNull(JacksonUtils.serializeRaw(dateQuery));
+        return dateNullDelegate(call.execute(), null);
     }
 
     /**
@@ -1193,7 +1038,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(dateNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1201,7 +1046,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1214,15 +1059,9 @@ public class QueriesImpl implements Queries {
      * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.dateTimeValid(JacksonUtils.serializeRaw(dateTimeQuery));
-            return dateTimeValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.dateTimeValid(JacksonUtils.serializeRaw(dateTimeQuery));
+        return dateTimeValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1238,7 +1077,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(dateTimeValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1246,7 +1085,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1259,15 +1098,9 @@ public class QueriesImpl implements Queries {
      * @param dateTimeQuery null as date-time (no query parameters)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> dateTimeNull(DateTime dateTimeQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.dateTimeNull(JacksonUtils.serializeRaw(dateTimeQuery));
-            return dateTimeNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> dateTimeNull(DateTime dateTimeQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.dateTimeNull(JacksonUtils.serializeRaw(dateTimeQuery));
+        return dateTimeNullDelegate(call.execute(), null);
     }
 
     /**
@@ -1283,7 +1116,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(dateTimeNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1291,7 +1124,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1304,15 +1137,9 @@ public class QueriesImpl implements Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> arrayStringCsvValid(List<String> arrayQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.arrayStringCsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
-            return arrayStringCsvValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> arrayStringCsvValid(List<String> arrayQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.arrayStringCsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
+        return arrayStringCsvValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1328,7 +1155,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(arrayStringCsvValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1336,7 +1163,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringCsvValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> arrayStringCsvValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1349,15 +1176,9 @@ public class QueriesImpl implements Queries {
      * @param arrayQuery a null array of string using the csv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> arrayStringCsvNull(List<String> arrayQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.arrayStringCsvNull(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
-            return arrayStringCsvNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> arrayStringCsvNull(List<String> arrayQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.arrayStringCsvNull(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
+        return arrayStringCsvNullDelegate(call.execute(), null);
     }
 
     /**
@@ -1373,7 +1194,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(arrayStringCsvNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1381,7 +1202,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringCsvNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> arrayStringCsvNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1394,15 +1215,9 @@ public class QueriesImpl implements Queries {
      * @param arrayQuery an empty array [] of string using the csv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.arrayStringCsvEmpty(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
-            return arrayStringCsvEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.arrayStringCsvEmpty(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
+        return arrayStringCsvEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -1418,7 +1233,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(arrayStringCsvEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1426,7 +1241,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringCsvEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> arrayStringCsvEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1439,15 +1254,9 @@ public class QueriesImpl implements Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> arrayStringSsvValid(List<String> arrayQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.arrayStringSsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.SSV));
-            return arrayStringSsvValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> arrayStringSsvValid(List<String> arrayQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.arrayStringSsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.SSV));
+        return arrayStringSsvValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1463,7 +1272,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(arrayStringSsvValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1471,7 +1280,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringSsvValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> arrayStringSsvValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1484,15 +1293,9 @@ public class QueriesImpl implements Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> arrayStringTsvValid(List<String> arrayQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.arrayStringTsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.TSV));
-            return arrayStringTsvValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> arrayStringTsvValid(List<String> arrayQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.arrayStringTsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.TSV));
+        return arrayStringTsvValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1508,7 +1311,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(arrayStringTsvValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1516,7 +1319,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringTsvValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> arrayStringTsvValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1529,15 +1332,9 @@ public class QueriesImpl implements Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> arrayStringPipesValid(List<String> arrayQuery) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.arrayStringPipesValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.PIPES));
-            return arrayStringPipesValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> arrayStringPipesValid(List<String> arrayQuery) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.arrayStringPipesValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.PIPES));
+        return arrayStringPipesValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1553,7 +1350,7 @@ public class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(arrayStringPipesValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1561,7 +1358,7 @@ public class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringPipesValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> arrayStringPipesValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

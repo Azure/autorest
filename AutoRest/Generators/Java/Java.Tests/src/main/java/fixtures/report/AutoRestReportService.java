@@ -17,6 +17,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import java.util.Map;
 import retrofit.Call;
 import retrofit.http.GET;
@@ -62,7 +63,7 @@ public interface AutoRestReportService {
      * @return the Map&lt;String, Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Integer>> getReport() throws ServiceException;
+    ServiceResponse<Map<String, Integer>> getReport() throws ServiceException, IOException;
 
     /**
      * Get test coverage report

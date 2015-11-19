@@ -1,9 +1,9 @@
 package fixtures.bodydictionary;
 
-import com.microsoft.rest.ServiceException;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.microsoft.rest.DateTimeRfc1123;
-import fixtures.bodydictionary.AutoRestSwaggerBATdictionaryService;
-import fixtures.bodydictionary.AutoRestSwaggerBATdictionaryServiceImpl;
 import fixtures.bodydictionary.models.Widget;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -13,7 +13,10 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.fail;
 
@@ -35,9 +38,9 @@ public class DictionaryTests {
         try {
             client.getDictionary().getInvalid();
             fail();
-        } catch (ServiceException exception) {
+        } catch (JsonParseException exception) {
             // expected
-            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
+            Assert.assertTrue(exception.getMessage().contains("Unexpected character (','"));
         }
     }
 
@@ -63,9 +66,9 @@ public class DictionaryTests {
         try {
             client.getDictionary().getNullKey();
             fail();
-        } catch (ServiceException exception) {
+        } catch (JsonParseException exception) {
             // expected
-            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
+            Assert.assertTrue(exception.getMessage().contains("Unexpected character ('n'"));
         }
     }
 
@@ -106,9 +109,9 @@ public class DictionaryTests {
     public void getBooleanInvalidString() throws Exception {
         try {
             Map<String, Boolean> result = client.getDictionary().getBooleanInvalidString().getBody();
-        } catch (ServiceException ex) {
+        } catch (InvalidFormatException ex) {
             // expected
-            Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
+            Assert.assertTrue(ex.getMessage().contains("only \"true\" or \"false\" recognized"));
         }
     }
 
@@ -144,9 +147,9 @@ public class DictionaryTests {
         try {
             Map<String, Integer> result = client.getDictionary().getIntInvalidString().getBody();
             fail();
-        } catch (ServiceException ex) {
+        } catch (InvalidFormatException ex) {
             // expected
-            Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
+            Assert.assertTrue(ex.getMessage().contains("not a valid Integer value"));
         }
     }
 
@@ -182,9 +185,9 @@ public class DictionaryTests {
         try {
             Map<String, Long> result = client.getDictionary().getLongInvalidString().getBody();
             fail();
-        } catch (ServiceException ex) {
+        } catch (InvalidFormatException ex) {
             // expected
-            Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
+            Assert.assertTrue(ex.getMessage().contains("not a valid Long value"));
         }
     }
 
@@ -218,9 +221,9 @@ public class DictionaryTests {
         try {
             Map<String, Double> result = client.getDictionary().getFloatInvalidString().getBody();
             fail();
-        } catch (ServiceException ex) {
+        } catch (InvalidFormatException ex) {
             // expected
-            Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
+            Assert.assertTrue(ex.getMessage().contains("not a valid Double value"));
         }
     }
 
@@ -255,9 +258,9 @@ public class DictionaryTests {
         try {
             Map<String, Double> result = client.getDictionary().getDoubleInvalidString().getBody();
             fail();
-        } catch (ServiceException ex) {
+        } catch (InvalidFormatException ex) {
             // expected
-            Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
+            Assert.assertTrue(ex.getMessage().contains("not a valid Double value"));
         }
     }
 
@@ -322,9 +325,9 @@ public class DictionaryTests {
         try {
             Map<String, LocalDate> result = client.getDictionary().getDateInvalidChars().getBody();
             fail();
-        } catch (ServiceException ex) {
+        } catch (JsonMappingException ex) {
             // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
+            Assert.assertTrue(ex.getMessage().contains("Invalid format: \"date\""));
         }
     }
 
@@ -360,9 +363,9 @@ public class DictionaryTests {
         try {
             Map<String, DateTime> result = client.getDictionary().getDateTimeInvalidChars().getBody();
             fail();
-        } catch (ServiceException ex) {
+        } catch (JsonMappingException ex) {
             // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
+            Assert.assertTrue(ex.getMessage().contains("Invalid format: \"date-time\""));
         }
     }
 

@@ -18,6 +18,7 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.Error;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -37,15 +38,9 @@ public class HttpFailureImpl implements HttpFailure {
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Boolean> getEmptyError() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getEmptyError();
-            return getEmptyErrorDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Boolean> getEmptyError() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getEmptyError();
+        return getEmptyErrorDelegate(call.execute(), null);
     }
 
     /**
@@ -60,7 +55,7 @@ public class HttpFailureImpl implements HttpFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getEmptyErrorDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -68,7 +63,7 @@ public class HttpFailureImpl implements HttpFailure {
         return call;
     }
 
-    private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Boolean>()
                 .register(200, new TypeToken<Boolean>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

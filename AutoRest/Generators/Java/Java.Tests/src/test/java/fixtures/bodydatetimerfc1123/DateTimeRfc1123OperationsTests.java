@@ -1,6 +1,6 @@
 package fixtures.bodydatetimerfc1123;
 
-import com.microsoft.rest.ServiceException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.microsoft.rest.DateTimeRfc1123;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -28,8 +28,7 @@ public class DateTimeRfc1123OperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("Invalid format"));
+            Assert.assertEquals(JsonMappingException.class, exception.getClass());
         }
     }
 
@@ -48,8 +47,7 @@ public class DateTimeRfc1123OperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("Cannot parse"));
+            Assert.assertEquals(JsonMappingException.class, exception.getClass());
         }
     }
 

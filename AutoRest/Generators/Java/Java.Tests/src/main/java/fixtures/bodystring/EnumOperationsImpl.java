@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.Error;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -38,15 +39,9 @@ public class EnumOperationsImpl implements EnumOperations {
      * @return the Colors object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Colors> getNotExpandable() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getNotExpandable();
-            return getNotExpandableDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Colors> getNotExpandable() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getNotExpandable();
+        return getNotExpandableDelegate(call.execute(), null);
     }
 
     /**
@@ -61,7 +56,7 @@ public class EnumOperationsImpl implements EnumOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNotExpandableDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -69,7 +64,7 @@ public class EnumOperationsImpl implements EnumOperations {
         return call;
     }
 
-    private ServiceResponse<Colors> getNotExpandableDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Colors> getNotExpandableDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Colors>()
                 .register(200, new TypeToken<Colors>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -82,19 +77,13 @@ public class EnumOperationsImpl implements EnumOperations {
      * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putNotExpandable(Colors stringBody) throws ServiceException {
+    public ServiceResponse<Void> putNotExpandable(Colors stringBody) throws ServiceException, IOException {
         if (stringBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
         }
-        try {
-            Call<ResponseBody> call = service.putNotExpandable(stringBody);
-            return putNotExpandableDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putNotExpandable(stringBody);
+        return putNotExpandableDelegate(call.execute(), null);
     }
 
     /**
@@ -115,7 +104,7 @@ public class EnumOperationsImpl implements EnumOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putNotExpandableDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -123,7 +112,7 @@ public class EnumOperationsImpl implements EnumOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putNotExpandableDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putNotExpandableDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

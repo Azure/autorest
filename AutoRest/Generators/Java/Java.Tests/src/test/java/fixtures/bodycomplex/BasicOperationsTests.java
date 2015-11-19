@@ -1,8 +1,6 @@
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.ServiceException;
-import fixtures.bodyboolean.AutoRestBoolTestService;
-import fixtures.bodyboolean.AutoRestBoolTestServiceImpl;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import fixtures.bodycomplex.models.Basic;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -40,8 +38,7 @@ public class BasicOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("InvalidFormatException"));
+            Assert.assertEquals(InvalidFormatException.class, exception.getClass());
         }
     }
 

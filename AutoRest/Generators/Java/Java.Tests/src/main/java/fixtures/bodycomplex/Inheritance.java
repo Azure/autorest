@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Siamese;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -40,10 +41,11 @@ public interface Inheritance {
     /**
      * Get complex types that extend others
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Siamese object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Siamese> getValid() throws ServiceException;
+    ServiceResponse<Siamese> getValid() throws ServiceException, IOException;
 
     /**
      * Get complex types that extend others
@@ -57,10 +59,11 @@ public interface Inheritance {
      * Put complex types that extend others
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putValid(Siamese complexBody) throws ServiceException;
+    ServiceResponse<Void> putValid(Siamese complexBody) throws ServiceException, IOException;
 
     /**
      * Put complex types that extend others
