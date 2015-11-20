@@ -5,8 +5,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>312b07bc-a830-4289-91b4-c53a2ec37d58</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>AcceptanceTests\acceptance_tests.py</StartupFile>
-    <SearchPath></SearchPath>
+    <StartupFile>AcceptanceTests\__init__.py</StartupFile>
+    <SearchPath>..\..\..\..\ClientRuntimes\Python\msrest\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>Python.Tests</Name>
@@ -22,6 +22,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AcceptanceTests\acceptance_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\dictionary_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\file_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\required_optional_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\url_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Expected\AcceptanceTests\**\*.py" />

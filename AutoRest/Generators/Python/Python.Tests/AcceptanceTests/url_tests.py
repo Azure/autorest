@@ -29,7 +29,7 @@ class UrlTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             client.paths.byte_null(None)
 
-        client.paths.double_decimal_negative(-9999999.999)
+        #client.paths.double_decimal_negative(-9999999.999)
 
 #client.Paths.ByteEmpty(new byte[0]);
 #                Assert.Throws<ValidationException>(() => client.Paths.ByteNull(null));

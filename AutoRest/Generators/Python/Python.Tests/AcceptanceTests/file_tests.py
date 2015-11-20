@@ -5,9 +5,11 @@ import isodate
 import tempfile
 from datetime import date, datetime, timedelta
 import os
-from os.path import dirname, realpath, sep, pardir
+from os.path import dirname, pardir, join, realpath
 
-sys.path.append(dirname(realpath(__file__)) + sep + pardir + sep + "Expected" + sep + "AcceptanceTests" + sep + "BodyFile")
+cwd = dirname(realpath(__file__))
+tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
+sys.path.append(join(tests, "BodyFile"))
 
 from msrest.exceptions import DeserializationError
 
@@ -15,27 +17,8 @@ from auto_rest_swagger_bat_file_service import AutoRestSwaggerBATFileService, Au
 from auto_rest_swagger_bat_file_service.models import ErrorException
 
 
-def sort_test(_, x, y):
-
-    if x == 'test_ensure_coverage' :
-        return 1
-    if y == 'test_ensure_coverage' :
-        return -1
-    return (x > y) - (x < y)
-
-unittest.TestLoader.sortTestMethodsUsing = sort_test
-
 class FileTests(unittest.TestCase):
 
-    #@classmethod
-    #def setUpClass(cls):
-
-    #    cls.server = subprocess.Popen("node ../../../../AutoRest/TestServer/server/startup/www.js")
-
-    #@classmethod
-    #def tearDownClass(cls):
-
-    #    cls.server.kill()
     def test_files(self):
 
         config = AutoRestSwaggerBATFileServiceConfiguration("http://localhost:3000")
@@ -54,9 +37,9 @@ class FileTests(unittest.TestCase):
 
             self.assertNotEqual(file_length, 0)
 
-        sample_file = dirname(realpath(__file__)) + sep + pardir + sep + \
-            pardir + sep + pardir + sep + "NodeJS" + sep + "NodeJS.Tests"\
-            + sep + "AcceptanceTests" + sep + "sample.png"
+        sample_file = realpath(
+            join(cwd, pardir, pardir, pardir, "NodeJS", 
+                 "NodeJS.Tests", "AcceptanceTests", "sample.png"))
 
         with open(sample_file, 'rb') as data:
             sample_data = hash(data.read())
@@ -81,31 +64,6 @@ class FileTests(unittest.TestCase):
 
         os.remove(temp_file)
             
-        #[Fact]
-        #public void FileTests()
-        #{
-        #    SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
-        #        SwaggerPath("body-file.json"), ExpectedPath("BodyFile"));
-        #    using (var client = new AutoRestSwaggerBATFileService(Fixture.Uri))
-        #    {
-        #        var stream = client.Files.GetFile();
-        #        Assert.NotEqual(0, stream.Length);
-        #        byte[] buffer = new byte[16 * 1024];
-        #        using (MemoryStream ms = new MemoryStream())
-        #        {
-        #            int read;
-        #            while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
-        #            {
-        #                ms.Write(buffer, 0, read);
-        #            }
-        #            Assert.Equal(File.ReadAllBytes("sample.png"), ms.ToArray());
-        #        }
-
-        #        var emptyStream = client.Files.GetEmptyFile();
-        #        Assert.Equal(0, emptyStream.Length);
-        #    }
-        #}
-
 
 if __name__ == '__main__':
     unittest.main()
