@@ -40,8 +40,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// Initializes a new instance of the class RubyCodeGenerator.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        public RubyCodeGenerator(Settings settings)
-            : base(settings)
+        public RubyCodeGenerator(Settings settings) : base(settings)
         {
             codeNamer = new RubyCodeNamer();
 

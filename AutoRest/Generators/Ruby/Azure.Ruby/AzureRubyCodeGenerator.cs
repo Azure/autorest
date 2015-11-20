@@ -20,8 +20,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// Initializes a new instance of the class AzureRubyCodeGenerator.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        public AzureRubyCodeGenerator(Settings settings)
-            : base(settings)
+        public AzureRubyCodeGenerator(Settings settings) : base(settings)
         {
         }
 
