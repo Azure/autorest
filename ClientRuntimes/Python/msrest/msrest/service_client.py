@@ -157,7 +157,6 @@ class ServiceClient(object):
                     allow_redirects=bool(self.config.redirect_policy),
                     **kwargs)
 
-                response.raise_for_status()
                 return response
 
             except (oauth2.rfc6749.errors.InvalidGrantError,
@@ -176,7 +175,6 @@ class ServiceClient(object):
                     allow_redirects=bool(self.config.redirect_policy),
                     **kwargs)
 
-                response.raise_for_status()
                 return response
 
             except (oauth2.rfc6749.errors.InvalidGrantError,

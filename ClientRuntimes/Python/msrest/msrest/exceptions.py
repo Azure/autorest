@@ -26,6 +26,7 @@
 
 import sys
 from . import logger
+from requests import RequestException
 
 
 def raise_with_traceback(exception, message="", *args):
@@ -74,7 +75,22 @@ class AuthenticationError(ClientException):
 
 class HttpOperationError(ClientException):
 
+    def __str__(self):
+        return str(self.error)
+
     def __init__(self, deserialize, response, resp_type, *args):
 
-        self.error = deserialize(resp_type, response)
+        self.error = None
+        try:
+            self.error = deserialize(resp_type, response)
+
+        except DeserializationError:
+            pass
+        
+        try:
+            response.raise_for_status()
+
+        except RequestException as err:
+            self.error = err
+
         super(HttpOperationError, self).__init__(str(self.error), *args)
