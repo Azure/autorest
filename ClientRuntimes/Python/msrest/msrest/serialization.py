@@ -152,13 +152,16 @@ class Serializer(object):
 
     def __call__(self, target_obj, data_type=None, **kwargs):
 
+        if target_obj is None:
+            return None
+
         serialized = {}
         attr_name = None
         class_name = target_obj.__class__.__name__
 
         if data_type:
             return self.serialize_data(
-                target_obj, data_type, required=True, **kwargs)
+                target_obj, data_type, **kwargs) #required=True
 
         if not hasattr(target_obj, "_attribute_map"):
             data_type = type(target_obj).__name__
@@ -271,6 +274,7 @@ class Serializer(object):
     @staticmethod
     def serialize_bytearray(attr, char="\"", **kwargs):
         return char + b64encode(attr) + char
+        #return b64encode(attr)
 
     @staticmethod
     def serialize_decimal(attr, **kwargs):
