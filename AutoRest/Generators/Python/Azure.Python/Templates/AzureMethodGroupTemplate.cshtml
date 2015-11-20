@@ -17,13 +17,10 @@ import sys
 @:from datetime import *
 }
 @EmptyLine
-from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
+from msrest.service_client import async_request
 from msrest.exceptions import (
-    SerializationError,
     DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
     HttpOperationError)
 import uuid
 @EmptyLine
@@ -43,7 +40,7 @@ class @(Model.MethodGroupType)(object):
     def _parse_url(self, name, value, datatype):
 @EmptyLine
         try:
-            value = self._serialize.serialize_data(value, str(datatype))
+            value = self._serialize.serialize_data(value, datatype)
 @EmptyLine
         except ValueError:
             raise ValueError("{} must not be None.".format(name))

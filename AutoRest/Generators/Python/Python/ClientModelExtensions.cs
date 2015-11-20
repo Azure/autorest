@@ -52,7 +52,7 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             }
 
             return string.Format(CultureInfo.InvariantCulture,
-                "Serialized.serializeObject({0}, '{1}', '{2}')", parameter.Name, "[str]", parameter.CollectionFormat.GetSeparator());
+                "self._serialize.serialize_data({0}, '{1}', '{2}')", parameter.Name, "[str]", parameter.CollectionFormat.GetSeparator());
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
         public static string ToString(this IType type, string reference)
         {
             return string.Format(CultureInfo.InvariantCulture,
-                "Serialized.serializeObject({0}, '{1}')", reference, type.ToPythonRuntimeTypeString());
+                "self._serialize.serialize_data({0}, '{1}')", reference, type.ToPythonRuntimeTypeString());
         }
 
         /// <summary>

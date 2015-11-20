@@ -58,7 +58,6 @@
         @(Model.BuildHeaders("headers"))
         @(Model.SetDefaultHeaders)
         headers['Content-Type'] = '@(Model.ContentType)'
-@* Add Credentials *@
 @EmptyLine
 @if (Model.RequestBody != null)
 {

@@ -9,7 +9,7 @@
 # --------------------------------------------------------------------------
 
 
-from msrest.service_client import ServiceClient, async_request
+from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.xms_client_request_id_operations import xms_client_request_idOperations
 from .operations.subscription_in_credentials_operations import subscription_in_credentialsOperations
@@ -32,6 +32,11 @@ class AutoRestAzureSpecialParametersTestClientConfiguration(Configuration):
 
         self.credentials = credentials
         self.subscription_id = subscription_id
+
+        if self.api_version is None:
+            self.api_version = '2015-07-01-preview'
+        if self.accept_language is None:
+            self.accept_language = 'en-US'
 
 
 class AutoRestAzureSpecialParametersTestClient(object):

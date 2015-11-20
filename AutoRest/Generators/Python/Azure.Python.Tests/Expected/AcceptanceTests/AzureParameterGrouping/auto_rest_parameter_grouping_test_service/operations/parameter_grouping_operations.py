@@ -11,13 +11,10 @@
 import sys
 
 
-from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
+from msrest.service_client import async_request
 from msrest.exceptions import (
-    SerializationError,
     DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
     HttpOperationError)
 import uuid
 
@@ -37,7 +34,7 @@ class parameter_groupingOperations(object):
     def _parse_url(self, name, value, datatype):
 
         try:
-            value = self._serialize.serialize_data(value, str(datatype))
+            value = self._serialize.serialize_data(value, datatype)
 
         except ValueError:
             raise ValueError("{} must not be None.".format(name))
@@ -49,12 +46,12 @@ class parameter_groupingOperations(object):
             return value
 
     @async_request
-    def post_required(self, parameter_groupingpost_required_parameters, custom_headers={}, raw=False, callback=None):
+    def post_required(self, parameter_grouping_post_required_parameters, custom_headers={}, raw=False, callback=None):
         """
 
         Post a bunch of required parameters grouped
 
-        :param parameter_groupingpost_required_parameters: Additional
+        :param parameter_grouping_post_required_parameters: Additional
         parameters for the operation
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
@@ -62,7 +59,7 @@ class parameter_groupingOperations(object):
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type parameter_groupingpost_required_parameters: object
+        :type parameter_grouping_post_required_parameters: object
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -70,17 +67,17 @@ class parameter_groupingOperations(object):
         """
 
         body = None
-        if parameter_groupingpost_required_parameters is not None:
-            body = parameter_groupingpost_required_parameters.body
+        if parameter_grouping_post_required_parameters is not None:
+            body = parameter_grouping_post_required_parameters.body
         custom_header = None
-        if parameter_groupingpost_required_parameters is not None:
-            custom_header = parameter_groupingpost_required_parameters.custom_header
+        if parameter_grouping_post_required_parameters is not None:
+            custom_header = parameter_grouping_post_required_parameters.custom_header
         query = None
-        if parameter_groupingpost_required_parameters is not None:
-            query = parameter_groupingpost_required_parameters.query
+        if parameter_grouping_post_required_parameters is not None:
+            query = parameter_grouping_post_required_parameters.query
         path = None
-        if parameter_groupingpost_required_parameters is not None:
-            path = parameter_groupingpost_required_parameters.path
+        if parameter_grouping_post_required_parameters is not None:
+            path = parameter_grouping_post_required_parameters.path
 
         # Construct URL
         url = '/parameterGrouping/postRequired/{path}'
@@ -95,17 +92,20 @@ class parameter_groupingOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         if custom_header is not None:
-            headers['customHeader'] = Serialized.serializeObject(custom_header, 'str')
+            headers['customHeader'] = self._serialize.serialize_data(custom_header, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
+        # Construct body
+        content = self._serialize(body, 'int')
+
         # Construct and send request
         request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        response = self._client.send(request, headers, content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -114,12 +114,12 @@ class parameter_groupingOperations(object):
             return None, response
 
     @async_request
-    def post_optional(self, parameter_groupingpost_optional_parameters, custom_headers={}, raw=False, callback=None):
+    def post_optional(self, parameter_grouping_post_optional_parameters, custom_headers={}, raw=False, callback=None):
         """
 
         Post a bunch of optional parameters grouped
 
-        :param parameter_groupingpost_optional_parameters: Additional
+        :param parameter_grouping_post_optional_parameters: Additional
         parameters for the operation
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
@@ -127,7 +127,7 @@ class parameter_groupingOperations(object):
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type parameter_groupingpost_optional_parameters: object or none
+        :type parameter_grouping_post_optional_parameters: object or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -135,11 +135,11 @@ class parameter_groupingOperations(object):
         """
 
         custom_header = None
-        if parameter_groupingpost_optional_parameters is not None:
-            custom_header = parameter_groupingpost_optional_parameters.custom_header
+        if parameter_grouping_post_optional_parameters is not None:
+            custom_header = parameter_grouping_post_optional_parameters.custom_header
         query = None
-        if parameter_groupingpost_optional_parameters is not None:
-            query = parameter_groupingpost_optional_parameters.query
+        if parameter_grouping_post_optional_parameters is not None:
+            query = parameter_grouping_post_optional_parameters.query
 
         # Construct URL
         url = '/parameterGrouping/postOptional'
@@ -151,10 +151,10 @@ class parameter_groupingOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         if custom_header is not None:
-            headers['customHeader'] = Serialized.serializeObject(custom_header, 'str')
+            headers['customHeader'] = self._serialize.serialize_data(custom_header, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -170,14 +170,14 @@ class parameter_groupingOperations(object):
             return None, response
 
     @async_request
-    def post_multiple_parameter_groups(self, firstparametergroup, parameter_groupingpost_multiple_parameter_groupssecondparametergroup, custom_headers={}, raw=False, callback=None):
+    def post_multiple_parameter_groups(self, first_parameter_group, parameter_grouping_post_multiple_parameter_groups_second_parameter_group, custom_headers={}, raw=False, callback=None):
         """
 
         Post parameters from multiple different parameter groups
 
-        :param firstparametergroup: Additional parameters for the operation
+        :param first_parameter_group: Additional parameters for the operation
         :param
-        parameter_groupingpost_multiple_parameter_groupssecondparametergroup:
+        parameter_grouping_post_multiple_parameter_groups_second_parameter_group:
         Additional parameters for the operation
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
@@ -185,9 +185,9 @@ class parameter_groupingOperations(object):
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type firstparametergroup: object or none
+        :type first_parameter_group: object or none
         :type
-        parameter_groupingpost_multiple_parameter_groupssecondparametergroup:
+        parameter_grouping_post_multiple_parameter_groups_second_parameter_group:
         object or none
         :type custom_headers: dict
         :type raw: boolean
@@ -195,37 +195,37 @@ class parameter_groupingOperations(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        headerone = None
-        if firstparametergroup is not None:
-            headerone = firstparametergroup.headerone
-        queryone = None
-        if firstparametergroup is not None:
-            queryone = firstparametergroup.queryone
-        headertwo = None
-        if parameter_groupingpost_multiple_parameter_groupssecondparametergroup is not None:
-            headertwo = parameter_groupingpost_multiple_parameter_groupssecondparametergroup.headertwo
-        querytwo = None
-        if parameter_groupingpost_multiple_parameter_groupssecondparametergroup is not None:
-            querytwo = parameter_groupingpost_multiple_parameter_groupssecondparametergroup.querytwo
+        header_one = None
+        if first_parameter_group is not None:
+            header_one = first_parameter_group.header_one
+        query_one = None
+        if first_parameter_group is not None:
+            query_one = first_parameter_group.query_one
+        header_two = None
+        if parameter_grouping_post_multiple_parameter_groups_second_parameter_group is not None:
+            header_two = parameter_grouping_post_multiple_parameter_groups_second_parameter_group.header_two
+        query_two = None
+        if parameter_grouping_post_multiple_parameter_groups_second_parameter_group is not None:
+            query_two = parameter_grouping_post_multiple_parameter_groups_second_parameter_group.query_two
 
         # Construct URL
         url = '/parameterGrouping/postMultipleParameterGroups'
 
         # Construct parameters
         query = {}
-        if queryone is not None:
-            query['query-one'] = self._parse_url("queryone", queryone, 'int', False)
-        if querytwo is not None:
-            query['query-two'] = self._parse_url("querytwo", querytwo, 'int', False)
+        if query_one is not None:
+            query['query-one'] = self._parse_url("query_one", query_one, 'int', False)
+        if query_two is not None:
+            query['query-two'] = self._parse_url("query_two", query_two, 'int', False)
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
-        if headerone is not None:
-            headers['header-one'] = Serialized.serializeObject(headerone, 'str')
-        if headertwo is not None:
-            headers['header-two'] = Serialized.serializeObject(headertwo, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
+        if header_one is not None:
+            headers['header-one'] = self._serialize.serialize_data(header_one, 'str')
+        if header_two is not None:
+            headers['header-two'] = self._serialize.serialize_data(header_two, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -241,46 +241,46 @@ class parameter_groupingOperations(object):
             return None, response
 
     @async_request
-    def post_shared_parameter_group_object(self, firstparametergroup, custom_headers={}, raw=False, callback=None):
+    def post_shared_parameter_group_object(self, first_parameter_group, custom_headers={}, raw=False, callback=None):
         """
 
         Post parameters with a shared parameter group object
 
-        :param firstparametergroup: Additional parameters for the operation
+        :param first_parameter_group: Additional parameters for the operation
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type firstparametergroup: object or none
+        :type first_parameter_group: object or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        headerone = None
-        if firstparametergroup is not None:
-            headerone = firstparametergroup.headerone
-        queryone = None
-        if firstparametergroup is not None:
-            queryone = firstparametergroup.queryone
+        header_one = None
+        if first_parameter_group is not None:
+            header_one = first_parameter_group.header_one
+        query_one = None
+        if first_parameter_group is not None:
+            query_one = first_parameter_group.query_one
 
         # Construct URL
         url = '/parameterGrouping/sharedParameterGroupObject'
 
         # Construct parameters
         query = {}
-        if queryone is not None:
-            query['query-one'] = self._parse_url("queryone", queryone, 'int', False)
+        if query_one is not None:
+            query['query-one'] = self._parse_url("query_one", query_one, 'int', False)
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
-        if headerone is not None:
-            headers['header-one'] = Serialized.serializeObject(headerone, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
+        if header_one is not None:
+            headers['header-one'] = self._serialize.serialize_data(header_one, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'

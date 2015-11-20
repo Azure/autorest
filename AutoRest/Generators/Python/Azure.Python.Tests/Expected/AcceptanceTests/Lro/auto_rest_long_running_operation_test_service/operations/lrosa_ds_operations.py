@@ -11,13 +11,10 @@
 import sys
 
 
-from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
+from msrest.service_client import async_request
 from msrest.exceptions import (
-    SerializationError,
     DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
     HttpOperationError)
 import uuid
 
@@ -37,7 +34,7 @@ class lrosa_dsOperations(object):
     def _parse_url(self, name, value, datatype):
 
         try:
-            value = self._serialize.serialize_data(value, str(datatype))
+            value = self._serialize.serialize_data(value, datatype)
 
         except ValueError:
             raise ValueError("{} must not be None.".format(name))
@@ -77,8 +74,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -134,8 +131,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -192,8 +189,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -250,8 +247,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -309,8 +306,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -366,8 +363,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -418,8 +415,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -460,8 +457,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -503,8 +500,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -546,8 +543,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -590,8 +587,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -634,8 +631,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -678,8 +675,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -725,8 +722,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -772,8 +769,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -819,8 +816,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -868,8 +865,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -917,8 +914,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -966,8 +963,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1024,8 +1021,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1084,8 +1081,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1142,8 +1139,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1200,8 +1197,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1258,8 +1255,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1311,8 +1308,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1354,8 +1351,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1398,8 +1395,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1442,8 +1439,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1487,8 +1484,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1535,8 +1532,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1585,8 +1582,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1635,8 +1632,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1684,8 +1681,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1740,8 +1737,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1797,8 +1794,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1854,8 +1851,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1912,8 +1909,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1970,8 +1967,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -2024,8 +2021,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -2068,8 +2065,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -2112,8 +2109,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -2156,8 +2153,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -2200,8 +2197,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -2244,8 +2241,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -2289,8 +2286,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -2337,8 +2334,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -2386,8 +2383,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -2435,8 +2432,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -2485,8 +2482,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -2535,8 +2532,8 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'

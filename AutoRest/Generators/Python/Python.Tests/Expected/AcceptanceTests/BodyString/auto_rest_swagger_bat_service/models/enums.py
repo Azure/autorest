@@ -14,5 +14,5 @@ from enum import Enum
 class Colors(Enum):
 
     redcolor = "red color"
-    greencolor = "green-color"
+    green_color = "green-color"
     blue_color = "blue_color"

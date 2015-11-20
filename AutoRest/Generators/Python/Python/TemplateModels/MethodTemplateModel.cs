@@ -268,7 +268,10 @@ namespace Microsoft.Rest.Generator.Python
         /// </summary>
         public ParameterTemplateModel RequestBody
         {
-            get { return ParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.Body); }
+            get
+            {
+                return this.Body != null ? new ParameterTemplateModel(this.Body) : null;
+            }
         }
 
         public static string GetStatusCodeReference(HttpStatusCode code)

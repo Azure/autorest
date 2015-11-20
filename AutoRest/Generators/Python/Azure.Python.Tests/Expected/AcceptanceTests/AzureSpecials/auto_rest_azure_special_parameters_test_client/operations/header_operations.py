@@ -11,13 +11,10 @@
 import sys
 
 
-from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
+from msrest.service_client import async_request
 from msrest.exceptions import (
-    SerializationError,
     DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
     HttpOperationError)
 import uuid
 
@@ -37,7 +34,7 @@ class headerOperations(object):
     def _parse_url(self, name, value, datatype):
 
         try:
-            value = self._serialize.serialize_data(value, str(datatype))
+            value = self._serialize.serialize_data(value, datatype)
 
         except ValueError:
             raise ValueError("{} must not be None.".format(name))
@@ -49,20 +46,20 @@ class headerOperations(object):
             return value
 
     @async_request
-    def custom_named_request_id(self, fooclientrequestid, custom_headers={}, raw=False, callback=None):
+    def custom_named_request_id(self, foo_client_request_id, custom_headers={}, raw=False, callback=None):
         """
 
         Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in
         the header of the request
 
-        :param fooclientrequestid: The fooRequestId
+        :param foo_client_request_id: The fooRequestId
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type fooclientrequestid: str
+        :type foo_client_request_id: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -77,10 +74,10 @@ class headerOperations(object):
 
         # Construct headers
         headers = {}
-        if fooclientrequestid is not None:
-            headers['foo-client-request-id'] = Serialized.serializeObject(fooclientrequestid, 'str')
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
+        if foo_client_request_id is not None:
+            headers['foo-client-request-id'] = self._serialize.serialize_data(foo_client_request_id, 'str')
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['foo-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'

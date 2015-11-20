@@ -9,7 +9,7 @@
 # --------------------------------------------------------------------------
 
 
-from msrest.service_client import ServiceClient, async_request
+from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.group_operations import groupOperations
 from . import models
@@ -26,6 +26,11 @@ class MicrosoftAzureTestUrlConfiguration(Configuration):
 
         self.credentials = credentials
         self.subscription_id = subscription_id
+
+        if self.api_version is None:
+            self.api_version = '2014-04-01-preview'
+        if self.accept_language is None:
+            self.accept_language = 'en-US'
 
 
 class MicrosoftAzureTestUrl(object):

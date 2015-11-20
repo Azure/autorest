@@ -9,7 +9,7 @@
 # --------------------------------------------------------------------------
 
 
-from msrest.service_client import ServiceClient, async_request
+from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.http_failure import http_failure
 from .operations.http_success import http_success
