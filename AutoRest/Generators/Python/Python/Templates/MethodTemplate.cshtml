@@ -65,7 +65,6 @@
 @:        content = self._serialize(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
 @EmptyLine
 }
-@*stream handler*@
         # Construct and send request
         request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query)
 @if (Model.RequestBody != null)
@@ -82,19 +81,37 @@ else
 @EmptyLine
 @if (Model.HasAnyResponse)
 {
+  if (Model.IsResponseStream)
+  {
+<text>
+        def download_gen():
+            for data in response.iter_content(self.config.connection.data_block_size):
+                if not data:
+                    break
+@EmptyLine
+                yield data
+@EmptyLine
+        if raw:
+            return download_gen(), response
+@EmptyLine
+        return download_gen()
+</text>
+  }
+  else
+  {
         @:deserialized = None
 @EmptyLine
-  foreach (var responsePair in Model.Responses.Where(r => r.Value != null))
-  {
-@*stream handler*@
+    foreach (var responsePair in Model.Responses.Where(r => r.Value != null))
+    {
         @:if response.status_code == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key):
             @:deserialized = self._deserialize('@responsePair.Value.ToPythonRuntimeTypeString()', response)
-  }
+    }
 @EmptyLine
         @:if raw:
             @:return deserialized, response
 @EmptyLine
         @:return deserialized
+  }
 }
 else
 {

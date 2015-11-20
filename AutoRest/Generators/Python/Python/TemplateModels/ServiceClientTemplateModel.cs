@@ -80,23 +80,5 @@ namespace Microsoft.Rest.Generator.Python
                 return param;
             }
         }
-
-        public bool ContainsDecimal
-        {
-            get
-            {
-                return this.Methods.FirstOrDefault(
-                    m => m.Parameters.FirstOrDefault(p => p.Type == PrimaryType.Decimal) != null) != null;
-            }
-        }
-
-        public bool ContainsDateTime
-        {
-            get
-            {
-                return this.Methods.FirstOrDefault(
-                    m => m.Parameters.FirstOrDefault(p => ClientModelExtensions.PythonDateTimeModuleType.Contains(p.Type)) != null) != null;
-            }
-        }
     }
 }

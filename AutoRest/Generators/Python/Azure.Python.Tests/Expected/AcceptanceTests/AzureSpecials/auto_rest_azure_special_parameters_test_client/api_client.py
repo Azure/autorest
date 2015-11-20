@@ -8,7 +8,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.xms_client_request_id_operations import xms_client_request_idOperations

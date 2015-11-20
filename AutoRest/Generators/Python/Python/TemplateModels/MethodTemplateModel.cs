@@ -48,6 +48,10 @@ namespace Microsoft.Rest.Generator.Python
             get { return _scopeProvider; }
         }
 
+        public bool IsResponseStream
+        {
+            get { return this.ReturnType == PrimaryType.Stream; }
+        }
 
         /// <summary>
         /// Get the predicate to determine of the http operation status code indicates success

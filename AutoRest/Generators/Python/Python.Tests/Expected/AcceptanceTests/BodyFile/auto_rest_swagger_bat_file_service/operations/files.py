@@ -78,15 +78,17 @@ class files(object):
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
 
-        deserialized = None
+        def download_gen():
+            for data in response.iter_content(self.config.connection.data_block_size):
+                if not data:
+                    break
 
-        if response.status_code == 200:
-            deserialized = self._deserialize('Object', response)
+                yield data
 
         if raw:
-            return deserialized, response
+            return download_gen(), response
 
-        return deserialized
+        return download_gen()
 
     @async_request
     def get_empty_file(self, custom_headers={}, raw=False, callback=None):
@@ -125,12 +127,14 @@ class files(object):
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
 
-        deserialized = None
+        def download_gen():
+            for data in response.iter_content(self.config.connection.data_block_size):
+                if not data:
+                    break
 
-        if response.status_code == 200:
-            deserialized = self._deserialize('Object', response)
+                yield data
 
         if raw:
-            return deserialized, response
+            return download_gen(), response
 
-        return deserialized
+        return download_gen()
