@@ -8,10 +8,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-import sys
-
-from datetime import *
-
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
 from msrest.exceptions import (

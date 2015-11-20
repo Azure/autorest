@@ -228,20 +228,5 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             }
             return type.Name + "Exception";
         }
-
-        public static bool ContainsDateTime(this CompositeType type)
-        {
-            if (type == null)
-            {
-                throw new ArgumentNullException("type");
-            }
-
-            Property prop = type.Properties.FirstOrDefault(p =>
-                PythonDateTimeModuleType.Contains(p.Type) ||
-                (p.Type is SequenceType && PythonDateTimeModuleType.Contains((p.Type as SequenceType).ElementType)) ||
-                (p.Type is DictionaryType && PythonDateTimeModuleType.Contains((p.Type as DictionaryType).ValueType)));
-
-            return prop != null;
-        }
     }
 }

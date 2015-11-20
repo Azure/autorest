@@ -6,18 +6,6 @@
 @Header("# ")
 # --------------------------------------------------------------------------
 @EmptyLine
-@if (Model.ContainsDecimal)
-{
-@:from decimal import *
-}
-@if (Model.ContainsDateTime)
-{
-@:from datetime import *
-}
-@if (Model.ContainsDateTime || Model.ContainsDecimal)
-{
-@EmptyLine
-}
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
 from msrest.exceptions import (

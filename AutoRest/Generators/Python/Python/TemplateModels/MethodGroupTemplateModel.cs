@@ -27,33 +27,5 @@ namespace Microsoft.Rest.Generator.Python
         public string MethodGroupName { get; set; }
 
         public string MethodGroupType { get; set; }
-
-        public bool ContainsDecimal
-        {
-            get
-            {
-                Method method = this.MethodTemplateModels.FirstOrDefault(m => m.Parameters.FirstOrDefault(p =>
-                    p.Type == PrimaryType.Decimal ||
-                    (p.Type is SequenceType && (p.Type as SequenceType).ElementType == PrimaryType.Decimal) ||
-                    (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType == PrimaryType.Decimal) ||
-                    (p.Type is CompositeType && (p.Type as CompositeType).ContainsDecimal())) != null);
-                
-                return  method != null;
-            }
-        }
-
-        public bool ContainsDateTime
-        {
-            get
-            {
-                Method method = this.MethodTemplateModels.FirstOrDefault(m => m.Parameters.FirstOrDefault(p =>
-                    ClientModelExtensions.PythonDateTimeModuleType.Contains(p.Type) ||
-                    (p.Type is SequenceType && ClientModelExtensions.PythonDateTimeModuleType.Contains((p.Type as SequenceType).ElementType)) ||
-                    (p.Type is DictionaryType && ClientModelExtensions.PythonDateTimeModuleType.Contains((p.Type as DictionaryType).ValueType)) ||
-                    (p.Type is CompositeType && (p.Type as CompositeType).ContainsDecimal())) != null);
-
-                return method != null;
-            }
-        }
     }
 }

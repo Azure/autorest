@@ -8,7 +8,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.paging_operations import pagingOperations
