@@ -112,9 +112,9 @@ class DictionaryTests(unittest.TestCase):
         datetime1 = isodate.parse_datetime("2000-12-01T00:00:01Z")
         datetime2 = isodate.parse_datetime("1980-01-02T00:11:35+01:00")
         datetime3 = isodate.parse_datetime("1492-10-12T10:15:01-08:00")
-        rfc_datetime1 = isodate.parse_datetime("2000-12-01T00:00:01")
-        rfc_datetime2 = isodate.parse_datetime("1980-01-02T00:11:35")
-        rfc_datetime3 = isodate.parse_datetime("1492-10-12T10:15:01")        
+        rfc_datetime1 = isodate.parse_datetime("2000-12-01T00:00:01Z")
+        rfc_datetime2 = isodate.parse_datetime("1980-01-02T00:11:35Z")
+        rfc_datetime3 = isodate.parse_datetime("1492-10-12T10:15:01Z")        
         duration1 = timedelta(days=123, hours=22, minutes=14, seconds=12, milliseconds=11)
         duration2 = timedelta(days=5, hours=1)
        
@@ -162,18 +162,100 @@ class DictionaryTests(unittest.TestCase):
         client.dictionary.put_byte_valid(bytes_valid)
 
         bytes_result = client.dictionary.get_byte_valid()
-
-        for key,val in bytes_valid.items():
-            self.assertTrue(key in bytes_result)
-            self.assertEqual(val, bytes_result[key])
+        self.assertEqual(bytes_valid, bytes_result)
         
         bytes_null = {"0":bytes4, "1":None}
         bytes_result = client.dictionary.get_byte_invalid_null()
+        self.assertEqual(bytes_null, bytes_result)
 
-        for key,val in bytes_null.items():
-            self.assertTrue(key in bytes_result)
-            self.assertEqual(val, bytes_result[key])
+    def test_basic_dictionary_parsing(self):
+
+        config = AutoRestSwaggerBATdictionaryServiceConfiguration("http://localhost:3000")
+        config.log_level = 10
+        client = AutoRestSwaggerBATdictionaryService(config)
+
+        self.assertEqual({}, client.dictionary.get_empty())
         
+        client.dictionary.put_empty({})
+       
+        self.assertIsNone(client.dictionary.get_null())
+        
+        with self.assertRaises(DeserializationError):
+            client.dictionary.get_invalid()
+
+        # TODO
+        #self.assertEqual({"None":"val1"}, client.dictionary.get_null_key())
+        self.assertEqual({"key1":None}, client.dictionary.get_null_value())
+        self.assertEqual({"":"val1"}, client.dictionary.get_empty_string_key())    
+        
+    def test_dictionary_composed_types(self):
+
+        config = AutoRestSwaggerBATdictionaryServiceConfiguration("http://localhost:3000")
+        config.log_level = 10
+        client = AutoRestSwaggerBATdictionaryService(config)
+
+        test_product1 = Widget(integer=1, string="2")
+        test_product2 = Widget(integer=3, string="4")
+        test_product3 = Widget(integer=5, string="6")
+        test_dict = {"0":test_product1, "1":test_product2, "2":test_product3}
+
+        self.assertIsNone(client.dictionary.get_complex_null())
+        self.assertEqual({}, client.dictionary.get_complex_empty())
+        
+        client.dictionary.put_complex_valid(test_dict)
+        complex_result = client.dictionary.get_complex_valid()
+        self.assertEqual(test_dict, complex_result)
+        
+        list_dict = {"0":["1","2","3"], "1":["4","5","6"], "2":["7","8","9"]}
+        client.dictionary.put_array_valid(list_dict)
+        
+        array_result = client.dictionary.get_array_valid()
+        self.assertEqual(list_dict, array_result)
+
+        dict_dict = {"0":{"1":"one","2":"two","3":"three"},
+                     "1":{"4":"four","5":"five","6":"six"},
+                     "2":{"7":"seven","8":"eight","9":"nine"}}
+        client.dictionary.put_dictionary_valid(dict_dict)
+        
+        dict_result = client.dictionary.get_dictionary_valid()
+        self.assertEqual(dict_dict, dict_result)
+
+        self.assertIsNone(client.dictionary.get_complex_null())
+        self.assertEqual({}, client.dictionary.get_complex_empty())
+
+        test_dict2 = {"0":test_product1, "1":None, "2":test_product3}
+        complex_result = client.dictionary.get_complex_item_null()
+        self.assertEqual(complex_result, test_dict2)
+
+        test_dict3 = {"0":test_product1, "1":Widget(), "2":test_product3}
+        complex_result = client.dictionary.get_complex_item_empty()
+        self.assertEqual(complex_result, test_dict3)
+
+        self.assertIsNone(client.dictionary.get_array_null())
+        self.assertEqual({}, client.dictionary.get_array_empty())
+        
+        list_dict = {"0":["1","2","3"], "1":None, "2":["7","8","9"]}
+        array_result = client.dictionary.get_array_item_null()
+        self.assertEqual(list_dict, array_result)
+
+        list_dict = {"0":["1","2","3"], "1":[], "2":["7","8","9"]}
+        array_result = client.dictionary.get_array_item_empty()
+        self.assertEqual(list_dict, array_result)
+
+        self.assertIsNone(client.dictionary.get_dictionary_null())
+        self.assertEqual({}, client.dictionary.get_dictionary_empty())
+        
+        dict_dict = {"0":{"1":"one","2":"two","3":"three"},
+                     "1":None,
+                     "2":{"7":"seven","8":"eight","9":"nine"}}
+        dict_result = client.dictionary.get_dictionary_item_null()
+        self.assertEqual(dict_dict, dict_result)
+
+        dict_dict = {"0":{"1":"one","2":"two","3":"three"},
+                     "1":{},
+                     "2":{"7":"seven","8":"eight","9":"nine"}}
+        dict_result = client.dictionary.get_dictionary_item_empty()
+        self.assertEqual(dict_dict, dict_result)
 
 
 if __name__ == '__main__':
