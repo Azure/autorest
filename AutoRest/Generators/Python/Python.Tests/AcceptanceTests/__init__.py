@@ -5,7 +5,12 @@ import subprocess
 from os.path import dirname, realpath
 from unittest import TestLoader, TextTestRunner
 
+from os.path import dirname, pardir, join, realpath
 
+cwd = dirname(realpath(__file__))
+root = realpath(join(cwd, pardir, pardir, pardir, pardir, pardir))
+runtime = join(root, "ClientRuntimes", "Python", "msrest")
+sys.path.append(runtime)
 
 
 def sort_test(x, y):
