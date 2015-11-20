@@ -258,7 +258,7 @@ class explicit(object):
         # Construct headers
         headers = {}
         if header_parameter is not None:
-            query['headerParameter'] = header_parameter
+            headers['headerParameter'] = header_parameter
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -302,7 +302,7 @@ class explicit(object):
         # Construct headers
         headers = {}
         if header_parameter is not None:
-            query['headerParameter'] = header_parameter
+            headers['headerParameter'] = header_parameter
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -530,7 +530,7 @@ class explicit(object):
         # Construct headers
         headers = {}
         if header_parameter is not None:
-            query['headerParameter'] = header_parameter
+            headers['headerParameter'] = header_parameter
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -574,7 +574,7 @@ class explicit(object):
         # Construct headers
         headers = {}
         if body_parameter is not None:
-            query['bodyParameter'] = body_parameter
+            headers['bodyParameter'] = body_parameter
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -984,7 +984,7 @@ class explicit(object):
         # Construct headers
         headers = {}
         if header_parameter is not None:
-            query['headerParameter'] = header_parameter
+            headers['headerParameter'] = header_parameter
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -1028,7 +1028,7 @@ class explicit(object):
         # Construct headers
         headers = {}
         if header_parameter is not None:
-            query['headerParameter'] = header_parameter
+            headers['headerParameter'] = header_parameter
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 

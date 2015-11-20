@@ -32,7 +32,10 @@ namespace Microsoft.Rest.Generator.Python
             {
                 OperationName = serviceClient.Name;
             }
+            AddCustomHeader = true;
         }
+
+        public bool AddCustomHeader { get; private set; }
 
         public string OperationName { get; set; }
 
@@ -184,7 +187,8 @@ namespace Microsoft.Rest.Generator.Python
                 builder.AppendLine("if {0} is not None:", headerParameter.Name)
                     .Indent()
                     .AppendLine("{0}['{1}'] = {2}", variableName,
-                        headerParameter.SerializedName, headerParameter.Type.ToString(headerParameter.Name));
+                        headerParameter.SerializedName, headerParameter.Type.ToString(headerParameter.Name))
+                    .Outdent();
             }
 
             return builder.ToString();
@@ -275,11 +279,21 @@ namespace Microsoft.Rest.Generator.Python
         /// <summary>
         /// Gets the expression for default header setting. 
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "customheaders")]
         public virtual string SetDefaultHeaders
         {
             get
             {
-                return string.Empty;
+                if (this.AddCustomHeader)
+                {
+                    var sb = new IndentedStringBuilder();
+                    sb.AppendLine("headers.update(custom_headers)");
+                    return sb.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
 

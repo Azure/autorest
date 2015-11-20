@@ -82,7 +82,7 @@ class subscription_in_methodOperations(object):
         # Construct headers
         headers = {}
         if self.config.acceptlanguage is not None:
-            query['accept-language'] = self.config.acceptlanguage
+            headers['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -132,7 +132,7 @@ class subscription_in_methodOperations(object):
         # Construct headers
         headers = {}
         if self.config.acceptlanguage is not None:
-            query['accept-language'] = self.config.acceptlanguage
+            headers['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -181,7 +181,7 @@ class subscription_in_methodOperations(object):
         # Construct headers
         headers = {}
         if self.config.acceptlanguage is not None:
-            query['accept-language'] = self.config.acceptlanguage
+            headers['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -230,7 +230,7 @@ class subscription_in_methodOperations(object):
         # Construct headers
         headers = {}
         if self.config.acceptlanguage is not None:
-            query['accept-language'] = self.config.acceptlanguage
+            headers['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'

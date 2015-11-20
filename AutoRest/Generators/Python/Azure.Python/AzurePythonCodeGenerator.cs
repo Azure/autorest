@@ -27,6 +27,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             : base(settings)
         {
             pageModels = new List<PageTemplateModel>();
+            Namer = new AzurePythonCodeNamer();
         }
 
         public override string Name
@@ -55,10 +56,17 @@ namespace Microsoft.Rest.Generator.Azure.Python
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
-            Namer.NormalizeClientModel(serviceClient);
-            Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
-                Settings.Namespace + "_models");
+            // Don't add pagable method since we already handle ourself.
+            Settings.AddCredentials = true;
+            AzureExtensions.UpdateHeadMethods(serviceClient);
+            AzureExtensions.ParseODataExtension(serviceClient);
+            AzureExtensions.FlattenResourceProperties(serviceClient);
+            AzureExtensions.AddLongRunningOperations(serviceClient);
+            AzureExtensions.AddAzureProperties(serviceClient);
+            AzureExtensions.SetDefaultResponses(serviceClient);
+            AzureExtensions.AddParameterGroups(serviceClient);
+
+            base.NormalizeClientModel(serviceClient);
             NormalizePaginatedMethods(serviceClient);
 
             if (serviceClient != null)

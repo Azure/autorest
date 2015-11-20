@@ -24,7 +24,7 @@ import uuid
 from ..models import *
 
 
-class usageOperationsOperations(object):
+class usageOperations(object):
 
     def __init__(self, client, config, serializer, derserializer):
 
@@ -82,7 +82,7 @@ class usageOperationsOperations(object):
         # Construct headers
         headers = {}
         if self.config.acceptlanguage is not None:
-            query['accept-language'] = self.config.acceptlanguage
+            headers['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'

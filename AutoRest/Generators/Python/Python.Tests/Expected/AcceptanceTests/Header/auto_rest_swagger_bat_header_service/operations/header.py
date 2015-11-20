@@ -76,7 +76,7 @@ class header(object):
         # Construct headers
         headers = {}
         if user_agent is not None:
-            query['User-Agent'] = user_agent
+            headers['User-Agent'] = user_agent
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -159,7 +159,7 @@ class header(object):
         # Construct headers
         headers = {}
         if content_type is not None:
-            query['Content-Type'] = content_type
+            headers['Content-Type'] = content_type
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -245,9 +245,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
-            if value is not None:
-                query['value'] = value
+            headers['scenario'] = scenario
+        if value is not None:
+            headers['value'] = value
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -291,7 +291,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
+            headers['scenario'] = scenario
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -338,9 +338,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
-            if value is not None:
-                query['value'] = value
+            headers['scenario'] = scenario
+        if value is not None:
+            headers['value'] = value
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -384,7 +384,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
+            headers['scenario'] = scenario
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -431,9 +431,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
-            if value is not None:
-                query['value'] = value
+            headers['scenario'] = scenario
+        if value is not None:
+            headers['value'] = value
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -477,7 +477,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
+            headers['scenario'] = scenario
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -524,9 +524,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
-            if value is not None:
-                query['value'] = value
+            headers['scenario'] = scenario
+        if value is not None:
+            headers['value'] = value
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -570,7 +570,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
+            headers['scenario'] = scenario
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -617,9 +617,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
-            if value is not None:
-                query['value'] = value
+            headers['scenario'] = scenario
+        if value is not None:
+            headers['value'] = value
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -663,7 +663,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
+            headers['scenario'] = scenario
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -712,9 +712,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
-            if value is not None:
-                query['value'] = value
+            headers['scenario'] = scenario
+        if value is not None:
+            headers['value'] = value
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -759,7 +759,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
+            headers['scenario'] = scenario
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -807,9 +807,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
-            if value is not None:
-                query['value'] = Serialized.serializeObject(value, 'date')
+            headers['scenario'] = scenario
+        if value is not None:
+            headers['value'] = Serialized.serializeObject(value, 'date')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -853,7 +853,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
+            headers['scenario'] = scenario
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -902,9 +902,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
-            if value is not None:
-                query['value'] = Serialized.serializeObject(value, 'iso-8601')
+            headers['scenario'] = scenario
+        if value is not None:
+            headers['value'] = Serialized.serializeObject(value, 'iso-8601')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -949,7 +949,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
+            headers['scenario'] = scenario
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -998,9 +998,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
-            if value is not None:
-                query['value'] = Serialized.serializeObject(value, 'rfc-1123')
+            headers['scenario'] = scenario
+        if value is not None:
+            headers['value'] = Serialized.serializeObject(value, 'rfc-1123')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -1045,7 +1045,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
+            headers['scenario'] = scenario
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -1093,9 +1093,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
-            if value is not None:
-                query['value'] = Serialized.serializeObject(value, 'duration')
+            headers['scenario'] = scenario
+        if value is not None:
+            headers['value'] = Serialized.serializeObject(value, 'duration')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -1139,7 +1139,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
+            headers['scenario'] = scenario
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -1186,9 +1186,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
-            if value is not None:
-                query['value'] = value
+            headers['scenario'] = scenario
+        if value is not None:
+            headers['value'] = value
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -1232,7 +1232,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
+            headers['scenario'] = scenario
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -1280,9 +1280,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
-            if value is not None:
-                query['value'] = value
+            headers['scenario'] = scenario
+        if value is not None:
+            headers['value'] = value
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -1326,7 +1326,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            query['scenario'] = scenario
+            headers['scenario'] = scenario
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
