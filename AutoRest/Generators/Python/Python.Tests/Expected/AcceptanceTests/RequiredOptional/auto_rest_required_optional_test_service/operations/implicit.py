@@ -161,7 +161,7 @@ class implicit(object):
         # Construct headers
         headers = {}
         if query_parameter is not None:
-            query['queryParameter'] = query_parameter
+            headers['queryParameter'] = query_parameter
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 

@@ -83,9 +83,9 @@ class parameter_groupingOperations(object):
         # Construct headers
         headers = {}
         if self.config.acceptlanguage is not None:
-            query['accept-language'] = self.config.acceptlanguage
-            if custom_header is not None:
-                query['customHeader'] = custom_header
+            headers['accept-language'] = self.config.acceptlanguage
+        if custom_header is not None:
+            headers['customHeader'] = custom_header
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -132,9 +132,9 @@ class parameter_groupingOperations(object):
         # Construct headers
         headers = {}
         if self.config.acceptlanguage is not None:
-            query['accept-language'] = self.config.acceptlanguage
-            if custom_header is not None:
-                query['customHeader'] = custom_header
+            headers['accept-language'] = self.config.acceptlanguage
+        if custom_header is not None:
+            headers['customHeader'] = custom_header
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -188,11 +188,11 @@ class parameter_groupingOperations(object):
         # Construct headers
         headers = {}
         if self.config.acceptlanguage is not None:
-            query['accept-language'] = self.config.acceptlanguage
-            if headerone is not None:
-                query['header-one'] = headerone
-                if headertwo is not None:
-                    query['header-two'] = headertwo
+            headers['accept-language'] = self.config.acceptlanguage
+        if headerone is not None:
+            headers['header-one'] = headerone
+        if headertwo is not None:
+            headers['header-two'] = headertwo
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -238,9 +238,9 @@ class parameter_groupingOperations(object):
         # Construct headers
         headers = {}
         if self.config.acceptlanguage is not None:
-            query['accept-language'] = self.config.acceptlanguage
-            if headerone is not None:
-                query['header-one'] = headerone
+            headers['accept-language'] = self.config.acceptlanguage
+        if headerone is not None:
+            headers['header-one'] = headerone
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'

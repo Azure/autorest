@@ -27,6 +27,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             : base(settings)
         {
             pageModels = new List<PageTemplateModel>();
+            Namer = new AzurePythonCodeNamer();
         }
 
         public override string Name
@@ -56,9 +57,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
-            Namer.NormalizeClientModel(serviceClient);
-            Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
-                Settings.Namespace + "_models");
+            base.NormalizeClientModel(serviceClient);
             NormalizePaginatedMethods(serviceClient);
 
             if (serviceClient != null)

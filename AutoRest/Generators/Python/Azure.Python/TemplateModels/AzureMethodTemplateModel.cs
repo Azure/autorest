@@ -165,7 +165,8 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 builder.AppendLine("if {0} is not None:", headerParameter.Name)
                     .Indent()
                     .AppendLine("{0}['{1}'] = {2}", variableName,
-                        headerParameter.SerializedName, headerParameter.Type.ToString(headerParameter.Name));
+                        headerParameter.SerializedName, headerParameter.Type.ToString(headerParameter.Name))
+                    .Outdent();
             }
 
             return builder.ToString();
