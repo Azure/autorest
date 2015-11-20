@@ -27,10 +27,10 @@ class explicit(object):
 
         self.config = config
 
-    def _parse_url(self, name, value, datatype):
+    def _serialize_data(self, name, value, datatype, **kwargs):
 
         try:
-            value = self._serialize.serialize_data(value, datatype)
+            value = self._serialize.serialize_data(value, datatype, **kwargs)
 
         except ValueError:
             raise ValueError("{} must not be None.".format(name))
@@ -254,8 +254,7 @@ class explicit(object):
 
         # Construct headers
         headers = {}
-        if header_parameter is not None:
-            headers['headerParameter'] = self._serialize.serialize_data(header_parameter, 'int')
+        headers['headerParameter'] = self._serialize_data("header_parameter", header_parameter, 'int')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -299,7 +298,7 @@ class explicit(object):
         # Construct headers
         headers = {}
         if header_parameter is not None:
-            headers['headerParameter'] = self._serialize.serialize_data(header_parameter, 'int')
+            headers['headerParameter'] = self._serialize_data("header_parameter", header_parameter, 'int')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -526,8 +525,7 @@ class explicit(object):
 
         # Construct headers
         headers = {}
-        if header_parameter is not None:
-            headers['headerParameter'] = self._serialize.serialize_data(header_parameter, 'str')
+        headers['headerParameter'] = self._serialize_data("header_parameter", header_parameter, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -571,7 +569,7 @@ class explicit(object):
         # Construct headers
         headers = {}
         if body_parameter is not None:
-            headers['bodyParameter'] = self._serialize.serialize_data(body_parameter, 'str')
+            headers['bodyParameter'] = self._serialize_data("body_parameter", body_parameter, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -980,8 +978,7 @@ class explicit(object):
 
         # Construct headers
         headers = {}
-        if header_parameter is not None:
-            headers['headerParameter'] = self._serialize.serialize_data(header_parameter, '[str]', ',')
+        headers['headerParameter'] = self._serialize_data("header_parameter", header_parameter, '[str]', div=',')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -1025,7 +1022,7 @@ class explicit(object):
         # Construct headers
         headers = {}
         if header_parameter is not None:
-            headers['headerParameter'] = self._serialize.serialize_data(header_parameter, '[str]', ',')
+            headers['headerParameter'] = self._serialize_data("header_parameter", header_parameter, '[str]', div=',')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 

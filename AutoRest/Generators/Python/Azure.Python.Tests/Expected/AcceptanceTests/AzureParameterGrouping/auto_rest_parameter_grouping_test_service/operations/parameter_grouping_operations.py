@@ -8,9 +8,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-import sys
-
-
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
 from msrest.exceptions import (
@@ -31,10 +28,10 @@ class parameter_groupingOperations(object):
 
         self.config = config
 
-    def _parse_url(self, name, value, datatype):
+    def _serialize_data(self, name, value, datatype, **kwargs):
 
         try:
-            value = self._serialize.serialize_data(value, datatype)
+            value = self._serialize.serialize_data(value, datatype, **kwargs)
 
         except ValueError:
             raise ValueError("{} must not be None.".format(name))
@@ -82,20 +79,21 @@ class parameter_groupingOperations(object):
         # Construct URL
         url = '/parameterGrouping/postRequired/{path}'
         path_format_arguments = {
-            'path': self._parse_url("path", path, 'str', False)}
+            'path': self._serialize_data("path", path, 'str')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
         if query is not None:
-            query['query'] = self._parse_url("query", query, 'int', False)
+            query['query'] = self._serialize_data("query", query, 'int')
 
         # Construct headers
         headers = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
+            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         if custom_header is not None:
-            headers['customHeader'] = self._serialize.serialize_data(custom_header, 'str')
+            headers['customHeader'] = self._serialize_data("custom_header", custom_header, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -147,14 +145,14 @@ class parameter_groupingOperations(object):
         # Construct parameters
         query = {}
         if query is not None:
-            query['query'] = self._parse_url("query", query, 'int', False)
+            query['query'] = self._serialize_data("query", query, 'int')
 
         # Construct headers
         headers = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
+            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         if custom_header is not None:
-            headers['customHeader'] = self._serialize.serialize_data(custom_header, 'str')
+            headers['customHeader'] = self._serialize_data("custom_header", custom_header, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -214,18 +212,18 @@ class parameter_groupingOperations(object):
         # Construct parameters
         query = {}
         if query_one is not None:
-            query['query-one'] = self._parse_url("query_one", query_one, 'int', False)
+            query['query-one'] = self._serialize_data("query_one", query_one, 'int')
         if query_two is not None:
-            query['query-two'] = self._parse_url("query_two", query_two, 'int', False)
+            query['query-two'] = self._serialize_data("query_two", query_two, 'int')
 
         # Construct headers
         headers = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
+            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         if header_one is not None:
-            headers['header-one'] = self._serialize.serialize_data(header_one, 'str')
+            headers['header-one'] = self._serialize_data("header_one", header_one, 'str')
         if header_two is not None:
-            headers['header-two'] = self._serialize.serialize_data(header_two, 'str')
+            headers['header-two'] = self._serialize_data("header_two", header_two, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -273,14 +271,14 @@ class parameter_groupingOperations(object):
         # Construct parameters
         query = {}
         if query_one is not None:
-            query['query-one'] = self._parse_url("query_one", query_one, 'int', False)
+            query['query-one'] = self._serialize_data("query_one", query_one, 'int')
 
         # Construct headers
         headers = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
+            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         if header_one is not None:
-            headers['header-one'] = self._serialize.serialize_data(header_one, 'str')
+            headers['header-one'] = self._serialize_data("header_one", header_one, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'

@@ -27,10 +27,10 @@ class path_items(object):
 
         self.config = config
 
-    def _parse_url(self, name, value, datatype):
+    def _serialize_data(self, name, value, datatype, **kwargs):
 
         try:
-            value = self._serialize.serialize_data(value, datatype)
+            value = self._serialize.serialize_data(value, datatype, **kwargs)
 
         except ValueError:
             raise ValueError("{} must not be None.".format(name))
@@ -77,19 +77,20 @@ class path_items(object):
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery'
         path_format_arguments = {
-            'localStringPath': self._parse_url("local_string_path", local_string_path, 'str', False),
-            'pathItemStringPath': self._parse_url("path_item_string_path", path_item_string_path, 'str', False),
-            'globalStringPath': self._parse_url("self.config.global_string_path", self.config.global_string_path, 'str', False)}
+            'localStringPath': self._serialize_data("local_string_path", local_string_path, 'str'),
+            'pathItemStringPath': self._serialize_data("path_item_string_path", path_item_string_path, 'str'),
+            'globalStringPath': self._serialize_data("self.config.global_string_path", self.config.global_string_path, 'str')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
         if local_string_query is not None:
-            query['localStringQuery'] = self._parse_url("local_string_query", local_string_query, 'str', False)
+            query['localStringQuery'] = self._serialize_data("local_string_query", local_string_query, 'str')
         if path_item_string_query is not None:
-            query['pathItemStringQuery'] = self._parse_url("path_item_string_query", path_item_string_query, 'str', False)
+            query['pathItemStringQuery'] = self._serialize_data("path_item_string_query", path_item_string_query, 'str')
         if self.config.global_string_query is not None:
-            query['globalStringQuery'] = self._parse_url("self.config.global_string_query", self.config.global_string_query, 'str', False)
+            query['globalStringQuery'] = self._serialize_data("self.config.global_string_query", self.config.global_string_query, 'str')
 
         # Construct headers
         headers = {}
@@ -141,19 +142,20 @@ class path_items(object):
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery'
         path_format_arguments = {
-            'localStringPath': self._parse_url("local_string_path", local_string_path, 'str', False),
-            'pathItemStringPath': self._parse_url("path_item_string_path", path_item_string_path, 'str', False),
-            'globalStringPath': self._parse_url("self.config.global_string_path", self.config.global_string_path, 'str', False)}
+            'localStringPath': self._serialize_data("local_string_path", local_string_path, 'str'),
+            'pathItemStringPath': self._serialize_data("path_item_string_path", path_item_string_path, 'str'),
+            'globalStringPath': self._serialize_data("self.config.global_string_path", self.config.global_string_path, 'str')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
         if local_string_query is not None:
-            query['localStringQuery'] = self._parse_url("local_string_query", local_string_query, 'str', False)
+            query['localStringQuery'] = self._serialize_data("local_string_query", local_string_query, 'str')
         if path_item_string_query is not None:
-            query['pathItemStringQuery'] = self._parse_url("path_item_string_query", path_item_string_query, 'str', False)
+            query['pathItemStringQuery'] = self._serialize_data("path_item_string_query", path_item_string_query, 'str')
         if self.config.global_string_query is not None:
-            query['globalStringQuery'] = self._parse_url("self.config.global_string_query", self.config.global_string_query, 'str', False)
+            query['globalStringQuery'] = self._serialize_data("self.config.global_string_query", self.config.global_string_query, 'str')
 
         # Construct headers
         headers = {}
@@ -204,19 +206,20 @@ class path_items(object):
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null'
         path_format_arguments = {
-            'localStringPath': self._parse_url("local_string_path", local_string_path, 'str', False),
-            'pathItemStringPath': self._parse_url("path_item_string_path", path_item_string_path, 'str', False),
-            'globalStringPath': self._parse_url("self.config.global_string_path", self.config.global_string_path, 'str', False)}
+            'localStringPath': self._serialize_data("local_string_path", local_string_path, 'str'),
+            'pathItemStringPath': self._serialize_data("path_item_string_path", path_item_string_path, 'str'),
+            'globalStringPath': self._serialize_data("self.config.global_string_path", self.config.global_string_path, 'str')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
         if local_string_query is not None:
-            query['localStringQuery'] = self._parse_url("local_string_query", local_string_query, 'str', False)
+            query['localStringQuery'] = self._serialize_data("local_string_query", local_string_query, 'str')
         if path_item_string_query is not None:
-            query['pathItemStringQuery'] = self._parse_url("path_item_string_query", path_item_string_query, 'str', False)
+            query['pathItemStringQuery'] = self._serialize_data("path_item_string_query", path_item_string_query, 'str')
         if self.config.global_string_query is not None:
-            query['globalStringQuery'] = self._parse_url("self.config.global_string_query", self.config.global_string_query, 'str', False)
+            query['globalStringQuery'] = self._serialize_data("self.config.global_string_query", self.config.global_string_query, 'str')
 
         # Construct headers
         headers = {}
@@ -267,19 +270,20 @@ class path_items(object):
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null'
         path_format_arguments = {
-            'localStringPath': self._parse_url("local_string_path", local_string_path, 'str', False),
-            'pathItemStringPath': self._parse_url("path_item_string_path", path_item_string_path, 'str', False),
-            'globalStringPath': self._parse_url("self.config.global_string_path", self.config.global_string_path, 'str', False)}
+            'localStringPath': self._serialize_data("local_string_path", local_string_path, 'str'),
+            'pathItemStringPath': self._serialize_data("path_item_string_path", path_item_string_path, 'str'),
+            'globalStringPath': self._serialize_data("self.config.global_string_path", self.config.global_string_path, 'str')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query = {}
         if local_string_query is not None:
-            query['localStringQuery'] = self._parse_url("local_string_query", local_string_query, 'str', False)
+            query['localStringQuery'] = self._serialize_data("local_string_query", local_string_query, 'str')
         if path_item_string_query is not None:
-            query['pathItemStringQuery'] = self._parse_url("path_item_string_query", path_item_string_query, 'str', False)
+            query['pathItemStringQuery'] = self._serialize_data("path_item_string_query", path_item_string_query, 'str')
         if self.config.global_string_query is not None:
-            query['globalStringQuery'] = self._parse_url("self.config.global_string_query", self.config.global_string_query, 'str', False)
+            query['globalStringQuery'] = self._serialize_data("self.config.global_string_query", self.config.global_string_query, 'str')
 
         # Construct headers
         headers = {}

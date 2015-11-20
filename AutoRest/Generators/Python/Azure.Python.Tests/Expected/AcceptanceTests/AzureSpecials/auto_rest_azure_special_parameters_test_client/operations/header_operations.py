@@ -8,9 +8,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-import sys
-
-
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
 from msrest.exceptions import (
@@ -31,10 +28,10 @@ class headerOperations(object):
 
         self.config = config
 
-    def _parse_url(self, name, value, datatype):
+    def _serialize_data(self, name, value, datatype, **kwargs):
 
         try:
-            value = self._serialize.serialize_data(value, datatype)
+            value = self._serialize.serialize_data(value, datatype, **kwargs)
 
         except ValueError:
             raise ValueError("{} must not be None.".format(name))
@@ -74,10 +71,9 @@ class headerOperations(object):
 
         # Construct headers
         headers = {}
-        if foo_client_request_id is not None:
-            headers['foo-client-request-id'] = self._serialize.serialize_data(foo_client_request_id, 'str')
+        headers['foo-client-request-id'] = self._serialize_data("foo_client_request_id", foo_client_request_id, 'str')
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
+            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['foo-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'

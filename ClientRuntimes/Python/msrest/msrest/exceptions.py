@@ -76,21 +76,35 @@ class AuthenticationError(ClientException):
 class HttpOperationError(ClientException):
 
     def __str__(self):
-        return str(self.error)
+        return str(self.message)
 
     def __init__(self, deserialize, response, resp_type, *args):
 
         self.error = None
+        self.message = None
         try:
             self.error = deserialize(resp_type, response)
+            self.message = self.error.message
 
-        except DeserializationError:
+        except (DeserializationError, AttributeError):
             pass
         
-        try:
-            response.raise_for_status()
+        if not self.error or not self.message:
+            try:
+                response.raise_for_status()
 
-        except RequestException as err:
-            self.error = err
+            except RequestException as err:
+                if not self.error:
+                    self.error = err
+
+                if not self.message:
+                    self.message = str(err)
+
+            else:
+                if not self.error:
+                    self.error = response
+
+                if not self.message:
+                    self.message = "Unknown error"
 
         super(HttpOperationError, self).__init__(str(self.error), *args)

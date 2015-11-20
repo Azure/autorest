@@ -8,9 +8,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-import sys
-
-
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
 from msrest.exceptions import (
@@ -31,10 +28,10 @@ class lr_os_custom_headerOperations(object):
 
         self.config = config
 
-    def _parse_url(self, name, value, datatype):
+    def _serialize_data(self, name, value, datatype, **kwargs):
 
         try:
-            value = self._serialize.serialize_data(value, datatype)
+            value = self._serialize.serialize_data(value, datatype, **kwargs)
 
         except ValueError:
             raise ValueError("{} must not be None.".format(name))
@@ -79,7 +76,7 @@ class lr_os_custom_headerOperations(object):
         # Construct headers
         headers = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
+            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -138,7 +135,7 @@ class lr_os_custom_headerOperations(object):
         # Construct headers
         headers = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
+            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -197,7 +194,7 @@ class lr_os_custom_headerOperations(object):
         # Construct headers
         headers = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
+            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -258,7 +255,7 @@ class lr_os_custom_headerOperations(object):
         # Construct headers
         headers = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
+            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -318,7 +315,7 @@ class lr_os_custom_headerOperations(object):
         # Construct headers
         headers = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
+            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -369,7 +366,7 @@ class lr_os_custom_headerOperations(object):
         # Construct headers
         headers = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
+            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -420,7 +417,7 @@ class lr_os_custom_headerOperations(object):
         # Construct headers
         headers = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
+            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -471,7 +468,7 @@ class lr_os_custom_headerOperations(object):
         # Construct headers
         headers = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
+            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'

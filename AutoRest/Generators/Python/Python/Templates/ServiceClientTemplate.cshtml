@@ -8,15 +8,6 @@
 @Header("# ")
 # --------------------------------------------------------------------------
 @EmptyLine
-@if (Model.ContainsDecimal)
-{
-@:from decimal import *
-}
-@if (Model.ContainsDateTime)
-{
-@:from datetime import *
-}
-@EmptyLine
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 @if (Model.MethodTemplateModels.Any())
@@ -81,10 +72,10 @@ class @(Model.Name)(object):
 {
 <text>
 @EmptyLine
-    def _parse_url(self, name, value, datatype):
+    def _serialize_data(self, name, value, datatype, **kwargs):
 @EmptyLine
         try:
-            value = self._serialize.serialize_data(value, datatype)
+            value = self._serialize.serialize_data(value, datatype, **kwargs)
 @EmptyLine
         except ValueError:
             raise ValueError("{} must not be None.".format(name))

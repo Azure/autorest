@@ -48,6 +48,10 @@ namespace Microsoft.Rest.Generator.Python
             get { return _scopeProvider; }
         }
 
+        public bool IsResponseStream
+        {
+            get { return this.ReturnType == PrimaryType.Stream; }
+        }
 
         /// <summary>
         /// Get the predicate to determine of the http operation status code indicates success
@@ -113,7 +117,25 @@ namespace Microsoft.Rest.Generator.Python
             var declaration = string.Join(", ", declarations);
             return declaration;
         }
-		
+
+        private string BuildSerializeDataCall(Parameter parameter)
+        {
+            string divChar;
+            string divParameter = string.Empty;
+
+            if (ClientModelExtensions.NeedsFormattedSeparator(parameter, out divChar))
+            {
+                divParameter = string.Format(CultureInfo.InvariantCulture, ", div='{0}'", divChar);
+            }
+
+            return string.Format(CultureInfo.InvariantCulture,
+                    "self._serialize_data(\"{0}\", {0}, '{1}'{2}{3})",
+                        parameter.Name,
+                        parameter.Type.ToPythonRuntimeTypeString(),
+                        parameter.SkipUrlEncoding() ? ", skip_quote=True" : string.Empty,
+                        divParameter);
+        }
+
         /// <summary>
         /// Generate code to build the URL from a url expression and method parameters
         /// </summary>
@@ -128,19 +150,18 @@ namespace Microsoft.Rest.Generator.Python
             if (pathParameterList.Any())
             {
                 builder.AppendLine("path_format_arguments = {").Indent();
-                //builder.AppendLine("{0} = {0}.format(", variableName).Indent();
 
                 for (int i = 0; i < pathParameterList.Count; i ++)
                 {
-                    builder.AppendLine("'{0}': self._parse_url(\"{1}\", {1}, '{2}', {3}){4}",
+                    builder.AppendLine("'{0}': {1}{2}{3}",
                         pathParameterList[i].SerializedName,
-                        pathParameterList[i].Name,
-                        pathParameterList[i].Type.ToPythonRuntimeTypeString(),
-                        pathParameterList[i].SkipUrlEncoding(),
-                        i == pathParameterList.Count-1 ? "}" : ",");
+                        BuildSerializeDataCall(pathParameterList[i]),
+                        pathParameterList[i].IsRequired ? string.Empty :
+                            string.Format(CultureInfo.InvariantCulture, "if {0} else ''", pathParameterList[i].Name),
+                        i == pathParameterList.Count-1 ? "" : ",");
                 }
 
-                builder.Outdent();
+                builder.Outdent().AppendLine("}");
                 builder.AppendLine("{0} = {0}.format(**path_format_arguments)", variableName);
             }
 
@@ -159,15 +180,23 @@ namespace Microsoft.Rest.Generator.Python
 
             foreach (var queryParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Query))
             {
-                builder.AppendLine("if {0} is not None:", queryParameter.Name)
-                    .Indent()
-                    .AppendLine("{0}['{1}'] = self._parse_url(\"{2}\", {2}, '{3}', {4})", 
-                            variableName,
-                            queryParameter.SerializedName, 
-                            queryParameter.Name, 
-                            queryParameter.Type.ToPythonRuntimeTypeString(), 
-                            queryParameter.SkipUrlEncoding())
-                    .Outdent();
+                if (queryParameter.IsRequired)
+                {
+                    builder.AppendLine("{0}['{1}'] ={2}",
+                                variableName,
+                                queryParameter.SerializedName,
+                                BuildSerializeDataCall(queryParameter));
+                }
+                else
+                {
+                    builder.AppendLine("if {0} is not None:", queryParameter.Name)
+                        .Indent()
+                        .AppendLine("{0}['{1}'] = {2}",
+                                variableName,
+                                queryParameter.SerializedName,
+                                BuildSerializeDataCall(queryParameter))
+                        .Outdent();
+                }
             }
 
             return builder.ToString();
@@ -184,11 +213,23 @@ namespace Microsoft.Rest.Generator.Python
 
             foreach (var headerParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Header))
             {
-                builder.AppendLine("if {0} is not None:", headerParameter.Name)
-                    .Indent()
-                    .AppendLine("{0}['{1}'] = {2}", variableName,
-                        headerParameter.SerializedName, headerParameter.GetFormattedReferenceValue())
-                    .Outdent();
+                if (headerParameter.IsRequired)
+                {
+                    builder.AppendLine("{0}['{1}'] = {2}",
+                            variableName,
+                            headerParameter.SerializedName,
+                            BuildSerializeDataCall(headerParameter));
+                }
+                else
+                {
+                    builder.AppendLine("if {0} is not None:", headerParameter.Name)
+                        .Indent()
+                        .AppendLine("{0}['{1}'] = {2}", 
+                            variableName,
+                            headerParameter.SerializedName, 
+                            BuildSerializeDataCall(headerParameter))
+                        .Outdent();
+                }
             }
 
             return builder.ToString();
