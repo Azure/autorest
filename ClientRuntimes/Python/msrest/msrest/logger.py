@@ -190,6 +190,9 @@ def log_response(adapter, request, response, *args, **kwargs):
             filename = header.split('=')[1]
             LOGGER.debug("File attachments: {}".format(filename))
 
+        elif result.headers.get("content-type", "").startswith("image"):
+            LOGGER.debug("Body contains image data.")
+
         else:
             LOGGER.debug(str(result.content))
         return result
