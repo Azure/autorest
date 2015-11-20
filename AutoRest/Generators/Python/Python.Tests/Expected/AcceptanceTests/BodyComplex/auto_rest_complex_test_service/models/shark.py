@@ -18,7 +18,7 @@ class Shark(Fish):
 
     _attribute_map = {
         'age': {'key': 'age', 'type': 'int'},
-        'birthday': {'key': 'birthday', 'type': 'iso-11'},
+        'birthday': {'key': 'birthday', 'type': 'iso-8601'},
     }
 
     _subtype_map = {

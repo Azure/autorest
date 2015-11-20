@@ -16,8 +16,8 @@ class DatetimeWrapper(Model):
     _required = []
 
     _attribute_map = {
-        'field': {'key': 'field', 'type': 'iso-11'},
-        'now': {'key': 'now', 'type': 'iso-11'},
+        'field': {'key': 'field', 'type': 'iso-8601'},
+        'now': {'key': 'now', 'type': 'iso-8601'},
     }
 
     def __init__(self, *args, **kwargs):
