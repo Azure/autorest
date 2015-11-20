@@ -3,9 +3,11 @@ import subprocess
 import sys
 import isodate
 from datetime import date, datetime, timedelta
-from os.path import dirname, realpath, sep, pardir
+from os.path import dirname, pardir, join, realpath
 
-sys.path.append(dirname(realpath(__file__)) + sep + pardir + sep + "Expected" + sep + "AcceptanceTests" + sep + "BodyDictionary")
+cwd = dirname(realpath(__file__))
+tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
+sys.path.append(join(tests, "BodyDictionary"))
 
 from msrest.exceptions import DeserializationError
 
@@ -13,27 +15,7 @@ from auto_rest_swagger_ba_tdictionary_service import AutoRestSwaggerBATdictionar
 from auto_rest_swagger_ba_tdictionary_service.models import Widget, ErrorException
 
 
-def sort_test(_, x, y):
-
-    if x == 'test_ensure_coverage' :
-        return 1
-    if y == 'test_ensure_coverage' :
-        return -1
-    return (x > y) - (x < y)
-
-unittest.TestLoader.sortTestMethodsUsing = sort_test
-
 class DictionaryTests(unittest.TestCase):
-
-    #@classmethod
-    #def setUpClass(cls):
-
-    #    cls.server = subprocess.Popen("node ../../../../AutoRest/TestServer/server/startup/www.js")
-
-    #@classmethod
-    #def tearDownClass(cls):
-
-    #    cls.server.kill()
 
     def test_dictionary_primitive_types(self):
 

@@ -187,7 +187,7 @@ namespace Microsoft.Rest.Generator.Python
                 builder.AppendLine("if {0} is not None:", headerParameter.Name)
                     .Indent()
                     .AppendLine("{0}['{1}'] = {2}", variableName,
-                        headerParameter.SerializedName, headerParameter.Type.ToString(headerParameter.Name))
+                        headerParameter.SerializedName, headerParameter.GetFormattedReferenceValue())
                     .Outdent();
             }
 
@@ -268,12 +268,64 @@ namespace Microsoft.Rest.Generator.Python
         /// </summary>
         public ParameterTemplateModel RequestBody
         {
-            get { return ParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.Body); }
+            get
+            {
+                return this.Body != null ? new ParameterTemplateModel(this.Body) : null;
+            }
         }
 
         public static string GetStatusCodeReference(HttpStatusCode code)
         {
             return string.Format(CultureInfo.InvariantCulture, "{0}", (int)code);
+        }
+
+        private static string BuildNullCheckExpression(ParameterTransformation transformation)
+        {
+            if (transformation == null)
+            {
+                throw new ArgumentNullException("transformation");
+            }
+
+            return string.Join(" or ",
+                transformation.ParameterMappings.Select(m =>
+                    string.Format(CultureInfo.InvariantCulture,
+                    "{0} is not None", m.InputParameter.Name)));
+        }
+
+        /// <summary>
+        /// Generates input mapping code block.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string BuildInputMappings()
+        {
+            var builder = new IndentedStringBuilder("    ");
+            foreach (var transformation in InputParameterTransformation)
+            {
+                builder.AppendLine("{0} = None",
+                        transformation.OutputParameter.Name);
+
+                builder.AppendLine("if {0}:", BuildNullCheckExpression(transformation))
+                       .Indent();
+
+                if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
+                    transformation.OutputParameter.Type is CompositeType)
+                {
+                    builder.AppendLine("{0} = {1}()",
+                        transformation.OutputParameter.Name,
+                        transformation.OutputParameter.Type.Name);
+                }
+
+                foreach (var mapping in transformation.ParameterMappings)
+                {
+                    builder.AppendLine("{0}{1}",
+                        transformation.OutputParameter.Name,
+                        mapping);
+                }
+
+                builder.Outdent();
+            }
+
+            return builder.ToString();
         }
 
         /// <summary>

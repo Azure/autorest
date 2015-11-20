@@ -8,13 +8,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
+from msrest.service_client import async_request
 from msrest.exceptions import (
-    SerializationError,
     DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
     HttpOperationError)
 
 from ..models import *
@@ -33,7 +30,7 @@ class implicit(object):
     def _parse_url(self, name, value, datatype):
 
         try:
-            value = self._serialize.serialize_data(value, str(datatype))
+            value = self._serialize.serialize_data(value, datatype)
 
         except ValueError:
             raise ValueError("{} must not be None.".format(name))
@@ -161,7 +158,7 @@ class implicit(object):
         # Construct headers
         headers = {}
         if query_parameter is not None:
-            headers['queryParameter'] = query_parameter
+            headers['queryParameter'] = self._serialize.serialize_data(query_parameter, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -241,7 +238,7 @@ class implicit(object):
         # Construct URL
         url = '/reqopt/global/required/path/{required-global-path}'
         path_format_arguments = {
-            'required-global-path': self._parse_url("self.config.requiredglobalpath", self.config.requiredglobalpath, 'str', False)}
+            'required-global-path': self._parse_url("self.config.required_global_path", self.config.required_global_path, 'str', False)}
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -286,8 +283,8 @@ class implicit(object):
 
         # Construct parameters
         query = {}
-        if self.config.requiredglobalquery is not None:
-            query['required-global-query'] = self._parse_url("self.config.requiredglobalquery", self.config.requiredglobalquery, 'str', False)
+        if self.config.required_global_query is not None:
+            query['required-global-query'] = self._parse_url("self.config.required_global_query", self.config.required_global_query, 'str', False)
 
         # Construct headers
         headers = {}
@@ -328,8 +325,8 @@ class implicit(object):
 
         # Construct parameters
         query = {}
-        if self.config.optionalglobalquery is not None:
-            query['optional-global-query'] = self._parse_url("self.config.optionalglobalquery", self.config.optionalglobalquery, 'int', False)
+        if self.config.optional_global_query is not None:
+            query['optional-global-query'] = self._parse_url("self.config.optional_global_query", self.config.optional_global_query, 'int', False)
 
         # Construct headers
         headers = {}

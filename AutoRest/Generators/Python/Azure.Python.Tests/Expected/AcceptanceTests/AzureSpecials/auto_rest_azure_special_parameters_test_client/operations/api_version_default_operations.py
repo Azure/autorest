@@ -11,13 +11,10 @@
 import sys
 
 
-from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
+from msrest.service_client import async_request
 from msrest.exceptions import (
-    SerializationError,
     DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
     HttpOperationError)
 import uuid
 
@@ -37,7 +34,7 @@ class api_version_defaultOperations(object):
     def _parse_url(self, name, value, datatype):
 
         try:
-            value = self._serialize.serialize_data(value, str(datatype))
+            value = self._serialize.serialize_data(value, datatype)
 
         except ValueError:
             raise ValueError("{} must not be None.".format(name))
@@ -71,13 +68,13 @@ class api_version_defaultOperations(object):
 
         # Construct parameters
         query = {}
-        if self.config.apiversion is not None:
-            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
+        if self.config.api_version is not None:
+            query['api-version'] = self._parse_url("self.config.api_version", self.config.api_version, 'str', False)
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -115,13 +112,13 @@ class api_version_defaultOperations(object):
 
         # Construct parameters
         query = {}
-        if self.config.apiversion is not None:
-            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
+        if self.config.api_version is not None:
+            query['api-version'] = self._parse_url("self.config.api_version", self.config.api_version, 'str', False)
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -159,13 +156,13 @@ class api_version_defaultOperations(object):
 
         # Construct parameters
         query = {}
-        if self.config.apiversion is not None:
-            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
+        if self.config.api_version is not None:
+            query['api-version'] = self._parse_url("self.config.api_version", self.config.api_version, 'str', False)
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -203,13 +200,13 @@ class api_version_defaultOperations(object):
 
         # Construct parameters
         query = {}
-        if self.config.apiversion is not None:
-            query['api-version'] = self._parse_url("self.config.apiversion", self.config.apiversion, 'str', False)
+        if self.config.api_version is not None:
+            query['api-version'] = self._parse_url("self.config.api_version", self.config.api_version, 'str', False)
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'

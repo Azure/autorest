@@ -40,6 +40,11 @@
 
         """
 @EmptyLine
+        @Model.BuildInputMappings()
+@if (Model.InputParameterTransformation.Any())
+{
+@EmptyLine
+}
         # Construct URL
         url = '@(Model.Url)'
         @(Model.BuildUrlPath("url"))
@@ -53,7 +58,6 @@
         @(Model.BuildHeaders("headers"))
         @(Model.SetDefaultHeaders)
         headers['Content-Type'] = '@(Model.ContentType)'
-@* Add Credentials *@
 @EmptyLine
 @if (Model.RequestBody != null)
 {

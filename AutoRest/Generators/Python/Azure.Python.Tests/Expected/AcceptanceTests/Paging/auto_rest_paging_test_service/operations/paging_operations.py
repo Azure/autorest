@@ -11,13 +11,10 @@
 import sys
 
 
-from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
+from msrest.service_client import async_request
 from msrest.exceptions import (
-    SerializationError,
     DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
     HttpOperationError)
 import uuid
 
@@ -37,7 +34,7 @@ class pagingOperations(object):
     def _parse_url(self, name, value, datatype):
 
         try:
-            value = self._serialize.serialize_data(value, str(datatype))
+            value = self._serialize.serialize_data(value, datatype)
 
         except ValueError:
             raise ValueError("{} must not be None.".format(name))
@@ -82,8 +79,8 @@ class pagingOperations(object):
 
             # Construct headers
             headers = {}
-            if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+            if self.config.accept_language is not None:
+                query['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -108,19 +105,19 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages(self, clientrequestid, custom_headers={}, raw=False, callback=None):
+    def get_multiple_pages(self, client_request_id, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that includes a nextLink that has 10 pages
 
-        :param clientrequestid:
+        :param client_request_id:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type clientrequestid: str or none
+        :type client_request_id: str or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
@@ -143,10 +140,10 @@ class pagingOperations(object):
 
             # Construct headers
             headers = {}
-            if clientrequestid is not None:
-                query['client-request-id'] = clientrequestid
-            if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+            if client_request_id is not None:
+                query['client-request-id'] = self._serialize.serialize_data(client_request_id, 'str')
+            if self.config.accept_language is not None:
+                query['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -205,8 +202,8 @@ class pagingOperations(object):
 
             # Construct headers
             headers = {}
-            if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+            if self.config.accept_language is not None:
+                query['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -266,8 +263,8 @@ class pagingOperations(object):
 
             # Construct headers
             headers = {}
-            if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+            if self.config.accept_language is not None:
+                query['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -325,8 +322,8 @@ class pagingOperations(object):
 
             # Construct headers
             headers = {}
-            if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+            if self.config.accept_language is not None:
+                query['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -384,8 +381,8 @@ class pagingOperations(object):
 
             # Construct headers
             headers = {}
-            if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+            if self.config.accept_language is not None:
+                query['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -443,8 +440,8 @@ class pagingOperations(object):
 
             # Construct headers
             headers = {}
-            if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+            if self.config.accept_language is not None:
+                query['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'

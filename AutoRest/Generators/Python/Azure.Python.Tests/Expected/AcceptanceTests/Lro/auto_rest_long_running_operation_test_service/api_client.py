@@ -9,7 +9,7 @@
 # --------------------------------------------------------------------------
 
 
-from msrest.service_client import ServiceClient, async_request
+from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.lr_os_operations import lr_osOperations
 from .operations.lro_retrys_operations import lro_retrysOperations
@@ -28,6 +28,9 @@ class AutoRestLongRunningOperationTestServiceConfiguration(Configuration):
         super(AutoRestLongRunningOperationTestServiceConfiguration, self).__init__(base_url, filepath)
 
         self.credentials = credentials
+
+        if self.accept_language is None:
+            self.accept_language = 'en-US'
 
 
 class AutoRestLongRunningOperationTestService(object):

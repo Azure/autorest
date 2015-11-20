@@ -434,7 +434,7 @@ namespace Microsoft.Rest.Generator
         /// <returns>Name with invalid characters removed.</returns>
         public static string RemoveInvalidPythonCharacters(string name)
         {
-            return GetValidName(name, '_');
+            return GetValidName(name.Replace('-', '_'), '_');
         }
 
         /// <summary>

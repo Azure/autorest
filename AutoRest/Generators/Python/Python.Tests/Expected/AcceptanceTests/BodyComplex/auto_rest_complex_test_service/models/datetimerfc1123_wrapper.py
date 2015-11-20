@@ -16,8 +16,8 @@ class Datetimerfc1123Wrapper(Model):
     _required = []
 
     _attribute_map = {
-        'field': {'key': 'field', 'type': 'rfc-8601'},
-        'now': {'key': 'now', 'type': 'rfc-8601'},
+        'field': {'key': 'field', 'type': 'rfc-1123'},
+        'now': {'key': 'now', 'type': 'rfc-1123'},
     }
 
     def __init__(self, *args, **kwargs):

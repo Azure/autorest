@@ -3,13 +3,15 @@ import isodate
 import subprocess
 import sys
 import datetime
-from os.path import dirname, realpath, sep, pardir
+from os.path import dirname, pardir, join, realpath
 
-sys.path.append(dirname(realpath(__file__)) + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + "ClientRuntimes" + sep + "Python" + sep + "msrest")
-sys.path.append(dirname(realpath(__file__)) + sep + pardir + sep + "Expected" + sep + "AcceptanceTests" + sep + "BodyArray")
-sys.path.append(dirname(realpath(__file__)) + sep + pardir + sep + "Expected" + sep + "AcceptanceTests" + sep + "BodyBoolean")
-sys.path.append(dirname(realpath(__file__)) + sep + pardir + sep + "Expected" + sep + "AcceptanceTests" + sep + "BodyComplex")
-sys.path.append(dirname(realpath(__file__)) + sep + pardir + sep + "Expected" + sep + "AcceptanceTests" + sep + "Report")
+cwd = dirname(realpath(__file__))
+tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
+
+sys.path.append(join(tests, "BodyArray"))
+sys.path.append(join(tests, "BodyBoolean"))
+sys.path.append(join(tests, "BodyComplex"))
+sys.path.append(join(tests, "Report"))
 
 from msrest.exceptions import DeserializationError
 
@@ -24,15 +26,7 @@ from auto_rest_complex_test_service.models import (
     DoubleWrapper, BooleanWrapper, StringWrapper, DatetimeWrapper,
     DateWrapper, DurationWrapper, Datetimerfc1123Wrapper, ByteWrapper)
 
-def sort_test(_, x, y):
 
-    if x == 'test_ensure_coverage' :
-        return 1
-    if y == 'test_ensure_coverage' :
-        return -1
-    return (x > y) - (x < y)
-
-unittest.TestLoader.sortTestMethodsUsing = sort_test
 
 class UTC(datetime.tzinfo): 
     def utcoffset(self,dt): 
@@ -45,18 +39,8 @@ class UTC(datetime.tzinfo):
         return datetime.timedelta(0) 
 
 class AcceptanceTests(unittest.TestCase):
-    #@classmethod
-    #def setUpClass(cls):
-
-    #    cls.server = subprocess.Popen("node ../../../../AutoRest/TestServer/server/startup/www.js")
-
-    #@classmethod
-    #def tearDownClass(cls):
-
-    #    cls.server.kill()
-
     def test_bool(self):
-        self.skipTest("temp")
+
         config = AutoRestBoolTestServiceConfiguration("http://localhost:3000")
         config.log_level = 10
         client = AutoRestBoolTestService(config)
@@ -69,15 +53,14 @@ class AcceptanceTests(unittest.TestCase):
             client.bool_model.put_true(False)
         with self.assertRaises(DeserializationError):
             client.bool_model.get_invalid()
-        pass
 
     def test_array(self):
+
         config = AutoRestSwaggerBATArrayServiceConfiguration("http://localhost:3000")
         config.log_level = 10
         client = AutoRestSwaggerBATArrayService(config)
         self.assertListEqual([], client.array.get_array_empty())
         self.assertIsNone(client.array.get_array_null())
-        pass
 
     def test_complex(self):
         """
@@ -286,7 +269,7 @@ class AcceptanceTests(unittest.TestCase):
         self.assertEqual("Tomato", inheritanceResult.hates[1].name)
 
     def test_ensure_coverage(self):
-        self.skipTest("temp")
+
         config = AutoRestReportServiceConfiguration("http://localhost:3000")
         config.log_level = 10
         client = AutoRestReportService(config)

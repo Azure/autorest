@@ -67,6 +67,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             AzureExtensions.AddParameterGroups(serviceClient);
 
             base.NormalizeClientModel(serviceClient);
+            NormalizeApiVersion(serviceClient);
             NormalizePaginatedMethods(serviceClient);
 
             if (serviceClient != null)
@@ -80,6 +81,17 @@ namespace Microsoft.Rest.Generator.Azure.Python
                     }
                 }
             }
+        }
+
+        private static void NormalizeApiVersion(ServiceClient serviceClient)
+        {
+            serviceClient.Properties.Where(
+                p => p.SerializedName.Equals(AzureExtensions.ApiVersion, StringComparison.OrdinalIgnoreCase))
+                .ForEach(p => p.DefaultValue = p.DefaultValue.Replace("\"", "'"));
+
+            serviceClient.Properties.Where(
+                p => p.SerializedName.Equals(AzureExtensions.AcceptLanguage, StringComparison.OrdinalIgnoreCase))
+                .ForEach(p => p.DefaultValue = p.DefaultValue.Replace("\"", "'"));
         }
 
         /// <summary>

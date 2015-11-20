@@ -16,13 +16,13 @@ class FirstParameterGroup(Model):
     _required = []
 
     _attribute_map = {
-        'headerone': {'key': '', 'type': 'str'},
-        'queryone': {'key': '', 'type': 'int'},
+        'header_one': {'key': '', 'type': 'str'},
+        'query_one': {'key': '', 'type': 'int'},
     }
 
     def __init__(self, *args, **kwargs):
 
-        self.headerone = None
-        self.queryone = None
+        self.header_one = None
+        self.query_one = None
 
         super(FirstParameterGroup, self).__init__(*args, **kwargs)

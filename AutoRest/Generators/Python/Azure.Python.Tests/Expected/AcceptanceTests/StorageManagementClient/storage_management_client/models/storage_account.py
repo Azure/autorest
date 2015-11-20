@@ -22,10 +22,10 @@ class StorageAccount(Resource):
         'primary_endpoints': {'key': 'properties.primaryEndpoints', 'type': 'Endpoints'},
         'primary_location': {'key': 'properties.primaryLocation', 'type': 'str'},
         'status_of_primary': {'key': 'properties.statusOfPrimary', 'type': 'AccountStatus'},
-        'last_geo_failover_time': {'key': 'properties.lastGeoFailoverTime', 'type': 'iso-11'},
+        'last_geo_failover_time': {'key': 'properties.lastGeoFailoverTime', 'type': 'iso-8601'},
         'secondary_location': {'key': 'properties.secondaryLocation', 'type': 'str'},
         'status_of_secondary': {'key': 'properties.statusOfSecondary', 'type': 'AccountStatus'},
-        'creation_time': {'key': 'properties.creationTime', 'type': 'iso-11'},
+        'creation_time': {'key': 'properties.creationTime', 'type': 'iso-8601'},
         'custom_domain': {'key': 'properties.customDomain', 'type': 'CustomDomain'},
         'secondary_endpoints': {'key': 'properties.secondaryEndpoints', 'type': 'Endpoints'},
     }

@@ -9,7 +9,7 @@
 # --------------------------------------------------------------------------
 
 
-from msrest.service_client import ServiceClient, async_request
+from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.paging_operations import pagingOperations
 from . import models
@@ -25,6 +25,9 @@ class AutoRestPagingTestServiceConfiguration(Configuration):
         super(AutoRestPagingTestServiceConfiguration, self).__init__(base_url, filepath)
 
         self.credentials = credentials
+
+        if self.accept_language is None:
+            self.accept_language = 'en-US'
 
 
 class AutoRestPagingTestService(object):

@@ -9,7 +9,7 @@
 # --------------------------------------------------------------------------
 
 
-from msrest.service_client import ServiceClient, async_request
+from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.http_success_operations import http_successOperations
 from . import models
@@ -25,6 +25,9 @@ class AutoRestHeadTestServiceConfiguration(Configuration):
         super(AutoRestHeadTestServiceConfiguration, self).__init__(base_url, filepath)
 
         self.credentials = credentials
+
+        if self.accept_language is None:
+            self.accept_language = 'en-US'
 
 
 class AutoRestHeadTestService(object):
