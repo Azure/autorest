@@ -213,6 +213,11 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <param name="client">The service client.</param>
         public void NormalizeMethodNames(ServiceClient client)
         {
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
+
             foreach (var method in client.Methods)
             {
                 method.Name = GetMethodName(method.Name);

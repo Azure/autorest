@@ -20,7 +20,8 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// Initializes a new instance of the class AzureRubyCodeGenerator.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        public AzureRubyCodeGenerator(Settings settings) : base(settings)
+        public AzureRubyCodeGenerator(Settings settings)
+            : base(settings)
         {
         }
 
@@ -54,7 +55,13 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <param name="serviceClient">The service client.</param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
+            Settings.AddCredentials = true;
+            AzureExtensions.UpdateHeadMethods(serviceClient);
+            AzureExtensions.ParseODataExtension(serviceClient);
+            AzureExtensions.AddPageableMethod(serviceClient);
+            AzureExtensions.AddLongRunningOperations(serviceClient);
+            AzureExtensions.AddAzureProperties(serviceClient);
+            AzureExtensions.SetDefaultResponses(serviceClient);
             CorrectFilterParameters(serviceClient);
             base.NormalizeClientModel(serviceClient);
         }
