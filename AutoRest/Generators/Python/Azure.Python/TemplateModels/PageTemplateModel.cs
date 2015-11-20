@@ -30,8 +30,8 @@ namespace Microsoft.Rest.Generator.Azure.Python
 
         public bool Equals(PageTemplateModel other)
         {
-            if (this.NextLinkName == other.NextLinkName && this.TypeDefinitionName == other.TypeDefinitionName &&
-                this.ItemName == other.ItemName)
+            if (other != null && this.NextLinkName == other.NextLinkName && 
+                this.TypeDefinitionName == other.TypeDefinitionName && this.ItemName == other.ItemName)
             {
                 return true;
             }

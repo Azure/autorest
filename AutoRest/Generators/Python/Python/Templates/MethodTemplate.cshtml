@@ -7,7 +7,7 @@
 @using Microsoft.Rest.Generator.Python.Templates
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodTemplateModel>
     @@async_request
-    def @(Model.Name.ToPythonCase())(self, @(Model.MethodParameterDeclaration(true))):
+    def @(Model.Name.ToPythonCase())(self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):
         """
 @if (!String.IsNullOrEmpty(Model.Summary))
 {
@@ -50,8 +50,7 @@
 @EmptyLine
         # Construct headers
         headers = {}
-        @(Model.BuildHeaders("query"))
-        headers.update(custom_headers)
+        @(Model.BuildHeaders("headers"))
         @(Model.SetDefaultHeaders)
         headers['Content-Type'] = '@(Model.ContentType)'
 @* Add Credentials *@

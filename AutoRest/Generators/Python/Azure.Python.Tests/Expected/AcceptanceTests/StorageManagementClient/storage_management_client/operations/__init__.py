@@ -9,4 +9,4 @@
 # --------------------------------------------------------------------------
 
 from .storage_accounts_operations import storage_accountsOperations
-from .usage_operations_operations import usageOperationsOperations
+from .usage_operations import usageOperations

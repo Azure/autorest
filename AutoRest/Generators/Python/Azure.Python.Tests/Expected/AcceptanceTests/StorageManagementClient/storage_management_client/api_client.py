@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient, async_request
 from msrest import Configuration, Serializer, Deserializer
 from .operations.storage_accounts_operations import storage_accountsOperations
-from .operations.usage_operations_operations import usageOperationsOperations
+from .operations.usage_operations import usageOperations
 from . import models
 
 
@@ -41,4 +41,4 @@ class StorageManagementClient(object):
 
         self.config = config
         self.storage_accounts = storage_accountsOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.usageOperations = usageOperationsOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.usage = usageOperations(self._client, self.config, self._serialize, self._deserialize)

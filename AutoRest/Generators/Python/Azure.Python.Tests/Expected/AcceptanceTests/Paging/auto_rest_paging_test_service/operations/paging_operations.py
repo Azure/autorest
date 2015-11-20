@@ -85,6 +85,7 @@ class pagingOperations(object):
             if self.config.acceptlanguage is not None:
                 query['accept-language'] = self.config.acceptlanguage
             headers.update(custom_headers)
+            headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -145,8 +146,9 @@ class pagingOperations(object):
             headers = {}
             if clientrequestid is not None:
                 query['client-request-id'] = clientrequestid
-                if self.config.acceptlanguage is not None:
-                    query['accept-language'] = self.config.acceptlanguage
+            if self.config.acceptlanguage is not None:
+                query['accept-language'] = self.config.acceptlanguage
+            headers.update(custom_headers)
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -207,6 +209,7 @@ class pagingOperations(object):
             headers = {}
             if self.config.acceptlanguage is not None:
                 query['accept-language'] = self.config.acceptlanguage
+            headers.update(custom_headers)
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -269,6 +272,7 @@ class pagingOperations(object):
             if self.config.acceptlanguage is not None:
                 query['accept-language'] = self.config.acceptlanguage
             headers.update(custom_headers)
+            headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -327,6 +331,7 @@ class pagingOperations(object):
             headers = {}
             if self.config.acceptlanguage is not None:
                 query['accept-language'] = self.config.acceptlanguage
+            headers.update(custom_headers)
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -387,6 +392,7 @@ class pagingOperations(object):
             if self.config.acceptlanguage is not None:
                 query['accept-language'] = self.config.acceptlanguage
             headers.update(custom_headers)
+            headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -445,6 +451,7 @@ class pagingOperations(object):
             headers = {}
             if self.config.acceptlanguage is not None:
                 query['accept-language'] = self.config.acceptlanguage
+            headers.update(custom_headers)
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -510,6 +517,7 @@ class pagingOperations(object):
             headers = {}
             if self.config.acceptlanguage is not None:
                 query['accept-language'] = self.config.acceptlanguage
+            headers.update(custom_headers)
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -577,8 +585,9 @@ class pagingOperations(object):
             headers = {}
             if clientrequestid is not None:
                 query['client-request-id'] = clientrequestid
-                if self.config.acceptlanguage is not None:
-                    query['accept-language'] = self.config.acceptlanguage
+            if self.config.acceptlanguage is not None:
+                query['accept-language'] = self.config.acceptlanguage
+            headers.update(custom_headers)
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -645,6 +654,7 @@ class pagingOperations(object):
             headers = {}
             if self.config.acceptlanguage is not None:
                 query['accept-language'] = self.config.acceptlanguage
+            headers.update(custom_headers)
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -713,6 +723,7 @@ class pagingOperations(object):
             if self.config.acceptlanguage is not None:
                 query['accept-language'] = self.config.acceptlanguage
             headers.update(custom_headers)
+            headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -777,6 +788,7 @@ class pagingOperations(object):
             headers = {}
             if self.config.acceptlanguage is not None:
                 query['accept-language'] = self.config.acceptlanguage
+            headers.update(custom_headers)
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -843,6 +855,7 @@ class pagingOperations(object):
             if self.config.acceptlanguage is not None:
                 query['accept-language'] = self.config.acceptlanguage
             headers.update(custom_headers)
+            headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -907,6 +920,7 @@ class pagingOperations(object):
             headers = {}
             if self.config.acceptlanguage is not None:
                 query['accept-language'] = self.config.acceptlanguage
+            headers.update(custom_headers)
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'

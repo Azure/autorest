@@ -76,7 +76,7 @@ class xms_client_request_idOperations(object):
         # Construct headers
         headers = {}
         if self.config.acceptlanguage is not None:
-            query['accept-language'] = self.config.acceptlanguage
+            headers['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -122,9 +122,9 @@ class xms_client_request_idOperations(object):
         # Construct headers
         headers = {}
         if xmsclientrequestid is not None:
-            query['x-ms-client-request-id'] = xmsclientrequestid
-            if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+            headers['x-ms-client-request-id'] = xmsclientrequestid
+        if self.config.acceptlanguage is not None:
+            headers['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'

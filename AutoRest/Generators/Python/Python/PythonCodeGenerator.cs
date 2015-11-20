@@ -55,6 +55,7 @@ namespace Microsoft.Rest.Generator.Python
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
+            Extensions.NormalizeClientModel(serviceClient, Settings);
             PopulateAdditionalProperties(serviceClient);
             Namer.NormalizeClientModel(serviceClient);
             Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,

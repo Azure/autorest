@@ -78,9 +78,9 @@ class headerOperations(object):
         # Construct headers
         headers = {}
         if fooclientrequestid is not None:
-            query['foo-client-request-id'] = fooclientrequestid
-            if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+            headers['foo-client-request-id'] = fooclientrequestid
+        if self.config.acceptlanguage is not None:
+            headers['accept-language'] = self.config.acceptlanguage
         headers.update(custom_headers)
         headers['foo-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
