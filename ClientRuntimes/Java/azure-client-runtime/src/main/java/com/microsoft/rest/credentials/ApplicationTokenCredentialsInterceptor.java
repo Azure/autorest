@@ -35,15 +35,22 @@ public class ApplicationTokenCredentialsInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        Response response = chain.proceed(chain.request());
-        if (response.code() == 401) {
+        if (credentials.getToken() == null) {
             credentials.setToken(acquireAccessToken(chain.request()));
-            Request newRequest = chain.request().newBuilder()
-                    .header("Authorization", credentials.getScheme() + " " + credentials.getToken())
-                    .build();
-            response = chain.proceed(newRequest);
+        }
+        Response response = sendRequestWithAuthorization(chain);
+        if (response == null || response.code() == 401) {
+            credentials.setToken(acquireAccessToken(chain.request()));
+            response = sendRequestWithAuthorization(chain);
         }
         return response;
+    }
+
+    private Response sendRequestWithAuthorization(Chain chain) throws IOException {
+        Request newRequest = chain.request().newBuilder()
+                .header("Authorization", credentials.getScheme() + " " + credentials.getToken())
+                .build();
+        return chain.proceed(newRequest);
     }
 
     private String acquireAccessToken(Request request) throws IOException {
