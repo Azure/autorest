@@ -85,12 +85,14 @@ class HttpOperationError(ClientException):
             self.error = deserialize(resp_type, response)
 
         except DeserializationError:
-            pass
         
-        try:
-            response.raise_for_status()
+            try:
+                response.raise_for_status()
 
-        except RequestException as err:
-            self.error = err
+            except RequestException as err:
+                self.error = err
+
+            else:
+                self.error = response
 
         super(HttpOperationError, self).__init__(str(self.error), *args)
