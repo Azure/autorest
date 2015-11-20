@@ -10,7 +10,7 @@
 
 from datetime import *
 
-from msrest.service_client import ServiceClient, async_request
+from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.duration import duration
 from . import models

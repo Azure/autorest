@@ -10,7 +10,7 @@
 
 from datetime import *
 
-from msrest.service_client import ServiceClient, async_request
+from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.duration_operations import durationOperations
 from . import models
@@ -26,6 +26,9 @@ class AutoRestDurationTestServiceConfiguration(Configuration):
         super(AutoRestDurationTestServiceConfiguration, self).__init__(base_url, filepath)
 
         self.credentials = credentials
+
+        if self.accept_language is None:
+            self.accept_language = 'en-US'
 
 
 class AutoRestDurationTestService(object):

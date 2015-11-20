@@ -9,7 +9,7 @@
 # --------------------------------------------------------------------------
 
 
-from msrest.service_client import ServiceClient, async_request
+from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.implicit import implicit
 from .operations.explicit import explicit
@@ -18,15 +18,15 @@ from . import models
 
 class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
 
-    def __init__(self, requiredglobalpath, requiredglobalquery, base_url=None, filepath=None):
+    def __init__(self, required_global_path, required_global_query, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
 
         super(AutoRestRequiredOptionalTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.requiredglobalpath = requiredglobalpath
-        self.requiredglobalquery = requiredglobalquery
+        self.required_global_path = required_global_path
+        self.required_global_query = required_global_query
 
 
 class AutoRestRequiredOptionalTestService(object):

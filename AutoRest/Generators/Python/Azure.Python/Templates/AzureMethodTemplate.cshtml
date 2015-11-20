@@ -47,6 +47,11 @@ else
 
         """
 @EmptyLine
+        @Model.BuildInputMappings()
+@if (Model.InputParameterTransformation.Any())
+{
+@EmptyLine
+}
         def paging(next_link=None, raw=False):
 @EmptyLine
             if next_link is None:

@@ -11,13 +11,10 @@
 import sys
 
 
-from msrest.service_client import ServiceClient, async_request
 from msrest.serialization import Serializer, Deserializer
+from msrest.service_client import async_request
 from msrest.exceptions import (
-    SerializationError,
     DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
     HttpOperationError)
 import uuid
 
@@ -37,7 +34,7 @@ class lro_retrysOperations(object):
     def _parse_url(self, name, value, datatype):
 
         try:
-            value = self._serialize.serialize_data(value, str(datatype))
+            value = self._serialize.serialize_data(value, datatype)
 
         except ValueError:
             raise ValueError("{} must not be None.".format(name))
@@ -80,8 +77,8 @@ class lro_retrysOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -140,8 +137,8 @@ class lro_retrysOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -200,8 +197,8 @@ class lro_retrysOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -258,8 +255,8 @@ class lro_retrysOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -314,8 +311,8 @@ class lro_retrysOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -369,8 +366,8 @@ class lro_retrysOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -422,8 +419,8 @@ class lro_retrysOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -466,8 +463,8 @@ class lro_retrysOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -510,8 +507,8 @@ class lro_retrysOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -554,8 +551,8 @@ class lro_retrysOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -600,8 +597,8 @@ class lro_retrysOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -649,8 +646,8 @@ class lro_retrysOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -699,8 +696,8 @@ class lro_retrysOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -749,8 +746,8 @@ class lro_retrysOperations(object):
 
         # Construct headers
         headers = {}
-        if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+        if self.config.accept_language is not None:
+            headers['accept-language'] = self._serialize.serialize_data(self.config.accept_language, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'

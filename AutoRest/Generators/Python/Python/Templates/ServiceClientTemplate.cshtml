@@ -17,11 +17,12 @@
 @:from datetime import *
 }
 @EmptyLine
-from msrest.service_client import ServiceClient, async_request
+from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 @if (Model.MethodTemplateModels.Any())
 {
 <text>
+from msrest.service_client import async_request
 from msrest.exceptions import (
     SerializationError,
     DeserializationError,
@@ -43,20 +44,19 @@ from . import models
 class @(Model.Name)Configuration(Configuration):
 @EmptyLine
     def __init__(self, @(Model.RequiredConstructorParameters)base_url=None, filepath=None):
-@*(Model.RequiredConstructorParameters)*@
 @EmptyLine
         if not base_url:
             base_url = '@Model.BaseUrl'
 @EmptyLine
         super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
 @{
-  var parameters = Model.Properties.Where(p => p.IsRequired);
-  if (parameters.Any())
+  var properties = Model.Properties.Where(p => p.IsRequired);
+  if (properties.Any())
   {
 @EmptyLine
-    foreach (var param in Model.Properties.Where(p => p.IsRequired))
+    foreach (var property in properties)
     {
-        @:self.@(param.Name) = @(param.Name)
+        @:self.@(property.Name) = @(property.Name)
     }
   }
 }
@@ -84,7 +84,7 @@ class @(Model.Name)(object):
     def _parse_url(self, name, value, datatype):
 @EmptyLine
         try:
-            value = self._serialize.serialize_data(value, str(datatype))
+            value = self._serialize.serialize_data(value, datatype)
 @EmptyLine
         except ValueError:
             raise ValueError("{} must not be None.".format(name))

@@ -261,8 +261,8 @@ namespace Microsoft.Rest.Generator.Python
         {
             Dictionary<IType, string> typeNameMapping = new Dictionary<IType, string>()
                         {
-                            { PrimaryType.DateTime, "iso-11" },
-                            { PrimaryType.DateTimeRfc1123, "rfc-8601" },
+                            { PrimaryType.DateTime, "iso-8601" },
+                            { PrimaryType.DateTimeRfc1123, "rfc-1123" },
                             { PrimaryType.TimeSpan, "duration" }
                         };
             if (type is PrimaryType)

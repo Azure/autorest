@@ -17,16 +17,14 @@
 @:from datetime import *
 }
 @EmptyLine
-from msrest.service_client import ServiceClient, async_request
+from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 @if (Model.MethodTemplateModels.Any())
 {
 <text>
+from msrest.service_client import async_request
 from msrest.exceptions import (
-    SerializationError,
     DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
     HttpOperationError)
 import uuid
 </text>
@@ -44,17 +42,33 @@ from . import models
 class @(Model.Name)Configuration(Configuration):
 @EmptyLine
     def __init__(self, @(Model.RequiredConstructorParameters)base_url=None, filepath=None):
-@*(Model.RequiredConstructorParameters)*@
 @EmptyLine
         if not base_url:
             base_url = '@Model.BaseUrl'
 @EmptyLine
-@{var parameters = Model.Properties.Where(p => p.IsRequired);}
         super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
+@{
+  var propertiesRequired = Model.Properties.Where(p => p.IsRequired);
+  if (propertiesRequired.Any())
+  {
 @EmptyLine
-@foreach (var param in Model.Properties.Where(p => p.IsRequired))
-{
-        @:self.@(param.Name) = @(param.Name)
+    foreach (var property in propertiesRequired)
+    {
+        @:self.@(property.Name) = @(property.Name)
+    }
+  }
+}
+@{
+  var propertiesHasDefault = Model.Properties.Where(p => p.DefaultValue != null);
+  if (propertiesHasDefault.Any())
+  {
+    @EmptyLine
+    @foreach (var property in propertiesHasDefault)
+    {
+        @:if self.@(property.Name) is None:
+            @:self.@(property.Name) = @(property.DefaultValue)
+    }
+  }
 }
 @EmptyLine
 @EmptyLine
@@ -80,7 +94,7 @@ class @(Model.Name)(object):
     def _parse_url(self, name, value, datatype):
 @EmptyLine
         try:
-            value = self._serialize.serialize_data(value, str(datatype))
+            value = self._serialize.serialize_data(value, datatype)
 @EmptyLine
         except ValueError:
             raise ValueError("{} must not be None.".format(name))

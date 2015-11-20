@@ -38,7 +38,7 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
 
             PrimaryType primaryType = sequence.ElementType as PrimaryType;
             EnumType enumType = sequence.ElementType as EnumType;
-            if (enumType != null && enumType.ModelAsString)
+            if (enumType != null)
             {
                 primaryType = PrimaryType.String;
             }
@@ -52,7 +52,7 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             }
 
             return string.Format(CultureInfo.InvariantCulture,
-                "{0}.join('{1}')", parameter.Name, parameter.CollectionFormat.GetSeparator());
+                "self._serialize.serialize_data({0}, '{1}', '{2}')", parameter.Name, "[str]", parameter.CollectionFormat.GetSeparator());
         }
 
         /// <summary>
@@ -86,33 +86,8 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
         /// <returns></returns>
         public static string ToString(this IType type, string reference)
         {
-            var known = type as PrimaryType;
-
-            if (known == PrimaryType.Date)
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "Serialized.serializeObject({0}, \'date\')", reference);
-            }
-
-            if (known == PrimaryType.DateTimeRfc1123)
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "Serialized.serializeObject({0}, \'rfc-1123\')", reference);
-            }
-
-            if (known == PrimaryType.DateTime)
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "Serialized.serializeObject({0}, \'iso-8601\')", reference);
-            }
-
-            if (known == PrimaryType.TimeSpan)
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "Serialized.serializeObject({0}, \'duration\')", reference);
-            }
-
-            return reference;
+            return string.Format(CultureInfo.InvariantCulture,
+                "self._serialize.serialize_data({0}, '{1}')", reference, type.ToPythonRuntimeTypeString());
         }
 
         /// <summary>
