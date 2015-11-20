@@ -9,7 +9,7 @@ package com.microsoft.rest.credentials;
 
 import com.microsoft.aad.adal4j.AuthenticationContext;
 import com.microsoft.aad.adal4j.AuthenticationResult;
-import com.microsoft.rest.ServiceException;
+import com.microsoft.aad.adal4j.ClientCredential;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -20,8 +20,8 @@ import java.util.concurrent.Executors;
 /**
  * Token credentials filter for placing a token credential into request headers.
  */
-public class UserTokenCredentialsInterceptor implements Interceptor {
-    private UserTokenCredentials credentials;
+public class ApplicationTokenCredentialsInterceptor implements Interceptor {
+    private ApplicationTokenCredentials credentials;
 
     /**
      * Initialize a TokenCredentialsFilter class with a
@@ -29,7 +29,7 @@ public class UserTokenCredentialsInterceptor implements Interceptor {
      *
      * @param credentials a TokenCredentials instance
      */
-    public UserTokenCredentialsInterceptor(UserTokenCredentials credentials) {
+    public ApplicationTokenCredentialsInterceptor(ApplicationTokenCredentials credentials) {
         this.credentials = credentials;
     }
 
@@ -53,9 +53,7 @@ public class UserTokenCredentialsInterceptor implements Interceptor {
         try {
             result = context.acquireToken(
                     credentials.getEnvironment().getTokenAudience(),
-                    credentials.getClientId(),
-                    credentials.getUsername(),
-                    credentials.getPassword(),
+                    new ClientCredential(credentials.getClientId(), credentials.getSecret()),
                     null).get();
         } catch (Exception e) {
             throw new IOException(e.getMessage(), e);
