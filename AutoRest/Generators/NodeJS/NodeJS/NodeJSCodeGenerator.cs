@@ -4,6 +4,7 @@
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS.Properties;
 using Microsoft.Rest.Generator.NodeJS.Templates;
+using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.Utilities;
 using System;
 using System.Globalization;

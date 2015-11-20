@@ -214,7 +214,7 @@ namespace Microsoft.Rest.Generator.Azure
                     if (isLongRunning is bool && (bool)isLongRunning)
                     {
                         serviceClient.Methods.Insert(i, (Method) method.Clone());
-                        method.Name = "Begin" + method.Name.ToPascalCase();
+                        method.Name = "Begin" + method.Name.ToPascalCase(); 
                         i++;
                    }
                    
