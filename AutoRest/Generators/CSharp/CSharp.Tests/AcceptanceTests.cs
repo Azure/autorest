@@ -1554,7 +1554,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             EnsureThrowsWithStatusCode((HttpStatusCode) 429, () => client.HttpClientFailure.Head429());
         }
 
-        private void TestRedirectStatusCodes(AutoRestHttpInfrastructureTestService client)
+        private static void TestRedirectStatusCodes(AutoRestHttpInfrastructureTestService client)
         {
 #if MONO
             Assert.ThrowsAsync<System.Net.WebException>(async () => await client.HttpRedirects.Head300WithHttpMessagesAsync());
