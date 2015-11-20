@@ -83,7 +83,7 @@ class pagingOperations(object):
             # Construct headers
             headers = {}
             if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+                query['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -144,9 +144,9 @@ class pagingOperations(object):
             # Construct headers
             headers = {}
             if clientrequestid is not None:
-                query['client-request-id'] = clientrequestid
+                query['client-request-id'] = Serialized.serializeObject(clientrequestid, 'str')
             if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+                query['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -206,7 +206,7 @@ class pagingOperations(object):
             # Construct headers
             headers = {}
             if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+                query['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -267,7 +267,7 @@ class pagingOperations(object):
             # Construct headers
             headers = {}
             if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+                query['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -326,7 +326,7 @@ class pagingOperations(object):
             # Construct headers
             headers = {}
             if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+                query['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -385,7 +385,7 @@ class pagingOperations(object):
             # Construct headers
             headers = {}
             if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+                query['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -444,7 +444,7 @@ class pagingOperations(object):
             # Construct headers
             headers = {}
             if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
+                query['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'

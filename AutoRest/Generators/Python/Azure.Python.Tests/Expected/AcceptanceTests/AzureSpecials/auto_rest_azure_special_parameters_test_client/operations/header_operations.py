@@ -78,9 +78,9 @@ class headerOperations(object):
         # Construct headers
         headers = {}
         if fooclientrequestid is not None:
-            headers['foo-client-request-id'] = fooclientrequestid
+            headers['foo-client-request-id'] = Serialized.serializeObject(fooclientrequestid, 'str')
         if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
         headers.update(custom_headers)
         headers['foo-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'

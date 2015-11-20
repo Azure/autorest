@@ -40,6 +40,11 @@
 
         """
 @EmptyLine
+        @Model.BuildInputMappings()
+@if (Model.InputParameterTransformation.Any())
+{
+@EmptyLine
+}
         # Construct URL
         url = '@(Model.Url)'
         @(Model.BuildUrlPath("url"))

@@ -76,7 +76,7 @@ class header(object):
         # Construct headers
         headers = {}
         if user_agent is not None:
-            headers['User-Agent'] = user_agent
+            headers['User-Agent'] = Serialized.serializeObject(user_agent, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -159,7 +159,7 @@ class header(object):
         # Construct headers
         headers = {}
         if content_type is not None:
-            headers['Content-Type'] = content_type
+            headers['Content-Type'] = Serialized.serializeObject(content_type, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -245,9 +245,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         if value is not None:
-            headers['value'] = value
+            headers['value'] = Serialized.serializeObject(value, 'int')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -291,7 +291,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -338,9 +338,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         if value is not None:
-            headers['value'] = value
+            headers['value'] = Serialized.serializeObject(value, 'long')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -384,7 +384,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -431,9 +431,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         if value is not None:
-            headers['value'] = value
+            headers['value'] = Serialized.serializeObject(value, 'float')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -477,7 +477,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -524,9 +524,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         if value is not None:
-            headers['value'] = value
+            headers['value'] = Serialized.serializeObject(value, 'float')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -570,7 +570,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -617,9 +617,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         if value is not None:
-            headers['value'] = value
+            headers['value'] = Serialized.serializeObject(value, 'bool')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -663,7 +663,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -712,9 +712,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         if value is not None:
-            headers['value'] = value
+            headers['value'] = Serialized.serializeObject(value, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -759,7 +759,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -807,7 +807,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         if value is not None:
             headers['value'] = Serialized.serializeObject(value, 'date')
         headers.update(custom_headers)
@@ -853,7 +853,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -902,7 +902,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         if value is not None:
             headers['value'] = Serialized.serializeObject(value, 'iso-8601')
         headers.update(custom_headers)
@@ -949,7 +949,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -998,7 +998,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         if value is not None:
             headers['value'] = Serialized.serializeObject(value, 'rfc-1123')
         headers.update(custom_headers)
@@ -1045,7 +1045,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -1093,7 +1093,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         if value is not None:
             headers['value'] = Serialized.serializeObject(value, 'duration')
         headers.update(custom_headers)
@@ -1139,7 +1139,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -1186,9 +1186,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         if value is not None:
-            headers['value'] = value
+            headers['value'] = Serialized.serializeObject(value, 'bytearray')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -1232,7 +1232,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -1280,9 +1280,9 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         if value is not None:
-            headers['value'] = value
+            headers['value'] = Serialized.serializeObject(value, 'GreyscaleColors')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -1326,7 +1326,7 @@ class header(object):
         # Construct headers
         headers = {}
         if scenario is not None:
-            headers['scenario'] = scenario
+            headers['scenario'] = Serialized.serializeObject(scenario, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 

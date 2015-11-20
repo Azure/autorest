@@ -69,6 +69,19 @@ class parameter_groupingOperations(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
+        body = None
+        if parameter_groupingpost_required_parameters is not None:
+            body = parameter_groupingpost_required_parameters.body
+        custom_header = None
+        if parameter_groupingpost_required_parameters is not None:
+            custom_header = parameter_groupingpost_required_parameters.custom_header
+        query = None
+        if parameter_groupingpost_required_parameters is not None:
+            query = parameter_groupingpost_required_parameters.query
+        path = None
+        if parameter_groupingpost_required_parameters is not None:
+            path = parameter_groupingpost_required_parameters.path
+
         # Construct URL
         url = '/parameterGrouping/postRequired/{path}'
         path_format_arguments = {
@@ -83,9 +96,9 @@ class parameter_groupingOperations(object):
         # Construct headers
         headers = {}
         if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
         if custom_header is not None:
-            headers['customHeader'] = custom_header
+            headers['customHeader'] = Serialized.serializeObject(custom_header, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -121,6 +134,13 @@ class parameter_groupingOperations(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
+        custom_header = None
+        if parameter_groupingpost_optional_parameters is not None:
+            custom_header = parameter_groupingpost_optional_parameters.custom_header
+        query = None
+        if parameter_groupingpost_optional_parameters is not None:
+            query = parameter_groupingpost_optional_parameters.query
+
         # Construct URL
         url = '/parameterGrouping/postOptional'
 
@@ -132,9 +152,9 @@ class parameter_groupingOperations(object):
         # Construct headers
         headers = {}
         if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
         if custom_header is not None:
-            headers['customHeader'] = custom_header
+            headers['customHeader'] = Serialized.serializeObject(custom_header, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -175,6 +195,19 @@ class parameter_groupingOperations(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
+        headerone = None
+        if firstparametergroup is not None:
+            headerone = firstparametergroup.headerone
+        queryone = None
+        if firstparametergroup is not None:
+            queryone = firstparametergroup.queryone
+        headertwo = None
+        if parameter_groupingpost_multiple_parameter_groupssecondparametergroup is not None:
+            headertwo = parameter_groupingpost_multiple_parameter_groupssecondparametergroup.headertwo
+        querytwo = None
+        if parameter_groupingpost_multiple_parameter_groupssecondparametergroup is not None:
+            querytwo = parameter_groupingpost_multiple_parameter_groupssecondparametergroup.querytwo
+
         # Construct URL
         url = '/parameterGrouping/postMultipleParameterGroups'
 
@@ -188,11 +221,11 @@ class parameter_groupingOperations(object):
         # Construct headers
         headers = {}
         if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
         if headerone is not None:
-            headers['header-one'] = headerone
+            headers['header-one'] = Serialized.serializeObject(headerone, 'str')
         if headertwo is not None:
-            headers['header-two'] = headertwo
+            headers['header-two'] = Serialized.serializeObject(headertwo, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -227,6 +260,13 @@ class parameter_groupingOperations(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
+        headerone = None
+        if firstparametergroup is not None:
+            headerone = firstparametergroup.headerone
+        queryone = None
+        if firstparametergroup is not None:
+            queryone = firstparametergroup.queryone
+
         # Construct URL
         url = '/parameterGrouping/sharedParameterGroupObject'
 
@@ -238,9 +278,9 @@ class parameter_groupingOperations(object):
         # Construct headers
         headers = {}
         if self.config.acceptlanguage is not None:
-            headers['accept-language'] = self.config.acceptlanguage
+            headers['accept-language'] = Serialized.serializeObject(self.config.acceptlanguage, 'str')
         if headerone is not None:
-            headers['header-one'] = headerone
+            headers['header-one'] = Serialized.serializeObject(headerone, 'str')
         headers.update(custom_headers)
         headers['x-ms-client-request-id'] = str(uuid.uuid1())
         headers['Content-Type'] = 'application/json; charset=utf-8'
