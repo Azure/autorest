@@ -3,7 +3,6 @@
 
 using System.Threading.Tasks;
 using System.IO;
-using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby.Templates;
 
@@ -41,7 +40,8 @@ namespace Microsoft.Rest.Generator.Ruby
         /// Initializes a new instance of the class RubyCodeGenerator.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        public RubyCodeGenerator(Settings settings) : base(settings)
+        public RubyCodeGenerator(Settings settings)
+            : base(settings)
         {
             codeNamer = new RubyCodeNamer();
 
@@ -97,7 +97,6 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <param name="serviceClientModel"></param>
         public override void NormalizeClientModel(ServiceClient serviceClientModel)
         {
-            Extensions.NormalizeClientModel(serviceClientModel, Settings);
             PopulateAdditionalProperties(serviceClientModel);
             codeNamer.NormalizeClientModel(serviceClientModel);
             codeNamer.ResolveNameCollisions(serviceClientModel, Settings.Namespace,
