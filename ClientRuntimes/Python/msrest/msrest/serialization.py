@@ -394,7 +394,7 @@ class Deserializer(object):
                 attr_type = map['type']
                 key = map['key']
 
-                raw_value = data.get(key) if key else data
+                raw_value = data.get(key)
 
                 value = self.deserialize_data(raw_value, attr_type)
                 setattr(response, attr, value)
