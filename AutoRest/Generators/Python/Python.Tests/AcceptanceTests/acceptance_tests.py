@@ -56,7 +56,7 @@ class AcceptanceTests(unittest.TestCase):
     #    cls.server.kill()
 
     def test_bool(self):
-        self.skipTest("temp")
+
         config = AutoRestBoolTestServiceConfiguration("http://localhost:3000")
         config.log_level = 10
         client = AutoRestBoolTestService(config)
@@ -69,15 +69,14 @@ class AcceptanceTests(unittest.TestCase):
             client.bool_model.put_true(False)
         with self.assertRaises(DeserializationError):
             client.bool_model.get_invalid()
-        pass
 
     def test_array(self):
+
         config = AutoRestSwaggerBATArrayServiceConfiguration("http://localhost:3000")
         config.log_level = 10
         client = AutoRestSwaggerBATArrayService(config)
         self.assertListEqual([], client.array.get_array_empty())
         self.assertIsNone(client.array.get_array_null())
-        pass
 
     def test_complex(self):
         """
@@ -286,7 +285,7 @@ class AcceptanceTests(unittest.TestCase):
         self.assertEqual("Tomato", inheritanceResult.hates[1].name)
 
     def test_ensure_coverage(self):
-        self.skipTest("temp")
+
         config = AutoRestReportServiceConfiguration("http://localhost:3000")
         config.log_level = 10
         client = AutoRestReportService(config)
