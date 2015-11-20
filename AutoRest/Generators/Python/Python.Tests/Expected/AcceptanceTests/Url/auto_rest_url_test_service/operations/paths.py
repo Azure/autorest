@@ -29,10 +29,10 @@ class paths(object):
 
         self.config = config
 
-    def _parse_url(self, name, value, datatype):
+    def _serialize_data(self, name, value, datatype, **kwargs):
 
         try:
-            value = self._serialize.serialize_data(value, datatype)
+            value = self._serialize.serialize_data(value, datatype, **kwargs)
 
         except ValueError:
             raise ValueError("{} must not be None.".format(name))
@@ -66,7 +66,8 @@ class paths(object):
         # Construct URL
         url = '/paths/bool/true/{boolPath}'
         path_format_arguments = {
-            'boolPath': self._parse_url("bool_path", bool_path, 'bool', False)}
+            'boolPath': self._serialize_data("bool_path", bool_path, 'bool')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -110,7 +111,8 @@ class paths(object):
         # Construct URL
         url = '/paths/bool/false/{boolPath}'
         path_format_arguments = {
-            'boolPath': self._parse_url("bool_path", bool_path, 'bool', False)}
+            'boolPath': self._serialize_data("bool_path", bool_path, 'bool')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -154,7 +156,8 @@ class paths(object):
         # Construct URL
         url = '/paths/int/1000000/{intPath}'
         path_format_arguments = {
-            'intPath': self._parse_url("int_path", int_path, 'int', False)}
+            'intPath': self._serialize_data("int_path", int_path, 'int')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -198,7 +201,8 @@ class paths(object):
         # Construct URL
         url = '/paths/int/-1000000/{intPath}'
         path_format_arguments = {
-            'intPath': self._parse_url("int_path", int_path, 'int', False)}
+            'intPath': self._serialize_data("int_path", int_path, 'int')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -242,7 +246,8 @@ class paths(object):
         # Construct URL
         url = '/paths/long/10000000000/{longPath}'
         path_format_arguments = {
-            'longPath': self._parse_url("long_path", long_path, 'long', False)}
+            'longPath': self._serialize_data("long_path", long_path, 'long')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -286,7 +291,8 @@ class paths(object):
         # Construct URL
         url = '/paths/long/-10000000000/{longPath}'
         path_format_arguments = {
-            'longPath': self._parse_url("long_path", long_path, 'long', False)}
+            'longPath': self._serialize_data("long_path", long_path, 'long')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -330,7 +336,8 @@ class paths(object):
         # Construct URL
         url = '/paths/float/1.034E+20/{floatPath}'
         path_format_arguments = {
-            'floatPath': self._parse_url("float_path", float_path, 'float', False)}
+            'floatPath': self._serialize_data("float_path", float_path, 'float')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -374,7 +381,8 @@ class paths(object):
         # Construct URL
         url = '/paths/float/-1.034E-20/{floatPath}'
         path_format_arguments = {
-            'floatPath': self._parse_url("float_path", float_path, 'float', False)}
+            'floatPath': self._serialize_data("float_path", float_path, 'float')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -418,7 +426,8 @@ class paths(object):
         # Construct URL
         url = '/paths/double/9999999.999/{doublePath}'
         path_format_arguments = {
-            'doublePath': self._parse_url("double_path", double_path, 'float', False)}
+            'doublePath': self._serialize_data("double_path", double_path, 'float')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -462,7 +471,8 @@ class paths(object):
         # Construct URL
         url = '/paths/double/-9999999.999/{doublePath}'
         path_format_arguments = {
-            'doublePath': self._parse_url("double_path", double_path, 'float', False)}
+            'doublePath': self._serialize_data("double_path", double_path, 'float')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -507,7 +517,8 @@ class paths(object):
         # Construct URL
         url = '/paths/string/unicode/{stringPath}'
         path_format_arguments = {
-            'stringPath': self._parse_url("string_path", string_path, 'str', False)}
+            'stringPath': self._serialize_data("string_path", string_path, 'str')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -553,7 +564,8 @@ class paths(object):
         # Construct URL
         url = '/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}'
         path_format_arguments = {
-            'stringPath': self._parse_url("string_path", string_path, 'str', False)}
+            'stringPath': self._serialize_data("string_path", string_path, 'str')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -598,7 +610,8 @@ class paths(object):
         # Construct URL
         url = '/paths/string/empty/{stringPath}'
         path_format_arguments = {
-            'stringPath': self._parse_url("string_path", string_path, 'str', False)}
+            'stringPath': self._serialize_data("string_path", string_path, 'str')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -642,7 +655,8 @@ class paths(object):
         # Construct URL
         url = '/paths/string/null/{stringPath}'
         path_format_arguments = {
-            'stringPath': self._parse_url("string_path", string_path, 'str', False)}
+            'stringPath': self._serialize_data("string_path", string_path, 'str')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -687,7 +701,8 @@ class paths(object):
         # Construct URL
         url = '/paths/enum/green%20color/{enumPath}'
         path_format_arguments = {
-            'enumPath': self._parse_url("enum_path", enum_path, 'UriColor', False)}
+            'enumPath': self._serialize_data("enum_path", enum_path, 'UriColor')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -733,7 +748,8 @@ class paths(object):
         # Construct URL
         url = '/paths/string/null/{enumPath}'
         path_format_arguments = {
-            'enumPath': self._parse_url("enum_path", enum_path, 'UriColor', False)}
+            'enumPath': self._serialize_data("enum_path", enum_path, 'UriColor')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -778,7 +794,8 @@ class paths(object):
         # Construct URL
         url = '/paths/byte/multibyte/{bytePath}'
         path_format_arguments = {
-            'bytePath': self._parse_url("byte_path", byte_path, 'bytearray', False)}
+            'bytePath': self._serialize_data("byte_path", byte_path, 'bytearray')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -822,7 +839,8 @@ class paths(object):
         # Construct URL
         url = '/paths/byte/empty/{bytePath}'
         path_format_arguments = {
-            'bytePath': self._parse_url("byte_path", byte_path, 'bytearray', False)}
+            'bytePath': self._serialize_data("byte_path", byte_path, 'bytearray')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -866,7 +884,8 @@ class paths(object):
         # Construct URL
         url = '/paths/byte/null/{bytePath}'
         path_format_arguments = {
-            'bytePath': self._parse_url("byte_path", byte_path, 'bytearray', False)}
+            'bytePath': self._serialize_data("byte_path", byte_path, 'bytearray')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -910,7 +929,8 @@ class paths(object):
         # Construct URL
         url = '/paths/date/2012-01-01/{datePath}'
         path_format_arguments = {
-            'datePath': self._parse_url("date_path", date_path, 'date', False)}
+            'datePath': self._serialize_data("date_path", date_path, 'date')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -955,7 +975,8 @@ class paths(object):
         # Construct URL
         url = '/paths/date/null/{datePath}'
         path_format_arguments = {
-            'datePath': self._parse_url("date_path", date_path, 'date', False)}
+            'datePath': self._serialize_data("date_path", date_path, 'date')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -999,7 +1020,8 @@ class paths(object):
         # Construct URL
         url = '/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}'
         path_format_arguments = {
-            'dateTimePath': self._parse_url("date_time_path", date_time_path, 'iso-8601', False)}
+            'dateTimePath': self._serialize_data("date_time_path", date_time_path, 'iso-8601')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -1044,7 +1066,8 @@ class paths(object):
         # Construct URL
         url = '/paths/datetime/null/{dateTimePath}'
         path_format_arguments = {
-            'dateTimePath': self._parse_url("date_time_path", date_time_path, 'iso-8601', False)}
+            'dateTimePath': self._serialize_data("date_time_path", date_time_path, 'iso-8601')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters

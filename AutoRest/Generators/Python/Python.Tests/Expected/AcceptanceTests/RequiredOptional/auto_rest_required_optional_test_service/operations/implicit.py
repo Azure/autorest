@@ -27,10 +27,10 @@ class implicit(object):
 
         self.config = config
 
-    def _parse_url(self, name, value, datatype):
+    def _serialize_data(self, name, value, datatype, **kwargs):
 
         try:
-            value = self._serialize.serialize_data(value, datatype)
+            value = self._serialize.serialize_data(value, datatype, **kwargs)
 
         except ValueError:
             raise ValueError("{} must not be None.".format(name))
@@ -65,7 +65,8 @@ class implicit(object):
         # Construct URL
         url = '/reqopt/implicit/required/path/{pathParameter}'
         path_format_arguments = {
-            'pathParameter': self._parse_url("path_parameter", path_parameter, 'str', False)}
+            'pathParameter': self._serialize_data("path_parameter", path_parameter, 'str')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -112,7 +113,7 @@ class implicit(object):
         # Construct parameters
         query = {}
         if query_parameter is not None:
-            query['queryParameter'] = self._parse_url("query_parameter", query_parameter, 'str', False)
+            query['queryParameter'] = self._serialize_data("query_parameter", query_parameter, 'str')
 
         # Construct headers
         headers = {}
@@ -158,7 +159,7 @@ class implicit(object):
         # Construct headers
         headers = {}
         if query_parameter is not None:
-            headers['queryParameter'] = self._serialize.serialize_data(query_parameter, 'str')
+            headers['queryParameter'] = self._serialize_data("query_parameter", query_parameter, 'str')
         headers.update(custom_headers)
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -238,7 +239,8 @@ class implicit(object):
         # Construct URL
         url = '/reqopt/global/required/path/{required-global-path}'
         path_format_arguments = {
-            'required-global-path': self._parse_url("self.config.required_global_path", self.config.required_global_path, 'str', False)}
+            'required-global-path': self._serialize_data("self.config.required_global_path", self.config.required_global_path, 'str')
+        }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
@@ -283,8 +285,7 @@ class implicit(object):
 
         # Construct parameters
         query = {}
-        if self.config.required_global_query is not None:
-            query['required-global-query'] = self._parse_url("self.config.required_global_query", self.config.required_global_query, 'str', False)
+        query['required-global-query'] =self._serialize_data("self.config.required_global_query", self.config.required_global_query, 'str')
 
         # Construct headers
         headers = {}
@@ -326,7 +327,7 @@ class implicit(object):
         # Construct parameters
         query = {}
         if self.config.optional_global_query is not None:
-            query['optional-global-query'] = self._parse_url("self.config.optional_global_query", self.config.optional_global_query, 'int', False)
+            query['optional-global-query'] = self._serialize_data("self.config.optional_global_query", self.config.optional_global_query, 'int')
 
         # Construct headers
         headers = {}

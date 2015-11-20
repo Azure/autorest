@@ -22,18 +22,21 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
         /// Format the value of a sequence given the modeled element format.  Note that only sequences of strings are supported
         /// </summary>
         /// <param name="parameter">The parameter to format</param>
-        /// <returns>A reference to the formatted parameter value</returns>
-        public static string GetFormattedReferenceValue(this Parameter parameter)
+        /// <param name="separator">return the separator</param>
+        /// <returns>true means it need format, and out with seperator</returns>
+        public static bool NeedsFormattedSeparator(Parameter parameter, out string separator)
         {
             if (parameter == null)
             {
                 throw new ArgumentNullException("parameter");
             }
 
+            separator = ",";
+
             SequenceType sequence = parameter.Type as SequenceType;
             if (sequence == null)
             {
-                return parameter.Type.ToString(parameter.Name);
+                return false;
             }
 
             PrimaryType primaryType = sequence.ElementType as PrimaryType;
@@ -51,8 +54,8 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                                   "non-string array parameter {0}", parameter));
             }
 
-            return string.Format(CultureInfo.InvariantCulture,
-                "self._serialize.serialize_data({0}, '{1}', '{2}')", parameter.Name, "[str]", parameter.CollectionFormat.GetSeparator());
+            separator = parameter.CollectionFormat.GetSeparator();
+            return true;
         }
 
         /// <summary>
