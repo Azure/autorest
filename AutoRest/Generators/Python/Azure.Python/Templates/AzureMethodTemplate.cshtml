@@ -65,7 +65,6 @@ else
             # Construct headers
             headers = {}
             @(Model.BuildHeaders("query"))
-            headers.update(custom_headers)
             @(Model.SetDefaultHeaders)
             headers['Content-Type'] = '@(Model.ContentType)'
 @EmptyLine
