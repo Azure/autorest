@@ -181,6 +181,9 @@ class ClientRequest(requests.Request):
         if isinstance(data, types.GeneratorType):
             self.data = data
 
+        elif data is None:
+            self.data = json.dumps(data)
+
         else:
             self.data = json.dumps(data)
             self.headers['Content-Length'] = len(self.data)

@@ -144,17 +144,21 @@ class ServiceClient(object):
         kwargs.update(self.config.connection())
 
         request.add_headers(headers)
-        if content is not None:
-            kwargs = request.add_content(content, **kwargs)
+        #if content is not None:
+        request.add_content(content, **kwargs)
+   
 
         try:
 
             try:
-                return session.request(
+                response = session.request(
                     request.method, request.url, data=request.data,
                     headers=request.headers, params=request.params,
                     allow_redirects=bool(self.config.redirect_policy),
                     **kwargs)
+
+                response.raise_for_status()
+                return response
 
             except (oauth2.rfc6749.errors.InvalidGrantError,
                     oauth2.rfc6749.errors.TokenExpiredError) as err:
