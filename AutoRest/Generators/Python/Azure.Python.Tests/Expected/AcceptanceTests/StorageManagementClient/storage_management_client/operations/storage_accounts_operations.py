@@ -562,7 +562,6 @@ class storage_accountsOperations(object):
             if self.config.acceptlanguage is not None:
                 query['accept-language'] = self.config.acceptlanguage
             headers.update(custom_headers)
-            headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
 
@@ -632,7 +631,6 @@ class storage_accountsOperations(object):
             headers = {}
             if self.config.acceptlanguage is not None:
                 query['accept-language'] = self.config.acceptlanguage
-            headers.update(custom_headers)
             headers.update(custom_headers)
             headers['x-ms-client-request-id'] = str(uuid.uuid1())
             headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -720,142 +718,6 @@ class storage_accountsOperations(object):
 
         if response.status_code == 200:
             deserialized = self._deserialize('StorageAccountKeys', response)
-
-        if raw:
-            return deserialized, response
-
-        return deserialized
-
-    @async_request
-    def list_next(self, next_page_link, custom_headers={}, raw=False, callback=None):
-        """
-
-        Lists all the storage accounts available under the subscription. Note
-        that storage keys are not returned; use the ListKeys operation for
-        this.
-
-        :param next_page_link: The NextLink from the previous successful call
-        to List operation.
-        :param custom_headers: headers that will be added to the request
-        :param raw: returns the direct response alongside the deserialized
-        response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type next_page_link: str
-        :type custom_headers: dict
-        :type raw: boolean
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: object or (object, requests.response) or
-        concurrent.futures.Future
-        """
-
-        def paging(next_link=None, raw=False):
-
-            if next_link is None:
-                # Construct URL
-                url = '{nextLink}'
-                path_format_arguments = {
-                    'nextLink': self._parse_url("next_page_link", next_page_link, 'str', True)}
-                url = url.format(**path_format_arguments)
-
-                # Construct parameters
-                query = {}
-
-            else:
-                url = next_link
-                query = {}
-
-            # Construct headers
-            headers = {}
-            if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
-            headers.update(custom_headers)
-            headers.update(custom_headers)
-            headers['x-ms-client-request-id'] = str(uuid.uuid1())
-            headers['Content-Type'] = 'application/json; charset=utf-8'
-
-            # Construct and send request
-            request = self._client.get(url, query)
-            response = self._client.send(request, headers)
-
-            if response.status_code not in [200]:
-                raise CloudException(self._deserialize, response)
-
-            return response
-
-        response = paging()
-
-        # Deserialize response
-        deserialized = StorageAccountPaged(response, paging, self._deserialize.dependencies)
-
-        if raw:
-            return deserialized, response
-
-        return deserialized
-
-    @async_request
-    def list_by_resource_group_next(self, next_page_link, custom_headers={}, raw=False, callback=None):
-        """
-
-        Lists all the storage accounts available under the given resource
-        group. Note that storage keys are not returned; use the ListKeys
-        operation for this.
-
-        :param next_page_link: The NextLink from the previous successful call
-        to List operation.
-        :param custom_headers: headers that will be added to the request
-        :param raw: returns the direct response alongside the deserialized
-        response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type next_page_link: str
-        :type custom_headers: dict
-        :type raw: boolean
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: object or (object, requests.response) or
-        concurrent.futures.Future
-        """
-
-        def paging(next_link=None, raw=False):
-
-            if next_link is None:
-                # Construct URL
-                url = '{nextLink}'
-                path_format_arguments = {
-                    'nextLink': self._parse_url("next_page_link", next_page_link, 'str', True)}
-                url = url.format(**path_format_arguments)
-
-                # Construct parameters
-                query = {}
-
-            else:
-                url = next_link
-                query = {}
-
-            # Construct headers
-            headers = {}
-            if self.config.acceptlanguage is not None:
-                query['accept-language'] = self.config.acceptlanguage
-            headers.update(custom_headers)
-            headers.update(custom_headers)
-            headers['x-ms-client-request-id'] = str(uuid.uuid1())
-            headers['Content-Type'] = 'application/json; charset=utf-8'
-
-            # Construct and send request
-            request = self._client.get(url, query)
-            response = self._client.send(request, headers)
-
-            if response.status_code not in [200]:
-                raise CloudException(self._deserialize, response)
-
-            return response
-
-        response = paging()
-
-        # Deserialize response
-        deserialized = StorageAccountPaged(response, paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
