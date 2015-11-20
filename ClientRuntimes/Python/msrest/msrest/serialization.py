@@ -27,8 +27,6 @@
 import json
 import isodate
 import datetime
-import cPickle
-import chardet
 
 from base64 import b64decode, b64encode
 from enum import Enum
