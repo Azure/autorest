@@ -106,6 +106,8 @@ Number.prototype.getNull = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -123,7 +125,7 @@ Number.prototype.getNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -205,6 +207,8 @@ Number.prototype.getInvalidFloat = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -222,7 +226,7 @@ Number.prototype.getInvalidFloat = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -304,6 +308,8 @@ Number.prototype.getInvalidDouble = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -321,7 +327,7 @@ Number.prototype.getInvalidDouble = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -403,6 +409,8 @@ Number.prototype.getInvalidDecimal = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -420,7 +428,7 @@ Number.prototype.getInvalidDecimal = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -525,11 +533,13 @@ Number.prototype.putBigFloat = function (numberBody, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -611,6 +621,8 @@ Number.prototype.getBigFloat = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -628,7 +640,7 @@ Number.prototype.getBigFloat = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -733,11 +745,13 @@ Number.prototype.putBigDouble = function (numberBody, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -819,6 +833,8 @@ Number.prototype.getBigDouble = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -836,7 +852,7 @@ Number.prototype.getBigDouble = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -941,11 +957,13 @@ Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, ca
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1027,6 +1045,8 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1044,7 +1064,7 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1149,11 +1169,13 @@ Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, ca
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1235,6 +1257,8 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1252,7 +1276,7 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1357,11 +1381,13 @@ Number.prototype.putBigDecimal = function (numberBody, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1443,6 +1469,8 @@ Number.prototype.getBigDecimal = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1460,7 +1488,7 @@ Number.prototype.getBigDecimal = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1565,11 +1593,13 @@ Number.prototype.putBigDecimalPositiveDecimal = function (numberBody, options, c
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1651,6 +1681,8 @@ Number.prototype.getBigDecimalPositiveDecimal = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1668,7 +1700,7 @@ Number.prototype.getBigDecimalPositiveDecimal = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1773,11 +1805,13 @@ Number.prototype.putBigDecimalNegativeDecimal = function (numberBody, options, c
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1859,6 +1893,8 @@ Number.prototype.getBigDecimalNegativeDecimal = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1876,7 +1912,7 @@ Number.prototype.getBigDecimalNegativeDecimal = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1981,11 +2017,13 @@ Number.prototype.putSmallFloat = function (numberBody, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2067,6 +2105,8 @@ Number.prototype.getSmallFloat = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2084,7 +2124,7 @@ Number.prototype.getSmallFloat = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2189,11 +2229,13 @@ Number.prototype.putSmallDouble = function (numberBody, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2275,6 +2317,8 @@ Number.prototype.getSmallDouble = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2292,7 +2336,7 @@ Number.prototype.getSmallDouble = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2397,11 +2441,13 @@ Number.prototype.putSmallDecimal = function (numberBody, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2483,6 +2529,8 @@ Number.prototype.getSmallDecimal = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2500,7 +2548,7 @@ Number.prototype.getSmallDecimal = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

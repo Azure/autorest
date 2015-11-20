@@ -107,6 +107,8 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -130,7 +132,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -213,6 +215,8 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -236,7 +240,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -319,6 +323,8 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = functi
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -342,7 +348,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = functi
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -425,6 +431,8 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function 
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -448,7 +456,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function 
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -532,6 +540,8 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -555,7 +565,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -638,6 +648,8 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -680,7 +692,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -764,6 +776,8 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -806,7 +820,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -890,6 +904,8 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -932,7 +948,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1014,6 +1030,8 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1075,7 +1093,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1157,6 +1175,8 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1218,7 +1238,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1300,6 +1320,8 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1361,7 +1383,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1444,6 +1466,8 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1505,7 +1529,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1587,11 +1611,13 @@ MultipleResponses.prototype.get202None204NoneDefaultError202None = function (opt
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1673,11 +1699,13 @@ MultipleResponses.prototype.get202None204NoneDefaultError204None = function (opt
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1760,11 +1788,13 @@ MultipleResponses.prototype.get202None204NoneDefaultError400Valid = function (op
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1842,11 +1872,13 @@ MultipleResponses.prototype.get202None204NoneDefaultNone202Invalid = function (o
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1924,11 +1956,13 @@ MultipleResponses.prototype.get202None204NoneDefaultNone204None = function (opti
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2006,11 +2040,13 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400None = function (opti
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2088,11 +2124,13 @@ MultipleResponses.prototype.get202None204NoneDefaultNone400Invalid = function (o
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2175,6 +2213,8 @@ MultipleResponses.prototype.getDefaultModelA200Valid = function (options, callba
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2195,7 +2235,7 @@ MultipleResponses.prototype.getDefaultModelA200Valid = function (options, callba
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2278,6 +2318,8 @@ MultipleResponses.prototype.getDefaultModelA200None = function (options, callbac
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2298,7 +2340,7 @@ MultipleResponses.prototype.getDefaultModelA200None = function (options, callbac
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2381,6 +2423,8 @@ MultipleResponses.prototype.getDefaultModelA400Valid = function (options, callba
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2401,7 +2445,7 @@ MultipleResponses.prototype.getDefaultModelA400Valid = function (options, callba
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2484,6 +2528,8 @@ MultipleResponses.prototype.getDefaultModelA400None = function (options, callbac
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2504,7 +2550,7 @@ MultipleResponses.prototype.getDefaultModelA400None = function (options, callbac
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2582,11 +2628,13 @@ MultipleResponses.prototype.getDefaultNone200Invalid = function (options, callba
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2664,11 +2712,13 @@ MultipleResponses.prototype.getDefaultNone200None = function (options, callback)
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2746,11 +2796,13 @@ MultipleResponses.prototype.getDefaultNone400Invalid = function (options, callba
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2828,11 +2880,13 @@ MultipleResponses.prototype.getDefaultNone400None = function (options, callback)
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2912,6 +2966,8 @@ MultipleResponses.prototype.get200ModelA200None = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2935,7 +2991,7 @@ MultipleResponses.prototype.get200ModelA200None = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -3014,6 +3070,8 @@ MultipleResponses.prototype.get200ModelA200Valid = function (options, callback) 
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3037,7 +3095,7 @@ MultipleResponses.prototype.get200ModelA200Valid = function (options, callback) 
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -3116,6 +3174,8 @@ MultipleResponses.prototype.get200ModelA200Invalid = function (options, callback
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3139,7 +3199,7 @@ MultipleResponses.prototype.get200ModelA200Invalid = function (options, callback
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -3219,6 +3279,8 @@ MultipleResponses.prototype.get200ModelA400None = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3242,7 +3304,7 @@ MultipleResponses.prototype.get200ModelA400None = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -3321,6 +3383,8 @@ MultipleResponses.prototype.get200ModelA400Valid = function (options, callback) 
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3344,7 +3408,7 @@ MultipleResponses.prototype.get200ModelA400Valid = function (options, callback) 
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -3423,6 +3487,8 @@ MultipleResponses.prototype.get200ModelA400Invalid = function (options, callback
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3446,7 +3512,7 @@ MultipleResponses.prototype.get200ModelA400Invalid = function (options, callback
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -3525,6 +3591,8 @@ MultipleResponses.prototype.get200ModelA202Valid = function (options, callback) 
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3548,7 +3616,7 @@ MultipleResponses.prototype.get200ModelA202Valid = function (options, callback) 
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

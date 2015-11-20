@@ -106,6 +106,8 @@ Datetimerfc1123.prototype.getNull = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -126,7 +128,7 @@ Datetimerfc1123.prototype.getNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -208,6 +210,8 @@ Datetimerfc1123.prototype.getInvalid = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -228,7 +232,7 @@ Datetimerfc1123.prototype.getInvalid = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -310,6 +314,8 @@ Datetimerfc1123.prototype.getOverflow = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -330,7 +336,7 @@ Datetimerfc1123.prototype.getOverflow = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -412,6 +418,8 @@ Datetimerfc1123.prototype.getUnderflow = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -432,7 +440,7 @@ Datetimerfc1123.prototype.getUnderflow = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -538,11 +546,13 @@ Datetimerfc1123.prototype.putUtcMaxDateTime = function (datetimeBody, options, c
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -624,6 +634,8 @@ Datetimerfc1123.prototype.getUtcLowercaseMaxDateTime = function (options, callba
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -644,7 +656,7 @@ Datetimerfc1123.prototype.getUtcLowercaseMaxDateTime = function (options, callba
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -726,6 +738,8 @@ Datetimerfc1123.prototype.getUtcUppercaseMaxDateTime = function (options, callba
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -746,7 +760,7 @@ Datetimerfc1123.prototype.getUtcUppercaseMaxDateTime = function (options, callba
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -852,11 +866,13 @@ Datetimerfc1123.prototype.putUtcMinDateTime = function (datetimeBody, options, c
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -938,6 +954,8 @@ Datetimerfc1123.prototype.getUtcMinDateTime = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -958,7 +976,7 @@ Datetimerfc1123.prototype.getUtcMinDateTime = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

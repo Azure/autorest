@@ -107,6 +107,8 @@ Inheritance.prototype.getValid = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -130,7 +132,7 @@ Inheritance.prototype.getValid = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -247,11 +249,13 @@ Inheritance.prototype.putValid = function (complexBody, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

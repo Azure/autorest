@@ -106,6 +106,8 @@ String.prototype.getNull = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -123,7 +125,7 @@ String.prototype.getNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -230,11 +232,13 @@ String.prototype.putNull = function (stringBody, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -316,6 +320,8 @@ String.prototype.getEmpty = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -333,7 +339,7 @@ String.prototype.getEmpty = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -438,11 +444,13 @@ String.prototype.putEmpty = function (stringBody, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -525,6 +533,8 @@ String.prototype.getMbcs = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -542,7 +552,7 @@ String.prototype.getMbcs = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -649,11 +659,13 @@ String.prototype.putMbcs = function (stringBody, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -737,6 +749,8 @@ String.prototype.getWhitespace = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -754,7 +768,7 @@ String.prototype.getWhitespace = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -863,11 +877,13 @@ String.prototype.putWhitespace = function (stringBody, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -949,6 +965,8 @@ String.prototype.getNotProvided = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -966,7 +984,7 @@ String.prototype.getNotProvided = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

@@ -85,7 +85,8 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (product, options, cal
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = null;
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -111,7 +112,7 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (product, options, cal
         return callback(deserializationError);
       }
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -238,6 +239,8 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -280,7 +283,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -340,7 +343,9 @@ LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (product, options,
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LRORetrysPutAsyncRelativeRetrySucceededHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -366,7 +371,7 @@ LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (product, options,
         return callback(deserializationError);
       }
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -493,6 +498,9 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, opt
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LRORetrysPutAsyncRelativeRetrySucceededHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -516,7 +524,7 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, opt
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -568,7 +576,9 @@ LRORetrys.prototype.deleteProvisioning202Accepted200Succeeded = function (option
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LRORetrysDeleteProvisioning202Accepted200SucceededHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -594,7 +604,7 @@ LRORetrys.prototype.deleteProvisioning202Accepted200Succeeded = function (option
         return callback(deserializationError);
       }
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -697,6 +707,9 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LRORetrysDeleteProvisioning202Accepted200SucceededHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -739,7 +752,7 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -789,7 +802,9 @@ LRORetrys.prototype.delete202Retry200 = function (options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LRORetrysDelete202Retry200Headers'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -799,7 +814,7 @@ LRORetrys.prototype.delete202Retry200 = function (options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -900,11 +915,14 @@ LRORetrys.prototype.beginDelete202Retry200 = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LRORetrysDelete202Retry200Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -954,7 +972,9 @@ LRORetrys.prototype.deleteAsyncRelativeRetrySucceeded = function (options, callb
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LRORetrysDeleteAsyncRelativeRetrySucceededHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -964,7 +984,7 @@ LRORetrys.prototype.deleteAsyncRelativeRetrySucceeded = function (options, callb
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -1065,11 +1085,14 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LRORetrysDeleteAsyncRelativeRetrySucceededHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1127,7 +1150,9 @@ LRORetrys.prototype.post202Retry200 = function (product, options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LRORetrysPost202Retry200Headers'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -1137,7 +1162,7 @@ LRORetrys.prototype.post202Retry200 = function (product, options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -1262,11 +1287,14 @@ LRORetrys.prototype.beginPost202Retry200 = function (product, options, callback)
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LRORetrysPost202Retry200Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1325,7 +1353,9 @@ LRORetrys.prototype.postAsyncRelativeRetrySucceeded = function (product, options
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LRORetrysPostAsyncRelativeRetrySucceededHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -1335,7 +1365,7 @@ LRORetrys.prototype.postAsyncRelativeRetrySucceeded = function (product, options
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -1461,11 +1491,14 @@ LRORetrys.prototype.beginPostAsyncRelativeRetrySucceeded = function (product, op
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LRORetrysPostAsyncRelativeRetrySucceededHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

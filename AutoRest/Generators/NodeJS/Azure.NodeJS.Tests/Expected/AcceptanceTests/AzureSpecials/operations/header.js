@@ -132,11 +132,14 @@ Header.prototype.customNamedRequestId = function (fooClientRequestId, options, c
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HeaderCustomNamedRequestIdHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

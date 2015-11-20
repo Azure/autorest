@@ -107,6 +107,8 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -127,7 +129,7 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -210,6 +212,8 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -230,7 +234,7 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -338,6 +342,8 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -358,7 +364,7 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -466,6 +472,8 @@ HttpServerFailure.prototype.delete505 = function (booleanValue, options, callbac
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -486,7 +494,7 @@ HttpServerFailure.prototype.delete505 = function (booleanValue, options, callbac
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

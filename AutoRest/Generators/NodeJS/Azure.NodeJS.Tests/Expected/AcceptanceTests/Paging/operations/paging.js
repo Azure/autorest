@@ -124,6 +124,8 @@ Paging.prototype.getSinglePages = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -147,7 +149,7 @@ Paging.prototype.getSinglePages = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -254,6 +256,8 @@ Paging.prototype.getMultiplePages = function (clientRequestId, options, callback
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -277,7 +281,7 @@ Paging.prototype.getMultiplePages = function (clientRequestId, options, callback
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -377,6 +381,8 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -400,7 +406,7 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -501,6 +507,8 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -524,7 +532,7 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -623,6 +631,8 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -646,7 +656,7 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -745,6 +755,8 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -768,7 +780,7 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -867,6 +879,8 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -890,7 +904,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -991,6 +1005,8 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1014,7 +1030,7 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1123,6 +1139,8 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, clientRequestId,
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1146,7 +1164,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, clientRequestId,
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1248,6 +1266,8 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1271,7 +1291,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1374,6 +1394,8 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1397,7 +1419,7 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1498,6 +1520,8 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1521,7 +1545,7 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1622,6 +1646,8 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1645,7 +1671,7 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1746,6 +1772,8 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1769,7 +1797,7 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

@@ -106,11 +106,14 @@ HttpRedirects.prototype.head300 = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HttpRedirectsHead300Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -192,6 +195,9 @@ HttpRedirects.prototype.get300 = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HttpRedirectsGet300Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -209,7 +215,7 @@ HttpRedirects.prototype.get300 = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -291,11 +297,14 @@ HttpRedirects.prototype.head301 = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HttpRedirectsHead301Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -377,11 +386,14 @@ HttpRedirects.prototype.get301 = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HttpRedirectsGet301Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -490,11 +502,14 @@ HttpRedirects.prototype.put301 = function (booleanValue, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HttpRedirectsPut301Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -576,11 +591,14 @@ HttpRedirects.prototype.head302 = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HttpRedirectsHead302Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -662,11 +680,14 @@ HttpRedirects.prototype.get302 = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HttpRedirectsGet302Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -775,11 +796,14 @@ HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HttpRedirectsPatch302Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -888,11 +912,14 @@ HttpRedirects.prototype.post303 = function (booleanValue, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HttpRedirectsPost303Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -974,11 +1001,14 @@ HttpRedirects.prototype.head307 = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HttpRedirectsHead307Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1060,11 +1090,14 @@ HttpRedirects.prototype.get307 = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HttpRedirectsGet307Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1171,11 +1204,14 @@ HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HttpRedirectsPut307Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1282,11 +1318,14 @@ HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HttpRedirectsPatch307Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1393,11 +1432,14 @@ HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HttpRedirectsPost307Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1504,11 +1546,14 @@ HttpRedirects.prototype.delete307 = function (booleanValue, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['HttpRedirectsDelete307Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

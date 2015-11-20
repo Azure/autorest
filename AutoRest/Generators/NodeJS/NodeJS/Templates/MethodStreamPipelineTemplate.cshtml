@@ -23,5 +23,15 @@ return client.pipeline(httpRequest, function (err, response) {
 
   // Create Result
   var result = response;
-  return callback(null, result, httpRequest, response);
+  // Create Header
+  @if (Model.ReturnType.Headers != null)
+  {
+  @:var header = new client._models['@(Model.ReturnType.Headers.Name)'](response.headers);
+  @:header.deserialize(response.headers);
+  }
+  else
+  {
+  @:var header = null;
+  }
+  return callback(null, result, header, httpRequest, response);
 });

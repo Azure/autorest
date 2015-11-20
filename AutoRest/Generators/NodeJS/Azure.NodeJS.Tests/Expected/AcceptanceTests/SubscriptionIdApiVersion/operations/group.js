@@ -138,6 +138,8 @@ Group.prototype.getSampleResourceGroup = function (resourceGroupName, options, c
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -161,7 +163,7 @@ Group.prototype.getSampleResourceGroup = function (resourceGroupName, options, c
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

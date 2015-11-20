@@ -99,7 +99,9 @@ Files.prototype.getFile = function (options, callback) {
 
     // Create Result
     var result = response;
-    return callback(null, result, httpRequest, response);
+    // Create Header
+    var header = null;
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -174,7 +176,9 @@ Files.prototype.getEmptyFile = function (options, callback) {
 
     // Create Result
     var result = response;
-    return callback(null, result, httpRequest, response);
+    // Create Header
+    var header = null;
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

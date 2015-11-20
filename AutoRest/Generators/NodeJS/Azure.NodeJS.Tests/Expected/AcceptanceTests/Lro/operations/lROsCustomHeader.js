@@ -86,7 +86,9 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, 
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROsCustomHeaderPutAsyncRetrySucceededHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -112,7 +114,7 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, 
         return callback(deserializationError);
       }
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -240,6 +242,9 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROsCustomHeaderPutAsyncRetrySucceededHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -263,7 +268,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -324,7 +329,8 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, optio
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = null;
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -350,7 +356,7 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, optio
         return callback(deserializationError);
       }
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -478,6 +484,8 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -520,7 +528,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -579,7 +587,9 @@ LROsCustomHeader.prototype.post202Retry200 = function (product, options, callbac
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROsCustomHeaderPost202Retry200Headers'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -589,7 +599,7 @@ LROsCustomHeader.prototype.post202Retry200 = function (product, options, callbac
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -715,11 +725,14 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROsCustomHeaderPost202Retry200Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -779,7 +792,9 @@ LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options,
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROsCustomHeaderPostAsyncRetrySucceededHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -789,7 +804,7 @@ LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options,
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -916,11 +931,14 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (product, opt
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROsCustomHeaderPostAsyncRetrySucceededHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

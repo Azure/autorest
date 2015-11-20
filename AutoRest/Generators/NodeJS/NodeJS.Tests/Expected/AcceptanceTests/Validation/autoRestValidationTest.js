@@ -173,6 +173,8 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -196,7 +198,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -334,6 +336,8 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -357,7 +361,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

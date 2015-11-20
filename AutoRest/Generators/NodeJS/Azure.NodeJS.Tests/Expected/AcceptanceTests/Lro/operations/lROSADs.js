@@ -82,7 +82,8 @@ LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = null;
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -108,7 +109,7 @@ LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
         return callback(deserializationError);
       }
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -232,6 +233,8 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -274,7 +277,7 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -332,7 +335,8 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callba
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = null;
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -358,7 +362,7 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callba
         return callback(deserializationError);
       }
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -483,6 +487,8 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -525,7 +531,7 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -584,7 +590,9 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callbac
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsPutAsyncRelativeRetry400Headers'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -610,7 +618,7 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callbac
         return callback(deserializationError);
       }
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -736,6 +744,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsPutAsyncRelativeRetry400Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -759,7 +770,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -807,7 +818,9 @@ LROSADs.prototype.deleteNonRetry400 = function (options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsDeleteNonRetry400Headers'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -817,7 +830,7 @@ LROSADs.prototype.deleteNonRetry400 = function (options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -916,11 +929,14 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsDeleteNonRetry400Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -968,7 +984,9 @@ LROSADs.prototype.delete202NonRetry400 = function (options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsDelete202NonRetry400Headers'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -978,7 +996,7 @@ LROSADs.prototype.delete202NonRetry400 = function (options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -1077,11 +1095,14 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsDelete202NonRetry400Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1131,7 +1152,9 @@ LROSADs.prototype.deleteAsyncRelativeRetry400 = function (options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsDeleteAsyncRelativeRetry400Headers'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -1141,7 +1164,7 @@ LROSADs.prototype.deleteAsyncRelativeRetry400 = function (options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -1242,11 +1265,14 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsDeleteAsyncRelativeRetry400Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1302,7 +1328,9 @@ LROSADs.prototype.postNonRetry400 = function (product, options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsPostNonRetry400Headers'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -1312,7 +1340,7 @@ LROSADs.prototype.postNonRetry400 = function (product, options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -1435,11 +1463,14 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsPostNonRetry400Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1495,7 +1526,9 @@ LROSADs.prototype.post202NonRetry400 = function (product, options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsPost202NonRetry400Headers'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -1505,7 +1538,7 @@ LROSADs.prototype.post202NonRetry400 = function (product, options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -1628,11 +1661,14 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsPost202NonRetry400Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1690,7 +1726,9 @@ LROSADs.prototype.postAsyncRelativeRetry400 = function (product, options, callba
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsPostAsyncRelativeRetry400Headers'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -1700,7 +1738,7 @@ LROSADs.prototype.postAsyncRelativeRetry400 = function (product, options, callba
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -1825,11 +1863,14 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsPostAsyncRelativeRetry400Headers'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1887,7 +1928,8 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, opt
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = null;
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -1913,7 +1955,7 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, opt
         return callback(deserializationError);
       }
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -2038,6 +2080,8 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2080,7 +2124,7 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2139,7 +2183,9 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, ca
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsPutAsyncRelativeRetryNoStatusHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -2165,7 +2211,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, ca
         return callback(deserializationError);
       }
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -2291,6 +2337,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsPutAsyncRelativeRetryNoStatusHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2314,7 +2363,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2373,7 +2422,9 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, opti
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -2399,7 +2450,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, opti
         return callback(deserializationError);
       }
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -2525,6 +2576,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2548,7 +2602,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2597,7 +2651,8 @@ LROSADs.prototype.delete204Succeeded = function (options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = null;
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -2607,7 +2662,7 @@ LROSADs.prototype.delete204Succeeded = function (options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -2707,11 +2762,13 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2761,7 +2818,9 @@ LROSADs.prototype.deleteAsyncRelativeRetryNoStatus = function (options, callback
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsDeleteAsyncRelativeRetryNoStatusHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -2771,7 +2830,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryNoStatus = function (options, callback
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -2872,11 +2931,14 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsDeleteAsyncRelativeRetryNoStatusHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2933,7 +2995,9 @@ LROSADs.prototype.post202NoLocation = function (product, options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsPost202NoLocationHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -2943,7 +3007,7 @@ LROSADs.prototype.post202NoLocation = function (product, options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -3067,11 +3131,14 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsPost202NoLocationHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -3129,7 +3196,9 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, options, 
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsPostAsyncRelativeRetryNoPayloadHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -3139,7 +3208,7 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, options, 
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -3264,11 +3333,14 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsPostAsyncRelativeRetryNoPayloadHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -3326,7 +3398,8 @@ LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = null;
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -3352,7 +3425,7 @@ LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
         return callback(deserializationError);
       }
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -3477,6 +3550,8 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3500,7 +3575,7 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -3559,7 +3634,9 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, option
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -3585,7 +3662,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, option
         return callback(deserializationError);
       }
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -3711,6 +3788,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3734,7 +3814,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -3793,7 +3873,9 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, o
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -3819,7 +3901,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, o
         return callback(deserializationError);
       }
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -3945,6 +4027,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3968,7 +4053,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -4017,7 +4102,9 @@ LROSADs.prototype.delete202RetryInvalidHeader = function (options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsDelete202RetryInvalidHeaderHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -4027,7 +4114,7 @@ LROSADs.prototype.delete202RetryInvalidHeader = function (options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -4127,11 +4214,14 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsDelete202RetryInvalidHeaderHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -4180,7 +4270,9 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidHeader = function (options, cal
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -4190,7 +4282,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidHeader = function (options, cal
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -4290,11 +4382,14 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -4344,7 +4439,9 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidJsonPolling = function (options
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -4354,7 +4451,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidJsonPolling = function (options
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -4455,11 +4552,14 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -4516,7 +4616,9 @@ LROSADs.prototype.post202RetryInvalidHeader = function (product, options, callba
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsPost202RetryInvalidHeaderHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -4526,7 +4628,7 @@ LROSADs.prototype.post202RetryInvalidHeader = function (product, options, callba
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -4650,11 +4752,14 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsPost202RetryInvalidHeaderHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -4712,7 +4817,9 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, optio
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -4722,7 +4829,7 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, optio
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -4847,11 +4954,14 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -4909,7 +5019,9 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, 
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = new client._models['LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders'](response.headers);
+      header.deserialize(response.headers);
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -4919,7 +5031,7 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, 
 
       // Deserialize Response
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -5044,11 +5156,14 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (prod
       }
       return callback(error);
     }
+    // Create Header
+    var header = new client._models['LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders'](response.headers);
+    header.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

@@ -185,11 +185,13 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -287,6 +289,8 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -321,7 +325,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -449,11 +453,13 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -551,6 +557,8 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -582,7 +590,7 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -717,11 +725,13 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -820,6 +830,8 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -843,7 +855,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

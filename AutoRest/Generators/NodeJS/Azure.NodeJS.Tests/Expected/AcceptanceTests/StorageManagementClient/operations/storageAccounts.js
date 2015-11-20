@@ -160,6 +160,8 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -183,7 +185,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -254,7 +256,8 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-
+      // Create Header
+      var header = null;
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -280,7 +283,7 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
         return callback(deserializationError);
       }
 
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };
@@ -437,6 +440,8 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -460,7 +465,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -577,11 +582,13 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -705,6 +712,8 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -728,7 +737,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -905,6 +914,8 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -928,7 +939,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1047,6 +1058,8 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1070,7 +1083,7 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1179,6 +1192,8 @@ StorageAccounts.prototype.list = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1202,7 +1217,7 @@ StorageAccounts.prototype.list = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1319,6 +1334,8 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1342,7 +1359,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1495,6 +1512,8 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1518,7 +1537,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1621,6 +1640,8 @@ StorageAccounts.prototype.listNext = function (nextPageLink, options, callback) 
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1644,7 +1665,7 @@ StorageAccounts.prototype.listNext = function (nextPageLink, options, callback) 
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1748,6 +1769,8 @@ StorageAccounts.prototype.listByResourceGroupNext = function (nextPageLink, opti
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1771,7 +1794,7 @@ StorageAccounts.prototype.listByResourceGroupNext = function (nextPageLink, opti
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

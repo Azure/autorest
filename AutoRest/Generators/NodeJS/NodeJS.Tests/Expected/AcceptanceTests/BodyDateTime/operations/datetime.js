@@ -106,6 +106,8 @@ Datetime.prototype.getNull = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -126,7 +128,7 @@ Datetime.prototype.getNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -208,6 +210,8 @@ Datetime.prototype.getInvalid = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -228,7 +232,7 @@ Datetime.prototype.getInvalid = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -310,6 +314,8 @@ Datetime.prototype.getOverflow = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -330,7 +336,7 @@ Datetime.prototype.getOverflow = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -412,6 +418,8 @@ Datetime.prototype.getUnderflow = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -432,7 +440,7 @@ Datetime.prototype.getUnderflow = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -538,11 +546,13 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -624,6 +634,8 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -644,7 +656,7 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -726,6 +738,8 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -746,7 +760,7 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -853,11 +867,13 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -940,6 +956,8 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -960,7 +978,7 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1043,6 +1061,8 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1063,7 +1083,7 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1170,11 +1190,13 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1257,6 +1279,8 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1277,7 +1301,7 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1360,6 +1384,8 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1380,7 +1406,7 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1486,11 +1512,13 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1572,6 +1600,8 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1592,7 +1622,7 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1698,11 +1728,13 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1784,6 +1816,8 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1804,7 +1838,7 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1910,11 +1944,13 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1996,6 +2032,8 @@ Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callba
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2016,7 +2054,7 @@ Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callba
       }
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

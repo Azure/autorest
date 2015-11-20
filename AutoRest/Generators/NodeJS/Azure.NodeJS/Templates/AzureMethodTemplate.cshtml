@@ -76,7 +76,15 @@ else
     initialResult.body = response.body;
     client.@(Model.LongRunningOperationMethodNameInRuntime)(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      @EmptyLine
+      // Create Header
+      @if (Model.ReturnType.Headers != null)
+      {
+      @:var header = new client._models['@(Model.ReturnType.Headers.Name)'](response.headers);
+      @:header.deserialize(response.headers);
+      } else
+      {
+      @:var header = null;
+      }
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -95,7 +103,7 @@ else
       @:@(Model.DeserializeResponse(Model.DefaultResponse.Body))
       }
       @EmptyLine
-      return callback(null, result, httpRequest, response);
+      return callback(null, result, header, httpRequest, response);
     });
   });
 };

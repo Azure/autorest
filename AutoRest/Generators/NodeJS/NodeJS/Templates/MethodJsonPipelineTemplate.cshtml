@@ -50,7 +50,16 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
     }
     return callback(error);
   }
-
+  // Create Header
+  @if (Model.ReturnType.Headers != null)
+  {
+  @:var header = new client._models['@(Model.ReturnType.Headers.Name)'](response.headers);
+  @:header.deserialize(response.headers);
+  }
+  else
+  {
+  @:var header = null;
+  }
   // Create Result
   var result = null;
   if (responseBody === '') responseBody = null;
@@ -70,5 +79,5 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
   }
   @EmptyLine
 
-  return callback(null, result, httpRequest, response);
+  return callback(null, result, header, httpRequest, response);
 });

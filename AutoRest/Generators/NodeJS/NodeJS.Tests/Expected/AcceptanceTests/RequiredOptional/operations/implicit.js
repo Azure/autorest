@@ -118,6 +118,8 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -138,7 +140,7 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -237,11 +239,13 @@ Implicit.prototype.putOptionalQuery = function (queryParameter, options, callbac
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -336,11 +340,13 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, options, callba
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -447,11 +453,13 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -543,6 +551,8 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -563,7 +573,7 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -659,6 +669,8 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -679,7 +691,7 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -777,6 +789,8 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -797,7 +811,7 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 

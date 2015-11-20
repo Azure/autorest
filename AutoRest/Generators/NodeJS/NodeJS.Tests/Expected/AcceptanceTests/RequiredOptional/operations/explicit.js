@@ -131,6 +131,8 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -151,7 +153,7 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -258,11 +260,13 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -379,6 +383,8 @@ Explicit.prototype.postRequiredIntegerProperty = function (value, options, callb
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -399,7 +405,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (value, options, callb
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -514,11 +520,13 @@ Explicit.prototype.postOptionalIntegerProperty = function (value, options, callb
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -615,6 +623,8 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -635,7 +645,7 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -731,11 +741,13 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, option
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -842,6 +854,8 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -862,7 +876,7 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -969,11 +983,13 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1090,6 +1106,8 @@ Explicit.prototype.postRequiredStringProperty = function (value, options, callba
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1110,7 +1128,7 @@ Explicit.prototype.postRequiredStringProperty = function (value, options, callba
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1225,11 +1243,13 @@ Explicit.prototype.postOptionalStringProperty = function (value, options, callba
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1326,6 +1346,8 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1346,7 +1368,7 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1442,11 +1464,13 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, 
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1560,6 +1584,8 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1580,7 +1606,7 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1684,11 +1710,13 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1809,6 +1837,8 @@ Explicit.prototype.postRequiredClassProperty = function (value, options, callbac
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1829,7 +1859,7 @@ Explicit.prototype.postRequiredClassProperty = function (value, options, callbac
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -1940,11 +1970,13 @@ Explicit.prototype.postOptionalClassProperty = function (value, options, callbac
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2064,6 +2096,8 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2084,7 +2118,7 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2200,11 +2234,13 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2326,6 +2362,8 @@ Explicit.prototype.postRequiredArrayProperty = function (value, options, callbac
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2346,7 +2384,7 @@ Explicit.prototype.postRequiredArrayProperty = function (value, options, callbac
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2465,11 +2503,13 @@ Explicit.prototype.postOptionalArrayProperty = function (value, options, callbac
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2571,6 +2611,8 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2591,7 +2633,7 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
       return callback(deserializationError);
     }
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
@@ -2691,11 +2733,13 @@ Explicit.prototype.postOptionalArrayHeader = function (headerParameter, options,
       }
       return callback(error);
     }
+    // Create Header
+    var header = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, httpRequest, response);
+    return callback(null, result, header, httpRequest, response);
   });
 };
 
