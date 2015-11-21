@@ -219,18 +219,64 @@ class Serializer(object):
         except AttributeError:
             pass  # TargetObj has no _subtype_map so we don't need to classify
 
-    def url(self, data, data_type, **kwargs):
+    def url(self, name, data, data_type, **kwargs):
+        try:
+            output = self.serialize_data(data, data_type, **kwargs)
 
-        if data_type in ['[str]']:
-            data = ["" if d is None else d for d in data]
+            if data_type == 'bool':
+                output = json.dumps(output)
 
-        output = self.serialize_data(data, data_type, **kwargs)
-        if kwargs.get('skip_quote') == True:
-            return str(output)
+            if kwargs.get('skip_quote') == True:
+                output = str(output)
+            else:
+                output = quote(str(output), safe='')
 
-        if data_type == 'bool':
-            output = json.dumps(output)
-        return quote(str(output), safe='')
+        except ValueError:
+            raise ValueError("{} must not be None.".format(name))
+
+        except DeserializationError:
+            raise TypeError("{} must be type {}.".format(name, data_type))
+
+        else:
+            return output
+
+    def query(self, name, data, data_type, **kwargs):
+        try:
+            if data_type in ['[str]']:
+                data = ["" if d is None else d for d in data]
+
+            output = self.serialize_data(data, data_type, **kwargs)
+
+            if data_type == 'bool':
+                output = json.dumps(output)
+
+        except ValueError:
+            raise ValueError("{} must not be None.".format(name))
+
+        except DeserializationError:
+            raise TypeError("{} must be type {}.".format(name, data_type))
+
+        else:
+            return output
+
+    def header(self, name, data, data_type, **kwargs):
+        try:
+            if data_type in ['[str]']:
+                data = ["" if d is None else d for d in data]
+
+            output = self.serialize_data(data, data_type, **kwargs)
+
+            if data_type == 'bool':
+                output = json.dumps(output)
+
+        except ValueError:
+            raise ValueError("{} must not be None.".format(name))
+
+        except DeserializationError:
+            raise TypeError("{} must be type {}.".format(name, data_type))
+
+        else:
+            return output
 
     def serialize_data(self, data, data_type, required=False, **kwargs):
 
