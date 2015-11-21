@@ -41,7 +41,7 @@ class queries(object):
             return value
 
     @async_request
-    def get_boolean_true(self, bool_query, custom_headers={}, raw=False, callback=None):
+    def get_boolean_true(self, bool_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get true Boolean value on path
@@ -64,18 +64,18 @@ class queries(object):
         url = '/queries/bool/true'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if bool_query is not None:
-            query['boolQuery'] = self._serialize_data("bool_query", bool_query, 'bool')
+            query_parameters['boolQuery'] = self._serialize_data("bool_query", bool_query, 'bool')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -84,7 +84,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_boolean_false(self, bool_query, custom_headers={}, raw=False, callback=None):
+    def get_boolean_false(self, bool_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get false Boolean value on path
@@ -107,18 +107,18 @@ class queries(object):
         url = '/queries/bool/false'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if bool_query is not None:
-            query['boolQuery'] = self._serialize_data("bool_query", bool_query, 'bool')
+            query_parameters['boolQuery'] = self._serialize_data("bool_query", bool_query, 'bool')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -127,7 +127,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_boolean_null(self, bool_query, custom_headers={}, raw=False, callback=None):
+    def get_boolean_null(self, bool_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null Boolean value on query (query string should be absent)
@@ -150,18 +150,18 @@ class queries(object):
         url = '/queries/bool/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if bool_query is not None:
-            query['boolQuery'] = self._serialize_data("bool_query", bool_query, 'bool')
+            query_parameters['boolQuery'] = self._serialize_data("bool_query", bool_query, 'bool')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -170,7 +170,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_int_one_million(self, int_query, custom_headers={}, raw=False, callback=None):
+    def get_int_one_million(self, int_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '1000000' integer value
@@ -193,18 +193,18 @@ class queries(object):
         url = '/queries/int/1000000'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if int_query is not None:
-            query['intQuery'] = self._serialize_data("int_query", int_query, 'int')
+            query_parameters['intQuery'] = self._serialize_data("int_query", int_query, 'int')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -213,7 +213,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_int_negative_one_million(self, int_query, custom_headers={}, raw=False, callback=None):
+    def get_int_negative_one_million(self, int_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '-1000000' integer value
@@ -236,18 +236,18 @@ class queries(object):
         url = '/queries/int/-1000000'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if int_query is not None:
-            query['intQuery'] = self._serialize_data("int_query", int_query, 'int')
+            query_parameters['intQuery'] = self._serialize_data("int_query", int_query, 'int')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -256,7 +256,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_int_null(self, int_query, custom_headers={}, raw=False, callback=None):
+    def get_int_null(self, int_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null integer value (no query parameter)
@@ -279,18 +279,18 @@ class queries(object):
         url = '/queries/int/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if int_query is not None:
-            query['intQuery'] = self._serialize_data("int_query", int_query, 'int')
+            query_parameters['intQuery'] = self._serialize_data("int_query", int_query, 'int')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -299,7 +299,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_ten_billion(self, long_query, custom_headers={}, raw=False, callback=None):
+    def get_ten_billion(self, long_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '10000000000' 64 bit integer value
@@ -322,18 +322,18 @@ class queries(object):
         url = '/queries/long/10000000000'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if long_query is not None:
-            query['longQuery'] = self._serialize_data("long_query", long_query, 'long')
+            query_parameters['longQuery'] = self._serialize_data("long_query", long_query, 'long')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -342,7 +342,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_negative_ten_billion(self, long_query, custom_headers={}, raw=False, callback=None):
+    def get_negative_ten_billion(self, long_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '-10000000000' 64 bit integer value
@@ -365,18 +365,18 @@ class queries(object):
         url = '/queries/long/-10000000000'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if long_query is not None:
-            query['longQuery'] = self._serialize_data("long_query", long_query, 'long')
+            query_parameters['longQuery'] = self._serialize_data("long_query", long_query, 'long')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -385,7 +385,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_long_null(self, long_query, custom_headers={}, raw=False, callback=None):
+    def get_long_null(self, long_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get 'null 64 bit integer value (no query param in uri)
@@ -408,18 +408,18 @@ class queries(object):
         url = '/queries/long/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if long_query is not None:
-            query['longQuery'] = self._serialize_data("long_query", long_query, 'long')
+            query_parameters['longQuery'] = self._serialize_data("long_query", long_query, 'long')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -428,7 +428,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def float_scientific_positive(self, float_query, custom_headers={}, raw=False, callback=None):
+    def float_scientific_positive(self, float_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '1.034E+20' numeric value
@@ -451,18 +451,18 @@ class queries(object):
         url = '/queries/float/1.034E+20'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if float_query is not None:
-            query['floatQuery'] = self._serialize_data("float_query", float_query, 'float')
+            query_parameters['floatQuery'] = self._serialize_data("float_query", float_query, 'float')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -471,7 +471,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def float_scientific_negative(self, float_query, custom_headers={}, raw=False, callback=None):
+    def float_scientific_negative(self, float_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '-1.034E-20' numeric value
@@ -494,18 +494,18 @@ class queries(object):
         url = '/queries/float/-1.034E-20'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if float_query is not None:
-            query['floatQuery'] = self._serialize_data("float_query", float_query, 'float')
+            query_parameters['floatQuery'] = self._serialize_data("float_query", float_query, 'float')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -514,7 +514,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def float_null(self, float_query, custom_headers={}, raw=False, callback=None):
+    def float_null(self, float_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null numeric value (no query parameter)
@@ -537,18 +537,18 @@ class queries(object):
         url = '/queries/float/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if float_query is not None:
-            query['floatQuery'] = self._serialize_data("float_query", float_query, 'float')
+            query_parameters['floatQuery'] = self._serialize_data("float_query", float_query, 'float')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -557,7 +557,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def double_decimal_positive(self, double_query, custom_headers={}, raw=False, callback=None):
+    def double_decimal_positive(self, double_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '9999999.999' numeric value
@@ -580,18 +580,18 @@ class queries(object):
         url = '/queries/double/9999999.999'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if double_query is not None:
-            query['doubleQuery'] = self._serialize_data("double_query", double_query, 'float')
+            query_parameters['doubleQuery'] = self._serialize_data("double_query", double_query, 'float')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -600,7 +600,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def double_decimal_negative(self, double_query, custom_headers={}, raw=False, callback=None):
+    def double_decimal_negative(self, double_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '-9999999.999' numeric value
@@ -623,18 +623,18 @@ class queries(object):
         url = '/queries/double/-9999999.999'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if double_query is not None:
-            query['doubleQuery'] = self._serialize_data("double_query", double_query, 'float')
+            query_parameters['doubleQuery'] = self._serialize_data("double_query", double_query, 'float')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -643,7 +643,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def double_null(self, double_query, custom_headers={}, raw=False, callback=None):
+    def double_null(self, double_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null numeric value (no query parameter)
@@ -666,18 +666,18 @@ class queries(object):
         url = '/queries/double/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if double_query is not None:
-            query['doubleQuery'] = self._serialize_data("double_query", double_query, 'float')
+            query_parameters['doubleQuery'] = self._serialize_data("double_query", double_query, 'float')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -686,7 +686,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def string_unicode(self, string_query, custom_headers={}, raw=False, callback=None):
+    def string_unicode(self, string_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
@@ -710,18 +710,18 @@ class queries(object):
         url = '/queries/string/unicode/'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if string_query is not None:
-            query['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
+            query_parameters['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -730,7 +730,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def string_url_encoded(self, string_query, custom_headers={}, raw=False, callback=None):
+    def string_url_encoded(self, string_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get 'begin!*'();:@ &=+$,/?#[]end
@@ -755,18 +755,18 @@ class queries(object):
         url = '/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if string_query is not None:
-            query['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
+            query_parameters['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -775,7 +775,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def string_empty(self, string_query, custom_headers={}, raw=False, callback=None):
+    def string_empty(self, string_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get ''
@@ -799,18 +799,18 @@ class queries(object):
         url = '/queries/string/empty'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if string_query is not None:
-            query['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
+            query_parameters['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -819,7 +819,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def string_null(self, string_query, custom_headers={}, raw=False, callback=None):
+    def string_null(self, string_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null (no query parameter in url)
@@ -842,18 +842,18 @@ class queries(object):
         url = '/queries/string/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if string_query is not None:
-            query['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
+            query_parameters['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -862,7 +862,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def enum_valid(self, enum_query, custom_headers={}, raw=False, callback=None):
+    def enum_valid(self, enum_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get using uri with query parameter 'green color'
@@ -886,18 +886,18 @@ class queries(object):
         url = '/queries/enum/green%20color'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if enum_query is not None:
-            query['enumQuery'] = self._serialize_data("enum_query", enum_query, 'UriColor')
+            query_parameters['enumQuery'] = self._serialize_data("enum_query", enum_query, 'UriColor')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -906,7 +906,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def enum_null(self, enum_query, custom_headers={}, raw=False, callback=None):
+    def enum_null(self, enum_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null (no query parameter in url)
@@ -930,18 +930,18 @@ class queries(object):
         url = '/queries/enum/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if enum_query is not None:
-            query['enumQuery'] = self._serialize_data("enum_query", enum_query, 'UriColor')
+            query_parameters['enumQuery'] = self._serialize_data("enum_query", enum_query, 'UriColor')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -950,7 +950,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def byte_multi_byte(self, byte_query, custom_headers={}, raw=False, callback=None):
+    def byte_multi_byte(self, byte_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -974,18 +974,18 @@ class queries(object):
         url = '/queries/byte/multibyte'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if byte_query is not None:
-            query['byteQuery'] = self._serialize_data("byte_query", byte_query, 'bytearray')
+            query_parameters['byteQuery'] = self._serialize_data("byte_query", byte_query, 'bytearray')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -994,7 +994,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def byte_empty(self, byte_query, custom_headers={}, raw=False, callback=None):
+    def byte_empty(self, byte_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '' as byte array
@@ -1017,18 +1017,18 @@ class queries(object):
         url = '/queries/byte/empty'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if byte_query is not None:
-            query['byteQuery'] = self._serialize_data("byte_query", byte_query, 'bytearray')
+            query_parameters['byteQuery'] = self._serialize_data("byte_query", byte_query, 'bytearray')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1037,7 +1037,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def byte_null(self, byte_query, custom_headers={}, raw=False, callback=None):
+    def byte_null(self, byte_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null as byte array (no query parameters in uri)
@@ -1060,18 +1060,18 @@ class queries(object):
         url = '/queries/byte/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if byte_query is not None:
-            query['byteQuery'] = self._serialize_data("byte_query", byte_query, 'bytearray')
+            query_parameters['byteQuery'] = self._serialize_data("byte_query", byte_query, 'bytearray')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1080,7 +1080,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def date_valid(self, date_query, custom_headers={}, raw=False, callback=None):
+    def date_valid(self, date_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '2012-01-01' as date
@@ -1103,18 +1103,18 @@ class queries(object):
         url = '/queries/date/2012-01-01'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if date_query is not None:
-            query['dateQuery'] = self._serialize_data("date_query", date_query, 'date')
+            query_parameters['dateQuery'] = self._serialize_data("date_query", date_query, 'date')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1123,7 +1123,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def date_null(self, date_query, custom_headers={}, raw=False, callback=None):
+    def date_null(self, date_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null as date - this should result in no query parameters in uri
@@ -1146,18 +1146,18 @@ class queries(object):
         url = '/queries/date/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if date_query is not None:
-            query['dateQuery'] = self._serialize_data("date_query", date_query, 'date')
+            query_parameters['dateQuery'] = self._serialize_data("date_query", date_query, 'date')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1166,7 +1166,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def date_time_valid(self, date_time_query, custom_headers={}, raw=False, callback=None):
+    def date_time_valid(self, date_time_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '2012-01-01T01:01:01Z' as date-time
@@ -1189,18 +1189,18 @@ class queries(object):
         url = '/queries/datetime/2012-01-01T01%3A01%3A01Z'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if date_time_query is not None:
-            query['dateTimeQuery'] = self._serialize_data("date_time_query", date_time_query, 'iso-8601')
+            query_parameters['dateTimeQuery'] = self._serialize_data("date_time_query", date_time_query, 'iso-8601')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1209,7 +1209,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def date_time_null(self, date_time_query, custom_headers={}, raw=False, callback=None):
+    def date_time_null(self, date_time_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null as date-time, should result in no query parameters in uri
@@ -1232,18 +1232,18 @@ class queries(object):
         url = '/queries/datetime/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if date_time_query is not None:
-            query['dateTimeQuery'] = self._serialize_data("date_time_query", date_time_query, 'iso-8601')
+            query_parameters['dateTimeQuery'] = self._serialize_data("date_time_query", date_time_query, 'iso-8601')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1252,7 +1252,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def array_string_csv_valid(self, array_query, custom_headers={}, raw=False, callback=None):
+    def array_string_csv_valid(self, array_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
@@ -1277,18 +1277,18 @@ class queries(object):
         url = '/queries/array/csv/string/valid'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if array_query is not None:
-            query['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=',')
+            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=',')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1297,7 +1297,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def array_string_csv_null(self, array_query, custom_headers={}, raw=False, callback=None):
+    def array_string_csv_null(self, array_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get a null array of string using the csv-array format
@@ -1320,18 +1320,18 @@ class queries(object):
         url = '/queries/array/csv/string/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if array_query is not None:
-            query['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=',')
+            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=',')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1340,7 +1340,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def array_string_csv_empty(self, array_query, custom_headers={}, raw=False, callback=None):
+    def array_string_csv_empty(self, array_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get an empty array [] of string using the csv-array format
@@ -1364,18 +1364,18 @@ class queries(object):
         url = '/queries/array/csv/string/empty'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if array_query is not None:
-            query['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=',')
+            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=',')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1384,7 +1384,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def array_string_ssv_valid(self, array_query, custom_headers={}, raw=False, callback=None):
+    def array_string_ssv_valid(self, array_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
@@ -1409,18 +1409,18 @@ class queries(object):
         url = '/queries/array/ssv/string/valid'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if array_query is not None:
-            query['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=' ')
+            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=' ')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1429,7 +1429,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def array_string_tsv_valid(self, array_query, custom_headers={}, raw=False, callback=None):
+    def array_string_tsv_valid(self, array_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
@@ -1454,18 +1454,18 @@ class queries(object):
         url = '/queries/array/tsv/string/valid'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if array_query is not None:
-            query['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div='	')
+            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div='	')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1474,7 +1474,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def array_string_pipes_valid(self, array_query, custom_headers={}, raw=False, callback=None):
+    def array_string_pipes_valid(self, array_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
@@ -1499,18 +1499,18 @@ class queries(object):
         url = '/queries/array/pipes/string/valid'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if array_query is not None:
-            query['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div='|')
+            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div='|')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

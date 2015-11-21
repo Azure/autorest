@@ -52,7 +52,7 @@ else
 {
 @EmptyLine
 }
-        def paging(next_link=None, raw=False):
+        def internal_paging(next_link=None, raw=False):
 @EmptyLine
             if next_link is None:
                 # Construct URL
@@ -60,36 +60,46 @@ else
                 @(Model.BuildUrlPath("url"))
 @EmptyLine
                 # Construct parameters
-                query = {}
-                @(Model.BuildUrlQuery("query"))
+                query_parameters = {}
+                @(Model.BuildUrlQuery("query_parameters"))
 @EmptyLine
             else:
                 url = next_link
-                query = {}
+                query_parameters = {}
 @EmptyLine
             # Construct headers
-            headers = {}
-            @(Model.BuildHeaders("query"))
+            header_parameters = {}
+            header_parameters['Content-Type'] = '@(Model.ContentType)'
             @(Model.SetDefaultHeaders)
-            headers['Content-Type'] = '@(Model.ContentType)'
+            @(Model.BuildHeaders("header_parameters"))
 @EmptyLine
 @if (Model.RequestBody != null)
 {
             @:# Construct body
-            @:content = self._serialize(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+  if (Model.RequestBody.IsRequired)
+  {
+            @:body_content = self._serialize(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+  }
+  else
+  {
+            @:if @Model.RequestBody.Name is not None:
+                @:body_content = self._serialize(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+            @:else:
+                @:body_content = None
+  }
 @EmptyLine
 }
 @* Add Credentials *@
 @*stream handler*@
             # Construct and send request
-            request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query)
+            request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query_parameters)
 @if (Model.RequestBody != null)
 {
-            @:response = self._client.send(request, headers, content)
+            @:response = self._client.send(request, header_parameters, body_content)
 }
 else
 {
-            @:response = self._client.send(request, headers)
+            @:response = self._client.send(request, header_parameters)
 }
 @EmptyLine
             if @Model.FailureStatusCodePredicate:
@@ -97,10 +107,10 @@ else
 @EmptyLine
             return response
 @EmptyLine
-        response = paging()
+        response = internal_paging()
 @EmptyLine
         # Deserialize response
-        deserialized = @(Model.PagedResponseClassName)(response, paging, self._deserialize.dependencies)
+        deserialized = @(Model.PagedResponseClassName)(response, internal_paging, self._deserialize.dependencies)
 @EmptyLine
         if raw:
             return deserialized, response

@@ -34,10 +34,8 @@ class AutoRestAzureSpecialParametersTestClientConfiguration(AzureConfiguration):
         self.credentials = credentials
         self.subscription_id = subscription_id
 
-        if self.api_version is None:
-            self.api_version = '2015-07-01-preview'
-        if self.accept_language is None:
-            self.accept_language = 'en-US'
+        self.api_version = '2015-07-01-preview'
+        self.accept_language = 'en-US'
 
 
 class AutoRestAzureSpecialParametersTestClient(object):

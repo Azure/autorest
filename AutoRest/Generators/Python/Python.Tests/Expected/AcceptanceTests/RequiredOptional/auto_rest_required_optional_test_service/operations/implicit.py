@@ -69,16 +69,16 @@ class implicit(object):
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -87,7 +87,7 @@ class implicit(object):
             return None, response
 
     @async_request
-    def put_optional_query(self, query_parameter, custom_headers={}, raw=False, callback=None):
+    def put_optional_query(self, query_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test implicitly optional query parameter
@@ -110,18 +110,18 @@ class implicit(object):
         url = '/reqopt/implicit/optional/query'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if query_parameter is not None:
-            query['queryParameter'] = self._serialize_data("query_parameter", query_parameter, 'str')
+            query_parameters['queryParameter'] = self._serialize_data("query_parameter", query_parameter, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -130,7 +130,7 @@ class implicit(object):
             return None, response
 
     @async_request
-    def put_optional_header(self, query_parameter, custom_headers={}, raw=False, callback=None):
+    def put_optional_header(self, query_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test implicitly optional header parameter
@@ -153,18 +153,18 @@ class implicit(object):
         url = '/reqopt/implicit/optional/header'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         if query_parameter is not None:
-            headers['queryParameter'] = self._serialize_data("query_parameter", query_parameter, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['queryParameter'] = self._serialize_data("query_parameter", query_parameter, 'str')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -173,7 +173,7 @@ class implicit(object):
             return None, response
 
     @async_request
-    def put_optional_body(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def put_optional_body(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test implicitly optional body parameter
@@ -196,19 +196,22 @@ class implicit(object):
         url = '/reqopt/implicit/optional/body'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(body_parameter, 'str')
+        if body_parameter is not None:
+            body_content = self._serialize(body_parameter, 'str')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -243,16 +246,16 @@ class implicit(object):
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -283,17 +286,17 @@ class implicit(object):
         url = '/reqopt/global/required/query'
 
         # Construct parameters
-        query = {}
-        query['required-global-query'] = self._serialize_data("self.config.required_global_query", self.config.required_global_query, 'str')
+        query_parameters = {}
+        query_parameters['required-global-query'] = self._serialize_data("self.config.required_global_query", self.config.required_global_query, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -324,18 +327,18 @@ class implicit(object):
         url = '/reqopt/global/optional/query'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if self.config.optional_global_query is not None:
-            query['optional-global-query'] = self._serialize_data("self.config.optional_global_query", self.config.optional_global_query, 'int')
+            query_parameters['optional-global-query'] = self._serialize_data("self.config.optional_global_query", self.config.optional_global_query, 'int')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)

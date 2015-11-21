@@ -14,7 +14,7 @@ from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
 from msrest.service_client import async_request
 from msrest.exceptions import DeserializationError, HttpOperationError
-from msrestazure.exceptions import CloudException
+from msrestazure.azure_exceptions import CloudError
 import uuid
 from . import models
 
@@ -30,8 +30,7 @@ class AutoRestResourceFlatteningTestServiceConfiguration(AzureConfiguration):
 
         self.credentials = credentials
 
-        if self.accept_language is None:
-            self.accept_language = 'en-US'
+        self.accept_language = 'en-US'
 
 
 class AutoRestResourceFlatteningTestService(object):
@@ -61,7 +60,7 @@ class AutoRestResourceFlatteningTestService(object):
             return value
 
     @async_request
-    def put_array(self, resource_array, custom_headers={}, raw=False, callback=None):
+    def put_array(self, resource_array=None, custom_headers={}, raw=False, callback=None):
         """
 
         Put External Resource as an Array
@@ -84,22 +83,25 @@ class AutoRestResourceFlatteningTestService(object):
         url = '/azure/resource-flatten/array'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(resource_array, '[Resource]')
+        if resource_array is not None:
+            body_content = self._serialize(resource_array, '[Resource]')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -129,19 +131,19 @@ class AutoRestResourceFlatteningTestService(object):
         url = '/azure/resource-flatten/array'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -157,7 +159,7 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     @async_request
-    def put_dictionary(self, resource_dictionary, custom_headers={}, raw=False, callback=None):
+    def put_dictionary(self, resource_dictionary=None, custom_headers={}, raw=False, callback=None):
         """
 
         Put External Resource as a Dictionary
@@ -180,22 +182,25 @@ class AutoRestResourceFlatteningTestService(object):
         url = '/azure/resource-flatten/dictionary'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(resource_dictionary, '{FlattenedProduct}')
+        if resource_dictionary is not None:
+            body_content = self._serialize(resource_dictionary, '{FlattenedProduct}')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -226,19 +231,19 @@ class AutoRestResourceFlatteningTestService(object):
         url = '/azure/resource-flatten/dictionary'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -254,7 +259,7 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     @async_request
-    def put_resource_collection(self, resource_complex_object, custom_headers={}, raw=False, callback=None):
+    def put_resource_collection(self, resource_complex_object=None, custom_headers={}, raw=False, callback=None):
         """
 
         Put External Resource as a ResourceCollection
@@ -278,22 +283,25 @@ class AutoRestResourceFlatteningTestService(object):
         url = '/azure/resource-flatten/resourcecollection'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(resource_complex_object, 'ResourceCollection')
+        if resource_complex_object is not None:
+            body_content = self._serialize(resource_complex_object, 'ResourceCollection')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -324,19 +332,19 @@ class AutoRestResourceFlatteningTestService(object):
         url = '/azure/resource-flatten/resourcecollection'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

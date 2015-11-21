@@ -12,7 +12,7 @@
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
 from msrest.exceptions import DeserializationError, HttpOperationError
-from msrestazure.exceptions import CloudException
+from msrestazure.azure_exceptions import CloudError
 import uuid
 
 from ..models import *
@@ -43,7 +43,7 @@ class lr_osOperations(object):
             return value
 
     @async_request
-    def put200_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def put200_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -68,25 +68,28 @@ class lr_osOperations(object):
         url = '/lro/put/200/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200, 204]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -99,7 +102,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put200_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put200_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -124,25 +127,28 @@ class lr_osOperations(object):
         url = '/lro/put/200/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200, 204]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -155,7 +161,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put200_succeeded_no_state(self, product, custom_headers={}, raw=False, callback=None):
+    def put200_succeeded_no_state(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -181,25 +187,28 @@ class lr_osOperations(object):
         url = '/lro/put/200/succeeded/nostate'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -212,7 +221,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put200_succeeded_no_state(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put200_succeeded_no_state(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -238,25 +247,28 @@ class lr_osOperations(object):
         url = '/lro/put/200/succeeded/nostate'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -269,7 +281,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put202_retry200(self, product, custom_headers={}, raw=False, callback=None):
+    def put202_retry200(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 202 to the initial
@@ -295,25 +307,28 @@ class lr_osOperations(object):
         url = '/lro/put/202/retry/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -326,7 +341,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put202_retry200(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put202_retry200(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 202 to the initial
@@ -352,25 +367,28 @@ class lr_osOperations(object):
         url = '/lro/put/202/retry/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -383,7 +401,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put201_creating_succeeded200(self, product, custom_headers={}, raw=False, callback=None):
+    def put201_creating_succeeded200(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 201 to the initial
@@ -410,25 +428,28 @@ class lr_osOperations(object):
         url = '/lro/put/201/creating/succeeded/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200, 201]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -443,7 +464,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put201_creating_succeeded200(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put201_creating_succeeded200(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 201 to the initial
@@ -470,25 +491,28 @@ class lr_osOperations(object):
         url = '/lro/put/201/creating/succeeded/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200, 201]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -503,7 +527,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put200_updating_succeeded204(self, product, custom_headers={}, raw=False, callback=None):
+    def put200_updating_succeeded204(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 201 to the initial
@@ -530,25 +554,28 @@ class lr_osOperations(object):
         url = '/lro/put/200/updating/succeeded/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -561,7 +588,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put200_updating_succeeded204(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put200_updating_succeeded204(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 201 to the initial
@@ -588,25 +615,28 @@ class lr_osOperations(object):
         url = '/lro/put/200/updating/succeeded/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -619,7 +649,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put201_creating_failed200(self, product, custom_headers={}, raw=False, callback=None):
+    def put201_creating_failed200(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 201 to the initial
@@ -646,25 +676,28 @@ class lr_osOperations(object):
         url = '/lro/put/201/created/failed/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200, 201]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -679,7 +712,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put201_creating_failed200(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put201_creating_failed200(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 201 to the initial
@@ -706,25 +739,28 @@ class lr_osOperations(object):
         url = '/lro/put/201/created/failed/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200, 201]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -739,7 +775,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put200_acceptedcanceled200(self, product, custom_headers={}, raw=False, callback=None):
+    def put200_acceptedcanceled200(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 201 to the initial
@@ -766,25 +802,28 @@ class lr_osOperations(object):
         url = '/lro/put/200/accepted/canceled/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -797,7 +836,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put200_acceptedcanceled200(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put200_acceptedcanceled200(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 201 to the initial
@@ -824,25 +863,28 @@ class lr_osOperations(object):
         url = '/lro/put/200/accepted/canceled/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -855,7 +897,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put_no_header_in_retry(self, product, custom_headers={}, raw=False, callback=None):
+    def put_no_header_in_retry(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 202 to the initial request
@@ -881,25 +923,28 @@ class lr_osOperations(object):
         url = '/lro/put/noheader/202/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -912,7 +957,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_no_header_in_retry(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_no_header_in_retry(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 202 to the initial request
@@ -938,25 +983,28 @@ class lr_osOperations(object):
         url = '/lro/put/noheader/202/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -969,7 +1017,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put_async_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def put_async_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -996,25 +1044,28 @@ class lr_osOperations(object):
         url = '/lro/putasync/retry/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1027,7 +1078,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_async_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_async_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1054,25 +1105,28 @@ class lr_osOperations(object):
         url = '/lro/putasync/retry/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1085,7 +1139,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put_async_no_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def put_async_no_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1112,25 +1166,28 @@ class lr_osOperations(object):
         url = '/lro/putasync/noretry/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1143,7 +1200,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_async_no_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_async_no_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1170,25 +1227,28 @@ class lr_osOperations(object):
         url = '/lro/putasync/noretry/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1201,7 +1261,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put_async_retry_failed(self, product, custom_headers={}, raw=False, callback=None):
+    def put_async_retry_failed(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1228,25 +1288,28 @@ class lr_osOperations(object):
         url = '/lro/putasync/retry/failed'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1259,7 +1322,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_async_retry_failed(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_async_retry_failed(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1286,25 +1349,28 @@ class lr_osOperations(object):
         url = '/lro/putasync/retry/failed'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1317,7 +1383,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put_async_no_retrycanceled(self, product, custom_headers={}, raw=False, callback=None):
+    def put_async_no_retrycanceled(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1344,25 +1410,28 @@ class lr_osOperations(object):
         url = '/lro/putasync/noretry/canceled'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1375,7 +1444,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_async_no_retrycanceled(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_async_no_retrycanceled(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1402,25 +1471,28 @@ class lr_osOperations(object):
         url = '/lro/putasync/noretry/canceled'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1433,7 +1505,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put_async_no_header_in_retry(self, product, custom_headers={}, raw=False, callback=None):
+    def put_async_no_header_in_retry(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 202 to the initial request
@@ -1459,25 +1531,28 @@ class lr_osOperations(object):
         url = '/lro/putasync/noheader/201/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [201]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1490,7 +1565,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_async_no_header_in_retry(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_async_no_header_in_retry(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 202 to the initial request
@@ -1516,25 +1591,28 @@ class lr_osOperations(object):
         url = '/lro/putasync/noheader/201/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [201]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1547,7 +1625,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put_non_resource(self, sku, custom_headers={}, raw=False, callback=None):
+    def put_non_resource(self, sku=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request with non resource.
@@ -1571,25 +1649,28 @@ class lr_osOperations(object):
         url = '/lro/putnonresource/202/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(sku, 'Sku')
+        if sku is not None:
+            body_content = self._serialize(sku, 'Sku')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1602,7 +1683,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_non_resource(self, sku, custom_headers={}, raw=False, callback=None):
+    def begin_put_non_resource(self, sku=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request with non resource.
@@ -1626,25 +1707,28 @@ class lr_osOperations(object):
         url = '/lro/putnonresource/202/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(sku, 'Sku')
+        if sku is not None:
+            body_content = self._serialize(sku, 'Sku')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1657,7 +1741,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put_async_non_resource(self, sku, custom_headers={}, raw=False, callback=None):
+    def put_async_non_resource(self, sku=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request with non resource.
@@ -1681,25 +1765,28 @@ class lr_osOperations(object):
         url = '/lro/putnonresourceasync/202/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(sku, 'Sku')
+        if sku is not None:
+            body_content = self._serialize(sku, 'Sku')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1712,7 +1799,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_async_non_resource(self, sku, custom_headers={}, raw=False, callback=None):
+    def begin_put_async_non_resource(self, sku=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request with non resource.
@@ -1736,25 +1823,28 @@ class lr_osOperations(object):
         url = '/lro/putnonresourceasync/202/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(sku, 'Sku')
+        if sku is not None:
+            body_content = self._serialize(sku, 'Sku')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1767,7 +1857,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put_sub_resource(self, product, custom_headers={}, raw=False, callback=None):
+    def put_sub_resource(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request with sub resource.
@@ -1791,25 +1881,28 @@ class lr_osOperations(object):
         url = '/lro/putsubresource/202/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'SubProduct')
+        if product is not None:
+            body_content = self._serialize(product, 'SubProduct')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1822,7 +1915,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_sub_resource(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_sub_resource(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request with sub resource.
@@ -1846,25 +1939,28 @@ class lr_osOperations(object):
         url = '/lro/putsubresource/202/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'SubProduct')
+        if product is not None:
+            body_content = self._serialize(product, 'SubProduct')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1877,7 +1973,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def put_async_sub_resource(self, product, custom_headers={}, raw=False, callback=None):
+    def put_async_sub_resource(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request with sub resource.
@@ -1901,25 +1997,28 @@ class lr_osOperations(object):
         url = '/lro/putsubresourceasync/202/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'SubProduct')
+        if product is not None:
+            body_content = self._serialize(product, 'SubProduct')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1932,7 +2031,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_async_sub_resource(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_async_sub_resource(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request with sub resource.
@@ -1956,25 +2055,28 @@ class lr_osOperations(object):
         url = '/lro/putsubresourceasync/202/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'SubProduct')
+        if product is not None:
+            body_content = self._serialize(product, 'SubProduct')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -2012,22 +2114,22 @@ class lr_osOperations(object):
         url = '/lro/delete/provisioning/202/accepted/200/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200, 202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -2067,22 +2169,22 @@ class lr_osOperations(object):
         url = '/lro/delete/provisioning/202/accepted/200/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200, 202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -2122,22 +2224,22 @@ class lr_osOperations(object):
         url = '/lro/delete/provisioning/202/deleting/200/failed'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200, 202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -2177,22 +2279,22 @@ class lr_osOperations(object):
         url = '/lro/delete/provisioning/202/deleting/200/failed'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200, 202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -2232,22 +2334,22 @@ class lr_osOperations(object):
         url = '/lro/delete/provisioning/202/deleting/200/canceled'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200, 202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -2287,22 +2389,22 @@ class lr_osOperations(object):
         url = '/lro/delete/provisioning/202/deleting/200/canceled'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200, 202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -2338,22 +2440,22 @@ class lr_osOperations(object):
         url = '/lro/delete/204/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [204]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2380,22 +2482,22 @@ class lr_osOperations(object):
         url = '/lro/delete/204/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [204]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2425,22 +2527,22 @@ class lr_osOperations(object):
         url = '/lro/delete/202/retry/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200, 202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -2477,22 +2579,22 @@ class lr_osOperations(object):
         url = '/lro/delete/202/retry/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200, 202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -2529,22 +2631,22 @@ class lr_osOperations(object):
         url = '/lro/delete/202/noretry/204'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200, 202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -2581,22 +2683,22 @@ class lr_osOperations(object):
         url = '/lro/delete/202/noretry/204'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200, 202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -2632,22 +2734,22 @@ class lr_osOperations(object):
         url = '/lro/delete/noheader'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [204, 202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2676,22 +2778,22 @@ class lr_osOperations(object):
         url = '/lro/delete/noheader'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [204, 202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2720,22 +2822,22 @@ class lr_osOperations(object):
         url = '/lro/deleteasync/noheader/202/204'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [204, 202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2764,22 +2866,22 @@ class lr_osOperations(object):
         url = '/lro/deleteasync/noheader/202/204'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [204, 202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2808,22 +2910,22 @@ class lr_osOperations(object):
         url = '/lro/deleteasync/retry/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2852,22 +2954,22 @@ class lr_osOperations(object):
         url = '/lro/deleteasync/retry/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2896,22 +2998,22 @@ class lr_osOperations(object):
         url = '/lro/deleteasync/noretry/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2940,22 +3042,22 @@ class lr_osOperations(object):
         url = '/lro/deleteasync/noretry/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2984,22 +3086,22 @@ class lr_osOperations(object):
         url = '/lro/deleteasync/retry/failed'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -3028,22 +3130,22 @@ class lr_osOperations(object):
         url = '/lro/deleteasync/retry/failed'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -3072,22 +3174,22 @@ class lr_osOperations(object):
         url = '/lro/deleteasync/retry/canceled'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -3116,22 +3218,22 @@ class lr_osOperations(object):
         url = '/lro/deleteasync/retry/canceled'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -3161,22 +3263,22 @@ class lr_osOperations(object):
         url = '/lro/post/payload/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202, 200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -3215,22 +3317,22 @@ class lr_osOperations(object):
         url = '/lro/post/payload/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202, 200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -3245,7 +3347,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def post202_retry200(self, product, custom_headers={}, raw=False, callback=None):
+    def post202_retry200(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -3270,31 +3372,34 @@ class lr_osOperations(object):
         url = '/lro/post/202/retry/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
 
     @async_request
-    def begin_post202_retry200(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post202_retry200(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -3319,31 +3424,34 @@ class lr_osOperations(object):
         url = '/lro/post/202/retry/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
 
     @async_request
-    def post202_no_retry204(self, product, custom_headers={}, raw=False, callback=None):
+    def post202_no_retry204(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -3369,25 +3477,28 @@ class lr_osOperations(object):
         url = '/lro/post/202/noretry/204'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -3400,7 +3511,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_post202_no_retry204(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post202_no_retry204(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -3426,25 +3537,28 @@ class lr_osOperations(object):
         url = '/lro/post/202/noretry/204'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -3457,7 +3571,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def post_async_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def post_async_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -3484,25 +3598,28 @@ class lr_osOperations(object):
         url = '/lro/postasync/retry/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202, 200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -3515,7 +3632,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_post_async_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post_async_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -3542,25 +3659,28 @@ class lr_osOperations(object):
         url = '/lro/postasync/retry/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202, 200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -3573,7 +3693,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def post_async_no_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def post_async_no_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -3600,25 +3720,28 @@ class lr_osOperations(object):
         url = '/lro/postasync/noretry/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202, 200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -3631,7 +3754,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def begin_post_async_no_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post_async_no_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -3658,25 +3781,28 @@ class lr_osOperations(object):
         url = '/lro/postasync/noretry/succeeded'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202, 200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -3689,7 +3815,7 @@ class lr_osOperations(object):
         return deserialized
 
     @async_request
-    def post_async_retry_failed(self, product, custom_headers={}, raw=False, callback=None):
+    def post_async_retry_failed(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -3715,31 +3841,34 @@ class lr_osOperations(object):
         url = '/lro/postasync/retry/failed'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
 
     @async_request
-    def begin_post_async_retry_failed(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post_async_retry_failed(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -3765,31 +3894,34 @@ class lr_osOperations(object):
         url = '/lro/postasync/retry/failed'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
 
     @async_request
-    def post_async_retrycanceled(self, product, custom_headers={}, raw=False, callback=None):
+    def post_async_retrycanceled(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -3815,31 +3947,34 @@ class lr_osOperations(object):
         url = '/lro/postasync/retry/canceled'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
 
     @async_request
-    def begin_post_async_retrycanceled(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post_async_retrycanceled(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -3865,25 +4000,28 @@ class lr_osOperations(object):
         url = '/lro/postasync/retry/canceled'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response

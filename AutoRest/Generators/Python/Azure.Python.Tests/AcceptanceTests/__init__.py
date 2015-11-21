@@ -9,7 +9,8 @@ cwd = dirname(realpath(__file__))
 root = realpath(join(cwd, pardir, pardir, pardir, pardir, pardir))
 runtime = join(root, "ClientRuntimes", "Python", "msrest")
 sys.path.append(runtime)
-
+runtime = join(root, "ClientRuntimes", "Python", "msrestazure")
+sys.path.append(runtime)
 
 def sort_test(x, y):
 

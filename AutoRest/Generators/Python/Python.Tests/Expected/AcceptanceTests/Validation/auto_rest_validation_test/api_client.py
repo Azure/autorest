@@ -89,17 +89,17 @@ class AutoRestValidationTest(object):
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
-        query['apiVersion'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query_parameters = {}
+        query_parameters['apiVersion'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -115,7 +115,7 @@ class AutoRestValidationTest(object):
         return deserialized
 
     @async_request
-    def validation_of_body(self, resource_group_name, id, body, custom_headers={}, raw=False, callback=None):
+    def validation_of_body(self, resource_group_name, id, body=None, custom_headers={}, raw=False, callback=None):
         """
 
         Validates body parameters on the method. See swagger for details.
@@ -150,20 +150,23 @@ class AutoRestValidationTest(object):
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
-        query['apiVersion'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query_parameters = {}
+        query_parameters['apiVersion'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(body, 'Product')
+        if body is not None:
+            body_content = self._serialize(body, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

@@ -104,7 +104,14 @@ namespace Microsoft.Rest.Generator.Python
             List<string> declarations = new List<string>();
             foreach (var parameter in LocalParameters)
             {
-                declarations.Add(parameter.Name);
+                if (parameter.IsRequired)
+                {
+                    declarations.Add(parameter.Name);
+                }
+                else
+                {
+                    declarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}=None", parameter.Name));
+                }
             }
 
             if (addCustomHeaderParameters)
@@ -380,7 +387,7 @@ namespace Microsoft.Rest.Generator.Python
                 if (this.AddCustomHeader)
                 {
                     var sb = new IndentedStringBuilder();
-                    sb.AppendLine("headers.update(custom_headers)");
+                    sb.AppendLine("header_parameters.update(custom_headers)");
                     return sb.ToString();
                 }
                 else
