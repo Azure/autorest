@@ -1,3 +1,4 @@
+# coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for
@@ -9,12 +10,13 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import ServiceClient
-from msrest import Configuration, Serializer, Deserializer
+from msrest import Serializer, Deserializer
+from msrestazure import AzureConfiguration
 from .operations.group_operations import groupOperations
 from . import models
 
 
-class MicrosoftAzureTestUrlConfiguration(Configuration):
+class MicrosoftAzureTestUrlConfiguration(AzureConfiguration):
 
     def __init__(self, credentials, subscription_id, base_url=None, filepath=None):
 

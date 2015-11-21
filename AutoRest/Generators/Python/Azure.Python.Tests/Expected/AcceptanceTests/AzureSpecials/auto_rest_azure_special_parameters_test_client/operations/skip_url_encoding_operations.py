@@ -1,3 +1,4 @@
+# coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for
@@ -10,9 +11,8 @@
 
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
+from msrestazure.exceptions import CloudException
 import uuid
 
 from ..models import *
@@ -217,7 +217,7 @@ class skip_url_encodingOperations(object):
 
         # Construct parameters
         query = {}
-        query['q1'] =self._serialize_data("q1", q1, 'str', skip_quote=True)
+        query['q1'] = self._serialize_data("q1", q1, 'str', skip_quote=True)
 
         # Construct headers
         headers = {}
@@ -310,7 +310,7 @@ class skip_url_encodingOperations(object):
 
         # Construct parameters
         query = {}
-        query['q1'] =self._serialize_data("q1", q1, 'str', skip_quote=True)
+        query['q1'] = self._serialize_data("q1", q1, 'str', skip_quote=True)
 
         # Construct headers
         headers = {}

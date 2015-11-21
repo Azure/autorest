@@ -4,6 +4,7 @@
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ServiceClientTemplateModel>
+# coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ")
 # --------------------------------------------------------------------------
@@ -14,12 +15,7 @@ from msrest import Configuration, Serializer, Deserializer
 {
 <text>
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
 </text>
 }
 @if (Model.MethodGroupModels.Any())

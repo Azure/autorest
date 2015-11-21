@@ -1,3 +1,4 @@
+# coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for
@@ -9,16 +10,16 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import ServiceClient
-from msrest import Configuration, Serializer, Deserializer
+from msrest import Serializer, Deserializer
+from msrestazure import AzureConfiguration
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
+from msrestazure.exceptions import CloudException
 import uuid
 from . import models
 
 
-class AutoRestReportServiceForAzureConfiguration(Configuration):
+class AutoRestReportServiceForAzureConfiguration(AzureConfiguration):
 
     def __init__(self, credentials, base_url=None, filepath=None):
 

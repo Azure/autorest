@@ -4,19 +4,20 @@
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Python.AzureServiceClientTemplateModel>
+# coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ")
 # --------------------------------------------------------------------------
 @EmptyLine
 from msrest.service_client import ServiceClient
-from msrest import Configuration, Serializer, Deserializer
+from msrest import Serializer, Deserializer
+from msrestazure import AzureConfiguration
 @if (Model.MethodTemplateModels.Any())
 {
 <text>
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
+from msrestazure.exceptions import CloudException
 import uuid
 </text>
 }
@@ -30,7 +31,7 @@ import uuid
 from . import models
 @EmptyLine
 @EmptyLine
-class @(Model.Name)Configuration(Configuration):
+class @(Model.Name)Configuration(AzureConfiguration):
 @EmptyLine
     def __init__(self, @(Model.RequiredConstructorParameters)base_url=None, filepath=None):
 @EmptyLine
