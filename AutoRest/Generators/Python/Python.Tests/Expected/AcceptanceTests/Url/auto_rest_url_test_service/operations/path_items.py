@@ -83,22 +83,22 @@ class path_items(object):
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if local_string_query is not None:
-            query['localStringQuery'] = self._serialize_data("local_string_query", local_string_query, 'str')
+            query_parameters['localStringQuery'] = self._serialize_data("local_string_query", local_string_query, 'str')
         if path_item_string_query is not None:
-            query['pathItemStringQuery'] = self._serialize_data("path_item_string_query", path_item_string_query, 'str')
+            query_parameters['pathItemStringQuery'] = self._serialize_data("path_item_string_query", path_item_string_query, 'str')
         if self.config.global_string_query is not None:
-            query['globalStringQuery'] = self._serialize_data("self.config.global_string_query", self.config.global_string_query, 'str')
+            query_parameters['globalStringQuery'] = self._serialize_data("self.config.global_string_query", self.config.global_string_query, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -148,22 +148,22 @@ class path_items(object):
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if local_string_query is not None:
-            query['localStringQuery'] = self._serialize_data("local_string_query", local_string_query, 'str')
+            query_parameters['localStringQuery'] = self._serialize_data("local_string_query", local_string_query, 'str')
         if path_item_string_query is not None:
-            query['pathItemStringQuery'] = self._serialize_data("path_item_string_query", path_item_string_query, 'str')
+            query_parameters['pathItemStringQuery'] = self._serialize_data("path_item_string_query", path_item_string_query, 'str')
         if self.config.global_string_query is not None:
-            query['globalStringQuery'] = self._serialize_data("self.config.global_string_query", self.config.global_string_query, 'str')
+            query_parameters['globalStringQuery'] = self._serialize_data("self.config.global_string_query", self.config.global_string_query, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -212,22 +212,22 @@ class path_items(object):
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if local_string_query is not None:
-            query['localStringQuery'] = self._serialize_data("local_string_query", local_string_query, 'str')
+            query_parameters['localStringQuery'] = self._serialize_data("local_string_query", local_string_query, 'str')
         if path_item_string_query is not None:
-            query['pathItemStringQuery'] = self._serialize_data("path_item_string_query", path_item_string_query, 'str')
+            query_parameters['pathItemStringQuery'] = self._serialize_data("path_item_string_query", path_item_string_query, 'str')
         if self.config.global_string_query is not None:
-            query['globalStringQuery'] = self._serialize_data("self.config.global_string_query", self.config.global_string_query, 'str')
+            query_parameters['globalStringQuery'] = self._serialize_data("self.config.global_string_query", self.config.global_string_query, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -276,22 +276,22 @@ class path_items(object):
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if local_string_query is not None:
-            query['localStringQuery'] = self._serialize_data("local_string_query", local_string_query, 'str')
+            query_parameters['localStringQuery'] = self._serialize_data("local_string_query", local_string_query, 'str')
         if path_item_string_query is not None:
-            query['pathItemStringQuery'] = self._serialize_data("path_item_string_query", path_item_string_query, 'str')
+            query_parameters['pathItemStringQuery'] = self._serialize_data("path_item_string_query", path_item_string_query, 'str')
         if self.config.global_string_query is not None:
-            query['globalStringQuery'] = self._serialize_data("self.config.global_string_query", self.config.global_string_query, 'str')
+            query_parameters['globalStringQuery'] = self._serialize_data("self.config.global_string_query", self.config.global_string_query, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

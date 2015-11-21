@@ -50,30 +50,30 @@
         @(Model.BuildUrlPath("url"))
 @EmptyLine
         # Construct parameters
-        query = {}
-        @(Model.BuildUrlQuery("query"))
+        query_parameters = {}
+        @(Model.BuildUrlQuery("query_parameters"))
 @EmptyLine
         # Construct headers
-        headers = {}
-        @(Model.BuildHeaders("headers"))
+        header_parameters = {}
+        @(Model.BuildHeaders("header_parameters"))
         @(Model.SetDefaultHeaders)
-        headers['Content-Type'] = '@(Model.ContentType)'
+        header_parameters['Content-Type'] = '@(Model.ContentType)'
 @EmptyLine
 @if (Model.RequestBody != null)
 {
 @:        # Construct body
-@:        content = self._serialize(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+@:        body_content = self._serialize(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
 @EmptyLine
 }
         # Construct and send request
-        request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query)
+        request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query_parameters)
 @if (Model.RequestBody != null)
 {
-        @:response = self._client.send(request, headers, content)
+        @:response = self._client.send(request, header_parameters, body_content)
 }
 else
 {
-        @:response = self._client.send(request, headers)
+        @:response = self._client.send(request, header_parameters)
 }
 @EmptyLine
         if @Model.FailureStatusCodePredicate:

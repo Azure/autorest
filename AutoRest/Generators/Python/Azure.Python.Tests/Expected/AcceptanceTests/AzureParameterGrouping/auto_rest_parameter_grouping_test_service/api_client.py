@@ -27,8 +27,7 @@ class AutoRestParameterGroupingTestServiceConfiguration(AzureConfiguration):
 
         self.credentials = credentials
 
-        if self.accept_language is None:
-            self.accept_language = 'en-US'
+        self.accept_language = 'en-US'
 
 
 class AutoRestParameterGroupingTestService(object):

@@ -64,16 +64,16 @@ class http_client_failure(object):
         url = '/http/failure/client/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.head(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.head(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -105,16 +105,16 @@ class http_client_failure(object):
         url = '/http/failure/client/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -148,19 +148,19 @@ class http_client_failure(object):
         url = '/http/failure/client/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        body_content = self._serialize(boolean_value, 'bool')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -194,19 +194,19 @@ class http_client_failure(object):
         url = '/http/failure/client/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        body_content = self._serialize(boolean_value, 'bool')
 
         # Construct and send request
-        request = self._client.patch(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.patch(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -240,19 +240,19 @@ class http_client_failure(object):
         url = '/http/failure/client/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        body_content = self._serialize(boolean_value, 'bool')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -286,19 +286,19 @@ class http_client_failure(object):
         url = '/http/failure/client/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        body_content = self._serialize(boolean_value, 'bool')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -330,16 +330,16 @@ class http_client_failure(object):
         url = '/http/failure/client/401'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.head(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.head(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -371,16 +371,16 @@ class http_client_failure(object):
         url = '/http/failure/client/402'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -412,16 +412,16 @@ class http_client_failure(object):
         url = '/http/failure/client/403'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -455,19 +455,19 @@ class http_client_failure(object):
         url = '/http/failure/client/404'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        body_content = self._serialize(boolean_value, 'bool')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -501,19 +501,19 @@ class http_client_failure(object):
         url = '/http/failure/client/405'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        body_content = self._serialize(boolean_value, 'bool')
 
         # Construct and send request
-        request = self._client.patch(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.patch(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -547,19 +547,19 @@ class http_client_failure(object):
         url = '/http/failure/client/406'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        body_content = self._serialize(boolean_value, 'bool')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -593,19 +593,19 @@ class http_client_failure(object):
         url = '/http/failure/client/407'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        body_content = self._serialize(boolean_value, 'bool')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -639,19 +639,19 @@ class http_client_failure(object):
         url = '/http/failure/client/409'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        body_content = self._serialize(boolean_value, 'bool')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -683,16 +683,16 @@ class http_client_failure(object):
         url = '/http/failure/client/410'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.head(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.head(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -724,16 +724,16 @@ class http_client_failure(object):
         url = '/http/failure/client/411'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -765,16 +765,16 @@ class http_client_failure(object):
         url = '/http/failure/client/412'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -808,19 +808,19 @@ class http_client_failure(object):
         url = '/http/failure/client/413'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        body_content = self._serialize(boolean_value, 'bool')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -854,19 +854,19 @@ class http_client_failure(object):
         url = '/http/failure/client/414'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        body_content = self._serialize(boolean_value, 'bool')
 
         # Construct and send request
-        request = self._client.patch(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.patch(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -900,19 +900,19 @@ class http_client_failure(object):
         url = '/http/failure/client/415'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        body_content = self._serialize(boolean_value, 'bool')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -944,16 +944,16 @@ class http_client_failure(object):
         url = '/http/failure/client/416'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -987,19 +987,19 @@ class http_client_failure(object):
         url = '/http/failure/client/417'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        body_content = self._serialize(boolean_value, 'bool')
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -1031,16 +1031,16 @@ class http_client_failure(object):
         url = '/http/failure/client/429'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.head(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.head(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)

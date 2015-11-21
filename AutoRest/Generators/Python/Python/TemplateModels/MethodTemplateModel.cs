@@ -380,7 +380,7 @@ namespace Microsoft.Rest.Generator.Python
                 if (this.AddCustomHeader)
                 {
                     var sb = new IndentedStringBuilder();
-                    sb.AppendLine("headers.update(custom_headers)");
+                    sb.AppendLine("header_parameters.update(custom_headers)");
                     return sb.ToString();
                 }
                 else

@@ -17,7 +17,7 @@ from msrestazure import AzureConfiguration
 <text>
 from msrest.service_client import async_request
 from msrest.exceptions import DeserializationError, HttpOperationError
-from msrestazure.exceptions import CloudException
+from msrestazure.azure_exceptions import CloudError
 import uuid
 </text>
 }
@@ -55,10 +55,17 @@ class @(Model.Name)Configuration(AzureConfiguration):
   if (propertiesHasDefault.Any())
   {
     @EmptyLine
-    @foreach (var property in propertiesHasDefault)
+    foreach (var property in propertiesHasDefault)
     {
+      if (property.IsRequired)
+      {
         @:if self.@(property.Name) is None:
             @:self.@(property.Name) = @(property.DefaultValue)
+      }
+      else
+      {
+        @:self.@(property.Name) = @(property.DefaultValue)
+      }
     }
   }
 }

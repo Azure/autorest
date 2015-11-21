@@ -12,7 +12,7 @@
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
 from msrest.exceptions import DeserializationError, HttpOperationError
-from msrestazure.exceptions import CloudException
+from msrestazure.azure_exceptions import CloudError
 import uuid
 
 from ..models import *
@@ -67,25 +67,25 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/put/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200, 201]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -124,25 +124,25 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/put/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200, 201]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -182,25 +182,25 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/put/201/creating/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200, 201]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -240,25 +240,25 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/put/201/creating/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200, 201]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -299,25 +299,25 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/putasync/retry/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -356,25 +356,25 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/putasync/retry/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -408,22 +408,22 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/delete/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -450,22 +450,22 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/delete/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -493,22 +493,22 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/delete/202/retry/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -536,22 +536,22 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/delete/202/retry/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -580,22 +580,22 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/deleteasync/retry/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -624,22 +624,22 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/deleteasync/retry/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -668,25 +668,25 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/post/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -715,25 +715,25 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/post/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -762,25 +762,25 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/post/202/retry/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -809,25 +809,25 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/post/202/retry/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -858,25 +858,25 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/postasync/retry/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -907,25 +907,25 @@ class lrosa_dsOperations(object):
         url = '/lro/nonretryerror/postasync/retry/400'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -956,25 +956,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/put/201/noprovisioningstatepayload'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200, 201]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1014,25 +1014,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/put/201/noprovisioningstatepayload'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200, 201]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1074,25 +1074,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/putasync/retry/nostatus'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1132,25 +1132,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/putasync/retry/nostatus'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1190,25 +1190,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/putasync/retry/nostatuspayload'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1248,25 +1248,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/putasync/retry/nostatuspayload'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1301,22 +1301,22 @@ class lrosa_dsOperations(object):
         url = '/lro/error/delete/204/nolocation'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [204]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1344,22 +1344,22 @@ class lrosa_dsOperations(object):
         url = '/lro/error/delete/204/nolocation'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [204]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1388,22 +1388,22 @@ class lrosa_dsOperations(object):
         url = '/lro/error/deleteasync/retry/nostatus'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1432,22 +1432,22 @@ class lrosa_dsOperations(object):
         url = '/lro/error/deleteasync/retry/nostatus'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1477,25 +1477,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/post/202/nolocation'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1525,25 +1525,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/post/202/nolocation'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1575,25 +1575,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/postasync/retry/nopayload'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1625,25 +1625,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/postasync/retry/nopayload'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1674,25 +1674,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/put/200/invalidjson'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200, 204]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1730,25 +1730,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/put/200/invalidjson'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200, 204]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1787,25 +1787,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/putasync/retry/invalidheader'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1844,25 +1844,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/putasync/retry/invalidheader'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1902,25 +1902,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/putasync/retry/invalidjsonpolling'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -1960,25 +1960,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/putasync/retry/invalidjsonpolling'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         deserialized = None
 
@@ -2014,22 +2014,22 @@ class lrosa_dsOperations(object):
         url = '/lro/error/delete/202/retry/invalidheader'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2058,22 +2058,22 @@ class lrosa_dsOperations(object):
         url = '/lro/error/delete/202/retry/invalidheader'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2102,22 +2102,22 @@ class lrosa_dsOperations(object):
         url = '/lro/error/deleteasync/retry/invalidheader'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2146,22 +2146,22 @@ class lrosa_dsOperations(object):
         url = '/lro/error/deleteasync/retry/invalidheader'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2190,22 +2190,22 @@ class lrosa_dsOperations(object):
         url = '/lro/error/deleteasync/retry/invalidjsonpolling'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2234,22 +2234,22 @@ class lrosa_dsOperations(object):
         url = '/lro/error/deleteasync/retry/invalidjsonpolling'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2279,25 +2279,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/post/202/retry/invalidheader'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2327,25 +2327,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/post/202/retry/invalidheader'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2376,25 +2376,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/postasync/retry/invalidheader'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2425,25 +2425,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/postasync/retry/invalidheader'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2475,25 +2475,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/postasync/retry/invalidjsonpolling'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -2525,25 +2525,25 @@ class lrosa_dsOperations(object):
         url = '/lro/error/postasync/retry/invalidjsonpolling'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
+        header_parameters = {}
         if self.config.accept_language is not None:
-            headers['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        headers.update(custom_headers)
-        headers['x-ms-client-request-id'] = str(uuid.uuid1())
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+        header_parameters.update(custom_headers)
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        content = self._serialize(product, 'Product')
+        body_content = self._serialize(product, 'Product')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
-            raise CloudException(self._deserialize, response)
+            raise CloudError(self._deserialize, response)
 
         if raw:
             return None, response

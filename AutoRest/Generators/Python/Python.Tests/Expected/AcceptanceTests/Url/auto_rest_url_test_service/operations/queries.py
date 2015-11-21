@@ -64,18 +64,18 @@ class queries(object):
         url = '/queries/bool/true'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if bool_query is not None:
-            query['boolQuery'] = self._serialize_data("bool_query", bool_query, 'bool')
+            query_parameters['boolQuery'] = self._serialize_data("bool_query", bool_query, 'bool')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -107,18 +107,18 @@ class queries(object):
         url = '/queries/bool/false'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if bool_query is not None:
-            query['boolQuery'] = self._serialize_data("bool_query", bool_query, 'bool')
+            query_parameters['boolQuery'] = self._serialize_data("bool_query", bool_query, 'bool')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -150,18 +150,18 @@ class queries(object):
         url = '/queries/bool/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if bool_query is not None:
-            query['boolQuery'] = self._serialize_data("bool_query", bool_query, 'bool')
+            query_parameters['boolQuery'] = self._serialize_data("bool_query", bool_query, 'bool')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -193,18 +193,18 @@ class queries(object):
         url = '/queries/int/1000000'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if int_query is not None:
-            query['intQuery'] = self._serialize_data("int_query", int_query, 'int')
+            query_parameters['intQuery'] = self._serialize_data("int_query", int_query, 'int')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -236,18 +236,18 @@ class queries(object):
         url = '/queries/int/-1000000'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if int_query is not None:
-            query['intQuery'] = self._serialize_data("int_query", int_query, 'int')
+            query_parameters['intQuery'] = self._serialize_data("int_query", int_query, 'int')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -279,18 +279,18 @@ class queries(object):
         url = '/queries/int/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if int_query is not None:
-            query['intQuery'] = self._serialize_data("int_query", int_query, 'int')
+            query_parameters['intQuery'] = self._serialize_data("int_query", int_query, 'int')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -322,18 +322,18 @@ class queries(object):
         url = '/queries/long/10000000000'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if long_query is not None:
-            query['longQuery'] = self._serialize_data("long_query", long_query, 'long')
+            query_parameters['longQuery'] = self._serialize_data("long_query", long_query, 'long')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -365,18 +365,18 @@ class queries(object):
         url = '/queries/long/-10000000000'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if long_query is not None:
-            query['longQuery'] = self._serialize_data("long_query", long_query, 'long')
+            query_parameters['longQuery'] = self._serialize_data("long_query", long_query, 'long')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -408,18 +408,18 @@ class queries(object):
         url = '/queries/long/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if long_query is not None:
-            query['longQuery'] = self._serialize_data("long_query", long_query, 'long')
+            query_parameters['longQuery'] = self._serialize_data("long_query", long_query, 'long')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -451,18 +451,18 @@ class queries(object):
         url = '/queries/float/1.034E+20'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if float_query is not None:
-            query['floatQuery'] = self._serialize_data("float_query", float_query, 'float')
+            query_parameters['floatQuery'] = self._serialize_data("float_query", float_query, 'float')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -494,18 +494,18 @@ class queries(object):
         url = '/queries/float/-1.034E-20'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if float_query is not None:
-            query['floatQuery'] = self._serialize_data("float_query", float_query, 'float')
+            query_parameters['floatQuery'] = self._serialize_data("float_query", float_query, 'float')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -537,18 +537,18 @@ class queries(object):
         url = '/queries/float/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if float_query is not None:
-            query['floatQuery'] = self._serialize_data("float_query", float_query, 'float')
+            query_parameters['floatQuery'] = self._serialize_data("float_query", float_query, 'float')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -580,18 +580,18 @@ class queries(object):
         url = '/queries/double/9999999.999'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if double_query is not None:
-            query['doubleQuery'] = self._serialize_data("double_query", double_query, 'float')
+            query_parameters['doubleQuery'] = self._serialize_data("double_query", double_query, 'float')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -623,18 +623,18 @@ class queries(object):
         url = '/queries/double/-9999999.999'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if double_query is not None:
-            query['doubleQuery'] = self._serialize_data("double_query", double_query, 'float')
+            query_parameters['doubleQuery'] = self._serialize_data("double_query", double_query, 'float')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -666,18 +666,18 @@ class queries(object):
         url = '/queries/double/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if double_query is not None:
-            query['doubleQuery'] = self._serialize_data("double_query", double_query, 'float')
+            query_parameters['doubleQuery'] = self._serialize_data("double_query", double_query, 'float')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -710,18 +710,18 @@ class queries(object):
         url = '/queries/string/unicode/'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if string_query is not None:
-            query['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
+            query_parameters['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -755,18 +755,18 @@ class queries(object):
         url = '/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if string_query is not None:
-            query['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
+            query_parameters['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -799,18 +799,18 @@ class queries(object):
         url = '/queries/string/empty'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if string_query is not None:
-            query['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
+            query_parameters['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -842,18 +842,18 @@ class queries(object):
         url = '/queries/string/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if string_query is not None:
-            query['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
+            query_parameters['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -886,18 +886,18 @@ class queries(object):
         url = '/queries/enum/green%20color'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if enum_query is not None:
-            query['enumQuery'] = self._serialize_data("enum_query", enum_query, 'UriColor')
+            query_parameters['enumQuery'] = self._serialize_data("enum_query", enum_query, 'UriColor')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -930,18 +930,18 @@ class queries(object):
         url = '/queries/enum/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if enum_query is not None:
-            query['enumQuery'] = self._serialize_data("enum_query", enum_query, 'UriColor')
+            query_parameters['enumQuery'] = self._serialize_data("enum_query", enum_query, 'UriColor')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -974,18 +974,18 @@ class queries(object):
         url = '/queries/byte/multibyte'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if byte_query is not None:
-            query['byteQuery'] = self._serialize_data("byte_query", byte_query, 'bytearray')
+            query_parameters['byteQuery'] = self._serialize_data("byte_query", byte_query, 'bytearray')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1017,18 +1017,18 @@ class queries(object):
         url = '/queries/byte/empty'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if byte_query is not None:
-            query['byteQuery'] = self._serialize_data("byte_query", byte_query, 'bytearray')
+            query_parameters['byteQuery'] = self._serialize_data("byte_query", byte_query, 'bytearray')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1060,18 +1060,18 @@ class queries(object):
         url = '/queries/byte/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if byte_query is not None:
-            query['byteQuery'] = self._serialize_data("byte_query", byte_query, 'bytearray')
+            query_parameters['byteQuery'] = self._serialize_data("byte_query", byte_query, 'bytearray')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1103,18 +1103,18 @@ class queries(object):
         url = '/queries/date/2012-01-01'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if date_query is not None:
-            query['dateQuery'] = self._serialize_data("date_query", date_query, 'date')
+            query_parameters['dateQuery'] = self._serialize_data("date_query", date_query, 'date')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1146,18 +1146,18 @@ class queries(object):
         url = '/queries/date/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if date_query is not None:
-            query['dateQuery'] = self._serialize_data("date_query", date_query, 'date')
+            query_parameters['dateQuery'] = self._serialize_data("date_query", date_query, 'date')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1189,18 +1189,18 @@ class queries(object):
         url = '/queries/datetime/2012-01-01T01%3A01%3A01Z'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if date_time_query is not None:
-            query['dateTimeQuery'] = self._serialize_data("date_time_query", date_time_query, 'iso-8601')
+            query_parameters['dateTimeQuery'] = self._serialize_data("date_time_query", date_time_query, 'iso-8601')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1232,18 +1232,18 @@ class queries(object):
         url = '/queries/datetime/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if date_time_query is not None:
-            query['dateTimeQuery'] = self._serialize_data("date_time_query", date_time_query, 'iso-8601')
+            query_parameters['dateTimeQuery'] = self._serialize_data("date_time_query", date_time_query, 'iso-8601')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1277,18 +1277,18 @@ class queries(object):
         url = '/queries/array/csv/string/valid'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if array_query is not None:
-            query['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=',')
+            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=',')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1320,18 +1320,18 @@ class queries(object):
         url = '/queries/array/csv/string/null'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if array_query is not None:
-            query['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=',')
+            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=',')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1364,18 +1364,18 @@ class queries(object):
         url = '/queries/array/csv/string/empty'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if array_query is not None:
-            query['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=',')
+            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=',')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1409,18 +1409,18 @@ class queries(object):
         url = '/queries/array/ssv/string/valid'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if array_query is not None:
-            query['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=' ')
+            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=' ')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1454,18 +1454,18 @@ class queries(object):
         url = '/queries/array/tsv/string/valid'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if array_query is not None:
-            query['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div='	')
+            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div='	')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1499,18 +1499,18 @@ class queries(object):
         url = '/queries/array/pipes/string/valid'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
         if array_query is not None:
-            query['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div='|')
+            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div='|')
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
