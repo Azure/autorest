@@ -81,32 +81,32 @@ class RequiredOptionalTests(unittest.TestCase):
         #with self.assertRaises(ValueError):
         #    client.explicit.post_required_string_header(None)
 
-        #with self.assertRaises(ValueError):
-        #    client.explicit.post_required_string_parameter(None)
+        with self.assertRaises(ValueError):
+            client.explicit.post_required_string_parameter(None)
 
-        #with self.assertRaises(ValueError):
-        #    client.explicit.post_required_string_property(None)
+        with self.assertRaises(ValueError):
+            client.explicit.post_required_string_property(None)
 
-        #with self.assertRaises(ValueError):
-        #    client.explicit.post_required_array_header(None)
+        with self.assertRaises(ValueError):
+            client.explicit.post_required_array_header(None)
 
-        #with self.assertRaises(ValueError):
-        #    client.explicit.post_required_array_parameter(None)
+        with self.assertRaises(ValueError):
+            client.explicit.post_required_array_parameter(None)
 
-        #with self.assertRaises(ValueError):
-        #    client.explicit.post_required_array_property(None)
+        with self.assertRaises(ValueError):
+            client.explicit.post_required_array_property(None)
 
-        #with self.assertRaises(ValueError):
-        #    client.explicit.post_required_class_parameter(None)
+        with self.assertRaises(ValueError):
+            client.explicit.post_required_class_parameter(None)
 
-        #with self.assertRaises(ValueError):
-        #    client.explicit.post_required_class_property(None)
+        with self.assertRaises(ValueError):
+            client.explicit.post_required_class_property(None)
 
         with self.assertRaises(ValueError):
             client.implicit.get_required_global_path()
 
-        #with self.assertRaises(ValueError):
-        #    client.implicit.get_required_global_query()
+        with self.assertRaises(ValueError):
+            client.implicit.get_required_global_query()
 
 
 if __name__ == '__main__':

@@ -85,26 +85,24 @@ class ServiceClient(object):
         self._adapter.add_hook("request", log_request)
         self._adapter.add_hook("response", log_response, precall=False)
 
-    def _format_url(self, url, skip_quote):
+    def _format_url(self, url):
 
         parsed = urlparse(url)
 
         if not parsed.scheme or not parsed.netloc:
-            if not skip_quote:
-                url = quote(url)
-
             url = url.lstrip('/')
             url = urljoin(self.config.base_url, url)
+
             return url
 
         else:
             return url
 
-    def _request(self, url, params, skip_quote):
+    def _request(self, url, params):
         request = ClientRequest()
 
         if url:
-            request.url = self._format_url(url, skip_quote)
+            request.url = self._format_url(url)
 
         if params:
             request.params = params
@@ -222,58 +220,58 @@ class ServiceClient(object):
         """
         self._headers[header] = value
 
-    def get(self, url=None, params={}, skip_quote=False):
+    def get(self, url=None, params={}):
         """
         Create a GET request object.
         """
-        request = self._request(url, params, skip_quote)
+        request = self._request(url, params)
         request.method = 'GET'
         return request
 
-    def put(self, url=None, params={}, skip_quote=False):
+    def put(self, url=None, params={}):
         """
         Create a PUT request object.
         """
-        request = self._request(url, params, skip_quote)
+        request = self._request(url, params)
         request.method = 'PUT'
         return request
 
-    def post(self, url=None, params={}, skip_quote=False):
+    def post(self, url=None, params={}):
         """
         Create a POST request object.
         """
-        request = self._request(url, params, skip_quote)
+        request = self._request(url, params)
         request.method = 'POST'
         return request
 
-    def head(self, url=None, params={}, skip_quote=False):
+    def head(self, url=None, params={}):
         """
         Create a HEAD request object.
         """
-        request = self._request(url, params, skip_quote)
+        request = self._request(url, params)
         request.method = 'HEAD'
         return request
 
-    def patch(self, url=None, params={}, skip_quote=False):
+    def patch(self, url=None, params={}):
         """
         Create a PATCH request object.
         """
-        request = self._request(url, params, skip_quote)
+        request = self._request(url, params)
         request.method = 'PATCH'
         return request
 
-    def delete(self, url=None, params={}, skip_quote=False):
+    def delete(self, url=None, params={}):
         """
         Create a DELETE request object.
         """
-        request = self._request(url, params, skip_quote)
+        request = self._request(url, params)
         request.method = 'DELETE'
         return request
 
-    def merge(self, url=None, params={}, skip_quote=False):
+    def merge(self, url=None, params={}):
         """
         Create a MERGE request object.
         """
-        request = self._request(url, params, skip_quote)
+        request = self._request(url, params)
         request.method = 'MERGE'
         return request

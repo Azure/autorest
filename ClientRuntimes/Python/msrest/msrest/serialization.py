@@ -28,6 +28,12 @@ import json
 import isodate
 import datetime
 
+try:
+    from urllib import quote
+
+except ImportError:
+    from urllib.parse import quote
+
 from base64 import b64decode, b64encode
 from enum import Enum
 from decimal import Decimal
@@ -212,6 +218,16 @@ class Serializer(object):
 
         except AttributeError:
             pass  # TargetObj has no _subtype_map so we don't need to classify
+
+    def url(self, data, data_type, **kwargs):
+
+        output = self.serialize_data(data, data_type, **kwargs)
+        if kwargs.get('skip_quote') == True:
+            return str(output)
+
+        if data_type == 'bool':
+            output = json.dumps(output)
+        return quote(str(output), safe='')
 
     def serialize_data(self, data, data_type, required=False, **kwargs):
 
