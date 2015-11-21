@@ -1,3 +1,4 @@
+# coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for
@@ -18,7 +19,7 @@ from . import models
 
 class AutoRestUrlTestServiceConfiguration(Configuration):
 
-    def __init__(self, global_string_path, base_url=None, filepath=None):
+    def __init__(self, global_string_path, global_string_query=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -26,6 +27,7 @@ class AutoRestUrlTestServiceConfiguration(Configuration):
         super(AutoRestUrlTestServiceConfiguration, self).__init__(base_url, filepath)
 
         self.global_string_path = global_string_path
+        self.global_string_query = global_string_query
 
 
 class AutoRestUrlTestService(object):

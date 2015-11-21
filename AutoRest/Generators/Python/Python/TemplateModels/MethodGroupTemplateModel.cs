@@ -21,7 +21,19 @@ namespace Microsoft.Rest.Generator.Python
             MethodGroupType = methodGroupName;
             Methods.Where(m => m.Group == MethodGroupName)
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
+
+            if (serviceClient.ModelTypes.Any())
+            {
+                HasAnyModel = true;
+            }
+            else
+            {
+                HasAnyModel = false;
+            }
         }
+
+        public bool HasAnyModel { get; protected set; }
+
         public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
         public string MethodGroupName { get; set; }

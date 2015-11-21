@@ -1,3 +1,4 @@
+# coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for
@@ -9,7 +10,8 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import ServiceClient
-from msrest import Configuration, Serializer, Deserializer
+from msrest import Serializer, Deserializer
+from msrestazure import AzureConfiguration
 from .operations.lr_os_operations import lr_osOperations
 from .operations.lro_retrys_operations import lro_retrysOperations
 from .operations.lrosa_ds_operations import lrosa_dsOperations
@@ -17,9 +19,9 @@ from .operations.lr_os_custom_header_operations import lr_os_custom_headerOperat
 from . import models
 
 
-class AutoRestLongRunningOperationTestServiceConfiguration(Configuration):
+class AutoRestLongRunningOperationTestServiceConfiguration(AzureConfiguration):
 
-    def __init__(self, credentials, base_url=None, filepath=None):
+    def __init__(self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -27,9 +29,8 @@ class AutoRestLongRunningOperationTestServiceConfiguration(Configuration):
         super(AutoRestLongRunningOperationTestServiceConfiguration, self).__init__(base_url, filepath)
 
         self.credentials = credentials
-
-        if self.accept_language is None:
-            self.accept_language = 'en-US'
+        self.accept_language = accept_language
+        self.long_running_operation_retry_timeout = long_running_operation_retry_timeout
 
 
 class AutoRestLongRunningOperationTestService(object):

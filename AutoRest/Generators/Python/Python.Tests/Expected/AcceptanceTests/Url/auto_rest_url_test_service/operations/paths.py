@@ -1,3 +1,4 @@
+# coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for
@@ -10,9 +11,7 @@
 
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
 
 from ..models import *
 
@@ -26,20 +25,6 @@ class paths(object):
         self._deserialize = derserializer
 
         self.config = config
-
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
 
     @async_request
     def get_boolean_true(self, bool_path, custom_headers={}, raw=False, callback=None):
@@ -64,21 +49,22 @@ class paths(object):
         # Construct URL
         url = '/paths/bool/true/{boolPath}'
         path_format_arguments = {
-            'boolPath': self._serialize_data("bool_path", bool_path, 'bool')
+            'boolPath': self._serialize.url("bool_path", bool_path, 'bool')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -109,21 +95,22 @@ class paths(object):
         # Construct URL
         url = '/paths/bool/false/{boolPath}'
         path_format_arguments = {
-            'boolPath': self._serialize_data("bool_path", bool_path, 'bool')
+            'boolPath': self._serialize.url("bool_path", bool_path, 'bool')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -154,21 +141,22 @@ class paths(object):
         # Construct URL
         url = '/paths/int/1000000/{intPath}'
         path_format_arguments = {
-            'intPath': self._serialize_data("int_path", int_path, 'int')
+            'intPath': self._serialize.url("int_path", int_path, 'int')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -199,21 +187,22 @@ class paths(object):
         # Construct URL
         url = '/paths/int/-1000000/{intPath}'
         path_format_arguments = {
-            'intPath': self._serialize_data("int_path", int_path, 'int')
+            'intPath': self._serialize.url("int_path", int_path, 'int')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -244,21 +233,22 @@ class paths(object):
         # Construct URL
         url = '/paths/long/10000000000/{longPath}'
         path_format_arguments = {
-            'longPath': self._serialize_data("long_path", long_path, 'long')
+            'longPath': self._serialize.url("long_path", long_path, 'long')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -289,21 +279,22 @@ class paths(object):
         # Construct URL
         url = '/paths/long/-10000000000/{longPath}'
         path_format_arguments = {
-            'longPath': self._serialize_data("long_path", long_path, 'long')
+            'longPath': self._serialize.url("long_path", long_path, 'long')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -334,21 +325,22 @@ class paths(object):
         # Construct URL
         url = '/paths/float/1.034E+20/{floatPath}'
         path_format_arguments = {
-            'floatPath': self._serialize_data("float_path", float_path, 'float')
+            'floatPath': self._serialize.url("float_path", float_path, 'float')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -379,21 +371,22 @@ class paths(object):
         # Construct URL
         url = '/paths/float/-1.034E-20/{floatPath}'
         path_format_arguments = {
-            'floatPath': self._serialize_data("float_path", float_path, 'float')
+            'floatPath': self._serialize.url("float_path", float_path, 'float')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -424,21 +417,22 @@ class paths(object):
         # Construct URL
         url = '/paths/double/9999999.999/{doublePath}'
         path_format_arguments = {
-            'doublePath': self._serialize_data("double_path", double_path, 'float')
+            'doublePath': self._serialize.url("double_path", double_path, 'float')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -469,21 +463,22 @@ class paths(object):
         # Construct URL
         url = '/paths/double/-9999999.999/{doublePath}'
         path_format_arguments = {
-            'doublePath': self._serialize_data("double_path", double_path, 'float')
+            'doublePath': self._serialize.url("double_path", double_path, 'float')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -515,21 +510,22 @@ class paths(object):
         # Construct URL
         url = '/paths/string/unicode/{stringPath}'
         path_format_arguments = {
-            'stringPath': self._serialize_data("string_path", string_path, 'str')
+            'stringPath': self._serialize.url("string_path", string_path, 'str')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -562,21 +558,22 @@ class paths(object):
         # Construct URL
         url = '/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}'
         path_format_arguments = {
-            'stringPath': self._serialize_data("string_path", string_path, 'str')
+            'stringPath': self._serialize.url("string_path", string_path, 'str')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -608,21 +605,22 @@ class paths(object):
         # Construct URL
         url = '/paths/string/empty/{stringPath}'
         path_format_arguments = {
-            'stringPath': self._serialize_data("string_path", string_path, 'str')
+            'stringPath': self._serialize.url("string_path", string_path, 'str')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -653,21 +651,22 @@ class paths(object):
         # Construct URL
         url = '/paths/string/null/{stringPath}'
         path_format_arguments = {
-            'stringPath': self._serialize_data("string_path", string_path, 'str')
+            'stringPath': self._serialize.url("string_path", string_path, 'str')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [400]:
             raise ErrorException(self._deserialize, response)
@@ -699,21 +698,22 @@ class paths(object):
         # Construct URL
         url = '/paths/enum/green%20color/{enumPath}'
         path_format_arguments = {
-            'enumPath': self._serialize_data("enum_path", enum_path, 'UriColor')
+            'enumPath': self._serialize.url("enum_path", enum_path, 'UriColor')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -746,21 +746,22 @@ class paths(object):
         # Construct URL
         url = '/paths/string/null/{enumPath}'
         path_format_arguments = {
-            'enumPath': self._serialize_data("enum_path", enum_path, 'UriColor')
+            'enumPath': self._serialize.url("enum_path", enum_path, 'UriColor')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [400]:
             raise ErrorException(self._deserialize, response)
@@ -792,21 +793,22 @@ class paths(object):
         # Construct URL
         url = '/paths/byte/multibyte/{bytePath}'
         path_format_arguments = {
-            'bytePath': self._serialize_data("byte_path", byte_path, 'bytearray')
+            'bytePath': self._serialize.url("byte_path", byte_path, 'bytearray')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -837,21 +839,22 @@ class paths(object):
         # Construct URL
         url = '/paths/byte/empty/{bytePath}'
         path_format_arguments = {
-            'bytePath': self._serialize_data("byte_path", byte_path, 'bytearray')
+            'bytePath': self._serialize.url("byte_path", byte_path, 'bytearray')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -882,21 +885,22 @@ class paths(object):
         # Construct URL
         url = '/paths/byte/null/{bytePath}'
         path_format_arguments = {
-            'bytePath': self._serialize_data("byte_path", byte_path, 'bytearray')
+            'bytePath': self._serialize.url("byte_path", byte_path, 'bytearray')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [400]:
             raise ErrorException(self._deserialize, response)
@@ -927,21 +931,22 @@ class paths(object):
         # Construct URL
         url = '/paths/date/2012-01-01/{datePath}'
         path_format_arguments = {
-            'datePath': self._serialize_data("date_path", date_path, 'date')
+            'datePath': self._serialize.url("date_path", date_path, 'date')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -973,21 +978,22 @@ class paths(object):
         # Construct URL
         url = '/paths/date/null/{datePath}'
         path_format_arguments = {
-            'datePath': self._serialize_data("date_path", date_path, 'date')
+            'datePath': self._serialize.url("date_path", date_path, 'date')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [400]:
             raise ErrorException(self._deserialize, response)
@@ -1018,21 +1024,22 @@ class paths(object):
         # Construct URL
         url = '/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}'
         path_format_arguments = {
-            'dateTimePath': self._serialize_data("date_time_path", date_time_path, 'iso-8601')
+            'dateTimePath': self._serialize.url("date_time_path", date_time_path, 'iso-8601')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1064,21 +1071,22 @@ class paths(object):
         # Construct URL
         url = '/paths/datetime/null/{dateTimePath}'
         path_format_arguments = {
-            'dateTimePath': self._serialize_data("date_time_path", date_time_path, 'iso-8601')
+            'dateTimePath': self._serialize.url("date_time_path", date_time_path, 'iso-8601')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [400]:
             raise ErrorException(self._deserialize, response)

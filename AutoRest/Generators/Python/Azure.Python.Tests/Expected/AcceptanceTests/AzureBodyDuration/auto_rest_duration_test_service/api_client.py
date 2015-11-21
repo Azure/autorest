@@ -1,3 +1,4 @@
+# coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for
@@ -9,14 +10,15 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import ServiceClient
-from msrest import Configuration, Serializer, Deserializer
+from msrest import Serializer, Deserializer
+from msrestazure import AzureConfiguration
 from .operations.duration_operations import durationOperations
 from . import models
 
 
-class AutoRestDurationTestServiceConfiguration(Configuration):
+class AutoRestDurationTestServiceConfiguration(AzureConfiguration):
 
-    def __init__(self, credentials, base_url=None, filepath=None):
+    def __init__(self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'https://localhost'
@@ -24,9 +26,8 @@ class AutoRestDurationTestServiceConfiguration(Configuration):
         super(AutoRestDurationTestServiceConfiguration, self).__init__(base_url, filepath)
 
         self.credentials = credentials
-
-        if self.accept_language is None:
-            self.accept_language = 'en-US'
+        self.accept_language = accept_language
+        self.long_running_operation_retry_timeout = long_running_operation_retry_timeout
 
 
 class AutoRestDurationTestService(object):

@@ -1,5 +1,3 @@
-
-
 import sys
 import subprocess
 from os.path import dirname, realpath
@@ -15,9 +13,9 @@ sys.path.append(runtime)
 
 def sort_test(x, y):
 
-    if x == 'test_ensure_coverage' :
+    if x == 'test_ensure_coverage':
         return 1
-    if y == 'test_ensure_coverage' :
+    if y == 'test_ensure_coverage':
         return -1
     return (x > y) - (x < y)
 
@@ -25,7 +23,7 @@ if __name__ == '__main__':
 
     cwd = dirname(realpath(__file__))
 
-    #server = subprocess.Popen("node ../../../../AutoRest/TestServer/server/startup/www.js")
+    server = subprocess.Popen("node ../../../../AutoRest/TestServer/server/startup/www.js")
     try:
         runner = TextTestRunner(verbosity=2)
 
@@ -36,5 +34,4 @@ if __name__ == '__main__':
         runner.run(suite)
     
     finally:
-        pass
-        #server.kill()
+        server.kill()

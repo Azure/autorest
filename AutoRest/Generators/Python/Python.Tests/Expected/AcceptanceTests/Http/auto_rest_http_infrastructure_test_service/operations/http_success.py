@@ -1,3 +1,4 @@
+# coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for
@@ -10,9 +11,7 @@
 
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
 
 from ..models import *
 
@@ -26,20 +25,6 @@ class http_success(object):
         self._deserialize = derserializer
 
         self.config = config
-
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
 
     @async_request
     def head200(self, custom_headers={}, raw=False, callback=None):
@@ -63,16 +48,17 @@ class http_success(object):
         url = '/http/success/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.head(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.head(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -102,16 +88,17 @@ class http_success(object):
         url = '/http/success/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -127,7 +114,7 @@ class http_success(object):
         return deserialized
 
     @async_request
-    def put200(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def put200(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Put boolean value true returning 200 success
@@ -150,19 +137,23 @@ class http_success(object):
         url = '/http/success/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -171,7 +162,7 @@ class http_success(object):
             return None, response
 
     @async_request
-    def patch200(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def patch200(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Patch true Boolean value in request returning 200
@@ -194,19 +185,23 @@ class http_success(object):
         url = '/http/success/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.patch(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.patch(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -215,7 +210,7 @@ class http_success(object):
             return None, response
 
     @async_request
-    def post200(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def post200(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Post bollean value true in request that returns a 200
@@ -238,19 +233,23 @@ class http_success(object):
         url = '/http/success/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -259,7 +258,7 @@ class http_success(object):
             return None, response
 
     @async_request
-    def delete200(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def delete200(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Delete simple boolean value true returns 200
@@ -282,19 +281,23 @@ class http_success(object):
         url = '/http/success/200'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -303,7 +306,7 @@ class http_success(object):
             return None, response
 
     @async_request
-    def put201(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def put201(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Put true Boolean value in request returns 201
@@ -326,19 +329,23 @@ class http_success(object):
         url = '/http/success/201'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [201]:
             raise ErrorException(self._deserialize, response)
@@ -347,7 +354,7 @@ class http_success(object):
             return None, response
 
     @async_request
-    def post201(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def post201(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Post true Boolean value in request returns 201 (Created)
@@ -370,19 +377,23 @@ class http_success(object):
         url = '/http/success/201'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [201]:
             raise ErrorException(self._deserialize, response)
@@ -391,7 +402,7 @@ class http_success(object):
             return None, response
 
     @async_request
-    def put202(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def put202(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Put true Boolean value in request returns 202 (Accepted)
@@ -414,19 +425,23 @@ class http_success(object):
         url = '/http/success/202'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
             raise ErrorException(self._deserialize, response)
@@ -435,7 +450,7 @@ class http_success(object):
             return None, response
 
     @async_request
-    def patch202(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def patch202(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Patch true Boolean value in request returns 202
@@ -458,19 +473,23 @@ class http_success(object):
         url = '/http/success/202'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.patch(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.patch(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
             raise ErrorException(self._deserialize, response)
@@ -479,7 +498,7 @@ class http_success(object):
             return None, response
 
     @async_request
-    def post202(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def post202(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Post true Boolean value in request returns 202 (Accepted)
@@ -502,19 +521,23 @@ class http_success(object):
         url = '/http/success/202'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
             raise ErrorException(self._deserialize, response)
@@ -523,7 +546,7 @@ class http_success(object):
             return None, response
 
     @async_request
-    def delete202(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def delete202(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Delete true Boolean value in request returns 202 (accepted)
@@ -546,19 +569,23 @@ class http_success(object):
         url = '/http/success/202'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [202]:
             raise ErrorException(self._deserialize, response)
@@ -588,16 +615,17 @@ class http_success(object):
         url = '/http/success/204'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.head(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.head(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [204]:
             raise ErrorException(self._deserialize, response)
@@ -606,7 +634,7 @@ class http_success(object):
             return None, response
 
     @async_request
-    def put204(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def put204(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Put true Boolean value in request returns 204 (no content)
@@ -629,19 +657,23 @@ class http_success(object):
         url = '/http/success/204'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [204]:
             raise ErrorException(self._deserialize, response)
@@ -650,7 +682,7 @@ class http_success(object):
             return None, response
 
     @async_request
-    def patch204(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def patch204(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Patch true Boolean value in request returns 204 (no content)
@@ -673,19 +705,23 @@ class http_success(object):
         url = '/http/success/204'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.patch(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.patch(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [204]:
             raise ErrorException(self._deserialize, response)
@@ -694,7 +730,7 @@ class http_success(object):
             return None, response
 
     @async_request
-    def post204(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def post204(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Post true Boolean value in request returns 204 (no content)
@@ -717,19 +753,23 @@ class http_success(object):
         url = '/http/success/204'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [204]:
             raise ErrorException(self._deserialize, response)
@@ -738,7 +778,7 @@ class http_success(object):
             return None, response
 
     @async_request
-    def delete204(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def delete204(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Delete true Boolean value in request returns 204 (no content)
@@ -761,19 +801,23 @@ class http_success(object):
         url = '/http/success/204'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [204]:
             raise ErrorException(self._deserialize, response)
@@ -803,16 +847,17 @@ class http_success(object):
         url = '/http/success/404'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.head(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.head(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [204, 404]:
             raise ErrorException(self._deserialize, response)

@@ -1,3 +1,4 @@
+# coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for
@@ -10,9 +11,8 @@
 
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
+from msrestazure.azure_exceptions import CloudError
 import uuid
 
 from ..models import *
@@ -27,20 +27,6 @@ class pagingOperations(object):
         self._deserialize = derserializer
 
         self.config = config
-
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
 
     @async_request
     def get_single_pages(self, custom_headers={}, raw=False, callback=None):
@@ -61,40 +47,41 @@ class pagingOperations(object):
         concurrent.futures.Future
         """
 
-        def paging(next_link=None, raw=False):
+        def internal_paging(next_link=None, raw=False):
 
             if next_link is None:
                 # Construct URL
                 url = '/paging/single'
 
                 # Construct parameters
-                query = {}
+                query_parameters = {}
 
             else:
                 url = next_link
-                query = {}
+                query_parameters = {}
 
             # Construct headers
-            headers = {}
+            header_parameters = {}
+            header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+            if custom_headers:
+                header_parameters.update(custom_headers)
             if self.config.accept_language is not None:
-                query['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-            headers.update(custom_headers)
-            headers['x-ms-client-request-id'] = str(uuid.uuid1())
-            headers['Content-Type'] = 'application/json; charset=utf-8'
+                header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
             # Construct and send request
-            request = self._client.get(url, query)
-            response = self._client.send(request, headers)
+            request = self._client.get(url, query_parameters)
+            response = self._client.send(request, header_parameters)
 
             if response.status_code not in [200]:
-                raise CloudException(self._deserialize, response)
+                raise CloudError(self._deserialize, response)
 
             return response
 
-        response = paging()
+        response = internal_paging()
 
         # Deserialize response
-        deserialized = ProductPaged(response, paging, self._deserialize.dependencies)
+        deserialized = ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -102,7 +89,7 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages(self, client_request_id, custom_headers={}, raw=False, callback=None):
+    def get_multiple_pages(self, client_request_id=None, custom_headers={}, raw=False, callback=None):
         """
 
         A paging operation that includes a nextLink that has 10 pages
@@ -122,42 +109,43 @@ class pagingOperations(object):
         concurrent.futures.Future
         """
 
-        def paging(next_link=None, raw=False):
+        def internal_paging(next_link=None, raw=False):
 
             if next_link is None:
                 # Construct URL
                 url = '/paging/multiple'
 
                 # Construct parameters
-                query = {}
+                query_parameters = {}
 
             else:
                 url = next_link
-                query = {}
+                query_parameters = {}
 
             # Construct headers
-            headers = {}
+            header_parameters = {}
+            header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+            if custom_headers:
+                header_parameters.update(custom_headers)
             if client_request_id is not None:
-                query['client-request-id'] = self._serialize_data("client_request_id", client_request_id, 'str')
+                header_parameters['client-request-id'] = self._serialize.header("client_request_id", client_request_id, 'str')
             if self.config.accept_language is not None:
-                query['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-            headers.update(custom_headers)
-            headers['x-ms-client-request-id'] = str(uuid.uuid1())
-            headers['Content-Type'] = 'application/json; charset=utf-8'
+                header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
             # Construct and send request
-            request = self._client.get(url, query)
-            response = self._client.send(request, headers)
+            request = self._client.get(url, query_parameters)
+            response = self._client.send(request, header_parameters)
 
             if response.status_code not in [200]:
-                raise CloudException(self._deserialize, response)
+                raise CloudError(self._deserialize, response)
 
             return response
 
-        response = paging()
+        response = internal_paging()
 
         # Deserialize response
-        deserialized = ProductPaged(response, paging, self._deserialize.dependencies)
+        deserialized = ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -184,40 +172,41 @@ class pagingOperations(object):
         concurrent.futures.Future
         """
 
-        def paging(next_link=None, raw=False):
+        def internal_paging(next_link=None, raw=False):
 
             if next_link is None:
                 # Construct URL
                 url = '/paging/multiple/retryfirst'
 
                 # Construct parameters
-                query = {}
+                query_parameters = {}
 
             else:
                 url = next_link
-                query = {}
+                query_parameters = {}
 
             # Construct headers
-            headers = {}
+            header_parameters = {}
+            header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+            if custom_headers:
+                header_parameters.update(custom_headers)
             if self.config.accept_language is not None:
-                query['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-            headers.update(custom_headers)
-            headers['x-ms-client-request-id'] = str(uuid.uuid1())
-            headers['Content-Type'] = 'application/json; charset=utf-8'
+                header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
             # Construct and send request
-            request = self._client.get(url, query)
-            response = self._client.send(request, headers)
+            request = self._client.get(url, query_parameters)
+            response = self._client.send(request, header_parameters)
 
             if response.status_code not in [200]:
-                raise CloudException(self._deserialize, response)
+                raise CloudError(self._deserialize, response)
 
             return response
 
-        response = paging()
+        response = internal_paging()
 
         # Deserialize response
-        deserialized = ProductPaged(response, paging, self._deserialize.dependencies)
+        deserialized = ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -245,40 +234,41 @@ class pagingOperations(object):
         concurrent.futures.Future
         """
 
-        def paging(next_link=None, raw=False):
+        def internal_paging(next_link=None, raw=False):
 
             if next_link is None:
                 # Construct URL
                 url = '/paging/multiple/retrysecond'
 
                 # Construct parameters
-                query = {}
+                query_parameters = {}
 
             else:
                 url = next_link
-                query = {}
+                query_parameters = {}
 
             # Construct headers
-            headers = {}
+            header_parameters = {}
+            header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+            if custom_headers:
+                header_parameters.update(custom_headers)
             if self.config.accept_language is not None:
-                query['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-            headers.update(custom_headers)
-            headers['x-ms-client-request-id'] = str(uuid.uuid1())
-            headers['Content-Type'] = 'application/json; charset=utf-8'
+                header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
             # Construct and send request
-            request = self._client.get(url, query)
-            response = self._client.send(request, headers)
+            request = self._client.get(url, query_parameters)
+            response = self._client.send(request, header_parameters)
 
             if response.status_code not in [200]:
-                raise CloudException(self._deserialize, response)
+                raise CloudError(self._deserialize, response)
 
             return response
 
-        response = paging()
+        response = internal_paging()
 
         # Deserialize response
-        deserialized = ProductPaged(response, paging, self._deserialize.dependencies)
+        deserialized = ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -304,40 +294,41 @@ class pagingOperations(object):
         concurrent.futures.Future
         """
 
-        def paging(next_link=None, raw=False):
+        def internal_paging(next_link=None, raw=False):
 
             if next_link is None:
                 # Construct URL
                 url = '/paging/single/failure'
 
                 # Construct parameters
-                query = {}
+                query_parameters = {}
 
             else:
                 url = next_link
-                query = {}
+                query_parameters = {}
 
             # Construct headers
-            headers = {}
+            header_parameters = {}
+            header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+            if custom_headers:
+                header_parameters.update(custom_headers)
             if self.config.accept_language is not None:
-                query['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-            headers.update(custom_headers)
-            headers['x-ms-client-request-id'] = str(uuid.uuid1())
-            headers['Content-Type'] = 'application/json; charset=utf-8'
+                header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
             # Construct and send request
-            request = self._client.get(url, query)
-            response = self._client.send(request, headers)
+            request = self._client.get(url, query_parameters)
+            response = self._client.send(request, header_parameters)
 
             if response.status_code not in [200]:
-                raise CloudException(self._deserialize, response)
+                raise CloudError(self._deserialize, response)
 
             return response
 
-        response = paging()
+        response = internal_paging()
 
         # Deserialize response
-        deserialized = ProductPaged(response, paging, self._deserialize.dependencies)
+        deserialized = ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -363,40 +354,41 @@ class pagingOperations(object):
         concurrent.futures.Future
         """
 
-        def paging(next_link=None, raw=False):
+        def internal_paging(next_link=None, raw=False):
 
             if next_link is None:
                 # Construct URL
                 url = '/paging/multiple/failure'
 
                 # Construct parameters
-                query = {}
+                query_parameters = {}
 
             else:
                 url = next_link
-                query = {}
+                query_parameters = {}
 
             # Construct headers
-            headers = {}
+            header_parameters = {}
+            header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+            if custom_headers:
+                header_parameters.update(custom_headers)
             if self.config.accept_language is not None:
-                query['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-            headers.update(custom_headers)
-            headers['x-ms-client-request-id'] = str(uuid.uuid1())
-            headers['Content-Type'] = 'application/json; charset=utf-8'
+                header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
             # Construct and send request
-            request = self._client.get(url, query)
-            response = self._client.send(request, headers)
+            request = self._client.get(url, query_parameters)
+            response = self._client.send(request, header_parameters)
 
             if response.status_code not in [200]:
-                raise CloudException(self._deserialize, response)
+                raise CloudError(self._deserialize, response)
 
             return response
 
-        response = paging()
+        response = internal_paging()
 
         # Deserialize response
-        deserialized = ProductPaged(response, paging, self._deserialize.dependencies)
+        deserialized = ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -422,40 +414,41 @@ class pagingOperations(object):
         concurrent.futures.Future
         """
 
-        def paging(next_link=None, raw=False):
+        def internal_paging(next_link=None, raw=False):
 
             if next_link is None:
                 # Construct URL
                 url = '/paging/multiple/failureuri'
 
                 # Construct parameters
-                query = {}
+                query_parameters = {}
 
             else:
                 url = next_link
-                query = {}
+                query_parameters = {}
 
             # Construct headers
-            headers = {}
+            header_parameters = {}
+            header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+            if custom_headers:
+                header_parameters.update(custom_headers)
             if self.config.accept_language is not None:
-                query['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-            headers.update(custom_headers)
-            headers['x-ms-client-request-id'] = str(uuid.uuid1())
-            headers['Content-Type'] = 'application/json; charset=utf-8'
+                header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
             # Construct and send request
-            request = self._client.get(url, query)
-            response = self._client.send(request, headers)
+            request = self._client.get(url, query_parameters)
+            response = self._client.send(request, header_parameters)
 
             if response.status_code not in [200]:
-                raise CloudException(self._deserialize, response)
+                raise CloudError(self._deserialize, response)
 
             return response
 
-        response = paging()
+        response = internal_paging()
 
         # Deserialize response
-        deserialized = ProductPaged(response, paging, self._deserialize.dependencies)
+        deserialized = ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response

@@ -4,19 +4,20 @@
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Python.AzureServiceClientTemplateModel>
+# coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ")
 # --------------------------------------------------------------------------
 @EmptyLine
 from msrest.service_client import ServiceClient
-from msrest import Configuration, Serializer, Deserializer
+from msrest import Serializer, Deserializer
+from msrestazure import AzureConfiguration
 @if (Model.MethodTemplateModels.Any())
 {
 <text>
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
+from msrestazure.azure_exceptions import CloudError
 import uuid
 </text>
 }
@@ -27,10 +28,13 @@ import uuid
 @:from .operations.@(modelGroupType.MethodGroupType.ToPythonCase()) import @modelGroupType.MethodGroupType
   }
 }
-from . import models
+@if (Model.HasAnyModel)
+{
+@:from . import models
+}
 @EmptyLine
 @EmptyLine
-class @(Model.Name)Configuration(Configuration):
+class @(Model.Name)Configuration(AzureConfiguration):
 @EmptyLine
     def __init__(self, @(Model.RequiredConstructorParameters)base_url=None, filepath=None):
 @EmptyLine
@@ -38,27 +42,12 @@ class @(Model.Name)Configuration(Configuration):
             base_url = '@Model.BaseUrl'
 @EmptyLine
         super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
-@{
-  var propertiesRequired = Model.Properties.Where(p => p.IsRequired);
-  if (propertiesRequired.Any())
-  {
+@if (Model.Properties.Any())
+{
 @EmptyLine
-    foreach (var property in propertiesRequired)
-    {
-        @:self.@(property.Name) = @(property.Name)
-    }
-  }
-}
-@{
-  var propertiesHasDefault = Model.Properties.Where(p => p.DefaultValue != null);
-  if (propertiesHasDefault.Any())
+  foreach (var property in Model.Properties)
   {
-    @EmptyLine
-    @foreach (var property in propertiesHasDefault)
-    {
-        @:if self.@(property.Name) is None:
-            @:self.@(property.Name) = @(property.DefaultValue)
-    }
+        @:self.@(property.Name) = @(property.Name)
   }
 }
 @EmptyLine
@@ -69,36 +58,24 @@ class @(Model.Name)(object):
 @EmptyLine
         self._client = ServiceClient(@(Model.Properties.Any(p => p.Type == PrimaryType.Credentials) ? "config.credentials" : "None"), config)
 @EmptyLine
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+@if (Model.ModelTemplateModels.Any())
+{
+        @:client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+}
+else
+{
+        @:client_models = {}
+}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 @EmptyLine
         self.config = config
-  @foreach (var methodGroup in Model.MethodGroupModels)
-  {
-        @:self.@(methodGroup.MethodGroupName) = @(methodGroup.MethodGroupType)(self._client, self.config, self._serialize, self._deserialize)
-  }
-@if (Model.MethodTemplateModels.Any())
+@foreach (var methodGroup in Model.MethodGroupModels)
 {
-<text>
-@EmptyLine
-    def _serialize_data(self, name, value, datatype, **kwargs):
-@EmptyLine
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-@EmptyLine
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-@EmptyLine
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-@EmptyLine
-        else:
-            return value
-</text>
-  foreach (var method in Model.MethodTemplateModels)
-  {
+        @:self.@(methodGroup.MethodGroupName) = @(methodGroup.MethodGroupType)(self._client, self.config, self._serialize, self._deserialize)
+}
+@foreach (var method in Model.MethodTemplateModels)
+{
 @EmptyLine
 @(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
-  }
 }

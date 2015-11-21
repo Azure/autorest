@@ -93,11 +93,11 @@ class AADMixin(object):
         Configure authentication endpoint.
         """
         if not config:
-            config = AzureConfiguration()
+            raise ValueError("Credentials require an AzureConfiguration object.")
 
         self.auth_uri = _https(config.auth_endpoint, config.tenant, config.auth_uri)
         self.token_uri = _https(config.auth_endpoint, config.tenant, config.token_uri)
-        self.verify = config.verify
+        self.verify = config.connection.verify
         self.cred_store = config.keyring
         
         self.state = state = oauth.oauth2_session.generate_token()
@@ -144,8 +144,8 @@ class AADMixin(object):
 class UserPassCredentials(TokenAuthentication, AADMixin):
     
 
-    def __init__(self, client_id, username, password, 
-                 secret=None, config=None):
+    def __init__(self, config, client_id, username, password, 
+                 secret=None):
 
         super(UserPassCredentials, self).__init__(client_id, None)
         self._configure(config)
@@ -178,8 +178,8 @@ class UserPassCredentials(TokenAuthentication, AADMixin):
 
 class ServicePrincipalCredentials(TokenAuthentication, AADMixin):
     
-    def __init__(self, client_id, secret, resource,
-                 tenant=None, config=None):
+    def __init__(self, config, client_id, secret, resource,
+                 tenant=None):
 
         if not config:
             config = AzureConfiguration()
@@ -218,7 +218,7 @@ class ServicePrincipalCredentials(TokenAuthentication, AADMixin):
 
 class InteractiveCredentials(TokenAuthentication, AADMixin):
     
-    def __init__(self, client_id, resource, redirect, config=None):
+    def __init__(self, config, client_id, resource, redirect):
         """
         Interactive/Web AAD authentication
         """

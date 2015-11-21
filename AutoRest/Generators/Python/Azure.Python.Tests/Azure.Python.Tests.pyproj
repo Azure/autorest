@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>74be0601-ff65-4b46-8a8b-e670056061c4</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>AcceptanceTests\acceptance_tests.py</StartupFile>
+    <StartupFile>AcceptanceTests\__init__.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -25,6 +25,10 @@
     <Compile Include="AcceptanceTests\acceptance_tests.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AcceptanceTests\azure_url_tests.py" />
+    <Compile Include="AcceptanceTests\head_tests.py" />
+    <Compile Include="AcceptanceTests\lro_happy_path_tests.py" />
+    <Compile Include="AcceptanceTests\__init__.py" />
     <Compile Include="Expected\AcceptanceTests\**\*.py" />
   </ItemGroup>
   <ItemGroup>

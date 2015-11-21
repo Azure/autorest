@@ -71,7 +71,7 @@ namespace Microsoft.Rest.Generator.Python
                     return string.Format(CultureInfo.InvariantCulture, "response.status_code not in [{0}]", string.Join(", ", predicates));
                 }
 
-                return "reponse.status_code < 200 or reponse.status_code >= 300";
+                return "response.status_code < 200 or response.status_code >= 300";
             }
         }
 
@@ -81,7 +81,7 @@ namespace Microsoft.Rest.Generator.Python
             {
                 if (DefaultResponse == null)
                 {
-                    return "HttpOperationException(self._deserialize, response)";
+                    return "HttpOperationError(self._deserialize, response)";
                 }
                 else if (DefaultResponse is CompositeType)
                 {
@@ -89,7 +89,7 @@ namespace Microsoft.Rest.Generator.Python
                 }
                 else
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "HttpOperationException(self._deserialize, response, '{0}')", DefaultResponse.ToPythonRuntimeTypeString());
+                    return string.Format(CultureInfo.InvariantCulture, "HttpOperationError(self._deserialize, response, '{0}')", DefaultResponse.ToPythonRuntimeTypeString());
                 }
             }
         }
@@ -104,7 +104,14 @@ namespace Microsoft.Rest.Generator.Python
             List<string> declarations = new List<string>();
             foreach (var parameter in LocalParameters)
             {
-                declarations.Add(parameter.Name);
+                if (parameter.IsRequired)
+                {
+                    declarations.Add(parameter.Name);
+                }
+                else
+                {
+                    declarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}=None", parameter.Name));
+                }
             }
 
             if (addCustomHeaderParameters)
@@ -118,18 +125,19 @@ namespace Microsoft.Rest.Generator.Python
             return declaration;
         }
 
-        private string BuildSerializeDataCall(Parameter parameter)
+        private static string BuildSerializeDataCall(Parameter parameter, string functionName)
         {
-            string divChar;
+            string divChar = ClientModelExtensions.NeedsFormattedSeparator(parameter);
             string divParameter = string.Empty;
 
-            if (ClientModelExtensions.NeedsFormattedSeparator(parameter, out divChar))
+            if (!string.IsNullOrEmpty(divChar))
             {
                 divParameter = string.Format(CultureInfo.InvariantCulture, ", div='{0}'", divChar);
             }
 
             return string.Format(CultureInfo.InvariantCulture,
-                    "self._serialize_data(\"{0}\", {0}, '{1}'{2}{3})",
+                    "self._serialize.{0}(\"{1}\", {1}, '{2}'{3}{4})",
+                        functionName,
                         parameter.Name,
                         parameter.Type.ToPythonRuntimeTypeString(),
                         parameter.SkipUrlEncoding() ? ", skip_quote=True" : string.Empty,
@@ -155,7 +163,7 @@ namespace Microsoft.Rest.Generator.Python
                 {
                     builder.AppendLine("'{0}': {1}{2}{3}",
                         pathParameterList[i].SerializedName,
-                        BuildSerializeDataCall(pathParameterList[i]),
+                        BuildSerializeDataCall(pathParameterList[i], "url"),
                         pathParameterList[i].IsRequired ? string.Empty :
                             string.Format(CultureInfo.InvariantCulture, "if {0} else ''", pathParameterList[i].Name),
                         i == pathParameterList.Count-1 ? "" : ",");
@@ -182,10 +190,10 @@ namespace Microsoft.Rest.Generator.Python
             {
                 if (queryParameter.IsRequired)
                 {
-                    builder.AppendLine("{0}['{1}'] ={2}",
+                    builder.AppendLine("{0}['{1}'] = {2}",
                                 variableName,
                                 queryParameter.SerializedName,
-                                BuildSerializeDataCall(queryParameter));
+                                BuildSerializeDataCall(queryParameter, "query"));
                 }
                 else
                 {
@@ -194,7 +202,7 @@ namespace Microsoft.Rest.Generator.Python
                         .AppendLine("{0}['{1}'] = {2}",
                                 variableName,
                                 queryParameter.SerializedName,
-                                BuildSerializeDataCall(queryParameter))
+                                BuildSerializeDataCall(queryParameter, "query"))
                         .Outdent();
                 }
             }
@@ -218,7 +226,7 @@ namespace Microsoft.Rest.Generator.Python
                     builder.AppendLine("{0}['{1}'] = {2}",
                             variableName,
                             headerParameter.SerializedName,
-                            BuildSerializeDataCall(headerParameter));
+                            BuildSerializeDataCall(headerParameter, "header"));
                 }
                 else
                 {
@@ -226,8 +234,8 @@ namespace Microsoft.Rest.Generator.Python
                         .Indent()
                         .AppendLine("{0}['{1}'] = {2}", 
                             variableName,
-                            headerParameter.SerializedName, 
-                            BuildSerializeDataCall(headerParameter))
+                            headerParameter.SerializedName,
+                            BuildSerializeDataCall(headerParameter, "header"))
                         .Outdent();
                 }
             }
@@ -372,7 +380,7 @@ namespace Microsoft.Rest.Generator.Python
         /// <summary>
         /// Gets the expression for default header setting. 
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "customheaders")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "headerparameters"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "customheaders")]
         public virtual string SetDefaultHeaders
         {
             get
@@ -380,7 +388,7 @@ namespace Microsoft.Rest.Generator.Python
                 if (this.AddCustomHeader)
                 {
                     var sb = new IndentedStringBuilder();
-                    sb.AppendLine("headers.update(custom_headers)");
+                    sb.AppendLine("if custom_headers:").Indent().AppendLine("header_parameters.update(custom_headers)").Outdent();
                     return sb.ToString();
                 }
                 else

@@ -1,3 +1,4 @@
+# coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for
@@ -11,12 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
 from . import models
 
 
@@ -42,20 +38,6 @@ class AutoRestReportService(object):
 
         self.config = config
 
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
-
     @async_request
     def get_report(self, custom_headers={}, raw=False, callback=None):
         """
@@ -79,16 +61,17 @@ class AutoRestReportService(object):
         url = '/report'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

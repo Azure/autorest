@@ -1,3 +1,4 @@
+# coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for
@@ -9,7 +10,8 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import ServiceClient
-from msrest import Configuration, Serializer, Deserializer
+from msrest import Serializer, Deserializer
+from msrestazure import AzureConfiguration
 from .operations.xms_client_request_id_operations import xms_client_request_idOperations
 from .operations.subscription_in_credentials_operations import subscription_in_credentialsOperations
 from .operations.subscription_in_method_operations import subscription_in_methodOperations
@@ -20,9 +22,9 @@ from .operations.header_operations import headerOperations
 from . import models
 
 
-class AutoRestAzureSpecialParametersTestClientConfiguration(Configuration):
+class AutoRestAzureSpecialParametersTestClientConfiguration(AzureConfiguration):
 
-    def __init__(self, credentials, subscription_id, base_url=None, filepath=None):
+    def __init__(self, credentials, subscription_id, api_version='2015-07-01-preview', accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -31,11 +33,9 @@ class AutoRestAzureSpecialParametersTestClientConfiguration(Configuration):
 
         self.credentials = credentials
         self.subscription_id = subscription_id
-
-        if self.api_version is None:
-            self.api_version = '2015-07-01-preview'
-        if self.accept_language is None:
-            self.accept_language = 'en-US'
+        self.api_version = api_version
+        self.accept_language = accept_language
+        self.long_running_operation_retry_timeout = long_running_operation_retry_timeout
 
 
 class AutoRestAzureSpecialParametersTestClient(object):

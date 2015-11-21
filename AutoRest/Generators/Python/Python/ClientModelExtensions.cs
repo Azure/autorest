@@ -14,29 +14,21 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
     public static class ClientModelExtensions
     {
         /// <summary>
-        /// The set contain the primary types which require datetime module
-        /// </summary>
-        internal static HashSet<PrimaryType> PythonDateTimeModuleType = new HashSet<PrimaryType>() { PrimaryType.Date, PrimaryType.DateTime, PrimaryType.DateTimeRfc1123, PrimaryType.TimeSpan };
-
-        /// <summary>
         /// Format the value of a sequence given the modeled element format.  Note that only sequences of strings are supported
         /// </summary>
         /// <param name="parameter">The parameter to format</param>
-        /// <param name="separator">return the separator</param>
-        /// <returns>true means it need format, and out with seperator</returns>
-        public static bool NeedsFormattedSeparator(Parameter parameter, out string separator)
+        /// <returns>return the separator</returns>
+        public static string NeedsFormattedSeparator(Parameter parameter)
         {
             if (parameter == null)
             {
                 throw new ArgumentNullException("parameter");
             }
 
-            separator = ",";
-
             SequenceType sequence = parameter.Type as SequenceType;
             if (sequence == null)
             {
-                return false;
+                return null;
             }
 
             PrimaryType primaryType = sequence.ElementType as PrimaryType;
@@ -54,8 +46,7 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                                   "non-string array parameter {0}", parameter));
             }
 
-            separator = parameter.CollectionFormat.GetSeparator();
-            return true;
+            return parameter.CollectionFormat.GetSeparator();
         }
 
         /// <summary>

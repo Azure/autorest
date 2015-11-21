@@ -2,17 +2,19 @@
 @using Microsoft.Rest.Generator.Python.Templates
 @using System.Linq;
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodGroupTemplateModel>
+# coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ")
 # --------------------------------------------------------------------------
 @EmptyLine
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
+@if (Model.HasAnyModel)
+{
 @EmptyLine
-from ..models import *
+@:from ..models import *
+}
 @EmptyLine
 @EmptyLine
 class @(Model.MethodGroupType)(object):
@@ -24,20 +26,6 @@ class @(Model.MethodGroupType)(object):
         self._deserialize = derserializer
 @EmptyLine
         self.config = config
-@EmptyLine
-    def _serialize_data(self, name, value, datatype, **kwargs):
-@EmptyLine
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-@EmptyLine
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-@EmptyLine
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-@EmptyLine
-        else:
-            return value
 @foreach (var method in Model.MethodTemplateModels)
 {
 @EmptyLine

@@ -5,9 +5,12 @@ import isodate
 import tempfile
 from datetime import date, datetime, timedelta
 import os
-from os.path import dirname, pardir, join, realpath
+from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
+
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "BodyFile"))
 
@@ -21,7 +24,7 @@ class FileTests(unittest.TestCase):
 
     def test_files(self):
 
-        config = AutoRestSwaggerBATFileServiceConfiguration("http://localhost:3000")
+        config = AutoRestSwaggerBATFileServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestSwaggerBATFileService(config)
 

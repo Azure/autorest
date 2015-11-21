@@ -4,6 +4,7 @@
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ServiceClientTemplateModel>
+# coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ")
 # --------------------------------------------------------------------------
@@ -14,12 +15,7 @@ from msrest import Configuration, Serializer, Deserializer
 {
 <text>
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
 </text>
 }
 @if (Model.MethodGroupModels.Any())
@@ -29,7 +25,10 @@ from msrest.exceptions import (
 @:from .operations.@(modelGroupType.MethodGroupType.ToPythonCase()) import @modelGroupType.MethodGroupType
   }
 }
-from . import models
+@if (Model.ModelTemplateModels.Any())
+{
+@:from . import models
+}
 @EmptyLine
 @EmptyLine
 class @(Model.Name)Configuration(Configuration):
@@ -40,15 +39,12 @@ class @(Model.Name)Configuration(Configuration):
             base_url = '@Model.BaseUrl'
 @EmptyLine
         super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
-@{
-  var properties = Model.Properties.Where(p => p.IsRequired);
-  if (properties.Any())
-  {
+@if (Model.Properties.Any())
+{
 @EmptyLine
-    foreach (var property in properties)
-    {
+  foreach (var property in Model.Properties)
+  {
         @:self.@(property.Name) = @(property.Name)
-    }
   }
 }
 @EmptyLine
@@ -59,36 +55,24 @@ class @(Model.Name)(object):
 @EmptyLine
         self._client = ServiceClient(@(Model.Properties.Any(p => p.Type == PrimaryType.Credentials) ? "config.credentials" : "None"), config)
 @EmptyLine
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+@if (Model.ModelTemplateModels.Any())
+{
+        @:client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+}
+else
+{
+        @:client_models = {}
+}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 @EmptyLine
         self.config = config
-  @foreach (var methodGroup in Model.MethodGroupModels)
-  {
-        @:self.@(methodGroup.MethodGroupName) = @(methodGroup.MethodGroupType)(self._client, self.config, self._serialize, self._deserialize)
-  }
-@if (Model.MethodTemplateModels.Any())
+@foreach (var methodGroup in Model.MethodGroupModels)
 {
-<text>
-@EmptyLine
-    def _serialize_data(self, name, value, datatype, **kwargs):
-@EmptyLine
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-@EmptyLine
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-@EmptyLine
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-@EmptyLine
-        else:
-            return value
-</text>
-  foreach (var method in Model.MethodTemplateModels)
-  {
+        @:self.@(methodGroup.MethodGroupName) = @(methodGroup.MethodGroupType)(self._client, self.config, self._serialize, self._deserialize)
+}
+@foreach (var method in Model.MethodTemplateModels)
+{
 @EmptyLine
 @(Include(new MethodTemplate(), method))
-  }
 }

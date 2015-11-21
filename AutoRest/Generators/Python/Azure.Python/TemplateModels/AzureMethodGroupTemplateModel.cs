@@ -21,6 +21,19 @@ namespace Microsoft.Rest.Generator.Azure.Python
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == methodGroupName)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
+
+            HasAnyModel = false;
+            if (serviceClient.ModelTypes.Any())
+            {
+                foreach (var model in serviceClient.ModelTypes)
+                {
+                    if (!model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) || !(bool)model.Extensions[AzureExtensions.ExternalExtension])
+                    {
+                        HasAnyModel = true;
+                        break;
+                    }
+                }
+            }
         }
     }
 }

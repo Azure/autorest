@@ -1,3 +1,4 @@
+# coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for
@@ -10,9 +11,7 @@
 
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
 
 from ..models import *
 
@@ -26,20 +25,6 @@ class enum(object):
         self._deserialize = derserializer
 
         self.config = config
-
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
 
     @async_request
     def get_not_expandable(self, custom_headers={}, raw=False, callback=None):
@@ -64,16 +49,17 @@ class enum(object):
         url = '/string/enum/notExpandable'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -114,19 +100,20 @@ class enum(object):
         url = '/string/enum/notExpandable'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(string_body, 'Colors')
+        body_content = self._serialize(string_body, 'Colors')
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

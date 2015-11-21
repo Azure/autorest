@@ -71,7 +71,7 @@ class TestServiceClient(unittest.TestCase):
 
         obj = client.get("service 2")
         self.assertEqual(obj.method, 'GET')
-        self.assertEqual(obj.url, "https://my_endpoint.com/service%202")
+        self.assertEqual(obj.url, "https://my_endpoint.com/service 2")
 
         self.cfg.base_url = "https://my_endpoint.com/"
         obj = client.get("//service3")
@@ -126,18 +126,15 @@ class TestServiceClient(unittest.TestCase):
         mock_client = mock.create_autospec(ServiceClient)
         mock_client.config = mock.Mock(base_url = "http://localhost:3000")
 
-        formatted = ServiceClient._format_url(mock_client, url, False)
-        self.assertEqual(formatted, "http://localhost:3000/bool/test%20true")
-
-        formatted = ServiceClient._format_url(mock_client, url, True)
+        formatted = ServiceClient._format_url(mock_client, url)
         self.assertEqual(formatted, "http://localhost:3000/bool/test true")
 
         url = "https://absolute_url.com/my/test/path"
-        formatted = ServiceClient._format_url(mock_client, url, False)
+        formatted = ServiceClient._format_url(mock_client, url)
         self.assertEqual(formatted, "https://absolute_url.com/my/test/path")
 
         url = "test"
-        formatted = ServiceClient._format_url(mock_client, url, False)
+        formatted = ServiceClient._format_url(mock_client, url)
         self.assertEqual(formatted, "http://localhost:3000/test")
 
 if __name__ == '__main__':

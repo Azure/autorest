@@ -1,3 +1,4 @@
+# coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for
@@ -10,9 +11,7 @@
 
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
 
 from ..models import *
 
@@ -26,20 +25,6 @@ class header(object):
         self._deserialize = derserializer
 
         self.config = config
-
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
 
     @async_request
     def param_existing_key(self, user_agent, custom_headers={}, raw=False, callback=None):
@@ -66,17 +51,18 @@ class header(object):
         url = '/header/param/existingkey'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['User-Agent'] = self._serialize_data("user_agent", user_agent, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['User-Agent'] = self._serialize.header("user_agent", user_agent, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -106,16 +92,17 @@ class header(object):
         url = '/header/response/existingkey'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -148,17 +135,18 @@ class header(object):
         url = '/header/param/protectedkey'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['Content-Type'] = self._serialize_data("content_type", content_type, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = self._serialize.header("content_type", content_type, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -188,16 +176,17 @@ class header(object):
         url = '/header/response/protectedkey'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -233,18 +222,19 @@ class header(object):
         url = '/header/param/prim/integer'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers['value'] = self._serialize_data("value", value, 'int')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
+        header_parameters['value'] = self._serialize.header("value", value, 'int')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -277,17 +267,18 @@ class header(object):
         url = '/header/response/prim/integer'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -323,18 +314,19 @@ class header(object):
         url = '/header/param/prim/long'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers['value'] = self._serialize_data("value", value, 'long')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
+        header_parameters['value'] = self._serialize.header("value", value, 'long')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -367,17 +359,18 @@ class header(object):
         url = '/header/response/prim/long'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -413,18 +406,19 @@ class header(object):
         url = '/header/param/prim/float'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers['value'] = self._serialize_data("value", value, 'float')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
+        header_parameters['value'] = self._serialize.header("value", value, 'float')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -457,17 +451,18 @@ class header(object):
         url = '/header/response/prim/float'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -503,18 +498,19 @@ class header(object):
         url = '/header/param/prim/double'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers['value'] = self._serialize_data("value", value, 'float')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
+        header_parameters['value'] = self._serialize.header("value", value, 'float')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -547,17 +543,18 @@ class header(object):
         url = '/header/response/prim/double'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -593,18 +590,19 @@ class header(object):
         url = '/header/param/prim/bool'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers['value'] = self._serialize_data("value", value, 'bool')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
+        header_parameters['value'] = self._serialize.header("value", value, 'bool')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -637,17 +635,18 @@ class header(object):
         url = '/header/response/prim/bool'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -656,7 +655,7 @@ class header(object):
             return None, response
 
     @async_request
-    def param_string(self, scenario, value, custom_headers={}, raw=False, callback=None):
+    def param_string(self, scenario, value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Send a post request with header values "scenario": "valid", "value":
@@ -685,19 +684,20 @@ class header(object):
         url = '/header/param/prim/string'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
         if value is not None:
-            headers['value'] = self._serialize_data("value", value, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['value'] = self._serialize.header("value", value, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -731,17 +731,18 @@ class header(object):
         url = '/header/response/prim/string'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -778,18 +779,19 @@ class header(object):
         url = '/header/param/prim/date'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers['value'] = self._serialize_data("value", value, 'date')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
+        header_parameters['value'] = self._serialize.header("value", value, 'date')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -822,17 +824,18 @@ class header(object):
         url = '/header/response/prim/date'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -870,18 +873,19 @@ class header(object):
         url = '/header/param/prim/datetime'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers['value'] = self._serialize_data("value", value, 'iso-8601')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
+        header_parameters['value'] = self._serialize.header("value", value, 'iso-8601')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -915,17 +919,18 @@ class header(object):
         url = '/header/response/prim/datetime'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -934,7 +939,7 @@ class header(object):
             return None, response
 
     @async_request
-    def param_datetime_rfc1123(self, scenario, value, custom_headers={}, raw=False, callback=None):
+    def param_datetime_rfc1123(self, scenario, value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Send a post request with header values "scenario": "valid", "value":
@@ -963,19 +968,20 @@ class header(object):
         url = '/header/param/prim/datetimerfc1123'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
         if value is not None:
-            headers['value'] = self._serialize_data("value", value, 'rfc-1123')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['value'] = self._serialize.header("value", value, 'rfc-1123')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1009,17 +1015,18 @@ class header(object):
         url = '/header/response/prim/datetimerfc1123'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1056,18 +1063,19 @@ class header(object):
         url = '/header/param/prim/duration'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers['value'] = self._serialize_data("value", value, 'duration')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
+        header_parameters['value'] = self._serialize.header("value", value, 'duration')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1100,17 +1108,18 @@ class header(object):
         url = '/header/response/prim/duration'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1146,18 +1155,19 @@ class header(object):
         url = '/header/param/prim/byte'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers['value'] = self._serialize_data("value", value, 'bytearray')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
+        header_parameters['value'] = self._serialize.header("value", value, 'bytearray')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1190,17 +1200,18 @@ class header(object):
         url = '/header/response/prim/byte'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1209,7 +1220,7 @@ class header(object):
             return None, response
 
     @async_request
-    def param_enum(self, scenario, value, custom_headers={}, raw=False, callback=None):
+    def param_enum(self, scenario, value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Send a post request with header values "scenario": "valid", "value":
@@ -1237,19 +1248,20 @@ class header(object):
         url = '/header/param/prim/enum'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
         if value is not None:
-            headers['value'] = self._serialize_data("value", value, 'GreyscaleColors')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+            header_parameters['value'] = self._serialize.header("value", value, 'GreyscaleColors')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1282,17 +1294,18 @@ class header(object):
         url = '/header/response/prim/enum'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize.header("scenario", scenario, 'str')
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1323,16 +1336,17 @@ class header(object):
         url = '/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

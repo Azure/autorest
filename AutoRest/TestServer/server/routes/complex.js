@@ -61,7 +61,7 @@ var complex = function(coverage) {
     var durationBodyAlternate = {"field":"P123DT22H14M12.010999999998603S"};
     var datetimeBodyExact = {"field":"0001-01-01T00:00:00.000Z","now":"2015-05-18T18:38:00.000Z"};
     var byteString = new Buffer([255, 254, 253, 252, 0, 250, 249, 248, 247, 246]).toString('base64');
-    var byteBody = {"field":'"' + byteString + '"'};
+    var byteBody = '{"field":"' + byteString + '"}';
     router.put('/primitive/:scenario', function(req, res, next) {
         if (req.params.scenario === 'integer') {
             if (_.isEqual(req.body, intBody)) {
@@ -135,7 +135,7 @@ var complex = function(coverage) {
                 utils.send400(res, next, "Did not like duration req " + util.inspect(req.body));
             }
         } else if (req.params.scenario === 'byte') {
-            if (_.isEqual(req.body, byteBody)) {
+            if (JSON.stringify(req.body) === byteBody) {
                 coverage['putComplexPrimitiveByte']++;
                 res.status(200).end();
             } else {
@@ -179,7 +179,7 @@ var complex = function(coverage) {
             res.status(200).end(JSON.stringify(durationBody));
         } else if (req.params.scenario === 'byte') {
             coverage['getComplexPrimitiveByte']++;
-            res.status(200).end(JSON.stringify(byteBody));
+            res.status(200).end(byteBody);
         } else {
             utils.send400(res, next, 'Must provide a valid primitive type scenario.');
         }

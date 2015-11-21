@@ -1,3 +1,4 @@
+# coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for
@@ -10,9 +11,7 @@
 
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
 
 from ..models import *
 
@@ -26,20 +25,6 @@ class http_retry(object):
         self._deserialize = derserializer
 
         self.config = config
-
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
 
     @async_request
     def head408(self, custom_headers={}, raw=False, callback=None):
@@ -63,16 +48,17 @@ class http_retry(object):
         url = '/http/retry/408'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.head(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.head(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -81,7 +67,7 @@ class http_retry(object):
             return None, response
 
     @async_request
-    def put500(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def put500(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 500 status code, then 200 after retry
@@ -104,19 +90,23 @@ class http_retry(object):
         url = '/http/retry/500'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -125,7 +115,7 @@ class http_retry(object):
             return None, response
 
     @async_request
-    def patch500(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def patch500(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 500 status code, then 200 after retry
@@ -148,19 +138,23 @@ class http_retry(object):
         url = '/http/retry/500'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.patch(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.patch(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -190,16 +184,17 @@ class http_retry(object):
         url = '/http/retry/502'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
-        request = self._client.get(url, query)
-        response = self._client.send(request, headers)
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -208,7 +203,7 @@ class http_retry(object):
             return None, response
 
     @async_request
-    def post503(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def post503(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 503 status code, then 200 after retry
@@ -231,19 +226,23 @@ class http_retry(object):
         url = '/http/retry/503'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.post(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -252,7 +251,7 @@ class http_retry(object):
             return None, response
 
     @async_request
-    def delete503(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def delete503(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 503 status code, then 200 after retry
@@ -275,19 +274,23 @@ class http_retry(object):
         url = '/http/retry/503'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.delete(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.delete(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -296,7 +299,7 @@ class http_retry(object):
             return None, response
 
     @async_request
-    def put504(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def put504(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 504 status code, then 200 after retry
@@ -319,19 +322,23 @@ class http_retry(object):
         url = '/http/retry/504'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.put(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -340,7 +347,7 @@ class http_retry(object):
             return None, response
 
     @async_request
-    def patch504(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def patch504(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 504 status code, then 200 after retry
@@ -363,19 +370,23 @@ class http_retry(object):
         url = '/http/retry/504'
 
         # Construct parameters
-        query = {}
+        query_parameters = {}
 
         # Construct headers
-        headers = {}
-        headers.update(custom_headers)
-        headers['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
-        content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
-        request = self._client.patch(url, query)
-        response = self._client.send(request, headers, content)
+        request = self._client.patch(url, query_parameters)
+        response = self._client.send(request, header_parameters, body_content)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

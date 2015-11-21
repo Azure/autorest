@@ -6,7 +6,8 @@
     <ProjectGuid>312b07bc-a830-4289-91b4-c53a2ec37d58</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>AcceptanceTests\__init__.py</StartupFile>
-    <SearchPath>..\..\..\..\ClientRuntimes\Python\msrest\</SearchPath>
+    <SearchPath>
+    </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>Python.Tests</Name>
@@ -21,18 +22,31 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AcceptanceTests\acceptance_tests.py">
+    <Compile Include="AcceptanceTests\zzz_tests.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AcceptanceTests\array_tests.py" />
+    <Compile Include="AcceptanceTests\bool_tests.py" />
+    <Compile Include="AcceptanceTests\byte_tests.py" />
+    <Compile Include="AcceptanceTests\complex_tests.py" />
+    <Compile Include="AcceptanceTests\datetime_rfc_tests.py" />
+    <Compile Include="AcceptanceTests\datetime_tests.py" />
+    <Compile Include="AcceptanceTests\date_tests.py" />
     <Compile Include="AcceptanceTests\dictionary_tests.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AcceptanceTests\duration_tests.py" />
     <Compile Include="AcceptanceTests\file_tests.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AcceptanceTests\header_tests.py" />
+    <Compile Include="AcceptanceTests\http_tests.py" />
+    <Compile Include="AcceptanceTests\integer_tests.py" />
+    <Compile Include="AcceptanceTests\number_tests.py" />
     <Compile Include="AcceptanceTests\required_optional_tests.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AcceptanceTests\string_tests.py" />
     <Compile Include="AcceptanceTests\url_tests.py">
       <SubType>Code</SubType>
     </Compile>
