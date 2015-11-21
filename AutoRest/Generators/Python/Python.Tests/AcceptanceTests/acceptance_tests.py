@@ -3,9 +3,12 @@ import isodate
 import subprocess
 import sys
 import datetime
-from os.path import dirname, pardir, join, realpath
+from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
+
+sys.path.append(cwd + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + "ClientRuntimes" + sep + "Python" + sep + "msrest")
+
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 
 sys.path.append(join(tests, "BodyArray"))

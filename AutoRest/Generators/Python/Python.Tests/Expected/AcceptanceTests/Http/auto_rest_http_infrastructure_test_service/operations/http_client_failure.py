@@ -10,9 +10,7 @@
 
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
 
 from ..models import *
 
@@ -76,7 +74,7 @@ class http_client_failure(object):
         request = self._client.head(url, query)
         response = self._client.send(request, headers)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -117,7 +115,7 @@ class http_client_failure(object):
         request = self._client.get(url, query)
         response = self._client.send(request, headers)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -163,7 +161,7 @@ class http_client_failure(object):
         request = self._client.put(url, query)
         response = self._client.send(request, headers, content)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -209,7 +207,7 @@ class http_client_failure(object):
         request = self._client.patch(url, query)
         response = self._client.send(request, headers, content)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -255,7 +253,7 @@ class http_client_failure(object):
         request = self._client.post(url, query)
         response = self._client.send(request, headers, content)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -301,7 +299,7 @@ class http_client_failure(object):
         request = self._client.delete(url, query)
         response = self._client.send(request, headers, content)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -342,7 +340,7 @@ class http_client_failure(object):
         request = self._client.head(url, query)
         response = self._client.send(request, headers)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -383,7 +381,7 @@ class http_client_failure(object):
         request = self._client.get(url, query)
         response = self._client.send(request, headers)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -424,7 +422,7 @@ class http_client_failure(object):
         request = self._client.get(url, query)
         response = self._client.send(request, headers)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -470,7 +468,7 @@ class http_client_failure(object):
         request = self._client.put(url, query)
         response = self._client.send(request, headers, content)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -516,7 +514,7 @@ class http_client_failure(object):
         request = self._client.patch(url, query)
         response = self._client.send(request, headers, content)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -562,7 +560,7 @@ class http_client_failure(object):
         request = self._client.post(url, query)
         response = self._client.send(request, headers, content)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -608,7 +606,7 @@ class http_client_failure(object):
         request = self._client.delete(url, query)
         response = self._client.send(request, headers, content)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -654,7 +652,7 @@ class http_client_failure(object):
         request = self._client.put(url, query)
         response = self._client.send(request, headers, content)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -695,7 +693,7 @@ class http_client_failure(object):
         request = self._client.head(url, query)
         response = self._client.send(request, headers)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -736,7 +734,7 @@ class http_client_failure(object):
         request = self._client.get(url, query)
         response = self._client.send(request, headers)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -777,7 +775,7 @@ class http_client_failure(object):
         request = self._client.get(url, query)
         response = self._client.send(request, headers)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -823,7 +821,7 @@ class http_client_failure(object):
         request = self._client.put(url, query)
         response = self._client.send(request, headers, content)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -869,7 +867,7 @@ class http_client_failure(object):
         request = self._client.patch(url, query)
         response = self._client.send(request, headers, content)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -915,7 +913,7 @@ class http_client_failure(object):
         request = self._client.post(url, query)
         response = self._client.send(request, headers, content)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -956,7 +954,7 @@ class http_client_failure(object):
         request = self._client.get(url, query)
         response = self._client.send(request, headers)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -1002,7 +1000,7 @@ class http_client_failure(object):
         request = self._client.delete(url, query)
         response = self._client.send(request, headers, content)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -1043,7 +1041,7 @@ class http_client_failure(object):
         request = self._client.head(url, query)
         response = self._client.send(request, headers)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:

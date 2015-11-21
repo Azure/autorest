@@ -9,12 +9,13 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import ServiceClient
-from msrest import Configuration, Serializer, Deserializer
+from msrest import Serializer, Deserializer
+from msrestazure import AzureConfiguration
 from .operations.http_success_operations import http_successOperations
 from . import models
 
 
-class AutoRestHeadTestServiceConfiguration(Configuration):
+class AutoRestHeadTestServiceConfiguration(AzureConfiguration):
 
     def __init__(self, credentials, base_url=None, filepath=None):
 

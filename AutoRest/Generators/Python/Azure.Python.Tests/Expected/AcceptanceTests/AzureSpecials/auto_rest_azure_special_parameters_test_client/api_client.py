@@ -9,7 +9,8 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import ServiceClient
-from msrest import Configuration, Serializer, Deserializer
+from msrest import Serializer, Deserializer
+from msrestazure import AzureConfiguration
 from .operations.xms_client_request_id_operations import xms_client_request_idOperations
 from .operations.subscription_in_credentials_operations import subscription_in_credentialsOperations
 from .operations.subscription_in_method_operations import subscription_in_methodOperations
@@ -20,7 +21,7 @@ from .operations.header_operations import headerOperations
 from . import models
 
 
-class AutoRestAzureSpecialParametersTestClientConfiguration(Configuration):
+class AutoRestAzureSpecialParametersTestClientConfiguration(AzureConfiguration):
 
     def __init__(self, credentials, subscription_id, base_url=None, filepath=None):
 

@@ -9,7 +9,8 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import ServiceClient
-from msrest import Configuration, Serializer, Deserializer
+from msrest import Serializer, Deserializer
+from msrestazure import AzureConfiguration
 from .operations.lr_os_operations import lr_osOperations
 from .operations.lro_retrys_operations import lro_retrysOperations
 from .operations.lrosa_ds_operations import lrosa_dsOperations
@@ -17,7 +18,7 @@ from .operations.lr_os_custom_header_operations import lr_os_custom_headerOperat
 from . import models
 
 
-class AutoRestLongRunningOperationTestServiceConfiguration(Configuration):
+class AutoRestLongRunningOperationTestServiceConfiguration(AzureConfiguration):
 
     def __init__(self, credentials, base_url=None, filepath=None):
 

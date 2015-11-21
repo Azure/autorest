@@ -71,7 +71,7 @@ namespace Microsoft.Rest.Generator.Python
                     return string.Format(CultureInfo.InvariantCulture, "response.status_code not in [{0}]", string.Join(", ", predicates));
                 }
 
-                return "reponse.status_code < 200 or reponse.status_code >= 300";
+                return "response.status_code < 200 or response.status_code >= 300";
             }
         }
 
@@ -182,7 +182,7 @@ namespace Microsoft.Rest.Generator.Python
             {
                 if (queryParameter.IsRequired)
                 {
-                    builder.AppendLine("{0}['{1}'] ={2}",
+                    builder.AppendLine("{0}['{1}'] = {2}",
                                 variableName,
                                 queryParameter.SerializedName,
                                 BuildSerializeDataCall(queryParameter));

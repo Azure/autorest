@@ -10,9 +10,8 @@
 
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
+from msrestazure.exceptions import CloudException
 import uuid
 
 from ..models import *
@@ -69,7 +68,7 @@ class api_version_localOperations(object):
 
         # Construct parameters
         query = {}
-        query['api-version'] =self._serialize_data("api_version", api_version, 'str')
+        query['api-version'] = self._serialize_data("api_version", api_version, 'str')
 
         # Construct headers
         headers = {}
@@ -164,7 +163,7 @@ class api_version_localOperations(object):
 
         # Construct parameters
         query = {}
-        query['api-version'] =self._serialize_data("api_version", api_version, 'str')
+        query['api-version'] = self._serialize_data("api_version", api_version, 'str')
 
         # Construct headers
         headers = {}
@@ -212,7 +211,7 @@ class api_version_localOperations(object):
 
         # Construct parameters
         query = {}
-        query['api-version'] =self._serialize_data("api_version", api_version, 'str')
+        query['api-version'] = self._serialize_data("api_version", api_version, 'str')
 
         # Construct headers
         headers = {}

@@ -9,12 +9,13 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import ServiceClient
-from msrest import Configuration, Serializer, Deserializer
+from msrest import Serializer, Deserializer
+from msrestazure import AzureConfiguration
 from .operations.duration_operations import durationOperations
 from . import models
 
 
-class AutoRestDurationTestServiceConfiguration(Configuration):
+class AutoRestDurationTestServiceConfiguration(AzureConfiguration):
 
     def __init__(self, credentials, base_url=None, filepath=None):
 

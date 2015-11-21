@@ -10,9 +10,7 @@
 
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
 
 from ..models import *
 
@@ -81,7 +79,7 @@ class implicit(object):
         request = self._client.get(url, query)
         response = self._client.send(request, headers)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -255,7 +253,7 @@ class implicit(object):
         request = self._client.get(url, query)
         response = self._client.send(request, headers)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -285,7 +283,7 @@ class implicit(object):
 
         # Construct parameters
         query = {}
-        query['required-global-query'] =self._serialize_data("self.config.required_global_query", self.config.required_global_query, 'str')
+        query['required-global-query'] = self._serialize_data("self.config.required_global_query", self.config.required_global_query, 'str')
 
         # Construct headers
         headers = {}
@@ -296,7 +294,7 @@ class implicit(object):
         request = self._client.get(url, query)
         response = self._client.send(request, headers)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:
@@ -338,7 +336,7 @@ class implicit(object):
         request = self._client.get(url, query)
         response = self._client.send(request, headers)
 
-        if reponse.status_code < 200 or reponse.status_code >= 300:
+        if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
 
         if raw:

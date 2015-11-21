@@ -9,12 +9,13 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import ServiceClient
-from msrest import Configuration, Serializer, Deserializer
+from msrest import Serializer, Deserializer
+from msrestazure import AzureConfiguration
 from .operations.parameter_grouping_operations import parameter_groupingOperations
 from . import models
 
 
-class AutoRestParameterGroupingTestServiceConfiguration(Configuration):
+class AutoRestParameterGroupingTestServiceConfiguration(AzureConfiguration):
 
     def __init__(self, credentials, base_url=None, filepath=None):
 

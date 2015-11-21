@@ -9,12 +9,13 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import ServiceClient
-from msrest import Configuration, Serializer, Deserializer
+from msrest import Serializer, Deserializer
+from msrestazure import AzureConfiguration
 from .operations.paging_operations import pagingOperations
 from . import models
 
 
-class AutoRestPagingTestServiceConfiguration(Configuration):
+class AutoRestPagingTestServiceConfiguration(AzureConfiguration):
 
     def __init__(self, credentials, base_url=None, filepath=None):
 

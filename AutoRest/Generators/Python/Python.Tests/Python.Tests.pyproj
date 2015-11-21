@@ -6,7 +6,8 @@
     <ProjectGuid>312b07bc-a830-4289-91b4-c53a2ec37d58</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>AcceptanceTests\__init__.py</StartupFile>
-    <SearchPath>..\..\..\..\ClientRuntimes\Python\msrest\</SearchPath>
+    <SearchPath>
+    </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>Python.Tests</Name>

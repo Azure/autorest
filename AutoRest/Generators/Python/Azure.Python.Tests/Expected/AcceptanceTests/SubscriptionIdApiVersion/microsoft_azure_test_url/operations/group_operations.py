@@ -10,9 +10,8 @@
 
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
+from msrestazure.exceptions import CloudException
 import uuid
 
 from ..models import *
@@ -74,7 +73,7 @@ class groupOperations(object):
 
         # Construct parameters
         query = {}
-        query['api-version'] =self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         headers = {}

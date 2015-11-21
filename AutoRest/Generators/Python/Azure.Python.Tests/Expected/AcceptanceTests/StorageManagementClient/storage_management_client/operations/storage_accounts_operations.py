@@ -10,9 +10,8 @@
 
 from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    DeserializationError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
+from msrestazure.exceptions import CloudException
 import uuid
 
 from ..models import *
@@ -74,7 +73,7 @@ class storage_accountsOperations(object):
 
         # Construct parameters
         query = {}
-        query['api-version'] =self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         headers = {}
@@ -147,7 +146,7 @@ class storage_accountsOperations(object):
 
         # Construct parameters
         query = {}
-        query['api-version'] =self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         headers = {}
@@ -220,7 +219,7 @@ class storage_accountsOperations(object):
 
         # Construct parameters
         query = {}
-        query['api-version'] =self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         headers = {}
@@ -286,7 +285,7 @@ class storage_accountsOperations(object):
 
         # Construct parameters
         query = {}
-        query['api-version'] =self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         headers = {}
@@ -345,7 +344,7 @@ class storage_accountsOperations(object):
 
         # Construct parameters
         query = {}
-        query['api-version'] =self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         headers = {}
@@ -421,7 +420,7 @@ class storage_accountsOperations(object):
 
         # Construct parameters
         query = {}
-        query['api-version'] =self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         headers = {}
@@ -485,7 +484,7 @@ class storage_accountsOperations(object):
 
         # Construct parameters
         query = {}
-        query['api-version'] =self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         headers = {}
@@ -545,7 +544,7 @@ class storage_accountsOperations(object):
 
                 # Construct parameters
                 query = {}
-                query['api-version'] =self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+                query['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
 
             else:
                 url = next_link
@@ -615,7 +614,7 @@ class storage_accountsOperations(object):
 
                 # Construct parameters
                 query = {}
-                query['api-version'] =self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+                query['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
 
             else:
                 url = next_link
@@ -688,7 +687,7 @@ class storage_accountsOperations(object):
 
         # Construct parameters
         query = {}
-        query['api-version'] =self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         headers = {}

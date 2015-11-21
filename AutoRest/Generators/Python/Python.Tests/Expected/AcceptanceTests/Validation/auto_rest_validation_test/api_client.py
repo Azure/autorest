@@ -11,12 +11,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import (
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    HttpOperationError)
+from msrest.exceptions import DeserializationError, HttpOperationError
 from . import models
 
 
@@ -94,7 +89,7 @@ class AutoRestValidationTest(object):
 
         # Construct parameters
         query = {}
-        query['apiVersion'] =self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query['apiVersion'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         headers = {}
@@ -155,7 +150,7 @@ class AutoRestValidationTest(object):
 
         # Construct parameters
         query = {}
-        query['apiVersion'] =self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query['apiVersion'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         headers = {}
