@@ -221,6 +221,9 @@ class Serializer(object):
 
     def url(self, data, data_type, **kwargs):
 
+        if data_type in ['[str]']:
+            data = ["" if d is None else d for d in data]
+
         output = self.serialize_data(data, data_type, **kwargs)
         if kwargs.get('skip_quote') == True:
             return str(output)
