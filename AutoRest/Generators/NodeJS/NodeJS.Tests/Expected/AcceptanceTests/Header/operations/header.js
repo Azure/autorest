@@ -47,6 +47,8 @@ function Header(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -122,12 +124,12 @@ Header.prototype.paramExistingKey = function (userAgent, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -146,6 +148,12 @@ Header.prototype.paramExistingKey = function (userAgent, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ *                      See {@link HeaderResponseExistingKeyHeaders} for more
+ *                      information.
+ * 
+ *                      {object} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link HeaderResponseExistingKeyHeaders} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -210,13 +218,13 @@ Header.prototype.responseExistingKey = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = new client._models['HeaderResponseExistingKeyHeaders'](response.headers);
-    header.deserialize(response.headers);
+    var responseHeaders = new client._models['HeaderResponseExistingKeyHeaders'](response.headers);
+    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -238,6 +246,8 @@ Header.prototype.responseExistingKey = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -313,12 +323,12 @@ Header.prototype.paramProtectedKey = function (contentType, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -337,6 +347,12 @@ Header.prototype.paramProtectedKey = function (contentType, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ *                      See {@link HeaderResponseProtectedKeyHeaders} for more
+ *                      information.
+ * 
+ *                      {object} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link HeaderResponseProtectedKeyHeaders} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -401,13 +417,13 @@ Header.prototype.responseProtectedKey = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = new client._models['HeaderResponseProtectedKeyHeaders'](response.headers);
-    header.deserialize(response.headers);
+    var responseHeaders = new client._models['HeaderResponseProtectedKeyHeaders'](response.headers);
+    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -432,6 +448,8 @@ Header.prototype.responseProtectedKey = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -513,12 +531,12 @@ Header.prototype.paramInteger = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -540,6 +558,12 @@ Header.prototype.paramInteger = function (scenario, value, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ *                      See {@link HeaderResponseIntegerHeaders} for more
+ *                      information.
+ * 
+ *                      {object} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link HeaderResponseIntegerHeaders} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -615,13 +639,13 @@ Header.prototype.responseInteger = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = new client._models['HeaderResponseIntegerHeaders'](response.headers);
-    header.deserialize(response.headers);
+    var responseHeaders = new client._models['HeaderResponseIntegerHeaders'](response.headers);
+    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -646,6 +670,8 @@ Header.prototype.responseInteger = function (scenario, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -727,12 +753,12 @@ Header.prototype.paramLong = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -754,6 +780,12 @@ Header.prototype.paramLong = function (scenario, value, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ *                      See {@link HeaderResponseLongHeaders} for more
+ *                      information.
+ * 
+ *                      {object} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link HeaderResponseLongHeaders} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -829,13 +861,13 @@ Header.prototype.responseLong = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = new client._models['HeaderResponseLongHeaders'](response.headers);
-    header.deserialize(response.headers);
+    var responseHeaders = new client._models['HeaderResponseLongHeaders'](response.headers);
+    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -860,6 +892,8 @@ Header.prototype.responseLong = function (scenario, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -941,12 +975,12 @@ Header.prototype.paramFloat = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -968,6 +1002,12 @@ Header.prototype.paramFloat = function (scenario, value, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ *                      See {@link HeaderResponseFloatHeaders} for more
+ *                      information.
+ * 
+ *                      {object} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link HeaderResponseFloatHeaders} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1043,13 +1083,13 @@ Header.prototype.responseFloat = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = new client._models['HeaderResponseFloatHeaders'](response.headers);
-    header.deserialize(response.headers);
+    var responseHeaders = new client._models['HeaderResponseFloatHeaders'](response.headers);
+    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1074,6 +1114,8 @@ Header.prototype.responseFloat = function (scenario, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1155,12 +1197,12 @@ Header.prototype.paramDouble = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1182,6 +1224,12 @@ Header.prototype.paramDouble = function (scenario, value, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ *                      See {@link HeaderResponseDoubleHeaders} for more
+ *                      information.
+ * 
+ *                      {object} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link HeaderResponseDoubleHeaders} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1257,13 +1305,13 @@ Header.prototype.responseDouble = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = new client._models['HeaderResponseDoubleHeaders'](response.headers);
-    header.deserialize(response.headers);
+    var responseHeaders = new client._models['HeaderResponseDoubleHeaders'](response.headers);
+    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1288,6 +1336,8 @@ Header.prototype.responseDouble = function (scenario, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1369,12 +1419,12 @@ Header.prototype.paramBool = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1396,6 +1446,12 @@ Header.prototype.paramBool = function (scenario, value, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ *                      See {@link HeaderResponseBoolHeaders} for more
+ *                      information.
+ * 
+ *                      {object} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link HeaderResponseBoolHeaders} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1471,13 +1527,13 @@ Header.prototype.responseBool = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = new client._models['HeaderResponseBoolHeaders'](response.headers);
-    header.deserialize(response.headers);
+    var responseHeaders = new client._models['HeaderResponseBoolHeaders'](response.headers);
+    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1504,6 +1560,8 @@ Header.prototype.responseBool = function (scenario, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1585,12 +1643,12 @@ Header.prototype.paramString = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1613,6 +1671,12 @@ Header.prototype.paramString = function (scenario, value, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ *                      See {@link HeaderResponseStringHeaders} for more
+ *                      information.
+ * 
+ *                      {object} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link HeaderResponseStringHeaders} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1688,13 +1752,13 @@ Header.prototype.responseString = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = new client._models['HeaderResponseStringHeaders'](response.headers);
-    header.deserialize(response.headers);
+    var responseHeaders = new client._models['HeaderResponseStringHeaders'](response.headers);
+    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1720,6 +1784,8 @@ Header.prototype.responseString = function (scenario, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1802,12 +1868,12 @@ Header.prototype.paramDate = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1829,6 +1895,12 @@ Header.prototype.paramDate = function (scenario, value, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ *                      See {@link HeaderResponseDateHeaders} for more
+ *                      information.
+ * 
+ *                      {object} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link HeaderResponseDateHeaders} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1904,13 +1976,13 @@ Header.prototype.responseDate = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = new client._models['HeaderResponseDateHeaders'](response.headers);
-    header.deserialize(response.headers);
+    var responseHeaders = new client._models['HeaderResponseDateHeaders'](response.headers);
+    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1937,6 +2009,8 @@ Header.prototype.responseDate = function (scenario, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2019,12 +2093,12 @@ Header.prototype.paramDatetime = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2047,6 +2121,12 @@ Header.prototype.paramDatetime = function (scenario, value, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ *                      See {@link HeaderResponseDatetimeHeaders} for more
+ *                      information.
+ * 
+ *                      {object} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link HeaderResponseDatetimeHeaders} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2122,13 +2202,13 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = new client._models['HeaderResponseDatetimeHeaders'](response.headers);
-    header.deserialize(response.headers);
+    var responseHeaders = new client._models['HeaderResponseDatetimeHeaders'](response.headers);
+    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2155,6 +2235,8 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2237,12 +2319,12 @@ Header.prototype.paramDatetimeRfc1123 = function (scenario, value, options, call
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2265,6 +2347,12 @@ Header.prototype.paramDatetimeRfc1123 = function (scenario, value, options, call
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ *                      See {@link HeaderResponseDatetimeRfc1123Headers} for
+ *                      more information.
+ * 
+ *                      {object} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link HeaderResponseDatetimeRfc1123Headers} for
+ *                      more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2340,13 +2428,13 @@ Header.prototype.responseDatetimeRfc1123 = function (scenario, options, callback
       return callback(error);
     }
     // Create Header
-    var header = new client._models['HeaderResponseDatetimeRfc1123Headers'](response.headers);
-    header.deserialize(response.headers);
+    var responseHeaders = new client._models['HeaderResponseDatetimeRfc1123Headers'](response.headers);
+    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2372,6 +2460,8 @@ Header.prototype.responseDatetimeRfc1123 = function (scenario, options, callback
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2453,12 +2543,12 @@ Header.prototype.paramDuration = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2480,6 +2570,12 @@ Header.prototype.paramDuration = function (scenario, value, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ *                      See {@link HeaderResponseDurationHeaders} for more
+ *                      information.
+ * 
+ *                      {object} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link HeaderResponseDurationHeaders} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2555,13 +2651,13 @@ Header.prototype.responseDuration = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = new client._models['HeaderResponseDurationHeaders'](response.headers);
-    header.deserialize(response.headers);
+    var responseHeaders = new client._models['HeaderResponseDurationHeaders'](response.headers);
+    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2586,6 +2682,8 @@ Header.prototype.responseDuration = function (scenario, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2667,12 +2765,12 @@ Header.prototype.paramByte = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2694,6 +2792,12 @@ Header.prototype.paramByte = function (scenario, value, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ *                      See {@link HeaderResponseByteHeaders} for more
+ *                      information.
+ * 
+ *                      {object} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link HeaderResponseByteHeaders} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2769,13 +2873,13 @@ Header.prototype.responseByte = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = new client._models['HeaderResponseByteHeaders'](response.headers);
-    header.deserialize(response.headers);
+    var responseHeaders = new client._models['HeaderResponseByteHeaders'](response.headers);
+    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2801,6 +2905,8 @@ Header.prototype.responseByte = function (scenario, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2885,12 +2991,12 @@ Header.prototype.paramEnum = function (scenario, value, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2912,6 +3018,12 @@ Header.prototype.paramEnum = function (scenario, value, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ *                      See {@link HeaderResponseEnumHeaders} for more
+ *                      information.
+ * 
+ *                      {object} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link HeaderResponseEnumHeaders} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2987,13 +3099,13 @@ Header.prototype.responseEnum = function (scenario, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = new client._models['HeaderResponseEnumHeaders'](response.headers);
-    header.deserialize(response.headers);
+    var responseHeaders = new client._models['HeaderResponseEnumHeaders'](response.headers);
+    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -3013,6 +3125,8 @@ Header.prototype.responseEnum = function (scenario, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3077,12 +3191,12 @@ Header.prototype.customRequestId = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 

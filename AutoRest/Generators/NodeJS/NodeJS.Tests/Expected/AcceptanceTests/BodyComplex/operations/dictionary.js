@@ -43,7 +43,8 @@ function Dictionary(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link DictionaryWrapper} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -108,7 +109,7 @@ Dictionary.prototype.getValid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -132,7 +133,7 @@ Dictionary.prototype.getValid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -153,6 +154,8 @@ Dictionary.prototype.getValid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -251,12 +254,12 @@ Dictionary.prototype.putValid = function (defaultProgram, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -275,7 +278,8 @@ Dictionary.prototype.putValid = function (defaultProgram, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link DictionaryWrapper} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -340,7 +344,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -364,7 +368,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -385,6 +389,8 @@ Dictionary.prototype.getEmpty = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -483,12 +489,12 @@ Dictionary.prototype.putEmpty = function (defaultProgram, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -507,7 +513,8 @@ Dictionary.prototype.putEmpty = function (defaultProgram, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link DictionaryWrapper} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -572,7 +579,7 @@ Dictionary.prototype.getNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -596,7 +603,7 @@ Dictionary.prototype.getNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -616,7 +623,8 @@ Dictionary.prototype.getNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link DictionaryWrapper} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -681,7 +689,7 @@ Dictionary.prototype.getNotProvided = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -705,7 +713,7 @@ Dictionary.prototype.getNotProvided = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 

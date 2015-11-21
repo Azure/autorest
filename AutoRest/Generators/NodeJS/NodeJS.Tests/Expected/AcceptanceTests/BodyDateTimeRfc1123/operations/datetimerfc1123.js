@@ -43,6 +43,8 @@ function Datetimerfc1123(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {date} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -107,7 +109,7 @@ Datetimerfc1123.prototype.getNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -128,7 +130,7 @@ Datetimerfc1123.prototype.getNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -147,6 +149,8 @@ Datetimerfc1123.prototype.getNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {date} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -211,7 +215,7 @@ Datetimerfc1123.prototype.getInvalid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -232,7 +236,7 @@ Datetimerfc1123.prototype.getInvalid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -251,6 +255,8 @@ Datetimerfc1123.prototype.getInvalid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {date} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -315,7 +321,7 @@ Datetimerfc1123.prototype.getOverflow = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -336,7 +342,7 @@ Datetimerfc1123.prototype.getOverflow = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -355,6 +361,8 @@ Datetimerfc1123.prototype.getOverflow = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {date} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -419,7 +427,7 @@ Datetimerfc1123.prototype.getUnderflow = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -440,7 +448,7 @@ Datetimerfc1123.prototype.getUnderflow = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -461,6 +469,8 @@ Datetimerfc1123.prototype.getUnderflow = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -547,12 +557,12 @@ Datetimerfc1123.prototype.putUtcMaxDateTime = function (datetimeBody, options, c
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -571,6 +581,8 @@ Datetimerfc1123.prototype.putUtcMaxDateTime = function (datetimeBody, options, c
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {date} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -635,7 +647,7 @@ Datetimerfc1123.prototype.getUtcLowercaseMaxDateTime = function (options, callba
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -656,7 +668,7 @@ Datetimerfc1123.prototype.getUtcLowercaseMaxDateTime = function (options, callba
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -675,6 +687,8 @@ Datetimerfc1123.prototype.getUtcLowercaseMaxDateTime = function (options, callba
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {date} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -739,7 +753,7 @@ Datetimerfc1123.prototype.getUtcUppercaseMaxDateTime = function (options, callba
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -760,7 +774,7 @@ Datetimerfc1123.prototype.getUtcUppercaseMaxDateTime = function (options, callba
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -781,6 +795,8 @@ Datetimerfc1123.prototype.getUtcUppercaseMaxDateTime = function (options, callba
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -867,12 +883,12 @@ Datetimerfc1123.prototype.putUtcMinDateTime = function (datetimeBody, options, c
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -891,6 +907,8 @@ Datetimerfc1123.prototype.putUtcMinDateTime = function (datetimeBody, options, c
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {date} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -955,7 +973,7 @@ Datetimerfc1123.prototype.getUtcMinDateTime = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -976,7 +994,7 @@ Datetimerfc1123.prototype.getUtcMinDateTime = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 

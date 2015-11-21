@@ -45,6 +45,8 @@ function SubscriptionInCredentials(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -129,12 +131,12 @@ SubscriptionInCredentials.prototype.postMethodGlobalValid = function (options, c
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -155,6 +157,8 @@ SubscriptionInCredentials.prototype.postMethodGlobalValid = function (options, c
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -239,12 +243,12 @@ SubscriptionInCredentials.prototype.postMethodGlobalNull = function (options, ca
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -264,6 +268,8 @@ SubscriptionInCredentials.prototype.postMethodGlobalNull = function (options, ca
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -352,12 +358,12 @@ SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function 
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -377,6 +383,8 @@ SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -461,12 +469,12 @@ SubscriptionInCredentials.prototype.postPathGlobalValid = function (options, cal
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -486,6 +494,8 @@ SubscriptionInCredentials.prototype.postPathGlobalValid = function (options, cal
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -570,12 +580,12 @@ SubscriptionInCredentials.prototype.postSwaggerGlobalValid = function (options, 
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 

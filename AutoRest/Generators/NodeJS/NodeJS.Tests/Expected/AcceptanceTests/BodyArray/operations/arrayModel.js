@@ -44,6 +44,8 @@ function ArrayModel(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -108,7 +110,7 @@ ArrayModel.prototype.getNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -126,7 +128,7 @@ ArrayModel.prototype.getNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -145,6 +147,8 @@ ArrayModel.prototype.getNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -209,7 +213,7 @@ ArrayModel.prototype.getInvalid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -227,7 +231,7 @@ ArrayModel.prototype.getInvalid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -246,6 +250,8 @@ ArrayModel.prototype.getInvalid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -310,7 +316,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -328,7 +334,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -349,6 +355,8 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -447,12 +455,12 @@ ArrayModel.prototype.putEmpty = function (arrayBody, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -471,6 +479,8 @@ ArrayModel.prototype.putEmpty = function (arrayBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -535,7 +545,7 @@ ArrayModel.prototype.getBooleanTfft = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -553,7 +563,7 @@ ArrayModel.prototype.getBooleanTfft = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -574,6 +584,8 @@ ArrayModel.prototype.getBooleanTfft = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -672,12 +684,12 @@ ArrayModel.prototype.putBooleanTfft = function (arrayBody, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -696,6 +708,8 @@ ArrayModel.prototype.putBooleanTfft = function (arrayBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -760,7 +774,7 @@ ArrayModel.prototype.getBooleanInvalidNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -778,7 +792,7 @@ ArrayModel.prototype.getBooleanInvalidNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -797,6 +811,8 @@ ArrayModel.prototype.getBooleanInvalidNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -861,7 +877,7 @@ ArrayModel.prototype.getBooleanInvalidString = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -879,7 +895,7 @@ ArrayModel.prototype.getBooleanInvalidString = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -898,6 +914,8 @@ ArrayModel.prototype.getBooleanInvalidString = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -962,7 +980,7 @@ ArrayModel.prototype.getIntegerValid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -980,7 +998,7 @@ ArrayModel.prototype.getIntegerValid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1001,6 +1019,8 @@ ArrayModel.prototype.getIntegerValid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1099,12 +1119,12 @@ ArrayModel.prototype.putIntegerValid = function (arrayBody, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1123,6 +1143,8 @@ ArrayModel.prototype.putIntegerValid = function (arrayBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1187,7 +1209,7 @@ ArrayModel.prototype.getIntInvalidNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1205,7 +1227,7 @@ ArrayModel.prototype.getIntInvalidNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1224,6 +1246,8 @@ ArrayModel.prototype.getIntInvalidNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1288,7 +1312,7 @@ ArrayModel.prototype.getIntInvalidString = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1306,7 +1330,7 @@ ArrayModel.prototype.getIntInvalidString = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1325,6 +1349,8 @@ ArrayModel.prototype.getIntInvalidString = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1389,7 +1415,7 @@ ArrayModel.prototype.getLongValid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1407,7 +1433,7 @@ ArrayModel.prototype.getLongValid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1428,6 +1454,8 @@ ArrayModel.prototype.getLongValid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1526,12 +1554,12 @@ ArrayModel.prototype.putLongValid = function (arrayBody, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1550,6 +1578,8 @@ ArrayModel.prototype.putLongValid = function (arrayBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1614,7 +1644,7 @@ ArrayModel.prototype.getLongInvalidNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1632,7 +1662,7 @@ ArrayModel.prototype.getLongInvalidNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1651,6 +1681,8 @@ ArrayModel.prototype.getLongInvalidNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1715,7 +1747,7 @@ ArrayModel.prototype.getLongInvalidString = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1733,7 +1765,7 @@ ArrayModel.prototype.getLongInvalidString = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1752,6 +1784,8 @@ ArrayModel.prototype.getLongInvalidString = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1816,7 +1850,7 @@ ArrayModel.prototype.getFloatValid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1834,7 +1868,7 @@ ArrayModel.prototype.getFloatValid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1855,6 +1889,8 @@ ArrayModel.prototype.getFloatValid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1953,12 +1989,12 @@ ArrayModel.prototype.putFloatValid = function (arrayBody, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1977,6 +2013,8 @@ ArrayModel.prototype.putFloatValid = function (arrayBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2041,7 +2079,7 @@ ArrayModel.prototype.getFloatInvalidNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2059,7 +2097,7 @@ ArrayModel.prototype.getFloatInvalidNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2078,6 +2116,8 @@ ArrayModel.prototype.getFloatInvalidNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2142,7 +2182,7 @@ ArrayModel.prototype.getFloatInvalidString = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2160,7 +2200,7 @@ ArrayModel.prototype.getFloatInvalidString = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2179,6 +2219,8 @@ ArrayModel.prototype.getFloatInvalidString = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2243,7 +2285,7 @@ ArrayModel.prototype.getDoubleValid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2261,7 +2303,7 @@ ArrayModel.prototype.getDoubleValid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2282,6 +2324,8 @@ ArrayModel.prototype.getDoubleValid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2380,12 +2424,12 @@ ArrayModel.prototype.putDoubleValid = function (arrayBody, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2404,6 +2448,8 @@ ArrayModel.prototype.putDoubleValid = function (arrayBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2468,7 +2514,7 @@ ArrayModel.prototype.getDoubleInvalidNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2486,7 +2532,7 @@ ArrayModel.prototype.getDoubleInvalidNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2505,6 +2551,8 @@ ArrayModel.prototype.getDoubleInvalidNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2569,7 +2617,7 @@ ArrayModel.prototype.getDoubleInvalidString = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2587,7 +2635,7 @@ ArrayModel.prototype.getDoubleInvalidString = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2606,6 +2654,8 @@ ArrayModel.prototype.getDoubleInvalidString = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2670,7 +2720,7 @@ ArrayModel.prototype.getStringValid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2688,7 +2738,7 @@ ArrayModel.prototype.getStringValid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2709,6 +2759,8 @@ ArrayModel.prototype.getStringValid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2807,12 +2859,12 @@ ArrayModel.prototype.putStringValid = function (arrayBody, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2831,6 +2883,8 @@ ArrayModel.prototype.putStringValid = function (arrayBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2895,7 +2949,7 @@ ArrayModel.prototype.getStringWithNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2913,7 +2967,7 @@ ArrayModel.prototype.getStringWithNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2932,6 +2986,8 @@ ArrayModel.prototype.getStringWithNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2996,7 +3052,7 @@ ArrayModel.prototype.getStringWithInvalid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3014,7 +3070,7 @@ ArrayModel.prototype.getStringWithInvalid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -3033,6 +3089,8 @@ ArrayModel.prototype.getStringWithInvalid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3097,7 +3155,7 @@ ArrayModel.prototype.getDateValid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3122,7 +3180,7 @@ ArrayModel.prototype.getDateValid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -3143,6 +3201,8 @@ ArrayModel.prototype.getDateValid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3242,12 +3302,12 @@ ArrayModel.prototype.putDateValid = function (arrayBody, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -3266,6 +3326,8 @@ ArrayModel.prototype.putDateValid = function (arrayBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3330,7 +3392,7 @@ ArrayModel.prototype.getDateInvalidNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3355,7 +3417,7 @@ ArrayModel.prototype.getDateInvalidNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -3374,6 +3436,8 @@ ArrayModel.prototype.getDateInvalidNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3438,7 +3502,7 @@ ArrayModel.prototype.getDateInvalidChars = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3463,7 +3527,7 @@ ArrayModel.prototype.getDateInvalidChars = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -3483,6 +3547,8 @@ ArrayModel.prototype.getDateInvalidChars = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3547,7 +3613,7 @@ ArrayModel.prototype.getDateTimeValid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3572,7 +3638,7 @@ ArrayModel.prototype.getDateTimeValid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -3594,6 +3660,8 @@ ArrayModel.prototype.getDateTimeValid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3693,12 +3761,12 @@ ArrayModel.prototype.putDateTimeValid = function (arrayBody, options, callback) 
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -3717,6 +3785,8 @@ ArrayModel.prototype.putDateTimeValid = function (arrayBody, options, callback) 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3781,7 +3851,7 @@ ArrayModel.prototype.getDateTimeInvalidNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3806,7 +3876,7 @@ ArrayModel.prototype.getDateTimeInvalidNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -3825,6 +3895,8 @@ ArrayModel.prototype.getDateTimeInvalidNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3889,7 +3961,7 @@ ArrayModel.prototype.getDateTimeInvalidChars = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3914,7 +3986,7 @@ ArrayModel.prototype.getDateTimeInvalidChars = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -3934,6 +4006,8 @@ ArrayModel.prototype.getDateTimeInvalidChars = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3998,7 +4072,7 @@ ArrayModel.prototype.getDateTimeRfc1123Valid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -4023,7 +4097,7 @@ ArrayModel.prototype.getDateTimeRfc1123Valid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -4045,6 +4119,8 @@ ArrayModel.prototype.getDateTimeRfc1123Valid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4144,12 +4220,12 @@ ArrayModel.prototype.putDateTimeRfc1123Valid = function (arrayBody, options, cal
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -4168,6 +4244,8 @@ ArrayModel.prototype.putDateTimeRfc1123Valid = function (arrayBody, options, cal
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4232,7 +4310,7 @@ ArrayModel.prototype.getDurationValid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -4257,7 +4335,7 @@ ArrayModel.prototype.getDurationValid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -4278,6 +4356,8 @@ ArrayModel.prototype.getDurationValid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4376,12 +4456,12 @@ ArrayModel.prototype.putDurationValid = function (arrayBody, options, callback) 
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -4401,6 +4481,8 @@ ArrayModel.prototype.putDurationValid = function (arrayBody, options, callback) 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4465,7 +4547,7 @@ ArrayModel.prototype.getByteValid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -4490,7 +4572,7 @@ ArrayModel.prototype.getByteValid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -4512,6 +4594,8 @@ ArrayModel.prototype.getByteValid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4610,12 +4694,12 @@ ArrayModel.prototype.putByteValid = function (arrayBody, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -4635,6 +4719,8 @@ ArrayModel.prototype.putByteValid = function (arrayBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4699,7 +4785,7 @@ ArrayModel.prototype.getByteInvalidNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -4724,7 +4810,7 @@ ArrayModel.prototype.getByteInvalidNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -4743,6 +4829,8 @@ ArrayModel.prototype.getByteInvalidNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4807,7 +4895,7 @@ ArrayModel.prototype.getComplexNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -4842,7 +4930,7 @@ ArrayModel.prototype.getComplexNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -4861,6 +4949,8 @@ ArrayModel.prototype.getComplexNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4925,7 +5015,7 @@ ArrayModel.prototype.getComplexEmpty = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -4960,7 +5050,7 @@ ArrayModel.prototype.getComplexEmpty = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -4980,6 +5070,8 @@ ArrayModel.prototype.getComplexEmpty = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5044,7 +5136,7 @@ ArrayModel.prototype.getComplexItemNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -5079,7 +5171,7 @@ ArrayModel.prototype.getComplexItemNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -5099,6 +5191,8 @@ ArrayModel.prototype.getComplexItemNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5163,7 +5257,7 @@ ArrayModel.prototype.getComplexItemEmpty = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -5198,7 +5292,7 @@ ArrayModel.prototype.getComplexItemEmpty = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -5218,6 +5312,8 @@ ArrayModel.prototype.getComplexItemEmpty = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5282,7 +5378,7 @@ ArrayModel.prototype.getComplexValid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -5317,7 +5413,7 @@ ArrayModel.prototype.getComplexValid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -5339,6 +5435,8 @@ ArrayModel.prototype.getComplexValid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5431,12 +5529,12 @@ ArrayModel.prototype.putComplexValid = function (arrayBody, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -5455,6 +5553,8 @@ ArrayModel.prototype.putComplexValid = function (arrayBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5519,7 +5619,7 @@ ArrayModel.prototype.getArrayNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -5537,7 +5637,7 @@ ArrayModel.prototype.getArrayNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -5556,6 +5656,8 @@ ArrayModel.prototype.getArrayNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5620,7 +5722,7 @@ ArrayModel.prototype.getArrayEmpty = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -5638,7 +5740,7 @@ ArrayModel.prototype.getArrayEmpty = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -5657,6 +5759,8 @@ ArrayModel.prototype.getArrayEmpty = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5721,7 +5825,7 @@ ArrayModel.prototype.getArrayItemNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -5739,7 +5843,7 @@ ArrayModel.prototype.getArrayItemNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -5758,6 +5862,8 @@ ArrayModel.prototype.getArrayItemNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5822,7 +5928,7 @@ ArrayModel.prototype.getArrayItemEmpty = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -5840,7 +5946,7 @@ ArrayModel.prototype.getArrayItemEmpty = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -5860,6 +5966,8 @@ ArrayModel.prototype.getArrayItemEmpty = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5924,7 +6032,7 @@ ArrayModel.prototype.getArrayValid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -5942,7 +6050,7 @@ ArrayModel.prototype.getArrayValid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -5964,6 +6072,8 @@ ArrayModel.prototype.getArrayValid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6074,12 +6184,12 @@ ArrayModel.prototype.putArrayValid = function (arrayBody, options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -6098,6 +6208,8 @@ ArrayModel.prototype.putArrayValid = function (arrayBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6162,7 +6274,7 @@ ArrayModel.prototype.getDictionaryNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -6180,7 +6292,7 @@ ArrayModel.prototype.getDictionaryNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -6199,6 +6311,8 @@ ArrayModel.prototype.getDictionaryNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6263,7 +6377,7 @@ ArrayModel.prototype.getDictionaryEmpty = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -6281,7 +6395,7 @@ ArrayModel.prototype.getDictionaryEmpty = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -6302,6 +6416,8 @@ ArrayModel.prototype.getDictionaryEmpty = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6366,7 +6482,7 @@ ArrayModel.prototype.getDictionaryItemNull = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -6384,7 +6500,7 @@ ArrayModel.prototype.getDictionaryItemNull = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -6405,6 +6521,8 @@ ArrayModel.prototype.getDictionaryItemNull = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6469,7 +6587,7 @@ ArrayModel.prototype.getDictionaryItemEmpty = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -6487,7 +6605,7 @@ ArrayModel.prototype.getDictionaryItemEmpty = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -6508,6 +6626,8 @@ ArrayModel.prototype.getDictionaryItemEmpty = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6572,7 +6692,7 @@ ArrayModel.prototype.getDictionaryValid = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -6590,7 +6710,7 @@ ArrayModel.prototype.getDictionaryValid = function (options, callback) {
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -6613,6 +6733,8 @@ ArrayModel.prototype.getDictionaryValid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -6726,12 +6848,12 @@ ArrayModel.prototype.putDictionaryValid = function (arrayBody, options, callback
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 

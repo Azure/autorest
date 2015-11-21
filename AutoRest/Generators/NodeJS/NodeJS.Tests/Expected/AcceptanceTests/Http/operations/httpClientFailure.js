@@ -43,7 +43,8 @@ function HttpClientFailure(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -108,7 +109,7 @@ HttpClientFailure.prototype.head400 = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -129,7 +130,7 @@ HttpClientFailure.prototype.head400 = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -148,7 +149,8 @@ HttpClientFailure.prototype.head400 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -213,7 +215,7 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -234,7 +236,7 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -255,7 +257,8 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -343,7 +346,7 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -364,7 +367,7 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -385,7 +388,8 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -473,7 +477,7 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -494,7 +498,7 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -515,7 +519,8 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -603,7 +608,7 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -624,7 +629,7 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -645,7 +650,8 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -733,7 +739,7 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -754,7 +760,7 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -773,7 +779,8 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -838,7 +845,7 @@ HttpClientFailure.prototype.head401 = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -859,7 +866,7 @@ HttpClientFailure.prototype.head401 = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -878,7 +885,8 @@ HttpClientFailure.prototype.head401 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -943,7 +951,7 @@ HttpClientFailure.prototype.get402 = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -964,7 +972,7 @@ HttpClientFailure.prototype.get402 = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -983,7 +991,8 @@ HttpClientFailure.prototype.get402 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1048,7 +1057,7 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1069,7 +1078,7 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1090,7 +1099,8 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1178,7 +1188,7 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1199,7 +1209,7 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1220,7 +1230,8 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1308,7 +1319,7 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1329,7 +1340,7 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1350,7 +1361,8 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1438,7 +1450,7 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1459,7 +1471,7 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1480,7 +1492,8 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1568,7 +1581,7 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1589,7 +1602,7 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1610,7 +1623,8 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1698,7 +1712,7 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1719,7 +1733,7 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1738,7 +1752,8 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1803,7 +1818,7 @@ HttpClientFailure.prototype.head410 = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1824,7 +1839,7 @@ HttpClientFailure.prototype.head410 = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1843,7 +1858,8 @@ HttpClientFailure.prototype.head410 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1908,7 +1924,7 @@ HttpClientFailure.prototype.get411 = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1929,7 +1945,7 @@ HttpClientFailure.prototype.get411 = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -1948,7 +1964,8 @@ HttpClientFailure.prototype.get411 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2013,7 +2030,7 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2034,7 +2051,7 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2055,7 +2072,8 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2143,7 +2161,7 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2164,7 +2182,7 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2185,7 +2203,8 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2273,7 +2292,7 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2294,7 +2313,7 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2315,7 +2334,8 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2403,7 +2423,7 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2424,7 +2444,7 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2443,7 +2463,8 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2508,7 +2529,7 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2529,7 +2550,7 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2550,7 +2571,8 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2638,7 +2660,7 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2659,7 +2681,7 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -2678,7 +2700,8 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ErrorModel} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2743,7 +2766,7 @@ HttpClientFailure.prototype.head429 = function (options, callback) {
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2764,7 +2787,7 @@ HttpClientFailure.prototype.head429 = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 

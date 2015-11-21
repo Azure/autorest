@@ -26,12 +26,12 @@ return client.pipeline(httpRequest, function (err, response) {
   // Create Header
   @if (Model.ReturnType.Headers != null)
   {
-  @:var header = new client._models['@(Model.ReturnType.Headers.Name)'](response.headers);
-  @:header.deserialize(response.headers);
+  @:var responseHeaders = new client._models['@(Model.ReturnType.Headers.Name)'](response.headers);
+  @:responseHeaders.deserialize(response.headers);
   }
   else
   {
   @:var header = null;
   }
-  return callback(null, result, header, httpRequest, response);
+  return callback(null, result, responseHeaders, httpRequest, response);
 });

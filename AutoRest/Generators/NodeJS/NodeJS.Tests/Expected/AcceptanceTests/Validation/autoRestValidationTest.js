@@ -84,7 +84,8 @@ util.inherits(AutoRestValidationTest, ServiceClient);
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -174,7 +175,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -198,7 +199,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
@@ -231,7 +232,8 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link Product} for more information.
+ * 
+ *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -337,7 +339,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
       return callback(error);
     }
     // Create Header
-    var header = null;
+    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -361,7 +363,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
       }
     }
 
-    return callback(null, result, header, httpRequest, response);
+    return callback(null, result, responseHeaders, httpRequest, response);
   });
 };
 
