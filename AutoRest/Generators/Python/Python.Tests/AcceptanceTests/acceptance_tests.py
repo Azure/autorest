@@ -222,7 +222,7 @@ class AcceptanceTests(unittest.TestCase):
         # PUT array/valid
         arrayWrapper = ArrayWrapper
         arrayWrapper.array = arrayValue
-        #TODO: investigate
+        #TODO: investigate, don't know how to serialize array with [str]
         #client.array.put_valid(arrayWrapper)
         # GET array/empty
         arrayResult = client.array.get_empty()
@@ -230,7 +230,7 @@ class AcceptanceTests(unittest.TestCase):
         # PUT array/empty
         arrayValue = []
         arrayWrapper.array = arrayValue
-        #TODO: investigate
+        #TODO: investigate, don't know how to serialize None with [str]
         #client.array.put_empty(arrayValue)
         # Get array/notprovided
         arrayResult = client.array.get_not_provided()
@@ -252,14 +252,14 @@ class AcceptanceTests(unittest.TestCase):
         self.assertEqual(dictionaryValue, dictionaryResult.default_program)
         # PUT dictionary/valid
         dictionaryWrapper = DictionaryWrapper(default_program = dictionaryValue)
-        #TODO: investigate
+        #TODO: investigate, don't know how to serialize with {str}
         #client.dictionary.put_valid(dictionaryWrapper)
         # GET dictionary/empty
         dictionaryResult = client.dictionary.get_empty()
         self.assertEqual(0, len(dictionaryResult.default_program))
         # PUT dictionary/empty
         dictionaryWrapper = DictionaryWrapper(default_program = {})
-        #TODO: investigate
+        #TODO: investigate, don't know how to serialize None with {str}
         #client.dictionary.put_empty(dictionaryWrapper)
         # GET dictionary/null
         dictionaryResult = client.dictionary.get_null()
@@ -287,7 +287,7 @@ class AcceptanceTests(unittest.TestCase):
         """
         # GET polymorphism/valid
         polymorphismResult = Salmon(client.polymorphism.get_valid()) 
-        #TODO: investigate???
+        #TODO: investigate, should we be able to cast Fish to Salmon?
         self.assertIsNotNone(polymorphismResult)
         #self.assertEqual("alaska", polymorphismResult.location)
         #self.assertEqual(3, len(polymorphismResult.siblings))
@@ -365,7 +365,7 @@ class AcceptanceTests(unittest.TestCase):
         """
         # GET polymorphicrecursive/valid
         recursiveResult = client.polymorphicrecursive.get_valid()
-        #TODO: investigate???
+        #TODO: investigate, the type is always Fish
         #self.assertIsInstance(recursiveResult, Salmon)
         #Assert.True(recursiveResult.Siblings[0] is Shark);
         #Assert.True(recursiveResult.Siblings[0].Siblings[0] is Salmon);
@@ -380,7 +380,7 @@ class AcceptanceTests(unittest.TestCase):
                     Sawshark(age = 105, length = 10, species = 'dangerous', siblings=[], birthday = isodate.parse_datetime("1900-01-05T10:00:00Z"), picture = bytearray([255, 255, 255, 255, 254]))],
                       birthday = isodate.parse_datetime("2012-01-05T10:00:00Z")),
                 Sawshark(age = 105, length = 10, species = 'dangerous', siblings=[], birthday = isodate.parse_datetime("1900-01-05T10:00:00Z"), picture = bytearray([255, 255, 255, 255, 254])) ]
-        #TODO: investigate???
+        #TODO: investigate, didn't set the fishtype when serilize Share, etc.
         #client.polymorphicrecursive.put_valid(recursiveRequest)
         pass
 

@@ -52,7 +52,7 @@ class AcceptanceTests(unittest.TestCase):
 
         #Required parameters object is not null, but a required property of the object is
         requiredParameters = ParameterGroupingPostRequiredParameters(body = None, path = pathParameter)
-        # TODO!!! Investigate
+        #TODO!!! Investigate, we should raise error if body in serial function is None
         #with self.assertRaises(ValueError):
         #    client.parameter_grouping.post_required(requiredParameters)
         with self.assertRaises(ValueError):
@@ -81,7 +81,7 @@ class AcceptanceTests(unittest.TestCase):
 
     def test_url(self):
 
-        # TODO: investigate how to use TokenAuth in testing
+        #TODO: investigate how to use TokenAuth in testing
         cred = TokenAuthentication("client_id", {"my_token":123})
         config = MicrosoftAzureTestUrlConfiguration(None, str(uuid.uuid1()), "http://localhost:3000")
         config.log_level = 10
@@ -114,11 +114,11 @@ class AcceptanceTests(unittest.TestCase):
 
         custom_headers = {"x-ms-client-request-id": validClientId }
         result1 = client.xms_client_request_id.get(custom_headers = custom_headers)
-        # TODO: investigate on return default request_id as other language
+        #TODO: investigate on return default request_id as other language
         #self.assertEqual("123", result1.request_id)
 
         result2 = client.xms_client_request_id.param_get(validClientId)
-        # TODO: investigate on return default request_id as other language
+        #TODO: investigate on return default request_id as other language
         #self.assertEqual("123", result2.request_id)
 
     def test_azure_special_parameters(self):
@@ -153,12 +153,11 @@ class AcceptanceTests(unittest.TestCase):
         client.skip_url_encoding.get_method_path_valid(unencodedPath)
         client.skip_url_encoding.get_path_path_valid(unencodedPath)
         client.skip_url_encoding.get_swagger_path_valid(unencodedPath)
-        #TODO: investigate
+        #TODO: investigate, how to stop requests automatic encode the query parameter
         #TODO: also client runtime need to set the default user agent just like C#
         #client.skip_url_encoding.get_method_query_valid(unencodedQuery)
         #client.skip_url_encoding.get_path_query_valid(unencodedQuery)
         #client.skip_url_encoding.get_swagger_query_valid(unencodedQuery)
-        #TODO: investigate, do we need to set the default type for the input parameter?
         client.skip_url_encoding.get_method_query_null()
         client.skip_url_encoding.get_method_query_null(None)
 
