@@ -27,7 +27,8 @@ from auto_rest_bool_test_service.models import ErrorException as BoolException
 from auto_rest_complex_test_service.models import (
     CMYKColors, Basic, IntWrapper, LongWrapper, FloatWrapper,
     DoubleWrapper, BooleanWrapper, StringWrapper, DatetimeWrapper,
-    DateWrapper, DurationWrapper, Datetimerfc1123Wrapper, ByteWrapper)
+    DateWrapper, DurationWrapper, Datetimerfc1123Wrapper, ByteWrapper, ArrayWrapper, DictionaryWrapper, 
+    Siamese, Dog, Salmon, Shark, Sawshark, Goblinshark, Fish)
 
 
 
@@ -208,58 +209,64 @@ class AcceptanceTests(unittest.TestCase):
         COMPLEX TYPE WITH ARRAY PROPERTIES
         """
         # GET array/valid
-        #var arrayResult = client.Array.GetValid();
-        #Assert.Equal(5, arrayResult.Array.Count);
-        #List<string> arrayValue = new List<string>
-        #{
-        #    "1, 2, 3, 4",
-        #    "",
-        #    null,
-        #    "&S#$(*Y",
-        #    "The quick brown fox jumps over the lazy dog"
-        #};
-        #for (int i = 0; i < 5; i++)
-        #{
-        #    Assert.Equal(arrayValue[i], arrayResult.Array[i]);
-        #}
+        arrayResult = client.array.get_valid();
+        self.assertEqual(5, len(arrayResult.array))
+        arrayValue = [
+            '1, 2, 3, 4',
+            '',
+            None,
+            '&S#$(*Y',
+            'The quick brown fox jumps over the lazy dog' ]
+        for x in range(0, 4):
+            self.assertEqual(arrayValue[x], arrayResult.array[x])
         # PUT array/valid
-        #client.Array.PutValid(arrayValue);
+        arrayWrapper = ArrayWrapper
+        arrayWrapper.array = arrayValue
+        #TODO: investigate
+        #client.array.put_valid(arrayWrapper)
         # GET array/empty
-        #arrayResult = client.Array.GetEmpty();
-        #Assert.Equal(0, arrayResult.Array.Count);
+        arrayResult = client.array.get_empty()
+        self.assertEqual(0, len(arrayResult.array))
         # PUT array/empty
-        #arrayValue.Clear();
-        #client.Array.PutEmpty(arrayValue);
+        arrayValue = []
+        arrayWrapper.array = arrayValue
+        #TODO: investigate
+        #client.array.put_empty(arrayValue)
         # Get array/notprovided
-        #arrayResult = client.Array.GetNotProvided();
-        #Assert.Null(arrayResult.Array);
+        arrayResult = client.array.get_not_provided()
+        self.assertIsNone(arrayResult.array)
 
         """
         COMPLEX TYPE WITH DICTIONARY PROPERTIES
         """
         # GET dictionary/valid
-        #var dictionaryResult = client.Dictionary.GetValid();
-        #Assert.Equal(5, dictionaryResult.DefaultProgram.Count);
-        #Dictionary<string, string> dictionaryValue = new Dictionary<string, string>
-        #{
-        #    {"txt", "notepad"},
-        #    {"bmp", "mspaint"},
-        #    {"xls", "excel"},
-        #    {"exe", ""},
-        #    {"", null}
-        #};
-        #Assert.Equal(dictionaryValue, dictionaryResult.DefaultProgram);
+        dictionaryResult = client.dictionary.get_valid()
+        self.assertEqual(5, len(dictionaryResult.default_program))
+        dictionaryValue = {
+            u"txt": "notepad",
+            u"bmp": "mspaint",
+            u"xls": "excel",
+            u"exe": "",
+            u"": None
+        }
+        self.assertEqual(dictionaryValue, dictionaryResult.default_program)
         # PUT dictionary/valid
-        #client.Dictionary.PutValid(dictionaryValue);
+        dictionaryWrapper = DictionaryWrapper(default_program = dictionaryValue)
+        #TODO: investigate
+        #client.dictionary.put_valid(dictionaryWrapper)
         # GET dictionary/empty
-        #dictionaryResult = client.Dictionary.GetEmpty();
-        #Assert.Equal(0, dictionaryResult.DefaultProgram.Count);
+        dictionaryResult = client.dictionary.get_empty()
+        self.assertEqual(0, len(dictionaryResult.default_program))
         # PUT dictionary/empty
-        #client.Dictionary.PutEmpty(new Dictionary<string, string>());
+        dictionaryWrapper = DictionaryWrapper(default_program = {})
+        #TODO: investigate
+        #client.dictionary.put_empty(dictionaryWrapper)
         # GET dictionary/null
-        #Assert.Null(client.Dictionary.GetNull().DefaultProgram);
+        dictionaryResult = client.dictionary.get_null()
+        self.assertIsNone(dictionaryResult.default_program)
         # GET dictionary/notprovided
-        #Assert.Null(client.Dictionary.GetNotProvided().DefaultProgram);
+        dictionaryResult = client.dictionary.get_not_provided()
+        self.assertIsNone(dictionaryResult.default_program)
 
         """
         COMPLEX TYPES THAT INVOLVE INHERITANCE
@@ -270,6 +277,112 @@ class AcceptanceTests(unittest.TestCase):
         self.assertEqual("Siameeee", inheritanceResult.name)
         self.assertEqual(-1, inheritanceResult.hates[1].id)
         self.assertEqual("Tomato", inheritanceResult.hates[1].name)
+        # PUT inheritance/valid
+        inheritanceRequest = Siamese(id = 2, name = 'Siameeee', color = 'green', breed = 'persian')
+        inheritanceRequest.hates = [ Dog(id = 1, name = 'Potato', food = 'tomato'), Dog(id = -1, name = 'Tomato', food = 'french fries') ]
+        client.inheritance.put_valid(inheritanceRequest)
+
+        """
+        COMPLEX TYPES THAT INVOLVE POLYMORPHISM
+        """
+        # GET polymorphism/valid
+        polymorphismResult = Salmon(client.polymorphism.get_valid()) 
+        #TODO: investigate???
+        self.assertIsNotNone(polymorphismResult)
+        #self.assertEqual("alaska", polymorphismResult.location)
+        #self.assertEqual(3, len(polymorphismResult.siblings))
+        #self.assertIsInstance(Shark, polymorphismResult.siblings[0])
+        #self.assertIsInstance(Sawshark, polymorphismResult.siblings[1])
+        #self.assertIsInstance(Goblinshark, polymorphismResult.siblings[2])
+        #Assert.Equal(6, ((Shark) polymorphismResult.Siblings[0]).Age);
+        #Assert.Equal(105, ((Sawshark) polymorphismResult.Siblings[1]).Age);
+        #Assert.Equal(1, ((Goblinshark)polymorphismResult.Siblings[2]).Age);
+        #// PUT polymorphism/valid
+        #var polymorphismRequest = new Salmon
+        #{
+        #    Iswild = true,
+        #    Length = 1,
+        #    Location = "alaska",
+        #    Species = "king",
+        #    Siblings = new List<Fish>
+        #    {
+        #        new Shark
+        #        {
+        #            Age = 6,
+        #            Length = 20,
+        #            Species = "predator",
+        #            Birthday = new DateTime(2012, 1, 5, 1, 0, 0, DateTimeKind.Utc)
+        #        },
+        #        new Sawshark
+        #        {
+        #            Age = 105,
+        #            Length = 10,
+        #            Species = "dangerous",
+        #            Birthday = new DateTime(1900, 1, 5, 1, 0, 0, DateTimeKind.Utc),
+        #            Picture = new byte[] {255, 255, 255, 255, 254}
+        #        },
+        #        new Goblinshark()
+        #        {
+        #            Age = 1,
+        #            Length = 30,
+        #            Species = "scary",
+        #            Birthday = new DateTime(2015, 8, 8, 0, 0, 0, DateTimeKind.Utc),
+        #            Jawsize = 5
+        #        }
+        #    }
+        #};
+        #client.Polymorphism.PutValid(polymorphismRequest);
+
+        #var badRequest = new Salmon
+        #{
+        #    Iswild = true,
+        #    Length = 1,
+        #    Location = "alaska",
+        #    Species = "king",
+        #    Siblings = new List<Fish>
+        #    {
+        #        new Shark
+        #        {
+        #            Age = 6,
+        #            Length = 20,
+        #            Species = "predator",
+        #            Birthday = new DateTime(2012, 1, 5, 1, 0, 0, DateTimeKind.Utc)
+        #        },
+        #        new Sawshark
+        #        {
+        #            Age = 105,
+        #            Length = 10,
+        #            Species = "dangerous",
+        #            Picture = new byte[] {255, 255, 255, 255, 254}
+        #        }
+        #    }
+        #};
+        #var missingRequired =
+        #    Assert.Throws<ValidationException>(() => client.Polymorphism.PutValidMissingRequired(badRequest));
+        #Assert.Equal("Birthday", missingRequired.Target);
+        """
+        COMPLEX TYPES THAT INVOLVE RECURSIVE REFERENCE
+        """
+        # GET polymorphicrecursive/valid
+        recursiveResult = client.polymorphicrecursive.get_valid()
+        #TODO: investigate???
+        #self.assertIsInstance(recursiveResult, Salmon)
+        #Assert.True(recursiveResult.Siblings[0] is Shark);
+        #Assert.True(recursiveResult.Siblings[0].Siblings[0] is Salmon);
+        #Assert.Equal("atlantic", ((Salmon) recursiveResult.Siblings[0].Siblings[0]).Location);
+        # PUT polymorphicrecursive/valid
+        recursiveRequest = Salmon(iswild = True, length = 1, species = 'king', location = 'alaska')
+        recursiveRequest.siblings = [
+                Shark(age = 6, length = 20, species = 'predator', siblings = [
+                    Salmon(iswild = True, length = 2, species = 'coho', location = 'atlantic', siblings = [
+                        Shark(age = 6, length = 20, species = 'predator', birthday = isodate.parse_datetime("2012-01-05T10:00:00Z")),
+                        Sawshark(age = 105, length = 10, species = 'dangerous', birthday = isodate.parse_datetime("1900-01-05T10:00:00Z"), picture = bytearray([255, 255, 255, 255, 254])) ]),
+                    Sawshark(age = 105, length = 10, species = 'dangerous', siblings=[], birthday = isodate.parse_datetime("1900-01-05T10:00:00Z"), picture = bytearray([255, 255, 255, 255, 254]))],
+                      birthday = isodate.parse_datetime("2012-01-05T10:00:00Z")),
+                Sawshark(age = 105, length = 10, species = 'dangerous', siblings=[], birthday = isodate.parse_datetime("1900-01-05T10:00:00Z"), picture = bytearray([255, 255, 255, 255, 254])) ]
+        #TODO: investigate???
+        #client.polymorphicrecursive.put_valid(recursiveRequest)
+        pass
 
     def test_ensure_coverage(self):
 

@@ -270,9 +270,8 @@ class Serializer(object):
         return r
 
     @staticmethod
-    def serialize_bytearray(attr, char="\"", **kwargs):
-        return char + b64encode(attr) + char
-        #return b64encode(attr)
+    def serialize_bytearray(attr, **kwargs):
+        return b64encode(attr)
 
     @staticmethod
     def serialize_decimal(attr, **kwargs):
