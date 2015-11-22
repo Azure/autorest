@@ -437,16 +437,17 @@ class Deserializer(object):
 
     def __call__(self, target_obj, response_data):
 
-        response, class_name = self._classify_target(target_obj, response_data)
+        data = self._unpack_content(response_data)
+        response, class_name = self._classify_target(target_obj, data)
 
         if isinstance(response, str):
-            data = self._unpack_content(response_data)
             return self.deserialize_data(data, response)
 
         try:
-            data = self._unpack_response(response, response_data)
             if data == None:
                 return data
+            else:
+                self._unpack_response(response, response_data)
 
         except (TypeError, ValueError, AttributeError) as err:
             msg = "Unable to deserialize to object: {}.".format(class_name)
@@ -475,19 +476,18 @@ class Deserializer(object):
         if not target:
             return None, None
 
-        if isinstance(target, type):
-            try:
-                target = target._classify(data, self.dependencies)
-
-            except (TypeError, AttributeError):
-                pass  # Target has no subclasses, so can't classify further.
-
         if isinstance(target, str):
             try:
                 target = self.dependencies[target]
 
             except KeyError:
                 return target, target
+
+        try:
+            target = target._classify(data, self.dependencies)
+
+        except (TypeError, AttributeError):
+            pass  # Target has no subclasses, so can't classify further.
 
         try:
             target_obj = target()
@@ -552,8 +552,6 @@ class Deserializer(object):
 
         if hasattr(response, '_response_map'):
             self._unpack_response_attrs(response, raw_data)
-
-        return self._unpack_content(raw_data)
 
     def deserialize_data(self, data, data_type):
 

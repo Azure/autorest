@@ -8,7 +8,8 @@ import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-sys.path.append(cwd + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + "ClientRuntimes" + sep + "Python" + sep + "msrest")
+root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "BodyFile"))
