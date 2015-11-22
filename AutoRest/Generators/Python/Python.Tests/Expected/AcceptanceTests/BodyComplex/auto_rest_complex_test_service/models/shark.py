@@ -23,7 +23,7 @@ class Shark(Fish):
     }
 
     _subtype_map = {
-        'fishtype': {'sawshark': 'Sawshark', 'goblin': 'Goblinshark'}
+        'fishtype': {'sawshark': 'Sawshark', 'goblin': 'Goblinshark', 'cookiecuttershark': 'Cookiecuttershark'}
     }
 
     def __init__(self, *args, **kwargs):

@@ -27,6 +27,13 @@
 import json
 import isodate
 import datetime
+import chardet
+
+try:
+    from urllib import quote
+
+except ImportError:
+    from urllib.parse import quote
 
 from base64 import b64decode, b64encode
 from enum import Enum
@@ -139,7 +146,6 @@ class Serializer(object):
             'iso-8601': Serializer.serialize_iso,
             'rfc-1123': Serializer.serialize_rfc,
             'duration': Serializer.serialize_duration,
-            'time': Serializer.serialize_time,
             'date': Serializer.serialize_date,
             'decimal': Serializer.serialize_decimal,
             'long': Serializer.serialize_long,
@@ -213,6 +219,65 @@ class Serializer(object):
         except AttributeError:
             pass  # TargetObj has no _subtype_map so we don't need to classify
 
+    def url(self, name, data, data_type, **kwargs):
+        try:
+            output = self.serialize_data(data, data_type, **kwargs)
+
+            if data_type == 'bool':
+                output = json.dumps(output)
+
+            if kwargs.get('skip_quote') == True:
+                output = str(output)
+            else:
+                output = quote(str(output), safe='')
+
+        except ValueError:
+            raise ValueError("{} must not be None.".format(name))
+
+        except DeserializationError:
+            raise TypeError("{} must be type {}.".format(name, data_type))
+
+        else:
+            return output
+
+    def query(self, name, data, data_type, **kwargs):
+        try:
+            if data_type in ['[str]']:
+                data = ["" if d is None else d for d in data]
+
+            output = self.serialize_data(data, data_type, **kwargs)
+
+            if data_type == 'bool':
+                output = json.dumps(output)
+
+        except ValueError:
+            raise ValueError("{} must not be None.".format(name))
+
+        except DeserializationError:
+            raise TypeError("{} must be type {}.".format(name, data_type))
+
+        else:
+            return output
+
+    def header(self, name, data, data_type, **kwargs):
+        try:
+            if data_type in ['[str]']:
+                data = ["" if d is None else d for d in data]
+
+            output = self.serialize_data(data, data_type, **kwargs)
+
+            if data_type == 'bool':
+                output = json.dumps(output)
+
+        except ValueError:
+            raise ValueError("{} must not be None.".format(name))
+
+        except DeserializationError:
+            raise TypeError("{} must be type {}.".format(name, data_type))
+
+        else:
+            return output
+
     def serialize_data(self, data, data_type, required=False, **kwargs):
 
         if data is None and required:
@@ -227,7 +292,7 @@ class Serializer(object):
 
         try:
             if data_type in self.basic_types:
-                return eval(data_type)(data)
+                return self.serialize_basic(data, data_type)
 
             if data_type in self.serialize_type:
                 return self.serialize_type[data_type](data, **kwargs)
@@ -250,6 +315,14 @@ class Serializer(object):
         else:
             return self(data, **kwargs)
 
+    def serialize_basic(self, data, data_type):
+
+        if data_type == 'str':
+            if isinstance(data, unicode):
+                return data.encode(encoding='utf-8')
+            return str(data)
+        return eval(data_type)(data)
+
     def serialize_iter(self, data, iter_type, required, div=None, **kwargs):
 
         if div:
@@ -270,9 +343,8 @@ class Serializer(object):
         return r
 
     @staticmethod
-    def serialize_bytearray(attr, char="\"", **kwargs):
-        return char + b64encode(attr) + char
-        #return b64encode(attr)
+    def serialize_bytearray(attr, **kwargs):
+        return b64encode(attr)
 
     @staticmethod
     def serialize_decimal(attr, **kwargs):
@@ -292,16 +364,15 @@ class Serializer(object):
         return t
 
     @staticmethod
-    def serialize_time(attr, **kwargs):
-        return str(attr)  # TODO
-
-    @staticmethod
     def serialize_duration(attr, **kwargs):
         return isodate.duration_isoformat(attr)
 
     @staticmethod
     def serialize_rfc(attr, **kwargs):
-        utc = attr.utctimetuple()
+        try:
+            utc = attr.utctimetuple()
+        except AttributeError:
+            raise TypeError("RFC1123 object must be valid Datetime object.")
 
         days = {0:"Mon", 1:"Tue", 2:"Wed", 3:"Thu", 4:"Fri", 5:"Sat", 6:"Sun"}
         months = {1:"Jan", 2:"Feb", 3:"Mar", 4:"Apr", 5:"May", 6:"Jun", 7:"Jul", 8:"Aug", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"}
@@ -360,7 +431,6 @@ class Deserializer(object):
             'iso-8601': Deserializer.deserialize_iso,
             'rfc-1123': Deserializer.deserialize_rfc,
             'duration': Deserializer.deserialize_duration,
-            'time': Deserializer.deserialize_time,
             'date': Deserializer.deserialize_date,
             'decimal': Deserializer.deserialize_decimal,
             'long': Deserializer.deserialize_long,
@@ -373,16 +443,20 @@ class Deserializer(object):
 
     def __call__(self, target_obj, response_data):
 
-        response, class_name = self._classify_target(target_obj, response_data)
+        data = self._unpack_content(response_data)
+        response, class_name = self._classify_target(target_obj, data)
 
         if isinstance(response, str):
-            data = self._unpack_content(response_data)
             return self.deserialize_data(data, response)
 
+        elif isinstance(response, Enum) or class_name == 'EnumMeta':
+            return self.deserialize_data(data, target_obj)
+
         try:
-            data = self._unpack_response(response, response_data)
             if data == None:
                 return data
+            else:
+                self._unpack_response(response, response_data)
 
         except (TypeError, ValueError, AttributeError) as err:
             msg = "Unable to deserialize to object: {}.".format(class_name)
@@ -411,13 +485,6 @@ class Deserializer(object):
         if not target:
             return None, None
 
-        if isinstance(target, type):
-            try:
-                target = target._classify(data, self.dependencies)
-
-            except (TypeError, AttributeError):
-                pass  # Target has no subclasses, so can't classify further.
-
         if isinstance(target, str):
             try:
                 target = self.dependencies[target]
@@ -426,11 +493,17 @@ class Deserializer(object):
                 return target, target
 
         try:
+            target = target._classify(data, self.dependencies)
+
+        except (TypeError, AttributeError):
+            pass  # Target has no subclasses, so can't classify further.
+
+        try:
             target_obj = target()
             return target_obj, target_obj.__class__.__name__
 
         except TypeError:
-            return target, None
+            return target, target.__class__.__name__
 
     def _unpack_headers(self, response, raw_data):
 
@@ -457,7 +530,7 @@ class Deserializer(object):
     def _unpack_content(self, raw_data):
 
         if isinstance(raw_data, bytes):
-            data = raw_data.decode
+            data = raw_data.decode(encoding=chardet.detect(raw_data))
 
         else:
             data = raw_data
@@ -467,7 +540,8 @@ class Deserializer(object):
                 return None
 
             if isinstance(raw_data.content, bytes):
-                data = raw_data.content.decode()
+                encoding = chardet.detect(raw_data.content)["encoding"]
+                data = raw_data.content.decode(encoding=encoding)
 
             else:
                 data = raw_data.content
@@ -488,8 +562,6 @@ class Deserializer(object):
 
         if hasattr(response, '_response_map'):
             self._unpack_response_attrs(response, raw_data)
-
-        return self._unpack_content(raw_data)
 
     def deserialize_data(self, data, data_type):
 
@@ -556,6 +628,14 @@ class Deserializer(object):
 
             raise TypeError("Invalid boolean value: {0}".format(attr))
 
+        if data_type == 'str':
+
+            if isinstance(attr, str) or isinstance(attr, unicode):
+                return attr
+
+            else:
+                return str(attr)
+
         return eval(data_type)(attr)
 
     @staticmethod
@@ -587,10 +667,6 @@ class Deserializer(object):
             return duration
 
     @staticmethod
-    def deserialize_time(attr):
-        return attr  # TODO
-
-    @staticmethod
     def deserialize_date(attr):
         return isodate.parse_date(attr)
 
@@ -612,6 +688,18 @@ class Deserializer(object):
     def deserialize_iso(attr):
         try:
             attr = attr.upper()
+
+            check_decimal = attr.split('.')
+            if len(check_decimal) > 1:
+                decimal = ""
+                for digit in check_decimal[1]:
+                    if digit.isdigit():
+                        decimal += digit
+                    else:
+                        break
+                if len(decimal) > 6:
+                    attr = attr.replace(decimal, decimal[0:-1])
+
             date_obj = isodate.parse_datetime(attr)
             test_utc = date_obj.utctimetuple()
             if test_utc.tm_year > 9999 or test_utc.tm_year < 1:

@@ -78,15 +78,21 @@ class HttpOperationError(ClientException):
     def __str__(self):
         return str(self.message)
 
-    def __init__(self, deserialize, response, resp_type, *args):
+    def __init__(self, deserialize, response, resp_type=None, *args):
 
         self.error = None
         self.message = None
-        try:
-            self.error = deserialize(resp_type, response)
-            self.message = self.error.message
+        self.response = response
 
-        except (DeserializationError, AttributeError):
+        try:
+            if resp_type:
+                self.error = deserialize(resp_type, response)
+                if self.error is None:
+                    self.error = deserialize.dependencies[resp_type]()
+
+                self.message = self.error.message
+
+        except (DeserializationError, AttributeError, KeyError):
             pass
         
         if not self.error or not self.message:
@@ -98,7 +104,9 @@ class HttpOperationError(ClientException):
                     self.error = err
 
                 if not self.message:
-                    self.message = str(err)
+                    msg = ("Operation returned an invalid status code "
+                           "'{}'".format(response.reason))
+                    self.message = msg
 
             else:
                 if not self.error:
@@ -107,4 +115,4 @@ class HttpOperationError(ClientException):
                 if not self.message:
                     self.message = "Unknown error"
 
-        super(HttpOperationError, self).__init__(str(self.error), *args)
+        super(HttpOperationError, self).__init__(self.message, self.error, *args)

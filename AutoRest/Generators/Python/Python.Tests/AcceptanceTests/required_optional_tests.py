@@ -6,7 +6,8 @@ from datetime import date, datetime, timedelta
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-sys.path.append(cwd + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + "ClientRuntimes" + sep + "Python" + sep + "msrest")
+root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "RequiredOptional"))
@@ -17,22 +18,11 @@ from auto_rest_required_optional_test_service import (
     AutoRestRequiredOptionalTestService,
     AutoRestRequiredOptionalTestServiceConfiguration)
 
-from auto_rest_required_optional_test_service.models import (
-    ArrayOptionalWrapper,
-    ArrayWrapper,
-    ClassOptionalWrapper,
-    ClassWrapper,
-    ErrorException,
-    IntOptionalWrapper,
-    IntWrapper,
-    Product,
-    StringOptionalWrapper,
-    StringWrapper)
-
 
 class RequiredOptionalTests(unittest.TestCase):
 
-    def test_required_optional(self):
+    @classmethod
+    def setUpClass(cls):
 
         config = AutoRestRequiredOptionalTestServiceConfiguration(
             "required_path",
@@ -40,73 +30,81 @@ class RequiredOptionalTests(unittest.TestCase):
             "http://localhost:3000")
 
         config.log_level = 10
-        client = AutoRestRequiredOptionalTestService(config)
+        cls.client = AutoRestRequiredOptionalTestService(config)
+        return super(RequiredOptionalTests, cls).setUpClass()
 
-        client.implicit.put_optional_query(None)
-        client.implicit.put_optional_body(None)
-        client.implicit.put_optional_header(None)
+    def test_required_optional(self):
+
+        self.client.config.required_global_path = "required_path"
+        self.client.config.required_global_query = "required_query"
+
+        self.client.implicit.put_optional_query(None)
+        self.client.implicit.put_optional_body(None)
+        self.client.implicit.put_optional_header(None)
 
         # TODO
-        #client.implicit.get_optional_global_query(None)
+        #self.client.implicit.get_optional_global_query(None)
 
-        client.explicit.post_optional_integer_parameter(None)
-        client.explicit.post_optional_integer_property(None)
-        client.explicit.post_optional_integer_header(None)
+        self.client.explicit.post_optional_integer_parameter(None)
+        self.client.explicit.post_optional_integer_property(None)
+        self.client.explicit.post_optional_integer_header(None)
 
-        client.explicit.post_optional_string_parameter(None)
-        client.explicit.post_optional_string_property(None)
-        client.explicit.post_optional_string_header(None)
+        self.client.explicit.post_optional_string_parameter(None)
+        self.client.explicit.post_optional_string_property(None)
+        self.client.explicit.post_optional_string_header(None)
 
-        client.explicit.post_optional_class_parameter(None)
-        client.explicit.post_optional_class_property(None)
+        self.client.explicit.post_optional_class_parameter(None)
+        self.client.explicit.post_optional_class_property(None)
 
-        client.explicit.post_optional_array_parameter(None)
-        client.explicit.post_optional_array_property(None)
-        client.explicit.post_optional_array_header(None)
+        self.client.explicit.post_optional_array_parameter(None)
+        self.client.explicit.post_optional_array_property(None)
+        self.client.explicit.post_optional_array_header(None)
 
     def test_required_optional_negative(self):
 
-        config = AutoRestRequiredOptionalTestServiceConfiguration(
-            None,
-            None,
-            "http://localhost:3000")
-
-        config.log_level = 10
-        client = AutoRestRequiredOptionalTestService(config)
+        self.client.config.required_global_path = None
+        self.client.config.required_global_query = None
 
         with self.assertRaises(ValueError):
-            client.implicit.get_required_path(None)
+            self.client.implicit.get_required_path(None)
 
         # TODO
         #with self.assertRaises(ValueError):
-        #    client.explicit.post_required_string_header(None)
+        #    self.client.explicit.post_required_string_header(None)
 
+        # TODO
         #with self.assertRaises(ValueError):
-        #    client.explicit.post_required_string_parameter(None)
+        #    self.client.explicit.post_required_string_parameter(None)
 
+        # TODO
         #with self.assertRaises(ValueError):
-        #    client.explicit.post_required_string_property(None)
+        #    self.client.explicit.post_required_string_property(None)
 
+        # TODO
         #with self.assertRaises(ValueError):
-        #    client.explicit.post_required_array_header(None)
+        #    self.client.explicit.post_required_array_header(None)
 
+        # TODO
         #with self.assertRaises(ValueError):
-        #    client.explicit.post_required_array_parameter(None)
+        #    self.client.explicit.post_required_array_parameter(None)
 
+        # TODO
         #with self.assertRaises(ValueError):
-        #    client.explicit.post_required_array_property(None)
+        #    self.client.explicit.post_required_array_property(None)
 
+        # TODO
         #with self.assertRaises(ValueError):
-        #    client.explicit.post_required_class_parameter(None)
+        #    self.client.explicit.post_required_class_parameter(None)
 
+        # TODO
         #with self.assertRaises(ValueError):
-        #    client.explicit.post_required_class_property(None)
+        #    self.client.explicit.post_required_class_property(None)
 
         with self.assertRaises(ValueError):
-            client.implicit.get_required_global_path()
+            self.client.implicit.get_required_global_path()
 
-        #with self.assertRaises(ValueError):
-        #    client.implicit.get_required_global_query()
+        with self.assertRaises(ValueError):
+            self.client.implicit.get_required_global_query()
 
 
 if __name__ == '__main__':

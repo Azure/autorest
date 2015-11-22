@@ -125,12 +125,12 @@ namespace Microsoft.Rest.Generator.Python
             return declaration;
         }
 
-        private string BuildSerializeDataCall(Parameter parameter)
+        private static string BuildSerializeDataCall(Parameter parameter)
         {
-            string divChar;
+            string divChar = ClientModelExtensions.NeedsFormattedSeparator(parameter);
             string divParameter = string.Empty;
 
-            if (ClientModelExtensions.NeedsFormattedSeparator(parameter, out divChar))
+            if (!string.IsNullOrEmpty(divChar))
             {
                 divParameter = string.Format(CultureInfo.InvariantCulture, ", div='{0}'", divChar);
             }
@@ -379,7 +379,7 @@ namespace Microsoft.Rest.Generator.Python
         /// <summary>
         /// Gets the expression for default header setting. 
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "customheaders")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "headerparameters"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "customheaders")]
         public virtual string SetDefaultHeaders
         {
             get

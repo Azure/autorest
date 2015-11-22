@@ -30,7 +30,7 @@ if __name__ == '__main__':
         test_loader = TestLoader()    
         test_loader.sortTestMethodsUsing = sort_test
 
-        suite = test_loader.discover(cwd, pattern="*_tests.py")
+        suite = test_loader.discover(cwd, pattern="acceptance_tests.py")
         runner.run(suite)
     
     finally:
