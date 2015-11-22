@@ -73,11 +73,11 @@ class subscription_in_credentialsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -121,11 +121,11 @@ class subscription_in_credentialsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -169,11 +169,11 @@ class subscription_in_credentialsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -216,11 +216,11 @@ class subscription_in_credentialsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -263,11 +263,11 @@ class subscription_in_credentialsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)

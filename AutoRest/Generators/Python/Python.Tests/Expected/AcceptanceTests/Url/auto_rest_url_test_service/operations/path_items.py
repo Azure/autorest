@@ -41,7 +41,7 @@ class path_items(object):
             return value
 
     @async_request
-    def get_all_with_values(self, local_string_path, path_item_string_path, local_string_query, path_item_string_query, custom_headers={}, raw=False, callback=None):
+    def get_all_with_values(self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         send globalStringPath='globalStringPath',
@@ -93,8 +93,8 @@ class path_items(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -107,7 +107,7 @@ class path_items(object):
             return None, response
 
     @async_request
-    def get_global_query_null(self, local_string_path, path_item_string_path, local_string_query, path_item_string_query, custom_headers={}, raw=False, callback=None):
+    def get_global_query_null(self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         send globalStringPath='globalStringPath',
@@ -158,8 +158,8 @@ class path_items(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -172,7 +172,7 @@ class path_items(object):
             return None, response
 
     @async_request
-    def get_global_and_local_query_null(self, local_string_path, path_item_string_path, local_string_query, path_item_string_query, custom_headers={}, raw=False, callback=None):
+    def get_global_and_local_query_null(self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         send globalStringPath=globalStringPath,
@@ -222,8 +222,8 @@ class path_items(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -236,7 +236,7 @@ class path_items(object):
             return None, response
 
     @async_request
-    def get_local_path_item_query_null(self, local_string_path, path_item_string_path, local_string_query, path_item_string_query, custom_headers={}, raw=False, callback=None):
+    def get_local_path_item_query_null(self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         send globalStringPath='globalStringPath',
@@ -286,8 +286,8 @@ class path_items(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)

@@ -43,7 +43,7 @@ class lrosa_dsOperations(object):
             return value
 
     @async_request
-    def put_non_retry400(self, product, custom_headers={}, raw=False, callback=None):
+    def put_non_retry400(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 400 to the initial request
@@ -71,14 +71,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -100,7 +103,7 @@ class lrosa_dsOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_non_retry400(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_non_retry400(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 400 to the initial request
@@ -128,14 +131,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -157,7 +163,7 @@ class lrosa_dsOperations(object):
         return deserialized
 
     @async_request
-    def put_non_retry201_creating400(self, product, custom_headers={}, raw=False, callback=None):
+    def put_non_retry201_creating400(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a Product with
@@ -186,14 +192,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -215,7 +224,7 @@ class lrosa_dsOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_non_retry201_creating400(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_non_retry201_creating400(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a Product with
@@ -244,14 +253,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -273,7 +285,7 @@ class lrosa_dsOperations(object):
         return deserialized
 
     @async_request
-    def put_async_relative_retry400(self, product, custom_headers={}, raw=False, callback=None):
+    def put_async_relative_retry400(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 with
@@ -303,14 +315,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -330,7 +345,7 @@ class lrosa_dsOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_async_relative_retry400(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_async_relative_retry400(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 with
@@ -360,14 +375,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -412,11 +430,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -454,11 +472,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -497,11 +515,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -540,11 +558,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -584,11 +602,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -628,11 +646,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -645,7 +663,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def post_non_retry400(self, product, custom_headers={}, raw=False, callback=None):
+    def post_non_retry400(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 400 with no error body
@@ -672,14 +690,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -692,7 +713,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def begin_post_non_retry400(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post_non_retry400(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 400 with no error body
@@ -719,14 +740,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -739,7 +763,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def post202_non_retry400(self, product, custom_headers={}, raw=False, callback=None):
+    def post202_non_retry400(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 with a location header
@@ -766,14 +790,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -786,7 +813,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def begin_post202_non_retry400(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post202_non_retry400(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 with a location header
@@ -813,14 +840,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -833,7 +863,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def post_async_relative_retry400(self, product, custom_headers={}, raw=False, callback=None):
+    def post_async_relative_retry400(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -862,14 +892,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -882,7 +915,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def begin_post_async_relative_retry400(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post_async_relative_retry400(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -911,14 +944,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -931,7 +967,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def put_error201_no_provisioning_state_payload(self, product, custom_headers={}, raw=False, callback=None):
+    def put_error201_no_provisioning_state_payload(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 201 to the initial request
@@ -960,14 +996,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -989,7 +1028,7 @@ class lrosa_dsOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_error201_no_provisioning_state_payload(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_error201_no_provisioning_state_payload(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 201 to the initial request
@@ -1018,14 +1057,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1047,7 +1089,7 @@ class lrosa_dsOperations(object):
         return deserialized
 
     @async_request
-    def put_async_relative_retry_no_status(self, product, custom_headers={}, raw=False, callback=None):
+    def put_async_relative_retry_no_status(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1078,14 +1120,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1105,7 +1150,7 @@ class lrosa_dsOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_async_relative_retry_no_status(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_async_relative_retry_no_status(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1136,14 +1181,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1163,7 +1211,7 @@ class lrosa_dsOperations(object):
         return deserialized
 
     @async_request
-    def put_async_relative_retry_no_status_payload(self, product, custom_headers={}, raw=False, callback=None):
+    def put_async_relative_retry_no_status_payload(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1194,14 +1242,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1221,7 +1272,7 @@ class lrosa_dsOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_async_relative_retry_no_status_payload(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_async_relative_retry_no_status_payload(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1252,14 +1303,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1305,11 +1359,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -1348,11 +1402,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -1392,11 +1446,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -1436,11 +1490,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -1453,7 +1507,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def post202_no_location(self, product, custom_headers={}, raw=False, callback=None):
+    def post202_no_location(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -1481,14 +1535,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1501,7 +1558,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def begin_post202_no_location(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post202_no_location(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -1529,14 +1586,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1549,7 +1609,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def post_async_relative_retry_no_payload(self, product, custom_headers={}, raw=False, callback=None):
+    def post_async_relative_retry_no_payload(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -1579,14 +1639,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1599,7 +1662,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def begin_post_async_relative_retry_no_payload(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post_async_relative_retry_no_payload(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -1629,14 +1692,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1649,7 +1715,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def put200_invalid_json(self, product, custom_headers={}, raw=False, callback=None):
+    def put200_invalid_json(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1678,14 +1744,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1705,7 +1774,7 @@ class lrosa_dsOperations(object):
         return deserialized
 
     @async_request
-    def begin_put200_invalid_json(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put200_invalid_json(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1734,14 +1803,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1761,7 +1833,7 @@ class lrosa_dsOperations(object):
         return deserialized
 
     @async_request
-    def put_async_relative_retry_invalid_header(self, product, custom_headers={}, raw=False, callback=None):
+    def put_async_relative_retry_invalid_header(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1791,14 +1863,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1818,7 +1893,7 @@ class lrosa_dsOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_async_relative_retry_invalid_header(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_async_relative_retry_invalid_header(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1848,14 +1923,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1875,7 +1953,7 @@ class lrosa_dsOperations(object):
         return deserialized
 
     @async_request
-    def put_async_relative_retry_invalid_json_polling(self, product, custom_headers={}, raw=False, callback=None):
+    def put_async_relative_retry_invalid_json_polling(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1906,14 +1984,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1933,7 +2014,7 @@ class lrosa_dsOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_async_relative_retry_invalid_json_polling(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_async_relative_retry_invalid_json_polling(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 200 to the initial
@@ -1964,14 +2045,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -2018,11 +2102,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -2062,11 +2146,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -2106,11 +2190,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -2150,11 +2234,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -2194,11 +2278,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -2238,11 +2322,11 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -2255,7 +2339,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def post202_retry_invalid_header(self, product, custom_headers={}, raw=False, callback=None):
+    def post202_retry_invalid_header(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -2283,14 +2367,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -2303,7 +2390,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def begin_post202_retry_invalid_header(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post202_retry_invalid_header(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -2331,14 +2418,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -2351,7 +2441,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def post_async_relative_retry_invalid_header(self, product, custom_headers={}, raw=False, callback=None):
+    def post_async_relative_retry_invalid_header(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -2380,14 +2470,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -2400,7 +2493,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def begin_post_async_relative_retry_invalid_header(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post_async_relative_retry_invalid_header(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -2429,14 +2522,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -2449,7 +2545,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def post_async_relative_retry_invalid_json_polling(self, product, custom_headers={}, raw=False, callback=None):
+    def post_async_relative_retry_invalid_json_polling(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -2479,14 +2575,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -2499,7 +2598,7 @@ class lrosa_dsOperations(object):
             return None, response
 
     @async_request
-    def begin_post_async_relative_retry_invalid_json_polling(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post_async_relative_retry_invalid_json_polling(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 202 to the initial
@@ -2529,14 +2628,17 @@ class lrosa_dsOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)

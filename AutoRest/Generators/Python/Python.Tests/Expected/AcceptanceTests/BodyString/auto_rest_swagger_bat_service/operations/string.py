@@ -66,8 +66,8 @@ class string(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -87,7 +87,7 @@ class string(object):
         return deserialized
 
     @async_request
-    def put_null(self, string_body, custom_headers={}, raw=False, callback=None):
+    def put_null(self, string_body=None, custom_headers={}, raw=False, callback=None):
         """
 
         Set string value null
@@ -114,11 +114,14 @@ class string(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(string_body, 'str')
+        if string_body is not None:
+            body_content = self._serialize(string_body, 'str')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -156,8 +159,8 @@ class string(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -204,8 +207,8 @@ class string(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(string_body, 'str')
@@ -248,8 +251,8 @@ class string(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -300,8 +303,8 @@ class string(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(string_body, 'str')
@@ -344,8 +347,8 @@ class string(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -396,8 +399,8 @@ class string(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(string_body, 'str')
@@ -438,8 +441,8 @@ class string(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)

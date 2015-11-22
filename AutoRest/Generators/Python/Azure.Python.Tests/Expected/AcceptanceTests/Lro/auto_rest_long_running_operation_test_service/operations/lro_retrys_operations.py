@@ -43,7 +43,7 @@ class lro_retrysOperations(object):
             return value
 
     @async_request
-    def put201_creating_succeeded200(self, product, custom_headers={}, raw=False, callback=None):
+    def put201_creating_succeeded200(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 500, then a 201 to the
@@ -74,14 +74,17 @@ class lro_retrysOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -103,7 +106,7 @@ class lro_retrysOperations(object):
         return deserialized
 
     @async_request
-    def begin_put201_creating_succeeded200(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put201_creating_succeeded200(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 500, then a 201 to the
@@ -134,14 +137,17 @@ class lro_retrysOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -163,7 +169,7 @@ class lro_retrysOperations(object):
         return deserialized
 
     @async_request
-    def put_async_relative_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def put_async_relative_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 500, then a 200 to the
@@ -194,14 +200,17 @@ class lro_retrysOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -221,7 +230,7 @@ class lro_retrysOperations(object):
         return deserialized
 
     @async_request
-    def begin_put_async_relative_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_put_async_relative_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running put request, service returns a 500, then a 200 to the
@@ -252,14 +261,17 @@ class lro_retrysOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -308,11 +320,11 @@ class lro_retrysOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -363,11 +375,11 @@ class lro_retrysOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -416,11 +428,11 @@ class lro_retrysOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -460,11 +472,11 @@ class lro_retrysOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -504,11 +516,11 @@ class lro_retrysOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -548,11 +560,11 @@ class lro_retrysOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -565,7 +577,7 @@ class lro_retrysOperations(object):
             return None, response
 
     @async_request
-    def post202_retry200(self, product, custom_headers={}, raw=False, callback=None):
+    def post202_retry200(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 500, then a 202 to the
@@ -594,14 +606,17 @@ class lro_retrysOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -614,7 +629,7 @@ class lro_retrysOperations(object):
             return None, response
 
     @async_request
-    def begin_post202_retry200(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post202_retry200(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 500, then a 202 to the
@@ -643,14 +658,17 @@ class lro_retrysOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -663,7 +681,7 @@ class lro_retrysOperations(object):
             return None, response
 
     @async_request
-    def post_async_relative_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def post_async_relative_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 500, then a 202 to the
@@ -693,14 +711,17 @@ class lro_retrysOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -713,7 +734,7 @@ class lro_retrysOperations(object):
             return None, response
 
     @async_request
-    def begin_post_async_relative_retry_succeeded(self, product, custom_headers={}, raw=False, callback=None):
+    def begin_post_async_relative_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
         """
 
         Long running post request, service returns a 500, then a 202 to the
@@ -743,14 +764,17 @@ class lro_retrysOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(product, 'Product')
+        if product is not None:
+            body_content = self._serialize(product, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)

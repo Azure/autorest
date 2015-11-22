@@ -77,7 +77,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             get
             {
                 var sb = new IndentedStringBuilder();
-                sb.Append(base.SetDefaultHeaders).AppendLine("header_parameters['{0}'] = str(uuid.uuid1())", this.ClientRequestIdString);
+                sb.AppendLine("header_parameters['{0}'] = str(uuid.uuid1())", this.ClientRequestIdString).Append(base.SetDefaultHeaders);
                 return sb.ToString();
             }
         }

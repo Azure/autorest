@@ -73,8 +73,8 @@ class implicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -87,7 +87,7 @@ class implicit(object):
             return None, response
 
     @async_request
-    def put_optional_query(self, query_parameter, custom_headers={}, raw=False, callback=None):
+    def put_optional_query(self, query_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test implicitly optional query parameter
@@ -116,8 +116,8 @@ class implicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -130,7 +130,7 @@ class implicit(object):
             return None, response
 
     @async_request
-    def put_optional_header(self, query_parameter, custom_headers={}, raw=False, callback=None):
+    def put_optional_header(self, query_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test implicitly optional header parameter
@@ -157,10 +157,10 @@ class implicit(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         if query_parameter is not None:
             header_parameters['queryParameter'] = self._serialize_data("query_parameter", query_parameter, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -173,7 +173,7 @@ class implicit(object):
             return None, response
 
     @async_request
-    def put_optional_body(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def put_optional_body(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test implicitly optional body parameter
@@ -200,11 +200,14 @@ class implicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, 'str')
+        if body_parameter is not None:
+            body_content = self._serialize(body_parameter, 'str')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -247,8 +250,8 @@ class implicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -288,8 +291,8 @@ class implicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -330,8 +333,8 @@ class implicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)

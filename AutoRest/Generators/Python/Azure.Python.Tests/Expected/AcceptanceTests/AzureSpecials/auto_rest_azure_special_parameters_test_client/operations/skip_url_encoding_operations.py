@@ -75,11 +75,11 @@ class skip_url_encodingOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -124,11 +124,11 @@ class skip_url_encodingOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -174,11 +174,11 @@ class skip_url_encodingOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -221,11 +221,11 @@ class skip_url_encodingOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -238,7 +238,7 @@ class skip_url_encodingOperations(object):
             return None, response
 
     @async_request
-    def get_method_query_null(self, q1, custom_headers={}, raw=False, callback=None):
+    def get_method_query_null(self, q1=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get method with unencoded query parameter with value null
@@ -267,11 +267,11 @@ class skip_url_encodingOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -314,11 +314,11 @@ class skip_url_encodingOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -331,7 +331,7 @@ class skip_url_encodingOperations(object):
             return None, response
 
     @async_request
-    def get_swagger_query_valid(self, q1, custom_headers={}, raw=False, callback=None):
+    def get_swagger_query_valid(self, q1=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get method with unencoded query parameter with value
@@ -363,11 +363,11 @@ class skip_url_encodingOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.get(url, query_parameters)

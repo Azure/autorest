@@ -90,13 +90,13 @@ class parameter_groupingOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         if custom_header is not None:
             header_parameters['customHeader'] = self._serialize_data("custom_header", custom_header, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
         body_content = self._serialize(body, 'int')
@@ -112,7 +112,7 @@ class parameter_groupingOperations(object):
             return None, response
 
     @async_request
-    def post_optional(self, parameter_grouping_post_optional_parameters, custom_headers={}, raw=False, callback=None):
+    def post_optional(self, parameter_grouping_post_optional_parameters=None, custom_headers={}, raw=False, callback=None):
         """
 
         Post a bunch of optional parameters grouped
@@ -149,13 +149,13 @@ class parameter_groupingOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         if custom_header is not None:
             header_parameters['customHeader'] = self._serialize_data("custom_header", custom_header, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -168,7 +168,7 @@ class parameter_groupingOperations(object):
             return None, response
 
     @async_request
-    def post_multiple_parameter_groups(self, first_parameter_group, parameter_grouping_post_multiple_parameter_groups_second_parameter_group, custom_headers={}, raw=False, callback=None):
+    def post_multiple_parameter_groups(self, first_parameter_group=None, parameter_grouping_post_multiple_parameter_groups_second_parameter_group=None, custom_headers={}, raw=False, callback=None):
         """
 
         Post parameters from multiple different parameter groups
@@ -218,15 +218,15 @@ class parameter_groupingOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         if header_one is not None:
             header_parameters['header-one'] = self._serialize_data("header_one", header_one, 'str')
         if header_two is not None:
             header_parameters['header-two'] = self._serialize_data("header_two", header_two, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -239,7 +239,7 @@ class parameter_groupingOperations(object):
             return None, response
 
     @async_request
-    def post_shared_parameter_group_object(self, first_parameter_group, custom_headers={}, raw=False, callback=None):
+    def post_shared_parameter_group_object(self, first_parameter_group=None, custom_headers={}, raw=False, callback=None):
         """
 
         Post parameters with a shared parameter group object
@@ -275,13 +275,13 @@ class parameter_groupingOperations(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
         if header_one is not None:
             header_parameters['header-one'] = self._serialize_data("header_one", header_one, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)

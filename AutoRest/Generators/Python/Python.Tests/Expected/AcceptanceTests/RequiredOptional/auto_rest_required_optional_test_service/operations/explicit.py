@@ -70,8 +70,8 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(body_parameter, 'int')
@@ -87,7 +87,7 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_integer_parameter(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_optional_integer_parameter(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test explicitly optional integer. Please put null.
@@ -114,11 +114,14 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, 'int')
+        if body_parameter is not None:
+            body_content = self._serialize(body_parameter, 'int')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -161,8 +164,8 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(body_parameter, 'IntWrapper')
@@ -178,7 +181,7 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_integer_property(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_optional_integer_property(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test explicitly optional integer. Please put a valid int-wrapper with
@@ -206,11 +209,14 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, 'IntOptionalWrapper')
+        if body_parameter is not None:
+            body_content = self._serialize(body_parameter, 'IntOptionalWrapper')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -253,9 +259,9 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['headerParameter'] = self._serialize_data("header_parameter", header_parameter, 'int')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['headerParameter'] = self._serialize_data("header_parameter", header_parameter, 'int')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -268,7 +274,7 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_integer_header(self, header_parameter, custom_headers={}, raw=False, callback=None):
+    def post_optional_integer_header(self, header_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test explicitly optional integer. Please put a header
@@ -296,10 +302,10 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         if header_parameter is not None:
             header_parameters['headerParameter'] = self._serialize_data("header_parameter", header_parameter, 'int')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -341,8 +347,8 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(body_parameter, 'str')
@@ -358,7 +364,7 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_string_parameter(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_optional_string_parameter(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test explicitly optional string. Please put null.
@@ -385,11 +391,14 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, 'str')
+        if body_parameter is not None:
+            body_content = self._serialize(body_parameter, 'str')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -432,8 +441,8 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(body_parameter, 'StringWrapper')
@@ -449,7 +458,7 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_string_property(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_optional_string_property(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test explicitly optional integer. Please put a valid string-wrapper
@@ -477,11 +486,14 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, 'StringOptionalWrapper')
+        if body_parameter is not None:
+            body_content = self._serialize(body_parameter, 'StringOptionalWrapper')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -524,9 +536,9 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['headerParameter'] = self._serialize_data("header_parameter", header_parameter, 'str')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['headerParameter'] = self._serialize_data("header_parameter", header_parameter, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -539,7 +551,7 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_string_header(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_optional_string_header(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test explicitly optional string. Please put a header 'headerParameter'
@@ -567,10 +579,10 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         if body_parameter is not None:
             header_parameters['bodyParameter'] = self._serialize_data("body_parameter", body_parameter, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -612,8 +624,8 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(body_parameter, 'Product')
@@ -629,7 +641,7 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_class_parameter(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_optional_class_parameter(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test explicitly optional complex object. Please put null.
@@ -656,11 +668,14 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, 'Product')
+        if body_parameter is not None:
+            body_content = self._serialize(body_parameter, 'Product')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -703,8 +718,8 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(body_parameter, 'ClassWrapper')
@@ -720,7 +735,7 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_class_property(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_optional_class_property(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test explicitly optional complex object. Please put a valid
@@ -748,11 +763,14 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, 'ClassOptionalWrapper')
+        if body_parameter is not None:
+            body_content = self._serialize(body_parameter, 'ClassOptionalWrapper')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -794,8 +812,8 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(body_parameter, '[str]')
@@ -811,7 +829,7 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_array_parameter(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_optional_array_parameter(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test explicitly optional array. Please put null.
@@ -838,11 +856,14 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, '[str]')
+        if body_parameter is not None:
+            body_content = self._serialize(body_parameter, '[str]')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -885,8 +906,8 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(body_parameter, 'ArrayWrapper')
@@ -902,7 +923,7 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_array_property(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_optional_array_property(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test explicitly optional array. Please put a valid array-wrapper with
@@ -930,11 +951,14 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, 'ArrayOptionalWrapper')
+        if body_parameter is not None:
+            body_content = self._serialize(body_parameter, 'ArrayOptionalWrapper')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -977,9 +1001,9 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['headerParameter'] = self._serialize_data("header_parameter", header_parameter, '[str]', div=',')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['headerParameter'] = self._serialize_data("header_parameter", header_parameter, '[str]', div=',')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -992,7 +1016,7 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_array_header(self, header_parameter, custom_headers={}, raw=False, callback=None):
+    def post_optional_array_header(self, header_parameter=None, custom_headers={}, raw=False, callback=None):
         """
 
         Test explicitly optional integer. Please put a header
@@ -1020,10 +1044,10 @@ class explicit(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         if header_parameter is not None:
             header_parameters['headerParameter'] = self._serialize_data("header_parameter", header_parameter, '[str]', div=',')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)

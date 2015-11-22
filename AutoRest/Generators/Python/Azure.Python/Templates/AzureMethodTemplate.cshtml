@@ -69,14 +69,24 @@ else
 @EmptyLine
             # Construct headers
             header_parameters = {}
-            @(Model.BuildHeaders("header_parameters"))
-            @(Model.SetDefaultHeaders)
             header_parameters['Content-Type'] = '@(Model.ContentType)'
+            @(Model.SetDefaultHeaders)
+            @(Model.BuildHeaders("header_parameters"))
 @EmptyLine
 @if (Model.RequestBody != null)
 {
             @:# Construct body
+  if (Model.RequestBody.IsRequired)
+  {
             @:body_content = self._serialize(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+  }
+  else
+  {
+            @:if @Model.RequestBody.Name is not None:
+                @:body_content = self._serialize(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+            @:else:
+                @:body_content = None
+  }
 @EmptyLine
 }
 @* Add Credentials *@

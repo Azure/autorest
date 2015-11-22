@@ -60,7 +60,7 @@ class AutoRestResourceFlatteningTestService(object):
             return value
 
     @async_request
-    def put_array(self, resource_array, custom_headers={}, raw=False, callback=None):
+    def put_array(self, resource_array=None, custom_headers={}, raw=False, callback=None):
         """
 
         Put External Resource as an Array
@@ -87,14 +87,17 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(resource_array, '[Resource]')
+        if resource_array is not None:
+            body_content = self._serialize(resource_array, '[Resource]')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -132,11 +135,11 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -156,7 +159,7 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     @async_request
-    def put_dictionary(self, resource_dictionary, custom_headers={}, raw=False, callback=None):
+    def put_dictionary(self, resource_dictionary=None, custom_headers={}, raw=False, callback=None):
         """
 
         Put External Resource as a Dictionary
@@ -183,14 +186,17 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(resource_dictionary, '{FlattenedProduct}')
+        if resource_dictionary is not None:
+            body_content = self._serialize(resource_dictionary, '{FlattenedProduct}')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -229,11 +235,11 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -253,7 +259,7 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     @async_request
-    def put_resource_collection(self, resource_complex_object, custom_headers={}, raw=False, callback=None):
+    def put_resource_collection(self, resource_complex_object=None, custom_headers={}, raw=False, callback=None):
         """
 
         Put External Resource as a ResourceCollection
@@ -281,14 +287,17 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct body
-        body_content = self._serialize(resource_complex_object, 'ResourceCollection')
+        if resource_complex_object is not None:
+            body_content = self._serialize(resource_complex_object, 'ResourceCollection')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -327,11 +336,11 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
             header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.get(url, query_parameters)

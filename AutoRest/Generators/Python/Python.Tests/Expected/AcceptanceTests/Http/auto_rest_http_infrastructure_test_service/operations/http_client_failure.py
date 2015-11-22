@@ -68,8 +68,8 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.head(url, query_parameters)
@@ -109,8 +109,8 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -123,7 +123,7 @@ class http_client_failure(object):
             return None, response
 
     @async_request
-    def put400(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def put400(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 400 status code - should be represented in the client as an
@@ -152,11 +152,14 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -169,7 +172,7 @@ class http_client_failure(object):
             return None, response
 
     @async_request
-    def patch400(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def patch400(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 400 status code - should be represented in the client as an
@@ -198,11 +201,14 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
@@ -215,7 +221,7 @@ class http_client_failure(object):
             return None, response
 
     @async_request
-    def post400(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def post400(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 400 status code - should be represented in the client as an
@@ -244,11 +250,14 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -261,7 +270,7 @@ class http_client_failure(object):
             return None, response
 
     @async_request
-    def delete400(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def delete400(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 400 status code - should be represented in the client as an
@@ -290,11 +299,14 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -334,8 +346,8 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.head(url, query_parameters)
@@ -375,8 +387,8 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -416,8 +428,8 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -430,7 +442,7 @@ class http_client_failure(object):
             return None, response
 
     @async_request
-    def put404(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def put404(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 404 status code - should be represented in the client as an
@@ -459,11 +471,14 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -476,7 +491,7 @@ class http_client_failure(object):
             return None, response
 
     @async_request
-    def patch405(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def patch405(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 405 status code - should be represented in the client as an
@@ -505,11 +520,14 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
@@ -522,7 +540,7 @@ class http_client_failure(object):
             return None, response
 
     @async_request
-    def post406(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def post406(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 406 status code - should be represented in the client as an
@@ -551,11 +569,14 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -568,7 +589,7 @@ class http_client_failure(object):
             return None, response
 
     @async_request
-    def delete407(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def delete407(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 407 status code - should be represented in the client as an
@@ -597,11 +618,14 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -614,7 +638,7 @@ class http_client_failure(object):
             return None, response
 
     @async_request
-    def put409(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def put409(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 409 status code - should be represented in the client as an
@@ -643,11 +667,14 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -687,8 +714,8 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.head(url, query_parameters)
@@ -728,8 +755,8 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -769,8 +796,8 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -783,7 +810,7 @@ class http_client_failure(object):
             return None, response
 
     @async_request
-    def put413(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def put413(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 413 status code - should be represented in the client as an
@@ -812,11 +839,14 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -829,7 +859,7 @@ class http_client_failure(object):
             return None, response
 
     @async_request
-    def patch414(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def patch414(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 414 status code - should be represented in the client as an
@@ -858,11 +888,14 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
@@ -875,7 +908,7 @@ class http_client_failure(object):
             return None, response
 
     @async_request
-    def post415(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def post415(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 415 status code - should be represented in the client as an
@@ -904,11 +937,14 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -948,8 +984,8 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -962,7 +998,7 @@ class http_client_failure(object):
             return None, response
 
     @async_request
-    def delete417(self, boolean_value, custom_headers={}, raw=False, callback=None):
+    def delete417(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Return 417 status code - should be represented in the client as an
@@ -991,11 +1027,14 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(boolean_value, 'bool')
+        if boolean_value is not None:
+            body_content = self._serialize(boolean_value, 'bool')
+        else:
+            body_content = None
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
@@ -1035,8 +1074,8 @@ class http_client_failure(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.head(url, query_parameters)

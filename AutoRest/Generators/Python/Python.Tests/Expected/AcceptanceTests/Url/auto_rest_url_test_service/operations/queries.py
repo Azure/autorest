@@ -41,7 +41,7 @@ class queries(object):
             return value
 
     @async_request
-    def get_boolean_true(self, bool_query, custom_headers={}, raw=False, callback=None):
+    def get_boolean_true(self, bool_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get true Boolean value on path
@@ -70,8 +70,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -84,7 +84,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_boolean_false(self, bool_query, custom_headers={}, raw=False, callback=None):
+    def get_boolean_false(self, bool_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get false Boolean value on path
@@ -113,8 +113,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -127,7 +127,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_boolean_null(self, bool_query, custom_headers={}, raw=False, callback=None):
+    def get_boolean_null(self, bool_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null Boolean value on query (query string should be absent)
@@ -156,8 +156,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -170,7 +170,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_int_one_million(self, int_query, custom_headers={}, raw=False, callback=None):
+    def get_int_one_million(self, int_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '1000000' integer value
@@ -199,8 +199,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -213,7 +213,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_int_negative_one_million(self, int_query, custom_headers={}, raw=False, callback=None):
+    def get_int_negative_one_million(self, int_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '-1000000' integer value
@@ -242,8 +242,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -256,7 +256,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_int_null(self, int_query, custom_headers={}, raw=False, callback=None):
+    def get_int_null(self, int_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null integer value (no query parameter)
@@ -285,8 +285,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -299,7 +299,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_ten_billion(self, long_query, custom_headers={}, raw=False, callback=None):
+    def get_ten_billion(self, long_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '10000000000' 64 bit integer value
@@ -328,8 +328,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -342,7 +342,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_negative_ten_billion(self, long_query, custom_headers={}, raw=False, callback=None):
+    def get_negative_ten_billion(self, long_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '-10000000000' 64 bit integer value
@@ -371,8 +371,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -385,7 +385,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def get_long_null(self, long_query, custom_headers={}, raw=False, callback=None):
+    def get_long_null(self, long_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get 'null 64 bit integer value (no query param in uri)
@@ -414,8 +414,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -428,7 +428,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def float_scientific_positive(self, float_query, custom_headers={}, raw=False, callback=None):
+    def float_scientific_positive(self, float_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '1.034E+20' numeric value
@@ -457,8 +457,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -471,7 +471,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def float_scientific_negative(self, float_query, custom_headers={}, raw=False, callback=None):
+    def float_scientific_negative(self, float_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '-1.034E-20' numeric value
@@ -500,8 +500,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -514,7 +514,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def float_null(self, float_query, custom_headers={}, raw=False, callback=None):
+    def float_null(self, float_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null numeric value (no query parameter)
@@ -543,8 +543,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -557,7 +557,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def double_decimal_positive(self, double_query, custom_headers={}, raw=False, callback=None):
+    def double_decimal_positive(self, double_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '9999999.999' numeric value
@@ -586,8 +586,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -600,7 +600,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def double_decimal_negative(self, double_query, custom_headers={}, raw=False, callback=None):
+    def double_decimal_negative(self, double_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '-9999999.999' numeric value
@@ -629,8 +629,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -643,7 +643,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def double_null(self, double_query, custom_headers={}, raw=False, callback=None):
+    def double_null(self, double_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null numeric value (no query parameter)
@@ -672,8 +672,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -686,7 +686,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def string_unicode(self, string_query, custom_headers={}, raw=False, callback=None):
+    def string_unicode(self, string_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
@@ -716,8 +716,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -730,7 +730,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def string_url_encoded(self, string_query, custom_headers={}, raw=False, callback=None):
+    def string_url_encoded(self, string_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get 'begin!*'();:@ &=+$,/?#[]end
@@ -761,8 +761,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -775,7 +775,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def string_empty(self, string_query, custom_headers={}, raw=False, callback=None):
+    def string_empty(self, string_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get ''
@@ -805,8 +805,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -819,7 +819,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def string_null(self, string_query, custom_headers={}, raw=False, callback=None):
+    def string_null(self, string_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null (no query parameter in url)
@@ -848,8 +848,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -862,7 +862,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def enum_valid(self, enum_query, custom_headers={}, raw=False, callback=None):
+    def enum_valid(self, enum_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get using uri with query parameter 'green color'
@@ -892,8 +892,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -906,7 +906,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def enum_null(self, enum_query, custom_headers={}, raw=False, callback=None):
+    def enum_null(self, enum_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null (no query parameter in url)
@@ -936,8 +936,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -950,7 +950,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def byte_multi_byte(self, byte_query, custom_headers={}, raw=False, callback=None):
+    def byte_multi_byte(self, byte_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -980,8 +980,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -994,7 +994,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def byte_empty(self, byte_query, custom_headers={}, raw=False, callback=None):
+    def byte_empty(self, byte_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '' as byte array
@@ -1023,8 +1023,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1037,7 +1037,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def byte_null(self, byte_query, custom_headers={}, raw=False, callback=None):
+    def byte_null(self, byte_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null as byte array (no query parameters in uri)
@@ -1066,8 +1066,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1080,7 +1080,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def date_valid(self, date_query, custom_headers={}, raw=False, callback=None):
+    def date_valid(self, date_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '2012-01-01' as date
@@ -1109,8 +1109,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1123,7 +1123,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def date_null(self, date_query, custom_headers={}, raw=False, callback=None):
+    def date_null(self, date_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null as date - this should result in no query parameters in uri
@@ -1152,8 +1152,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1166,7 +1166,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def date_time_valid(self, date_time_query, custom_headers={}, raw=False, callback=None):
+    def date_time_valid(self, date_time_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get '2012-01-01T01:01:01Z' as date-time
@@ -1195,8 +1195,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1209,7 +1209,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def date_time_null(self, date_time_query, custom_headers={}, raw=False, callback=None):
+    def date_time_null(self, date_time_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get null as date-time, should result in no query parameters in uri
@@ -1238,8 +1238,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1252,7 +1252,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def array_string_csv_valid(self, array_query, custom_headers={}, raw=False, callback=None):
+    def array_string_csv_valid(self, array_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
@@ -1283,8 +1283,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1297,7 +1297,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def array_string_csv_null(self, array_query, custom_headers={}, raw=False, callback=None):
+    def array_string_csv_null(self, array_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get a null array of string using the csv-array format
@@ -1326,8 +1326,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1340,7 +1340,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def array_string_csv_empty(self, array_query, custom_headers={}, raw=False, callback=None):
+    def array_string_csv_empty(self, array_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get an empty array [] of string using the csv-array format
@@ -1370,8 +1370,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1384,7 +1384,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def array_string_ssv_valid(self, array_query, custom_headers={}, raw=False, callback=None):
+    def array_string_ssv_valid(self, array_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
@@ -1415,8 +1415,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1429,7 +1429,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def array_string_tsv_valid(self, array_query, custom_headers={}, raw=False, callback=None):
+    def array_string_tsv_valid(self, array_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
@@ -1460,8 +1460,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1474,7 +1474,7 @@ class queries(object):
             return None, response
 
     @async_request
-    def array_string_pipes_valid(self, array_query, custom_headers={}, raw=False, callback=None):
+    def array_string_pipes_valid(self, array_query=None, custom_headers={}, raw=False, callback=None):
         """
 
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
@@ -1505,8 +1505,8 @@ class queries(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)

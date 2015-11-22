@@ -69,9 +69,9 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['User-Agent'] = self._serialize_data("user_agent", user_agent, 'str')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['User-Agent'] = self._serialize_data("user_agent", user_agent, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -109,8 +109,8 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -151,9 +151,9 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['Content-Type'] = self._serialize_data("content_type", content_type, 'str')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['Content-Type'] = self._serialize_data("content_type", content_type, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -191,8 +191,8 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -236,10 +236,10 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
         header_parameters['value'] = self._serialize_data("value", value, 'int')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -280,9 +280,9 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -326,10 +326,10 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
         header_parameters['value'] = self._serialize_data("value", value, 'long')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -370,9 +370,9 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -416,10 +416,10 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
         header_parameters['value'] = self._serialize_data("value", value, 'float')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -460,9 +460,9 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -506,10 +506,10 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
         header_parameters['value'] = self._serialize_data("value", value, 'float')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -550,9 +550,9 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -596,10 +596,10 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
         header_parameters['value'] = self._serialize_data("value", value, 'bool')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -640,9 +640,9 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -655,7 +655,7 @@ class header(object):
             return None, response
 
     @async_request
-    def param_string(self, scenario, value, custom_headers={}, raw=False, callback=None):
+    def param_string(self, scenario, value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Send a post request with header values "scenario": "valid", "value":
@@ -688,11 +688,11 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
         if value is not None:
             header_parameters['value'] = self._serialize_data("value", value, 'str')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -734,9 +734,9 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -781,10 +781,10 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
         header_parameters['value'] = self._serialize_data("value", value, 'date')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -825,9 +825,9 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -873,10 +873,10 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
         header_parameters['value'] = self._serialize_data("value", value, 'iso-8601')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -918,9 +918,9 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -933,7 +933,7 @@ class header(object):
             return None, response
 
     @async_request
-    def param_datetime_rfc1123(self, scenario, value, custom_headers={}, raw=False, callback=None):
+    def param_datetime_rfc1123(self, scenario, value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Send a post request with header values "scenario": "valid", "value":
@@ -966,11 +966,11 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
         if value is not None:
             header_parameters['value'] = self._serialize_data("value", value, 'rfc-1123')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1012,9 +1012,9 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1059,10 +1059,10 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
         header_parameters['value'] = self._serialize_data("value", value, 'duration')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1103,9 +1103,9 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1149,10 +1149,10 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
         header_parameters['value'] = self._serialize_data("value", value, 'bytearray')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1193,9 +1193,9 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1208,7 +1208,7 @@ class header(object):
             return None, response
 
     @async_request
-    def param_enum(self, scenario, value, custom_headers={}, raw=False, callback=None):
+    def param_enum(self, scenario, value=None, custom_headers={}, raw=False, callback=None):
         """
 
         Send a post request with header values "scenario": "valid", "value":
@@ -1240,11 +1240,11 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
         header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
         if value is not None:
             header_parameters['value'] = self._serialize_data("value", value, 'GreyscaleColors')
-        header_parameters.update(custom_headers)
-        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1285,9 +1285,9 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
+        header_parameters['scenario'] = self._serialize_data("scenario", scenario, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1326,8 +1326,8 @@ class header(object):
 
         # Construct headers
         header_parameters = {}
-        header_parameters.update(custom_headers)
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
