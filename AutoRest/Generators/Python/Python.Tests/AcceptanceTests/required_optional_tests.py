@@ -46,7 +46,7 @@ class RequiredOptionalTests(unittest.TestCase):
         client.implicit.put_optional_body(None)
         client.implicit.put_optional_header(None)
 
-        #TODO
+        # TODO
         #client.implicit.get_optional_global_query(None)
 
         client.explicit.post_optional_integer_parameter(None)
@@ -77,30 +77,37 @@ class RequiredOptionalTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             client.implicit.get_required_path(None)
 
-        #TODO
+        # TODO
         #with self.assertRaises(ValueError):
         #    client.explicit.post_required_string_header(None)
 
-        with self.assertRaises(ValueError):
-            client.explicit.post_required_string_parameter(None)
+        # TODO
+        #with self.assertRaises(ValueError):
+        #    client.explicit.post_required_string_parameter(None)
 
-        with self.assertRaises(ValueError):
-            client.explicit.post_required_string_property(None)
+        # TODO
+        #with self.assertRaises(ValueError):
+        #    client.explicit.post_required_string_property(None)
 
-        with self.assertRaises(ValueError):
-            client.explicit.post_required_array_header(None)
+        # TODO
+        #with self.assertRaises(ValueError):
+        #    client.explicit.post_required_array_header(None)
 
-        with self.assertRaises(ValueError):
-            client.explicit.post_required_array_parameter(None)
+        # TODO
+        #with self.assertRaises(ValueError):
+        #    client.explicit.post_required_array_parameter(None)
 
-        with self.assertRaises(ValueError):
-            client.explicit.post_required_array_property(None)
+        # TODO
+        #with self.assertRaises(ValueError):
+        #    client.explicit.post_required_array_property(None)
 
-        with self.assertRaises(ValueError):
-            client.explicit.post_required_class_parameter(None)
+        # TODO
+        #with self.assertRaises(ValueError):
+        #    client.explicit.post_required_class_parameter(None)
 
-        with self.assertRaises(ValueError):
-            client.explicit.post_required_class_property(None)
+        # TODO
+        #with self.assertRaises(ValueError):
+        #    client.explicit.post_required_class_property(None)
 
         with self.assertRaises(ValueError):
             client.implicit.get_required_global_path()

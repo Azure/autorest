@@ -782,7 +782,7 @@ class multiple_responses(object):
         response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202, 204]:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -821,7 +821,7 @@ class multiple_responses(object):
         response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202, 204]:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -860,7 +860,7 @@ class multiple_responses(object):
         response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202, 204]:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -899,7 +899,7 @@ class multiple_responses(object):
         response = self._client.send(request, header_parameters)
 
         if response.status_code not in [202, 204]:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1098,7 +1098,7 @@ class multiple_responses(object):
         response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1137,7 +1137,7 @@ class multiple_responses(object):
         response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1176,7 +1176,7 @@ class multiple_responses(object):
         response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1215,7 +1215,7 @@ class multiple_responses(object):
         response = self._client.send(request, header_parameters)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1256,7 +1256,7 @@ class multiple_responses(object):
         response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         deserialized = None
 
@@ -1303,7 +1303,7 @@ class multiple_responses(object):
         response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         deserialized = None
 
@@ -1350,7 +1350,7 @@ class multiple_responses(object):
         response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         deserialized = None
 
@@ -1398,7 +1398,7 @@ class multiple_responses(object):
         response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         deserialized = None
 
@@ -1445,7 +1445,7 @@ class multiple_responses(object):
         response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         deserialized = None
 
@@ -1492,7 +1492,7 @@ class multiple_responses(object):
         response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         deserialized = None
 
@@ -1539,7 +1539,7 @@ class multiple_responses(object):
         response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200]:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         deserialized = None
 
