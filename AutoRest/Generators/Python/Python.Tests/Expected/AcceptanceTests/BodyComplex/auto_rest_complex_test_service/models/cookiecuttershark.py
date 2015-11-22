@@ -10,25 +10,16 @@
 # --------------------------------------------------------------------------
 
 from msrest.serialization import Model
-from .fish import Fish
+from .shark import Shark
 
 
-class Shark(Fish):
+class Cookiecuttershark(Shark):
 
-    _required = ['birthday']
+    _required = []
 
     _attribute_map = {
-        'age': {'key': 'age', 'type': 'int'},
-        'birthday': {'key': 'birthday', 'type': 'iso-8601'},
-    }
-
-    _subtype_map = {
-        'fishtype': {'sawshark': 'Sawshark', 'goblin': 'Goblinshark', 'cookiecuttershark': 'Cookiecuttershark'}
     }
 
     def __init__(self, *args, **kwargs):
 
-        self.age = None
-        self.birthday = None
-
-        super(Shark, self).__init__(*args, **kwargs)
+        super(Cookiecuttershark, self).__init__(*args, **kwargs)

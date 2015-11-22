@@ -20,6 +20,7 @@ from .salmon import Salmon
 from .shark import Shark
 from .sawshark import Sawshark
 from .goblinshark import Goblinshark
+from .cookiecuttershark import Cookiecuttershark
 from .int_wrapper import IntWrapper
 from .long_wrapper import LongWrapper
 from .float_wrapper import FloatWrapper
