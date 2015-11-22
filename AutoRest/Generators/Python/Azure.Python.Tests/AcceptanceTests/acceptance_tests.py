@@ -81,7 +81,7 @@ class AcceptanceTests(unittest.TestCase):
 
     def test_url(self):
 
-        #TODO: investigate how to use TokenAuth in testing
+        
         cred = TokenAuthentication("client_id", {"my_token":123})
         config = MicrosoftAzureTestUrlConfiguration(None, str(uuid.uuid1()), "http://localhost:3000")
         config.log_level = 10
@@ -161,7 +161,7 @@ class AcceptanceTests(unittest.TestCase):
         client.skip_url_encoding.get_method_query_null()
         client.skip_url_encoding.get_method_query_null(None)
 
-    @unittest.skip("For now, skip this test since it'll always fail")
+    #@unittest.skip("For now, skip this test since it'll always fail")
     def test_ensure_coverage(self):
 
         config = AutoRestReportServiceForAzureConfiguration(None, "http://localhost:3000")
