@@ -54,7 +54,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -101,7 +102,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -149,7 +151,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(array_body, '{str}')
@@ -192,7 +195,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -239,7 +243,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -286,7 +291,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -333,7 +339,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -381,7 +388,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -430,7 +438,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(array_body, '{bool}')
@@ -473,7 +482,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -520,7 +530,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -567,7 +578,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -615,7 +627,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(array_body, '{int}')
@@ -658,7 +671,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -705,7 +719,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -752,7 +767,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -800,7 +816,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(array_body, '{long}')
@@ -843,7 +860,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -890,7 +908,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -937,7 +956,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -985,7 +1005,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(array_body, '{float}')
@@ -1028,7 +1049,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1075,7 +1097,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1122,7 +1145,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1170,7 +1194,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(array_body, '{float}')
@@ -1213,7 +1238,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1260,7 +1286,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1307,7 +1334,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1355,7 +1383,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(array_body, '{str}')
@@ -1398,7 +1427,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1445,7 +1475,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1493,7 +1524,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1542,7 +1574,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(array_body, '{date}')
@@ -1586,7 +1619,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1633,7 +1667,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1681,7 +1716,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1730,7 +1766,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(array_body, '{iso-8601}')
@@ -1773,7 +1810,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1821,7 +1859,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1870,7 +1909,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -1919,7 +1959,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(array_body, '{rfc-1123}')
@@ -1963,7 +2004,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2011,7 +2053,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(array_body, '{duration}')
@@ -2055,7 +2098,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2104,7 +2148,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(array_body, '{bytearray}')
@@ -2148,7 +2193,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2195,7 +2241,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2242,7 +2289,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2290,7 +2338,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2338,7 +2387,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2387,7 +2437,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2437,7 +2488,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(array_body, '{Widget}')
@@ -2480,7 +2532,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2527,7 +2580,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2575,7 +2629,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2623,7 +2678,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2671,7 +2727,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2720,7 +2777,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(array_body, '{[str]}')
@@ -2763,7 +2821,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2811,7 +2870,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2860,7 +2920,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2909,7 +2970,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -2959,7 +3021,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -3010,7 +3073,8 @@ class dictionary(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         body_content = self._serialize(array_body, '{{str}}')

@@ -55,7 +55,8 @@ class http_server_failure(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.head(url, query_parameters)
@@ -96,7 +97,8 @@ class http_server_failure(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -139,7 +141,8 @@ class http_server_failure(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         if boolean_value is not None:
@@ -188,7 +191,8 @@ class http_server_failure(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         if boolean_value is not None:
