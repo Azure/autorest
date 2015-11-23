@@ -7,8 +7,18 @@
   },
   "version": "1.2.0",
   "description": "Client Runtime for nodeJS client libraries generated using AutoRest",
-  "tags": ["node", "microsoft", "autorest", "clientruntime"],
-  "keywords": ["node", "microsoft", "autorest", "clientruntime"],
+  "tags": [
+    "node",
+    "microsoft",
+    "autorest",
+    "clientruntime"
+  ],
+  "keywords": [
+    "node",
+    "microsoft",
+    "autorest",
+    "clientruntime"
+  ],
   "main": "./lib/msRest.js",
   "typings": "./lib/index.d.ts",
   "engines": {
@@ -21,19 +31,20 @@
     }
   ],
   "dependencies": {
-    "underscore": "1.4.x",
-    "tunnel": "~0.0.2",
-    "request": "2.52.0",
-    "validator": "~3.1.0",
     "duplexer": "~0.1.1",
+    "superagent": "^1.4.0",
     "through": "~2.3.4",
-    "tough-cookie": "*"
+    "tunnel": "~0.0.2",
+    "underscore": "1.4.x",
+    "url-parse": "^1.0.4",
+    "validator": "~3.1.0"
   },
   "devDependencies": {
     "jshint": "2.6.3",
-    "xunit-file": "0.0.5",
     "mocha": "2.2.5",
-    "should": "5.2.0"
+    "should": "5.2.0",
+    "superagent-mock": "^1.7.0",
+    "xunit-file": "0.0.5"
   },
   "homepage": "https://github.com/Azure/AutoRest",
   "repository": {
@@ -46,6 +57,7 @@
   "scripts": {
     "test": "npm install && npm -s run-script jshint && npm -s run-script unit",
     "unit": "node test/unit.js testlist.txt",
+    "test-browser": "zuul -- tests/*.js",
     "jshint": "jshint lib --reporter=jslint"
   }
 }

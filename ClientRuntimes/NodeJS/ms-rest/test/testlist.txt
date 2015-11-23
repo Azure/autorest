@@ -4,3 +4,4 @@ retryPolicyTests.js
 proxyFilterTests.js
 logFilterTests.js
 redirectFilterTests.js
+requestTests.js
