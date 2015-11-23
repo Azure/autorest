@@ -69,17 +69,20 @@ else
 @EmptyLine
     def __init__(self, *args, **kwargs):
 @EmptyLine
-@{
-  if (propertyList.Count > 0)
+@if (propertyList.Count > 0)
+{
+  for (int i = 0; i < propertyList.Count; i++) 
   {
-    for (int i = 0; i < propertyList.Count; i++) 
-    {
         @:@(Model.InitializeProperty("self", propertyList[i]))
-    }
-@EmptyLine
   }
+@EmptyLine
 }
         super(@(Model.Name), self).__init__(*args, **kwargs)
+@if (Model.NeedsPolymorphicConverter)
+{
+@EmptyLine
+        @:self.@Model.BasePolymorphicDiscriminator = '@Model.SerializedName'
+}
 @if (Model.IsException)
 {
 @EmptyLine

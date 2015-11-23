@@ -28,3 +28,5 @@ class Salmon(Fish):
         self.iswild = None
 
         super(Salmon, self).__init__(*args, **kwargs)
+
+        self.fishtype = 'salmon'
