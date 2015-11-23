@@ -156,9 +156,10 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                 throw new ArgumentNullException("scope");
             }
 
+            string nullValue = "None";
+            /*
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
-            string nullValue = "None";
             if (sequence != null)
             {
                 nullValue = "[]";
@@ -167,7 +168,7 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             {
                 nullValue = "{}";
             }
-
+            */
             return string.Format(CultureInfo.InvariantCulture, "{0} = {1}", objectReference, nullValue);
         }
 

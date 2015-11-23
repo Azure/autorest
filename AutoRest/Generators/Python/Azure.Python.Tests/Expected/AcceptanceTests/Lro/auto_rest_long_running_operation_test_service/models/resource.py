@@ -10,10 +10,9 @@
 # --------------------------------------------------------------------------
 
 from msrest.serialization import Model
-from .base_resource import BaseResource
 
 
-class Resource(BaseResource):
+class Resource(Model):
 
     _required = []
 
@@ -29,7 +28,7 @@ class Resource(BaseResource):
 
         self.id = None
         self.type = None
-        self.tags = {}
+        self.tags = None
         self.location = None
         self.name = None
 

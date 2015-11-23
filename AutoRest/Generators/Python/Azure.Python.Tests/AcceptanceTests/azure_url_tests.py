@@ -34,14 +34,14 @@ class AzureUrlTests(unittest.TestCase):
         sub_id = str(uuid4())
         client_id = str(uuid4())
         
-        config = MicrosoftAzureTestUrlConfiguration(sub_id, base_url="http://localhost:3000")
+        config = MicrosoftAzureTestUrlConfiguration(None, sub_id, base_url="http://localhost:3000")
 
         # TODO: investigate how to use TokenAuth in testing
         #creds = UserPassCredentials(config, client_id, "user", "password")
         #creds.get_token()
 
         config.log_level = 10
-        client = MicrosoftAzureTestUrl(None, config)
+        client = MicrosoftAzureTestUrl(config)
 
         group = client.group.get_sample_resource_group("testgoup101")
         self.assertEqual(group.name, "testgroup101")

@@ -190,6 +190,35 @@ class ClientRequest(requests.Request):
         return kwargs
 
 
+class ClientRetry(Retry):
+
+    def __init__(self, log_name=None, **kwargs):
+        self._log = logging.getLogger(log_name)
+        return super(ClientRetry, self).__init__(**kwargs)
+
+    def increment(self, method=None, url=None, response=None,
+                  error=None, _pool=None, _stacktrace=None):
+
+        # TODO: This is a hacky way of updating the retry headers
+        response_cookie = response.getheader("Set-Cookie")
+        if response_cookie:
+            _pool.proxy_headers['cookie'] = response_cookie
+
+        return super(ClientRetry, self).increment(
+            method, url, response, error, _pool, _stacktrace)
+
+    def is_forced_retry(self, method, status_code):
+        self._log.debug(
+            "Received status: {} for method {}".format(status_code, method))
+        output = super(ClientRetry, self).is_forced_retry(method, status_code)
+
+        self._log.debug("Is forced retry: {0}".format(output))
+        return output
+
+    def is_exhausted(self):
+        return super(ClientRetry, self).is_exhausted()
+
+
 class ClientRetryPolicy(object):
     """
     Wrapper for urllib Retry object.
@@ -198,19 +227,21 @@ class ClientRetryPolicy(object):
     def __init__(self, log_name):
 
         self._log = logging.getLogger(log_name)
-        self.policy = Retry()
+        self.policy = ClientRetry(log_name)
         self.policy.total = 3
         self.policy.connect = 3
         self.policy.read = 3
         self.policy.backoff_factor = 0.8
         self.policy.BACKOFF_MAX = 90
 
-        safe_codes = [i for i in range(501) if i != 408]
+        safe_codes = [i for i in range(500) if i != 408]
         safe_codes.append(501)
         safe_codes.append(505)
 
         retry_codes = [i for i in range(999) if i not in safe_codes]
         self.policy.status_forcelist = retry_codes
+        self.policy.method_whitelist = ['HEAD', 'TRACE', 'GET', 'PUT',
+                                        'OPTIONS', 'DELETE', 'POST', 'PATCH']
 
     def __call__(self):
         self._log.debug("Configuring retry: max_retries={}, backoff_factor={}"

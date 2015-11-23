@@ -30,14 +30,14 @@ class HeadTests(unittest.TestCase):
 
     def test_head(self):
         
-        config = AutoRestHeadTestServiceConfiguration(base_url="http://localhost:3000")
+        config = AutoRestHeadTestServiceConfiguration(None, base_url="http://localhost:3000")
 
         # TODO: investigate how to use TokenAuth in testing
         #creds = UserPassCredentials(config, client_id, "user", "password")
         #creds.get_token()
 
         config.log_level = 10
-        client = AutoRestHeadTestService(None, config)
+        client = AutoRestHeadTestService(config)
 
         # TODO - Not generating any response
         #self.assertTrue(client.http_success.head200())

@@ -24,7 +24,7 @@ class Product(Model):
 
     def __init__(self, *args, **kwargs):
 
-        self.display_names = []
+        self.display_names = None
         self.capacity = None
         self.image = None
 

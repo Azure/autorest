@@ -26,3 +26,5 @@ class Sawshark(Shark):
         self.picture = None
 
         super(Sawshark, self).__init__(*args, **kwargs)
+
+        self.fishtype = 'sawshark'

@@ -31,7 +31,7 @@ class Fish(Model):
 
         self.species = None
         self.length = None
-        self.siblings = []
+        self.siblings = None
         self.fishtype = None
 
         super(Fish, self).__init__(*args, **kwargs)

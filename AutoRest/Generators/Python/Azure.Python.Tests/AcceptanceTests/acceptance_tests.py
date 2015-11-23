@@ -79,47 +79,10 @@ class AcceptanceTests(unittest.TestCase):
         client.parameter_grouping.post_shared_parameter_group_object(firstGroup)
 
 
-    def test_url(self):
 
-        
-        cred = TokenAuthentication("client_id", {"my_token":123})
-        config = MicrosoftAzureTestUrlConfiguration(None, str(uuid.uuid1()), base_url="http://localhost:3000")
-        config.log_level = 10
-        client = MicrosoftAzureTestUrl(config)
-        group = client.group.get_sample_resource_group("testgroup101")
-        self.assertEqual("testgroup101", group.name)
-        self.assertEqual("West US", group.location)
 
-    def test_duration(self):
 
-        config = AutoRestDurationTestServiceConfiguration(None, base_url="http://localhost:3000")
-        config.log_level = 10
-        client = AutoRestDurationTestService(config)
-        self.assertIsNone(client.duration.get_null())
-        with self.assertRaises(DeserializationError):
-            client.duration.get_invalid()
 
-        client.duration.get_positive_duration();
-        t = datetime.timedelta(days = 123, hours = 22, minutes = 14, seconds = 12, milliseconds = 11)
-        client.duration.put_positive_duration(t)
-
-    def test_xms_request_client_id(self):
-
-        validSubscription = '1234-5678-9012-3456'
-        validClientId = '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
-        cred = TokenAuthentication(validSubscription, {"my_token":123})
-        config = AutoRestAzureSpecialParametersTestClientConfiguration(None, validSubscription, base_url="http://localhost:3000")
-        config.log_level = 10
-        client = AutoRestAzureSpecialParametersTestClient(config)
-
-        custom_headers = {"x-ms-client-request-id": validClientId }
-        result1 = client.xms_client_request_id.get(custom_headers = custom_headers)
-        #TODO: investigate on return default request_id as other language
-        #self.assertEqual("123", result1.request_id)
-
-        result2 = client.xms_client_request_id.param_get(validClientId)
-        #TODO: investigate on return default request_id as other language
-        #self.assertEqual("123", result2.request_id)
 
     def test_azure_special_parameters(self):
 

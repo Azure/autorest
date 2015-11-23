@@ -39,19 +39,20 @@ var paging = function(coverage) {
 
   router.get('/single', function(req, res, next) {
     coverage["PagingSingle"]++;
-    res.status(200).end('{ "values" : [ {"id": 1, "name": "Product" }]}');
+    res.status(200).end('{ "values" : [ {"properties":{"id": 1, "name": "Product" }}]}');
   });
 
   router.get('/multiple', function(req, res, next) {
+    
     coverage["PagingMultiple"]++;
-    res.status(200).end('{ "values" : [ {"id": 1, "name": "Product" }], "nextLink":"' + 'http://localhost.:' + utils.getPort() + '/paging/multiple/page/2" }')
+    res.status(200).end('{ "values" : [ {"properties":{"id": 1, "name": "Product" }}], "nextLink":"' + 'http://localhost.:' + utils.getPort() + '/paging/multiple/page/2" }')
   });
 
   router.get('/multiple/page/:pagenumber', function(req, res, next) {
     if (req.params.pagenumber < 10) {
-      res.status(200).end('{ "values": [ {"id" : ' + req.params.pagenumber + ', "name": "product"} ], "nextLink": "' + 'http://localhost.:' + utils.getPort() + '/paging/multiple/page/' + (++req.params.pagenumber) + '"}');
+      res.status(200).end('{ "values": [ {"properties":{"id" : ' + req.params.pagenumber + ', "name": "product"}} ], "nextLink": "' + 'http://localhost.:' + utils.getPort() + '/paging/multiple/page/' + (++req.params.pagenumber) + '"}');
     } else {
-      res.status(200).end('{"values": [ {"id" : ' + req.params.pagenumber + ', "name": "product"} ]}');
+      res.status(200).end('{"values": [ {"properties":{"id" : ' + req.params.pagenumber + ', "name": "product"}} ]}');
     }
   });
 
@@ -63,12 +64,12 @@ var paging = function(coverage) {
     } else {
       coverage[scenario]++;
       removeScenarioCookie(res);
-      res.status(200).end('{ "values" : [ {"id": 1, "name": "Product" }], "nextLink": "' + 'http://localhost.:' + utils.getPort() + '/paging/multiple/page/2" }')
+      res.status(200).end('{ "values" : [ {"properties":{"id": 1, "name": "Product" }}], "nextLink": "' + 'http://localhost.:' + utils.getPort() + '/paging/multiple/page/2" }')
     }
   });
 
   router.get('/multiple/retrysecond', function(req, res, next) {
-    res.status(200).end('{ "values" : [ {"id": 1, "name": "Product" }], "nextLink": "' + 'http://localhost.:' + utils.getPort() + '/paging/multiple/retrysecond/page/2" }')
+    res.status(200).end('{ "values" : [ {"properties":{"id": 1, "name": "Product" }}], "nextLink": "' + 'http://localhost.:' + utils.getPort() + '/paging/multiple/retrysecond/page/2" }')
   });
 
   router.get('/multiple/retrysecond/page/:pagenumber', function(req, res, next) {
@@ -80,12 +81,12 @@ var paging = function(coverage) {
       } else {
         coverage[scenario]++;
         removeScenarioCookie(res);
-        res.status(200).end('{ "values" : [ {"id": 1, "name": "Product" }], "nextLink": "' + 'http://localhost.:' + utils.getPort() + '/paging/multiple/retrysecond/page/3" }')
+        res.status(200).end('{ "values" : [ {"properties":{"id": 1, "name": "Product" }}], "nextLink": "' + 'http://localhost.:' + utils.getPort() + '/paging/multiple/retrysecond/page/3" }')
       }
     } else if (req.params.pagenumber < 10) {
-      res.status(200).end('{ "values": [ {"id" : ' + req.params.pagenumber + ', "name": "product"} ], "nextLink": "' + 'http://localhost.:' + utils.getPort() + '/paging/multiple/retrysecond/page/' + (++req.params.pagenumber) + '"}');
+      res.status(200).end('{ "values": [ {"properties":{"id" : ' + req.params.pagenumber + ', "name": "product"}} ], "nextLink": "' + 'http://localhost.:' + utils.getPort() + '/paging/multiple/retrysecond/page/' + (++req.params.pagenumber) + '"}');
     } else {
-      res.status(200).end('{"values": [ {"id" : ' + req.params.pagenumber + ', "name": "product"} ]}');
+      res.status(200).end('{"values": [ {"properties":{"id" : ' + req.params.pagenumber + ', "name": "product"}} ]}');
     }
   });
 
@@ -97,7 +98,7 @@ var paging = function(coverage) {
 
   router.get('/multiple/failure', function(req, res, next) {
     coverage["PagingMultipleFailure"]++;
-    res.status(200).end('{ "values" : [ {"id": 1, "name": "Product" }], "nextLink": "' + 'http://localhost.:' + utils.getPort() + '/paging/multiple/failure/page/2" }')
+    res.status(200).end('{ "values" : [ {"properties":{"id": 1, "name": "Product" }}], "nextLink": "' + 'http://localhost.:' + utils.getPort() + '/paging/multiple/failure/page/2" }')
   });
 
   router.get('/multiple/failure/page/:pagenumber', function(req, res, next) {
@@ -106,7 +107,7 @@ var paging = function(coverage) {
 
   router.get('/multiple/failureuri', function(req, res, next) {
     coverage["PagingMultipleFailureUri"]++;
-    res.status(200).end('{ "values" : [ {"id": 1, "name": "Product" }], "nextLink": "*&*#&$" }')
+    res.status(200).end('{ "values" : [ {"properties":{"id": 1, "name": "Product" }}], "nextLink": "*&*#&$" }')
   });
 
 

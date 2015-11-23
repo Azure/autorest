@@ -22,6 +22,6 @@ class DictionaryWrapper(Model):
 
     def __init__(self, *args, **kwargs):
 
-        self.default_program = {}
+        self.default_program = None
 
         super(DictionaryWrapper, self).__init__(*args, **kwargs)

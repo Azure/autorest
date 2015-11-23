@@ -22,6 +22,6 @@ class ArrayOptionalWrapper(Model):
 
     def __init__(self, *args, **kwargs):
 
-        self.value = []
+        self.value = None
 
         super(ArrayOptionalWrapper, self).__init__(*args, **kwargs)

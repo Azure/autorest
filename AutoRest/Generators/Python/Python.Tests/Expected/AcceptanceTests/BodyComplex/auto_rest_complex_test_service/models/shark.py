@@ -32,3 +32,5 @@ class Shark(Fish):
         self.birthday = None
 
         super(Shark, self).__init__(*args, **kwargs)
+
+        self.fishtype = 'shark'

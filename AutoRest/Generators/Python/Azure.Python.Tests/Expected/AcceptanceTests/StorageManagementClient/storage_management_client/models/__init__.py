@@ -18,7 +18,6 @@ from .bar import Bar
 from .custom_domain import CustomDomain
 from .storage_account import StorageAccount
 from .storage_account_keys import StorageAccountKeys
-from .storage_account_list_result import StorageAccountListResult
 from .storage_account_update_parameters import StorageAccountUpdateParameters
 from .storage_account_regenerate_key_parameters import StorageAccountRegenerateKeyParameters
 from .usage_name import UsageName

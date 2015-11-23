@@ -38,6 +38,11 @@ namespace Microsoft.Rest.Generator.Azure.Python
             }
         }
 
+        public bool HasAnyLongRunOperation
+        {
+            get { return MethodTemplateModels.Any(m => m.Extensions.ContainsKey(AzureExtensions.LongRunningExtension)); }
+        }
+
         public bool HasAnyModel { get; private set; }
 
         public override IEnumerable<MethodGroupTemplateModel> MethodGroupModels
