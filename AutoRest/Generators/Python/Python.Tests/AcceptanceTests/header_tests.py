@@ -26,7 +26,7 @@ class HeaderTests(unittest.TestCase):
 
     def test_headers(self):
 
-        config = AutoRestSwaggerBATHeaderServiceConfiguration("http://localhost:3000")
+        config = AutoRestSwaggerBATHeaderServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestSwaggerBATHeaderService(config)
 

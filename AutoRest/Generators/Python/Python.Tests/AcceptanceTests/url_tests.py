@@ -25,7 +25,7 @@ class UrlTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
 
-        config = AutoRestUrlTestServiceConfiguration(None, "http://localhost:3000")
+        config = AutoRestUrlTestServiceConfiguration(None, base_url="http://localhost:3000")
         config.log_level = 10
         cls.client = AutoRestUrlTestService(config)
         return super(UrlTests, cls).setUpClass()

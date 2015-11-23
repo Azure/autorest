@@ -30,7 +30,7 @@ class HttpTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
 
-        config = AutoRestHttpInfrastructureTestServiceConfiguration("http://localhost:3000")
+        config = AutoRestHttpInfrastructureTestServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = 10
         config.retry_policy.retries = 3
         cls.client = AutoRestHttpInfrastructureTestService(config)

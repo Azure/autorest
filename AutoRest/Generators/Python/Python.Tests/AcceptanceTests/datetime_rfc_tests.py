@@ -27,7 +27,7 @@ class DateTimeRfcTests(unittest.TestCase):
 
     def test_datetime_rfc(self):
 
-        config = AutoRestRFC1123DateTimeTestServiceConfiguration("http://localhost:3000")
+        config = AutoRestRFC1123DateTimeTestServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestRFC1123DateTimeTestService(config)
 

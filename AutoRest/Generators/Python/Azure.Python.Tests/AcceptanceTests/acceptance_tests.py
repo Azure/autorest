@@ -38,7 +38,7 @@ class AcceptanceTests(unittest.TestCase):
         queryParameter = 21
         pathParameter = 'path'
 
-        config = AutoRestParameterGroupingTestServiceConfiguration(None, "http://localhost:3000")
+        config = AutoRestParameterGroupingTestServiceConfiguration(None, base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestParameterGroupingTestService(config)
 
@@ -83,7 +83,7 @@ class AcceptanceTests(unittest.TestCase):
 
         
         cred = TokenAuthentication("client_id", {"my_token":123})
-        config = MicrosoftAzureTestUrlConfiguration(None, str(uuid.uuid1()), "http://localhost:3000")
+        config = MicrosoftAzureTestUrlConfiguration(None, str(uuid.uuid1()), base_url="http://localhost:3000")
         config.log_level = 10
         client = MicrosoftAzureTestUrl(config)
         group = client.group.get_sample_resource_group("testgroup101")
@@ -92,7 +92,7 @@ class AcceptanceTests(unittest.TestCase):
 
     def test_duration(self):
 
-        config = AutoRestDurationTestServiceConfiguration(None, "http://localhost:3000")
+        config = AutoRestDurationTestServiceConfiguration(None, base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestDurationTestService(config)
         self.assertIsNone(client.duration.get_null())
@@ -108,7 +108,7 @@ class AcceptanceTests(unittest.TestCase):
         validSubscription = '1234-5678-9012-3456'
         validClientId = '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
         cred = TokenAuthentication(validSubscription, {"my_token":123})
-        config = AutoRestAzureSpecialParametersTestClientConfiguration(None, validSubscription, "http://localhost:3000")
+        config = AutoRestAzureSpecialParametersTestClientConfiguration(None, validSubscription, base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestAzureSpecialParametersTestClient(config)
 
@@ -127,7 +127,7 @@ class AcceptanceTests(unittest.TestCase):
         validApiVersion = '2.0'
         unencodedPath = 'path1/path2/path3'
         unencodedQuery = 'value1&q2=value2&q3=value3'
-        config = AutoRestAzureSpecialParametersTestClientConfiguration(None, validSubscription, "http://localhost:3000")
+        config = AutoRestAzureSpecialParametersTestClientConfiguration(None, validSubscription, base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestAzureSpecialParametersTestClient(config)
 
@@ -164,7 +164,7 @@ class AcceptanceTests(unittest.TestCase):
     #@unittest.skip("For now, skip this test since it'll always fail")
     def test_ensure_coverage(self):
 
-        config = AutoRestReportServiceForAzureConfiguration(None, "http://localhost:3000")
+        config = AutoRestReportServiceForAzureConfiguration(None, base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestReportServiceForAzure(config)
         report = client.get_report()

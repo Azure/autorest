@@ -27,7 +27,7 @@ class IntegerTests(unittest.TestCase):
 
     def test_integer(self):
 
-        config = AutoRestIntegerTestServiceConfiguration("http://localhost:3000")
+        config = AutoRestIntegerTestServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestIntegerTestService(config)
 

@@ -29,7 +29,7 @@ class ArrayTests(unittest.TestCase):
 
     def test_array(self):
 
-        config = AutoRestSwaggerBATArrayServiceConfiguration("http://localhost:3000")
+        config = AutoRestSwaggerBATArrayServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestSwaggerBATArrayService(config)
 

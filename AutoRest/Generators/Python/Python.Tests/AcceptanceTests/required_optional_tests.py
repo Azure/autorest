@@ -27,7 +27,7 @@ class RequiredOptionalTests(unittest.TestCase):
         config = AutoRestRequiredOptionalTestServiceConfiguration(
             "required_path",
             "required_query",
-            "http://localhost:3000")
+            base_url="http://localhost:3000")
 
         config.log_level = 10
         cls.client = AutoRestRequiredOptionalTestService(config)

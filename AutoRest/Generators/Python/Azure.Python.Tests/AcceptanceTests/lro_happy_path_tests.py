@@ -41,7 +41,7 @@ class LroTests(unittest.TestCase):
 
     def test_lro(self):
 
-        config = AutoRestLongRunningOperationTestServiceConfiguration("http://localhost:3000")
+        config = AutoRestLongRunningOperationTestServiceConfiguration(base_url="http://localhost:3000")
 
         # TODO: investigate how to use TokenAuth in testing
         #creds = UserPassCredentials(config, client_id, "user", "password")
