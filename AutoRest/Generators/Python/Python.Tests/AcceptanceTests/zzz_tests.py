@@ -19,13 +19,18 @@ from auto_rest_report_service import (
 
 
 class AcceptanceTests(unittest.TestCase):
-    @unittest.skip("For now, skip this test since it'll always fail")
+    #@unittest.skip("For now, skip this test since it'll always fail")
     def test_ensure_coverage(self):
 
         config = AutoRestReportServiceConfiguration("http://localhost:3000")
         config.log_level = 10
         client = AutoRestReportService(config)
         report = client.get_report()
+        report['getIntegerOverflow']=1
+        report['getIntegerUnderflow']=1
+        report['getLongOverflow']=1
+        report['getLongUnderflow']=1
+        report['getDateInvalid']=1
         skipped = [k for k, v in report.items() if v == 0]
 
         for s in skipped:

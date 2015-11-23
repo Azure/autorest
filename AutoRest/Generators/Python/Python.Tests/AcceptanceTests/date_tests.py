@@ -40,7 +40,7 @@ class DateTests(unittest.TestCase):
         self.assertEqual(min_date, client.date_model.get_min_date())
         self.assertIsNone(client.date_model.get_null())
 
-        # TODO
+        # Python isodate.parse support too wild input, and won't raise error
         #with self.assertRaises(DeserializationError):
         #    client.date_model.get_invalid_date()
 

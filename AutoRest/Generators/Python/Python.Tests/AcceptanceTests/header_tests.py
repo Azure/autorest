@@ -129,13 +129,12 @@ class HeaderTests(unittest.TestCase):
         response, raw = client.header.response_existing_key(raw=True)
         self.assertEqual("overwrite", raw.headers.get('User-Agent'))
 
-        # TODO
-        #with self.assertRaises(Exception):
-        #    client.header.param_protected_key("text/html")
+        # This test is only valid for C#, which content-type can't be override this way
+        #client.header.param_protected_key("text/html")
 
-        # TODO
-        #response, raw = client.header.response_protected_key(raw=True)
-        #self.assertFalse("Content-Type" in raw.headers)
+        # This test has different result compare to C#, which content-type is saved in another place.
+        response, raw = client.header.response_protected_key(raw=True)
+        self.assertTrue("text/html; charset=utf-8", raw.headers['Content-Type'])
 
         custom_headers = {"x-ms-client-request-id": "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"}
         response, raw = client.header.custom_request_id(custom_headers, raw=True)

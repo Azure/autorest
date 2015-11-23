@@ -13,9 +13,9 @@ sys.path.append(runtime)
 
 def sort_test(x, y):
 
-    if x == 'test_ensure_coverage' :
+    if x == 'test_ensure_coverage':
         return 1
-    if y == 'test_ensure_coverage' :
+    if y == 'test_ensure_coverage':
         return -1
     return (x > y) - (x < y)
 
@@ -30,7 +30,7 @@ if __name__ == '__main__':
         test_loader = TestLoader()    
         test_loader.sortTestMethodsUsing = sort_test
 
-        suite = test_loader.discover(cwd, pattern="acceptance_tests.py")
+        suite = test_loader.discover(cwd, pattern="*_tests.py")
         runner.run(suite)
     
     finally:
