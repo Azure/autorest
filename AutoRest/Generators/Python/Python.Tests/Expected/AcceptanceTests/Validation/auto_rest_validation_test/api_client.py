@@ -41,20 +41,6 @@ class AutoRestValidationTest(object):
 
         self.config = config
 
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
-
     @async_request
     def validation_of_method_parameters(self, resource_group_name, id, custom_headers={}, raw=False, callback=None):
         """
@@ -82,15 +68,15 @@ class AutoRestValidationTest(object):
         # Construct URL
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}'
         path_format_arguments = {
-            'subscriptionId': self._serialize_data("self.config.subscription_id", self.config.subscription_id, 'str'),
-            'resourceGroupName': self._serialize_data("resource_group_name", resource_group_name, 'str'),
-            'id': self._serialize_data("id", id, 'int')
+            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str'),
+            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+            'id': self._serialize.url("id", id, 'int')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['apiVersion'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['apiVersion'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -143,15 +129,15 @@ class AutoRestValidationTest(object):
         # Construct URL
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}'
         path_format_arguments = {
-            'subscriptionId': self._serialize_data("self.config.subscription_id", self.config.subscription_id, 'str'),
-            'resourceGroupName': self._serialize_data("resource_group_name", resource_group_name, 'str'),
-            'id': self._serialize_data("id", id, 'int')
+            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str'),
+            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+            'id': self._serialize.url("id", id, 'int')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['apiVersion'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['apiVersion'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         header_parameters = {}

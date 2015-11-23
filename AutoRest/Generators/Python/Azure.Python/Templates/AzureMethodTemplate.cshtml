@@ -89,8 +89,6 @@ else
   }
 @EmptyLine
 }
-@* Add Credentials *@
-@*stream handler*@
             # Construct and send request
             request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query_parameters)
 @if (Model.RequestBody != null)
