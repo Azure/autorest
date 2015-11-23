@@ -18,7 +18,7 @@ from . import models
 
 class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
 
-    def __init__(self, required_global_path, required_global_query, base_url=None, filepath=None):
+    def __init__(self, required_global_path, required_global_query, optional_global_query=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -27,6 +27,7 @@ class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
 
         self.required_global_path = required_global_path
         self.required_global_query = required_global_query
+        self.optional_global_query = optional_global_query
 
 
 class AutoRestRequiredOptionalTestService(object):

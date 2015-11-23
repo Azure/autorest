@@ -17,7 +17,7 @@ from .operations.http_success_operations import http_successOperations
 
 class AutoRestHeadTestServiceConfiguration(AzureConfiguration):
 
-    def __init__(self, credentials, base_url=None, filepath=None):
+    def __init__(self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -25,8 +25,8 @@ class AutoRestHeadTestServiceConfiguration(AzureConfiguration):
         super(AutoRestHeadTestServiceConfiguration, self).__init__(base_url, filepath)
 
         self.credentials = credentials
-
-        self.accept_language = 'en-US'
+        self.accept_language = accept_language
+        self.long_running_operation_retry_timeout = long_running_operation_retry_timeout
 
 
 class AutoRestHeadTestService(object):

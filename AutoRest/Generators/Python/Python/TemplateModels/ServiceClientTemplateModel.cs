@@ -64,13 +64,22 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        public string RequiredConstructorParameters
+        public virtual string RequiredConstructorParameters
         {
             get
             {
                 var requireParams = new List<string>();
-                this.Properties.Where(p => p.IsRequired)
-                    .ForEach(p => requireParams.Add(p.Name.ToPythonCase()));
+                foreach (var property in this.Properties)
+                {
+                    if (property.IsRequired)
+                    {
+                        requireParams.Add(property.Name.ToPythonCase());
+                    }
+                    else
+                    {
+                        requireParams.Add(string.Format(CultureInfo.InvariantCulture, "{0}=None", property.Name.ToPythonCase()));
+                    }
+                }
                 //requireParams.Add("baseUri");
                 var param = string.Join(", ", requireParams);
                 if (!string.IsNullOrEmpty(param))

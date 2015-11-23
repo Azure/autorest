@@ -18,7 +18,7 @@ from . import models
 
 class MicrosoftAzureTestUrlConfiguration(AzureConfiguration):
 
-    def __init__(self, credentials, subscription_id, base_url=None, filepath=None):
+    def __init__(self, credentials, subscription_id, api_version='2014-04-01-preview', accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'https://management.azure.com/'
@@ -27,9 +27,9 @@ class MicrosoftAzureTestUrlConfiguration(AzureConfiguration):
 
         self.credentials = credentials
         self.subscription_id = subscription_id
-
-        self.api_version = '2014-04-01-preview'
-        self.accept_language = 'en-US'
+        self.api_version = api_version
+        self.accept_language = accept_language
+        self.long_running_operation_retry_timeout = long_running_operation_retry_timeout
 
 
 class MicrosoftAzureTestUrl(object):
