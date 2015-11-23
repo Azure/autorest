@@ -47,5 +47,32 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 return MethodGroups.Select(mg => new AzureMethodGroupTemplateModel(this, mg));
             }
         }
+
+        public override string RequiredConstructorParameters
+        {
+            get
+            {
+                var requireParams = new List<string>();
+                foreach (var property in this.Properties)
+                {
+                    if (property.IsRequired)
+                    {
+                        requireParams.Add(property.Name.ToPythonCase());
+                    }
+                    else
+                    {
+                        requireParams.Add(string.Format(CultureInfo.InvariantCulture, "{0}={1}", property.Name.ToPythonCase(), property.DefaultValue ?? "None"));
+                    }
+                }
+                //requireParams.Add("baseUri");
+                var param = string.Join(", ", requireParams);
+                if (!string.IsNullOrEmpty(param))
+                {
+                    param += ", ";
+                }
+                return param;
+            }
+        }
+
     }
 }

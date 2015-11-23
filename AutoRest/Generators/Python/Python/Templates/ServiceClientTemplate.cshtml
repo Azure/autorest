@@ -39,15 +39,12 @@ class @(Model.Name)Configuration(Configuration):
             base_url = '@Model.BaseUrl'
 @EmptyLine
         super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
-@{
-  var properties = Model.Properties.Where(p => p.IsRequired);
-  if (properties.Any())
-  {
+@if (Model.Properties.Any())
+{
 @EmptyLine
-    foreach (var property in properties)
-    {
+  foreach (var property in Model.Properties)
+  {
         @:self.@(property.Name) = @(property.Name)
-    }
   }
 }
 @EmptyLine
