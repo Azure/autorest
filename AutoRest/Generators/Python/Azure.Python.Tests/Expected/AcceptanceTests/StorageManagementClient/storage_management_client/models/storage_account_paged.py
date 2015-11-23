@@ -9,14 +9,14 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from runtime.msrest.paging import Paged
+from msrest.paging import Paged
 
 
 class StorageAccountPaged(Paged):
 
     _attribute_map = {
         'next_link': {'key': 'nextLink', 'type': 'str'},
-        'items': {'key': 'value', 'type': '[StorageAccount]'}
+        'items': {'key': 'values', 'type': '[StorageAccount]'}
     }
 
     def __init__(self, *args, **kwargs):

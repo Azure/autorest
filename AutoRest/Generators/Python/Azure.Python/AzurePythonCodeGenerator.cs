@@ -123,12 +123,12 @@ namespace Microsoft.Rest.Generator.Azure.Python
             }
         }
 
-        private void GetPagingSetting(Dictionary<string, object> extensions, string valueTypeName)
+        private string GetPagingSetting(Dictionary<string, object> extensions, string valueTypeName)
         {
             var ext = extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
 
             string nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
-            string itemName = (string)ext["itemName"] ?? "value";
+            string itemName = (string)ext["itemName"] ?? "values";
             string className = (string)ext["className"];
             if (string.IsNullOrEmpty(className))
             {
@@ -141,6 +141,8 @@ namespace Microsoft.Rest.Generator.Azure.Python
             {
                 pageModels.Add(pageModel);
             }
+
+            return className;
         }
 
         /// <summary>
@@ -154,12 +156,10 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 throw new ArgumentNullException("serviceClient");
             }
 
-            var convertedTypes = new HashSet<CompositeType>();
+            var convertedTypes = new Dictionary<IType, CompositeType>();
 
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
-                bool hasReturnType = false;
-
                 foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key))
                 {
                     var compositType = (CompositeType)method.Responses[responseStatus];
@@ -168,21 +168,26 @@ namespace Microsoft.Rest.Generator.Azure.Python
                     // if the type is a wrapper over page-able response
                     if (sequenceType != null)
                     {
-                        GetPagingSetting(method.Extensions, sequenceType.ElementType.Name);
-                        convertedTypes.Add(compositType);
-                        hasReturnType = true;
+                        string pagableTypeName = GetPagingSetting(method.Extensions, sequenceType.ElementType.Name);
+
+                        CompositeType pagedResult = new CompositeType
+                        {
+                            Name = pagableTypeName
+                        };
+
+                        convertedTypes[compositType] = pagedResult;
+                        method.Responses[responseStatus] = pagedResult;
                         break;
                     }
                 }
 
-                if (!hasReturnType)
+                if (convertedTypes.ContainsKey(method.ReturnType))
                 {
-                    // Somehow the page method doesn't have correct response type
-                    method.Extensions.Remove(AzureExtensions.PageableExtension);
+                    method.ReturnType = convertedTypes[method.ReturnType];
                 }
             }
 
-            AzureExtensions.RemoveUnreferencedTypes(serviceClient, convertedTypes.Select(t => t.Name));
+            AzureExtensions.RemoveUnreferencedTypes(serviceClient, convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name));
         }
 
         /// <summary>
