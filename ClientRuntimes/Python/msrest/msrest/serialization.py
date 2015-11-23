@@ -488,7 +488,7 @@ class Deserializer(object):
 
     def _classify_target(self, target, data):
 
-        if not target:
+        if target is None:
             return None, None
 
         if isinstance(target, str):

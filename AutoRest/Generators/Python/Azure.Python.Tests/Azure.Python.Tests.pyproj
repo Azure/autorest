@@ -12,6 +12,10 @@
     <OutputPath>.</OutputPath>
     <Name>Azure.Python.Tests</Name>
     <RootNamespace>Azure.Python.Tests</RootNamespace>
+    <InterpreterId>
+    </InterpreterId>
+    <InterpreterVersion>
+    </InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,9 +29,24 @@
     <Compile Include="AcceptanceTests\acceptance_tests.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AcceptanceTests\azure_url_tests.py" />
-    <Compile Include="AcceptanceTests\head_tests.py" />
-    <Compile Include="AcceptanceTests\lro_happy_path_tests.py" />
+    <Compile Include="AcceptanceTests\azure_url_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\duration_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\head_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\lro_happy_path_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\paging_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\xms_request_clientid_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="AcceptanceTests\__init__.py" />
     <Compile Include="Expected\AcceptanceTests\**\*.py" />
   </ItemGroup>

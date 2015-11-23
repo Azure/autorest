@@ -205,7 +205,7 @@ class ClientRetryPolicy(object):
         self.policy.backoff_factor = 0.8
         self.policy.BACKOFF_MAX = 90
 
-        safe_codes = [i for i in range(501) if i != 408]
+        safe_codes = [i for i in range(500) if i != 408]
         safe_codes.append(501)
         safe_codes.append(505)
 
