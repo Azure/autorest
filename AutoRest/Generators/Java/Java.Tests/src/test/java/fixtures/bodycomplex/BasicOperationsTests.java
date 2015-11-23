@@ -18,7 +18,7 @@ public class BasicOperationsTests {
 
     @Test
     public void getValid() throws Exception {
-        Basic result = client.getBasicOperations().getValid();
+        Basic result = client.getBasicOperations().getValid().getBody();
         Assert.assertEquals(2, result.getId().intValue());
         Assert.assertEquals("abc", result.getName());
         Assert.assertEquals("YELLOW", result.getColor());
@@ -47,18 +47,18 @@ public class BasicOperationsTests {
 
     @Test
     public void getEmpty() throws Exception {
-        Basic result = client.getBasicOperations().getEmpty();
+        Basic result = client.getBasicOperations().getEmpty().getBody();
         Assert.assertNull(result.getName());
     }
 
     @Test
     public void getNull() throws Exception {
-        Basic result = client.getBasicOperations().getNull();
+        Basic result = client.getBasicOperations().getNull().getBody();
         Assert.assertNull(result.getName());
     }
 
     @Test
     public void getNotProvided() throws Exception {
-        Assert.assertNull(client.getBasicOperations().getNotProvided());
+        Assert.assertNull(client.getBasicOperations().getNotProvided().getBody());
     }
 }

@@ -11,10 +11,6 @@
 
 package @(Settings.Namespace.ToLower());
 @EmptyLine
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
-import retrofit.Call;
-import com.squareup.okhttp.ResponseBody;
 @foreach (var importClass in Model.InterfaceImports)
 {
 @:import @importClass;
@@ -64,11 +60,15 @@ public interface @Model.MethodGroupType {
     }
     if (method.ReturnType != null)
     {
-    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object if successful.
+    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link ServiceResponse} if successful.
+    }
+    else
+    {
+    @: * @@return the {@@link ServiceResponse} object if successful.
     }
     @: * @@throws ServiceException the exception wrapped in ServiceException if failed.
     @: */
-    @:@method.ReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException;
+    @:ServiceResponse<@method.GenericReturnTypeString> @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException;
     @EmptyLine
     @:/**
     if (!String.IsNullOrEmpty(method.Summary))

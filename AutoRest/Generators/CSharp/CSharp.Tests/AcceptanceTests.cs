@@ -941,15 +941,14 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 TimeSpan expectedDuration = new TimeSpan(123, 22, 14, 12, 11);
                 var durationResult = client.Primitive.GetDuration();
                 Assert.Equal(expectedDuration, durationResult.Field);
-                client.Primitive.PutDuration(new DurationWrapper() { Field = expectedDuration });
+                client.Primitive.PutDuration(expectedDuration);
 
                 // GET primitive/byte
                 var byteResult = client.Primitive.GetByte();
                 var bytes = new byte[] {0x0FF, 0x0FE, 0x0FD, 0x0FC, 0x000, 0x0FA, 0x0F9, 0x0F8, 0x0F7, 0x0F6};
                 Assert.Equal(bytes, byteResult.Field);
                 // PUT primitive/byte
-                var byteRequest = new ByteWrapper {Field = bytes};
-                client.Primitive.PutByte(byteRequest);
+                client.Primitive.PutByte(bytes);
 
                 /* COMPLEX TYPE WITH ARRAY PROPERTIES */
                 // GET array/valid
@@ -968,13 +967,13 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     Assert.Equal(arrayValue[i], arrayResult.Array[i]);
                 }
                 // PUT array/valid
-                client.Array.PutValid(new ArrayWrapper {Array = arrayValue});
+                client.Array.PutValid(arrayValue);
                 // GET array/empty
                 arrayResult = client.Array.GetEmpty();
                 Assert.Equal(0, arrayResult.Array.Count);
                 // PUT array/empty
                 arrayValue.Clear();
-                client.Array.PutEmpty(new ArrayWrapper {Array = arrayValue});
+                client.Array.PutEmpty(arrayValue);
                 // Get array/notprovided
                 arrayResult = client.Array.GetNotProvided();
                 Assert.Null(arrayResult.Array);
@@ -993,12 +992,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 };
                 Assert.Equal(dictionaryValue, dictionaryResult.DefaultProgram);
                 // PUT dictionary/valid
-                client.Dictionary.PutValid(new DictionaryWrapper {DefaultProgram = dictionaryValue});
+                client.Dictionary.PutValid(dictionaryValue);
                 // GET dictionary/empty
                 dictionaryResult = client.Dictionary.GetEmpty();
                 Assert.Equal(0, dictionaryResult.DefaultProgram.Count);
                 // PUT dictionary/empty
-                client.Dictionary.PutEmpty(new DictionaryWrapper {DefaultProgram = new Dictionary<string, string>()});
+                client.Dictionary.PutEmpty(new Dictionary<string, string>());
                 // GET dictionary/null
                 Assert.Null(client.Dictionary.GetNull().DefaultProgram);
                 // GET dictionary/notprovided
@@ -1031,10 +1030,13 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 var polymorphismResult = client.Polymorphism.GetValid() as Salmon;
                 Assert.NotNull(polymorphismResult);
                 Assert.Equal("alaska", polymorphismResult.Location);
-                Assert.True(polymorphismResult.Siblings[0] is Shark);
-                Assert.True(polymorphismResult.Siblings[1] is Sawshark);
+                Assert.Equal(3, polymorphismResult.Siblings.Count);
+                Assert.IsType(typeof(Shark), polymorphismResult.Siblings[0]);
+                Assert.IsType(typeof(Sawshark), polymorphismResult.Siblings[1]);
+                Assert.IsType(typeof(Goblinshark), polymorphismResult.Siblings[2]);
                 Assert.Equal(6, ((Shark) polymorphismResult.Siblings[0]).Age);
                 Assert.Equal(105, ((Sawshark) polymorphismResult.Siblings[1]).Age);
+                Assert.Equal(1, ((Goblinshark)polymorphismResult.Siblings[2]).Age);
                 // PUT polymorphism/valid
                 var polymorphismRequest = new Salmon
                 {
@@ -1058,6 +1060,14 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                             Species = "dangerous",
                             Birthday = new DateTime(1900, 1, 5, 1, 0, 0, DateTimeKind.Utc),
                             Picture = new byte[] {255, 255, 255, 255, 254}
+                        },
+                        new Goblinshark()
+                        {
+                            Age = 1,
+                            Length = 30,
+                            Species = "scary",
+                            Birthday = new DateTime(2015, 8, 8, 0, 0, 0, DateTimeKind.Utc),
+                            Jawsize = 5
                         }
                     }
                 };
@@ -1326,7 +1336,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
                 // POST param/existingkey
 #if MONO
-                Assert.Throws<Microsoft.Rest.HttpOperationException>(
+                Assert.Throws<Fixtures.AcceptanceTestsHeader.Models.ErrorException>(
                     () => client.Header.ParamExistingKey("overwrite"));
 #else
                 client.Header.ParamExistingKey("overwrite");
@@ -1578,7 +1588,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         private static void TestSuccessStatusCodes(AutoRestHttpInfrastructureTestService client)
         {
-            var ex = Assert.Throws<HttpOperationException>(() => client.HttpFailure.GetEmptyError());
+            var ex = Assert.Throws<Fixtures.AcceptanceTestsHttp.Models.ErrorException>(() => client.HttpFailure.GetEmptyError());
             Assert.Equal("Operation returned an invalid status code 'BadRequest'", ex.Message);
             client.HttpSuccess.Head200();
             Assert.True(client.HttpSuccess.Get200());
@@ -1617,20 +1627,17 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Throws<ValidationException>(() =>
                     client.ExplicitModel.PostRequiredStringParameter(null));
                 Assert.Throws<ValidationException>(() =>
-                    client.ExplicitModel.PostRequiredStringProperty(
-                        new Fixtures.AcceptanceTestsRequiredOptional.Models.StringWrapper {Value = null}));
+                    client.ExplicitModel.PostRequiredStringProperty(null));
                 Assert.Throws<ValidationException>(() =>
                     client.ExplicitModel.PostRequiredArrayHeader(null));
                 Assert.Throws<ValidationException>(() =>
                     client.ExplicitModel.PostRequiredArrayParameter(null));
                 Assert.Throws<ValidationException>(() =>
-                    client.ExplicitModel.PostRequiredArrayProperty(
-                        new Fixtures.AcceptanceTestsRequiredOptional.Models.ArrayWrapper {Value = null}));
+                    client.ExplicitModel.PostRequiredArrayProperty(null));
                 Assert.Throws<ValidationException>(() =>
                     client.ExplicitModel.PostRequiredClassParameter(null));
                 Assert.Throws<ValidationException>(() =>
-                    client.ExplicitModel.PostRequiredClassProperty(
-                        new Fixtures.AcceptanceTestsRequiredOptional.Models.ClassWrapper {Value = null}));
+                    client.ExplicitModel.PostRequiredClassProperty(null));
                 Assert.Throws<ValidationException>(() =>
                     client.ImplicitModel.GetRequiredGlobalPath());
                 Assert.Throws<ValidationException>(() =>
@@ -1661,8 +1668,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     client.ExplicitModel.PostOptionalIntegerParameterWithHttpMessagesAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ExplicitModel.PostOptionalIntegerPropertyWithHttpMessagesAsync(
-                        new Fixtures.AcceptanceTestsRequiredOptional.Models.IntOptionalWrapper {Value = null})
+                    client.ExplicitModel.PostOptionalIntegerPropertyWithHttpMessagesAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
                     client.ExplicitModel.PostOptionalIntegerHeaderWithHttpMessagesAsync(null)
@@ -1671,8 +1677,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     client.ExplicitModel.PostOptionalStringParameterWithHttpMessagesAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ExplicitModel.PostOptionalStringPropertyWithHttpMessagesAsync(
-                        new Fixtures.AcceptanceTestsRequiredOptional.Models.StringOptionalWrapper {Value = null})
+                    client.ExplicitModel.PostOptionalStringPropertyWithHttpMessagesAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
                     client.ExplicitModel.PostOptionalStringHeaderWithHttpMessagesAsync(null)
@@ -1681,15 +1686,13 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     client.ExplicitModel.PostOptionalClassParameterWithHttpMessagesAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ExplicitModel.PostOptionalClassPropertyWithHttpMessagesAsync(
-                        new Fixtures.AcceptanceTestsRequiredOptional.Models.ClassOptionalWrapper {Value = null})
+                    client.ExplicitModel.PostOptionalClassPropertyWithHttpMessagesAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
                     client.ExplicitModel.PostOptionalArrayParameterWithHttpMessagesAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.ExplicitModel.PostOptionalArrayPropertyWithHttpMessagesAsync(
-                        new Fixtures.AcceptanceTestsRequiredOptional.Models.ArrayOptionalWrapper {Value = null})
+                    client.ExplicitModel.PostOptionalArrayPropertyWithHttpMessagesAsync(null)
                         .Result.Response.StatusCode);
                 Assert.Equal(HttpStatusCode.OK,
                     client.ExplicitModel.PostOptionalArrayHeaderWithHttpMessagesAsync(null)
@@ -1750,12 +1753,28 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 operation();
                 throw new InvalidOperationException("Operation did not throw as expected");
             }
-            catch (HttpOperationException exception)
+            catch (Fixtures.AcceptanceTestsHttp.Models.ErrorException exception)
             {
                 Assert.Equal(expectedStatusCode, exception.Response.StatusCode);
                 if (errorValidator != null)
                 {
                     errorValidator(exception.Body as T);
+                }
+            }
+            catch (MyException exception1)
+            {
+                Assert.Equal(expectedStatusCode, exception1.Response.StatusCode);
+                if (errorValidator != null)
+                {
+                    errorValidator(exception1.Body as T);
+                }
+            }
+            catch (HttpOperationException exception2)
+            {
+                Assert.Equal(expectedStatusCode, exception2.Response.StatusCode);
+                if (errorValidator != null)
+                {
+                    errorValidator(exception2.Body as T);
                 }
             }
         }

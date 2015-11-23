@@ -38,6 +38,7 @@
     <Compile Include="TemplateModels\AzureMethodTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureServiceClientTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureMethodGroupTemplateModel.cs" />
+    <Compile Include="TemplateModels\PageTemplateModel.cs" />
     <Compile Include="Templates\AzureMethodGroupTemplate.cs">
       <DependentUpon>AzureMethodGroupTemplate.cshtml</DependentUpon>
     </Compile>
@@ -50,15 +51,34 @@
     <Compile Include="Templates\AzureServiceClientTemplate.cs">
       <DependentUpon>AzureServiceClientTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\PageModelTemplate.cs">
+      <DependentUpon>PageModelTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureMethodGroupTemplateTS.cs">
+      <DependentUpon>AzureMethodGroupTemplateTS.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureMethodTemplateTS.cs">
+      <DependentUpon>AzureMethodTemplateTS.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureModelIndexTemplateTS.cs">
+      <DependentUpon>AzureModelIndexTemplateTS.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureServiceClientTemplateTS.cs">
+      <DependentUpon>AzureServiceClientTemplateTS.cshtml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Azure.Common\Azure.Common\AutoRest.Generator.Azure.Common.csproj">
+    <ProjectReference Include="..\..\Extensions\Azure.Extensions\AutoRest.Generator.Azure.Extensions.csproj">
       <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
-      <Name>AutoRest.Generator.Azure.Common</Name>
+      <Name>AutoRest.Generator.Azure.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extensions\Extensions\AutoRest.Generator.Extensions.csproj">
+      <Project>{7dd043eb-5e53-4180-b123-cc3cc5022e34}</Project>
+      <Name>AutoRest.Generator.Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\NodeJS\AutoRest.Generator.NodeJS.csproj">
       <Project>{77e73f37-9586-44ea-91b0-f244d08467d2}</Project>
@@ -76,6 +96,11 @@
     <None Include="Templates\AzureMethodGroupTemplate.cshtml" />
     <None Include="Templates\AzureServiceClientTemplate.cshtml" />
     <None Include="Templates\AzureModelIndexTemplate.cshtml" />
+    <None Include="Templates\PageModelTemplate.cshtml" />
+    <None Include="Templates\AzureMethodTemplateTS.cshtml" />
+    <None Include="Templates\AzureMethodGroupTemplateTS.cshtml" />
+    <None Include="Templates\AzureServiceClientTemplateTS.cshtml" />
+    <None Include="Templates\AzureModelIndexTemplateTS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\..\..\Tools\CustomDictionary.xml">

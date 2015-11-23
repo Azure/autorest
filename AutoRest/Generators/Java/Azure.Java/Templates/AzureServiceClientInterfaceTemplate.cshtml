@@ -1,0 +1,141 @@
+﻿@using System
+@using Microsoft.Rest.Generator.Java.Azure
+@using Microsoft.Rest.Generator.Java.Azure.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.Azure.AzureServiceClientTemplateModel>
+/**
+@Header(" * ")
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower());
+@EmptyLine
+@foreach (var importClass in Model.InterfaceImports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+/**
+ * The interface for @Model.Name class.
+ */
+public interface @Model.Name {
+    /**
+     * Gets the URI used as the base for all cloud service requests.
+     * @@return The BaseUri value.
+     */
+    String getBaseUri();
+@EmptyLine
+    /**
+     * Gets the list of interceptors the OkHttp client will execute.
+     * @@return the list of interceptors.
+     */
+    List<Interceptor> getClientInterceptors();
+@EmptyLine
+    /**
+     * Gets the {@@link AzureClient} used for long running operations.
+     * @@return the azure client;
+     */
+    AzureClient getAzureClient();
+@foreach (var property in Model.Properties)
+{
+@EmptyLine
+@:    /**
+@:     * Gets @(property.Documentation).
+@:     *
+@:     * @@return the @(property.Name) value.
+@:     */
+@:    @property.Type get@(property.Name.ToPascalCase())();
+if(!property.IsReadOnly)
+{
+@EmptyLine
+@:    /**
+@:     * Sets @(property.Documentation).
+@:     *
+@:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
+@:     */
+@:    void set@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase()));
+}
+}
+
+@foreach (var operation in Model.Operations)
+{
+@EmptyLine
+@:    /**
+@:     * Gets the @(operation.MethodGroupType) object to access its operations.
+@:     * @@return the @(operation.MethodGroupName) value.
+@:     */
+@:    @(operation.MethodGroupType) get@(operation.MethodGroupName.ToPascalCase())();
+}
+@EmptyLine
+@if (Model.MethodTemplateModels.Any())
+{
+<text>
+    /**
+     * The interface defining all the services for @Model.Name to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface @Model.ServiceClientServiceType {
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
+    @:    Call<@method.CallType> @(method.Name)(@method.MethodParameterApiDeclaration);
+    @EmptyLine
+    }
+    }
+    @EmptyLine
+    @foreach (AzureMethodTemplateModel method in Model.MethodTemplateModels)
+    {
+    @:/**
+    if (!String.IsNullOrEmpty(method.Summary))
+    {
+    @: * @method.Summary.EscapeXmlComment()
+    }
+    if (!String.IsNullOrEmpty(method.Description))
+    {
+    @: * @method.Description.EscapeXmlComment()
+    }
+    @: *
+    foreach (var param in method.LocalParameters)
+    {
+    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+    }
+    foreach (var exception in method.ExceptionStatements)
+    {
+    @: * @@throws @exception
+    }
+    if (method.ReturnType != null)
+    {
+    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object wrapped in ServiceResponse if successful.
+    }
+    else
+    {
+    @: * @@return the ServiceResponse object if successful.
+    }
+    @: */
+    @:ServiceResponse<@method.GenericReturnTypeString> @(method.Name)(@method.MethodParameterDeclaration) throws @method.Exceptions;
+    @EmptyLine
+    @:/**
+    if (!String.IsNullOrEmpty(method.Summary))
+    {
+    @: * @method.Summary.EscapeXmlComment()
+    }
+    if (!String.IsNullOrEmpty(method.Description))
+    {
+    @: * @method.Description.EscapeXmlComment()
+    }
+    @: *
+    foreach (var param in method.LocalParameters)
+    {
+    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+    }
+    @: * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+    @: * @@return the {@@link Call} object
+    @: */
+    @:Call<@method.CallType> @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
+    @EmptyLine
+    }
+</text>
+}
+}

@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Microsoft.Rest.Generator.ClientModel
 {
@@ -30,6 +31,22 @@ namespace Microsoft.Rest.Generator.ClientModel
         public IList<Property> Properties { get; private set; }
 
         /// <summary>
+        /// Gets the union of Parent and current type properties
+        /// </summary>
+        public IEnumerable<Property> ComposedProperties
+        {
+            get
+            {
+                if (BaseModelType != null)
+                {
+                    return BaseModelType.ComposedProperties.Union(Properties);
+                }
+
+                return this.Properties;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the base model type.
         /// </summary>
         public CompositeType BaseModelType { get; set; }
@@ -48,6 +65,24 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// Gets a dictionary of x-vendor extensions defined for the CompositeType.
         /// </summary>
         public Dictionary<string, object> Extensions { get; private set; }
+
+        /// <summary>
+        /// Gets the union of Parent and current type properties
+        /// </summary>
+        public IDictionary<string, object> ComposedExtensions
+        {
+            get
+            {
+                if (BaseModelType != null)
+                {
+                    return Extensions.Concat(BaseModelType.ComposedExtensions
+                        .Where(pair => !Extensions.Keys.Contains(pair.Key)))
+                        .ToDictionary(pair => pair.Key, pair => pair.Value);
+                }
+
+                return this.Extensions;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the CompositeType name.

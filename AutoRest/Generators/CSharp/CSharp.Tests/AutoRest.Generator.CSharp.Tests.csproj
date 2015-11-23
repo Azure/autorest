@@ -224,7 +224,7 @@
     <Compile Include="Utilities\MirrorTestHelpers.cs" />
     <Compile Include="Utilities\MirroringHandler.cs" />
     <Compile Include="Utilities\RecordedDelegatingHandler.cs" />
-    <Compile Include="SerializationTests.cs" />
+    <Compile Include="MirrorTests.cs" />
     <Compile Include="Utilities\ServiceController.cs" />
     <Compile Include="AcceptanceTestOrderer.cs" />
     <Compile Include="Utilities\TestExtensions.cs" />

@@ -143,7 +143,8 @@ gulp.task('regenerate:expected:nodeazure', function(cb){
     'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
     'mappings': nodeAzureMappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'Azure.NodeJS'
+    'codeGenerator': 'Azure.NodeJS',
+    'flatteningThreshold': '1'
   }, cb);
 })
 
@@ -153,7 +154,8 @@ gulp.task('regenerate:expected:node', function(cb){
     'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
     'mappings': defaultMappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'NodeJS'
+    'codeGenerator': 'NodeJS',
+    'flatteningThreshold': '1'
   }, cb);
 })
 
@@ -164,7 +166,7 @@ gulp.task('regenerate:expected:rubyazure', function(cb){
     'mappings': rubyAzureMappings,
     'outputDir': 'RspecTests/Generated',
     'codeGenerator': 'Azure.Ruby',
-	'nsPrefix': 'MyNamespace'
+	  'nsPrefix': 'MyNamespace'
   }, cb);
 })
 
@@ -220,7 +222,8 @@ gulp.task('regenerate:expected:csazure', function(cb){
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp',
-    'nsPrefix': 'Fixtures.Azure'
+    'nsPrefix': 'Fixtures.Azure',
+    'flatteningThreshold': '1'
   }, cb);
 });
 
@@ -239,7 +242,8 @@ gulp.task('regenerate:expected:cs', function(cb){
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'CSharp',
-    'nsPrefix': 'Fixtures'
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1'
   }, cb);
 });
 
@@ -341,8 +345,8 @@ gulp.task('test:clientruntime:node', shell.task('npm test', { cwd: './ClientRunt
 gulp.task('test:clientruntime:nodeazure', shell.task('npm test', { cwd: './ClientRuntimes/NodeJS/ms-rest-azure/', verbosity: 3 }));
 gulp.task('test:clientruntime:ruby', ['syncDependencies:runtime:ruby'], shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest/', verbosity: 3 }));
 gulp.task('test:clientruntime:rubyazure', ['syncDependencies:runtime:rubyazure'], shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest-azure/', verbosity: 3 }));
-gulp.task('test:clientruntime:java', shell.task('gradle build uploadArchives', { cwd: './ClientRuntimes/Java/client-runtime/', verbosity: 3 }));
-gulp.task('test:clientruntime:javaazure', shell.task('gradle build uploadArchives', { cwd: './ClientRuntimes/Java/azure-client-runtime/', verbosity: 3 }));
+gulp.task('test:clientruntime:java', shell.task(basePathOrThrow() + '/gradlew :client-runtime:build', { cwd: './', verbosity: 3 }));
+gulp.task('test:clientruntime:javaazure', shell.task(basePathOrThrow() + '/gradlew :azure-client-runtime:build', { cwd: './', verbosity: 3 }));
 gulp.task('test:clientruntime', function (cb) {
   runSequence('test:clientruntime:node', 'test:clientruntime:nodeazure',
     'test:clientruntime:ruby', 'test:clientruntime:rubyazure',
@@ -355,8 +359,8 @@ gulp.task('test:node:azure', shell.task('npm test', {cwd: './AutoRest/Generators
 gulp.task('test:ruby', ['regenerate:expected:ruby'], shell.task('ruby RspecTests/tests_runner.rb', { cwd: './AutoRest/Generators/Ruby/Ruby.Tests', verbosity: 3 }));
 gulp.task('test:ruby:azure', ['regenerate:expected:rubyazure'], shell.task('ruby RspecTests/tests_runner.rb', { cwd: './AutoRest/Generators/Ruby/Azure.Ruby.Tests', verbosity: 3 }));
 
-gulp.task('test:java', shell.task('gradle build', {cwd: './AutoRest/Generators/Java/Java.Tests/', verbosity: 3}));
-gulp.task('test:java:azure', shell.task('gradle build', {cwd: './AutoRest/Generators/Java/Azure.Java.Tests/', verbosity: 3}));
+gulp.task('test:java', shell.task(basePathOrThrow() + '/gradlew :codegen-tests:build', {cwd: './', verbosity: 3}));
+gulp.task('test:java:azure', shell.task(basePathOrThrow() + '/gradlew :azure-codegen-tests:build', {cwd: './', verbosity: 3}));
 
 var xunitTestsDlls = [
   'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',

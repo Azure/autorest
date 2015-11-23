@@ -12,17 +12,22 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS;
 using Microsoft.Rest.Generator.NodeJS.Templates;
 using Microsoft.Rest.Generator.Utilities;
+using System.Collections.Generic;
 
 namespace Microsoft.Rest.Generator.Azure.NodeJS
 {
     public class AzureNodeJSCodeGenerator : NodeJSCodeGenerator
     {
-        private const string ClientRuntimePackage = "ms-rest-azure version 1.0.0";
+        private const string ClientRuntimePackage = "ms-rest-azure version 1.1.0";
         public const string LongRunningExtension = "x-ms-long-running-operation";
+
+        // List of models with paging extensions.
+        private IList<PageTemplateModel> pageModels;
 
         public AzureNodeJSCodeGenerator(Settings settings)
             : base(settings)
         {
+            pageModels = new List<PageTemplateModel>();
         }
 
         public override string Name
@@ -56,72 +61,82 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            //please do not change the following sequence as it may have undesirable results.
-
-            //TODO: Why is this list duplicated from AzureCodeGenerator.NormalizeClientModel?
-
-            Settings.AddCredentials = true;
-            AzureCodeGenerator.UpdateHeadMethods(serviceClient);
-            AzureCodeGenerator.ParseODataExtension(serviceClient);
-            AzureCodeGenerator.FlattenResourceProperties(serviceClient);
-            AzureCodeGenerator.AddPageableMethod(serviceClient);
-            AzureCodeGenerator.AddAzureProperties(serviceClient);
-            AzureCodeGenerator.SetDefaultResponses(serviceClient);
-            AzureCodeGenerator.AddParameterGroups(serviceClient);
+            // MethodNames are normalized explicitly to provide a consitent method name while 
+            // generating cloned methods for long running operations with reserved words. For
+            // example - beginDeleteMethod() insteadof beginDelete() as delete is a reserved word.
+            Namer.NormalizeMethodNames(serviceClient);
+            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
             base.NormalizeClientModel(serviceClient);
-            AzureCodeGenerator.AddLongRunningOperations(serviceClient);
             NormalizeApiVersion(serviceClient);
-            NormalizeCredentials(serviceClient);
+            NormalizePaginatedMethods(serviceClient);
+            ExtendAllResourcesToBaseResource(serviceClient);
+        }
+
+        private static void ExtendAllResourcesToBaseResource(ServiceClient serviceClient)
+        {
+            if (serviceClient != null)
+            {
+                foreach (var model in serviceClient.ModelTypes)
+                {
+                    if (model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
+                        (bool)model.Extensions[AzureExtensions.AzureResourceExtension])
+                    {
+                        model.BaseModelType = new CompositeType { Name = "BaseResource", SerializedName = "BaseResource" };
+                    }
+                }
+            }
+        }
+        
+        private static void NormalizeApiVersion(ServiceClient serviceClient)
+        {
+            serviceClient.Properties.Where(
+                p => p.SerializedName.Equals(AzureExtensions.ApiVersion, StringComparison.OrdinalIgnoreCase))
+                .ForEach(p => p.DefaultValue = p.DefaultValue.Replace("\"", "'"));
+
+            serviceClient.Properties.Where(
+                p => p.SerializedName.Equals(AzureExtensions.AcceptLanguage, StringComparison.OrdinalIgnoreCase))
+                .ForEach(p => p.DefaultValue = p.DefaultValue.Replace("\"", "'"));
         }
 
         /// <summary>
-        /// Creates long running operation methods.
+        /// Changes paginated method signatures to return Page type.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public void AddLongRunningOperations(ServiceClient serviceClient)
+        public virtual void NormalizePaginatedMethods(ServiceClient serviceClient)
         {
             if (serviceClient == null)
             {
                 throw new ArgumentNullException("serviceClient");
             }
 
-            for (int i = 0; i < serviceClient.Methods.Count; i++)
+            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
-                var method = serviceClient.Methods[i];
-                if (method.Extensions.ContainsKey(LongRunningExtension))
+                string nextLinkName = null;
+                var ext = method.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+                if (ext == null)
                 {
-                    var isLongRunning = method.Extensions[LongRunningExtension];
-                    if (isLongRunning is bool && (bool)isLongRunning)
-                    {
-                        serviceClient.Methods.Insert(i, (Method)method.Clone());
-                        method.Name = "begin" + Namer.GetMethodName(method.Name.ToPascalCase());
-                        i++;
-                    }
+                    continue;
+                }
+                
+                nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
+                string itemName = (string)ext["itemName"] ?? "value";
+                foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key).ToArray())
+                {
+                    var compositType = (CompositeType)method.Responses[responseStatus];
+                    var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
-                    method.Extensions.Remove(LongRunningExtension);
+                    // if the type is a wrapper over page-able response
+                    if (sequenceType != null)
+                    {
+                        compositType.Extensions[AzureExtensions.PageableExtension] = true;
+                        var pageTemplateModel = new PageTemplateModel(compositType, serviceClient, nextLinkName, itemName);
+                        if (!pageModels.Contains(pageTemplateModel))
+                        {
+                            pageModels.Add(pageTemplateModel);
+                        }
+                    }
                 }
             }
-        }
-
-        private static void NormalizeCredentials(ServiceClient serviceClient)
-        {
-            var property = serviceClient.Properties.FirstOrDefault(
-                p => p.Name.Equals("credentials", StringComparison.OrdinalIgnoreCase));
-            if (property != null)
-            {
-                ((CompositeType) property.Type).Name = "ServiceClientCredentials";
-            }
-        }
-
-        private static void NormalizeApiVersion(ServiceClient serviceClient)
-        {
-            serviceClient.Properties.Where(
-                p => p.SerializedName.Equals(AzureCodeGenerator.ApiVersion, StringComparison.OrdinalIgnoreCase))
-                .ForEach(p => p.DefaultValue = p.DefaultValue.Replace("\"", "'"));
-
-            serviceClient.Properties.Where(
-                p => p.SerializedName.Equals(AzureCodeGenerator.AcceptLanguage, StringComparison.OrdinalIgnoreCase))
-                .ForEach(p => p.DefaultValue = p.DefaultValue.Replace("\"", "'"));
         }
 
         /// <summary>
@@ -139,14 +154,48 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             };
             await Write(serviceClientTemplate, serviceClient.Name.ToCamelCase() + ".js");
 
+            if (!DisableTypeScriptGeneration)
+            {
+                var serviceClientTemplateTS = new AzureServiceClientTemplateTS
+                {
+                    Model = serviceClientTemplateModel,
+                };
+                await Write(serviceClientTemplateTS, serviceClient.Name.ToCamelCase() + ".d.ts");
+            }
+
             //Models
             if (serviceClient.ModelTypes.Any())
             {
+                // Paged Models
+                foreach (var pageModel in pageModels)
+                {
+                    //Add the PageTemplateModel to AzureServiceClientTemplateModel
+                    if (!serviceClientTemplateModel.PageTemplateModels.Contains(pageModel))
+                    {
+                        serviceClientTemplateModel.PageTemplateModels.Add(pageModel);
+                    }
+                    var pageTemplate = new PageModelTemplate
+                    {
+                        Model = pageModel
+                    };
+                    await Write(pageTemplate, Path.Combine("models", pageModel.Name.ToCamelCase() + ".js"));
+                }
+
                 var modelIndexTemplate = new AzureModelIndexTemplate
                 {
                     Model = serviceClientTemplateModel
                 };
                 await Write(modelIndexTemplate, Path.Combine("models", "index.js"));
+
+                if (!DisableTypeScriptGeneration)
+                {
+                    var modelIndexTemplateTS = new AzureModelIndexTemplateTS
+                    {
+                        Model = serviceClientTemplateModel
+                    };
+                    await Write(modelIndexTemplateTS, Path.Combine("models", "index.d.ts"));
+                }
+
                 foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
                 {
                     var modelTemplate = new ModelTemplate
@@ -165,6 +214,16 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                     Model = serviceClientTemplateModel
                 };
                 await Write(methodGroupIndexTemplate, Path.Combine("operations", "index.js"));
+
+                if (!DisableTypeScriptGeneration)
+                {
+                    var methodGroupIndexTemplateTS = new MethodGroupIndexTemplateTS
+                    {
+                        Model = serviceClientTemplateModel
+                    };
+                    await Write(methodGroupIndexTemplateTS, Path.Combine("operations", "index.d.ts"));
+                }
+                
                 foreach (var methodGroupModel in serviceClientTemplateModel.MethodGroupModels)
                 {
                     var methodGroupTemplate = new AzureMethodGroupTemplate

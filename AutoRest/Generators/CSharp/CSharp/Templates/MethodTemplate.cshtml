@@ -31,15 +31,7 @@
 /// </param>
 public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
-    @foreach (var mapping in Model.InputParameterMappings)
-    {
-    @:var @(mapping.OutputParameter.Name) = @string.Format(CultureInfo.InvariantCulture,
-                                 "({0} == null ? default({1}) : {0}.{2})",
-                                 mapping.InputParameter.Name,
-                                 mapping.OutputParameter.Type.Name, mapping.InputParameterProperty);
-    }
-
-    @foreach (var parameter in Model.LogicalParameterTemplateModels)
+    @foreach (var parameter in Model.ParameterTemplateModels)
     {
         if (parameter.IsRequired)
         {
@@ -49,11 +41,12 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     @:}
 @:
         }
-        if(parameter.CanBeValidated == true && parameter.Location != ParameterLocation.None && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
+        if(parameter.CanBeValidated == true && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
         {
     @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name, parameter.Constraints))
         }
     }
+    @Model.BuildInputMappings()
     // Tracing
     bool shouldTrace = ServiceClientTracing.IsEnabled;
     string invocationId = null;
@@ -109,6 +102,17 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
         }
     }
     @EmptyLine
+
+    @if (Model.RequestBody != null)
+    {
+        <text>
+    // Serialize Request
+    string requestContent = JsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
+    httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
+    httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.ContentType)");
+        </text>
+    }
+
     @if (Settings.AddCredentials)
     {
         <text>
@@ -120,17 +124,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     }
         </text>
     }
-
-
-    @if (Model.RequestBody != null)
-    {
-        <text>
-    // Serialize Request
-    string requestContent = JsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
-    httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-    httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.ContentType)");
-        </text>
-    }
+    
     // Send Request
     if (shouldTrace)
     {
@@ -146,7 +140,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
 
     HttpStatusCode statusCode = httpResponse.StatusCode;
     cancellationToken.ThrowIfCancellationRequested();
-    if (!(@(Model.SuccessStatusCodePredicate)))
+    if (@(Model.FailureStatusCodePredicate))
     {
         var ex = new @(Model.OperationExceptionTypeString)(string.Format("Operation returned an invalid status code '{0}'", statusCode));
     @if (Model.DefaultResponse != null)
@@ -186,7 +180,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     {
     <text>
     // Deserialize Response
-    if (statusCode == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key))
+    if ((int)statusCode == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key))
     {
         @if (responsePair.Value == PrimaryType.Stream)
         {

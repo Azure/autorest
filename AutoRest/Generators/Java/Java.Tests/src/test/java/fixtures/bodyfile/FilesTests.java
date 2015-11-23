@@ -18,7 +18,7 @@ public class FilesTests {
     @Test
     public void getFile() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        try (InputStream result = client.getFiles().getFile();
+        try (InputStream result = client.getFiles().getFile().getBody();
              InputStream file = classLoader.getResourceAsStream("sample.png")) {
             byte[] actual = IOUtils.toByteArray(result);
             byte[] expected = IOUtils.toByteArray(file);
@@ -28,7 +28,7 @@ public class FilesTests {
 
     @Test
     public void getEmptyFile() throws Exception {
-        try (InputStream result = client.getFiles().getEmptyFile()) {
+        try (InputStream result = client.getFiles().getEmptyFile().getBody()) {
             byte[] actual = IOUtils.toByteArray(result);
             Assert.assertEquals(0, actual.length);
         }

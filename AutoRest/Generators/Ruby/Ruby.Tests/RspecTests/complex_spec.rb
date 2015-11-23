@@ -277,11 +277,14 @@ describe 'Complex' do
 
     expect(result.body.location).to eq("alaska")
 
+    expect(result.body.siblings.length).to eq(3)
     expect(result.body.siblings[0].is_a? ComplexModule::Models::Shark).to be_truthy
     expect(result.body.siblings[1].is_a? ComplexModule::Models::Sawshark).to be_truthy
+    expect(result.body.siblings[2].is_a? ComplexModule::Models::Goblinshark).to be_truthy
 
     expect(result.body.siblings[0].age).to eq(6)
     expect(result.body.siblings[1].age).to eq(105)
+    expect(result.body.siblings[2].jawsize).to eq(5)
   end
 
   it 'should put polymorphism valid' do
@@ -298,12 +301,22 @@ describe 'Complex' do
     sawshark.birthday = DateTime.new(1900, 1, 5, 1, 0, 0, 'Z')
     sawshark.picture = [255, 255, 255, 255, 254]
 
+    goblinshark = ComplexModule::Models::Goblinshark.new
+    goblinshark.age = 1
+    goblinshark.birthday = DateTime.new(2015, 8, 8, 0, 0, 0, 'Z')
+    goblinshark.length = 30.0
+    goblinshark.species = "scary"
+    goblinshark.jawsize = 5
+
     polymorphism_request = ComplexModule::Models::Salmon.new
     polymorphism_request.iswild = true
     polymorphism_request.length = 1
     polymorphism_request.species = "king"
     polymorphism_request.location = "alaska"
-    polymorphism_request.siblings = [shark, sawshark]
+    polymorphism_request.siblings = [shark, sawshark, goblinshark]
+
+	result = @client.polymorphism.put_valid(polymorphism_request).value!
+	expect(result.response.status).to eq(200)
   end
 
   # Primitive tests
@@ -410,7 +423,7 @@ describe 'Complex' do
     expect(result.body.field).to eq(DateTime.new(1, 1, 1, 0, 0, 0))
     expect(result.body.now).to eq(DateTime.new(2015, 5, 18, 18, 38, 0))
   end
-  
+
   # Test fails because of Azure's issue with server's expectations
   it 'should put dateTime' do
     date_time_wrapper = ComplexModule::DatetimeWrapper.new
@@ -422,14 +435,14 @@ describe 'Complex' do
 
   it 'should put dateTimeRfc1123' do
     pending("DateTime.new(1, 1, 1, 0, 0, 0, 'Z') is interpreted as Sat, 01 Jan 0001 00:00:00 GMT, but other languages interpret it as Mon, 01 Jan 0001...")
-    date_time_rfc1123_wrapper = ComplexModule::Datetimerfc1123Wrapper.new    
+    date_time_rfc1123_wrapper = ComplexModule::Datetimerfc1123Wrapper.new
     date_time_rfc1123_wrapper.field = DateTime.new(1, 1, 1, 0, 0, 0, 'Z')
     date_time_rfc1123_wrapper.now = DateTime.new(2015, 5, 18, 11, 38, 0, 'Z')
     expect(date_time_rfc1123_wrapper.field.new_offset(0).strftime('%a, %d %b %Y %H:%M:%S GMT')).to eq(nil)
     result = @client.primitive.put_date_time_rfc1123(date_time_rfc1123_wrapper).value!
     expect(result.response.status).to eq(200)
   end
-  
+
   it 'should get dateTimeRfc1123' do
     result = @client.primitive.get_date_time_rfc1123().value!
     expect(result.response.status).to eq(200)
@@ -437,7 +450,7 @@ describe 'Complex' do
     expect(result.body.field).to eq(DateTime.new(1, 1, 1, 0, 0, 0, 'Z'))
     expect(result.body.now).to eq(DateTime.new(2015, 5, 18, 11, 38, 0, 'Z'))
   end
-  
+
   it 'should get byte' do
     result = @client.primitive.get_byte().value!
     expect(result.response.status).to eq(200)

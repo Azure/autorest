@@ -24,7 +24,7 @@
 }
  * @@throws ServiceException the exception wrapped in ServiceException if failed.
  */
-public @Model.ReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws ServiceException {
+public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws ServiceException {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -36,10 +36,17 @@ public @Model.ReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) 
 {
 @:    Validator.validate(@(param.Name));
 }
+@foreach (var transformation in Model.InputParameterTransformation)
+{
+    var outType = transformation.OutputParameter.Type.Name;
+    var outProp = transformation.OutputParameter.Name;
+    var inParam = transformation.ParameterMappings[0].InputParameter.Name;
+    var inProp = transformation.ParameterMappings[0].InputParameterProperty;
+@:    @outType @outProp = @(inParam).get@(inProp.ToPascalCase())();
+}
     try {
         Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
-        ServiceResponse<@Model.GenericReturnTypeString> response = @(Model.Name)Delegate(call.execute(), null);
-        @Model.ReturnStatement
+        return @(Model.Name)Delegate(call.execute(), null);
     } catch (ServiceException ex) {
         throw ex;
     } catch (Exception ex) {
@@ -69,11 +76,20 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
 @:    if (@param.Name == null) {
 @:        serviceCallback.failure(new ServiceException(
 @:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null.")));
+@:        return null;
 @:    }
 }
 @foreach (var param in Model.ParametersToValidate)
 {
 @:    Validator.validate(@(param.Name), serviceCallback);
+}
+@foreach (var transformation in Model.InputParameterTransformation)
+{
+    var outType = transformation.OutputParameter.Type.Name;
+    var outProp = transformation.OutputParameter.Name;
+    var inParam = transformation.ParameterMappings[0].InputParameter.Name;
+    var inProp = transformation.ParameterMappings[0].InputParameterProperty;
+@:    @outType @outProp = @(inParam).get@(inProp.ToPascalCase())();
 }
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
     call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType).Name)>(serviceCallback) {
@@ -90,7 +106,7 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
 }
 @EmptyLine
 private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws ServiceException {
-    return new ServiceResponseBuilder<@Model.GenericReturnTypeString>()
+    return new @Model.ResponseBuilder<@Model.GenericReturnTypeString>(@Model.ServiceResponseBuilderArgs)
 @foreach (var response in Model.Responses)
 {
             @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.WrapPrimitiveType(response.Value).Name>(){}.getType())
@@ -99,7 +115,7 @@ private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Re
 {
             @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(Model.DefaultResponse).Name)>(){}.getType())
 }
-@if (Model.CallType == "Void")
+@if (Model.HttpMethod == HttpMethod.Head)
 {
             @:.buildEmpty(response, retrofit);
 }

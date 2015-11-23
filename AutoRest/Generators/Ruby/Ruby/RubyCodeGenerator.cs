@@ -113,10 +113,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 serviceClientModel.Properties.Add(new Property
                 {
                     Name = "Credentials",
-                    Type = new CompositeType
-                    {
-                        Name = "ServiceClient"
-                    },
+                    Type = PrimaryType.Credentials,
                     IsRequired = true,
                     Documentation = "Subscription credentials which uniquely identify client subscription."
                 });
@@ -154,7 +151,7 @@ namespace Microsoft.Rest.Generator.Ruby
             {
                 var modelTemplate = new ModelTemplate
                 {
-                    Model = new ModelTemplateModel(model)
+                    Model = new ModelTemplateModel(model, serviceClient.ModelTypes)
                 };
                 await Write(modelTemplate,
                     Path.Combine(modelsPath, RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));

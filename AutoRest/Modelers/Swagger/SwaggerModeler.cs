@@ -57,6 +57,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public override ServiceClient Build()
         {
             PrimaryType.Reset();
@@ -99,6 +100,10 @@ namespace Microsoft.Rest.Modeler.Swagger
                         var method = BuildMethod(verb.ToHttpMethod(), path.Key, methodName, operation);
                         method.Group = methodGroup;
                         ServiceClient.Methods.Add(method);
+                        if (method.DefaultResponse is CompositeType)
+                        {
+                            ServiceClient.ErrorTypes.Add((CompositeType)method.DefaultResponse);
+                        }
                     }
                     else
                     {
@@ -120,7 +125,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             return ServiceClient;
-        }
+        }        
 
         /// <summary>
         /// Initialize the base service and populate global service properties

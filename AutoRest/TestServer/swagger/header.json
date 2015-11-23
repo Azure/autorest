@@ -726,7 +726,7 @@
             "name": "value",
             "in": "header",
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc1123"
           }
         ],
         "responses": {

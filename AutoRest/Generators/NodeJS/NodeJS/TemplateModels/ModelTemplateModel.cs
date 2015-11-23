@@ -54,19 +54,6 @@ namespace Microsoft.Rest.Generator.NodeJS
             get { return Enumerable.Empty<string>(); }
         }
 
-        public IEnumerable<Property> ComposedProperties
-        {
-            get
-            {
-                if(this._parent != null)
-                {
-                    return _parent.ComposedProperties
-                                  .Union(this.Properties);
-                }
-                return this.Properties;
-            }
-        }
-
         public IEnumerable<Property> SerializableProperties
         {
             get { return this.Properties.Where(p => !string.IsNullOrEmpty(p.SerializedName)); }

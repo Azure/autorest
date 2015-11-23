@@ -8,7 +8,7 @@
 package com.microsoft.rest;
 
 import com.microsoft.rest.retry.RetryHandler;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.JacksonConverterFactory;
@@ -38,7 +38,7 @@ public abstract class ServiceClient {
 
         Executor executor = Executors.newCachedThreadPool();
         this.retrofitBuilder = this.retrofitBuilder
-                .addConverterFactory(JacksonConverterFactory.create(JacksonHelper.getObjectMapper()))
+                .addConverterFactory(JacksonConverterFactory.create(new JacksonUtils().getObjectMapper()))
                 .callbackExecutor(executor);
     }
 

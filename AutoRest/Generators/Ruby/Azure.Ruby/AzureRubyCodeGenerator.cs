@@ -55,12 +55,12 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             Settings.AddCredentials = true;
-            AzureCodeGenerator.UpdateHeadMethods(serviceClient);
-            AzureCodeGenerator.ParseODataExtension(serviceClient);
-            AzureCodeGenerator.AddPageableMethod(serviceClient);
-            AzureCodeGenerator.AddLongRunningOperations(serviceClient);
-            AzureCodeGenerator.AddAzureProperties(serviceClient);
-            AzureCodeGenerator.SetDefaultResponses(serviceClient);
+            AzureExtensions.UpdateHeadMethods(serviceClient);
+            AzureExtensions.ParseODataExtension(serviceClient);
+            AzureExtensions.AddPageableMethod(serviceClient);
+            AzureExtensions.AddLongRunningOperations(serviceClient);
+            AzureExtensions.AddAzureProperties(serviceClient);
+            AzureExtensions.SetDefaultResponses(serviceClient);
             CorrectFilterParameters(serviceClient);
             base.NormalizeClientModel(serviceClient);
         }
@@ -73,7 +73,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <param name="serviceClient">The service client.</param>
         public static void CorrectFilterParameters(ServiceClient serviceClient)
         {
-            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.ODataExtension)))
+            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.ODataExtension)))
             {
                 var filterParameter = method.Parameters
                     .FirstOrDefault(p => p.Location == ParameterLocation.Query && p.Name == "$filter");
@@ -113,14 +113,14 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             // Models
             foreach (var model in serviceClient.ModelTypes)
             {
-                if (model.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension) || model.Extensions.ContainsKey(AzureCodeGenerator.AzureResourceExtension))
+                if (model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) || model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension))
                 {
                     continue;
                 }
 
                 var modelTemplate = new ModelTemplate
                 {
-                    Model = new AzureModelTemplateModel(model),
+                    Model = new AzureModelTemplateModel(model, serviceClient.ModelTypes),
                 };
 
                 await Write(modelTemplate, Path.Combine(modelsPath, RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));

@@ -28,3 +28,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Tests.SwaggerModelerTests.#TestClientModelWithMethodGroups()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Tests.SwaggerModelerTests.#TestDataTypes()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Tests.SwaggerModelerTests.#TestClientWithValidation()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Tests.SwaggerModelerTests.#TestClientModelWithPayloadFlattening()")]
+
