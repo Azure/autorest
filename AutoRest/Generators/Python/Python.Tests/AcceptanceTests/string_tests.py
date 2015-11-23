@@ -29,7 +29,7 @@ class StringTests(unittest.TestCase):
 
     def test_string(self):
 
-        config = AutoRestSwaggerBATServiceConfiguration("http://localhost:3000")
+        config = AutoRestSwaggerBATServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestSwaggerBATService(config)
 

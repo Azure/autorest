@@ -27,7 +27,7 @@ class DateTests(unittest.TestCase):
 
     def test_date(self):
 
-        config = AutoRestDateTestServiceConfiguration("http://localhost:3000")
+        config = AutoRestDateTestServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestDateTestService(config)
 
@@ -40,7 +40,7 @@ class DateTests(unittest.TestCase):
         self.assertEqual(min_date, client.date_model.get_min_date())
         self.assertIsNone(client.date_model.get_null())
 
-        # TODO
+        # Python isodate.parse support too wild input, and won't raise error
         #with self.assertRaises(DeserializationError):
         #    client.date_model.get_invalid_date()
 

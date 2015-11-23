@@ -27,7 +27,7 @@ class ByteTests(unittest.TestCase):
 
     def test_byte(self):
 
-        config = AutoRestSwaggerBATByteServiceConfiguration("http://localhost:3000")
+        config = AutoRestSwaggerBATByteServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestSwaggerBATByteService(config)
 

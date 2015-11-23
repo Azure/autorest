@@ -23,7 +23,7 @@ class DictionaryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
 
-        config = AutoRestSwaggerBATdictionaryServiceConfiguration("http://localhost:3000")
+        config = AutoRestSwaggerBATdictionaryServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = 10
         cls.client = AutoRestSwaggerBATdictionaryService(config)
         return super(DictionaryTests, cls).setUpClass()

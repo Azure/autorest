@@ -24,7 +24,7 @@ class FileTests(unittest.TestCase):
 
     def test_files(self):
 
-        config = AutoRestSwaggerBATFileServiceConfiguration("http://localhost:3000")
+        config = AutoRestSwaggerBATFileServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestSwaggerBATFileService(config)
 

@@ -27,7 +27,7 @@ class DatetimeTests(unittest.TestCase):
 
     def test_datetime(self):
 
-        config = AutoRestDateTimeTestServiceConfiguration("http://localhost:3000")
+        config = AutoRestDateTimeTestServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestDateTimeTestService(config)
 

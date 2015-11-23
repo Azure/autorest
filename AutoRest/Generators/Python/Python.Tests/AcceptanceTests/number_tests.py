@@ -27,7 +27,7 @@ class NumberTests(unittest.TestCase):
 
     def test_numbers(self):
 
-        config = AutoRestNumberTestServiceConfiguration("http://localhost:3000")
+        config = AutoRestNumberTestServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestNumberTestService(config)
 

@@ -27,27 +27,26 @@ class IntegerTests(unittest.TestCase):
 
     def test_integer(self):
 
-        config = AutoRestIntegerTestServiceConfiguration("http://localhost:3000")
+        config = AutoRestIntegerTestServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestIntegerTestService(config)
 
         client.int_model.put_max32(sys.maxint)
 
-        # TODO
-        #client.int_model.put_min32()
+        client.int_model.put_min32(0 - sys.maxint - 1)
 
-        client.int_model.put_max64(sys.maxsize)
-        client.int_model.put_min64(0 - sys.maxsize)
+        client.int_model.put_max64(9223372036854776000)  #sys.maxsize
+        client.int_model.put_min64(-9223372036854776000)  #0 - sys.maxsize
         client.int_model.get_null()
 
         with self.assertRaises(DeserializationError):
             client.int_model.get_invalid()
 
         # These wont fail in Python
-        client.int_model.get_overflow_int32()
-        client.int_model.get_overflow_int64()
-        client.int_model.get_underflow_int32()
-        client.int_model.get_underflow_int64()
+        #client.int_model.get_overflow_int32()
+        #client.int_model.get_overflow_int64()
+        #client.int_model.get_underflow_int32()
+        #client.int_model.get_underflow_int64()
 
 
 if __name__ == '__main__':

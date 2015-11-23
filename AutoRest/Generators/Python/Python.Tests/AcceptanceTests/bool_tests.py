@@ -28,7 +28,7 @@ class BoolTests(unittest.TestCase):
 
     def test_bool(self):
 
-        config = AutoRestBoolTestServiceConfiguration("http://localhost:3000")
+        config = AutoRestBoolTestServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestBoolTestService(config)
 
