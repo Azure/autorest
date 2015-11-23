@@ -42,8 +42,7 @@ class RequiredOptionalTests(unittest.TestCase):
         self.client.implicit.put_optional_body(None)
         self.client.implicit.put_optional_header(None)
 
-        # TODO
-        #self.client.implicit.get_optional_global_query(None)
+        self.client.implicit.get_optional_global_query(None)
 
         self.client.explicit.post_optional_integer_parameter(None)
         self.client.explicit.post_optional_integer_property(None)

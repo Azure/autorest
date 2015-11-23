@@ -168,7 +168,7 @@ class DictionaryTests(unittest.TestCase):
         with self.assertRaises(DeserializationError):
             self.client.dictionary.get_invalid()
 
-        # TODO
+        # TODO {null:"val1"} is not standard JSON format (JSON require key as string. Should we skip this case
         #self.assertEqual({"None":"val1"}, self.client.dictionary.get_null_key())
         self.assertEqual({"key1":None}, self.client.dictionary.get_null_value())
         self.assertEqual({"":"val1"}, self.client.dictionary.get_empty_string_key())    

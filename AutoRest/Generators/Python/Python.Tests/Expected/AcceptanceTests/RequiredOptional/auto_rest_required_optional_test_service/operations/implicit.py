@@ -60,7 +60,8 @@ class implicit(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -103,7 +104,8 @@ class implicit(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -144,7 +146,8 @@ class implicit(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
         if query_parameter is not None:
             header_parameters['queryParameter'] = self._serialize.header("query_parameter", query_parameter, 'str')
 
@@ -187,7 +190,8 @@ class implicit(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct body
         if body_parameter is not None:
@@ -237,7 +241,8 @@ class implicit(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -278,7 +283,8 @@ class implicit(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -320,7 +326,8 @@ class implicit(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters.update(custom_headers)
+        if custom_headers:
+            header_parameters.update(custom_headers)
 
         # Construct and send request
         request = self._client.get(url, query_parameters)

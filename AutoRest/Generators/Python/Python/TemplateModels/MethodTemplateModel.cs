@@ -388,7 +388,7 @@ namespace Microsoft.Rest.Generator.Python
                 if (this.AddCustomHeader)
                 {
                     var sb = new IndentedStringBuilder();
-                    sb.AppendLine("header_parameters.update(custom_headers)");
+                    sb.AppendLine("if custom_headers:").Indent().AppendLine("header_parameters.update(custom_headers)").Outdent();
                     return sb.ToString();
                 }
                 else
