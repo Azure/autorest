@@ -22,4 +22,6 @@ class Cookiecuttershark(Shark):
 
     def __init__(self, *args, **kwargs):
 
+        self.fishtype = 'cookiecuttershark'
+
         super(Cookiecuttershark, self).__init__(*args, **kwargs)

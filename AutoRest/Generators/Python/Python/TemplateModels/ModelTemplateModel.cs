@@ -334,6 +334,14 @@ namespace Microsoft.Rest.Generator.Python
             return property.Type.NullInitializeType(_scope, objectName + "." + property.Name);
         }
 
+        public bool NeedsPolymorphicConverter
+        {
+            get
+            {
+                return this.IsPolymorphic && BaseModelType != null;
+            }
+        }
+
         /// <summary>
         /// Provides the property name in the correct jsdoc notation depending on 
         /// whether it is required or optional
