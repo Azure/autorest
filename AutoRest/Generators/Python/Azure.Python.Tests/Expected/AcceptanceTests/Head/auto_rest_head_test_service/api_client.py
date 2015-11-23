@@ -13,7 +13,6 @@ from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
 from .operations.http_success_operations import http_successOperations
-from . import models
 
 
 class AutoRestHeadTestServiceConfiguration(AzureConfiguration):
@@ -36,7 +35,7 @@ class AutoRestHeadTestService(object):
 
         self._client = ServiceClient(config.credentials, config)
 
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        client_models = {}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 

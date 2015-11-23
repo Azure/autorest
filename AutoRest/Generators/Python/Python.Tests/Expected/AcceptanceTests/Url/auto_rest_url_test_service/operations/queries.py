@@ -26,20 +26,6 @@ class queries(object):
 
         self.config = config
 
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
-
     @async_request
     def get_boolean_true(self, bool_query=None, custom_headers={}, raw=False, callback=None):
         """
@@ -66,7 +52,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if bool_query is not None:
-            query_parameters['boolQuery'] = self._serialize_data("bool_query", bool_query, 'bool')
+            query_parameters['boolQuery'] = self._serialize.query("bool_query", bool_query, 'bool')
 
         # Construct headers
         header_parameters = {}
@@ -109,7 +95,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if bool_query is not None:
-            query_parameters['boolQuery'] = self._serialize_data("bool_query", bool_query, 'bool')
+            query_parameters['boolQuery'] = self._serialize.query("bool_query", bool_query, 'bool')
 
         # Construct headers
         header_parameters = {}
@@ -152,7 +138,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if bool_query is not None:
-            query_parameters['boolQuery'] = self._serialize_data("bool_query", bool_query, 'bool')
+            query_parameters['boolQuery'] = self._serialize.query("bool_query", bool_query, 'bool')
 
         # Construct headers
         header_parameters = {}
@@ -195,7 +181,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if int_query is not None:
-            query_parameters['intQuery'] = self._serialize_data("int_query", int_query, 'int')
+            query_parameters['intQuery'] = self._serialize.query("int_query", int_query, 'int')
 
         # Construct headers
         header_parameters = {}
@@ -238,7 +224,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if int_query is not None:
-            query_parameters['intQuery'] = self._serialize_data("int_query", int_query, 'int')
+            query_parameters['intQuery'] = self._serialize.query("int_query", int_query, 'int')
 
         # Construct headers
         header_parameters = {}
@@ -281,7 +267,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if int_query is not None:
-            query_parameters['intQuery'] = self._serialize_data("int_query", int_query, 'int')
+            query_parameters['intQuery'] = self._serialize.query("int_query", int_query, 'int')
 
         # Construct headers
         header_parameters = {}
@@ -324,7 +310,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if long_query is not None:
-            query_parameters['longQuery'] = self._serialize_data("long_query", long_query, 'long')
+            query_parameters['longQuery'] = self._serialize.query("long_query", long_query, 'long')
 
         # Construct headers
         header_parameters = {}
@@ -367,7 +353,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if long_query is not None:
-            query_parameters['longQuery'] = self._serialize_data("long_query", long_query, 'long')
+            query_parameters['longQuery'] = self._serialize.query("long_query", long_query, 'long')
 
         # Construct headers
         header_parameters = {}
@@ -410,7 +396,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if long_query is not None:
-            query_parameters['longQuery'] = self._serialize_data("long_query", long_query, 'long')
+            query_parameters['longQuery'] = self._serialize.query("long_query", long_query, 'long')
 
         # Construct headers
         header_parameters = {}
@@ -453,7 +439,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if float_query is not None:
-            query_parameters['floatQuery'] = self._serialize_data("float_query", float_query, 'float')
+            query_parameters['floatQuery'] = self._serialize.query("float_query", float_query, 'float')
 
         # Construct headers
         header_parameters = {}
@@ -496,7 +482,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if float_query is not None:
-            query_parameters['floatQuery'] = self._serialize_data("float_query", float_query, 'float')
+            query_parameters['floatQuery'] = self._serialize.query("float_query", float_query, 'float')
 
         # Construct headers
         header_parameters = {}
@@ -539,7 +525,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if float_query is not None:
-            query_parameters['floatQuery'] = self._serialize_data("float_query", float_query, 'float')
+            query_parameters['floatQuery'] = self._serialize.query("float_query", float_query, 'float')
 
         # Construct headers
         header_parameters = {}
@@ -582,7 +568,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if double_query is not None:
-            query_parameters['doubleQuery'] = self._serialize_data("double_query", double_query, 'float')
+            query_parameters['doubleQuery'] = self._serialize.query("double_query", double_query, 'float')
 
         # Construct headers
         header_parameters = {}
@@ -625,7 +611,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if double_query is not None:
-            query_parameters['doubleQuery'] = self._serialize_data("double_query", double_query, 'float')
+            query_parameters['doubleQuery'] = self._serialize.query("double_query", double_query, 'float')
 
         # Construct headers
         header_parameters = {}
@@ -668,7 +654,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if double_query is not None:
-            query_parameters['doubleQuery'] = self._serialize_data("double_query", double_query, 'float')
+            query_parameters['doubleQuery'] = self._serialize.query("double_query", double_query, 'float')
 
         # Construct headers
         header_parameters = {}
@@ -712,7 +698,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if string_query is not None:
-            query_parameters['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
+            query_parameters['stringQuery'] = self._serialize.query("string_query", string_query, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -757,7 +743,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if string_query is not None:
-            query_parameters['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
+            query_parameters['stringQuery'] = self._serialize.query("string_query", string_query, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -801,7 +787,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if string_query is not None:
-            query_parameters['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
+            query_parameters['stringQuery'] = self._serialize.query("string_query", string_query, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -844,7 +830,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if string_query is not None:
-            query_parameters['stringQuery'] = self._serialize_data("string_query", string_query, 'str')
+            query_parameters['stringQuery'] = self._serialize.query("string_query", string_query, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -888,7 +874,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if enum_query is not None:
-            query_parameters['enumQuery'] = self._serialize_data("enum_query", enum_query, 'UriColor')
+            query_parameters['enumQuery'] = self._serialize.query("enum_query", enum_query, 'UriColor')
 
         # Construct headers
         header_parameters = {}
@@ -932,7 +918,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if enum_query is not None:
-            query_parameters['enumQuery'] = self._serialize_data("enum_query", enum_query, 'UriColor')
+            query_parameters['enumQuery'] = self._serialize.query("enum_query", enum_query, 'UriColor')
 
         # Construct headers
         header_parameters = {}
@@ -976,7 +962,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if byte_query is not None:
-            query_parameters['byteQuery'] = self._serialize_data("byte_query", byte_query, 'bytearray')
+            query_parameters['byteQuery'] = self._serialize.query("byte_query", byte_query, 'bytearray')
 
         # Construct headers
         header_parameters = {}
@@ -1019,7 +1005,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if byte_query is not None:
-            query_parameters['byteQuery'] = self._serialize_data("byte_query", byte_query, 'bytearray')
+            query_parameters['byteQuery'] = self._serialize.query("byte_query", byte_query, 'bytearray')
 
         # Construct headers
         header_parameters = {}
@@ -1062,7 +1048,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if byte_query is not None:
-            query_parameters['byteQuery'] = self._serialize_data("byte_query", byte_query, 'bytearray')
+            query_parameters['byteQuery'] = self._serialize.query("byte_query", byte_query, 'bytearray')
 
         # Construct headers
         header_parameters = {}
@@ -1105,7 +1091,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if date_query is not None:
-            query_parameters['dateQuery'] = self._serialize_data("date_query", date_query, 'date')
+            query_parameters['dateQuery'] = self._serialize.query("date_query", date_query, 'date')
 
         # Construct headers
         header_parameters = {}
@@ -1148,7 +1134,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if date_query is not None:
-            query_parameters['dateQuery'] = self._serialize_data("date_query", date_query, 'date')
+            query_parameters['dateQuery'] = self._serialize.query("date_query", date_query, 'date')
 
         # Construct headers
         header_parameters = {}
@@ -1191,7 +1177,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if date_time_query is not None:
-            query_parameters['dateTimeQuery'] = self._serialize_data("date_time_query", date_time_query, 'iso-8601')
+            query_parameters['dateTimeQuery'] = self._serialize.query("date_time_query", date_time_query, 'iso-8601')
 
         # Construct headers
         header_parameters = {}
@@ -1234,7 +1220,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if date_time_query is not None:
-            query_parameters['dateTimeQuery'] = self._serialize_data("date_time_query", date_time_query, 'iso-8601')
+            query_parameters['dateTimeQuery'] = self._serialize.query("date_time_query", date_time_query, 'iso-8601')
 
         # Construct headers
         header_parameters = {}
@@ -1279,7 +1265,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if array_query is not None:
-            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=',')
+            query_parameters['arrayQuery'] = self._serialize.query("array_query", array_query, '[str]', div=',')
 
         # Construct headers
         header_parameters = {}
@@ -1322,7 +1308,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if array_query is not None:
-            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=',')
+            query_parameters['arrayQuery'] = self._serialize.query("array_query", array_query, '[str]', div=',')
 
         # Construct headers
         header_parameters = {}
@@ -1366,7 +1352,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if array_query is not None:
-            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=',')
+            query_parameters['arrayQuery'] = self._serialize.query("array_query", array_query, '[str]', div=',')
 
         # Construct headers
         header_parameters = {}
@@ -1411,7 +1397,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if array_query is not None:
-            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div=' ')
+            query_parameters['arrayQuery'] = self._serialize.query("array_query", array_query, '[str]', div=' ')
 
         # Construct headers
         header_parameters = {}
@@ -1456,7 +1442,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if array_query is not None:
-            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div='	')
+            query_parameters['arrayQuery'] = self._serialize.query("array_query", array_query, '[str]', div='	')
 
         # Construct headers
         header_parameters = {}
@@ -1501,7 +1487,7 @@ class queries(object):
         # Construct parameters
         query_parameters = {}
         if array_query is not None:
-            query_parameters['arrayQuery'] = self._serialize_data("array_query", array_query, '[str]', div='|')
+            query_parameters['arrayQuery'] = self._serialize.query("array_query", array_query, '[str]', div='|')
 
         # Construct headers
         header_parameters = {}

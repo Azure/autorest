@@ -28,20 +28,6 @@ class xms_client_request_idOperations(object):
 
         self.config = config
 
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
-
     @async_request
     def get(self, custom_headers={}, raw=False, callback=None):
         """
@@ -73,7 +59,7 @@ class xms_client_request_idOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -118,9 +104,9 @@ class xms_client_request_idOperations(object):
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
-        header_parameters['x-ms-client-request-id'] = self._serialize_data("x_ms_client_request_id", x_ms_client_request_id, 'str')
+        header_parameters['x-ms-client-request-id'] = self._serialize.header("x_ms_client_request_id", x_ms_client_request_id, 'str')
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
         request = self._client.get(url, query_parameters)

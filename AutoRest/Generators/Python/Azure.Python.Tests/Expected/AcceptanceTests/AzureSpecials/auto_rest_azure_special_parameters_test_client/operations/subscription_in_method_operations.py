@@ -28,20 +28,6 @@ class subscription_in_methodOperations(object):
 
         self.config = config
 
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
-
     @async_request
     def post_method_local_valid(self, subscription_id, custom_headers={}, raw=False, callback=None):
         """
@@ -67,7 +53,7 @@ class subscription_in_methodOperations(object):
         # Construct URL
         url = '/azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}'
         path_format_arguments = {
-            'subscriptionId': self._serialize_data("subscription_id", subscription_id, 'str')
+            'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str')
         }
         url = url.format(**path_format_arguments)
 
@@ -80,7 +66,7 @@ class subscription_in_methodOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -118,7 +104,7 @@ class subscription_in_methodOperations(object):
         # Construct URL
         url = '/azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}'
         path_format_arguments = {
-            'subscriptionId': self._serialize_data("subscription_id", subscription_id, 'str')
+            'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str')
         }
         url = url.format(**path_format_arguments)
 
@@ -131,7 +117,7 @@ class subscription_in_methodOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -168,7 +154,7 @@ class subscription_in_methodOperations(object):
         # Construct URL
         url = '/azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}'
         path_format_arguments = {
-            'subscriptionId': self._serialize_data("subscription_id", subscription_id, 'str')
+            'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str')
         }
         url = url.format(**path_format_arguments)
 
@@ -181,7 +167,7 @@ class subscription_in_methodOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -218,7 +204,7 @@ class subscription_in_methodOperations(object):
         # Construct URL
         url = '/azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}'
         path_format_arguments = {
-            'subscriptionId': self._serialize_data("subscription_id", subscription_id, 'str')
+            'subscriptionId': self._serialize.url("subscription_id", subscription_id, 'str')
         }
         url = url.format(**path_format_arguments)
 
@@ -231,7 +217,7 @@ class subscription_in_methodOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)

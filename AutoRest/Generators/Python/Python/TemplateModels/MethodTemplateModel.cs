@@ -81,7 +81,7 @@ namespace Microsoft.Rest.Generator.Python
             {
                 if (DefaultResponse == null)
                 {
-                    return "HttpOperationException(self._deserialize, response)";
+                    return "HttpOperationError(self._deserialize, response)";
                 }
                 else if (DefaultResponse is CompositeType)
                 {
@@ -89,7 +89,7 @@ namespace Microsoft.Rest.Generator.Python
                 }
                 else
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "HttpOperationException(self._deserialize, response, '{0}')", DefaultResponse.ToPythonRuntimeTypeString());
+                    return string.Format(CultureInfo.InvariantCulture, "HttpOperationError(self._deserialize, response, '{0}')", DefaultResponse.ToPythonRuntimeTypeString());
                 }
             }
         }
@@ -125,7 +125,7 @@ namespace Microsoft.Rest.Generator.Python
             return declaration;
         }
 
-        private static string BuildSerializeDataCall(Parameter parameter)
+        private static string BuildSerializeDataCall(Parameter parameter, string functionName)
         {
             string divChar = ClientModelExtensions.NeedsFormattedSeparator(parameter);
             string divParameter = string.Empty;
@@ -136,7 +136,8 @@ namespace Microsoft.Rest.Generator.Python
             }
 
             return string.Format(CultureInfo.InvariantCulture,
-                    "self._serialize_data(\"{0}\", {0}, '{1}'{2}{3})",
+                    "self._serialize.{0}(\"{1}\", {1}, '{2}'{3}{4})",
+                        functionName,
                         parameter.Name,
                         parameter.Type.ToPythonRuntimeTypeString(),
                         parameter.SkipUrlEncoding() ? ", skip_quote=True" : string.Empty,
@@ -162,7 +163,7 @@ namespace Microsoft.Rest.Generator.Python
                 {
                     builder.AppendLine("'{0}': {1}{2}{3}",
                         pathParameterList[i].SerializedName,
-                        BuildSerializeDataCall(pathParameterList[i]),
+                        BuildSerializeDataCall(pathParameterList[i], "url"),
                         pathParameterList[i].IsRequired ? string.Empty :
                             string.Format(CultureInfo.InvariantCulture, "if {0} else ''", pathParameterList[i].Name),
                         i == pathParameterList.Count-1 ? "" : ",");
@@ -192,7 +193,7 @@ namespace Microsoft.Rest.Generator.Python
                     builder.AppendLine("{0}['{1}'] = {2}",
                                 variableName,
                                 queryParameter.SerializedName,
-                                BuildSerializeDataCall(queryParameter));
+                                BuildSerializeDataCall(queryParameter, "query"));
                 }
                 else
                 {
@@ -201,7 +202,7 @@ namespace Microsoft.Rest.Generator.Python
                         .AppendLine("{0}['{1}'] = {2}",
                                 variableName,
                                 queryParameter.SerializedName,
-                                BuildSerializeDataCall(queryParameter))
+                                BuildSerializeDataCall(queryParameter, "query"))
                         .Outdent();
                 }
             }
@@ -225,7 +226,7 @@ namespace Microsoft.Rest.Generator.Python
                     builder.AppendLine("{0}['{1}'] = {2}",
                             variableName,
                             headerParameter.SerializedName,
-                            BuildSerializeDataCall(headerParameter));
+                            BuildSerializeDataCall(headerParameter, "header"));
                 }
                 else
                 {
@@ -233,8 +234,8 @@ namespace Microsoft.Rest.Generator.Python
                         .Indent()
                         .AppendLine("{0}['{1}'] = {2}", 
                             variableName,
-                            headerParameter.SerializedName, 
-                            BuildSerializeDataCall(headerParameter))
+                            headerParameter.SerializedName,
+                            BuildSerializeDataCall(headerParameter, "header"))
                         .Outdent();
                 }
             }

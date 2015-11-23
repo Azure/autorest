@@ -28,20 +28,6 @@ class groupOperations(object):
 
         self.config = config
 
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
-
     @async_request
     def get_sample_resource_group(self, resource_group_name, custom_headers={}, raw=False, callback=None):
         """
@@ -67,14 +53,14 @@ class groupOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}'
         path_format_arguments = {
-            'subscriptionId': self._serialize_data("self.config.subscription_id", self.config.subscription_id, 'str'),
-            'resourceGroupName': self._serialize_data("resource_group_name", resource_group_name, 'str')
+            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str'),
+            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['api-version'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -82,7 +68,7 @@ class groupOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
         request = self._client.get(url, query_parameters)

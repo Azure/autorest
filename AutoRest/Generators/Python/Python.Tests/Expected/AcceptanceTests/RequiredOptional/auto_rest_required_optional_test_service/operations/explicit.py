@@ -26,20 +26,6 @@ class explicit(object):
 
         self.config = config
 
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
-
     @async_request
     def post_required_integer_parameter(self, body_parameter, custom_headers={}, raw=False, callback=None):
         """
@@ -261,7 +247,7 @@ class explicit(object):
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
         header_parameters.update(custom_headers)
-        header_parameters['headerParameter'] = self._serialize_data("header_parameter", header_parameter, 'int')
+        header_parameters['headerParameter'] = self._serialize.header("header_parameter", header_parameter, 'int')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -305,7 +291,7 @@ class explicit(object):
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
         header_parameters.update(custom_headers)
         if header_parameter is not None:
-            header_parameters['headerParameter'] = self._serialize_data("header_parameter", header_parameter, 'int')
+            header_parameters['headerParameter'] = self._serialize.header("header_parameter", header_parameter, 'int')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -538,7 +524,7 @@ class explicit(object):
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
         header_parameters.update(custom_headers)
-        header_parameters['headerParameter'] = self._serialize_data("header_parameter", header_parameter, 'str')
+        header_parameters['headerParameter'] = self._serialize.header("header_parameter", header_parameter, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -582,7 +568,7 @@ class explicit(object):
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
         header_parameters.update(custom_headers)
         if body_parameter is not None:
-            header_parameters['bodyParameter'] = self._serialize_data("body_parameter", body_parameter, 'str')
+            header_parameters['bodyParameter'] = self._serialize.header("body_parameter", body_parameter, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1003,7 +989,7 @@ class explicit(object):
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
         header_parameters.update(custom_headers)
-        header_parameters['headerParameter'] = self._serialize_data("header_parameter", header_parameter, '[str]', div=',')
+        header_parameters['headerParameter'] = self._serialize.header("header_parameter", header_parameter, '[str]', div=',')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1047,7 +1033,7 @@ class explicit(object):
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
         header_parameters.update(custom_headers)
         if header_parameter is not None:
-            header_parameters['headerParameter'] = self._serialize_data("header_parameter", header_parameter, '[str]', div=',')
+            header_parameters['headerParameter'] = self._serialize.header("header_parameter", header_parameter, '[str]', div=',')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)

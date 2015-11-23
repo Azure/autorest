@@ -28,20 +28,6 @@ class parameter_groupingOperations(object):
 
         self.config = config
 
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
-
     @async_request
     def post_required(self, parameter_grouping_post_required_parameters, custom_headers={}, raw=False, callback=None):
         """
@@ -79,14 +65,14 @@ class parameter_groupingOperations(object):
         # Construct URL
         url = '/parameterGrouping/postRequired/{path}'
         path_format_arguments = {
-            'path': self._serialize_data("path", path, 'str')
+            'path': self._serialize.url("path", path, 'str')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
         if query is not None:
-            query_parameters['query'] = self._serialize_data("query", query, 'int')
+            query_parameters['query'] = self._serialize.query("query", query, 'int')
 
         # Construct headers
         header_parameters = {}
@@ -94,9 +80,9 @@ class parameter_groupingOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
         if custom_header is not None:
-            header_parameters['customHeader'] = self._serialize_data("custom_header", custom_header, 'str')
+            header_parameters['customHeader'] = self._serialize.header("custom_header", custom_header, 'str')
 
         # Construct body
         body_content = self._serialize(body, 'int')
@@ -145,7 +131,7 @@ class parameter_groupingOperations(object):
         # Construct parameters
         query_parameters = {}
         if query is not None:
-            query_parameters['query'] = self._serialize_data("query", query, 'int')
+            query_parameters['query'] = self._serialize.query("query", query, 'int')
 
         # Construct headers
         header_parameters = {}
@@ -153,9 +139,9 @@ class parameter_groupingOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
         if custom_header is not None:
-            header_parameters['customHeader'] = self._serialize_data("custom_header", custom_header, 'str')
+            header_parameters['customHeader'] = self._serialize.header("custom_header", custom_header, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -212,9 +198,9 @@ class parameter_groupingOperations(object):
         # Construct parameters
         query_parameters = {}
         if query_one is not None:
-            query_parameters['query-one'] = self._serialize_data("query_one", query_one, 'int')
+            query_parameters['query-one'] = self._serialize.query("query_one", query_one, 'int')
         if query_two is not None:
-            query_parameters['query-two'] = self._serialize_data("query_two", query_two, 'int')
+            query_parameters['query-two'] = self._serialize.query("query_two", query_two, 'int')
 
         # Construct headers
         header_parameters = {}
@@ -222,11 +208,11 @@ class parameter_groupingOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
         if header_one is not None:
-            header_parameters['header-one'] = self._serialize_data("header_one", header_one, 'str')
+            header_parameters['header-one'] = self._serialize.header("header_one", header_one, 'str')
         if header_two is not None:
-            header_parameters['header-two'] = self._serialize_data("header_two", header_two, 'str')
+            header_parameters['header-two'] = self._serialize.header("header_two", header_two, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -271,7 +257,7 @@ class parameter_groupingOperations(object):
         # Construct parameters
         query_parameters = {}
         if query_one is not None:
-            query_parameters['query-one'] = self._serialize_data("query_one", query_one, 'int')
+            query_parameters['query-one'] = self._serialize.query("query_one", query_one, 'int')
 
         # Construct headers
         header_parameters = {}
@@ -279,9 +265,9 @@ class parameter_groupingOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
         if header_one is not None:
-            header_parameters['header-one'] = self._serialize_data("header_one", header_one, 'str')
+            header_parameters['header-one'] = self._serialize.header("header_one", header_one, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)

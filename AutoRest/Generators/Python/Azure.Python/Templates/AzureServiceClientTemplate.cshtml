@@ -28,7 +28,10 @@ import uuid
 @:from .operations.@(modelGroupType.MethodGroupType.ToPythonCase()) import @modelGroupType.MethodGroupType
   }
 }
-from . import models
+@if (Model.HasAnyModel)
+{
+@:from . import models
+}
 @EmptyLine
 @EmptyLine
 class @(Model.Name)Configuration(AzureConfiguration):
@@ -77,36 +80,24 @@ class @(Model.Name)(object):
 @EmptyLine
         self._client = ServiceClient(@(Model.Properties.Any(p => p.Type == PrimaryType.Credentials) ? "config.credentials" : "None"), config)
 @EmptyLine
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+@if (Model.ModelTemplateModels.Any())
+{
+        @:client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+}
+else
+{
+        @:client_models = {}
+}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 @EmptyLine
         self.config = config
-  @foreach (var methodGroup in Model.MethodGroupModels)
-  {
-        @:self.@(methodGroup.MethodGroupName) = @(methodGroup.MethodGroupType)(self._client, self.config, self._serialize, self._deserialize)
-  }
-@if (Model.MethodTemplateModels.Any())
+@foreach (var methodGroup in Model.MethodGroupModels)
 {
-<text>
-@EmptyLine
-    def _serialize_data(self, name, value, datatype, **kwargs):
-@EmptyLine
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-@EmptyLine
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-@EmptyLine
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-@EmptyLine
-        else:
-            return value
-</text>
-  foreach (var method in Model.MethodTemplateModels)
-  {
+        @:self.@(methodGroup.MethodGroupName) = @(methodGroup.MethodGroupType)(self._client, self.config, self._serialize, self._deserialize)
+}
+@foreach (var method in Model.MethodTemplateModels)
+{
 @EmptyLine
 @(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
-  }
 }

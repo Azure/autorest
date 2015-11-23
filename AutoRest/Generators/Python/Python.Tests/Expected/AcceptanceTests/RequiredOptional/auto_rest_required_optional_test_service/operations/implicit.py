@@ -26,20 +26,6 @@ class implicit(object):
 
         self.config = config
 
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
-
     @async_request
     def get_required_path(self, path_parameter, custom_headers={}, raw=False, callback=None):
         """
@@ -64,7 +50,7 @@ class implicit(object):
         # Construct URL
         url = '/reqopt/implicit/required/path/{pathParameter}'
         path_format_arguments = {
-            'pathParameter': self._serialize_data("path_parameter", path_parameter, 'str')
+            'pathParameter': self._serialize.url("path_parameter", path_parameter, 'str')
         }
         url = url.format(**path_format_arguments)
 
@@ -112,7 +98,7 @@ class implicit(object):
         # Construct parameters
         query_parameters = {}
         if query_parameter is not None:
-            query_parameters['queryParameter'] = self._serialize_data("query_parameter", query_parameter, 'str')
+            query_parameters['queryParameter'] = self._serialize.query("query_parameter", query_parameter, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -160,7 +146,7 @@ class implicit(object):
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
         header_parameters.update(custom_headers)
         if query_parameter is not None:
-            header_parameters['queryParameter'] = self._serialize_data("query_parameter", query_parameter, 'str')
+            header_parameters['queryParameter'] = self._serialize.header("query_parameter", query_parameter, 'str')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -241,7 +227,7 @@ class implicit(object):
         # Construct URL
         url = '/reqopt/global/required/path/{required-global-path}'
         path_format_arguments = {
-            'required-global-path': self._serialize_data("self.config.required_global_path", self.config.required_global_path, 'str')
+            'required-global-path': self._serialize.url("self.config.required_global_path", self.config.required_global_path, 'str')
         }
         url = url.format(**path_format_arguments)
 
@@ -287,7 +273,7 @@ class implicit(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['required-global-query'] = self._serialize_data("self.config.required_global_query", self.config.required_global_query, 'str')
+        query_parameters['required-global-query'] = self._serialize.query("self.config.required_global_query", self.config.required_global_query, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -329,7 +315,7 @@ class implicit(object):
         # Construct parameters
         query_parameters = {}
         if self.config.optional_global_query is not None:
-            query_parameters['optional-global-query'] = self._serialize_data("self.config.optional_global_query", self.config.optional_global_query, 'int')
+            query_parameters['optional-global-query'] = self._serialize.query("self.config.optional_global_query", self.config.optional_global_query, 'int')
 
         # Construct headers
         header_parameters = {}

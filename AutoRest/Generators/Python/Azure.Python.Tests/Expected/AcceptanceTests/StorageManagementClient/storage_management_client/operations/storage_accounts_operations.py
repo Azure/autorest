@@ -28,20 +28,6 @@ class storage_accountsOperations(object):
 
         self.config = config
 
-    def _serialize_data(self, name, value, datatype, **kwargs):
-
-        try:
-            value = self._serialize.serialize_data(value, datatype, **kwargs)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
-        except DeserializationError:
-            raise TypeError("{} must be type {}.".format(name, datatype))
-
-        else:
-            return value
-
     @async_request
     def check_name_availability(self, account_name, custom_headers={}, raw=False, callback=None):
         """
@@ -68,13 +54,13 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability'
         path_format_arguments = {
-            'subscriptionId': self._serialize_data("self.config.subscription_id", self.config.subscription_id, 'str')
+            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['api-version'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -82,7 +68,7 @@ class storage_accountsOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
         body_content = self._serialize(account_name, 'StorageAccountCheckNameAvailabilityParameters')
@@ -139,15 +125,15 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName': self._serialize_data("resource_group_name", resource_group_name, 'str'),
-            'accountName': self._serialize_data("account_name", account_name, 'str'),
-            'subscriptionId': self._serialize_data("self.config.subscription_id", self.config.subscription_id, 'str')
+            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+            'accountName': self._serialize.url("account_name", account_name, 'str'),
+            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['api-version'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -155,7 +141,7 @@ class storage_accountsOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
         body_content = self._serialize(parameters, 'StorageAccountCreateParameters')
@@ -212,15 +198,15 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName': self._serialize_data("resource_group_name", resource_group_name, 'str'),
-            'accountName': self._serialize_data("account_name", account_name, 'str'),
-            'subscriptionId': self._serialize_data("self.config.subscription_id", self.config.subscription_id, 'str')
+            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+            'accountName': self._serialize.url("account_name", account_name, 'str'),
+            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['api-version'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -228,7 +214,7 @@ class storage_accountsOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
         body_content = self._serialize(parameters, 'StorageAccountCreateParameters')
@@ -278,15 +264,15 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName': self._serialize_data("resource_group_name", resource_group_name, 'str'),
-            'accountName': self._serialize_data("account_name", account_name, 'str'),
-            'subscriptionId': self._serialize_data("self.config.subscription_id", self.config.subscription_id, 'str')
+            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+            'accountName': self._serialize.url("account_name", account_name, 'str'),
+            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['api-version'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -294,14 +280,14 @@ class storage_accountsOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
         response = self._client.send(request, header_parameters)
 
         if response.status_code not in [200, 204]:
-            raise HttpOperationException(self._deserialize, response)
+            raise HttpOperationError(self._deserialize, response)
 
         if raw:
             return None, response
@@ -337,15 +323,15 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName': self._serialize_data("resource_group_name", resource_group_name, 'str'),
-            'accountName': self._serialize_data("account_name", account_name, 'str'),
-            'subscriptionId': self._serialize_data("self.config.subscription_id", self.config.subscription_id, 'str')
+            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+            'accountName': self._serialize.url("account_name", account_name, 'str'),
+            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['api-version'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -353,7 +339,7 @@ class storage_accountsOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
@@ -413,15 +399,15 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName': self._serialize_data("resource_group_name", resource_group_name, 'str'),
-            'accountName': self._serialize_data("account_name", account_name, 'str'),
-            'subscriptionId': self._serialize_data("self.config.subscription_id", self.config.subscription_id, 'str')
+            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+            'accountName': self._serialize.url("account_name", account_name, 'str'),
+            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['api-version'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -429,7 +415,7 @@ class storage_accountsOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
         body_content = self._serialize(parameters, 'StorageAccountUpdateParameters')
@@ -477,15 +463,15 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
         path_format_arguments = {
-            'resourceGroupName': self._serialize_data("resource_group_name", resource_group_name, 'str'),
-            'accountName': self._serialize_data("account_name", account_name, 'str'),
-            'subscriptionId': self._serialize_data("self.config.subscription_id", self.config.subscription_id, 'str')
+            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+            'accountName': self._serialize.url("account_name", account_name, 'str'),
+            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['api-version'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -493,7 +479,7 @@ class storage_accountsOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -539,13 +525,13 @@ class storage_accountsOperations(object):
                 # Construct URL
                 url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts'
                 path_format_arguments = {
-                    'subscriptionId': self._serialize_data("self.config.subscription_id", self.config.subscription_id, 'str')
+                    'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
                 }
                 url = url.format(**path_format_arguments)
 
                 # Construct parameters
                 query_parameters = {}
-                query_parameters['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+                query_parameters['api-version'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
 
             else:
                 url = next_link
@@ -557,7 +543,7 @@ class storage_accountsOperations(object):
             header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
             header_parameters.update(custom_headers)
             if self.config.accept_language is not None:
-                header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+                header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
             # Construct and send request
             request = self._client.get(url, query_parameters)
@@ -608,14 +594,14 @@ class storage_accountsOperations(object):
                 # Construct URL
                 url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts'
                 path_format_arguments = {
-                    'resourceGroupName': self._serialize_data("resource_group_name", resource_group_name, 'str'),
-                    'subscriptionId': self._serialize_data("self.config.subscription_id", self.config.subscription_id, 'str')
+                    'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+                    'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
                 }
                 url = url.format(**path_format_arguments)
 
                 # Construct parameters
                 query_parameters = {}
-                query_parameters['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+                query_parameters['api-version'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
 
             else:
                 url = next_link
@@ -627,7 +613,7 @@ class storage_accountsOperations(object):
             header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
             header_parameters.update(custom_headers)
             if self.config.accept_language is not None:
-                header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+                header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
             # Construct and send request
             request = self._client.get(url, query_parameters)
@@ -680,15 +666,15 @@ class storage_accountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'
         path_format_arguments = {
-            'resourceGroupName': self._serialize_data("resource_group_name", resource_group_name, 'str'),
-            'accountName': self._serialize_data("account_name", account_name, 'str'),
-            'subscriptionId': self._serialize_data("self.config.subscription_id", self.config.subscription_id, 'str')
+            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+            'accountName': self._serialize.url("account_name", account_name, 'str'),
+            'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['api-version'] = self._serialize_data("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['api-version'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -696,7 +682,7 @@ class storage_accountsOperations(object):
         header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
-            header_parameters['accept-language'] = self._serialize_data("self.config.accept_language", self.config.accept_language, 'str')
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
         body_content = self._serialize(regenerate_key, 'StorageAccountRegenerateKeyParameters')

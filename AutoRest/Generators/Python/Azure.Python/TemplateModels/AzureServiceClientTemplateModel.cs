@@ -20,10 +20,25 @@ namespace Microsoft.Rest.Generator.Azure.Python
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
             // Removing all models that contain the extension "x-ms-external", as they will be 
-            // generated in nodejs client runtime for azure - "ms-rest-azure".
+            // generated in python client runtime for azure - "ms-rest-azure".
             ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension));
             ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.ExternalExtension));
+
+            HasAnyModel = false;
+            if (serviceClient.ModelTypes.Any())
+            {
+                foreach (var model in serviceClient.ModelTypes)
+                {
+                    if (!model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) || !(bool)model.Extensions[AzureExtensions.ExternalExtension])
+                    {
+                        HasAnyModel = true;
+                        break;
+                    }
+                }
+            }
         }
+
+        public bool HasAnyModel { get; private set; }
 
         public override IEnumerable<MethodGroupTemplateModel> MethodGroupModels
         {
