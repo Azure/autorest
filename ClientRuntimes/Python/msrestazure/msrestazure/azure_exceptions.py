@@ -24,10 +24,12 @@
 #
 #--------------------------------------------------------------------------
 
+from msrest.exceptions import ClientException
 from msrest.serialization import Deserializer
+from requests import RequestException
 
 
-class CloudError(Exception):
+class CloudException(object):
 
     _response_map = {
         'status_code': {'key':'status_code', 'type':'str'}
@@ -70,3 +72,51 @@ class CloudError(Exception):
 
         except (AttributeError, IndexError):
             self._message = value
+
+class CloudError(ClientException):
+
+    def __str__(self):
+        return str(self.message)
+
+    def __init__(self, deserializer, response, output=None, *args):
+
+        deserialize = deserializer if deserializer else Deserializer()
+        self.error = None
+        self.message = None
+        self.response = response
+
+        if output:
+            raise_states = ['failed', 'canceled']
+
+            if hasattr(output, 'provisioning_state'):
+                if output.provisioning_state.lower() in raise_states:
+                    self.error = output
+                    self.message = "Long running operation failed"
+
+        else:
+            try:
+                self.error = deserialize(CloudException, response)
+                self.message = self.error.message
+
+            except (DeserializationError, AttributeError, KeyError):
+                pass
+        
+        if not self.error or not self.message:
+
+            try:
+                response.raise_for_status()
+
+            except RequestException as err:
+                if not self.error:
+                    self.error = err
+
+                if not self.message:
+                    msg = ("Operation returned an invalid status code "
+                           "'{}'".format(response.reason))
+                    self.message = msg
+
+            else:
+                self.error = output if output else response
+                self.message = "Long running operation failed"
+
+        super(CloudError, self).__init__(self.message, self.error, *args)

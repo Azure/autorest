@@ -467,8 +467,14 @@ class Deserializer(object):
             for attr, map in attributes.items():
                 attr_type = map['type']
                 key = map['key']
+                working_data = data
 
-                raw_value = data.get(key)
+                if '.' in key:
+                    dict_keys = key.split('.')
+                    working_data = working_data.get(dict_keys[0], data)
+                    key = dict_keys[1]
+
+                raw_value = working_data.get(key)
 
                 value = self.deserialize_data(raw_value, attr_type)
                 setattr(response, attr, value)

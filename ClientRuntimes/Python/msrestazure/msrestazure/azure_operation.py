@@ -23,54 +23,121 @@
 #--------------------------------------------------------------------------
 
 from msrest.serialization import Deserializer
+from msrestazure.azure_exceptions import CloudError
 from threading import Thread, Event
 import time
 
+class PollingFinished(Exception):
+    pass
+
+class NoRetryUrl(PollingFinished):
+    pass
+
+class BadReturnStatus(PollingFinished):
+    pass
+
+class OperationFinished(PollingFinished):
+    pass
+
 class AzureOperationPoller(object):
 
-    def __init__(self, response, update_cmd, status_codes, timeout=30):
+    accept_states = [200, 202, 201, 204]
+    raise_states = ['failed', 'canceled']
+    done_states = ['succeeded']
+
+    def __init__(self, send_cmd, output_cmd, update_cmd, timeout=30):
         """
         A container for polling long-running Azure requests.
         """
         self._timeout = timeout
-        self._response = response
-        self._url = self._extract_url()
+        self._response = None
+        self._no_retry = False
+        self._url = None
         self._callbacks = []
-        self._status_codes = status_codes
+        self._output = None
 
         self._done = Event()
-        self._thread = Thread(target=self._poll, args=(update_cmd,))
+        self._thread = Thread(target=self._poll, args=(send_cmd, update_cmd, output_cmd))
         self._thread.start()
 
     def _extract_url(self):
-        if self._response.headers['azure-asyncoperation']:
-            return self._response.asyncoperation
 
-        elif self._response.headers['location']:
-            return self._response.location
+        if self._response.headers.get('azure-asyncoperation'):
+            self._no_retry = True
+            self._url = self._response.headers.get('azure-asyncoperation')
+
+        elif self._response.headers.get('location'):
+            self._no_retry = True
+            self._url = self._response.headers['location']
+
+        elif not self._no_retry and self._response.content:
+            self._url = self._response.request.url
+
+        else:
+            raise NoRetryUrl()
+
+    def _check_state(self):
+
+        if isinstance(self._output, Exception):
+            raise OperationFinished()
+
+        if self._response.status_code not in self.accept_states:
+            raise BadReturnStatus()
+
+        if hasattr(self._output, 'provisioning_state'):
+            if self._output.provisioning_state is None:
+                raise OperationFinished()
+
+            if self._output.provisioning_state.lower() in self.raise_states:
+                self._output = CloudError(None, self._response, self._output)
+                raise OperationFinished()
+
+            if self._output.provisioning_state.lower() in self.done_states:
+                raise OperationFinished()
+
+
+    def _set_implicit_state(self):
+        if hasattr(self._output, 'provisioning_state'):
+            self._output.provisioning_state = 'Succeeded'
 
     def _delay(self):
-        if self._response.headers.get('retry_after'):
-            time.sleep(int(self._response.headers['retry_after']))
+        if self._response is None:
+            return 
+
+        if self._response.headers.get('retry-after'):
+            time.sleep(int(self._response.headers['retry-after']))
 
         else:
             time.sleep(self._timeout)
 
-    def _poll(self, update):
-        while True:
-            self._delay()
-            try:
-                self._response = update(self._url)
+    def _poll(self, send, update, outputs):
+        try:
+            while True:
+                self._delay()
 
-            except Exception as err:
-                self._response = err
-                self._done.set()
-                return
+                if self._response is None:
+                    self._response = send()
 
+                else:
+                    self._response = update(self._url)
 
-            if self._response.status_code in [200, 201, 204]:
-                self._done.set()
-                break
+                self._extract_url()
+                self._output = outputs(self._response)
+                self._check_state()
+
+        except NoRetryUrl:
+            if self._response.status_code in self.accept_states:
+                if self._output:
+                    self._set_implicit_state()
+
+        except PollingFinished:
+            pass
+
+        except Exception as err:
+            self._output = err
+
+        finally:
+            self._done.set()
 
         callbacks, self._callbacks = self._callbacks, []
         while callbacks:
@@ -79,24 +146,26 @@ class AzureOperationPoller(object):
 
             callbacks, self._callbacks = self._callbacks, []
 
-    def result(timeout=None):
+    def result(self, timeout=None):
         self.wait(timeout)
-        return self._response
+        if isinstance(self._output, Exception):
+            raise self._output
+        return self._output
 
-    def wait(timeout=None):
+    def wait(self, timeout=None):
         self._thread.join(timeout=timeout)
 
     def done(self):
         return not self._thread.isAlive()
 
-    def add_done_callback(func):
+    def add_done_callback(self, func):
 
         if self._done.is_set():
             raise ValueError("Process is complete.")
         
         self._callbacks.append(func)
 
-    def remove_done_callback(func):
+    def remove_done_callback(self, func):
 
         if self._done.is_set():
             raise ValueError("Process is complete.")
