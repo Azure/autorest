@@ -26,6 +26,7 @@
 
 from msrest.exceptions import ClientException
 from msrest.serialization import Deserializer
+from msrest.exceptions import DeserializationError
 from requests import RequestException
 
 

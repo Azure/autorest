@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .product_result import ProductResult
 from .product import Product
 from .product_properties import ProductProperties
 from .operation_result import OperationResult

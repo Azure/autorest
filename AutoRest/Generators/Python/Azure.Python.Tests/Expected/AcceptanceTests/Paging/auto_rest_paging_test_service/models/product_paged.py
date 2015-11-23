@@ -9,14 +9,14 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from runtime.msrest.paging import Paged
+from msrest.paging import Paged
 
 
 class ProductPaged(Paged):
 
     _attribute_map = {
         'next_link': {'key': 'nextLink', 'type': 'str'},
-        'items': {'key': 'value', 'type': '[Product]'}
+        'items': {'key': 'values', 'type': '[Product]'}
     }
 
     def __init__(self, *args, **kwargs):
