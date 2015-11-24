@@ -17,7 +17,8 @@ from . import models
 
 class AutoRestIntegerTestServiceConfiguration(Configuration):
 
-    def __init__(self, base_url=None, filepath=None):
+    def __init__(
+            self, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'https://localhost'
@@ -36,4 +37,5 @@ class AutoRestIntegerTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.int_model = int_model(self._client, self.config, self._serialize, self._deserialize)
+        self.int_model = int_model(
+            self._client, self.config, self._serialize, self._deserialize)

@@ -27,7 +27,8 @@ class explicit(object):
         self.config = config
 
     @async_request
-    def post_required_integer_parameter(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_required_integer_parameter(
+            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly required integer. Please put null and the client
@@ -65,7 +66,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -74,7 +76,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_integer_parameter(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
+    def post_optional_integer_parameter(
+            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly optional integer. Please put null.
@@ -113,7 +116,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -122,7 +126,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_required_integer_property(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_required_integer_property(
+            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly required integer. Please put a valid int-wrapper with
@@ -161,7 +166,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -170,7 +176,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_integer_property(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
+    def post_optional_integer_property(
+            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly optional integer. Please put a valid int-wrapper with
@@ -210,7 +217,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -219,7 +227,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_required_integer_header(self, header_parameter, custom_headers={}, raw=False, callback=None):
+    def post_required_integer_header(
+            self, header_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly required integer. Please put a header
@@ -256,7 +265,7 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -265,7 +274,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_integer_header(self, header_parameter=None, custom_headers={}, raw=False, callback=None):
+    def post_optional_integer_header(
+            self, header_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly optional integer. Please put a header
@@ -301,7 +311,7 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -310,7 +320,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_required_string_parameter(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_required_string_parameter(
+            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly required string. Please put null and the client
@@ -348,7 +359,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -357,7 +369,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_string_parameter(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
+    def post_optional_string_parameter(
+            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly optional string. Please put null.
@@ -396,7 +409,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -405,7 +419,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_required_string_property(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_required_string_property(
+            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly required string. Please put a valid string-wrapper
@@ -444,7 +459,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -453,7 +469,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_string_property(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
+    def post_optional_string_property(
+            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly optional integer. Please put a valid string-wrapper
@@ -493,7 +510,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -502,7 +520,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_required_string_header(self, header_parameter, custom_headers={}, raw=False, callback=None):
+    def post_required_string_header(
+            self, header_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly required string. Please put a header 'headerParameter'
@@ -539,7 +558,7 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -548,7 +567,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_string_header(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
+    def post_optional_string_header(
+            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly optional string. Please put a header 'headerParameter'
@@ -584,7 +604,7 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -593,7 +613,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_required_class_parameter(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_required_class_parameter(
+            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly required complex object. Please put null and the
@@ -631,7 +652,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -640,7 +662,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_class_parameter(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
+    def post_optional_class_parameter(
+            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly optional complex object. Please put null.
@@ -679,7 +702,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -688,7 +712,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_required_class_property(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_required_class_property(
+            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly required complex object. Please put a valid
@@ -727,7 +752,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -736,7 +762,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_class_property(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
+    def post_optional_class_property(
+            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly optional complex object. Please put a valid
@@ -776,7 +803,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -785,7 +813,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_required_array_parameter(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_required_array_parameter(
+            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly required array. Please put null and the client library
@@ -823,7 +852,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -832,7 +862,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_array_parameter(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
+    def post_optional_array_parameter(
+            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly optional array. Please put null.
@@ -871,7 +902,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -880,7 +912,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_required_array_property(self, body_parameter, custom_headers={}, raw=False, callback=None):
+    def post_required_array_property(
+            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly required array. Please put a valid array-wrapper with
@@ -919,7 +952,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -928,7 +962,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_array_property(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
+    def post_optional_array_property(
+            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly optional array. Please put a valid array-wrapper with
@@ -968,7 +1003,8 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -977,7 +1013,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_required_array_header(self, header_parameter, custom_headers={}, raw=False, callback=None):
+    def post_required_array_header(
+            self, header_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly required array. Please put a header 'headerParameter'
@@ -1014,7 +1051,7 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -1023,7 +1060,8 @@ class explicit(object):
             return None, response
 
     @async_request
-    def post_optional_array_header(self, header_parameter=None, custom_headers={}, raw=False, callback=None):
+    def post_optional_array_header(
+            self, header_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly optional integer. Please put a header
@@ -1059,7 +1097,7 @@ class explicit(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

@@ -27,7 +27,8 @@ class dictionary(object):
         self.config = config
 
     @async_request
-    def get_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with dictionary property
@@ -59,7 +60,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -75,7 +76,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_valid(self, complex_body, custom_headers={}, raw=False, callback=None):
+    def put_valid(
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with dictionary property
@@ -112,7 +114,8 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -121,7 +124,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_empty(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with dictionary property which is empty
@@ -153,7 +157,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -169,7 +173,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_empty(self, complex_body, custom_headers={}, raw=False, callback=None):
+    def put_empty(
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with dictionary property which is empty
@@ -205,7 +210,8 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -214,7 +220,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_null(self, custom_headers={}, raw=False, callback=None):
+    def get_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with dictionary property which is null
@@ -246,7 +253,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -262,7 +269,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_not_provided(self, custom_headers={}, raw=False, callback=None):
+    def get_not_provided(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with dictionary property while server doesn't
@@ -295,7 +303,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

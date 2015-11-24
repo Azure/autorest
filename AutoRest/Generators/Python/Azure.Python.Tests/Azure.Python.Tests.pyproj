@@ -24,7 +24,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AcceptanceTests\acceptance_tests.py">
+    <Compile Include="AcceptanceTests\zzz_tests.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AcceptanceTests\azure_url_tests.py">

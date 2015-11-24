@@ -29,7 +29,8 @@ class api_version_defaultOperations(object):
         self.config = config
 
     @async_request
-    def get_method_global_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_method_global_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         GET method with api-version modeled in global settings.
@@ -64,7 +65,7 @@ class api_version_defaultOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -73,7 +74,8 @@ class api_version_defaultOperations(object):
             return None, response
 
     @async_request
-    def get_method_global_not_provided_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_method_global_not_provided_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         GET method with api-version modeled in global settings.
@@ -108,7 +110,7 @@ class api_version_defaultOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -117,7 +119,8 @@ class api_version_defaultOperations(object):
             return None, response
 
     @async_request
-    def get_path_global_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_path_global_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         GET method with api-version modeled in global settings.
@@ -152,7 +155,7 @@ class api_version_defaultOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -161,7 +164,8 @@ class api_version_defaultOperations(object):
             return None, response
 
     @async_request
-    def get_swagger_global_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_swagger_global_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         GET method with api-version modeled in global settings.
@@ -196,7 +200,7 @@ class api_version_defaultOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

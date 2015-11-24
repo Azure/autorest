@@ -27,7 +27,8 @@ class array(object):
         self.config = config
 
     @async_request
-    def get_null(self, custom_headers={}, raw=False, callback=None):
+    def get_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get null array value
@@ -58,7 +59,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -74,7 +75,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_invalid(self, custom_headers={}, raw=False, callback=None):
+    def get_invalid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get invalid array [1, 2, 3
@@ -105,7 +107,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -121,7 +123,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_empty(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get empty array value []
@@ -152,7 +155,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -168,7 +171,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_empty(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_empty(
+            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set array value empty []
@@ -204,7 +208,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -213,7 +218,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_boolean_tfft(self, custom_headers={}, raw=False, callback=None):
+    def get_boolean_tfft(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get boolean array value [true, false, false, true]
@@ -244,7 +250,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -260,7 +266,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_boolean_tfft(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_boolean_tfft(
+            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set array value empty [true, false, false, true]
@@ -296,7 +303,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -305,7 +313,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_boolean_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_boolean_invalid_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get boolean array value [true, null, false]
@@ -336,7 +345,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -352,7 +361,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_boolean_invalid_string(self, custom_headers={}, raw=False, callback=None):
+    def get_boolean_invalid_string(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get boolean array value [true, 'boolean', false]
@@ -383,7 +393,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -399,7 +409,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_integer_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_integer_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get integer array value [1, -1, 3, 300]
@@ -430,7 +441,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -446,7 +457,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_integer_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_integer_valid(
+            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set array value empty [1, -1, 3, 300]
@@ -482,7 +494,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -491,7 +504,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_int_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_int_invalid_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get integer array value [1, null, 0]
@@ -522,7 +536,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -538,7 +552,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_int_invalid_string(self, custom_headers={}, raw=False, callback=None):
+    def get_int_invalid_string(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get integer array value [1, 'integer', 0]
@@ -569,7 +584,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -585,7 +600,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_long_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_long_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get integer array value [1, -1, 3, 300]
@@ -616,7 +632,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -632,7 +648,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_long_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_long_valid(
+            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set array value empty [1, -1, 3, 300]
@@ -668,7 +685,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -677,7 +695,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_long_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_long_invalid_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get long array value [1, null, 0]
@@ -708,7 +727,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -724,7 +743,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_long_invalid_string(self, custom_headers={}, raw=False, callback=None):
+    def get_long_invalid_string(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get long array value [1, 'integer', 0]
@@ -755,7 +775,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -771,7 +791,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_float_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_float_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get float array value [0, -0.01, 1.2e20]
@@ -802,7 +823,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -818,7 +839,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_float_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_float_valid(
+            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set array value [0, -0.01, 1.2e20]
@@ -854,7 +876,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -863,7 +886,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_float_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_float_invalid_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get float array value [0.0, null, -1.2e20]
@@ -894,7 +918,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -910,7 +934,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_float_invalid_string(self, custom_headers={}, raw=False, callback=None):
+    def get_float_invalid_string(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get boolean array value [1.0, 'number', 0.0]
@@ -941,7 +966,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -957,7 +982,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_double_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_double_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get float array value [0, -0.01, 1.2e20]
@@ -988,7 +1014,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1004,7 +1030,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_double_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_double_valid(
+            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set array value [0, -0.01, 1.2e20]
@@ -1040,7 +1067,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1049,7 +1077,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_double_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_double_invalid_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get float array value [0.0, null, -1.2e20]
@@ -1080,7 +1109,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1096,7 +1125,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_double_invalid_string(self, custom_headers={}, raw=False, callback=None):
+    def get_double_invalid_string(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get boolean array value [1.0, 'number', 0.0]
@@ -1127,7 +1157,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1143,7 +1173,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_string_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_string_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get string array value ['foo1', 'foo2', 'foo3']
@@ -1174,7 +1205,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1190,7 +1221,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_string_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_string_valid(
+            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set array value ['foo1', 'foo2', 'foo3']
@@ -1226,7 +1258,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1235,7 +1268,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_string_with_null(self, custom_headers={}, raw=False, callback=None):
+    def get_string_with_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get string array value ['foo', null, 'foo2']
@@ -1266,7 +1300,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1282,7 +1316,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_string_with_invalid(self, custom_headers={}, raw=False, callback=None):
+    def get_string_with_invalid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get string array value ['foo', 123, 'foo2']
@@ -1313,7 +1348,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1329,7 +1364,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_date_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_date_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
@@ -1360,7 +1396,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1376,7 +1412,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_date_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_date_valid(
+            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
@@ -1412,7 +1449,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1421,7 +1459,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_date_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_date_invalid_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get date array value ['2012-01-01', null, '1776-07-04']
@@ -1452,7 +1491,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1468,7 +1507,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_date_invalid_chars(self, custom_headers={}, raw=False, callback=None):
+    def get_date_invalid_chars(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get date array value ['2011-03-22', 'date']
@@ -1499,7 +1539,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1515,7 +1555,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_date_time_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_date_time_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get date-time array value ['2000-12-01t00:00:01z',
@@ -1547,7 +1588,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1563,7 +1604,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_date_time_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_date_time_valid(
+            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
@@ -1600,7 +1642,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1609,7 +1652,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_date_time_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_date_time_invalid_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get date array value ['2000-12-01t00:00:01z', null]
@@ -1640,7 +1684,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1656,7 +1700,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_date_time_invalid_chars(self, custom_headers={}, raw=False, callback=None):
+    def get_date_time_invalid_chars(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get date array value ['2000-12-01t00:00:01z', 'date-time']
@@ -1687,7 +1732,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1703,7 +1748,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_date_time_rfc1123_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_date_time_rfc1123_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02
@@ -1735,7 +1781,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1751,7 +1797,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_date_time_rfc1123_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_date_time_rfc1123_valid(
+            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980
@@ -1788,7 +1835,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1797,7 +1845,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_duration_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_duration_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
@@ -1828,7 +1877,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1844,7 +1893,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_duration_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_duration_valid(
+            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
@@ -1880,7 +1930,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1889,7 +1940,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_byte_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_byte_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29,
@@ -1921,7 +1973,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1937,7 +1989,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_byte_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_byte_valid(
+            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29,
@@ -1974,7 +2027,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1983,7 +2037,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_byte_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_byte_invalid_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get byte array value [hex(AB, AC, AD), null] with the first item
@@ -2015,7 +2070,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2031,7 +2086,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_complex_null(self, custom_headers={}, raw=False, callback=None):
+    def get_complex_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get array of complex type null value
@@ -2062,7 +2118,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2078,7 +2134,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_complex_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_complex_empty(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get empty array of complex type []
@@ -2109,7 +2166,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2125,7 +2182,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_complex_item_null(self, custom_headers={}, raw=False, callback=None):
+    def get_complex_item_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get array of complex type with null item [{'integer': 1 'string':
@@ -2157,7 +2215,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2173,7 +2231,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_complex_item_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_complex_item_empty(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get array of complex type with empty item [{'integer': 1 'string':
@@ -2205,7 +2264,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2221,7 +2280,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_complex_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_complex_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get array of complex type with [{'integer': 1 'string': '2'},
@@ -2253,7 +2313,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2269,7 +2329,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_complex_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_complex_valid(
+            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put an array of complex type with values [{'integer': 1 'string':
@@ -2306,7 +2367,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2315,7 +2377,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_array_null(self, custom_headers={}, raw=False, callback=None):
+    def get_array_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get a null array
@@ -2346,7 +2409,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2362,7 +2425,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_array_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_array_empty(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an empty array []
@@ -2393,7 +2457,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2409,7 +2473,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_array_item_null(self, custom_headers={}, raw=False, callback=None):
+    def get_array_item_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an array of array of strings [['1', '2', '3'], null, ['7', '8',
@@ -2441,7 +2506,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2457,7 +2522,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_array_item_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_array_item_empty(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
@@ -2488,7 +2554,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2504,7 +2570,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_array_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_array_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'],
@@ -2536,7 +2603,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2552,7 +2619,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_array_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_array_valid(
+            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'],
@@ -2589,7 +2657,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2598,7 +2667,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_dictionary_null(self, custom_headers={}, raw=False, callback=None):
+    def get_dictionary_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an array of Dictionaries with value null
@@ -2629,7 +2699,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2645,7 +2715,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_dictionary_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_dictionary_empty(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an array of Dictionaries of type <string, string> with value []
@@ -2676,7 +2747,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2692,7 +2763,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_dictionary_item_null(self, custom_headers={}, raw=False, callback=None):
+    def get_dictionary_item_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an array of Dictionaries of type <string, string> with value
@@ -2725,7 +2797,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2741,7 +2813,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_dictionary_item_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_dictionary_item_empty(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an array of Dictionaries of type <string, string> with value
@@ -2774,7 +2847,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2790,7 +2863,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def get_dictionary_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_dictionary_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an array of Dictionaries of type <string, string> with value
@@ -2823,7 +2897,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2839,7 +2913,8 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_dictionary_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_dictionary_valid(
+            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an array of Dictionaries of type <string, string> with value
@@ -2877,7 +2952,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

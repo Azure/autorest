@@ -116,7 +116,6 @@ class UrlTests(unittest.TestCase):
     def test_url_mixed(self):
 
         self.client.config.global_string_path = "globalStringPath"
-        # TODO - This attribute doesn't exist by default
         self.client.config.global_string_query = "globalStringQuery"
 
         self.client.path_items.get_all_with_values("localStringPath", "pathItemStringPath",

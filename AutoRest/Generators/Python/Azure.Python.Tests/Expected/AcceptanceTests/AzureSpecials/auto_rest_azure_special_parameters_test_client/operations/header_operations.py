@@ -29,7 +29,8 @@ class headerOperations(object):
         self.config = config
 
     @async_request
-    def custom_named_request_id(self, foo_client_request_id, custom_headers={}, raw=False, callback=None):
+    def custom_named_request_id(
+            self, foo_client_request_id, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in
@@ -67,7 +68,7 @@ class headerOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

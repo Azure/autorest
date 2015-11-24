@@ -121,6 +121,7 @@ namespace Microsoft.Rest.Generator.Python
 
             declarations.Add("raw=False");
             declarations.Add("callback=None");
+            declarations.Add("**operation_config");
             var declaration = string.Join(", ", declarations);
             return declaration;
         }

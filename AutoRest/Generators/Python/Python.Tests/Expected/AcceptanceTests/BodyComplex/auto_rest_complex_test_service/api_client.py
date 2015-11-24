@@ -23,7 +23,8 @@ from . import models
 
 class AutoRestComplexTestServiceConfiguration(Configuration):
 
-    def __init__(self, base_url=None, filepath=None):
+    def __init__(
+            self, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -42,10 +43,17 @@ class AutoRestComplexTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.basicOperations = basicOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.primitive = primitive(self._client, self.config, self._serialize, self._deserialize)
-        self.array = array(self._client, self.config, self._serialize, self._deserialize)
-        self.dictionary = dictionary(self._client, self.config, self._serialize, self._deserialize)
-        self.inheritance = inheritance(self._client, self.config, self._serialize, self._deserialize)
-        self.polymorphism = polymorphism(self._client, self.config, self._serialize, self._deserialize)
-        self.polymorphicrecursive = polymorphicrecursive(self._client, self.config, self._serialize, self._deserialize)
+        self.basicOperations = basicOperations(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.primitive = primitive(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.array = array(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.dictionary = dictionary(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.inheritance = inheritance(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.polymorphism = polymorphism(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.polymorphicrecursive = polymorphicrecursive(
+            self._client, self.config, self._serialize, self._deserialize)

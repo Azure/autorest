@@ -24,7 +24,8 @@ from . import models
 
 class AutoRestAzureSpecialParametersTestClientConfiguration(AzureConfiguration):
 
-    def __init__(self, credentials, subscription_id, api_version='2015-07-01-preview', accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
+    def __init__(
+            self, credentials, subscription_id, api_version='2015-07-01-preview', accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -49,10 +50,17 @@ class AutoRestAzureSpecialParametersTestClient(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.xms_client_request_id = xms_client_request_idOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.subscription_in_credentials = subscription_in_credentialsOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.subscription_in_method = subscription_in_methodOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.api_version_default = api_version_defaultOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.api_version_local = api_version_localOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.skip_url_encoding = skip_url_encodingOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.header = headerOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.xms_client_request_id = xms_client_request_idOperations(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.subscription_in_credentials = subscription_in_credentialsOperations(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.subscription_in_method = subscription_in_methodOperations(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.api_version_default = api_version_defaultOperations(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.api_version_local = api_version_localOperations(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.skip_url_encoding = skip_url_encodingOperations(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.header = headerOperations(
+            self._client, self.config, self._serialize, self._deserialize)

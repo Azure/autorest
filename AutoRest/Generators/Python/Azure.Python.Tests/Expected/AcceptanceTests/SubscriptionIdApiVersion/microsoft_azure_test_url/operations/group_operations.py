@@ -29,7 +29,8 @@ class groupOperations(object):
         self.config = config
 
     @async_request
-    def get_sample_resource_group(self, resource_group_name, custom_headers={}, raw=False, callback=None):
+    def get_sample_resource_group(
+            self, resource_group_name, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Provides a resouce group with name 'testgroup101' and location 'West
@@ -73,7 +74,7 @@ class groupOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

@@ -27,7 +27,8 @@ class http_successOperations(object):
         self.config = config
 
     @async_request
-    def head200(self, custom_headers={}, raw=False, callback=None):
+    def head200(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 200 status code if successful
@@ -61,7 +62,7 @@ class http_successOperations(object):
 
         # Construct and send request
         request = self._client.head(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200, 404]:
             raise CloudError(self._deserialize, response)
@@ -70,7 +71,8 @@ class http_successOperations(object):
             return None, response
 
     @async_request
-    def head204(self, custom_headers={}, raw=False, callback=None):
+    def head204(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 204 status code if successful
@@ -104,7 +106,7 @@ class http_successOperations(object):
 
         # Construct and send request
         request = self._client.head(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [204, 404]:
             raise CloudError(self._deserialize, response)
@@ -113,7 +115,8 @@ class http_successOperations(object):
             return None, response
 
     @async_request
-    def head404(self, custom_headers={}, raw=False, callback=None):
+    def head404(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 404 status code if successful
@@ -147,7 +150,7 @@ class http_successOperations(object):
 
         # Construct and send request
         request = self._client.head(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [204, 404]:
             raise CloudError(self._deserialize, response)
