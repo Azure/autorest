@@ -19,7 +19,8 @@ from . import models
 
 class AutoRestUrlTestServiceConfiguration(Configuration):
 
-    def __init__(self, global_string_path, global_string_query=None, base_url=None, filepath=None):
+    def __init__(
+            self, global_string_path, global_string_query=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -41,6 +42,9 @@ class AutoRestUrlTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.paths = paths(self._client, self.config, self._serialize, self._deserialize)
-        self.queries = queries(self._client, self.config, self._serialize, self._deserialize)
-        self.path_items = path_items(self._client, self.config, self._serialize, self._deserialize)
+        self.paths = paths(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.queries = queries(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.path_items = path_items(
+            self._client, self.config, self._serialize, self._deserialize)

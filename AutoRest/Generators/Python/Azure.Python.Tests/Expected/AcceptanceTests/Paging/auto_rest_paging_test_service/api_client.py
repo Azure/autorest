@@ -18,7 +18,8 @@ from . import models
 
 class AutoRestPagingTestServiceConfiguration(AzureConfiguration):
 
-    def __init__(self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
+    def __init__(
+            self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -41,4 +42,5 @@ class AutoRestPagingTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.paging = pagingOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.paging = pagingOperations(
+            self._client, self.config, self._serialize, self._deserialize)

@@ -29,7 +29,8 @@ class api_version_localOperations(object):
         self.config = config
 
     @async_request
-    def get_method_local_valid(self, api_version, custom_headers={}, raw=False, callback=None):
+    def get_method_local_valid(
+            self, api_version, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with api-version modeled in the method.  pass in
@@ -68,7 +69,7 @@ class api_version_localOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -77,7 +78,8 @@ class api_version_localOperations(object):
             return None, response
 
     @async_request
-    def get_method_local_null(self, api_version=None, custom_headers={}, raw=False, callback=None):
+    def get_method_local_null(
+            self, api_version=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with api-version modeled in the method.  pass in
@@ -117,7 +119,7 @@ class api_version_localOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -126,7 +128,8 @@ class api_version_localOperations(object):
             return None, response
 
     @async_request
-    def get_path_local_valid(self, api_version, custom_headers={}, raw=False, callback=None):
+    def get_path_local_valid(
+            self, api_version, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with api-version modeled in the method.  pass in
@@ -165,7 +168,7 @@ class api_version_localOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -174,7 +177,8 @@ class api_version_localOperations(object):
             return None, response
 
     @async_request
-    def get_swagger_local_valid(self, api_version, custom_headers={}, raw=False, callback=None):
+    def get_swagger_local_valid(
+            self, api_version, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with api-version modeled in the method.  pass in
@@ -214,7 +218,7 @@ class api_version_localOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

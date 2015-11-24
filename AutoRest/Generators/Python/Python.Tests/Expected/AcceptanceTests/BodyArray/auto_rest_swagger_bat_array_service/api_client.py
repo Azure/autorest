@@ -17,7 +17,8 @@ from . import models
 
 class AutoRestSwaggerBATArrayServiceConfiguration(Configuration):
 
-    def __init__(self, base_url=None, filepath=None):
+    def __init__(
+            self, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -36,4 +37,5 @@ class AutoRestSwaggerBATArrayService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.array = array(self._client, self.config, self._serialize, self._deserialize)
+        self.array = array(
+            self._client, self.config, self._serialize, self._deserialize)

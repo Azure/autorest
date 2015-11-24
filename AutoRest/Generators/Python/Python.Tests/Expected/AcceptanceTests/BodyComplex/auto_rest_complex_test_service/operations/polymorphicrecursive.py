@@ -27,7 +27,8 @@ class polymorphicrecursive(object):
         self.config = config
 
     @async_request
-    def get_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types that are polymorphic and have recursive references
@@ -59,7 +60,7 @@ class polymorphicrecursive(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -75,7 +76,8 @@ class polymorphicrecursive(object):
         return deserialized
 
     @async_request
-    def put_valid(self, complex_body, custom_headers={}, raw=False, callback=None):
+    def put_valid(
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types that are polymorphic and have recursive references
@@ -163,7 +165,8 @@ class polymorphicrecursive(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

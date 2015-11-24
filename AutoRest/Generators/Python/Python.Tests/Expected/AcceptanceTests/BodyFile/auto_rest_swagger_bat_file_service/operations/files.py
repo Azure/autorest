@@ -27,7 +27,8 @@ class files(object):
         self.config = config
 
     @async_request
-    def get_file(self, custom_headers={}, raw=False, callback=None):
+    def get_file(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get file
@@ -59,7 +60,7 @@ class files(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -77,7 +78,8 @@ class files(object):
         return download_gen()
 
     @async_request
-    def get_empty_file(self, custom_headers={}, raw=False, callback=None):
+    def get_empty_file(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get empty file
@@ -109,7 +111,7 @@ class files(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

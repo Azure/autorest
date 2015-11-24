@@ -7,7 +7,8 @@
 @using Microsoft.Rest.Generator.Python.Templates
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodTemplateModel>
     @@async_request
-    def @(Model.Name.ToPythonCase())(self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):
+    def @(Model.Name.ToPythonCase())(
+            self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):
         """
 @if (!String.IsNullOrEmpty(Model.Summary))
 {
@@ -77,11 +78,12 @@
         request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query_parameters)
 @if (Model.RequestBody != null)
 {
-        @:response = self._client.send(request, header_parameters, body_content)
+        @:response = self._client.send(
+            @:request, header_parameters, body_content, **operation_config)
 }
 else
 {
-        @:response = self._client.send(request, header_parameters)
+        @:response = self._client.send(request, header_parameters, **operation_config)
 }
 @EmptyLine
         if @Model.FailureStatusCodePredicate:

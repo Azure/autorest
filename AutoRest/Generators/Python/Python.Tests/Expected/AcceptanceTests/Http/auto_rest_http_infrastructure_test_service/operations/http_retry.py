@@ -27,7 +27,8 @@ class http_retry(object):
         self.config = config
 
     @async_request
-    def head408(self, custom_headers={}, raw=False, callback=None):
+    def head408(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 408 status code, then 200 after retry
@@ -58,7 +59,7 @@ class http_retry(object):
 
         # Construct and send request
         request = self._client.head(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -67,7 +68,8 @@ class http_retry(object):
             return None, response
 
     @async_request
-    def put500(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
+    def put500(
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 500 status code, then 200 after retry
@@ -106,7 +108,8 @@ class http_retry(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -115,7 +118,8 @@ class http_retry(object):
             return None, response
 
     @async_request
-    def patch500(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
+    def patch500(
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 500 status code, then 200 after retry
@@ -154,7 +158,8 @@ class http_retry(object):
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -163,7 +168,8 @@ class http_retry(object):
             return None, response
 
     @async_request
-    def get502(self, custom_headers={}, raw=False, callback=None):
+    def get502(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 502 status code, then 200 after retry
@@ -194,7 +200,7 @@ class http_retry(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -203,7 +209,8 @@ class http_retry(object):
             return None, response
 
     @async_request
-    def post503(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
+    def post503(
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 503 status code, then 200 after retry
@@ -242,7 +249,8 @@ class http_retry(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -251,7 +259,8 @@ class http_retry(object):
             return None, response
 
     @async_request
-    def delete503(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
+    def delete503(
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 503 status code, then 200 after retry
@@ -290,7 +299,8 @@ class http_retry(object):
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -299,7 +309,8 @@ class http_retry(object):
             return None, response
 
     @async_request
-    def put504(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
+    def put504(
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 504 status code, then 200 after retry
@@ -338,7 +349,8 @@ class http_retry(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -347,7 +359,8 @@ class http_retry(object):
             return None, response
 
     @async_request
-    def patch504(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
+    def patch504(
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 504 status code, then 200 after retry
@@ -386,7 +399,8 @@ class http_retry(object):
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

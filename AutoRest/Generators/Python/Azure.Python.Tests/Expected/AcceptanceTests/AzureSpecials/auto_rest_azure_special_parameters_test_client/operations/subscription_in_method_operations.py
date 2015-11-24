@@ -29,7 +29,8 @@ class subscription_in_methodOperations(object):
         self.config = config
 
     @async_request
-    def post_method_local_valid(self, subscription_id, custom_headers={}, raw=False, callback=None):
+    def post_method_local_valid(
+            self, subscription_id, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         POST method with subscriptionId modeled in the method.  pass in
@@ -71,7 +72,7 @@ class subscription_in_methodOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -80,7 +81,8 @@ class subscription_in_methodOperations(object):
             return None, response
 
     @async_request
-    def post_method_local_null(self, subscription_id, custom_headers={}, raw=False, callback=None):
+    def post_method_local_null(
+            self, subscription_id, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         POST method with subscriptionId modeled in the method.  pass in
@@ -123,7 +125,7 @@ class subscription_in_methodOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -132,7 +134,8 @@ class subscription_in_methodOperations(object):
             return None, response
 
     @async_request
-    def post_path_local_valid(self, subscription_id, custom_headers={}, raw=False, callback=None):
+    def post_path_local_valid(
+            self, subscription_id, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         POST method with subscriptionId modeled in the method.  pass in
@@ -174,7 +177,7 @@ class subscription_in_methodOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -183,7 +186,8 @@ class subscription_in_methodOperations(object):
             return None, response
 
     @async_request
-    def post_swagger_local_valid(self, subscription_id, custom_headers={}, raw=False, callback=None):
+    def post_swagger_local_valid(
+            self, subscription_id, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         POST method with subscriptionId modeled in the method.  pass in
@@ -225,7 +229,7 @@ class subscription_in_methodOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

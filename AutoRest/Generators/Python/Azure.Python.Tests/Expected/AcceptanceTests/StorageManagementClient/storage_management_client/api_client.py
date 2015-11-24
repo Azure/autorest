@@ -19,7 +19,8 @@ from . import models
 
 class StorageManagementClientConfiguration(AzureConfiguration):
 
-    def __init__(self, credentials, subscription_id, api_version='2015-05-01-preview', accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
+    def __init__(
+            self, credentials, subscription_id, api_version='2015-05-01-preview', accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'https://management.azure.com'
@@ -44,5 +45,7 @@ class StorageManagementClient(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.storage_accounts = storage_accountsOperations(self._client, self.config, self._serialize, self._deserialize)
-        self.usage = usageOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.storage_accounts = storage_accountsOperations(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.usage = usageOperations(
+            self._client, self.config, self._serialize, self._deserialize)

@@ -12,11 +12,13 @@ sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "RequiredOptional"))
 
-from msrest.exceptions import DeserializationError
+from msrest.exceptions import DeserializationError, SerializationError
 
 from auto_rest_required_optional_test_service import (
     AutoRestRequiredOptionalTestService,
     AutoRestRequiredOptionalTestServiceConfiguration)
+
+from auto_rest_required_optional_test_service.models import StringWrapper, ArrayWrapper, ClassWrapper
 
 
 class RequiredOptionalTests(unittest.TestCase):
@@ -67,37 +69,34 @@ class RequiredOptionalTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.client.implicit.get_required_path(None)
 
-        # TODO
-        #with self.assertRaises(ValueError):
-        #    self.client.explicit.post_required_string_header(None)
+        with self.assertRaises(ValueError):
+            self.client.explicit.post_required_string_header(None)
 
-        # TODO
+        # TODO need check body parameter
         #with self.assertRaises(ValueError):
         #    self.client.explicit.post_required_string_parameter(None)
 
-        # TODO
-        #with self.assertRaises(ValueError):
-        #    self.client.explicit.post_required_string_property(None)
+        with self.assertRaises(SerializationError):
+            self.client.explicit.post_required_string_property(None)
 
-        # TODO
-        #with self.assertRaises(ValueError):
-        #    self.client.explicit.post_required_array_header(None)
+        # TODO, is ValueError or TypeError, should check the None first
+        with self.assertRaises(TypeError):
+            self.client.explicit.post_required_array_header(None)
 
-        # TODO
-        #with self.assertRaises(ValueError):
+        # TODO, need check body parameter
+        #with self.assertRaises(TypeError):
         #    self.client.explicit.post_required_array_parameter(None)
 
-        # TODO
-        #with self.assertRaises(ValueError):
-        #    self.client.explicit.post_required_array_property(None)
+        with self.assertRaises(SerializationError):
+            self.client.explicit.post_required_array_property(None)
 
-        # TODO
+        # TODO need check body parameter
         #with self.assertRaises(ValueError):
         #    self.client.explicit.post_required_class_parameter(None)
 
-        # TODO
-        #with self.assertRaises(ValueError):
-        #    self.client.explicit.post_required_class_property(None)
+        cw = ClassWrapper(value = None)
+        with self.assertRaises(SerializationError):
+            self.client.explicit.post_required_class_property(cw)
 
         with self.assertRaises(ValueError):
             self.client.implicit.get_required_global_path()

@@ -27,7 +27,8 @@ class enum(object):
         self.config = config
 
     @async_request
-    def get_not_expandable(self, custom_headers={}, raw=False, callback=None):
+    def get_not_expandable(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get enum value 'red color' from enumeration of 'red color',
@@ -59,7 +60,7 @@ class enum(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -75,7 +76,8 @@ class enum(object):
         return deserialized
 
     @async_request
-    def put_not_expandable(self, string_body, custom_headers={}, raw=False, callback=None):
+    def put_not_expandable(
+            self, string_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Sends value 'red color' from enumeration of 'red color',
@@ -113,7 +115,8 @@ class enum(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

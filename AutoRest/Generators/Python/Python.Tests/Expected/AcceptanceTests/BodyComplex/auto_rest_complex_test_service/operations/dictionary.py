@@ -27,7 +27,8 @@ class dictionary(object):
         self.config = config
 
     @async_request
-    def get_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with dictionary property
@@ -59,7 +60,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -75,25 +76,29 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_valid(self, complex_body, custom_headers={}, raw=False, callback=None):
+    def put_valid(
+            self, default_program=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with dictionary property
 
-        :param complex_body: Please put a dictionary with 5 key-value pairs:
-        "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
+        :param default_program:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type complex_body: object
+        :type default_program: object or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
+
+        complex_body = DictionaryWrapper
+        if default_program is not None:
+            complex_body.default_program = default_program
 
         # Construct URL
         url = '/complex/dictionary/typed/valid'
@@ -112,7 +117,8 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -121,7 +127,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_empty(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with dictionary property which is empty
@@ -153,7 +160,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -169,24 +176,29 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_empty(self, complex_body, custom_headers={}, raw=False, callback=None):
+    def put_empty(
+            self, default_program=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with dictionary property which is empty
 
-        :param complex_body: Please put an empty dictionary
+        :param default_program:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type complex_body: object
+        :type default_program: object or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
+
+        complex_body = DictionaryWrapper
+        if default_program is not None:
+            complex_body.default_program = default_program
 
         # Construct URL
         url = '/complex/dictionary/typed/empty'
@@ -205,7 +217,8 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -214,7 +227,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_null(self, custom_headers={}, raw=False, callback=None):
+    def get_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with dictionary property which is null
@@ -246,7 +260,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -262,7 +276,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_not_provided(self, custom_headers={}, raw=False, callback=None):
+    def get_not_provided(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with dictionary property while server doesn't
@@ -295,7 +310,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

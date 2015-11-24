@@ -27,7 +27,8 @@ class path_items(object):
         self.config = config
 
     @async_request
-    def get_all_with_values(self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, callback=None):
+    def get_all_with_values(
+            self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         send globalStringPath='globalStringPath',
@@ -85,7 +86,7 @@ class path_items(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -94,7 +95,8 @@ class path_items(object):
             return None, response
 
     @async_request
-    def get_global_query_null(self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, callback=None):
+    def get_global_query_null(
+            self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         send globalStringPath='globalStringPath',
@@ -151,7 +153,7 @@ class path_items(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -160,7 +162,8 @@ class path_items(object):
             return None, response
 
     @async_request
-    def get_global_and_local_query_null(self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, callback=None):
+    def get_global_and_local_query_null(
+            self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         send globalStringPath=globalStringPath,
@@ -216,7 +219,7 @@ class path_items(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -225,7 +228,8 @@ class path_items(object):
             return None, response
 
     @async_request
-    def get_local_path_item_query_null(self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, callback=None):
+    def get_local_path_item_query_null(
+            self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         send globalStringPath='globalStringPath',
@@ -281,7 +285,7 @@ class path_items(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

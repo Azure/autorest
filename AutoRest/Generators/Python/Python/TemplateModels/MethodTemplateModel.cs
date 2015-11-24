@@ -121,6 +121,7 @@ namespace Microsoft.Rest.Generator.Python
 
             declarations.Add("raw=False");
             declarations.Add("callback=None");
+            declarations.Add("**operation_config");
             var declaration = string.Join(", ", declarations);
             return declaration;
         }
@@ -350,20 +351,21 @@ namespace Microsoft.Rest.Generator.Python
             var builder = new IndentedStringBuilder("    ");
             foreach (var transformation in InputParameterTransformation)
             {
-                builder.AppendLine("{0} = None",
-                        transformation.OutputParameter.Name);
-
-                builder.AppendLine("if {0}:", BuildNullCheckExpression(transformation))
-                       .Indent();
-
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     transformation.OutputParameter.Type is CompositeType)
                 {
-                    builder.AppendLine("{0} = {1}()",
+                    builder.AppendLine("{0} = {1}",
                         transformation.OutputParameter.Name,
                         transformation.OutputParameter.Type.Name);
                 }
+                else
+                {
+                    builder.AppendLine("{0} = None",
+                            transformation.OutputParameter.Name);
+                }
 
+                builder.AppendLine("if {0}:", BuildNullCheckExpression(transformation))
+                       .Indent();
                 foreach (var mapping in transformation.ParameterMappings)
                 {
                     builder.AppendLine("{0}{1}",

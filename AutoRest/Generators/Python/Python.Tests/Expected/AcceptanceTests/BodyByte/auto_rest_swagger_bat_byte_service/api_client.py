@@ -17,7 +17,8 @@ from . import models
 
 class AutoRestSwaggerBATByteServiceConfiguration(Configuration):
 
-    def __init__(self, base_url=None, filepath=None):
+    def __init__(
+            self, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -36,4 +37,5 @@ class AutoRestSwaggerBATByteService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.byte = byte(self._client, self.config, self._serialize, self._deserialize)
+        self.byte = byte(
+            self._client, self.config, self._serialize, self._deserialize)

@@ -18,7 +18,8 @@ from . import models
 
 class AutoRestParameterGroupingTestServiceConfiguration(AzureConfiguration):
 
-    def __init__(self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
+    def __init__(
+            self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'https://localhost'
@@ -41,4 +42,5 @@ class AutoRestParameterGroupingTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.parameter_grouping = parameter_groupingOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.parameter_grouping = parameter_groupingOperations(
+            self._client, self.config, self._serialize, self._deserialize)

@@ -27,7 +27,8 @@ class datetime_model(object):
         self.config = config
 
     @async_request
-    def get_null(self, custom_headers={}, raw=False, callback=None):
+    def get_null(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get null datetime value
@@ -59,7 +60,7 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -75,7 +76,8 @@ class datetime_model(object):
         return deserialized
 
     @async_request
-    def get_invalid(self, custom_headers={}, raw=False, callback=None):
+    def get_invalid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get invalid datetime value
@@ -107,7 +109,7 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -123,7 +125,8 @@ class datetime_model(object):
         return deserialized
 
     @async_request
-    def get_overflow(self, custom_headers={}, raw=False, callback=None):
+    def get_overflow(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get overflow datetime value
@@ -155,7 +158,7 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -171,7 +174,8 @@ class datetime_model(object):
         return deserialized
 
     @async_request
-    def get_underflow(self, custom_headers={}, raw=False, callback=None):
+    def get_underflow(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get underflow datetime value
@@ -203,7 +207,7 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -219,7 +223,8 @@ class datetime_model(object):
         return deserialized
 
     @async_request
-    def put_utc_max_date_time(self, datetime_body, custom_headers={}, raw=False, callback=None):
+    def put_utc_max_date_time(
+            self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put max datetime value 9999-12-31T23:59:59.9999999Z
@@ -255,7 +260,8 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -264,7 +270,8 @@ class datetime_model(object):
             return None, response
 
     @async_request
-    def get_utc_lowercase_max_date_time(self, custom_headers={}, raw=False, callback=None):
+    def get_utc_lowercase_max_date_time(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get max datetime value 9999-12-31t23:59:59.9999999z
@@ -296,7 +303,7 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -312,7 +319,8 @@ class datetime_model(object):
         return deserialized
 
     @async_request
-    def get_utc_uppercase_max_date_time(self, custom_headers={}, raw=False, callback=None):
+    def get_utc_uppercase_max_date_time(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get max datetime value 9999-12-31T23:59:59.9999999Z
@@ -344,7 +352,7 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -360,7 +368,8 @@ class datetime_model(object):
         return deserialized
 
     @async_request
-    def put_local_positive_offset_max_date_time(self, datetime_body, custom_headers={}, raw=False, callback=None):
+    def put_local_positive_offset_max_date_time(
+            self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put max datetime value with positive numoffset
@@ -397,7 +406,8 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -406,7 +416,8 @@ class datetime_model(object):
             return None, response
 
     @async_request
-    def get_local_positive_offset_lowercase_max_date_time(self, custom_headers={}, raw=False, callback=None):
+    def get_local_positive_offset_lowercase_max_date_time(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get max datetime value with positive num offset
@@ -439,7 +450,7 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -455,7 +466,8 @@ class datetime_model(object):
         return deserialized
 
     @async_request
-    def get_local_positive_offset_uppercase_max_date_time(self, custom_headers={}, raw=False, callback=None):
+    def get_local_positive_offset_uppercase_max_date_time(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get max datetime value with positive num offset
@@ -488,7 +500,7 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -504,7 +516,8 @@ class datetime_model(object):
         return deserialized
 
     @async_request
-    def put_local_negative_offset_max_date_time(self, datetime_body, custom_headers={}, raw=False, callback=None):
+    def put_local_negative_offset_max_date_time(
+            self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put max datetime value with positive numoffset
@@ -541,7 +554,8 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -550,7 +564,8 @@ class datetime_model(object):
             return None, response
 
     @async_request
-    def get_local_negative_offset_uppercase_max_date_time(self, custom_headers={}, raw=False, callback=None):
+    def get_local_negative_offset_uppercase_max_date_time(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get max datetime value with positive num offset
@@ -583,7 +598,7 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -599,7 +614,8 @@ class datetime_model(object):
         return deserialized
 
     @async_request
-    def get_local_negative_offset_lowercase_max_date_time(self, custom_headers={}, raw=False, callback=None):
+    def get_local_negative_offset_lowercase_max_date_time(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get max datetime value with positive num offset
@@ -632,7 +648,7 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -648,7 +664,8 @@ class datetime_model(object):
         return deserialized
 
     @async_request
-    def put_utc_min_date_time(self, datetime_body, custom_headers={}, raw=False, callback=None):
+    def put_utc_min_date_time(
+            self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put min datetime value 0001-01-01T00:00:00Z
@@ -684,7 +701,8 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -693,7 +711,8 @@ class datetime_model(object):
             return None, response
 
     @async_request
-    def get_utc_min_date_time(self, custom_headers={}, raw=False, callback=None):
+    def get_utc_min_date_time(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get min datetime value 0001-01-01T00:00:00Z
@@ -725,7 +744,7 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -741,7 +760,8 @@ class datetime_model(object):
         return deserialized
 
     @async_request
-    def put_local_positive_offset_min_date_time(self, datetime_body, custom_headers={}, raw=False, callback=None):
+    def put_local_positive_offset_min_date_time(
+            self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put min datetime value 0001-01-01T00:00:00+14:00
@@ -777,7 +797,8 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -786,7 +807,8 @@ class datetime_model(object):
             return None, response
 
     @async_request
-    def get_local_positive_offset_min_date_time(self, custom_headers={}, raw=False, callback=None):
+    def get_local_positive_offset_min_date_time(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get min datetime value 0001-01-01T00:00:00+14:00
@@ -818,7 +840,7 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -834,7 +856,8 @@ class datetime_model(object):
         return deserialized
 
     @async_request
-    def put_local_negative_offset_min_date_time(self, datetime_body, custom_headers={}, raw=False, callback=None):
+    def put_local_negative_offset_min_date_time(
+            self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put min datetime value 0001-01-01T00:00:00-14:00
@@ -870,7 +893,8 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -879,7 +903,8 @@ class datetime_model(object):
             return None, response
 
     @async_request
-    def get_local_negative_offset_min_date_time(self, custom_headers={}, raw=False, callback=None):
+    def get_local_negative_offset_min_date_time(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get min datetime value 0001-01-01T00:00:00-14:00
@@ -911,7 +936,7 @@ class datetime_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

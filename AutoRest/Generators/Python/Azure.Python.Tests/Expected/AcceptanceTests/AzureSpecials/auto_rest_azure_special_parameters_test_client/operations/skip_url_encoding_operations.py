@@ -29,7 +29,8 @@ class skip_url_encodingOperations(object):
         self.config = config
 
     @async_request
-    def get_method_path_valid(self, unencoded_path_param, custom_headers={}, raw=False, callback=None):
+    def get_method_path_valid(
+            self, unencoded_path_param, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -70,7 +71,7 @@ class skip_url_encodingOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -79,7 +80,8 @@ class skip_url_encodingOperations(object):
             return None, response
 
     @async_request
-    def get_path_path_valid(self, unencoded_path_param, custom_headers={}, raw=False, callback=None):
+    def get_path_path_valid(
+            self, unencoded_path_param, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -120,7 +122,7 @@ class skip_url_encodingOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -129,7 +131,8 @@ class skip_url_encodingOperations(object):
             return None, response
 
     @async_request
-    def get_swagger_path_valid(self, unencoded_path_param, custom_headers={}, raw=False, callback=None):
+    def get_swagger_path_valid(
+            self, unencoded_path_param, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -171,7 +174,7 @@ class skip_url_encodingOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -180,7 +183,8 @@ class skip_url_encodingOperations(object):
             return None, response
 
     @async_request
-    def get_method_query_valid(self, q1, custom_headers={}, raw=False, callback=None):
+    def get_method_query_valid(
+            self, q1, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with unencoded query parameter with value
@@ -219,7 +223,7 @@ class skip_url_encodingOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -228,7 +232,8 @@ class skip_url_encodingOperations(object):
             return None, response
 
     @async_request
-    def get_method_query_null(self, q1=None, custom_headers={}, raw=False, callback=None):
+    def get_method_query_null(
+            self, q1=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with unencoded query parameter with value null
@@ -266,7 +271,7 @@ class skip_url_encodingOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -275,7 +280,8 @@ class skip_url_encodingOperations(object):
             return None, response
 
     @async_request
-    def get_path_query_valid(self, q1, custom_headers={}, raw=False, callback=None):
+    def get_path_query_valid(
+            self, q1, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with unencoded query parameter with value
@@ -314,7 +320,7 @@ class skip_url_encodingOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -323,7 +329,8 @@ class skip_url_encodingOperations(object):
             return None, response
 
     @async_request
-    def get_swagger_query_valid(self, q1=None, custom_headers={}, raw=False, callback=None):
+    def get_swagger_query_valid(
+            self, q1=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with unencoded query parameter with value
@@ -364,7 +371,7 @@ class skip_url_encodingOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

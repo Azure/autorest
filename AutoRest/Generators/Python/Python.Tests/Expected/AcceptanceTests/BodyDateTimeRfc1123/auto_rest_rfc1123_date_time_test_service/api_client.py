@@ -17,7 +17,8 @@ from . import models
 
 class AutoRestRFC1123DateTimeTestServiceConfiguration(Configuration):
 
-    def __init__(self, base_url=None, filepath=None):
+    def __init__(
+            self, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'https://localhost'
@@ -36,4 +37,5 @@ class AutoRestRFC1123DateTimeTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.datetimerfc1123 = datetimerfc1123(self._client, self.config, self._serialize, self._deserialize)
+        self.datetimerfc1123 = datetimerfc1123(
+            self._client, self.config, self._serialize, self._deserialize)

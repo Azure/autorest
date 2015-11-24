@@ -27,7 +27,8 @@ class array(object):
         self.config = config
 
     @async_request
-    def get_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_valid(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with array property
@@ -59,7 +60,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -75,25 +76,29 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_valid(self, complex_body, custom_headers={}, raw=False, callback=None):
+    def put_valid(
+            self, array=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with array property
 
-        :param complex_body: Please put an array with 4 items: "1, 2, 3, 4",
-        "", null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog"
+        :param array:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type complex_body: object
+        :type array: list or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
+
+        complex_body = ArrayWrapper
+        if array is not None:
+            complex_body.array = array
 
         # Construct URL
         url = '/complex/array/valid'
@@ -112,7 +117,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -121,7 +127,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_empty(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with array property which is empty
@@ -153,7 +160,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -169,24 +176,29 @@ class array(object):
         return deserialized
 
     @async_request
-    def put_empty(self, complex_body, custom_headers={}, raw=False, callback=None):
+    def put_empty(
+            self, array=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with array property which is empty
 
-        :param complex_body: Please put an empty array
+        :param array:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type complex_body: object
+        :type array: list or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
+
+        complex_body = ArrayWrapper
+        if array is not None:
+            complex_body.array = array
 
         # Construct URL
         url = '/complex/array/empty'
@@ -205,7 +217,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -214,7 +227,8 @@ class array(object):
             return None, response
 
     @async_request
-    def get_not_provided(self, custom_headers={}, raw=False, callback=None):
+    def get_not_provided(
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with array property while server doesn't provide a
@@ -247,7 +261,7 @@ class array(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
