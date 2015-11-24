@@ -87,7 +87,6 @@ class lr_os_custom_headerOperations(object):
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
 
-
             deserialized = None
 
             if response.status_code == 200:
@@ -220,7 +219,6 @@ class lr_os_custom_headerOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [200, 201]:
                 raise CloudError(self._deserialize, response)
-
 
             deserialized = None
 
@@ -358,7 +356,6 @@ class lr_os_custom_headerOperations(object):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
-
             if raw:
                 return None, response
 
@@ -475,7 +472,6 @@ class lr_os_custom_headerOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
-
 
             if raw:
                 return None, response

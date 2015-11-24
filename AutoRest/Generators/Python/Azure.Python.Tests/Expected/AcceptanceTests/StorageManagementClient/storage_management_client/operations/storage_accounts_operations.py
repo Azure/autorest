@@ -161,7 +161,6 @@ class storage_accountsOperations(object):
             if response.status_code not in [200, 202]:
                 raise CloudError(self._deserialize, response)
 
-
             deserialized = None
 
             if response.status_code == 200:

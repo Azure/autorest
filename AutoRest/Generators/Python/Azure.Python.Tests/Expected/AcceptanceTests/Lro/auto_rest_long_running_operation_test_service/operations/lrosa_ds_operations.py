@@ -83,7 +83,6 @@ class lrosa_dsOperations(object):
             if response.status_code not in [200, 201]:
                 raise CloudError(self._deserialize, response)
 
-
             deserialized = None
 
             if response.status_code == 200:
@@ -213,7 +212,6 @@ class lrosa_dsOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [200, 201]:
                 raise CloudError(self._deserialize, response)
-
 
             deserialized = None
 
@@ -347,7 +345,6 @@ class lrosa_dsOperations(object):
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
 
-
             deserialized = None
 
             if response.status_code == 200:
@@ -466,7 +463,6 @@ class lrosa_dsOperations(object):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
-
             if raw:
                 return None, response
 
@@ -560,7 +556,6 @@ class lrosa_dsOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
-
 
             if raw:
                 return None, response
@@ -657,7 +652,6 @@ class lrosa_dsOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
-
 
             if raw:
                 return None, response
@@ -761,7 +755,6 @@ class lrosa_dsOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
-
 
             if raw:
                 return None, response
@@ -871,7 +864,6 @@ class lrosa_dsOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
-
 
             if raw:
                 return None, response
@@ -983,7 +975,6 @@ class lrosa_dsOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
-
 
             if raw:
                 return None, response
@@ -1097,7 +1088,6 @@ class lrosa_dsOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [200, 201]:
                 raise CloudError(self._deserialize, response)
-
 
             deserialized = None
 
@@ -1232,7 +1222,6 @@ class lrosa_dsOperations(object):
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
 
-
             deserialized = None
 
             if response.status_code == 200:
@@ -1364,7 +1353,6 @@ class lrosa_dsOperations(object):
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
 
-
             deserialized = None
 
             if response.status_code == 200:
@@ -1485,7 +1473,6 @@ class lrosa_dsOperations(object):
             if response.status_code not in [204]:
                 raise CloudError(self._deserialize, response)
 
-
             if raw:
                 return None, response
 
@@ -1581,7 +1568,6 @@ class lrosa_dsOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
-
 
             if raw:
                 return None, response
@@ -1686,7 +1672,6 @@ class lrosa_dsOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
-
 
             if raw:
                 return None, response
@@ -1801,7 +1786,6 @@ class lrosa_dsOperations(object):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
-
             if raw:
                 return None, response
 
@@ -1915,7 +1899,6 @@ class lrosa_dsOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [200, 204]:
                 raise CloudError(self._deserialize, response)
-
 
             deserialized = None
 
@@ -2044,7 +2027,6 @@ class lrosa_dsOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
-
 
             deserialized = None
 
@@ -2176,7 +2158,6 @@ class lrosa_dsOperations(object):
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
 
-
             deserialized = None
 
             if response.status_code == 200:
@@ -2298,7 +2279,6 @@ class lrosa_dsOperations(object):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
-
             if raw:
                 return None, response
 
@@ -2396,7 +2376,6 @@ class lrosa_dsOperations(object):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
-
             if raw:
                 return None, response
 
@@ -2493,7 +2472,6 @@ class lrosa_dsOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
-
 
             if raw:
                 return None, response
@@ -2598,7 +2576,6 @@ class lrosa_dsOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
-
 
             if raw:
                 return None, response
@@ -2711,7 +2688,6 @@ class lrosa_dsOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
-
 
             if raw:
                 return None, response
@@ -2826,7 +2802,6 @@ class lrosa_dsOperations(object):
         def get_long_running_output(response):
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
-
 
             if raw:
                 return None, response
