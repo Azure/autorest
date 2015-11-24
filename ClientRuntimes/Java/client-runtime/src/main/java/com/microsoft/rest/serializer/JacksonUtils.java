@@ -13,17 +13,17 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-import retrofit.Converter;
-import retrofit.JacksonConverterFactory;
+import com.google.common.base.CharMatcher;
+import com.google.common.base.Joiner;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.Converter;
+import retrofit.JacksonConverterFactory;
 
 /**
  * A serialization helper class wrapped around {@link JacksonConverterFactory} and {@link ObjectMapper}.
@@ -94,7 +94,7 @@ public class JacksonUtils {
      */
     public static String serializeRaw(Object object) {
         if (object == null) return null;
-        return StringUtils.strip(serialize(object), "\"");
+        return CharMatcher.is('"').trimFrom(serialize(object));
     }
 
     /**
@@ -113,7 +113,7 @@ public class JacksonUtils {
             String raw = serializeRaw(element);
             serialized.add(raw != null ? raw : "");
         }
-        return StringUtils.join(serialized, format.getDelimiter());
+        return Joiner.on(format.getDelimiter()).join(serialized);
     }
 
     /**

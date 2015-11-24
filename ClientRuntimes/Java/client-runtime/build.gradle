@@ -26,13 +26,10 @@ repositories {
 }
 
 dependencies {
-    compile 'org.apache.commons:commons-lang3:3.4'
-    compile 'commons-codec:commons-codec:1.10'
-    compile 'commons-io:commons-io:2.4'
     compile 'com.google.guava:guava:18.0'
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
-    compile 'com.squareup.okhttp:okhttp:2.6.0-SNAPSHOT'
-    compile 'com.squareup.okhttp:logging-interceptor:2.6.0-SNAPSHOT'
+    compile 'com.squareup.okhttp:okhttp:2.6.0'
+    compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
     compile 'com.squareup.retrofit:converter-jackson:2.0.0-beta2'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.1.1'
     testCompile 'junit:junit:4.11'
