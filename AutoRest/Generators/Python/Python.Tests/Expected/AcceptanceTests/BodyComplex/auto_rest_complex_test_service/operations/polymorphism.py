@@ -27,7 +27,8 @@ class polymorphism(object):
         self.config = config
 
     @async_request
-    def get_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types that are polymorphic
@@ -59,7 +60,7 @@ class polymorphism(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -75,7 +76,8 @@ class polymorphism(object):
         return deserialized
 
     @async_request
-    def put_valid(self, complex_body, custom_headers={}, raw=False, callback=None):
+    def put_valid(
+        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types that are polymorphic
@@ -144,7 +146,7 @@ class polymorphism(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -153,7 +155,8 @@ class polymorphism(object):
             return None, response
 
     @async_request
-    def put_valid_missing_required(self, complex_body, custom_headers={}, raw=False, callback=None):
+    def put_valid_missing_required(
+        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types that are polymorphic, attempting to omit required
@@ -216,7 +219,7 @@ class polymorphism(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

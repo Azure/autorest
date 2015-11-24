@@ -29,7 +29,8 @@ class subscription_in_credentialsOperations(object):
         self.config = config
 
     @async_request
-    def post_method_global_valid(self, custom_headers={}, raw=False, callback=None):
+    def post_method_global_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         POST method with subscriptionId modeled in credentials.  Set the
@@ -68,7 +69,7 @@ class subscription_in_credentialsOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -77,7 +78,8 @@ class subscription_in_credentialsOperations(object):
             return None, response
 
     @async_request
-    def post_method_global_null(self, custom_headers={}, raw=False, callback=None):
+    def post_method_global_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         POST method with subscriptionId modeled in credentials.  Set the
@@ -117,7 +119,7 @@ class subscription_in_credentialsOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -126,7 +128,8 @@ class subscription_in_credentialsOperations(object):
             return None, response
 
     @async_request
-    def post_method_global_not_provided_valid(self, custom_headers={}, raw=False, callback=None):
+    def post_method_global_not_provided_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         POST method with subscriptionId modeled in credentials.  Set the
@@ -166,7 +169,7 @@ class subscription_in_credentialsOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -175,7 +178,8 @@ class subscription_in_credentialsOperations(object):
             return None, response
 
     @async_request
-    def post_path_global_valid(self, custom_headers={}, raw=False, callback=None):
+    def post_path_global_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         POST method with subscriptionId modeled in credentials.  Set the
@@ -214,7 +218,7 @@ class subscription_in_credentialsOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -223,7 +227,8 @@ class subscription_in_credentialsOperations(object):
             return None, response
 
     @async_request
-    def post_swagger_global_valid(self, custom_headers={}, raw=False, callback=None):
+    def post_swagger_global_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         POST method with subscriptionId modeled in credentials.  Set the
@@ -262,7 +267,7 @@ class subscription_in_credentialsOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

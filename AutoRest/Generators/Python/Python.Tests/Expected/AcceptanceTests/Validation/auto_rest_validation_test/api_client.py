@@ -42,7 +42,8 @@ class AutoRestValidationTest(object):
         self.config = config
 
     @async_request
-    def validation_of_method_parameters(self, resource_group_name, id, custom_headers={}, raw=False, callback=None):
+    def validation_of_method_parameters(
+        self, resource_group_name, id, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Validates input parameters on the method. See swagger for details.
@@ -86,7 +87,7 @@ class AutoRestValidationTest(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -102,7 +103,8 @@ class AutoRestValidationTest(object):
         return deserialized
 
     @async_request
-    def validation_of_body(self, resource_group_name, id, body=None, custom_headers={}, raw=False, callback=None):
+    def validation_of_body(
+        self, resource_group_name, id, body=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Validates body parameters on the method. See swagger for details.
@@ -154,7 +156,7 @@ class AutoRestValidationTest(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

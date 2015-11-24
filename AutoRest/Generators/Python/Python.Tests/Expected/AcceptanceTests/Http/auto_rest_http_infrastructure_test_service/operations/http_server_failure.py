@@ -27,7 +27,8 @@ class http_server_failure(object):
         self.config = config
 
     @async_request
-    def head501(self, custom_headers={}, raw=False, callback=None):
+    def head501(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 501 status code - should be represented in the client as an
@@ -60,7 +61,7 @@ class http_server_failure(object):
 
         # Construct and send request
         request = self._client.head(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -69,7 +70,8 @@ class http_server_failure(object):
             return None, response
 
     @async_request
-    def get501(self, custom_headers={}, raw=False, callback=None):
+    def get501(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 501 status code - should be represented in the client as an
@@ -102,7 +104,7 @@ class http_server_failure(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -111,7 +113,8 @@ class http_server_failure(object):
             return None, response
 
     @async_request
-    def post505(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
+    def post505(
+        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 505 status code - should be represented in the client as an
@@ -152,7 +155,7 @@ class http_server_failure(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -161,7 +164,8 @@ class http_server_failure(object):
             return None, response
 
     @async_request
-    def delete505(self, boolean_value=None, custom_headers={}, raw=False, callback=None):
+    def delete505(
+        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 505 status code - should be represented in the client as an
@@ -202,7 +206,7 @@ class http_server_failure(object):
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)

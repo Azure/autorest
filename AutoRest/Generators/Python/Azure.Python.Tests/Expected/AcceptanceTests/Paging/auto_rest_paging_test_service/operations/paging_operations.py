@@ -29,7 +29,8 @@ class pagingOperations(object):
         self.config = config
 
     @async_request
-    def get_single_pages(self, custom_headers={}, raw=False, callback=None):
+    def get_single_pages(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         A paging operation that finishes on the first call without a nextlink
@@ -71,7 +72,7 @@ class pagingOperations(object):
 
             # Construct and send request
             request = self._client.get(url, query_parameters)
-            response = self._client.send(request, header_parameters)
+            response = self._client.send(request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
@@ -89,7 +90,8 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages(self, client_request_id=None, custom_headers={}, raw=False, callback=None):
+    def get_multiple_pages(
+        self, client_request_id=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         A paging operation that includes a nextLink that has 10 pages
@@ -135,7 +137,7 @@ class pagingOperations(object):
 
             # Construct and send request
             request = self._client.get(url, query_parameters)
-            response = self._client.send(request, header_parameters)
+            response = self._client.send(request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
@@ -153,7 +155,8 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages_retry_first(self, custom_headers={}, raw=False, callback=None):
+    def get_multiple_pages_retry_first(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         A paging operation that fails on the first call with 500 and then
@@ -196,7 +199,7 @@ class pagingOperations(object):
 
             # Construct and send request
             request = self._client.get(url, query_parameters)
-            response = self._client.send(request, header_parameters)
+            response = self._client.send(request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
@@ -214,7 +217,8 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages_retry_second(self, custom_headers={}, raw=False, callback=None):
+    def get_multiple_pages_retry_second(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         A paging operation that includes a nextLink that has 10 pages, of
@@ -258,7 +262,7 @@ class pagingOperations(object):
 
             # Construct and send request
             request = self._client.get(url, query_parameters)
-            response = self._client.send(request, header_parameters)
+            response = self._client.send(request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
@@ -276,7 +280,8 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_single_pages_failure(self, custom_headers={}, raw=False, callback=None):
+    def get_single_pages_failure(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         A paging operation that receives a 400 on the first call
@@ -318,7 +323,7 @@ class pagingOperations(object):
 
             # Construct and send request
             request = self._client.get(url, query_parameters)
-            response = self._client.send(request, header_parameters)
+            response = self._client.send(request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
@@ -336,7 +341,8 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages_failure(self, custom_headers={}, raw=False, callback=None):
+    def get_multiple_pages_failure(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         A paging operation that receives a 400 on the second call
@@ -378,7 +384,7 @@ class pagingOperations(object):
 
             # Construct and send request
             request = self._client.get(url, query_parameters)
-            response = self._client.send(request, header_parameters)
+            response = self._client.send(request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
@@ -396,7 +402,8 @@ class pagingOperations(object):
         return deserialized
 
     @async_request
-    def get_multiple_pages_failure_uri(self, custom_headers={}, raw=False, callback=None):
+    def get_multiple_pages_failure_uri(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         A paging operation that receives an invalid nextLink
@@ -438,7 +445,7 @@ class pagingOperations(object):
 
             # Construct and send request
             request = self._client.get(url, query_parameters)
-            response = self._client.send(request, header_parameters)
+            response = self._client.send(request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)

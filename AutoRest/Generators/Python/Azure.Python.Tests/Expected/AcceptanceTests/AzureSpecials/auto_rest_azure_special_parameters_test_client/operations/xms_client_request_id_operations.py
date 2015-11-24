@@ -29,7 +29,8 @@ class xms_client_request_idOperations(object):
         self.config = config
 
     @async_request
-    def get(self, custom_headers={}, raw=False, callback=None):
+    def get(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method that overwrites x-ms-client-request header with value
@@ -64,7 +65,7 @@ class xms_client_request_idOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -73,7 +74,8 @@ class xms_client_request_idOperations(object):
             return None, response
 
     @async_request
-    def param_get(self, x_ms_client_request_id, custom_headers={}, raw=False, callback=None):
+    def param_get(
+        self, x_ms_client_request_id, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method that overwrites x-ms-client-request header with value
@@ -112,7 +114,7 @@ class xms_client_request_idOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

@@ -27,7 +27,8 @@ class implicit(object):
         self.config = config
 
     @async_request
-    def get_required_path(self, path_parameter, custom_headers={}, raw=False, callback=None):
+    def get_required_path(
+        self, path_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test implicitly required path parameter
@@ -65,7 +66,7 @@ class implicit(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -74,7 +75,8 @@ class implicit(object):
             return None, response
 
     @async_request
-    def put_optional_query(self, query_parameter=None, custom_headers={}, raw=False, callback=None):
+    def put_optional_query(
+        self, query_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test implicitly optional query parameter
@@ -109,7 +111,7 @@ class implicit(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -118,7 +120,8 @@ class implicit(object):
             return None, response
 
     @async_request
-    def put_optional_header(self, query_parameter=None, custom_headers={}, raw=False, callback=None):
+    def put_optional_header(
+        self, query_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test implicitly optional header parameter
@@ -153,7 +156,7 @@ class implicit(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -162,7 +165,8 @@ class implicit(object):
             return None, response
 
     @async_request
-    def put_optional_body(self, body_parameter=None, custom_headers={}, raw=False, callback=None):
+    def put_optional_body(
+        self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test implicitly optional body parameter
@@ -201,7 +205,7 @@ class implicit(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -210,7 +214,8 @@ class implicit(object):
             return None, response
 
     @async_request
-    def get_required_global_path(self, custom_headers={}, raw=False, callback=None):
+    def get_required_global_path(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test implicitly required path parameter
@@ -246,7 +251,7 @@ class implicit(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -255,7 +260,8 @@ class implicit(object):
             return None, response
 
     @async_request
-    def get_required_global_query(self, custom_headers={}, raw=False, callback=None):
+    def get_required_global_query(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test implicitly required query parameter
@@ -288,7 +294,7 @@ class implicit(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -297,7 +303,8 @@ class implicit(object):
             return None, response
 
     @async_request
-    def get_optional_global_query(self, custom_headers={}, raw=False, callback=None):
+    def get_optional_global_query(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test implicitly optional query parameter
@@ -331,7 +338,7 @@ class implicit(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)

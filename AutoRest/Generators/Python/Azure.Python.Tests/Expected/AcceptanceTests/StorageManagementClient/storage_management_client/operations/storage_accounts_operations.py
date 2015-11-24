@@ -30,7 +30,8 @@ class storage_accountsOperations(object):
         self.config = config
 
     @async_request
-    def check_name_availability(self, account_name, custom_headers={}, raw=False, callback=None):
+    def check_name_availability(
+        self, account_name, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Checks that account name is valid and is not in use.
@@ -77,7 +78,7 @@ class storage_accountsOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise CloudError(self._deserialize, response)
@@ -92,7 +93,8 @@ class storage_accountsOperations(object):
 
         return deserialized
 
-    def create(self, resource_group_name, account_name, parameters, custom_headers={}, raw=False, callback=None):
+    def create(
+        self, resource_group_name, account_name, parameters, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Asynchronously creates a new storage account with the specified
@@ -151,11 +153,13 @@ class storage_accountsOperations(object):
         # Construct and send request
         def long_running_send():
             request = self._client.put(url, query_parameters)
-            return self._client.send(request, header_parameters, body_content)
+            return self._client.send(
+                request, header_parameters, body_content, **operation_config)
 
         def get_long_running_status(status_link):
             request = self._client.get(status_link)
-            return self._client.send(request, header_parameters)
+            return self._client.send(
+                request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
             if response.status_code not in [200, 202]:
@@ -171,10 +175,18 @@ class storage_accountsOperations(object):
 
             return deserialized
 
-        return AzureOperationPoller(long_running_send, get_long_running_output, get_long_running_status, self.config.long_running_operation_timeout)
+        long_running_operation_timeout = operation_config.get(
+            'long_running_operation_timeout',
+            self.config.long_running_operation_timeout)
+        return AzureOperationPoller(
+            long_running_send, 
+            get_long_running_output,
+            get_long_running_status, 
+            long_running_operation_timeout)
 
     @async_request
-    def begin_create(self, resource_group_name, account_name, parameters, custom_headers={}, raw=False, callback=None):
+    def begin_create(
+        self, resource_group_name, account_name, parameters, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Asynchronously creates a new storage account with the specified
@@ -232,7 +244,7 @@ class storage_accountsOperations(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200, 202]:
             raise CloudError(self._deserialize, response)
@@ -248,7 +260,8 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def delete(self, resource_group_name, account_name, custom_headers={}, raw=False, callback=None):
+    def delete(
+        self, resource_group_name, account_name, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Deletes a storage account in Microsoft Azure.
@@ -296,7 +309,7 @@ class storage_accountsOperations(object):
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200, 204]:
             raise HttpOperationError(self._deserialize, response)
@@ -305,7 +318,8 @@ class storage_accountsOperations(object):
             return None, response
 
     @async_request
-    def get_properties(self, resource_group_name, account_name, custom_headers={}, raw=False, callback=None):
+    def get_properties(
+        self, resource_group_name, account_name, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Returns the properties for the specified storage account including but
@@ -356,7 +370,7 @@ class storage_accountsOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise CloudError(self._deserialize, response)
@@ -372,7 +386,8 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def update(self, resource_group_name, account_name, parameters, custom_headers={}, raw=False, callback=None):
+    def update(
+        self, resource_group_name, account_name, parameters, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Updates the account type or tags for a storage account. It can also be
@@ -436,7 +451,7 @@ class storage_accountsOperations(object):
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise CloudError(self._deserialize, response)
@@ -452,7 +467,8 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def list_keys(self, resource_group_name, account_name, custom_headers={}, raw=False, callback=None):
+    def list_keys(
+        self, resource_group_name, account_name, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Lists the access keys for the specified storage account.
@@ -498,7 +514,7 @@ class storage_accountsOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise CloudError(self._deserialize, response)
@@ -514,7 +530,8 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def list(self, custom_headers={}, raw=False, callback=None):
+    def list(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Lists all the storage accounts available under the subscription. Note
@@ -563,7 +580,7 @@ class storage_accountsOperations(object):
 
             # Construct and send request
             request = self._client.get(url, query_parameters)
-            response = self._client.send(request, header_parameters)
+            response = self._client.send(request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
@@ -581,7 +598,8 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def list_by_resource_group(self, resource_group_name, custom_headers={}, raw=False, callback=None):
+    def list_by_resource_group(
+        self, resource_group_name, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Lists all the storage accounts available under the given resource
@@ -634,7 +652,7 @@ class storage_accountsOperations(object):
 
             # Construct and send request
             request = self._client.get(url, query_parameters)
-            response = self._client.send(request, header_parameters)
+            response = self._client.send(request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
@@ -652,7 +670,8 @@ class storage_accountsOperations(object):
         return deserialized
 
     @async_request
-    def regenerate_key(self, resource_group_name, account_name, regenerate_key, custom_headers={}, raw=False, callback=None):
+    def regenerate_key(
+        self, resource_group_name, account_name, regenerate_key, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Regenerates the access keys for the specified storage account.
@@ -707,7 +726,7 @@ class storage_accountsOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise CloudError(self._deserialize, response)

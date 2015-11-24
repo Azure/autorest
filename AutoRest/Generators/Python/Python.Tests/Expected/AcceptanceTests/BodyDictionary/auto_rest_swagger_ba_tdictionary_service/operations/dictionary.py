@@ -27,7 +27,8 @@ class dictionary(object):
         self.config = config
 
     @async_request
-    def get_null(self, custom_headers={}, raw=False, callback=None):
+    def get_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get null dictionary value
@@ -59,7 +60,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -75,7 +76,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_empty(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get empty dictionary value {}
@@ -107,7 +109,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -123,7 +125,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_empty(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_empty(
+        self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set dictionary value empty {}
@@ -159,7 +162,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -168,7 +171,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_null_value(self, custom_headers={}, raw=False, callback=None):
+    def get_null_value(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get Dictionary with null value
@@ -200,7 +204,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -216,7 +220,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_null_key(self, custom_headers={}, raw=False, callback=None):
+    def get_null_key(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get Dictionary with null key
@@ -248,7 +253,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -264,7 +269,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_empty_string_key(self, custom_headers={}, raw=False, callback=None):
+    def get_empty_string_key(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get Dictionary with key as empty string
@@ -296,7 +302,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -312,7 +318,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_invalid(self, custom_headers={}, raw=False, callback=None):
+    def get_invalid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get invalid Dictionary value
@@ -344,7 +351,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -360,7 +367,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_boolean_tfft(self, custom_headers={}, raw=False, callback=None):
+    def get_boolean_tfft(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get boolean dictionary value {"0": true, "1": false, "2": false, "3":
@@ -393,7 +401,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -409,7 +417,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_boolean_tfft(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_boolean_tfft(
+        self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set dictionary value empty {"0": true, "1": false, "2": false, "3":
@@ -446,7 +455,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -455,7 +464,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_boolean_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_boolean_invalid_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get boolean dictionary value {"0": true, "1": null, "2": false }
@@ -487,7 +497,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -503,7 +513,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_boolean_invalid_string(self, custom_headers={}, raw=False, callback=None):
+    def get_boolean_invalid_string(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
@@ -535,7 +546,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -551,7 +562,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_integer_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_integer_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -583,7 +595,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -599,7 +611,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_integer_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_integer_valid(
+        self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -635,7 +648,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -644,7 +657,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_int_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_int_invalid_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get integer dictionary value {"0": 1, "1": null, "2": 0}
@@ -676,7 +690,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -692,7 +706,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_int_invalid_string(self, custom_headers={}, raw=False, callback=None):
+    def get_int_invalid_string(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
@@ -724,7 +739,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -740,7 +755,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_long_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_long_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -772,7 +788,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -788,7 +804,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_long_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_long_valid(
+        self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -824,7 +841,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -833,7 +850,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_long_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_long_invalid_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get long dictionary value {"0": 1, "1": null, "2": 0}
@@ -865,7 +883,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -881,7 +899,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_long_invalid_string(self, custom_headers={}, raw=False, callback=None):
+    def get_long_invalid_string(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get long dictionary value {"0": 1, "1": "integer", "2": 0}
@@ -913,7 +932,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -929,7 +948,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_float_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_float_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -961,7 +981,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -977,7 +997,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_float_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_float_valid(
+        self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -1013,7 +1034,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1022,7 +1043,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_float_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_float_invalid_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
@@ -1054,7 +1076,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1070,7 +1092,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_float_invalid_string(self, custom_headers={}, raw=False, callback=None):
+    def get_float_invalid_string(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
@@ -1102,7 +1125,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1118,7 +1141,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_double_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_double_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -1150,7 +1174,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1166,7 +1190,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_double_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_double_valid(
+        self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -1202,7 +1227,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1211,7 +1236,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_double_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_double_invalid_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
@@ -1243,7 +1269,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1259,7 +1285,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_double_invalid_string(self, custom_headers={}, raw=False, callback=None):
+    def get_double_invalid_string(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
@@ -1291,7 +1318,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1307,7 +1334,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_string_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_string_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
@@ -1339,7 +1367,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1355,7 +1383,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_string_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_string_valid(
+        self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
@@ -1391,7 +1420,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1400,7 +1429,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_string_with_null(self, custom_headers={}, raw=False, callback=None):
+    def get_string_with_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
@@ -1432,7 +1462,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1448,7 +1478,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_string_with_invalid(self, custom_headers={}, raw=False, callback=None):
+    def get_string_with_invalid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
@@ -1480,7 +1511,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1496,7 +1527,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_date_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_date_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02",
@@ -1529,7 +1561,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1545,7 +1577,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_date_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_date_valid(
+        self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
@@ -1582,7 +1615,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1591,7 +1624,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_date_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_date_invalid_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get date dictionary value {"0": "2012-01-01", "1": null, "2":
@@ -1624,7 +1658,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1640,7 +1674,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_date_invalid_chars(self, custom_headers={}, raw=False, callback=None):
+    def get_date_invalid_chars(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get date dictionary value {"0": "2011-03-22", "1": "date"}
@@ -1672,7 +1707,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1688,7 +1723,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_date_time_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_date_time_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
@@ -1721,7 +1757,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1737,7 +1773,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_date_time_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_date_time_valid(
+        self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
@@ -1774,7 +1811,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1783,7 +1820,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_date_time_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_date_time_invalid_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
@@ -1815,7 +1853,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1831,7 +1869,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_date_time_invalid_chars(self, custom_headers={}, raw=False, callback=None):
+    def get_date_time_invalid_chars(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get date dictionary value {"0": "2000-12-01t00:00:01z", "1":
@@ -1864,7 +1903,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1880,7 +1919,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_date_time_rfc1123_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_date_time_rfc1123_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000
@@ -1914,7 +1954,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1930,7 +1970,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_date_time_rfc1123_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_date_time_rfc1123_valid(
+        self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1":
@@ -1967,7 +2008,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1976,7 +2017,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_duration_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_duration_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get duration dictionary value {"0": "P123DT22H14M12.011S", "1":
@@ -2009,7 +2051,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2025,7 +2067,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_duration_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_duration_valid(
+        self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
@@ -2061,7 +2104,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2070,7 +2113,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_byte_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_byte_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
@@ -2103,7 +2147,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2119,7 +2163,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_byte_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_byte_valid(
+        self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
@@ -2156,7 +2201,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2165,7 +2210,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_byte_invalid_null(self, custom_headers={}, raw=False, callback=None):
+    def get_byte_invalid_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
@@ -2198,7 +2244,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2214,7 +2260,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_complex_null(self, custom_headers={}, raw=False, callback=None):
+    def get_complex_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get dictionary of complex type null value
@@ -2246,7 +2293,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2262,7 +2309,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_complex_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_complex_empty(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get empty dictionary of complex type {}
@@ -2294,7 +2342,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2310,7 +2358,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_complex_item_null(self, custom_headers={}, raw=False, callback=None):
+    def get_complex_item_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get dictionary of complex type with null item {"0": {"integer": 1,
@@ -2343,7 +2392,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2359,7 +2408,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_complex_item_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_complex_item_empty(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get dictionary of complex type with empty item {"0": {"integer": 1,
@@ -2392,7 +2442,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2408,7 +2458,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_complex_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_complex_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get dictionary of complex type with {"0": {"integer": 1, "string":
@@ -2442,7 +2493,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2458,7 +2509,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_complex_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_complex_valid(
+        self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put an dictionary of complex type with values {"0": {"integer": 1,
@@ -2496,7 +2548,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2505,7 +2557,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_array_null(self, custom_headers={}, raw=False, callback=None):
+    def get_array_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get a null array
@@ -2537,7 +2590,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2553,7 +2606,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_array_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_array_empty(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an empty dictionary {}
@@ -2585,7 +2639,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2601,7 +2655,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_array_item_null(self, custom_headers={}, raw=False, callback=None):
+    def get_array_item_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an dictionary of array of strings {"0": ["1", "2", "3"], "1":
@@ -2634,7 +2689,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2650,7 +2705,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_array_item_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_array_item_empty(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
@@ -2683,7 +2739,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2699,7 +2755,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_array_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_array_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4",
@@ -2732,7 +2789,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2748,7 +2805,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_array_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_array_valid(
+        self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4",
@@ -2785,7 +2843,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2794,7 +2852,8 @@ class dictionary(object):
             return None, response
 
     @async_request
-    def get_dictionary_null(self, custom_headers={}, raw=False, callback=None):
+    def get_dictionary_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an dictionaries of dictionaries with value null
@@ -2826,7 +2885,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2842,7 +2901,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_dictionary_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_dictionary_empty(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an dictionaries of dictionaries of type <string, string> with
@@ -2875,7 +2935,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2891,7 +2951,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_dictionary_item_null(self, custom_headers={}, raw=False, callback=None):
+    def get_dictionary_item_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an dictionaries of dictionaries of type <string, string> with
@@ -2925,7 +2986,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2941,7 +3002,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_dictionary_item_empty(self, custom_headers={}, raw=False, callback=None):
+    def get_dictionary_item_empty(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an dictionaries of dictionaries of type <string, string> with
@@ -2975,7 +3037,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -2991,7 +3053,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def get_dictionary_valid(self, custom_headers={}, raw=False, callback=None):
+    def get_dictionary_valid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an dictionaries of dictionaries of type <string, string> with
@@ -3026,7 +3089,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -3042,7 +3105,8 @@ class dictionary(object):
         return deserialized
 
     @async_request
-    def put_dictionary_valid(self, array_body, custom_headers={}, raw=False, callback=None):
+    def put_dictionary_valid(
+        self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an dictionaries of dictionaries of type <string, string> with
@@ -3081,7 +3145,7 @@ class dictionary(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

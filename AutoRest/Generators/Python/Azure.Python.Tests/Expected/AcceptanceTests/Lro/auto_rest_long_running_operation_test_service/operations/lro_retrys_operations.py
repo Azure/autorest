@@ -29,7 +29,8 @@ class lro_retrysOperations(object):
 
         self.config = config
 
-    def put201_creating_succeeded200(self, product=None, custom_headers={}, raw=False, callback=None):
+    def put201_creating_succeeded200(
+        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Long running put request, service returns a 500, then a 201 to the
@@ -76,11 +77,13 @@ class lro_retrysOperations(object):
         # Construct and send request
         def long_running_send():
             request = self._client.put(url, query_parameters)
-            return self._client.send(request, header_parameters, body_content)
+            return self._client.send(
+                request, header_parameters, body_content, **operation_config)
 
         def get_long_running_status(status_link):
             request = self._client.get(status_link)
-            return self._client.send(request, header_parameters)
+            return self._client.send(
+                request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
             if response.status_code not in [200, 201]:
@@ -98,10 +101,18 @@ class lro_retrysOperations(object):
 
             return deserialized
 
-        return AzureOperationPoller(long_running_send, get_long_running_output, get_long_running_status, self.config.long_running_operation_timeout)
+        long_running_operation_timeout = operation_config.get(
+            'long_running_operation_timeout',
+            self.config.long_running_operation_timeout)
+        return AzureOperationPoller(
+            long_running_send, 
+            get_long_running_output,
+            get_long_running_status, 
+            long_running_operation_timeout)
 
     @async_request
-    def begin_put201_creating_succeeded200(self, product=None, custom_headers={}, raw=False, callback=None):
+    def begin_put201_creating_succeeded200(
+        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Long running put request, service returns a 500, then a 201 to the
@@ -147,7 +158,7 @@ class lro_retrysOperations(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200, 201]:
             raise CloudError(self._deserialize, response)
@@ -164,7 +175,8 @@ class lro_retrysOperations(object):
 
         return deserialized
 
-    def put_async_relative_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
+    def put_async_relative_retry_succeeded(
+        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Long running put request, service returns a 500, then a 200 to the
@@ -211,11 +223,13 @@ class lro_retrysOperations(object):
         # Construct and send request
         def long_running_send():
             request = self._client.put(url, query_parameters)
-            return self._client.send(request, header_parameters, body_content)
+            return self._client.send(
+                request, header_parameters, body_content, **operation_config)
 
         def get_long_running_status(status_link):
             request = self._client.get(status_link)
-            return self._client.send(request, header_parameters)
+            return self._client.send(
+                request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
             if response.status_code not in [200]:
@@ -231,10 +245,18 @@ class lro_retrysOperations(object):
 
             return deserialized
 
-        return AzureOperationPoller(long_running_send, get_long_running_output, get_long_running_status, self.config.long_running_operation_timeout)
+        long_running_operation_timeout = operation_config.get(
+            'long_running_operation_timeout',
+            self.config.long_running_operation_timeout)
+        return AzureOperationPoller(
+            long_running_send, 
+            get_long_running_output,
+            get_long_running_status, 
+            long_running_operation_timeout)
 
     @async_request
-    def begin_put_async_relative_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
+    def begin_put_async_relative_retry_succeeded(
+        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Long running put request, service returns a 500, then a 200 to the
@@ -280,7 +302,7 @@ class lro_retrysOperations(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise CloudError(self._deserialize, response)
@@ -295,7 +317,8 @@ class lro_retrysOperations(object):
 
         return deserialized
 
-    def delete_provisioning202_accepted200_succeeded(self, custom_headers={}, raw=False, callback=None):
+    def delete_provisioning202_accepted200_succeeded(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Long running delete request, service returns a 500, then a  202 to the
@@ -334,11 +357,12 @@ class lro_retrysOperations(object):
         # Construct and send request
         def long_running_send():
             request = self._client.delete(url, query_parameters)
-            return self._client.send(request, header_parameters)
+            return self._client.send(request, header_parameters, **operation_config)
 
         def get_long_running_status(status_link):
             request = self._client.get(status_link)
-            return self._client.send(request, header_parameters)
+            return self._client.send(
+                request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
             if response.status_code not in [200, 202]:
@@ -356,10 +380,18 @@ class lro_retrysOperations(object):
 
             return deserialized
 
-        return AzureOperationPoller(long_running_send, get_long_running_output, get_long_running_status, self.config.long_running_operation_timeout)
+        long_running_operation_timeout = operation_config.get(
+            'long_running_operation_timeout',
+            self.config.long_running_operation_timeout)
+        return AzureOperationPoller(
+            long_running_send, 
+            get_long_running_output,
+            get_long_running_status, 
+            long_running_operation_timeout)
 
     @async_request
-    def begin_delete_provisioning202_accepted200_succeeded(self, custom_headers={}, raw=False, callback=None):
+    def begin_delete_provisioning202_accepted200_succeeded(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Long running delete request, service returns a 500, then a  202 to the
@@ -397,7 +429,7 @@ class lro_retrysOperations(object):
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200, 202]:
             raise CloudError(self._deserialize, response)
@@ -414,7 +446,8 @@ class lro_retrysOperations(object):
 
         return deserialized
 
-    def delete202_retry200(self, custom_headers={}, raw=False, callback=None):
+    def delete202_retry200(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Long running delete request, service returns a 500, then a 202 to the
@@ -451,11 +484,12 @@ class lro_retrysOperations(object):
         # Construct and send request
         def long_running_send():
             request = self._client.delete(url, query_parameters)
-            return self._client.send(request, header_parameters)
+            return self._client.send(request, header_parameters, **operation_config)
 
         def get_long_running_status(status_link):
             request = self._client.get(status_link)
-            return self._client.send(request, header_parameters)
+            return self._client.send(
+                request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
             if response.status_code not in [202]:
@@ -464,10 +498,18 @@ class lro_retrysOperations(object):
             if raw:
                 return None, response
 
-        return AzureOperationPoller(long_running_send, get_long_running_output, get_long_running_status, self.config.long_running_operation_timeout)
+        long_running_operation_timeout = operation_config.get(
+            'long_running_operation_timeout',
+            self.config.long_running_operation_timeout)
+        return AzureOperationPoller(
+            long_running_send, 
+            get_long_running_output,
+            get_long_running_status, 
+            long_running_operation_timeout)
 
     @async_request
-    def begin_delete202_retry200(self, custom_headers={}, raw=False, callback=None):
+    def begin_delete202_retry200(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Long running delete request, service returns a 500, then a 202 to the
@@ -503,7 +545,7 @@ class lro_retrysOperations(object):
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [202]:
             raise CloudError(self._deserialize, response)
@@ -511,7 +553,8 @@ class lro_retrysOperations(object):
         if raw:
             return None, response
 
-    def delete_async_relative_retry_succeeded(self, custom_headers={}, raw=False, callback=None):
+    def delete_async_relative_retry_succeeded(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Long running delete request, service returns a 500, then a 202 to the
@@ -548,11 +591,12 @@ class lro_retrysOperations(object):
         # Construct and send request
         def long_running_send():
             request = self._client.delete(url, query_parameters)
-            return self._client.send(request, header_parameters)
+            return self._client.send(request, header_parameters, **operation_config)
 
         def get_long_running_status(status_link):
             request = self._client.get(status_link)
-            return self._client.send(request, header_parameters)
+            return self._client.send(
+                request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
             if response.status_code not in [202]:
@@ -561,10 +605,18 @@ class lro_retrysOperations(object):
             if raw:
                 return None, response
 
-        return AzureOperationPoller(long_running_send, get_long_running_output, get_long_running_status, self.config.long_running_operation_timeout)
+        long_running_operation_timeout = operation_config.get(
+            'long_running_operation_timeout',
+            self.config.long_running_operation_timeout)
+        return AzureOperationPoller(
+            long_running_send, 
+            get_long_running_output,
+            get_long_running_status, 
+            long_running_operation_timeout)
 
     @async_request
-    def begin_delete_async_relative_retry_succeeded(self, custom_headers={}, raw=False, callback=None):
+    def begin_delete_async_relative_retry_succeeded(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Long running delete request, service returns a 500, then a 202 to the
@@ -600,7 +652,7 @@ class lro_retrysOperations(object):
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [202]:
             raise CloudError(self._deserialize, response)
@@ -608,7 +660,8 @@ class lro_retrysOperations(object):
         if raw:
             return None, response
 
-    def post202_retry200(self, product=None, custom_headers={}, raw=False, callback=None):
+    def post202_retry200(
+        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Long running post request, service returns a 500, then a 202 to the
@@ -653,11 +706,13 @@ class lro_retrysOperations(object):
         # Construct and send request
         def long_running_send():
             request = self._client.post(url, query_parameters)
-            return self._client.send(request, header_parameters, body_content)
+            return self._client.send(
+                request, header_parameters, body_content, **operation_config)
 
         def get_long_running_status(status_link):
             request = self._client.get(status_link)
-            return self._client.send(request, header_parameters)
+            return self._client.send(
+                request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
             if response.status_code not in [202]:
@@ -666,10 +721,18 @@ class lro_retrysOperations(object):
             if raw:
                 return None, response
 
-        return AzureOperationPoller(long_running_send, get_long_running_output, get_long_running_status, self.config.long_running_operation_timeout)
+        long_running_operation_timeout = operation_config.get(
+            'long_running_operation_timeout',
+            self.config.long_running_operation_timeout)
+        return AzureOperationPoller(
+            long_running_send, 
+            get_long_running_output,
+            get_long_running_status, 
+            long_running_operation_timeout)
 
     @async_request
-    def begin_post202_retry200(self, product=None, custom_headers={}, raw=False, callback=None):
+    def begin_post202_retry200(
+        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Long running post request, service returns a 500, then a 202 to the
@@ -713,7 +776,7 @@ class lro_retrysOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [202]:
             raise CloudError(self._deserialize, response)
@@ -721,7 +784,8 @@ class lro_retrysOperations(object):
         if raw:
             return None, response
 
-    def post_async_relative_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
+    def post_async_relative_retry_succeeded(
+        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Long running post request, service returns a 500, then a 202 to the
@@ -767,11 +831,13 @@ class lro_retrysOperations(object):
         # Construct and send request
         def long_running_send():
             request = self._client.post(url, query_parameters)
-            return self._client.send(request, header_parameters, body_content)
+            return self._client.send(
+                request, header_parameters, body_content, **operation_config)
 
         def get_long_running_status(status_link):
             request = self._client.get(status_link)
-            return self._client.send(request, header_parameters)
+            return self._client.send(
+                request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
             if response.status_code not in [202]:
@@ -780,10 +846,18 @@ class lro_retrysOperations(object):
             if raw:
                 return None, response
 
-        return AzureOperationPoller(long_running_send, get_long_running_output, get_long_running_status, self.config.long_running_operation_timeout)
+        long_running_operation_timeout = operation_config.get(
+            'long_running_operation_timeout',
+            self.config.long_running_operation_timeout)
+        return AzureOperationPoller(
+            long_running_send, 
+            get_long_running_output,
+            get_long_running_status, 
+            long_running_operation_timeout)
 
     @async_request
-    def begin_post_async_relative_retry_succeeded(self, product=None, custom_headers={}, raw=False, callback=None):
+    def begin_post_async_relative_retry_succeeded(
+        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Long running post request, service returns a 500, then a 202 to the
@@ -828,7 +902,7 @@ class lro_retrysOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [202]:
             raise CloudError(self._deserialize, response)

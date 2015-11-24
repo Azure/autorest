@@ -27,7 +27,8 @@ class datetimerfc1123(object):
         self.config = config
 
     @async_request
-    def get_null(self, custom_headers={}, raw=False, callback=None):
+    def get_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get null datetime value
@@ -59,7 +60,7 @@ class datetimerfc1123(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -75,7 +76,8 @@ class datetimerfc1123(object):
         return deserialized
 
     @async_request
-    def get_invalid(self, custom_headers={}, raw=False, callback=None):
+    def get_invalid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get invalid datetime value
@@ -107,7 +109,7 @@ class datetimerfc1123(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -123,7 +125,8 @@ class datetimerfc1123(object):
         return deserialized
 
     @async_request
-    def get_overflow(self, custom_headers={}, raw=False, callback=None):
+    def get_overflow(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get overflow datetime value
@@ -155,7 +158,7 @@ class datetimerfc1123(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -171,7 +174,8 @@ class datetimerfc1123(object):
         return deserialized
 
     @async_request
-    def get_underflow(self, custom_headers={}, raw=False, callback=None):
+    def get_underflow(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get underflow datetime value
@@ -203,7 +207,7 @@ class datetimerfc1123(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -219,7 +223,8 @@ class datetimerfc1123(object):
         return deserialized
 
     @async_request
-    def put_utc_max_date_time(self, datetime_body, custom_headers={}, raw=False, callback=None):
+    def put_utc_max_date_time(
+        self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT
@@ -255,7 +260,7 @@ class datetimerfc1123(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -264,7 +269,8 @@ class datetimerfc1123(object):
             return None, response
 
     @async_request
-    def get_utc_lowercase_max_date_time(self, custom_headers={}, raw=False, callback=None):
+    def get_utc_lowercase_max_date_time(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get max datetime value fri, 31 dec 9999 23:59:59 gmt
@@ -296,7 +302,7 @@ class datetimerfc1123(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -312,7 +318,8 @@ class datetimerfc1123(object):
         return deserialized
 
     @async_request
-    def get_utc_uppercase_max_date_time(self, custom_headers={}, raw=False, callback=None):
+    def get_utc_uppercase_max_date_time(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT
@@ -344,7 +351,7 @@ class datetimerfc1123(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -360,7 +367,8 @@ class datetimerfc1123(object):
         return deserialized
 
     @async_request
-    def put_utc_min_date_time(self, datetime_body, custom_headers={}, raw=False, callback=None):
+    def put_utc_min_date_time(
+        self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT
@@ -396,7 +404,7 @@ class datetimerfc1123(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -405,7 +413,8 @@ class datetimerfc1123(object):
             return None, response
 
     @async_request
-    def get_utc_min_date_time(self, custom_headers={}, raw=False, callback=None):
+    def get_utc_min_date_time(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT
@@ -437,7 +446,7 @@ class datetimerfc1123(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

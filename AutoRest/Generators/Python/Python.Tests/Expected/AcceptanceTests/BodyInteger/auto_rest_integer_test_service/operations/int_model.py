@@ -27,7 +27,8 @@ class int_model(object):
         self.config = config
 
     @async_request
-    def get_null(self, custom_headers={}, raw=False, callback=None):
+    def get_null(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get null Int value
@@ -58,7 +59,7 @@ class int_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -74,7 +75,8 @@ class int_model(object):
         return deserialized
 
     @async_request
-    def get_invalid(self, custom_headers={}, raw=False, callback=None):
+    def get_invalid(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get invalid Int value
@@ -105,7 +107,7 @@ class int_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -121,7 +123,8 @@ class int_model(object):
         return deserialized
 
     @async_request
-    def get_overflow_int32(self, custom_headers={}, raw=False, callback=None):
+    def get_overflow_int32(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get overflow Int32 value
@@ -152,7 +155,7 @@ class int_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -168,7 +171,8 @@ class int_model(object):
         return deserialized
 
     @async_request
-    def get_underflow_int32(self, custom_headers={}, raw=False, callback=None):
+    def get_underflow_int32(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get underflow Int32 value
@@ -199,7 +203,7 @@ class int_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -215,7 +219,8 @@ class int_model(object):
         return deserialized
 
     @async_request
-    def get_overflow_int64(self, custom_headers={}, raw=False, callback=None):
+    def get_overflow_int64(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get overflow Int64 value
@@ -246,7 +251,7 @@ class int_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -262,7 +267,8 @@ class int_model(object):
         return deserialized
 
     @async_request
-    def get_underflow_int64(self, custom_headers={}, raw=False, callback=None):
+    def get_underflow_int64(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get underflow Int64 value
@@ -293,7 +299,7 @@ class int_model(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -309,7 +315,8 @@ class int_model(object):
         return deserialized
 
     @async_request
-    def put_max32(self, int_body, custom_headers={}, raw=False, callback=None):
+    def put_max32(
+        self, int_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put max int32 value
@@ -345,7 +352,7 @@ class int_model(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -354,7 +361,8 @@ class int_model(object):
             return None, response
 
     @async_request
-    def put_max64(self, int_body, custom_headers={}, raw=False, callback=None):
+    def put_max64(
+        self, int_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put max int64 value
@@ -390,7 +398,7 @@ class int_model(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -399,7 +407,8 @@ class int_model(object):
             return None, response
 
     @async_request
-    def put_min32(self, int_body, custom_headers={}, raw=False, callback=None):
+    def put_min32(
+        self, int_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put min int32 value
@@ -435,7 +444,7 @@ class int_model(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -444,7 +453,8 @@ class int_model(object):
             return None, response
 
     @async_request
-    def put_min64(self, int_body, custom_headers={}, raw=False, callback=None):
+    def put_min64(
+        self, int_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put min int64 value
@@ -480,7 +490,7 @@ class int_model(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        response = self._client.send(request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

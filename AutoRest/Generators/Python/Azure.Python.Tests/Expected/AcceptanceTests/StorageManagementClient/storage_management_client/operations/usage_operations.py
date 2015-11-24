@@ -29,7 +29,8 @@ class usageOperations(object):
         self.config = config
 
     @async_request
-    def list(self, custom_headers={}, raw=False, callback=None):
+    def list(
+        self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Gets the current usage count and the limit for the resources under the
@@ -70,7 +71,7 @@ class usageOperations(object):
 
         # Construct and send request
         request = self._client.get(url, query_parameters)
-        response = self._client.send(request, header_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
             raise CloudError(self._deserialize, response)
