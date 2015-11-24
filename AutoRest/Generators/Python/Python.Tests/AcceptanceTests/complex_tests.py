@@ -179,8 +179,7 @@ class ComplexTests(unittest.TestCase):
         # PUT primitive/byte
         byte_body = ByteWrapper(field=valid_bytes)
 
-        # TODO
-        #client.primitive.put_byte(byte_body)
+        client.primitive.put_byte(byte_body)
 
         """
         COMPLEX TYPE WITH ARRAY PROPERTIES
@@ -194,7 +193,7 @@ class ComplexTests(unittest.TestCase):
         self.assertEqual(array_result.array, array_value)
 
         # PUT array/valid
-        # TODO
+        # TODO: bug in serialize_data(None, 'str')
         #client.array.put_valid(ArrayWrapper(array=array_value))
        
         # GET array/empty
@@ -218,7 +217,7 @@ class ComplexTests(unittest.TestCase):
         self.assertEqual(dict_val, dict_result.default_program)
 
         # PUT dictionary/valid
-        # TODO
+        # TODO: bug in serialize_data(None, 'str')
         #client.dictionary.put_valid(DictionaryWrapper(default_program=dict_val))
 
         # GET dictionary/empty
@@ -273,7 +272,7 @@ class ComplexTests(unittest.TestCase):
 
         # PUT polymorphism/valid
         request = Salmon(
-            is_wild = True,
+            iswild = True,
             length = 1,
             location = "alaska",
             species = "king",
@@ -286,11 +285,10 @@ class ComplexTests(unittest.TestCase):
                               birthday=isodate.parse_datetime("2015-08-08T00:00:00Z"),
                               jawsize=5)]
             )
-        # TODO
-        #client.polymorphism.put_valid(request)
+        client.polymorphism.put_valid(request)
 
         bad_request = Salmon(
-            is_wild=True,
+            iswild=True,
             length=1,
             location="alaska",
             species="king",
@@ -316,7 +314,7 @@ class ComplexTests(unittest.TestCase):
         self.assertEqual(result.siblings[0].siblings[0].location, "atlantic")
 
         request = Salmon(
-            is_wild=True,
+            iswild=True,
             length=1,
             species="king",
             location="alaska",
@@ -327,7 +325,7 @@ class ComplexTests(unittest.TestCase):
                     species="predator",
                     siblings=[
                         Salmon(
-                            is_wild=True,
+                            iswild=True,
                             length=2,
                             location="atlantic",
                             species="coho",
@@ -360,8 +358,7 @@ class ComplexTests(unittest.TestCase):
                     picture=bytearray([255, 255, 255, 255, 254]))])
 
         # PUT polymorphicrecursive/valid
-        # TODO
-        #client.polymorphicrecursive.put_valid(request)
+        client.polymorphicrecursive.put_valid(request)
 
 
 if __name__ == '__main__':

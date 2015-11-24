@@ -30,6 +30,6 @@ class Resource(Model):
         self.name = None
         self.type = None
         self.location = None
-        self.tags = {}
+        self.tags = None
 
         super(Resource, self).__init__(*args, **kwargs)

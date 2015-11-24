@@ -28,7 +28,7 @@ class Resource(Model):
 
         self.id = None
         self.type = None
-        self.tags = {}
+        self.tags = None
         self.location = None
         self.name = None
 

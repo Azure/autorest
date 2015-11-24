@@ -25,7 +25,7 @@ class ResourceCollection(Model):
     def __init__(self, *args, **kwargs):
 
         self.productresource = None
-        self.arrayofresources = []
-        self.dictionaryofresources = {}
+        self.arrayofresources = None
+        self.dictionaryofresources = None
 
         super(ResourceCollection, self).__init__(*args, **kwargs)

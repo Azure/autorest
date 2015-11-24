@@ -22,6 +22,6 @@ class UsageListResult(Model):
 
     def __init__(self, *args, **kwargs):
 
-        self.value = []
+        self.value = None
 
         super(UsageListResult, self).__init__(*args, **kwargs)
