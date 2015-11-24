@@ -22,6 +22,6 @@ class ArrayWrapper(Model):
 
     def __init__(self, *args, **kwargs):
 
-        self.array = []
+        self.array = None
 
         super(ArrayWrapper, self).__init__(*args, **kwargs)

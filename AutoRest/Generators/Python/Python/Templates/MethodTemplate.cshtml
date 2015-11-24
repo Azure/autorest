@@ -18,7 +18,6 @@
 @EmptyLine
 @:        @WrapComment(string.Empty, Model.Description)
 }
-
 @EmptyLine
     @foreach(var parameter in Model.DocumentationParameters)
     {
@@ -31,7 +30,6 @@
     {
 @:        @WrapComment(string.Empty, ":type " + parameter.Name + ": " + MethodTemplateModel.GetDocumentationType(parameter.Type, parameter.IsRequired))
     }
-
         @WrapComment(string.Empty, ":type custom_headers: dict")
         @WrapComment(string.Empty, ":type raw: boolean")
         @WrapComment(string.Empty, ":type callback: Callable[[concurrent.futures.Future], None] or None")
@@ -128,4 +126,3 @@ else
         @:if raw:
             @:return None, response
 }
-

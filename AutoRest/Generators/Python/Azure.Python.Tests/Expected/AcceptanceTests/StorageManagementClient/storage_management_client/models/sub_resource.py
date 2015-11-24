@@ -10,10 +10,9 @@
 # --------------------------------------------------------------------------
 
 from msrest.serialization import Model
-from .base_resource import BaseResource
 
 
-class SubResource(BaseResource):
+class SubResource(Model):
 
     _required = []
 

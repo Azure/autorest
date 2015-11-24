@@ -31,14 +31,14 @@ from auto_rest_long_running_operation_test_service.models import *
 class LroTests(unittest.TestCase):
 
     def setUp(self):
-        config = AutoRestLongRunningOperationTestServiceConfiguration("http://localhost:3000")
+        config = AutoRestLongRunningOperationTestServiceConfiguration(None, base_url="http://localhost:3000")
 
         # TODO: investigate how to use TokenAuth in testing
         #creds = UserPassCredentials(config, client_id, "user", "password")
         #creds.get_token()
 
         config.log_level = 10
-        self.client = AutoRestLongRunningOperationTestService(None, config)
+        self.client = AutoRestLongRunningOperationTestService(config)
 
         self.client.config.long_running_operation_timeout = 0
         return super(LroTests, self).setUp()

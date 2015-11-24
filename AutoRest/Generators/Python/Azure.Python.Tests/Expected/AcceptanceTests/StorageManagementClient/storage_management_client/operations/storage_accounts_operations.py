@@ -13,6 +13,7 @@ from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
 from msrest.exceptions import DeserializationError, HttpOperationError
 from msrestazure.azure_exceptions import CloudError
+from msrestazure.azure_operation import AzureOperationPoller
 import uuid
 
 from ..models import *
@@ -91,7 +92,6 @@ class storage_accountsOperations(object):
 
         return deserialized
 
-    @async_request
     def create(self, resource_group_name, account_name, parameters, custom_headers={}, raw=False, callback=None):
         """
 
@@ -149,21 +149,29 @@ class storage_accountsOperations(object):
         body_content = self._serialize(parameters, 'StorageAccountCreateParameters')
 
         # Construct and send request
-        request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content)
+        def long_running_send():
+            request = self._client.put(url, query_parameters)
+            return self._client.send(request, header_parameters, body_content)
 
-        if response.status_code not in [200, 202]:
-            raise CloudError(self._deserialize, response)
+        def get_long_running_status(status_link):
+            request = self._client.get(status_link)
+            return self._client.send(request, header_parameters)
 
-        deserialized = None
+        def get_long_running_output(response):
+            if response.status_code not in [200, 202]:
+                raise CloudError(self._deserialize, response)
 
-        if response.status_code == 200:
-            deserialized = self._deserialize('StorageAccount', response)
+            deserialized = None
 
-        if raw:
-            return deserialized, response
+            if response.status_code == 200:
+                deserialized = self._deserialize('StorageAccount', response)
 
-        return deserialized
+            if raw:
+                return deserialized, response
+
+            return deserialized
+
+        return AzureOperationPoller(long_running_send, get_long_running_output, get_long_running_status, self.config.long_running_operation_timeout)
 
     @async_request
     def begin_create(self, resource_group_name, account_name, parameters, custom_headers={}, raw=False, callback=None):
