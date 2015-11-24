@@ -35,5 +35,10 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 }
             }
         }
+
+        public bool HasAnyLongRunOperation
+        {
+            get { return MethodTemplateModels.Any(m => m.Extensions.ContainsKey(AzureExtensions.LongRunningExtension)); }
+        }
     }
 }

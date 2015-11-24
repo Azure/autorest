@@ -11,6 +11,10 @@ from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
 from msrest.exceptions import DeserializationError, HttpOperationError
 from msrestazure.azure_exceptions import CloudError
+@if (Model.HasAnyLongRunOperation)
+{
+@:from msrestazure.azure_operation import AzureOperationPoller
+}
 import uuid
 @if (Model.HasAnyModel)
 {
