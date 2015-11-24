@@ -18,7 +18,8 @@ from . import models
 
 class AutoRestReportServiceConfiguration(Configuration):
 
-    def __init__(self, base_url=None, filepath=None):
+    def __init__(
+            self, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -40,7 +41,7 @@ class AutoRestReportService(object):
 
     @async_request
     def get_report(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get test coverage report

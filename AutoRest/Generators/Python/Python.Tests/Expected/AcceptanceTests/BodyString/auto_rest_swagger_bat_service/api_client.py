@@ -18,7 +18,8 @@ from . import models
 
 class AutoRestSwaggerBATServiceConfiguration(Configuration):
 
-    def __init__(self, base_url=None, filepath=None):
+    def __init__(
+            self, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -37,5 +38,7 @@ class AutoRestSwaggerBATService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.string = string(self._client, self.config, self._serialize, self._deserialize)
-        self.enum = enum(self._client, self.config, self._serialize, self._deserialize)
+        self.string = string(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.enum = enum(
+            self._client, self.config, self._serialize, self._deserialize)

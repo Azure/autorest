@@ -23,7 +23,8 @@ from . import models
 
 class AutoRestHttpInfrastructureTestServiceConfiguration(Configuration):
 
-    def __init__(self, base_url=None, filepath=None):
+    def __init__(
+            self, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -42,10 +43,17 @@ class AutoRestHttpInfrastructureTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.http_failure = http_failure(self._client, self.config, self._serialize, self._deserialize)
-        self.http_success = http_success(self._client, self.config, self._serialize, self._deserialize)
-        self.http_redirects = http_redirects(self._client, self.config, self._serialize, self._deserialize)
-        self.http_client_failure = http_client_failure(self._client, self.config, self._serialize, self._deserialize)
-        self.http_server_failure = http_server_failure(self._client, self.config, self._serialize, self._deserialize)
-        self.http_retry = http_retry(self._client, self.config, self._serialize, self._deserialize)
-        self.multiple_responses = multiple_responses(self._client, self.config, self._serialize, self._deserialize)
+        self.http_failure = http_failure(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.http_success = http_success(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.http_redirects = http_redirects(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.http_client_failure = http_client_failure(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.http_server_failure = http_server_failure(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.http_retry = http_retry(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.multiple_responses = multiple_responses(
+            self._client, self.config, self._serialize, self._deserialize)

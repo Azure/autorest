@@ -30,7 +30,7 @@ class subscription_in_credentialsOperations(object):
 
     @async_request
     def post_method_global_valid(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         POST method with subscriptionId modeled in credentials.  Set the
@@ -79,7 +79,7 @@ class subscription_in_credentialsOperations(object):
 
     @async_request
     def post_method_global_null(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         POST method with subscriptionId modeled in credentials.  Set the
@@ -129,7 +129,7 @@ class subscription_in_credentialsOperations(object):
 
     @async_request
     def post_method_global_not_provided_valid(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         POST method with subscriptionId modeled in credentials.  Set the
@@ -179,7 +179,7 @@ class subscription_in_credentialsOperations(object):
 
     @async_request
     def post_path_global_valid(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         POST method with subscriptionId modeled in credentials.  Set the
@@ -228,7 +228,7 @@ class subscription_in_credentialsOperations(object):
 
     @async_request
     def post_swagger_global_valid(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         POST method with subscriptionId modeled in credentials.  Set the

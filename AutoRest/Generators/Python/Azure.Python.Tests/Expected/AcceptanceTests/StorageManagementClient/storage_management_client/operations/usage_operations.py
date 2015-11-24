@@ -30,7 +30,7 @@ class usageOperations(object):
 
     @async_request
     def list(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Gets the current usage count and the limit for the resources under the

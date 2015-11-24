@@ -30,7 +30,7 @@ class api_version_localOperations(object):
 
     @async_request
     def get_method_local_valid(
-        self, api_version, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, api_version, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with api-version modeled in the method.  pass in
@@ -79,7 +79,7 @@ class api_version_localOperations(object):
 
     @async_request
     def get_method_local_null(
-        self, api_version=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, api_version=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with api-version modeled in the method.  pass in
@@ -129,7 +129,7 @@ class api_version_localOperations(object):
 
     @async_request
     def get_path_local_valid(
-        self, api_version, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, api_version, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with api-version modeled in the method.  pass in
@@ -178,7 +178,7 @@ class api_version_localOperations(object):
 
     @async_request
     def get_swagger_local_valid(
-        self, api_version, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, api_version, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with api-version modeled in the method.  pass in

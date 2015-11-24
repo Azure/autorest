@@ -28,7 +28,7 @@ class duration(object):
 
     @async_request
     def get_null(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get null duration value
@@ -77,7 +77,7 @@ class duration(object):
 
     @async_request
     def put_positive_duration(
-        self, duration_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, duration_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put a positive duration value
@@ -113,7 +113,8 @@ class duration(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -123,7 +124,7 @@ class duration(object):
 
     @async_request
     def get_positive_duration(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get a positive duration value
@@ -172,7 +173,7 @@ class duration(object):
 
     @async_request
     def get_invalid(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get an invalid duration value

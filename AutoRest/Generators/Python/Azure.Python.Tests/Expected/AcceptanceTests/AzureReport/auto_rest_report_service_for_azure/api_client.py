@@ -21,7 +21,8 @@ from . import models
 
 class AutoRestReportServiceForAzureConfiguration(AzureConfiguration):
 
-    def __init__(self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
+    def __init__(
+            self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -47,7 +48,7 @@ class AutoRestReportServiceForAzure(object):
 
     @async_request
     def get_report(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get test coverage report

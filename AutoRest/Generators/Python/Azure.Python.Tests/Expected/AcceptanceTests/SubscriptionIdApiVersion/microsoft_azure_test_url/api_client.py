@@ -18,7 +18,8 @@ from . import models
 
 class MicrosoftAzureTestUrlConfiguration(AzureConfiguration):
 
-    def __init__(self, credentials, subscription_id, api_version='2014-04-01-preview', accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
+    def __init__(
+            self, credentials, subscription_id, api_version='2014-04-01-preview', accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'https://management.azure.com/'
@@ -43,4 +44,5 @@ class MicrosoftAzureTestUrl(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.group = groupOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.group = groupOperations(
+            self._client, self.config, self._serialize, self._deserialize)

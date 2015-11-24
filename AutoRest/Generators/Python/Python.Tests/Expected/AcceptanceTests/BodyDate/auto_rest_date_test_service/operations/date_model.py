@@ -28,7 +28,7 @@ class date_model(object):
 
     @async_request
     def get_null(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get null date value
@@ -76,7 +76,7 @@ class date_model(object):
 
     @async_request
     def get_invalid_date(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get invalid date value
@@ -124,7 +124,7 @@ class date_model(object):
 
     @async_request
     def get_overflow_date(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get overflow date value
@@ -172,7 +172,7 @@ class date_model(object):
 
     @async_request
     def get_underflow_date(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get underflow date value
@@ -220,7 +220,7 @@ class date_model(object):
 
     @async_request
     def put_max_date(
-        self, date_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, date_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put max date value 9999-12-31
@@ -256,7 +256,8 @@ class date_model(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -266,7 +267,7 @@ class date_model(object):
 
     @async_request
     def get_max_date(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get max date value 9999-12-31
@@ -314,7 +315,7 @@ class date_model(object):
 
     @async_request
     def put_min_date(
-        self, date_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, date_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put min date value 0000-01-01
@@ -350,7 +351,8 @@ class date_model(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -360,7 +362,7 @@ class date_model(object):
 
     @async_request
     def get_min_date(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get min date value 0000-01-01

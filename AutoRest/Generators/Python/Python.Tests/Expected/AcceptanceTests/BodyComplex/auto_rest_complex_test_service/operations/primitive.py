@@ -28,7 +28,7 @@ class primitive(object):
 
     @async_request
     def get_int(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with integer properties
@@ -77,7 +77,7 @@ class primitive(object):
 
     @async_request
     def put_int(
-        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with integer properties
@@ -113,7 +113,8 @@ class primitive(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -123,7 +124,7 @@ class primitive(object):
 
     @async_request
     def get_long(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with long properties
@@ -172,7 +173,7 @@ class primitive(object):
 
     @async_request
     def put_long(
-        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with long properties
@@ -208,7 +209,8 @@ class primitive(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -218,7 +220,7 @@ class primitive(object):
 
     @async_request
     def get_float(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with float properties
@@ -267,7 +269,7 @@ class primitive(object):
 
     @async_request
     def put_float(
-        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with float properties
@@ -303,7 +305,8 @@ class primitive(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -313,7 +316,7 @@ class primitive(object):
 
     @async_request
     def get_double(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with double properties
@@ -362,7 +365,7 @@ class primitive(object):
 
     @async_request
     def put_double(
-        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with double properties
@@ -399,7 +402,8 @@ class primitive(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -409,7 +413,7 @@ class primitive(object):
 
     @async_request
     def get_bool(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with bool properties
@@ -458,7 +462,7 @@ class primitive(object):
 
     @async_request
     def put_bool(
-        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with bool properties
@@ -494,7 +498,8 @@ class primitive(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -504,7 +509,7 @@ class primitive(object):
 
     @async_request
     def get_string(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with string properties
@@ -553,7 +558,7 @@ class primitive(object):
 
     @async_request
     def put_string(
-        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with string properties
@@ -589,7 +594,8 @@ class primitive(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -599,7 +605,7 @@ class primitive(object):
 
     @async_request
     def get_date(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with date properties
@@ -648,7 +654,7 @@ class primitive(object):
 
     @async_request
     def put_date(
-        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with date properties
@@ -684,7 +690,8 @@ class primitive(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -694,7 +701,7 @@ class primitive(object):
 
     @async_request
     def get_date_time(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with datetime properties
@@ -743,7 +750,7 @@ class primitive(object):
 
     @async_request
     def put_date_time(
-        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with datetime properties
@@ -780,7 +787,8 @@ class primitive(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -790,7 +798,7 @@ class primitive(object):
 
     @async_request
     def get_date_time_rfc1123(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with datetimeRfc1123 properties
@@ -839,7 +847,7 @@ class primitive(object):
 
     @async_request
     def put_date_time_rfc1123(
-        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with datetimeRfc1123 properties
@@ -876,7 +884,8 @@ class primitive(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -886,7 +895,7 @@ class primitive(object):
 
     @async_request
     def get_duration(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with duration properties
@@ -935,7 +944,7 @@ class primitive(object):
 
     @async_request
     def put_duration(
-        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with duration properties
@@ -971,7 +980,8 @@ class primitive(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -981,7 +991,7 @@ class primitive(object):
 
     @async_request
     def get_byte(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with byte properties
@@ -1030,7 +1040,7 @@ class primitive(object):
 
     @async_request
     def put_byte(
-        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with byte properties
@@ -1067,7 +1077,8 @@ class primitive(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)

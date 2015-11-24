@@ -30,7 +30,7 @@ class lr_os_custom_headerOperations(object):
         self.config = config
 
     def put_async_retry_succeeded(
-        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
@@ -104,14 +104,12 @@ class lr_os_custom_headerOperations(object):
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
-            long_running_send, 
-            get_long_running_output,
-            get_long_running_status, 
-            long_running_operation_timeout)
+            long_running_send, get_long_running_output,
+            get_long_running_status, long_running_operation_timeout)
 
     @async_request
     def begin_put_async_retry_succeeded(
-        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
@@ -158,7 +156,8 @@ class lr_os_custom_headerOperations(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise CloudError(self._deserialize, response)
@@ -174,7 +173,7 @@ class lr_os_custom_headerOperations(object):
         return deserialized
 
     def put201_creating_succeeded200(
-        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
@@ -250,14 +249,12 @@ class lr_os_custom_headerOperations(object):
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
-            long_running_send, 
-            get_long_running_output,
-            get_long_running_status, 
-            long_running_operation_timeout)
+            long_running_send, get_long_running_output,
+            get_long_running_status, long_running_operation_timeout)
 
     @async_request
     def begin_put201_creating_succeeded200(
-        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
@@ -304,7 +301,8 @@ class lr_os_custom_headerOperations(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200, 201]:
             raise CloudError(self._deserialize, response)
@@ -322,7 +320,7 @@ class lr_os_custom_headerOperations(object):
         return deserialized
 
     def post202_retry200(
-        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
@@ -388,14 +386,12 @@ class lr_os_custom_headerOperations(object):
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
-            long_running_send, 
-            get_long_running_output,
-            get_long_running_status, 
-            long_running_operation_timeout)
+            long_running_send, get_long_running_output,
+            get_long_running_status, long_running_operation_timeout)
 
     @async_request
     def begin_post202_retry200(
-        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
@@ -441,7 +437,8 @@ class lr_os_custom_headerOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [202]:
             raise CloudError(self._deserialize, response)
@@ -450,7 +447,7 @@ class lr_os_custom_headerOperations(object):
             return None, response
 
     def post_async_retry_succeeded(
-        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
@@ -516,14 +513,12 @@ class lr_os_custom_headerOperations(object):
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
-            long_running_send, 
-            get_long_running_output,
-            get_long_running_status, 
-            long_running_operation_timeout)
+            long_running_send, get_long_running_output,
+            get_long_running_status, long_running_operation_timeout)
 
     @async_request
     def begin_post_async_retry_succeeded(
-        self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
@@ -569,7 +564,8 @@ class lr_os_custom_headerOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [202]:
             raise CloudError(self._deserialize, response)

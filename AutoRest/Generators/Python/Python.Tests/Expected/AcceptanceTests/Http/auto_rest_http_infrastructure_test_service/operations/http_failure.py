@@ -28,7 +28,7 @@ class http_failure(object):
 
     @async_request
     def get_empty_error(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get empty error form server

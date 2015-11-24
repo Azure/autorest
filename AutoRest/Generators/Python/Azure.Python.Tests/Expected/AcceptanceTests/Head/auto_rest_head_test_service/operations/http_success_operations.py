@@ -28,7 +28,7 @@ class http_successOperations(object):
 
     @async_request
     def head200(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 200 status code if successful
@@ -72,7 +72,7 @@ class http_successOperations(object):
 
     @async_request
     def head204(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 204 status code if successful
@@ -116,7 +116,7 @@ class http_successOperations(object):
 
     @async_request
     def head404(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 404 status code if successful

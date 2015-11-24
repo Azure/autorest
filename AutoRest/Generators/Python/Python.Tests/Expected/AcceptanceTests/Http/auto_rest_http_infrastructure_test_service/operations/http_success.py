@@ -28,7 +28,7 @@ class http_success(object):
 
     @async_request
     def head200(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 200 status code if successful
@@ -69,7 +69,7 @@ class http_success(object):
 
     @async_request
     def get200(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get 200 success
@@ -117,7 +117,7 @@ class http_success(object):
 
     @async_request
     def put200(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put boolean value true returning 200 success
@@ -156,7 +156,8 @@ class http_success(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -166,7 +167,7 @@ class http_success(object):
 
     @async_request
     def patch200(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Patch true Boolean value in request returning 200
@@ -205,7 +206,8 @@ class http_success(object):
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -215,7 +217,7 @@ class http_success(object):
 
     @async_request
     def post200(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Post bollean value true in request that returns a 200
@@ -254,7 +256,8 @@ class http_success(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -264,7 +267,7 @@ class http_success(object):
 
     @async_request
     def delete200(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Delete simple boolean value true returns 200
@@ -303,7 +306,8 @@ class http_success(object):
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -313,7 +317,7 @@ class http_success(object):
 
     @async_request
     def put201(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put true Boolean value in request returns 201
@@ -352,7 +356,8 @@ class http_success(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [201]:
             raise ErrorException(self._deserialize, response)
@@ -362,7 +367,7 @@ class http_success(object):
 
     @async_request
     def post201(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Post true Boolean value in request returns 201 (Created)
@@ -401,7 +406,8 @@ class http_success(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [201]:
             raise ErrorException(self._deserialize, response)
@@ -411,7 +417,7 @@ class http_success(object):
 
     @async_request
     def put202(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put true Boolean value in request returns 202 (Accepted)
@@ -450,7 +456,8 @@ class http_success(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [202]:
             raise ErrorException(self._deserialize, response)
@@ -460,7 +467,7 @@ class http_success(object):
 
     @async_request
     def patch202(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Patch true Boolean value in request returns 202
@@ -499,7 +506,8 @@ class http_success(object):
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [202]:
             raise ErrorException(self._deserialize, response)
@@ -509,7 +517,7 @@ class http_success(object):
 
     @async_request
     def post202(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Post true Boolean value in request returns 202 (Accepted)
@@ -548,7 +556,8 @@ class http_success(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [202]:
             raise ErrorException(self._deserialize, response)
@@ -558,7 +567,7 @@ class http_success(object):
 
     @async_request
     def delete202(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Delete true Boolean value in request returns 202 (accepted)
@@ -597,7 +606,8 @@ class http_success(object):
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [202]:
             raise ErrorException(self._deserialize, response)
@@ -607,7 +617,7 @@ class http_success(object):
 
     @async_request
     def head204(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 204 status code if successful
@@ -648,7 +658,7 @@ class http_success(object):
 
     @async_request
     def put204(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put true Boolean value in request returns 204 (no content)
@@ -687,7 +697,8 @@ class http_success(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [204]:
             raise ErrorException(self._deserialize, response)
@@ -697,7 +708,7 @@ class http_success(object):
 
     @async_request
     def patch204(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Patch true Boolean value in request returns 204 (no content)
@@ -736,7 +747,8 @@ class http_success(object):
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [204]:
             raise ErrorException(self._deserialize, response)
@@ -746,7 +758,7 @@ class http_success(object):
 
     @async_request
     def post204(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Post true Boolean value in request returns 204 (no content)
@@ -785,7 +797,8 @@ class http_success(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [204]:
             raise ErrorException(self._deserialize, response)
@@ -795,7 +808,7 @@ class http_success(object):
 
     @async_request
     def delete204(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Delete true Boolean value in request returns 204 (no content)
@@ -834,7 +847,8 @@ class http_success(object):
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [204]:
             raise ErrorException(self._deserialize, response)
@@ -844,7 +858,7 @@ class http_success(object):
 
     @async_request
     def head404(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 404 status code

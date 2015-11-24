@@ -30,7 +30,7 @@ class parameter_groupingOperations(object):
 
     @async_request
     def post_required(
-        self, parameter_grouping_post_required_parameters, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, parameter_grouping_post_required_parameters, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Post a bunch of required parameters grouped
@@ -91,7 +91,8 @@ class parameter_groupingOperations(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -101,7 +102,7 @@ class parameter_groupingOperations(object):
 
     @async_request
     def post_optional(
-        self, parameter_grouping_post_optional_parameters=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, parameter_grouping_post_optional_parameters=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Post a bunch of optional parameters grouped
@@ -159,7 +160,7 @@ class parameter_groupingOperations(object):
 
     @async_request
     def post_multiple_parameter_groups(
-        self, first_parameter_group=None, parameter_grouping_post_multiple_parameter_groups_second_parameter_group=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, first_parameter_group=None, parameter_grouping_post_multiple_parameter_groups_second_parameter_group=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Post parameters from multiple different parameter groups
@@ -232,7 +233,7 @@ class parameter_groupingOperations(object):
 
     @async_request
     def post_shared_parameter_group_object(
-        self, first_parameter_group=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, first_parameter_group=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Post parameters with a shared parameter group object

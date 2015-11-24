@@ -28,7 +28,7 @@ class files(object):
 
     @async_request
     def get_file(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get file
@@ -79,7 +79,7 @@ class files(object):
 
     @async_request
     def get_empty_file(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get empty file

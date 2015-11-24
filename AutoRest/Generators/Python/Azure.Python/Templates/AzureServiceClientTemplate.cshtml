@@ -40,7 +40,8 @@ import uuid
 @EmptyLine
 class @(Model.Name)Configuration(AzureConfiguration):
 @EmptyLine
-    def __init__(self, @(Model.RequiredConstructorParameters)base_url=None, filepath=None):
+    def __init__(
+            self, @(Model.RequiredConstructorParameters)base_url=None, filepath=None):
 @EmptyLine
         if not base_url:
             base_url = '@Model.BaseUrl'
@@ -76,7 +77,8 @@ else
         self.config = config
 @foreach (var methodGroup in Model.MethodGroupModels)
 {
-        @:self.@(methodGroup.MethodGroupName) = @(methodGroup.MethodGroupType)(self._client, self.config, self._serialize, self._deserialize)
+        @:self.@(methodGroup.MethodGroupName) = @(methodGroup.MethodGroupType)(
+            @:self._client, self.config, self._serialize, self._deserialize)
 }
 @foreach (var method in Model.MethodTemplateModels)
 {

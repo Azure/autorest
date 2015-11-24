@@ -21,7 +21,8 @@ from . import models
 
 class AutoRestResourceFlatteningTestServiceConfiguration(AzureConfiguration):
 
-    def __init__(self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
+    def __init__(
+            self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -47,7 +48,7 @@ class AutoRestResourceFlatteningTestService(object):
 
     @async_request
     def put_array(
-        self, resource_array=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, resource_array=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put External Resource as an Array
@@ -89,7 +90,8 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -99,7 +101,7 @@ class AutoRestResourceFlatteningTestService(object):
 
     @async_request
     def get_array(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get External Resource as an Array
@@ -150,7 +152,7 @@ class AutoRestResourceFlatteningTestService(object):
 
     @async_request
     def put_dictionary(
-        self, resource_dictionary=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, resource_dictionary=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put External Resource as a Dictionary
@@ -192,7 +194,8 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -202,7 +205,7 @@ class AutoRestResourceFlatteningTestService(object):
 
     @async_request
     def get_dictionary(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get External Resource as a Dictionary
@@ -254,7 +257,7 @@ class AutoRestResourceFlatteningTestService(object):
 
     @async_request
     def put_resource_collection(
-        self, resource_complex_object=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, resource_complex_object=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put External Resource as a ResourceCollection
@@ -297,7 +300,8 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -307,7 +311,7 @@ class AutoRestResourceFlatteningTestService(object):
 
     @async_request
     def get_resource_collection(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get External Resource as a ResourceCollection

@@ -28,7 +28,7 @@ class bool_model(object):
 
     @async_request
     def get_true(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get true Boolean value
@@ -76,7 +76,7 @@ class bool_model(object):
 
     @async_request
     def put_true(
-        self, bool_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, bool_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set Boolean value true
@@ -112,7 +112,8 @@ class bool_model(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -122,7 +123,7 @@ class bool_model(object):
 
     @async_request
     def get_false(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get false Boolean value
@@ -170,7 +171,7 @@ class bool_model(object):
 
     @async_request
     def put_false(
-        self, bool_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, bool_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set Boolean value false
@@ -206,7 +207,8 @@ class bool_model(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -216,7 +218,7 @@ class bool_model(object):
 
     @async_request
     def get_null(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get null Boolean value
@@ -264,7 +266,7 @@ class bool_model(object):
 
     @async_request
     def get_invalid(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get invalid Boolean value

@@ -28,7 +28,7 @@ class array(object):
 
     @async_request
     def get_valid(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with array property
@@ -77,7 +77,7 @@ class array(object):
 
     @async_request
     def put_valid(
-        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with array property
@@ -114,7 +114,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -124,7 +125,7 @@ class array(object):
 
     @async_request
     def get_empty(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with array property which is empty
@@ -173,7 +174,7 @@ class array(object):
 
     @async_request
     def put_empty(
-        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with array property which is empty
@@ -209,7 +210,8 @@ class array(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -219,7 +221,7 @@ class array(object):
 
     @async_request
     def get_not_provided(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex types with array property while server doesn't provide a

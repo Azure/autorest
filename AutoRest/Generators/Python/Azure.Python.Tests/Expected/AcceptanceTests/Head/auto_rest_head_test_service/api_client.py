@@ -17,7 +17,8 @@ from .operations.http_success_operations import http_successOperations
 
 class AutoRestHeadTestServiceConfiguration(AzureConfiguration):
 
-    def __init__(self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
+    def __init__(
+            self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
 
         if not base_url:
             base_url = 'http://localhost'
@@ -40,4 +41,5 @@ class AutoRestHeadTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.http_success = http_successOperations(self._client, self.config, self._serialize, self._deserialize)
+        self.http_success = http_successOperations(
+            self._client, self.config, self._serialize, self._deserialize)

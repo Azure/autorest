@@ -28,7 +28,7 @@ class basicOperations(object):
 
     @async_request
     def get_valid(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
@@ -77,7 +77,7 @@ class basicOperations(object):
 
     @async_request
     def put_valid(
-        self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Please put {id: 2, name: 'abc', color: 'Magenta'}
@@ -113,7 +113,8 @@ class basicOperations(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -123,7 +124,7 @@ class basicOperations(object):
 
     @async_request
     def get_invalid(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get a basic complex type that is invalid for the local strong type
@@ -172,7 +173,7 @@ class basicOperations(object):
 
     @async_request
     def get_empty(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get a basic complex type that is empty
@@ -221,7 +222,7 @@ class basicOperations(object):
 
     @async_request
     def get_null(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get a basic complex type whose properties are null
@@ -270,7 +271,7 @@ class basicOperations(object):
 
     @async_request
     def get_not_provided(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get a basic complex type while the server doesn't provide a response

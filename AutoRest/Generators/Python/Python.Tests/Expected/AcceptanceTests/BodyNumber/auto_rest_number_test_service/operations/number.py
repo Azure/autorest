@@ -28,7 +28,7 @@ class number(object):
 
     @async_request
     def get_null(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get null Number value
@@ -77,7 +77,7 @@ class number(object):
 
     @async_request
     def get_invalid_float(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get invalid float Number value
@@ -126,7 +126,7 @@ class number(object):
 
     @async_request
     def get_invalid_double(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get invalid double Number value
@@ -175,7 +175,7 @@ class number(object):
 
     @async_request
     def get_invalid_decimal(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get invalid decimal Number value
@@ -224,7 +224,7 @@ class number(object):
 
     @async_request
     def put_big_float(
-        self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put big float value 3.402823e+20
@@ -260,7 +260,8 @@ class number(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -270,7 +271,7 @@ class number(object):
 
     @async_request
     def get_big_float(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get big float value 3.402823e+20
@@ -319,7 +320,7 @@ class number(object):
 
     @async_request
     def put_big_double(
-        self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put big double value 2.5976931e+101
@@ -355,7 +356,8 @@ class number(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -365,7 +367,7 @@ class number(object):
 
     @async_request
     def get_big_double(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get big double value 2.5976931e+101
@@ -414,7 +416,7 @@ class number(object):
 
     @async_request
     def put_big_double_positive_decimal(
-        self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put big double value 99999999.99
@@ -450,7 +452,8 @@ class number(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -460,7 +463,7 @@ class number(object):
 
     @async_request
     def get_big_double_positive_decimal(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get big double value 99999999.99
@@ -509,7 +512,7 @@ class number(object):
 
     @async_request
     def put_big_double_negative_decimal(
-        self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put big double value -99999999.99
@@ -545,7 +548,8 @@ class number(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -555,7 +559,7 @@ class number(object):
 
     @async_request
     def get_big_double_negative_decimal(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get big double value -99999999.99
@@ -604,7 +608,7 @@ class number(object):
 
     @async_request
     def put_big_decimal(
-        self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put big decimal value 2.5976931e+101
@@ -640,7 +644,8 @@ class number(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -650,7 +655,7 @@ class number(object):
 
     @async_request
     def get_big_decimal(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get big decimal value 2.5976931e+101
@@ -699,7 +704,7 @@ class number(object):
 
     @async_request
     def put_big_decimal_positive_decimal(
-        self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put big decimal value 99999999.99
@@ -735,7 +740,8 @@ class number(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -745,7 +751,7 @@ class number(object):
 
     @async_request
     def get_big_decimal_positive_decimal(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get big decimal value 99999999.99
@@ -794,7 +800,7 @@ class number(object):
 
     @async_request
     def put_big_decimal_negative_decimal(
-        self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put big decimal value -99999999.99
@@ -830,7 +836,8 @@ class number(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -840,7 +847,7 @@ class number(object):
 
     @async_request
     def get_big_decimal_negative_decimal(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get big decimal value -99999999.99
@@ -889,7 +896,7 @@ class number(object):
 
     @async_request
     def put_small_float(
-        self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put small float value 3.402823e-20
@@ -925,7 +932,8 @@ class number(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -935,7 +943,7 @@ class number(object):
 
     @async_request
     def get_small_float(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get big double value 3.402823e-20
@@ -984,7 +992,7 @@ class number(object):
 
     @async_request
     def put_small_double(
-        self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put small double value 2.5976931e-101
@@ -1020,7 +1028,8 @@ class number(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1030,7 +1039,7 @@ class number(object):
 
     @async_request
     def get_small_double(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get big double value 2.5976931e-101
@@ -1079,7 +1088,7 @@ class number(object):
 
     @async_request
     def put_small_decimal(
-        self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put small decimal value 2.5976931e-101
@@ -1115,7 +1124,8 @@ class number(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -1125,7 +1135,7 @@ class number(object):
 
     @async_request
     def get_small_decimal(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get small decimal value 2.5976931e-101

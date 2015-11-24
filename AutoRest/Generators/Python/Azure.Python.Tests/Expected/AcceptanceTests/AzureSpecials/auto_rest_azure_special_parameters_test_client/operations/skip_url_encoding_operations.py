@@ -30,7 +30,7 @@ class skip_url_encodingOperations(object):
 
     @async_request
     def get_method_path_valid(
-        self, unencoded_path_param, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, unencoded_path_param, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -81,7 +81,7 @@ class skip_url_encodingOperations(object):
 
     @async_request
     def get_path_path_valid(
-        self, unencoded_path_param, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, unencoded_path_param, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -132,7 +132,7 @@ class skip_url_encodingOperations(object):
 
     @async_request
     def get_swagger_path_valid(
-        self, unencoded_path_param, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, unencoded_path_param, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -184,7 +184,7 @@ class skip_url_encodingOperations(object):
 
     @async_request
     def get_method_query_valid(
-        self, q1, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, q1, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with unencoded query parameter with value
@@ -233,7 +233,7 @@ class skip_url_encodingOperations(object):
 
     @async_request
     def get_method_query_null(
-        self, q1=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, q1=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with unencoded query parameter with value null
@@ -281,7 +281,7 @@ class skip_url_encodingOperations(object):
 
     @async_request
     def get_path_query_valid(
-        self, q1, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, q1, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with unencoded query parameter with value
@@ -330,7 +330,7 @@ class skip_url_encodingOperations(object):
 
     @async_request
     def get_swagger_query_valid(
-        self, q1=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, q1=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method with unencoded query parameter with value

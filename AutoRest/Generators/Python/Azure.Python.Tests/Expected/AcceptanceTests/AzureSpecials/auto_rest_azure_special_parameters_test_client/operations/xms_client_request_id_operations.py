@@ -30,7 +30,7 @@ class xms_client_request_idOperations(object):
 
     @async_request
     def get(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method that overwrites x-ms-client-request header with value
@@ -75,7 +75,7 @@ class xms_client_request_idOperations(object):
 
     @async_request
     def param_get(
-        self, x_ms_client_request_id, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, x_ms_client_request_id, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get method that overwrites x-ms-client-request header with value

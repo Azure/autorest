@@ -15,7 +15,7 @@ else if (Model.IsPagingMethod)
 <text>
     @@async_request
     def @(Model.Name.ToPythonCase())(
-        self, @(Model.MethodParameterDeclaration(true))):
+            self, @(Model.MethodParameterDeclaration(true))):
         """
 @if (!String.IsNullOrEmpty(Model.Summary))
 {
@@ -93,11 +93,13 @@ else if (Model.IsPagingMethod)
             request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query_parameters)
 @if (Model.RequestBody != null)
 {
-            @:response = self._client.send(request, header_parameters, body_content, **operation_config)
+            @:response = self._client.send(
+                @:request, header_parameters, body_content, **operation_config)
 }
 else
 {
-            @:response = self._client.send(request, header_parameters, **operation_config)
+            @:response = self._client.send(
+                @:request, header_parameters, **operation_config)
 }
 @EmptyLine
             if @Model.FailureStatusCodePredicate:
@@ -120,7 +122,7 @@ else //Long running operations
 {
 <text>
     def @(Model.Name.ToPythonCase())(
-        self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):
+            self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):
         """
 @*need to fix comment here for long running function*@
 @if (!String.IsNullOrEmpty(Model.Summary))
@@ -214,8 +216,7 @@ else
   if (Model.IsResponseStream)
   {
             @:def download_gen():
-                @:for data in response.iter_content(
-                    @:self.config.connection.data_block_size):
+                @:for data in response.iter_content(self.config.connection.data_block_size):
                     @:if not data:
                         @:break
 @EmptyLine
@@ -252,9 +253,7 @@ else
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
-            long_running_send, 
-            get_long_running_output,
-            get_long_running_status, 
-            long_running_operation_timeout)
+            long_running_send, get_long_running_output,
+            get_long_running_status, long_running_operation_timeout)
 </text>
 }

@@ -28,7 +28,7 @@ class paths(object):
 
     @async_request
     def get_boolean_true(
-        self, bool_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, bool_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get true Boolean value on path
@@ -75,7 +75,7 @@ class paths(object):
 
     @async_request
     def get_boolean_false(
-        self, bool_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, bool_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get false Boolean value on path
@@ -122,7 +122,7 @@ class paths(object):
 
     @async_request
     def get_int_one_million(
-        self, int_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, int_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get '1000000' integer value
@@ -169,7 +169,7 @@ class paths(object):
 
     @async_request
     def get_int_negative_one_million(
-        self, int_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, int_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get '-1000000' integer value
@@ -216,7 +216,7 @@ class paths(object):
 
     @async_request
     def get_ten_billion(
-        self, long_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, long_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get '10000000000' 64 bit integer value
@@ -263,7 +263,7 @@ class paths(object):
 
     @async_request
     def get_negative_ten_billion(
-        self, long_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, long_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get '-10000000000' 64 bit integer value
@@ -310,7 +310,7 @@ class paths(object):
 
     @async_request
     def float_scientific_positive(
-        self, float_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, float_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get '1.034E+20' numeric value
@@ -357,7 +357,7 @@ class paths(object):
 
     @async_request
     def float_scientific_negative(
-        self, float_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, float_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get '-1.034E-20' numeric value
@@ -404,7 +404,7 @@ class paths(object):
 
     @async_request
     def double_decimal_positive(
-        self, double_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, double_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get '9999999.999' numeric value
@@ -451,7 +451,7 @@ class paths(object):
 
     @async_request
     def double_decimal_negative(
-        self, double_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, double_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get '-9999999.999' numeric value
@@ -498,7 +498,7 @@ class paths(object):
 
     @async_request
     def string_unicode(
-        self, string_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, string_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
@@ -546,7 +546,7 @@ class paths(object):
 
     @async_request
     def string_url_encoded(
-        self, string_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, string_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get 'begin!*'();:@ &=+$,/?#[]end
@@ -595,7 +595,7 @@ class paths(object):
 
     @async_request
     def string_empty(
-        self, string_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, string_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get ''
@@ -643,7 +643,7 @@ class paths(object):
 
     @async_request
     def string_null(
-        self, string_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, string_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get null (should throw)
@@ -690,7 +690,7 @@ class paths(object):
 
     @async_request
     def enum_valid(
-        self, enum_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, enum_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get using uri with 'green color' in path parameter
@@ -738,7 +738,7 @@ class paths(object):
 
     @async_request
     def enum_null(
-        self, enum_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, enum_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get null (should throw on the client before the request is sent on
@@ -787,7 +787,7 @@ class paths(object):
 
     @async_request
     def byte_multi_byte(
-        self, byte_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, byte_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -835,7 +835,7 @@ class paths(object):
 
     @async_request
     def byte_empty(
-        self, byte_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, byte_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get '' as byte array
@@ -882,7 +882,7 @@ class paths(object):
 
     @async_request
     def byte_null(
-        self, byte_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, byte_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get null as byte array (should throw)
@@ -929,7 +929,7 @@ class paths(object):
 
     @async_request
     def date_valid(
-        self, date_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, date_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get '2012-01-01' as date
@@ -976,7 +976,7 @@ class paths(object):
 
     @async_request
     def date_null(
-        self, date_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, date_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get null as date - this should throw or be unusable on the client
@@ -1024,7 +1024,7 @@ class paths(object):
 
     @async_request
     def date_time_valid(
-        self, date_time_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, date_time_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get '2012-01-01T01:01:01Z' as date-time
@@ -1071,7 +1071,7 @@ class paths(object):
 
     @async_request
     def date_time_null(
-        self, date_time_path, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, date_time_path, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get null as date-time, should be disallowed or throw depending on

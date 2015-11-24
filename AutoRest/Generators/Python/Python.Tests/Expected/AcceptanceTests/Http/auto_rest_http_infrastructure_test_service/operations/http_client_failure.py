@@ -28,7 +28,7 @@ class http_client_failure(object):
 
     @async_request
     def head400(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 400 status code - should be represented in the client as an
@@ -71,7 +71,7 @@ class http_client_failure(object):
 
     @async_request
     def get400(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 400 status code - should be represented in the client as an
@@ -114,7 +114,7 @@ class http_client_failure(object):
 
     @async_request
     def put400(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 400 status code - should be represented in the client as an
@@ -155,7 +155,8 @@ class http_client_failure(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -165,7 +166,7 @@ class http_client_failure(object):
 
     @async_request
     def patch400(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 400 status code - should be represented in the client as an
@@ -206,7 +207,8 @@ class http_client_failure(object):
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -216,7 +218,7 @@ class http_client_failure(object):
 
     @async_request
     def post400(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 400 status code - should be represented in the client as an
@@ -257,7 +259,8 @@ class http_client_failure(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -267,7 +270,7 @@ class http_client_failure(object):
 
     @async_request
     def delete400(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 400 status code - should be represented in the client as an
@@ -308,7 +311,8 @@ class http_client_failure(object):
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -318,7 +322,7 @@ class http_client_failure(object):
 
     @async_request
     def head401(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 401 status code - should be represented in the client as an
@@ -361,7 +365,7 @@ class http_client_failure(object):
 
     @async_request
     def get402(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 402 status code - should be represented in the client as an
@@ -404,7 +408,7 @@ class http_client_failure(object):
 
     @async_request
     def get403(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 403 status code - should be represented in the client as an
@@ -447,7 +451,7 @@ class http_client_failure(object):
 
     @async_request
     def put404(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 404 status code - should be represented in the client as an
@@ -488,7 +492,8 @@ class http_client_failure(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -498,7 +503,7 @@ class http_client_failure(object):
 
     @async_request
     def patch405(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 405 status code - should be represented in the client as an
@@ -539,7 +544,8 @@ class http_client_failure(object):
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -549,7 +555,7 @@ class http_client_failure(object):
 
     @async_request
     def post406(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 406 status code - should be represented in the client as an
@@ -590,7 +596,8 @@ class http_client_failure(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -600,7 +607,7 @@ class http_client_failure(object):
 
     @async_request
     def delete407(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 407 status code - should be represented in the client as an
@@ -641,7 +648,8 @@ class http_client_failure(object):
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -651,7 +659,7 @@ class http_client_failure(object):
 
     @async_request
     def put409(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 409 status code - should be represented in the client as an
@@ -692,7 +700,8 @@ class http_client_failure(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -702,7 +711,7 @@ class http_client_failure(object):
 
     @async_request
     def head410(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 410 status code - should be represented in the client as an
@@ -745,7 +754,7 @@ class http_client_failure(object):
 
     @async_request
     def get411(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 411 status code - should be represented in the client as an
@@ -788,7 +797,7 @@ class http_client_failure(object):
 
     @async_request
     def get412(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 412 status code - should be represented in the client as an
@@ -831,7 +840,7 @@ class http_client_failure(object):
 
     @async_request
     def put413(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 413 status code - should be represented in the client as an
@@ -872,7 +881,8 @@ class http_client_failure(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -882,7 +892,7 @@ class http_client_failure(object):
 
     @async_request
     def patch414(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 414 status code - should be represented in the client as an
@@ -923,7 +933,8 @@ class http_client_failure(object):
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -933,7 +944,7 @@ class http_client_failure(object):
 
     @async_request
     def post415(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 415 status code - should be represented in the client as an
@@ -974,7 +985,8 @@ class http_client_failure(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -984,7 +996,7 @@ class http_client_failure(object):
 
     @async_request
     def get416(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 416 status code - should be represented in the client as an
@@ -1027,7 +1039,7 @@ class http_client_failure(object):
 
     @async_request
     def delete417(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 417 status code - should be represented in the client as an
@@ -1068,7 +1080,8 @@ class http_client_failure(object):
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
             raise ErrorException(self._deserialize, response)
@@ -1078,7 +1091,7 @@ class http_client_failure(object):
 
     @async_request
     def head429(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 429 status code - should be represented in the client as an

@@ -28,7 +28,7 @@ class http_redirects(object):
 
     @async_request
     def head300(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 300 status code and redirect to /http/success/200
@@ -69,7 +69,7 @@ class http_redirects(object):
 
     @async_request
     def get300(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 300 status code and redirect to /http/success/200
@@ -117,7 +117,7 @@ class http_redirects(object):
 
     @async_request
     def head301(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 301 status code and redirect to /http/success/200
@@ -158,7 +158,7 @@ class http_redirects(object):
 
     @async_request
     def get301(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 301 status code and redirect to /http/success/200
@@ -199,7 +199,7 @@ class http_redirects(object):
 
     @async_request
     def put301(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put true Boolean value in request returns 301.  This request should
@@ -240,7 +240,8 @@ class http_redirects(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [301]:
             raise ErrorException(self._deserialize, response)
@@ -250,7 +251,7 @@ class http_redirects(object):
 
     @async_request
     def head302(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 302 status code and redirect to /http/success/200
@@ -291,7 +292,7 @@ class http_redirects(object):
 
     @async_request
     def get302(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Return 302 status code and redirect to /http/success/200
@@ -332,7 +333,7 @@ class http_redirects(object):
 
     @async_request
     def patch302(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Patch true Boolean value in request returns 302.  This request should
@@ -373,7 +374,8 @@ class http_redirects(object):
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [302]:
             raise ErrorException(self._deserialize, response)
@@ -383,7 +385,7 @@ class http_redirects(object):
 
     @async_request
     def post303(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Post true Boolean value in request returns 303.  This request should
@@ -424,7 +426,8 @@ class http_redirects(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200, 303]:
             raise ErrorException(self._deserialize, response)
@@ -434,7 +437,7 @@ class http_redirects(object):
 
     @async_request
     def head307(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Redirect with 307, resulting in a 200 success
@@ -475,7 +478,7 @@ class http_redirects(object):
 
     @async_request
     def get307(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Redirect get with 307, resulting in a 200 success
@@ -516,7 +519,7 @@ class http_redirects(object):
 
     @async_request
     def put307(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put redirected with 307, resulting in a 200 after redirect
@@ -555,7 +558,8 @@ class http_redirects(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200, 307]:
             raise ErrorException(self._deserialize, response)
@@ -565,7 +569,7 @@ class http_redirects(object):
 
     @async_request
     def patch307(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Patch redirected with 307, resulting in a 200 after redirect
@@ -604,7 +608,8 @@ class http_redirects(object):
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200, 307]:
             raise ErrorException(self._deserialize, response)
@@ -614,7 +619,7 @@ class http_redirects(object):
 
     @async_request
     def post307(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Post redirected with 307, resulting in a 200 after redirect
@@ -653,7 +658,8 @@ class http_redirects(object):
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200, 307]:
             raise ErrorException(self._deserialize, response)
@@ -663,7 +669,7 @@ class http_redirects(object):
 
     @async_request
     def delete307(
-        self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Delete redirected with 307, resulting in a 200 after redirect
@@ -702,7 +708,8 @@ class http_redirects(object):
 
         # Construct and send request
         request = self._client.delete(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200, 307]:
             raise ErrorException(self._deserialize, response)

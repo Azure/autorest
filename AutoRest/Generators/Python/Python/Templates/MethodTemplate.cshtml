@@ -8,7 +8,7 @@
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodTemplateModel>
     @@async_request
     def @(Model.Name.ToPythonCase())(
-        self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):
+            self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):
         """
 @if (!String.IsNullOrEmpty(Model.Summary))
 {
@@ -78,7 +78,8 @@
         request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query_parameters)
 @if (Model.RequestBody != null)
 {
-        @:response = self._client.send(request, header_parameters, body_content, **operation_config)
+        @:response = self._client.send(
+            @:request, header_parameters, body_content, **operation_config)
 }
 else
 {

@@ -28,7 +28,7 @@ class string(object):
 
     @async_request
     def get_null(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get null string value value
@@ -76,7 +76,7 @@ class string(object):
 
     @async_request
     def put_null(
-        self, string_body=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, string_body=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set string value null
@@ -115,7 +115,8 @@ class string(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -125,7 +126,7 @@ class string(object):
 
     @async_request
     def get_empty(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get empty string value value ''
@@ -173,7 +174,7 @@ class string(object):
 
     @async_request
     def put_empty(
-        self, string_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, string_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set string value empty ''
@@ -209,7 +210,8 @@ class string(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -219,7 +221,7 @@ class string(object):
 
     @async_request
     def get_mbcs(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get mbcs string value
@@ -269,7 +271,7 @@ class string(object):
 
     @async_request
     def put_mbcs(
-        self, string_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, string_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set string value mbcs
@@ -309,7 +311,8 @@ class string(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -319,7 +322,7 @@ class string(object):
 
     @async_request
     def get_whitespace(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get string value with leading and trailing whitespace
@@ -369,7 +372,7 @@ class string(object):
 
     @async_request
     def put_whitespace(
-        self, string_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, string_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Set String value with leading and trailing whitespace
@@ -409,7 +412,8 @@ class string(object):
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
-        response = self._client.send(request, header_parameters, body_content, **operation_config)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
             raise ErrorException(self._deserialize, response)
@@ -419,7 +423,7 @@ class string(object):
 
     @async_request
     def get_not_provided(
-        self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Get String value when no string value is sent in response payload
