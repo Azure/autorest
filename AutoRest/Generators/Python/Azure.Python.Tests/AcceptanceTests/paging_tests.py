@@ -30,9 +30,9 @@ from auto_rest_paging_test_service import (
 class PagingTests(unittest.TestCase):
 
     def setUp(self):
-        config = AutoRestPagingTestServiceConfiguration("http://localhost:3000")
+        config = AutoRestPagingTestServiceConfiguration(None, base_url="http://localhost:3000")
         config.log_level = 10
-        self.client = AutoRestPagingTestService(None, config)
+        self.client = AutoRestPagingTestService(config)
 
         return super(PagingTests, self).setUp()
 

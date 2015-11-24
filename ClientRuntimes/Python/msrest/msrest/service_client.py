@@ -80,7 +80,9 @@ class ServiceClient(object):
 
         self._adapter = ClientHTTPAdapter(config)
         self._protocols = ['http://', 'https://']
-        self._headers = {}
+        
+        # TODO - Add correct default User-Agent
+        self._headers = {'User-Agent':'msrest'}
 
         self._adapter.add_hook("request", log_request)
         self._adapter.add_hook("response", log_response, precall=False)
