@@ -31,6 +31,6 @@ class Shark(Fish):
         self.age = None
         self.birthday = None
 
-        self.fishtype = 'shark'
-
         super(Shark, self).__init__(*args, **kwargs)
+
+        self.fishtype = 'shark'

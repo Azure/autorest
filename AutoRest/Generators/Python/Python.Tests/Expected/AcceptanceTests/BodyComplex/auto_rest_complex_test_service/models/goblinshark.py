@@ -25,6 +25,6 @@ class Goblinshark(Shark):
 
         self.jawsize = None
 
-        self.fishtype = 'goblin'
-
         super(Goblinshark, self).__init__(*args, **kwargs)
+
+        self.fishtype = 'goblin'

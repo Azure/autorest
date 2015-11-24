@@ -77,13 +77,12 @@ else
   }
 @EmptyLine
 }
+        super(@(Model.Name), self).__init__(*args, **kwargs)
 @if (Model.NeedsPolymorphicConverter)
 {
-        @:self.@Model.BasePolymorphicDiscriminator = '@Model.SerializedName'
 @EmptyLine
+        @:self.@Model.BasePolymorphicDiscriminator = '@Model.SerializedName'
 }
-
-        super(@(Model.Name), self).__init__(*args, **kwargs)
 @if (Model.IsException)
 {
 @EmptyLine
