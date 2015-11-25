@@ -179,6 +179,13 @@ class ClientRequest(requests.Request):
         for key, value in headers.items():
             self.add_header(key, value)
 
+    def format_parameters(self, params):
+        query_params = []
+        for key, value in params.items():
+            query_params.append("{}={}".format(key, value))
+        query = '?' + '&'.join(query_params)
+        self.url = self.url + query
+
     def add_content(self, data, **kwargs):
 
         if isinstance(data, types.GeneratorType):
