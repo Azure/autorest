@@ -1,4 +1,4 @@
-import unittest
+﻿import unittest
 import subprocess
 import sys
 import isodate
@@ -11,6 +11,7 @@ from os.path import dirname, pardir, join, realpath, sep, pardir
 cwd = dirname(realpath(__file__))
 root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
+log_level = os.environ.get('PythonLogLevel', 30)
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "BodyDate"))
@@ -28,7 +29,7 @@ class DateTests(unittest.TestCase):
     def test_date(self):
 
         config = AutoRestDateTestServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = 10
+        config.log_level = log_level
         client = AutoRestDateTestService(config)
 
         max_date = isodate.parse_date("9999-12-31T23:59:59.999999Z")

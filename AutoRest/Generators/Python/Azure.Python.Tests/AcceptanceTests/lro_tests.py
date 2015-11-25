@@ -1,4 +1,4 @@
-import unittest
+﻿import unittest
 import subprocess
 import sys
 import isodate
@@ -13,6 +13,7 @@ cwd = dirname(realpath(__file__))
 root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrestazure"))
+log_level = os.environ.get('PythonLogLevel', 30)
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "Lro"))
@@ -35,7 +36,7 @@ class LroTests(unittest.TestCase):
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
         config = AutoRestLongRunningOperationTestServiceConfiguration(cred, base_url="http://localhost:3000")
 
-        config.log_level = 10
+        config.log_level = log_level
         self.client = AutoRestLongRunningOperationTestService(config)
 
         self.client.config.long_running_operation_timeout = 0

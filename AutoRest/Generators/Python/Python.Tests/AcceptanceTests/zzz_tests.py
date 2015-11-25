@@ -3,11 +3,13 @@ import isodate
 import subprocess
 import sys
 import datetime
+import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
 root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
+log_level = os.environ.get('PythonLogLevel', 30)
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "Report"))
@@ -19,11 +21,10 @@ from auto_rest_report_service import (
 
 
 class AcceptanceTests(unittest.TestCase):
-    #@unittest.skip("For now, skip this test since it'll always fail")
     def test_ensure_coverage(self):
 
         config = AutoRestReportServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = 10
+        config.log_level = log_level
         client = AutoRestReportService(config)
         report = client.get_report()
         report['getIntegerOverflow']=1
