@@ -34,6 +34,9 @@ import functools
 import types
 
 from requests.packages.urllib3 import Retry
+from requests.models import REDIRECT_STATI
+REDIRECT_STATI = [300, 301, 302, 303, 307, 308]
+
 
 
 class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
@@ -292,6 +295,14 @@ class ClientRedirectPolicy(object):
         self._log.debug("Configuring redirects: allow={}, max={}".format(
             self.allow, self.max_redirects))
         return self.max_redirects
+
+    def check_redirect(self, resp, request):
+        if resp.status_code == 301 and request.method not in ['GET', 'HEAD']:
+            return False
+        elif resp.status_code == 302 and request.method not in ['GET', 'HEAD']:
+            return False
+        else:
+            return True
 
 
 class ClientProxies(object):

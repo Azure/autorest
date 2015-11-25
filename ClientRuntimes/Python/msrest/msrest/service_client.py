@@ -111,18 +111,27 @@ class ServiceClient(object):
 
         return request
 
-    def _configure_session(self, session):
+    def _configure_session(self, session, **config):
         """
         Apply configuration to session.
         """
         session.headers.update(self._headers)
-
         session.max_redirects = self.config.redirect_policy()
         session.proxies = self.config.proxies()
         session.trust_env = self.config.proxies.use_env_settings
 
-        self._adapter.max_retries = self.config.retry_policy()
+        redirect_logic = session.resolve_redirects
 
+        def wrapped_redirect(resp, req, **kwargs):
+            attempt = self.config.redirect_policy.check_redirect(resp, req)
+            if attempt:
+                return redirect_logic(resp, req, **kwargs)
+
+            return []
+
+        session.resolve_redirects = wrapped_redirect
+
+        self._adapter.max_retries = self.config.retry_policy()
         for protocol in self._protocols:
             session.mount(protocol, self._adapter)
 
@@ -139,14 +148,12 @@ class ServiceClient(object):
         Prepare and send request object according to configuration.
         """
         session = self.creds.signed_session()
-        self._configure_session(session)
+        self._configure_session(session, **kwargs)
 
         kwargs.update(self.config.connection())
 
         request.add_headers(headers)
-        #if content is not None:
         request.add_content(content, **kwargs)
-   
 
         try:
 
