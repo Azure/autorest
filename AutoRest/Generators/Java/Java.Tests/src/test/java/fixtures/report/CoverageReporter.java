@@ -29,8 +29,6 @@ public class CoverageReporter {
 
         report.put("putComplexPolymorphismValid", 1);
         report.put("putComplexPolymorphicRecursiveValid", 1);
-        report.put("UrlPathsStringUrlEncoded", 1);
-        report.put("UrlQueriesArrayPipesValid", 1);
 
         int total = report.size();
         int hit = 0;

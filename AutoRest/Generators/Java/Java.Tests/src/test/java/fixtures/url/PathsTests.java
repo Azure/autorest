@@ -69,7 +69,7 @@ public class PathsTests {
         client.getPaths().doubleDecimalNegative(-9999999.999);
     }
 
-    @Ignore("Fixed when OkHttp 2.6 comes out")
+    @Test
     public void stringUrlEncoded() throws Exception {
         client.getPaths().stringUrlEncoded("begin!*'();:@ &=+$,/?#[]end");
     }
