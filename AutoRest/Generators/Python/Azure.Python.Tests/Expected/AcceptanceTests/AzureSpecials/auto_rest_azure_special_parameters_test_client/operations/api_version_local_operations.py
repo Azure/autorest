@@ -15,7 +15,10 @@ from msrest.exceptions import DeserializationError, HttpOperationError
 from msrestazure.azure_exceptions import CloudError
 import uuid
 
-from ..models import *
+from ..models import (
+  Error,
+  CloudError,
+)
 
 
 class api_version_localOperations(object):

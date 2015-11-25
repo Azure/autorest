@@ -82,6 +82,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)")]
         public override string ReturnEmptyResponse
         {
             get

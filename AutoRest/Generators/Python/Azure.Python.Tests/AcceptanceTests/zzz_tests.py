@@ -1,6 +1,7 @@
-import unittest
+﻿import unittest
 import sys
 import datetime
+import os
 from uuid import uuid4
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
@@ -8,6 +9,7 @@ cwd = dirname(realpath(__file__))
 
 sys.path.append(cwd + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + "ClientRuntimes" + sep + "Python" + sep + "msrest")
 sys.path.append(cwd + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + "ClientRuntimes" + sep + "Python" + sep + "msrestazure")
+log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 
@@ -39,7 +41,7 @@ class AcceptanceTests(unittest.TestCase):
 
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
         config = AutoRestParameterGroupingTestServiceConfiguration(cred, base_url="http://localhost:3000")
-        config.log_level = 10
+        config.log_level = log_level
         client = AutoRestParameterGroupingTestService(config)
 
         # Valid required parameters
@@ -92,7 +94,7 @@ class AcceptanceTests(unittest.TestCase):
         unencodedQuery = 'value1&q2=value2&q3=value3'
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
         config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
-        config.log_level = 10
+        config.log_level = log_level
         client = AutoRestAzureSpecialParametersTestClient(config)
 
         client.subscription_in_credentials.post_method_global_not_provided_valid()
@@ -129,7 +131,7 @@ class AcceptanceTests(unittest.TestCase):
 
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
         config = AutoRestReportServiceForAzureConfiguration(cred, base_url="http://localhost:3000")
-        config.log_level = 10
+        config.log_level = log_level
         client = AutoRestReportServiceForAzure(config)
         report = client.get_report()
         skipped = [k for k, v in report.items() if v == 0]

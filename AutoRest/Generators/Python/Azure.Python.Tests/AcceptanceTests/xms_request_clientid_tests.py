@@ -1,4 +1,4 @@
-import unittest
+﻿import unittest
 import subprocess
 import sys
 import isodate
@@ -13,6 +13,7 @@ cwd = dirname(realpath(__file__))
 root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrestazure"))
+log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "AzureSpecials"))
@@ -33,7 +34,7 @@ class XmsRequestClientIdTests(unittest.TestCase):
 
         cred = BasicTokenAuthentication({"access_token":123})
         config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
-        config.log_level = 10
+        config.log_level = log_level
         client = AutoRestAzureSpecialParametersTestClient(config)
 
         custom_headers = {"x-ms-client-request-id": validClientId }

@@ -13,7 +13,34 @@ from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
 from msrest.exceptions import DeserializationError, HttpOperationError
 
-from ..models import *
+from ..models import (
+    Error,
+    ErrorException,
+    Basic,
+    Pet,
+    Cat,
+    Dog,
+    Siamese,
+    Fish,
+    Salmon,
+    Shark,
+    Sawshark,
+    Goblinshark,
+    Cookiecuttershark,
+    IntWrapper,
+    LongWrapper,
+    FloatWrapper,
+    DoubleWrapper,
+    BooleanWrapper,
+    StringWrapper,
+    DateWrapper,
+    DatetimeWrapper,
+    Datetimerfc1123Wrapper,
+    DurationWrapper,
+    ByteWrapper,
+    ArrayWrapper,
+    DictionaryWrapper,
+)
 
 
 class dictionary(object):

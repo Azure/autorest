@@ -9,6 +9,14 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.exceptions import *
+from msrest.exceptions import (
+    ClientException,
+    SerializationError,
+    DeserializationError,
+    TokenExpiredError,
+    ClientRequestError,
+    AuthenticationError,
+    HttpOperationError,
+)
 
 from .api_client import AutoRestRFC1123DateTimeTestService, AutoRestRFC1123DateTimeTestServiceConfiguration

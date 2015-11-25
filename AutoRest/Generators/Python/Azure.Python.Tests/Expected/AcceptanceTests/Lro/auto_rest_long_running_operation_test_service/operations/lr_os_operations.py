@@ -16,7 +16,16 @@ from msrestazure.azure_exceptions import CloudError
 from msrestazure.azure_operation import AzureOperationPoller
 import uuid
 
-from ..models import *
+from ..models import (
+  CloudError,
+  Resource,
+  Sku,
+  Product,
+  SubProduct,
+  SubResource,
+  OperationResult,
+  OperationResultError,
+)
 
 
 class lr_osOperations(object):

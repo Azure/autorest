@@ -1,4 +1,5 @@
 ﻿@using Microsoft.Rest.Generator.Python
+@using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Python.Templates
 @using System.Linq;
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodGroupTemplateModel>
@@ -13,7 +14,17 @@ from msrest.exceptions import DeserializationError, HttpOperationError
 @if (Model.HasAnyModel)
 {
 @EmptyLine
-@:from ..models import *
+@:from ..models import (
+    foreach (var modelType in Model.ModelTypes)
+    {
+@:    @(modelType.Name),
+        var exceptionTypeName = modelType.GetExceptionDefinitionTypeIfExists(Model);
+        if (!string.IsNullOrEmpty(exceptionTypeName))
+        {
+@:    @(exceptionTypeName),
+        }
+    }
+@:)
 }
 @EmptyLine
 @EmptyLine

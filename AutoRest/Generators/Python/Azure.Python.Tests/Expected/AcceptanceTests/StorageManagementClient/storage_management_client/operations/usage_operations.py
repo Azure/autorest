@@ -15,7 +15,25 @@ from msrest.exceptions import DeserializationError, HttpOperationError
 from msrestazure.azure_exceptions import CloudError
 import uuid
 
-from ..models import *
+from ..models import (
+  StorageAccountCheckNameAvailabilityParameters,
+  CheckNameAvailabilityResult,
+  StorageAccountCreateParameters,
+  Endpoints,
+  Foo,
+  Bar,
+  CustomDomain,
+  StorageAccount,
+  StorageAccountKeys,
+  StorageAccountUpdateParameters,
+  StorageAccountRegenerateKeyParameters,
+  UsageName,
+  Usage,
+  UsageListResult,
+  Resource,
+  SubResource,
+  CloudError,
+)
 
 
 class usageOperations(object):

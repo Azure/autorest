@@ -13,7 +13,15 @@ from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
 from msrest.exceptions import DeserializationError, HttpOperationError
 
-from ..models import *
+from ..models import (
+    Error,
+    ErrorException,
+    A,
+    MyException,
+    B,
+    C,
+    D,
+)
 
 
 class http_client_failure(object):

@@ -13,7 +13,10 @@ from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.bool_model import bool_model
 from . import models
-from .models import *
+from .models import (
+    Error,
+    ErrorException,
+)
 
 
 class AutoRestBoolTestServiceConfiguration(Configuration):
