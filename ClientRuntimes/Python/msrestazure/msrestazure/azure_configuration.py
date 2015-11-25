@@ -41,13 +41,7 @@ class AzureConfiguration(Configuration):
 
         super(AzureConfiguration, self).__init__(base_url, filepath)
 
-        # Authentication
-        self.auth_endpoint = "//login.microsoftonline.com"
-        self.token_uri = "/oauth2/token"
-        self.auth_uri = "/oauth2/authorize"
-        self.tenant = "common"
-        self.resource = 'https://management.core.windows.net/'
-        self.keyring = "AzureAAD"
+
         self.long_running_operation_timeout = 30
 
     def save(self, filepath):
