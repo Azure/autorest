@@ -75,7 +75,7 @@ class RequiredOptionalTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.client.explicit.post_required_string_parameter(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(SerializationError):
             self.client.explicit.post_required_string_property(None)
 
         with self.assertRaises(ValueError):
@@ -84,13 +84,13 @@ class RequiredOptionalTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.client.explicit.post_required_array_parameter(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(SerializationError):
             self.client.explicit.post_required_array_property(None)
 
         with self.assertRaises(ValueError):
             self.client.explicit.post_required_class_parameter(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(SerializationError):
             self.client.explicit.post_required_class_property(None)
 
         with self.assertRaises(ValueError):

@@ -199,10 +199,7 @@ class Serializer(object):
                 except ValueError:
                     continue
 
-        except AttributeError as err:
-            raise_with_traceback(ValueError, str(err), err)
-
-        except (KeyError, TypeError) as err:
+        except (AttributeError, KeyError, TypeError) as err:
             msg = "Attribute {0} in object {1} cannot be serialized.".format(
                 attr_name, class_name)
 
@@ -231,14 +228,7 @@ class Serializer(object):
         if data is None:
             raise ValueError("Request body must not be None")
 
-        try:
-            output = self._serialize(data, data_type, **kwargs)
-
-        except DeserializationError as err:
-            raise TypeError("Invalid {} object: {}".format(data_type, err))
-
-        else:
-            return output
+        return self._serialize(data, data_type, **kwargs)
 
     def url(self, name, data, data_type, **kwargs):
 
@@ -256,7 +246,7 @@ class Serializer(object):
             else:
                 output = quote(str(output), safe='')
 
-        except DeserializationError:
+        except SerializationError:
             raise TypeError("{} must be type {}.".format(name, data_type))
 
         else:
@@ -275,7 +265,12 @@ class Serializer(object):
             if data_type == 'bool':
                 output = json.dumps(output)
 
-        except DeserializationError:
+            if kwargs.get('skip_quote') == True:
+                output = str(output)
+            else:
+                output = quote(str(output), safe='')
+
+        except SerializationError:
             raise TypeError("{} must be type {}.".format(name, data_type))
 
         else:
@@ -294,7 +289,7 @@ class Serializer(object):
             if data_type == 'bool':
                 output = json.dumps(output)
 
-        except DeserializationError:
+        except SerializationError:
             raise TypeError("{} must be type {}.".format(name, data_type))
 
         else:
