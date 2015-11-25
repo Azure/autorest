@@ -13,7 +13,7 @@ cwd = dirname(realpath(__file__))
 root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrestazure"))
-log_level = os.environ.get('PythonLogLevel', 30)
+log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "Lro"))
