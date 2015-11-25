@@ -34,6 +34,13 @@ public interface @Model.Name {
     List<Interceptor> getClientInterceptors();
 @EmptyLine
     /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @@param logLevel the logging level enum.
+     */
+    void setLogLevel(Level logLevel);
+@EmptyLine
+    /**
      * Gets the {@@link AzureClient} used for long running operations.
      * @@return the azure client;
      */

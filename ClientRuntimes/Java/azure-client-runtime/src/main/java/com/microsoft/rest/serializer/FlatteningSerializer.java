@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationConfig;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
@@ -26,12 +27,18 @@ import com.microsoft.rest.BaseResource;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * Custom serializer for deserializing {@link BaseResource} with wrapped properties.
+ * Custom serializer for serializing {@link BaseResource} with wrapped properties.
  * For example, a property with annotation @JsonProperty(value = "properties.name")
- * will be mapped to a top level "name" property in the POJO model.
+ * will be mapped from a top level "name" property in the POJO model to
+ * {'properties' : { 'name' : 'my_name' }} in the serialized payload.
  */
 public class FlatteningSerializer<T> extends StdSerializer<T> implements ResolvableSerializer {
     private final JsonSerializer<?> defaultSerializer;
@@ -61,27 +68,51 @@ public class FlatteningSerializer<T> extends StdSerializer<T> implements Resolva
             return;
         }
 
+        // BFS for all collapsed properties
         ObjectMapper mapper = new JacksonUtils().getObjectMapper();
         ObjectNode root = mapper.valueToTree(value);
         ObjectNode res = root.deepCopy();
-        Iterator<Map.Entry<String, JsonNode>> fields = root.fields();
-        while (fields.hasNext()) {
-            Map.Entry<String, JsonNode> field = fields.next();
-            if (field.getKey().contains(".")) {
-                ObjectNode node = res;
-                String[] values = field.getKey().split("\\.");
-                for (int i = 0; i < values.length - 1; ++i) {
-                    String val = values[i];
-                    if (node.has(val)) {
-                        node = (ObjectNode)node.get(val);
-                    } else {
-                        ObjectNode child = new ObjectNode(JsonNodeFactory.instance);
-                        node.put(val, child);
-                        node = child;
+        Queue<ObjectNode> source = new LinkedBlockingQueue<ObjectNode>();
+        Queue<ObjectNode> target = new LinkedBlockingQueue<ObjectNode>();
+        source.add(root);
+        target.add(res);
+        while (!source.isEmpty()) {
+            ObjectNode current = source.poll();
+            ObjectNode resCurrent = target.poll();
+            Iterator<Map.Entry<String, JsonNode>> fields = current.fields();
+            while (fields.hasNext()) {
+                Map.Entry<String, JsonNode> field = fields.next();
+                ObjectNode node = resCurrent;
+                JsonNode outNode = resCurrent.get(field.getKey());
+                if (field.getKey().contains(".")) {
+                    String[] values = field.getKey().split("\\.");
+                    for (int i = 0; i < values.length - 1; ++i) {
+                        String val = values[i];
+                        if (node.has(val)) {
+                            node = (ObjectNode)node.get(val);
+                        } else {
+                            ObjectNode child = new ObjectNode(JsonNodeFactory.instance);
+                            node.put(val, child);
+                            node = child;
+                        }
+                    }
+                    node.set(values[values.length - 1], resCurrent.get(field.getKey()));
+                    resCurrent.remove(field.getKey());
+                    outNode = node.get(values[values.length - 1]);
+                }
+                if (field.getValue() instanceof ObjectNode) {
+                    source.add((ObjectNode)field.getValue());
+                    target.add((ObjectNode)outNode);
+                } else if (field.getValue() instanceof ArrayNode &&
+                    (field.getValue()).size() > 0 &&
+                    (field.getValue()).get(0) instanceof ObjectNode) {
+                    Iterator<JsonNode> sourceIt = field.getValue().elements();
+                    Iterator<JsonNode> targetIt = outNode.elements();
+                    while (sourceIt.hasNext()) {
+                        source.add((ObjectNode)sourceIt.next());
+                        target.add((ObjectNode)targetIt.next());
                     }
                 }
-                node.set(values[values.length - 1], field.getValue());
-                res.remove(field.getKey());
             }
         }
         jgen.writeTree(res);

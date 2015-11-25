@@ -12,12 +12,12 @@ package fixtures.resourceflattening;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.AzureServiceClient;
 import com.microsoft.rest.AzureServiceResponseBuilder;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.CustomHeaderInterceptor;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -27,6 +27,7 @@ import fixtures.resourceflattening.models.Error;
 import fixtures.resourceflattening.models.FlattenedProduct;
 import fixtures.resourceflattening.models.Resource;
 import fixtures.resourceflattening.models.ResourceCollection;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -37,7 +38,7 @@ import retrofit.Retrofit;
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
  */
-public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient implements AutoRestResourceFlatteningTestService {
+public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClient implements AutoRestResourceFlatteningTestService {
     private AutoRestResourceFlatteningTestServiceService service;
     private String baseUri;
     private AzureClient azureClient;
@@ -171,9 +172,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        service = retrofit.create(AutoRestResourceFlatteningTestServiceService.class);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        service = this.retrofitBuilder.build().create(AutoRestResourceFlatteningTestServiceService.class);
     }
 
     /**
@@ -182,15 +182,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param resourceArray External Resource as an Array to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putArray(List<Resource> resourceArray) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
-            return putArrayDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> putArray(List<Resource> resourceArray) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
+        return putArrayDelegate(call.execute(), null);
     }
 
     /**
@@ -206,7 +200,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putArrayDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -214,7 +208,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         return call;
     }
 
-    private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -227,15 +221,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<List<FlattenedProduct>> getArray() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getArray(this.getAcceptLanguage());
-            return getArrayDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<List<FlattenedProduct>> getArray() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getArray(this.getAcceptLanguage());
+        return getArrayDelegate(call.execute(), null);
     }
 
     /**
@@ -250,7 +238,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getArrayDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -258,7 +246,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         return call;
     }
 
-    private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<List<FlattenedProduct>>(new AzureJacksonUtils())
                 .register(200, new TypeToken<List<FlattenedProduct>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -271,15 +259,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param resourceDictionary External Resource as a Dictionary to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
-            return putDictionaryDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
+        return putDictionaryDelegate(call.execute(), null);
     }
 
     /**
@@ -295,7 +277,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDictionaryDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -303,7 +285,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         return call;
     }
 
-    private ServiceResponse<Void> putDictionaryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putDictionaryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -316,15 +298,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, FlattenedProduct>> getDictionary() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDictionary(this.getAcceptLanguage());
-            return getDictionaryDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, FlattenedProduct>> getDictionary() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDictionary(this.getAcceptLanguage());
+        return getDictionaryDelegate(call.execute(), null);
     }
 
     /**
@@ -339,7 +315,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDictionaryDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -347,7 +323,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         return call;
     }
 
-    private ServiceResponse<Map<String, FlattenedProduct>> getDictionaryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, FlattenedProduct>> getDictionaryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Map<String, FlattenedProduct>>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Map<String, FlattenedProduct>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -360,15 +336,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putResourceCollection(ResourceCollection resourceComplexObject) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
-            return putResourceCollectionDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> putResourceCollection(ResourceCollection resourceComplexObject) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
+        return putResourceCollectionDelegate(call.execute(), null);
     }
 
     /**
@@ -384,7 +354,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putResourceCollectionDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -392,7 +362,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         return call;
     }
 
-    private ServiceResponse<Void> putResourceCollectionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putResourceCollectionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -405,15 +375,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the ResourceCollection object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<ResourceCollection> getResourceCollection() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getResourceCollection(this.getAcceptLanguage());
-            return getResourceCollectionDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<ResourceCollection> getResourceCollection() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getResourceCollection(this.getAcceptLanguage());
+        return getResourceCollectionDelegate(call.execute(), null);
     }
 
     /**
@@ -428,7 +392,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getResourceCollectionDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -436,7 +400,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         return call;
     }
 
-    private ServiceResponse<ResourceCollection> getResourceCollectionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<ResourceCollection> getResourceCollectionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<ResourceCollection>(new AzureJacksonUtils())
                 .register(200, new TypeToken<ResourceCollection>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

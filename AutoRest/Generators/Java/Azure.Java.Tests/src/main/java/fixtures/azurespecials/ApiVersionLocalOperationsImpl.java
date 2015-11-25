@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.Error;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -38,19 +39,13 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> getMethodLocalValid(String apiVersion) throws ServiceException {
+    public ServiceResponse<Void> getMethodLocalValid(String apiVersion) throws ServiceException, IOException {
         if (apiVersion == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
         }
-        try {
-            Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
-            return getMethodLocalValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
+        return getMethodLocalValidDelegate(call.execute(), null);
     }
 
     /**
@@ -71,7 +66,7 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getMethodLocalValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -79,7 +74,7 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
         return call;
     }
 
-    private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -92,15 +87,9 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> getMethodLocalNull(String apiVersion) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
-            return getMethodLocalNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> getMethodLocalNull(String apiVersion) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
+        return getMethodLocalNullDelegate(call.execute(), null);
     }
 
     /**
@@ -116,7 +105,7 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getMethodLocalNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -124,7 +113,7 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
         return call;
     }
 
-    private ServiceResponse<Void> getMethodLocalNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getMethodLocalNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -137,19 +126,13 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> getPathLocalValid(String apiVersion) throws ServiceException {
+    public ServiceResponse<Void> getPathLocalValid(String apiVersion) throws ServiceException, IOException {
         if (apiVersion == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
         }
-        try {
-            Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
-            return getPathLocalValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
+        return getPathLocalValidDelegate(call.execute(), null);
     }
 
     /**
@@ -170,7 +153,7 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getPathLocalValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -178,7 +161,7 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
         return call;
     }
 
-    private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -191,19 +174,13 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
      * @param apiVersion The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> getSwaggerLocalValid(String apiVersion) throws ServiceException {
+    public ServiceResponse<Void> getSwaggerLocalValid(String apiVersion) throws ServiceException, IOException {
         if (apiVersion == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
         }
-        try {
-            Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
-            return getSwaggerLocalValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
+        return getSwaggerLocalValidDelegate(call.execute(), null);
     }
 
     /**
@@ -224,7 +201,7 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getSwaggerLocalValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -232,7 +209,7 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
         return call;
     }
 
-    private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

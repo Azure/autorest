@@ -28,14 +28,12 @@ public class AutoRestIntegerTestServiceImpl extends ServiceClient implements Aut
         return this.baseUri;
     }
 
-    private IntOperations intOperations;
-
     /**
      * Gets the IntOperations object to access its operations.
      * @return the intOperations value.
      */
     public IntOperations getIntOperations() {
-        return this.intOperations;
+        return new IntOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -70,7 +68,6 @@ public class AutoRestIntegerTestServiceImpl extends ServiceClient implements Aut
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.intOperations = new IntOperationsImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

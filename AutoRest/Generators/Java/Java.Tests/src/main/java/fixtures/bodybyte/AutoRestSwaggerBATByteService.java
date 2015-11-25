@@ -12,6 +12,7 @@ package fixtures.bodybyte;
 
 import java.util.List;
 import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 
 /**
  * The interface for AutoRestSwaggerBATByteService class.
@@ -19,15 +20,24 @@ import com.squareup.okhttp.Interceptor;
 public interface AutoRestSwaggerBATByteService {
     /**
      * Gets the URI used as the base for all cloud service requests.
+     *
      * @return the BaseUri value.
      */
     String getBaseUri();
 
     /**
      * Gets the list of interceptors the OkHttp client will execute.
+     *
      * @return the list of interceptors.
      */
     List<Interceptor> getClientInterceptors();
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum.
+     */
+    void setLogLevel(Level logLevel);
 
     /**
      * Gets the ByteOperations object to access its operations.

@@ -16,10 +16,12 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.resourceflattening.models.FlattenedProduct;
 import fixtures.resourceflattening.models.Resource;
 import fixtures.resourceflattening.models.ResourceCollection;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import retrofit.Call;
@@ -43,6 +45,13 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the list of interceptors.
      */
     List<Interceptor> getClientInterceptors();
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum.
+     */
+    void setLogLevel(Level logLevel);
 
     /**
      * Gets the {@link AzureClient} used for long running operations.
@@ -115,9 +124,10 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceArray External Resource as an Array to put
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> putArray(List<Resource> resourceArray) throws ServiceException;
+    ServiceResponse<Void> putArray(List<Resource> resourceArray) throws ServiceException, IOException;
 
     /**
      * Put External Resource as an Array
@@ -132,9 +142,10 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as an Array
      *
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;FlattenedProduct&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<List<FlattenedProduct>> getArray() throws ServiceException;
+    ServiceResponse<List<FlattenedProduct>> getArray() throws ServiceException, IOException;
 
     /**
      * Get External Resource as an Array
@@ -149,9 +160,10 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ServiceException;
+    ServiceResponse<Void> putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ServiceException, IOException;
 
     /**
      * Put External Resource as a Dictionary
@@ -166,9 +178,10 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as a Dictionary
      *
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, FlattenedProduct&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<Map<String, FlattenedProduct>> getDictionary() throws ServiceException;
+    ServiceResponse<Map<String, FlattenedProduct>> getDictionary() throws ServiceException, IOException;
 
     /**
      * Get External Resource as a Dictionary
@@ -183,9 +196,10 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> putResourceCollection(ResourceCollection resourceComplexObject) throws ServiceException;
+    ServiceResponse<Void> putResourceCollection(ResourceCollection resourceComplexObject) throws ServiceException, IOException;
 
     /**
      * Put External Resource as a ResourceCollection
@@ -200,9 +214,10 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as a ResourceCollection
      *
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ResourceCollection object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<ResourceCollection> getResourceCollection() throws ServiceException;
+    ServiceResponse<ResourceCollection> getResourceCollection() throws ServiceException, IOException;
 
     /**
      * Get External Resource as a ResourceCollection

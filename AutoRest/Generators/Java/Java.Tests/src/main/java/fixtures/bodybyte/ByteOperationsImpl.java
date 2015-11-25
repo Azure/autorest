@@ -18,6 +18,7 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodybyte.models.Error;
+import java.io.IOException;
 import org.apache.commons.codec.binary.Base64;
 import retrofit.Call;
 import retrofit.Response;
@@ -38,15 +39,9 @@ public class ByteOperationsImpl implements ByteOperations {
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<byte[]> getNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getNull();
-            return getNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<byte[]> getNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getNull();
+        return getNullDelegate(call.execute(), null);
     }
 
     /**
@@ -61,7 +56,7 @@ public class ByteOperationsImpl implements ByteOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -69,7 +64,7 @@ public class ByteOperationsImpl implements ByteOperations {
         return call;
     }
 
-    private ServiceResponse<byte[]> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<byte[]> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<byte[]>()
                 .register(200, new TypeToken<byte[]>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -82,15 +77,9 @@ public class ByteOperationsImpl implements ByteOperations {
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<byte[]> getEmpty() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getEmpty();
-            return getEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<byte[]> getEmpty() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getEmpty();
+        return getEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -105,7 +94,7 @@ public class ByteOperationsImpl implements ByteOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -113,7 +102,7 @@ public class ByteOperationsImpl implements ByteOperations {
         return call;
     }
 
-    private ServiceResponse<byte[]> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<byte[]> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<byte[]>()
                 .register(200, new TypeToken<byte[]>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -126,15 +115,9 @@ public class ByteOperationsImpl implements ByteOperations {
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<byte[]> getNonAscii() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getNonAscii();
-            return getNonAsciiDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<byte[]> getNonAscii() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getNonAscii();
+        return getNonAsciiDelegate(call.execute(), null);
     }
 
     /**
@@ -149,7 +132,7 @@ public class ByteOperationsImpl implements ByteOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNonAsciiDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -157,7 +140,7 @@ public class ByteOperationsImpl implements ByteOperations {
         return call;
     }
 
-    private ServiceResponse<byte[]> getNonAsciiDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<byte[]> getNonAsciiDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<byte[]>()
                 .register(200, new TypeToken<byte[]>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -170,19 +153,13 @@ public class ByteOperationsImpl implements ByteOperations {
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putNonAscii(byte[] byteBody) throws ServiceException {
+    public ServiceResponse<Void> putNonAscii(byte[] byteBody) throws ServiceException, IOException {
         if (byteBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter byteBody is required and cannot be null."));
         }
-        try {
-            Call<ResponseBody> call = service.putNonAscii(byteBody);
-            return putNonAsciiDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putNonAscii(byteBody);
+        return putNonAsciiDelegate(call.execute(), null);
     }
 
     /**
@@ -203,7 +180,7 @@ public class ByteOperationsImpl implements ByteOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putNonAsciiDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -211,7 +188,7 @@ public class ByteOperationsImpl implements ByteOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putNonAsciiDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putNonAsciiDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -224,15 +201,9 @@ public class ByteOperationsImpl implements ByteOperations {
      * @return the byte[] object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<byte[]> getInvalid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getInvalid();
-            return getInvalidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<byte[]> getInvalid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getInvalid();
+        return getInvalidDelegate(call.execute(), null);
     }
 
     /**
@@ -247,7 +218,7 @@ public class ByteOperationsImpl implements ByteOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getInvalidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -255,7 +226,7 @@ public class ByteOperationsImpl implements ByteOperations {
         return call;
     }
 
-    private ServiceResponse<byte[]> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<byte[]> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<byte[]>()
                 .register(200, new TypeToken<byte[]>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

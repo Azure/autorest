@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import java.io.InputStream;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
 
@@ -38,10 +39,11 @@ public interface Files {
     /**
      * Get file
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<InputStream> getFile() throws ServiceException;
+    ServiceResponse<InputStream> getFile() throws ServiceException, IOException;
 
     /**
      * Get file
@@ -54,10 +56,11 @@ public interface Files {
     /**
      * Get empty file
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<InputStream> getEmptyFile() throws ServiceException;
+    ServiceResponse<InputStream> getEmptyFile() throws ServiceException, IOException;
 
     /**
      * Get empty file

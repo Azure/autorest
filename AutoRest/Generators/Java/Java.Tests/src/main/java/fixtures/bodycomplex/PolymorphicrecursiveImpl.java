@@ -20,6 +20,7 @@ import com.microsoft.rest.Validator;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Error;
 import fixtures.bodycomplex.models.Fish;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -39,15 +40,9 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
      * @return the Fish object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Fish> getValid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getValid();
-            return getValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Fish> getValid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getValid();
+        return getValidDelegate(call.execute(), null);
     }
 
     /**
@@ -62,7 +57,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -70,7 +65,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
         return call;
     }
 
-    private ServiceResponse<Fish> getValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Fish> getValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Fish>()
                 .register(200, new TypeToken<Fish>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -135,20 +130,14 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
      }
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putValid(Fish complexBody) throws ServiceException {
+    public ServiceResponse<Void> putValid(Fish complexBody) throws ServiceException, IOException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         }
         Validator.validate(complexBody);
-        try {
-            Call<ResponseBody> call = service.putValid(complexBody);
-            return putValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putValid(complexBody);
+        return putValidDelegate(call.execute(), null);
     }
 
     /**
@@ -222,7 +211,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -230,7 +219,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
         return call;
     }
 
-    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
@@ -46,9 +47,10 @@ public interface ApiVersionDefaultOperations {
      * GET method with api-version modeled in global settings.
      *
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> getMethodGlobalValid() throws ServiceException;
+    ServiceResponse<Void> getMethodGlobalValid() throws ServiceException, IOException;
 
     /**
      * GET method with api-version modeled in global settings.
@@ -62,9 +64,10 @@ public interface ApiVersionDefaultOperations {
      * GET method with api-version modeled in global settings.
      *
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> getMethodGlobalNotProvidedValid() throws ServiceException;
+    ServiceResponse<Void> getMethodGlobalNotProvidedValid() throws ServiceException, IOException;
 
     /**
      * GET method with api-version modeled in global settings.
@@ -78,9 +81,10 @@ public interface ApiVersionDefaultOperations {
      * GET method with api-version modeled in global settings.
      *
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> getPathGlobalValid() throws ServiceException;
+    ServiceResponse<Void> getPathGlobalValid() throws ServiceException, IOException;
 
     /**
      * GET method with api-version modeled in global settings.
@@ -94,9 +98,10 @@ public interface ApiVersionDefaultOperations {
      * GET method with api-version modeled in global settings.
      *
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> getSwaggerGlobalValid() throws ServiceException;
+    ServiceResponse<Void> getSwaggerGlobalValid() throws ServiceException, IOException;
 
     /**
      * GET method with api-version modeled in global settings.

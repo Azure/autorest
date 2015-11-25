@@ -1,6 +1,6 @@
 package fixtures.bodyboolean;
 
-import com.microsoft.rest.ServiceException;
+import com.fasterxml.jackson.core.JsonParseException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,8 +25,7 @@ public class BoolTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
+            Assert.assertEquals(JsonParseException.class, exception.getClass());
         }
     }
 

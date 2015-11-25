@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodyarray.models.Product;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import org.joda.time.DateTime;
@@ -223,10 +224,11 @@ public interface Array {
     /**
      * Get null array value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Integer>> getNull() throws ServiceException;
+    ServiceResponse<List<Integer>> getNull() throws ServiceException, IOException;
 
     /**
      * Get null array value
@@ -239,10 +241,11 @@ public interface Array {
     /**
      * Get invalid array [1, 2, 3
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Integer>> getInvalid() throws ServiceException;
+    ServiceResponse<List<Integer>> getInvalid() throws ServiceException, IOException;
 
     /**
      * Get invalid array [1, 2, 3
@@ -255,10 +258,11 @@ public interface Array {
     /**
      * Get empty array value []
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Integer>> getEmpty() throws ServiceException;
+    ServiceResponse<List<Integer>> getEmpty() throws ServiceException, IOException;
 
     /**
      * Get empty array value []
@@ -272,10 +276,11 @@ public interface Array {
      * Set array value empty []
      *
      * @param arrayBody the List&lt;String&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putEmpty(List<String> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putEmpty(List<String> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set array value empty []
@@ -289,10 +294,11 @@ public interface Array {
     /**
      * Get boolean array value [true, false, false, true]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Boolean>> getBooleanTfft() throws ServiceException;
+    ServiceResponse<List<Boolean>> getBooleanTfft() throws ServiceException, IOException;
 
     /**
      * Get boolean array value [true, false, false, true]
@@ -306,10 +312,11 @@ public interface Array {
      * Set array value empty [true, false, false, true]
      *
      * @param arrayBody the List&lt;Boolean&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putBooleanTfft(List<Boolean> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putBooleanTfft(List<Boolean> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set array value empty [true, false, false, true]
@@ -323,10 +330,11 @@ public interface Array {
     /**
      * Get boolean array value [true, null, false]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Boolean>> getBooleanInvalidNull() throws ServiceException;
+    ServiceResponse<List<Boolean>> getBooleanInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get boolean array value [true, null, false]
@@ -339,10 +347,11 @@ public interface Array {
     /**
      * Get boolean array value [true, 'boolean', false]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Boolean>> getBooleanInvalidString() throws ServiceException;
+    ServiceResponse<List<Boolean>> getBooleanInvalidString() throws ServiceException, IOException;
 
     /**
      * Get boolean array value [true, 'boolean', false]
@@ -355,10 +364,11 @@ public interface Array {
     /**
      * Get integer array value [1, -1, 3, 300]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Integer>> getIntegerValid() throws ServiceException;
+    ServiceResponse<List<Integer>> getIntegerValid() throws ServiceException, IOException;
 
     /**
      * Get integer array value [1, -1, 3, 300]
@@ -372,10 +382,11 @@ public interface Array {
      * Set array value empty [1, -1, 3, 300]
      *
      * @param arrayBody the List&lt;Integer&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putIntegerValid(List<Integer> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putIntegerValid(List<Integer> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set array value empty [1, -1, 3, 300]
@@ -389,10 +400,11 @@ public interface Array {
     /**
      * Get integer array value [1, null, 0]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Integer>> getIntInvalidNull() throws ServiceException;
+    ServiceResponse<List<Integer>> getIntInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get integer array value [1, null, 0]
@@ -405,10 +417,11 @@ public interface Array {
     /**
      * Get integer array value [1, 'integer', 0]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Integer>> getIntInvalidString() throws ServiceException;
+    ServiceResponse<List<Integer>> getIntInvalidString() throws ServiceException, IOException;
 
     /**
      * Get integer array value [1, 'integer', 0]
@@ -421,10 +434,11 @@ public interface Array {
     /**
      * Get integer array value [1, -1, 3, 300]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Long&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Long>> getLongValid() throws ServiceException;
+    ServiceResponse<List<Long>> getLongValid() throws ServiceException, IOException;
 
     /**
      * Get integer array value [1, -1, 3, 300]
@@ -438,10 +452,11 @@ public interface Array {
      * Set array value empty [1, -1, 3, 300]
      *
      * @param arrayBody the List&lt;Long&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putLongValid(List<Long> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putLongValid(List<Long> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set array value empty [1, -1, 3, 300]
@@ -455,10 +470,11 @@ public interface Array {
     /**
      * Get long array value [1, null, 0]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Long&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Long>> getLongInvalidNull() throws ServiceException;
+    ServiceResponse<List<Long>> getLongInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get long array value [1, null, 0]
@@ -471,10 +487,11 @@ public interface Array {
     /**
      * Get long array value [1, 'integer', 0]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Long&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Long>> getLongInvalidString() throws ServiceException;
+    ServiceResponse<List<Long>> getLongInvalidString() throws ServiceException, IOException;
 
     /**
      * Get long array value [1, 'integer', 0]
@@ -487,10 +504,11 @@ public interface Array {
     /**
      * Get float array value [0, -0.01, 1.2e20]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Double>> getFloatValid() throws ServiceException;
+    ServiceResponse<List<Double>> getFloatValid() throws ServiceException, IOException;
 
     /**
      * Get float array value [0, -0.01, 1.2e20]
@@ -504,10 +522,11 @@ public interface Array {
      * Set array value [0, -0.01, 1.2e20]
      *
      * @param arrayBody the List&lt;Double&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putFloatValid(List<Double> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putFloatValid(List<Double> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set array value [0, -0.01, 1.2e20]
@@ -521,10 +540,11 @@ public interface Array {
     /**
      * Get float array value [0.0, null, -1.2e20]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Double>> getFloatInvalidNull() throws ServiceException;
+    ServiceResponse<List<Double>> getFloatInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get float array value [0.0, null, -1.2e20]
@@ -537,10 +557,11 @@ public interface Array {
     /**
      * Get boolean array value [1.0, 'number', 0.0]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Double>> getFloatInvalidString() throws ServiceException;
+    ServiceResponse<List<Double>> getFloatInvalidString() throws ServiceException, IOException;
 
     /**
      * Get boolean array value [1.0, 'number', 0.0]
@@ -553,10 +574,11 @@ public interface Array {
     /**
      * Get float array value [0, -0.01, 1.2e20]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Double>> getDoubleValid() throws ServiceException;
+    ServiceResponse<List<Double>> getDoubleValid() throws ServiceException, IOException;
 
     /**
      * Get float array value [0, -0.01, 1.2e20]
@@ -570,10 +592,11 @@ public interface Array {
      * Set array value [0, -0.01, 1.2e20]
      *
      * @param arrayBody the List&lt;Double&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDoubleValid(List<Double> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putDoubleValid(List<Double> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set array value [0, -0.01, 1.2e20]
@@ -587,10 +610,11 @@ public interface Array {
     /**
      * Get float array value [0.0, null, -1.2e20]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Double>> getDoubleInvalidNull() throws ServiceException;
+    ServiceResponse<List<Double>> getDoubleInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get float array value [0.0, null, -1.2e20]
@@ -603,10 +627,11 @@ public interface Array {
     /**
      * Get boolean array value [1.0, 'number', 0.0]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Double>> getDoubleInvalidString() throws ServiceException;
+    ServiceResponse<List<Double>> getDoubleInvalidString() throws ServiceException, IOException;
 
     /**
      * Get boolean array value [1.0, 'number', 0.0]
@@ -619,10 +644,11 @@ public interface Array {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<String>> getStringValid() throws ServiceException;
+    ServiceResponse<List<String>> getStringValid() throws ServiceException, IOException;
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3']
@@ -636,10 +662,11 @@ public interface Array {
      * Set array value ['foo1', 'foo2', 'foo3']
      *
      * @param arrayBody the List&lt;String&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putStringValid(List<String> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putStringValid(List<String> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3']
@@ -653,10 +680,11 @@ public interface Array {
     /**
      * Get string array value ['foo', null, 'foo2']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<String>> getStringWithNull() throws ServiceException;
+    ServiceResponse<List<String>> getStringWithNull() throws ServiceException, IOException;
 
     /**
      * Get string array value ['foo', null, 'foo2']
@@ -669,10 +697,11 @@ public interface Array {
     /**
      * Get string array value ['foo', 123, 'foo2']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<String>> getStringWithInvalid() throws ServiceException;
+    ServiceResponse<List<String>> getStringWithInvalid() throws ServiceException, IOException;
 
     /**
      * Get string array value ['foo', 123, 'foo2']
@@ -685,10 +714,11 @@ public interface Array {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<LocalDate>> getDateValid() throws ServiceException;
+    ServiceResponse<List<LocalDate>> getDateValid() throws ServiceException, IOException;
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
@@ -702,10 +732,11 @@ public interface Array {
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDateValid(List<LocalDate> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putDateValid(List<LocalDate> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
@@ -719,10 +750,11 @@ public interface Array {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<LocalDate>> getDateInvalidNull() throws ServiceException;
+    ServiceResponse<List<LocalDate>> getDateInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04']
@@ -735,10 +767,11 @@ public interface Array {
     /**
      * Get date array value ['2011-03-22', 'date']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<LocalDate>> getDateInvalidChars() throws ServiceException;
+    ServiceResponse<List<LocalDate>> getDateInvalidChars() throws ServiceException, IOException;
 
     /**
      * Get date array value ['2011-03-22', 'date']
@@ -751,10 +784,11 @@ public interface Array {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<DateTime>> getDateTimeValid() throws ServiceException;
+    ServiceResponse<List<DateTime>> getDateTimeValid() throws ServiceException, IOException;
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
@@ -768,10 +802,11 @@ public interface Array {
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
      * @param arrayBody the List&lt;DateTime&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDateTimeValid(List<DateTime> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putDateTimeValid(List<DateTime> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
@@ -785,10 +820,11 @@ public interface Array {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<DateTime>> getDateTimeInvalidNull() throws ServiceException;
+    ServiceResponse<List<DateTime>> getDateTimeInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null]
@@ -801,10 +837,11 @@ public interface Array {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<DateTime>> getDateTimeInvalidChars() throws ServiceException;
+    ServiceResponse<List<DateTime>> getDateTimeInvalidChars() throws ServiceException, IOException;
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time']
@@ -817,10 +854,11 @@ public interface Array {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTimeRfc1123&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<DateTimeRfc1123>> getDateTimeRfc1123Valid() throws ServiceException;
+    ServiceResponse<List<DateTimeRfc1123>> getDateTimeRfc1123Valid() throws ServiceException, IOException;
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
@@ -834,10 +872,11 @@ public interface Array {
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDateTimeRfc1123Valid(List<DateTimeRfc1123> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putDateTimeRfc1123Valid(List<DateTimeRfc1123> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
@@ -851,10 +890,11 @@ public interface Array {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Period&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Period>> getDurationValid() throws ServiceException;
+    ServiceResponse<List<Period>> getDurationValid() throws ServiceException, IOException;
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
@@ -868,10 +908,11 @@ public interface Array {
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
      *
      * @param arrayBody the List&lt;Period&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDurationValid(List<Period> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putDurationValid(List<Period> arrayBody) throws ServiceException, IOException;
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
@@ -885,10 +926,11 @@ public interface Array {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<byte[]>> getByteValid() throws ServiceException;
+    ServiceResponse<List<byte[]>> getByteValid() throws ServiceException, IOException;
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
@@ -902,10 +944,11 @@ public interface Array {
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
      *
      * @param arrayBody the List&lt;byte[]&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putByteValid(List<byte[]> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putByteValid(List<byte[]> arrayBody) throws ServiceException, IOException;
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
@@ -919,10 +962,11 @@ public interface Array {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<byte[]>> getByteInvalidNull() throws ServiceException;
+    ServiceResponse<List<byte[]>> getByteInvalidNull() throws ServiceException, IOException;
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded
@@ -935,10 +979,11 @@ public interface Array {
     /**
      * Get array of complex type null value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Product>> getComplexNull() throws ServiceException;
+    ServiceResponse<List<Product>> getComplexNull() throws ServiceException, IOException;
 
     /**
      * Get array of complex type null value
@@ -951,10 +996,11 @@ public interface Array {
     /**
      * Get empty array of complex type []
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Product>> getComplexEmpty() throws ServiceException;
+    ServiceResponse<List<Product>> getComplexEmpty() throws ServiceException, IOException;
 
     /**
      * Get empty array of complex type []
@@ -967,10 +1013,11 @@ public interface Array {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Product>> getComplexItemNull() throws ServiceException;
+    ServiceResponse<List<Product>> getComplexItemNull() throws ServiceException, IOException;
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
@@ -983,10 +1030,11 @@ public interface Array {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Product>> getComplexItemEmpty() throws ServiceException;
+    ServiceResponse<List<Product>> getComplexItemEmpty() throws ServiceException, IOException;
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
@@ -999,10 +1047,11 @@ public interface Array {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Product>> getComplexValid() throws ServiceException;
+    ServiceResponse<List<Product>> getComplexValid() throws ServiceException, IOException;
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
@@ -1016,10 +1065,11 @@ public interface Array {
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
      * @param arrayBody the List&lt;Product&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putComplexValid(List<Product> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putComplexValid(List<Product> arrayBody) throws ServiceException, IOException;
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
@@ -1033,10 +1083,11 @@ public interface Array {
     /**
      * Get a null array
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<List<String>>> getArrayNull() throws ServiceException;
+    ServiceResponse<List<List<String>>> getArrayNull() throws ServiceException, IOException;
 
     /**
      * Get a null array
@@ -1049,10 +1100,11 @@ public interface Array {
     /**
      * Get an empty array []
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<List<String>>> getArrayEmpty() throws ServiceException;
+    ServiceResponse<List<List<String>>> getArrayEmpty() throws ServiceException, IOException;
 
     /**
      * Get an empty array []
@@ -1065,10 +1117,11 @@ public interface Array {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<List<String>>> getArrayItemNull() throws ServiceException;
+    ServiceResponse<List<List<String>>> getArrayItemNull() throws ServiceException, IOException;
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
@@ -1081,10 +1134,11 @@ public interface Array {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<List<String>>> getArrayItemEmpty() throws ServiceException;
+    ServiceResponse<List<List<String>>> getArrayItemEmpty() throws ServiceException, IOException;
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
@@ -1097,10 +1151,11 @@ public interface Array {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<List<String>>> getArrayValid() throws ServiceException;
+    ServiceResponse<List<List<String>>> getArrayValid() throws ServiceException, IOException;
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
@@ -1114,10 +1169,11 @@ public interface Array {
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putArrayValid(List<List<String>> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putArrayValid(List<List<String>> arrayBody) throws ServiceException, IOException;
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
@@ -1131,10 +1187,11 @@ public interface Array {
     /**
      * Get an array of Dictionaries with value null
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Map<String, String>>> getDictionaryNull() throws ServiceException;
+    ServiceResponse<List<Map<String, String>>> getDictionaryNull() throws ServiceException, IOException;
 
     /**
      * Get an array of Dictionaries with value null
@@ -1147,10 +1204,11 @@ public interface Array {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value []
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Map<String, String>>> getDictionaryEmpty() throws ServiceException;
+    ServiceResponse<List<Map<String, String>>> getDictionaryEmpty() throws ServiceException, IOException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value []
@@ -1163,10 +1221,11 @@ public interface Array {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Map<String, String>>> getDictionaryItemNull() throws ServiceException;
+    ServiceResponse<List<Map<String, String>>> getDictionaryItemNull() throws ServiceException, IOException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}]
@@ -1179,10 +1238,11 @@ public interface Array {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Map<String, String>>> getDictionaryItemEmpty() throws ServiceException;
+    ServiceResponse<List<Map<String, String>>> getDictionaryItemEmpty() throws ServiceException, IOException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
@@ -1195,10 +1255,11 @@ public interface Array {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<List<Map<String, String>>> getDictionaryValid() throws ServiceException;
+    ServiceResponse<List<Map<String, String>>> getDictionaryValid() throws ServiceException, IOException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
@@ -1212,10 +1273,11 @@ public interface Array {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDictionaryValid(List<Map<String, String>> arrayBody) throws ServiceException;
+    ServiceResponse<Void> putDictionaryValid(List<Map<String, String>> arrayBody) throws ServiceException, IOException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]

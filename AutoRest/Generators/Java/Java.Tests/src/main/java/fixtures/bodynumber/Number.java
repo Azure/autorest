@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import java.math.BigDecimal;
 import retrofit.Call;
 import retrofit.http.Body;
@@ -106,10 +107,11 @@ public interface Number {
     /**
      * Get null Number value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Double> getNull() throws ServiceException;
+    ServiceResponse<Double> getNull() throws ServiceException, IOException;
 
     /**
      * Get null Number value
@@ -122,10 +124,11 @@ public interface Number {
     /**
      * Get invalid float Number value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Double> getInvalidFloat() throws ServiceException;
+    ServiceResponse<Double> getInvalidFloat() throws ServiceException, IOException;
 
     /**
      * Get invalid float Number value
@@ -138,10 +141,11 @@ public interface Number {
     /**
      * Get invalid double Number value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Double> getInvalidDouble() throws ServiceException;
+    ServiceResponse<Double> getInvalidDouble() throws ServiceException, IOException;
 
     /**
      * Get invalid double Number value
@@ -154,10 +158,11 @@ public interface Number {
     /**
      * Get invalid decimal Number value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<BigDecimal> getInvalidDecimal() throws ServiceException;
+    ServiceResponse<BigDecimal> getInvalidDecimal() throws ServiceException, IOException;
 
     /**
      * Get invalid decimal Number value
@@ -171,10 +176,11 @@ public interface Number {
      * Put big float value 3.402823e+20
      *
      * @param numberBody the double value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putBigFloat(double numberBody) throws ServiceException;
+    ServiceResponse<Void> putBigFloat(double numberBody) throws ServiceException, IOException;
 
     /**
      * Put big float value 3.402823e+20
@@ -188,10 +194,11 @@ public interface Number {
     /**
      * Get big float value 3.402823e+20
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Double> getBigFloat() throws ServiceException;
+    ServiceResponse<Double> getBigFloat() throws ServiceException, IOException;
 
     /**
      * Get big float value 3.402823e+20
@@ -205,10 +212,11 @@ public interface Number {
      * Put big double value 2.5976931e+101
      *
      * @param numberBody the double value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putBigDouble(double numberBody) throws ServiceException;
+    ServiceResponse<Void> putBigDouble(double numberBody) throws ServiceException, IOException;
 
     /**
      * Put big double value 2.5976931e+101
@@ -222,10 +230,11 @@ public interface Number {
     /**
      * Get big double value 2.5976931e+101
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Double> getBigDouble() throws ServiceException;
+    ServiceResponse<Double> getBigDouble() throws ServiceException, IOException;
 
     /**
      * Get big double value 2.5976931e+101
@@ -239,10 +248,11 @@ public interface Number {
      * Put big double value 99999999.99
      *
      * @param numberBody the double value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putBigDoublePositiveDecimal(double numberBody) throws ServiceException;
+    ServiceResponse<Void> putBigDoublePositiveDecimal(double numberBody) throws ServiceException, IOException;
 
     /**
      * Put big double value 99999999.99
@@ -256,10 +266,11 @@ public interface Number {
     /**
      * Get big double value 99999999.99
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Double> getBigDoublePositiveDecimal() throws ServiceException;
+    ServiceResponse<Double> getBigDoublePositiveDecimal() throws ServiceException, IOException;
 
     /**
      * Get big double value 99999999.99
@@ -273,10 +284,11 @@ public interface Number {
      * Put big double value -99999999.99
      *
      * @param numberBody the double value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putBigDoubleNegativeDecimal(double numberBody) throws ServiceException;
+    ServiceResponse<Void> putBigDoubleNegativeDecimal(double numberBody) throws ServiceException, IOException;
 
     /**
      * Put big double value -99999999.99
@@ -290,10 +302,11 @@ public interface Number {
     /**
      * Get big double value -99999999.99
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Double> getBigDoubleNegativeDecimal() throws ServiceException;
+    ServiceResponse<Double> getBigDoubleNegativeDecimal() throws ServiceException, IOException;
 
     /**
      * Get big double value -99999999.99
@@ -307,10 +320,11 @@ public interface Number {
      * Put big decimal value 2.5976931e+101
      *
      * @param numberBody the BigDecimal value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putBigDecimal(BigDecimal numberBody) throws ServiceException;
+    ServiceResponse<Void> putBigDecimal(BigDecimal numberBody) throws ServiceException, IOException;
 
     /**
      * Put big decimal value 2.5976931e+101
@@ -324,10 +338,11 @@ public interface Number {
     /**
      * Get big decimal value 2.5976931e+101
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<BigDecimal> getBigDecimal() throws ServiceException;
+    ServiceResponse<BigDecimal> getBigDecimal() throws ServiceException, IOException;
 
     /**
      * Get big decimal value 2.5976931e+101
@@ -341,10 +356,11 @@ public interface Number {
      * Put big decimal value 99999999.99
      *
      * @param numberBody the BigDecimal value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putBigDecimalPositiveDecimal(BigDecimal numberBody) throws ServiceException;
+    ServiceResponse<Void> putBigDecimalPositiveDecimal(BigDecimal numberBody) throws ServiceException, IOException;
 
     /**
      * Put big decimal value 99999999.99
@@ -358,10 +374,11 @@ public interface Number {
     /**
      * Get big decimal value 99999999.99
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<BigDecimal> getBigDecimalPositiveDecimal() throws ServiceException;
+    ServiceResponse<BigDecimal> getBigDecimalPositiveDecimal() throws ServiceException, IOException;
 
     /**
      * Get big decimal value 99999999.99
@@ -375,10 +392,11 @@ public interface Number {
      * Put big decimal value -99999999.99
      *
      * @param numberBody the BigDecimal value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putBigDecimalNegativeDecimal(BigDecimal numberBody) throws ServiceException;
+    ServiceResponse<Void> putBigDecimalNegativeDecimal(BigDecimal numberBody) throws ServiceException, IOException;
 
     /**
      * Put big decimal value -99999999.99
@@ -392,10 +410,11 @@ public interface Number {
     /**
      * Get big decimal value -99999999.99
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<BigDecimal> getBigDecimalNegativeDecimal() throws ServiceException;
+    ServiceResponse<BigDecimal> getBigDecimalNegativeDecimal() throws ServiceException, IOException;
 
     /**
      * Get big decimal value -99999999.99
@@ -409,10 +428,11 @@ public interface Number {
      * Put small float value 3.402823e-20
      *
      * @param numberBody the double value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putSmallFloat(double numberBody) throws ServiceException;
+    ServiceResponse<Void> putSmallFloat(double numberBody) throws ServiceException, IOException;
 
     /**
      * Put small float value 3.402823e-20
@@ -426,10 +446,11 @@ public interface Number {
     /**
      * Get big double value 3.402823e-20
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Double> getSmallFloat() throws ServiceException;
+    ServiceResponse<Double> getSmallFloat() throws ServiceException, IOException;
 
     /**
      * Get big double value 3.402823e-20
@@ -443,10 +464,11 @@ public interface Number {
      * Put small double value 2.5976931e-101
      *
      * @param numberBody the double value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putSmallDouble(double numberBody) throws ServiceException;
+    ServiceResponse<Void> putSmallDouble(double numberBody) throws ServiceException, IOException;
 
     /**
      * Put small double value 2.5976931e-101
@@ -460,10 +482,11 @@ public interface Number {
     /**
      * Get big double value 2.5976931e-101
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Double> getSmallDouble() throws ServiceException;
+    ServiceResponse<Double> getSmallDouble() throws ServiceException, IOException;
 
     /**
      * Get big double value 2.5976931e-101
@@ -477,10 +500,11 @@ public interface Number {
      * Put small decimal value 2.5976931e-101
      *
      * @param numberBody the BigDecimal value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putSmallDecimal(BigDecimal numberBody) throws ServiceException;
+    ServiceResponse<Void> putSmallDecimal(BigDecimal numberBody) throws ServiceException, IOException;
 
     /**
      * Put small decimal value 2.5976931e-101
@@ -494,10 +518,11 @@ public interface Number {
     /**
      * Get small decimal value 2.5976931e-101
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<BigDecimal> getSmallDecimal() throws ServiceException;
+    ServiceResponse<BigDecimal> getSmallDecimal() throws ServiceException, IOException;
 
     /**
      * Get small decimal value 2.5976931e-101

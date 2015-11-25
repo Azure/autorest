@@ -20,6 +20,7 @@ import com.microsoft.rest.Validator;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.Error;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -39,15 +40,9 @@ public class ArrayImpl implements Array {
      * @return the ArrayWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<ArrayWrapper> getValid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getValid();
-            return getValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<ArrayWrapper> getValid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getValid();
+        return getValidDelegate(call.execute(), null);
     }
 
     /**
@@ -62,7 +57,7 @@ public class ArrayImpl implements Array {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -70,7 +65,7 @@ public class ArrayImpl implements Array {
         return call;
     }
 
-    private ServiceResponse<ArrayWrapper> getValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<ArrayWrapper> getValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<ArrayWrapper>()
                 .register(200, new TypeToken<ArrayWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -83,20 +78,14 @@ public class ArrayImpl implements Array {
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putValid(ArrayWrapper complexBody) throws ServiceException {
+    public ServiceResponse<Void> putValid(ArrayWrapper complexBody) throws ServiceException, IOException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         }
         Validator.validate(complexBody);
-        try {
-            Call<ResponseBody> call = service.putValid(complexBody);
-            return putValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putValid(complexBody);
+        return putValidDelegate(call.execute(), null);
     }
 
     /**
@@ -118,7 +107,7 @@ public class ArrayImpl implements Array {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -126,7 +115,7 @@ public class ArrayImpl implements Array {
         return call;
     }
 
-    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -139,15 +128,9 @@ public class ArrayImpl implements Array {
      * @return the ArrayWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<ArrayWrapper> getEmpty() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getEmpty();
-            return getEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<ArrayWrapper> getEmpty() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getEmpty();
+        return getEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -162,7 +145,7 @@ public class ArrayImpl implements Array {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -170,7 +153,7 @@ public class ArrayImpl implements Array {
         return call;
     }
 
-    private ServiceResponse<ArrayWrapper> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<ArrayWrapper> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<ArrayWrapper>()
                 .register(200, new TypeToken<ArrayWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -183,20 +166,14 @@ public class ArrayImpl implements Array {
      * @param complexBody Please put an empty array
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putEmpty(ArrayWrapper complexBody) throws ServiceException {
+    public ServiceResponse<Void> putEmpty(ArrayWrapper complexBody) throws ServiceException, IOException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         }
         Validator.validate(complexBody);
-        try {
-            Call<ResponseBody> call = service.putEmpty(complexBody);
-            return putEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putEmpty(complexBody);
+        return putEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -218,7 +195,7 @@ public class ArrayImpl implements Array {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -226,7 +203,7 @@ public class ArrayImpl implements Array {
         return call;
     }
 
-    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -239,15 +216,9 @@ public class ArrayImpl implements Array {
      * @return the ArrayWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<ArrayWrapper> getNotProvided() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getNotProvided();
-            return getNotProvidedDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<ArrayWrapper> getNotProvided() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getNotProvided();
+        return getNotProvidedDelegate(call.execute(), null);
     }
 
     /**
@@ -262,7 +233,7 @@ public class ArrayImpl implements Array {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNotProvidedDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -270,7 +241,7 @@ public class ArrayImpl implements Array {
         return call;
     }
 
-    private ServiceResponse<ArrayWrapper> getNotProvidedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<ArrayWrapper> getNotProvidedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<ArrayWrapper>()
                 .register(200, new TypeToken<ArrayWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

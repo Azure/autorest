@@ -30,6 +30,7 @@ import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -49,15 +50,9 @@ public class PrimitiveImpl implements Primitive {
      * @return the IntWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<IntWrapper> getInt() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getInt();
-            return getIntDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<IntWrapper> getInt() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getInt();
+        return getIntDelegate(call.execute(), null);
     }
 
     /**
@@ -72,7 +67,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getIntDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -80,7 +75,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<IntWrapper> getIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<IntWrapper> getIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<IntWrapper>()
                 .register(200, new TypeToken<IntWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -93,20 +88,14 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put -1 and 2
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putInt(IntWrapper complexBody) throws ServiceException {
+    public ServiceResponse<Void> putInt(IntWrapper complexBody) throws ServiceException, IOException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         }
         Validator.validate(complexBody);
-        try {
-            Call<ResponseBody> call = service.putInt(complexBody);
-            return putIntDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putInt(complexBody);
+        return putIntDelegate(call.execute(), null);
     }
 
     /**
@@ -128,7 +117,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putIntDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -136,7 +125,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -149,15 +138,9 @@ public class PrimitiveImpl implements Primitive {
      * @return the LongWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<LongWrapper> getLong() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getLong();
-            return getLongDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<LongWrapper> getLong() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getLong();
+        return getLongDelegate(call.execute(), null);
     }
 
     /**
@@ -172,7 +155,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getLongDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -180,7 +163,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<LongWrapper> getLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<LongWrapper> getLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<LongWrapper>()
                 .register(200, new TypeToken<LongWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -193,20 +176,14 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put 1099511627775 and -999511627788
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putLong(LongWrapper complexBody) throws ServiceException {
+    public ServiceResponse<Void> putLong(LongWrapper complexBody) throws ServiceException, IOException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         }
         Validator.validate(complexBody);
-        try {
-            Call<ResponseBody> call = service.putLong(complexBody);
-            return putLongDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putLong(complexBody);
+        return putLongDelegate(call.execute(), null);
     }
 
     /**
@@ -228,7 +205,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putLongDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -236,7 +213,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -249,15 +226,9 @@ public class PrimitiveImpl implements Primitive {
      * @return the FloatWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<FloatWrapper> getFloat() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getFloat();
-            return getFloatDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<FloatWrapper> getFloat() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getFloat();
+        return getFloatDelegate(call.execute(), null);
     }
 
     /**
@@ -272,7 +243,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getFloatDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -280,7 +251,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<FloatWrapper> getFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<FloatWrapper> getFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<FloatWrapper>()
                 .register(200, new TypeToken<FloatWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -293,20 +264,14 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put 1.05 and -0.003
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putFloat(FloatWrapper complexBody) throws ServiceException {
+    public ServiceResponse<Void> putFloat(FloatWrapper complexBody) throws ServiceException, IOException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         }
         Validator.validate(complexBody);
-        try {
-            Call<ResponseBody> call = service.putFloat(complexBody);
-            return putFloatDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putFloat(complexBody);
+        return putFloatDelegate(call.execute(), null);
     }
 
     /**
@@ -328,7 +293,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putFloatDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -336,7 +301,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -349,15 +314,9 @@ public class PrimitiveImpl implements Primitive {
      * @return the DoubleWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<DoubleWrapper> getDouble() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDouble();
-            return getDoubleDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<DoubleWrapper> getDouble() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDouble();
+        return getDoubleDelegate(call.execute(), null);
     }
 
     /**
@@ -372,7 +331,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDoubleDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -380,7 +339,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<DoubleWrapper> getDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<DoubleWrapper> getDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<DoubleWrapper>()
                 .register(200, new TypeToken<DoubleWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -393,20 +352,14 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putDouble(DoubleWrapper complexBody) throws ServiceException {
+    public ServiceResponse<Void> putDouble(DoubleWrapper complexBody) throws ServiceException, IOException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         }
         Validator.validate(complexBody);
-        try {
-            Call<ResponseBody> call = service.putDouble(complexBody);
-            return putDoubleDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putDouble(complexBody);
+        return putDoubleDelegate(call.execute(), null);
     }
 
     /**
@@ -428,7 +381,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDoubleDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -436,7 +389,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -449,15 +402,9 @@ public class PrimitiveImpl implements Primitive {
      * @return the BooleanWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<BooleanWrapper> getBool() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getBool();
-            return getBoolDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<BooleanWrapper> getBool() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getBool();
+        return getBoolDelegate(call.execute(), null);
     }
 
     /**
@@ -472,7 +419,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBoolDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -480,7 +427,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<BooleanWrapper> getBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<BooleanWrapper> getBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<BooleanWrapper>()
                 .register(200, new TypeToken<BooleanWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -493,20 +440,14 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put true and false
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putBool(BooleanWrapper complexBody) throws ServiceException {
+    public ServiceResponse<Void> putBool(BooleanWrapper complexBody) throws ServiceException, IOException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         }
         Validator.validate(complexBody);
-        try {
-            Call<ResponseBody> call = service.putBool(complexBody);
-            return putBoolDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putBool(complexBody);
+        return putBoolDelegate(call.execute(), null);
     }
 
     /**
@@ -528,7 +469,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putBoolDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -536,7 +477,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -549,15 +490,9 @@ public class PrimitiveImpl implements Primitive {
      * @return the StringWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<StringWrapper> getString() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getString();
-            return getStringDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<StringWrapper> getString() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getString();
+        return getStringDelegate(call.execute(), null);
     }
 
     /**
@@ -572,7 +507,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getStringDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -580,7 +515,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<StringWrapper> getStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<StringWrapper> getStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<StringWrapper>()
                 .register(200, new TypeToken<StringWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -593,20 +528,14 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put 'goodrequest', '', and null
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putString(StringWrapper complexBody) throws ServiceException {
+    public ServiceResponse<Void> putString(StringWrapper complexBody) throws ServiceException, IOException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         }
         Validator.validate(complexBody);
-        try {
-            Call<ResponseBody> call = service.putString(complexBody);
-            return putStringDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putString(complexBody);
+        return putStringDelegate(call.execute(), null);
     }
 
     /**
@@ -628,7 +557,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putStringDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -636,7 +565,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -649,15 +578,9 @@ public class PrimitiveImpl implements Primitive {
      * @return the DateWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<DateWrapper> getDate() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDate();
-            return getDateDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<DateWrapper> getDate() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDate();
+        return getDateDelegate(call.execute(), null);
     }
 
     /**
@@ -672,7 +595,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDateDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -680,7 +603,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<DateWrapper> getDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<DateWrapper> getDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<DateWrapper>()
                 .register(200, new TypeToken<DateWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -693,20 +616,14 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putDate(DateWrapper complexBody) throws ServiceException {
+    public ServiceResponse<Void> putDate(DateWrapper complexBody) throws ServiceException, IOException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         }
         Validator.validate(complexBody);
-        try {
-            Call<ResponseBody> call = service.putDate(complexBody);
-            return putDateDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putDate(complexBody);
+        return putDateDelegate(call.execute(), null);
     }
 
     /**
@@ -728,7 +645,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDateDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -736,7 +653,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -749,15 +666,9 @@ public class PrimitiveImpl implements Primitive {
      * @return the DatetimeWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<DatetimeWrapper> getDateTime() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDateTime();
-            return getDateTimeDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<DatetimeWrapper> getDateTime() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDateTime();
+        return getDateTimeDelegate(call.execute(), null);
     }
 
     /**
@@ -772,7 +683,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDateTimeDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -780,7 +691,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<DatetimeWrapper> getDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<DatetimeWrapper> getDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<DatetimeWrapper>()
                 .register(200, new TypeToken<DatetimeWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -793,20 +704,14 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putDateTime(DatetimeWrapper complexBody) throws ServiceException {
+    public ServiceResponse<Void> putDateTime(DatetimeWrapper complexBody) throws ServiceException, IOException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         }
         Validator.validate(complexBody);
-        try {
-            Call<ResponseBody> call = service.putDateTime(complexBody);
-            return putDateTimeDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putDateTime(complexBody);
+        return putDateTimeDelegate(call.execute(), null);
     }
 
     /**
@@ -828,7 +733,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDateTimeDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -836,7 +741,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -849,15 +754,9 @@ public class PrimitiveImpl implements Primitive {
      * @return the Datetimerfc1123Wrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDateTimeRfc1123();
-            return getDateTimeRfc1123Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDateTimeRfc1123();
+        return getDateTimeRfc1123Delegate(call.execute(), null);
     }
 
     /**
@@ -872,7 +771,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDateTimeRfc1123Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -880,7 +779,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Datetimerfc1123Wrapper>()
                 .register(200, new TypeToken<Datetimerfc1123Wrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -893,20 +792,14 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ServiceException {
+    public ServiceResponse<Void> putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ServiceException, IOException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         }
         Validator.validate(complexBody);
-        try {
-            Call<ResponseBody> call = service.putDateTimeRfc1123(complexBody);
-            return putDateTimeRfc1123Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putDateTimeRfc1123(complexBody);
+        return putDateTimeRfc1123Delegate(call.execute(), null);
     }
 
     /**
@@ -928,7 +821,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDateTimeRfc1123Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -936,7 +829,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -949,15 +842,9 @@ public class PrimitiveImpl implements Primitive {
      * @return the DurationWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<DurationWrapper> getDuration() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDuration();
-            return getDurationDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<DurationWrapper> getDuration() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDuration();
+        return getDurationDelegate(call.execute(), null);
     }
 
     /**
@@ -972,7 +859,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDurationDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -980,7 +867,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<DurationWrapper> getDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<DurationWrapper> getDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<DurationWrapper>()
                 .register(200, new TypeToken<DurationWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -993,20 +880,14 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put 'P123DT22H14M12.011S'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putDuration(DurationWrapper complexBody) throws ServiceException {
+    public ServiceResponse<Void> putDuration(DurationWrapper complexBody) throws ServiceException, IOException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         }
         Validator.validate(complexBody);
-        try {
-            Call<ResponseBody> call = service.putDuration(complexBody);
-            return putDurationDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putDuration(complexBody);
+        return putDurationDelegate(call.execute(), null);
     }
 
     /**
@@ -1028,7 +909,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDurationDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1036,7 +917,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1049,15 +930,9 @@ public class PrimitiveImpl implements Primitive {
      * @return the ByteWrapper object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<ByteWrapper> getByte() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getByte();
-            return getByteDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<ByteWrapper> getByte() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getByte();
+        return getByteDelegate(call.execute(), null);
     }
 
     /**
@@ -1072,7 +947,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getByteDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1080,7 +955,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<ByteWrapper> getByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<ByteWrapper> getByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<ByteWrapper>()
                 .register(200, new TypeToken<ByteWrapper>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1093,20 +968,14 @@ public class PrimitiveImpl implements Primitive {
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> putByte(ByteWrapper complexBody) throws ServiceException {
+    public ServiceResponse<Void> putByte(ByteWrapper complexBody) throws ServiceException, IOException {
         if (complexBody == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         }
         Validator.validate(complexBody);
-        try {
-            Call<ResponseBody> call = service.putByte(complexBody);
-            return putByteDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putByte(complexBody);
+        return putByteDelegate(call.execute(), null);
     }
 
     /**
@@ -1128,7 +997,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putByteDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1136,7 +1005,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

@@ -28,14 +28,12 @@ public class AutoRestBoolTestServiceImpl extends ServiceClient implements AutoRe
         return this.baseUri;
     }
 
-    private Bool bool;
-
     /**
      * Gets the Bool object to access its operations.
      * @return the bool value.
      */
     public Bool getBool() {
-        return this.bool;
+        return new BoolImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -70,7 +68,6 @@ public class AutoRestBoolTestServiceImpl extends ServiceClient implements AutoRe
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.bool = new BoolImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

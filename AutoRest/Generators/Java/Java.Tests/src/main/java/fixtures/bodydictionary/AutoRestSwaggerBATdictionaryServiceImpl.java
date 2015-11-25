@@ -28,14 +28,12 @@ public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient imple
         return this.baseUri;
     }
 
-    private Dictionary dictionary;
-
     /**
      * Gets the Dictionary object to access its operations.
      * @return the dictionary value.
      */
     public Dictionary getDictionary() {
-        return this.dictionary;
+        return new DictionaryImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -70,7 +68,6 @@ public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient imple
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.dictionary = new DictionaryImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

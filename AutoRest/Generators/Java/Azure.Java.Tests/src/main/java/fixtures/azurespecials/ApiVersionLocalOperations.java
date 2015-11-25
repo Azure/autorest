@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
@@ -47,9 +48,10 @@ public interface ApiVersionLocalOperations {
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> getMethodLocalValid(String apiVersion) throws ServiceException;
+    ServiceResponse<Void> getMethodLocalValid(String apiVersion) throws ServiceException, IOException;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
@@ -65,9 +67,10 @@ public interface ApiVersionLocalOperations {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> getMethodLocalNull(String apiVersion) throws ServiceException;
+    ServiceResponse<Void> getMethodLocalNull(String apiVersion) throws ServiceException, IOException;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed
@@ -83,9 +86,10 @@ public interface ApiVersionLocalOperations {
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> getPathLocalValid(String apiVersion) throws ServiceException;
+    ServiceResponse<Void> getPathLocalValid(String apiVersion) throws ServiceException, IOException;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
@@ -101,9 +105,10 @@ public interface ApiVersionLocalOperations {
      *
      * @param apiVersion The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> getSwaggerLocalValid(String apiVersion) throws ServiceException;
+    ServiceResponse<Void> getSwaggerLocalValid(String apiVersion) throws ServiceException, IOException;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed

@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.url.models.UriColor;
+import java.io.IOException;
 import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -139,10 +140,11 @@ public interface Queries {
      * Get true Boolean value on path
      *
      * @param boolQuery true boolean value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> getBooleanTrue(Boolean boolQuery) throws ServiceException;
+    ServiceResponse<Void> getBooleanTrue(Boolean boolQuery) throws ServiceException, IOException;
 
     /**
      * Get true Boolean value on path
@@ -157,10 +159,11 @@ public interface Queries {
      * Get false Boolean value on path
      *
      * @param boolQuery false boolean value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> getBooleanFalse(Boolean boolQuery) throws ServiceException;
+    ServiceResponse<Void> getBooleanFalse(Boolean boolQuery) throws ServiceException, IOException;
 
     /**
      * Get false Boolean value on path
@@ -175,10 +178,11 @@ public interface Queries {
      * Get null Boolean value on query (query string should be absent)
      *
      * @param boolQuery null boolean value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> getBooleanNull(Boolean boolQuery) throws ServiceException;
+    ServiceResponse<Void> getBooleanNull(Boolean boolQuery) throws ServiceException, IOException;
 
     /**
      * Get null Boolean value on query (query string should be absent)
@@ -193,10 +197,11 @@ public interface Queries {
      * Get '1000000' integer value
      *
      * @param intQuery '1000000' integer value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> getIntOneMillion(Integer intQuery) throws ServiceException;
+    ServiceResponse<Void> getIntOneMillion(Integer intQuery) throws ServiceException, IOException;
 
     /**
      * Get '1000000' integer value
@@ -211,10 +216,11 @@ public interface Queries {
      * Get '-1000000' integer value
      *
      * @param intQuery '-1000000' integer value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> getIntNegativeOneMillion(Integer intQuery) throws ServiceException;
+    ServiceResponse<Void> getIntNegativeOneMillion(Integer intQuery) throws ServiceException, IOException;
 
     /**
      * Get '-1000000' integer value
@@ -229,10 +235,11 @@ public interface Queries {
      * Get null integer value (no query parameter)
      *
      * @param intQuery null integer value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> getIntNull(Integer intQuery) throws ServiceException;
+    ServiceResponse<Void> getIntNull(Integer intQuery) throws ServiceException, IOException;
 
     /**
      * Get null integer value (no query parameter)
@@ -247,10 +254,11 @@ public interface Queries {
      * Get '10000000000' 64 bit integer value
      *
      * @param longQuery '10000000000' 64 bit integer value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> getTenBillion(Long longQuery) throws ServiceException;
+    ServiceResponse<Void> getTenBillion(Long longQuery) throws ServiceException, IOException;
 
     /**
      * Get '10000000000' 64 bit integer value
@@ -265,10 +273,11 @@ public interface Queries {
      * Get '-10000000000' 64 bit integer value
      *
      * @param longQuery '-10000000000' 64 bit integer value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> getNegativeTenBillion(Long longQuery) throws ServiceException;
+    ServiceResponse<Void> getNegativeTenBillion(Long longQuery) throws ServiceException, IOException;
 
     /**
      * Get '-10000000000' 64 bit integer value
@@ -283,10 +292,11 @@ public interface Queries {
      * Get 'null 64 bit integer value (no query param in uri)
      *
      * @param longQuery null 64 bit integer value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> getLongNull(Long longQuery) throws ServiceException;
+    ServiceResponse<Void> getLongNull(Long longQuery) throws ServiceException, IOException;
 
     /**
      * Get 'null 64 bit integer value (no query param in uri)
@@ -301,10 +311,11 @@ public interface Queries {
      * Get '1.034E+20' numeric value
      *
      * @param floatQuery '1.034E+20'numeric value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> floatScientificPositive(Double floatQuery) throws ServiceException;
+    ServiceResponse<Void> floatScientificPositive(Double floatQuery) throws ServiceException, IOException;
 
     /**
      * Get '1.034E+20' numeric value
@@ -319,10 +330,11 @@ public interface Queries {
      * Get '-1.034E-20' numeric value
      *
      * @param floatQuery '-1.034E-20'numeric value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> floatScientificNegative(Double floatQuery) throws ServiceException;
+    ServiceResponse<Void> floatScientificNegative(Double floatQuery) throws ServiceException, IOException;
 
     /**
      * Get '-1.034E-20' numeric value
@@ -337,10 +349,11 @@ public interface Queries {
      * Get null numeric value (no query parameter)
      *
      * @param floatQuery null numeric value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> floatNull(Double floatQuery) throws ServiceException;
+    ServiceResponse<Void> floatNull(Double floatQuery) throws ServiceException, IOException;
 
     /**
      * Get null numeric value (no query parameter)
@@ -355,10 +368,11 @@ public interface Queries {
      * Get '9999999.999' numeric value
      *
      * @param doubleQuery '9999999.999'numeric value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> doubleDecimalPositive(Double doubleQuery) throws ServiceException;
+    ServiceResponse<Void> doubleDecimalPositive(Double doubleQuery) throws ServiceException, IOException;
 
     /**
      * Get '9999999.999' numeric value
@@ -373,10 +387,11 @@ public interface Queries {
      * Get '-9999999.999' numeric value
      *
      * @param doubleQuery '-9999999.999'numeric value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> doubleDecimalNegative(Double doubleQuery) throws ServiceException;
+    ServiceResponse<Void> doubleDecimalNegative(Double doubleQuery) throws ServiceException, IOException;
 
     /**
      * Get '-9999999.999' numeric value
@@ -391,10 +406,11 @@ public interface Queries {
      * Get null numeric value (no query parameter)
      *
      * @param doubleQuery null numeric value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> doubleNull(Double doubleQuery) throws ServiceException;
+    ServiceResponse<Void> doubleNull(Double doubleQuery) throws ServiceException, IOException;
 
     /**
      * Get null numeric value (no query parameter)
@@ -409,10 +425,11 @@ public interface Queries {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
      *
      * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> stringUnicode(String stringQuery) throws ServiceException;
+    ServiceResponse<Void> stringUnicode(String stringQuery) throws ServiceException, IOException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
@@ -427,10 +444,11 @@ public interface Queries {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end
      *
      * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> stringUrlEncoded(String stringQuery) throws ServiceException;
+    ServiceResponse<Void> stringUrlEncoded(String stringQuery) throws ServiceException, IOException;
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end
@@ -445,10 +463,11 @@ public interface Queries {
      * Get ''
      *
      * @param stringQuery '' string value. Possible values for this parameter include: ''
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> stringEmpty(String stringQuery) throws ServiceException;
+    ServiceResponse<Void> stringEmpty(String stringQuery) throws ServiceException, IOException;
 
     /**
      * Get ''
@@ -463,10 +482,11 @@ public interface Queries {
      * Get null (no query parameter in url)
      *
      * @param stringQuery null string value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> stringNull(String stringQuery) throws ServiceException;
+    ServiceResponse<Void> stringNull(String stringQuery) throws ServiceException, IOException;
 
     /**
      * Get null (no query parameter in url)
@@ -481,10 +501,11 @@ public interface Queries {
      * Get using uri with query parameter 'green color'
      *
      * @param enumQuery 'green color' enum value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> enumValid(UriColor enumQuery) throws ServiceException;
+    ServiceResponse<Void> enumValid(UriColor enumQuery) throws ServiceException, IOException;
 
     /**
      * Get using uri with query parameter 'green color'
@@ -499,10 +520,11 @@ public interface Queries {
      * Get null (no query parameter in url)
      *
      * @param enumQuery null string value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> enumNull(UriColor enumQuery) throws ServiceException;
+    ServiceResponse<Void> enumNull(UriColor enumQuery) throws ServiceException, IOException;
 
     /**
      * Get null (no query parameter in url)
@@ -517,10 +539,11 @@ public interface Queries {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> byteMultiByte(byte[] byteQuery) throws ServiceException;
+    ServiceResponse<Void> byteMultiByte(byte[] byteQuery) throws ServiceException, IOException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -535,10 +558,11 @@ public interface Queries {
      * Get '' as byte array
      *
      * @param byteQuery '' as byte array
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> byteEmpty(byte[] byteQuery) throws ServiceException;
+    ServiceResponse<Void> byteEmpty(byte[] byteQuery) throws ServiceException, IOException;
 
     /**
      * Get '' as byte array
@@ -553,10 +577,11 @@ public interface Queries {
      * Get null as byte array (no query parameters in uri)
      *
      * @param byteQuery null as byte array (no query parameters in uri)
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> byteNull(byte[] byteQuery) throws ServiceException;
+    ServiceResponse<Void> byteNull(byte[] byteQuery) throws ServiceException, IOException;
 
     /**
      * Get null as byte array (no query parameters in uri)
@@ -571,10 +596,11 @@ public interface Queries {
      * Get '2012-01-01' as date
      *
      * @param dateQuery '2012-01-01' as date
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ServiceException;
+    ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ServiceException, IOException;
 
     /**
      * Get '2012-01-01' as date
@@ -589,10 +615,11 @@ public interface Queries {
      * Get null as date - this should result in no query parameters in uri
      *
      * @param dateQuery null as date (no query parameters in uri)
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> dateNull(LocalDate dateQuery) throws ServiceException;
+    ServiceResponse<Void> dateNull(LocalDate dateQuery) throws ServiceException, IOException;
 
     /**
      * Get null as date - this should result in no query parameters in uri
@@ -607,10 +634,11 @@ public interface Queries {
      * Get '2012-01-01T01:01:01Z' as date-time
      *
      * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ServiceException;
+    ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ServiceException, IOException;
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time
@@ -625,10 +653,11 @@ public interface Queries {
      * Get null as date-time, should result in no query parameters in uri
      *
      * @param dateTimeQuery null as date-time (no query parameters)
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> dateTimeNull(DateTime dateTimeQuery) throws ServiceException;
+    ServiceResponse<Void> dateTimeNull(DateTime dateTimeQuery) throws ServiceException, IOException;
 
     /**
      * Get null as date-time, should result in no query parameters in uri
@@ -643,10 +672,11 @@ public interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> arrayStringCsvValid(List<String> arrayQuery) throws ServiceException;
+    ServiceResponse<Void> arrayStringCsvValid(List<String> arrayQuery) throws ServiceException, IOException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
@@ -661,10 +691,11 @@ public interface Queries {
      * Get a null array of string using the csv-array format
      *
      * @param arrayQuery a null array of string using the csv-array format
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> arrayStringCsvNull(List<String> arrayQuery) throws ServiceException;
+    ServiceResponse<Void> arrayStringCsvNull(List<String> arrayQuery) throws ServiceException, IOException;
 
     /**
      * Get a null array of string using the csv-array format
@@ -679,10 +710,11 @@ public interface Queries {
      * Get an empty array [] of string using the csv-array format
      *
      * @param arrayQuery an empty array [] of string using the csv-array format
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException;
+    ServiceResponse<Void> arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException, IOException;
 
     /**
      * Get an empty array [] of string using the csv-array format
@@ -697,10 +729,11 @@ public interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> arrayStringSsvValid(List<String> arrayQuery) throws ServiceException;
+    ServiceResponse<Void> arrayStringSsvValid(List<String> arrayQuery) throws ServiceException, IOException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
@@ -715,10 +748,11 @@ public interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> arrayStringTsvValid(List<String> arrayQuery) throws ServiceException;
+    ServiceResponse<Void> arrayStringTsvValid(List<String> arrayQuery) throws ServiceException, IOException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
@@ -733,10 +767,11 @@ public interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> arrayStringPipesValid(List<String> arrayQuery) throws ServiceException;
+    ServiceResponse<Void> arrayStringPipesValid(List<String> arrayQuery) throws ServiceException, IOException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
