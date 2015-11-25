@@ -190,8 +190,7 @@ class ComplexTests(unittest.TestCase):
         self.assertEqual(array_result.array, array_value)
 
         # PUT array/valid
-        # TODO: bug in serialize_data(None, 'str')
-        #client.array.put_valid(array_value)
+        client.array.put_valid(array_value)
        
         # GET array/empty
         array_result = client.array.get_empty()
@@ -214,8 +213,7 @@ class ComplexTests(unittest.TestCase):
         self.assertEqual(dict_val, dict_result.default_program)
 
         # PUT dictionary/valid
-        # TODO: bug in serialize_data(None, 'str')
-        #client.dictionary.put_valid(dict_val)
+        client.dictionary.put_valid(dict_val)
 
         # GET dictionary/empty
         dict_result = client.dictionary.get_empty()

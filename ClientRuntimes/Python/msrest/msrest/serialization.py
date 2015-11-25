@@ -28,6 +28,7 @@ import json
 import isodate
 import datetime
 import chardet
+import re
 
 try:
     from urllib import quote
@@ -325,22 +326,31 @@ class Serializer(object):
 
     def serialize_iter(self, data, iter_type, required, div=None, **kwargs):
 
-        if div:
-            return div.join([self.serialize_data(
-            i, iter_type, required, **kwargs) for i in data])
+        serialized = []
+        for d in data:
+            try:
+                serialized.append(
+                    self.serialize_data(d, iter_type, required, **kwargs))
+            except ValueError:
+                serialized.append(None)
 
-        return [self.serialize_data(
-            i, iter_type, required, **kwargs) for i in data]
+        if div:
+            return div.join(serialized)
+
+        return serialized
 
     def serialize_dict(self, attr, dict_type, required, **kwargs):
 
-        #return {str(x): self.serialize_data(
-        #    attr[x], dict_type, required, **kwargs) for x in attr}
-        r = {}
-        for x,t in attr.items():
-            kwargs["char"] = ""
-            r[str(x)] = self.serialize_data(t, dict_type, required, **kwargs)
-        return r
+        serialized = {}
+        for key, value in attr.items():
+            try:
+                serialized[str(key)] = self.serialize_data(
+                    value, dict_type, required, **kwargs)
+
+            except ValueError:
+                serialized[str(key)] = None
+
+        return serialized
 
     @staticmethod
     def serialize_bytearray(attr, **kwargs):
@@ -424,6 +434,9 @@ class DeserializedGenerator(object):
 class Deserializer(object):
 
     basic_types = ['str', 'int', 'bool', 'float']
+    valid_date = re.compile(
+            r'\d{4}[-]\d{2}[-]\d{2}T\d{2}:\d{2}:\d{2}'
+            '\.?\d*Z?[-+]?[\d{2}]?:?[\d{2}]?')
 
     def __init__(self, classes={}):
 
@@ -694,6 +707,9 @@ class Deserializer(object):
     def deserialize_iso(attr):
         try:
             attr = attr.upper()
+            match = Deserializer.valid_date.match(attr)
+            if not match:
+                raise ValueError("Invalid datetime string: {}".format(attr))
 
             check_decimal = attr.split('.')
             if len(check_decimal) > 1:
