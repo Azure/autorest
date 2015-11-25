@@ -42,7 +42,7 @@ try:
 except ImportError:
     import mock
 
-from msrest.authentication import BasicAuthentication, TokenAuthentication
+from msrest.authentication import BasicAuthentication, OAuthTokenAuthentication
 
 from requests import Request
 
@@ -76,7 +76,7 @@ class TestAuthentication(unittest.TestCase):
 
     def test_token_auth(self):
 
-        token = TokenAuthentication("client_id", {"my_token":123})
+        token = OAuthTokenAuthentication("client_id", {"my_token":123})
         session = token.signed_session()
 
         self.assertEqual(session.token, {"my_token":123})

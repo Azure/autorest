@@ -25,7 +25,7 @@
 #--------------------------------------------------------------------------
 
 
-from msrest.authentication import Authentication, TokenAuthentication
+from msrest.authentication import Authentication, OAuthTokenAuthentication
 from msrest.exceptions import TokenExpiredError, AuthenticationError, raise_with_traceback
 from .azure_configuration import AzureConfiguration
 
@@ -141,7 +141,7 @@ class AADMixin(object):
             raise_with_traceback(KeyError, "Unable to clear password.")
 
 
-class UserPassCredentials(TokenAuthentication, AADMixin):
+class UserPassCredentials(OAuthTokenAuthentication, AADMixin):
     
 
     def __init__(self, config, client_id, username, password, 
@@ -176,7 +176,7 @@ class UserPassCredentials(TokenAuthentication, AADMixin):
         return token
 
 
-class ServicePrincipalCredentials(TokenAuthentication, AADMixin):
+class ServicePrincipalCredentials(OAuthTokenAuthentication, AADMixin):
     
     def __init__(self, config, client_id, secret, resource,
                  tenant=None):
@@ -216,7 +216,7 @@ class ServicePrincipalCredentials(TokenAuthentication, AADMixin):
 
 
 
-class InteractiveCredentials(TokenAuthentication, AADMixin):
+class InteractiveCredentials(OAuthTokenAuthentication, AADMixin):
     
     def __init__(self, config, client_id, resource, redirect):
         """
