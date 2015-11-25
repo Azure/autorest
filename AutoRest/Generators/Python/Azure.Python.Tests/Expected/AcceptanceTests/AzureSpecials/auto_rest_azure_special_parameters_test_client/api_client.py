@@ -20,6 +20,7 @@ from .operations.api_version_local_operations import api_version_localOperations
 from .operations.skip_url_encoding_operations import skip_url_encodingOperations
 from .operations.header_operations import headerOperations
 from . import models
+from .models import *
 
 
 class AutoRestAzureSpecialParametersTestClientConfiguration(AzureConfiguration):

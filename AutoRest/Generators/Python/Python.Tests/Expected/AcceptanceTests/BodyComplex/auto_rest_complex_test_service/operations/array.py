@@ -96,7 +96,7 @@ class array(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        complex_body = ArrayWrapper
+        complex_body = ArrayWrapper()
         if array is not None:
             complex_body.array = array
 
@@ -196,7 +196,7 @@ class array(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        complex_body = ArrayWrapper
+        complex_body = ArrayWrapper()
         if array is not None:
             complex_body.array = array
 

@@ -963,7 +963,7 @@ class primitive(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        complex_body = DurationWrapper
+        complex_body = DurationWrapper()
         if field is not None:
             complex_body.field = field
 
@@ -1063,7 +1063,7 @@ class primitive(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        complex_body = ByteWrapper
+        complex_body = ByteWrapper()
         if field is not None:
             complex_body.field = field
 

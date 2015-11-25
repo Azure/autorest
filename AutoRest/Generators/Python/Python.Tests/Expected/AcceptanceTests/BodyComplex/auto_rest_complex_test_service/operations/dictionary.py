@@ -96,7 +96,7 @@ class dictionary(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        complex_body = DictionaryWrapper
+        complex_body = DictionaryWrapper()
         if default_program is not None:
             complex_body.default_program = default_program
 
@@ -196,7 +196,7 @@ class dictionary(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        complex_body = DictionaryWrapper
+        complex_body = DictionaryWrapper()
         if default_program is not None:
             complex_body.default_program = default_program
 

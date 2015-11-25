@@ -14,6 +14,7 @@ from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
 from .operations.group_operations import groupOperations
 from . import models
+from .models import *
 
 
 class MicrosoftAzureTestUrlConfiguration(AzureConfiguration):

@@ -702,7 +702,7 @@ class storage_accountsOperations(object):
         concurrent.futures.Future
         """
 
-        regenerate_key = StorageAccountRegenerateKeyParameters
+        regenerate_key = StorageAccountRegenerateKeyParameters()
         if key_name is not None:
             regenerate_key.key_name = key_name
 
