@@ -76,7 +76,7 @@ class HttpTests(unittest.TestCase):
             self.assertEqual(err.response.status_code, code)
 
     def test_response_modeling(self):
-        self.skipTest("temp")
+
         r = self.client.multiple_responses.get200_model204_no_model_default_error200_valid()
         self.assertEqual('200', r.status_code)
 
@@ -168,7 +168,7 @@ class HttpTests(unittest.TestCase):
             self.client.multiple_responses.get200_model_a202_valid)
 
     def test_server_error_status_codes(self):
-        self.skipTest("temp")
+
         self.assertRaisesWithStatus(requests.codes.not_implemented,
             self.client.http_server_failure.head501)
 
@@ -279,23 +279,15 @@ class HttpTests(unittest.TestCase):
 
     def test_redirect_status_codes(self):
 
-        # TODO
         self.assertStatus(200, self.client.http_redirects.head300)
-
-        # TODO
-        #self.assertStatus(200, self.client.http_redirects.get300)
-
+        self.assertStatus(200, self.client.http_redirects.get300)
         self.assertStatus(200, self.client.http_redirects.head302)
         self.assertStatus(200, self.client.http_redirects.head301)
         self.assertStatus(200, self.client.http_redirects.get301)
 
-        # TODO
-        #self.assertStatus(requests.codes.moved_permanently, self.client.http_redirects.put301, True)
-
+        self.assertStatus(requests.codes.moved_permanently, self.client.http_redirects.put301, True)
         self.assertStatus(200, self.client.http_redirects.get302)
-
-        # TODO
-        #self.assertStatus(requests.codes.found, self.client.http_redirects.patch302, True)
+        self.assertStatus(requests.codes.found, self.client.http_redirects.patch302, True)
 
         self.assertStatus(200, self.client.http_redirects.post303, True)
         self.assertStatus(200, self.client.http_redirects.head307)
@@ -311,7 +303,6 @@ class HttpTests(unittest.TestCase):
 
     def test_success_status_codes(self):
 
-        self.skipTest("temp")
         self.assertRaisesWithMessage("Operation returned an invalid status code 'Bad Request'",
             self.client.http_failure.get_empty_error)
 
