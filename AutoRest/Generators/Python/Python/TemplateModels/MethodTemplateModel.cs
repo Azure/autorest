@@ -354,7 +354,7 @@ namespace Microsoft.Rest.Generator.Python
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     transformation.OutputParameter.Type is CompositeType)
                 {
-                    builder.AppendLine("{0} = {1}",
+                    builder.AppendLine("{0} = {1}()",
                         transformation.OutputParameter.Name,
                         transformation.OutputParameter.Type.Name);
                 }

@@ -28,6 +28,7 @@ from msrest.exceptions import DeserializationError, HttpOperationError
 @if (Model.ModelTemplateModels.Any())
 {
 @:from . import models
+@:from .models import *
 }
 @EmptyLine
 @EmptyLine

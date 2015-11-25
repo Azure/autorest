@@ -53,7 +53,21 @@ class BasicAuthentication(Authentication):
         return session
 
 
-class TokenAuthentication(Authentication):
+class BasicTokenAuthentication(Authentication):
+
+    def __init__(self, token):
+        self.scheme = 'Bearer'
+        self.token = token
+
+    def signed_session(self):
+        session = super(BasicTokenAuthentication, self).signed_session()
+        header = "{0} {1}".format(self.scheme, self.token['access_token'])
+        session.headers['Authorization'] = header
+        
+        return session
+
+
+class OAuthTokenAuthentication(Authentication):
 
     def __init__(self, client_id, token):
         self.scheme = 'Bearer'

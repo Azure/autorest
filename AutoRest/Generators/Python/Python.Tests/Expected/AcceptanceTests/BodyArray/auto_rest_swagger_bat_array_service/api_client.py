@@ -13,6 +13,7 @@ from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.array import array
 from . import models
+from .models import *
 
 
 class AutoRestSwaggerBATArrayServiceConfiguration(Configuration):

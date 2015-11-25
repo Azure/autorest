@@ -43,8 +43,8 @@ class PagingTests(unittest.TestCase):
         items = [i for i in pages]
         self.assertEqual(len(items), 1)
 
-        #self.assertEqual(items[0].id, 1)
-        #self.assertEqual(items[0].name, "Product")
+        #self.assertEqual(items[0].properties.id, 1)
+        #self.assertEqual(items[0].properties.name, "Product")
 
         pages = self.client.paging.get_multiple_pages()
         self.assertIsNotNone(pages.next_link)
@@ -74,9 +74,8 @@ class PagingTests(unittest.TestCase):
 
         pages = self.client.paging.get_multiple_pages_failure_uri()
 
-        # TODO - need to check for invalid url
-        #with self.assertRaises(ValueError):
-        #    items = [i for i in pages]
+        with self.assertRaises(ValueError):
+            items = [i for i in pages]
         
 
 if __name__ == '__main__':

@@ -17,6 +17,7 @@ from msrest.exceptions import DeserializationError, HttpOperationError
 from msrestazure.azure_exceptions import CloudError
 import uuid
 from . import models
+from .models import *
 
 
 class AutoRestResourceFlatteningTestServiceConfiguration(AzureConfiguration):

@@ -47,7 +47,7 @@ try:
 except ImportError:
     import mock
 
-from msrest.authentication import Authentication, TokenAuthentication
+from msrest.authentication import Authentication, OAuthTokenAuthentication
 from msrest.pipeline import (
     ClientHTTPAdapter,
     ClientPipelineHook,
@@ -73,7 +73,7 @@ class TestRuntime(unittest.TestCase):
             'expires_in': '3600',
         }
 
-        creds = TokenAuthentication("client_id", token)
+        creds = OAuthTokenAuthentication("client_id", token)
         cfg = Configuration("https://my_service.com")
 
         client = ServiceClient(creds, cfg)
@@ -89,7 +89,7 @@ class TestRuntime(unittest.TestCase):
         self.assertEqual(response.json(), [{"title": "Test Data"}])
 
         token['expires_in'] = '-30'
-        creds = TokenAuthentication("client_id", token)
+        creds = OAuthTokenAuthentication("client_id", token)
         client = ServiceClient(creds, cfg)
         request = client.get("/get_endpoint", {'check':True})
 

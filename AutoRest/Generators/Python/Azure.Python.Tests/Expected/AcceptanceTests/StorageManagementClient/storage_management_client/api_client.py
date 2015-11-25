@@ -15,6 +15,7 @@ from msrestazure import AzureConfiguration
 from .operations.storage_accounts_operations import storage_accountsOperations
 from .operations.usage_operations import usageOperations
 from . import models
+from .models import *
 
 
 class StorageManagementClientConfiguration(AzureConfiguration):

@@ -149,7 +149,7 @@ class explicit(object):
         concurrent.futures.Future
         """
 
-        body_parameter = IntWrapper
+        body_parameter = IntWrapper()
         if value is not None:
             body_parameter.value = value
 
@@ -201,7 +201,7 @@ class explicit(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        body_parameter = IntOptionalWrapper
+        body_parameter = IntOptionalWrapper()
         if value is not None:
             body_parameter.value = value
 
@@ -450,7 +450,7 @@ class explicit(object):
         concurrent.futures.Future
         """
 
-        body_parameter = StringWrapper
+        body_parameter = StringWrapper()
         if value is not None:
             body_parameter.value = value
 
@@ -502,7 +502,7 @@ class explicit(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        body_parameter = StringOptionalWrapper
+        body_parameter = StringOptionalWrapper()
         if value is not None:
             body_parameter.value = value
 
@@ -751,7 +751,7 @@ class explicit(object):
         concurrent.futures.Future
         """
 
-        body_parameter = ClassWrapper
+        body_parameter = ClassWrapper()
         if value is not None:
             body_parameter.value = value
 
@@ -803,7 +803,7 @@ class explicit(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        body_parameter = ClassOptionalWrapper
+        body_parameter = ClassOptionalWrapper()
         if value is not None:
             body_parameter.value = value
 
@@ -959,7 +959,7 @@ class explicit(object):
         concurrent.futures.Future
         """
 
-        body_parameter = ArrayWrapper
+        body_parameter = ArrayWrapper()
         if value is not None:
             body_parameter.value = value
 
@@ -1011,7 +1011,7 @@ class explicit(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        body_parameter = ArrayOptionalWrapper
+        body_parameter = ArrayOptionalWrapper()
         if value is not None:
             body_parameter.value = value
 

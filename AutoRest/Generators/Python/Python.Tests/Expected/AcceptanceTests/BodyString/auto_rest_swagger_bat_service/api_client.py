@@ -14,6 +14,7 @@ from msrest import Configuration, Serializer, Deserializer
 from .operations.string import string
 from .operations.enum import enum
 from . import models
+from .models import *
 
 
 class AutoRestSwaggerBATServiceConfiguration(Configuration):

@@ -13,6 +13,7 @@ from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.number import number
 from . import models
+from .models import *
 
 
 class AutoRestNumberTestServiceConfiguration(Configuration):

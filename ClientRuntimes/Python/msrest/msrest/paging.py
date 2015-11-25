@@ -25,6 +25,11 @@
 # --------------------------------------------------------------------------
 
 from .serialization import Deserializer
+try:
+    from urlparse import urlparse
+
+except ImportError:
+    from urllib.parse import urlparse
 
 
 class Paged(object):
@@ -46,6 +51,7 @@ class Paged(object):
             yield i
 
         while self.next_link is not None:
+            self._validate_url()
             response = self.command(self.next_link)
             self.derserializer(self, response)
 
@@ -57,3 +63,8 @@ class Paged(object):
 
     def __getitem__(self, index):
         return self.items[index]
+
+    def _validate_url(self):
+        parsed = urlparse(self.next_link)
+        if not parsed.scheme or not parsed.netloc:
+            raise ValueError("Invalid URL: {}".format(self.next_link))

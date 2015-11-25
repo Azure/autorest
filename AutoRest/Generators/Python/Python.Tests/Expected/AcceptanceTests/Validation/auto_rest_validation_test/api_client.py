@@ -14,6 +14,7 @@ from msrest import Configuration, Serializer, Deserializer
 from msrest.service_client import async_request
 from msrest.exceptions import DeserializationError, HttpOperationError
 from . import models
+from .models import *
 
 
 class AutoRestValidationTestConfiguration(Configuration):
