@@ -81,5 +81,26 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 return sb.ToString();
             }
         }
+
+        public override string ReturnEmptyResponse
+        {
+            get
+            {
+                if (this.HttpMethod == HttpMethod.Head)
+                {
+                    HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
+                    var builder = new IndentedStringBuilder("    ");
+                    builder.AppendFormat("deserialized = (response.status_code == {0})", (int)code).AppendLine();
+                    builder.AppendLine("if raw:").Indent().AppendLine("return deserialized, response").Outdent();
+                    builder.AppendLine("return deserialized");
+
+                    return builder.ToString();
+                }
+                else
+                {
+                    return base.ReturnEmptyResponse;
+                }
+            }
+        }
     }
 }

@@ -67,8 +67,10 @@ class http_successOperations(object):
         if response.status_code not in [200, 404]:
             raise CloudError(self._deserialize, response)
 
+        deserialized = (response.status_code == 200)
         if raw:
-            return None, response
+            return deserialized, response
+        return deserialized
 
     @async_request
     def head204(
@@ -111,8 +113,10 @@ class http_successOperations(object):
         if response.status_code not in [204, 404]:
             raise CloudError(self._deserialize, response)
 
+        deserialized = (response.status_code == 204)
         if raw:
-            return None, response
+            return deserialized, response
+        return deserialized
 
     @async_request
     def head404(
@@ -155,5 +159,7 @@ class http_successOperations(object):
         if response.status_code not in [204, 404]:
             raise CloudError(self._deserialize, response)
 
+        deserialized = (response.status_code == 204)
         if raw:
-            return None, response
+            return deserialized, response
+        return deserialized
