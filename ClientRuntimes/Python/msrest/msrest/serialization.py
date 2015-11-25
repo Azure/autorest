@@ -199,7 +199,10 @@ class Serializer(object):
                 except ValueError:
                     continue
 
-        except (AttributeError, KeyError, TypeError) as err:
+        except AttributeError as err:
+            raise_with_traceback(ValueError, str(err), err)
+
+        except (KeyError, TypeError) as err:
             msg = "Attribute {0} in object {1} cannot be serialized.".format(
                 attr_name, class_name)
 
@@ -228,7 +231,14 @@ class Serializer(object):
         if data is None:
             raise ValueError("Request body must not be None")
 
-        return self._serialize(data, data_type, **kwargs)
+        try:
+            output = self._serialize(data, data_type, **kwargs)
+
+        except DeserializationError as err:
+            raise TypeError("Invalid {} object: {}".format(data_type, err))
+
+        else:
+            return output
 
     def url(self, name, data, data_type, **kwargs):
 
@@ -296,7 +306,7 @@ class Serializer(object):
             raise AttributeError(
                 "Object missing required attribute")
 
-        if data is None: #in [None, ""]:
+        if data is None:
             raise ValueError("No value for given attribute")
 
         if data_type is None:
