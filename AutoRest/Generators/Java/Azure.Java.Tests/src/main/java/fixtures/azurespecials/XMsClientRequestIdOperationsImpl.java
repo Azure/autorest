@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.Error;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -37,15 +38,9 @@ public class XMsClientRequestIdOperationsImpl implements XMsClientRequestIdOpera
      *
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> get() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get(this.client.getAcceptLanguage());
-            return getDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> get() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get(this.client.getAcceptLanguage());
+        return getDelegate(call.execute(), null);
     }
 
     /**
@@ -60,7 +55,7 @@ public class XMsClientRequestIdOperationsImpl implements XMsClientRequestIdOpera
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -68,7 +63,7 @@ public class XMsClientRequestIdOperationsImpl implements XMsClientRequestIdOpera
         return call;
     }
 
-    private ServiceResponse<Void> getDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -81,19 +76,13 @@ public class XMsClientRequestIdOperationsImpl implements XMsClientRequestIdOpera
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> paramGet(String xMsClientRequestId) throws ServiceException {
+    public ServiceResponse<Void> paramGet(String xMsClientRequestId) throws ServiceException, IOException {
         if (xMsClientRequestId == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null."));
         }
-        try {
-            Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.getAcceptLanguage());
-            return paramGetDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.getAcceptLanguage());
+        return paramGetDelegate(call.execute(), null);
     }
 
     /**
@@ -114,7 +103,7 @@ public class XMsClientRequestIdOperationsImpl implements XMsClientRequestIdOpera
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(paramGetDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -122,7 +111,7 @@ public class XMsClientRequestIdOperationsImpl implements XMsClientRequestIdOpera
         return call;
     }
 
-    private ServiceResponse<Void> paramGetDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> paramGetDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

@@ -28,24 +28,20 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
         return this.baseUri;
     }
 
-    private StringOperations stringOperations;
-
     /**
      * Gets the StringOperations object to access its operations.
      * @return the stringOperations value.
      */
     public StringOperations getStringOperations() {
-        return this.stringOperations;
+        return new StringOperationsImpl(this.retrofitBuilder.build(), this);
     }
-
-    private EnumOperations enumOperations;
 
     /**
      * Gets the EnumOperations object to access its operations.
      * @return the enumOperations value.
      */
     public EnumOperations getEnumOperations() {
-        return this.enumOperations;
+        return new EnumOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -80,8 +76,6 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.stringOperations = new StringOperationsImpl(retrofit, this);
-        this.enumOperations = new EnumOperationsImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

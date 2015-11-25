@@ -88,6 +88,7 @@ namespace Microsoft.Rest.Generator.Java
                 HashSet<string> classes = new HashSet<string>();
                 classes.Add("java.util.List");
                 classes.Add("com.squareup.okhttp.Interceptor");
+                classes.Add("com.squareup.okhttp.logging.HttpLoggingInterceptor.Level");
                 if (this.Properties.Any(p => p.Type == PrimaryType.Credentials))
                 {
                     classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");

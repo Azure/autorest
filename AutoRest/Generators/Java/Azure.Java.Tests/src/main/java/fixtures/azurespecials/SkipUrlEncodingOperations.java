@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
@@ -57,9 +58,10 @@ public interface SkipUrlEncodingOperations {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> getMethodPathValid(String unencodedPathParam) throws ServiceException;
+    ServiceResponse<Void> getMethodPathValid(String unencodedPathParam) throws ServiceException, IOException;
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -75,9 +77,10 @@ public interface SkipUrlEncodingOperations {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> getPathPathValid(String unencodedPathParam) throws ServiceException;
+    ServiceResponse<Void> getPathPathValid(String unencodedPathParam) throws ServiceException, IOException;
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -93,9 +96,10 @@ public interface SkipUrlEncodingOperations {
      *
      * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> getSwaggerPathValid(String unencodedPathParam) throws ServiceException;
+    ServiceResponse<Void> getSwaggerPathValid(String unencodedPathParam) throws ServiceException, IOException;
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'
@@ -111,9 +115,10 @@ public interface SkipUrlEncodingOperations {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> getMethodQueryValid(String q1) throws ServiceException;
+    ServiceResponse<Void> getMethodQueryValid(String q1) throws ServiceException, IOException;
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
@@ -129,9 +134,10 @@ public interface SkipUrlEncodingOperations {
      *
      * @param q1 Unencoded query parameter with value null
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> getMethodQueryNull(String q1) throws ServiceException;
+    ServiceResponse<Void> getMethodQueryNull(String q1) throws ServiceException, IOException;
 
     /**
      * Get method with unencoded query parameter with value null
@@ -147,9 +153,10 @@ public interface SkipUrlEncodingOperations {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> getPathQueryValid(String q1) throws ServiceException;
+    ServiceResponse<Void> getPathQueryValid(String q1) throws ServiceException, IOException;
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
@@ -165,9 +172,10 @@ public interface SkipUrlEncodingOperations {
      *
      * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter include: 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> getSwaggerQueryValid(String q1) throws ServiceException;
+    ServiceResponse<Void> getSwaggerQueryValid(String q1) throws ServiceException, IOException;
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'

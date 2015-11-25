@@ -40,8 +40,8 @@ public class ImplicitTests {
         try {
             client.getImplicit().putOptionalBody(null);
             fail();
-        } catch (ServiceException ex) {
-            Assert.assertTrue(ex.getCause().getMessage().contains("Body parameter value must not be null"));
+        } catch (IllegalArgumentException ex) {
+            Assert.assertTrue(ex.getMessage().contains("Body parameter value must not be null"));
         }
     }
 

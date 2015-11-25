@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Header;
 import retrofit.http.Path;
@@ -47,9 +48,10 @@ public interface SubscriptionInMethodOperations {
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> postMethodLocalValid(String subscriptionId) throws ServiceException;
+    ServiceResponse<Void> postMethodLocalValid(String subscriptionId) throws ServiceException, IOException;
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
@@ -65,9 +67,10 @@ public interface SubscriptionInMethodOperations {
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> postMethodLocalNull(String subscriptionId) throws ServiceException;
+    ServiceResponse<Void> postMethodLocalNull(String subscriptionId) throws ServiceException, IOException;
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call
@@ -83,9 +86,10 @@ public interface SubscriptionInMethodOperations {
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> postPathLocalValid(String subscriptionId) throws ServiceException;
+    ServiceResponse<Void> postPathLocalValid(String subscriptionId) throws ServiceException, IOException;
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
@@ -101,9 +105,10 @@ public interface SubscriptionInMethodOperations {
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> postSwaggerLocalValid(String subscriptionId) throws ServiceException;
+    ServiceResponse<Void> postSwaggerLocalValid(String subscriptionId) throws ServiceException, IOException;
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed

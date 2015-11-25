@@ -68,34 +68,28 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
         this.globalStringQuery = globalStringQuery;
     }
 
-    private Paths paths;
-
     /**
      * Gets the Paths object to access its operations.
      * @return the paths value.
      */
     public Paths getPaths() {
-        return this.paths;
+        return new PathsImpl(this.retrofitBuilder.build(), this);
     }
-
-    private Queries queries;
 
     /**
      * Gets the Queries object to access its operations.
      * @return the queries value.
      */
     public Queries getQueries() {
-        return this.queries;
+        return new QueriesImpl(this.retrofitBuilder.build(), this);
     }
-
-    private PathItems pathItems;
 
     /**
      * Gets the PathItems object to access its operations.
      * @return the pathItems value.
      */
     public PathItems getPathItems() {
-        return this.pathItems;
+        return new PathItemsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -130,9 +124,6 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.paths = new PathsImpl(retrofit, this);
-        this.queries = new QueriesImpl(retrofit, this);
-        this.pathItems = new PathItemsImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

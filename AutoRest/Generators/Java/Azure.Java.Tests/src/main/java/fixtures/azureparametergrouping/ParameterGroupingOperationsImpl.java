@@ -25,6 +25,7 @@ import fixtures.azureparametergrouping.models.FirstParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -44,7 +45,7 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) throws ServiceException {
+    public ServiceResponse<Void> postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) throws ServiceException, IOException {
         if (parameterGroupingPostRequiredParameters == null) {
             throw new ServiceException(
                 new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null."));
@@ -54,14 +55,8 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
         String customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
         int query = parameterGroupingPostRequiredParameters.getQuery();
         String path = parameterGroupingPostRequiredParameters.getPath();
-        try {
-            Call<ResponseBody> call = service.postRequired(path, this.client.getAcceptLanguage(), body, customHeader, query);
-            return postRequiredDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.postRequired(path, this.client.getAcceptLanguage(), body, customHeader, query);
+        return postRequiredDelegate(call.execute(), null);
     }
 
     /**
@@ -87,7 +82,7 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postRequiredDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -95,7 +90,7 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
         return call;
     }
 
-    private ServiceResponse<Void> postRequiredDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> postRequiredDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -108,17 +103,11 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) throws ServiceException {
+    public ServiceResponse<Void> postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) throws ServiceException, IOException {
         String customHeader = parameterGroupingPostOptionalParameters.getCustomHeader();
         int query = parameterGroupingPostOptionalParameters.getQuery();
-        try {
-            Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
-            return postOptionalDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
+        return postOptionalDelegate(call.execute(), null);
     }
 
     /**
@@ -136,7 +125,7 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postOptionalDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -144,7 +133,7 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> postOptionalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -158,19 +147,13 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
      * @param parameterGroupingPostMultipleParameterGroupsSecondParameterGroup Additional parameters for the operation
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> postMultipleParameterGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup) throws ServiceException {
+    public ServiceResponse<Void> postMultipleParameterGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup) throws ServiceException, IOException {
         String headerOne = firstParameterGroup.getHeaderOne();
         int queryOne = firstParameterGroup.getQueryOne();
         String headerTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.getHeaderTwo();
         int queryTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.getQueryTwo();
-        try {
-            Call<ResponseBody> call = service.postMultipleParameterGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
-            return postMultipleParameterGroupsDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.postMultipleParameterGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
+        return postMultipleParameterGroupsDelegate(call.execute(), null);
     }
 
     /**
@@ -191,7 +174,7 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postMultipleParameterGroupsDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -199,7 +182,7 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
         return call;
     }
 
-    private ServiceResponse<Void> postMultipleParameterGroupsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> postMultipleParameterGroupsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -212,17 +195,11 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
      * @param firstParameterGroup Additional parameters for the operation
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Void> postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) throws ServiceException {
+    public ServiceResponse<Void> postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) throws ServiceException, IOException {
         String headerOne = firstParameterGroup.getHeaderOne();
         int queryOne = firstParameterGroup.getQueryOne();
-        try {
-            Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
-            return postSharedParameterGroupObjectDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
+        return postSharedParameterGroupObjectDelegate(call.execute(), null);
     }
 
     /**
@@ -240,7 +217,7 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postSharedParameterGroupObjectDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -248,7 +225,7 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
         return call;
     }
 
-    private ServiceResponse<Void> postSharedParameterGroupObjectDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> postSharedParameterGroupObjectDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

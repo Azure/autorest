@@ -12,11 +12,13 @@ package fixtures.validation;
 
 import java.util.List;
 import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.validation.models.Product;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -30,15 +32,24 @@ import retrofit.http.Query;
 public interface AutoRestValidationTest {
     /**
      * Gets the URI used as the base for all cloud service requests.
+     *
      * @return the BaseUri value.
      */
     String getBaseUri();
 
     /**
      * Gets the list of interceptors the OkHttp client will execute.
+     *
      * @return the list of interceptors.
      */
     List<Interceptor> getClientInterceptors();
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum.
+     */
+    void setLogLevel(Level logLevel);
 
     /**
      * Gets Subscription ID..
@@ -89,7 +100,7 @@ public interface AutoRestValidationTest {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Product> validationOfMethodParameters(String resourceGroupName, int id) throws ServiceException;
+    ServiceResponse<Product> validationOfMethodParameters(String resourceGroupName, int id) throws ServiceException, IOException;
 
     /**
      * Validates input parameters on the method. See swagger for details.
@@ -109,7 +120,7 @@ public interface AutoRestValidationTest {
      * @return the Product object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Product> validationOfBody(String resourceGroupName, int id, Product body) throws ServiceException;
+    ServiceResponse<Product> validationOfBody(String resourceGroupName, int id, Product body) throws ServiceException, IOException;
 
     /**
      * Validates body parameters on the method. See swagger for details.

@@ -28,14 +28,12 @@ public class AutoRestDurationTestServiceImpl extends ServiceClient implements Au
         return this.baseUri;
     }
 
-    private Duration duration;
-
     /**
      * Gets the Duration object to access its operations.
      * @return the duration value.
      */
     public Duration getDuration() {
-        return this.duration;
+        return new DurationImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -70,7 +68,6 @@ public class AutoRestDurationTestServiceImpl extends ServiceClient implements Au
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.duration = new DurationImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

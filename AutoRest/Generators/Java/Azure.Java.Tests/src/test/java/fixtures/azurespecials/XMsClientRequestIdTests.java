@@ -1,7 +1,6 @@
 package fixtures.azurespecials;
 
 import com.microsoft.rest.CustomHeaderInterceptor;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.credentials.TokenCredentials;
 import com.squareup.okhttp.Interceptor;
@@ -9,10 +8,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Map;
 import java.util.UUID;
-
-import static org.junit.Assert.fail;
 
 public class XMsClientRequestIdTests {
     static AutoRestAzureSpecialParametersTestClient client;

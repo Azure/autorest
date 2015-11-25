@@ -8,11 +8,13 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.commons.lang3.ClassUtils;
-import org.apache.commons.lang3.reflect.FieldUtils;
+import com.google.common.primitives.Primitives;
+import com.google.common.reflect.TypeToken;
+
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
+
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
@@ -35,58 +37,64 @@ public class Validator {
         }
 
         Class parameterType = parameter.getClass();
-        if (ClassUtils.isPrimitiveOrWrapper(parameterType) ||
+        TypeToken<?> parameterToken = TypeToken.of(parameterType);
+        if (Primitives.isWrapperType(parameterType)) {
+            parameterToken = parameterToken.unwrap();
+        }
+        if (parameterToken.isPrimitive() ||
                 parameterType.isEnum() ||
-                ClassUtils.isAssignable(parameterType, LocalDate.class) ||
-                ClassUtils.isAssignable(parameterType, DateTime.class) ||
-                ClassUtils.isAssignable(parameterType, String.class) || 
-                ClassUtils.isAssignable(parameterType, DateTimeRfc1123.class) || 
-                ClassUtils.isAssignable(parameterType, Period.class)) {
+                parameterToken.isAssignableFrom(LocalDate.class) ||
+                parameterToken.isAssignableFrom(DateTime.class) ||
+                parameterToken.isAssignableFrom(String.class) ||
+                parameterToken.isAssignableFrom(DateTimeRfc1123.class) ||
+                parameterToken.isAssignableFrom(Period.class)) {
             return;
         }
 
-        Field[] fields = FieldUtils.getAllFields(parameterType);
-        for (Field field : fields) {
-            field.setAccessible(true);
-            JsonProperty annotation = field.getAnnotation(JsonProperty.class);
-            Object property;
-            try {
-                property = field.get(parameter);
-            } catch (IllegalAccessException e) {
-                throw new ServiceException(e);
-            }
-            if (property == null) {
-                if (annotation != null && annotation.required()) {
-                    throw new ServiceException(
-                            new IllegalArgumentException(field.getName() + " is required and cannot be null."));
-                }
-            } else {
+
+        for (Class<?> c : parameterToken.getTypes().classes().rawTypes()){
+            for (Field field : c.getDeclaredFields()) {
+                field.setAccessible(true);
+                JsonProperty annotation = field.getAnnotation(JsonProperty.class);
+                Object property;
                 try {
-                    Class propertyType = property.getClass();
-                    if (ClassUtils.isAssignable(propertyType, List.class)) {
-                        List<?> items = (List<?>)property;
-                        for (Object item : items) {
-                            Validator.validate(item);
-                        }
-                    }
-                    else if (ClassUtils.isAssignable(propertyType, Map.class)) {
-                        Map<?, ?> entries = (Map<?, ?>)property;
-                        for (Map.Entry<?, ?> entry : entries.entrySet()) {
-                            Validator.validate(entry.getKey());
-                            Validator.validate(entry.getValue());
-                        }
-                    }
-                    else if (parameter.getClass().getDeclaringClass() != propertyType) {
-                        Validator.validate(property);
-                    }
-                } catch (ServiceException ex) {
-                    IllegalArgumentException cause = (IllegalArgumentException)(ex.getCause());
-                    if (cause != null) {
-                        // Build property chain
+                    property = field.get(parameter);
+                } catch (IllegalAccessException e) {
+                    throw new ServiceException(e);
+                }
+                if (property == null) {
+                    if (annotation != null && annotation.required()) {
                         throw new ServiceException(
-                                new IllegalArgumentException(field.getName() + "." + cause.getMessage()));
-                    } else {
-                        throw ex;
+                                new IllegalArgumentException(field.getName() + " is required and cannot be null."));
+                    }
+                } else {
+                    try {
+                        Class<?> propertyType = property.getClass();
+                        if (TypeToken.of(List.class).isAssignableFrom(propertyType)){
+                            List<?> items = (List<?>)property;
+                            for (Object item : items) {
+                                Validator.validate(item);
+                            }
+                        }
+                        else if (TypeToken.of(Map.class).isAssignableFrom(propertyType)) {
+                            Map<?, ?> entries = (Map<?, ?>)property;
+                            for (Map.Entry<?, ?> entry : entries.entrySet()) {
+                                Validator.validate(entry.getKey());
+                                Validator.validate(entry.getValue());
+                            }
+                        }
+                        else if (parameter.getClass().getDeclaringClass() != propertyType) {
+                            Validator.validate(property);
+                        }
+                    } catch (ServiceException ex) {
+                        IllegalArgumentException cause = (IllegalArgumentException)(ex.getCause());
+                        if (cause != null) {
+                            // Build property chain
+                            throw new ServiceException(
+                                    new IllegalArgumentException(field.getName() + "." + cause.getMessage()));
+                        } else {
+                            throw ex;
+                        }
                     }
                 }
             }

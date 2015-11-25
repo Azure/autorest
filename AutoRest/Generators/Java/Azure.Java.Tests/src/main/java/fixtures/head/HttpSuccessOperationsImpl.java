@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -38,15 +39,9 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Boolean> head200() throws ServiceException {
-        try {
-            Call<Void> call = service.head200(this.client.getAcceptLanguage());
-            return head200Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Boolean> head200() throws ServiceException, IOException {
+        Call<Void> call = service.head200(this.client.getAcceptLanguage());
+        return head200Delegate(call.execute(), null);
     }
 
     /**
@@ -61,7 +56,7 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head200Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -69,7 +64,7 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         return call;
     }
 
-    private ServiceResponse<Boolean> head200Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Boolean> head200Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Boolean>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(404, new TypeToken<Void>(){}.getType())
@@ -83,15 +78,9 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Boolean> head204() throws ServiceException {
-        try {
-            Call<Void> call = service.head204(this.client.getAcceptLanguage());
-            return head204Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Boolean> head204() throws ServiceException, IOException {
+        Call<Void> call = service.head204(this.client.getAcceptLanguage());
+        return head204Delegate(call.execute(), null);
     }
 
     /**
@@ -106,7 +95,7 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head204Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -114,7 +103,7 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         return call;
     }
 
-    private ServiceResponse<Boolean> head204Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Boolean> head204Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Boolean>(new AzureJacksonUtils())
                 .register(204, new TypeToken<Void>(){}.getType())
                 .register(404, new TypeToken<Void>(){}.getType())
@@ -128,15 +117,9 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the Boolean object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Boolean> head404() throws ServiceException {
-        try {
-            Call<Void> call = service.head404(this.client.getAcceptLanguage());
-            return head404Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Boolean> head404() throws ServiceException, IOException {
+        Call<Void> call = service.head404(this.client.getAcceptLanguage());
+        return head404Delegate(call.execute(), null);
     }
 
     /**
@@ -151,7 +134,7 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head404Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -159,7 +142,7 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         return call;
     }
 
-    private ServiceResponse<Boolean> head404Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Boolean> head404Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Boolean>(new AzureJacksonUtils())
                 .register(204, new TypeToken<Void>(){}.getType())
                 .register(404, new TypeToken<Void>(){}.getType())

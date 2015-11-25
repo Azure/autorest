@@ -8,6 +8,7 @@ using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 using System.Globalization;
 using System.Text;
+using System;
 
 namespace Microsoft.Rest.Generator.Java
 {
@@ -285,6 +286,28 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual string Exceptions
+        {
+            get
+            {
+                List<string> exceptions = new List<string>();
+                exceptions.Add("ServiceException");
+                exceptions.Add("IOException");
+                return string.Join(", ", exceptions);
+            }
+        }
+
+        public virtual List<string> ExceptionStatements
+        {
+            get
+            {
+                List<string> exceptions = new List<string>();
+                exceptions.Add("ServiceException exception thrown from REST call");
+                exceptions.Add("IOException exception thrown from serialization/deserialization");
+                return exceptions;
+            }
+        }
+
         /// <summary>
         /// Get the type name for the method's return type
         /// </summary>
@@ -384,6 +407,9 @@ namespace Microsoft.Rest.Generator.Java
                 imports.AddRange(this.ReturnType.ImportFrom(ServiceClient.Namespace));
                 // Http verb annotations
                 imports.Add(this.HttpMethod.ImportFrom());
+                // exceptions
+                this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
+                    .ForEach(ex => imports.Add(JavaCodeNamer.GetJavaException(ex)));
                 return imports.ToList();
             }
         }
@@ -431,6 +457,9 @@ namespace Microsoft.Rest.Generator.Java
                 // response type (can be different from return type)
                 this.Responses.ForEach(r => imports.AddRange(r.Value.ImportFrom(ServiceClient.Namespace)));
                 imports.AddRange(DefaultResponse.ImportFrom(ServiceClient.Namespace));
+                // exceptions
+                this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
+                    .ForEach(ex => imports.Add(JavaCodeNamer.GetJavaException(ex)));
                 return imports.ToList();
             }
         }

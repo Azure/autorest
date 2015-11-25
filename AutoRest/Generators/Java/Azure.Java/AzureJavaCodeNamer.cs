@@ -35,7 +35,7 @@ namespace Microsoft.Rest.Generator.Java
             }
 
             nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
-            string itemName = (string)ext["itemName"] ?? "values";
+            string itemName = (string)ext["itemName"] ?? "value";
 
             var keypair = new KeyValuePair<string, string>(nextLinkName, itemName);
             if (!pageClasses.ContainsKey(keypair))

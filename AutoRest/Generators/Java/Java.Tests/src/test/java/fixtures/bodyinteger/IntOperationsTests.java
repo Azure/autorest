@@ -1,7 +1,7 @@
 package fixtures.bodyinteger;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -30,8 +30,7 @@ public class IntOperationsTests {
             client.getIntOperations().getInvalid();
             Assert.assertTrue(false);
         } catch (Exception exception) {
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
+            Assert.assertEquals(JsonParseException.class, exception.getClass());
         }
     }
 
@@ -41,8 +40,7 @@ public class IntOperationsTests {
             client.getIntOperations().getOverflowInt32();
             Assert.assertTrue(false);
         } catch (Exception exception) {
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
+            Assert.assertEquals(JsonParseException.class, exception.getClass());
         }
     }
 
@@ -52,8 +50,7 @@ public class IntOperationsTests {
             client.getIntOperations().getUnderflowInt32();
             Assert.assertTrue(false);
         } catch (Exception exception) {
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
+            Assert.assertEquals(JsonParseException.class, exception.getClass());
         }
     }
 
@@ -63,8 +60,7 @@ public class IntOperationsTests {
             long value = client.getIntOperations().getOverflowInt64().getBody();
             Assert.assertEquals(Long.MAX_VALUE, value);
         } catch (Exception exception) {
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
+            Assert.assertEquals(JsonParseException.class, exception.getClass());
         }
     }
 
@@ -74,8 +70,7 @@ public class IntOperationsTests {
             long value = client.getIntOperations().getUnderflowInt64().getBody();
             Assert.assertEquals(Long.MIN_VALUE, value);
         } catch (Exception exception) {
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
+            Assert.assertEquals(JsonParseException.class, exception.getClass());
         }
     }
 

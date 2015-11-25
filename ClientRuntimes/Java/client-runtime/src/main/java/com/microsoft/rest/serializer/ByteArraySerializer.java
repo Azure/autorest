@@ -11,9 +11,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.apache.commons.lang3.ArrayUtils;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 /**
@@ -28,6 +26,10 @@ public class ByteArraySerializer extends JsonSerializer<Byte[]> {
 
     @Override
     public void serialize(Byte[] value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
-        jgen.writeBinary(ArrayUtils.toPrimitive(value));
+        byte[] bytes = new byte[value.length];
+        for(int i = 0; i < value.length; i++){
+            bytes[i] = value[i];
+        }
+        jgen.writeBinary(bytes);
     }
 }

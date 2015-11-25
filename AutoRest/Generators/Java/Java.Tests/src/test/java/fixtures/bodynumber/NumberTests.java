@@ -1,14 +1,10 @@
 package fixtures.bodynumber;
 
-import com.microsoft.rest.ServiceCallback;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 public class NumberTests {
     static AutoRestNumberTestService client;
@@ -30,8 +26,7 @@ public class NumberTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
+            Assert.assertEquals(JsonParseException.class, exception.getClass());
         }
     }
 
@@ -42,8 +37,7 @@ public class NumberTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
+            Assert.assertEquals(JsonParseException.class, exception.getClass());
         }
     }
 

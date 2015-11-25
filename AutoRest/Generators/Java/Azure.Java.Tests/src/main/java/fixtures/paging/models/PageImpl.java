@@ -24,11 +24,16 @@ public class PageImpl<T> implements Page<T> {
     /*
      * The list of items.
      */
-    @JsonProperty("values")
+    @JsonProperty("value")
     private List<T> items;
 
     @Override
     public String getNextPageLink() {
         return this.nextPageLink;
+    }
+
+    @Override
+    public List<T> getItems() {
+        return items;
     }
 }

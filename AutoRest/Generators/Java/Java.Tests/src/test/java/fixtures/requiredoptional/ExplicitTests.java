@@ -1,7 +1,13 @@
 package fixtures.requiredoptional;
 
 import com.microsoft.rest.ServiceException;
-import fixtures.requiredoptional.models.*;
+import fixtures.requiredoptional.models.ArrayOptionalWrapper;
+import fixtures.requiredoptional.models.ArrayWrapper;
+import fixtures.requiredoptional.models.ClassOptionalWrapper;
+import fixtures.requiredoptional.models.ClassWrapper;
+import fixtures.requiredoptional.models.IntOptionalWrapper;
+import fixtures.requiredoptional.models.StringOptionalWrapper;
+import fixtures.requiredoptional.models.StringWrapper;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -27,7 +33,7 @@ public class ExplicitTests {
         try {
             client.getExplicit().postOptionalIntegerParameter(null);
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             // Body parameter cannot be null
         }
     }
@@ -72,7 +78,7 @@ public class ExplicitTests {
         try {
             client.getExplicit().postOptionalIntegerParameter(null);
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             // Body parameter cannot be null
         }
     }
@@ -127,7 +133,7 @@ public class ExplicitTests {
         try {
             client.getExplicit().postOptionalClassParameter(null);
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             // Body parameter cannot be null
         }
     }
@@ -167,7 +173,7 @@ public class ExplicitTests {
         try {
             client.getExplicit().postOptionalArrayParameter(null);
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             // Body parameter cannot be null
         }
     }

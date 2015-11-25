@@ -11,9 +11,9 @@
 package fixtures.azureparametergrouping;
 
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.CustomHeaderInterceptor;
-import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import java.util.UUID;
 import retrofit.Retrofit;
@@ -21,7 +21,7 @@ import retrofit.Retrofit;
 /**
  * Initializes a new instance of the AutoRestParameterGroupingTestService class.
  */
-public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient implements AutoRestParameterGroupingTestService {
+public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient implements AutoRestParameterGroupingTestService {
     private String baseUri;
     private AzureClient azureClient;
 
@@ -92,14 +92,12 @@ public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient impl
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private ParameterGroupingOperations parameterGrouping;
-
     /**
      * Gets the ParameterGroupingOperations object to access its operations.
      * @return the parameterGrouping value.
      */
     public ParameterGroupingOperations getParameterGrouping() {
-        return this.parameterGrouping;
+        return new ParameterGroupingOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -164,8 +162,6 @@ public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient impl
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.parameterGrouping = new ParameterGroupingOperationsImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

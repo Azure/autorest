@@ -36,7 +36,7 @@ public class LROsCustomHeaderTests {
                 .callbackExecutor(executor);
 
         client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost.:3000", null, httpClient, builder);
-        client.setLongRunningOperationRetryTimeout(0);
+        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
         customHeaders = new HashMap<>();
         customHeaders.put("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
         customHeaderInterceptor = new CustomHeaderInterceptor().addHeaderMap(customHeaders);

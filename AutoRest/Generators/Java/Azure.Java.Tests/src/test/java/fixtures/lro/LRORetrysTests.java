@@ -30,7 +30,7 @@ public class LRORetrysTests {
                 .callbackExecutor(executor);
 
         client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost.:3000", null, httpClient, builder);
-        client.setLongRunningOperationRetryTimeout(0);
+        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
     }
 
     @Test
