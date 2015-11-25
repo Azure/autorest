@@ -149,7 +149,7 @@ class http_server_failure(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 
@@ -201,7 +201,7 @@ class http_server_failure(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 

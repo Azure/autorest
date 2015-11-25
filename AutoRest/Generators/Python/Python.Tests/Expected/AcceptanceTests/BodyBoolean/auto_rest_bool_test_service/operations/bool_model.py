@@ -108,7 +108,7 @@ class bool_model(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(bool_body, 'bool')
+        body_content = self._serialize.body(bool_body, 'bool')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -203,7 +203,7 @@ class bool_model(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(bool_body, 'bool')
+        body_content = self._serialize.body(bool_body, 'bool')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)

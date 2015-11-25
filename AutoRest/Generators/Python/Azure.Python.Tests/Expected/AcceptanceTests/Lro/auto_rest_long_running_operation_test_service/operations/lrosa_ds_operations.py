@@ -67,7 +67,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -144,7 +144,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -207,7 +207,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -285,7 +285,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -349,7 +349,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -426,7 +426,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -794,7 +794,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -861,7 +861,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -913,7 +913,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -980,7 +980,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1034,7 +1034,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1103,7 +1103,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1157,7 +1157,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1235,7 +1235,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1300,7 +1300,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1378,7 +1378,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1441,7 +1441,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1519,7 +1519,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1787,7 +1787,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1855,7 +1855,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1910,7 +1910,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1980,7 +1980,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -2034,7 +2034,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -2110,7 +2110,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -2172,7 +2172,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -2249,7 +2249,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -2312,7 +2312,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -2390,7 +2390,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -2765,7 +2765,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -2833,7 +2833,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -2887,7 +2887,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -2956,7 +2956,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -3011,7 +3011,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -3081,7 +3081,7 @@ class lrosa_dsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 

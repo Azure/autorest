@@ -62,7 +62,7 @@ class explicit(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, 'int')
+        body_content = self._serialize.body(body_parameter, 'int')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -110,7 +110,7 @@ class explicit(object):
 
         # Construct body
         if body_parameter is not None:
-            body_content = self._serialize(body_parameter, 'int')
+            body_content = self._serialize.body(body_parameter, 'int')
         else:
             body_content = None
 
@@ -166,7 +166,7 @@ class explicit(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, 'IntWrapper')
+        body_content = self._serialize.body(body_parameter, 'IntWrapper')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -219,7 +219,7 @@ class explicit(object):
 
         # Construct body
         if body_parameter is not None:
-            body_content = self._serialize(body_parameter, 'IntOptionalWrapper')
+            body_content = self._serialize.body(body_parameter, 'IntOptionalWrapper')
         else:
             body_content = None
 
@@ -363,7 +363,7 @@ class explicit(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, 'str')
+        body_content = self._serialize.body(body_parameter, 'str')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -411,7 +411,7 @@ class explicit(object):
 
         # Construct body
         if body_parameter is not None:
-            body_content = self._serialize(body_parameter, 'str')
+            body_content = self._serialize.body(body_parameter, 'str')
         else:
             body_content = None
 
@@ -467,7 +467,7 @@ class explicit(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, 'StringWrapper')
+        body_content = self._serialize.body(body_parameter, 'StringWrapper')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -520,7 +520,7 @@ class explicit(object):
 
         # Construct body
         if body_parameter is not None:
-            body_content = self._serialize(body_parameter, 'StringOptionalWrapper')
+            body_content = self._serialize.body(body_parameter, 'StringOptionalWrapper')
         else:
             body_content = None
 
@@ -664,7 +664,7 @@ class explicit(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, 'Product')
+        body_content = self._serialize.body(body_parameter, 'Product')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -712,7 +712,7 @@ class explicit(object):
 
         # Construct body
         if body_parameter is not None:
-            body_content = self._serialize(body_parameter, 'Product')
+            body_content = self._serialize.body(body_parameter, 'Product')
         else:
             body_content = None
 
@@ -768,7 +768,7 @@ class explicit(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, 'ClassWrapper')
+        body_content = self._serialize.body(body_parameter, 'ClassWrapper')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -821,7 +821,7 @@ class explicit(object):
 
         # Construct body
         if body_parameter is not None:
-            body_content = self._serialize(body_parameter, 'ClassOptionalWrapper')
+            body_content = self._serialize.body(body_parameter, 'ClassOptionalWrapper')
         else:
             body_content = None
 
@@ -872,7 +872,7 @@ class explicit(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, '[str]')
+        body_content = self._serialize.body(body_parameter, '[str]')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -920,7 +920,7 @@ class explicit(object):
 
         # Construct body
         if body_parameter is not None:
-            body_content = self._serialize(body_parameter, '[str]')
+            body_content = self._serialize.body(body_parameter, '[str]')
         else:
             body_content = None
 
@@ -976,7 +976,7 @@ class explicit(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(body_parameter, 'ArrayWrapper')
+        body_content = self._serialize.body(body_parameter, 'ArrayWrapper')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -1029,7 +1029,7 @@ class explicit(object):
 
         # Construct body
         if body_parameter is not None:
-            body_content = self._serialize(body_parameter, 'ArrayOptionalWrapper')
+            body_content = self._serialize.body(body_parameter, 'ArrayOptionalWrapper')
         else:
             body_content = None
 

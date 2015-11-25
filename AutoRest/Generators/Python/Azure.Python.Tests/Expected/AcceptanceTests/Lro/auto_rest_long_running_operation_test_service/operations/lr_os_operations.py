@@ -68,7 +68,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -144,7 +144,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -206,7 +206,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -283,7 +283,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -345,7 +345,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -422,7 +422,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -485,7 +485,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -565,7 +565,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -630,7 +630,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -708,7 +708,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -771,7 +771,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -851,7 +851,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -916,7 +916,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -994,7 +994,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1056,7 +1056,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1133,7 +1133,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1196,7 +1196,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1274,7 +1274,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1337,7 +1337,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1415,7 +1415,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1478,7 +1478,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1556,7 +1556,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1619,7 +1619,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1697,7 +1697,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1759,7 +1759,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1836,7 +1836,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1896,7 +1896,7 @@ class lr_osOperations(object):
 
         # Construct body
         if sku is not None:
-            body_content = self._serialize(sku, 'Sku')
+            body_content = self._serialize.body(sku, 'Sku')
         else:
             body_content = None
 
@@ -1971,7 +1971,7 @@ class lr_osOperations(object):
 
         # Construct body
         if sku is not None:
-            body_content = self._serialize(sku, 'Sku')
+            body_content = self._serialize.body(sku, 'Sku')
         else:
             body_content = None
 
@@ -2031,7 +2031,7 @@ class lr_osOperations(object):
 
         # Construct body
         if sku is not None:
-            body_content = self._serialize(sku, 'Sku')
+            body_content = self._serialize.body(sku, 'Sku')
         else:
             body_content = None
 
@@ -2106,7 +2106,7 @@ class lr_osOperations(object):
 
         # Construct body
         if sku is not None:
-            body_content = self._serialize(sku, 'Sku')
+            body_content = self._serialize.body(sku, 'Sku')
         else:
             body_content = None
 
@@ -2166,7 +2166,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'SubProduct')
+            body_content = self._serialize.body(product, 'SubProduct')
         else:
             body_content = None
 
@@ -2241,7 +2241,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'SubProduct')
+            body_content = self._serialize.body(product, 'SubProduct')
         else:
             body_content = None
 
@@ -2301,7 +2301,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'SubProduct')
+            body_content = self._serialize.body(product, 'SubProduct')
         else:
             body_content = None
 
@@ -2376,7 +2376,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'SubProduct')
+            body_content = self._serialize.body(product, 'SubProduct')
         else:
             body_content = None
 
@@ -3916,7 +3916,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -3985,7 +3985,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -4040,7 +4040,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -4117,7 +4117,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -4180,7 +4180,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -4258,7 +4258,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -4321,7 +4321,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -4399,7 +4399,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -4461,7 +4461,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -4531,7 +4531,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -4586,7 +4586,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -4656,7 +4656,7 @@ class lr_osOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 

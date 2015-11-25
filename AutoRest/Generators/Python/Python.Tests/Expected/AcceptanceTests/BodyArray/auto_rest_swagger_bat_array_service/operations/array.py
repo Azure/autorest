@@ -204,7 +204,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(array_body, '[str]')
+        body_content = self._serialize.body(array_body, '[str]')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -299,7 +299,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(array_body, '[bool]')
+        body_content = self._serialize.body(array_body, '[bool]')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -490,7 +490,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(array_body, '[int]')
+        body_content = self._serialize.body(array_body, '[int]')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -681,7 +681,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(array_body, '[long]')
+        body_content = self._serialize.body(array_body, '[long]')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -872,7 +872,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(array_body, '[float]')
+        body_content = self._serialize.body(array_body, '[float]')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1063,7 +1063,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(array_body, '[float]')
+        body_content = self._serialize.body(array_body, '[float]')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1254,7 +1254,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(array_body, '[str]')
+        body_content = self._serialize.body(array_body, '[str]')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1445,7 +1445,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(array_body, '[date]')
+        body_content = self._serialize.body(array_body, '[date]')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1638,7 +1638,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(array_body, '[iso-8601]')
+        body_content = self._serialize.body(array_body, '[iso-8601]')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1831,7 +1831,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(array_body, '[rfc-1123]')
+        body_content = self._serialize.body(array_body, '[rfc-1123]')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1926,7 +1926,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(array_body, '[duration]')
+        body_content = self._serialize.body(array_body, '[duration]')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -2023,7 +2023,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(array_body, '[bytearray]')
+        body_content = self._serialize.body(array_body, '[bytearray]')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -2363,7 +2363,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(array_body, '[Product]')
+        body_content = self._serialize.body(array_body, '[Product]')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -2653,7 +2653,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(array_body, '[[str]]')
+        body_content = self._serialize.body(array_body, '[[str]]')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -2948,7 +2948,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(array_body, '[{str}]')
+        body_content = self._serialize.body(array_body, '[{str}]')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)

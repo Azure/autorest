@@ -256,7 +256,7 @@ class datetimerfc1123(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(datetime_body, 'rfc-1123')
+        body_content = self._serialize.body(datetime_body, 'rfc-1123')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -401,7 +401,7 @@ class datetimerfc1123(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(datetime_body, 'rfc-1123')
+        body_content = self._serialize.body(datetime_body, 'rfc-1123')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
