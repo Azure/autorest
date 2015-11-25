@@ -77,25 +77,28 @@ class dictionary(object):
 
     @async_request
     def put_valid(
-            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, default_program=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with dictionary property
 
-        :param complex_body: Please put a dictionary with 5 key-value pairs:
-        "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
+        :param default_program:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type complex_body: object
+        :type default_program: object or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
+
+        complex_body = DictionaryWrapper
+        if default_program is not None:
+            complex_body.default_program = default_program
 
         # Construct URL
         url = '/complex/dictionary/typed/valid'
@@ -174,24 +177,28 @@ class dictionary(object):
 
     @async_request
     def put_empty(
-            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, default_program=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with dictionary property which is empty
 
-        :param complex_body: Please put an empty dictionary
+        :param default_program:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type complex_body: object
+        :type default_program: object or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
+
+        complex_body = DictionaryWrapper
+        if default_program is not None:
+            complex_body.default_program = default_program
 
         # Construct URL
         url = '/complex/dictionary/typed/empty'
