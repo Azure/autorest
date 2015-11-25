@@ -674,7 +674,7 @@ class storage_accountsOperations(object):
 
     @async_request
     def regenerate_key(
-            self, resource_group_name, account_name, regenerate_key, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, resource_group_name, account_name, key_name=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Regenerates the access keys for the specified storage account.
@@ -684,8 +684,8 @@ class storage_accountsOperations(object):
         :param account_name: The name of the storage account within the
         specified resource group. Storage account names must be between 3 and
         24 characters in length and use numbers and lower-case letters only.
-        :param regenerate_key: Specifies name of the key which should be
-        regenerated.
+        :param key_name: Possible values for this property include: 'key1',
+        'key2'.
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
@@ -694,13 +694,17 @@ class storage_accountsOperations(object):
         a concurrent.futures.Future
         :type resource_group_name: str
         :type account_name: str
-        :type regenerate_key: object
+        :type key_name: str or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: object or (object, requests.response) or
         concurrent.futures.Future
         """
+
+        regenerate_key = StorageAccountRegenerateKeyParameters
+        if key_name is not None:
+            regenerate_key.key_name = key_name
 
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'

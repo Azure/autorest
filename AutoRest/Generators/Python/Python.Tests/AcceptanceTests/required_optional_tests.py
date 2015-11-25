@@ -76,9 +76,8 @@ class RequiredOptionalTests(unittest.TestCase):
         #with self.assertRaises(ValueError):
         #    self.client.explicit.post_required_string_parameter(None)
 
-        sw = StringWrapper(value = None)
         with self.assertRaises(SerializationError):
-            self.client.explicit.post_required_string_property(sw)
+            self.client.explicit.post_required_string_property(None)
 
         # TODO, is ValueError or TypeError, should check the None first
         with self.assertRaises(TypeError):
@@ -88,9 +87,8 @@ class RequiredOptionalTests(unittest.TestCase):
         #with self.assertRaises(TypeError):
         #    self.client.explicit.post_required_array_parameter(None)
 
-        aw = ArrayWrapper(value = None)
         with self.assertRaises(SerializationError):
-            self.client.explicit.post_required_array_property(aw)
+            self.client.explicit.post_required_array_property(None)
 
         # TODO need check body parameter
         #with self.assertRaises(ValueError):

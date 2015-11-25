@@ -170,7 +170,8 @@ gulp.task('regenerate:expected:python', function(cb){
     'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
     'mappings': defaultMappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'Python'
+    'codeGenerator': 'Python',
+    'flatteningThreshold': '1'
   }, cb);
 })
 
@@ -185,7 +186,8 @@ gulp.task('regenerate:expected:pythonazure', function(cb){
     'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'Azure.Python'
+    'codeGenerator': 'Azure.Python',
+    'flatteningThreshold': '1'
   }, cb);
 })
 

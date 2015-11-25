@@ -944,24 +944,28 @@ class primitive(object):
 
     @async_request
     def put_duration(
-            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, field=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with duration properties
 
-        :param complex_body: Please put 'P123DT22H14M12.011S'
+        :param field:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type complex_body: object
+        :type field: timedelta or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
+
+        complex_body = DurationWrapper
+        if field is not None:
+            complex_body.field = field
 
         # Construct URL
         url = '/complex/primitive/duration'
@@ -1040,25 +1044,28 @@ class primitive(object):
 
     @async_request
     def put_byte(
-            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, field=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Put complex types with byte properties
 
-        :param complex_body: Please put non-ascii byte string hex(FF FE FD FC
-        00 FA F9 F8 F7 F6)
+        :param field:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type complex_body: object
+        :type field: bytearray or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
+
+        complex_body = ByteWrapper
+        if field is not None:
+            complex_body.field = field
 
         # Construct URL
         url = '/complex/primitive/byte'

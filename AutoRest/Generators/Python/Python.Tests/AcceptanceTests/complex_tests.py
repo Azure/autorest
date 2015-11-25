@@ -168,8 +168,7 @@ class ComplexTests(unittest.TestCase):
         expected = timedelta(days=123, hours=22, minutes=14, seconds=12, milliseconds=11)
         self.assertEqual(expected, client.primitive.get_duration().field)
 
-        durationRequest = DurationWrapper(field=expected)
-        client.primitive.put_duration(durationRequest);
+        client.primitive.put_duration(expected)
 
         # GET primitive/byte
         byteResult = client.primitive.get_byte()
@@ -177,9 +176,7 @@ class ComplexTests(unittest.TestCase):
         self.assertEqual(valid_bytes, byteResult.field)
 
         # PUT primitive/byte
-        byte_body = ByteWrapper(field=valid_bytes)
-
-        client.primitive.put_byte(byte_body)
+        client.primitive.put_byte(valid_bytes)
 
         """
         COMPLEX TYPE WITH ARRAY PROPERTIES
@@ -194,14 +191,14 @@ class ComplexTests(unittest.TestCase):
 
         # PUT array/valid
         # TODO: bug in serialize_data(None, 'str')
-        #client.array.put_valid(ArrayWrapper(array=array_value))
+        #client.array.put_valid(array_value)
        
         # GET array/empty
         array_result = client.array.get_empty()
         self.assertEqual(0, len(array_result.array))
 
         # PUT array/empty
-        client.array.put_empty(ArrayWrapper(array=[]))
+        client.array.put_empty([])
 
         # Get array/notprovided
         self.assertIsNone(client.array.get_not_provided().array)
@@ -218,14 +215,14 @@ class ComplexTests(unittest.TestCase):
 
         # PUT dictionary/valid
         # TODO: bug in serialize_data(None, 'str')
-        #client.dictionary.put_valid(DictionaryWrapper(default_program=dict_val))
+        #client.dictionary.put_valid(dict_val)
 
         # GET dictionary/empty
         dict_result = client.dictionary.get_empty()
         self.assertEqual(0, len(dict_result.default_program))
 
         # PUT dictionary/empty
-        client.dictionary.put_empty(DictionaryWrapper(default_program={}))
+        client.dictionary.put_empty(default_program={})
 
         # GET dictionary/null
         self.assertIsNone(client.dictionary.get_null().default_program)

@@ -127,27 +127,31 @@ class explicit(object):
 
     @async_request
     def post_required_integer_property(
-            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly required integer. Please put a valid int-wrapper with
         'value' = null and the client library should throw before the request
         is sent.
 
-        :param body_parameter:
+        :param value:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type body_parameter: object
+        :type value: int
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: object or (object, requests.response) or
         concurrent.futures.Future
         """
+
+        body_parameter = IntWrapper
+        if value is not None:
+            body_parameter.value = value
 
         # Construct URL
         url = '/reqopt/requied/integer/property'
@@ -177,25 +181,29 @@ class explicit(object):
 
     @async_request
     def post_optional_integer_property(
-            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly optional integer. Please put a valid int-wrapper with
         'value' = null.
 
-        :param body_parameter:
+        :param value:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type body_parameter: object or none
+        :type value: int or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
+
+        body_parameter = IntOptionalWrapper
+        if value is not None:
+            body_parameter.value = value
 
         # Construct URL
         url = '/reqopt/optional/integer/property'
@@ -420,27 +428,31 @@ class explicit(object):
 
     @async_request
     def post_required_string_property(
-            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly required string. Please put a valid string-wrapper
         with 'value' = null and the client library should throw before the
         request is sent.
 
-        :param body_parameter:
+        :param value:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type body_parameter: object
+        :type value: str
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: object or (object, requests.response) or
         concurrent.futures.Future
         """
+
+        body_parameter = StringWrapper
+        if value is not None:
+            body_parameter.value = value
 
         # Construct URL
         url = '/reqopt/requied/string/property'
@@ -470,25 +482,29 @@ class explicit(object):
 
     @async_request
     def post_optional_string_property(
-            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly optional integer. Please put a valid string-wrapper
         with 'value' = null.
 
-        :param body_parameter:
+        :param value:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type body_parameter: object or none
+        :type value: str or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
+
+        body_parameter = StringOptionalWrapper
+        if value is not None:
+            body_parameter.value = value
 
         # Construct URL
         url = '/reqopt/optional/string/property'
@@ -713,27 +729,31 @@ class explicit(object):
 
     @async_request
     def post_required_class_property(
-            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly required complex object. Please put a valid
         class-wrapper with 'value' = null and the client library should throw
         before the request is sent.
 
-        :param body_parameter:
+        :param value:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type body_parameter: object
+        :type value: object
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: object or (object, requests.response) or
         concurrent.futures.Future
         """
+
+        body_parameter = ClassWrapper
+        if value is not None:
+            body_parameter.value = value
 
         # Construct URL
         url = '/reqopt/requied/class/property'
@@ -763,25 +783,29 @@ class explicit(object):
 
     @async_request
     def post_optional_class_property(
-            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly optional complex object. Please put a valid
         class-wrapper with 'value' = null.
 
-        :param body_parameter:
+        :param value:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type body_parameter: object or none
+        :type value: object or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
+
+        body_parameter = ClassOptionalWrapper
+        if value is not None:
+            body_parameter.value = value
 
         # Construct URL
         url = '/reqopt/optional/class/property'
@@ -913,27 +937,31 @@ class explicit(object):
 
     @async_request
     def post_required_array_property(
-            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly required array. Please put a valid array-wrapper with
         'value' = null and the client library should throw before the request
         is sent.
 
-        :param body_parameter:
+        :param value:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type body_parameter: object
+        :type value: list
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: object or (object, requests.response) or
         concurrent.futures.Future
         """
+
+        body_parameter = ArrayWrapper
+        if value is not None:
+            body_parameter.value = value
 
         # Construct URL
         url = '/reqopt/requied/array/property'
@@ -963,25 +991,29 @@ class explicit(object):
 
     @async_request
     def post_optional_array_property(
-            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
         Test explicitly optional array. Please put a valid array-wrapper with
         'value' = null.
 
-        :param body_parameter:
+        :param value:
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
-        :type body_parameter: object or none
+        :type value: list or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
+
+        body_parameter = ArrayOptionalWrapper
+        if value is not None:
+            body_parameter.value = value
 
         # Construct URL
         url = '/reqopt/optional/array/property'
