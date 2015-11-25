@@ -107,7 +107,7 @@ class ServiceClient(object):
             request.url = self._format_url(url)
 
         if params:
-            request.params = params
+            request.format_parameters(params)
 
         return request
 
@@ -159,8 +159,9 @@ class ServiceClient(object):
 
             try:
                 response = session.request(
-                    request.method, request.url, data=request.data,
-                    headers=request.headers, params=request.params,
+                    request.method, request.url,
+                    data=request.data,
+                    headers=request.headers,
                     allow_redirects=bool(self.config.redirect_policy),
                     **kwargs)
 
