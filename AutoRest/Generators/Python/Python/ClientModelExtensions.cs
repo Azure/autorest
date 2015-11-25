@@ -149,29 +149,6 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                 type.Values.Select(p => string.Format(CultureInfo.InvariantCulture, "'{0}'", p.Name))));
         }
 
-        public static string NullInitializeType(this IType type, IScopeProvider scope, string objectReference)
-        {
-            if (scope == null)
-            {
-                throw new ArgumentNullException("scope");
-            }
-
-            string nullValue = "None";
-            /*
-            SequenceType sequence = type as SequenceType;
-            DictionaryType dictionary = type as DictionaryType;
-            if (sequence != null)
-            {
-                nullValue = "[]";
-            }
-            else if (dictionary != null)
-            {
-                nullValue = "{}";
-            }
-            */
-            return string.Format(CultureInfo.InvariantCulture, "{0} = {1}", objectReference, nullValue);
-        }
-
         /// <summary>
         /// Determine whether URL encoding should be skipped for this parameter
         /// </summary>
