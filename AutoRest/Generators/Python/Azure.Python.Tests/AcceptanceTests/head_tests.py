@@ -32,21 +32,12 @@ class HeadTests(unittest.TestCase):
         
         config = AutoRestHeadTestServiceConfiguration(None, base_url="http://localhost:3000")
 
-        # TODO: investigate how to use TokenAuth in testing
-        #creds = UserPassCredentials(config, client_id, "user", "password")
-        #creds.get_token()
-
         config.log_level = 10
         client = AutoRestHeadTestService(config)
 
-        # TODO - Not generating any response
-        #self.assertTrue(client.http_success.head200())
-
-        # TODO - Not generating any response
-        #self.assertTrue(client.http_success.head204())
-
-        # TODO - Not generating any response
-        #self.assertFalse(client.http_success.head404())
+        self.assertTrue(client.http_success.head200())
+        self.assertTrue(client.http_success.head204())
+        self.assertFalse(client.http_success.head404())
 
 
 if __name__ == '__main__':
