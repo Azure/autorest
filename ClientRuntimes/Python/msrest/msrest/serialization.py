@@ -140,6 +140,10 @@ class Model(object):
 class Serializer(object):
 
     basic_types = ['str', 'int', 'bool', 'float']
+    days = {0:"Mon", 1:"Tue", 2:"Wed", 3:"Thu", 4:"Fri", 5:"Sat", 6:"Sun"}
+    months = {1:"Jan", 2:"Feb", 3:"Mar", 4:"Apr", 5:"May", 6:"Jun",
+              7:"Jul", 8:"Aug", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"}
+
 
     def __init__(self):
 
@@ -155,7 +159,7 @@ class Serializer(object):
             '{}': self.serialize_dict
             }
 
-    def __call__(self, target_obj, data_type=None, **kwargs):
+    def _serialize(self, target_obj, data_type=None, **kwargs):
 
         if target_obj is None:
             return None
@@ -166,7 +170,7 @@ class Serializer(object):
 
         if data_type:
             return self.serialize_data(
-                target_obj, data_type, **kwargs) #required=True
+                target_obj, data_type, required=True, **kwargs)
 
         if not hasattr(target_obj, "_attribute_map"):
             data_type = type(target_obj).__name__
@@ -220,7 +224,17 @@ class Serializer(object):
         except AttributeError:
             pass  # TargetObj has no _subtype_map so we don't need to classify
 
+    def body(self, data, data_type, **kwargs):
+        if data is None:
+            raise ValueError("Request body must not be None")
+
+        return self._serialize(data, data_type, **kwargs)
+
     def url(self, name, data, data_type, **kwargs):
+
+        if data is None:
+            raise ValueError("{} must not be None.".format(name))
+
         try:
             output = self.serialize_data(data, data_type, **kwargs)
 
@@ -232,9 +246,6 @@ class Serializer(object):
             else:
                 output = quote(str(output), safe='')
 
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
         except DeserializationError:
             raise TypeError("{} must be type {}.".format(name, data_type))
 
@@ -242,6 +253,9 @@ class Serializer(object):
             return output
 
     def query(self, name, data, data_type, **kwargs):
+        if data is None:
+            raise ValueError("{} must not be None.".format(name))
+
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]
@@ -250,9 +264,6 @@ class Serializer(object):
 
             if data_type == 'bool':
                 output = json.dumps(output)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
 
         except DeserializationError:
             raise TypeError("{} must be type {}.".format(name, data_type))
@@ -261,6 +272,9 @@ class Serializer(object):
             return output
 
     def header(self, name, data, data_type, **kwargs):
+        if data is None:
+            raise ValueError("{} must not be None.".format(name))
+
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]
@@ -269,9 +283,6 @@ class Serializer(object):
 
             if data_type == 'bool':
                 output = json.dumps(output)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
 
         except DeserializationError:
             raise TypeError("{} must be type {}.".format(name, data_type))
@@ -314,7 +325,7 @@ class Serializer(object):
             raise_with_traceback(SerializationError, msg, err)
 
         else:
-            return self(data, **kwargs)
+            return self._serialize(data, **kwargs)
 
     def serialize_basic(self, data, data_type):
 
@@ -384,12 +395,10 @@ class Serializer(object):
         except AttributeError:
             raise TypeError("RFC1123 object must be valid Datetime object.")
 
-        days = {0:"Mon", 1:"Tue", 2:"Wed", 3:"Thu", 4:"Fri", 5:"Sat", 6:"Sun"}
-        months = {1:"Jan", 2:"Feb", 3:"Mar", 4:"Apr", 5:"May", 6:"Jun", 7:"Jul", 8:"Aug", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"}
-        
         date_str = "{}, {:02} {} {:04} {:02}:{:02}:{:02} GMT".format(
-            days[utc.tm_wday], utc.tm_mday, months[utc.tm_mon], utc.tm_year, utc.tm_hour,
-            utc.tm_min, utc.tm_sec)
+            Serializer.days[utc.tm_wday], utc.tm_mday,
+            Serializer.months[utc.tm_mon], utc.tm_year,
+            utc.tm_hour, utc.tm_min, utc.tm_sec)
         
         return date_str
 
