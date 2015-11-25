@@ -89,5 +89,25 @@ namespace Microsoft.Rest.Generator.Python
                 return param;
             }
         }
+
+        public virtual string ValidateRequiredParameters
+        {
+            get
+            {
+                var builder = new IndentedStringBuilder("    ");
+                foreach (var property in this.Properties)
+                {
+                    if (property.IsRequired)
+                    {
+                        builder.
+                            AppendFormat("if {0} is None:", property.Name.ToPythonCase()).AppendLine().
+                            Indent().
+                                AppendLine(string.Format(CultureInfo.InvariantCulture, "raise ValueError('{0} must not be None.')", property.Name.ToPythonCase())).
+                            Outdent();
+                    }
+                }
+                return builder.ToString();
+            }
+        }
     }
 }

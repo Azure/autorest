@@ -23,6 +23,8 @@ class AutoRestUrlTestServiceConfiguration(Configuration):
     def __init__(
             self, global_string_path, global_string_query=None, base_url=None, filepath=None):
 
+        if global_string_path is None:
+            raise ValueError('global_string_path must not be None.')
         if not base_url:
             base_url = 'http://localhost'
 

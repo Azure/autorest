@@ -25,14 +25,14 @@ class UrlTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
 
-        config = AutoRestUrlTestServiceConfiguration(None, base_url="http://localhost:3000")
+        config = AutoRestUrlTestServiceConfiguration('', base_url="http://localhost:3000")
         config.log_level = 10
         cls.client = AutoRestUrlTestService(config)
         return super(UrlTests, cls).setUpClass()
 
     def test_url_path(self):
 
-        self.client.config.global_string_path = None
+        self.client.config.global_string_path = ''
 
         self.client.paths.byte_empty(bytearray())
 
@@ -75,7 +75,7 @@ class UrlTests(unittest.TestCase):
 
     def test_url_query(self):
 
-        self.client.config.global_string_path = None
+        self.client.config.global_string_path = ''
 
         self.client.queries.byte_empty(bytearray())
         u_bytes = bytearray(u"\u554A\u9F44\u4E02\u72DB\u72DC\uF9F1\uF92C\uF9F1\uFA0C\uFA29", encoding='utf-8')

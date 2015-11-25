@@ -19,7 +19,7 @@ sys.path.append(join(tests, "Head"))
 
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
-from msrestazure.azure_active_directory import UserPassCredentials
+from msrest.authentication import BasicTokenAuthentication
 
 from auto_rest_head_test_service import (
     AutoRestHeadTestService, 
@@ -30,23 +30,15 @@ class HeadTests(unittest.TestCase):
 
     def test_head(self):
         
-        config = AutoRestHeadTestServiceConfiguration(None, base_url="http://localhost:3000")
-
-        # TODO: investigate how to use TokenAuth in testing
-        #creds = UserPassCredentials(config, client_id, "user", "password")
-        #creds.get_token()
+        cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
+        config = AutoRestHeadTestServiceConfiguration(cred, base_url="http://localhost:3000")
 
         config.log_level = 10
         client = AutoRestHeadTestService(config)
 
-        # TODO - Not generating any response
-        #self.assertTrue(client.http_success.head200())
-
-        # TODO - Not generating any response
-        #self.assertTrue(client.http_success.head204())
-
-        # TODO - Not generating any response
-        #self.assertFalse(client.http_success.head404())
+        self.assertTrue(client.http_success.head200())
+        self.assertTrue(client.http_success.head204())
+        self.assertFalse(client.http_success.head404())
 
 
 if __name__ == '__main__':

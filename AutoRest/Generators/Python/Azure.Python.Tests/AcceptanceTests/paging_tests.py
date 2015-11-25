@@ -19,8 +19,8 @@ sys.path.append(join(tests, "Paging"))
 
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
-from msrestazure.azure_active_directory import UserPassCredentials
 from msrestazure.azure_exceptions import CloudError
+from msrest.authentication import BasicTokenAuthentication
 
 from auto_rest_paging_test_service import (
     AutoRestPagingTestService, 
@@ -30,7 +30,8 @@ from auto_rest_paging_test_service import (
 class PagingTests(unittest.TestCase):
 
     def setUp(self):
-        config = AutoRestPagingTestServiceConfiguration(None, base_url="http://localhost:3000")
+        cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
+        config = AutoRestPagingTestServiceConfiguration(cred, base_url="http://localhost:3000")
         config.log_level = 10
         self.client = AutoRestPagingTestService(config)
 

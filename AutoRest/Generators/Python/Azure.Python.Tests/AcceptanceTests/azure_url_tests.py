@@ -19,7 +19,7 @@ sys.path.append(join(tests, "SubscriptionIdApiVersion"))
 
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
-from msrestazure.azure_active_directory import UserPassCredentials
+from msrest.authentication import BasicTokenAuthentication
 
 from microsoft_azure_test_url import (
     MicrosoftAzureTestUrl, 
@@ -34,11 +34,8 @@ class AzureUrlTests(unittest.TestCase):
         sub_id = str(uuid4())
         client_id = str(uuid4())
         
-        config = MicrosoftAzureTestUrlConfiguration(None, sub_id, base_url="http://localhost:3000")
-
-        # TODO: investigate how to use TokenAuth in testing
-        #creds = UserPassCredentials(config, client_id, "user", "password")
-        #creds.get_token()
+        cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
+        config = MicrosoftAzureTestUrlConfiguration(cred, sub_id, base_url="http://localhost:3000")
 
         config.log_level = 10
         client = MicrosoftAzureTestUrl(config)

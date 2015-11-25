@@ -244,6 +244,17 @@ namespace Microsoft.Rest.Generator.Python
             return builder.ToString();
         }
 
+        public virtual string ReturnEmptyResponse
+        {
+            get
+            {
+                var builder = new IndentedStringBuilder("    ");
+                builder.AppendLine("if raw:").Indent().AppendLine("return None, response").Outdent();
+
+                return builder.ToString();
+            }
+        }
+
         /// <summary>
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters
