@@ -70,16 +70,16 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             framework.NormalizeClientModel(serviceClient);
 
             Assert.Equal("Azurealwaysrocks", serviceClient.Name);
-            Assert.Equal("Abc", serviceClient.ModelTypes[0].Name);
-            Assert.Equal("!@#$%^&*()abc", serviceClient.ModelTypes[0].SerializedName);
-            Assert.Equal("BooleanProperty", serviceClient.ModelTypes[0].Properties[0].Name);
-            Assert.Equal("SomedateTimeSequence", serviceClient.ModelTypes[0].Properties[1].Name);
-            Assert.Equal("BaseType", serviceClient.ModelTypes[1].Name);
-            Assert.Equal("baseType", serviceClient.ModelTypes[1].SerializedName);
-            Assert.Equal("BooleanProperty", serviceClient.ModelTypes[1].Properties[0].Name);
-            Assert.Equal("boolean-property", serviceClient.ModelTypes[1].Properties[0].SerializedName);
-            Assert.Equal("SelfProperty", serviceClient.ModelTypes[1].Properties[1].Name);
-            Assert.Equal("self-property", serviceClient.ModelTypes[1].Properties[1].SerializedName);
+            Assert.Equal("Abc", serviceClient.ModelTypes.First(m => m.Name == "Abc").Name);
+            Assert.Equal("!@#$%^&*()abc", serviceClient.ModelTypes.First(m => m.Name == "Abc").SerializedName);
+            Assert.Equal("BooleanProperty", serviceClient.ModelTypes.First(m => m.Name == "Abc").Properties[0].Name);
+            Assert.Equal("SomedateTimeSequence", serviceClient.ModelTypes.First(m => m.Name == "Abc").Properties[1].Name);
+            Assert.Equal("BaseType", serviceClient.ModelTypes.First(m => m.Name == "BaseType").Name);
+            Assert.Equal("baseType", serviceClient.ModelTypes.First(m => m.Name == "BaseType").SerializedName);
+            Assert.Equal("BooleanProperty", serviceClient.ModelTypes.First(m => m.Name == "BaseType").Properties[0].Name);
+            Assert.Equal("boolean-property", serviceClient.ModelTypes.First(m => m.Name == "BaseType").Properties[0].SerializedName);
+            Assert.Equal("SelfProperty", serviceClient.ModelTypes.First(m => m.Name == "BaseType").Properties[1].Name);
+            Assert.Equal("self-property", serviceClient.ModelTypes.First(m => m.Name == "BaseType").Properties[1].SerializedName);
         }
 
         [Fact]
@@ -127,15 +127,15 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             framework.NormalizeClientModel(serviceClient);
             framework.ResolveNameCollisions(serviceClient, "SampleNs", "SampleNs.Models");
 
-            Assert.Equal("Sample", serviceClient.ModelTypes[0].Name);
-            Assert.Equal("Child", serviceClient.ModelTypes[0].Properties[0].Name);
-            Assert.Equal("Child", serviceClient.ModelTypes[0].Properties[0].Type.Name);
-            Assert.Equal("ChildList", serviceClient.ModelTypes[0].Properties[1].Name);
-            Assert.Equal("IList<Child>", serviceClient.ModelTypes[0].Properties[1].Type.Name);
-            Assert.Equal("ChildDict", serviceClient.ModelTypes[0].Properties[2].Name);
-            Assert.Equal("IDictionary<string, Child>", serviceClient.ModelTypes[0].Properties[2].Type.Name);
-            Assert.Equal("Child", serviceClient.ModelTypes[1].Name);
-            Assert.Equal("string", serviceClient.ModelTypes[1].Properties[0].Type.Name);
+            Assert.Equal("Sample", serviceClient.ModelTypes.First(m => m.Name == "Sample").Name);
+            Assert.Equal("Child", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[0].Name);
+            Assert.Equal("Child", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[0].Type.Name);
+            Assert.Equal("ChildList", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[1].Name);
+            Assert.Equal("IList<Child>", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[1].Type.Name);
+            Assert.Equal("ChildDict", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[2].Name);
+            Assert.Equal("IDictionary<string, Child>", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[2].Type.Name);
+            Assert.Equal("Child", serviceClient.ModelTypes.First(m => m.Name == "Child").Name);
+            Assert.Equal("string", serviceClient.ModelTypes.First(m => m.Name == "Child").Properties[0].Type.Name);
         }
 
         [Fact]
@@ -194,8 +194,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             Assert.Equal("azure always rocks!Client", serviceClient.Name);
             Assert.Equal("azure always rocks!Operations", serviceClient.MethodGroups.First());
             Assert.Equal("azure always rocks!", serviceClient.Methods[0].Name);
-            Assert.Equal("azure always rocks!", serviceClient.ModelTypes[0].Name);
-            Assert.Equal("azure always rocks!Model", serviceClient.ModelTypes[1].Name);
+            Assert.Equal("azure always rocks!", serviceClient.ModelTypes.First(m => m.Name == "azure always rocks!").Name);
         }
 
         [Fact]
@@ -226,8 +225,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             Assert.Equal("azure always rocks!Client", serviceClient.Name);
             Assert.Equal("azure always rocks!Operations", serviceClient.MethodGroups.First());
             Assert.Equal("azure always rocks!", serviceClient.Methods[0].Name);
-            Assert.Equal("azure always rocks!Model", serviceClient.ModelTypes[0].Name);
-            Assert.Equal("azure always rocks!ModelModel", serviceClient.ModelTypes[1].Name);
+            Assert.Equal("azure always rocks!Model", serviceClient.ModelTypes.First(m => m.Name == "azure always rocks!Model").Name);
         }
 
         [Fact]

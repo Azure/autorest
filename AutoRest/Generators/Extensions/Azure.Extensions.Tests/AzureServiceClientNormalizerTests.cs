@@ -27,9 +27,6 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
             var dogProperties = new CompositeType();
             var dog = new CompositeType();
             serviceClient.Methods.Add(getPet);
-            serviceClient.ModelTypes.Add(resource);
-            serviceClient.ModelTypes.Add(dogProperties);
-            serviceClient.ModelTypes.Add(dog);
 
             resource.Name = "resource";
             resource.Extensions[AzureExtensions.AzureResourceExtension] = true;
@@ -80,16 +77,20 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
             });
             getPet.ReturnType = new Response(dog, null);
 
+            serviceClient.ModelTypes.Add(resource);
+            serviceClient.ModelTypes.Add(dogProperties);
+            serviceClient.ModelTypes.Add(dog);
+
             var codeGen = new SampleAzureCodeGenerator(new Settings());
             codeGen.NormalizeClientModel(serviceClient);
             Assert.Equal(3, serviceClient.ModelTypes.Count);
-            Assert.Equal("dog", serviceClient.ModelTypes[1].Name);
-            Assert.Equal(1, serviceClient.ModelTypes[1].Properties.Count);
-            Assert.True(serviceClient.ModelTypes[0].Properties.Any(p => p.Name == "id"));
-            Assert.True(serviceClient.ModelTypes[0].Properties.Any(p => p.Name == "name"));
-            Assert.Equal("pedigree", serviceClient.ModelTypes[1].Properties[0].Name);
+            Assert.Equal("dog", serviceClient.ModelTypes.First(m => m.Name == "dog").Name);
+            Assert.Equal(1, serviceClient.ModelTypes.First(m => m.Name == "dog").Properties.Count);
+            Assert.True(serviceClient.ModelTypes.First(m => m.Name == "resource").Properties.Any(p => p.Name == "id"));
+            Assert.True(serviceClient.ModelTypes.First(m => m.Name == "resource").Properties.Any(p => p.Name == "name"));
+            Assert.Equal("pedigree", serviceClient.ModelTypes.First(m => m.Name == "dog").Properties[0].Name);
             Assert.Equal("dog", serviceClient.Methods[0].ReturnType.Body.Name);
-            Assert.Equal(serviceClient.ModelTypes[1], serviceClient.Methods[0].ReturnType.Body);
+            Assert.Equal(serviceClient.ModelTypes.First(m => m.Name == "dog"), serviceClient.Methods[0].ReturnType.Body);
         }
 
         [Fact]
@@ -107,10 +108,6 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
             var dogProperties = new CompositeType();
             var dog = new CompositeType();
             serviceClient.Methods.Add(getPet);
-            serviceClient.ModelTypes.Add(resource);
-            serviceClient.ModelTypes.Add(dogProperties);
-            serviceClient.ModelTypes.Add(dog);
-
             resource.Name = "resource";
             resource.Extensions[AzureExtensions.AzureResourceExtension] = true;
             resource.Properties.Add(new Property
@@ -172,16 +169,20 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
             });
             getPet.ReturnType = new Response(dog, null);
 
+            serviceClient.ModelTypes.Add(resource);
+            serviceClient.ModelTypes.Add(dogProperties);
+            serviceClient.ModelTypes.Add(dog);
+
             var codeGen = new SampleAzureCodeGenerator(new Settings());
             codeGen.NormalizeClientModel(serviceClient);
             Assert.Equal(3, serviceClient.ModelTypes.Count);
-            Assert.Equal("dog", serviceClient.ModelTypes[1].Name);
-            Assert.Equal(3, serviceClient.ModelTypes[1].Properties.Count);
-            Assert.True(serviceClient.ModelTypes[1].Properties.Any(p => p.Name == "dogName"));
-            Assert.True(serviceClient.ModelTypes[1].Properties.Any(p => p.Name == "dogId"));
-            Assert.True(serviceClient.ModelTypes[1].Properties.Any(p => p.Name == "pedigree"));
+            Assert.Equal("dog", serviceClient.ModelTypes.First(m => m.Name == "dog").Name);
+            Assert.Equal(3, serviceClient.ModelTypes.First(m => m.Name == "dog").Properties.Count);
+            Assert.True(serviceClient.ModelTypes.First(m => m.Name == "dog").Properties.Any(p => p.Name == "dogName"));
+            Assert.True(serviceClient.ModelTypes.First(m => m.Name == "dog").Properties.Any(p => p.Name == "dogId"));
+            Assert.True(serviceClient.ModelTypes.First(m => m.Name == "dog").Properties.Any(p => p.Name == "pedigree"));
             Assert.Equal("dog", serviceClient.Methods[0].ReturnType.Body.Name);
-            Assert.Equal(serviceClient.ModelTypes[1], serviceClient.Methods[0].ReturnType.Body);
+            Assert.Equal(serviceClient.ModelTypes.First(m => m.Name == "dog"), serviceClient.Methods[0].ReturnType.Body);
         }
 
         [Fact]
@@ -241,7 +242,7 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
 
             var codeGen = new SampleAzureCodeGenerator(new Settings());
             codeGen.NormalizeClientModel(serviceClient);
-            Assert.Equal(3, serviceClient.ModelTypes.Count);
+            Assert.Equal(2, serviceClient.ModelTypes.Count);
         }
 
         [Fact]
@@ -260,11 +261,6 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
             var dogProperties = new CompositeType();
             var dog = new CompositeType();
             serviceClient.Methods.Add(getPet);
-            serviceClient.ModelTypes.Add(resource);
-            serviceClient.ModelTypes.Add(dogProperties);
-            serviceClient.ModelTypes.Add(resourceProperties);
-            serviceClient.ModelTypes.Add(dog);
-
             resource.Name = "resource";
             resource.Properties.Add(new Property
             {
@@ -334,15 +330,20 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
             });
             getPet.ReturnType = new Response(dog, null);
 
+            serviceClient.ModelTypes.Add(resource);
+            serviceClient.ModelTypes.Add(dogProperties);
+            serviceClient.ModelTypes.Add(resourceProperties);
+            serviceClient.ModelTypes.Add(dog);
+
             var codeGen = new SampleAzureCodeGenerator(new Settings());
             codeGen.NormalizeClientModel(serviceClient);
             Assert.Equal(3, serviceClient.ModelTypes.Count);
-            Assert.Equal("dog", serviceClient.ModelTypes[1].Name);
-            Assert.Equal(4, serviceClient.ModelTypes[1].Properties.Count);
-            Assert.Equal("dogId", serviceClient.ModelTypes[1].Properties[1].Name);
-            Assert.Equal("dogName", serviceClient.ModelTypes[1].Properties[2].Name);
-            Assert.Equal("pedigree", serviceClient.ModelTypes[1].Properties[0].Name);
-            Assert.Equal("parent", serviceClient.ModelTypes[1].Properties[3].Name);
+            Assert.Equal("dog", serviceClient.ModelTypes.First(m => m.Name == "dog").Name);
+            Assert.Equal(4, serviceClient.ModelTypes.First(m => m.Name == "dog").Properties.Count);
+            Assert.Equal("dogId", serviceClient.ModelTypes.First(m => m.Name == "dog").Properties[1].Name);
+            Assert.Equal("dogName", serviceClient.ModelTypes.First(m => m.Name == "dog").Properties[2].Name);
+            Assert.Equal("pedigree", serviceClient.ModelTypes.First(m => m.Name == "dog").Properties[0].Name);
+            Assert.Equal("parent", serviceClient.ModelTypes.First(m => m.Name == "dog").Properties[3].Name);
         }
 
         [Fact]
