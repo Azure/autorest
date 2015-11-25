@@ -41,7 +41,7 @@
     <Compile Include="AcceptanceTests\head_tests.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AcceptanceTests\lro_happy_path_tests.py">
+    <Compile Include="AcceptanceTests\lro_tests.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AcceptanceTests\paging_tests.py">
