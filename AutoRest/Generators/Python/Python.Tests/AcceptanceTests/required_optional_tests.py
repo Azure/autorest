@@ -72,31 +72,26 @@ class RequiredOptionalTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.client.explicit.post_required_string_header(None)
 
-        # TODO need check body parameter
         with self.assertRaises(ValueError):
             self.client.explicit.post_required_string_parameter(None)
 
-        with self.assertRaises(SerializationError):
+        with self.assertRaises(ValueError):
             self.client.explicit.post_required_string_property(None)
 
-        # TODO, is ValueError or TypeError, should check the None first
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             self.client.explicit.post_required_array_header(None)
 
-        # TODO, need check body parameter
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             self.client.explicit.post_required_array_parameter(None)
 
-        with self.assertRaises(SerializationError):
+        with self.assertRaises(ValueError):
             self.client.explicit.post_required_array_property(None)
 
-        # TODO need check body parameter
         with self.assertRaises(ValueError):
             self.client.explicit.post_required_class_parameter(None)
 
-        cw = ClassWrapper(value = None)
-        with self.assertRaises(SerializationError):
-            self.client.explicit.post_required_class_property(cw)
+        with self.assertRaises(ValueError):
+            self.client.explicit.post_required_class_property(None)
 
         with self.assertRaises(ValueError):
             self.client.implicit.get_required_global_path()
