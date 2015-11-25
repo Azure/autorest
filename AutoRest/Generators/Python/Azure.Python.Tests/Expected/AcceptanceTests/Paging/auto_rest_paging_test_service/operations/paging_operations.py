@@ -9,13 +9,11 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import DeserializationError, HttpOperationError
 from msrestazure.azure_exceptions import CloudError
 import uuid
 
-from ..models import *
+from .. import models
 
 
 class pagingOperations(object):
@@ -83,7 +81,7 @@ class pagingOperations(object):
         response = internal_paging()
 
         # Deserialize response
-        deserialized = ProductPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -149,7 +147,7 @@ class pagingOperations(object):
         response = internal_paging()
 
         # Deserialize response
-        deserialized = ProductPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -212,7 +210,7 @@ class pagingOperations(object):
         response = internal_paging()
 
         # Deserialize response
-        deserialized = ProductPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -276,7 +274,7 @@ class pagingOperations(object):
         response = internal_paging()
 
         # Deserialize response
-        deserialized = ProductPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -338,7 +336,7 @@ class pagingOperations(object):
         response = internal_paging()
 
         # Deserialize response
-        deserialized = ProductPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -400,7 +398,7 @@ class pagingOperations(object):
         response = internal_paging()
 
         # Deserialize response
-        deserialized = ProductPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -462,7 +460,7 @@ class pagingOperations(object):
         response = internal_paging()
 
         # Deserialize response
-        deserialized = ProductPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response

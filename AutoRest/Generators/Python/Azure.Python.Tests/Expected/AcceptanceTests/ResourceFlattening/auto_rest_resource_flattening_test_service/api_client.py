@@ -13,11 +13,8 @@ from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
 from msrest.service_client import async_request
-from msrest.exceptions import DeserializationError, HttpOperationError
-from msrestazure.azure_exceptions import CloudError
 import uuid
 from . import models
-from .models import *
 
 
 class AutoRestResourceFlatteningTestServiceConfiguration(AzureConfiguration):
@@ -97,7 +94,7 @@ class AutoRestResourceFlatteningTestService(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -141,7 +138,7 @@ class AutoRestResourceFlatteningTestService(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         deserialized = None
 
@@ -201,7 +198,7 @@ class AutoRestResourceFlatteningTestService(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -246,7 +243,7 @@ class AutoRestResourceFlatteningTestService(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         deserialized = None
 
@@ -307,7 +304,7 @@ class AutoRestResourceFlatteningTestService(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -352,7 +349,7 @@ class AutoRestResourceFlatteningTestService(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         deserialized = None
 

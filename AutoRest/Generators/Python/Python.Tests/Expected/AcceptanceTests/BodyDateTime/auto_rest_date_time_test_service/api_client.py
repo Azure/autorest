@@ -13,7 +13,6 @@ from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.datetime_model import datetime_model
 from . import models
-from .models import *
 
 
 class AutoRestDateTimeTestServiceConfiguration(Configuration):

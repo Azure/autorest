@@ -12,3 +12,9 @@
 from .paths import paths
 from .queries import queries
 from .path_items import path_items
+
+__all__ = [
+    'paths',
+    'queries',
+    'path_items',
+]

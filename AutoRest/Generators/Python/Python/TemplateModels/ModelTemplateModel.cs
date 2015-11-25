@@ -324,14 +324,14 @@ namespace Microsoft.Rest.Generator.Python
             return string.Format(CultureInfo.InvariantCulture, "'{0}': {{'key': '{1}', 'type': '{2}'}},", property.Name, property.SerializedName, GetPythonSerializationType(property.Type));
         }
 
-        public string InitializeProperty(string objectName, Property property)
+        public static string InitializeProperty(string objectName, Property property)
         {
             if (property == null || property.Type == null)
             {
                 throw new ArgumentNullException("property");
             }
 
-            return property.Type.NullInitializeType(_scope, objectName + "." + property.Name);
+            return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = None", objectName, property.Name);
         }
 
         public bool NeedsPolymorphicConverter

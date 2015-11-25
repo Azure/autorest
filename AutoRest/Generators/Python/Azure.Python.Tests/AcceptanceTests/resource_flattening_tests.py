@@ -1,4 +1,4 @@
-import unittest
+﻿import unittest
 import subprocess
 import sys
 import isodate
@@ -13,6 +13,7 @@ cwd = dirname(realpath(__file__))
 root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrestazure"))
+log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "ResourceFlattening"))
@@ -30,7 +31,7 @@ class ResourceFlatteningTests(unittest.TestCase):
     def setUp(self):
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
         config = AutoRestResourceFlatteningTestServiceConfiguration(cred, base_url="http://localhost:3000")
-        config.log_level = 10
+        config.log_level = log_level
         self.client = AutoRestResourceFlatteningTestService(config)
 
         return super(ResourceFlatteningTests, self).setUp()
@@ -103,9 +104,8 @@ class ResourceFlatteningTests(unittest.TestCase):
                     location = "Building 44",
                     pname = "Product2",
                     flattened_product_type = "Flat")}
-        #TODO: serializer need to handle flatten resources
-        #self.client.put_dictionary(resourceDictionary)
-        pass
+
+        self.client.put_dictionary(resourceDictionary)
 
     def test_flattening_complex_object(self):
 
@@ -185,9 +185,8 @@ class ResourceFlatteningTests(unittest.TestCase):
                     location = "India",
                     pname = "Azure",
                     flattened_product_type = "Flat"))
-        #TODO: serializer need to handle flatten resources
-        #self.client.put_resource_collection(resourceComplexObject)
-        pass
+
+        self.client.put_resource_collection(resourceComplexObject)
 
 if __name__ == '__main__':
     unittest.main()

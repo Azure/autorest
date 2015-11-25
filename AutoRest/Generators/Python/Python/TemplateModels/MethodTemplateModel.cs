@@ -50,7 +50,7 @@ namespace Microsoft.Rest.Generator.Python
 
         public bool IsResponseStream
         {
-            get { return this.ReturnType == PrimaryType.Stream; }
+            get { return this.ReturnType.Body == PrimaryType.Stream; }
         }
 
         /// <summary>
@@ -79,17 +79,19 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
-                if (DefaultResponse == null)
+                IType body = DefaultResponse.Body;
+
+                if (body == null)
                 {
                     return "HttpOperationError(self._deserialize, response)";
                 }
-                else if (DefaultResponse is CompositeType)
+                else if (body is CompositeType)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}(self._deserialize, response)", ((CompositeType)DefaultResponse).GetExceptionDefineType());
+                    return string.Format(CultureInfo.InvariantCulture, "models.{0}(self._deserialize, response)", ((CompositeType)body).GetExceptionDefineType());
                 }
                 else
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "HttpOperationError(self._deserialize, response, '{0}')", DefaultResponse.ToPythonRuntimeTypeString());
+                    return string.Format(CultureInfo.InvariantCulture, "HttpOperationError(self._deserialize, response, '{0}')", body.ToPythonRuntimeTypeString());
                 }
             }
         }
@@ -244,6 +246,7 @@ namespace Microsoft.Rest.Generator.Python
             return builder.ToString();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)")]
         public virtual string ReturnEmptyResponse
         {
             get
@@ -284,9 +287,9 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null)
                 {
-                    return ReturnType.Name;
+                    return ReturnType.Body.Name;
                 }
                 return "null";
             }
@@ -365,7 +368,7 @@ namespace Microsoft.Rest.Generator.Python
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     transformation.OutputParameter.Type is CompositeType)
                 {
-                    builder.AppendLine("{0} = {1}()",
+                    builder.AppendLine("{0} = models.{1}()",
                         transformation.OutputParameter.Name,
                         transformation.OutputParameter.Type.Name);
                 }
@@ -436,7 +439,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
-                if (Responses.Where(r => r.Value != null).Any())
+                if (Responses.Where(r => r.Value.Body != null).Any())
                 {
                     return true;
                 }
@@ -449,24 +452,26 @@ namespace Microsoft.Rest.Generator.Python
             get
             {
                 string result = null;
-                if (ReturnType is EnumType)
+                IType body = ReturnType.Body;
+
+                if (body is EnumType)
                 {
                     string enumValues = "";
-                    for (var i = 0; i <((EnumType)ReturnType).Values.Count; i++)
+                    for (var i = 0; i < ((EnumType)body).Values.Count; i++)
                     {
-                        if (i == ((EnumType)ReturnType).Values.Count - 1)
+                        if (i == ((EnumType)body).Values.Count - 1)
                         {
-                            enumValues += ((EnumType)ReturnType).Values[i].SerializedName;
+                            enumValues += ((EnumType)body).Values[i].SerializedName;
                         }
                         else
                         {
-                            enumValues += ((EnumType)ReturnType).Values[i].SerializedName + ", ";
+                            enumValues += ((EnumType)body).Values[i].SerializedName + ", ";
                         }
                     }
                     result = string.Format(CultureInfo.InvariantCulture,
                         "Possible values for result are - {0}.", enumValues);
                 }
-                else if (ReturnType is CompositeType)
+                else if (body is CompositeType)
                 {
                     result = string.Format(CultureInfo.InvariantCulture,
                         "See {{@link {0}}} for more information.", ReturnTypeString);

@@ -10,3 +10,7 @@
 # --------------------------------------------------------------------------
 
 from .error import Error, ErrorException
+
+__all__ = [
+    'Error', 'ErrorException',
+]

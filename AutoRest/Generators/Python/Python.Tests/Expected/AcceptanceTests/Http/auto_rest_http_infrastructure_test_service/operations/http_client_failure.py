@@ -9,11 +9,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import DeserializationError, HttpOperationError
 
-from ..models import *
+from .. import models
 
 
 class http_client_failure(object):
@@ -64,7 +62,7 @@ class http_client_failure(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -107,7 +105,7 @@ class http_client_failure(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -159,7 +157,7 @@ class http_client_failure(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -211,7 +209,7 @@ class http_client_failure(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -263,7 +261,7 @@ class http_client_failure(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -315,7 +313,7 @@ class http_client_failure(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -358,7 +356,7 @@ class http_client_failure(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -401,7 +399,7 @@ class http_client_failure(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -444,7 +442,7 @@ class http_client_failure(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -496,7 +494,7 @@ class http_client_failure(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -548,7 +546,7 @@ class http_client_failure(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -600,7 +598,7 @@ class http_client_failure(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -652,7 +650,7 @@ class http_client_failure(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -704,7 +702,7 @@ class http_client_failure(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -747,7 +745,7 @@ class http_client_failure(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -790,7 +788,7 @@ class http_client_failure(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -833,7 +831,7 @@ class http_client_failure(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -885,7 +883,7 @@ class http_client_failure(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -937,7 +935,7 @@ class http_client_failure(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -989,7 +987,7 @@ class http_client_failure(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1032,7 +1030,7 @@ class http_client_failure(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1084,7 +1082,7 @@ class http_client_failure(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -1127,7 +1125,7 @@ class http_client_failure(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code < 200 or response.status_code >= 300:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response

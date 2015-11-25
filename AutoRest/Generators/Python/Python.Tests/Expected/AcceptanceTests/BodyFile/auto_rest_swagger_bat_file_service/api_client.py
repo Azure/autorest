@@ -13,7 +13,6 @@ from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.files import files
 from . import models
-from .models import *
 
 
 class AutoRestSwaggerBATFileServiceConfiguration(Configuration):

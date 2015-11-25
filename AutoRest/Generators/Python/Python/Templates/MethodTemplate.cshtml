@@ -35,7 +35,7 @@
         @WrapComment(string.Empty, ":type raw: boolean")
         @WrapComment(string.Empty, ":type callback: Callable[[concurrent.futures.Future], None] or None")
 
-        @WrapComment(string.Empty, string.Format(":rtype: {0} or ({0}, requests.response) or concurrent.futures.Future", MethodTemplateModel.GetDocumentationType(Model.ReturnType)))
+        @WrapComment(string.Empty, string.Format(":rtype: {0} or ({0}, requests.response) or concurrent.futures.Future", MethodTemplateModel.GetDocumentationType(Model.ReturnType.Body)))
 
         """
 @EmptyLine
@@ -111,10 +111,10 @@ else
   {
         @:deserialized = None
 @EmptyLine
-    foreach (var responsePair in Model.Responses.Where(r => r.Value != null))
+    foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null))
     {
         @:if response.status_code == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key):
-            @:deserialized = self._deserialize('@responsePair.Value.ToPythonRuntimeTypeString()', response)
+            @:deserialized = self._deserialize('@responsePair.Value.Body.ToPythonRuntimeTypeString()', response)
     }
 @EmptyLine
         @:if raw:

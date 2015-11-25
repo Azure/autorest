@@ -10,4 +10,11 @@
 # --------------------------------------------------------------------------
 
 from .error import Error, ErrorException
-from .enums import *
+from .enums import (
+    Colors,
+    )
+
+__all__ = [
+    'Error', 'ErrorException',
+    'Colors',
+]

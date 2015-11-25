@@ -19,7 +19,6 @@ from .operations.inheritance import inheritance
 from .operations.polymorphism import polymorphism
 from .operations.polymorphicrecursive import polymorphicrecursive
 from . import models
-from .models import *
 
 
 class AutoRestComplexTestServiceConfiguration(Configuration):

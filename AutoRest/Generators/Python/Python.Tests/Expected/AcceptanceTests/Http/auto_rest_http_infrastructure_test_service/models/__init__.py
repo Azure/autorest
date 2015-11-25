@@ -14,3 +14,11 @@ from .a import A, MyException
 from .b import B
 from .c import C
 from .d import D
+
+__all__ = [
+    'Error', 'ErrorException',
+    'A', 'MyException',
+    'B',
+    'C',
+    'D',
+]

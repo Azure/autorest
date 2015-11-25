@@ -9,6 +9,26 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.exceptions import *
+from msrest.exceptions import (
+    ClientException,
+    SerializationError,
+    DeserializationError,
+    TokenExpiredError,
+    ClientRequestError,
+    AuthenticationError,
+    HttpOperationError,
+)
 
 from .api_client import AutoRestNumberTestService, AutoRestNumberTestServiceConfiguration
+
+__all__ = [
+    'ClientException',
+    'SerializationError',
+    'DeserializationError',
+    'TokenExpiredError',
+    'ClientRequestError',
+    'AuthenticationError',
+    'HttpOperationError',
+    'AutoRestNumberTestService',
+    'AutoRestNumberTestServiceConfiguration'
+]

@@ -13,7 +13,6 @@ from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.byte import byte
 from . import models
-from .models import *
 
 
 class AutoRestSwaggerBATByteServiceConfiguration(Configuration):

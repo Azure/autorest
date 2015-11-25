@@ -14,7 +14,6 @@ from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
 from .operations.parameter_grouping_operations import parameter_groupingOperations
 from . import models
-from .models import *
 
 
 class AutoRestParameterGroupingTestServiceConfiguration(AzureConfiguration):

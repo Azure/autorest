@@ -13,6 +13,7 @@ cwd = dirname(realpath(__file__))
 root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrestazure"))
+log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "AzureSpecials"))
@@ -33,7 +34,7 @@ class XmsRequestClientIdTests(unittest.TestCase):
 
         cred = BasicTokenAuthentication({"access_token":123})
         config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
-        config.log_level = 10
+        config.log_level = log_level
         client = AutoRestAzureSpecialParametersTestClient(config)
 
         custom_headers = {"x-ms-client-request-id": validClientId }
@@ -44,6 +45,20 @@ class XmsRequestClientIdTests(unittest.TestCase):
         result2 = client.xms_client_request_id.param_get(validClientId)
         #TODO: investigate on return default request_id as other language
         #self.assertEqual("123", result2.request_id)
+
+    def test_custom_named_request_id(self):
+
+        validSubscription = '1234-5678-9012-3456'
+        expectedRequestId = '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+
+        cred = BasicTokenAuthentication({"access_token":123})
+        config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
+        config.log_level = log_level
+        client = AutoRestAzureSpecialParametersTestClient(config)
+
+        response = client.header.custom_named_request_id(expectedRequestId)
+        #TODO: investigate on return default request_id as other language
+        #self.assertEqual("123", result1.request_id)
 
 if __name__ == '__main__':
     unittest.main()

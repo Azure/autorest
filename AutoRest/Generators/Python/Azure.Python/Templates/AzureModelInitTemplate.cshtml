@@ -9,27 +9,46 @@
 # --------------------------------------------------------------------------
 @EmptyLine
 @{
-  if (Model.ServiceClient.ModelTypes.Any())
+  foreach (var modelType in Model.ServiceClient.ModelTypes)
   {
-    foreach (var modelType in Model.ServiceClient.ModelTypes)
+    if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
+      (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
     {
-      if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
-        (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
-      {
-        continue;
-      }
+      continue;
+    }
 @:from .@(modelType.Name.ToPythonCase()) import @modelType.Name@Model.GetExceptionNameIfExist(modelType)
-    }
   }
-  if (Model.PagedClasses.Any())
+  foreach (var pagedName in Model.PagedClasses)
   {
-    foreach (var pagedName in Model.PagedClasses)
-    {
 @:from .@pagedName.ToPythonCase() import @pagedName
-    }
   }
   if (Model.ServiceClient.EnumTypes.Any())
   {
-@:from .enums import *
+@:from .enums import (
+    foreach (var enumType in @Model.ServiceClient.EnumTypes)
+    {
+    @:@(enumType.Name),
+    }
+    @:)
   }
+@EmptyLine
+@:__all__ = [
+  foreach (var modelType in Model.ServiceClient.ModelTypes)
+  {
+    if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
+      (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
+    {
+      continue;
+    }
+@:    '@modelType.Name'@Model.GetExceptionNameIfExist(modelType, true),
+  }
+  foreach (var pagedName in Model.PagedClasses)
+  {
+@:    '@pagedName',
+  }
+  foreach (var enumType in @Model.ServiceClient.EnumTypes)
+  {
+@:    '@(enumType.Name)',
+  }
+@:]
 }

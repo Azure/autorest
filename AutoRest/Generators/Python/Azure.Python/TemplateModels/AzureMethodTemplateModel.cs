@@ -42,7 +42,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             {
                 var ext = this.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
 
-                return (string)ext["className"];
+                return "models." + (string)ext["className"];
             }
         }
 
@@ -60,7 +60,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             get
             {
-                if (DefaultResponse != null && DefaultResponse.Name == "CloudError")
+                if (DefaultResponse.Body != null && DefaultResponse.Body.Name == "CloudError")
                 {
                     return "CloudError(self._deserialize, response)";
                 }
@@ -82,6 +82,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)")]
         public override string ReturnEmptyResponse
         {
             get

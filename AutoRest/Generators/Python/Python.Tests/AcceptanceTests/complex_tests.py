@@ -1,4 +1,4 @@
-import unittest
+﻿import unittest
 import subprocess
 import sys
 import isodate
@@ -11,6 +11,7 @@ from os.path import dirname, pardir, join, realpath, sep, pardir
 cwd = dirname(realpath(__file__))
 root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
+log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "BodyComplex"))
@@ -23,10 +24,6 @@ from auto_rest_complex_test_service import (
     AutoRestComplexTestServiceConfiguration)
 
 from auto_rest_complex_test_service.models import *
-    #CMYKColors, Basic, IntWrapper, LongWrapper, FloatWrapper,
-    #DoubleWrapper, BooleanWrapper, StringWrapper, DatetimeWrapper,
-    #DateWrapper, DurationWrapper, Datetimerfc1123Wrapper, ByteWrapper,
-    #ArrayWrapper, DictionaryWrapper, Salmon, Siamese, Cat, Dog, )
 
 class UTC(tzinfo): 
     def utcoffset(self,dt): 
@@ -44,7 +41,7 @@ class ComplexTests(unittest.TestCase):
     def test_complex(self):
 
         config = AutoRestComplexTestServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = 10
+        config.log_level = log_level
         client = AutoRestComplexTestService(config)
 
         # GET basic/valid
@@ -294,9 +291,8 @@ class ComplexTests(unittest.TestCase):
                          picture=bytearray([255, 255, 255, 255, 254]))]
             )
 
-        #TODO: regression bug
-        #with self.assertRaises(SerializationError):
-        #    client.polymorphism.put_valid_missing_required(bad_request)
+        with self.assertRaises(SerializationError):
+            client.polymorphism.put_valid_missing_required(bad_request)
 
         """
         COMPLEX TYPES THAT INVOLVE RECURSIVE REFERENCE

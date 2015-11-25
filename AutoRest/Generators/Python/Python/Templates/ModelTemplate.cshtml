@@ -11,10 +11,13 @@
 @Header("# ")
 # --------------------------------------------------------------------------
 @EmptyLine
-from msrest.serialization import Model
 @if (Model.BaseModelType != null)
 {
 @:from .@Model.BaseModelType.Name.ToPythonCase() import @Model.BaseModelType.Name
+}
+else
+{
+@:from msrest.serialization import Model
 }
 @if (Model.IsException)
 {
@@ -73,7 +76,7 @@ else
 {
   for (int i = 0; i < propertyList.Count; i++) 
   {
-        @:@(Model.InitializeProperty("self", propertyList[i]))
+        @:@(ModelTemplateModel.InitializeProperty("self", propertyList[i]))
   }
 @EmptyLine
 }

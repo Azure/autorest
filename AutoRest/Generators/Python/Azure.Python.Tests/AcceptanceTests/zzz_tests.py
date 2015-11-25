@@ -1,6 +1,7 @@
 import unittest
 import sys
 import datetime
+import os
 from uuid import uuid4
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
@@ -8,6 +9,7 @@ cwd = dirname(realpath(__file__))
 
 sys.path.append(cwd + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + "ClientRuntimes" + sep + "Python" + sep + "msrest")
 sys.path.append(cwd + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + "ClientRuntimes" + sep + "Python" + sep + "msrestazure")
+log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 
@@ -39,7 +41,7 @@ class AcceptanceTests(unittest.TestCase):
 
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
         config = AutoRestParameterGroupingTestServiceConfiguration(cred, base_url="http://localhost:3000")
-        config.log_level = 10
+        config.log_level = log_level
         client = AutoRestParameterGroupingTestService(config)
 
         # Valid required parameters
@@ -52,9 +54,8 @@ class AcceptanceTests(unittest.TestCase):
 
         #Required parameters object is not null, but a required property of the object is
         requiredParameters = ParameterGroupingPostRequiredParameters(body = None, path = pathParameter)
-        #TODO!!! Investigate, we should raise error if body in serial function is None
-        #with self.assertRaises(ValueError):
-        #    client.parameter_grouping.post_required(requiredParameters)
+        with self.assertRaises(ValueError):
+            client.parameter_grouping.post_required(requiredParameters)
         with self.assertRaises(ValueError):
             client.parameter_grouping.post_required(None)
 
@@ -78,12 +79,6 @@ class AcceptanceTests(unittest.TestCase):
         client.parameter_grouping.post_multiple_parameter_groups(firstGroup, secondGroup)
         client.parameter_grouping.post_shared_parameter_group_object(firstGroup)
 
-
-
-
-
-
-
     def test_azure_special_parameters(self):
 
         validSubscription = '1234-5678-9012-3456'
@@ -92,7 +87,7 @@ class AcceptanceTests(unittest.TestCase):
         unencodedQuery = 'value1&q2=value2&q3=value3'
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
         config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
-        config.log_level = 10
+        config.log_level = log_level
         client = AutoRestAzureSpecialParametersTestClient(config)
 
         client.subscription_in_credentials.post_method_global_not_provided_valid()
@@ -117,10 +112,9 @@ class AcceptanceTests(unittest.TestCase):
         client.skip_url_encoding.get_method_path_valid(unencodedPath)
         client.skip_url_encoding.get_path_path_valid(unencodedPath)
         client.skip_url_encoding.get_swagger_path_valid(unencodedPath)
-        #TODO: investigate, how to stop requests automatic encode the query parameter
-        #client.skip_url_encoding.get_method_query_valid(unencodedQuery)
-        #client.skip_url_encoding.get_path_query_valid(unencodedQuery)
-        #client.skip_url_encoding.get_swagger_query_valid(unencodedQuery)
+        client.skip_url_encoding.get_method_query_valid(unencodedQuery)
+        client.skip_url_encoding.get_path_query_valid(unencodedQuery)
+        client.skip_url_encoding.get_swagger_query_valid(unencodedQuery)
         client.skip_url_encoding.get_method_query_null()
         client.skip_url_encoding.get_method_query_null(None)
 
@@ -129,7 +123,7 @@ class AcceptanceTests(unittest.TestCase):
 
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
         config = AutoRestReportServiceForAzureConfiguration(cred, base_url="http://localhost:3000")
-        config.log_level = 10
+        config.log_level = log_level
         client = AutoRestReportServiceForAzure(config)
         report = client.get_report()
         skipped = [k for k, v in report.items() if v == 0]

@@ -1,4 +1,5 @@
 ﻿@using Microsoft.Rest.Generator.Python
+@using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Python.Templates
 @using System.Linq;
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodGroupTemplateModel>
@@ -7,13 +8,15 @@
 @Header("# ")
 # --------------------------------------------------------------------------
 @EmptyLine
-from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import DeserializationError, HttpOperationError
+@if (Model.HasAnyDefaultExceptions)
+{
+@:from msrest.exceptions import HttpOperationError
+}
 @if (Model.HasAnyModel)
 {
 @EmptyLine
-@:from ..models import *
+@:from .. import models
 }
 @EmptyLine
 @EmptyLine
