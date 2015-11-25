@@ -14,6 +14,7 @@ from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
 from .operations.duration_operations import durationOperations
 from . import models
+from .models import *
 
 
 class AutoRestDurationTestServiceConfiguration(AzureConfiguration):

@@ -71,7 +71,7 @@ class lr_os_custom_headerOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -150,7 +150,7 @@ class lr_os_custom_headerOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -214,7 +214,7 @@ class lr_os_custom_headerOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -295,7 +295,7 @@ class lr_os_custom_headerOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -360,7 +360,7 @@ class lr_os_custom_headerOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -431,7 +431,7 @@ class lr_os_custom_headerOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -487,7 +487,7 @@ class lr_os_custom_headerOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -558,7 +558,7 @@ class lr_os_custom_headerOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize(product, 'Product')
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 

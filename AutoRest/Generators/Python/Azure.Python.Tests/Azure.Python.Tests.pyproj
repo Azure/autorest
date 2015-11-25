@@ -12,8 +12,10 @@
     <OutputPath>.</OutputPath>
     <Name>Azure.Python.Tests</Name>
     <RootNamespace>Azure.Python.Tests</RootNamespace>
-    <InterpreterId>{fd1b0a11-f40d-4116-a95c-6838938974f3}</InterpreterId>
-    <InterpreterVersion>2.7</InterpreterVersion>
+    <InterpreterId>
+    </InterpreterId>
+    <InterpreterVersion>
+    </InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,7 +41,7 @@
     <Compile Include="AcceptanceTests\head_tests.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AcceptanceTests\lro_happy_path_tests.py">
+    <Compile Include="AcceptanceTests\lro_tests.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AcceptanceTests\paging_tests.py">
@@ -92,19 +94,6 @@
     <Folder Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\microsoft_azure_test_url\" />
     <Folder Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\microsoft_azure_test_url\models\" />
     <Folder Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\microsoft_azure_test_url\operations\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Interpreter Include="..\..\..\..\..\..\..\Users\antisch\Documents\GitHub\PythonEnv\Python27-64\">
-      <Id>{fd1b0a11-f40d-4116-a95c-6838938974f3}</Id>
-      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
-      <Version>2.7</Version>
-      <Description>Python27-64 (Python 64-bit 2.7)</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <LibraryPath>Lib\</LibraryPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>Amd64</Architecture>
-    </Interpreter>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

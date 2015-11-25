@@ -96,7 +96,7 @@ class array(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        complex_body = ArrayWrapper
+        complex_body = ArrayWrapper()
         if array is not None:
             complex_body.array = array
 
@@ -113,7 +113,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'ArrayWrapper')
+        body_content = self._serialize.body(complex_body, 'ArrayWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -196,7 +196,7 @@ class array(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        complex_body = ArrayWrapper
+        complex_body = ArrayWrapper()
         if array is not None:
             complex_body.array = array
 
@@ -213,7 +213,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'ArrayWrapper')
+        body_content = self._serialize.body(complex_body, 'ArrayWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)

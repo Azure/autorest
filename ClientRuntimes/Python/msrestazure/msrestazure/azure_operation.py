@@ -26,6 +26,11 @@ from msrest.serialization import Deserializer
 from msrestazure.azure_exceptions import CloudError
 from threading import Thread, Event
 import time
+try:
+    from urlparse import urlparse
+
+except ImportError:
+    from urllib.parse import urlparse
 
 class PollingFinished(Exception):
     pass
@@ -75,6 +80,7 @@ class AzureOperationPoller(object):
 
         else:
             raise NoRetryUrl()
+        self._validate_url()
 
     def _check_state(self):
 
@@ -95,10 +101,14 @@ class AzureOperationPoller(object):
             if self._output.provisioning_state.lower() in self.done_states:
                 raise OperationFinished()
 
-
     def _set_implicit_state(self):
         if hasattr(self._output, 'provisioning_state'):
             self._output.provisioning_state = 'Succeeded'
+
+    def _validate_url(self):
+        parsed = urlparse(self._url)
+        if not parsed.scheme or not parsed.netloc:
+            raise ValueError("Invalid URL: {}".format(self._url))
 
     def _delay(self):
         if self._response is None:

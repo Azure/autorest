@@ -25,9 +25,8 @@
 #--------------------------------------------------------------------------
 
 
-from msrest.authentication import Authentication, TokenAuthentication
+from msrest.authentication import Authentication, OAuthTokenAuthentication
 from msrest.exceptions import TokenExpiredError, AuthenticationError, raise_with_traceback
-from .azure_configuration import AzureConfiguration
 
 import requests_oauthlib as oauth
 from oauthlib.oauth2 import BackendApplicationClient, LegacyApplicationClient
@@ -87,19 +86,28 @@ class AADMixin(object):
         - State validation
         - Token caching and retrieval
     """
+    _auth_endpoint = "//login.microsoftonline.com"
+    _token_uri = "/oauth2/token"
+    _auth_uri = "/oauth2/authorize"
+    _tenant = "common"
+    _resource = 'https://management.core.windows.net/'
+    _keyring = "AzureAAD"
 
-    def _configure(self, config):
+    def _configure(self, **kwargs):
         """
         Configure authentication endpoint.
         """
-        if not config:
-            raise ValueError("Credentials require an AzureConfiguration object.")
-
-        self.auth_uri = _https(config.auth_endpoint, config.tenant, config.auth_uri)
-        self.token_uri = _https(config.auth_endpoint, config.tenant, config.token_uri)
-        self.verify = config.connection.verify
-        self.cred_store = config.keyring
+        tenant = kwargs.get('tenant', self._tenant)
         
+        self.auth_uri = kwargs.get('auth_uri', _https(
+            self._auth_endpoint, tenant, self._auth_uri))
+
+        self.token_uri = kwargs.get('token_uri', _https(
+            self._auth_endpoint, tenant, self._token_uri))
+
+        self.verify = kwargs.get('verify', True)
+        self.cred_store = kwargs.get('keyring', self._keyring)
+        self.resource = kwargs.get('resource', self._resource)
         self.state = state = oauth.oauth2_session.generate_token()
 
     def _check_state(self, response):
@@ -141,19 +149,19 @@ class AADMixin(object):
             raise_with_traceback(KeyError, "Unable to clear password.")
 
 
-class UserPassCredentials(TokenAuthentication, AADMixin):
+class UserPassCredentials(OAuthTokenAuthentication, AADMixin):
     
 
-    def __init__(self, config, client_id, username, password, 
-                 secret=None):
+    def __init__(self, client_id, username, password, secret=None, **kwargs):
 
         super(UserPassCredentials, self).__init__(client_id, None)
-        self._configure(config)
+        self._configure(**kwargs)
 
         self.username = username
         self.password = password
         self.secret = secret
         self.client = LegacyApplicationClient(self.id)
+        self.get_token()
 
     def get_token(self):
 
@@ -173,26 +181,18 @@ class UserPassCredentials(TokenAuthentication, AADMixin):
             raise
 
         self.token = token
-        return token
 
 
-class ServicePrincipalCredentials(TokenAuthentication, AADMixin):
+class ServicePrincipalCredentials(OAuthTokenAuthentication, AADMixin):
     
-    def __init__(self, config, client_id, secret, resource,
-                 tenant=None):
-
-        if not config:
-            config = AzureConfiguration()
-
-        if tenant:
-            config.tenant = tenant
+    def __init__(self, client_id, secret, **kwargs):
 
         super(ServicePrincipalCredentials, self).__init__(client_id, None)
-        self._configure(config)
+        self._configure(**kwargs)
 
         self.secret = secret
-        self.resource = resource
         self.client = BackendApplicationClient(self.id)
+        self.get_token()
 
     def get_token(self):
 
@@ -212,21 +212,19 @@ class ServicePrincipalCredentials(TokenAuthentication, AADMixin):
             raise
 
         self.token = token
-        return token
 
 
-
-class InteractiveCredentials(TokenAuthentication, AADMixin):
+class InteractiveCredentials(OAuthTokenAuthentication, AADMixin):
     
-    def __init__(self, config, client_id, resource, redirect):
+    def __init__(self, client_id, redirect, **kwargs):
         """
         Interactive/Web AAD authentication
         """
         super(InteractiveCredentials, self).__init__(client_id, None)
-        self._configure(config)
+        self._configure(**kwargs)
 
-        self.resource = resource
         self.redirect = redirect
+        self.get_token()
 
     def _setup_session(self):
         return oauth.OAuth2Session(self.id,
@@ -278,7 +276,6 @@ class InteractiveCredentials(TokenAuthentication, AADMixin):
             raise_with_traceback(AuthenticationError, "", err)
 
         self.token = token
-        return token
 
     def signed_session(self):
         countdown = float(self.token['expires_at']) - time.time()

@@ -150,7 +150,7 @@ class http_success(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 
@@ -200,7 +200,7 @@ class http_success(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 
@@ -250,7 +250,7 @@ class http_success(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 
@@ -300,7 +300,7 @@ class http_success(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 
@@ -350,7 +350,7 @@ class http_success(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 
@@ -400,7 +400,7 @@ class http_success(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 
@@ -450,7 +450,7 @@ class http_success(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 
@@ -500,7 +500,7 @@ class http_success(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 
@@ -550,7 +550,7 @@ class http_success(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 
@@ -600,7 +600,7 @@ class http_success(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 
@@ -691,7 +691,7 @@ class http_success(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 
@@ -741,7 +741,7 @@ class http_success(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 
@@ -791,7 +791,7 @@ class http_success(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 
@@ -841,7 +841,7 @@ class http_success(object):
 
         # Construct body
         if boolean_value is not None:
-            body_content = self._serialize(boolean_value, 'bool')
+            body_content = self._serialize.body(boolean_value, 'bool')
         else:
             body_content = None
 

@@ -38,7 +38,7 @@ except ImportError:
 
 from msrest import ServiceClient
 
-from msrest.authentication import TokenAuthentication
+from msrest.authentication import OAuthTokenAuthentication
 from msrest.pipeline import (
     ClientHTTPAdapter,
     ClientPipelineHook,
@@ -53,7 +53,7 @@ class TestServiceClient(unittest.TestCase):
         self.cfg = mock.create_autospec(Configuration)
         self.cfg.log_name = "test_log_name"
         self.cfg.base_url = "https://my_endpoint.com"
-        self.creds = mock.create_autospec(TokenAuthentication)
+        self.creds = mock.create_autospec(OAuthTokenAuthentication)
         return super(TestServiceClient, self).setUp()
 
     def test_client_request(self):

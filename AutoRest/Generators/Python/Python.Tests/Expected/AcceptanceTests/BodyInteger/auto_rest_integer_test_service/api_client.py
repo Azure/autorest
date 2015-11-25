@@ -13,6 +13,7 @@ from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.int_model import int_model
 from . import models
+from .models import *
 
 
 class AutoRestIntegerTestServiceConfiguration(Configuration):

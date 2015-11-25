@@ -96,7 +96,7 @@ class dictionary(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        complex_body = DictionaryWrapper
+        complex_body = DictionaryWrapper()
         if default_program is not None:
             complex_body.default_program = default_program
 
@@ -113,7 +113,7 @@ class dictionary(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'DictionaryWrapper')
+        body_content = self._serialize.body(complex_body, 'DictionaryWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -196,7 +196,7 @@ class dictionary(object):
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
-        complex_body = DictionaryWrapper
+        complex_body = DictionaryWrapper()
         if default_program is not None:
             complex_body.default_program = default_program
 
@@ -213,7 +213,7 @@ class dictionary(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'DictionaryWrapper')
+        body_content = self._serialize.body(complex_body, 'DictionaryWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)

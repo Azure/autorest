@@ -199,7 +199,7 @@ class implicit(object):
 
         # Construct body
         if body_parameter is not None:
-            body_content = self._serialize(body_parameter, 'str')
+            body_content = self._serialize.body(body_parameter, 'str')
         else:
             body_content = None
 

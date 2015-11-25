@@ -17,6 +17,7 @@ from .operations.lro_retrys_operations import lro_retrysOperations
 from .operations.lrosa_ds_operations import lrosa_dsOperations
 from .operations.lr_os_custom_header_operations import lr_os_custom_headerOperations
 from . import models
+from .models import *
 
 
 class AutoRestLongRunningOperationTestServiceConfiguration(AzureConfiguration):

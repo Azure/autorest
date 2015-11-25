@@ -14,6 +14,7 @@ from msrest import Configuration, Serializer, Deserializer
 from .operations.implicit import implicit
 from .operations.explicit import explicit
 from . import models
+from .models import *
 
 
 class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):

@@ -58,6 +58,21 @@ class LroTests(unittest.TestCase):
                 self.assertIsNone(error.code)
                 self.assertIsNotNone(error.message)
 
+    def assertRaisesWithServerErrorMessage(self, msg, func, *args, **kwargs):
+
+        try:
+            func(*args, **kwargs)
+            self.fail("CloudError wasn't raised as expected")
+
+        except CloudError as err:
+            self.assertIn(msg, err.response.content)
+            self.assertIsNotNone(err.response)
+            error = err.error
+            self.assertIsNotNone(error)
+            if isinstance(error, CloudException):
+                self.assertIsNone(error.code)
+                self.assertIsNotNone(error.message)
+
     def test_lro_happy_paths(self):
 
         product = Product(location="West US")
@@ -140,7 +155,7 @@ class LroTests(unittest.TestCase):
         #self.client.lr_os.delete_provisioning202_deletingcanceled200().result()
         #self.client.lr_os.delete_provisioning202_deleting_failed200().result()
 
-        #self.client.lr_os.post202_no_retry204(product).result()
+        self.client.lr_os.post202_no_retry204(product).result()
 
         #self.assertRaisesWithMessage("Long running operation failed with status 'Failed'",
         #    self.client.lr_os.post_async_retry_failed().result)
@@ -183,21 +198,22 @@ class LroTests(unittest.TestCase):
 
         #process = self.client.lr_os_custom_header.post202_retry200(product, custom_headers)
         #self.assertIsNotNone(process.result())
+        pass
 
     def test_lro_sad_paths(self):
 
         product = Product(location="West US")
 
-        #self.assertRaisesWithMessage("Expected",
-        #    self.client.lrosa_ds.put_non_retry400(product).result)
+        self.assertRaisesWithServerErrorMessage("Expected",
+            self.client.lrosa_ds.put_non_retry400(product).result)
 
-        #self.assertRaisesWithMessage("Error from the server",
-        #    self.client.lrosa_ds.put_non_retry201_creating400(product).result)
+        self.assertRaisesWithServerErrorMessage("Error from the server",
+            self.client.lrosa_ds.put_non_retry201_creating400(product).result)
 
         #self.assertRaisesWithMessage("Long running operation failed with status 'BadRequest'.",
         #    self.client.lrosa_ds.put_async_relative_retry400(product).result)
 
-        #self.assertRaisesWithMessage("Expected",
+        #self.assertRaisesWithServerErrorMessage("Expected",
         #    self.client.lrosa_ds.delete_non_retry400(product).result)
 
         #self.assertRaisesWithMessage("Long running operation failed with status 'BadRequest'.",
@@ -206,8 +222,8 @@ class LroTests(unittest.TestCase):
         #self.assertRaisesWithMessage("Long running operation failed with status 'BadRequest'.",
         #    self.client.lrosa_ds.delete_async_relative_retry400(product).result)
 
-        #self.assertRaisesWithMessage("Expected bad request message",
-        #    self.client.lrosa_ds.post_non_retry400(product).result)
+        self.assertRaisesWithServerErrorMessage("Expected bad request message",
+            self.client.lrosa_ds.post_non_retry400(product).result)
 
         #self.assertRaisesWithMessage("Long running operation failed with status 'BadRequest'.",
         #    self.client.lrosa_ds.post202_non_retry400(product).result)
@@ -230,20 +246,20 @@ class LroTests(unittest.TestCase):
         #with self.assertRaises(CloudError):
         #    self.client.lrosa_ds.put_async_relative_retry_invalid_json_polling(product).result()
 
-        #with self.assertRaises(ValueError):
-        #    self.client.lrosa_ds.put_async_relative_retry_invalid_header(product).result()
+        with self.assertRaises(ValueError):
+            self.client.lrosa_ds.put_async_relative_retry_invalid_header(product).result()
 
-        #with self.assertRaises(ValueError):
-        #    self.client.lrosa_ds.delete202_retry_invalid_header().result()
+        with self.assertRaises(ValueError):
+            self.client.lrosa_ds.delete202_retry_invalid_header().result()
 
-        #with self.assertRaises(ValueError):
-        #    self.client.lrosa_ds.delete_async_relative_retry_invalid_header().result()
+        with self.assertRaises(ValueError):
+            self.client.lrosa_ds.delete_async_relative_retry_invalid_header().result()
 
-        #with self.assertRaises(ValueError):
-        #    self.client.lrosa_ds.post202_retry_invalid_header().result()
+        with self.assertRaises(ValueError):
+            self.client.lrosa_ds.post202_retry_invalid_header().result()
 
-        #with self.assertRaises(ValueError):
-        #    self.client.lrosa_ds.post_async_relative_retry_invalid_header().result()
+        with self.assertRaises(ValueError):
+            self.client.lrosa_ds.post_async_relative_retry_invalid_header().result()
 
 
         #with self.assertRaises(CloudError):
@@ -263,6 +279,7 @@ class LroTests(unittest.TestCase):
         #self.assertRaisesWithMessage("The response from long running operation does not contain a body.",
         #    self.client.lrosa_ds.post_async_relative_retry_no_payload().result)
 
+        pass
 
 if __name__ == '__main__':
     unittest.main()

@@ -14,6 +14,7 @@ from msrest import Configuration, Serializer, Deserializer
 from msrest.service_client import async_request
 from msrest.exceptions import DeserializationError, HttpOperationError
 from . import models
+from .models import *
 
 
 class AutoRestValidationTestConfiguration(Configuration):
@@ -151,7 +152,7 @@ class AutoRestValidationTest(object):
 
         # Construct body
         if body is not None:
-            body_content = self._serialize(body, 'Product')
+            body_content = self._serialize.body(body, 'Product')
         else:
             body_content = None
 

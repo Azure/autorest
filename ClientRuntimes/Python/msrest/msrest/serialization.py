@@ -28,6 +28,7 @@ import json
 import isodate
 import datetime
 import chardet
+import re
 
 try:
     from urllib import quote
@@ -139,6 +140,10 @@ class Model(object):
 class Serializer(object):
 
     basic_types = ['str', 'int', 'bool', 'float']
+    days = {0:"Mon", 1:"Tue", 2:"Wed", 3:"Thu", 4:"Fri", 5:"Sat", 6:"Sun"}
+    months = {1:"Jan", 2:"Feb", 3:"Mar", 4:"Apr", 5:"May", 6:"Jun",
+              7:"Jul", 8:"Aug", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"}
+
 
     def __init__(self):
 
@@ -154,7 +159,7 @@ class Serializer(object):
             '{}': self.serialize_dict
             }
 
-    def __call__(self, target_obj, data_type=None, **kwargs):
+    def _serialize(self, target_obj, data_type=None, **kwargs):
 
         if target_obj is None:
             return None
@@ -165,7 +170,7 @@ class Serializer(object):
 
         if data_type:
             return self.serialize_data(
-                target_obj, data_type, **kwargs) #required=True
+                target_obj, data_type, required=True, **kwargs)
 
         if not hasattr(target_obj, "_attribute_map"):
             data_type = type(target_obj).__name__
@@ -194,7 +199,10 @@ class Serializer(object):
                 except ValueError:
                     continue
 
-        except (AttributeError, KeyError, TypeError) as err:
+        except AttributeError as err:
+            raise_with_traceback(ValueError, str(err), err)
+
+        except (KeyError, TypeError) as err:
             msg = "Attribute {0} in object {1} cannot be serialized.".format(
                 attr_name, class_name)
 
@@ -219,7 +227,24 @@ class Serializer(object):
         except AttributeError:
             pass  # TargetObj has no _subtype_map so we don't need to classify
 
+    def body(self, data, data_type, **kwargs):
+        if data is None:
+            raise ValueError("Request body must not be None")
+
+        try:
+            output = self._serialize(data, data_type, **kwargs)
+
+        except DeserializationError as err:
+            raise TypeError("Invalid {} object: {}".format(data_type, err))
+
+        else:
+            return output
+
     def url(self, name, data, data_type, **kwargs):
+
+        if data is None:
+            raise ValueError("{} must not be None.".format(name))
+
         try:
             output = self.serialize_data(data, data_type, **kwargs)
 
@@ -231,9 +256,6 @@ class Serializer(object):
             else:
                 output = quote(str(output), safe='')
 
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
-
         except DeserializationError:
             raise TypeError("{} must be type {}.".format(name, data_type))
 
@@ -241,6 +263,9 @@ class Serializer(object):
             return output
 
     def query(self, name, data, data_type, **kwargs):
+        if data is None:
+            raise ValueError("{} must not be None.".format(name))
+
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]
@@ -249,9 +274,6 @@ class Serializer(object):
 
             if data_type == 'bool':
                 output = json.dumps(output)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
 
         except DeserializationError:
             raise TypeError("{} must be type {}.".format(name, data_type))
@@ -260,6 +282,9 @@ class Serializer(object):
             return output
 
     def header(self, name, data, data_type, **kwargs):
+        if data is None:
+            raise ValueError("{} must not be None.".format(name))
+
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]
@@ -268,9 +293,6 @@ class Serializer(object):
 
             if data_type == 'bool':
                 output = json.dumps(output)
-
-        except ValueError:
-            raise ValueError("{} must not be None.".format(name))
 
         except DeserializationError:
             raise TypeError("{} must be type {}.".format(name, data_type))
@@ -284,7 +306,7 @@ class Serializer(object):
             raise AttributeError(
                 "Object missing required attribute")
 
-        if data is None: #in [None, ""]:
+        if data is None:
             raise ValueError("No value for given attribute")
 
         if data_type is None:
@@ -313,7 +335,7 @@ class Serializer(object):
             raise_with_traceback(SerializationError, msg, err)
 
         else:
-            return self(data, **kwargs)
+            return self._serialize(data, **kwargs)
 
     def serialize_basic(self, data, data_type):
 
@@ -325,22 +347,31 @@ class Serializer(object):
 
     def serialize_iter(self, data, iter_type, required, div=None, **kwargs):
 
-        if div:
-            return div.join([self.serialize_data(
-            i, iter_type, required, **kwargs) for i in data])
+        serialized = []
+        for d in data:
+            try:
+                serialized.append(
+                    self.serialize_data(d, iter_type, required, **kwargs))
+            except ValueError:
+                serialized.append(None)
 
-        return [self.serialize_data(
-            i, iter_type, required, **kwargs) for i in data]
+        if div:
+            return div.join(serialized)
+
+        return serialized
 
     def serialize_dict(self, attr, dict_type, required, **kwargs):
 
-        #return {str(x): self.serialize_data(
-        #    attr[x], dict_type, required, **kwargs) for x in attr}
-        r = {}
-        for x,t in attr.items():
-            kwargs["char"] = ""
-            r[str(x)] = self.serialize_data(t, dict_type, required, **kwargs)
-        return r
+        serialized = {}
+        for key, value in attr.items():
+            try:
+                serialized[str(key)] = self.serialize_data(
+                    value, dict_type, required, **kwargs)
+
+            except ValueError:
+                serialized[str(key)] = None
+
+        return serialized
 
     @staticmethod
     def serialize_bytearray(attr, **kwargs):
@@ -374,12 +405,10 @@ class Serializer(object):
         except AttributeError:
             raise TypeError("RFC1123 object must be valid Datetime object.")
 
-        days = {0:"Mon", 1:"Tue", 2:"Wed", 3:"Thu", 4:"Fri", 5:"Sat", 6:"Sun"}
-        months = {1:"Jan", 2:"Feb", 3:"Mar", 4:"Apr", 5:"May", 6:"Jun", 7:"Jul", 8:"Aug", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"}
-        
         date_str = "{}, {:02} {} {:04} {:02}:{:02}:{:02} GMT".format(
-            days[utc.tm_wday], utc.tm_mday, months[utc.tm_mon], utc.tm_year, utc.tm_hour,
-            utc.tm_min, utc.tm_sec)
+            Serializer.days[utc.tm_wday], utc.tm_mday,
+            Serializer.months[utc.tm_mon], utc.tm_year,
+            utc.tm_hour, utc.tm_min, utc.tm_sec)
         
         return date_str
 
@@ -424,6 +453,9 @@ class DeserializedGenerator(object):
 class Deserializer(object):
 
     basic_types = ['str', 'int', 'bool', 'float']
+    valid_date = re.compile(
+            r'\d{4}[-]\d{2}[-]\d{2}T\d{2}:\d{2}:\d{2}'
+            '\.?\d*Z?[-+]?[\d{2}]?:?[\d{2}]?')
 
     def __init__(self, classes={}):
 
@@ -694,6 +726,9 @@ class Deserializer(object):
     def deserialize_iso(attr):
         try:
             attr = attr.upper()
+            match = Deserializer.valid_date.match(attr)
+            if not match:
+                raise ValueError("Invalid datetime string: {}".format(attr))
 
             check_decimal = attr.split('.')
             if len(check_decimal) > 1:
