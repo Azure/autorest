@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodydate.models.Error;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import org.joda.time.LocalDate;
 import retrofit.Call;
 import retrofit.Response;
@@ -36,8 +37,9 @@ public class DateOperationsImpl implements DateOperations {
     /**
      * Get null date value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<LocalDate> getNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -74,8 +76,9 @@ public class DateOperationsImpl implements DateOperations {
     /**
      * Get invalid date value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<LocalDate> getInvalidDate() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getInvalidDate();
@@ -112,8 +115,9 @@ public class DateOperationsImpl implements DateOperations {
     /**
      * Get overflow date value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<LocalDate> getOverflowDate() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getOverflowDate();
@@ -150,8 +154,9 @@ public class DateOperationsImpl implements DateOperations {
     /**
      * Get underflow date value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<LocalDate> getUnderflowDate() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getUnderflowDate();
@@ -189,12 +194,13 @@ public class DateOperationsImpl implements DateOperations {
      * Put max date value 9999-12-31
      *
      * @param dateBody the LocalDate value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putMaxDate(LocalDate dateBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putMaxDate(LocalDate dateBody) throws ServiceException, IOException, IllegalArgumentException {
         if (dateBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putMaxDate(dateBody);
         return putMaxDateDelegate(call.execute(), null);
@@ -208,8 +214,7 @@ public class DateOperationsImpl implements DateOperations {
      */
     public Call<ResponseBody> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
         if (dateBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter dateBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putMaxDate(dateBody);
@@ -236,8 +241,9 @@ public class DateOperationsImpl implements DateOperations {
     /**
      * Get max date value 9999-12-31
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<LocalDate> getMaxDate() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getMaxDate();
@@ -275,12 +281,13 @@ public class DateOperationsImpl implements DateOperations {
      * Put min date value 0000-01-01
      *
      * @param dateBody the LocalDate value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putMinDate(LocalDate dateBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putMinDate(LocalDate dateBody) throws ServiceException, IOException, IllegalArgumentException {
         if (dateBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putMinDate(dateBody);
         return putMinDateDelegate(call.execute(), null);
@@ -294,8 +301,7 @@ public class DateOperationsImpl implements DateOperations {
      */
     public Call<ResponseBody> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
         if (dateBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter dateBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putMinDate(dateBody);
@@ -322,8 +328,9 @@ public class DateOperationsImpl implements DateOperations {
     /**
      * Get min date value 0000-01-01
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<LocalDate> getMinDate() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getMinDate();

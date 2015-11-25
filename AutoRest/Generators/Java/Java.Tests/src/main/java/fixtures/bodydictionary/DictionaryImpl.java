@@ -22,6 +22,7 @@ import com.squareup.okhttp.ResponseBody;
 import fixtures.bodydictionary.models.Error;
 import fixtures.bodydictionary.models.Widget;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import java.util.List;
 import java.util.Map;
 import org.joda.time.DateTime;
@@ -43,8 +44,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get null dictionary value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Integer>> getNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -81,8 +83,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get empty dictionary value {}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Integer>> getEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getEmpty();
@@ -120,12 +123,13 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value empty {}
      *
      * @param arrayBody the Map&lt;String, String&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putEmpty(Map<String, String> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putEmpty(Map<String, String> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putEmpty(arrayBody);
@@ -140,8 +144,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -169,8 +172,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get Dictionary with null value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, String>> getNullValue() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNullValue();
@@ -207,8 +211,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get Dictionary with null key
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, String>> getNullKey() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNullKey();
@@ -245,8 +250,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get Dictionary with key as empty string
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, String>> getEmptyStringKey() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getEmptyStringKey();
@@ -283,8 +289,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get invalid Dictionary value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, String>> getInvalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getInvalid();
@@ -321,8 +328,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Boolean>> getBooleanTfft() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBooleanTfft();
@@ -360,12 +368,13 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putBooleanTfft(Map<String, Boolean> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putBooleanTfft(Map<String, Boolean> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putBooleanTfft(arrayBody);
@@ -380,8 +389,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -409,8 +417,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Boolean>> getBooleanInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBooleanInvalidNull();
@@ -447,8 +456,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Boolean>> getBooleanInvalidString() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBooleanInvalidString();
@@ -485,8 +495,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Integer>> getIntegerValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getIntegerValid();
@@ -524,12 +535,13 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
      *
      * @param arrayBody the Map&lt;String, Integer&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putIntegerValid(Map<String, Integer> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putIntegerValid(Map<String, Integer> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putIntegerValid(arrayBody);
@@ -544,8 +556,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -573,8 +584,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Integer>> getIntInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getIntInvalidNull();
@@ -611,8 +623,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Integer>> getIntInvalidString() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getIntInvalidString();
@@ -649,8 +662,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Long>> getLongValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getLongValid();
@@ -688,12 +702,13 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
      *
      * @param arrayBody the Map&lt;String, Long&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putLongValid(Map<String, Long> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putLongValid(Map<String, Long> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putLongValid(arrayBody);
@@ -708,8 +723,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -737,8 +751,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Long>> getLongInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getLongInvalidNull();
@@ -775,8 +790,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Long>> getLongInvalidString() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getLongInvalidString();
@@ -813,8 +829,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Double>> getFloatValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getFloatValid();
@@ -852,12 +869,13 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putFloatValid(Map<String, Double> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putFloatValid(Map<String, Double> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putFloatValid(arrayBody);
@@ -872,8 +890,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -901,8 +918,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Double>> getFloatInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getFloatInvalidNull();
@@ -939,8 +957,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Double>> getFloatInvalidString() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getFloatInvalidString();
@@ -977,8 +996,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Double>> getDoubleValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDoubleValid();
@@ -1016,12 +1036,13 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDoubleValid(Map<String, Double> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDoubleValid(Map<String, Double> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDoubleValid(arrayBody);
@@ -1036,8 +1057,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -1065,8 +1085,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Double>> getDoubleInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDoubleInvalidNull();
@@ -1103,8 +1124,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Double>> getDoubleInvalidString() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDoubleInvalidString();
@@ -1141,8 +1163,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, String>> getStringValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getStringValid();
@@ -1180,12 +1203,13 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
      *
      * @param arrayBody the Map&lt;String, String&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putStringValid(Map<String, String> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putStringValid(Map<String, String> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putStringValid(arrayBody);
@@ -1200,8 +1224,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -1229,8 +1252,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, String>> getStringWithNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getStringWithNull();
@@ -1267,8 +1291,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, String>> getStringWithInvalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getStringWithInvalid();
@@ -1305,8 +1330,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, LocalDate>> getDateValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateValid();
@@ -1344,12 +1370,13 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDateValid(Map<String, LocalDate> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDateValid(Map<String, LocalDate> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDateValid(arrayBody);
@@ -1364,8 +1391,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -1393,8 +1419,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, LocalDate>> getDateInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateInvalidNull();
@@ -1431,8 +1458,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, LocalDate>> getDateInvalidChars() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateInvalidChars();
@@ -1469,8 +1497,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, DateTime>> getDateTimeValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateTimeValid();
@@ -1508,12 +1537,13 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDateTimeValid(Map<String, DateTime> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDateTimeValid(Map<String, DateTime> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDateTimeValid(arrayBody);
@@ -1528,8 +1558,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -1557,8 +1586,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, DateTime>> getDateTimeInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateTimeInvalidNull();
@@ -1595,8 +1625,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, DateTime>> getDateTimeInvalidChars() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateTimeInvalidChars();
@@ -1633,8 +1664,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTimeRfc1123&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, DateTimeRfc1123>> getDateTimeRfc1123Valid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
@@ -1672,12 +1704,13 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
      *
      * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDateTimeRfc1123Valid(Map<String, DateTimeRfc1123> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDateTimeRfc1123Valid(Map<String, DateTimeRfc1123> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
@@ -1692,8 +1725,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putDateTimeRfc1123ValidAsync(Map<String, DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -1721,8 +1753,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Period&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Period>> getDurationValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDurationValid();
@@ -1760,12 +1793,13 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
      *
      * @param arrayBody the Map&lt;String, Period&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDurationValid(Map<String, Period> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDurationValid(Map<String, Period> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDurationValid(arrayBody);
@@ -1780,8 +1814,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putDurationValidAsync(Map<String, Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -1809,8 +1842,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, byte[]&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, byte[]>> getByteValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getByteValid();
@@ -1848,12 +1882,13 @@ public class DictionaryImpl implements Dictionary {
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putByteValid(Map<String, byte[]> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putByteValid(Map<String, byte[]> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putByteValid(arrayBody);
@@ -1868,8 +1903,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -1897,8 +1931,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, byte[]&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, byte[]>> getByteInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getByteInvalidNull();
@@ -1935,8 +1970,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get dictionary of complex type null value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Widget>> getComplexNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getComplexNull();
@@ -1973,8 +2009,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get empty dictionary of complex type {}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Widget>> getComplexEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getComplexEmpty();
@@ -2011,8 +2048,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Widget>> getComplexItemNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getComplexItemNull();
@@ -2049,8 +2087,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Widget>> getComplexItemEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getComplexItemEmpty();
@@ -2087,8 +2126,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Widget>> getComplexValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getComplexValid();
@@ -2126,12 +2166,13 @@ public class DictionaryImpl implements Dictionary {
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putComplexValid(Map<String, Widget> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putComplexValid(Map<String, Widget> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putComplexValid(arrayBody);
@@ -2146,8 +2187,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -2175,8 +2215,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get a null array
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, List<String>>> getArrayNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getArrayNull();
@@ -2213,8 +2254,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an empty dictionary {}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, List<String>>> getArrayEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getArrayEmpty();
@@ -2251,8 +2293,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, List<String>>> getArrayItemNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getArrayItemNull();
@@ -2289,8 +2332,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, List<String>>> getArrayItemEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getArrayItemEmpty();
@@ -2327,8 +2371,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, List<String>>> getArrayValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getArrayValid();
@@ -2366,12 +2411,13 @@ public class DictionaryImpl implements Dictionary {
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putArrayValid(Map<String, List<String>> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putArrayValid(Map<String, List<String>> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putArrayValid(arrayBody);
@@ -2386,8 +2432,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -2415,8 +2460,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an dictionaries of dictionaries with value null
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Map<String, String>>> getDictionaryNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDictionaryNull();
@@ -2453,8 +2499,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Map<String, String>>> getDictionaryEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDictionaryEmpty();
@@ -2491,8 +2538,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDictionaryItemNull();
@@ -2529,8 +2577,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDictionaryItemEmpty();
@@ -2567,8 +2616,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Map<String, String>>> getDictionaryValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDictionaryValid();
@@ -2606,12 +2656,13 @@ public class DictionaryImpl implements Dictionary {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDictionaryValid(arrayBody);
@@ -2626,8 +2677,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);

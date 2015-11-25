@@ -20,6 +20,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.Error;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -37,12 +38,13 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> postMethodLocalValid(String subscriptionId) throws ServiceException, IOException {
+    public ServiceResponse<Void> postMethodLocalValid(String subscriptionId) throws ServiceException, IOException, IllegalArgumentException {
         if (subscriptionId == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.getAcceptLanguage());
         return postMethodLocalValidDelegate(call.execute(), null);
@@ -56,8 +58,7 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
      */
     public Call<ResponseBody> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.getAcceptLanguage());
@@ -85,12 +86,13 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
      * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> postMethodLocalNull(String subscriptionId) throws ServiceException, IOException {
+    public ServiceResponse<Void> postMethodLocalNull(String subscriptionId) throws ServiceException, IOException, IllegalArgumentException {
         if (subscriptionId == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.getAcceptLanguage());
         return postMethodLocalNullDelegate(call.execute(), null);
@@ -104,8 +106,7 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
      */
     public Call<ResponseBody> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.getAcceptLanguage());
@@ -133,12 +134,13 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> postPathLocalValid(String subscriptionId) throws ServiceException, IOException {
+    public ServiceResponse<Void> postPathLocalValid(String subscriptionId) throws ServiceException, IOException, IllegalArgumentException {
         if (subscriptionId == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.getAcceptLanguage());
         return postPathLocalValidDelegate(call.execute(), null);
@@ -152,8 +154,7 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
      */
     public Call<ResponseBody> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.getAcceptLanguage());
@@ -181,12 +182,13 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> postSwaggerLocalValid(String subscriptionId) throws ServiceException, IOException {
+    public ServiceResponse<Void> postSwaggerLocalValid(String subscriptionId) throws ServiceException, IOException, IllegalArgumentException {
         if (subscriptionId == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.getAcceptLanguage());
         return postSwaggerLocalValidDelegate(call.execute(), null);
@@ -200,8 +202,7 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
      */
     public Call<ResponseBody> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.getAcceptLanguage());

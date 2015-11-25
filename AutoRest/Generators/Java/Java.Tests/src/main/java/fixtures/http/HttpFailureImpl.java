@@ -35,8 +35,9 @@ public class HttpFailureImpl implements HttpFailure {
     /**
      * Get empty error form server
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Boolean> getEmptyError() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getEmptyError();

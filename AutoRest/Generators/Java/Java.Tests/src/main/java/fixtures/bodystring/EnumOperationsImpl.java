@@ -20,6 +20,7 @@ import com.squareup.okhttp.ResponseBody;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.Error;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -36,8 +37,9 @@ public class EnumOperationsImpl implements EnumOperations {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Colors object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Colors> getNotExpandable() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNotExpandable();
@@ -75,12 +77,13 @@ public class EnumOperationsImpl implements EnumOperations {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
      *
      * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putNotExpandable(Colors stringBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putNotExpandable(Colors stringBody) throws ServiceException, IOException, IllegalArgumentException {
         if (stringBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putNotExpandable(stringBody);
         return putNotExpandableDelegate(call.execute(), null);
@@ -94,8 +97,7 @@ public class EnumOperationsImpl implements EnumOperations {
      */
     public Call<ResponseBody> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter stringBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putNotExpandable(stringBody);

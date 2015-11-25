@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodynumber.models.Error;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import java.math.BigDecimal;
 import retrofit.Call;
 import retrofit.Response;
@@ -36,8 +37,9 @@ public class NumberImpl implements Number {
     /**
      * Get null Number value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Double> getNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -74,8 +76,9 @@ public class NumberImpl implements Number {
     /**
      * Get invalid float Number value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Double> getInvalidFloat() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getInvalidFloat();
@@ -112,8 +115,9 @@ public class NumberImpl implements Number {
     /**
      * Get invalid double Number value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Double> getInvalidDouble() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getInvalidDouble();
@@ -150,8 +154,9 @@ public class NumberImpl implements Number {
     /**
      * Get invalid decimal Number value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<BigDecimal> getInvalidDecimal() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getInvalidDecimal();
@@ -189,7 +194,8 @@ public class NumberImpl implements Number {
      * Put big float value 3.402823e+20
      *
      * @param numberBody the double value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> putBigFloat(double numberBody) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putBigFloat(numberBody);
@@ -227,8 +233,9 @@ public class NumberImpl implements Number {
     /**
      * Get big float value 3.402823e+20
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Double> getBigFloat() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBigFloat();
@@ -266,7 +273,8 @@ public class NumberImpl implements Number {
      * Put big double value 2.5976931e+101
      *
      * @param numberBody the double value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> putBigDouble(double numberBody) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putBigDouble(numberBody);
@@ -304,8 +312,9 @@ public class NumberImpl implements Number {
     /**
      * Get big double value 2.5976931e+101
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Double> getBigDouble() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBigDouble();
@@ -343,7 +352,8 @@ public class NumberImpl implements Number {
      * Put big double value 99999999.99
      *
      * @param numberBody the double value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> putBigDoublePositiveDecimal(double numberBody) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putBigDoublePositiveDecimal(numberBody);
@@ -381,8 +391,9 @@ public class NumberImpl implements Number {
     /**
      * Get big double value 99999999.99
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Double> getBigDoublePositiveDecimal() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBigDoublePositiveDecimal();
@@ -420,7 +431,8 @@ public class NumberImpl implements Number {
      * Put big double value -99999999.99
      *
      * @param numberBody the double value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> putBigDoubleNegativeDecimal(double numberBody) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putBigDoubleNegativeDecimal(numberBody);
@@ -458,8 +470,9 @@ public class NumberImpl implements Number {
     /**
      * Get big double value -99999999.99
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Double> getBigDoubleNegativeDecimal() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBigDoubleNegativeDecimal();
@@ -497,12 +510,13 @@ public class NumberImpl implements Number {
      * Put big decimal value 2.5976931e+101
      *
      * @param numberBody the BigDecimal value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putBigDecimal(BigDecimal numberBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putBigDecimal(BigDecimal numberBody) throws ServiceException, IOException, IllegalArgumentException {
         if (numberBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putBigDecimal(numberBody);
         return putBigDecimalDelegate(call.execute(), null);
@@ -516,8 +530,7 @@ public class NumberImpl implements Number {
      */
     public Call<ResponseBody> putBigDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
         if (numberBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter numberBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putBigDecimal(numberBody);
@@ -544,8 +557,9 @@ public class NumberImpl implements Number {
     /**
      * Get big decimal value 2.5976931e+101
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<BigDecimal> getBigDecimal() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBigDecimal();
@@ -583,12 +597,13 @@ public class NumberImpl implements Number {
      * Put big decimal value 99999999.99
      *
      * @param numberBody the BigDecimal value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putBigDecimalPositiveDecimal(BigDecimal numberBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putBigDecimalPositiveDecimal(BigDecimal numberBody) throws ServiceException, IOException, IllegalArgumentException {
         if (numberBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putBigDecimalPositiveDecimal(numberBody);
         return putBigDecimalPositiveDecimalDelegate(call.execute(), null);
@@ -602,8 +617,7 @@ public class NumberImpl implements Number {
      */
     public Call<ResponseBody> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
         if (numberBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter numberBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putBigDecimalPositiveDecimal(numberBody);
@@ -630,8 +644,9 @@ public class NumberImpl implements Number {
     /**
      * Get big decimal value 99999999.99
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<BigDecimal> getBigDecimalPositiveDecimal() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBigDecimalPositiveDecimal();
@@ -669,12 +684,13 @@ public class NumberImpl implements Number {
      * Put big decimal value -99999999.99
      *
      * @param numberBody the BigDecimal value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putBigDecimalNegativeDecimal(BigDecimal numberBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putBigDecimalNegativeDecimal(BigDecimal numberBody) throws ServiceException, IOException, IllegalArgumentException {
         if (numberBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putBigDecimalNegativeDecimal(numberBody);
         return putBigDecimalNegativeDecimalDelegate(call.execute(), null);
@@ -688,8 +704,7 @@ public class NumberImpl implements Number {
      */
     public Call<ResponseBody> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
         if (numberBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter numberBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putBigDecimalNegativeDecimal(numberBody);
@@ -716,8 +731,9 @@ public class NumberImpl implements Number {
     /**
      * Get big decimal value -99999999.99
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<BigDecimal> getBigDecimalNegativeDecimal() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBigDecimalNegativeDecimal();
@@ -755,7 +771,8 @@ public class NumberImpl implements Number {
      * Put small float value 3.402823e-20
      *
      * @param numberBody the double value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> putSmallFloat(double numberBody) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putSmallFloat(numberBody);
@@ -793,8 +810,9 @@ public class NumberImpl implements Number {
     /**
      * Get big double value 3.402823e-20
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Double> getSmallFloat() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getSmallFloat();
@@ -832,7 +850,8 @@ public class NumberImpl implements Number {
      * Put small double value 2.5976931e-101
      *
      * @param numberBody the double value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> putSmallDouble(double numberBody) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putSmallDouble(numberBody);
@@ -870,8 +889,9 @@ public class NumberImpl implements Number {
     /**
      * Get big double value 2.5976931e-101
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Double> getSmallDouble() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getSmallDouble();
@@ -909,12 +929,13 @@ public class NumberImpl implements Number {
      * Put small decimal value 2.5976931e-101
      *
      * @param numberBody the BigDecimal value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putSmallDecimal(BigDecimal numberBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putSmallDecimal(BigDecimal numberBody) throws ServiceException, IOException, IllegalArgumentException {
         if (numberBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putSmallDecimal(numberBody);
         return putSmallDecimalDelegate(call.execute(), null);
@@ -928,8 +949,7 @@ public class NumberImpl implements Number {
      */
     public Call<ResponseBody> putSmallDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
         if (numberBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter numberBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putSmallDecimal(numberBody);
@@ -956,8 +976,9 @@ public class NumberImpl implements Number {
     /**
      * Get small decimal value 2.5976931e-101
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<BigDecimal> getSmallDecimal() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getSmallDecimal();

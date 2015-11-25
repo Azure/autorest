@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import org.joda.time.Period;
 import retrofit.Call;
 import retrofit.http.Body;
@@ -67,9 +68,10 @@ public interface Duration {
      * @param durationBody the Period value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putPositiveDuration(Period durationBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putPositiveDuration(Period durationBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put a positive duration value

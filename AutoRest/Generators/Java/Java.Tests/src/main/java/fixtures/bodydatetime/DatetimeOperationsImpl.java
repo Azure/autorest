@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodydatetime.models.Error;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import org.joda.time.DateTime;
 import retrofit.Call;
 import retrofit.Response;
@@ -36,8 +37,9 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     /**
      * Get null datetime value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTime> getNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -74,8 +76,9 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     /**
      * Get invalid datetime value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTime> getInvalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getInvalid();
@@ -112,8 +115,9 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     /**
      * Get overflow datetime value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTime> getOverflow() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getOverflow();
@@ -150,8 +154,9 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     /**
      * Get underflow datetime value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTime> getUnderflow() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getUnderflow();
@@ -189,12 +194,13 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * Put max datetime value 9999-12-31T23:59:59.9999999Z
      *
      * @param datetimeBody the DateTime value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putUtcMaxDateTime(DateTime datetimeBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putUtcMaxDateTime(DateTime datetimeBody) throws ServiceException, IOException, IllegalArgumentException {
         if (datetimeBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBody);
         return putUtcMaxDateTimeDelegate(call.execute(), null);
@@ -208,8 +214,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public Call<ResponseBody> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBody);
@@ -236,8 +241,9 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTime> getUtcLowercaseMaxDateTime() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getUtcLowercaseMaxDateTime();
@@ -274,8 +280,9 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTime> getUtcUppercaseMaxDateTime() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getUtcUppercaseMaxDateTime();
@@ -313,12 +320,13 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00
      *
      * @param datetimeBody the DateTime value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) throws ServiceException, IOException, IllegalArgumentException {
         if (datetimeBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putLocalPositiveOffsetMaxDateTime(datetimeBody);
         return putLocalPositiveOffsetMaxDateTimeDelegate(call.execute(), null);
@@ -332,8 +340,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public Call<ResponseBody> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putLocalPositiveOffsetMaxDateTime(datetimeBody);
@@ -360,8 +367,9 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTime> getLocalPositiveOffsetLowercaseMaxDateTime() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getLocalPositiveOffsetLowercaseMaxDateTime();
@@ -398,8 +406,9 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTime> getLocalPositiveOffsetUppercaseMaxDateTime() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getLocalPositiveOffsetUppercaseMaxDateTime();
@@ -437,12 +446,13 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00
      *
      * @param datetimeBody the DateTime value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) throws ServiceException, IOException, IllegalArgumentException {
         if (datetimeBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putLocalNegativeOffsetMaxDateTime(datetimeBody);
         return putLocalNegativeOffsetMaxDateTimeDelegate(call.execute(), null);
@@ -456,8 +466,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public Call<ResponseBody> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putLocalNegativeOffsetMaxDateTime(datetimeBody);
@@ -484,8 +493,9 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTime> getLocalNegativeOffsetUppercaseMaxDateTime() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getLocalNegativeOffsetUppercaseMaxDateTime();
@@ -522,8 +532,9 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTime> getLocalNegativeOffsetLowercaseMaxDateTime() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getLocalNegativeOffsetLowercaseMaxDateTime();
@@ -561,12 +572,13 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * Put min datetime value 0001-01-01T00:00:00Z
      *
      * @param datetimeBody the DateTime value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putUtcMinDateTime(DateTime datetimeBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putUtcMinDateTime(DateTime datetimeBody) throws ServiceException, IOException, IllegalArgumentException {
         if (datetimeBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBody);
         return putUtcMinDateTimeDelegate(call.execute(), null);
@@ -580,8 +592,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public Call<ResponseBody> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBody);
@@ -608,8 +619,9 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     /**
      * Get min datetime value 0001-01-01T00:00:00Z
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTime> getUtcMinDateTime() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getUtcMinDateTime();
@@ -647,12 +659,13 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * Put min datetime value 0001-01-01T00:00:00+14:00
      *
      * @param datetimeBody the DateTime value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) throws ServiceException, IOException, IllegalArgumentException {
         if (datetimeBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putLocalPositiveOffsetMinDateTime(datetimeBody);
         return putLocalPositiveOffsetMinDateTimeDelegate(call.execute(), null);
@@ -666,8 +679,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public Call<ResponseBody> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putLocalPositiveOffsetMinDateTime(datetimeBody);
@@ -694,8 +706,9 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTime> getLocalPositiveOffsetMinDateTime() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getLocalPositiveOffsetMinDateTime();
@@ -733,12 +746,13 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      * Put min datetime value 0001-01-01T00:00:00-14:00
      *
      * @param datetimeBody the DateTime value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) throws ServiceException, IOException, IllegalArgumentException {
         if (datetimeBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putLocalNegativeOffsetMinDateTime(datetimeBody);
         return putLocalNegativeOffsetMinDateTimeDelegate(call.execute(), null);
@@ -752,8 +766,7 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public Call<ResponseBody> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putLocalNegativeOffsetMinDateTime(datetimeBody);
@@ -780,8 +793,9 @@ public class DatetimeOperationsImpl implements DatetimeOperations {
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTime> getLocalNegativeOffsetMinDateTime() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getLocalNegativeOffsetMinDateTime();

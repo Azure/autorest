@@ -20,8 +20,8 @@ public class ImplicitTests {
         try {
             client.getImplicit().getRequiredPath(null);
             fail();
-        } catch (ServiceException ex) {
-            Assert.assertTrue(ex.getCause().getMessage().contains("Parameter pathParameter is required"));
+        } catch (IllegalArgumentException ex) {
+            Assert.assertTrue(ex.getMessage().contains("Parameter pathParameter is required"));
         }
     }
 
@@ -50,7 +50,7 @@ public class ImplicitTests {
         try {
             client.getImplicit().getRequiredGlobalPath();
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("this.client.getRequiredGlobalPath() is required"));
         }
     }
@@ -60,7 +60,7 @@ public class ImplicitTests {
         try {
             client.getImplicit().getRequiredGlobalQuery();
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("this.client.getRequiredGlobalQuery() is required"));
         }
     }

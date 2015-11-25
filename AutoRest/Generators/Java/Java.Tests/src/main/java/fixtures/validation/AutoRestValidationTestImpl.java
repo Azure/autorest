@@ -23,6 +23,7 @@ import com.squareup.okhttp.ResponseBody;
 import fixtures.validation.models.Error;
 import fixtures.validation.models.Product;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 
@@ -122,21 +123,20 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Product> validationOfMethodParameters(String resourceGroupName, int id) throws ServiceException, IOException {
+    public ServiceResponse<Product> validationOfMethodParameters(String resourceGroupName, int id) throws ServiceException, IOException, IllegalArgumentException {
         if (this.getSubscriptionId() == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null.");
         }
         if (resourceGroupName == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
         if (this.getApiVersion() == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.validationOfMethodParameters(this.getSubscriptionId(), resourceGroupName, id, this.getApiVersion());
         return validationOfMethodParametersDelegate(call.execute(), null);
@@ -151,18 +151,15 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      */
     public Call<ResponseBody> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
         if (this.getSubscriptionId() == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
             return null;
         }
         if (resourceGroupName == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
             return null;
         }
         if (this.getApiVersion() == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.validationOfMethodParameters(this.getSubscriptionId(), resourceGroupName, id, this.getApiVersion());
@@ -192,21 +189,20 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Product object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Product> validationOfBody(String resourceGroupName, int id, Product body) throws ServiceException, IOException {
+    public ServiceResponse<Product> validationOfBody(String resourceGroupName, int id, Product body) throws ServiceException, IOException, IllegalArgumentException {
         if (this.getSubscriptionId() == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null.");
         }
         if (resourceGroupName == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
         if (this.getApiVersion() == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
         return validationOfBodyDelegate(call.execute(), null);
@@ -222,18 +218,15 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      */
     public Call<ResponseBody> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
         if (this.getSubscriptionId() == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
             return null;
         }
         if (resourceGroupName == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
             return null;
         }
         if (this.getApiVersion() == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());

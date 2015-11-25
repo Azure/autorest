@@ -17,6 +17,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodyarray.models.Product;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import java.util.List;
 import java.util.Map;
 import org.joda.time.DateTime;
@@ -278,9 +279,10 @@ public interface Array {
      * @param arrayBody the List&lt;String&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putEmpty(List<String> arrayBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putEmpty(List<String> arrayBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Set array value empty []
@@ -314,9 +316,10 @@ public interface Array {
      * @param arrayBody the List&lt;Boolean&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBooleanTfft(List<Boolean> arrayBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putBooleanTfft(List<Boolean> arrayBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Set array value empty [true, false, false, true]
@@ -384,9 +387,10 @@ public interface Array {
      * @param arrayBody the List&lt;Integer&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putIntegerValid(List<Integer> arrayBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putIntegerValid(List<Integer> arrayBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Set array value empty [1, -1, 3, 300]
@@ -454,9 +458,10 @@ public interface Array {
      * @param arrayBody the List&lt;Long&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putLongValid(List<Long> arrayBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putLongValid(List<Long> arrayBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Set array value empty [1, -1, 3, 300]
@@ -524,9 +529,10 @@ public interface Array {
      * @param arrayBody the List&lt;Double&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putFloatValid(List<Double> arrayBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putFloatValid(List<Double> arrayBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Set array value [0, -0.01, 1.2e20]
@@ -594,9 +600,10 @@ public interface Array {
      * @param arrayBody the List&lt;Double&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDoubleValid(List<Double> arrayBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putDoubleValid(List<Double> arrayBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Set array value [0, -0.01, 1.2e20]
@@ -664,9 +671,10 @@ public interface Array {
      * @param arrayBody the List&lt;String&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putStringValid(List<String> arrayBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putStringValid(List<String> arrayBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3']
@@ -734,9 +742,10 @@ public interface Array {
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateValid(List<LocalDate> arrayBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putDateValid(List<LocalDate> arrayBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
@@ -804,9 +813,10 @@ public interface Array {
      * @param arrayBody the List&lt;DateTime&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateTimeValid(List<DateTime> arrayBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putDateTimeValid(List<DateTime> arrayBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
@@ -874,9 +884,10 @@ public interface Array {
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateTimeRfc1123Valid(List<DateTimeRfc1123> arrayBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putDateTimeRfc1123Valid(List<DateTimeRfc1123> arrayBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
@@ -910,9 +921,10 @@ public interface Array {
      * @param arrayBody the List&lt;Period&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDurationValid(List<Period> arrayBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putDurationValid(List<Period> arrayBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
@@ -946,9 +958,10 @@ public interface Array {
      * @param arrayBody the List&lt;byte[]&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putByteValid(List<byte[]> arrayBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putByteValid(List<byte[]> arrayBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
@@ -1067,9 +1080,10 @@ public interface Array {
      * @param arrayBody the List&lt;Product&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putComplexValid(List<Product> arrayBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putComplexValid(List<Product> arrayBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
@@ -1171,9 +1185,10 @@ public interface Array {
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putArrayValid(List<List<String>> arrayBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putArrayValid(List<List<String>> arrayBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
@@ -1275,9 +1290,10 @@ public interface Array {
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDictionaryValid(List<Map<String, String>> arrayBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putDictionaryValid(List<Map<String, String>> arrayBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]

@@ -17,6 +17,7 @@ import com.squareup.okhttp.ResponseBody;
 import fixtures.paging.models.PageImpl;
 import fixtures.paging.models.Product;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
@@ -202,9 +203,10 @@ public interface PagingOperations {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getSinglePagesNext(String nextPageLink) throws ServiceException, IOException;
+    ServiceResponse<PageImpl<Product>> getSinglePagesNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * A paging operation that finishes on the first call without a nextlink
@@ -222,9 +224,10 @@ public interface PagingOperations {
      * @param clientRequestId the String value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePagesNext(String nextPageLink, String clientRequestId) throws ServiceException, IOException;
+    ServiceResponse<PageImpl<Product>> getMultiplePagesNext(String nextPageLink, String clientRequestId) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages
@@ -242,9 +245,10 @@ public interface PagingOperations {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNext(String nextPageLink) throws ServiceException, IOException;
+    ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
@@ -261,9 +265,10 @@ public interface PagingOperations {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNext(String nextPageLink) throws ServiceException, IOException;
+    ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
@@ -280,9 +285,10 @@ public interface PagingOperations {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getSinglePagesFailureNext(String nextPageLink) throws ServiceException, IOException;
+    ServiceResponse<PageImpl<Product>> getSinglePagesFailureNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * A paging operation that receives a 400 on the first call
@@ -299,9 +305,10 @@ public interface PagingOperations {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNext(String nextPageLink) throws ServiceException, IOException;
+    ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * A paging operation that receives a 400 on the second call
@@ -318,9 +325,10 @@ public interface PagingOperations {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNext(String nextPageLink) throws ServiceException, IOException;
+    ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * A paging operation that receives an invalid nextLink

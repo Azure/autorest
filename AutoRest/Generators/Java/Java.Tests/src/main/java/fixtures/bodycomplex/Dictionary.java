@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -73,9 +74,10 @@ public interface Dictionary {
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putValid(DictionaryWrapper complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putValid(DictionaryWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with dictionary property
@@ -109,9 +111,10 @@ public interface Dictionary {
      * @param complexBody Please put an empty dictionary
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putEmpty(DictionaryWrapper complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putEmpty(DictionaryWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with dictionary property which is empty

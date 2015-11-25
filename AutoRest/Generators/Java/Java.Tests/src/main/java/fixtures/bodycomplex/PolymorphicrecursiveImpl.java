@@ -21,6 +21,7 @@ import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Error;
 import fixtures.bodycomplex.models.Fish;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -37,8 +38,9 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
     /**
      * Get complex types that are polymorphic and have recursive references
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Fish object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Fish> getValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getValid();
@@ -128,12 +130,13 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
              }
          ]
      }
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putValid(Fish complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putValid(Fish complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody);
@@ -200,8 +203,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
      */
     public Call<ResponseBody> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);

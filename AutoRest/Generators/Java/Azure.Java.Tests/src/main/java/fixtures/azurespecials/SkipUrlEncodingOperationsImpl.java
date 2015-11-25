@@ -20,6 +20,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.Error;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -37,12 +38,13 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
      * Get method with unencoded path parameter with value 'path1/path2/path3'
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> getMethodPathValid(String unencodedPathParam) throws ServiceException, IOException {
+    public ServiceResponse<Void> getMethodPathValid(String unencodedPathParam) throws ServiceException, IOException, IllegalArgumentException {
         if (unencodedPathParam == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         return getMethodPathValidDelegate(call.execute(), null);
@@ -56,8 +58,7 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
      */
     public Call<ResponseBody> getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
         if (unencodedPathParam == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.getAcceptLanguage());
@@ -85,12 +86,13 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
      * Get method with unencoded path parameter with value 'path1/path2/path3'
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> getPathPathValid(String unencodedPathParam) throws ServiceException, IOException {
+    public ServiceResponse<Void> getPathPathValid(String unencodedPathParam) throws ServiceException, IOException, IllegalArgumentException {
         if (unencodedPathParam == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         return getPathPathValidDelegate(call.execute(), null);
@@ -104,8 +106,7 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
      */
     public Call<ResponseBody> getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
         if (unencodedPathParam == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.getAcceptLanguage());
@@ -133,12 +134,13 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
      * Get method with unencoded path parameter with value 'path1/path2/path3'
      *
      * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> getSwaggerPathValid(String unencodedPathParam) throws ServiceException, IOException {
+    public ServiceResponse<Void> getSwaggerPathValid(String unencodedPathParam) throws ServiceException, IOException, IllegalArgumentException {
         if (unencodedPathParam == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         return getSwaggerPathValidDelegate(call.execute(), null);
@@ -152,8 +154,7 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
      */
     public Call<ResponseBody> getSwaggerPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
         if (unencodedPathParam == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
@@ -181,12 +182,13 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> getMethodQueryValid(String q1) throws ServiceException, IOException {
+    public ServiceResponse<Void> getMethodQueryValid(String q1) throws ServiceException, IOException, IllegalArgumentException {
         if (q1 == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter q1 is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.getAcceptLanguage());
         return getMethodQueryValidDelegate(call.execute(), null);
@@ -200,8 +202,7 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
      */
     public Call<ResponseBody> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
         if (q1 == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter q1 is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.getAcceptLanguage());
@@ -229,7 +230,8 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
      * Get method with unencoded query parameter with value null
      *
      * @param q1 Unencoded query parameter with value null
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> getMethodQueryNull(String q1) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
@@ -268,12 +270,13 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> getPathQueryValid(String q1) throws ServiceException, IOException {
+    public ServiceResponse<Void> getPathQueryValid(String q1) throws ServiceException, IOException, IllegalArgumentException {
         if (q1 == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter q1 is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.getAcceptLanguage());
         return getPathQueryValidDelegate(call.execute(), null);
@@ -287,8 +290,7 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
      */
     public Call<ResponseBody> getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
         if (q1 == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter q1 is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.getAcceptLanguage());
@@ -316,7 +318,8 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      *
      * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter include: 'value1&amp;q2=value2&amp;q3=value3'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> getSwaggerQueryValid(String q1) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());

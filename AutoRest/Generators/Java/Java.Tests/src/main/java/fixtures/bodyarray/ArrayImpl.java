@@ -22,6 +22,7 @@ import com.squareup.okhttp.ResponseBody;
 import fixtures.bodyarray.models.Error;
 import fixtures.bodyarray.models.Product;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import java.util.List;
 import java.util.Map;
 import org.joda.time.DateTime;
@@ -43,8 +44,9 @@ public class ArrayImpl implements Array {
     /**
      * Get null array value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Integer>> getNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -81,8 +83,9 @@ public class ArrayImpl implements Array {
     /**
      * Get invalid array [1, 2, 3
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Integer>> getInvalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getInvalid();
@@ -119,8 +122,9 @@ public class ArrayImpl implements Array {
     /**
      * Get empty array value []
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Integer>> getEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getEmpty();
@@ -158,12 +162,13 @@ public class ArrayImpl implements Array {
      * Set array value empty []
      *
      * @param arrayBody the List&lt;String&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putEmpty(List<String> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putEmpty(List<String> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putEmpty(arrayBody);
@@ -178,8 +183,7 @@ public class ArrayImpl implements Array {
      */
     public Call<ResponseBody> putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -207,8 +211,9 @@ public class ArrayImpl implements Array {
     /**
      * Get boolean array value [true, false, false, true]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Boolean&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Boolean>> getBooleanTfft() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBooleanTfft();
@@ -246,12 +251,13 @@ public class ArrayImpl implements Array {
      * Set array value empty [true, false, false, true]
      *
      * @param arrayBody the List&lt;Boolean&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putBooleanTfft(List<Boolean> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putBooleanTfft(List<Boolean> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putBooleanTfft(arrayBody);
@@ -266,8 +272,7 @@ public class ArrayImpl implements Array {
      */
     public Call<ResponseBody> putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -295,8 +300,9 @@ public class ArrayImpl implements Array {
     /**
      * Get boolean array value [true, null, false]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Boolean&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Boolean>> getBooleanInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBooleanInvalidNull();
@@ -333,8 +339,9 @@ public class ArrayImpl implements Array {
     /**
      * Get boolean array value [true, 'boolean', false]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Boolean&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Boolean>> getBooleanInvalidString() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBooleanInvalidString();
@@ -371,8 +378,9 @@ public class ArrayImpl implements Array {
     /**
      * Get integer array value [1, -1, 3, 300]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Integer>> getIntegerValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getIntegerValid();
@@ -410,12 +418,13 @@ public class ArrayImpl implements Array {
      * Set array value empty [1, -1, 3, 300]
      *
      * @param arrayBody the List&lt;Integer&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putIntegerValid(List<Integer> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putIntegerValid(List<Integer> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putIntegerValid(arrayBody);
@@ -430,8 +439,7 @@ public class ArrayImpl implements Array {
      */
     public Call<ResponseBody> putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -459,8 +467,9 @@ public class ArrayImpl implements Array {
     /**
      * Get integer array value [1, null, 0]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Integer>> getIntInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getIntInvalidNull();
@@ -497,8 +506,9 @@ public class ArrayImpl implements Array {
     /**
      * Get integer array value [1, 'integer', 0]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Integer>> getIntInvalidString() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getIntInvalidString();
@@ -535,8 +545,9 @@ public class ArrayImpl implements Array {
     /**
      * Get integer array value [1, -1, 3, 300]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Long&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Long>> getLongValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getLongValid();
@@ -574,12 +585,13 @@ public class ArrayImpl implements Array {
      * Set array value empty [1, -1, 3, 300]
      *
      * @param arrayBody the List&lt;Long&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putLongValid(List<Long> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putLongValid(List<Long> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putLongValid(arrayBody);
@@ -594,8 +606,7 @@ public class ArrayImpl implements Array {
      */
     public Call<ResponseBody> putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -623,8 +634,9 @@ public class ArrayImpl implements Array {
     /**
      * Get long array value [1, null, 0]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Long&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Long>> getLongInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getLongInvalidNull();
@@ -661,8 +673,9 @@ public class ArrayImpl implements Array {
     /**
      * Get long array value [1, 'integer', 0]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Long&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Long>> getLongInvalidString() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getLongInvalidString();
@@ -699,8 +712,9 @@ public class ArrayImpl implements Array {
     /**
      * Get float array value [0, -0.01, 1.2e20]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Double>> getFloatValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getFloatValid();
@@ -738,12 +752,13 @@ public class ArrayImpl implements Array {
      * Set array value [0, -0.01, 1.2e20]
      *
      * @param arrayBody the List&lt;Double&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putFloatValid(List<Double> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putFloatValid(List<Double> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putFloatValid(arrayBody);
@@ -758,8 +773,7 @@ public class ArrayImpl implements Array {
      */
     public Call<ResponseBody> putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -787,8 +801,9 @@ public class ArrayImpl implements Array {
     /**
      * Get float array value [0.0, null, -1.2e20]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Double>> getFloatInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getFloatInvalidNull();
@@ -825,8 +840,9 @@ public class ArrayImpl implements Array {
     /**
      * Get boolean array value [1.0, 'number', 0.0]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Double>> getFloatInvalidString() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getFloatInvalidString();
@@ -863,8 +879,9 @@ public class ArrayImpl implements Array {
     /**
      * Get float array value [0, -0.01, 1.2e20]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Double>> getDoubleValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDoubleValid();
@@ -902,12 +919,13 @@ public class ArrayImpl implements Array {
      * Set array value [0, -0.01, 1.2e20]
      *
      * @param arrayBody the List&lt;Double&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDoubleValid(List<Double> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDoubleValid(List<Double> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDoubleValid(arrayBody);
@@ -922,8 +940,7 @@ public class ArrayImpl implements Array {
      */
     public Call<ResponseBody> putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -951,8 +968,9 @@ public class ArrayImpl implements Array {
     /**
      * Get float array value [0.0, null, -1.2e20]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Double>> getDoubleInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDoubleInvalidNull();
@@ -989,8 +1007,9 @@ public class ArrayImpl implements Array {
     /**
      * Get boolean array value [1.0, 'number', 0.0]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Double>> getDoubleInvalidString() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDoubleInvalidString();
@@ -1027,8 +1046,9 @@ public class ArrayImpl implements Array {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<String>> getStringValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getStringValid();
@@ -1066,12 +1086,13 @@ public class ArrayImpl implements Array {
      * Set array value ['foo1', 'foo2', 'foo3']
      *
      * @param arrayBody the List&lt;String&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putStringValid(List<String> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putStringValid(List<String> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putStringValid(arrayBody);
@@ -1086,8 +1107,7 @@ public class ArrayImpl implements Array {
      */
     public Call<ResponseBody> putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -1115,8 +1135,9 @@ public class ArrayImpl implements Array {
     /**
      * Get string array value ['foo', null, 'foo2']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<String>> getStringWithNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getStringWithNull();
@@ -1153,8 +1174,9 @@ public class ArrayImpl implements Array {
     /**
      * Get string array value ['foo', 123, 'foo2']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<String>> getStringWithInvalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getStringWithInvalid();
@@ -1191,8 +1213,9 @@ public class ArrayImpl implements Array {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;LocalDate&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<LocalDate>> getDateValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateValid();
@@ -1230,12 +1253,13 @@ public class ArrayImpl implements Array {
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDateValid(List<LocalDate> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDateValid(List<LocalDate> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDateValid(arrayBody);
@@ -1250,8 +1274,7 @@ public class ArrayImpl implements Array {
      */
     public Call<ResponseBody> putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -1279,8 +1302,9 @@ public class ArrayImpl implements Array {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;LocalDate&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<LocalDate>> getDateInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateInvalidNull();
@@ -1317,8 +1341,9 @@ public class ArrayImpl implements Array {
     /**
      * Get date array value ['2011-03-22', 'date']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;LocalDate&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<LocalDate>> getDateInvalidChars() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateInvalidChars();
@@ -1355,8 +1380,9 @@ public class ArrayImpl implements Array {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<DateTime>> getDateTimeValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateTimeValid();
@@ -1394,12 +1420,13 @@ public class ArrayImpl implements Array {
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
      *
      * @param arrayBody the List&lt;DateTime&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDateTimeValid(List<DateTime> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDateTimeValid(List<DateTime> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDateTimeValid(arrayBody);
@@ -1414,8 +1441,7 @@ public class ArrayImpl implements Array {
      */
     public Call<ResponseBody> putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -1443,8 +1469,9 @@ public class ArrayImpl implements Array {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<DateTime>> getDateTimeInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateTimeInvalidNull();
@@ -1481,8 +1508,9 @@ public class ArrayImpl implements Array {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<DateTime>> getDateTimeInvalidChars() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateTimeInvalidChars();
@@ -1519,8 +1547,9 @@ public class ArrayImpl implements Array {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTimeRfc1123&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<DateTimeRfc1123>> getDateTimeRfc1123Valid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
@@ -1558,12 +1587,13 @@ public class ArrayImpl implements Array {
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDateTimeRfc1123Valid(List<DateTimeRfc1123> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDateTimeRfc1123Valid(List<DateTimeRfc1123> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
@@ -1578,8 +1608,7 @@ public class ArrayImpl implements Array {
      */
     public Call<ResponseBody> putDateTimeRfc1123ValidAsync(List<DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -1607,8 +1636,9 @@ public class ArrayImpl implements Array {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Period&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Period>> getDurationValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDurationValid();
@@ -1646,12 +1676,13 @@ public class ArrayImpl implements Array {
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
      *
      * @param arrayBody the List&lt;Period&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDurationValid(List<Period> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDurationValid(List<Period> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDurationValid(arrayBody);
@@ -1666,8 +1697,7 @@ public class ArrayImpl implements Array {
      */
     public Call<ResponseBody> putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -1695,8 +1725,9 @@ public class ArrayImpl implements Array {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;byte[]&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<byte[]>> getByteValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getByteValid();
@@ -1734,12 +1765,13 @@ public class ArrayImpl implements Array {
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
      *
      * @param arrayBody the List&lt;byte[]&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putByteValid(List<byte[]> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putByteValid(List<byte[]> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putByteValid(arrayBody);
@@ -1754,8 +1786,7 @@ public class ArrayImpl implements Array {
      */
     public Call<ResponseBody> putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -1783,8 +1814,9 @@ public class ArrayImpl implements Array {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;byte[]&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<byte[]>> getByteInvalidNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getByteInvalidNull();
@@ -1821,8 +1853,9 @@ public class ArrayImpl implements Array {
     /**
      * Get array of complex type null value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Product>> getComplexNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getComplexNull();
@@ -1859,8 +1892,9 @@ public class ArrayImpl implements Array {
     /**
      * Get empty array of complex type []
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Product>> getComplexEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getComplexEmpty();
@@ -1897,8 +1931,9 @@ public class ArrayImpl implements Array {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Product>> getComplexItemNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getComplexItemNull();
@@ -1935,8 +1970,9 @@ public class ArrayImpl implements Array {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Product>> getComplexItemEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getComplexItemEmpty();
@@ -1973,8 +2009,9 @@ public class ArrayImpl implements Array {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Product>> getComplexValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getComplexValid();
@@ -2012,12 +2049,13 @@ public class ArrayImpl implements Array {
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
      *
      * @param arrayBody the List&lt;Product&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putComplexValid(List<Product> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putComplexValid(List<Product> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putComplexValid(arrayBody);
@@ -2032,8 +2070,7 @@ public class ArrayImpl implements Array {
      */
     public Call<ResponseBody> putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -2061,8 +2098,9 @@ public class ArrayImpl implements Array {
     /**
      * Get a null array
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<List<String>>> getArrayNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getArrayNull();
@@ -2099,8 +2137,9 @@ public class ArrayImpl implements Array {
     /**
      * Get an empty array []
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<List<String>>> getArrayEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getArrayEmpty();
@@ -2137,8 +2176,9 @@ public class ArrayImpl implements Array {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<List<String>>> getArrayItemNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getArrayItemNull();
@@ -2175,8 +2215,9 @@ public class ArrayImpl implements Array {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<List<String>>> getArrayItemEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getArrayItemEmpty();
@@ -2213,8 +2254,9 @@ public class ArrayImpl implements Array {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<List<String>>> getArrayValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getArrayValid();
@@ -2252,12 +2294,13 @@ public class ArrayImpl implements Array {
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putArrayValid(List<List<String>> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putArrayValid(List<List<String>> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putArrayValid(arrayBody);
@@ -2272,8 +2315,7 @@ public class ArrayImpl implements Array {
      */
     public Call<ResponseBody> putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
@@ -2301,8 +2343,9 @@ public class ArrayImpl implements Array {
     /**
      * Get an array of Dictionaries with value null
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Map<String, String>>> getDictionaryNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDictionaryNull();
@@ -2339,8 +2382,9 @@ public class ArrayImpl implements Array {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value []
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Map<String, String>>> getDictionaryEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDictionaryEmpty();
@@ -2377,8 +2421,9 @@ public class ArrayImpl implements Array {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Map<String, String>>> getDictionaryItemNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDictionaryItemNull();
@@ -2415,8 +2460,9 @@ public class ArrayImpl implements Array {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Map<String, String>>> getDictionaryItemEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDictionaryItemEmpty();
@@ -2453,8 +2499,9 @@ public class ArrayImpl implements Array {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<Map<String, String>>> getDictionaryValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDictionaryValid();
@@ -2492,12 +2539,13 @@ public class ArrayImpl implements Array {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDictionaryValid(List<Map<String, String>> arrayBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDictionaryValid(List<Map<String, String>> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDictionaryValid(arrayBody);
@@ -2512,8 +2560,7 @@ public class ArrayImpl implements Array {
      */
     public Call<ResponseBody> putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);

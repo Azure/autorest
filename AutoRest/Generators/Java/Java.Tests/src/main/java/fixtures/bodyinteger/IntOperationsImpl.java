@@ -35,8 +35,9 @@ public class IntOperationsImpl implements IntOperations {
     /**
      * Get null Int value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Integer object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Integer> getNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -73,8 +74,9 @@ public class IntOperationsImpl implements IntOperations {
     /**
      * Get invalid Int value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Integer object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Integer> getInvalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getInvalid();
@@ -111,8 +113,9 @@ public class IntOperationsImpl implements IntOperations {
     /**
      * Get overflow Int32 value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Integer object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Integer> getOverflowInt32() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getOverflowInt32();
@@ -149,8 +152,9 @@ public class IntOperationsImpl implements IntOperations {
     /**
      * Get underflow Int32 value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Integer object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Integer> getUnderflowInt32() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getUnderflowInt32();
@@ -187,8 +191,9 @@ public class IntOperationsImpl implements IntOperations {
     /**
      * Get overflow Int64 value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Long object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Long> getOverflowInt64() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getOverflowInt64();
@@ -225,8 +230,9 @@ public class IntOperationsImpl implements IntOperations {
     /**
      * Get underflow Int64 value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Long object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Long> getUnderflowInt64() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getUnderflowInt64();
@@ -264,7 +270,8 @@ public class IntOperationsImpl implements IntOperations {
      * Put max int32 value
      *
      * @param intBody the int value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> putMax32(int intBody) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putMax32(intBody);
@@ -303,7 +310,8 @@ public class IntOperationsImpl implements IntOperations {
      * Put max int64 value
      *
      * @param intBody the long value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> putMax64(long intBody) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putMax64(intBody);
@@ -342,7 +350,8 @@ public class IntOperationsImpl implements IntOperations {
      * Put min int32 value
      *
      * @param intBody the int value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> putMin32(int intBody) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putMin32(intBody);
@@ -381,7 +390,8 @@ public class IntOperationsImpl implements IntOperations {
      * Put min int64 value
      *
      * @param intBody the long value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> putMin64(long intBody) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putMin64(intBody);
