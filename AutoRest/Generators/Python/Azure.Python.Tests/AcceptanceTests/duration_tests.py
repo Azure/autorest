@@ -19,7 +19,7 @@ sys.path.append(join(tests, "AzureBodyDuration"))
 
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
-from msrestazure.azure_active_directory import UserPassCredentials
+from msrest.authentication import BasicTokenAuthentication
 
 from auto_rest_duration_test_service import (
     AutoRestDurationTestService, 
@@ -30,7 +30,8 @@ class DurationTests(unittest.TestCase):
 
     def test_duration(self):
 
-        config = AutoRestDurationTestServiceConfiguration(None, base_url="http://localhost:3000")
+        cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
+        config = AutoRestDurationTestServiceConfiguration(cred, base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestDurationTestService(config)
 

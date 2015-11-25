@@ -245,8 +245,7 @@ else
 }
 else
 {
-            @:if raw:
-                @:return None, response
+            @:@Model.ReturnEmptyResponse
 }
 @EmptyLine
         long_running_operation_timeout = operation_config.get(

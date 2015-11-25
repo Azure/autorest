@@ -22,6 +22,10 @@ class MicrosoftAzureTestUrlConfiguration(AzureConfiguration):
     def __init__(
             self, credentials, subscription_id, api_version='2014-04-01-preview', accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
 
+        if credentials is None:
+            raise ValueError('credentials must not be None.')
+        if subscription_id is None:
+            raise ValueError('subscription_id must not be None.')
         if not base_url:
             base_url = 'https://management.azure.com/'
 
