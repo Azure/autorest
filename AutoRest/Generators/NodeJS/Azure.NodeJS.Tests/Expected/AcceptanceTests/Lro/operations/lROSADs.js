@@ -53,8 +53,7 @@ function LROSADs(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -83,8 +82,7 @@ LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = null;
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -110,7 +108,7 @@ LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
         return callback(deserializationError);
       }
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -138,8 +136,7 @@ LROSADs.prototype.putNonRetry400 = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -235,8 +232,6 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -279,7 +274,7 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -308,8 +303,7 @@ LROSADs.prototype.beginPutNonRetry400 = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -338,8 +332,7 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callba
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = null;
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -365,7 +358,7 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callba
         return callback(deserializationError);
       }
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -394,8 +387,7 @@ LROSADs.prototype.putNonRetry201Creating400 = function (product, options, callba
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -491,8 +483,6 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -535,7 +525,7 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -565,12 +555,7 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (product, options, c
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link LROSADsPutAsyncRelativeRetry400Headers} for
- *                      more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsPutAsyncRelativeRetry400Headers} for
- *                      more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -599,9 +584,7 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callbac
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsPutAsyncRelativeRetry400Headers'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -627,7 +610,7 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callbac
         return callback(deserializationError);
       }
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -657,12 +640,7 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (product, options, callbac
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link LROSADsPutAsyncRelativeRetry400Headers} for
- *                      more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsPutAsyncRelativeRetry400Headers} for
- *                      more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -758,9 +736,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsPutAsyncRelativeRetry400Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -784,7 +759,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -804,12 +779,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (product, options, ca
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsDeleteNonRetry400Headers} for more
- *                      information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsDeleteNonRetry400Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -838,9 +807,7 @@ LROSADs.prototype.deleteNonRetry400 = function (options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsDeleteNonRetry400Headers'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -850,7 +817,7 @@ LROSADs.prototype.deleteNonRetry400 = function (options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -870,12 +837,6 @@ LROSADs.prototype.deleteNonRetry400 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsDeleteNonRetry400Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsDeleteNonRetry400Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -955,14 +916,11 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsDeleteNonRetry400Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -982,12 +940,6 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsDelete202NonRetry400Headers} for
- *                      more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsDelete202NonRetry400Headers} for
- *                      more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1016,9 +968,7 @@ LROSADs.prototype.delete202NonRetry400 = function (options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsDelete202NonRetry400Headers'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -1028,7 +978,7 @@ LROSADs.prototype.delete202NonRetry400 = function (options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -1048,12 +998,6 @@ LROSADs.prototype.delete202NonRetry400 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsDelete202NonRetry400Headers} for
- *                      more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsDelete202NonRetry400Headers} for
- *                      more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1133,14 +1077,11 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsDelete202NonRetry400Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1162,12 +1103,6 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsDeleteAsyncRelativeRetry400Headers}
- *                      for more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsDeleteAsyncRelativeRetry400Headers}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1196,9 +1131,7 @@ LROSADs.prototype.deleteAsyncRelativeRetry400 = function (options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsDeleteAsyncRelativeRetry400Headers'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -1208,7 +1141,7 @@ LROSADs.prototype.deleteAsyncRelativeRetry400 = function (options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -1230,12 +1163,6 @@ LROSADs.prototype.deleteAsyncRelativeRetry400 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsDeleteAsyncRelativeRetry400Headers}
- *                      for more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsDeleteAsyncRelativeRetry400Headers}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1315,14 +1242,11 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsDeleteAsyncRelativeRetry400Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1350,12 +1274,6 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsPostNonRetry400Headers} for more
- *                      information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsPostNonRetry400Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1384,9 +1302,7 @@ LROSADs.prototype.postNonRetry400 = function (product, options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsPostNonRetry400Headers'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -1396,7 +1312,7 @@ LROSADs.prototype.postNonRetry400 = function (product, options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -1424,12 +1340,6 @@ LROSADs.prototype.postNonRetry400 = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsPostNonRetry400Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsPostNonRetry400Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1525,14 +1435,11 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsPostNonRetry400Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1560,12 +1467,6 @@ LROSADs.prototype.beginPostNonRetry400 = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsPost202NonRetry400Headers} for more
- *                      information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsPost202NonRetry400Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1594,9 +1495,7 @@ LROSADs.prototype.post202NonRetry400 = function (product, options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsPost202NonRetry400Headers'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -1606,7 +1505,7 @@ LROSADs.prototype.post202NonRetry400 = function (product, options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -1634,12 +1533,6 @@ LROSADs.prototype.post202NonRetry400 = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsPost202NonRetry400Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsPost202NonRetry400Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1735,14 +1628,11 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsPost202NonRetry400Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1772,12 +1662,6 @@ LROSADs.prototype.beginPost202NonRetry400 = function (product, options, callback
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsPostAsyncRelativeRetry400Headers}
- *                      for more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsPostAsyncRelativeRetry400Headers}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1806,9 +1690,7 @@ LROSADs.prototype.postAsyncRelativeRetry400 = function (product, options, callba
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsPostAsyncRelativeRetry400Headers'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -1818,7 +1700,7 @@ LROSADs.prototype.postAsyncRelativeRetry400 = function (product, options, callba
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -1848,12 +1730,6 @@ LROSADs.prototype.postAsyncRelativeRetry400 = function (product, options, callba
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsPostAsyncRelativeRetry400Headers}
- *                      for more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsPostAsyncRelativeRetry400Headers}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1949,14 +1825,11 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsPostAsyncRelativeRetry400Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1985,8 +1858,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (product, options, c
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2015,8 +1887,7 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, opt
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = null;
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -2042,7 +1913,7 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, opt
         return callback(deserializationError);
       }
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -2071,8 +1942,7 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (product, opt
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2168,8 +2038,6 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2212,7 +2080,7 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -2242,14 +2110,7 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (product
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryNoStatusHeaders} for more
- *                      information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryNoStatusHeaders} for more
- *                      information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2278,9 +2139,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, ca
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsPutAsyncRelativeRetryNoStatusHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -2306,7 +2165,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, ca
         return callback(deserializationError);
       }
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -2336,14 +2195,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (product, options, ca
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryNoStatusHeaders} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryNoStatusHeaders} for more
- *                      information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2439,9 +2291,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsPutAsyncRelativeRetryNoStatusHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2465,7 +2314,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -2495,14 +2344,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (product, option
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders}
- *                      for more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders}
- *                      for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2531,9 +2373,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, opti
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -2559,7 +2399,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, opti
         return callback(deserializationError);
       }
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -2589,14 +2429,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (product, opti
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders}
- *                      for more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders}
- *                      for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2692,9 +2525,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -2718,7 +2548,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -2739,8 +2569,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (product,
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *
- *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2769,8 +2597,7 @@ LROSADs.prototype.delete204Succeeded = function (options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = null;
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -2780,7 +2607,7 @@ LROSADs.prototype.delete204Succeeded = function (options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -2801,8 +2628,6 @@ LROSADs.prototype.delete204Succeeded = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2882,13 +2707,11 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -2910,14 +2733,6 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsDeleteAsyncRelativeRetryNoStatusHeaders} for
- *                      more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsDeleteAsyncRelativeRetryNoStatusHeaders} for
- *                      more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -2946,9 +2761,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryNoStatus = function (options, callback
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsDeleteAsyncRelativeRetryNoStatusHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -2958,7 +2771,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryNoStatus = function (options, callback
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -2980,14 +2793,6 @@ LROSADs.prototype.deleteAsyncRelativeRetryNoStatus = function (options, callback
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsDeleteAsyncRelativeRetryNoStatusHeaders} for
- *                      more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsDeleteAsyncRelativeRetryNoStatusHeaders} for
- *                      more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3067,14 +2872,11 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsDeleteAsyncRelativeRetryNoStatusHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -3103,12 +2905,6 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsPost202NoLocationHeaders} for more
- *                      information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsPost202NoLocationHeaders} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3137,9 +2933,7 @@ LROSADs.prototype.post202NoLocation = function (product, options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsPost202NoLocationHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -3149,7 +2943,7 @@ LROSADs.prototype.post202NoLocation = function (product, options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -3178,12 +2972,6 @@ LROSADs.prototype.post202NoLocation = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsPost202NoLocationHeaders} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsPost202NoLocationHeaders} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3279,14 +3067,11 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsPost202NoLocationHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -3316,14 +3101,6 @@ LROSADs.prototype.beginPost202NoLocation = function (product, options, callback)
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsPostAsyncRelativeRetryNoPayloadHeaders} for
- *                      more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsPostAsyncRelativeRetryNoPayloadHeaders} for
- *                      more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3352,9 +3129,7 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, options, 
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsPostAsyncRelativeRetryNoPayloadHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -3364,7 +3139,7 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, options, 
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -3394,14 +3169,6 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (product, options, 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsPostAsyncRelativeRetryNoPayloadHeaders} for
- *                      more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsPostAsyncRelativeRetryNoPayloadHeaders} for
- *                      more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3497,14 +3264,11 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsPostAsyncRelativeRetryNoPayloadHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -3533,8 +3297,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (product, opti
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3563,8 +3326,7 @@ LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = null;
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -3590,7 +3352,7 @@ LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
         return callback(deserializationError);
       }
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -3619,8 +3381,7 @@ LROSADs.prototype.put200InvalidJson = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3716,8 +3477,6 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3741,7 +3500,7 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -3771,14 +3530,7 @@ LROSADs.prototype.beginPut200InvalidJson = function (product, options, callback)
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders} for
- *                      more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders} for
- *                      more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3807,9 +3559,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, option
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -3835,7 +3585,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, option
         return callback(deserializationError);
       }
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -3865,14 +3615,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (product, option
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders} for
- *                      more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders} for
- *                      more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -3968,9 +3711,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -3994,7 +3734,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -4024,14 +3764,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (product, o
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders}
- *                      for more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders}
- *                      for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4060,9 +3793,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, o
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -4088,7 +3819,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, o
         return callback(deserializationError);
       }
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -4118,14 +3849,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (product, o
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders}
- *                      for more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders}
- *                      for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4221,9 +3945,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -4247,7 +3968,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -4268,12 +3989,6 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (produ
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsDelete202RetryInvalidHeaderHeaders}
- *                      for more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsDelete202RetryInvalidHeaderHeaders}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4302,9 +4017,7 @@ LROSADs.prototype.delete202RetryInvalidHeader = function (options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsDelete202RetryInvalidHeaderHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -4314,7 +4027,7 @@ LROSADs.prototype.delete202RetryInvalidHeader = function (options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -4335,12 +4048,6 @@ LROSADs.prototype.delete202RetryInvalidHeader = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsDelete202RetryInvalidHeaderHeaders}
- *                      for more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsDelete202RetryInvalidHeaderHeaders}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4420,14 +4127,11 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsDelete202RetryInvalidHeaderHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -4448,14 +4152,6 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders}
- *                      for more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4484,9 +4180,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidHeader = function (options, cal
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -4496,7 +4190,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidHeader = function (options, cal
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -4517,14 +4211,6 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidHeader = function (options, cal
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders}
- *                      for more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4604,14 +4290,11 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -4633,14 +4316,6 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders}
- *                      for more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4669,9 +4344,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidJsonPolling = function (options
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -4681,7 +4354,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidJsonPolling = function (options
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -4703,14 +4376,6 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidJsonPolling = function (options
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders}
- *                      for more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4790,14 +4455,11 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -4826,12 +4488,6 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsPost202RetryInvalidHeaderHeaders}
- *                      for more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsPost202RetryInvalidHeaderHeaders}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -4860,9 +4516,7 @@ LROSADs.prototype.post202RetryInvalidHeader = function (product, options, callba
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsPost202RetryInvalidHeaderHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -4872,7 +4526,7 @@ LROSADs.prototype.post202RetryInvalidHeader = function (product, options, callba
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -4901,12 +4555,6 @@ LROSADs.prototype.post202RetryInvalidHeader = function (product, options, callba
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LROSADsPost202RetryInvalidHeaderHeaders}
- *                      for more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LROSADsPost202RetryInvalidHeaderHeaders}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5002,14 +4650,11 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsPost202RetryInvalidHeaderHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -5039,14 +4684,6 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (product, options, c
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders}
- *                      for more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5075,9 +4712,7 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, optio
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -5087,7 +4722,7 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, optio
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -5117,14 +4752,6 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (product, optio
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders}
- *                      for more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5220,14 +4847,11 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -5257,14 +4881,6 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (product, 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders}
- *                      for more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5293,9 +4909,7 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, 
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -5305,7 +4919,7 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, 
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -5335,14 +4949,6 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (product, 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders}
- *                      for more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -5438,14 +5044,11 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (prod
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 

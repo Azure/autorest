@@ -43,12 +43,6 @@ function HttpRedirects(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link HttpRedirectsHead300Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HttpRedirectsHead300Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -112,14 +106,11 @@ HttpRedirects.prototype.head300 = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HttpRedirectsHead300Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -138,12 +129,6 @@ HttpRedirects.prototype.head300 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
- *                      See {@link HttpRedirectsGet300Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HttpRedirectsGet300Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -207,9 +192,6 @@ HttpRedirects.prototype.get300 = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HttpRedirectsGet300Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -227,7 +209,7 @@ HttpRedirects.prototype.get300 = function (options, callback) {
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -246,12 +228,6 @@ HttpRedirects.prototype.get300 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link HttpRedirectsHead301Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HttpRedirectsHead301Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -315,14 +291,11 @@ HttpRedirects.prototype.head301 = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HttpRedirectsHead301Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -341,12 +314,6 @@ HttpRedirects.prototype.head301 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link HttpRedirectsGet301Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HttpRedirectsGet301Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -410,14 +377,11 @@ HttpRedirects.prototype.get301 = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HttpRedirectsGet301Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -440,12 +404,6 @@ HttpRedirects.prototype.get301 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link HttpRedirectsPut301Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HttpRedirectsPut301Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -532,14 +490,11 @@ HttpRedirects.prototype.put301 = function (booleanValue, options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HttpRedirectsPut301Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -558,12 +513,6 @@ HttpRedirects.prototype.put301 = function (booleanValue, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link HttpRedirectsHead302Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HttpRedirectsHead302Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -627,14 +576,11 @@ HttpRedirects.prototype.head302 = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HttpRedirectsHead302Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -653,12 +599,6 @@ HttpRedirects.prototype.head302 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link HttpRedirectsGet302Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HttpRedirectsGet302Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -722,14 +662,11 @@ HttpRedirects.prototype.get302 = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HttpRedirectsGet302Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -752,12 +689,6 @@ HttpRedirects.prototype.get302 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link HttpRedirectsPatch302Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HttpRedirectsPatch302Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -844,14 +775,11 @@ HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HttpRedirectsPatch302Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -874,12 +802,6 @@ HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link HttpRedirectsPost303Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HttpRedirectsPost303Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -966,14 +888,11 @@ HttpRedirects.prototype.post303 = function (booleanValue, options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HttpRedirectsPost303Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -992,12 +911,6 @@ HttpRedirects.prototype.post303 = function (booleanValue, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link HttpRedirectsHead307Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HttpRedirectsHead307Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1061,14 +974,11 @@ HttpRedirects.prototype.head307 = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HttpRedirectsHead307Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1087,12 +997,6 @@ HttpRedirects.prototype.head307 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link HttpRedirectsGet307Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HttpRedirectsGet307Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1156,14 +1060,11 @@ HttpRedirects.prototype.get307 = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HttpRedirectsGet307Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1184,12 +1085,6 @@ HttpRedirects.prototype.get307 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link HttpRedirectsPut307Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HttpRedirectsPut307Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1276,14 +1171,11 @@ HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HttpRedirectsPut307Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1304,12 +1196,6 @@ HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link HttpRedirectsPatch307Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HttpRedirectsPatch307Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1396,14 +1282,11 @@ HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HttpRedirectsPatch307Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1424,12 +1307,6 @@ HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link HttpRedirectsPost307Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HttpRedirectsPost307Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1516,14 +1393,11 @@ HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HttpRedirectsPost307Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1544,12 +1418,6 @@ HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link HttpRedirectsDelete307Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HttpRedirectsDelete307Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1636,14 +1504,11 @@ HttpRedirects.prototype.delete307 = function (booleanValue, options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HttpRedirectsDelete307Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 

@@ -43,8 +43,7 @@ function Inheritance(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link Siamese} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -108,8 +107,6 @@ Inheritance.prototype.getValid = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -133,7 +130,7 @@ Inheritance.prototype.getValid = function (options, callback) {
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -163,8 +160,6 @@ Inheritance.prototype.getValid = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -252,13 +247,11 @@ Inheritance.prototype.putValid = function (complexBody, options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 

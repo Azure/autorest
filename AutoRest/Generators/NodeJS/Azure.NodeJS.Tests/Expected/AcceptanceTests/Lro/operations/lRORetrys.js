@@ -56,8 +56,7 @@ function LRORetrys(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -86,8 +85,7 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (product, options, cal
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = null;
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -113,7 +111,7 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (product, options, cal
         return callback(deserializationError);
       }
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -144,8 +142,7 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (product, options, cal
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -241,8 +238,6 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -285,7 +280,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -316,14 +311,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (product, options
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link
- *                      LRORetrysPutAsyncRelativeRetrySucceededHeaders} for
- *                      more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LRORetrysPutAsyncRelativeRetrySucceededHeaders} for
- *                      more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -352,9 +340,7 @@ LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (product, options,
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LRORetrysPutAsyncRelativeRetrySucceededHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -380,7 +366,7 @@ LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (product, options,
         return callback(deserializationError);
       }
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -411,14 +397,7 @@ LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (product, options,
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link
- *                      LRORetrysPutAsyncRelativeRetrySucceededHeaders} for
- *                      more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LRORetrysPutAsyncRelativeRetrySucceededHeaders} for
- *                      more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -514,9 +493,6 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, opt
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LRORetrysPutAsyncRelativeRetrySucceededHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -540,7 +516,7 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, opt
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -563,14 +539,7 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (product, opt
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link
- *                      LRORetrysDeleteProvisioning202Accepted200SucceededHeaders}
- *                      for more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LRORetrysDeleteProvisioning202Accepted200SucceededHeaders}
- *                      for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -599,9 +568,7 @@ LRORetrys.prototype.deleteProvisioning202Accepted200Succeeded = function (option
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LRORetrysDeleteProvisioning202Accepted200SucceededHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -627,7 +594,7 @@ LRORetrys.prototype.deleteProvisioning202Accepted200Succeeded = function (option
         return callback(deserializationError);
       }
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -650,14 +617,7 @@ LRORetrys.prototype.deleteProvisioning202Accepted200Succeeded = function (option
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link
- *                      LRORetrysDeleteProvisioning202Accepted200SucceededHeaders}
- *                      for more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LRORetrysDeleteProvisioning202Accepted200SucceededHeaders}
- *                      for more information.
+ *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -737,9 +697,6 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LRORetrysDeleteProvisioning202Accepted200SucceededHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -782,7 +739,7 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -804,12 +761,6 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LRORetrysDelete202Retry200Headers} for more
- *                      information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LRORetrysDelete202Retry200Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -838,9 +789,7 @@ LRORetrys.prototype.delete202Retry200 = function (options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LRORetrysDelete202Retry200Headers'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -850,7 +799,7 @@ LRORetrys.prototype.delete202Retry200 = function (options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -872,12 +821,6 @@ LRORetrys.prototype.delete202Retry200 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LRORetrysDelete202Retry200Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LRORetrysDelete202Retry200Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -957,14 +900,11 @@ LRORetrys.prototype.beginDelete202Retry200 = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LRORetrysDelete202Retry200Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -986,14 +926,6 @@ LRORetrys.prototype.beginDelete202Retry200 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LRORetrysDeleteAsyncRelativeRetrySucceededHeaders}
- *                      for more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LRORetrysDeleteAsyncRelativeRetrySucceededHeaders}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1022,9 +954,7 @@ LRORetrys.prototype.deleteAsyncRelativeRetrySucceeded = function (options, callb
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LRORetrysDeleteAsyncRelativeRetrySucceededHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -1034,7 +964,7 @@ LRORetrys.prototype.deleteAsyncRelativeRetrySucceeded = function (options, callb
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -1056,14 +986,6 @@ LRORetrys.prototype.deleteAsyncRelativeRetrySucceeded = function (options, callb
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LRORetrysDeleteAsyncRelativeRetrySucceededHeaders}
- *                      for more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LRORetrysDeleteAsyncRelativeRetrySucceededHeaders}
- *                      for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1143,14 +1065,11 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LRORetrysDeleteAsyncRelativeRetrySucceededHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1180,12 +1099,6 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LRORetrysPost202Retry200Headers} for more
- *                      information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LRORetrysPost202Retry200Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1214,9 +1127,7 @@ LRORetrys.prototype.post202Retry200 = function (product, options, callback) {
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LRORetrysPost202Retry200Headers'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -1226,7 +1137,7 @@ LRORetrys.prototype.post202Retry200 = function (product, options, callback) {
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -1256,12 +1167,6 @@ LRORetrys.prototype.post202Retry200 = function (product, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link LRORetrysPost202Retry200Headers} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link LRORetrysPost202Retry200Headers} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1357,14 +1262,11 @@ LRORetrys.prototype.beginPost202Retry200 = function (product, options, callback)
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LRORetrysPost202Retry200Headers'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1395,14 +1297,6 @@ LRORetrys.prototype.beginPost202Retry200 = function (product, options, callback)
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LRORetrysPostAsyncRelativeRetrySucceededHeaders} for
- *                      more information.
- *
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LRORetrysPostAsyncRelativeRetrySucceededHeaders} for
- *                      more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1431,9 +1325,7 @@ LRORetrys.prototype.postAsyncRelativeRetrySucceeded = function (product, options
     initialResult.body = response.body;
     client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = new client._models['LRORetrysPostAsyncRelativeRetrySucceededHeaders'](response.headers);
-      responseHeaders.deserialize(response.headers);
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -1443,7 +1335,7 @@ LRORetrys.prototype.postAsyncRelativeRetrySucceeded = function (product, options
 
       // Deserialize Response
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -1474,14 +1366,6 @@ LRORetrys.prototype.postAsyncRelativeRetrySucceeded = function (product, options
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link
- *                      LRORetrysPostAsyncRelativeRetrySucceededHeaders} for
- *                      more information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link
- *                      LRORetrysPostAsyncRelativeRetrySucceededHeaders} for
- *                      more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1577,14 +1461,11 @@ LRORetrys.prototype.beginPostAsyncRelativeRetrySucceeded = function (product, op
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['LRORetrysPostAsyncRelativeRetrySucceededHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 

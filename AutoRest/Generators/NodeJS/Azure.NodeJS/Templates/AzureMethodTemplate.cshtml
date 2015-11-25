@@ -49,9 +49,6 @@ else
  *                      {@Model.DocumentReturnTypeString} [result]   - The deserialized result object.
 @WrapComment(" *                      ", Model.ReturnTypeInfo)
  *
- *                      {@Model.DocumentReturnHeaderTypeString} [responseHeaders]   - The deserialized headers object.
-@WrapComment(" *                      ", Model.ReturnHeaderTypeInfo)
- *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
@@ -79,15 +76,7 @@ else
     initialResult.body = response.body;
     client.@(Model.LongRunningOperationMethodNameInRuntime)(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      @if (Model.ReturnType.Headers != null)
-      {
-      @:var responseHeaders = new client._models['@(Model.ReturnType.Headers.Name)'](response.headers);
-      @:responseHeaders.deserialize(response.headers);
-      } else
-      {
-      @:var responseHeaders = null;
-      }
+      @EmptyLine
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -106,7 +95,7 @@ else
       @:@(Model.DeserializeResponse(Model.DefaultResponse.Body))
       }
       @EmptyLine
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };

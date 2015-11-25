@@ -52,8 +52,8 @@ function StorageAccounts(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link CheckNameAvailabilityResult} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -160,8 +160,6 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -185,7 +183,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -227,8 +225,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link StorageAccount} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -257,8 +254,7 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
     initialResult.body = response.body;
     client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
-      // Create Header
-      var responseHeaders = null;
+
       // Create Result
       var result = null;
       httpRequest = pollingResult.request;
@@ -284,7 +280,7 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
         return callback(deserializationError);
       }
 
-      return callback(null, result, responseHeaders, httpRequest, response);
+      return callback(null, result, httpRequest, response);
     });
   });
 };
@@ -326,8 +322,7 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link StorageAccount} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -442,8 +437,6 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -467,7 +460,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -493,8 +486,6 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -586,13 +577,11 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -620,8 +609,7 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link StorageAccount} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -717,8 +705,6 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -742,7 +728,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -801,8 +787,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link StorageAccount} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -920,8 +905,6 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -945,7 +928,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -968,8 +951,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link StorageAccountKeys} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1065,8 +1047,6 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1090,7 +1070,7 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1110,8 +1090,8 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link StorageAccountListResult} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1199,8 +1179,6 @@ StorageAccounts.prototype.list = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1224,7 +1202,7 @@ StorageAccounts.prototype.list = function (options, callback) {
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1248,8 +1226,8 @@ StorageAccounts.prototype.list = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link StorageAccountListResult} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1341,8 +1319,6 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1366,7 +1342,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1395,8 +1371,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link StorageAccountKeys} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1520,8 +1495,6 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1545,7 +1518,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1568,8 +1541,8 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link StorageAccountListResult} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1648,8 +1621,6 @@ StorageAccounts.prototype.listNext = function (nextPageLink, options, callback) 
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1673,7 +1644,7 @@ StorageAccounts.prototype.listNext = function (nextPageLink, options, callback) 
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -1697,8 +1668,8 @@ StorageAccounts.prototype.listNext = function (nextPageLink, options, callback) 
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link StorageAccountListResult} for more
+ *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1777,8 +1748,6 @@ StorageAccounts.prototype.listByResourceGroupNext = function (nextPageLink, opti
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -1802,7 +1771,7 @@ StorageAccounts.prototype.listByResourceGroupNext = function (nextPageLink, opti
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 

@@ -43,8 +43,7 @@ function HttpServerFailure(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -108,8 +107,6 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -130,7 +127,7 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -149,8 +146,7 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -214,8 +210,6 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -236,7 +230,7 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
       return callback(deserializationError);
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -257,8 +251,7 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -345,8 +338,6 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -367,7 +358,7 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
       return callback(deserializationError);
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -388,8 +379,7 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link ErrorModel} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -476,8 +466,6 @@ HttpServerFailure.prototype.delete505 = function (booleanValue, options, callbac
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -498,7 +486,7 @@ HttpServerFailure.prototype.delete505 = function (booleanValue, options, callbac
       return callback(deserializationError);
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 

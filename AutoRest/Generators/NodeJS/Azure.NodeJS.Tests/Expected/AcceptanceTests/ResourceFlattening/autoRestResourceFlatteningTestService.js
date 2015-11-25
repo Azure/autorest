@@ -79,8 +79,6 @@ util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -187,13 +185,11 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -212,8 +208,6 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {array} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -293,8 +287,6 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -329,7 +321,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -351,8 +343,6 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -459,13 +449,11 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -484,8 +472,6 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -565,8 +551,6 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -598,7 +582,7 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -638,8 +622,6 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -735,13 +717,11 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -760,8 +740,7 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      See {@link ResourceCollection} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -841,8 +820,6 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -866,7 +843,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 

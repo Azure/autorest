@@ -44,8 +44,8 @@ function EnumModel(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {string} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
+ *                      Possible values for result are - red color,
+ *                      green-color, blue_color.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -109,8 +109,6 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -128,7 +126,7 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
@@ -151,8 +149,6 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -247,13 +243,11 @@ EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) 
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 

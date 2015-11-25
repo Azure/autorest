@@ -26,6 +26,7 @@ namespace Microsoft.Rest.Generator.ClientModel
             ModelTypes = new List<CompositeType>();
             EnumTypes = new List<EnumType>();
             ErrorTypes = new HashSet<CompositeType>();
+            HeaderTypes = new HashSet<CompositeType>();
         }
 
         /// <summary>
@@ -76,6 +77,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// Gets the list of error type for customize exceptions.
         /// </summary>
         public ISet<CompositeType> ErrorTypes { get; private set; }
+
+        /// <summary>
+        /// Gets the list of header types.
+        /// </summary>
+        public ISet<CompositeType> HeaderTypes { get; private set; }
 
         /// <summary>
         /// Gets the method groups.

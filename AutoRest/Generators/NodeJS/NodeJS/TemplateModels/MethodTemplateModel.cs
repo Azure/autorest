@@ -238,17 +238,17 @@ namespace Microsoft.Rest.Generator.NodeJS
             return builder.AppendLine(documentation)
                           .AppendLine(" * ").ToString();
         }
-        
+
         /// <summary>
-        /// Get the type name for the method's header return type
+        /// Get the type name for the method's return type
         /// </summary>
-        public string ReturnHeaderTypeString
+        public string ReturnTypeString
         {
             get
             {
-                if (ReturnType.Headers != null)
+                if (ReturnType.Body != null)
                 {
-                    return ReturnType.Headers.Name;
+                    return ReturnType.Body.Name;
                 }
                 else
                 {
@@ -710,90 +710,68 @@ namespace Microsoft.Rest.Generator.NodeJS
         {
             get
             {
-                return GetTypeDetails(ReturnType.Headers);
-            }
-        }
+                string result = null;
 
-        public string ReturnHeaderTypeInfo
-        {
-            get
-            {
-                return GetTypeDetails(ReturnType.Headers);
-            }
-        }
-
-        private static string GetTypeDetails(IType type)
-        {
-            if (type is EnumType)
-            {
-                var returnBodyType = type as EnumType;
-
-                string enumValues = "";
-                for (var i = 0; i < returnBodyType.Values.Count; i++)
+                if (ReturnType.Body is EnumType)
                 {
-                    if (i == returnBodyType.Values.Count - 1)
+                    var returnBodyType = ReturnType.Body as EnumType;
+
+                    string enumValues = "";
+                    for (var i = 0; i < returnBodyType.Values.Count; i++)
                     {
-                        enumValues += returnBodyType.Values[i].SerializedName;
+                        if (i == returnBodyType.Values.Count - 1)
+                        {
+                            enumValues += returnBodyType.Values[i].SerializedName;
+                        }
+                        else
+                        {
+                            enumValues += returnBodyType.Values[i].SerializedName + ", ";
+                        }
                     }
-                    else
-                    {
-                        enumValues += returnBodyType.Values[i].SerializedName + ", ";
-                    }
+                    result = string.Format(CultureInfo.InvariantCulture,
+                        "Possible values for result are - {0}.", enumValues);
                 }
-                return string.Format(CultureInfo.InvariantCulture,
-                    "Possible values for result are - {0}.", enumValues);
-            }
-            else if (type is CompositeType)
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "See {{@link {0}}} for more information.", (type == null ? "null" : type.Name));
-            }
-            return string.Empty;
-        }
+                else if (ReturnType.Body is CompositeType)
+                {
+                    result = string.Format(CultureInfo.InvariantCulture,
+                        "See {{@link {0}}} for more information.", ReturnTypeString);
+                }
 
-        public string DocumentReturnTypeString
-        {
-            get
-            {
-                return GetTypeDocumentation(ReturnType.Body);
-            }
-        }
-
-        public string DocumentReturnHeaderTypeString
-        {
-            get
-            {
-                return GetTypeDocumentation(ReturnType.Headers);
+                return result;
             }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        private static string GetTypeDocumentation(IType type)
+        public string DocumentReturnTypeString
         {
-            string typeName = "object";
+            get
+            {
+                string typeName = "object";
+                IType returnBodyType = ReturnType.Body;
 
-            if (type == null)
-            {
-                typeName = "null";
-            }
-            else if (type is PrimaryType)
-            {
-                typeName = type.Name;
-            }
-            else if (type is SequenceType)
-            {
-                typeName = "array";
-            }
-            else if (type is EnumType)
-            {
-                typeName = PrimaryType.String.Name;
-            }
-            else if (type is CompositeType || type is DictionaryType)
-            {
-                typeName = PrimaryType.Object.Name;
-            }
+                if (returnBodyType == null)
+                {
+                    typeName = "null";
+                }
+                else if (returnBodyType is PrimaryType)
+                {
+                    typeName = returnBodyType.Name;
+                }
+                else if (returnBodyType is SequenceType)
+                {
+                    typeName = "array";
+                }
+                else if (returnBodyType is EnumType)
+                {
+                    typeName = PrimaryType.String.Name;
+                }
+                else if (returnBodyType is CompositeType || returnBodyType is DictionaryType)
+                {
+                    typeName = PrimaryType.Object.Name;
+                }
 
-            return typeName.ToLower(CultureInfo.InvariantCulture);
+                return typeName.ToLower(CultureInfo.InvariantCulture);
+            }
         }
 
         /// <summary>

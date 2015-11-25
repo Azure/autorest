@@ -66,15 +66,3 @@ export interface C {
 export interface D {
     httpStatusCode?: string;
 }
-
-/**
- * @class
- * Initializes a new instance of the HttpRedirectsGet300Headers class.
- * @constructor
- * Defines headers for get300 operation.
- * @member {string} [location] The redirect location for this request
- * 
- */
-export interface HttpRedirectsGet300Headers {
-    location?: string;
-}

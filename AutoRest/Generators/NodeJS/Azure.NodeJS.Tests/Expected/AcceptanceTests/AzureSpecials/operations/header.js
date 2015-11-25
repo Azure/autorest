@@ -47,12 +47,6 @@ function Header(client) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {null} [result]   - The deserialized result object.
- *                      See {@link HeaderCustomNamedRequestIdHeaders} for more
- *                      information.
- * 
- *                      {object} [responseHeaders]   - The deserialized headers object.
- *                      See {@link HeaderCustomNamedRequestIdHeaders} for more
- *                      information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -138,14 +132,11 @@ Header.prototype.customNamedRequestId = function (fooClientRequestId, options, c
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = new client._models['HeaderCustomNamedRequestIdHeaders'](response.headers);
-    responseHeaders.deserialize(response.headers);
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 

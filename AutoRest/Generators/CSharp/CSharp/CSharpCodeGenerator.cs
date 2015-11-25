@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Templates;
+using System.Linq;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -125,7 +126,7 @@ namespace Microsoft.Rest.Generator.CSharp
             }
 
             // Models
-            foreach (var model in serviceClient.ModelTypes)
+            foreach (var model in serviceClient.ModelTypes.Concat(serviceClient.HeaderTypes))
             {
                 var modelTemplate = new ModelTemplate
                 {

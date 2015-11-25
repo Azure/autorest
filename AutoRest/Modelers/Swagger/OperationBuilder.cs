@@ -158,7 +158,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             if (method.ReturnType.Body != null && method.ReturnType.Headers != null)
             {
-                _swaggerModeler.GeneratedTypes[method.ReturnType.Headers.Name] = method.ReturnType.Headers as CompositeType;
+                _swaggerModeler.ServiceClient.HeaderTypes.Add(method.ReturnType.Headers as CompositeType);
             }
 
             // Copy extensions

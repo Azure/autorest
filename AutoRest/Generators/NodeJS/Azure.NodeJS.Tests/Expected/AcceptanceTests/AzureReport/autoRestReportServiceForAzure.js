@@ -77,8 +77,6 @@ util.inherits(AutoRestReportServiceForAzure, ServiceClient);
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- * 
- *                      {null} [responseHeaders]   - The deserialized headers object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -158,8 +156,6 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
       }
       return callback(error);
     }
-    // Create Header
-    var responseHeaders = null;
     // Create Result
     var result = null;
     if (responseBody === '') responseBody = null;
@@ -177,7 +173,7 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
       }
     }
 
-    return callback(null, result, responseHeaders, httpRequest, response);
+    return callback(null, result, httpRequest, response);
   });
 };
 
