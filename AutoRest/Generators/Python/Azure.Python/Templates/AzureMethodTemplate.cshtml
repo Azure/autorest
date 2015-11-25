@@ -78,12 +78,12 @@ else if (Model.IsPagingMethod)
             @:# Construct body
   if (Model.RequestBody.IsRequired)
   {
-            @:body_content = self._serialize(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+            @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
   }
   else
   {
             @:if @Model.RequestBody.Name is not None:
-                @:body_content = self._serialize(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+                @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
             @:else:
                 @:body_content = None
   }
@@ -178,12 +178,12 @@ else //Long running operations
         @:# Construct body
   if (Model.RequestBody.IsRequired)
   {
-        @:body_content = self._serialize(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+        @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
   }
   else
   {
         @:if @Model.RequestBody.Name is not None:
-            @:body_content = self._serialize(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+            @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
         @:else:
             @:body_content = None
   }

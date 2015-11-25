@@ -142,7 +142,7 @@ class polymorphism(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'Fish')
+        body_content = self._serialize.body(complex_body, 'Fish')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -216,7 +216,7 @@ class polymorphism(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'Fish')
+        body_content = self._serialize.body(complex_body, 'Fish')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)

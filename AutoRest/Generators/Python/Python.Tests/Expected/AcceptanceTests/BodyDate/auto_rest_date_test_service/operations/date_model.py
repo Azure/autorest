@@ -252,7 +252,7 @@ class date_model(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(date_body, 'date')
+        body_content = self._serialize.body(date_body, 'date')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -347,7 +347,7 @@ class date_model(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(date_body, 'date')
+        body_content = self._serialize.body(date_body, 'date')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)

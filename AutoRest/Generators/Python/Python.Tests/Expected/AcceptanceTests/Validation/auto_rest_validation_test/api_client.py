@@ -152,7 +152,7 @@ class AutoRestValidationTest(object):
 
         # Construct body
         if body is not None:
-            body_content = self._serialize(body, 'Product')
+            body_content = self._serialize.body(body, 'Product')
         else:
             body_content = None
 

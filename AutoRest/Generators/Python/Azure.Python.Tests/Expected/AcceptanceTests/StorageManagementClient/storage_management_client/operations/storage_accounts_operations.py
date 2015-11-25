@@ -74,7 +74,7 @@ class storage_accountsOperations(object):
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        body_content = self._serialize(account_name, 'StorageAccountCheckNameAvailabilityParameters')
+        body_content = self._serialize.body(account_name, 'StorageAccountCheckNameAvailabilityParameters')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -149,7 +149,7 @@ class storage_accountsOperations(object):
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        body_content = self._serialize(parameters, 'StorageAccountCreateParameters')
+        body_content = self._serialize.body(parameters, 'StorageAccountCreateParameters')
 
         # Construct and send request
         def long_running_send():
@@ -239,7 +239,7 @@ class storage_accountsOperations(object):
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        body_content = self._serialize(parameters, 'StorageAccountCreateParameters')
+        body_content = self._serialize.body(parameters, 'StorageAccountCreateParameters')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -447,7 +447,7 @@ class storage_accountsOperations(object):
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        body_content = self._serialize(parameters, 'StorageAccountUpdateParameters')
+        body_content = self._serialize.body(parameters, 'StorageAccountUpdateParameters')
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
@@ -729,7 +729,7 @@ class storage_accountsOperations(object):
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        body_content = self._serialize(regenerate_key, 'StorageAccountRegenerateKeyParameters')
+        body_content = self._serialize.body(regenerate_key, 'StorageAccountRegenerateKeyParameters')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)

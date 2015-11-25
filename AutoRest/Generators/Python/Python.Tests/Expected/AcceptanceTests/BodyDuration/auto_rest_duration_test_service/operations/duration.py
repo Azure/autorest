@@ -109,7 +109,7 @@ class duration(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(duration_body, 'duration')
+        body_content = self._serialize.body(duration_body, 'duration')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)

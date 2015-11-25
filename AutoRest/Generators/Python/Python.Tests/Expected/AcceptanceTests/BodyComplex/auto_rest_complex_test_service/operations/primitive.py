@@ -109,7 +109,7 @@ class primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'IntWrapper')
+        body_content = self._serialize.body(complex_body, 'IntWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -205,7 +205,7 @@ class primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'LongWrapper')
+        body_content = self._serialize.body(complex_body, 'LongWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -301,7 +301,7 @@ class primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'FloatWrapper')
+        body_content = self._serialize.body(complex_body, 'FloatWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -398,7 +398,7 @@ class primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'DoubleWrapper')
+        body_content = self._serialize.body(complex_body, 'DoubleWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -494,7 +494,7 @@ class primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'BooleanWrapper')
+        body_content = self._serialize.body(complex_body, 'BooleanWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -590,7 +590,7 @@ class primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'StringWrapper')
+        body_content = self._serialize.body(complex_body, 'StringWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -686,7 +686,7 @@ class primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'DateWrapper')
+        body_content = self._serialize.body(complex_body, 'DateWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -783,7 +783,7 @@ class primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'DatetimeWrapper')
+        body_content = self._serialize.body(complex_body, 'DatetimeWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -880,7 +880,7 @@ class primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'Datetimerfc1123Wrapper')
+        body_content = self._serialize.body(complex_body, 'Datetimerfc1123Wrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -980,7 +980,7 @@ class primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'DurationWrapper')
+        body_content = self._serialize.body(complex_body, 'DurationWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1080,7 +1080,7 @@ class primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'ByteWrapper')
+        body_content = self._serialize.body(complex_body, 'ByteWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)

@@ -113,7 +113,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'ArrayWrapper')
+        body_content = self._serialize.body(complex_body, 'ArrayWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -213,7 +213,7 @@ class array(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(complex_body, 'ArrayWrapper')
+        body_content = self._serialize.body(complex_body, 'ArrayWrapper')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)

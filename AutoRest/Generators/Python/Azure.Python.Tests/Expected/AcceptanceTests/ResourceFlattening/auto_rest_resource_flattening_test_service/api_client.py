@@ -85,7 +85,7 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct body
         if resource_array is not None:
-            body_content = self._serialize(resource_array, '[Resource]')
+            body_content = self._serialize.body(resource_array, '[Resource]')
         else:
             body_content = None
 
@@ -189,7 +189,7 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct body
         if resource_dictionary is not None:
-            body_content = self._serialize(resource_dictionary, '{FlattenedProduct}')
+            body_content = self._serialize.body(resource_dictionary, '{FlattenedProduct}')
         else:
             body_content = None
 
@@ -295,7 +295,7 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct body
         if resource_complex_object is not None:
-            body_content = self._serialize(resource_complex_object, 'ResourceCollection')
+            body_content = self._serialize.body(resource_complex_object, 'ResourceCollection')
         else:
             body_content = None
 

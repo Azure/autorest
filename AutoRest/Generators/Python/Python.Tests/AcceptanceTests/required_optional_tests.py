@@ -73,8 +73,8 @@ class RequiredOptionalTests(unittest.TestCase):
             self.client.explicit.post_required_string_header(None)
 
         # TODO need check body parameter
-        #with self.assertRaises(ValueError):
-        #    self.client.explicit.post_required_string_parameter(None)
+        with self.assertRaises(ValueError):
+            self.client.explicit.post_required_string_parameter(None)
 
         with self.assertRaises(SerializationError):
             self.client.explicit.post_required_string_property(None)
@@ -84,15 +84,15 @@ class RequiredOptionalTests(unittest.TestCase):
             self.client.explicit.post_required_array_header(None)
 
         # TODO, need check body parameter
-        #with self.assertRaises(TypeError):
-        #    self.client.explicit.post_required_array_parameter(None)
+        with self.assertRaises(TypeError):
+            self.client.explicit.post_required_array_parameter(None)
 
         with self.assertRaises(SerializationError):
             self.client.explicit.post_required_array_property(None)
 
         # TODO need check body parameter
-        #with self.assertRaises(ValueError):
-        #    self.client.explicit.post_required_class_parameter(None)
+        with self.assertRaises(ValueError):
+            self.client.explicit.post_required_class_parameter(None)
 
         cw = ClassWrapper(value = None)
         with self.assertRaises(SerializationError):

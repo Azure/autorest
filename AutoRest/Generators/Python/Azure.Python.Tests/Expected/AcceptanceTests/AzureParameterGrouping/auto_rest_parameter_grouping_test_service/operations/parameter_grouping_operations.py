@@ -87,7 +87,7 @@ class parameter_groupingOperations(object):
             header_parameters['customHeader'] = self._serialize.header("custom_header", custom_header, 'str')
 
         # Construct body
-        body_content = self._serialize(body, 'int')
+        body_content = self._serialize.body(body, 'int')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)

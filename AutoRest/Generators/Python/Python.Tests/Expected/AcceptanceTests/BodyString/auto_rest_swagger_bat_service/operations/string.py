@@ -109,7 +109,7 @@ class string(object):
 
         # Construct body
         if string_body is not None:
-            body_content = self._serialize(string_body, 'str')
+            body_content = self._serialize.body(string_body, 'str')
         else:
             body_content = None
 
@@ -206,7 +206,7 @@ class string(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(string_body, 'str')
+        body_content = self._serialize.body(string_body, 'str')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -307,7 +307,7 @@ class string(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(string_body, 'str')
+        body_content = self._serialize.body(string_body, 'str')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -408,7 +408,7 @@ class string(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(string_body, 'str')
+        body_content = self._serialize.body(string_body, 'str')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)

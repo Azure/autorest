@@ -348,7 +348,7 @@ class int_model(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(int_body, 'int')
+        body_content = self._serialize.body(int_body, 'int')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -395,7 +395,7 @@ class int_model(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(int_body, 'long')
+        body_content = self._serialize.body(int_body, 'long')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -442,7 +442,7 @@ class int_model(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(int_body, 'int')
+        body_content = self._serialize.body(int_body, 'int')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -489,7 +489,7 @@ class int_model(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(int_body, 'long')
+        body_content = self._serialize.body(int_body, 'long')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)

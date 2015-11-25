@@ -256,7 +256,7 @@ class datetime_model(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(datetime_body, 'iso-8601')
+        body_content = self._serialize.body(datetime_body, 'iso-8601')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -402,7 +402,7 @@ class datetime_model(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(datetime_body, 'iso-8601')
+        body_content = self._serialize.body(datetime_body, 'iso-8601')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -550,7 +550,7 @@ class datetime_model(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(datetime_body, 'iso-8601')
+        body_content = self._serialize.body(datetime_body, 'iso-8601')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -697,7 +697,7 @@ class datetime_model(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(datetime_body, 'iso-8601')
+        body_content = self._serialize.body(datetime_body, 'iso-8601')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -793,7 +793,7 @@ class datetime_model(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(datetime_body, 'iso-8601')
+        body_content = self._serialize.body(datetime_body, 'iso-8601')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -889,7 +889,7 @@ class datetime_model(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(datetime_body, 'iso-8601')
+        body_content = self._serialize.body(datetime_body, 'iso-8601')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)

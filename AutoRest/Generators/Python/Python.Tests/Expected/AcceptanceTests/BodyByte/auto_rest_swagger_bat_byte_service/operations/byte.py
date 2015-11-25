@@ -208,7 +208,7 @@ class byte(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize(byte_body, 'bytearray')
+        body_content = self._serialize.body(byte_body, 'bytearray')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
