@@ -37,6 +37,7 @@ class @(Model.Name)Configuration(Configuration):
     def __init__(
             self, @(Model.RequiredConstructorParameters)base_url=None, filepath=None):
 @EmptyLine
+        @Model.ValidateRequiredParameters
         if not base_url:
             base_url = '@Model.BaseUrl'
 @EmptyLine

@@ -19,8 +19,7 @@ sys.path.append(join(tests, "AzureSpecials"))
 
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
-from msrestazure.azure_active_directory import UserPassCredentials
-from msrest.authentication import TokenAuthentication
+from msrest.authentication import BasicTokenAuthentication
 
 from auto_rest_azure_special_parameters_test_client import AutoRestAzureSpecialParametersTestClient, AutoRestAzureSpecialParametersTestClientConfiguration
     
@@ -32,8 +31,8 @@ class XmsRequestClientIdTests(unittest.TestCase):
         validSubscription = '1234-5678-9012-3456'
         validClientId = '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
 
-        cred = TokenAuthentication(validSubscription, {"my_token":123})
-        config = AutoRestAzureSpecialParametersTestClientConfiguration(None, validSubscription, base_url="http://localhost:3000")
+        cred = BasicTokenAuthentication({"access_token":123})
+        config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestAzureSpecialParametersTestClient(config)
 

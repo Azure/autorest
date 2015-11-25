@@ -19,7 +19,7 @@ sys.path.append(join(tests, "ResourceFlattening"))
 
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
-from msrestazure.azure_active_directory import UserPassCredentials
+from msrest.authentication import BasicTokenAuthentication
 
 from auto_rest_resource_flattening_test_service import AutoRestResourceFlatteningTestService, AutoRestResourceFlatteningTestServiceConfiguration
 from auto_rest_resource_flattening_test_service.models import FlattenedProduct, ErrorException, ResourceCollection
@@ -28,7 +28,8 @@ from auto_rest_resource_flattening_test_service.models import FlattenedProduct, 
 class ResourceFlatteningTests(unittest.TestCase):
 
     def setUp(self):
-        config = AutoRestResourceFlatteningTestServiceConfiguration(None, base_url="http://localhost:3000")
+        cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
+        config = AutoRestResourceFlatteningTestServiceConfiguration(cred, base_url="http://localhost:3000")
         config.log_level = 10
         self.client = AutoRestResourceFlatteningTestService(config)
 

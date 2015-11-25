@@ -19,7 +19,7 @@ sys.path.append(join(tests, "Lro"))
 
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
-from msrestazure.azure_active_directory import UserPassCredentials
+from msrest.authentication import BasicTokenAuthentication
 from msrestazure.azure_exceptions import CloudError, CloudException
 
 from auto_rest_long_running_operation_test_service import (
@@ -31,11 +31,9 @@ from auto_rest_long_running_operation_test_service.models import *
 class LroTests(unittest.TestCase):
 
     def setUp(self):
-        config = AutoRestLongRunningOperationTestServiceConfiguration(None, base_url="http://localhost:3000")
 
-        # TODO: investigate how to use TokenAuth in testing
-        #creds = UserPassCredentials(config, client_id, "user", "password")
-        #creds.get_token()
+        cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
+        config = AutoRestLongRunningOperationTestServiceConfiguration(cred, base_url="http://localhost:3000")
 
         config.log_level = 10
         self.client = AutoRestLongRunningOperationTestService(config)

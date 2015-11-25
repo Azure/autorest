@@ -1,7 +1,7 @@
 import unittest
 import sys
-import uuid
 import datetime
+from uuid import uuid4
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
@@ -18,7 +18,6 @@ sys.path.append(join(tests, "AzureSpecials"))
 sys.path.append(join(tests, "AzureReport"))
 
 from msrest.exceptions import DeserializationError
-from msrest.authentication import TokenAuthentication
 
 from auto_rest_parameter_grouping_test_service import AutoRestParameterGroupingTestServiceConfiguration, AutoRestParameterGroupingTestService
 from microsoft_azure_test_url import MicrosoftAzureTestUrl, MicrosoftAzureTestUrlConfiguration
@@ -27,7 +26,7 @@ from auto_rest_duration_test_service import AutoRestDurationTestService, AutoRes
 from auto_rest_azure_special_parameters_test_client import AutoRestAzureSpecialParametersTestClient, AutoRestAzureSpecialParametersTestClientConfiguration
 
 from auto_rest_parameter_grouping_test_service.models import ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup, ParameterGroupingPostOptionalParameters, ParameterGroupingPostRequiredParameters, FirstParameterGroup
-
+from msrest.authentication import BasicTokenAuthentication
 
 class AcceptanceTests(unittest.TestCase):
 
@@ -38,7 +37,8 @@ class AcceptanceTests(unittest.TestCase):
         queryParameter = 21
         pathParameter = 'path'
 
-        config = AutoRestParameterGroupingTestServiceConfiguration(None, base_url="http://localhost:3000")
+        cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
+        config = AutoRestParameterGroupingTestServiceConfiguration(cred, base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestParameterGroupingTestService(config)
 
@@ -90,7 +90,8 @@ class AcceptanceTests(unittest.TestCase):
         validApiVersion = '2.0'
         unencodedPath = 'path1/path2/path3'
         unencodedQuery = 'value1&q2=value2&q3=value3'
-        config = AutoRestAzureSpecialParametersTestClientConfiguration(None, validSubscription, base_url="http://localhost:3000")
+        cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
+        config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestAzureSpecialParametersTestClient(config)
 
@@ -126,7 +127,8 @@ class AcceptanceTests(unittest.TestCase):
     #@unittest.skip("For now, skip this test since it'll always fail")
     def test_ensure_coverage(self):
 
-        config = AutoRestReportServiceForAzureConfiguration(None, base_url="http://localhost:3000")
+        cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
+        config = AutoRestReportServiceForAzureConfiguration(cred, base_url="http://localhost:3000")
         config.log_level = 10
         client = AutoRestReportServiceForAzure(config)
         report = client.get_report()

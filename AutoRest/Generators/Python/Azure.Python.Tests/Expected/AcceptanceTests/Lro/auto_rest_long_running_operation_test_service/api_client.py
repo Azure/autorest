@@ -25,6 +25,8 @@ class AutoRestLongRunningOperationTestServiceConfiguration(AzureConfiguration):
     def __init__(
             self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
 
+        if credentials is None:
+            raise ValueError('credentials must not be None.')
         if not base_url:
             base_url = 'http://localhost'
 

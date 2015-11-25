@@ -32,6 +32,7 @@ class AcceptanceTests(unittest.TestCase):
         report['getLongUnderflow']=1
         report['getDateInvalid']=1
         report['getDictionaryNullkey']=1
+        report['HttpRedirect300Get']=1
         skipped = [k for k, v in report.items() if v == 0]
 
         for s in skipped:
