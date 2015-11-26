@@ -54,7 +54,7 @@ class DictionaryTests(unittest.TestCase):
         with self.assertRaises(DeserializationError):
             self.client.dictionary.get_int_invalid_string()
         
-        long_valid = {"0":1L, "1":-1, "2":3, "3":300}
+        long_valid = {"0":1, "1":-1, "2":3, "3":300}
         self.assertEqual(long_valid, self.client.dictionary.get_long_valid())
 
         self.client.dictionary.put_long_valid(long_valid)

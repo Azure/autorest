@@ -44,8 +44,8 @@ class ArrayTests(unittest.TestCase):
         self.assertEqual([1, -1, 3, 300], client.array.get_integer_valid())
         client.array.put_integer_valid([1, -1, 3, 300])
 
-        self.assertEqual([1L, -1, 3, 300], client.array.get_long_valid())
-        client.array.put_long_valid([1L, -1, 3, 300])
+        self.assertEqual([1, -1, 3, 300], client.array.get_long_valid())
+        client.array.put_long_valid([1, -1, 3, 300])
 
         self.assertEqual([0, -0.01, -1.2e20], client.array.get_float_valid())
         client.array.put_float_valid([0, -0.01, -1.2e20])
