@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodystring.models.Colors;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -61,9 +62,10 @@ public interface EnumOperations {
      * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putNotExpandable(Colors stringBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putNotExpandable(Colors stringBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'

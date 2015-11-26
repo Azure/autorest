@@ -21,6 +21,7 @@ import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.Error;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -37,8 +38,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get complex types with dictionary property
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DictionaryWrapper> getValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getValid();
@@ -76,12 +78,13 @@ public class DictionaryImpl implements Dictionary {
      * Put complex types with dictionary property
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putValid(DictionaryWrapper complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putValid(DictionaryWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody);
@@ -96,8 +99,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
@@ -125,8 +127,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get complex types with dictionary property which is empty
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DictionaryWrapper> getEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getEmpty();
@@ -164,12 +167,13 @@ public class DictionaryImpl implements Dictionary {
      * Put complex types with dictionary property which is empty
      *
      * @param complexBody Please put an empty dictionary
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putEmpty(DictionaryWrapper complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putEmpty(DictionaryWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putEmpty(complexBody);
@@ -184,8 +188,7 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
@@ -213,8 +216,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get complex types with dictionary property which is null
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DictionaryWrapper> getNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -251,8 +255,9 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DictionaryWrapper> getNotProvided() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNotProvided();

@@ -37,7 +37,7 @@ public class ValidatorTests {
             body.value = null;
             Validator.validate(body); // fail
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("value is required"));
         }
     }
@@ -51,7 +51,7 @@ public class ValidatorTests {
             body.value = null;
             Validator.validate(body); // fail
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("value is required"));
         }
     }
@@ -65,7 +65,7 @@ public class ValidatorTests {
             body.value = null;
             Validator.validate(body); // fail
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("value is required"));
         }
     }
@@ -77,7 +77,7 @@ public class ValidatorTests {
             body.list = null;
             Validator.validate(body); // fail
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("list is required"));
         }
         body.list = new ArrayList<StringWrapper>();
@@ -92,7 +92,7 @@ public class ValidatorTests {
         try {
             Validator.validate(body); // fail
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("list.value is required"));
         }
     }
@@ -104,7 +104,7 @@ public class ValidatorTests {
             body.map = null;
             Validator.validate(body); // fail
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("map is required"));
         }
         body.map = new HashMap<LocalDate, StringWrapper>();
@@ -119,7 +119,7 @@ public class ValidatorTests {
         try {
             Validator.validate(body); // fail
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("map.value is required"));
         }
     }

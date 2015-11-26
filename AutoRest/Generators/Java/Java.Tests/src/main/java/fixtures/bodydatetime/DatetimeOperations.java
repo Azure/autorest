@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import org.joda.time.DateTime;
 import retrofit.Call;
 import retrofit.http.Body;
@@ -163,9 +164,10 @@ public interface DatetimeOperations {
      * @param datetimeBody the DateTime value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUtcMaxDateTime(DateTime datetimeBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putUtcMaxDateTime(DateTime datetimeBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z
@@ -216,9 +218,10 @@ public interface DatetimeOperations {
      * @param datetimeBody the DateTime value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00
@@ -269,9 +272,10 @@ public interface DatetimeOperations {
      * @param datetimeBody the DateTime value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00
@@ -322,9 +326,10 @@ public interface DatetimeOperations {
      * @param datetimeBody the DateTime value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUtcMinDateTime(DateTime datetimeBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putUtcMinDateTime(DateTime datetimeBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put min datetime value 0001-01-01T00:00:00Z
@@ -358,9 +363,10 @@ public interface DatetimeOperations {
      * @param datetimeBody the DateTime value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00
@@ -394,9 +400,10 @@ public interface DatetimeOperations {
      * @param datetimeBody the DateTime value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00

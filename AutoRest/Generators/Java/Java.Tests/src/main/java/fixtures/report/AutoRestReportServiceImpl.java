@@ -80,8 +80,9 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     /**
      * Get test coverage report
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, Integer>> getReport() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getReport();

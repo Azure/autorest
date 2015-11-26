@@ -21,6 +21,7 @@ import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Error;
 import fixtures.bodycomplex.models.Siamese;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -37,8 +38,9 @@ public class InheritanceImpl implements Inheritance {
     /**
      * Get complex types that extend others
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Siamese object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Siamese> getValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getValid();
@@ -76,12 +78,13 @@ public class InheritanceImpl implements Inheritance {
      * Put complex types that extend others
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putValid(Siamese complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putValid(Siamese complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody);
@@ -96,8 +99,7 @@ public class InheritanceImpl implements Inheritance {
      */
     public Call<ResponseBody> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);

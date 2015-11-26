@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import java.math.BigDecimal;
 import retrofit.Call;
 import retrofit.http.Body;
@@ -322,9 +323,10 @@ public interface Number {
      * @param numberBody the BigDecimal value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBigDecimal(BigDecimal numberBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putBigDecimal(BigDecimal numberBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put big decimal value 2.5976931e+101
@@ -358,9 +360,10 @@ public interface Number {
      * @param numberBody the BigDecimal value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBigDecimalPositiveDecimal(BigDecimal numberBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putBigDecimalPositiveDecimal(BigDecimal numberBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put big decimal value 99999999.99
@@ -394,9 +397,10 @@ public interface Number {
      * @param numberBody the BigDecimal value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBigDecimalNegativeDecimal(BigDecimal numberBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putBigDecimalNegativeDecimal(BigDecimal numberBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put big decimal value -99999999.99
@@ -502,9 +506,10 @@ public interface Number {
      * @param numberBody the BigDecimal value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putSmallDecimal(BigDecimal numberBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putSmallDecimal(BigDecimal numberBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put small decimal value 2.5976931e-101

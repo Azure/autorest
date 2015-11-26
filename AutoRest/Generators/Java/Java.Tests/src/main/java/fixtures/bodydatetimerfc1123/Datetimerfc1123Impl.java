@@ -20,6 +20,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodydatetimerfc1123.models.Error;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -36,8 +37,9 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
     /**
      * Get null datetime value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTimeRfc1123 object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTimeRfc1123> getNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -74,8 +76,9 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
     /**
      * Get invalid datetime value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTimeRfc1123 object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTimeRfc1123> getInvalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getInvalid();
@@ -112,8 +115,9 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
     /**
      * Get overflow datetime value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTimeRfc1123 object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTimeRfc1123> getOverflow() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getOverflow();
@@ -150,8 +154,9 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
     /**
      * Get underflow datetime value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTimeRfc1123 object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTimeRfc1123> getUnderflow() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getUnderflow();
@@ -189,12 +194,13 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT
      *
      * @param datetimeBody the DateTimeRfc1123 value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putUtcMaxDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putUtcMaxDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException, IOException, IllegalArgumentException {
         if (datetimeBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBody);
         return putUtcMaxDateTimeDelegate(call.execute(), null);
@@ -208,8 +214,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
      */
     public Call<ResponseBody> putUtcMaxDateTimeAsync(DateTimeRfc1123 datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBody);
@@ -236,8 +241,9 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTimeRfc1123 object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTimeRfc1123> getUtcLowercaseMaxDateTime() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getUtcLowercaseMaxDateTime();
@@ -274,8 +280,9 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTimeRfc1123 object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTimeRfc1123> getUtcUppercaseMaxDateTime() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getUtcUppercaseMaxDateTime();
@@ -313,12 +320,13 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT
      *
      * @param datetimeBody the DateTimeRfc1123 value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putUtcMinDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putUtcMinDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException, IOException, IllegalArgumentException {
         if (datetimeBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBody);
         return putUtcMinDateTimeDelegate(call.execute(), null);
@@ -332,8 +340,7 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
      */
     public Call<ResponseBody> putUtcMinDateTimeAsync(DateTimeRfc1123 datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBody);
@@ -360,8 +367,9 @@ public class Datetimerfc1123Impl implements Datetimerfc1123 {
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTimeRfc1123 object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateTimeRfc1123> getUtcMinDateTime() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getUtcMinDateTime();

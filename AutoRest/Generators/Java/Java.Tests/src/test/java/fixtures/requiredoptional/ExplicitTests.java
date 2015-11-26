@@ -68,8 +68,8 @@ public class ExplicitTests {
         try {
             client.getExplicit().postRequiredStringParameter(null);
             fail();
-        } catch (ServiceException ex) {
-            Assert.assertTrue(ex.getCause().getMessage().contains("Parameter bodyParameter is required"));
+        } catch (IllegalArgumentException ex) {
+            Assert.assertTrue(ex.getMessage().contains("Parameter bodyParameter is required"));
         }
     }
 
@@ -90,8 +90,7 @@ public class ExplicitTests {
             body.setValue(null);
             client.getExplicit().postRequiredStringProperty(body);
             fail();
-        } catch (ServiceException ex) {
-            Assert.assertEquals(IllegalArgumentException.class, ex.getCause().getClass());
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("value is required"));
         }
     }
@@ -108,7 +107,7 @@ public class ExplicitTests {
         try {
             client.getExplicit().postRequiredStringHeader(null);
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter headerParameter is required"));
         }
     }
@@ -123,8 +122,8 @@ public class ExplicitTests {
         try {
             client.getExplicit().postRequiredClassParameter(null);
             fail();
-        } catch (ServiceException ex) {
-            Assert.assertTrue(ex.getCause().getMessage().contains("Parameter bodyParameter is required"));
+        } catch (IllegalArgumentException ex) {
+            Assert.assertTrue(ex.getMessage().contains("Parameter bodyParameter is required"));
         }
     }
 
@@ -145,8 +144,7 @@ public class ExplicitTests {
             body.setValue(null);
             client.getExplicit().postRequiredClassProperty(body);
             fail();
-        } catch (ServiceException ex) {
-            Assert.assertEquals(IllegalArgumentException.class, ex.getCause().getClass());
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("value is required"));
         }
     }
@@ -163,8 +161,8 @@ public class ExplicitTests {
         try {
             client.getExplicit().postRequiredArrayParameter(null);
             fail();
-        } catch (ServiceException ex) {
-            Assert.assertTrue(ex.getCause().getMessage().contains("Parameter bodyParameter is required"));
+        } catch (IllegalArgumentException ex) {
+            Assert.assertTrue(ex.getMessage().contains("Parameter bodyParameter is required"));
         }
     }
 
@@ -185,8 +183,7 @@ public class ExplicitTests {
             body.setValue(null);
             client.getExplicit().postRequiredArrayProperty(body);
             fail();
-        } catch (ServiceException ex) {
-            Assert.assertEquals(IllegalArgumentException.class, ex.getCause().getClass());
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("value is required"));
         }
     }
@@ -203,8 +200,8 @@ public class ExplicitTests {
         try {
             client.getExplicit().postRequiredArrayHeader(null);
             fail();
-        } catch (ServiceException ex) {
-            Assert.assertTrue(ex.getCause().getMessage().contains("Parameter headerParameter is required"));
+        } catch (IllegalArgumentException ex) {
+            Assert.assertTrue(ex.getMessage().contains("Parameter headerParameter is required"));
         }
     }
 

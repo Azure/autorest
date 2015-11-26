@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Basic;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -73,9 +74,10 @@ public interface BasicOperations {
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putValid(Basic complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putValid(Basic complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}

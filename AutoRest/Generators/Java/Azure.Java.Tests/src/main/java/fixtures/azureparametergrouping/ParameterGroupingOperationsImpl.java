@@ -26,6 +26,7 @@ import fixtures.azureparametergrouping.models.ParameterGroupingPostMultipleParam
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -43,12 +44,13 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
      * Post a bunch of required parameters grouped
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) throws ServiceException, IOException {
+    public ServiceResponse<Void> postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) throws ServiceException, IOException, IllegalArgumentException {
         if (parameterGroupingPostRequiredParameters == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null.");
         }
         Validator.validate(parameterGroupingPostRequiredParameters);
         int body = parameterGroupingPostRequiredParameters.getBody();
@@ -67,8 +69,7 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
      */
     public Call<ResponseBody> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) {
         if (parameterGroupingPostRequiredParameters == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null."));
             return null;
         }
         Validator.validate(parameterGroupingPostRequiredParameters, serviceCallback);
@@ -101,7 +102,8 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
      * Post a bunch of optional parameters grouped
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) throws ServiceException, IOException {
         String customHeader = parameterGroupingPostOptionalParameters.getCustomHeader();
@@ -145,7 +147,8 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultipleParameterGroupsSecondParameterGroup Additional parameters for the operation
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> postMultipleParameterGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup) throws ServiceException, IOException {
         String headerOne = firstParameterGroup.getHeaderOne();
@@ -193,7 +196,8 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
      * Post parameters with a shared parameter group object
      *
      * @param firstParameterGroup Additional parameters for the operation
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) throws ServiceException, IOException {
         String headerOne = firstParameterGroup.getHeaderOne();

@@ -36,7 +36,8 @@ public class HttpRetryImpl implements HttpRetry {
     /**
      * Return 408 status code, then 200 after retry
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> head408() throws ServiceException, IOException {
         Call<Void> call = service.head408();
@@ -74,7 +75,8 @@ public class HttpRetryImpl implements HttpRetry {
      * Return 500 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> put500(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.put500(booleanValue);
@@ -113,7 +115,8 @@ public class HttpRetryImpl implements HttpRetry {
      * Return 500 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> patch500(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.patch500(booleanValue);
@@ -151,7 +154,8 @@ public class HttpRetryImpl implements HttpRetry {
     /**
      * Return 502 status code, then 200 after retry
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> get502() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get502();
@@ -189,7 +193,8 @@ public class HttpRetryImpl implements HttpRetry {
      * Return 503 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> post503(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.post503(booleanValue);
@@ -228,7 +233,8 @@ public class HttpRetryImpl implements HttpRetry {
      * Return 503 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> delete503(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.delete503(booleanValue);
@@ -267,7 +273,8 @@ public class HttpRetryImpl implements HttpRetry {
      * Return 504 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> put504(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.put504(booleanValue);
@@ -306,7 +313,8 @@ public class HttpRetryImpl implements HttpRetry {
      * Return 504 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> patch504(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.patch504(booleanValue);

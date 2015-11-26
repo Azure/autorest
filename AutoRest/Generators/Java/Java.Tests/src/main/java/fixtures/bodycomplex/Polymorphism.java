@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Fish;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -96,9 +97,10 @@ public interface Polymorphism {
        };
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putValid(Fish complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putValid(Fish complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types that are polymorphic
@@ -172,9 +174,10 @@ public interface Polymorphism {
  }
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putValidMissingRequired(Fish complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putValidMissingRequired(Fish complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client
