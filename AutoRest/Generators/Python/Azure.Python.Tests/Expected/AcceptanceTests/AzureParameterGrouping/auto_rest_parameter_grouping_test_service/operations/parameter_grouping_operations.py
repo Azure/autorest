@@ -15,7 +15,14 @@ from msrest.exceptions import DeserializationError, HttpOperationError
 from msrestazure.azure_exceptions import CloudError
 import uuid
 
-from ..models import *
+from ..models import (
+  Error,
+  CloudError,
+  ParameterGroupingPostRequiredParameters,
+  ParameterGroupingPostOptionalParameters,
+  FirstParameterGroup,
+  ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup,
+)
 
 
 class parameter_groupingOperations(object):

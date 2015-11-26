@@ -197,5 +197,17 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             }
             return type.Name + "Exception";
         }
+
+        public static string GetExceptionDefinitionTypeIfExists(this CompositeType type, ServiceClient serviceClient)
+        {
+            if (serviceClient.ErrorTypes.Contains(type))
+            {
+                return type.GetExceptionDefineType();
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

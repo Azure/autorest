@@ -16,7 +16,25 @@ from msrestazure.azure_exceptions import CloudError
 from msrestazure.azure_operation import AzureOperationPoller
 import uuid
 
-from ..models import *
+from ..models import (
+  StorageAccountCheckNameAvailabilityParameters,
+  CheckNameAvailabilityResult,
+  StorageAccountCreateParameters,
+  Endpoints,
+  Foo,
+  Bar,
+  CustomDomain,
+  StorageAccount,
+  StorageAccountKeys,
+  StorageAccountUpdateParameters,
+  StorageAccountRegenerateKeyParameters,
+  UsageName,
+  Usage,
+  UsageListResult,
+  Resource,
+  SubResource,
+  CloudError,
+)
 
 
 class storage_accountsOperations(object):

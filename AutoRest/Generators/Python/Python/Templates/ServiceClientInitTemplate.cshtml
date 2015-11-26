@@ -8,6 +8,14 @@
 @Header("# ")
 # --------------------------------------------------------------------------
 @EmptyLine
-from msrest.exceptions import *
+from msrest.exceptions import (
+    ClientException,
+    SerializationError,
+    DeserializationError,
+    TokenExpiredError,
+    ClientRequestError,
+    AuthenticationError,
+    HttpOperationError,
+)
 @EmptyLine
 from .api_client import @(Model.Name), @(Model.Name)Configuration

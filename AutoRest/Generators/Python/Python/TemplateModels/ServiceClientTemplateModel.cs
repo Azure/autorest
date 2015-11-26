@@ -110,5 +110,6 @@ namespace Microsoft.Rest.Generator.Python
                 return builder.ToString();
             }
         }
+
     }
 }

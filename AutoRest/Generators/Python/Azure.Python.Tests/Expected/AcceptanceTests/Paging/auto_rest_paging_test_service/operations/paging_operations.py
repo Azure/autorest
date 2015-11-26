@@ -15,7 +15,12 @@ from msrest.exceptions import DeserializationError, HttpOperationError
 from msrestazure.azure_exceptions import CloudError
 import uuid
 
-from ..models import *
+from ..models import (
+  Product,
+  ProductProperties,
+  OperationResult,
+  CloudError,
+)
 
 
 class pagingOperations(object):

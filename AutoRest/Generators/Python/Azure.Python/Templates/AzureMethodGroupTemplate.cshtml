@@ -19,7 +19,12 @@ import uuid
 @if (Model.HasAnyModel)
 {
 @EmptyLine
-@:from ..models import *
+@:from ..models import (
+    foreach (var type in Model.ModelTypes)
+    {
+@:  @(type.Name),
+    }
+@:)
 }
 @EmptyLine
 @EmptyLine
