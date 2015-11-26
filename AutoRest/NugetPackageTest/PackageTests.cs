@@ -7,6 +7,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Fixtures.Bodynumber;
 using Microsoft.Rest.Generator.CSharp.Tests;
+using Microsoft.Rest;
 
 namespace NugetPackageTest
 {
@@ -29,7 +30,7 @@ namespace NugetPackageTest
         {
             var client = new AutoRestNumberTestService(Fixture.Uri);
             Assert.Equal(3.402823e+20, client.Number.GetBigFloat());
-            Assert.Throws<JsonReaderException>(() => client.Number.GetInvalidFloat());
+            Assert.Throws<RestException>(() => client.Number.GetInvalidFloat());
         }
     }
 }
