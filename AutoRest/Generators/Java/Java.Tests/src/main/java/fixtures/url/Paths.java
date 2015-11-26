@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.url.models.UriColor;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import retrofit.Call;
@@ -298,9 +299,10 @@ public interface Paths {
      * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringUnicode(String stringPath) throws ServiceException, IOException;
+    ServiceResponse<Void> stringUnicode(String stringPath) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
@@ -317,9 +319,10 @@ public interface Paths {
      * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringUrlEncoded(String stringPath) throws ServiceException, IOException;
+    ServiceResponse<Void> stringUrlEncoded(String stringPath) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end
@@ -336,9 +339,10 @@ public interface Paths {
      * @param stringPath '' string value. Possible values for this parameter include: ''
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringEmpty(String stringPath) throws ServiceException, IOException;
+    ServiceResponse<Void> stringEmpty(String stringPath) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get ''
@@ -355,9 +359,10 @@ public interface Paths {
      * @param stringPath null string value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringNull(String stringPath) throws ServiceException, IOException;
+    ServiceResponse<Void> stringNull(String stringPath) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get null (should throw)
@@ -374,9 +379,10 @@ public interface Paths {
      * @param enumPath send the value green. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> enumValid(UriColor enumPath) throws ServiceException, IOException;
+    ServiceResponse<Void> enumValid(UriColor enumPath) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get using uri with 'green color' in path parameter
@@ -393,9 +399,10 @@ public interface Paths {
      * @param enumPath send null should throw. Possible values for this parameter include: 'red color', 'green color', 'blue color'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> enumNull(UriColor enumPath) throws ServiceException, IOException;
+    ServiceResponse<Void> enumNull(UriColor enumPath) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get null (should throw on the client before the request is sent on wire)
@@ -412,9 +419,10 @@ public interface Paths {
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> byteMultiByte(byte[] bytePath) throws ServiceException, IOException;
+    ServiceResponse<Void> byteMultiByte(byte[] bytePath) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
@@ -431,9 +439,10 @@ public interface Paths {
      * @param bytePath '' as byte array
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> byteEmpty(byte[] bytePath) throws ServiceException, IOException;
+    ServiceResponse<Void> byteEmpty(byte[] bytePath) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get '' as byte array
@@ -450,9 +459,10 @@ public interface Paths {
      * @param bytePath null as byte array (should throw)
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> byteNull(byte[] bytePath) throws ServiceException, IOException;
+    ServiceResponse<Void> byteNull(byte[] bytePath) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get null as byte array (should throw)
@@ -469,9 +479,10 @@ public interface Paths {
      * @param datePath '2012-01-01' as date
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateValid(LocalDate datePath) throws ServiceException, IOException;
+    ServiceResponse<Void> dateValid(LocalDate datePath) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get '2012-01-01' as date
@@ -488,9 +499,10 @@ public interface Paths {
      * @param datePath null as date (should throw)
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateNull(LocalDate datePath) throws ServiceException, IOException;
+    ServiceResponse<Void> dateNull(LocalDate datePath) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation
@@ -507,9 +519,10 @@ public interface Paths {
      * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateTimeValid(DateTime dateTimePath) throws ServiceException, IOException;
+    ServiceResponse<Void> dateTimeValid(DateTime dateTimePath) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time
@@ -526,9 +539,10 @@ public interface Paths {
      * @param dateTimePath null as date-time
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateTimeNull(DateTime dateTimePath) throws ServiceException, IOException;
+    ServiceResponse<Void> dateTimeNull(DateTime dateTimePath) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time

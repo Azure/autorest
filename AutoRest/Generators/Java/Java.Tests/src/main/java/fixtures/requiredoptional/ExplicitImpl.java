@@ -31,6 +31,7 @@ import fixtures.requiredoptional.models.Product;
 import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import java.util.List;
 import retrofit.Call;
 import retrofit.Response;
@@ -49,8 +50,9 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the int value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Error> postRequiredIntegerParameter(int bodyParameter) throws ServiceException, IOException {
         Call<ResponseBody> call = service.postRequiredIntegerParameter(bodyParameter);
@@ -88,7 +90,8 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional integer. Please put null.
      *
      * @param bodyParameter the Integer value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> postOptionalIntegerParameter(Integer bodyParameter) throws ServiceException, IOException {
         Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
@@ -127,13 +130,14 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the IntWrapper value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredIntegerProperty(IntWrapper bodyParameter) throws ServiceException, IOException {
+    public ServiceResponse<Error> postRequiredIntegerProperty(IntWrapper bodyParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (bodyParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredIntegerProperty(bodyParameter);
@@ -148,8 +152,7 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
             return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
@@ -177,7 +180,8 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter the IntOptionalWrapper value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ServiceException, IOException {
         Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
@@ -216,8 +220,9 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the int value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Error> postRequiredIntegerHeader(int headerParameter) throws ServiceException, IOException {
         Call<ResponseBody> call = service.postRequiredIntegerHeader(headerParameter);
@@ -255,7 +260,8 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the Integer value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> postOptionalIntegerHeader(Integer headerParameter) throws ServiceException, IOException {
         Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
@@ -294,13 +300,14 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the String value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredStringParameter(String bodyParameter) throws ServiceException, IOException {
+    public ServiceResponse<Error> postRequiredStringParameter(String bodyParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (bodyParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postRequiredStringParameter(bodyParameter);
         return postRequiredStringParameterDelegate(call.execute(), null);
@@ -314,8 +321,7 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postRequiredStringParameter(bodyParameter);
@@ -342,7 +348,8 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional string. Please put null.
      *
      * @param bodyParameter the String value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> postOptionalStringParameter(String bodyParameter) throws ServiceException, IOException {
         Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
@@ -381,13 +388,14 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the StringWrapper value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredStringProperty(StringWrapper bodyParameter) throws ServiceException, IOException {
+    public ServiceResponse<Error> postRequiredStringProperty(StringWrapper bodyParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (bodyParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredStringProperty(bodyParameter);
@@ -402,8 +410,7 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
             return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
@@ -431,7 +438,8 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter the StringOptionalWrapper value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ServiceException, IOException {
         Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
@@ -470,13 +478,14 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the String value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredStringHeader(String headerParameter) throws ServiceException, IOException {
+    public ServiceResponse<Error> postRequiredStringHeader(String headerParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (headerParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postRequiredStringHeader(headerParameter);
         return postRequiredStringHeaderDelegate(call.execute(), null);
@@ -490,8 +499,7 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback) {
         if (headerParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter headerParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postRequiredStringHeader(headerParameter);
@@ -518,7 +526,8 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter the String value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> postOptionalStringHeader(String bodyParameter) throws ServiceException, IOException {
         Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
@@ -557,13 +566,14 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the Product value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredClassParameter(Product bodyParameter) throws ServiceException, IOException {
+    public ServiceResponse<Error> postRequiredClassParameter(Product bodyParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (bodyParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredClassParameter(bodyParameter);
@@ -578,8 +588,7 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
             return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
@@ -607,7 +616,8 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional complex object. Please put null.
      *
      * @param bodyParameter the Product value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> postOptionalClassParameter(Product bodyParameter) throws ServiceException, IOException {
         Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
@@ -646,13 +656,14 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ClassWrapper value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredClassProperty(ClassWrapper bodyParameter) throws ServiceException, IOException {
+    public ServiceResponse<Error> postRequiredClassProperty(ClassWrapper bodyParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (bodyParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredClassProperty(bodyParameter);
@@ -667,8 +678,7 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
             return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
@@ -696,7 +706,8 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter the ClassOptionalWrapper value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ServiceException, IOException {
         Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
@@ -735,13 +746,14 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the List&lt;String&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredArrayParameter(List<String> bodyParameter) throws ServiceException, IOException {
+    public ServiceResponse<Error> postRequiredArrayParameter(List<String> bodyParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (bodyParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredArrayParameter(bodyParameter);
@@ -756,8 +768,7 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
             return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
@@ -785,7 +796,8 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional array. Please put null.
      *
      * @param bodyParameter the List&lt;String&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> postOptionalArrayParameter(List<String> bodyParameter) throws ServiceException, IOException {
         Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
@@ -824,13 +836,14 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ArrayWrapper value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ServiceException, IOException {
+    public ServiceResponse<Error> postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (bodyParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredArrayProperty(bodyParameter);
@@ -845,8 +858,7 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
             return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
@@ -874,7 +886,8 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter the ArrayOptionalWrapper value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ServiceException, IOException {
         Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
@@ -913,13 +926,14 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the List&lt;String&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredArrayHeader(List<String> headerParameter) throws ServiceException, IOException {
+    public ServiceResponse<Error> postRequiredArrayHeader(List<String> headerParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (headerParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
         Validator.validate(headerParameter);
         Call<ResponseBody> call = service.postRequiredArrayHeader(JacksonUtils.serializeList(headerParameter, CollectionFormat.CSV));
@@ -934,8 +948,7 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback) {
         if (headerParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter headerParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
             return null;
         }
         Validator.validate(headerParameter, serviceCallback);
@@ -963,7 +976,8 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the List&lt;String&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> postOptionalArrayHeader(List<String> headerParameter) throws ServiceException, IOException {
         Call<ResponseBody> call = service.postOptionalArrayHeader(JacksonUtils.serializeList(headerParameter, CollectionFormat.CSV));

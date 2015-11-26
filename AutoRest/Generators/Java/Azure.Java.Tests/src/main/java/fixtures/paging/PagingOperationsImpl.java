@@ -22,6 +22,7 @@ import com.squareup.okhttp.ResponseBody;
 import fixtures.paging.models.PageImpl;
 import fixtures.paging.models.Product;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -38,8 +39,9 @@ public class PagingOperationsImpl implements PagingOperations {
     /**
      * A paging operation that finishes on the first call without a nextlink
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<PageImpl<Product>> getSinglePages() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getSinglePages(this.client.getAcceptLanguage());
@@ -77,8 +79,9 @@ public class PagingOperationsImpl implements PagingOperations {
      * A paging operation that includes a nextLink that has 10 pages
      *
      * @param clientRequestId the String value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<PageImpl<Product>> getMultiplePages(String clientRequestId) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage());
@@ -116,8 +119,9 @@ public class PagingOperationsImpl implements PagingOperations {
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirst() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.getAcceptLanguage());
@@ -154,8 +158,9 @@ public class PagingOperationsImpl implements PagingOperations {
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecond() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.getAcceptLanguage());
@@ -192,8 +197,9 @@ public class PagingOperationsImpl implements PagingOperations {
     /**
      * A paging operation that receives a 400 on the first call
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<PageImpl<Product>> getSinglePagesFailure() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getSinglePagesFailure(this.client.getAcceptLanguage());
@@ -230,8 +236,9 @@ public class PagingOperationsImpl implements PagingOperations {
     /**
      * A paging operation that receives a 400 on the second call
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<PageImpl<Product>> getMultiplePagesFailure() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.getAcceptLanguage());
@@ -268,8 +275,9 @@ public class PagingOperationsImpl implements PagingOperations {
     /**
      * A paging operation that receives an invalid nextLink
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUri() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.getAcceptLanguage());
@@ -307,13 +315,14 @@ public class PagingOperationsImpl implements PagingOperations {
      * A paging operation that finishes on the first call without a nextlink
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<PageImpl<Product>> getSinglePagesNext(String nextPageLink) throws ServiceException, IOException {
+    public ServiceResponse<PageImpl<Product>> getSinglePagesNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getSinglePagesNext(nextPageLink, this.client.getAcceptLanguage());
         return getSinglePagesNextDelegate(call.execute(), null);
@@ -327,8 +336,7 @@ public class PagingOperationsImpl implements PagingOperations {
      */
     public Call<ResponseBody> getSinglePagesNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         if (nextPageLink == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getSinglePagesNext(nextPageLink, this.client.getAcceptLanguage());
@@ -357,13 +365,14 @@ public class PagingOperationsImpl implements PagingOperations {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePagesNext(String nextPageLink, String clientRequestId) throws ServiceException, IOException {
+    public ServiceResponse<PageImpl<Product>> getMultiplePagesNext(String nextPageLink, String clientRequestId) throws ServiceException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage());
         return getMultiplePagesNextDelegate(call.execute(), null);
@@ -378,8 +387,7 @@ public class PagingOperationsImpl implements PagingOperations {
      */
     public Call<ResponseBody> getMultiplePagesNextAsync(String nextPageLink, String clientRequestId, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         if (nextPageLink == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage());
@@ -407,13 +415,14 @@ public class PagingOperationsImpl implements PagingOperations {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNext(String nextPageLink) throws ServiceException, IOException {
+    public ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.getAcceptLanguage());
         return getMultiplePagesRetryFirstNextDelegate(call.execute(), null);
@@ -427,8 +436,7 @@ public class PagingOperationsImpl implements PagingOperations {
      */
     public Call<ResponseBody> getMultiplePagesRetryFirstNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         if (nextPageLink == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.getAcceptLanguage());
@@ -456,13 +464,14 @@ public class PagingOperationsImpl implements PagingOperations {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNext(String nextPageLink) throws ServiceException, IOException {
+    public ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.getAcceptLanguage());
         return getMultiplePagesRetrySecondNextDelegate(call.execute(), null);
@@ -476,8 +485,7 @@ public class PagingOperationsImpl implements PagingOperations {
      */
     public Call<ResponseBody> getMultiplePagesRetrySecondNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         if (nextPageLink == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.getAcceptLanguage());
@@ -505,13 +513,14 @@ public class PagingOperationsImpl implements PagingOperations {
      * A paging operation that receives a 400 on the first call
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<PageImpl<Product>> getSinglePagesFailureNext(String nextPageLink) throws ServiceException, IOException {
+    public ServiceResponse<PageImpl<Product>> getSinglePagesFailureNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getSinglePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
         return getSinglePagesFailureNextDelegate(call.execute(), null);
@@ -525,8 +534,7 @@ public class PagingOperationsImpl implements PagingOperations {
      */
     public Call<ResponseBody> getSinglePagesFailureNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         if (nextPageLink == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getSinglePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
@@ -554,13 +562,14 @@ public class PagingOperationsImpl implements PagingOperations {
      * A paging operation that receives a 400 on the second call
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNext(String nextPageLink) throws ServiceException, IOException {
+    public ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMultiplePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
         return getMultiplePagesFailureNextDelegate(call.execute(), null);
@@ -574,8 +583,7 @@ public class PagingOperationsImpl implements PagingOperations {
      */
     public Call<ResponseBody> getMultiplePagesFailureNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         if (nextPageLink == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getMultiplePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
@@ -603,13 +611,14 @@ public class PagingOperationsImpl implements PagingOperations {
      * A paging operation that receives an invalid nextLink
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNext(String nextPageLink) throws ServiceException, IOException {
+    public ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMultiplePagesFailureUriNext(nextPageLink, this.client.getAcceptLanguage());
         return getMultiplePagesFailureUriNextDelegate(call.execute(), null);
@@ -623,8 +632,7 @@ public class PagingOperationsImpl implements PagingOperations {
      */
     public Call<ResponseBody> getMultiplePagesFailureUriNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         if (nextPageLink == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getMultiplePagesFailureUriNext(nextPageLink, this.client.getAcceptLanguage());

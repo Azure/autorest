@@ -36,8 +36,9 @@ public class FilesImpl implements Files {
     /**
      * Get file
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the InputStream object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<InputStream> getFile() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getFile();
@@ -74,8 +75,9 @@ public class FilesImpl implements Files {
     /**
      * Get empty file
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the InputStream object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<InputStream> getEmptyFile() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getEmptyFile();

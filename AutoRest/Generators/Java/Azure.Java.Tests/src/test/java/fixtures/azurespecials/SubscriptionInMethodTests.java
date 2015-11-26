@@ -31,7 +31,7 @@ public class SubscriptionInMethodTests {
         try {
             ServiceResponse<Void> response = client.getSubscriptionInMethod().postMethodLocalNull(null);
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter subscriptionId is required"));
         }
     }

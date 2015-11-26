@@ -37,7 +37,8 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> head300() throws ServiceException, IOException {
         Call<Void> call = service.head300();
@@ -75,8 +76,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<String>> get300() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get300();
@@ -114,7 +116,8 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> head301() throws ServiceException, IOException {
         Call<Void> call = service.head301();
@@ -152,7 +155,8 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> get301() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get301();
@@ -191,7 +195,8 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> put301(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.put301(booleanValue);
@@ -229,7 +234,8 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> head302() throws ServiceException, IOException {
         Call<Void> call = service.head302();
@@ -267,7 +273,8 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> get302() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get302();
@@ -306,7 +313,8 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> patch302(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.patch302(booleanValue);
@@ -345,7 +353,8 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> post303(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.post303(booleanValue);
@@ -384,7 +393,8 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect with 307, resulting in a 200 success
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> head307() throws ServiceException, IOException {
         Call<Void> call = service.head307();
@@ -422,7 +432,8 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect get with 307, resulting in a 200 success
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> get307() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get307();
@@ -461,7 +472,8 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Put redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> put307(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.put307(booleanValue);
@@ -501,7 +513,8 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Patch redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> patch307(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.patch307(booleanValue);
@@ -541,7 +554,8 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Post redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> post307(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.post307(booleanValue);
@@ -581,7 +595,8 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Delete redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> delete307(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.delete307(booleanValue);

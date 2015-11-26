@@ -22,6 +22,7 @@ import com.squareup.okhttp.ResponseBody;
 import fixtures.header.models.Error;
 import fixtures.header.models.GreyscaleColors;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -43,12 +44,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * Send a post request with header value "User-Agent": "overwrite"
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> paramExistingKey(String userAgent) throws ServiceException, IOException {
+    public ServiceResponse<Void> paramExistingKey(String userAgent) throws ServiceException, IOException, IllegalArgumentException {
         if (userAgent == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter userAgent is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter userAgent is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramExistingKey(userAgent);
         return paramExistingKeyDelegate(call.execute(), null);
@@ -62,8 +64,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
         if (userAgent == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter userAgent is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter userAgent is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramExistingKey(userAgent);
@@ -90,7 +91,8 @@ public class HeaderOperationsImpl implements HeaderOperations {
     /**
      * Get a response with header value "User-Agent": "overwrite"
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> responseExistingKey() throws ServiceException, IOException {
         Call<ResponseBody> call = service.responseExistingKey();
@@ -128,12 +130,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * Send a post request with header value "Content-Type": "text/html"
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> paramProtectedKey(String contentType) throws ServiceException, IOException {
+    public ServiceResponse<Void> paramProtectedKey(String contentType) throws ServiceException, IOException, IllegalArgumentException {
         if (contentType == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter contentType is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter contentType is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramProtectedKey(contentType);
         return paramProtectedKeyDelegate(call.execute(), null);
@@ -147,8 +150,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
         if (contentType == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter contentType is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramProtectedKey(contentType);
@@ -175,7 +177,8 @@ public class HeaderOperationsImpl implements HeaderOperations {
     /**
      * Get a response with header value "Content-Type": "text/html"
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> responseProtectedKey() throws ServiceException, IOException {
         Call<ResponseBody> call = service.responseProtectedKey();
@@ -214,12 +217,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> paramInteger(String scenario, int value) throws ServiceException, IOException {
+    public ServiceResponse<Void> paramInteger(String scenario, int value) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramInteger(scenario, value);
         return paramIntegerDelegate(call.execute(), null);
@@ -234,8 +238,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramInteger(scenario, value);
@@ -263,12 +266,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * Get a response with header value "value": 1 or -2
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> responseInteger(String scenario) throws ServiceException, IOException {
+    public ServiceResponse<Void> responseInteger(String scenario) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseInteger(scenario);
         return responseIntegerDelegate(call.execute(), null);
@@ -282,8 +286,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseInteger(scenario);
@@ -312,12 +315,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> paramLong(String scenario, long value) throws ServiceException, IOException {
+    public ServiceResponse<Void> paramLong(String scenario, long value) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramLong(scenario, value);
         return paramLongDelegate(call.execute(), null);
@@ -332,8 +336,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramLong(scenario, value);
@@ -361,12 +364,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * Get a response with header value "value": 105 or -2
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> responseLong(String scenario) throws ServiceException, IOException {
+    public ServiceResponse<Void> responseLong(String scenario) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseLong(scenario);
         return responseLongDelegate(call.execute(), null);
@@ -380,8 +384,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseLong(scenario);
@@ -410,12 +413,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> paramFloat(String scenario, double value) throws ServiceException, IOException {
+    public ServiceResponse<Void> paramFloat(String scenario, double value) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramFloat(scenario, value);
         return paramFloatDelegate(call.execute(), null);
@@ -430,8 +434,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramFloat(scenario, value);
@@ -459,12 +462,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * Get a response with header value "value": 0.07 or -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> responseFloat(String scenario) throws ServiceException, IOException {
+    public ServiceResponse<Void> responseFloat(String scenario) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseFloat(scenario);
         return responseFloatDelegate(call.execute(), null);
@@ -478,8 +482,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseFloat(scenario);
@@ -508,12 +511,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> paramDouble(String scenario, double value) throws ServiceException, IOException {
+    public ServiceResponse<Void> paramDouble(String scenario, double value) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramDouble(scenario, value);
         return paramDoubleDelegate(call.execute(), null);
@@ -528,8 +532,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramDouble(scenario, value);
@@ -557,12 +560,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * Get a response with header value "value": 7e120 or -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> responseDouble(String scenario) throws ServiceException, IOException {
+    public ServiceResponse<Void> responseDouble(String scenario) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseDouble(scenario);
         return responseDoubleDelegate(call.execute(), null);
@@ -576,8 +580,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseDouble(scenario);
@@ -606,12 +609,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> paramBool(String scenario, boolean value) throws ServiceException, IOException {
+    public ServiceResponse<Void> paramBool(String scenario, boolean value) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramBool(scenario, value);
         return paramBoolDelegate(call.execute(), null);
@@ -626,8 +630,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramBool(scenario, value);
@@ -655,12 +658,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * Get a response with header value "value": true or false
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> responseBool(String scenario) throws ServiceException, IOException {
+    public ServiceResponse<Void> responseBool(String scenario) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseBool(scenario);
         return responseBoolDelegate(call.execute(), null);
@@ -674,8 +678,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseBool(scenario);
@@ -704,12 +707,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> paramString(String scenario, String value) throws ServiceException, IOException {
+    public ServiceResponse<Void> paramString(String scenario, String value) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramString(scenario, value);
         return paramStringDelegate(call.execute(), null);
@@ -724,8 +728,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramString(scenario, value);
@@ -753,12 +756,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or ""
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> responseString(String scenario) throws ServiceException, IOException {
+    public ServiceResponse<Void> responseString(String scenario) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseString(scenario);
         return responseStringDelegate(call.execute(), null);
@@ -772,8 +776,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseString(scenario);
@@ -802,16 +805,16 @@ public class HeaderOperationsImpl implements HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> paramDate(String scenario, LocalDate value) throws ServiceException, IOException {
+    public ServiceResponse<Void> paramDate(String scenario, LocalDate value) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         if (value == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter value is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramDate(scenario, JacksonUtils.serializeRaw(value));
         return paramDateDelegate(call.execute(), null);
@@ -826,13 +829,11 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         if (value == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter value is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter value is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramDate(scenario, JacksonUtils.serializeRaw(value));
@@ -860,12 +861,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * Get a response with header values "2010-01-01" or "0001-01-01"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> responseDate(String scenario) throws ServiceException, IOException {
+    public ServiceResponse<Void> responseDate(String scenario) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseDate(scenario);
         return responseDateDelegate(call.execute(), null);
@@ -879,8 +881,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseDate(scenario);
@@ -909,16 +910,16 @@ public class HeaderOperationsImpl implements HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> paramDatetime(String scenario, DateTime value) throws ServiceException, IOException {
+    public ServiceResponse<Void> paramDatetime(String scenario, DateTime value) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         if (value == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter value is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramDatetime(scenario, JacksonUtils.serializeRaw(value));
         return paramDatetimeDelegate(call.execute(), null);
@@ -933,13 +934,11 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         if (value == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter value is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter value is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramDatetime(scenario, JacksonUtils.serializeRaw(value));
@@ -967,12 +966,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> responseDatetime(String scenario) throws ServiceException, IOException {
+    public ServiceResponse<Void> responseDatetime(String scenario) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseDatetime(scenario);
         return responseDatetimeDelegate(call.execute(), null);
@@ -986,8 +986,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseDatetime(scenario);
@@ -1016,12 +1015,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> paramDatetimeRfc1123(String scenario, DateTimeRfc1123 value) throws ServiceException, IOException {
+    public ServiceResponse<Void> paramDatetimeRfc1123(String scenario, DateTimeRfc1123 value) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, value);
         return paramDatetimeRfc1123Delegate(call.execute(), null);
@@ -1036,8 +1036,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> paramDatetimeRfc1123Async(String scenario, DateTimeRfc1123 value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, value);
@@ -1065,12 +1064,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> responseDatetimeRfc1123(String scenario) throws ServiceException, IOException {
+    public ServiceResponse<Void> responseDatetimeRfc1123(String scenario) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseDatetimeRfc1123(scenario);
         return responseDatetimeRfc1123Delegate(call.execute(), null);
@@ -1084,8 +1084,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseDatetimeRfc1123(scenario);
@@ -1114,16 +1113,16 @@ public class HeaderOperationsImpl implements HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> paramDuration(String scenario, Period value) throws ServiceException, IOException {
+    public ServiceResponse<Void> paramDuration(String scenario, Period value) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         if (value == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter value is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramDuration(scenario, value);
         return paramDurationDelegate(call.execute(), null);
@@ -1138,13 +1137,11 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         if (value == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter value is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter value is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramDuration(scenario, value);
@@ -1172,12 +1169,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * Get a response with header values "P123DT22H14M12.011S"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> responseDuration(String scenario) throws ServiceException, IOException {
+    public ServiceResponse<Void> responseDuration(String scenario) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseDuration(scenario);
         return responseDurationDelegate(call.execute(), null);
@@ -1191,8 +1189,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseDuration(scenario);
@@ -1221,16 +1218,16 @@ public class HeaderOperationsImpl implements HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> paramByte(String scenario, byte[] value) throws ServiceException, IOException {
+    public ServiceResponse<Void> paramByte(String scenario, byte[] value) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         if (value == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter value is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramByte(scenario, Base64.encodeBase64String(value));
         return paramByteDelegate(call.execute(), null);
@@ -1245,13 +1242,11 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         if (value == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter value is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter value is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramByte(scenario, Base64.encodeBase64String(value));
@@ -1279,12 +1274,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> responseByte(String scenario) throws ServiceException, IOException {
+    public ServiceResponse<Void> responseByte(String scenario) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseByte(scenario);
         return responseByteDelegate(call.execute(), null);
@@ -1298,8 +1294,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseByte(scenario);
@@ -1328,12 +1323,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY' . Possible values for this parameter include: 'White', 'black', 'GREY'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> paramEnum(String scenario, GreyscaleColors value) throws ServiceException, IOException {
+    public ServiceResponse<Void> paramEnum(String scenario, GreyscaleColors value) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramEnum(scenario, JacksonUtils.serializeRaw(value));
         return paramEnumDelegate(call.execute(), null);
@@ -1348,8 +1344,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramEnum(scenario, JacksonUtils.serializeRaw(value));
@@ -1377,12 +1372,13 @@ public class HeaderOperationsImpl implements HeaderOperations {
      * Get a response with header values "GREY" or null
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> responseEnum(String scenario) throws ServiceException, IOException {
+    public ServiceResponse<Void> responseEnum(String scenario) throws ServiceException, IOException, IllegalArgumentException {
         if (scenario == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseEnum(scenario);
         return responseEnumDelegate(call.execute(), null);
@@ -1396,8 +1392,7 @@ public class HeaderOperationsImpl implements HeaderOperations {
      */
     public Call<ResponseBody> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter scenario is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseEnum(scenario);
@@ -1424,7 +1419,8 @@ public class HeaderOperationsImpl implements HeaderOperations {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> customRequestId() throws ServiceException, IOException {
         Call<ResponseBody> call = service.customRequestId();

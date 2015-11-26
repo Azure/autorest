@@ -26,6 +26,7 @@ import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -131,9 +132,10 @@ public interface Primitive {
      * @param complexBody Please put -1 and 2
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putInt(IntWrapper complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putInt(IntWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with integer properties
@@ -167,9 +169,10 @@ public interface Primitive {
      * @param complexBody Please put 1099511627775 and -999511627788
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putLong(LongWrapper complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putLong(LongWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with long properties
@@ -203,9 +206,10 @@ public interface Primitive {
      * @param complexBody Please put 1.05 and -0.003
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putFloat(FloatWrapper complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putFloat(FloatWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with float properties
@@ -239,9 +243,10 @@ public interface Primitive {
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDouble(DoubleWrapper complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putDouble(DoubleWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with double properties
@@ -275,9 +280,10 @@ public interface Primitive {
      * @param complexBody Please put true and false
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBool(BooleanWrapper complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putBool(BooleanWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with bool properties
@@ -311,9 +317,10 @@ public interface Primitive {
      * @param complexBody Please put 'goodrequest', '', and null
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putString(StringWrapper complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putString(StringWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with string properties
@@ -347,9 +354,10 @@ public interface Primitive {
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDate(DateWrapper complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putDate(DateWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with date properties
@@ -383,9 +391,10 @@ public interface Primitive {
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateTime(DatetimeWrapper complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putDateTime(DatetimeWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with datetime properties
@@ -419,9 +428,10 @@ public interface Primitive {
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with datetimeRfc1123 properties
@@ -455,9 +465,10 @@ public interface Primitive {
      * @param complexBody Please put 'P123DT22H14M12.011S'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDuration(DurationWrapper complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putDuration(DurationWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with duration properties
@@ -491,9 +502,10 @@ public interface Primitive {
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putByte(ByteWrapper complexBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putByte(ByteWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with byte properties

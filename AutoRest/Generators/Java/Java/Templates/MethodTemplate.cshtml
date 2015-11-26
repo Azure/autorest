@@ -18,18 +18,20 @@
 {
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
+@foreach (var exception in Model.ExceptionStatements)
+{
+@: * @@throws @exception
+}
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object if successful.
 }
- * @@throws ServiceException the exception wrapped in ServiceException if failed.
  */
-public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws ServiceException, IOException {
+public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.Exceptions {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
-@:        throw new ServiceException(
-@:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null."));
+@:        throw new IllegalArgumentException("Parameter @param.Name is required and cannot be null.");
 @:    }
 }
 @foreach (var param in Model.ParametersToValidate)
@@ -68,8 +70,7 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
-@:        serviceCallback.failure(new ServiceException(
-@:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null.")));
+@:        serviceCallback.failure(new IllegalArgumentException("Parameter @param.Name is required and cannot be null."));
 @:        return null;
 @:    }
 }

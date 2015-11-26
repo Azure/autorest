@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -52,9 +53,10 @@ public interface PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException, IOException;
+    ServiceResponse<Void> getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'
@@ -77,9 +79,10 @@ public interface PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException, IOException;
+    ServiceResponse<Void> getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'
@@ -102,9 +105,10 @@ public interface PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException, IOException;
+    ServiceResponse<Void> getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null
@@ -127,9 +131,10 @@ public interface PathItems {
      * @param pathItemStringQuery should contain value null
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException, IOException;
+    ServiceResponse<Void> getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null

@@ -19,6 +19,7 @@ import fixtures.azureparametergrouping.models.ParameterGroupingPostMultipleParam
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.Header;
@@ -55,9 +56,10 @@ public interface ParameterGroupingOperations {
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) throws ServiceException, IOException;
+    ServiceResponse<Void> postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Post a bunch of required parameters grouped

@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.requiredoptional.models.Error;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -62,9 +63,10 @@ public interface Implicit {
      * @param pathParameter the String value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> getRequiredPath(String pathParameter) throws ServiceException, IOException;
+    ServiceResponse<Error> getRequiredPath(String pathParameter) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Test implicitly required path parameter
@@ -137,9 +139,10 @@ public interface Implicit {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> getRequiredGlobalPath() throws ServiceException, IOException;
+    ServiceResponse<Error> getRequiredGlobalPath() throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Test implicitly required path parameter
@@ -154,9 +157,10 @@ public interface Implicit {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> getRequiredGlobalQuery() throws ServiceException, IOException;
+    ServiceResponse<Error> getRequiredGlobalQuery() throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Test implicitly required query parameter

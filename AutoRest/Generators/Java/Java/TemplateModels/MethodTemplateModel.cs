@@ -293,6 +293,10 @@ namespace Microsoft.Rest.Generator.Java
                 List<string> exceptions = new List<string>();
                 exceptions.Add("ServiceException");
                 exceptions.Add("IOException");
+                if (RequiredNullableParameters.Any())
+                {
+                    exceptions.Add("IllegalArgumentException");
+                }
                 return string.Join(", ", exceptions);
             }
         }
@@ -304,6 +308,10 @@ namespace Microsoft.Rest.Generator.Java
                 List<string> exceptions = new List<string>();
                 exceptions.Add("ServiceException exception thrown from REST call");
                 exceptions.Add("IOException exception thrown from serialization/deserialization");
+                if (RequiredNullableParameters.Any())
+                {
+                    exceptions.Add("IllegalArgumentException exception thrown from invalid parameters");
+                }
                 return exceptions;
             }
         }

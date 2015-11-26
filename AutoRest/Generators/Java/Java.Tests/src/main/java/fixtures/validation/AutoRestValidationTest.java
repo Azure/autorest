@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.validation.models.Product;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;

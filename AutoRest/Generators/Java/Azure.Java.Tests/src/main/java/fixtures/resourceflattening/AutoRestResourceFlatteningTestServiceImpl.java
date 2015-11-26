@@ -180,7 +180,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as an Array
      *
      * @param resourceArray External Resource as an Array to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> putArray(List<Resource> resourceArray) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
@@ -218,8 +219,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Get External Resource as an Array
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;FlattenedProduct&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<List<FlattenedProduct>> getArray() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getArray(this.getAcceptLanguage());
@@ -257,7 +259,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as a Dictionary
      *
      * @param resourceDictionary External Resource as a Dictionary to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
@@ -295,8 +298,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Get External Resource as a Dictionary
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Map<String, FlattenedProduct>> getDictionary() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDictionary(this.getAcceptLanguage());
@@ -334,7 +338,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as a ResourceCollection
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> putResourceCollection(ResourceCollection resourceComplexObject) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
@@ -372,8 +377,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Get External Resource as a ResourceCollection
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ResourceCollection object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<ResourceCollection> getResourceCollection() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getResourceCollection(this.getAcceptLanguage());

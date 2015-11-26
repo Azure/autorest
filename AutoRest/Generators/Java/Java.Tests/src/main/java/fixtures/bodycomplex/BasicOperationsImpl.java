@@ -21,6 +21,7 @@ import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.Error;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -37,8 +38,9 @@ public class BasicOperationsImpl implements BasicOperations {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Basic> getValid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getValid();
@@ -76,12 +78,13 @@ public class BasicOperationsImpl implements BasicOperations {
      * Please put {id: 2, name: 'abc', color: 'Magenta'}
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putValid(Basic complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putValid(Basic complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody);
@@ -96,8 +99,7 @@ public class BasicOperationsImpl implements BasicOperations {
      */
     public Call<ResponseBody> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
@@ -125,8 +127,9 @@ public class BasicOperationsImpl implements BasicOperations {
     /**
      * Get a basic complex type that is invalid for the local strong type
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Basic> getInvalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getInvalid();
@@ -163,8 +166,9 @@ public class BasicOperationsImpl implements BasicOperations {
     /**
      * Get a basic complex type that is empty
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Basic> getEmpty() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getEmpty();
@@ -201,8 +205,9 @@ public class BasicOperationsImpl implements BasicOperations {
     /**
      * Get a basic complex type whose properties are null
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Basic> getNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -239,8 +244,9 @@ public class BasicOperationsImpl implements BasicOperations {
     /**
      * Get a basic complex type while the server doesn't provide a response payload
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Basic> getNotProvided() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNotProvided();

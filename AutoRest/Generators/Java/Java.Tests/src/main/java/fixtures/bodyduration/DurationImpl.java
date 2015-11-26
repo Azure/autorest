@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodyduration.models.Error;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import org.joda.time.Period;
 import retrofit.Call;
 import retrofit.Response;
@@ -36,8 +37,9 @@ public class DurationImpl implements Duration {
     /**
      * Get null duration value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Period object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Period> getNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -75,12 +77,13 @@ public class DurationImpl implements Duration {
      * Put a positive duration value
      *
      * @param durationBody the Period value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putPositiveDuration(Period durationBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putPositiveDuration(Period durationBody) throws ServiceException, IOException, IllegalArgumentException {
         if (durationBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter durationBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter durationBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putPositiveDuration(durationBody);
         return putPositiveDurationDelegate(call.execute(), null);
@@ -94,8 +97,7 @@ public class DurationImpl implements Duration {
      */
     public Call<ResponseBody> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
         if (durationBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter durationBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter durationBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putPositiveDuration(durationBody);
@@ -122,8 +124,9 @@ public class DurationImpl implements Duration {
     /**
      * Get a positive duration value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Period object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Period> getPositiveDuration() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getPositiveDuration();
@@ -160,8 +163,9 @@ public class DurationImpl implements Duration {
     /**
      * Get an invalid duration value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Period object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Period> getInvalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getInvalid();

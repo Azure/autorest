@@ -36,7 +36,8 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 200 status code if successful
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> head200() throws ServiceException, IOException {
         Call<Void> call = service.head200();
@@ -73,8 +74,9 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Get 200 success
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Boolean> get200() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get200();
@@ -112,7 +114,8 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Put boolean value true returning 200 success
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> put200(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.put200(booleanValue);
@@ -151,7 +154,8 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Patch true Boolean value in request returning 200
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> patch200(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.patch200(booleanValue);
@@ -190,7 +194,8 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Post bollean value true in request that returns a 200
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> post200(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.post200(booleanValue);
@@ -229,7 +234,8 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Delete simple boolean value true returns 200
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> delete200(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.delete200(booleanValue);
@@ -268,7 +274,8 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Put true Boolean value in request returns 201
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> put201(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.put201(booleanValue);
@@ -307,7 +314,8 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Post true Boolean value in request returns 201 (Created)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> post201(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.post201(booleanValue);
@@ -346,7 +354,8 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Put true Boolean value in request returns 202 (Accepted)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> put202(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.put202(booleanValue);
@@ -385,7 +394,8 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Patch true Boolean value in request returns 202
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> patch202(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.patch202(booleanValue);
@@ -424,7 +434,8 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Post true Boolean value in request returns 202 (Accepted)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> post202(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.post202(booleanValue);
@@ -463,7 +474,8 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Delete true Boolean value in request returns 202 (accepted)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> delete202(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.delete202(booleanValue);
@@ -501,7 +513,8 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 204 status code if successful
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> head204() throws ServiceException, IOException {
         Call<Void> call = service.head204();
@@ -539,7 +552,8 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Put true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> put204(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.put204(booleanValue);
@@ -578,7 +592,8 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Patch true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> patch204(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.patch204(booleanValue);
@@ -617,7 +632,8 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Post true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> post204(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.post204(booleanValue);
@@ -656,7 +672,8 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Delete true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> delete204(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.delete204(booleanValue);
@@ -694,7 +711,8 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 404 status code
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> head404() throws ServiceException, IOException {
         Call<Void> call = service.head404();

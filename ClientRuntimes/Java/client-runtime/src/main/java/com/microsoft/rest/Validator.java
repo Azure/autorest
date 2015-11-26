@@ -25,12 +25,12 @@ import java.util.Map;
 public class Validator {
     /**
      * Validates a user provided required parameter to be not null.
-     * A {@link ServiceException} is thrown if a property fails the validation.
+     * An {@link IllegalArgumentException} is thrown if a property fails the validation.
      *
      * @param parameter the parameter to validate
-     * @throws ServiceException failures wrapped in {@link ServiceException}
+     * @throws IllegalArgumentException thrown when the Validator determines the argument is invalid
      */
-    public static void validate(Object parameter) throws ServiceException {
+    public static void validate(Object parameter) throws IllegalArgumentException {
         // Validation of top level payload is done outside
         if (parameter == null) {
             return;
@@ -60,12 +60,11 @@ public class Validator {
                 try {
                     property = field.get(parameter);
                 } catch (IllegalAccessException e) {
-                    throw new ServiceException(e);
+                    throw new IllegalArgumentException(e.getMessage(), e);
                 }
                 if (property == null) {
                     if (annotation != null && annotation.required()) {
-                        throw new ServiceException(
-                                new IllegalArgumentException(field.getName() + " is required and cannot be null."));
+                        throw new IllegalArgumentException(field.getName() + " is required and cannot be null.");
                     }
                 } else {
                     try {
@@ -86,12 +85,10 @@ public class Validator {
                         else if (parameter.getClass().getDeclaringClass() != propertyType) {
                             Validator.validate(property);
                         }
-                    } catch (ServiceException ex) {
-                        IllegalArgumentException cause = (IllegalArgumentException)(ex.getCause());
-                        if (cause != null) {
+                    } catch (IllegalArgumentException ex) {
+                        if (ex.getCause() == null) {
                             // Build property chain
-                            throw new ServiceException(
-                                    new IllegalArgumentException(field.getName() + "." + cause.getMessage()));
+                            throw new IllegalArgumentException(field.getName() + "." + ex.getMessage());
                         } else {
                             throw ex;
                         }
@@ -103,7 +100,7 @@ public class Validator {
 
     /**
      * Validates a user provided required parameter to be not null. Returns if
-     * the parameter passes the validation. A {@link ServiceException} is passed
+     * the parameter passes the validation. An {@link IllegalArgumentException} is passed
      * to the {@link ServiceCallback#failure(Throwable)} if a property fails the validation.
      *
      * @param parameter the parameter to validate
@@ -112,7 +109,7 @@ public class Validator {
     public static void validate(Object parameter, ServiceCallback<?> serviceCallback) {
         try {
             validate(parameter);
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             serviceCallback.failure(ex);
         }
     }

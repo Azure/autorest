@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -133,9 +134,10 @@ public interface Datetimerfc1123 {
      * @param datetimeBody the DateTimeRfc1123 value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUtcMaxDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putUtcMaxDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT
@@ -186,9 +188,10 @@ public interface Datetimerfc1123 {
      * @param datetimeBody the DateTimeRfc1123 value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUtcMinDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putUtcMinDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT

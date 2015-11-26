@@ -31,6 +31,7 @@ import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
 import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -47,8 +48,9 @@ public class PrimitiveImpl implements Primitive {
     /**
      * Get complex types with integer properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the IntWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<IntWrapper> getInt() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getInt();
@@ -86,12 +88,13 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with integer properties
      *
      * @param complexBody Please put -1 and 2
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putInt(IntWrapper complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putInt(IntWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putInt(complexBody);
@@ -106,8 +109,7 @@ public class PrimitiveImpl implements Primitive {
      */
     public Call<ResponseBody> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
@@ -135,8 +137,9 @@ public class PrimitiveImpl implements Primitive {
     /**
      * Get complex types with long properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LongWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<LongWrapper> getLong() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getLong();
@@ -174,12 +177,13 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with long properties
      *
      * @param complexBody Please put 1099511627775 and -999511627788
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putLong(LongWrapper complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putLong(LongWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putLong(complexBody);
@@ -194,8 +198,7 @@ public class PrimitiveImpl implements Primitive {
      */
     public Call<ResponseBody> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
@@ -223,8 +226,9 @@ public class PrimitiveImpl implements Primitive {
     /**
      * Get complex types with float properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the FloatWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<FloatWrapper> getFloat() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getFloat();
@@ -262,12 +266,13 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with float properties
      *
      * @param complexBody Please put 1.05 and -0.003
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putFloat(FloatWrapper complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putFloat(FloatWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putFloat(complexBody);
@@ -282,8 +287,7 @@ public class PrimitiveImpl implements Primitive {
      */
     public Call<ResponseBody> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
@@ -311,8 +315,9 @@ public class PrimitiveImpl implements Primitive {
     /**
      * Get complex types with double properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DoubleWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DoubleWrapper> getDouble() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDouble();
@@ -350,12 +355,13 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with double properties
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDouble(DoubleWrapper complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDouble(DoubleWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDouble(complexBody);
@@ -370,8 +376,7 @@ public class PrimitiveImpl implements Primitive {
      */
     public Call<ResponseBody> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
@@ -399,8 +404,9 @@ public class PrimitiveImpl implements Primitive {
     /**
      * Get complex types with bool properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the BooleanWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<BooleanWrapper> getBool() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBool();
@@ -438,12 +444,13 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with bool properties
      *
      * @param complexBody Please put true and false
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putBool(BooleanWrapper complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putBool(BooleanWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putBool(complexBody);
@@ -458,8 +465,7 @@ public class PrimitiveImpl implements Primitive {
      */
     public Call<ResponseBody> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
@@ -487,8 +493,9 @@ public class PrimitiveImpl implements Primitive {
     /**
      * Get complex types with string properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the StringWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<StringWrapper> getString() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getString();
@@ -526,12 +533,13 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with string properties
      *
      * @param complexBody Please put 'goodrequest', '', and null
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putString(StringWrapper complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putString(StringWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putString(complexBody);
@@ -546,8 +554,7 @@ public class PrimitiveImpl implements Primitive {
      */
     public Call<ResponseBody> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
@@ -575,8 +582,9 @@ public class PrimitiveImpl implements Primitive {
     /**
      * Get complex types with date properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DateWrapper> getDate() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDate();
@@ -614,12 +622,13 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with date properties
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDate(DateWrapper complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDate(DateWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDate(complexBody);
@@ -634,8 +643,7 @@ public class PrimitiveImpl implements Primitive {
      */
     public Call<ResponseBody> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
@@ -663,8 +671,9 @@ public class PrimitiveImpl implements Primitive {
     /**
      * Get complex types with datetime properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DatetimeWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DatetimeWrapper> getDateTime() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateTime();
@@ -702,12 +711,13 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with datetime properties
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDateTime(DatetimeWrapper complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDateTime(DatetimeWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDateTime(complexBody);
@@ -722,8 +732,7 @@ public class PrimitiveImpl implements Primitive {
      */
     public Call<ResponseBody> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
@@ -751,8 +760,9 @@ public class PrimitiveImpl implements Primitive {
     /**
      * Get complex types with datetimeRfc1123 properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Datetimerfc1123Wrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDateTimeRfc1123();
@@ -790,12 +800,13 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with datetimeRfc1123 properties
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDateTimeRfc1123(complexBody);
@@ -810,8 +821,7 @@ public class PrimitiveImpl implements Primitive {
      */
     public Call<ResponseBody> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
@@ -839,8 +849,9 @@ public class PrimitiveImpl implements Primitive {
     /**
      * Get complex types with duration properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DurationWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<DurationWrapper> getDuration() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDuration();
@@ -878,12 +889,13 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with duration properties
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDuration(DurationWrapper complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putDuration(DurationWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDuration(complexBody);
@@ -898,8 +910,7 @@ public class PrimitiveImpl implements Primitive {
      */
     public Call<ResponseBody> putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
@@ -927,8 +938,9 @@ public class PrimitiveImpl implements Primitive {
     /**
      * Get complex types with byte properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ByteWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<ByteWrapper> getByte() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getByte();
@@ -966,12 +978,13 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with byte properties
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putByte(ByteWrapper complexBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putByte(ByteWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putByte(complexBody);
@@ -986,8 +999,7 @@ public class PrimitiveImpl implements Primitive {
      */
     public Call<ResponseBody> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);

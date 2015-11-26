@@ -36,8 +36,9 @@ public class HttpServerFailureImpl implements HttpServerFailure {
     /**
      * Return 501 status code - should be represented in the client as an error
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Error> head501() throws ServiceException, IOException {
         Call<Void> call = service.head501();
@@ -73,8 +74,9 @@ public class HttpServerFailureImpl implements HttpServerFailure {
     /**
      * Return 501 status code - should be represented in the client as an error
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Error> get501() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get501();
@@ -111,8 +113,9 @@ public class HttpServerFailureImpl implements HttpServerFailure {
      * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Error> post505(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.post505(booleanValue);
@@ -150,8 +153,9 @@ public class HttpServerFailureImpl implements HttpServerFailure {
      * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Error> delete505(Boolean booleanValue) throws ServiceException, IOException {
         Call<ResponseBody> call = service.delete505(booleanValue);

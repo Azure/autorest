@@ -35,8 +35,9 @@ public class BoolImpl implements Bool {
     /**
      * Get true Boolean value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Boolean> getTrue() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getTrue();
@@ -74,7 +75,8 @@ public class BoolImpl implements Bool {
      * Set Boolean value true
      *
      * @param boolBody the boolean value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> putTrue(boolean boolBody) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putTrue(boolBody);
@@ -112,8 +114,9 @@ public class BoolImpl implements Bool {
     /**
      * Get false Boolean value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Boolean> getFalse() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getFalse();
@@ -151,7 +154,8 @@ public class BoolImpl implements Bool {
      * Set Boolean value false
      *
      * @param boolBody the boolean value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> putFalse(boolean boolBody) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putFalse(boolBody);
@@ -189,8 +193,9 @@ public class BoolImpl implements Bool {
     /**
      * Get null Boolean value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Boolean> getNull() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -227,8 +232,9 @@ public class BoolImpl implements Bool {
     /**
      * Get invalid Boolean value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
     public ServiceResponse<Boolean> getInvalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getInvalid();

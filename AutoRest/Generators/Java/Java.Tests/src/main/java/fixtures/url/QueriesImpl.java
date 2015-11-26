@@ -43,7 +43,8 @@ public class QueriesImpl implements Queries {
      * Get true Boolean value on path
      *
      * @param boolQuery true boolean value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> getBooleanTrue(Boolean boolQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBooleanTrue(boolQuery);
@@ -82,7 +83,8 @@ public class QueriesImpl implements Queries {
      * Get false Boolean value on path
      *
      * @param boolQuery false boolean value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> getBooleanFalse(Boolean boolQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBooleanFalse(boolQuery);
@@ -121,7 +123,8 @@ public class QueriesImpl implements Queries {
      * Get null Boolean value on query (query string should be absent)
      *
      * @param boolQuery null boolean value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> getBooleanNull(Boolean boolQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getBooleanNull(boolQuery);
@@ -160,7 +163,8 @@ public class QueriesImpl implements Queries {
      * Get '1000000' integer value
      *
      * @param intQuery '1000000' integer value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> getIntOneMillion(Integer intQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getIntOneMillion(intQuery);
@@ -199,7 +203,8 @@ public class QueriesImpl implements Queries {
      * Get '-1000000' integer value
      *
      * @param intQuery '-1000000' integer value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> getIntNegativeOneMillion(Integer intQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getIntNegativeOneMillion(intQuery);
@@ -238,7 +243,8 @@ public class QueriesImpl implements Queries {
      * Get null integer value (no query parameter)
      *
      * @param intQuery null integer value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> getIntNull(Integer intQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getIntNull(intQuery);
@@ -277,7 +283,8 @@ public class QueriesImpl implements Queries {
      * Get '10000000000' 64 bit integer value
      *
      * @param longQuery '10000000000' 64 bit integer value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> getTenBillion(Long longQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getTenBillion(longQuery);
@@ -316,7 +323,8 @@ public class QueriesImpl implements Queries {
      * Get '-10000000000' 64 bit integer value
      *
      * @param longQuery '-10000000000' 64 bit integer value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> getNegativeTenBillion(Long longQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getNegativeTenBillion(longQuery);
@@ -355,7 +363,8 @@ public class QueriesImpl implements Queries {
      * Get 'null 64 bit integer value (no query param in uri)
      *
      * @param longQuery null 64 bit integer value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> getLongNull(Long longQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getLongNull(longQuery);
@@ -394,7 +403,8 @@ public class QueriesImpl implements Queries {
      * Get '1.034E+20' numeric value
      *
      * @param floatQuery '1.034E+20'numeric value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> floatScientificPositive(Double floatQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.floatScientificPositive(floatQuery);
@@ -433,7 +443,8 @@ public class QueriesImpl implements Queries {
      * Get '-1.034E-20' numeric value
      *
      * @param floatQuery '-1.034E-20'numeric value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> floatScientificNegative(Double floatQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.floatScientificNegative(floatQuery);
@@ -472,7 +483,8 @@ public class QueriesImpl implements Queries {
      * Get null numeric value (no query parameter)
      *
      * @param floatQuery null numeric value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> floatNull(Double floatQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.floatNull(floatQuery);
@@ -511,7 +523,8 @@ public class QueriesImpl implements Queries {
      * Get '9999999.999' numeric value
      *
      * @param doubleQuery '9999999.999'numeric value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> doubleDecimalPositive(Double doubleQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.doubleDecimalPositive(doubleQuery);
@@ -550,7 +563,8 @@ public class QueriesImpl implements Queries {
      * Get '-9999999.999' numeric value
      *
      * @param doubleQuery '-9999999.999'numeric value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> doubleDecimalNegative(Double doubleQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.doubleDecimalNegative(doubleQuery);
@@ -589,7 +603,8 @@ public class QueriesImpl implements Queries {
      * Get null numeric value (no query parameter)
      *
      * @param doubleQuery null numeric value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> doubleNull(Double doubleQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.doubleNull(doubleQuery);
@@ -628,7 +643,8 @@ public class QueriesImpl implements Queries {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
      *
      * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> stringUnicode(String stringQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.stringUnicode(stringQuery);
@@ -667,7 +683,8 @@ public class QueriesImpl implements Queries {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end
      *
      * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> stringUrlEncoded(String stringQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.stringUrlEncoded(stringQuery);
@@ -706,7 +723,8 @@ public class QueriesImpl implements Queries {
      * Get ''
      *
      * @param stringQuery '' string value. Possible values for this parameter include: ''
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> stringEmpty(String stringQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.stringEmpty(stringQuery);
@@ -745,7 +763,8 @@ public class QueriesImpl implements Queries {
      * Get null (no query parameter in url)
      *
      * @param stringQuery null string value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> stringNull(String stringQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.stringNull(stringQuery);
@@ -784,7 +803,8 @@ public class QueriesImpl implements Queries {
      * Get using uri with query parameter 'green color'
      *
      * @param enumQuery 'green color' enum value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> enumValid(UriColor enumQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.enumValid(JacksonUtils.serializeRaw(enumQuery));
@@ -823,7 +843,8 @@ public class QueriesImpl implements Queries {
      * Get null (no query parameter in url)
      *
      * @param enumQuery null string value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> enumNull(UriColor enumQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.enumNull(JacksonUtils.serializeRaw(enumQuery));
@@ -862,7 +883,8 @@ public class QueriesImpl implements Queries {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> byteMultiByte(byte[] byteQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(byteQuery));
@@ -901,7 +923,8 @@ public class QueriesImpl implements Queries {
      * Get '' as byte array
      *
      * @param byteQuery '' as byte array
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> byteEmpty(byte[] byteQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(byteQuery));
@@ -940,7 +963,8 @@ public class QueriesImpl implements Queries {
      * Get null as byte array (no query parameters in uri)
      *
      * @param byteQuery null as byte array (no query parameters in uri)
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> byteNull(byte[] byteQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(byteQuery));
@@ -979,7 +1003,8 @@ public class QueriesImpl implements Queries {
      * Get '2012-01-01' as date
      *
      * @param dateQuery '2012-01-01' as date
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.dateValid(JacksonUtils.serializeRaw(dateQuery));
@@ -1018,7 +1043,8 @@ public class QueriesImpl implements Queries {
      * Get null as date - this should result in no query parameters in uri
      *
      * @param dateQuery null as date (no query parameters in uri)
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> dateNull(LocalDate dateQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.dateNull(JacksonUtils.serializeRaw(dateQuery));
@@ -1057,7 +1083,8 @@ public class QueriesImpl implements Queries {
      * Get '2012-01-01T01:01:01Z' as date-time
      *
      * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.dateTimeValid(JacksonUtils.serializeRaw(dateTimeQuery));
@@ -1096,7 +1123,8 @@ public class QueriesImpl implements Queries {
      * Get null as date-time, should result in no query parameters in uri
      *
      * @param dateTimeQuery null as date-time (no query parameters)
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> dateTimeNull(DateTime dateTimeQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.dateTimeNull(JacksonUtils.serializeRaw(dateTimeQuery));
@@ -1135,7 +1163,8 @@ public class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> arrayStringCsvValid(List<String> arrayQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.arrayStringCsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
@@ -1174,7 +1203,8 @@ public class QueriesImpl implements Queries {
      * Get a null array of string using the csv-array format
      *
      * @param arrayQuery a null array of string using the csv-array format
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> arrayStringCsvNull(List<String> arrayQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.arrayStringCsvNull(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
@@ -1213,7 +1243,8 @@ public class QueriesImpl implements Queries {
      * Get an empty array [] of string using the csv-array format
      *
      * @param arrayQuery an empty array [] of string using the csv-array format
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.arrayStringCsvEmpty(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
@@ -1252,7 +1283,8 @@ public class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> arrayStringSsvValid(List<String> arrayQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.arrayStringSsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.SSV));
@@ -1291,7 +1323,8 @@ public class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> arrayStringTsvValid(List<String> arrayQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.arrayStringTsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.TSV));
@@ -1330,7 +1363,8 @@ public class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
     public ServiceResponse<Void> arrayStringPipesValid(List<String> arrayQuery) throws ServiceException, IOException {
         Call<ResponseBody> call = service.arrayStringPipesValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.PIPES));
