@@ -14,6 +14,8 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
@@ -39,9 +41,10 @@ public interface XMsClientRequestIdOperations {
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> get() throws ServiceException;
+    ServiceResponse<Void> get() throws ServiceException, IOException;
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
@@ -56,9 +59,11 @@ public interface XMsClientRequestIdOperations {
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> paramGet(String xMsClientRequestId) throws ServiceException;
+    ServiceResponse<Void> paramGet(String xMsClientRequestId) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.

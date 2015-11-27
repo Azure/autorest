@@ -27,7 +27,8 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the SiameseCat class.
         /// </summary>
-        public SiameseCat(int? length = default(int?))
+        public SiameseCat(string id = default(string), string description = default(string), string color = default(string), int? length = default(int?))
+            : base(id, description, color)
         {
             Length = length;
         }

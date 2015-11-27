@@ -18,18 +18,20 @@
 {
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
+@foreach (var exception in Model.ExceptionStatements)
+{
+@: * @@throws @exception
+}
 @if (Model.ReturnType != null)
 {
 @: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object if successful.
 }
- * @@throws ServiceException the exception wrapped in ServiceException if failed.
  */
-public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws ServiceException {
+public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.Exceptions {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
-@:        throw new ServiceException(
-@:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null."));
+@:        throw new IllegalArgumentException("Parameter @param.Name is required and cannot be null.");
 @:    }
 }
 @foreach (var param in Model.ParametersToValidate)
@@ -44,14 +46,8 @@ public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.Meth
     var inProp = transformation.ParameterMappings[0].InputParameterProperty;
 @:    @outType @outProp = @(inParam).get@(inProp.ToPascalCase())();
 }
-    try {
-        Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
-        return @(Model.Name)Delegate(call.execute(), null);
-    } catch (ServiceException ex) {
-        throw ex;
-    } catch (Exception ex) {
-        throw new ServiceException(ex);
-    }
+    Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
+    return @(Model.Name)Delegate(call.execute(), null);
 }
 @EmptyLine
 /**
@@ -74,8 +70,7 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
-@:        serviceCallback.failure(new ServiceException(
-@:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null.")));
+@:        serviceCallback.failure(new IllegalArgumentException("Parameter @param.Name is required and cannot be null."));
 @:        return null;
 @:    }
 }
@@ -97,7 +92,7 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
         public void onResponse(Response<@Model.CallType> response, Retrofit retrofit) {
             try {
                 serviceCallback.success(@(Model.Name)Delegate(response, retrofit));
-            } catch (ServiceException exception) {
+            } catch (ServiceException | IOException exception) {
                 serviceCallback.failure(exception);
             }
         }
@@ -105,7 +100,7 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
     return call;
 }
 @EmptyLine
-private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws ServiceException {
+private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws ServiceException, IOException {
     return new @Model.ResponseBuilder<@Model.GenericReturnTypeString>(@Model.ServiceResponseBuilderArgs)
 @foreach (var response in Model.Responses)
 {

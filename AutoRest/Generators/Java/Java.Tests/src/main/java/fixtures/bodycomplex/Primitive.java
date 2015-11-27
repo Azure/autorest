@@ -25,6 +25,8 @@ import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -110,10 +112,11 @@ public interface Primitive {
     /**
      * Get complex types with integer properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the IntWrapper object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<IntWrapper> getInt() throws ServiceException;
+    ServiceResponse<IntWrapper> getInt() throws ServiceException, IOException;
 
     /**
      * Get complex types with integer properties
@@ -127,10 +130,12 @@ public interface Primitive {
      * Put complex types with integer properties
      *
      * @param complexBody Please put -1 and 2
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putInt(IntWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putInt(IntWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with integer properties
@@ -144,10 +149,11 @@ public interface Primitive {
     /**
      * Get complex types with long properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LongWrapper object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<LongWrapper> getLong() throws ServiceException;
+    ServiceResponse<LongWrapper> getLong() throws ServiceException, IOException;
 
     /**
      * Get complex types with long properties
@@ -161,10 +167,12 @@ public interface Primitive {
      * Put complex types with long properties
      *
      * @param complexBody Please put 1099511627775 and -999511627788
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putLong(LongWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putLong(LongWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with long properties
@@ -178,10 +186,11 @@ public interface Primitive {
     /**
      * Get complex types with float properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the FloatWrapper object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<FloatWrapper> getFloat() throws ServiceException;
+    ServiceResponse<FloatWrapper> getFloat() throws ServiceException, IOException;
 
     /**
      * Get complex types with float properties
@@ -195,10 +204,12 @@ public interface Primitive {
      * Put complex types with float properties
      *
      * @param complexBody Please put 1.05 and -0.003
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putFloat(FloatWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putFloat(FloatWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with float properties
@@ -212,10 +223,11 @@ public interface Primitive {
     /**
      * Get complex types with double properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DoubleWrapper object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<DoubleWrapper> getDouble() throws ServiceException;
+    ServiceResponse<DoubleWrapper> getDouble() throws ServiceException, IOException;
 
     /**
      * Get complex types with double properties
@@ -229,10 +241,12 @@ public interface Primitive {
      * Put complex types with double properties
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDouble(DoubleWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putDouble(DoubleWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with double properties
@@ -246,10 +260,11 @@ public interface Primitive {
     /**
      * Get complex types with bool properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the BooleanWrapper object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<BooleanWrapper> getBool() throws ServiceException;
+    ServiceResponse<BooleanWrapper> getBool() throws ServiceException, IOException;
 
     /**
      * Get complex types with bool properties
@@ -263,10 +278,12 @@ public interface Primitive {
      * Put complex types with bool properties
      *
      * @param complexBody Please put true and false
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putBool(BooleanWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putBool(BooleanWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with bool properties
@@ -280,10 +297,11 @@ public interface Primitive {
     /**
      * Get complex types with string properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the StringWrapper object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<StringWrapper> getString() throws ServiceException;
+    ServiceResponse<StringWrapper> getString() throws ServiceException, IOException;
 
     /**
      * Get complex types with string properties
@@ -297,10 +315,12 @@ public interface Primitive {
      * Put complex types with string properties
      *
      * @param complexBody Please put 'goodrequest', '', and null
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putString(StringWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putString(StringWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with string properties
@@ -314,10 +334,11 @@ public interface Primitive {
     /**
      * Get complex types with date properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DateWrapper object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<DateWrapper> getDate() throws ServiceException;
+    ServiceResponse<DateWrapper> getDate() throws ServiceException, IOException;
 
     /**
      * Get complex types with date properties
@@ -331,10 +352,12 @@ public interface Primitive {
      * Put complex types with date properties
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDate(DateWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putDate(DateWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with date properties
@@ -348,10 +371,11 @@ public interface Primitive {
     /**
      * Get complex types with datetime properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DatetimeWrapper object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<DatetimeWrapper> getDateTime() throws ServiceException;
+    ServiceResponse<DatetimeWrapper> getDateTime() throws ServiceException, IOException;
 
     /**
      * Get complex types with datetime properties
@@ -365,10 +389,12 @@ public interface Primitive {
      * Put complex types with datetime properties
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDateTime(DatetimeWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putDateTime(DatetimeWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with datetime properties
@@ -382,10 +408,11 @@ public interface Primitive {
     /**
      * Get complex types with datetimeRfc1123 properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Datetimerfc1123Wrapper object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123() throws ServiceException;
+    ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123() throws ServiceException, IOException;
 
     /**
      * Get complex types with datetimeRfc1123 properties
@@ -399,10 +426,12 @@ public interface Primitive {
      * Put complex types with datetimeRfc1123 properties
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with datetimeRfc1123 properties
@@ -416,10 +445,11 @@ public interface Primitive {
     /**
      * Get complex types with duration properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the DurationWrapper object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<DurationWrapper> getDuration() throws ServiceException;
+    ServiceResponse<DurationWrapper> getDuration() throws ServiceException, IOException;
 
     /**
      * Get complex types with duration properties
@@ -433,10 +463,12 @@ public interface Primitive {
      * Put complex types with duration properties
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putDuration(DurationWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putDuration(DurationWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with duration properties
@@ -450,10 +482,11 @@ public interface Primitive {
     /**
      * Get complex types with byte properties
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the ByteWrapper object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<ByteWrapper> getByte() throws ServiceException;
+    ServiceResponse<ByteWrapper> getByte() throws ServiceException, IOException;
 
     /**
      * Get complex types with byte properties
@@ -467,10 +500,12 @@ public interface Primitive {
      * Put complex types with byte properties
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putByte(ByteWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putByte(ByteWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with byte properties

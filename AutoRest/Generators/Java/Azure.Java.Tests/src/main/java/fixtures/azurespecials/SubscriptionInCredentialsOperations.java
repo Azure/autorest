@@ -14,6 +14,8 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Header;
 import retrofit.http.Path;
@@ -50,9 +52,11 @@ public interface SubscriptionInCredentialsOperations {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> postMethodGlobalValid() throws ServiceException;
+    ServiceResponse<Void> postMethodGlobalValid() throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
@@ -66,9 +70,11 @@ public interface SubscriptionInCredentialsOperations {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call
      *
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> postMethodGlobalNull() throws ServiceException;
+    ServiceResponse<Void> postMethodGlobalNull() throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call
@@ -82,9 +88,11 @@ public interface SubscriptionInCredentialsOperations {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> postMethodGlobalNotProvidedValid() throws ServiceException;
+    ServiceResponse<Void> postMethodGlobalNotProvidedValid() throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
@@ -98,9 +106,11 @@ public interface SubscriptionInCredentialsOperations {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> postPathGlobalValid() throws ServiceException;
+    ServiceResponse<Void> postPathGlobalValid() throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
@@ -114,9 +124,11 @@ public interface SubscriptionInCredentialsOperations {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed
      *
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> postSwaggerGlobalValid() throws ServiceException;
+    ServiceResponse<Void> postSwaggerGlobalValid() throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed

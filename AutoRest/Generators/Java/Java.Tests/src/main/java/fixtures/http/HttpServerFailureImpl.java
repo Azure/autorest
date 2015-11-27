@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.Error;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -35,18 +36,13 @@ public class HttpServerFailureImpl implements HttpServerFailure {
     /**
      * Return 501 status code - should be represented in the client as an error
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> head501() throws ServiceException {
-        try {
-            Call<Void> call = service.head501();
-            return head501Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> head501() throws ServiceException, IOException {
+        Call<Void> call = service.head501();
+        return head501Delegate(call.execute(), null);
     }
 
     /**
@@ -61,7 +57,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head501Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -69,7 +65,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
         return call;
     }
 
-    private ServiceResponse<Error> head501Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> head501Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .buildEmpty(response, retrofit);
@@ -78,18 +74,13 @@ public class HttpServerFailureImpl implements HttpServerFailure {
     /**
      * Return 501 status code - should be represented in the client as an error
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> get501() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get501();
-            return get501Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> get501() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get501();
+        return get501Delegate(call.execute(), null);
     }
 
     /**
@@ -104,7 +95,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get501Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -112,7 +103,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
         return call;
     }
 
-    private ServiceResponse<Error> get501Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> get501Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -122,18 +113,13 @@ public class HttpServerFailureImpl implements HttpServerFailure {
      * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> post505(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.post505(booleanValue);
-            return post505Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> post505(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.post505(booleanValue);
+        return post505Delegate(call.execute(), null);
     }
 
     /**
@@ -149,7 +135,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(post505Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -157,7 +143,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
         return call;
     }
 
-    private ServiceResponse<Error> post505Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> post505Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -167,18 +153,13 @@ public class HttpServerFailureImpl implements HttpServerFailure {
      * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> delete505(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.delete505(booleanValue);
-            return delete505Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> delete505(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.delete505(booleanValue);
+        return delete505Delegate(call.execute(), null);
     }
 
     /**
@@ -194,7 +175,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(delete505Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -202,7 +183,7 @@ public class HttpServerFailureImpl implements HttpServerFailure {
         return call;
     }
 
-    private ServiceResponse<Error> delete505Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> delete505Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);

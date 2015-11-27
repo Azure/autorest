@@ -1,11 +1,11 @@
 package fixtures.http;
 
 import com.microsoft.rest.ServiceException;
-import fixtures.bodyboolean.AutoRestBoolTestService;
-import fixtures.bodyboolean.AutoRestBoolTestServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.net.ProtocolException;
 
 import static org.junit.Assert.fail;
 
@@ -142,7 +142,7 @@ public class HttpClientFailureTests {
         try {
             client.getHttpClientFailure().delete407(true);
             fail();
-        } catch (ServiceException ex) {
+        } catch (ProtocolException ex) {
             Assert.assertTrue(ex.getMessage().contains("Received HTTP_PROXY_AUTH (407) code while not using proxy"));
         }
     }

@@ -27,7 +27,8 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Dog class.
         /// </summary>
-        public Dog(string food = default(string))
+        public Dog(int? id = default(int?), string name = default(string), string food = default(string))
+            : base(id, name)
         {
             Food = food;
         }

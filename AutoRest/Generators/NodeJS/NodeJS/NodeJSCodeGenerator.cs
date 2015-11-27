@@ -59,7 +59,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            Microsoft.Rest.Generator.Extensions.NormalizeClientModel(serviceClient, Settings);
+            Extensions.NormalizeClientModel(serviceClient, Settings);
             PopulateAdditionalProperties(serviceClient);
             Namer.NormalizeClientModel(serviceClient);
             Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,

@@ -21,7 +21,7 @@ package @(Settings.Namespace.ToLower());
 /**
  * Initializes a new instance of the @Model.Name class.
  */
-public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
+public class @(Model.Name)Impl extends AzureServiceClient implements @Model.Name {
 @if (Model.MethodTemplateModels.Any())
 {
 @:    private @Model.ServiceClientServiceType service;
@@ -74,14 +74,12 @@ if(!property.IsReadOnly)
 @foreach (var operation in Model.Operations)
 {
 @EmptyLine
-@:    private @(operation.MethodGroupType) @(operation.MethodGroupName.ToCamelCase());
-@EmptyLine
 @:    /**
 @:     * Gets the @(operation.MethodGroupType) object to access its operations.
 @:     * @@return the @(operation.MethodGroupName) value.
 @:     */
 @:    public @(operation.MethodGroupType) get@(operation.MethodGroupName.ToPascalCase())() {
-@:        return this.@(operation.MethodGroupName.ToCamelCase());
+@:        return new @(operation.MethodGroupType)Impl(this.retrofitBuilder.build(), this);
 @:    }
 }
 @EmptyLine
@@ -177,16 +175,11 @@ else
         @Model.SetDefaultHeaders
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
 
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
 @if (Model.MethodTemplateModels.Any())
 {
-@:        service = retrofit.create(@(Model.ServiceClientServiceType).class);
-}
-@foreach (var operation in Model.Operations)
-{
-@:        this.@(operation.MethodGroupName.ToCamelCase()) = new @(operation.MethodGroupType)Impl(retrofit, this);
+@:        service = this.retrofitBuilder.build().create(@(Model.ServiceClientServiceType).class);
 }
     }
 @if (Model.MethodTemplateModels.Any())

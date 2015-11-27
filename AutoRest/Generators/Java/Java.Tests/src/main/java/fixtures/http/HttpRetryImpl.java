@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.Error;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -35,17 +36,12 @@ public class HttpRetryImpl implements HttpRetry {
     /**
      * Return 408 status code, then 200 after retry
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> head408() throws ServiceException {
-        try {
-            Call<Void> call = service.head408();
-            return head408Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> head408() throws ServiceException, IOException {
+        Call<Void> call = service.head408();
+        return head408Delegate(call.execute(), null);
     }
 
     /**
@@ -60,7 +56,7 @@ public class HttpRetryImpl implements HttpRetry {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head408Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -68,7 +64,7 @@ public class HttpRetryImpl implements HttpRetry {
         return call;
     }
 
-    private ServiceResponse<Void> head408Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> head408Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -79,17 +75,12 @@ public class HttpRetryImpl implements HttpRetry {
      * Return 500 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> put500(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.put500(booleanValue);
-            return put500Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> put500(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.put500(booleanValue);
+        return put500Delegate(call.execute(), null);
     }
 
     /**
@@ -105,7 +96,7 @@ public class HttpRetryImpl implements HttpRetry {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(put500Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -113,7 +104,7 @@ public class HttpRetryImpl implements HttpRetry {
         return call;
     }
 
-    private ServiceResponse<Void> put500Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> put500Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -124,17 +115,12 @@ public class HttpRetryImpl implements HttpRetry {
      * Return 500 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> patch500(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.patch500(booleanValue);
-            return patch500Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> patch500(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.patch500(booleanValue);
+        return patch500Delegate(call.execute(), null);
     }
 
     /**
@@ -150,7 +136,7 @@ public class HttpRetryImpl implements HttpRetry {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(patch500Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -158,7 +144,7 @@ public class HttpRetryImpl implements HttpRetry {
         return call;
     }
 
-    private ServiceResponse<Void> patch500Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> patch500Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -168,17 +154,12 @@ public class HttpRetryImpl implements HttpRetry {
     /**
      * Return 502 status code, then 200 after retry
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> get502() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get502();
-            return get502Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> get502() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get502();
+        return get502Delegate(call.execute(), null);
     }
 
     /**
@@ -193,7 +174,7 @@ public class HttpRetryImpl implements HttpRetry {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get502Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -201,7 +182,7 @@ public class HttpRetryImpl implements HttpRetry {
         return call;
     }
 
-    private ServiceResponse<Void> get502Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> get502Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -212,17 +193,12 @@ public class HttpRetryImpl implements HttpRetry {
      * Return 503 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> post503(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.post503(booleanValue);
-            return post503Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> post503(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.post503(booleanValue);
+        return post503Delegate(call.execute(), null);
     }
 
     /**
@@ -238,7 +214,7 @@ public class HttpRetryImpl implements HttpRetry {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(post503Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -246,7 +222,7 @@ public class HttpRetryImpl implements HttpRetry {
         return call;
     }
 
-    private ServiceResponse<Void> post503Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> post503Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -257,17 +233,12 @@ public class HttpRetryImpl implements HttpRetry {
      * Return 503 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> delete503(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.delete503(booleanValue);
-            return delete503Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> delete503(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.delete503(booleanValue);
+        return delete503Delegate(call.execute(), null);
     }
 
     /**
@@ -283,7 +254,7 @@ public class HttpRetryImpl implements HttpRetry {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(delete503Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -291,7 +262,7 @@ public class HttpRetryImpl implements HttpRetry {
         return call;
     }
 
-    private ServiceResponse<Void> delete503Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> delete503Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -302,17 +273,12 @@ public class HttpRetryImpl implements HttpRetry {
      * Return 504 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> put504(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.put504(booleanValue);
-            return put504Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> put504(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.put504(booleanValue);
+        return put504Delegate(call.execute(), null);
     }
 
     /**
@@ -328,7 +294,7 @@ public class HttpRetryImpl implements HttpRetry {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(put504Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -336,7 +302,7 @@ public class HttpRetryImpl implements HttpRetry {
         return call;
     }
 
-    private ServiceResponse<Void> put504Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> put504Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -347,17 +313,12 @@ public class HttpRetryImpl implements HttpRetry {
      * Return 504 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> patch504(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.patch504(booleanValue);
-            return patch504Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> patch504(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.patch504(booleanValue);
+        return patch504Delegate(call.execute(), null);
     }
 
     /**
@@ -373,7 +334,7 @@ public class HttpRetryImpl implements HttpRetry {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(patch504Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -381,7 +342,7 @@ public class HttpRetryImpl implements HttpRetry {
         return call;
     }
 
-    private ServiceResponse<Void> patch504Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> patch504Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

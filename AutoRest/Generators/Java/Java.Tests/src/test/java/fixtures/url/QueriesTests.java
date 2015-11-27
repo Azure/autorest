@@ -216,7 +216,7 @@ public class QueriesTests {
         client.getQueries().arrayStringTsvValid(query);
     }
 
-    @Ignore("Fixed when OkHttp 2.6 comes out")
+    @Test
     public void arrayStringPipesValid() throws Exception {
         List<String> query = new ArrayList<>();
         query.add("ArrayQuery1");

@@ -18,6 +18,8 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.requiredoptional.models.Error;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -35,22 +37,17 @@ public class ImplicitImpl implements Implicit {
      * Test implicitly required path parameter
      *
      * @param pathParameter the String value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> getRequiredPath(String pathParameter) throws ServiceException {
+    public ServiceResponse<Error> getRequiredPath(String pathParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (pathParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter pathParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter pathParameter is required and cannot be null.");
         }
-        try {
-            Call<ResponseBody> call = service.getRequiredPath(pathParameter);
-            return getRequiredPathDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.getRequiredPath(pathParameter);
+        return getRequiredPathDelegate(call.execute(), null);
     }
 
     /**
@@ -61,8 +58,7 @@ public class ImplicitImpl implements Implicit {
      */
     public Call<ResponseBody> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
         if (pathParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter pathParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter pathParameter is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getRequiredPath(pathParameter);
@@ -71,7 +67,7 @@ public class ImplicitImpl implements Implicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getRequiredPathDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -79,7 +75,7 @@ public class ImplicitImpl implements Implicit {
         return call;
     }
 
-    private ServiceResponse<Error> getRequiredPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> getRequiredPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -89,17 +85,12 @@ public class ImplicitImpl implements Implicit {
      * Test implicitly optional query parameter
      *
      * @param queryParameter the String value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> putOptionalQuery(String queryParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
-            return putOptionalQueryDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> putOptionalQuery(String queryParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
+        return putOptionalQueryDelegate(call.execute(), null);
     }
 
     /**
@@ -115,7 +106,7 @@ public class ImplicitImpl implements Implicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putOptionalQueryDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -123,7 +114,7 @@ public class ImplicitImpl implements Implicit {
         return call;
     }
 
-    private ServiceResponse<Void> putOptionalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putOptionalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -134,17 +125,12 @@ public class ImplicitImpl implements Implicit {
      * Test implicitly optional header parameter
      *
      * @param queryParameter the String value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> putOptionalHeader(String queryParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
-            return putOptionalHeaderDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> putOptionalHeader(String queryParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
+        return putOptionalHeaderDelegate(call.execute(), null);
     }
 
     /**
@@ -160,7 +146,7 @@ public class ImplicitImpl implements Implicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putOptionalHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -168,7 +154,7 @@ public class ImplicitImpl implements Implicit {
         return call;
     }
 
-    private ServiceResponse<Void> putOptionalHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putOptionalHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -179,17 +165,12 @@ public class ImplicitImpl implements Implicit {
      * Test implicitly optional body parameter
      *
      * @param bodyParameter the String value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> putOptionalBody(String bodyParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
-            return putOptionalBodyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> putOptionalBody(String bodyParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
+        return putOptionalBodyDelegate(call.execute(), null);
     }
 
     /**
@@ -205,7 +186,7 @@ public class ImplicitImpl implements Implicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putOptionalBodyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -213,7 +194,7 @@ public class ImplicitImpl implements Implicit {
         return call;
     }
 
-    private ServiceResponse<Void> putOptionalBodyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putOptionalBodyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -223,22 +204,17 @@ public class ImplicitImpl implements Implicit {
     /**
      * Test implicitly required path parameter
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> getRequiredGlobalPath() throws ServiceException {
+    public ServiceResponse<Error> getRequiredGlobalPath() throws ServiceException, IOException, IllegalArgumentException {
         if (this.client.getRequiredGlobalPath() == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null.");
         }
-        try {
-            Call<ResponseBody> call = service.getRequiredGlobalPath(this.client.getRequiredGlobalPath());
-            return getRequiredGlobalPathDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.getRequiredGlobalPath(this.client.getRequiredGlobalPath());
+        return getRequiredGlobalPathDelegate(call.execute(), null);
     }
 
     /**
@@ -248,8 +224,7 @@ public class ImplicitImpl implements Implicit {
      */
     public Call<ResponseBody> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
         if (this.client.getRequiredGlobalPath() == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getRequiredGlobalPath(this.client.getRequiredGlobalPath());
@@ -258,7 +233,7 @@ public class ImplicitImpl implements Implicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getRequiredGlobalPathDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -266,7 +241,7 @@ public class ImplicitImpl implements Implicit {
         return call;
     }
 
-    private ServiceResponse<Error> getRequiredGlobalPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> getRequiredGlobalPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -275,22 +250,17 @@ public class ImplicitImpl implements Implicit {
     /**
      * Test implicitly required query parameter
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> getRequiredGlobalQuery() throws ServiceException {
+    public ServiceResponse<Error> getRequiredGlobalQuery() throws ServiceException, IOException, IllegalArgumentException {
         if (this.client.getRequiredGlobalQuery() == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null.");
         }
-        try {
-            Call<ResponseBody> call = service.getRequiredGlobalQuery(this.client.getRequiredGlobalQuery());
-            return getRequiredGlobalQueryDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.getRequiredGlobalQuery(this.client.getRequiredGlobalQuery());
+        return getRequiredGlobalQueryDelegate(call.execute(), null);
     }
 
     /**
@@ -300,8 +270,7 @@ public class ImplicitImpl implements Implicit {
      */
     public Call<ResponseBody> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
         if (this.client.getRequiredGlobalQuery() == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getRequiredGlobalQuery(this.client.getRequiredGlobalQuery());
@@ -310,7 +279,7 @@ public class ImplicitImpl implements Implicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getRequiredGlobalQueryDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -318,7 +287,7 @@ public class ImplicitImpl implements Implicit {
         return call;
     }
 
-    private ServiceResponse<Error> getRequiredGlobalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> getRequiredGlobalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -327,18 +296,13 @@ public class ImplicitImpl implements Implicit {
     /**
      * Test implicitly optional query parameter
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> getOptionalGlobalQuery() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getOptionalGlobalQuery(this.client.getOptionalGlobalQuery());
-            return getOptionalGlobalQueryDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> getOptionalGlobalQuery() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getOptionalGlobalQuery(this.client.getOptionalGlobalQuery());
+        return getOptionalGlobalQueryDelegate(call.execute(), null);
     }
 
     /**
@@ -353,7 +317,7 @@ public class ImplicitImpl implements Implicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getOptionalGlobalQueryDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -361,7 +325,7 @@ public class ImplicitImpl implements Implicit {
         return call;
     }
 
-    private ServiceResponse<Error> getOptionalGlobalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> getOptionalGlobalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);

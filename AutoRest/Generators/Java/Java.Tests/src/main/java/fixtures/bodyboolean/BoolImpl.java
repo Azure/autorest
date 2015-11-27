@@ -18,6 +18,7 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodyboolean.models.Error;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -34,18 +35,13 @@ public class BoolImpl implements Bool {
     /**
      * Get true Boolean value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Boolean> getTrue() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getTrue();
-            return getTrueDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Boolean> getTrue() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getTrue();
+        return getTrueDelegate(call.execute(), null);
     }
 
     /**
@@ -60,7 +56,7 @@ public class BoolImpl implements Bool {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getTrueDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -68,7 +64,7 @@ public class BoolImpl implements Bool {
         return call;
     }
 
-    private ServiceResponse<Boolean> getTrueDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Boolean> getTrueDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Boolean>()
                 .register(200, new TypeToken<Boolean>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -79,17 +75,12 @@ public class BoolImpl implements Bool {
      * Set Boolean value true
      *
      * @param boolBody the boolean value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> putTrue(boolean boolBody) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putTrue(boolBody);
-            return putTrueDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> putTrue(boolean boolBody) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.putTrue(boolBody);
+        return putTrueDelegate(call.execute(), null);
     }
 
     /**
@@ -105,7 +96,7 @@ public class BoolImpl implements Bool {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putTrueDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -113,7 +104,7 @@ public class BoolImpl implements Bool {
         return call;
     }
 
-    private ServiceResponse<Void> putTrueDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putTrueDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -123,18 +114,13 @@ public class BoolImpl implements Bool {
     /**
      * Get false Boolean value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Boolean> getFalse() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getFalse();
-            return getFalseDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Boolean> getFalse() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getFalse();
+        return getFalseDelegate(call.execute(), null);
     }
 
     /**
@@ -149,7 +135,7 @@ public class BoolImpl implements Bool {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getFalseDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -157,7 +143,7 @@ public class BoolImpl implements Bool {
         return call;
     }
 
-    private ServiceResponse<Boolean> getFalseDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Boolean> getFalseDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Boolean>()
                 .register(200, new TypeToken<Boolean>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -168,17 +154,12 @@ public class BoolImpl implements Bool {
      * Set Boolean value false
      *
      * @param boolBody the boolean value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> putFalse(boolean boolBody) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putFalse(boolBody);
-            return putFalseDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> putFalse(boolean boolBody) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.putFalse(boolBody);
+        return putFalseDelegate(call.execute(), null);
     }
 
     /**
@@ -194,7 +175,7 @@ public class BoolImpl implements Bool {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putFalseDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -202,7 +183,7 @@ public class BoolImpl implements Bool {
         return call;
     }
 
-    private ServiceResponse<Void> putFalseDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putFalseDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -212,18 +193,13 @@ public class BoolImpl implements Bool {
     /**
      * Get null Boolean value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Boolean> getNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getNull();
-            return getNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Boolean> getNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getNull();
+        return getNullDelegate(call.execute(), null);
     }
 
     /**
@@ -238,7 +214,7 @@ public class BoolImpl implements Bool {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -246,7 +222,7 @@ public class BoolImpl implements Bool {
         return call;
     }
 
-    private ServiceResponse<Boolean> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Boolean> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Boolean>()
                 .register(200, new TypeToken<Boolean>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -256,18 +232,13 @@ public class BoolImpl implements Bool {
     /**
      * Get invalid Boolean value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Boolean> getInvalid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getInvalid();
-            return getInvalidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Boolean> getInvalid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getInvalid();
+        return getInvalidDelegate(call.execute(), null);
     }
 
     /**
@@ -282,7 +253,7 @@ public class BoolImpl implements Bool {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getInvalidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -290,7 +261,7 @@ public class BoolImpl implements Bool {
         return call;
     }
 
-    private ServiceResponse<Boolean> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Boolean> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Boolean>()
                 .register(200, new TypeToken<Boolean>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

@@ -69,7 +69,7 @@ public class PathsTests {
         client.getPaths().doubleDecimalNegative(-9999999.999);
     }
 
-    @Ignore("Fixed when OkHttp 2.6 comes out")
+    @Test
     public void stringUrlEncoded() throws Exception {
         client.getPaths().stringUrlEncoded("begin!*'();:@ &=+$,/?#[]end");
     }
@@ -83,7 +83,7 @@ public class PathsTests {
     public void stringNull() throws Exception {
         try {
             client.getPaths().stringNull(null);
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter stringPath is required"));
         }
     }
@@ -97,7 +97,7 @@ public class PathsTests {
     public void enumNull() throws Exception {
         try {
             client.getPaths().enumNull(null);
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter enumPath is required"));
         }
     }
@@ -116,7 +116,7 @@ public class PathsTests {
     public void byteNull() throws Exception {
         try {
             client.getPaths().byteNull(null);
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter bytePath is required"));
         }
     }
@@ -130,7 +130,7 @@ public class PathsTests {
     public void dateNull() throws Exception {
         try {
             client.getPaths().dateNull(null);
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter datePath is required"));
         }
     }
@@ -144,7 +144,7 @@ public class PathsTests {
     public void dateTimeNull() throws Exception {
         try {
             client.getPaths().dateTimeNull(null);
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter dateTimePath is required"));
         }
     }

@@ -28,7 +28,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Initializes a new instance of the SubProduct class.
         /// </summary>
-        public SubProduct(string provisioningState = default(string), string provisioningStateValues = default(string))
+        public SubProduct(string id = default(string), string provisioningState = default(string), string provisioningStateValues = default(string))
+            : base(id)
         {
             ProvisioningState = provisioningState;
             ProvisioningStateValues = provisioningStateValues;

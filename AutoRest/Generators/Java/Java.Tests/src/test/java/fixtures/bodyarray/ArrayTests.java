@@ -1,17 +1,24 @@
 package fixtures.bodyarray;
 
-import com.microsoft.rest.ServiceException;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.microsoft.rest.DateTimeRfc1123;
+import com.microsoft.rest.ServiceException;
 import fixtures.bodyarray.models.Product;
 import org.joda.time.DateTime;
-import org.joda.time.Period;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.joda.time.Period;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ArrayTests {
     static AutoRestSwaggerBATArrayService client;
@@ -31,9 +38,9 @@ public class ArrayTests {
         try {
             List<Integer> result = client.getArray().getInvalid().getBody();
             Assert.assertTrue(false);
-        } catch (ServiceException exception) {
+        } catch (JsonParseException exception) {
             // expected
-            Assert.assertTrue(exception.getMessage().contains("JsonParseException"));
+            Assert.assertTrue(exception.getMessage().contains("Unexpected end-of-input"));
         }
     }
 
@@ -74,9 +81,9 @@ public class ArrayTests {
     public void getBooleanInvalidString() throws Exception {
         try {
             List<Boolean> result = client.getArray().getBooleanInvalidString().getBody();
-        } catch (ServiceException ex) {
+        } catch (InvalidFormatException ex) {
             // expected
-            Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
+            Assert.assertTrue(ex.getMessage().contains("only \"true\" or \"false\" recognized"));
         }
     }
 
@@ -106,9 +113,9 @@ public class ArrayTests {
     public void getIntInvalidString() throws Exception {
         try {
             List<Integer> result = client.getArray().getIntInvalidString().getBody();
-        } catch (ServiceException ex) {
+        } catch (InvalidFormatException ex) {
             // expected
-            Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
+            Assert.assertTrue(ex.getMessage().contains("not a valid Integer value"));
         }
     }
 
@@ -138,9 +145,9 @@ public class ArrayTests {
     public void getLongInvalidString() throws Exception {
         try {
             List<Long> result = client.getArray().getLongInvalidString().getBody();
-        } catch (ServiceException ex) {
+        } catch (InvalidFormatException ex) {
             // expected
-            Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
+            Assert.assertTrue(ex.getMessage().contains("not a valid Long value"));
         }
     }
 
@@ -170,9 +177,9 @@ public class ArrayTests {
     public void getFloatInvalidString() throws Exception {
         try {
             List<Double> result = client.getArray().getFloatInvalidString().getBody();
-        } catch (ServiceException ex) {
+        } catch (InvalidFormatException ex) {
             // expected
-            Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
+            Assert.assertTrue(ex.getMessage().contains("not a valid Double value"));
         }
     }
 
@@ -202,9 +209,9 @@ public class ArrayTests {
     public void getDoubleInvalidString() throws Exception {
         try {
             List<Double> result = client.getArray().getDoubleInvalidString().getBody();
-        } catch (ServiceException ex) {
+        } catch (InvalidFormatException ex) {
             // expected
-            Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
+            Assert.assertTrue(ex.getMessage().contains("not a valid Double value"));
         }
     }
 
@@ -274,9 +281,9 @@ public class ArrayTests {
     public void getDateInvalidString() throws Exception {
         try {
             List<LocalDate> result = client.getArray().getDateInvalidChars().getBody();
-        } catch (ServiceException ex) {
+        } catch (JsonMappingException ex) {
             // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
+            Assert.assertTrue(ex.getMessage().contains("Invalid format: \"date\""));
         }
     }
 
@@ -314,9 +321,9 @@ public class ArrayTests {
     public void getDateTimeInvalidString() throws Exception {
         try {
             List<DateTime> result = client.getArray().getDateTimeInvalidChars().getBody();
-        } catch (ServiceException ex) {
+        } catch (JsonMappingException ex) {
             // expected
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
+            Assert.assertTrue(ex.getMessage().contains("Invalid format: \"date-time\""));
         }
     }
 

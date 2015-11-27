@@ -1,6 +1,5 @@
 package fixtures.bodyduration;
 
-import com.microsoft.rest.ServiceException;
 import org.joda.time.Period;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -26,7 +25,7 @@ public class DurationOperationsTests {
             client.getDuration().getInvalid();
             Assert.fail(); //Should not reach here
         }
-        catch(ServiceException e) {
+        catch(IllegalArgumentException e) {
             //Swallow exceptions
         }
     }

@@ -61,6 +61,10 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
+            // MethodNames are normalized explicitly to provide a consitent method name while 
+            // generating cloned methods for long running operations with reserved words. For
+            // example - beginDeleteMethod() insteadof beginDelete() as delete is a reserved word.
+            Namer.NormalizeMethodNames(serviceClient);
             AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
             base.NormalizeClientModel(serviceClient);
             NormalizeApiVersion(serviceClient);
@@ -79,35 +83,6 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                     {
                         model.BaseModelType = new CompositeType { Name = "BaseResource", SerializedName = "BaseResource" };
                     }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Creates long running operation methods.
-        /// </summary>
-        /// <param name="serviceClient"></param>
-        public void AddLongRunningOperations(ServiceClient serviceClient)
-        {
-            if (serviceClient == null)
-            {
-                throw new ArgumentNullException("serviceClient");
-            }
-
-            for (int i = 0; i < serviceClient.Methods.Count; i++)
-            {
-                var method = serviceClient.Methods[i];
-                if (method.Extensions.ContainsKey(LongRunningExtension))
-                {
-                    var isLongRunning = method.Extensions[LongRunningExtension];
-                    if (isLongRunning is bool && (bool)isLongRunning)
-                    {
-                        serviceClient.Methods.Insert(i, (Method)method.Clone());
-                        method.Name = "begin" + Namer.GetMethodName(method.Name.ToPascalCase());
-                        i++;
-                    }
-
-                    method.Extensions.Remove(LongRunningExtension);
                 }
             }
         }
