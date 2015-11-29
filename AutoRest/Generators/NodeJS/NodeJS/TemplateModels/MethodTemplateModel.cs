@@ -81,12 +81,11 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in LocalParameters)
+                foreach (var parameter in LocalParametersWithOptions)
                 {
                     declarations.Add(parameter.Name);
                 }
 
-                declarations.Add("options");
                 var declaration = string.Join(", ", declarations);
                 declaration += ", ";
                 return declaration;
@@ -163,15 +162,77 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         /// <summary>
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
-        /// exclude global parameters
+        /// exclude global parameters.
         /// </summary>
-        public IEnumerable<ParameterTemplateModel> LocalParameters
+        internal IEnumerable<ParameterTemplateModel> LocalParameters
         {
             get
             {
                 return ParameterTemplateModels.Where(
                     p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
                     .OrderBy(item => !item.IsRequired);
+            }
+        }
+
+        /// <summary>
+        /// Get the parameters that are actually method parameters in the order they appear in the method signature
+        /// exclude global parameters. All the optional parameters are pushed into the second last "options" parameter.
+        /// </summary>
+        public IEnumerable<ParameterTemplateModel> LocalParametersWithOptions
+        {
+            get
+            {
+                CompositeType optionsType;
+                optionsType = new CompositeType
+                {
+                    Name = "options",
+                    SerializedName = "options",
+                    Documentation = "Optional Parameters."
+                };
+                var optionsParmeter = new Parameter
+                {
+                    Name = "options",
+                    SerializedName = "options",
+                    IsRequired = false,
+                    Documentation = "Optional Parameters.",
+                    Location = ParameterLocation.None,
+                    Type = optionsType
+                };
+
+                IEnumerable<ParameterTemplateModel> optionalParameters = LocalParameters.Where(p => !p.IsRequired);
+                foreach (ParameterTemplateModel parameter in optionalParameters)
+                {
+                    Property optionalProperty = new Property
+                    {
+                        IsReadOnly = false,
+                        Name = parameter.Name,
+                        IsRequired = parameter.IsRequired,
+                        DefaultValue = parameter.DefaultValue,
+                        Constraints = parameter.Constraints,
+                        Documentation = parameter.Documentation,
+                        Type = parameter.Type,
+                        SerializedName = parameter.SerializedName,
+                        Extensions = parameter.Extensions
+                    };
+                    ((CompositeType)optionsParmeter.Type).Properties.Add(optionalProperty);
+                }
+
+                //Adding customHeaders to the options object
+                Property customHeaders = new Property
+                {
+                    IsReadOnly = false,
+                    Name = "customHeaders",
+                    IsRequired = false,
+                    Documentation = "Headers that will be added to the request",
+                    Type = PrimaryType.Object,
+                    SerializedName = "customHeaders"
+                };
+                ((CompositeType)optionsParmeter.Type).Properties.Add(customHeaders);
+                var optionsParameterTemplateModel = new ParameterTemplateModel(optionsParmeter);
+                List<ParameterTemplateModel> paramsWithOptionsList = LocalParameters.Except(optionalParameters).ToList();
+                paramsWithOptionsList.Add(optionsParameterTemplateModel);
+                IEnumerable<ParameterTemplateModel> parametersWithOptions = paramsWithOptionsList;
+                return parametersWithOptions;
             }
         }
 
@@ -187,7 +248,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 var visitedHash = new Dictionary<string, ParameterTemplateModel>();
                 var retValue = new Stack<ParameterTemplateModel>();
 
-                foreach (var param in LocalParameters)
+                foreach (var param in LocalParametersWithOptions)
                 {
                     traversalStack.Push(param);
                 }

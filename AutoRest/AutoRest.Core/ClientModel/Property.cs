@@ -53,7 +53,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the constraints.
         /// </summary>
-        public Dictionary<Constraint, string> Constraints { get; private set; }
+        public Dictionary<Constraint, string> Constraints { get; set; }
 
         /// <summary>
         /// Gets or sets the documentation.
@@ -63,7 +63,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets vendor extensions dictionary.
         /// </summary>
-        public Dictionary<string, object> Extensions { get; private set; }
+        public Dictionary<string, object> Extensions { get; set; }
 
         /// <summary>
         /// Returns a string representation of the Property object.
