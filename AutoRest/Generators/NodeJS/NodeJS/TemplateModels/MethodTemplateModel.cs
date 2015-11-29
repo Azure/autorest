@@ -34,6 +34,59 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 OperationName = serviceClient.Name;
             }
+
+            BuildOptionsParameterTemplateModel();
+        }
+
+        private void BuildOptionsParameterTemplateModel()
+        {
+            CompositeType optionsType;
+            optionsType = new CompositeType
+            {
+                Name = "options",
+                SerializedName = "options",
+                Documentation = "Optional Parameters."
+            };
+            var optionsParmeter = new Parameter
+            {
+                Name = "options",
+                SerializedName = "options",
+                IsRequired = false,
+                Documentation = "Optional Parameters.",
+                Location = ParameterLocation.None,
+                Type = optionsType
+            };
+
+            IEnumerable<ParameterTemplateModel> optionalParameters = LocalParameters.Where(p => !p.IsRequired);
+            foreach (ParameterTemplateModel parameter in optionalParameters)
+            {
+                Property optionalProperty = new Property
+                {
+                    IsReadOnly = false,
+                    Name = parameter.Name,
+                    IsRequired = parameter.IsRequired,
+                    DefaultValue = parameter.DefaultValue,
+                    Constraints = parameter.Constraints,
+                    Documentation = parameter.Documentation,
+                    Type = parameter.Type,
+                    SerializedName = parameter.SerializedName,
+                    Extensions = parameter.Extensions
+                };
+                ((CompositeType)optionsParmeter.Type).Properties.Add(optionalProperty);
+            }
+
+            //Adding customHeaders to the options object
+            Property customHeaders = new Property
+            {
+                IsReadOnly = false,
+                Name = "customHeaders",
+                IsRequired = false,
+                Documentation = "Headers that will be added to the request",
+                Type = PrimaryType.Object,
+                SerializedName = "customHeaders"
+            };
+            ((CompositeType)optionsParmeter.Type).Properties.Add(customHeaders);
+            OptionsParameterTemplateModel = new ParameterTemplateModel(optionsParmeter);
         }
 
         public string OperationName { get; set; }
@@ -41,6 +94,8 @@ namespace Microsoft.Rest.Generator.NodeJS
         public ServiceClient ServiceClient { get; set; }
 
         public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+
+        public ParameterTemplateModel OptionsParameterTemplateModel { get; private set; }
 
         protected List<ParameterTemplateModel> GroupedParameterTemplateModels { get; private set; }
 
@@ -182,57 +237,9 @@ namespace Microsoft.Rest.Generator.NodeJS
         {
             get
             {
-                CompositeType optionsType;
-                optionsType = new CompositeType
-                {
-                    Name = "options",
-                    SerializedName = "options",
-                    Documentation = "Optional Parameters."
-                };
-                var optionsParmeter = new Parameter
-                {
-                    Name = "options",
-                    SerializedName = "options",
-                    IsRequired = false,
-                    Documentation = "Optional Parameters.",
-                    Location = ParameterLocation.None,
-                    Type = optionsType
-                };
-
-                IEnumerable<ParameterTemplateModel> optionalParameters = LocalParameters.Where(p => !p.IsRequired);
-                foreach (ParameterTemplateModel parameter in optionalParameters)
-                {
-                    Property optionalProperty = new Property
-                    {
-                        IsReadOnly = false,
-                        Name = parameter.Name,
-                        IsRequired = parameter.IsRequired,
-                        DefaultValue = parameter.DefaultValue,
-                        Constraints = parameter.Constraints,
-                        Documentation = parameter.Documentation,
-                        Type = parameter.Type,
-                        SerializedName = parameter.SerializedName,
-                        Extensions = parameter.Extensions
-                    };
-                    ((CompositeType)optionsParmeter.Type).Properties.Add(optionalProperty);
-                }
-
-                //Adding customHeaders to the options object
-                Property customHeaders = new Property
-                {
-                    IsReadOnly = false,
-                    Name = "customHeaders",
-                    IsRequired = false,
-                    Documentation = "Headers that will be added to the request",
-                    Type = PrimaryType.Object,
-                    SerializedName = "customHeaders"
-                };
-                ((CompositeType)optionsParmeter.Type).Properties.Add(customHeaders);
-                var optionsParameterTemplateModel = new ParameterTemplateModel(optionsParmeter);
-                List<ParameterTemplateModel> paramsWithOptionsList = LocalParameters.Except(optionalParameters).ToList();
-                paramsWithOptionsList.Add(optionsParameterTemplateModel);
-                IEnumerable<ParameterTemplateModel> parametersWithOptions = paramsWithOptionsList;
-                return parametersWithOptions;
+                List<ParameterTemplateModel> requiredParamsWithOptionsList = LocalParameters.Where(p => p.IsRequired).ToList();
+                requiredParamsWithOptionsList.Add(OptionsParameterTemplateModel);
+                return requiredParamsWithOptionsList as IEnumerable<ParameterTemplateModel>;
             }
         }
 
@@ -875,6 +882,20 @@ namespace Microsoft.Rest.Generator.NodeJS
                 transformation.ParameterMappings.Select(m => 
                     string.Format(CultureInfo.InvariantCulture,
                     "({0} !== null && {0} !== undefined)", m.InputParameter.Name)));
+        }
+
+        public string  BuildOptionalMappings()
+        {
+            IEnumerable<Property> optionalParameters = 
+                ((CompositeType)OptionsParameterTemplateModel.Type)
+                .Properties.Where(p => p.Name != "customHeaders");
+            var builder = new IndentedStringBuilder("  ");
+            foreach (var optionalParam in optionalParameters)
+            {
+                builder.AppendLine("var {0} = {1}.{2};", 
+                    optionalParam.Name, OptionsParameterTemplateModel.Name, optionalParam.Name);
+            }
+            return builder.ToString();
         }
     }        
 }
