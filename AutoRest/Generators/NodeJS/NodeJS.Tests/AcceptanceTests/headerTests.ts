@@ -1,17 +1,28 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
+
 'use strict';
-var should = require('should');
-var msRest = require('ms-rest');
-var moment = require('moment');
-var _ = require('underscore');
-var headerClient = require('../Expected/AcceptanceTests/Header/autoRestSwaggerBATHeaderService');
+
+import should = require('should');
+import http = require('http');
+import util = require('util');
+import assert = require('assert');
+import msRest = require('ms-rest');
+import moment = require('moment');
+var _ = require('underscore')
+
+import headerClient = require('../Expected/AcceptanceTests/Header/autoRestSwaggerBATHeaderService');
+
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
+
 var clientOptions = {};
 var baseUri = 'http://localhost:3000';
+
 describe('nodejs', function () {
+
   describe('Swagger Header BAT', function () {
+
     describe('Basic Header Operations', function () {
       var testClient = new headerClient(baseUri, clientOptions);
       it('should override existing headers', function (done) {
@@ -23,7 +34,8 @@ describe('nodejs', function () {
           });
         });
       });
-      it('should throw on changing protected headers', function (done) {
+
+      it('should throw on changing protected headers', function(done) {
         testClient.header.paramProtectedKey('text/html', function (error, result, request, response) {
           should.not.exist(error);
           testClient.header.responseProtectedKey(function (error, result, request, response) {
@@ -32,8 +44,9 @@ describe('nodejs', function () {
           });
         });
       });
-      it('should send and receive integer type headers', function (done) {
-        testClient.header.paramInteger('positive', 1, function (error, result) {
+
+      it('should send and receive integer type headers', function(done) {
+        testClient.header.paramInteger('positive', 1, function(error, result) {
           should.not.exist(error);
           testClient.header.paramInteger('negative', -2, function (error, result) {
             should.not.exist(error);
@@ -49,8 +62,9 @@ describe('nodejs', function () {
           });
         });
       });
-      it('should send and receive long type headers', function (done) {
-        testClient.header.paramLong('positive', 105, function (error, result) {
+
+      it('should send and receive long type headers', function(done) {
+        testClient.header.paramLong('positive', 105, function(error, result) {
           should.not.exist(error);
           testClient.header.paramLong('negative', -2, function (error, result) {
             should.not.exist(error);
@@ -66,8 +80,9 @@ describe('nodejs', function () {
           });
         });
       });
-      it('should send and receive float type headers', function (done) {
-        testClient.header.paramFloat('positive', 0.07, function (error, result) {
+
+      it('should send and receive float type headers', function(done) {
+        testClient.header.paramFloat('positive', 0.07, function(error, result) {
           should.not.exist(error);
           testClient.header.paramFloat('negative', -3.0, function (error, result) {
             should.not.exist(error);
@@ -83,8 +98,9 @@ describe('nodejs', function () {
           });
         });
       });
-      it('should send and receive double type headers', function (done) {
-        testClient.header.paramDouble('positive', 7e120, function (error, result) {
+
+      it('should send and receive double type headers', function(done) {
+        testClient.header.paramDouble('positive', 7e120, function(error, result) {
           should.not.exist(error);
           testClient.header.paramDouble('negative', -3.0, function (error, result) {
             should.not.exist(error);
@@ -100,8 +116,9 @@ describe('nodejs', function () {
           });
         });
       });
-      it('should send and receive boolean type headers', function (done) {
-        testClient.header.paramBool('true', true, function (error, result) {
+
+      it('should send and receive boolean type headers', function(done) {
+        testClient.header.paramBool('true', true, function(error, result) {
           should.not.exist(error);
           testClient.header.paramBool('false', false, function (error, result) {
             should.not.exist(error);
@@ -118,11 +135,11 @@ describe('nodejs', function () {
         });
       });
       it('should send and receive string type headers', function (done) {
-        testClient.header.paramString('valid', { value: 'The quick brown fox jumps over the lazy dog' }, function (error, result) {
+        testClient.header.paramString('valid', <any>{ value: 'The quick brown fox jumps over the lazy dog' }, function (error, result) {
           should.not.exist(error);
-          testClient.header.paramString('null', { value: null }, function (error, result) {
+          testClient.header.paramString('null', <any>{ value: null }, function (error, result) {
             should.not.exist(error);
-            testClient.header.paramString('empty', { value: '' }, function (error, result) {
+            testClient.header.paramString('empty', <any>{ value: '' }, function (error, result) {
               should.not.exist(error);
               testClient.header.responseString('valid', function (error, result, request, response) {
                 should.not.exist(error);
@@ -144,7 +161,7 @@ describe('nodejs', function () {
       it('should send and receive enum type headers', function (done) {
         testClient.header.paramEnum('valid', { value: 'GREY' }, function (error, result) {
           should.not.exist(error);
-          testClient.header.paramEnum('null', { value: null }, function (error, result) {
+          testClient.header.paramEnum('null', <any>{ value: null }, function (error, result) {
             should.not.exist(error);
             testClient.header.responseEnum('valid', function (error, result, request, response) {
               should.not.exist(error);
@@ -193,9 +210,9 @@ describe('nodejs', function () {
         });
       });
       it('should send and receive datetimerfc1123 type headers', function (done) {
-        testClient.header.paramDatetimeRfc1123('valid', { value: new Date('2010-01-01T12:34:56Z') }, function (error, result) {
+        testClient.header.paramDatetimeRfc1123('valid', <any>{ value: new Date('2010-01-01T12:34:56Z') }, function (error, result) {
           should.not.exist(error);
-          testClient.header.paramDatetimeRfc1123('min', { value: new Date('0001-01-01T00:00:00Z') }, function (error, result) {
+          testClient.header.paramDatetimeRfc1123('min', <any>{ value: new Date('0001-01-01T00:00:00Z') }, function (error, result) {
             should.not.exist(error);
             testClient.header.responseDatetimeRfc1123('valid', function (error, result, request, response) {
               should.not.exist(error);

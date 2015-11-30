@@ -1,17 +1,30 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
+
 'use strict';
-var should = require('should');
-var msRest = require('ms-rest');
-var reqOptClient = require('../Expected/AcceptanceTests/RequiredOptional/autoRestRequiredOptionalTestService');
+
+import should = require('should');
+import http = require('http');
+import util = require('util');
+import assert = require('assert');
+import msRest = require('ms-rest');
+
+import reqOptClient = require('../Expected/AcceptanceTests/RequiredOptional/autoRestRequiredOptionalTestService');
+
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
+
 var clientOptions = {};
 var baseUri = 'http://localhost:3000';
+
+
 describe('nodejs', function () {
+
   describe('Swagger Required Optional BAT', function () {
+
     describe('Basic Required Optional Operations', function () {
       var testClient = new reqOptClient('', '', baseUri, clientOptions);
+
       it('should throw error on null path parameter', function (done) {
         testClient.implicit.getRequiredPath(null, function (error, result) {
           should.exist(error);
@@ -19,22 +32,23 @@ describe('nodejs', function () {
           done();
         });
       });
+
       it('should accept null values for query parameters', function (done) {
-        testClient.implicit.putOptionalQuery({ queryParameter: null }, function (error, result, request, response) {
+        testClient.implicit.putOptionalQuery(<any>{ queryParameter: null }, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
         });
       });
       it('should accept null values for optional header parameters', function (done) {
-        testClient.implicit.putOptionalHeader({ queryParameter: null }, function (error, result, request, response) {
+        testClient.implicit.putOptionalHeader(<any>{ queryParameter: null }, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
         });
       });
       it('should accept null values for optional body parameters', function (done) {
-        testClient.implicit.putOptionalBody({ bodyParameter: null }, function (error, result, request, response) {
+        testClient.implicit.putOptionalBody(<any>{ bodyParameter: null }, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -55,7 +69,7 @@ describe('nodejs', function () {
         });
       });
       it('should throw error on null values for required integer properties', function (done) {
-        testClient.explicit.postRequiredIntegerProperty({ 'value': null }, function (error, result) {
+        testClient.explicit.postRequiredIntegerProperty(<any>{ 'value': null }, function (error, result) {
           should.exist(error);
           error.message.should.containEql('value');
           error.message.should.containEql('cannot be null or undefined');
@@ -63,7 +77,7 @@ describe('nodejs', function () {
         });
       });
       it('should accept null values for optional integer properties', function (done) {
-        testClient.explicit.postOptionalIntegerProperty({ value: null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalIntegerProperty(<any>{ value: null }, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -91,7 +105,7 @@ describe('nodejs', function () {
         });
       });
       it('should accept null values for optional string parameters', function (done) {
-        testClient.explicit.postOptionalStringParameter({ bodyParameter: null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalStringParameter(<any>{ bodyParameter: null }, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -106,7 +120,7 @@ describe('nodejs', function () {
         });
       });
       it('should accept null values for optional string properties', function (done) {
-        testClient.explicit.postOptionalStringProperty({ value: null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalStringProperty(<any>{ value: null }, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -120,7 +134,7 @@ describe('nodejs', function () {
         });
       });
       it('should accept null values for optional string header', function (done) {
-        testClient.explicit.postOptionalStringHeader({ bodyParameter: null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalStringHeader(<any>{ bodyParameter: null }, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -134,14 +148,14 @@ describe('nodejs', function () {
         });
       });
       it('should accept null values for optional class parameters', function (done) {
-        testClient.explicit.postOptionalClassParameter({ bodyParameter: null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalClassParameter(<any>{ bodyParameter: null }, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
         });
       });
       it('should throw error on null values for required class properties', function (done) {
-        testClient.explicit.postRequiredClassProperty({ 'value': null }, function (error, result) {
+        testClient.explicit.postRequiredClassProperty(<any>{ 'value': null }, function (error, result) {
           should.exist(error);
           error.message.should.containEql('value');
           error.message.should.containEql('cannot be null or undefined');
@@ -149,7 +163,7 @@ describe('nodejs', function () {
         });
       });
       it('should accept null values for optional class properties', function (done) {
-        testClient.explicit.postOptionalClassProperty({ value: null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalClassProperty(<any>{ value: null }, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -163,14 +177,14 @@ describe('nodejs', function () {
         });
       });
       it('should accept null values for optional array parameters', function (done) {
-        testClient.explicit.postOptionalArrayParameter({ bodyParameter: null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalArrayParameter(<any>{ bodyParameter: null }, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
         });
       });
       it('should throw error on null values for required array properties', function (done) {
-        testClient.explicit.postRequiredArrayProperty({ 'value': null }, function (error, result) {
+        testClient.explicit.postRequiredArrayProperty(<any>{ 'value': null }, function (error, result) {
           should.exist(error);
           error.message.should.containEql('value');
           error.message.should.containEql('cannot be null or undefined');
@@ -178,7 +192,7 @@ describe('nodejs', function () {
         });
       });
       it('should accept null values for optional array properties', function (done) {
-        testClient.explicit.postOptionalArrayProperty({ value: null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalArrayProperty(<any>{ value: null }, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -192,7 +206,7 @@ describe('nodejs', function () {
         });
       });
       it('should accept null values for optional array header', function (done) {
-        testClient.explicit.postOptionalArrayHeader({ headerParameter: null }, function (error, result, request, response) {
+        testClient.explicit.postOptionalArrayHeader(<any>{ headerParameter: null }, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
