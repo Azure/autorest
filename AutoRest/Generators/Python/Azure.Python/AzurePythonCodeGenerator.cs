@@ -56,12 +56,11 @@ namespace Microsoft.Rest.Generator.Azure.Python
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            // Don't add pagable method since we already handle ourself.
+            // Don't add pagable/longrunning method since we already handle ourself.
             Settings.AddCredentials = true;
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
             AzureExtensions.FlattenResourceProperties(serviceClient);
-            AzureExtensions.AddLongRunningOperations(serviceClient);
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);
             AzureExtensions.AddParameterGroups(serviceClient);
