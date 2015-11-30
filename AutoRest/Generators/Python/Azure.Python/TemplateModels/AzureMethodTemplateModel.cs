@@ -60,7 +60,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             get
             {
-                if (DefaultResponse != null && DefaultResponse.Name == "CloudError")
+                if (DefaultResponse.Body != null && DefaultResponse.Body.Name == "CloudError")
                 {
                     return "CloudError(self._deserialize, response)";
                 }

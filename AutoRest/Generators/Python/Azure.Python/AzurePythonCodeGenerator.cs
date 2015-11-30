@@ -157,13 +157,13 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 throw new ArgumentNullException("serviceClient");
             }
 
-            var convertedTypes = new Dictionary<IType, CompositeType>();
+            var convertedTypes = new Dictionary<IType, Response>();
 
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
-                foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key))
+                foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key))
                 {
-                    var compositType = (CompositeType)method.Responses[responseStatus];
+                    var compositType = (CompositeType)method.Responses[responseStatus].Body;
                     var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
                     // if the type is a wrapper over page-able response
@@ -176,15 +176,15 @@ namespace Microsoft.Rest.Generator.Azure.Python
                             Name = pagableTypeName
                         };
 
-                        convertedTypes[compositType] = pagedResult;
-                        method.Responses[responseStatus] = pagedResult;
+                        convertedTypes[compositType] = new Response(pagedResult, null);
+                        method.Responses[responseStatus] = convertedTypes[compositType];
                         break;
                     }
                 }
 
-                if (convertedTypes.ContainsKey(method.ReturnType))
+                if (convertedTypes.ContainsKey(method.ReturnType.Body))
                 {
-                    method.ReturnType = convertedTypes[method.ReturnType];
+                    method.ReturnType = convertedTypes[method.ReturnType.Body];
                 }
             }
 

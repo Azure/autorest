@@ -9,11 +9,11 @@ namespace Microsoft.Rest.Generator.Python
 {
     public class EnumTemplateModel
     {
-        public EnumTemplateModel(IList<EnumType> source)
+        public EnumTemplateModel(ISet<EnumType> source)
         {
             this.EnumTypes = source;
         }
 
-        public IList<EnumType> EnumTypes { get; private set; }
+        public ISet<EnumType> EnumTypes { get; private set; }
     }
 }
