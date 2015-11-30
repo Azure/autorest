@@ -24,10 +24,6 @@ from auto_rest_complex_test_service import (
     AutoRestComplexTestServiceConfiguration)
 
 from auto_rest_complex_test_service.models import *
-    #CMYKColors, Basic, IntWrapper, LongWrapper, FloatWrapper,
-    #DoubleWrapper, BooleanWrapper, StringWrapper, DatetimeWrapper,
-    #DateWrapper, DurationWrapper, Datetimerfc1123Wrapper, ByteWrapper,
-    #ArrayWrapper, DictionaryWrapper, Salmon, Siamese, Cat, Dog, )
 
 class UTC(tzinfo): 
     def utcoffset(self,dt): 
@@ -295,9 +291,8 @@ class ComplexTests(unittest.TestCase):
                          picture=bytearray([255, 255, 255, 255, 254]))]
             )
 
-        #TODO: regression bug
-        #with self.assertRaises(SerializationError):
-        #    client.polymorphism.put_valid_missing_required(bad_request)
+        with self.assertRaises(SerializationError):
+            client.polymorphism.put_valid_missing_required(bad_request)
 
         """
         COMPLEX TYPES THAT INVOLVE RECURSIVE REFERENCE

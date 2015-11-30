@@ -54,9 +54,8 @@ class AcceptanceTests(unittest.TestCase):
 
         #Required parameters object is not null, but a required property of the object is
         requiredParameters = ParameterGroupingPostRequiredParameters(body = None, path = pathParameter)
-        #TODO!!! Investigate, we should raise error if body in serial function is None
-        #with self.assertRaises(ValueError):
-        #    client.parameter_grouping.post_required(requiredParameters)
+        with self.assertRaises(ValueError):
+            client.parameter_grouping.post_required(requiredParameters)
         with self.assertRaises(ValueError):
             client.parameter_grouping.post_required(None)
 
@@ -113,10 +112,9 @@ class AcceptanceTests(unittest.TestCase):
         client.skip_url_encoding.get_method_path_valid(unencodedPath)
         client.skip_url_encoding.get_path_path_valid(unencodedPath)
         client.skip_url_encoding.get_swagger_path_valid(unencodedPath)
-        #TODO: investigate, how to stop requests automatic encode the query parameter
-        #client.skip_url_encoding.get_method_query_valid(unencodedQuery)
-        #client.skip_url_encoding.get_path_query_valid(unencodedQuery)
-        #client.skip_url_encoding.get_swagger_query_valid(unencodedQuery)
+        client.skip_url_encoding.get_method_query_valid(unencodedQuery)
+        client.skip_url_encoding.get_path_query_valid(unencodedQuery)
+        client.skip_url_encoding.get_swagger_query_valid(unencodedQuery)
         client.skip_url_encoding.get_method_query_null()
         client.skip_url_encoding.get_method_query_null(None)
 
