@@ -23,11 +23,11 @@ export interface HttpFailure {
     /**
      * Get empty error form server
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -46,11 +46,11 @@ export interface HttpSuccess {
     /**
      * Return 200 status code if successful
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -60,11 +60,11 @@ export interface HttpSuccess {
     /**
      * Get 200 success
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -74,13 +74,13 @@ export interface HttpSuccess {
     /**
      * Put boolean value true returning 200 success
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -90,13 +90,13 @@ export interface HttpSuccess {
     /**
      * Patch true Boolean value in request returning 200
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -106,13 +106,13 @@ export interface HttpSuccess {
     /**
      * Post bollean value true in request that returns a 200
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -122,13 +122,13 @@ export interface HttpSuccess {
     /**
      * Delete simple boolean value true returns 200
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -138,13 +138,13 @@ export interface HttpSuccess {
     /**
      * Put true Boolean value in request returns 201
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -154,13 +154,13 @@ export interface HttpSuccess {
     /**
      * Post true Boolean value in request returns 201 (Created)
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -170,13 +170,13 @@ export interface HttpSuccess {
     /**
      * Put true Boolean value in request returns 202 (Accepted)
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -186,13 +186,13 @@ export interface HttpSuccess {
     /**
      * Patch true Boolean value in request returns 202
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -202,13 +202,13 @@ export interface HttpSuccess {
     /**
      * Post true Boolean value in request returns 202 (Accepted)
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -218,13 +218,13 @@ export interface HttpSuccess {
     /**
      * Delete true Boolean value in request returns 202 (accepted)
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -234,11 +234,11 @@ export interface HttpSuccess {
     /**
      * Return 204 status code if successful
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -248,13 +248,13 @@ export interface HttpSuccess {
     /**
      * Put true Boolean value in request returns 204 (no content)
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -264,13 +264,13 @@ export interface HttpSuccess {
     /**
      * Patch true Boolean value in request returns 204 (no content)
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -280,13 +280,13 @@ export interface HttpSuccess {
     /**
      * Post true Boolean value in request returns 204 (no content)
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -296,13 +296,13 @@ export interface HttpSuccess {
     /**
      * Delete true Boolean value in request returns 204 (no content)
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -312,11 +312,11 @@ export interface HttpSuccess {
     /**
      * Return 404 status code
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -335,11 +335,11 @@ export interface HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -349,11 +349,11 @@ export interface HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -363,11 +363,11 @@ export interface HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -377,11 +377,11 @@ export interface HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -393,13 +393,13 @@ export interface HttpRedirects {
      * automatically redirected, but should return the received 301 to the caller
      * for evaluation
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -409,11 +409,11 @@ export interface HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -423,11 +423,11 @@ export interface HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -439,13 +439,13 @@ export interface HttpRedirects {
      * be automatically redirected, but should return the received 302 to the
      * caller for evaluation
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -457,13 +457,13 @@ export interface HttpRedirects {
      * automatically redirected usign a get, ultimately returning a 200 status
      * code
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -473,11 +473,11 @@ export interface HttpRedirects {
     /**
      * Redirect with 307, resulting in a 200 success
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -487,11 +487,11 @@ export interface HttpRedirects {
     /**
      * Redirect get with 307, resulting in a 200 success
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -501,13 +501,13 @@ export interface HttpRedirects {
     /**
      * Put redirected with 307, resulting in a 200 after redirect
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -517,13 +517,13 @@ export interface HttpRedirects {
     /**
      * Patch redirected with 307, resulting in a 200 after redirect
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -533,13 +533,13 @@ export interface HttpRedirects {
     /**
      * Post redirected with 307, resulting in a 200 after redirect
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -549,13 +549,13 @@ export interface HttpRedirects {
     /**
      * Delete redirected with 307, resulting in a 200 after redirect
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -574,11 +574,11 @@ export interface HttpClientFailure {
     /**
      * Return 400 status code - should be represented in the client as an error
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -588,11 +588,11 @@ export interface HttpClientFailure {
     /**
      * Return 400 status code - should be represented in the client as an error
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -602,13 +602,13 @@ export interface HttpClientFailure {
     /**
      * Return 400 status code - should be represented in the client as an error
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -618,13 +618,13 @@ export interface HttpClientFailure {
     /**
      * Return 400 status code - should be represented in the client as an error
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -634,13 +634,13 @@ export interface HttpClientFailure {
     /**
      * Return 400 status code - should be represented in the client as an error
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -650,13 +650,13 @@ export interface HttpClientFailure {
     /**
      * Return 400 status code - should be represented in the client as an error
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -666,11 +666,11 @@ export interface HttpClientFailure {
     /**
      * Return 401 status code - should be represented in the client as an error
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -680,11 +680,11 @@ export interface HttpClientFailure {
     /**
      * Return 402 status code - should be represented in the client as an error
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -694,11 +694,11 @@ export interface HttpClientFailure {
     /**
      * Return 403 status code - should be represented in the client as an error
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -708,13 +708,13 @@ export interface HttpClientFailure {
     /**
      * Return 404 status code - should be represented in the client as an error
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -724,13 +724,13 @@ export interface HttpClientFailure {
     /**
      * Return 405 status code - should be represented in the client as an error
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -740,13 +740,13 @@ export interface HttpClientFailure {
     /**
      * Return 406 status code - should be represented in the client as an error
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -756,13 +756,13 @@ export interface HttpClientFailure {
     /**
      * Return 407 status code - should be represented in the client as an error
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -772,13 +772,13 @@ export interface HttpClientFailure {
     /**
      * Return 409 status code - should be represented in the client as an error
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -788,11 +788,11 @@ export interface HttpClientFailure {
     /**
      * Return 410 status code - should be represented in the client as an error
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -802,11 +802,11 @@ export interface HttpClientFailure {
     /**
      * Return 411 status code - should be represented in the client as an error
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -816,11 +816,11 @@ export interface HttpClientFailure {
     /**
      * Return 412 status code - should be represented in the client as an error
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -830,13 +830,13 @@ export interface HttpClientFailure {
     /**
      * Return 413 status code - should be represented in the client as an error
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -846,13 +846,13 @@ export interface HttpClientFailure {
     /**
      * Return 414 status code - should be represented in the client as an error
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -862,13 +862,13 @@ export interface HttpClientFailure {
     /**
      * Return 415 status code - should be represented in the client as an error
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -878,11 +878,11 @@ export interface HttpClientFailure {
     /**
      * Return 416 status code - should be represented in the client as an error
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -892,13 +892,13 @@ export interface HttpClientFailure {
     /**
      * Return 417 status code - should be represented in the client as an error
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -908,11 +908,11 @@ export interface HttpClientFailure {
     /**
      * Return 429 status code - should be represented in the client as an error
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -931,11 +931,11 @@ export interface HttpServerFailure {
     /**
      * Return 501 status code - should be represented in the client as an error
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -945,11 +945,11 @@ export interface HttpServerFailure {
     /**
      * Return 501 status code - should be represented in the client as an error
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -959,13 +959,13 @@ export interface HttpServerFailure {
     /**
      * Return 505 status code - should be represented in the client as an error
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -975,13 +975,13 @@ export interface HttpServerFailure {
     /**
      * Return 505 status code - should be represented in the client as an error
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1000,11 +1000,11 @@ export interface HttpRetry {
     /**
      * Return 408 status code, then 200 after retry
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1014,13 +1014,13 @@ export interface HttpRetry {
     /**
      * Return 500 status code, then 200 after retry
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1030,13 +1030,13 @@ export interface HttpRetry {
     /**
      * Return 500 status code, then 200 after retry
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1046,11 +1046,11 @@ export interface HttpRetry {
     /**
      * Return 502 status code, then 200 after retry
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1060,13 +1060,13 @@ export interface HttpRetry {
     /**
      * Return 503 status code, then 200 after retry
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1076,13 +1076,13 @@ export interface HttpRetry {
     /**
      * Return 503 status code, then 200 after retry
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1092,13 +1092,13 @@ export interface HttpRetry {
     /**
      * Return 504 status code, then 200 after retry
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1108,13 +1108,13 @@ export interface HttpRetry {
     /**
      * Return 504 status code, then 200 after retry
      *
-     * @param {boolean} [booleanValue] Simple boolean value true
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1133,11 +1133,11 @@ export interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1147,11 +1147,11 @@ export interface MultipleResponses {
     /**
      * Send a 204 response with no payload
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1161,11 +1161,11 @@ export interface MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1175,11 +1175,11 @@ export interface MultipleResponses {
     /**
      * Send a 202 response with no payload:
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1190,11 +1190,11 @@ export interface MultipleResponses {
      * Send a 400 response with valid error payload: {'status': 400, 'message':
      * 'client error'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1204,11 +1204,11 @@ export interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1219,11 +1219,11 @@ export interface MultipleResponses {
      * Send a 201 response with valid payload: {'statusCode': '201',
      * 'textStatusCode': 'Created'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1234,11 +1234,11 @@ export interface MultipleResponses {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client
      * error'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1248,11 +1248,11 @@ export interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1262,11 +1262,11 @@ export interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1276,11 +1276,11 @@ export interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1291,11 +1291,11 @@ export interface MultipleResponses {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client
      * error'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1305,11 +1305,11 @@ export interface MultipleResponses {
     /**
      * Send a 202 response with no payload
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1319,11 +1319,11 @@ export interface MultipleResponses {
     /**
      * Send a 204 response with no payload
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1334,11 +1334,11 @@ export interface MultipleResponses {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client
      * error'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1348,11 +1348,11 @@ export interface MultipleResponses {
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1362,11 +1362,11 @@ export interface MultipleResponses {
     /**
      * Send a 204 response with no payload
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1376,11 +1376,11 @@ export interface MultipleResponses {
     /**
      * Send a 400 response with no payload
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1390,11 +1390,11 @@ export interface MultipleResponses {
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1404,11 +1404,11 @@ export interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1418,11 +1418,11 @@ export interface MultipleResponses {
     /**
      * Send a 200 response with no payload
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1432,11 +1432,11 @@ export interface MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1446,11 +1446,11 @@ export interface MultipleResponses {
     /**
      * Send a 400 response with no payload
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1460,11 +1460,11 @@ export interface MultipleResponses {
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1474,11 +1474,11 @@ export interface MultipleResponses {
     /**
      * Send a 200 response with no payload
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1488,11 +1488,11 @@ export interface MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1502,11 +1502,11 @@ export interface MultipleResponses {
     /**
      * Send a 400 response with no payload
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1517,11 +1517,11 @@ export interface MultipleResponses {
      * Send a 200 response with no payload, when a payload is expected - client
      * should return a null object of thde type for model A
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1531,11 +1531,11 @@ export interface MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '200'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1545,11 +1545,11 @@ export interface MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1560,11 +1560,11 @@ export interface MultipleResponses {
      * Send a 400 response with no payload client should treat as an http error
      * with no error model
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1574,11 +1574,11 @@ export interface MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '400'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1588,11 +1588,11 @@ export interface MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1602,11 +1602,11 @@ export interface MultipleResponses {
     /**
      * Send a 202 response with payload {'statusCode': '202'}
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */

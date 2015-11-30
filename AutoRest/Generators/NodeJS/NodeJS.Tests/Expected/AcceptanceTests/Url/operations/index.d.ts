@@ -25,11 +25,11 @@ export interface Paths {
      *
      * @param {boolean} boolPath true boolean value
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -41,11 +41,11 @@ export interface Paths {
      *
      * @param {boolean} boolPath false boolean value
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -57,11 +57,11 @@ export interface Paths {
      *
      * @param {number} intPath '1000000' integer value
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -73,11 +73,11 @@ export interface Paths {
      *
      * @param {number} intPath '-1000000' integer value
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -89,11 +89,11 @@ export interface Paths {
      *
      * @param {number} longPath '10000000000' 64 bit integer value
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -105,11 +105,11 @@ export interface Paths {
      *
      * @param {number} longPath '-10000000000' 64 bit integer value
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -121,11 +121,11 @@ export interface Paths {
      *
      * @param {number} floatPath '1.034E+20'numeric value
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -137,11 +137,11 @@ export interface Paths {
      *
      * @param {number} floatPath '-1.034E-20'numeric value
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -153,11 +153,11 @@ export interface Paths {
      *
      * @param {number} doublePath '9999999.999'numeric value
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -169,11 +169,11 @@ export interface Paths {
      *
      * @param {number} doublePath '-9999999.999'numeric value
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -186,11 +186,11 @@ export interface Paths {
      * @param {string} stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible
      * values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -204,11 +204,11 @@ export interface Paths {
      * value. Possible values for this parameter include: 'begin!*'();:@
      * &=+$,/?#[]end'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -221,11 +221,11 @@ export interface Paths {
      * @param {string} stringPath '' string value. Possible values for this
      * parameter include: ''
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -237,11 +237,11 @@ export interface Paths {
      *
      * @param {string} stringPath null string value
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -254,11 +254,11 @@ export interface Paths {
      * @param {string} enumPath send the value green. Possible values for this
      * parameter include: 'red color', 'green color', 'blue color'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -271,11 +271,11 @@ export interface Paths {
      * @param {string} enumPath send null should throw. Possible values for this
      * parameter include: 'red color', 'green color', 'blue color'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -288,11 +288,11 @@ export interface Paths {
      * @param {buffer} bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte
      * array
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -304,11 +304,11 @@ export interface Paths {
      *
      * @param {buffer} bytePath '' as byte array
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -320,11 +320,11 @@ export interface Paths {
      *
      * @param {buffer} bytePath null as byte array (should throw)
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -336,11 +336,11 @@ export interface Paths {
      *
      * @param {date} datePath '2012-01-01' as date
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -353,11 +353,11 @@ export interface Paths {
      *
      * @param {date} datePath null as date (should throw)
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -369,11 +369,11 @@ export interface Paths {
      *
      * @param {date} dateTimePath '2012-01-01T01:01:01Z' as date-time
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -386,11 +386,11 @@ export interface Paths {
      *
      * @param {date} dateTimePath null as date-time
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -409,13 +409,13 @@ export interface Queries {
     /**
      * Get true Boolean value on path
      *
-     * @param {boolean} [boolQuery] true boolean value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.boolQuery] true boolean value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -425,13 +425,13 @@ export interface Queries {
     /**
      * Get false Boolean value on path
      *
-     * @param {boolean} [boolQuery] false boolean value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.boolQuery] false boolean value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -441,13 +441,13 @@ export interface Queries {
     /**
      * Get null Boolean value on query (query string should be absent)
      *
-     * @param {boolean} [boolQuery] null boolean value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {boolean} [options.boolQuery] null boolean value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -457,13 +457,13 @@ export interface Queries {
     /**
      * Get '1000000' integer value
      *
-     * @param {number} [intQuery] '1000000' integer value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.intQuery] '1000000' integer value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -473,13 +473,13 @@ export interface Queries {
     /**
      * Get '-1000000' integer value
      *
-     * @param {number} [intQuery] '-1000000' integer value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.intQuery] '-1000000' integer value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -489,13 +489,13 @@ export interface Queries {
     /**
      * Get null integer value (no query parameter)
      *
-     * @param {number} [intQuery] null integer value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.intQuery] null integer value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -505,13 +505,13 @@ export interface Queries {
     /**
      * Get '10000000000' 64 bit integer value
      *
-     * @param {number} [longQuery] '10000000000' 64 bit integer value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.longQuery] '10000000000' 64 bit integer value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -521,13 +521,13 @@ export interface Queries {
     /**
      * Get '-10000000000' 64 bit integer value
      *
-     * @param {number} [longQuery] '-10000000000' 64 bit integer value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.longQuery] '-10000000000' 64 bit integer value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -537,13 +537,13 @@ export interface Queries {
     /**
      * Get 'null 64 bit integer value (no query param in uri)
      *
-     * @param {number} [longQuery] null 64 bit integer value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.longQuery] null 64 bit integer value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -553,13 +553,13 @@ export interface Queries {
     /**
      * Get '1.034E+20' numeric value
      *
-     * @param {number} [floatQuery] '1.034E+20'numeric value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.floatQuery] '1.034E+20'numeric value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -569,13 +569,13 @@ export interface Queries {
     /**
      * Get '-1.034E-20' numeric value
      *
-     * @param {number} [floatQuery] '-1.034E-20'numeric value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.floatQuery] '-1.034E-20'numeric value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -585,13 +585,13 @@ export interface Queries {
     /**
      * Get null numeric value (no query parameter)
      *
-     * @param {number} [floatQuery] null numeric value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.floatQuery] null numeric value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -601,13 +601,13 @@ export interface Queries {
     /**
      * Get '9999999.999' numeric value
      *
-     * @param {number} [doubleQuery] '9999999.999'numeric value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.doubleQuery] '9999999.999'numeric value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -617,13 +617,13 @@ export interface Queries {
     /**
      * Get '-9999999.999' numeric value
      *
-     * @param {number} [doubleQuery] '-9999999.999'numeric value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.doubleQuery] '-9999999.999'numeric value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -633,13 +633,13 @@ export interface Queries {
     /**
      * Get null numeric value (no query parameter)
      *
-     * @param {number} [doubleQuery] null numeric value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.doubleQuery] null numeric value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -649,14 +649,14 @@ export interface Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
      *
-     * @param {string} [stringQuery] '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible
-     * values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.stringQuery] '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value.
+     * Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -666,15 +666,15 @@ export interface Queries {
     /**
      * Get 'begin!*'();:@ &=+$,/?#[]end
      *
-     * @param {string} [stringQuery] 'begin!*'();:@ &=+$,/?#[]end' url encoded
-     * string value. Possible values for this parameter include: 'begin!*'();:@
-     * &=+$,/?#[]end'
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.stringQuery] 'begin!*'();:@ &=+$,/?#[]end' url
+     * encoded string value. Possible values for this parameter include:
+     * 'begin!*'();:@ &=+$,/?#[]end'
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -684,14 +684,14 @@ export interface Queries {
     /**
      * Get ''
      *
-     * @param {string} [stringQuery] '' string value. Possible values for this
-     * parameter include: ''
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.stringQuery] '' string value. Possible values for
+     * this parameter include: ''
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -701,13 +701,13 @@ export interface Queries {
     /**
      * Get null (no query parameter in url)
      *
-     * @param {string} [stringQuery] null string value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.stringQuery] null string value
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -717,14 +717,14 @@ export interface Queries {
     /**
      * Get using uri with query parameter 'green color'
      *
-     * @param {string} [enumQuery] 'green color' enum value. Possible values for
-     * this parameter include: 'red color', 'green color', 'blue color'
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.enumQuery] 'green color' enum value. Possible
+     * values for this parameter include: 'red color', 'green color', 'blue color'
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -734,14 +734,14 @@ export interface Queries {
     /**
      * Get null (no query parameter in url)
      *
-     * @param {string} [enumQuery] null string value. Possible values for this
-     * parameter include: 'red color', 'green color', 'blue color'
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.enumQuery] null string value. Possible values for
+     * this parameter include: 'red color', 'green color', 'blue color'
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -751,14 +751,14 @@ export interface Queries {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      *
-     * @param {buffer} [byteQuery] '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded
-     * byte array
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {buffer} [options.byteQuery] '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8
+     * encoded byte array
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -768,13 +768,13 @@ export interface Queries {
     /**
      * Get '' as byte array
      *
-     * @param {buffer} [byteQuery] '' as byte array
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {buffer} [options.byteQuery] '' as byte array
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -784,13 +784,14 @@ export interface Queries {
     /**
      * Get null as byte array (no query parameters in uri)
      *
-     * @param {buffer} [byteQuery] null as byte array (no query parameters in uri)
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {buffer} [options.byteQuery] null as byte array (no query parameters
+     * in uri)
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -800,13 +801,13 @@ export interface Queries {
     /**
      * Get '2012-01-01' as date
      *
-     * @param {date} [dateQuery] '2012-01-01' as date
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {date} [options.dateQuery] '2012-01-01' as date
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -816,13 +817,13 @@ export interface Queries {
     /**
      * Get null as date - this should result in no query parameters in uri
      *
-     * @param {date} [dateQuery] null as date (no query parameters in uri)
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {date} [options.dateQuery] null as date (no query parameters in uri)
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -832,13 +833,13 @@ export interface Queries {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time
      *
-     * @param {date} [dateTimeQuery] '2012-01-01T01:01:01Z' as date-time
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {date} [options.dateTimeQuery] '2012-01-01T01:01:01Z' as date-time
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -848,13 +849,14 @@ export interface Queries {
     /**
      * Get null as date-time, should result in no query parameters in uri
      *
-     * @param {date} [dateTimeQuery] null as date-time (no query parameters)
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {date} [options.dateTimeQuery] null as date-time (no query
+     * parameters)
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -865,14 +867,14 @@ export interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
      * null, ''] using the csv-array format
      *
-     * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {array} [options.arrayQuery] an array of string ['ArrayQuery1',
      * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -882,14 +884,14 @@ export interface Queries {
     /**
      * Get a null array of string using the csv-array format
      *
-     * @param {array} [arrayQuery] a null array of string using the csv-array
-     * format
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {array} [options.arrayQuery] a null array of string using the
+     * csv-array format
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -899,14 +901,14 @@ export interface Queries {
     /**
      * Get an empty array [] of string using the csv-array format
      *
-     * @param {array} [arrayQuery] an empty array [] of string using the csv-array
-     * format
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {array} [options.arrayQuery] an empty array [] of string using the
+     * csv-array format
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -917,14 +919,14 @@ export interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
      * null, ''] using the ssv-array format
      *
-     * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {array} [options.arrayQuery] an array of string ['ArrayQuery1',
      * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the ssv-array format
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -935,14 +937,14 @@ export interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
      * null, ''] using the tsv-array format
      *
-     * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {array} [options.arrayQuery] an array of string ['ArrayQuery1',
      * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the tsv-array format
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -953,14 +955,14 @@ export interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
      * null, ''] using the pipes-array format
      *
-     * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {array} [options.arrayQuery] an array of string ['ArrayQuery1',
      * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the pipes-array format
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -988,16 +990,17 @@ export interface PathItems {
      * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
      * appears in the path
      * 
-     * @param {string} [localStringQuery] should contain value 'localStringQuery'
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [pathItemStringQuery] A string value 'pathItemStringQuery'
-     * that appears as a query parameter
+     * @param {string} [options.localStringQuery] should contain value
+     * 'localStringQuery'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.pathItemStringQuery] A string value
+     * 'pathItemStringQuery' that appears as a query parameter
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1016,16 +1019,17 @@ export interface PathItems {
      * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
      * appears in the path
      * 
-     * @param {string} [localStringQuery] should contain value 'localStringQuery'
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [pathItemStringQuery] A string value 'pathItemStringQuery'
-     * that appears as a query parameter
+     * @param {string} [options.localStringQuery] should contain value
+     * 'localStringQuery'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.pathItemStringQuery] A string value
+     * 'pathItemStringQuery' that appears as a query parameter
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1043,16 +1047,16 @@ export interface PathItems {
      * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
      * appears in the path
      * 
-     * @param {string} [localStringQuery] should contain null value
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [pathItemStringQuery] A string value 'pathItemStringQuery'
-     * that appears as a query parameter
+     * @param {string} [options.localStringQuery] should contain null value
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.pathItemStringQuery] A string value
+     * 'pathItemStringQuery' that appears as a query parameter
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1070,15 +1074,15 @@ export interface PathItems {
      * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
      * appears in the path
      * 
-     * @param {string} [localStringQuery] should contain value null
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [pathItemStringQuery] should contain value null
+     * @param {string} [options.localStringQuery] should contain value null
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.pathItemStringQuery] should contain value null
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */

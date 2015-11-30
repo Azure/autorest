@@ -31,11 +31,11 @@ function Polymorphicrecursive(client) {
 /**
  * Get complex types that are polymorphic and have recursive references
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -199,11 +199,11 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
  * 
  * @param {string} [complexBody.fishtype] Polymorhpic Discriminator
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

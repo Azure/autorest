@@ -892,7 +892,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             var builder = new IndentedStringBuilder("  ");
             foreach (var optionalParam in optionalParameters)
             {
-                builder.AppendLine("var {0} = {1}.{2};", 
+                builder.AppendLine("var {0} = {1} ? {1}.{2} : undefined;", 
                     optionalParam.Name, OptionsParameterTemplateModel.Name, optionalParam.Name);
             }
             return builder.ToString();

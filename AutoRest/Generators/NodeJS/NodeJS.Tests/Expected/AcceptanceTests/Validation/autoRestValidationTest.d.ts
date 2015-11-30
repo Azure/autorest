@@ -46,11 +46,11 @@ declare class AutoRestValidationTest {
          * 
          * @param {number} id Required int multiple of 10 from 100 to 1000.
          * 
-         * @param {object} [options]
-         *
-         * @param {object} [options.customHeaders] headers that will be added to
+         * @param {object} [options] Optional Parameters.
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         *
+         * 
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -65,20 +65,21 @@ declare class AutoRestValidationTest {
          * 
          * @param {number} id Required int multiple of 10 from 100 to 1000.
          * 
-         * @param {object} [body]
+         * @param {object} [options] Optional Parameters.
          * 
-         * @param {array} [body.displayNames] Non required array of unique items from
-         * 0 to 6 elements.
+         * @param {object} [options.body]
          * 
-         * @param {number} [body.capacity] Non required int betwen 0 and 100 exclusive.
+         * @param {array} [options.body.displayNames] Non required array of unique
+         * items from 0 to 6 elements.
          * 
-         * @param {string} [body.image] Image URL representing the product.
+         * @param {number} [options.body.capacity] Non required int betwen 0 and 100
+         * exclusive.
          * 
-         * @param {object} [options]
-         *
-         * @param {object} [options.customHeaders] headers that will be added to
+         * @param {string} [options.body.image] Image URL representing the product.
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         *
+         * 
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */

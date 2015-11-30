@@ -24,19 +24,19 @@ export interface LROs {
      * Long running put request, service returns a 200 to the initial request,
      * with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -47,19 +47,19 @@ export interface LROs {
      * Long running put request, service returns a 200 to the initial request,
      * with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -70,19 +70,19 @@ export interface LROs {
      * Long running put request, service returns a 200 to the initial request,
      * with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -93,19 +93,19 @@ export interface LROs {
      * Long running put request, service returns a 200 to the initial request,
      * with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -117,19 +117,19 @@ export interface LROs {
      * with a location header that points to a polling URL that returns a 200 and
      * an entity that doesn't contains ProvisioningState
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -141,19 +141,19 @@ export interface LROs {
      * with a location header that points to a polling URL that returns a 200 and
      * an entity that doesn't contains ProvisioningState
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -166,19 +166,19 @@ export interface LROs {
      * this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -191,19 +191,19 @@ export interface LROs {
      * this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -216,19 +216,19 @@ export interface LROs {
      * this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -241,19 +241,19 @@ export interface LROs {
      * this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -266,19 +266,19 @@ export interface LROs {
      * this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -291,19 +291,19 @@ export interface LROs {
      * this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -316,19 +316,19 @@ export interface LROs {
      * this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -341,19 +341,19 @@ export interface LROs {
      * this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -365,19 +365,19 @@ export interface LROs {
      * location header. Subsequent calls to operation status do not contain
      * location header.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -389,19 +389,19 @@ export interface LROs {
      * location header. Subsequent calls to operation status do not contain
      * location header.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -413,19 +413,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -437,19 +437,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -461,19 +461,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -485,19 +485,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -509,19 +509,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -533,19 +533,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -557,19 +557,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -581,19 +581,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -605,19 +605,19 @@ export interface LROs {
      * Azure-AsyncOperation header. Subsequent calls to operation status do not
      * contain Azure-AsyncOperation header.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -629,19 +629,19 @@ export interface LROs {
      * Azure-AsyncOperation header. Subsequent calls to operation status do not
      * contain Azure-AsyncOperation header.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -651,17 +651,17 @@ export interface LROs {
     /**
      * Long running put request with non resource.
      *
-     * @param {object} [sku] sku to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [sku.name]
+     * @param {object} [options.sku] sku to put
      * 
-     * @param {string} [sku.id]
+     * @param {string} [options.sku.name]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.sku.id]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -671,17 +671,17 @@ export interface LROs {
     /**
      * Long running put request with non resource.
      *
-     * @param {object} [sku] sku to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [sku.name]
+     * @param {object} [options.sku] sku to put
      * 
-     * @param {string} [sku.id]
+     * @param {string} [options.sku.name]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.sku.id]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -691,17 +691,17 @@ export interface LROs {
     /**
      * Long running put request with non resource.
      *
-     * @param {object} [sku] Sku to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [sku.name]
+     * @param {object} [options.sku] Sku to put
      * 
-     * @param {string} [sku.id]
+     * @param {string} [options.sku.name]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.sku.id]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -711,17 +711,17 @@ export interface LROs {
     /**
      * Long running put request with non resource.
      *
-     * @param {object} [sku] Sku to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [sku.name]
+     * @param {object} [options.sku] Sku to put
      * 
-     * @param {string} [sku.id]
+     * @param {string} [options.sku.name]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.sku.id]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -731,15 +731,15 @@ export interface LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @param {object} [product] Sub Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Sub Product to put
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -749,15 +749,15 @@ export interface LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @param {object} [product] Sub Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Sub Product to put
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -767,15 +767,15 @@ export interface LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @param {object} [product] Sub Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Sub Product to put
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -785,15 +785,15 @@ export interface LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @param {object} [product] Sub Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Sub Product to put
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -806,11 +806,11 @@ export interface LROs {
      * this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -823,11 +823,11 @@ export interface LROs {
      * this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -840,11 +840,11 @@ export interface LROs {
      * this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -857,11 +857,11 @@ export interface LROs {
      * this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -874,11 +874,11 @@ export interface LROs {
      * this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -891,11 +891,11 @@ export interface LROs {
      * this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -905,11 +905,11 @@ export interface LROs {
     /**
      * Long running delete succeeds and returns right away
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -919,11 +919,11 @@ export interface LROs {
     /**
      * Long running delete succeeds and returns right away
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -935,11 +935,11 @@ export interface LROs {
      * Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -951,11 +951,11 @@ export interface LROs {
      * Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -967,11 +967,11 @@ export interface LROs {
      * Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -983,11 +983,11 @@ export interface LROs {
      * Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -999,11 +999,11 @@ export interface LROs {
      * initial request. Subsequent calls to operation status do not contain
      * location header.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1015,11 +1015,11 @@ export interface LROs {
      * initial request. Subsequent calls to operation status do not contain
      * location header.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1031,11 +1031,11 @@ export interface LROs {
      * in the initial request. Subsequent calls to operation status do not
      * contain Azure-AsyncOperation header.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1047,11 +1047,11 @@ export interface LROs {
      * in the initial request. Subsequent calls to operation status do not
      * contain Azure-AsyncOperation header.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1063,11 +1063,11 @@ export interface LROs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1079,11 +1079,11 @@ export interface LROs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1095,11 +1095,11 @@ export interface LROs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1111,11 +1111,11 @@ export interface LROs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1127,11 +1127,11 @@ export interface LROs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1143,11 +1143,11 @@ export interface LROs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1159,11 +1159,11 @@ export interface LROs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1175,11 +1175,11 @@ export interface LROs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1191,11 +1191,11 @@ export interface LROs {
      * with 'Location' header. Poll returns a 200 with a response body after
      * success.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1207,11 +1207,11 @@ export interface LROs {
      * with 'Location' header. Poll returns a 200 with a response body after
      * success.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1223,19 +1223,19 @@ export interface LROs {
      * with 'Location' and 'Retry-After' headers, Polls return a 200 with a
      * response body after success
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1247,19 +1247,19 @@ export interface LROs {
      * with 'Location' and 'Retry-After' headers, Polls return a 200 with a
      * response body after success
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1270,19 +1270,19 @@ export interface LROs {
      * Long running post request, service returns a 202 to the initial request,
      * with 'Location' header, 204 with noresponse body after success
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1293,19 +1293,19 @@ export interface LROs {
      * Long running post request, service returns a 202 to the initial request,
      * with 'Location' header, 204 with noresponse body after success
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1317,19 +1317,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1341,19 +1341,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1365,19 +1365,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1389,19 +1389,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1413,19 +1413,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1437,19 +1437,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1461,19 +1461,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1485,19 +1485,19 @@ export interface LROs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1519,19 +1519,19 @@ export interface LRORetrys {
      * return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1544,19 +1544,19 @@ export interface LRORetrys {
      * return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1569,19 +1569,19 @@ export interface LRORetrys {
      * the endpoint indicated in the Azure-AsyncOperation header for operation
      * status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1594,19 +1594,19 @@ export interface LRORetrys {
      * the endpoint indicated in the Azure-AsyncOperation header for operation
      * status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1619,11 +1619,11 @@ export interface LRORetrys {
      * ProvisioningState=’Accepted’.  Polls return this value until the last poll
      * returns a ‘200’ with ProvisioningState=’Succeeded’
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1636,11 +1636,11 @@ export interface LRORetrys {
      * ProvisioningState=’Accepted’.  Polls return this value until the last poll
      * returns a ‘200’ with ProvisioningState=’Succeeded’
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1652,11 +1652,11 @@ export interface LRORetrys {
      * initial request. Polls return this value until the last poll returns a
      * ‘200’ with ProvisioningState=’Succeeded’
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1668,11 +1668,11 @@ export interface LRORetrys {
      * initial request. Polls return this value until the last poll returns a
      * ‘200’ with ProvisioningState=’Succeeded’
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1684,11 +1684,11 @@ export interface LRORetrys {
      * initial request. Poll the endpoint indicated in the Azure-AsyncOperation
      * header for operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1700,11 +1700,11 @@ export interface LRORetrys {
      * initial request. Poll the endpoint indicated in the Azure-AsyncOperation
      * header for operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1716,19 +1716,19 @@ export interface LRORetrys {
      * request, with 'Location' and 'Retry-After' headers, Polls return a 200
      * with a response body after success
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1740,19 +1740,19 @@ export interface LRORetrys {
      * request, with 'Location' and 'Retry-After' headers, Polls return a 200
      * with a response body after success
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1765,19 +1765,19 @@ export interface LRORetrys {
      * the endpoint indicated in the Azure-AsyncOperation header for operation
      * status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1790,19 +1790,19 @@ export interface LRORetrys {
      * the endpoint indicated in the Azure-AsyncOperation header for operation
      * status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1821,19 +1821,19 @@ export interface LROSADs {
     /**
      * Long running put request, service returns a 400 to the initial request
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1843,19 +1843,19 @@ export interface LROSADs {
     /**
      * Long running put request, service returns a 400 to the initial request
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1866,19 +1866,19 @@ export interface LROSADs {
      * Long running put request, service returns a Product with
      * 'ProvisioningState' = 'Creating' and 201 response code
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1889,19 +1889,19 @@ export interface LROSADs {
      * Long running put request, service returns a Product with
      * 'ProvisioningState' = 'Creating' and 201 response code
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1913,19 +1913,19 @@ export interface LROSADs {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the
      * Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1937,19 +1937,19 @@ export interface LROSADs {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the
      * Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1959,11 +1959,11 @@ export interface LROSADs {
     /**
      * Long running delete request, service returns a 400 with an error body
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1973,11 +1973,11 @@ export interface LROSADs {
     /**
      * Long running delete request, service returns a 400 with an error body
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -1987,11 +1987,11 @@ export interface LROSADs {
     /**
      * Long running delete request, service returns a 202 with a location header
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2001,11 +2001,11 @@ export interface LROSADs {
     /**
      * Long running delete request, service returns a 202 with a location header
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2017,11 +2017,11 @@ export interface LROSADs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2033,11 +2033,11 @@ export interface LROSADs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2047,19 +2047,19 @@ export interface LROSADs {
     /**
      * Long running post request, service returns a 400 with no error body
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2069,19 +2069,19 @@ export interface LROSADs {
     /**
      * Long running post request, service returns a 400 with no error body
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2091,19 +2091,19 @@ export interface LROSADs {
     /**
      * Long running post request, service returns a 202 with a location header
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2113,19 +2113,19 @@ export interface LROSADs {
     /**
      * Long running post request, service returns a 202 with a location header
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2137,19 +2137,19 @@ export interface LROSADs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2161,19 +2161,19 @@ export interface LROSADs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2184,19 +2184,19 @@ export interface LROSADs {
      * Long running put request, service returns a 201 to the initial request with
      * no payload
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2207,19 +2207,19 @@ export interface LROSADs {
      * Long running put request, service returns a 201 to the initial request with
      * no payload
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2231,19 +2231,19 @@ export interface LROSADs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2255,19 +2255,19 @@ export interface LROSADs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2279,19 +2279,19 @@ export interface LROSADs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2303,19 +2303,19 @@ export interface LROSADs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2326,11 +2326,11 @@ export interface LROSADs {
      * Long running delete request, service returns a 204 to the initial request,
      * indicating success.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2341,11 +2341,11 @@ export interface LROSADs {
      * Long running delete request, service returns a 204 to the initial request,
      * indicating success.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2357,11 +2357,11 @@ export interface LROSADs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2373,11 +2373,11 @@ export interface LROSADs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2388,19 +2388,19 @@ export interface LROSADs {
      * Long running post request, service returns a 202 to the initial request,
      * without a location header.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2411,19 +2411,19 @@ export interface LROSADs {
      * Long running post request, service returns a 202 to the initial request,
      * without a location header.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2435,19 +2435,19 @@ export interface LROSADs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2459,19 +2459,19 @@ export interface LROSADs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2482,19 +2482,19 @@ export interface LROSADs {
      * Long running put request, service returns a 200 to the initial request,
      * with an entity that is not a valid json
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2505,19 +2505,19 @@ export interface LROSADs {
      * Long running put request, service returns a 200 to the initial request,
      * with an entity that is not a valid json
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2529,19 +2529,19 @@ export interface LROSADs {
      * with an entity that contains ProvisioningState=’Creating’. The endpoint
      * indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2553,19 +2553,19 @@ export interface LROSADs {
      * with an entity that contains ProvisioningState=’Creating’. The endpoint
      * indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2577,19 +2577,19 @@ export interface LROSADs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2601,19 +2601,19 @@ export interface LROSADs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2624,11 +2624,11 @@ export interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request
      * receing a reponse with an invalid 'Location' and 'Retry-After' headers
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2639,11 +2639,11 @@ export interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request
      * receing a reponse with an invalid 'Location' and 'Retry-After' headers
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2654,11 +2654,11 @@ export interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request.
      * The endpoint indicated in the Azure-AsyncOperation header is invalid
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2669,11 +2669,11 @@ export interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request.
      * The endpoint indicated in the Azure-AsyncOperation header is invalid
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2685,11 +2685,11 @@ export interface LROSADs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2701,11 +2701,11 @@ export interface LROSADs {
      * Poll the endpoint indicated in the Azure-AsyncOperation header for
      * operation status
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2716,19 +2716,19 @@ export interface LROSADs {
      * Long running post request, service returns a 202 to the initial request,
      * with invalid 'Location' and 'Retry-After' headers.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2739,19 +2739,19 @@ export interface LROSADs {
      * Long running post request, service returns a 202 to the initial request,
      * with invalid 'Location' and 'Retry-After' headers.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2763,19 +2763,19 @@ export interface LROSADs {
      * with an entity that contains ProvisioningState=’Creating’. The endpoint
      * indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2787,19 +2787,19 @@ export interface LROSADs {
      * with an entity that contains ProvisioningState=’Creating’. The endpoint
      * indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2811,19 +2811,19 @@ export interface LROSADs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2835,19 +2835,19 @@ export interface LROSADs {
      * with an entity that contains ProvisioningState=’Creating’. Poll the
      * endpoint indicated in the Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2870,19 +2870,19 @@ export interface LROsCustomHeader {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the
      * Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2896,19 +2896,19 @@ export interface LROsCustomHeader {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the
      * Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2922,19 +2922,19 @@ export interface LROsCustomHeader {
      * ProvisioningState=’Creating’.  Polls return this value until the last poll
      * returns a ‘200’ with ProvisioningState=’Succeeded’
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2948,19 +2948,19 @@ export interface LROsCustomHeader {
      * ProvisioningState=’Creating’.  Polls return this value until the last poll
      * returns a ‘200’ with ProvisioningState=’Succeeded’
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2973,19 +2973,19 @@ export interface LROsCustomHeader {
      * returns a 202 to the initial request, with 'Location' and 'Retry-After'
      * headers, Polls return a 200 with a response body after success
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -2998,19 +2998,19 @@ export interface LROsCustomHeader {
      * returns a 202 to the initial request, with 'Location' and 'Retry-After'
      * headers, Polls return a 200 with a response body after success
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -3024,19 +3024,19 @@ export interface LROsCustomHeader {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the
      * Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -3050,19 +3050,19 @@ export interface LROsCustomHeader {
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the
      * Azure-AsyncOperation header for operation status
      *
-     * @param {object} [product] Product to put
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [product.provisioningState]
+     * @param {object} [options.product] Product to put
      * 
-     * @param {object} [product.tags]
+     * @param {string} [options.product.provisioningState]
      * 
-     * @param {string} [product.location] Resource Location
+     * @param {object} [options.product.tags]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */

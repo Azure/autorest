@@ -24,11 +24,11 @@ export interface XMsClientRequestId {
      * Get method that overwrites x-ms-client-request header with value
      * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -42,11 +42,11 @@ export interface XMsClientRequestId {
      * @param {string} xMsClientRequestId This should appear as a method
      * parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -66,11 +66,11 @@ export interface SubscriptionInCredentials {
      * POST method with subscriptionId modeled in credentials.  Set the credential
      * subscriptionId to '1234-5678-9012-3456' to succeed
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -82,11 +82,11 @@ export interface SubscriptionInCredentials {
      * subscriptionId to null, and client-side validation should prevent you from
      * making this call
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -97,11 +97,11 @@ export interface SubscriptionInCredentials {
      * POST method with subscriptionId modeled in credentials.  Set the credential
      * subscriptionId to '1234-5678-9012-3456' to succeed
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -112,11 +112,11 @@ export interface SubscriptionInCredentials {
      * POST method with subscriptionId modeled in credentials.  Set the credential
      * subscriptionId to '1234-5678-9012-3456' to succeed
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -127,11 +127,11 @@ export interface SubscriptionInCredentials {
      * POST method with subscriptionId modeled in credentials.  Set the credential
      * subscriptionId to '1234-5678-9012-3456' to succeed
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -154,11 +154,11 @@ export interface SubscriptionInMethod {
      * @param {string} subscriptionId This should appear as a method parameter,
      * use value '1234-5678-9012-3456'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -173,11 +173,11 @@ export interface SubscriptionInMethod {
      * @param {string} subscriptionId This should appear as a method parameter,
      * use value null, client-side validation should prvenet the call
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -191,11 +191,11 @@ export interface SubscriptionInMethod {
      * @param {string} subscriptionId Should appear as a method parameter -use
      * value '1234-5678-9012-3456'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -209,11 +209,11 @@ export interface SubscriptionInMethod {
      * @param {string} subscriptionId The subscriptionId, which appears in the
      * path, the value is always '1234-5678-9012-3456'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -232,11 +232,11 @@ export interface ApiVersionDefault {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -246,11 +246,11 @@ export interface ApiVersionDefault {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -260,11 +260,11 @@ export interface ApiVersionDefault {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -274,11 +274,11 @@ export interface ApiVersionDefault {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -301,11 +301,11 @@ export interface ApiVersionLocal {
      * @param {string} apiVersion This should appear as a method parameter, use
      * value '2.0'. Possible values for this parameter include: '2.0'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -316,14 +316,14 @@ export interface ApiVersionLocal {
      * Get method with api-version modeled in the method.  pass in api-version =
      * null to succeed
      *
-     * @param {string} [apiVersion] This should appear as a method parameter, use
-     * value null, this should result in no serialized parameter
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.apiVersion] This should appear as a method
+     * parameter, use value null, this should result in no serialized parameter
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -337,11 +337,11 @@ export interface ApiVersionLocal {
      * @param {string} apiVersion This should appear as a method parameter, use
      * value '2.0'. Possible values for this parameter include: '2.0'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -355,11 +355,11 @@ export interface ApiVersionLocal {
      * @param {string} apiVersion The api version, which appears in the query, the
      * value is always '2.0'. Possible values for this parameter include: '2.0'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -381,11 +381,11 @@ export interface SkipUrlEncoding {
      * @param {string} unencodedPathParam Unencoded path parameter with value
      * 'path1/path2/path3'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -398,11 +398,11 @@ export interface SkipUrlEncoding {
      * @param {string} unencodedPathParam Unencoded path parameter with value
      * 'path1/path2/path3'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -416,11 +416,11 @@ export interface SkipUrlEncoding {
      * 'path1/path2/path3'. Possible values for this parameter include:
      * 'path1/path2/path3'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -434,11 +434,11 @@ export interface SkipUrlEncoding {
      * @param {string} q1 Unencoded query parameter with value
      * 'value1&q2=value2&q3=value3'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -448,13 +448,13 @@ export interface SkipUrlEncoding {
     /**
      * Get method with unencoded query parameter with value null
      *
-     * @param {string} [q1] Unencoded query parameter with value null
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.q1] Unencoded query parameter with value null
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -468,11 +468,11 @@ export interface SkipUrlEncoding {
      * @param {string} q1 Unencoded query parameter with value
      * 'value1&q2=value2&q3=value3'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -483,15 +483,15 @@ export interface SkipUrlEncoding {
      * Get method with unencoded query parameter with value
      * 'value1&q2=value2&q3=value3'
      *
-     * @param {string} [q1] An unencoded query parameter with value
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {string} [options.q1] An unencoded query parameter with value
      * 'value1&q2=value2&q3=value3'. Possible values for this parameter include:
      * 'value1&q2=value2&q3=value3'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -513,11 +513,11 @@ export interface Header {
      *
      * @param {string} fooClientRequestId The fooRequestId
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */

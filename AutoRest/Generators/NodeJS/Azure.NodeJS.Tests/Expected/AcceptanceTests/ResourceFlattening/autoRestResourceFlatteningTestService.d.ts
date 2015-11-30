@@ -41,13 +41,13 @@ declare class AutoRestResourceFlatteningTestService {
             /**
          * Put External Resource as an Array
          *
-         * @param {array} [resourceArray] External Resource as an Array to put
+         * @param {object} [options] Optional Parameters.
          * 
-         * @param {object} [options]
-         *
-         * @param {object} [options.customHeaders] headers that will be added to
+         * @param {array} [options.resourceArray] External Resource as an Array to put
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         *
+         * 
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -57,11 +57,11 @@ declare class AutoRestResourceFlatteningTestService {
         /**
          * Get External Resource as an Array
          *
-         * @param {object} [options]
-         *
-         * @param {object} [options.customHeaders] headers that will be added to
+         * @param {object} [options] Optional Parameters.
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         *
+         * 
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -71,14 +71,14 @@ declare class AutoRestResourceFlatteningTestService {
         /**
          * Put External Resource as a Dictionary
          *
-         * @param {object} [resourceDictionary] External Resource as a Dictionary to
-         * put
+         * @param {object} [options] Optional Parameters.
          * 
-         * @param {object} [options]
-         *
-         * @param {object} [options.customHeaders] headers that will be added to
+         * @param {object} [options.resourceDictionary] External Resource as a
+         * Dictionary to put
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         *
+         * 
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -88,11 +88,11 @@ declare class AutoRestResourceFlatteningTestService {
         /**
          * Get External Resource as a Dictionary
          *
-         * @param {object} [options]
-         *
-         * @param {object} [options.customHeaders] headers that will be added to
+         * @param {object} [options] Optional Parameters.
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         *
+         * 
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -102,32 +102,33 @@ declare class AutoRestResourceFlatteningTestService {
         /**
          * Put External Resource as a ResourceCollection
          *
-         * @param {object} [resourceComplexObject] External Resource as a
+         * @param {object} [options] Optional Parameters.
+         * 
+         * @param {object} [options.resourceComplexObject] External Resource as a
          * ResourceCollection to put
          * 
-         * @param {object} [resourceComplexObject.productresource]
+         * @param {object} [options.resourceComplexObject.productresource]
          * 
-         * @param {string} [resourceComplexObject.productresource.pname]
+         * @param {string} [options.resourceComplexObject.productresource.pname]
          * 
          * @param {string}
-         * [resourceComplexObject.productresource.flattenedProductType]
+         * [options.resourceComplexObject.productresource.flattenedProductType]
          * 
-         * @param {string} [resourceComplexObject.productresource.provisioningState]
+         * @param {string}
+         * [options.resourceComplexObject.productresource.provisioningState]
          * 
-         * @param {object} [resourceComplexObject.productresource.tags]
+         * @param {object} [options.resourceComplexObject.productresource.tags]
          * 
-         * @param {string} [resourceComplexObject.productresource.location] Resource
-         * Location
+         * @param {string} [options.resourceComplexObject.productresource.location]
+         * Resource Location
          * 
-         * @param {array} [resourceComplexObject.arrayofresources]
+         * @param {array} [options.resourceComplexObject.arrayofresources]
          * 
-         * @param {object} [resourceComplexObject.dictionaryofresources]
+         * @param {object} [options.resourceComplexObject.dictionaryofresources]
          * 
-         * @param {object} [options]
-         *
-         * @param {object} [options.customHeaders] headers that will be added to
+         * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         *
+         * 
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
@@ -137,11 +138,11 @@ declare class AutoRestResourceFlatteningTestService {
         /**
          * Get External Resource as a ResourceCollection
          *
-         * @param {object} [options]
-         *
-         * @param {object} [options.customHeaders] headers that will be added to
+         * @param {object} [options] Optional Parameters.
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         *
+         * 
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */

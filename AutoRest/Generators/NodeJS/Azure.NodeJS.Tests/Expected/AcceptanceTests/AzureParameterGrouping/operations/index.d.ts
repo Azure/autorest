@@ -36,11 +36,11 @@ export interface ParameterGrouping {
      * @param {string} [parameterGroupingPostRequiredParameters.path] Path
      * parameter
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -50,19 +50,20 @@ export interface ParameterGrouping {
     /**
      * Post a bunch of optional parameters grouped
      *
-     * @param {object} [parameterGroupingPostOptionalParameters] Additional
-     * parameters for the operation
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [parameterGroupingPostOptionalParameters.customHeader]
+     * @param {object} [options.parameterGroupingPostOptionalParameters]
+     * Additional parameters for the operation
      * 
-     * @param {number} [parameterGroupingPostOptionalParameters.query] Query
-     * parameter with default
+     * @param {string}
+     * [options.parameterGroupingPostOptionalParameters.customHeader]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.parameterGroupingPostOptionalParameters.query]
+     * Query parameter with default
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -72,29 +73,30 @@ export interface ParameterGrouping {
     /**
      * Post parameters from multiple different parameter groups
      *
-     * @param {object} [firstParameterGroup] Additional parameters for the
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.firstParameterGroup] Additional parameters for the
      * operation
      * 
-     * @param {string} [firstParameterGroup.headerOne]
+     * @param {string} [options.firstParameterGroup.headerOne]
      * 
-     * @param {number} [firstParameterGroup.queryOne] Query parameter with default
+     * @param {number} [options.firstParameterGroup.queryOne] Query parameter with
+     * default
      * 
      * @param {object}
-     * [parameterGroupingPostMultipleParameterGroupsSecondParameterGroup]
+     * [options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup]
      * Additional parameters for the operation
      * 
      * @param {string}
-     * [parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.headerTwo]
+     * [options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.headerTwo]
      * 
      * @param {number}
-     * [parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.queryTwo]
+     * [options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.queryTwo]
      * Query parameter with default
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
@@ -104,18 +106,19 @@ export interface ParameterGrouping {
     /**
      * Post parameters with a shared parameter group object
      *
-     * @param {object} [firstParameterGroup] Additional parameters for the
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.firstParameterGroup] Additional parameters for the
      * operation
      * 
-     * @param {string} [firstParameterGroup.headerOne]
+     * @param {string} [options.firstParameterGroup.headerOne]
      * 
-     * @param {number} [firstParameterGroup.queryOne] Query parameter with default
+     * @param {number} [options.firstParameterGroup.queryOne] Query parameter with
+     * default
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */

@@ -31,13 +31,13 @@ function Queries(client) {
 /**
  * Get true Boolean value on path
  *
- * @param {boolean} [boolQuery] true boolean value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.boolQuery] true boolean value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -50,7 +50,7 @@ function Queries(client) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
+Queries.prototype.getBooleanTrue = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -59,6 +59,7 @@ Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var boolQuery = options ? options.boolQuery : undefined;
   // Validate
   try {
     if (boolQuery !== null && boolQuery !== undefined && typeof boolQuery !== 'boolean') {
@@ -134,13 +135,13 @@ Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
 /**
  * Get false Boolean value on path
  *
- * @param {boolean} [boolQuery] false boolean value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.boolQuery] false boolean value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -153,7 +154,7 @@ Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
+Queries.prototype.getBooleanFalse = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -162,6 +163,7 @@ Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var boolQuery = options ? options.boolQuery : undefined;
   // Validate
   try {
     if (boolQuery !== null && boolQuery !== undefined && typeof boolQuery !== 'boolean') {
@@ -237,13 +239,13 @@ Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
 /**
  * Get null Boolean value on query (query string should be absent)
  *
- * @param {boolean} [boolQuery] null boolean value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.boolQuery] null boolean value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -256,7 +258,7 @@ Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.getBooleanNull = function (boolQuery, options, callback) {
+Queries.prototype.getBooleanNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -265,6 +267,7 @@ Queries.prototype.getBooleanNull = function (boolQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var boolQuery = options ? options.boolQuery : undefined;
   // Validate
   try {
     if (boolQuery !== null && boolQuery !== undefined && typeof boolQuery !== 'boolean') {
@@ -340,13 +343,13 @@ Queries.prototype.getBooleanNull = function (boolQuery, options, callback) {
 /**
  * Get '1000000' integer value
  *
- * @param {number} [intQuery] '1000000' integer value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.intQuery] '1000000' integer value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -359,7 +362,7 @@ Queries.prototype.getBooleanNull = function (boolQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
+Queries.prototype.getIntOneMillion = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -368,6 +371,7 @@ Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var intQuery = options ? options.intQuery : undefined;
   // Validate
   try {
     if (intQuery !== null && intQuery !== undefined && typeof intQuery !== 'number') {
@@ -443,13 +447,13 @@ Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
 /**
  * Get '-1000000' integer value
  *
- * @param {number} [intQuery] '-1000000' integer value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.intQuery] '-1000000' integer value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -462,7 +466,7 @@ Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callback) {
+Queries.prototype.getIntNegativeOneMillion = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -471,6 +475,7 @@ Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callba
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var intQuery = options ? options.intQuery : undefined;
   // Validate
   try {
     if (intQuery !== null && intQuery !== undefined && typeof intQuery !== 'number') {
@@ -546,13 +551,13 @@ Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callba
 /**
  * Get null integer value (no query parameter)
  *
- * @param {number} [intQuery] null integer value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.intQuery] null integer value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -565,7 +570,7 @@ Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callba
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.getIntNull = function (intQuery, options, callback) {
+Queries.prototype.getIntNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -574,6 +579,7 @@ Queries.prototype.getIntNull = function (intQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var intQuery = options ? options.intQuery : undefined;
   // Validate
   try {
     if (intQuery !== null && intQuery !== undefined && typeof intQuery !== 'number') {
@@ -649,13 +655,13 @@ Queries.prototype.getIntNull = function (intQuery, options, callback) {
 /**
  * Get '10000000000' 64 bit integer value
  *
- * @param {number} [longQuery] '10000000000' 64 bit integer value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.longQuery] '10000000000' 64 bit integer value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -668,7 +674,7 @@ Queries.prototype.getIntNull = function (intQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.getTenBillion = function (longQuery, options, callback) {
+Queries.prototype.getTenBillion = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -677,6 +683,7 @@ Queries.prototype.getTenBillion = function (longQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var longQuery = options ? options.longQuery : undefined;
   // Validate
   try {
     if (longQuery !== null && longQuery !== undefined && typeof longQuery !== 'number') {
@@ -752,13 +759,13 @@ Queries.prototype.getTenBillion = function (longQuery, options, callback) {
 /**
  * Get '-10000000000' 64 bit integer value
  *
- * @param {number} [longQuery] '-10000000000' 64 bit integer value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.longQuery] '-10000000000' 64 bit integer value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -771,7 +778,7 @@ Queries.prototype.getTenBillion = function (longQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback) {
+Queries.prototype.getNegativeTenBillion = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -780,6 +787,7 @@ Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var longQuery = options ? options.longQuery : undefined;
   // Validate
   try {
     if (longQuery !== null && longQuery !== undefined && typeof longQuery !== 'number') {
@@ -855,13 +863,13 @@ Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback
 /**
  * Get 'null 64 bit integer value (no query param in uri)
  *
- * @param {number} [longQuery] null 64 bit integer value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.longQuery] null 64 bit integer value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -874,7 +882,7 @@ Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.getLongNull = function (longQuery, options, callback) {
+Queries.prototype.getLongNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -883,6 +891,7 @@ Queries.prototype.getLongNull = function (longQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var longQuery = options ? options.longQuery : undefined;
   // Validate
   try {
     if (longQuery !== null && longQuery !== undefined && typeof longQuery !== 'number') {
@@ -958,13 +967,13 @@ Queries.prototype.getLongNull = function (longQuery, options, callback) {
 /**
  * Get '1.034E+20' numeric value
  *
- * @param {number} [floatQuery] '1.034E+20'numeric value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.floatQuery] '1.034E+20'numeric value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -977,7 +986,7 @@ Queries.prototype.getLongNull = function (longQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.floatScientificPositive = function (floatQuery, options, callback) {
+Queries.prototype.floatScientificPositive = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -986,6 +995,7 @@ Queries.prototype.floatScientificPositive = function (floatQuery, options, callb
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var floatQuery = options ? options.floatQuery : undefined;
   // Validate
   try {
     if (floatQuery !== null && floatQuery !== undefined && typeof floatQuery !== 'number') {
@@ -1061,13 +1071,13 @@ Queries.prototype.floatScientificPositive = function (floatQuery, options, callb
 /**
  * Get '-1.034E-20' numeric value
  *
- * @param {number} [floatQuery] '-1.034E-20'numeric value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.floatQuery] '-1.034E-20'numeric value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1080,7 +1090,7 @@ Queries.prototype.floatScientificPositive = function (floatQuery, options, callb
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.floatScientificNegative = function (floatQuery, options, callback) {
+Queries.prototype.floatScientificNegative = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1089,6 +1099,7 @@ Queries.prototype.floatScientificNegative = function (floatQuery, options, callb
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var floatQuery = options ? options.floatQuery : undefined;
   // Validate
   try {
     if (floatQuery !== null && floatQuery !== undefined && typeof floatQuery !== 'number') {
@@ -1164,13 +1175,13 @@ Queries.prototype.floatScientificNegative = function (floatQuery, options, callb
 /**
  * Get null numeric value (no query parameter)
  *
- * @param {number} [floatQuery] null numeric value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.floatQuery] null numeric value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1183,7 +1194,7 @@ Queries.prototype.floatScientificNegative = function (floatQuery, options, callb
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.floatNull = function (floatQuery, options, callback) {
+Queries.prototype.floatNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1192,6 +1203,7 @@ Queries.prototype.floatNull = function (floatQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var floatQuery = options ? options.floatQuery : undefined;
   // Validate
   try {
     if (floatQuery !== null && floatQuery !== undefined && typeof floatQuery !== 'number') {
@@ -1267,13 +1279,13 @@ Queries.prototype.floatNull = function (floatQuery, options, callback) {
 /**
  * Get '9999999.999' numeric value
  *
- * @param {number} [doubleQuery] '9999999.999'numeric value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.doubleQuery] '9999999.999'numeric value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1286,7 +1298,7 @@ Queries.prototype.floatNull = function (floatQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callback) {
+Queries.prototype.doubleDecimalPositive = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1295,6 +1307,7 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callba
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var doubleQuery = options ? options.doubleQuery : undefined;
   // Validate
   try {
     if (doubleQuery !== null && doubleQuery !== undefined && typeof doubleQuery !== 'number') {
@@ -1370,13 +1383,13 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callba
 /**
  * Get '-9999999.999' numeric value
  *
- * @param {number} [doubleQuery] '-9999999.999'numeric value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.doubleQuery] '-9999999.999'numeric value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1389,7 +1402,7 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callba
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callback) {
+Queries.prototype.doubleDecimalNegative = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1398,6 +1411,7 @@ Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callba
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var doubleQuery = options ? options.doubleQuery : undefined;
   // Validate
   try {
     if (doubleQuery !== null && doubleQuery !== undefined && typeof doubleQuery !== 'number') {
@@ -1473,13 +1487,13 @@ Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callba
 /**
  * Get null numeric value (no query parameter)
  *
- * @param {number} [doubleQuery] null numeric value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.doubleQuery] null numeric value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1492,7 +1506,7 @@ Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callba
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.doubleNull = function (doubleQuery, options, callback) {
+Queries.prototype.doubleNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1501,6 +1515,7 @@ Queries.prototype.doubleNull = function (doubleQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var doubleQuery = options ? options.doubleQuery : undefined;
   // Validate
   try {
     if (doubleQuery !== null && doubleQuery !== undefined && typeof doubleQuery !== 'number') {
@@ -1576,14 +1591,14 @@ Queries.prototype.doubleNull = function (doubleQuery, options, callback) {
 /**
  * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
  *
- * @param {string} [stringQuery] '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible
- * values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.stringQuery] '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value.
+ * Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1596,7 +1611,7 @@ Queries.prototype.doubleNull = function (doubleQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
+Queries.prototype.stringUnicode = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1605,6 +1620,7 @@ Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var stringQuery = options ? options.stringQuery : undefined;
   // Validate
   try {
     if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
@@ -1680,15 +1696,15 @@ Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
 /**
  * Get 'begin!*'();:@ &=+$,/?#[]end
  *
- * @param {string} [stringQuery] 'begin!*'();:@ &=+$,/?#[]end' url encoded
- * string value. Possible values for this parameter include: 'begin!*'();:@
- * &=+$,/?#[]end'
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.stringQuery] 'begin!*'();:@ &=+$,/?#[]end' url
+ * encoded string value. Possible values for this parameter include:
+ * 'begin!*'();:@ &=+$,/?#[]end'
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1701,7 +1717,7 @@ Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
+Queries.prototype.stringUrlEncoded = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1710,6 +1726,7 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var stringQuery = options ? options.stringQuery : undefined;
   // Validate
   try {
     if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
@@ -1785,14 +1802,14 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
 /**
  * Get ''
  *
- * @param {string} [stringQuery] '' string value. Possible values for this
- * parameter include: ''
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.stringQuery] '' string value. Possible values for
+ * this parameter include: ''
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1805,7 +1822,7 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
+Queries.prototype.stringEmpty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1814,6 +1831,7 @@ Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var stringQuery = options ? options.stringQuery : undefined;
   // Validate
   try {
     if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
@@ -1889,13 +1907,13 @@ Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
 /**
  * Get null (no query parameter in url)
  *
- * @param {string} [stringQuery] null string value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.stringQuery] null string value
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1908,7 +1926,7 @@ Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.stringNull = function (stringQuery, options, callback) {
+Queries.prototype.stringNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1917,6 +1935,7 @@ Queries.prototype.stringNull = function (stringQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var stringQuery = options ? options.stringQuery : undefined;
   // Validate
   try {
     if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
@@ -1992,14 +2011,14 @@ Queries.prototype.stringNull = function (stringQuery, options, callback) {
 /**
  * Get using uri with query parameter 'green color'
  *
- * @param {string} [enumQuery] 'green color' enum value. Possible values for
- * this parameter include: 'red color', 'green color', 'blue color'
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.enumQuery] 'green color' enum value. Possible
+ * values for this parameter include: 'red color', 'green color', 'blue color'
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2012,7 +2031,7 @@ Queries.prototype.stringNull = function (stringQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.enumValid = function (enumQuery, options, callback) {
+Queries.prototype.enumValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2021,6 +2040,7 @@ Queries.prototype.enumValid = function (enumQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var enumQuery = options ? options.enumQuery : undefined;
   // Validate
   try {
     if (enumQuery) {
@@ -2099,14 +2119,14 @@ Queries.prototype.enumValid = function (enumQuery, options, callback) {
 /**
  * Get null (no query parameter in url)
  *
- * @param {string} [enumQuery] null string value. Possible values for this
- * parameter include: 'red color', 'green color', 'blue color'
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.enumQuery] null string value. Possible values for
+ * this parameter include: 'red color', 'green color', 'blue color'
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2119,7 +2139,7 @@ Queries.prototype.enumValid = function (enumQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.enumNull = function (enumQuery, options, callback) {
+Queries.prototype.enumNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2128,6 +2148,7 @@ Queries.prototype.enumNull = function (enumQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var enumQuery = options ? options.enumQuery : undefined;
   // Validate
   try {
     if (enumQuery) {
@@ -2206,14 +2227,14 @@ Queries.prototype.enumNull = function (enumQuery, options, callback) {
 /**
  * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
  *
- * @param {buffer} [byteQuery] '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded
- * byte array
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {buffer} [options.byteQuery] '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8
+ * encoded byte array
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2226,7 +2247,7 @@ Queries.prototype.enumNull = function (enumQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.byteMultiByte = function (byteQuery, options, callback) {
+Queries.prototype.byteMultiByte = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2235,6 +2256,7 @@ Queries.prototype.byteMultiByte = function (byteQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var byteQuery = options ? options.byteQuery : undefined;
   // Validate
   try {
     if (byteQuery && !Buffer.isBuffer(byteQuery)) {
@@ -2310,13 +2332,13 @@ Queries.prototype.byteMultiByte = function (byteQuery, options, callback) {
 /**
  * Get '' as byte array
  *
- * @param {buffer} [byteQuery] '' as byte array
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {buffer} [options.byteQuery] '' as byte array
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2329,7 +2351,7 @@ Queries.prototype.byteMultiByte = function (byteQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
+Queries.prototype.byteEmpty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2338,6 +2360,7 @@ Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var byteQuery = options ? options.byteQuery : undefined;
   // Validate
   try {
     if (byteQuery && !Buffer.isBuffer(byteQuery)) {
@@ -2413,13 +2436,14 @@ Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
 /**
  * Get null as byte array (no query parameters in uri)
  *
- * @param {buffer} [byteQuery] null as byte array (no query parameters in uri)
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {buffer} [options.byteQuery] null as byte array (no query parameters
+ * in uri)
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2432,7 +2456,7 @@ Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.byteNull = function (byteQuery, options, callback) {
+Queries.prototype.byteNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2441,6 +2465,7 @@ Queries.prototype.byteNull = function (byteQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var byteQuery = options ? options.byteQuery : undefined;
   // Validate
   try {
     if (byteQuery && !Buffer.isBuffer(byteQuery)) {
@@ -2516,13 +2541,13 @@ Queries.prototype.byteNull = function (byteQuery, options, callback) {
 /**
  * Get '2012-01-01' as date
  *
- * @param {date} [dateQuery] '2012-01-01' as date
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {date} [options.dateQuery] '2012-01-01' as date
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2535,7 +2560,7 @@ Queries.prototype.byteNull = function (byteQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.dateValid = function (dateQuery, options, callback) {
+Queries.prototype.dateValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2544,6 +2569,7 @@ Queries.prototype.dateValid = function (dateQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var dateQuery = options ? options.dateQuery : undefined;
   // Validate
   try {
     if (dateQuery && !(dateQuery instanceof Date || 
@@ -2620,13 +2646,13 @@ Queries.prototype.dateValid = function (dateQuery, options, callback) {
 /**
  * Get null as date - this should result in no query parameters in uri
  *
- * @param {date} [dateQuery] null as date (no query parameters in uri)
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {date} [options.dateQuery] null as date (no query parameters in uri)
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2639,7 +2665,7 @@ Queries.prototype.dateValid = function (dateQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.dateNull = function (dateQuery, options, callback) {
+Queries.prototype.dateNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2648,6 +2674,7 @@ Queries.prototype.dateNull = function (dateQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var dateQuery = options ? options.dateQuery : undefined;
   // Validate
   try {
     if (dateQuery && !(dateQuery instanceof Date || 
@@ -2724,13 +2751,13 @@ Queries.prototype.dateNull = function (dateQuery, options, callback) {
 /**
  * Get '2012-01-01T01:01:01Z' as date-time
  *
- * @param {date} [dateTimeQuery] '2012-01-01T01:01:01Z' as date-time
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {date} [options.dateTimeQuery] '2012-01-01T01:01:01Z' as date-time
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2743,7 +2770,7 @@ Queries.prototype.dateNull = function (dateQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
+Queries.prototype.dateTimeValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2752,6 +2779,7 @@ Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var dateTimeQuery = options ? options.dateTimeQuery : undefined;
   // Validate
   try {
     if (dateTimeQuery && !(dateTimeQuery instanceof Date || 
@@ -2828,13 +2856,14 @@ Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
 /**
  * Get null as date-time, should result in no query parameters in uri
  *
- * @param {date} [dateTimeQuery] null as date-time (no query parameters)
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {date} [options.dateTimeQuery] null as date-time (no query
+ * parameters)
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2847,7 +2876,7 @@ Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.dateTimeNull = function (dateTimeQuery, options, callback) {
+Queries.prototype.dateTimeNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2856,6 +2885,7 @@ Queries.prototype.dateTimeNull = function (dateTimeQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var dateTimeQuery = options ? options.dateTimeQuery : undefined;
   // Validate
   try {
     if (dateTimeQuery && !(dateTimeQuery instanceof Date || 
@@ -2933,14 +2963,14 @@ Queries.prototype.dateTimeNull = function (dateTimeQuery, options, callback) {
  * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
  * null, ''] using the csv-array format
  *
- * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {array} [options.arrayQuery] an array of string ['ArrayQuery1',
  * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2953,7 +2983,7 @@ Queries.prototype.dateTimeNull = function (dateTimeQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.arrayStringCsvValid = function (arrayQuery, options, callback) {
+Queries.prototype.arrayStringCsvValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2962,6 +2992,7 @@ Queries.prototype.arrayStringCsvValid = function (arrayQuery, options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var arrayQuery = options ? options.arrayQuery : undefined;
   // Validate
   try {
     if (util.isArray(arrayQuery)) {
@@ -3041,14 +3072,14 @@ Queries.prototype.arrayStringCsvValid = function (arrayQuery, options, callback)
 /**
  * Get a null array of string using the csv-array format
  *
- * @param {array} [arrayQuery] a null array of string using the csv-array
- * format
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {array} [options.arrayQuery] a null array of string using the
+ * csv-array format
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -3061,7 +3092,7 @@ Queries.prototype.arrayStringCsvValid = function (arrayQuery, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.arrayStringCsvNull = function (arrayQuery, options, callback) {
+Queries.prototype.arrayStringCsvNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3070,6 +3101,7 @@ Queries.prototype.arrayStringCsvNull = function (arrayQuery, options, callback) 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var arrayQuery = options ? options.arrayQuery : undefined;
   // Validate
   try {
     if (util.isArray(arrayQuery)) {
@@ -3149,14 +3181,14 @@ Queries.prototype.arrayStringCsvNull = function (arrayQuery, options, callback) 
 /**
  * Get an empty array [] of string using the csv-array format
  *
- * @param {array} [arrayQuery] an empty array [] of string using the csv-array
- * format
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {array} [options.arrayQuery] an empty array [] of string using the
+ * csv-array format
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -3169,7 +3201,7 @@ Queries.prototype.arrayStringCsvNull = function (arrayQuery, options, callback) 
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, options, callback) {
+Queries.prototype.arrayStringCsvEmpty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3178,6 +3210,7 @@ Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var arrayQuery = options ? options.arrayQuery : undefined;
   // Validate
   try {
     if (util.isArray(arrayQuery)) {
@@ -3258,14 +3291,14 @@ Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, options, callback)
  * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
  * null, ''] using the ssv-array format
  *
- * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {array} [options.arrayQuery] an array of string ['ArrayQuery1',
  * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the ssv-array format
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -3278,7 +3311,7 @@ Queries.prototype.arrayStringCsvEmpty = function (arrayQuery, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.arrayStringSsvValid = function (arrayQuery, options, callback) {
+Queries.prototype.arrayStringSsvValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3287,6 +3320,7 @@ Queries.prototype.arrayStringSsvValid = function (arrayQuery, options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var arrayQuery = options ? options.arrayQuery : undefined;
   // Validate
   try {
     if (util.isArray(arrayQuery)) {
@@ -3367,14 +3401,14 @@ Queries.prototype.arrayStringSsvValid = function (arrayQuery, options, callback)
  * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
  * null, ''] using the tsv-array format
  *
- * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {array} [options.arrayQuery] an array of string ['ArrayQuery1',
  * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the tsv-array format
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -3387,7 +3421,7 @@ Queries.prototype.arrayStringSsvValid = function (arrayQuery, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.arrayStringTsvValid = function (arrayQuery, options, callback) {
+Queries.prototype.arrayStringTsvValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3396,6 +3430,7 @@ Queries.prototype.arrayStringTsvValid = function (arrayQuery, options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var arrayQuery = options ? options.arrayQuery : undefined;
   // Validate
   try {
     if (util.isArray(arrayQuery)) {
@@ -3476,14 +3511,14 @@ Queries.prototype.arrayStringTsvValid = function (arrayQuery, options, callback)
  * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
  * null, ''] using the pipes-array format
  *
- * @param {array} [arrayQuery] an array of string ['ArrayQuery1',
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {array} [options.arrayQuery] an array of string ['ArrayQuery1',
  * 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the pipes-array format
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -3496,7 +3531,7 @@ Queries.prototype.arrayStringTsvValid = function (arrayQuery, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.arrayStringPipesValid = function (arrayQuery, options, callback) {
+Queries.prototype.arrayStringPipesValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3505,6 +3540,7 @@ Queries.prototype.arrayStringPipesValid = function (arrayQuery, options, callbac
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var arrayQuery = options ? options.arrayQuery : undefined;
   // Validate
   try {
     if (util.isArray(arrayQuery)) {

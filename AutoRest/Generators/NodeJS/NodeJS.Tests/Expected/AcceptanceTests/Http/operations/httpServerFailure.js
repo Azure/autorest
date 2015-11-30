@@ -31,11 +31,11 @@ function HttpServerFailure(client) {
 /**
  * Return 501 status code - should be represented in the client as an error
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -134,11 +134,11 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
 /**
  * Return 501 status code - should be represented in the client as an error
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -237,13 +237,13 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
 /**
  * Return 505 status code - should be represented in the client as an error
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -257,7 +257,7 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpServerFailure.prototype.post505 = function (booleanValue, options, callback) {
+HttpServerFailure.prototype.post505 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -266,6 +266,7 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = options ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -365,13 +366,13 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
 /**
  * Return 505 status code - should be represented in the client as an error
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -385,7 +386,7 @@ HttpServerFailure.prototype.post505 = function (booleanValue, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpServerFailure.prototype.delete505 = function (booleanValue, options, callback) {
+HttpServerFailure.prototype.delete505 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -394,6 +395,7 @@ HttpServerFailure.prototype.delete505 = function (booleanValue, options, callbac
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = options ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
