@@ -1,4 +1,4 @@
-﻿import unittest
+import unittest
 import sys
 import datetime
 import os
@@ -79,12 +79,6 @@ class AcceptanceTests(unittest.TestCase):
 
         client.parameter_grouping.post_multiple_parameter_groups(firstGroup, secondGroup)
         client.parameter_grouping.post_shared_parameter_group_object(firstGroup)
-
-
-
-
-
-
 
     def test_azure_special_parameters(self):
 

@@ -187,14 +187,26 @@ class Serializer(object):
             for attr, map in attributes.items():
                 attr_name = attr
                 try:
+                    keys = map['key'].split('.')
+                    attr_type = map['type']
+
                     orig_attr = getattr(target_obj, attr)
-                    attr_type = attributes[attr]['type']
 
                     new_attr = self.serialize_data(
                         orig_attr, attr_type,
                         attr in required_attrs, **kwargs)
 
-                    serialized[map['key']] = new_attr
+                    for k in reversed(keys):
+                        unflattened = {k:new_attr}
+                        new_attr = unflattened
+
+                    _new_attr = new_attr
+                    _serialized = serialized
+                    for k in keys:
+                        if k not in _serialized:
+                            _serialized.update(_new_attr)
+                        _new_attr = _new_attr[k]
+                        _serialized = _serialized[k]
 
                 except ValueError:
                     continue
@@ -496,10 +508,10 @@ class Deserializer(object):
                 key = map['key']
                 working_data = data
 
-                if '.' in key:
+                while '.' in key:
                     dict_keys = key.split('.')
                     working_data = working_data.get(dict_keys[0], data)
-                    key = dict_keys[1]
+                    key = '.'.join(dict_keys[1:])
 
                 raw_value = working_data.get(key)
 

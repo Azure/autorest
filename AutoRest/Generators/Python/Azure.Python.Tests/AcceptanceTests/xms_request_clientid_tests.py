@@ -1,4 +1,4 @@
-﻿import unittest
+import unittest
 import subprocess
 import sys
 import isodate

@@ -104,9 +104,8 @@ class ResourceFlatteningTests(unittest.TestCase):
                     location = "Building 44",
                     pname = "Product2",
                     flattened_product_type = "Flat")}
-        #TODO: serializer need to handle flatten resources
-        #self.client.put_dictionary(resourceDictionary)
-        pass
+
+        self.client.put_dictionary(resourceDictionary)
 
     def test_flattening_complex_object(self):
 
@@ -186,9 +185,8 @@ class ResourceFlatteningTests(unittest.TestCase):
                     location = "India",
                     pname = "Azure",
                     flattened_product_type = "Flat"))
-        #TODO: serializer need to handle flatten resources
-        #self.client.put_resource_collection(resourceComplexObject)
-        pass
+
+        self.client.put_resource_collection(resourceComplexObject)
 
 if __name__ == '__main__':
     unittest.main()
