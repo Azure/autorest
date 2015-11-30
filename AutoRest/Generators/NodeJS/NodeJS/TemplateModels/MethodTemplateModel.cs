@@ -66,12 +66,12 @@ namespace Microsoft.Rest.Generator.NodeJS
                     Name = parameter.Name,
                     IsRequired = parameter.IsRequired,
                     DefaultValue = parameter.DefaultValue,
-                    Constraints = parameter.Constraints,
                     Documentation = parameter.Documentation,
                     Type = parameter.Type,
-                    SerializedName = parameter.SerializedName,
-                    Extensions = parameter.Extensions
+                    SerializedName = parameter.SerializedName   
                 };
+                parameter.Constraints.ToList().ForEach(x => optionalProperty.Constraints.Add(x.Key, x.Value));
+                parameter.Extensions.ToList().ForEach(x => optionalProperty.Extensions.Add(x.Key, x.Value));
                 ((CompositeType)optionsParmeter.Type).Properties.Add(optionalProperty);
             }
 
