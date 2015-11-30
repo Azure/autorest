@@ -13,10 +13,6 @@ from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .operations.datetimerfc1123 import datetimerfc1123
 from . import models
-from .models import (
-    Error,
-    ErrorException,
-)
 
 
 class AutoRestRFC1123DateTimeTestServiceConfiguration(Configuration):

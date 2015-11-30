@@ -11,3 +11,8 @@
 
 from .string import string
 from .enum import enum
+
+__all__ = [
+    'string',
+    'enum',
+]

@@ -87,7 +87,7 @@ namespace Microsoft.Rest.Generator.Python
                 }
                 else if (body is CompositeType)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}(self._deserialize, response)", ((CompositeType)body).GetExceptionDefineType());
+                    return string.Format(CultureInfo.InvariantCulture, "models.{0}(self._deserialize, response)", ((CompositeType)body).GetExceptionDefineType());
                 }
                 else
                 {
@@ -368,7 +368,7 @@ namespace Microsoft.Rest.Generator.Python
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     transformation.OutputParameter.Type is CompositeType)
                 {
-                    builder.AppendLine("{0} = {1}()",
+                    builder.AppendLine("{0} = models.{1}()",
                         transformation.OutputParameter.Name,
                         transformation.OutputParameter.Type.Name);
                 }

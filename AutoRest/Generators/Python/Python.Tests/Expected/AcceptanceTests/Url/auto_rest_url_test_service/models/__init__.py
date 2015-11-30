@@ -12,4 +12,9 @@
 from .error import Error, ErrorException
 from .enums import (
     UriColor,
-)
+    )
+
+__all__ = [
+    'Error', 'ErrorException',
+    'UriColor',
+]

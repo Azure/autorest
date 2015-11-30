@@ -20,3 +20,15 @@ from msrest.exceptions import (
 )
 
 from .api_client import AutoRestSwaggerBATArrayService, AutoRestSwaggerBATArrayServiceConfiguration
+
+__all__ = [
+    'ClientException',
+    'SerializationError',
+    'DeserializationError',
+    'TokenExpiredError',
+    'ClientRequestError',
+    'AuthenticationError',
+    'HttpOperationError',
+    'AutoRestSwaggerBATArrayService',
+    'AutoRestSwaggerBATArrayServiceConfiguration'
+]

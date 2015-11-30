@@ -9,16 +9,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import DeserializationError, HttpOperationError
-from msrestazure.azure_exceptions import CloudError
 import uuid
 
-from ..models import (
-  Error,
-  CloudError,
-)
+from .. import models
 
 
 class subscription_in_credentialsOperations(object):
@@ -75,7 +69,7 @@ class subscription_in_credentialsOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -125,7 +119,7 @@ class subscription_in_credentialsOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -175,7 +169,7 @@ class subscription_in_credentialsOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -224,7 +218,7 @@ class subscription_in_credentialsOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -273,7 +267,7 @@ class subscription_in_credentialsOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response

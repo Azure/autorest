@@ -9,21 +9,28 @@
 # --------------------------------------------------------------------------
 @EmptyLine
 @{
-  if (Model.ServiceClient.ModelTypes.Any())
+  foreach (var modelType in Model.ServiceClient.ModelTypes)
   {
-    foreach (var modelType in Model.ServiceClient.ModelTypes)
-    {
 @:from .@(modelType.Name.ToPythonCase()) import @modelType.Name@Model.GetExceptionNameIfExist(modelType)
-    }
   }
-
   if (Model.ServiceClient.EnumTypes.Any())
   {
 @:from .enums import (
-    foreach (var enumType in Model.ServiceClient.EnumTypes)
+    foreach (var enumType in @Model.ServiceClient.EnumTypes)
     {
-@:    @(enumType.Name),
+    @:@(enumType.Name),
     }
-@:)
+    @:)
   }
+@EmptyLine
+@:__all__ = [
+  foreach (var modelType in Model.ServiceClient.ModelTypes)
+  {
+@:    '@modelType.Name'@Model.GetExceptionNameIfExist(modelType, true),
+  }
+  foreach (var enumType in @Model.ServiceClient.EnumTypes)
+  {
+@:    '@(enumType.Name)',
+  }
+@:]
 }

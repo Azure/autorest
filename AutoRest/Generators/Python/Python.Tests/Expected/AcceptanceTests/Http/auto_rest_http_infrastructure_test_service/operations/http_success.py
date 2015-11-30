@@ -9,19 +9,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import DeserializationError, HttpOperationError
 
-from ..models import (
-    Error,
-    ErrorException,
-    A,
-    MyException,
-    B,
-    C,
-    D,
-)
+from .. import models
 
 
 class http_success(object):
@@ -70,7 +60,7 @@ class http_success(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -111,7 +101,7 @@ class http_success(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         deserialized = None
 
@@ -168,7 +158,7 @@ class http_success(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -218,7 +208,7 @@ class http_success(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -268,7 +258,7 @@ class http_success(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -318,7 +308,7 @@ class http_success(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -368,7 +358,7 @@ class http_success(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [201]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -418,7 +408,7 @@ class http_success(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [201]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -468,7 +458,7 @@ class http_success(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [202]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -518,7 +508,7 @@ class http_success(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [202]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -568,7 +558,7 @@ class http_success(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [202]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -618,7 +608,7 @@ class http_success(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [202]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -659,7 +649,7 @@ class http_success(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [204]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -709,7 +699,7 @@ class http_success(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [204]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -759,7 +749,7 @@ class http_success(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [204]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -809,7 +799,7 @@ class http_success(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [204]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -859,7 +849,7 @@ class http_success(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [204]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response
@@ -900,7 +890,7 @@ class http_success(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [204, 404]:
-            raise ErrorException(self._deserialize, response)
+            raise models.ErrorException(self._deserialize, response)
 
         if raw:
             return None, response

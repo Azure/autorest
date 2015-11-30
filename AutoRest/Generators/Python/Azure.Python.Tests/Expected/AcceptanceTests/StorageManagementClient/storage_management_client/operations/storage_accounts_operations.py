@@ -9,32 +9,13 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import DeserializationError, HttpOperationError
+from msrest.exceptions import HttpOperationError
 from msrestazure.azure_exceptions import CloudError
 from msrestazure.azure_operation import AzureOperationPoller
 import uuid
 
-from ..models import (
-  StorageAccountCheckNameAvailabilityParameters,
-  CheckNameAvailabilityResult,
-  StorageAccountCreateParameters,
-  Endpoints,
-  Foo,
-  Bar,
-  CustomDomain,
-  StorageAccount,
-  StorageAccountKeys,
-  StorageAccountUpdateParameters,
-  StorageAccountRegenerateKeyParameters,
-  UsageName,
-  Usage,
-  UsageListResult,
-  Resource,
-  SubResource,
-  CloudError,
-)
+from .. import models
 
 
 class storage_accountsOperations(object):
@@ -610,7 +591,7 @@ class storage_accountsOperations(object):
         response = internal_paging()
 
         # Deserialize response
-        deserialized = StorageAccountPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.StorageAccountPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -683,7 +664,7 @@ class storage_accountsOperations(object):
         response = internal_paging()
 
         # Deserialize response
-        deserialized = StorageAccountPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.StorageAccountPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
             return deserialized, response
@@ -720,7 +701,7 @@ class storage_accountsOperations(object):
         concurrent.futures.Future
         """
 
-        regenerate_key = StorageAccountRegenerateKeyParameters()
+        regenerate_key = models.StorageAccountRegenerateKeyParameters()
         if key_name is not None:
             regenerate_key.key_name = key_name
 

@@ -20,3 +20,15 @@ from msrest.exceptions import (
 )
 
 from .api_client import AutoRestParameterGroupingTestService, AutoRestParameterGroupingTestServiceConfiguration
+
+__all__ = [
+    'ClientException',
+    'SerializationError',
+    'DeserializationError',
+    'TokenExpiredError',
+    'ClientRequestError',
+    'AuthenticationError',
+    'HttpOperationError',
+    'AutoRestParameterGroupingTestService',
+    'AutoRestParameterGroupingTestServiceConfiguration'
+]

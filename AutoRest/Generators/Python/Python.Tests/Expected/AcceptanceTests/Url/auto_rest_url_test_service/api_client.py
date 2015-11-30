@@ -15,10 +15,6 @@ from .operations.paths import paths
 from .operations.queries import queries
 from .operations.path_items import path_items
 from . import models
-from .models import (
-    Error,
-    ErrorException,
-)
 
 
 class AutoRestUrlTestServiceConfiguration(Configuration):

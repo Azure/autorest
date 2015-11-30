@@ -19,34 +19,6 @@ from .operations.inheritance import inheritance
 from .operations.polymorphism import polymorphism
 from .operations.polymorphicrecursive import polymorphicrecursive
 from . import models
-from .models import (
-    Error,
-    ErrorException,
-    Basic,
-    Pet,
-    Cat,
-    Dog,
-    Siamese,
-    Fish,
-    Salmon,
-    Shark,
-    Sawshark,
-    Goblinshark,
-    Cookiecuttershark,
-    IntWrapper,
-    LongWrapper,
-    FloatWrapper,
-    DoubleWrapper,
-    BooleanWrapper,
-    StringWrapper,
-    DateWrapper,
-    DatetimeWrapper,
-    Datetimerfc1123Wrapper,
-    DurationWrapper,
-    ByteWrapper,
-    ArrayWrapper,
-    DictionaryWrapper,
-)
 
 
 class AutoRestComplexTestServiceConfiguration(Configuration):
