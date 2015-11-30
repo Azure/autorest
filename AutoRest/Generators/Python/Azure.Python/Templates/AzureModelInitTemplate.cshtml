@@ -30,11 +30,26 @@
   }
   if (Model.ServiceClient.EnumTypes.Any())
   {
-@:from .enums import (
-    foreach(var enumType in Model.ServiceClient.EnumTypes)
-    {
-@:    @(enumType.Name),
-    }
-@:)
+@:from . import enums
   }
+  
+@:__all__ = [
+    foreach (var modelType in Model.ServiceClient.ModelTypes)
+    {
+      if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
+        (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
+      {
+          continue;
+      }
+@:    @modelType.Name@Model.GetExceptionNameIfExist(modelType),
+    }
+    foreach (var pagedName in Model.PagedClasses)
+    {
+@:    @pagedName,
+    }
+    if (Model.ServiceClient.EnumTypes.Any())
+    {
+@:    enums,
+    }
+@:]
 }

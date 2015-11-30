@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.serialization import Model
 from .pet import Pet
 
 

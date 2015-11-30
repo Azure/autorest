@@ -11,3 +11,7 @@
 
 from .sample_resource_group import SampleResourceGroup
 from .error import Error, ErrorException
+__all__ = [
+    SampleResourceGroup,
+    Error, ErrorException,
+]

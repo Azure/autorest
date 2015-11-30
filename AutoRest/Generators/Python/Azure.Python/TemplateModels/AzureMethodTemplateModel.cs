@@ -42,7 +42,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             {
                 var ext = this.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
 
-                return (string)ext["className"];
+                return "models." + (string)ext["className"];
             }
         }
 

@@ -43,6 +43,14 @@ namespace Microsoft.Rest.Generator.Azure.Python
             get { return MethodTemplateModels.Any(m => m.Extensions.ContainsKey(AzureExtensions.LongRunningExtension)); }
         }
 
+        public bool HasAnyCloudErrors
+        {
+            get
+            {
+                return this.MethodTemplateModels.Any(item => item.DefaultResponse.Body != null && item.DefaultResponse.Body.Name == "CloudError");
+            }
+        }
+
         public bool HasAnyModel { get; private set; }
 
         public override IEnumerable<MethodGroupTemplateModel> MethodGroupModels

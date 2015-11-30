@@ -11,3 +11,7 @@
 
 from .storage_accounts_operations import storage_accountsOperations
 from .usage_operations import usageOperations
+__all__ = [
+    storage_accountsOperations,
+    usageOperations,
+]

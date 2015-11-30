@@ -14,7 +14,6 @@ from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
 from .operations.paging_operations import pagingOperations
 from . import models
-from .models import *
 
 
 class AutoRestPagingTestServiceConfiguration(AzureConfiguration):

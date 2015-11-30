@@ -8,23 +8,15 @@
 @Header("# ")
 # --------------------------------------------------------------------------
 @EmptyLine
-from msrest.serialization import Serializer, Deserializer
 from msrest.service_client import async_request
-from msrest.exceptions import DeserializationError, HttpOperationError
+@if (Model.HasAnyDefaultExceptions)
+{
+@:from msrest.exceptions import HttpOperationError
+}
 @if (Model.HasAnyModel)
 {
 @EmptyLine
-@:from ..models import (
-    foreach (var modelType in Model.ModelTypes)
-    {
-@:    @(modelType.Name),
-        var exceptionTypeName = modelType.GetExceptionDefinitionTypeIfExists(Model);
-        if (!string.IsNullOrEmpty(exceptionTypeName))
-        {
-@:    @(exceptionTypeName),
-        }
-    }
-@:)
+@:from .. import models
 }
 @EmptyLine
 @EmptyLine

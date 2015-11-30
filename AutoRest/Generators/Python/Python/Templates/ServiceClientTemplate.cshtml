@@ -16,7 +16,6 @@ from msrest import Configuration, Serializer, Deserializer
 {
 <text>
 from msrest.service_client import async_request
-from msrest.exceptions import DeserializationError, HttpOperationError
 </text>
 }
 @if (Model.MethodGroupModels.Any())
@@ -29,17 +28,6 @@ from msrest.exceptions import DeserializationError, HttpOperationError
 @if (Model.ModelTemplateModels.Any())
 {
 @:from . import models
-@:from .models import (
-  foreach (var modelTemplateModel in Model.ModelTemplateModels)
-  {
-@:    @(modelTemplateModel.Name),
-    var exceptionTypeName = modelTemplateModel.GetExceptionDefinitionTypeIfExists(Model);
-    if (modelTemplateModel.IsException && !string.IsNullOrEmpty(exceptionTypeName))
-    {
-@:    @(exceptionTypeName),
-    }
-  }
-@:)
 }
 @EmptyLine
 @EmptyLine

@@ -15,15 +15,23 @@
     {
 @:from .@(modelType.Name.ToPythonCase()) import @modelType.Name@Model.GetExceptionNameIfExist(modelType)
     }
-  }
+@EmptyLine
 
   if (Model.ServiceClient.EnumTypes.Any())
   {
-@:from .enums import (
-    foreach (var enumType in Model.ServiceClient.EnumTypes)
-    {
-@:    @(enumType.Name),
-    }
-@:)
+@:from . import enums
   }
+
+@:__all__ = [
+    foreach (var modelType in Model.ServiceClient.ModelTypes)
+    {
+@:    @modelType.Name@Model.GetExceptionNameIfExist(modelType),
+    }
+    if (Model.ServiceClient.EnumTypes.Any())
+    {
+@:    enums,
+    }
+@:]
+  }
+
 }

@@ -16,3 +16,12 @@ from .dictionary import dictionary
 from .inheritance import inheritance
 from .polymorphism import polymorphism
 from .polymorphicrecursive import polymorphicrecursive
+__all__ = [
+    basicOperations,
+    primitive,
+    array,
+    dictionary,
+    inheritance,
+    polymorphism,
+    polymorphicrecursive,
+]

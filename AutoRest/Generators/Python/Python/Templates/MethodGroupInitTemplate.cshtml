@@ -15,5 +15,11 @@
     {
 @:from .@(modelGroupType.MethodGroupType.ToPythonCase()) import @modelGroupType.MethodGroupType
     }
+@:__all__ = [
+    foreach (var modelGroupType in Model.MethodGroupModels)
+    {
+@:    @modelGroupType.MethodGroupType,
+    }
+@:]
   }
 }

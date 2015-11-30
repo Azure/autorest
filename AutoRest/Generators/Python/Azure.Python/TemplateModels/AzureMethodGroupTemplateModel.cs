@@ -21,18 +21,31 @@ namespace Microsoft.Rest.Generator.Azure.Python
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == methodGroupName)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
+        }
 
-            HasAnyModel = false;
-            if (serviceClient.ModelTypes.Any())
+        public override bool HasAnyModel
+        {
+            get
             {
-                foreach (var model in serviceClient.ModelTypes)
+                bool result = false;
+                foreach (var model in this.ModelTypes)
                 {
                     if (!model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) || !(bool)model.Extensions[AzureExtensions.ExternalExtension])
                     {
-                        HasAnyModel = true;
+                        result = true;
                         break;
                     }
                 }
+
+                return result;
+            }
+        }
+
+        public bool HasAnyCloudErrors
+        {
+            get
+            {
+                return this.MethodTemplateModels.Any(item => item.DefaultResponse.Body != null && item.DefaultResponse.Body.Name == "CloudError");
             }
         }
 

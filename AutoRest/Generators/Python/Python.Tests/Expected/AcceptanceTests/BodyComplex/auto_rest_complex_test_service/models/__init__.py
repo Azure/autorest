@@ -34,6 +34,33 @@ from .duration_wrapper import DurationWrapper
 from .byte_wrapper import ByteWrapper
 from .array_wrapper import ArrayWrapper
 from .dictionary_wrapper import DictionaryWrapper
-from .enums import (
-    CMYKColors,
-)
+
+from . import enums
+__all__ = [
+    Error, ErrorException,
+    Basic,
+    Pet,
+    Cat,
+    Dog,
+    Siamese,
+    Fish,
+    Salmon,
+    Shark,
+    Sawshark,
+    Goblinshark,
+    Cookiecuttershark,
+    IntWrapper,
+    LongWrapper,
+    FloatWrapper,
+    DoubleWrapper,
+    BooleanWrapper,
+    StringWrapper,
+    DateWrapper,
+    DatetimeWrapper,
+    Datetimerfc1123Wrapper,
+    DurationWrapper,
+    ByteWrapper,
+    ArrayWrapper,
+    DictionaryWrapper,
+    enums,
+]

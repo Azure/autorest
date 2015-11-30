@@ -10,6 +10,9 @@
 # --------------------------------------------------------------------------
 
 from .error import Error, ErrorException
-from .enums import (
-    UriColor,
-)
+
+from . import enums
+__all__ = [
+    Error, ErrorException,
+    enums,
+]
