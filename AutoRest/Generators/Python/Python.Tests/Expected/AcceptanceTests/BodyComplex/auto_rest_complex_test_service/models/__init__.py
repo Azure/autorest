@@ -34,4 +34,6 @@ from .duration_wrapper import DurationWrapper
 from .byte_wrapper import ByteWrapper
 from .array_wrapper import ArrayWrapper
 from .dictionary_wrapper import DictionaryWrapper
-from .enums import *
+from .enums import (
+    CMYKColors,
+)
