@@ -13,9 +13,10 @@ from .product import Product
 from .product_properties import ProductProperties
 from .operation_result import OperationResult
 from .product_paged import ProductPaged
+
 __all__ = [
-    Product,
-    ProductProperties,
-    OperationResult,
-    ProductPaged,
+    'Product',
+    'ProductProperties',
+    'OperationResult',
+    'ProductPaged',
 ]

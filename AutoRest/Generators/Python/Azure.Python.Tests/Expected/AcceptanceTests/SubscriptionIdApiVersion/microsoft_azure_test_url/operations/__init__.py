@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from .group_operations import groupOperations
+
 __all__ = [
-    groupOperations,
+    'groupOperations',
 ]

@@ -20,14 +20,15 @@ from msrest.exceptions import (
 )
 
 from .api_client import AutoRestReportServiceForAzure, AutoRestReportServiceForAzureConfiguration
+
 __all__ = [
-    ClientException,
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    AuthenticationError,
-    HttpOperationError,
-    AutoRestReportServiceForAzure,
-    AutoRestReportServiceForAzureConfiguration
+    'ClientException',
+    'SerializationError',
+    'DeserializationError',
+    'TokenExpiredError',
+    'ClientRequestError',
+    'AuthenticationError',
+    'HttpOperationError',
+    'AutoRestReportServiceForAzure',
+    'AutoRestReportServiceForAzureConfiguration'
 ]

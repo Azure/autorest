@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from .datetimerfc1123 import datetimerfc1123
+
 __all__ = [
-    datetimerfc1123,
+    'datetimerfc1123',
 ]

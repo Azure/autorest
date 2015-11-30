@@ -20,14 +20,15 @@ from msrest.exceptions import (
 )
 
 from .api_client import AutoRestHttpInfrastructureTestService, AutoRestHttpInfrastructureTestServiceConfiguration
+
 __all__ = [
-    ClientException,
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    AuthenticationError,
-    HttpOperationError,
-    AutoRestHttpInfrastructureTestService,
-    AutoRestHttpInfrastructureTestServiceConfiguration
+    'ClientException',
+    'SerializationError',
+    'DeserializationError',
+    'TokenExpiredError',
+    'ClientRequestError',
+    'AuthenticationError',
+    'HttpOperationError',
+    'AutoRestHttpInfrastructureTestService',
+    'AutoRestHttpInfrastructureTestServiceConfiguration'
 ]

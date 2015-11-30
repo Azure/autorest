@@ -13,6 +13,6 @@ from .widget import Widget
 from .error import Error, ErrorException
 
 __all__ = [
-    Widget,
-    Error, ErrorException,
+    'Widget',
+    'Error', 'ErrorException',
 ]

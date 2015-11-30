@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from .date_model import date_model
+
 __all__ = [
-    date_model,
+    'date_model',
 ]

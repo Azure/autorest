@@ -13,6 +13,6 @@ from .product import Product
 from .error import Error, ErrorException
 
 __all__ = [
-    Product,
-    Error, ErrorException,
+    'Product',
+    'Error', 'ErrorException',
 ]

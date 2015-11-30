@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from .dictionary import dictionary
+
 __all__ = [
-    dictionary,
+    'dictionary',
 ]

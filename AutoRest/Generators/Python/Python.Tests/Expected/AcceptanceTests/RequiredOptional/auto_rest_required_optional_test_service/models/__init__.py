@@ -21,14 +21,14 @@ from .product import Product
 from .class_optional_wrapper import ClassOptionalWrapper
 
 __all__ = [
-    Error, ErrorException,
-    IntWrapper,
-    IntOptionalWrapper,
-    StringWrapper,
-    StringOptionalWrapper,
-    ArrayWrapper,
-    ArrayOptionalWrapper,
-    ClassWrapper,
-    Product,
-    ClassOptionalWrapper,
+    'Error', 'ErrorException',
+    'IntWrapper',
+    'IntOptionalWrapper',
+    'StringWrapper',
+    'StringOptionalWrapper',
+    'ArrayWrapper',
+    'ArrayOptionalWrapper',
+    'ClassWrapper',
+    'Product',
+    'ClassOptionalWrapper',
 ]

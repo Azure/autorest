@@ -13,9 +13,10 @@ from .error import Error, ErrorException
 from .resource import Resource
 from .flattened_product import FlattenedProduct
 from .resource_collection import ResourceCollection
+
 __all__ = [
-    Error, ErrorException,
-    Resource,
-    FlattenedProduct,
-    ResourceCollection,
+    'Error', 'ErrorException',
+    'Resource',
+    'FlattenedProduct',
+    'ResourceCollection',
 ]
