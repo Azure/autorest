@@ -1,27 +1,19 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
-
 'use strict';
-
 var should = require('should');
 var http = require('http');
 var util = require('util');
 var assert = require('assert');
-import msRest = require('ms-rest');
-import moment = require('moment');
-import complexClient = require('../Expected/AcceptanceTests/BodyComplex/autoRestComplexTestService');
-import complexClientModels = require('../Expected/AcceptanceTests/BodyComplex/models');
-
+var msRest = require('ms-rest');
+var moment = require('moment');
+var complexClient = require('../Expected/AcceptanceTests/BodyComplex/autoRestComplexTestService');
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
-
 var clientOptions = {};
 var baseUri = 'http://localhost:3000';
-
 describe('nodejs', function () {
-
   describe('Swagger Complex Type BAT', function () {
-
     describe('Basic Types Operations', function () {
       var testClient = new complexClient(baseUri, clientOptions);
       it('should get and put valid basic type properties', function (done) {
@@ -36,7 +28,6 @@ describe('nodejs', function () {
           });
         });
       });
-
       it('should get null basic type properties', function (done) {
         testClient.basicOperations.getNull(function (error, result) {
           should.not.exist(error);
@@ -45,7 +36,6 @@ describe('nodejs', function () {
           done();
         });
       });
-
       it('should get empty basic type properties', function (done) {
         testClient.basicOperations.getEmpty(function (error, result) {
           should.not.exist(error);
@@ -54,7 +44,6 @@ describe('nodejs', function () {
           done();
         });
       });
-
       it('should get basic type properties when the payload is empty', function (done) {
         testClient.basicOperations.getNotProvided(function (error, result) {
           should.not.exist(error);
@@ -62,7 +51,6 @@ describe('nodejs', function () {
           done();
         });
       });
-
       it('should deserialize invalid basic types without throwing', function (done) {
         testClient.basicOperations.getInvalid(function (error, result) {
           should.not.exist(error);
@@ -70,9 +58,7 @@ describe('nodejs', function () {
           done();
         });
       });
-
     });
-
     describe('Primitive Types Operations', function () {
       var testClient = new complexClient(baseUri, clientOptions);
       it('should get and put valid int properties', function (done) {
@@ -86,7 +72,6 @@ describe('nodejs', function () {
           });
         });
       });
-
       it('should get and put valid long properties', function (done) {
         testClient.primitive.getLong(function (error, result) {
           should.not.exist(error);
@@ -98,7 +83,6 @@ describe('nodejs', function () {
           });
         });
       });
-
       it('should get and put valid float properties', function (done) {
         testClient.primitive.getFloat(function (error, result) {
           should.not.exist(error);
@@ -110,7 +94,6 @@ describe('nodejs', function () {
           });
         });
       });
-
       it('should get and put valid double properties', function (done) {
         testClient.primitive.getDouble(function (error, result) {
           should.not.exist(error);
@@ -122,7 +105,6 @@ describe('nodejs', function () {
           });
         });
       });
-
       it('should get and put valid bool properties', function (done) {
         testClient.primitive.getBool(function (error, result) {
           should.not.exist(error);
@@ -134,7 +116,6 @@ describe('nodejs', function () {
           });
         });
       });
-
       it('should get and put valid string properties', function (done) {
         testClient.primitive.getString(function (error, result) {
           should.not.exist(error);
@@ -147,7 +128,6 @@ describe('nodejs', function () {
           });
         });
       });
-
       it('should get and put valid date properties', function (done) {
         testClient.primitive.getDate(function (error, result) {
           should.not.exist(error);
@@ -156,7 +136,7 @@ describe('nodejs', function () {
           //testClient.primitive.putDate({ 'field': 'goodrequest', 'empty': '' }, function (error, result) {
           //  should.not.exist(error);
           done();
-          //});
+                    //});
         });
       });
       it('should get and put valid date-time properties', function (done) {
@@ -170,7 +150,6 @@ describe('nodejs', function () {
           });
         });
       });
-
       it('should get and put valid date-time-rfc1123 properties', function (done) {
         var timeStringOne = 'Mon, 01 Jan 0001 00:00:00 GMT';
         var timeStringTwo = 'Mon, 18 May 2015 11:38:00 GMT';
@@ -179,43 +158,38 @@ describe('nodejs', function () {
           assert.deepEqual(result.field, new Date(timeStringOne));
           assert.deepEqual(result.now, new Date(timeStringTwo));
           var dateFormat = 'ddd, DD MMM YYYY HH:mm:ss';
-
           //Have to use moment.js to construct the date object because NodeJS default Date constructor doesn't parse "old" RFC dates right
-          var fieldDate = moment.utc(timeStringOne, dateFormat).toDate(); 
+          var fieldDate = moment.utc(timeStringOne, dateFormat).toDate();
           testClient.primitive.putDateTimeRfc1123({ 'field': fieldDate, 'now': new Date(timeStringTwo) }, function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
-
       it('should get and put valid duration properties', function (done) {
         var durationString = 'P123DT22H14M12.011S';
         testClient.primitive.getDuration(function (error, result) {
           should.not.exist(error);
           //should.not.exist(result.field);
           assert.deepEqual(result.field, moment.duration(durationString));
-          testClient.primitive.putDuration(moment.duration(durationString), function (error, result) {
+          testClient.primitive.putDuration({ field : moment.duration(durationString) }, function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
-
       it('should get and put valid byte properties', function (done) {
         var byteBuffer = new Buffer([255, 254, 253, 252, 0, 250, 249, 248, 247, 246]);
         testClient.primitive.getByte(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.field, byteBuffer);
-          testClient.primitive.putByte(byteBuffer, function (error, result) {
+          testClient.primitive.putByte({ field: byteBuffer }, function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
-
     });
-
     describe('Array Types Operations', function () {
       var testClient = new complexClient(baseUri, clientOptions);
       it('should get valid array type properties', function (done) {
@@ -223,25 +197,22 @@ describe('nodejs', function () {
         testClient.arrayModel.getValid(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.array, testArray);
-          testClient.arrayModel.putValid(testArray, function (error, result) {
+          testClient.arrayModel.putValid({ arrayParameter: testArray }, function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
-
-
       it('should get and put empty array type properties', function (done) {
         testClient.arrayModel.getEmpty(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.array, []);
-          testClient.arrayModel.putEmpty([], function (error, result) {
+          testClient.arrayModel.putEmpty({ arrayParameter: [] }, function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
-
       it('should get array type properties when the payload is empty', function (done) {
         testClient.arrayModel.getNotProvided(function (error, result) {
           should.not.exist(error);
@@ -249,35 +220,30 @@ describe('nodejs', function () {
           done();
         });
       });
-
     });
-
     describe('Dictionary Types Operations', function () {
       var testClient = new complexClient(baseUri, clientOptions);
       it('should get and put valid dictionary type properties', function (done) {
-        var testDictionary: { [propertyName: string]: string } =
-          { 'txt': 'notepad', 'bmp': 'mspaint', 'xls': 'excel', 'exe': '', '': null };
+        var testDictionary = { 'txt': 'notepad', 'bmp': 'mspaint', 'xls': 'excel', 'exe': '', '': null };
         testClient.dictionary.getValid(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.defaultProgram, testDictionary);
-          testClient.dictionary.putValid(testDictionary, function (error, result) {
+          testClient.dictionary.putValid({ defaultProgram: testDictionary }, function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
-
       it('should get and put empty dictionary type properties', function (done) {
         testClient.dictionary.getEmpty(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.defaultProgram, {});
-          testClient.dictionary.putEmpty({}, function (error, result) {
+          testClient.dictionary.putEmpty({ defaultProgram: {} }, function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
-
       it('should get null dictionary type properties', function (done) {
         testClient.dictionary.getNull(function (error, result) {
           should.not.exist(error);
@@ -285,7 +251,6 @@ describe('nodejs', function () {
           done();
         });
       });
-
       it('should get dictionary type properties when the payload is empty', function (done) {
         testClient.dictionary.getNotProvided(function (error, result) {
           should.not.exist(error);
@@ -293,9 +258,7 @@ describe('nodejs', function () {
           done();
         });
       });
-
     });
-
     describe('Complex Types with Inheritance Operations', function () {
       var siamese = { "breed": "persian", "color": "green", "hates": [{ "food": "tomato", "id": 1, "name": "Potato" }, { "food": "french fries", "id": -1, "name": "Tomato" }], "id": 2, "name": "Siameeee" };
       var testClient = new complexClient(baseUri, clientOptions);
@@ -309,9 +272,7 @@ describe('nodejs', function () {
           });
         });
       });
-
     });
-
     describe('Complex Types with Polymorphism Operations', function () {
       var fish = {
         'fishtype': 'salmon',
@@ -390,37 +351,36 @@ describe('nodejs', function () {
         });
       });
     });
-
     describe('Complex Types with recursive definitions', function () {
-      var bigfish = <complexClientModels.Fish> {
+      var bigfish = {
         'fishtype': 'salmon',
         'location': 'alaska',
         'iswild': true,
         'species': 'king',
         'length': 1,
         'siblings': [
-          <complexClientModels.Shark> {
+          {
             'fishtype': 'shark',
             'age': 6,
             'birthday': new Date('2012-01-05T01:00:00Z'),
             'species': 'predator',
             'length': 20,
             'siblings': [
-              <complexClientModels.Salmon> {
+              {
                 'fishtype': 'salmon',
                 'location': 'atlantic',
                 'iswild': true,
                 'species': 'coho',
                 'length': 2,
                 'siblings': [
-                  <complexClientModels.Shark> {
+                  {
                     'fishtype': 'shark',
                     'age': 6,
                     'birthday': new Date('2012-01-05T01:00:00Z'),
                     'species': 'predator',
                     'length': 20
                   },
-                  <complexClientModels.Sawshark> {
+                  {
                     'fishtype': 'sawshark',
                     'age': 105,
                     'birthday': new Date('1900-01-05T01:00:00Z'),
@@ -430,7 +390,7 @@ describe('nodejs', function () {
                   }
                 ]
               },
-              <complexClientModels.Sawshark> {
+              {
                 'fishtype': 'sawshark',
                 'age': 105,
                 'birthday': new Date('1900-01-05T01:00:00Z'),
@@ -441,7 +401,7 @@ describe('nodejs', function () {
               }
             ]
           },
-          <complexClientModels.Sawshark> {
+          {
             'fishtype': 'sawshark',
             'age': 105,
             'birthday': new Date('1900-01-05T01:00:00Z'),
