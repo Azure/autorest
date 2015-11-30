@@ -27,7 +27,7 @@ from auto_rest_long_running_operation_test_service import (
     AutoRestLongRunningOperationTestService, 
     AutoRestLongRunningOperationTestServiceConfiguration)
 
-from auto_rest_long_running_operation_test_service.models import *
+from auto_rest_long_running_operation_test_service.models import Product, SubProduct
 
 class LroTests(unittest.TestCase):
 
