@@ -183,7 +183,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> PutAsyncRelativeRetry400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.PutAsyncRelativeRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetry400Headers> result = await operations.PutAsyncRelativeRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -219,7 +219,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPutAsyncRelativeRetry400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetry400Headers> result = await operations.BeginPutAsyncRelativeRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -675,7 +675,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> PutAsyncRelativeRetryNoStatusAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.PutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryNoStatusHeaders> result = await operations.PutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -711,7 +711,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPutAsyncRelativeRetryNoStatusAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.BeginPutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryNoStatusHeaders> result = await operations.BeginPutAsyncRelativeRetryNoStatusWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -747,7 +747,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> PutAsyncRelativeRetryNoStatusPayloadAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.PutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> result = await operations.PutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -783,7 +783,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPutAsyncRelativeRetryNoStatusPayloadAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> result = await operations.BeginPutAsyncRelativeRetryNoStatusPayloadWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1135,7 +1135,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> PutAsyncRelativeRetryInvalidHeaderAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.PutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> result = await operations.PutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1171,7 +1171,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPutAsyncRelativeRetryInvalidHeaderAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> result = await operations.BeginPutAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1207,7 +1207,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> PutAsyncRelativeRetryInvalidJsonPollingAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.PutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> result = await operations.PutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1243,7 +1243,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPutAsyncRelativeRetryInvalidJsonPollingAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product,LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> result = await operations.BeginPutAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

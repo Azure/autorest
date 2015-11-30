@@ -52,7 +52,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             {
                 var sb = new IndentedStringBuilder();
                 if (this.HttpMethod == HttpMethod.Head &&
-                    this.ReturnType != null)
+                    this.ReturnType.Body != null)
                 {
                     HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
                     sb.AppendFormat("result = (statusCode === {0});", (int)code).AppendLine();

@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+using System.Net.Http;
 using Microsoft.Rest.ClientRuntime.Tests.Resources;
 using Microsoft.Rest.Serialization;
 using Microsoft.Rest.TransientFaultHandling;
@@ -247,6 +248,17 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             DateTestObject testRoundtrip = JsonConvert.DeserializeObject<DateTestObject>(json, serializeSettings);
             Assert.Equal(localDateTime, testRoundtrip.DateTime.ToLocalTime());
             Assert.Equal(expectedJson, json);
+        }
+
+        [Fact]
+        public void HeaderGetsSerializedToJson()
+        {
+            var message = new HttpResponseMessage();
+            message.Headers.Add("h1", "value");
+            message.Headers.Add("h2", "");
+            message.Headers.Add("h3", new string[] {"value1", "value2"});
+            var json = message.Headers.ToJson().ToString();
+            Assert.Equal("{\r\n  \"h1\": \"value\",\r\n  \"h2\": \"\",\r\n  \"h3\": [\r\n    \"value1\",\r\n    \"value2\"\r\n  ]\r\n}", json);
         }
     }
 }

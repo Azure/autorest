@@ -22,7 +22,7 @@ namespace Microsoft.Rest
     }
 
     /// <summary>
-    /// Represents the base return type of all ServiceClient REST operations.
+    /// Represents the base return type of all ServiceClient REST operations with response body.
     /// </summary>
     public interface IHttpOperationResponse<T> : IHttpOperationResponse
     {
@@ -33,16 +33,16 @@ namespace Microsoft.Rest
     }
 
     /// <summary>
-    /// Represents the base return type of all ServiceClient REST operations.
+    /// Represents the base return type of all ServiceClient REST operations with response body and header.
     /// </summary>
-    public class HttpOperationResponse<T> : HttpOperationResponse, IHttpOperationResponse<T>
+    public interface IHttpOperationResponse<TBody, THeader> : IHttpOperationResponse<TBody>
     {
         /// <summary>
-        /// Gets or sets the response object.
+        /// Gets or sets the response header object.
         /// </summary>
-        public T Body { get; set; }
+        THeader Headers { get; set; }
     }
-
+    
     /// <summary>
     /// Represents the base return type of all ServiceClient REST operations without response body.
     /// </summary>
@@ -57,5 +57,27 @@ namespace Microsoft.Rest
         /// Gets information about the associated HTTP response.
         /// </summary>
         public HttpResponseMessage Response { get; set; }
+    }
+
+    /// <summary>
+    /// Represents the base return type of all ServiceClient REST operations.
+    /// </summary>
+    public class HttpOperationResponse<T> : HttpOperationResponse, IHttpOperationResponse<T>
+    {
+        /// <summary>
+        /// Gets or sets the response object.
+        /// </summary>
+        public T Body { get; set; }
+    }
+
+    /// <summary>
+    /// Represents the base return type of all ServiceClient REST operations.
+    /// </summary>
+    public class HttpOperationResponse<TBody, THeader> : HttpOperationResponse<TBody>, IHttpOperationResponse<TBody, THeader>
+    {
+        /// <summary>
+        /// Gets or sets the response header object.
+        /// </summary>
+        public THeader Headers { get; set; }
     }
 }

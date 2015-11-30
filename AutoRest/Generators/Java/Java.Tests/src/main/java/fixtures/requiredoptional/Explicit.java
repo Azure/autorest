@@ -467,7 +467,7 @@ public interface Explicit {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error>  postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<Error> postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.

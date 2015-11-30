@@ -255,7 +255,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidJsonPolling(new Product {Location = "West US"}));
                 // TODO: 4103936 Fix exception type
 #if !MONO
-                Assert.Throws<UriFormatException>(
+                Assert.Throws<RestException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidHeader(new Product {Location = "West US"}));
                 // TODO: 4103936 Fix exception type
                 // UriFormatException invalidHeader = null;

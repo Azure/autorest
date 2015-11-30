@@ -36,16 +36,16 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             IDictionary<KeyValuePair<string, string>, string> pageClass = new Dictionary<KeyValuePair<string, string>, string>();
 
             codeNamer.NormalizePaginatedMethods(serviceClient, pageClass);
-            Assert.Equal("Page<Product>", serviceClient.Methods[0].ReturnType.Name);
-            Assert.Equal(objName, serviceClient.Methods[1].ReturnType.Name);
-            Assert.Equal("Page<Product>", serviceClient.Methods[1].Responses.ElementAt(0).Value.Name);
-            Assert.Equal(strName, serviceClient.Methods[1].Responses.ElementAt(1).Value.Name);
-            Assert.Equal(objName, serviceClient.Methods[2].ReturnType.Name);
-            Assert.Equal("Page<Product>", serviceClient.Methods[2].Responses.ElementAt(0).Value.Name);
-            Assert.Equal("Page<Product>", serviceClient.Methods[2].Responses.ElementAt(1).Value.Name);
-            Assert.Equal(objName, serviceClient.Methods[3].ReturnType.Name);
-            Assert.Equal("Page<Product>", serviceClient.Methods[3].Responses.ElementAt(0).Value.Name);
-            Assert.Equal("Page<ProductChild>", serviceClient.Methods[3].Responses.ElementAt(1).Value.Name);
+            Assert.Equal("Page<Product>", serviceClient.Methods[0].ReturnType.Body.Name);
+            Assert.Equal(objName, serviceClient.Methods[1].ReturnType.Body.Name);
+            Assert.Equal("Page<Product>", serviceClient.Methods[1].Responses.ElementAt(0).Value.Body.Name);
+            Assert.Equal(strName, serviceClient.Methods[1].Responses.ElementAt(1).Value.Body.Name);
+            Assert.Equal(objName, serviceClient.Methods[2].ReturnType.Body.Name);
+            Assert.Equal("Page<Product>", serviceClient.Methods[2].Responses.ElementAt(0).Value.Body.Name);
+            Assert.Equal("Page<Product>", serviceClient.Methods[2].Responses.ElementAt(1).Value.Body.Name);
+            Assert.Equal(objName, serviceClient.Methods[3].ReturnType.Body.Name);
+            Assert.Equal("Page<Product>", serviceClient.Methods[3].Responses.ElementAt(0).Value.Body.Name);
+            Assert.Equal("Page<ProductChild>", serviceClient.Methods[3].Responses.ElementAt(1).Value.Body.Name);
             Assert.Equal(4, serviceClient.ModelTypes.Count);
             Assert.False(serviceClient.ModelTypes.Any(t => t.Name.Equals("ProducResult", StringComparison.OrdinalIgnoreCase)));
             Assert.False(serviceClient.ModelTypes.Any(t => t.Name.Equals("ProducResult2", StringComparison.OrdinalIgnoreCase)));

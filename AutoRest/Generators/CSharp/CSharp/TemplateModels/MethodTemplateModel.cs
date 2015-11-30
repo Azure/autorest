@@ -166,18 +166,29 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
-        /// Get the return type name for the underlyign interface method
+        /// Get the return type name for the underlying interface method
         /// </summary>
         public virtual string OperationResponseReturnTypeString
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "HttpOperationResponse<{0}>", ReturnType.Name);
+                    if (ReturnType.Headers != null)
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                            "HttpOperationResponse<{0},{1}>", ReturnType.Body.Name, ReturnType.Headers.Name);
+                    }
+                    else
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                            "HttpOperationResponse<{0}>", ReturnType.Body.Name);
+                    }
                 }
-                return "HttpOperationResponse";
+                else
+                {
+                    return "HttpOperationResponse";
+                }
             }
         }
 
@@ -188,12 +199,15 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "Task<{0}>", ReturnType.Name);
+                        "Task<{0}>", ReturnType.Body.Name);
                 }
-                return "Task";
+                else
+                {
+                    return "Task";
+                }
             }
         }
 
@@ -204,9 +218,9 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                if (this.DefaultResponse is CompositeType)
+                if (this.DefaultResponse.Body is CompositeType)
                 {
-                    CompositeType type = this.DefaultResponse as CompositeType;
+                    CompositeType type = this.DefaultResponse.Body as CompositeType;
                     if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
                     {
                         var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
@@ -264,11 +278,14 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null)
                 {
-                    return ReturnType.Name;
+                    return ReturnType.Body.Name;
                 }
-                return "void";
+                else
+                {
+                    return "void";
+                }
             }
         }
 

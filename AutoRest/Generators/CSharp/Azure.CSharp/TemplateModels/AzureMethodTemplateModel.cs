@@ -66,7 +66,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
-                if (DefaultResponse != null && DefaultResponse.Name == "CloudError")
+                if (DefaultResponse.Body != null && DefaultResponse.Body.Name == "CloudError")
                 {
                     return "ex = new CloudException(errorBody.Message);";
                 }
@@ -86,10 +86,10 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
-                if (ReturnType is CompositeType)
+                if (ReturnType.Body is CompositeType)
                 {
                     // Special handle Page class with IPage interface
-                    CompositeType compositeType = ReturnType as CompositeType;
+                    CompositeType compositeType = ReturnType.Body as CompositeType;
                     if (compositeType.Extensions.ContainsKey(AzureExtensions.PageableExtension))
                     {
                         return (string)compositeType.Extensions[AzureExtensions.PageableExtension];
@@ -106,15 +106,23 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null)
                 {
+                    string bodyName = ReturnType.Body.Name;
                     if (!string.IsNullOrEmpty(ReturnTypePageInterfaceName))
                     {
-                        return string.Format(CultureInfo.InvariantCulture,
-                            "AzureOperationResponse<{0}>", ReturnTypePageInterfaceName);
+                        bodyName = ReturnTypePageInterfaceName;
                     }
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "AzureOperationResponse<{0}>", ReturnType.Name);
+                    if (ReturnType.Headers != null)
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                                    "AzureOperationResponse<{0},{1}>", bodyName, ReturnType.Headers.Name);
+                    }
+                    else
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                                    "AzureOperationResponse<{0}>", bodyName);
+                    }
                 }
                 else
                 {
@@ -157,7 +165,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
-                if (DefaultResponse == null || DefaultResponse.Name == "CloudError")
+                if (DefaultResponse.Body == null || DefaultResponse.Body.Name == "CloudError")
                 {
                     return "CloudException";
                 }
@@ -175,7 +183,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             {
                 var sb = new IndentedStringBuilder();
                 if (this.HttpMethod == HttpMethod.Head &&
-                    this.ReturnType != null)
+                    this.ReturnType.Body != null)
                 {
                     HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
                     sb.AppendFormat("result.Body = (statusCode == HttpStatusCode.{0});", code.ToString()).AppendLine();
