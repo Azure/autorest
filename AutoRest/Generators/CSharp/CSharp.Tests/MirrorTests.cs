@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Reflection;
 using Fixtures.MirrorPolymorphic;
 using Fixtures.MirrorPolymorphic.Models;
 using Fixtures.MirrorPrimitives;
 using Fixtures.MirrorRecursiveTypes;
 using Fixtures.MirrorSequences;
 using Fixtures.MirrorSequences.Models;
-using Microsoft.Rest.Modeler.Swagger.Tests;
 using Xunit;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
@@ -48,7 +48,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         public void CanSerializeAndDeserializePrimitiveTypes()
         {
             // first regen the spec
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("swagger-mirror-primitives.json"), ExpectedPath("Mirror.Primitives"));
 
             //Now run mocked tests using the client
@@ -63,7 +63,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void CanRoundTripSequences()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("swagger-mirror-sequences.json"), ExpectedPath("Mirror.Sequences"));
             using (var sequenceClient = MirrorTestHelpers.CreateSequenceClient())
             {
@@ -104,7 +104,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void CanRoundtripPolymorphicTypes()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("swagger-mirror-polymorphic.json"),
                 ExpectedPath("Mirror.Polymorphic"));
             

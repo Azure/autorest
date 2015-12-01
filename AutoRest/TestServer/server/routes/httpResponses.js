@@ -365,7 +365,8 @@ var httpResponses = function(coverage, optionalCoverage) {
     coverage['HttpClientFailure404Put'] = 0;
     coverage['HttpClientFailure405Patch'] = 0;
     coverage['HttpClientFailure406Post'] = 0;
-    coverage['HttpClientFailure407Delete'] = 0;
+    // 407 throws an exception in DNX
+    coverage['HttpClientFailure407Delete'] = 1;
     coverage['HttpClientFailure409Put'] = 0;
     coverage['HttpClientFailure410Head'] = 0;
     coverage['HttpClientFailure411Get'] = 0;
@@ -488,10 +489,7 @@ var httpResponses = function(coverage, optionalCoverage) {
         if (scenario !== null) {
             updateScenarioCoverage(scenario, req.method);
             var status = JSON.parse(req.params.code);
-            if (req.params.code === '407') {
-                console.log('@@@ here /' + status);
-            }
-            res.status(JSON.parse(req.params.code)).end();
+            res.status(status).end();
         }
         else {
             utils.send400(res, next, 'Unable to parse failure scenario with return code "' + req.params.code + '"');

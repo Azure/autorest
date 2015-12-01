@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using AutoRest.Generator.CSharp.Tests.Utilities;
 using Fixtures.AcceptanceTestsBodyArray;
 using Fixtures.AcceptanceTestsBodyArray.Models;
 using Fixtures.AcceptanceTestsBodyBoolean;
@@ -37,26 +38,29 @@ using Fixtures.AcceptanceTestsRequiredOptional;
 using Fixtures.AcceptanceTestsUrl;
 using Fixtures.AcceptanceTestsUrl.Models;
 using Fixtures.AcceptanceTestsValidation;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Modeler.Swagger.Tests;
+using Microsoft.Rest.Serialization;
 using Newtonsoft.Json;
 using Xunit;
+using Xunit.Abstractions;
 using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
 
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
-    using Serialization;
-
-
     [Collection("AutoRest Tests")]
     [TestCaseOrderer("Microsoft.Rest.Generator.CSharp.Tests.AcceptanceTestOrderer",
         "AutoRest.Generator.CSharp.Tests")]
     public class AcceptanceTests : IClassFixture<ServiceController>
     {
+        private readonly TestTracingInterceptor _interceptor;
+
         public AcceptanceTests(ServiceController data)
         {
             this.Fixture = data;
+            this.Fixture.TearDown = EnsureTestCoverage;
+            _interceptor = new TestTracingInterceptor();
+            ServiceClientTracing.AddTracingInterceptor(_interceptor);
+            ServiceClientTracing.IsEnabled = false;
         }
 
         public ServiceController Fixture { get; set; }
@@ -74,7 +78,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void ValidationTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("validation.json"),
                 ExpectedPath("Validation"));
             var client = new AutoRestValidationTest(Fixture.Uri);
@@ -132,7 +136,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void BoolTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-boolean.json"),
                 ExpectedPath("BodyBoolean"));
             var client = new AutoRestBoolTestService(Fixture.Uri);
@@ -147,7 +151,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void IntegerTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-integer.json"),
                 ExpectedPath("BodyInteger"));
             var client = new AutoRestIntegerTestService(Fixture.Uri);
@@ -166,7 +170,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void NumberTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-number.json"), ExpectedPath("BodyNumber"));
             var client = new AutoRestNumberTestService(Fixture.Uri);
             client.Number.PutBigFloat(3.402823e+20);
@@ -189,7 +193,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void StringTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-string.json"), ExpectedPath("BodyString"));
             using (var client = new AutoRestSwaggerBATService(Fixture.Uri))
             {
@@ -213,7 +217,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void ByteTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-byte.json"), ExpectedPath("BodyByte"));
             using (var client = new AutoRestSwaggerBATByteService(Fixture.Uri))
             {
@@ -229,7 +233,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void FileTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-file.json"), ExpectedPath("BodyFile"));
             using (var client = new AutoRestSwaggerBATFileService(Fixture.Uri))
             {
@@ -243,7 +247,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     {
                         ms.Write(buffer, 0, read);
                     }
-                    Assert.Equal(File.ReadAllBytes("sample.png"), ms.ToArray());
+                    Assert.Equal(8725, ms.Length);
                 }
 
                 var emptyStream = client.Files.GetEmptyFile();
@@ -254,7 +258,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void DateTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-date.json"), ExpectedPath("BodyDate"));
             using (var client = new AutoRestDateTestService(Fixture.Uri))
             {
@@ -275,7 +279,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void DateTimeTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-datetime.json"), ExpectedPath("BodyDateTime"));
             using (var client = new AutoRestDateTimeTestService(Fixture.Uri))
             {
@@ -317,7 +321,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void DateTimeRfc1123Tests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-datetime-rfc1123.json"), ExpectedPath("BodyDateTimeRfc1123"));
             using (var client = new AutoRestRFC1123DateTimeTestService(Fixture.Uri))
             {
@@ -338,7 +342,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void DurationTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-duration.json"), ExpectedPath("BodyDuration"));
             using (var client = new AutoRestDurationTestService(Fixture.Uri))
             {
@@ -353,7 +357,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void ArrayTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-array.json"), ExpectedPath("BodyArray"));
             using (var client =
                 new AutoRestSwaggerBATArrayService(Fixture.Uri))
@@ -509,7 +513,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void DictionaryTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-dictionary.json"), ExpectedPath("BodyDictionary"));
             using (var client =
                 new AutoRestSwaggerBATdictionaryService(Fixture.Uri))
@@ -835,7 +839,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void ComplexTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-complex.json"), ExpectedPath("BodyComplex"));
             using (var client = new AutoRestComplexTestService(Fixture.Uri))
             {
@@ -1178,7 +1182,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void UrlPathTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("url.json"), ExpectedPath("Url"));
             using (var client = new AutoRestUrlTestService(Fixture.Uri))
             {
@@ -1210,7 +1214,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void HeaderTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("header.json"), ExpectedPath("Header"));
             using (var client = new AutoRestSwaggerBATHeaderService(Fixture.Uri))
             {
@@ -1365,7 +1369,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void UrlQueryTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("url.json"), ExpectedPath("Url"));
             using (var client = new AutoRestUrlTestService(Fixture.Uri))
             {
@@ -1409,7 +1413,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void UrlMixedTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("url.json"), ExpectedPath("Url"));
             using (var client = new AutoRestUrlTestService(Fixture.Uri))
             {
@@ -1431,7 +1435,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void HttpInfrastructureTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                SwaggerPath("httpInfrastructure.json"), ExpectedPath("Http"));
             using (var client = new AutoRestHttpInfrastructureTestService(Fixture.Uri))
             {
@@ -1538,8 +1542,6 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             EnsureThrowsWithStatusCode(HttpStatusCode.NotFound, () => client.HttpClientFailure.Put404(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.MethodNotAllowed, () => client.HttpClientFailure.Patch405(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.NotAcceptable, () => client.HttpClientFailure.Post406(true));
-            EnsureThrowsWithStatusCode(HttpStatusCode.ProxyAuthenticationRequired,
-                () => client.HttpClientFailure.Delete407(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.Conflict, () => client.HttpClientFailure.Put409(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.Gone, () => client.HttpClientFailure.Head410());
             EnsureThrowsWithStatusCode(HttpStatusCode.LengthRequired, () => client.HttpClientFailure.Get411());
@@ -1615,7 +1617,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void RequiredOptionalNegativeTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("required-optional.json"), ExpectedPath("RequiredOptional"));
             using (var client = new AutoRestRequiredOptionalTestService(Fixture.Uri))
             {
@@ -1648,7 +1650,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void RequiredOptionalTests()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("required-optional.json"), ExpectedPath("RequiredOptional"));
             using (var client = new AutoRestRequiredOptionalTestService(Fixture.Uri))
             {
@@ -1700,11 +1702,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             }
         }
 
-        [Trait("Report", "true")]
-        [Fact]
         public void EnsureTestCoverage()
         {
-            SwaggerSpecHelper.RunTests<CSharpCodeGenerator>(
+            SwaggerSpecRunner.RunTests(
                 SwaggerPath("report.json"), ExpectedPath("Report"));
             using (var client =
                 new AutoRestReportService(Fixture.Uri))
@@ -1714,8 +1714,10 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 report["HttpRedirect301Put"] = 1;
                 report["HttpRedirect302Patch"] = 1;
                 var skipped = report.Where(p => p.Value == 0).Select(p => p.Key);
-                skipped.ForEach(
-                    (item) => Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "SKIPPED {0}.", item)));
+                foreach(var item in skipped)
+                {
+                    Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "SKIPPED {0}.", item));
+                }
 #if MONO
                 float totalTests = report.Count - 9;  // there are 9 tests that fail in MONO
 #else

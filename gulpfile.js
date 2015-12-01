@@ -20,6 +20,7 @@ runSequence = require('run-sequence'),
 requireDir = require('require-dir')('./Tools/gulp');
 
 const DEFAULT_ASSEMBLY_VERSION = '0.9.0.0';
+const DNX_VERSION = '1.0.0-rc1-final';
 const MAX_BUFFER = 1024 * 4096;
 var isWindows = (process.platform.lastIndexOf('win') === 0);
 process.env.MSBUILDDISABLENODEREUSE = 1;
@@ -166,7 +167,7 @@ gulp.task('regenerate:expected:rubyazure', function(cb){
     'mappings': rubyAzureMappings,
     'outputDir': 'RspecTests/Generated',
     'codeGenerator': 'Azure.Ruby',
-	  'nsPrefix': 'MyNamespace'
+    'nsPrefix': 'MyNamespace'
   }, cb);
 })
 
@@ -365,11 +366,14 @@ gulp.task('test:java:azure', shell.task(basePathOrThrow() + '/gradlew :azure-cod
 var xunitTestsDlls = [
   'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
   'AutoRest/Modelers/Swagger.Tests/bin/Net45-Debug/AutoRest.Modeler.Swagger.Tests.dll',
-  'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll',
-  'AutoRest/Generators/CSharp/Azure.CSharp.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.CSharp.Tests.dll',
-  'AutoRest/Generators/CSharp/CSharp.Tests/bin/Net45-Debug/AutoRest.Generator.CSharp.Tests.dll',
-  'ClientRuntimes/CSharp/ClientRuntime.Azure.Tests/bin/Net45-Debug/ClientRuntime.Azure.Tests.dll',
-  'ClientRuntimes/CSharp/ClientRuntime.Tests/bin/Net45-Debug/ClientRuntime.Tests.dll',
+  'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll'
+];
+
+var xunitDnxXproj = [
+  'AutoRest/Generators/CSharp/Azure.CSharp.Tests/project.json',
+  'AutoRest/Generators/CSharp/CSharp.Tests/project.json',
+  'ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Tests/project.json',
+  'ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure.Tests/project.json'
 ];
 
 var defaultShellOptions = {
@@ -397,8 +401,23 @@ var xunit = function(template, options){
   return execClrCmd(xunitRunner + ' ' + template, options);
 }
 
-gulp.task('test:xunit', function () {
+var xunitdnx = function(options){
+  options.templateData = {
+    f: function (s) {
+      return path.basename(path.dirname(s))
+    }
+  };
+  return shell('dnvm use ' + DNX_VERSION + ' -r coreclr -a x64 && dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml"', options);
+}
+
+gulp.task('dnxinit', shell.task('dnvm install ' + DNX_VERSION + ' -r coreclr -a x64 && dnvm install ' + DNX_VERSION + ' -r clr -a x86', defaultShellOptions));
+
+gulp.task('test:xunit', ['test:xunit:dnx'], function () {
   return gulp.src(xunitTestsDlls).pipe(xunit('<%= file.path %> -noshadow -noappdomain -diagnostics', defaultShellOptions));
+});
+
+gulp.task('test:xunit:dnx', function () {
+  return gulp.src(xunitDnxXproj).pipe(xunitdnx(defaultShellOptions));
 });
 
 var nugetPath = path.resolve('Tools/NuGet.exe');
@@ -468,5 +487,5 @@ gulp.task('default', function(cb){
   // analysis runs rebuild under the covers, so this cause build to be run in debug
   // the build release causes release bits to be built, so we can package release dlls
   // test then runs in debug, but uses the packages created in package
-  runSequence('clean', 'build', 'analysis', 'build:release', 'package', 'test', cb);
+  runSequence('dnxinit', 'clean', 'build', 'analysis', 'build:release', 'package', 'test', cb);
 });

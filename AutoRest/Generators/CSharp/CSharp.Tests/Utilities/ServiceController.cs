@@ -17,7 +17,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         private const string NpmArgument = "install";
         private const string NodeCommand = "node.exe";
         private const string NodeArgument = "./startup/www";
-
+        
         private ProcessOutputListener _listener;
 
         private object _sync = new object();
@@ -35,10 +35,15 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             get
             {
                 var serverPath = Environment.GetEnvironmentVariable("AUTOREST_TEST_SERVER_PATH") ??
-                    @"..\..\..\..\..\..\AutoRest\TestServer";
+                    @"..\..\..\..\AutoRest\TestServer";
                 return Path.Combine(serverPath, "server");
             }
         }
+
+        /// <summary>
+        /// Teardown action
+        /// </summary>
+        public Action TearDown { get; set; }
 
         /// <summary>
         /// Port number the service is listenig on.
@@ -47,7 +52,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public Uri Uri
         {
-            get { return new Uri(string.Format(CultureInfo.InvariantCulture, "http://localhost:{0}", Port)); }
+            get { return new Uri(string.Format(CultureInfo.InvariantCulture, "http://localhost.:{0}", Port)); }
         }
 
         /// <summary>
@@ -57,6 +62,10 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public void Dispose()
         {
+            if (TearDown != null)
+            {
+                TearDown();
+            }
             Dispose(true);
             GC.SuppressFinalize(this);
         }
@@ -89,18 +98,15 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             var paths = Environment.GetEnvironmentVariable("PATH");
             foreach (var path in paths.Split(new[] {Path.PathSeparator}, StringSplitOptions.RemoveEmptyEntries))
             {
-                var fullPath = "";
-                if(ServiceController.IsUnix)
+                var fullPath = Path.Combine(path, Path.GetFileName(executableName));
+                if (File.Exists(fullPath))
                 {
-                    var ext = Path.GetExtension(executableName);
-                    var exec = (ext == ".cmd" || ext == ".exe") ? Path.GetFileNameWithoutExtension(executableName) : executableName;
-                    fullPath = Path.Combine(path, exec);
-                }
-                else
-                {
-                    fullPath = Path.Combine(path, Path.GetFileName(executableName));
+                    return fullPath;
                 }
 
+                var ext = Path.GetExtension(executableName);
+                var exec = (ext == ".cmd" || ext == ".exe") ? Path.GetFileNameWithoutExtension(executableName) : executableName;
+                fullPath = Path.Combine(path, exec);
                 if (File.Exists(fullPath))
                 {
                     return fullPath;
@@ -108,20 +114,6 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             }
 
             return null;
-        }
-
-        private static bool IsUnix
-        {
-          get
-          {
-            int p = (int) Environment.OSVersion.Platform;
-            if ((p == 4) || (p == 128))
-            {
-                return true;
-            }
-
-            return false;
-          }
         }
 
         private static int GetRandomPortNumber()
@@ -185,7 +177,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             startInfo.UseShellExecute = false;
             startInfo.FileName = path;
             startInfo.Arguments = arguments;
+#if PORTABLE
+            startInfo.Environment["PORT"] = Port.ToString(CultureInfo.InvariantCulture);
+#else
             startInfo.EnvironmentVariables["PORT"] = Port.ToString(CultureInfo.InvariantCulture);
+#endif
             process.OutputDataReceived += _listener.ProcessOutput;
             process.ErrorDataReceived += _listener.ProcessError;
             process.Start();
