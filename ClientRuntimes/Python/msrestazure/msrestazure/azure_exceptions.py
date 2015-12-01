@@ -101,8 +101,21 @@ class CloudError(ClientException):
 
             except (DeserializationError, AttributeError, KeyError):
                 pass
-        
+
+
         if not self.error or not self.message:
+
+            try:
+                content = response.json()
+                if not content:
+                    server_message = ("The response from long running "
+                                      "operation does not contain a body.")
+                else:
+                    server_message = content.get('message', "none")
+
+            except ValueError as err:
+                server_message = ("The response from long running "
+                                  "operation does not contain a body.")
 
             try:
                 response.raise_for_status()
@@ -112,12 +125,18 @@ class CloudError(ClientException):
                     self.error = err
 
                 if not self.message:
-                    msg = ("Operation returned an invalid status code "
-                           "'{}'".format(response.reason))
+                    msg = ("Long running operation failed with status "
+                           "'{}'. Details: {}".format(response.reason,
+                                                      server_message))
                     self.message = msg
 
             else:
-                self.error = output if output else response
-                self.message = "Long running operation failed"
+                if not self.error:
+                    self.error = output if output else response
+
+                if not self.message:
+                    self.message = ("Long running operation failed with "
+                                    "status: '{}'. Details: {}".format(
+                                        response.status_code, server_message))
 
         super(CloudError, self).__init__(self.message, self.error, *args)

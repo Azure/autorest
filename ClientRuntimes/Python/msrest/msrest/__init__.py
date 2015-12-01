@@ -29,8 +29,8 @@ from .serialization import Serializer, Deserializer
 from .configuration import Configuration
 
 __all__ = [
-    ServiceClient,
-    Serializer,
-    Deserializer,
-    Configuration
+    "ServiceClient",
+    "Serializer",
+    "Deserializer",
+    "Configuration"
     ]
