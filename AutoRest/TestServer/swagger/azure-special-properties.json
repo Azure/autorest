@@ -736,7 +736,7 @@
     "/azurespecials/odata/filter": {
       "get": {
         "operationId": "odata_getWithFilter",
-        "description": "Specify filter parameter with value '$filter=id gt 5 and name eq \'foo\'&$orderby=id&$top=10'",
+        "description": "Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&$orderby=id&$top=10'",
         "tags": [
           "odata Operations"
         ],
@@ -746,7 +746,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter parameter with value '$filter=id gt 5 and name eq \'foo\''."
+            "description": "The filter parameter with value '$filter=id gt 5 and name eq 'foo''."
           },
           {
             "name": "$top",
@@ -766,7 +766,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully received filter parameter with value '$filter=id gt 5 and name eq \'foo\'&$orderby=id&$top=10'"
+            "description": "Successfully received filter parameter with value '$filter=id gt 5 and name eq 'foo'&$orderby=id&$top=10'"
           },
           "default": {
             "description": "Unexpected error",
