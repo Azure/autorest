@@ -23,6 +23,7 @@
 #--------------------------------------------------------------------------
 
 from msrest.serialization import Deserializer
+from msrest.exceptions import DeserializationError
 from msrestazure.azure_exceptions import CloudError
 from threading import Thread, Event
 import time
@@ -32,23 +33,280 @@ try:
 except ImportError:
     from urllib.parse import urlparse
 
-class PollingFinished(Exception):
+
+class BadStatus(Exception):
     pass
 
-class NoRetryUrl(PollingFinished):
+
+class BadResponse(Exception):
     pass
 
-class BadReturnStatus(PollingFinished):
+
+class OperationFailed(Exception):
     pass
 
-class OperationFinished(PollingFinished):
-    pass
+
+class LongRunningOperation(object):
+
+    def __init__(self):
+        self._status = ""
+        self.resource = None
+        self.method = None
+        self.async_url = None
+        self.location_url = None
+
+    @property
+    def status(self):
+        if hasattr(self.resource, 'provisioning_state'):
+            if self.resource.provisioning_state:
+                return self.resource.provisioning_state.lower()
+
+        return self._status.lower()
+
+    @status.setter
+    def status(self, value):
+        self._status = value
+
+        if hasattr(self.resource, 'provisioning_state'):
+            self.resource.provisioning_state = value
+
+    def _validate(self, url):
+
+        if url is None:
+            return None
+
+        parsed = urlparse(url)
+        if not parsed.scheme or not parsed.netloc:
+            raise ValueError
+
+        return url
+
+    def _is_empty(self, response):
+
+        if not response.content:
+            return True
+
+        try:
+            body = response.json()
+            if not body:
+                return True
+
+            return False
+
+        except ValueError:
+            raise DeserializationError("Response json invalid.")
+
+    def _deserialize(self, response, cmd):
+        self.resource = cmd(response)
+        self._status = self.status
+
+    def _get_body_status(self, response):
+
+        if self._is_empty(response):
+            return None
+
+        body = response.json()
+        if 'status' in body:
+            return body['status']
+
+        if 'provisioningState' in body:
+            return body['provisioningState']
+
+        return None
+
+    def _object_from_response(self, response): 
+        if self.resource is None and self.method not in ['POST', 'DELETE']:
+            body = response.json()
+
+            self.resource = type("Resource", (), {})
+            for key, value in body.items():
+                setattr(self.resource, key, value)
+
+    def _status_200(self, response, outputs):
+        self.status = 'Succeeded'
+        try:
+            self._deserialize(response, outputs)
+
+        except CloudError:
+            status = self._get_body_status(response)
+            if status:
+                self.status = status
+            else:
+                self._object_from_response(response)
+
+    def _status_201(self, response, outputs):
+        try:
+            self._deserialize(response, outputs)
+            if not self.status:
+                self.status = 'Succeeded'
+
+        except CloudError:
+            raise BadResponse()
+
+    def _status_202(self, response):
+        self.status = 'InProgress'
+
+    def _status_204(self, response):
+        self.status = 'Succeeded'
+        self.resource = None
+    
+    def _check_status(self, response):
+        code = response.status_code
+
+        if self.method in ['PUT', 'PATCH']:
+            if code not in [200, 201, 202]:
+                raise BadStatus()
+
+        elif self.method in ['POST', 'DELETE']:
+            if code not in [200, 202, 204]:
+                raise BadStatus()
+
+    def get_initial_status(self, response, outputs):
+
+        self.method = response.request.method
+        self._check_status(response)
+
+        if response.status_code == 204:
+            self._status_204(response)
+            return
+
+        try:
+            self._deserialize(response, outputs)
+            if self.status:
+                return
+
+        except CloudError:
+            raise BadStatus()
+
+
+        status = self._get_body_status(response)
+        if status:
+            self.status = status
+            return
+
+        if response.status_code == 200:
+            self._status_200(response, outputs)
+            return
+
+        if response.status_code == 202:
+            self._status_202(response)
+            return
+
+    def get_status_from_location(self, response, outputs):
+
+        self._check_status(response)
+
+        if self.method in ['POST', 'DELETE']:
+            if response.status_code == 202:
+                self._status_202(response)
+                return
+
+            elif response.status_code == 204:
+                self._status_204(response)
+                return
+
+            elif response.status_code == 201:
+                self._status_201(response, outputs)
+                return
+
+            elif response.status_code == 200:
+                self._status_200(response, outputs)
+                return
+
+        if self.method in ['PUT', 'PATCH']:
+
+            if response.status_code == 202:
+                self._status_202(response)
+                return
+
+            elif response.status_code == 200:
+                if self._is_empty(response):
+                    raise BadResponse('The response from long running '
+                                      'operation does not contain a body.')
+
+                self._status_200(response, outputs)
+
+            elif response.status_code == 201:
+                if self._is_empty(response):
+                    raise BadResponse('The response from long running '
+                                      'operation does not contain a body.')
+
+                self._status_201(response, outputs)
+
+            else:
+                raise BadStatus('Long running operation failed with status '
+                                '{}.'.format(response.status_code))
+           
+    def get_status_from_async(self, response, outputs):
+
+        self._check_status(response)
+
+        if self._is_empty(response):
+            raise BadResponse('The response from long running operation '
+                              'does not contain a body.')
+
+        self.status = self._get_body_status(response)
+
+        if not self.status:
+            raise BadResponse("No status found in body")
+
+        if self.method in ['POST', 'DELETE']:
+            try:
+                self._deserialize(response, outputs)
+
+            except CloudError:
+                pass # Not all accept status will deserialize
+
+    def get_status_from_resource(self, response, outputs):
+
+        self._check_status(response)
+
+        if self.method in ['POST', 'DELETE']:
+            if response.status_code == 204:
+                self._status_204(response)
+                return
+
+            elif response.status_code == 200:
+                self._status_200(response, outputs)
+                return
+
+            else:
+                raise BadResponse('Location header is missing from '
+                                  'long running operation.')
+
+        if self._is_empty(response):
+            raise BadResponse('The response from long running operation '
+                              'does not contain a body.')
+        
+        self._status_200(response, outputs)
+
+    def get_retry(self, response):
+
+        try:
+            self.async_url = self._validate(
+                response.headers.get('azure-asyncoperation'))
+
+            # Return if we have a url, in case location header raises error
+            if self.async_url:
+                return
+
+        except ValueError:
+            pass # We can ignore as location header may still be valid
+
+        self.location_url = self._validate(response.headers.get('location'))
+
+        if not self.location_url:
+
+            # TODO: There must be a nicer way to handle this scenario...
+            code = response.status_code
+            if code not in [200, 204] and self.method in ['POST']:
+                raise BadResponse(
+                    'Location header is missing from long running operation.')
 
 class AzureOperationPoller(object):
 
-    accept_states = [200, 202, 201, 204]
-    raise_states = ['failed', 'canceled']
-    done_states = ['succeeded']
+    finished_states = ['succeeded', 'failed', 'canceled']
+    failed_states = ['failed', 'canceled']
 
     def __init__(self, send_cmd, output_cmd, update_cmd, timeout=30):
         """
@@ -56,112 +314,38 @@ class AzureOperationPoller(object):
         """
         self._timeout = timeout
         self._response = None
-        self._no_retry = False
-        self._url = None
         self._callbacks = []
-        self._output = None
+        self._operation = LongRunningOperation()
 
         self._done = Event()
-        self._thread = Thread(target=self._poll, args=(send_cmd, update_cmd, output_cmd))
+
+        self._thread = Thread(
+            target=self._start, args=(send_cmd, update_cmd, output_cmd))
+
         self._thread.start()
 
-    def _extract_url(self):
+    def _start(self, send_cmd, update_cmd, output_cmd):
 
-        if self._response.headers.get('azure-asyncoperation'):
-            self._no_retry = True
-            self._url = self._response.headers.get('azure-asyncoperation')
-
-        elif self._response.headers.get('location'):
-            self._no_retry = True
-            self._url = self._response.headers['location']
-
-        elif not self._no_retry and self._response.content:
-            self._url = self._response.request.url
-
-        else:
-            raise NoRetryUrl()
-        self._validate_url()
-
-    def _check_state(self):
-
-        if isinstance(self._output, Exception):
-            raise OperationFinished()
-
-        if self._response.status_code not in self.accept_states:
-            raise BadReturnStatus()
-
-        if hasattr(self._output, 'provisioning_state'):
-            if self._output.provisioning_state is None:
-                raise OperationFinished()
-
-            if self._output.provisioning_state.lower() in self.raise_states:
-                self._output = CloudError(None, self._response, self._output)
-                raise OperationFinished()
-
-            if self._output.provisioning_state.lower() in self.done_states:
-                raise OperationFinished()
-
-    def _attempt_output_resolution(self, outputs):
-        if self._response.status_code == 204:
-            self._output = None
-            return
         try:
-            self._output = outputs(self._response)
-        except Exception as err:
-            self._output = err
-            return
+            self._response = send_cmd()
+            self._operation.get_initial_status(self._response, output_cmd)      
 
-        if hasattr(self._output, 'provisioning_state') and self._output.provisioning_state is None:
-            if self._response.status_code == 200:
-                self._output.provisioning_state = 'Succeeded'
-            elif self._response.status_code == 201:
-                self._output = CloudError(None, self._response)
+            self._poll(update_cmd, output_cmd)
 
-    def _validate_url(self):
-        parsed = urlparse(self._url)
-        if not parsed.scheme or not parsed.netloc:
-            raise ValueError("Invalid URL: {}".format(self._url))
+        except BadStatus:
+            self._operation.status = 'Failed'
+            self._operation.resource = CloudError(None, self._response)
 
-    def _delay(self):
-        if self._response is None:
-            return 
+        except BadResponse as err:
+            self._operation.status = 'Failed'
+            self._operation.resource = CloudError(None, self._response, str(err))
 
-        if self._response.headers.get('retry-after'):
-            time.sleep(int(self._response.headers['retry-after']))
-
-        else:
-            time.sleep(self._timeout)
-
-    def _poll(self, send, update, outputs):
-        try:
-            while True:
-                self._delay()
-
-                if self._response is None:
-                    self._response = send()
-
-                else:
-                    self._response = update(self._url)
-
-                self._extract_url()
-                self._output = outputs(self._response)
-                self._check_state()
-
-        except NoRetryUrl:
-            if self._response.status_code in self.accept_states:
-                self._attempt_output_resolution(outputs)
-                #if self._output:
-                #    self._set_implicit_state()
-                #else:
-                #    self._attempt_output_resolution()
-            else:
-                self._output = CloudError(None, self._response)
-
-        except PollingFinished:
-            pass
+        except OperationFailed:
+            error = "Long running operation failed with status '{}'".format(self._operation.status)
+            self._operation.resource = CloudError(None, self._response, error)
 
         except Exception as err:
-            self._output = err
+            self._operation.resource = err
 
         finally:
             self._done.set()
@@ -173,11 +357,52 @@ class AzureOperationPoller(object):
 
             callbacks, self._callbacks = self._callbacks, []
 
+    def _delay(self):
+        if self._response is None:
+            return 
+
+        if self._response.headers.get('retry-after'):
+            time.sleep(int(self._response.headers['retry-after']))
+
+        else:
+            time.sleep(self._timeout)
+
+    def _polling_cookie(self):
+        # TODO: Any cookie protocol to consider here?
+        if self._response.headers.get('set-cookie'):
+            return {'cookie': self._response.headers['set-cookie']}
+        return {}
+
+    def _poll(self, update_cmd, output_cmd):
+
+        while self._operation.status not in self.finished_states:
+
+            headers = self._polling_cookie()
+            url = self._response.request.url
+            self._operation.get_retry(self._response)
+
+            if self._operation.async_url:
+                self._response = update_cmd(self._operation.async_url, headers)
+                self._operation.get_status_from_async(self._response, output_cmd)
+
+            elif self._operation.location_url:
+                self._response = update_cmd(self._operation.location_url, headers)
+                self._operation.get_status_from_location(self._response, output_cmd)
+
+            else:
+                self._response = update_cmd(url, headers)
+                self._operation.get_status_from_resource(self._response, output_cmd)
+
+        if self._operation.status in self.failed_states:
+            raise OperationFailed()
+
     def result(self, timeout=None):
         self.wait(timeout)
-        if isinstance(self._output, Exception):
-            raise self._output
-        return self._output
+
+        if isinstance(self._operation.resource, Exception):
+            raise self._operation.resource
+
+        return self._operation.resource
 
     def wait(self, timeout=None):
         self._thread.join(timeout=timeout)

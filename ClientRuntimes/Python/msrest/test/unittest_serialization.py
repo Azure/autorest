@@ -81,7 +81,7 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj = type("BadTestObj", (), {})
 
         with self.assertRaises(SerializationError):
-            self.s(test_obj)
+            self.s._serialize(test_obj)
 
     def test_obj_with_malformed_map(self):
         """
@@ -90,17 +90,17 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj = type("BadTestObj", (Model,), {"_attribute_map":None})
 
         with self.assertRaises(SerializationError):
-            self.s(test_obj)
+            self.s._serialize(test_obj)
 
         test_obj._attribute_map = {"attr":"val"}
 
         with self.assertRaises(SerializationError):
-            self.s(test_obj)
+            self.s._serialize(test_obj)
 
         test_obj._attribute_map = {"attr":{"val":1}}
 
         with self.assertRaises(SerializationError):
-            self.s(test_obj)
+            self.s._serialize(test_obj)
 
     def test_obj_with_mismatched_map(self):
         """
@@ -110,14 +110,14 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj._attribute_map = {"abc":{"key":"ABC", "type":"str"}}
 
         with self.assertRaises(SerializationError):
-            self.s(test_obj)
+            self.s._serialize(test_obj)
 
     def test_attr_none(self):
         """
         Test serializing an object with None attributes.
         """
         test_obj = self.TestObj()
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
 
         self.assertIsInstance(message, dict)
         self.assertFalse('id' in message)
@@ -131,22 +131,22 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj.attr_b = None
 
         with self.assertRaises(SerializationError):
-            self.s(test_obj)
+            self.s._serialize(test_obj)
 
         test_obj.attr_b = 25
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         self.assertEqual(message['AttrB'], 25)
 
         test_obj.attr_b = "34534"
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         self.assertEqual(message['AttrB'], 34534)
 
         test_obj.attr_b = "NotANumber"
 
         with self.assertRaises(SerializationError):
-            self.s(test_obj)
+            self.s._serialize(test_obj)
 
         self.TestObj._required = []
 
@@ -159,28 +159,28 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj.attr_a = None
 
         with self.assertRaises(SerializationError):
-            self.s(test_obj)
+            self.s._serialize(test_obj)
 
         self.TestObj._required = []
         test_obj.attr_a = "TestString"
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         self.assertEqual(message['id'], "TestString")
 
         test_obj.attr_a = 1234
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         self.assertEqual(message['id'], "1234")
 
         test_obj.attr_a = list()
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         self.assertEqual(message['id'], '[]')
         #self.assertFalse('id' in message)
 
         test_obj.attr_a = [1]
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         self.assertEqual(message['id'], "[1]")
 
     def test_attr_bool(self):
@@ -190,22 +190,22 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj = self.TestObj()
         test_obj.attr_c = True
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         self.assertEqual(message['Key_C'], True)
 
         test_obj.attr_c = ""
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         self.assertTrue('Key_C' in message)
 
         test_obj.attr_c = None
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         self.assertFalse('Key_C' in message)
 
         test_obj.attr_c = "NotEmpty"
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         self.assertEqual(message['Key_C'], True)
 
     def test_attr_sequence(self):
@@ -214,11 +214,11 @@ class TestRuntimeSerialized(unittest.TestCase):
         """
 
         test_obj = ["A", "B", "C"]
-        output = self.s(test_obj, '[str]', div='|')
+        output = self.s._serialize(test_obj, '[str]', div='|')
         self.assertEqual(output, "A|B|C")
 
         test_obj = [1,2,3]
-        output = self.s(test_obj, '[str]', div=',')
+        output = self.s._serialize(test_obj, '[str]', div=',')
         self.assertEqual(output, "1,2,3")
 
     def test_attr_list_simple(self):
@@ -228,34 +228,34 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj = self.TestObj()
         test_obj.attr_d = []
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         #self.assertFalse('AttrD' in message)
         self.assertEqual(message['AttrD'], [])
 
         test_obj.attr_d = [1,2,3]
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         self.assertEqual(message['AttrD'], [1,2,3])
 
         test_obj.attr_d = ["1","2","3"]
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         self.assertEqual(message['AttrD'], [1,2,3])
 
         test_obj.attr_d = ["test","test2","test3"]
 
         with self.assertRaises(SerializationError):
-            self.s(test_obj)
+            self.s._serialize(test_obj)
 
         test_obj.attr_d = "NotAList"
 
         with self.assertRaises(SerializationError):
-            self.s(test_obj)
+            self.s._serialize(test_obj)
 
     def test_empty_list(self):
 
         input = []
-        output = self.s(input, '[str]')
+        output = self.s._serialize(input, '[str]')
         self.assertEqual(output, [])
 
     def test_attr_list_complex(self):
@@ -275,7 +275,7 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj._attribute_map = {"test_list":{"key":"_list", "type":"[ListObj]"}}
         test_obj.test_list = [list_obj]
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         self.assertEqual(message, {'_list':[{'ABC':123}]})
 
         list_obj = type("BadListObj", (Model,), {"map":None})
@@ -283,7 +283,7 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj.test_list = [list_obj]
 
         with self.assertRaises(SerializationError):
-            self.s(test_obj)
+            self.s._serialize(test_obj)
 
     def test_attr_dict_simple(self):
         """
@@ -293,23 +293,23 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj = self.TestObj()
         test_obj.attr_e = {"value": 3.14}
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         self.assertEqual(message['AttrE']['value'], 3.14)
 
         test_obj.attr_e = {1: "3.14"}
 
-        message = self.s(test_obj)
+        message = self.s._serialize(test_obj)
         self.assertEqual(message['AttrE']['1'], 3.14)
 
         test_obj.attr_e = "NotADict"
 
         with self.assertRaises(SerializationError):
-            self.s(test_obj)
+            self.s._serialize(test_obj)
 
         test_obj.attr_e = {"value": "NotAFloat"}
 
         with self.assertRaises(SerializationError):
-            self.s(test_obj)
+            self.s._serialize(test_obj)
 
     def test_serialize_datetime(self):
 
@@ -407,7 +407,7 @@ class TestRuntimeSerialized(unittest.TestCase):
                 'k3': isodate.parse_datetime('2017-01-01T00:00:00')}
             top_complex = ComplexId()
 
-        message =self.s(ComplexJson())
+        message =self.s._serialize(ComplexJson())
 
         output = { 
             'p1': 'value1', 
@@ -540,7 +540,7 @@ class TestRuntimeSerialized(unittest.TestCase):
 
         zoo.animals = [fido, felix, finch]
 
-        serialized = self.s(zoo)
+        serialized = self.s._serialize(zoo)
         self.assertEqual(serialized, message)
 
 

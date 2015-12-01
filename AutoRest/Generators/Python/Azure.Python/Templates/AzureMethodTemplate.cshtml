@@ -191,6 +191,7 @@ else //Long running operations
 }
         # Construct and send request
         def long_running_send():
+@EmptyLine
             request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query_parameters)
 @if (Model.RequestBody != null)
 {
@@ -202,12 +203,15 @@ else
             @:return self._client.send(request, header_parameters, **operation_config)
 }
 @EmptyLine
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+@EmptyLine
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 @EmptyLine
         def get_long_running_output(response):
+@EmptyLine
             if @Model.FailureStatusCodePredicate:
                 raise @Model.RaisedException
 @EmptyLine

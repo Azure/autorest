@@ -16,11 +16,6 @@ class ParameterGroupingPostOptionalParameters(Model):
 
     _required = []
 
-    _attribute_map = {
-        'custom_header': {'key': '', 'type': 'str'},
-        'query': {'key': '', 'type': 'int'},
-    }
-
     def __init__(self, *args, **kwargs):
 
         self.custom_header = None

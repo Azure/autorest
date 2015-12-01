@@ -72,16 +72,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [200, 204]:
                 raise CloudError(self._deserialize, response)
 
@@ -148,16 +152,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
 
@@ -224,16 +232,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
@@ -301,16 +313,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [200, 201]:
                 raise CloudError(self._deserialize, response)
 
@@ -380,16 +396,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
 
@@ -457,16 +477,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [200, 201]:
                 raise CloudError(self._deserialize, response)
 
@@ -536,16 +560,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
 
@@ -612,16 +640,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
@@ -689,16 +721,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
 
@@ -766,16 +802,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
 
@@ -843,16 +883,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
 
@@ -920,16 +964,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [200]:
                 raise CloudError(self._deserialize, response)
 
@@ -996,16 +1044,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [201]:
                 raise CloudError(self._deserialize, response)
 
@@ -1070,16 +1122,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
@@ -1144,16 +1200,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
@@ -1218,16 +1278,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
@@ -1292,16 +1356,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.put(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
@@ -1361,15 +1429,19 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.delete(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [200, 202]:
                 raise CloudError(self._deserialize, response)
 
@@ -1431,15 +1503,19 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.delete(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [200, 202]:
                 raise CloudError(self._deserialize, response)
 
@@ -1501,15 +1577,19 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.delete(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [200, 202]:
                 raise CloudError(self._deserialize, response)
 
@@ -1567,15 +1647,19 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.delete(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [204]:
                 raise CloudError(self._deserialize, response)
 
@@ -1627,15 +1711,19 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.delete(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [200, 202]:
                 raise CloudError(self._deserialize, response)
 
@@ -1694,15 +1782,19 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.delete(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [200, 202]:
                 raise CloudError(self._deserialize, response)
 
@@ -1760,15 +1852,19 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.delete(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [204, 202]:
                 raise CloudError(self._deserialize, response)
 
@@ -1819,15 +1915,19 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.delete(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [204, 202]:
                 raise CloudError(self._deserialize, response)
 
@@ -1878,15 +1978,19 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.delete(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
@@ -1937,15 +2041,19 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.delete(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
@@ -1996,15 +2104,19 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.delete(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
@@ -2055,15 +2167,19 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.delete(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
@@ -2115,15 +2231,19 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.post(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202, 200]:
                 raise CloudError(self._deserialize, response)
 
@@ -2191,16 +2311,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.post(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
@@ -2260,16 +2384,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.post(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
@@ -2337,16 +2465,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.post(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202, 200]:
                 raise CloudError(self._deserialize, response)
 
@@ -2414,16 +2546,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.post(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202, 200]:
                 raise CloudError(self._deserialize, response)
 
@@ -2490,16 +2626,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.post(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 
@@ -2559,16 +2699,20 @@ class lr_osOperations(object):
 
         # Construct and send request
         def long_running_send():
+
             request = self._client.post(url, query_parameters)
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link):
+        def get_long_running_status(status_link, headers={}):
+
             request = self._client.get(status_link)
+            request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
         def get_long_running_output(response):
+
             if response.status_code not in [202]:
                 raise CloudError(self._deserialize, response)
 

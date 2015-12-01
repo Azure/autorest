@@ -33,10 +33,9 @@ from concurrent.futures import ThreadPoolExecutor
 
 try:
     from urlparse import urljoin, urlparse
-    from urllib import quote
 
 except ImportError:
-    from urllib.parse import urljoin, quote, urlparse
+    from urllib.parse import urljoin, urlparse
 
 from .authentication import Authentication
 from .pipeline import ClientHTTPAdapter, ClientRequest
@@ -80,9 +79,9 @@ class ServiceClient(object):
 
         self._adapter = ClientHTTPAdapter(config)
         self._protocols = ['http://', 'https://']
-        
+
         # TODO - Add correct default User-Agent
-        self._headers = {'User-Agent':'msrest'}
+        self._headers = {'User-Agent': 'msrest'}
 
         self._adapter.add_hook("request", log_request)
         self._adapter.add_hook("response", log_response, precall=False)
@@ -122,6 +121,7 @@ class ServiceClient(object):
 
         redirect_logic = session.resolve_redirects
 
+        # TODO: Make this nicer!
         def wrapped_redirect(resp, req, **kwargs):
             attempt = self.config.redirect_policy.check_redirect(resp, req)
             if attempt:

@@ -26,7 +26,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
          [JsonProperty("nextLink")]
          public string NextPageLink { get; private set; }
 
-         [JsonProperty("value")]
+         [JsonProperty("values")]
          private IList<T> Items{ get; set; }
 
          /// <summary>
