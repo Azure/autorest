@@ -176,7 +176,7 @@ else
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
 
-        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUri);
 @if (Model.MethodTemplateModels.Any())
 {
 @:        service = this.retrofitBuilder.build().create(@(Model.ServiceClientServiceType).class);

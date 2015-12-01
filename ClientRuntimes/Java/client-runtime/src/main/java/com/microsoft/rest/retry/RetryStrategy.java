@@ -61,10 +61,21 @@ public abstract class RetryStrategy {
      */
     public abstract boolean shouldRetry(int retryCount, Response response);
 
+    /**
+     * Gets the name of the retry strategy.
+     *
+     * @return the name of the retry strategy.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets whether the first retry attempt will be made immediately.
+     *
+     * @return true if the first retry attempt will be made immediately.
+     *         false otherwise.
+     */
     public boolean isFastFirstRetry() {
         return fastFirstRetry;
     }

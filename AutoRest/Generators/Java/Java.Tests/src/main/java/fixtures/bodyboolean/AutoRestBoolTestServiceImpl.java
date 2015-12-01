@@ -68,6 +68,6 @@ public class AutoRestBoolTestServiceImpl extends ServiceClient implements AutoRe
     }
 
     private void initialize() {
-        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUri);
     }
 }

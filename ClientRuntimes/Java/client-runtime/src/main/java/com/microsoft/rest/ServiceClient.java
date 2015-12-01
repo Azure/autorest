@@ -25,7 +25,14 @@ import java.util.concurrent.Executors;
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
  */
 public abstract class ServiceClient {
+    /**
+     * The HTTP client object.
+     */
     protected final OkHttpClient client;
+
+    /**
+     * The builder for building Retrofit services.
+     */
     protected final Retrofit.Builder retrofitBuilder;
 
     /**

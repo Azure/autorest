@@ -18,6 +18,12 @@ import java.io.IOException;
  * Custom serializer for serializing {@link Byte[]} objects into Base64 strings.
  */
 public class ByteArraySerializer extends JsonSerializer<Byte[]> {
+    /**
+     * Gets a module wrapping this serializer as an adapter for the Jackson
+     * ObjectMapper.
+     *
+     * @return a simple module to be plugged onto Jackson ObjectMapper.
+     */
     public static SimpleModule getModule() {
         SimpleModule module = new SimpleModule();
         module.addSerializer(Byte[].class, new ByteArraySerializer());

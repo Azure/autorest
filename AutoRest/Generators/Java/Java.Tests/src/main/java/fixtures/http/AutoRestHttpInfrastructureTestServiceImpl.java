@@ -116,6 +116,6 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     }
 
     private void initialize() {
-        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUri);
     }
 }

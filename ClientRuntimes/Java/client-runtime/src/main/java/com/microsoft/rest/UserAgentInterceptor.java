@@ -17,7 +17,14 @@ import java.io.IOException;
  * User agent interceptor for putting a 'User-Agent' header in the request.
  */
 public class UserAgentInterceptor implements Interceptor {
+    /**
+     * The default user agent header.
+     */
     private static final String DEFAULT_USER_AGENT_HEADER = "AutoRest-Java";
+
+    /**
+     * The user agent header string.
+     */
     private String userAgent;
 
     /**

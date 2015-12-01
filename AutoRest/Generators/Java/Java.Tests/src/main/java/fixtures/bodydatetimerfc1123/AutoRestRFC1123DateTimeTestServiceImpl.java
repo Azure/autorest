@@ -68,6 +68,6 @@ public class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implem
     }
 
     private void initialize() {
-        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUri);
     }
 }

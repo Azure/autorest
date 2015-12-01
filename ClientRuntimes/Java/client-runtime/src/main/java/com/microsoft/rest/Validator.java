@@ -23,6 +23,9 @@ import java.util.Map;
  * Validates user provided parameters are not null if they are required.
  */
 public final class Validator {
+    /**
+     * Hidden constructor for utility class.
+     */
     private Validator() { }
 
     /**

@@ -124,6 +124,6 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
     }
 
     private void initialize() {
-        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUri);
     }
 }

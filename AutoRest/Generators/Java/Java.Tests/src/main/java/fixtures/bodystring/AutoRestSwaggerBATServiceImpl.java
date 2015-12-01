@@ -76,6 +76,6 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
     }
 
     private void initialize() {
-        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUri);
     }
 }

@@ -36,6 +36,9 @@
         <property name="checkFormat" value="$1"/>
         <property name="influenceFormat" value="$2"/>
     </module>
+    <module name="SuppressionFilter">
+        <property name="file" value="${samedir}/suppressions.xml"/>
+    </module>
 
     <!--
         If you set the basedir property below, then all reported file
@@ -64,9 +67,7 @@
     <!-- See http://checkstyle.sf.net/config_misc.html#Translation -->
     <module name="Translation"/>
 
-    <!-- Removed on 20/01/2014
-        Justification: generated code.
-        <module name="FileLength"/> -->
+    <module name="FileLength"/>
 
     <!-- Following interprets the header file as regular expressions. -->
     <!-- <module name="RegexpHeader"/>                                -->
@@ -75,30 +76,19 @@
         <property name="eachLine" value="true"/>
     </module>
 
-    <!-- Removed on 11/02/2012:
-         Justification: Over 5000 hits in generated boilerplate comments.
-         Use Eclipse preference file to auto-remove EOL whitespace in code.
-
     <module name="RegexpSingleline">
         <property name="format" value="\s+$"/>
         <property name="message" value="Line has trailing spaces."/>
     </module>
-    -->
 
     <module name="TreeWalker">
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
 
-        <!-- Removed on 11/02/2012
-             Justification: Many methods that could be documented are
-             intentionally undocumented because they are not part of
-             the public surface SDK area.
-
         <module name="JavadocMethod"/>
         <module name="JavadocType"/>
         <module name="JavadocVariable"/>
         <module name="JavadocStyle"/>
-        -->
 
 
         <!-- Checks for Naming Conventions.                  -->

@@ -68,6 +68,6 @@ public class AutoRestDurationTestServiceImpl extends ServiceClient implements Au
     }
 
     private void initialize() {
-        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUri);
     }
 }

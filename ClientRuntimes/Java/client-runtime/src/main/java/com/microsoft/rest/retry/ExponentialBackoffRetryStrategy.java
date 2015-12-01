@@ -29,9 +29,22 @@ public class ExponentialBackoffRetryStrategy extends RetryStrategy {
      */
     public static final int DEFAULT_MIN_BACKOFF = 1000;
 
+    /**
+     * The value that will be used to calculate a random delta in the exponential delay
+     * between retries.
+     */
     private final int deltaBackoff;
+    /**
+     * The maximum backoff time.
+     */
     private final int maxBackoff;
+    /**
+     * The minimum backoff time.
+     */
     private final int minBackoff;
+    /**
+     * The maximum number of retry attempts.
+     */
     private final int retryCount;
 
     /**

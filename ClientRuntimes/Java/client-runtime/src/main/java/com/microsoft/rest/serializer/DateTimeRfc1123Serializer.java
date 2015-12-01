@@ -20,6 +20,12 @@ import java.io.IOException;
  * Custom serializer for serializing {@link DateTimeRfc1123} object into RFC1123 formats.
  */
 public class DateTimeRfc1123Serializer extends JsonSerializer<DateTimeRfc1123> {
+    /**
+     * Gets a module wrapping this serializer as an adapter for the Jackson
+     * ObjectMapper.
+     *
+     * @return a simple module to be plugged onto Jackson ObjectMapper.
+     */
     public static SimpleModule getModule() {
         SimpleModule module = new SimpleModule();
         module.addSerializer(DateTimeRfc1123.class, new DateTimeRfc1123Serializer());

@@ -114,7 +114,7 @@ if(!property.IsReadOnly)
 @:        }
     }
     
-        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUri);
 @if (Model.MethodTemplateModels.Any())
 {
 @:        service = this.retrofitBuilder.build().create(@(Model.ServiceClientServiceType).class);

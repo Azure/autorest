@@ -27,9 +27,22 @@ import java.util.List;
  * A serialization helper class wrapped around {@link JacksonConverterFactory} and {@link ObjectMapper}.
  */
 public class JacksonUtils {
+    /**
+     * An instance of {@link ObjectMapper} to serialize/deserialize objects.
+     */
     private static ObjectMapper mapper;
+
+    /**
+     * An instance of {@link JacksonConverterFactory} for Retrofit to use.
+     */
     private static JacksonConverterFactory converterFactory;
 
+    /**
+     * Initializes an instance of JacksonUtils with default configurations
+     * applied to the object mapper.
+     *
+     * @param mapper the object mapper to use.
+     */
     protected void initializeObjectMapper(ObjectMapper mapper) {
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
                 .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)

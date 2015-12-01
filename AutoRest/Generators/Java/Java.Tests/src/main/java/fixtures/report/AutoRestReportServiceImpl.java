@@ -73,7 +73,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     }
 
     private void initialize() {
-        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUri);
         service = this.retrofitBuilder.build().create(AutoRestReportServiceService.class);
     }
 

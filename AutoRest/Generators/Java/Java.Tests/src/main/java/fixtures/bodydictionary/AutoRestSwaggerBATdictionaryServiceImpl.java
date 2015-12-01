@@ -68,6 +68,6 @@ public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient imple
     }
 
     private void initialize() {
-        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUri);
     }
 }

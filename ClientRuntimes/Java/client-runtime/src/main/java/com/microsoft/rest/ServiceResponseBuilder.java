@@ -21,9 +21,18 @@ import java.util.Map;
 
 /**
  * The builder for building a {@link ServiceResponse}.
+ *
+ * @param <T> The return type the caller expects from the REST response
  */
 public class ServiceResponseBuilder<T> {
+    /**
+     * A mapping of HTTP status codes and their corresponding return types.
+     */
     protected Map<Integer, Type> responseTypes;
+
+    /**
+     * The deserializer used for deserializing the response.
+     */
     protected JacksonUtils deserializer;
 
     /**
@@ -46,7 +55,7 @@ public class ServiceResponseBuilder<T> {
      * Create a ServiceResponseBuilder instance.
      *
      * @param deserializer the serialization utils to use for deserialization operations
-     * @param responseTypes a mapping of response status codes and response destination types.
+     * @param responseTypes a mapping of response status codes and response destination types
      */
     public ServiceResponseBuilder(JacksonUtils deserializer, Map<Integer, Type> responseTypes) {
         this.deserializer = deserializer;
@@ -104,7 +113,8 @@ public class ServiceResponseBuilder<T> {
      * @param response the {@link Response} instance from REST call
      * @param retrofit the {@link Retrofit} instance from REST call
      * @return a ServiceResponse instance of generic type {@link T}
-     * @throws ServiceException all exceptions will be wrapped in ServiceException
+     * @throws ServiceException exceptions from the REST call
+     * @throws IOException exceptions from deserialization
      */
     public ServiceResponse<T> build(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         if (response == null) {
@@ -132,6 +142,21 @@ public class ServiceResponseBuilder<T> {
         }
     }
 
+    /**
+     * Build a ServiceResponse instance from a REST call response and a
+     * possible error, which does not have a response body.
+     *
+     * <p>
+     *     If the status code in the response is registered, the response will
+     *     be considered valid. If the status code is not registered, the
+     *     response will be considered invalid. A ServiceException is also thrown.
+     * </p>
+     *
+     * @param response the {@link Response} instance from REST call
+     * @param retrofit the {@link Retrofit} instance from REST call
+     * @return a ServiceResponse instance of generic type {@link T}
+     * @throws ServiceException exceptions from the REST call
+     */
     public ServiceResponse<T> buildEmpty(Response<Void> response, Retrofit retrofit) throws ServiceException {
         int statusCode = response.code();
         if (responseTypes.containsKey(statusCode)) {
@@ -146,6 +171,15 @@ public class ServiceResponseBuilder<T> {
         }
     }
 
+    /**
+     * Builds the body object from the HTTP status code and returned response
+     * body undeserialized and wrapped in {@link ResponseBody}.
+     *
+     * @param statusCode the HTTP status code
+     * @param responseBody the response body
+     * @return the response body, deserialized
+     * @throws IOException thrown for any deserialization errors
+     */
     @SuppressWarnings("unchecked")
     protected T buildBody(int statusCode, ResponseBody responseBody) throws IOException {
         if (responseBody == null) {

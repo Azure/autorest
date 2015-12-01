@@ -114,7 +114,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     private void initialize() {
-        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUri);
         service = this.retrofitBuilder.build().create(AutoRestValidationTestService.class);
     }
 
