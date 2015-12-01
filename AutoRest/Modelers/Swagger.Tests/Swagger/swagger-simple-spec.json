@@ -128,7 +128,8 @@
         },
         "capacity": {
           "type": "string",
-          "description": "Capacity of product. For example, 4 people."
+          "description": "Capacity of product. For example, 4 people.",
+          "default": "100"
         },
         "image": {
           "type": "string",

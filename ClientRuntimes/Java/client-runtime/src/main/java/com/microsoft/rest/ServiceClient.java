@@ -8,10 +8,11 @@
 package com.microsoft.rest;
 
 import com.microsoft.rest.retry.RetryHandler;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.JacksonConverterFactory;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import retrofit.Retrofit;
 
 import java.net.CookieManager;
@@ -38,7 +39,7 @@ public abstract class ServiceClient {
 
         Executor executor = Executors.newCachedThreadPool();
         this.retrofitBuilder = this.retrofitBuilder
-                .addConverterFactory(JacksonConverterFactory.create(new JacksonHelper().getObjectMapper()))
+                .addConverterFactory(new JacksonUtils().getConverterFactory())
                 .callbackExecutor(executor);
     }
 
@@ -71,5 +72,16 @@ public abstract class ServiceClient {
      */
     public List<Interceptor> getClientInterceptors() {
         return this.client.interceptors();
+    }
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum
+     */
+    public void setLogLevel(Level logLevel) {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(logLevel);
+        this.getClientInterceptors().add(loggingInterceptor);
     }
 }

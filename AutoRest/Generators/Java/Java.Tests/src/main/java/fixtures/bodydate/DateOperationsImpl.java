@@ -18,6 +18,8 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodydate.models.Error;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import org.joda.time.LocalDate;
 import retrofit.Call;
 import retrofit.Response;
@@ -35,18 +37,13 @@ public class DateOperationsImpl implements DateOperations {
     /**
      * Get null date value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<LocalDate> getNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getNull();
-            return getNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<LocalDate> getNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getNull();
+        return getNullDelegate(call.execute(), null);
     }
 
     /**
@@ -61,7 +58,7 @@ public class DateOperationsImpl implements DateOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -69,7 +66,7 @@ public class DateOperationsImpl implements DateOperations {
         return call;
     }
 
-    private ServiceResponse<LocalDate> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<LocalDate> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<LocalDate>()
                 .register(200, new TypeToken<LocalDate>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -79,18 +76,13 @@ public class DateOperationsImpl implements DateOperations {
     /**
      * Get invalid date value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<LocalDate> getInvalidDate() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getInvalidDate();
-            return getInvalidDateDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<LocalDate> getInvalidDate() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getInvalidDate();
+        return getInvalidDateDelegate(call.execute(), null);
     }
 
     /**
@@ -105,7 +97,7 @@ public class DateOperationsImpl implements DateOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getInvalidDateDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -113,7 +105,7 @@ public class DateOperationsImpl implements DateOperations {
         return call;
     }
 
-    private ServiceResponse<LocalDate> getInvalidDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<LocalDate> getInvalidDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<LocalDate>()
                 .register(200, new TypeToken<LocalDate>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -123,18 +115,13 @@ public class DateOperationsImpl implements DateOperations {
     /**
      * Get overflow date value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<LocalDate> getOverflowDate() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getOverflowDate();
-            return getOverflowDateDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<LocalDate> getOverflowDate() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getOverflowDate();
+        return getOverflowDateDelegate(call.execute(), null);
     }
 
     /**
@@ -149,7 +136,7 @@ public class DateOperationsImpl implements DateOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getOverflowDateDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -157,7 +144,7 @@ public class DateOperationsImpl implements DateOperations {
         return call;
     }
 
-    private ServiceResponse<LocalDate> getOverflowDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<LocalDate> getOverflowDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<LocalDate>()
                 .register(200, new TypeToken<LocalDate>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -167,18 +154,13 @@ public class DateOperationsImpl implements DateOperations {
     /**
      * Get underflow date value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<LocalDate> getUnderflowDate() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getUnderflowDate();
-            return getUnderflowDateDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<LocalDate> getUnderflowDate() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getUnderflowDate();
+        return getUnderflowDateDelegate(call.execute(), null);
     }
 
     /**
@@ -193,7 +175,7 @@ public class DateOperationsImpl implements DateOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getUnderflowDateDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -201,7 +183,7 @@ public class DateOperationsImpl implements DateOperations {
         return call;
     }
 
-    private ServiceResponse<LocalDate> getUnderflowDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<LocalDate> getUnderflowDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<LocalDate>()
                 .register(200, new TypeToken<LocalDate>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -212,21 +194,16 @@ public class DateOperationsImpl implements DateOperations {
      * Put max date value 9999-12-31
      *
      * @param dateBody the LocalDate value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putMaxDate(LocalDate dateBody) throws ServiceException {
+    public ServiceResponse<Void> putMaxDate(LocalDate dateBody) throws ServiceException, IOException, IllegalArgumentException {
         if (dateBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
         }
-        try {
-            Call<ResponseBody> call = service.putMaxDate(dateBody);
-            return putMaxDateDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putMaxDate(dateBody);
+        return putMaxDateDelegate(call.execute(), null);
     }
 
     /**
@@ -237,8 +214,8 @@ public class DateOperationsImpl implements DateOperations {
      */
     public Call<ResponseBody> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
         if (dateBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter dateBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
+            return null;
         }
         Call<ResponseBody> call = service.putMaxDate(dateBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -246,7 +223,7 @@ public class DateOperationsImpl implements DateOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putMaxDateDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -254,7 +231,7 @@ public class DateOperationsImpl implements DateOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putMaxDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putMaxDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -264,18 +241,13 @@ public class DateOperationsImpl implements DateOperations {
     /**
      * Get max date value 9999-12-31
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<LocalDate> getMaxDate() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getMaxDate();
-            return getMaxDateDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<LocalDate> getMaxDate() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getMaxDate();
+        return getMaxDateDelegate(call.execute(), null);
     }
 
     /**
@@ -290,7 +262,7 @@ public class DateOperationsImpl implements DateOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getMaxDateDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -298,7 +270,7 @@ public class DateOperationsImpl implements DateOperations {
         return call;
     }
 
-    private ServiceResponse<LocalDate> getMaxDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<LocalDate> getMaxDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<LocalDate>()
                 .register(200, new TypeToken<LocalDate>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -309,21 +281,16 @@ public class DateOperationsImpl implements DateOperations {
      * Put min date value 0000-01-01
      *
      * @param dateBody the LocalDate value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putMinDate(LocalDate dateBody) throws ServiceException {
+    public ServiceResponse<Void> putMinDate(LocalDate dateBody) throws ServiceException, IOException, IllegalArgumentException {
         if (dateBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
         }
-        try {
-            Call<ResponseBody> call = service.putMinDate(dateBody);
-            return putMinDateDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putMinDate(dateBody);
+        return putMinDateDelegate(call.execute(), null);
     }
 
     /**
@@ -334,8 +301,8 @@ public class DateOperationsImpl implements DateOperations {
      */
     public Call<ResponseBody> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
         if (dateBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter dateBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
+            return null;
         }
         Call<ResponseBody> call = service.putMinDate(dateBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -343,7 +310,7 @@ public class DateOperationsImpl implements DateOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putMinDateDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -351,7 +318,7 @@ public class DateOperationsImpl implements DateOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putMinDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putMinDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -361,18 +328,13 @@ public class DateOperationsImpl implements DateOperations {
     /**
      * Get min date value 0000-01-01
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<LocalDate> getMinDate() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getMinDate();
-            return getMinDateDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<LocalDate> getMinDate() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getMinDate();
+        return getMinDateDelegate(call.execute(), null);
     }
 
     /**
@@ -387,7 +349,7 @@ public class DateOperationsImpl implements DateOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getMinDateDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -395,7 +357,7 @@ public class DateOperationsImpl implements DateOperations {
         return call;
     }
 
-    private ServiceResponse<LocalDate> getMinDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<LocalDate> getMinDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<LocalDate>()
                 .register(200, new TypeToken<LocalDate>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

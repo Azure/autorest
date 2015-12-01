@@ -28,6 +28,19 @@ public interface @Model.Name {
     String getBaseUri();
 @EmptyLine
     /**
+     * Gets the list of interceptors the OkHttp client will execute.
+     * @@return the list of interceptors.
+     */
+    List<Interceptor> getClientInterceptors();
+@EmptyLine
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @@param logLevel the logging level enum.
+     */
+    void setLogLevel(Level logLevel);
+@EmptyLine
+    /**
      * Gets the {@@link AzureClient} used for long running operations.
      * @@return the azure client;
      */
@@ -99,7 +112,7 @@ if(!property.IsReadOnly)
     {
     @: * @@throws @exception
     }
-    if (method.ReturnType != null)
+    if (method.ReturnType.Body != null)
     {
     @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object wrapped in ServiceResponse if successful.
     }

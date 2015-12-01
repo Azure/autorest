@@ -14,6 +14,8 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import org.joda.time.Period;
 import retrofit.Call;
 import retrofit.http.Body;
@@ -46,10 +48,11 @@ public interface Duration {
     /**
      * Get null duration value
      *
-     * @return the Period object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Period object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Period> getNull() throws ServiceException;
+    ServiceResponse<Period> getNull() throws ServiceException, IOException;
 
     /**
      * Get null duration value
@@ -63,9 +66,12 @@ public interface Duration {
      * Put a positive duration value
      *
      * @param durationBody the Period value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putPositiveDuration(Period durationBody) throws ServiceException;
+    ServiceResponse<Void> putPositiveDuration(Period durationBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put a positive duration value
@@ -79,10 +85,11 @@ public interface Duration {
     /**
      * Get a positive duration value
      *
-     * @return the Period object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Period object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Period> getPositiveDuration() throws ServiceException;
+    ServiceResponse<Period> getPositiveDuration() throws ServiceException, IOException;
 
     /**
      * Get a positive duration value
@@ -95,10 +102,11 @@ public interface Duration {
     /**
      * Get an invalid duration value
      *
-     * @return the Period object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Period object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Period> getInvalid() throws ServiceException;
+    ServiceResponse<Period> getInvalid() throws ServiceException, IOException;
 
     /**
      * Get an invalid duration value

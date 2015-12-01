@@ -63,19 +63,10 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// <summary>
         /// Initializes a new instance of the AutoRestResourceFlatteningTestService class.
         /// </summary>
-        public AutoRestResourceFlatteningTestService() : base()
-        {
-            this.Initialize();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the AutoRestResourceFlatteningTestService class.
-        /// </summary>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestResourceFlatteningTestService(params DelegatingHandler[] handlers) : base(handlers)
+        protected AutoRestResourceFlatteningTestService(params DelegatingHandler[] handlers) : base(handlers)
         {
             this.Initialize();
         }
@@ -87,10 +78,9 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// Optional. The http client handler used to handle http transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestResourceFlatteningTestService(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        protected AutoRestResourceFlatteningTestService(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             this.Initialize();
         }
@@ -102,10 +92,30 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestResourceFlatteningTestService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        protected AutoRestResourceFlatteningTestService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            this.BaseUri = baseUri;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestResourceFlatteningTestService class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        protected AutoRestResourceFlatteningTestService(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {
@@ -121,10 +131,34 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// Required. The management credentials for Azure.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
         public AutoRestResourceFlatteningTestService(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (credentials == null)
+            {
+                throw new ArgumentNullException("credentials");
+            }
+            this.Credentials = credentials;
+            if (this.Credentials != null)
+            {
+                this.Credentials.InitializeServiceClient(this);
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestResourceFlatteningTestService class.
+        /// </summary>
+        /// <param name='credentials'>
+        /// Required. The management credentials for Azure.
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        public AutoRestResourceFlatteningTestService(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (credentials == null)
             {
@@ -147,10 +181,42 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
         /// Required. The management credentials for Azure.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
+        /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
         public AutoRestResourceFlatteningTestService(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            if (credentials == null)
+            {
+                throw new ArgumentNullException("credentials");
+            }
+            this.BaseUri = baseUri;
+            this.Credentials = credentials;
+            if (this.Credentials != null)
+            {
+                this.Credentials.InitializeServiceClient(this);
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestResourceFlatteningTestService class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='credentials'>
+        /// Required. The management credentials for Azure.
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        public AutoRestResourceFlatteningTestService(Uri baseUri, ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {
@@ -189,7 +255,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                     }
             };
             SerializationSettings.Converters.Add(new ResourceJsonConverter()); 
-            DeserializationSettings = new JsonSerializerSettings{
+            DeserializationSettings = new JsonSerializerSettings
+            {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
@@ -287,12 +354,19 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
-                if (errorBody != null)
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                try
                 {
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -393,12 +467,19 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
-                if (errorBody != null)
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                try
                 {
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -419,8 +500,15 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<IList<FlattenedProduct>>(responseContent, this.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<IList<FlattenedProduct>>(responseContent, this.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -513,12 +601,19 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
-                if (errorBody != null)
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                try
                 {
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -619,12 +714,19 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
-                if (errorBody != null)
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                try
                 {
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -645,8 +747,15 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<IDictionary<string, FlattenedProduct>>(responseContent, this.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<IDictionary<string, FlattenedProduct>>(responseContent, this.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -739,12 +848,19 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
-                if (errorBody != null)
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                try
                 {
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -845,12 +961,19 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
-                if (errorBody != null)
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                try
                 {
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -871,8 +994,15 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<ResourceCollection>(responseContent, this.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<ResourceCollection>(responseContent, this.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {

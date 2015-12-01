@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.A;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
 
@@ -134,10 +135,11 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> get200Model204NoModelDefaultError200Valid() throws ServiceException;
+    ServiceResponse<A> get200Model204NoModelDefaultError200Valid() throws ServiceException, IOException;
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
@@ -150,10 +152,11 @@ public interface MultipleResponses {
     /**
      * Send a 204 response with no payload
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> get200Model204NoModelDefaultError204Valid() throws ServiceException;
+    ServiceResponse<A> get200Model204NoModelDefaultError204Valid() throws ServiceException, IOException;
 
     /**
      * Send a 204 response with no payload
@@ -166,10 +169,11 @@ public interface MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> get200Model204NoModelDefaultError201Invalid() throws ServiceException;
+    ServiceResponse<A> get200Model204NoModelDefaultError201Invalid() throws ServiceException, IOException;
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}
@@ -182,10 +186,11 @@ public interface MultipleResponses {
     /**
      * Send a 202 response with no payload:
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> get200Model204NoModelDefaultError202None() throws ServiceException;
+    ServiceResponse<A> get200Model204NoModelDefaultError202None() throws ServiceException, IOException;
 
     /**
      * Send a 202 response with no payload:
@@ -198,10 +203,11 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> get200Model204NoModelDefaultError400Valid() throws ServiceException;
+    ServiceResponse<A> get200Model204NoModelDefaultError400Valid() throws ServiceException, IOException;
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}
@@ -214,10 +220,11 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> get200Model201ModelDefaultError200Valid() throws ServiceException;
+    ServiceResponse<A> get200Model201ModelDefaultError200Valid() throws ServiceException, IOException;
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
@@ -230,10 +237,11 @@ public interface MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> get200Model201ModelDefaultError201Valid() throws ServiceException;
+    ServiceResponse<A> get200Model201ModelDefaultError201Valid() throws ServiceException, IOException;
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}
@@ -246,10 +254,11 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> get200Model201ModelDefaultError400Valid() throws ServiceException;
+    ServiceResponse<A> get200Model201ModelDefaultError400Valid() throws ServiceException, IOException;
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
@@ -262,10 +271,11 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
-     * @return the Object object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Object object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError200Valid() throws ServiceException;
+    ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError200Valid() throws ServiceException, IOException;
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
@@ -278,10 +288,11 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}
      *
-     * @return the Object object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Object object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError201Valid() throws ServiceException;
+    ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError201Valid() throws ServiceException, IOException;
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}
@@ -294,10 +305,11 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}
      *
-     * @return the Object object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Object object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError404Valid() throws ServiceException;
+    ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError404Valid() throws ServiceException, IOException;
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}
@@ -310,10 +322,11 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
-     * @return the Object object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Object object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError400Valid() throws ServiceException;
+    ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError400Valid() throws ServiceException, IOException;
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
@@ -326,9 +339,11 @@ public interface MultipleResponses {
     /**
      * Send a 202 response with no payload
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> get202None204NoneDefaultError202None() throws ServiceException;
+    ServiceResponse<Void> get202None204NoneDefaultError202None() throws ServiceException, IOException;
 
     /**
      * Send a 202 response with no payload
@@ -341,9 +356,11 @@ public interface MultipleResponses {
     /**
      * Send a 204 response with no payload
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> get202None204NoneDefaultError204None() throws ServiceException;
+    ServiceResponse<Void> get202None204NoneDefaultError204None() throws ServiceException, IOException;
 
     /**
      * Send a 204 response with no payload
@@ -356,9 +373,11 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> get202None204NoneDefaultError400Valid() throws ServiceException;
+    ServiceResponse<Void> get202None204NoneDefaultError400Valid() throws ServiceException, IOException;
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
@@ -371,9 +390,11 @@ public interface MultipleResponses {
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> get202None204NoneDefaultNone202Invalid() throws ServiceException;
+    ServiceResponse<Void> get202None204NoneDefaultNone202Invalid() throws ServiceException, IOException;
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}
@@ -386,9 +407,11 @@ public interface MultipleResponses {
     /**
      * Send a 204 response with no payload
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> get202None204NoneDefaultNone204None() throws ServiceException;
+    ServiceResponse<Void> get202None204NoneDefaultNone204None() throws ServiceException, IOException;
 
     /**
      * Send a 204 response with no payload
@@ -401,9 +424,11 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with no payload
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> get202None204NoneDefaultNone400None() throws ServiceException;
+    ServiceResponse<Void> get202None204NoneDefaultNone400None() throws ServiceException, IOException;
 
     /**
      * Send a 400 response with no payload
@@ -416,9 +441,11 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> get202None204NoneDefaultNone400Invalid() throws ServiceException;
+    ServiceResponse<Void> get202None204NoneDefaultNone400Invalid() throws ServiceException, IOException;
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}
@@ -431,10 +458,11 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> getDefaultModelA200Valid() throws ServiceException;
+    ServiceResponse<A> getDefaultModelA200Valid() throws ServiceException, IOException;
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
@@ -447,10 +475,11 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with no payload
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> getDefaultModelA200None() throws ServiceException;
+    ServiceResponse<A> getDefaultModelA200None() throws ServiceException, IOException;
 
     /**
      * Send a 200 response with no payload
@@ -463,10 +492,11 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> getDefaultModelA400Valid() throws ServiceException;
+    ServiceResponse<A> getDefaultModelA400Valid() throws ServiceException, IOException;
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}
@@ -479,10 +509,11 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with no payload
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> getDefaultModelA400None() throws ServiceException;
+    ServiceResponse<A> getDefaultModelA400None() throws ServiceException, IOException;
 
     /**
      * Send a 400 response with no payload
@@ -495,9 +526,11 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getDefaultNone200Invalid() throws ServiceException;
+    ServiceResponse<Void> getDefaultNone200Invalid() throws ServiceException, IOException;
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}
@@ -510,9 +543,11 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with no payload
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getDefaultNone200None() throws ServiceException;
+    ServiceResponse<Void> getDefaultNone200None() throws ServiceException, IOException;
 
     /**
      * Send a 200 response with no payload
@@ -525,9 +560,11 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getDefaultNone400Invalid() throws ServiceException;
+    ServiceResponse<Void> getDefaultNone400Invalid() throws ServiceException, IOException;
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}
@@ -540,9 +577,11 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with no payload
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getDefaultNone400None() throws ServiceException;
+    ServiceResponse<Void> getDefaultNone400None() throws ServiceException, IOException;
 
     /**
      * Send a 400 response with no payload
@@ -555,10 +594,11 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> get200ModelA200None() throws ServiceException;
+    ServiceResponse<A> get200ModelA200None() throws ServiceException, IOException;
 
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
@@ -571,10 +611,11 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '200'}
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> get200ModelA200Valid() throws ServiceException;
+    ServiceResponse<A> get200ModelA200Valid() throws ServiceException, IOException;
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}
@@ -587,10 +628,11 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> get200ModelA200Invalid() throws ServiceException;
+    ServiceResponse<A> get200ModelA200Invalid() throws ServiceException, IOException;
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
@@ -603,10 +645,11 @@ public interface MultipleResponses {
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> get200ModelA400None() throws ServiceException;
+    ServiceResponse<A> get200ModelA400None() throws ServiceException, IOException;
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model
@@ -619,10 +662,11 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '400'}
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> get200ModelA400Valid() throws ServiceException;
+    ServiceResponse<A> get200ModelA400Valid() throws ServiceException, IOException;
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}
@@ -635,10 +679,11 @@ public interface MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> get200ModelA400Invalid() throws ServiceException;
+    ServiceResponse<A> get200ModelA400Invalid() throws ServiceException, IOException;
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
@@ -651,10 +696,11 @@ public interface MultipleResponses {
     /**
      * Send a 202 response with payload {'statusCode': '202'}
      *
-     * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<A> get200ModelA202Valid() throws ServiceException;
+    ServiceResponse<A> get200ModelA202Valid() throws ServiceException, IOException;
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}

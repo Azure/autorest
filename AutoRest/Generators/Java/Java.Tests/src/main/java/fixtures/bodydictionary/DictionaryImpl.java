@@ -21,6 +21,8 @@ import com.microsoft.rest.Validator;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodydictionary.models.Error;
 import fixtures.bodydictionary.models.Widget;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import java.util.List;
 import java.util.Map;
 import org.joda.time.DateTime;
@@ -42,18 +44,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get null dictionary value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Integer>> getNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getNull();
-            return getNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Integer>> getNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getNull();
+        return getNullDelegate(call.execute(), null);
     }
 
     /**
@@ -68,7 +65,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -76,7 +73,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Integer>> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Integer>>()
                 .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -86,18 +83,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get empty dictionary value {}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Integer>> getEmpty() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getEmpty();
-            return getEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Integer>> getEmpty() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getEmpty();
+        return getEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -112,7 +104,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -120,7 +112,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Integer>> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Integer>>()
                 .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -131,22 +123,17 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value empty {}
      *
      * @param arrayBody the Map&lt;String, String&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putEmpty(Map<String, String> arrayBody) throws ServiceException {
+    public ServiceResponse<Void> putEmpty(Map<String, String> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        try {
-            Call<ResponseBody> call = service.putEmpty(arrayBody);
-            return putEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putEmpty(arrayBody);
+        return putEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -157,8 +144,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putEmpty(arrayBody);
@@ -167,7 +154,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -175,7 +162,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -185,18 +172,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get Dictionary with null value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, String>> getNullValue() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getNullValue();
-            return getNullValueDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, String>> getNullValue() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getNullValue();
+        return getNullValueDelegate(call.execute(), null);
     }
 
     /**
@@ -211,7 +193,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNullValueDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -219,7 +201,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, String>> getNullValueDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, String>> getNullValueDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, String>>()
                 .register(200, new TypeToken<Map<String, String>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -229,18 +211,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get Dictionary with null key
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, String>> getNullKey() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getNullKey();
-            return getNullKeyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, String>> getNullKey() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getNullKey();
+        return getNullKeyDelegate(call.execute(), null);
     }
 
     /**
@@ -255,7 +232,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNullKeyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -263,7 +240,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, String>> getNullKeyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, String>> getNullKeyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, String>>()
                 .register(200, new TypeToken<Map<String, String>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -273,18 +250,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get Dictionary with key as empty string
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, String>> getEmptyStringKey() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getEmptyStringKey();
-            return getEmptyStringKeyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, String>> getEmptyStringKey() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getEmptyStringKey();
+        return getEmptyStringKeyDelegate(call.execute(), null);
     }
 
     /**
@@ -299,7 +271,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getEmptyStringKeyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -307,7 +279,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, String>> getEmptyStringKeyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, String>> getEmptyStringKeyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, String>>()
                 .register(200, new TypeToken<Map<String, String>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -317,18 +289,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get invalid Dictionary value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, String>> getInvalid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getInvalid();
-            return getInvalidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, String>> getInvalid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getInvalid();
+        return getInvalidDelegate(call.execute(), null);
     }
 
     /**
@@ -343,7 +310,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getInvalidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -351,7 +318,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, String>> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, String>> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, String>>()
                 .register(200, new TypeToken<Map<String, String>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -361,18 +328,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Boolean>> getBooleanTfft() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getBooleanTfft();
-            return getBooleanTfftDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Boolean>> getBooleanTfft() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getBooleanTfft();
+        return getBooleanTfftDelegate(call.execute(), null);
     }
 
     /**
@@ -387,7 +349,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBooleanTfftDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -395,7 +357,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Boolean>> getBooleanTfftDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Boolean>> getBooleanTfftDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Boolean>>()
                 .register(200, new TypeToken<Map<String, Boolean>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -406,22 +368,17 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putBooleanTfft(Map<String, Boolean> arrayBody) throws ServiceException {
+    public ServiceResponse<Void> putBooleanTfft(Map<String, Boolean> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        try {
-            Call<ResponseBody> call = service.putBooleanTfft(arrayBody);
-            return putBooleanTfftDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putBooleanTfft(arrayBody);
+        return putBooleanTfftDelegate(call.execute(), null);
     }
 
     /**
@@ -432,8 +389,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putBooleanTfft(arrayBody);
@@ -442,7 +399,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putBooleanTfftDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -450,7 +407,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Void> putBooleanTfftDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putBooleanTfftDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -460,18 +417,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Boolean>> getBooleanInvalidNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getBooleanInvalidNull();
-            return getBooleanInvalidNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Boolean>> getBooleanInvalidNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getBooleanInvalidNull();
+        return getBooleanInvalidNullDelegate(call.execute(), null);
     }
 
     /**
@@ -486,7 +438,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBooleanInvalidNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -494,7 +446,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Boolean>> getBooleanInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Boolean>> getBooleanInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Boolean>>()
                 .register(200, new TypeToken<Map<String, Boolean>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -504,18 +456,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Boolean>> getBooleanInvalidString() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getBooleanInvalidString();
-            return getBooleanInvalidStringDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Boolean>> getBooleanInvalidString() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getBooleanInvalidString();
+        return getBooleanInvalidStringDelegate(call.execute(), null);
     }
 
     /**
@@ -530,7 +477,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBooleanInvalidStringDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -538,7 +485,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Boolean>> getBooleanInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Boolean>> getBooleanInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Boolean>>()
                 .register(200, new TypeToken<Map<String, Boolean>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -548,18 +495,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Integer>> getIntegerValid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getIntegerValid();
-            return getIntegerValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Integer>> getIntegerValid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getIntegerValid();
+        return getIntegerValidDelegate(call.execute(), null);
     }
 
     /**
@@ -574,7 +516,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getIntegerValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -582,7 +524,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getIntegerValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Integer>> getIntegerValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Integer>>()
                 .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -593,22 +535,17 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
      *
      * @param arrayBody the Map&lt;String, Integer&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putIntegerValid(Map<String, Integer> arrayBody) throws ServiceException {
+    public ServiceResponse<Void> putIntegerValid(Map<String, Integer> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        try {
-            Call<ResponseBody> call = service.putIntegerValid(arrayBody);
-            return putIntegerValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putIntegerValid(arrayBody);
+        return putIntegerValidDelegate(call.execute(), null);
     }
 
     /**
@@ -619,8 +556,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putIntegerValid(arrayBody);
@@ -629,7 +566,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putIntegerValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -637,7 +574,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Void> putIntegerValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putIntegerValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -647,18 +584,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Integer>> getIntInvalidNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getIntInvalidNull();
-            return getIntInvalidNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Integer>> getIntInvalidNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getIntInvalidNull();
+        return getIntInvalidNullDelegate(call.execute(), null);
     }
 
     /**
@@ -673,7 +605,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getIntInvalidNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -681,7 +613,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getIntInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Integer>> getIntInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Integer>>()
                 .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -691,18 +623,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Integer>> getIntInvalidString() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getIntInvalidString();
-            return getIntInvalidStringDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Integer>> getIntInvalidString() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getIntInvalidString();
+        return getIntInvalidStringDelegate(call.execute(), null);
     }
 
     /**
@@ -717,7 +644,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getIntInvalidStringDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -725,7 +652,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getIntInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Integer>> getIntInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Integer>>()
                 .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -735,18 +662,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Long>> getLongValid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getLongValid();
-            return getLongValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Long>> getLongValid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getLongValid();
+        return getLongValidDelegate(call.execute(), null);
     }
 
     /**
@@ -761,7 +683,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getLongValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -769,7 +691,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Long>> getLongValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Long>> getLongValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Long>>()
                 .register(200, new TypeToken<Map<String, Long>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -780,22 +702,17 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
      *
      * @param arrayBody the Map&lt;String, Long&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putLongValid(Map<String, Long> arrayBody) throws ServiceException {
+    public ServiceResponse<Void> putLongValid(Map<String, Long> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        try {
-            Call<ResponseBody> call = service.putLongValid(arrayBody);
-            return putLongValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putLongValid(arrayBody);
+        return putLongValidDelegate(call.execute(), null);
     }
 
     /**
@@ -806,8 +723,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putLongValid(arrayBody);
@@ -816,7 +733,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putLongValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -824,7 +741,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Void> putLongValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putLongValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -834,18 +751,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Long>> getLongInvalidNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getLongInvalidNull();
-            return getLongInvalidNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Long>> getLongInvalidNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getLongInvalidNull();
+        return getLongInvalidNullDelegate(call.execute(), null);
     }
 
     /**
@@ -860,7 +772,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getLongInvalidNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -868,7 +780,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Long>> getLongInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Long>> getLongInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Long>>()
                 .register(200, new TypeToken<Map<String, Long>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -878,18 +790,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Long>> getLongInvalidString() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getLongInvalidString();
-            return getLongInvalidStringDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Long>> getLongInvalidString() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getLongInvalidString();
+        return getLongInvalidStringDelegate(call.execute(), null);
     }
 
     /**
@@ -904,7 +811,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getLongInvalidStringDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -912,7 +819,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Long>> getLongInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Long>> getLongInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Long>>()
                 .register(200, new TypeToken<Map<String, Long>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -922,18 +829,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Double>> getFloatValid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getFloatValid();
-            return getFloatValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Double>> getFloatValid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getFloatValid();
+        return getFloatValidDelegate(call.execute(), null);
     }
 
     /**
@@ -948,7 +850,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getFloatValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -956,7 +858,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Double>> getFloatValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Double>> getFloatValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Double>>()
                 .register(200, new TypeToken<Map<String, Double>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -967,22 +869,17 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putFloatValid(Map<String, Double> arrayBody) throws ServiceException {
+    public ServiceResponse<Void> putFloatValid(Map<String, Double> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        try {
-            Call<ResponseBody> call = service.putFloatValid(arrayBody);
-            return putFloatValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putFloatValid(arrayBody);
+        return putFloatValidDelegate(call.execute(), null);
     }
 
     /**
@@ -993,8 +890,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putFloatValid(arrayBody);
@@ -1003,7 +900,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putFloatValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1011,7 +908,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Void> putFloatValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putFloatValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1021,18 +918,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Double>> getFloatInvalidNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getFloatInvalidNull();
-            return getFloatInvalidNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Double>> getFloatInvalidNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getFloatInvalidNull();
+        return getFloatInvalidNullDelegate(call.execute(), null);
     }
 
     /**
@@ -1047,7 +939,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getFloatInvalidNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1055,7 +947,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Double>> getFloatInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Double>> getFloatInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Double>>()
                 .register(200, new TypeToken<Map<String, Double>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1065,18 +957,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Double>> getFloatInvalidString() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getFloatInvalidString();
-            return getFloatInvalidStringDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Double>> getFloatInvalidString() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getFloatInvalidString();
+        return getFloatInvalidStringDelegate(call.execute(), null);
     }
 
     /**
@@ -1091,7 +978,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getFloatInvalidStringDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1099,7 +986,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Double>> getFloatInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Double>> getFloatInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Double>>()
                 .register(200, new TypeToken<Map<String, Double>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1109,18 +996,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Double>> getDoubleValid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDoubleValid();
-            return getDoubleValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Double>> getDoubleValid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDoubleValid();
+        return getDoubleValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1135,7 +1017,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDoubleValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1143,7 +1025,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Double>> getDoubleValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Double>> getDoubleValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Double>>()
                 .register(200, new TypeToken<Map<String, Double>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1154,22 +1036,17 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDoubleValid(Map<String, Double> arrayBody) throws ServiceException {
+    public ServiceResponse<Void> putDoubleValid(Map<String, Double> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        try {
-            Call<ResponseBody> call = service.putDoubleValid(arrayBody);
-            return putDoubleValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putDoubleValid(arrayBody);
+        return putDoubleValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1180,8 +1057,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDoubleValid(arrayBody);
@@ -1190,7 +1067,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDoubleValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1198,7 +1075,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Void> putDoubleValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putDoubleValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1208,18 +1085,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Double>> getDoubleInvalidNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDoubleInvalidNull();
-            return getDoubleInvalidNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Double>> getDoubleInvalidNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDoubleInvalidNull();
+        return getDoubleInvalidNullDelegate(call.execute(), null);
     }
 
     /**
@@ -1234,7 +1106,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDoubleInvalidNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1242,7 +1114,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Double>> getDoubleInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Double>> getDoubleInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Double>>()
                 .register(200, new TypeToken<Map<String, Double>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1252,18 +1124,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Double>> getDoubleInvalidString() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDoubleInvalidString();
-            return getDoubleInvalidStringDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Double>> getDoubleInvalidString() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDoubleInvalidString();
+        return getDoubleInvalidStringDelegate(call.execute(), null);
     }
 
     /**
@@ -1278,7 +1145,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDoubleInvalidStringDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1286,7 +1153,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Double>> getDoubleInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Double>> getDoubleInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Double>>()
                 .register(200, new TypeToken<Map<String, Double>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1296,18 +1163,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, String>> getStringValid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getStringValid();
-            return getStringValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, String>> getStringValid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getStringValid();
+        return getStringValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1322,7 +1184,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getStringValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1330,7 +1192,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, String>> getStringValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, String>> getStringValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, String>>()
                 .register(200, new TypeToken<Map<String, String>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1341,22 +1203,17 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
      *
      * @param arrayBody the Map&lt;String, String&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putStringValid(Map<String, String> arrayBody) throws ServiceException {
+    public ServiceResponse<Void> putStringValid(Map<String, String> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        try {
-            Call<ResponseBody> call = service.putStringValid(arrayBody);
-            return putStringValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putStringValid(arrayBody);
+        return putStringValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1367,8 +1224,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putStringValid(arrayBody);
@@ -1377,7 +1234,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putStringValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1385,7 +1242,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Void> putStringValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putStringValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1395,18 +1252,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, String>> getStringWithNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getStringWithNull();
-            return getStringWithNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, String>> getStringWithNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getStringWithNull();
+        return getStringWithNullDelegate(call.execute(), null);
     }
 
     /**
@@ -1421,7 +1273,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getStringWithNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1429,7 +1281,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, String>> getStringWithNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, String>> getStringWithNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, String>>()
                 .register(200, new TypeToken<Map<String, String>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1439,18 +1291,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, String>> getStringWithInvalid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getStringWithInvalid();
-            return getStringWithInvalidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, String>> getStringWithInvalid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getStringWithInvalid();
+        return getStringWithInvalidDelegate(call.execute(), null);
     }
 
     /**
@@ -1465,7 +1312,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getStringWithInvalidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1473,7 +1320,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, String>> getStringWithInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, String>> getStringWithInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, String>>()
                 .register(200, new TypeToken<Map<String, String>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1483,18 +1330,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, LocalDate>> getDateValid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDateValid();
-            return getDateValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, LocalDate>> getDateValid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDateValid();
+        return getDateValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1509,7 +1351,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDateValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1517,7 +1359,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, LocalDate>> getDateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, LocalDate>> getDateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, LocalDate>>()
                 .register(200, new TypeToken<Map<String, LocalDate>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1528,22 +1370,17 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDateValid(Map<String, LocalDate> arrayBody) throws ServiceException {
+    public ServiceResponse<Void> putDateValid(Map<String, LocalDate> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        try {
-            Call<ResponseBody> call = service.putDateValid(arrayBody);
-            return putDateValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putDateValid(arrayBody);
+        return putDateValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1554,8 +1391,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDateValid(arrayBody);
@@ -1564,7 +1401,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDateValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1572,7 +1409,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Void> putDateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putDateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1582,18 +1419,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, LocalDate>> getDateInvalidNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDateInvalidNull();
-            return getDateInvalidNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, LocalDate>> getDateInvalidNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDateInvalidNull();
+        return getDateInvalidNullDelegate(call.execute(), null);
     }
 
     /**
@@ -1608,7 +1440,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDateInvalidNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1616,7 +1448,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, LocalDate>> getDateInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, LocalDate>> getDateInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, LocalDate>>()
                 .register(200, new TypeToken<Map<String, LocalDate>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1626,18 +1458,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, LocalDate>> getDateInvalidChars() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDateInvalidChars();
-            return getDateInvalidCharsDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, LocalDate>> getDateInvalidChars() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDateInvalidChars();
+        return getDateInvalidCharsDelegate(call.execute(), null);
     }
 
     /**
@@ -1652,7 +1479,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDateInvalidCharsDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1660,7 +1487,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, LocalDate>> getDateInvalidCharsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, LocalDate>> getDateInvalidCharsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, LocalDate>>()
                 .register(200, new TypeToken<Map<String, LocalDate>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1670,18 +1497,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, DateTime>> getDateTimeValid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDateTimeValid();
-            return getDateTimeValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, DateTime>> getDateTimeValid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDateTimeValid();
+        return getDateTimeValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1696,7 +1518,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDateTimeValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1704,7 +1526,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, DateTime>> getDateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, DateTime>> getDateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, DateTime>>()
                 .register(200, new TypeToken<Map<String, DateTime>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1715,22 +1537,17 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDateTimeValid(Map<String, DateTime> arrayBody) throws ServiceException {
+    public ServiceResponse<Void> putDateTimeValid(Map<String, DateTime> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        try {
-            Call<ResponseBody> call = service.putDateTimeValid(arrayBody);
-            return putDateTimeValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putDateTimeValid(arrayBody);
+        return putDateTimeValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1741,8 +1558,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTimeValid(arrayBody);
@@ -1751,7 +1568,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDateTimeValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1759,7 +1576,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Void> putDateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putDateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1769,18 +1586,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, DateTime>> getDateTimeInvalidNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDateTimeInvalidNull();
-            return getDateTimeInvalidNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, DateTime>> getDateTimeInvalidNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDateTimeInvalidNull();
+        return getDateTimeInvalidNullDelegate(call.execute(), null);
     }
 
     /**
@@ -1795,7 +1607,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDateTimeInvalidNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1803,7 +1615,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, DateTime>>()
                 .register(200, new TypeToken<Map<String, DateTime>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1813,18 +1625,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, DateTime>> getDateTimeInvalidChars() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDateTimeInvalidChars();
-            return getDateTimeInvalidCharsDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, DateTime>> getDateTimeInvalidChars() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDateTimeInvalidChars();
+        return getDateTimeInvalidCharsDelegate(call.execute(), null);
     }
 
     /**
@@ -1839,7 +1646,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDateTimeInvalidCharsDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1847,7 +1654,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidCharsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidCharsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, DateTime>>()
                 .register(200, new TypeToken<Map<String, DateTime>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1857,18 +1664,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTimeRfc1123&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, DateTimeRfc1123>> getDateTimeRfc1123Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
-            return getDateTimeRfc1123ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, DateTimeRfc1123>> getDateTimeRfc1123Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
+        return getDateTimeRfc1123ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1883,7 +1685,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDateTimeRfc1123ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1891,7 +1693,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, DateTimeRfc1123>> getDateTimeRfc1123ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, DateTimeRfc1123>> getDateTimeRfc1123ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, DateTimeRfc1123>>()
                 .register(200, new TypeToken<Map<String, DateTimeRfc1123>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1902,22 +1704,17 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
      *
      * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDateTimeRfc1123Valid(Map<String, DateTimeRfc1123> arrayBody) throws ServiceException {
+    public ServiceResponse<Void> putDateTimeRfc1123Valid(Map<String, DateTimeRfc1123> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        try {
-            Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
-            return putDateTimeRfc1123ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
+        return putDateTimeRfc1123ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1928,8 +1725,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putDateTimeRfc1123ValidAsync(Map<String, DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
@@ -1938,7 +1735,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDateTimeRfc1123ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1946,7 +1743,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Void> putDateTimeRfc1123ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putDateTimeRfc1123ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1956,18 +1753,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Period&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Period>> getDurationValid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDurationValid();
-            return getDurationValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Period>> getDurationValid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDurationValid();
+        return getDurationValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1982,7 +1774,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDurationValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1990,7 +1782,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Period>> getDurationValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Period>> getDurationValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Period>>()
                 .register(200, new TypeToken<Map<String, Period>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2001,22 +1793,17 @@ public class DictionaryImpl implements Dictionary {
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
      *
      * @param arrayBody the Map&lt;String, Period&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDurationValid(Map<String, Period> arrayBody) throws ServiceException {
+    public ServiceResponse<Void> putDurationValid(Map<String, Period> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        try {
-            Call<ResponseBody> call = service.putDurationValid(arrayBody);
-            return putDurationValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putDurationValid(arrayBody);
+        return putDurationValidDelegate(call.execute(), null);
     }
 
     /**
@@ -2027,8 +1814,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putDurationValidAsync(Map<String, Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDurationValid(arrayBody);
@@ -2037,7 +1824,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDurationValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2045,7 +1832,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Void> putDurationValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putDurationValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2055,18 +1842,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, byte[]&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, byte[]>> getByteValid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getByteValid();
-            return getByteValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, byte[]>> getByteValid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getByteValid();
+        return getByteValidDelegate(call.execute(), null);
     }
 
     /**
@@ -2081,7 +1863,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getByteValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2089,7 +1871,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, byte[]>> getByteValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, byte[]>> getByteValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, byte[]>>()
                 .register(200, new TypeToken<Map<String, byte[]>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2100,22 +1882,17 @@ public class DictionaryImpl implements Dictionary {
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putByteValid(Map<String, byte[]> arrayBody) throws ServiceException {
+    public ServiceResponse<Void> putByteValid(Map<String, byte[]> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        try {
-            Call<ResponseBody> call = service.putByteValid(arrayBody);
-            return putByteValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putByteValid(arrayBody);
+        return putByteValidDelegate(call.execute(), null);
     }
 
     /**
@@ -2126,8 +1903,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putByteValid(arrayBody);
@@ -2136,7 +1913,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putByteValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2144,7 +1921,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Void> putByteValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putByteValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2154,18 +1931,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, byte[]&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, byte[]>> getByteInvalidNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getByteInvalidNull();
-            return getByteInvalidNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, byte[]>> getByteInvalidNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getByteInvalidNull();
+        return getByteInvalidNullDelegate(call.execute(), null);
     }
 
     /**
@@ -2180,7 +1952,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getByteInvalidNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2188,7 +1960,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, byte[]>> getByteInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, byte[]>> getByteInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, byte[]>>()
                 .register(200, new TypeToken<Map<String, byte[]>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2198,18 +1970,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get dictionary of complex type null value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Widget>> getComplexNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getComplexNull();
-            return getComplexNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Widget>> getComplexNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getComplexNull();
+        return getComplexNullDelegate(call.execute(), null);
     }
 
     /**
@@ -2224,7 +1991,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getComplexNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2232,7 +1999,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Widget>> getComplexNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Widget>> getComplexNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Widget>>()
                 .register(200, new TypeToken<Map<String, Widget>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2242,18 +2009,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get empty dictionary of complex type {}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Widget>> getComplexEmpty() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getComplexEmpty();
-            return getComplexEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Widget>> getComplexEmpty() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getComplexEmpty();
+        return getComplexEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -2268,7 +2030,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getComplexEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2276,7 +2038,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Widget>> getComplexEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Widget>> getComplexEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Widget>>()
                 .register(200, new TypeToken<Map<String, Widget>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2286,18 +2048,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Widget>> getComplexItemNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getComplexItemNull();
-            return getComplexItemNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Widget>> getComplexItemNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getComplexItemNull();
+        return getComplexItemNullDelegate(call.execute(), null);
     }
 
     /**
@@ -2312,7 +2069,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getComplexItemNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2320,7 +2077,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Widget>> getComplexItemNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Widget>> getComplexItemNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Widget>>()
                 .register(200, new TypeToken<Map<String, Widget>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2330,18 +2087,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Widget>> getComplexItemEmpty() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getComplexItemEmpty();
-            return getComplexItemEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Widget>> getComplexItemEmpty() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getComplexItemEmpty();
+        return getComplexItemEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -2356,7 +2108,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getComplexItemEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2364,7 +2116,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Widget>> getComplexItemEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Widget>> getComplexItemEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Widget>>()
                 .register(200, new TypeToken<Map<String, Widget>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2374,18 +2126,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Widget>> getComplexValid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getComplexValid();
-            return getComplexValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Widget>> getComplexValid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getComplexValid();
+        return getComplexValidDelegate(call.execute(), null);
     }
 
     /**
@@ -2400,7 +2147,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getComplexValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2408,7 +2155,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Widget>> getComplexValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Widget>> getComplexValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Widget>>()
                 .register(200, new TypeToken<Map<String, Widget>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2419,22 +2166,17 @@ public class DictionaryImpl implements Dictionary {
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putComplexValid(Map<String, Widget> arrayBody) throws ServiceException {
+    public ServiceResponse<Void> putComplexValid(Map<String, Widget> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        try {
-            Call<ResponseBody> call = service.putComplexValid(arrayBody);
-            return putComplexValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putComplexValid(arrayBody);
+        return putComplexValidDelegate(call.execute(), null);
     }
 
     /**
@@ -2445,8 +2187,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putComplexValid(arrayBody);
@@ -2455,7 +2197,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putComplexValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2463,7 +2205,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Void> putComplexValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putComplexValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2473,18 +2215,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get a null array
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, List<String>>> getArrayNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getArrayNull();
-            return getArrayNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, List<String>>> getArrayNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getArrayNull();
+        return getArrayNullDelegate(call.execute(), null);
     }
 
     /**
@@ -2499,7 +2236,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getArrayNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2507,7 +2244,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, List<String>>> getArrayNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, List<String>>> getArrayNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, List<String>>>()
                 .register(200, new TypeToken<Map<String, List<String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2517,18 +2254,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an empty dictionary {}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, List<String>>> getArrayEmpty() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getArrayEmpty();
-            return getArrayEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, List<String>>> getArrayEmpty() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getArrayEmpty();
+        return getArrayEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -2543,7 +2275,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getArrayEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2551,7 +2283,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, List<String>>> getArrayEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, List<String>>> getArrayEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, List<String>>>()
                 .register(200, new TypeToken<Map<String, List<String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2561,18 +2293,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, List<String>>> getArrayItemNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getArrayItemNull();
-            return getArrayItemNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, List<String>>> getArrayItemNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getArrayItemNull();
+        return getArrayItemNullDelegate(call.execute(), null);
     }
 
     /**
@@ -2587,7 +2314,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getArrayItemNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2595,7 +2322,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, List<String>>> getArrayItemNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, List<String>>> getArrayItemNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, List<String>>>()
                 .register(200, new TypeToken<Map<String, List<String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2605,18 +2332,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, List<String>>> getArrayItemEmpty() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getArrayItemEmpty();
-            return getArrayItemEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, List<String>>> getArrayItemEmpty() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getArrayItemEmpty();
+        return getArrayItemEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -2631,7 +2353,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getArrayItemEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2639,7 +2361,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, List<String>>> getArrayItemEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, List<String>>> getArrayItemEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, List<String>>>()
                 .register(200, new TypeToken<Map<String, List<String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2649,18 +2371,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, List<String>>> getArrayValid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getArrayValid();
-            return getArrayValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, List<String>>> getArrayValid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getArrayValid();
+        return getArrayValidDelegate(call.execute(), null);
     }
 
     /**
@@ -2675,7 +2392,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getArrayValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2683,7 +2400,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, List<String>>> getArrayValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, List<String>>> getArrayValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, List<String>>>()
                 .register(200, new TypeToken<Map<String, List<String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2694,22 +2411,17 @@ public class DictionaryImpl implements Dictionary {
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putArrayValid(Map<String, List<String>> arrayBody) throws ServiceException {
+    public ServiceResponse<Void> putArrayValid(Map<String, List<String>> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        try {
-            Call<ResponseBody> call = service.putArrayValid(arrayBody);
-            return putArrayValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putArrayValid(arrayBody);
+        return putArrayValidDelegate(call.execute(), null);
     }
 
     /**
@@ -2720,8 +2432,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putArrayValid(arrayBody);
@@ -2730,7 +2442,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putArrayValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2738,7 +2450,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Void> putArrayValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putArrayValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2748,18 +2460,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an dictionaries of dictionaries with value null
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Map<String, String>>> getDictionaryNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDictionaryNull();
-            return getDictionaryNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Map<String, String>>> getDictionaryNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDictionaryNull();
+        return getDictionaryNullDelegate(call.execute(), null);
     }
 
     /**
@@ -2774,7 +2481,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDictionaryNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2782,7 +2489,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Map<String, String>>>()
                 .register(200, new TypeToken<Map<String, Map<String, String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2792,18 +2499,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Map<String, String>>> getDictionaryEmpty() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDictionaryEmpty();
-            return getDictionaryEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Map<String, String>>> getDictionaryEmpty() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDictionaryEmpty();
+        return getDictionaryEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -2818,7 +2520,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDictionaryEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2826,7 +2528,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Map<String, String>>>()
                 .register(200, new TypeToken<Map<String, Map<String, String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2836,18 +2538,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDictionaryItemNull();
-            return getDictionaryItemNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDictionaryItemNull();
+        return getDictionaryItemNullDelegate(call.execute(), null);
     }
 
     /**
@@ -2862,7 +2559,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDictionaryItemNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2870,7 +2567,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Map<String, String>>>()
                 .register(200, new TypeToken<Map<String, Map<String, String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2880,18 +2577,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemEmpty() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDictionaryItemEmpty();
-            return getDictionaryItemEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemEmpty() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDictionaryItemEmpty();
+        return getDictionaryItemEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -2906,7 +2598,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDictionaryItemEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2914,7 +2606,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Map<String, String>>>()
                 .register(200, new TypeToken<Map<String, Map<String, String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2924,18 +2616,13 @@ public class DictionaryImpl implements Dictionary {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Map<String, String>>> getDictionaryValid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDictionaryValid();
-            return getDictionaryValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Map<String, String>>> getDictionaryValid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDictionaryValid();
+        return getDictionaryValidDelegate(call.execute(), null);
     }
 
     /**
@@ -2950,7 +2637,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDictionaryValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -2958,7 +2645,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Map<String, Map<String, String>>>()
                 .register(200, new TypeToken<Map<String, Map<String, String>>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -2969,22 +2656,17 @@ public class DictionaryImpl implements Dictionary {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ServiceException {
+    public ServiceResponse<Void> putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ServiceException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        try {
-            Call<ResponseBody> call = service.putDictionaryValid(arrayBody);
-            return putDictionaryValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putDictionaryValid(arrayBody);
+        return putDictionaryValidDelegate(call.execute(), null);
     }
 
     /**
@@ -2995,8 +2677,8 @@ public class DictionaryImpl implements Dictionary {
      */
     public Call<ResponseBody> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter arrayBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDictionaryValid(arrayBody);
@@ -3005,7 +2687,7 @@ public class DictionaryImpl implements Dictionary {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDictionaryValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -3013,7 +2695,7 @@ public class DictionaryImpl implements Dictionary {
         return call;
     }
 
-    private ServiceResponse<Void> putDictionaryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putDictionaryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

@@ -28,14 +28,14 @@ namespace Microsoft.Rest.Generator.Java
         {
             // default value
             nextLinkName = null;
-            var ext = extensions[AzureCodeGenerator.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+            var ext = extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
             if (ext == null)
             {
                 return null;
             }
 
             nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
-            string itemName = (string)ext["itemName"] ?? "values";
+            string itemName = (string)ext["itemName"] ?? "value";
 
             var keypair = new KeyValuePair<string, string>(nextLinkName, itemName);
             if (!pageClasses.ContainsKey(keypair))
@@ -72,7 +72,7 @@ namespace Microsoft.Rest.Generator.Java
 
             var convertedTypes = new Dictionary<IType, CompositeType>();
 
-            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension)))
+            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
                 string nextLinkString;
                 string pageClassName = GetPagingSetting(method.Extensions, pageClasses, out nextLinkString);
@@ -83,9 +83,9 @@ namespace Microsoft.Rest.Generator.Java
                 var pageTypeFormat = "{0}<{1}>";
                 var ipageTypeFormat = "IPage<{0}>";
 
-                foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key).ToArray())
+                foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
                 {
-                    var compositType = (CompositeType)method.Responses[responseStatus];
+                    var compositType = (CompositeType)method.Responses[responseStatus].Body;
                     var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
                     // if the type is a wrapper over page-able response
@@ -100,21 +100,21 @@ namespace Microsoft.Rest.Generator.Java
                         {
                             Name = pagableTypeName
                         };
-                        pagedResult.Extensions[AzureCodeGenerator.ExternalExtension] = true;
-                        pagedResult.Extensions[AzureCodeGenerator.PageableExtension] = ipagableTypeName;
+                        pagedResult.Extensions[AzureExtensions.ExternalExtension] = true;
+                        pagedResult.Extensions[AzureExtensions.PageableExtension] = ipagableTypeName;
 
-                        convertedTypes[method.Responses[responseStatus]] = pagedResult;
-                        method.Responses[responseStatus] = pagedResult;
+                        convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
+                        method.Responses[responseStatus] = new Response(pagedResult, method.Responses[responseStatus].Headers);
                     }
                 }
 
-                if (convertedTypes.ContainsKey(method.ReturnType))
+                if (convertedTypes.ContainsKey(method.ReturnType.Body))
                 {
-                    method.ReturnType = convertedTypes[method.ReturnType];
+                    method.ReturnType = new Response(convertedTypes[method.ReturnType.Body], method.ReturnType.Headers);
                 }
             }
 
-            AzureCodeGenerator.RemoveUnreferencedTypes(serviceClient, convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name));
+            AzureExtensions.RemoveUnreferencedTypes(serviceClient, convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name));
         }
     }
 }

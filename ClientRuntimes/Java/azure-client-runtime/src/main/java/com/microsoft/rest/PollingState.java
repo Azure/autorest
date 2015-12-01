@@ -9,16 +9,12 @@ package com.microsoft.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.serializer.AzureJacksonHelper;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.AzureJacksonUtils;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Response;
 
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
@@ -44,7 +40,7 @@ public class PollingState<T> {
      * @param resourceType the type of the resource the long running operation returns
      * @throws IOException thrown by deserialization
      */
-    public PollingState(Response<ResponseBody> response, int retryTimeout, Type resourceType) throws IOException {
+    public PollingState(Response<ResponseBody> response, Integer retryTimeout, Type resourceType) throws IOException {
         this.retryTimeout = retryTimeout;
         this.setResponse(response);
         this.resourceType = resourceType;
@@ -55,8 +51,8 @@ public class PollingState<T> {
             responseContent = response.body().string();
         }
         if (responseContent != null && !responseContent.isEmpty()) {
-            this.resource = JacksonHelper.deserialize(responseContent, resourceType);
-            resource = JacksonHelper.deserialize(responseContent, new TypeReference<PollingResource>() {});
+            this.resource = new AzureJacksonUtils().deserialize(responseContent, resourceType);
+            resource = new AzureJacksonUtils().deserialize(responseContent, PollingResource.class);
         }
         if (resource != null && resource.getProperties() != null &&
                 resource.getProperties().getProvisioningState() != null) {
@@ -96,7 +92,7 @@ public class PollingState<T> {
             throw exception;
         }
 
-        PollingResource resource = JacksonHelper.deserialize(responseContent, new TypeReference<PollingResource>() {});
+        PollingResource resource = new AzureJacksonUtils().deserialize(responseContent, PollingResource.class);
         if (resource != null && resource.getProperties() != null && resource.getProperties().getProvisioningState() != null) {
             this.setStatus(resource.getProperties().getProvisioningState());
         } else {
@@ -108,12 +104,7 @@ public class PollingState<T> {
         error.setCode(this.getStatus());
         error.setMessage("Long running operation failed");
         this.setResponse(response);
-        this.setResource(JacksonHelper.<T>deserialize(responseContent, new TypeReference<T>() {
-            @Override
-            public Type getType() {
-                return resourceType;
-            }
-        }));
+        this.setResource(new AzureJacksonUtils().<T>deserialize(responseContent, resourceType));
     }
 
     /**
@@ -129,12 +120,7 @@ public class PollingState<T> {
         if (response.body() != null) {
             responseContent = response.body().string();
         }
-        this.setResource(JacksonHelper.<T>deserialize(responseContent, new TypeReference<T>() {
-            @Override
-            public Type getType() {
-                return resourceType;
-            }
-        }));
+        this.setResource(new AzureJacksonUtils().<T>deserialize(responseContent, resourceType));
         setStatus(AzureAsyncOperation.successStatus);
     }
 
@@ -147,8 +133,8 @@ public class PollingState<T> {
         if (this.retryTimeout != null) {
             return this.retryTimeout * 1000;
         }
-        if (this.response != null) {
-            return Integer.parseInt(response.headers().get("Retry-After"));
+        if (this.response != null && response.headers().get("Retry-After") != null) {
+            return Integer.parseInt(response.headers().get("Retry-After")) * 1000;
         }
         return AzureAsyncOperation.defaultDelay * 1000;
     }

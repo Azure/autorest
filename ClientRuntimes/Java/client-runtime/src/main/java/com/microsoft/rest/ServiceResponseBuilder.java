@@ -8,7 +8,7 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -23,21 +23,33 @@ import java.util.Map;
  * The builder for building a {@link ServiceResponse}.
  */
 public class ServiceResponseBuilder<T> {
-    private Map<Integer, TypeReference<?>> responseTypes;
+    protected Map<Integer, Type> responseTypes;
+    protected JacksonUtils deserializer;
 
     /**
      * Create a ServiceResponseBuilder instance.
      */
     public ServiceResponseBuilder() {
-        this(new HashMap<Integer, TypeReference<?>>());
+        this(new JacksonUtils());
     }
 
     /**
      * Create a ServiceResponseBuilder instance.
      *
+     * @param deserializer the serialization utils to use for deserialization operations
+     */
+    public ServiceResponseBuilder(JacksonUtils deserializer) {
+        this(deserializer, new HashMap<Integer, Type>());
+    }
+
+    /**
+     * Create a ServiceResponseBuilder instance.
+     *
+     * @param deserializer the serialization utils to use for deserialization operations
      * @param responseTypes a mapping of response status codes and response destination types.
      */
-    public ServiceResponseBuilder(Map<Integer, TypeReference<?>> responseTypes) {
+    public ServiceResponseBuilder(JacksonUtils deserializer, Map<Integer, Type> responseTypes) {
+        this.deserializer = deserializer;
         this.responseTypes = responseTypes;
     }
 
@@ -45,17 +57,11 @@ public class ServiceResponseBuilder<T> {
      * Register a mapping from a response status code to a response destination type.
      *
      * @param statusCode the status code.
-     * @param <V> the response destination type.
      * @param type the type to deserialize.
      * @return the same builder instance.
      */
-    public <V> ServiceResponseBuilder<T> register(int statusCode, final Type type) {
-        this.responseTypes.put(statusCode, new TypeReference<V>() {
-            @Override
-            public Type getType() {
-                return type;
-            }
-        });
+    public ServiceResponseBuilder<T> register(int statusCode, final Type type) {
+        this.responseTypes.put(statusCode, type);
         return this;
     }
 
@@ -67,12 +73,7 @@ public class ServiceResponseBuilder<T> {
      * @return the same builder instance.
      */
     public <V> ServiceResponseBuilder<T> registerError(final Type type) {
-        this.responseTypes.put(0, new TypeReference<V>() {
-            @Override
-            public Type getType() {
-                return type;
-            }
-        });
+        this.responseTypes.put(0, type);
         return this;
     }
 
@@ -83,7 +84,7 @@ public class ServiceResponseBuilder<T> {
      * @param responseTypes the mapping from response status codes to response types.
      * @return the same builder instance.
      */
-    public ServiceResponseBuilder<T> registerAll(Map<Integer, TypeReference<?>> responseTypes) {
+    public ServiceResponseBuilder<T> registerAll(Map<Integer, Type> responseTypes) {
         this.responseTypes.putAll(responseTypes);
         return this;
     }
@@ -105,36 +106,28 @@ public class ServiceResponseBuilder<T> {
      * @return a ServiceResponse instance of generic type {@link T}
      * @throws ServiceException all exceptions will be wrapped in ServiceException
      */
-    public ServiceResponse<T> build(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    public ServiceResponse<T> build(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         if (response == null) {
             throw new ServiceException("no response");
         }
 
-        try {
-            int statusCode = response.code();
-            ResponseBody responseBody;
-            if (response.isSuccess()) {
-                responseBody = response.body();
-            } else {
-                responseBody = response.errorBody();
-            }
+        int statusCode = response.code();
+        ResponseBody responseBody;
+        if (response.isSuccess()) {
+            responseBody = response.body();
+        } else {
+            responseBody = response.errorBody();
+        }
 
-            if (responseTypes.containsKey(statusCode)) {
-                return new ServiceResponse<T>(buildBody(statusCode, responseBody), response);
-            } else if (response.isSuccess() &&
-                    (responseTypes.isEmpty() || (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
-                return new ServiceResponse<T>(buildBody(statusCode, responseBody), response);
-            } else {
-                ServiceException exception = new ServiceException("Invalid status code " + statusCode);
-                exception.setResponse(response);
-                exception.setErrorModel(buildBody(statusCode, responseBody));
-                throw exception;
-            }
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            ServiceException exception = new ServiceException(ex);
+        if (responseTypes.containsKey(statusCode)) {
+            return new ServiceResponse<T>(buildBody(statusCode, responseBody), response);
+        } else if (response.isSuccess() &&
+                (responseTypes.isEmpty() || (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
+            return new ServiceResponse<T>(buildBody(statusCode, responseBody), response);
+        } else {
+            ServiceException exception = new ServiceException("Invalid status code " + statusCode);
             exception.setResponse(response);
+            exception.setErrorModel(buildBody(statusCode, responseBody));
             throw exception;
         }
     }
@@ -154,26 +147,26 @@ public class ServiceResponseBuilder<T> {
     }
 
     @SuppressWarnings("unchecked")
-    private T buildBody(int statusCode, ResponseBody responseBody) throws IOException {
+    protected T buildBody(int statusCode, ResponseBody responseBody) throws IOException {
         if (responseBody == null) {
             return null;
         }
 
-        TypeReference<?> type = null;
+        Type type;
         if (responseTypes.containsKey(statusCode)) {
             type = responseTypes.get(statusCode);
         } else if (responseTypes.containsKey(0)) {
             type = responseTypes.get(0);
         } else {
-            type = new TypeReference<T>() {};
+            type = new TypeReference<T>() {}.getType();
         }
 
         // Void response
-        if (type.getType() == new TypeReference<Void>(){}.getType()) {
+        if (type == Void.class) {
             return null;
         }
         // Return raw response if InputStream is the target type
-        else if (type.getType() == new TypeReference<InputStream>(){}.getType()) {
+        else if (type == InputStream.class) {
             return (T)responseBody.byteStream();
         }
         // Deserialize
@@ -182,8 +175,7 @@ public class ServiceResponseBuilder<T> {
             if (responseContent.length() <= 0) {
                 return null;
             }
-            return JacksonHelper.deserialize(responseContent, type);
+            return deserializer.deserialize(responseContent, type);
         }
     }
-
 }

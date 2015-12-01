@@ -58,13 +58,20 @@ public interface @Model.MethodGroupType {
     {
     @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
     }
-    if (method.ReturnType != null)
+    foreach (var exception in method.ExceptionStatements)
     {
-    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object if successful.
+    @: * @@throws @exception
     }
-    @: * @@throws ServiceException the exception wrapped in ServiceException if failed.
+    if (method.ReturnType.Body != null)
+    {
+    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link ServiceResponse} if successful.
+    }
+    else
+    {
+    @: * @@return the {@@link ServiceResponse} object if successful.
+    }
     @: */
-    @:ServiceResponse<@method.GenericReturnTypeString> @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException;
+    @:ServiceResponse<@method.GenericReturnTypeString> @(method.Name)(@method.MethodParameterDeclaration) throws @method.Exceptions;
     @EmptyLine
     @:/**
     if (!String.IsNullOrEmpty(method.Summary))

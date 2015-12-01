@@ -15,7 +15,11 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
+import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import retrofit.Call;
 import retrofit.http.GET;
@@ -30,6 +34,19 @@ public interface AutoRestReportServiceForAzure {
      * @return The BaseUri value.
      */
     String getBaseUri();
+
+    /**
+     * Gets the list of interceptors the OkHttp client will execute.
+     * @return the list of interceptors.
+     */
+    List<Interceptor> getClientInterceptors();
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum.
+     */
+    void setLogLevel(Level logLevel);
 
     /**
      * Gets the {@link AzureClient} used for long running operations.
@@ -86,9 +103,10 @@ public interface AutoRestReportServiceForAzure {
      * Get test coverage report
      *
      * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<Map<String, Integer>> getReport() throws ServiceException;
+    ServiceResponse<Map<String, Integer>> getReport() throws ServiceException, IOException;
 
     /**
      * Get test coverage report

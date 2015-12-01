@@ -46,7 +46,7 @@ public class FlatteningDeserializer<T> extends StdDeserializer<T> implements Res
             @Override
             public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BeanDescription beanDesc, JsonDeserializer<?> deserializer) {
                 if (vc.isAssignableFrom(beanDesc.getBeanClass()) && vc != beanDesc.getBeanClass())
-                    return new FlatteningDeserializer<BaseResource>(vc, deserializer);
+                    return new FlatteningDeserializer<BaseResource>(beanDesc.getBeanClass(), deserializer);
                 return deserializer;
             }
         });
@@ -56,7 +56,7 @@ public class FlatteningDeserializer<T> extends StdDeserializer<T> implements Res
     @SuppressWarnings("unchecked")
     @Override
     public T deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-        JsonNode root = new AzureJacksonHelper().getObjectMapper().readTree(jp);
+        JsonNode root = new AzureJacksonUtils().getObjectMapper().readTree(jp);
         final Class<?> tClass = this.defaultDeserializer.handledType();
         for (Field field : tClass.getDeclaredFields()) {
             JsonNode node = root;
@@ -69,8 +69,8 @@ public class FlatteningDeserializer<T> extends StdDeserializer<T> implements Res
                         node = node.get(val);
                         if (node == null) break;
                     }
+                    ((ObjectNode)root).put(value, node);
                 }
-                ((ObjectNode)root).put(value, node);
             }
         }
         JsonParser parser = new JsonFactory().createParser(root.toString());

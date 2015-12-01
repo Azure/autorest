@@ -20,6 +20,8 @@ import com.microsoft.rest.Validator;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Error;
 import fixtures.bodycomplex.models.Fish;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -36,18 +38,13 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
     /**
      * Get complex types that are polymorphic and have recursive references
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Fish object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Fish> getValid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getValid();
-            return getValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Fish> getValid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getValid();
+        return getValidDelegate(call.execute(), null);
     }
 
     /**
@@ -62,7 +59,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -70,7 +67,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
         return call;
     }
 
-    private ServiceResponse<Fish> getValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Fish> getValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Fish>()
                 .register(200, new TypeToken<Fish>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -82,7 +79,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
      *
      * @param complexBody Please put a salmon that looks like this:
      {
-         "dtype": "salmon",
+         "fishtype": "salmon",
          "species": "king",
          "length": 1,
          "age": 1,
@@ -90,13 +87,13 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
          "iswild": true,
          "siblings": [
              {
-                 "dtype": "shark",
+                 "fishtype": "shark",
                  "species": "predator",
                  "length": 20,
                  "age": 6,
                  "siblings": [
                      {
-                         "dtype": "salmon",
+                         "fishtype": "salmon",
                          "species": "coho",
                          "length": 2,
                          "age": 2,
@@ -104,13 +101,13 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
                          "iswild": true,
                          "siblings": [
                              {
-                                 "dtype": "shark",
+                                 "fishtype": "shark",
                                  "species": "predator",
                                  "length": 20,
                                  "age": 6
                              },
                              {
-                                 "dtype": "sawshark",
+                                 "fishtype": "sawshark",
                                  "species": "dangerous",
                                  "length": 10,
                                  "age": 105
@@ -118,7 +115,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
                          ]
                      },
                      {
-                         "dtype": "sawshark",
+                         "fishtype": "sawshark",
                          "species": "dangerous",
                          "length": 10,
                          "age": 105
@@ -126,29 +123,24 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
                  ]
              },
              {
-                 "dtype": "sawshark",
+                 "fishtype": "sawshark",
                  "species": "dangerous",
                  "length": 10,
                  "age": 105
              }
          ]
      }
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putValid(Fish complexBody) throws ServiceException {
+    public ServiceResponse<Void> putValid(Fish complexBody) throws ServiceException, IOException, IllegalArgumentException {
         if (complexBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        try {
-            Call<ResponseBody> call = service.putValid(complexBody);
-            return putValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putValid(complexBody);
+        return putValidDelegate(call.execute(), null);
     }
 
     /**
@@ -156,7 +148,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
      *
      * @param complexBody Please put a salmon that looks like this:
      {
-         "dtype": "salmon",
+         "fishtype": "salmon",
          "species": "king",
          "length": 1,
          "age": 1,
@@ -164,13 +156,13 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
          "iswild": true,
          "siblings": [
              {
-                 "dtype": "shark",
+                 "fishtype": "shark",
                  "species": "predator",
                  "length": 20,
                  "age": 6,
                  "siblings": [
                      {
-                         "dtype": "salmon",
+                         "fishtype": "salmon",
                          "species": "coho",
                          "length": 2,
                          "age": 2,
@@ -178,13 +170,13 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
                          "iswild": true,
                          "siblings": [
                              {
-                                 "dtype": "shark",
+                                 "fishtype": "shark",
                                  "species": "predator",
                                  "length": 20,
                                  "age": 6
                              },
                              {
-                                 "dtype": "sawshark",
+                                 "fishtype": "sawshark",
                                  "species": "dangerous",
                                  "length": 10,
                                  "age": 105
@@ -192,7 +184,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
                          ]
                      },
                      {
-                         "dtype": "sawshark",
+                         "fishtype": "sawshark",
                          "species": "dangerous",
                          "length": 10,
                          "age": 105
@@ -200,7 +192,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
                  ]
              },
              {
-                 "dtype": "sawshark",
+                 "fishtype": "sawshark",
                  "species": "dangerous",
                  "length": 10,
                  "age": 105
@@ -211,8 +203,8 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
      */
     public Call<ResponseBody> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putValid(complexBody);
@@ -221,7 +213,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -229,7 +221,7 @@ public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
         return call;
     }
 
-    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

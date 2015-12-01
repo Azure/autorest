@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.Error;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -35,18 +36,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     /**
      * Return 400 status code - should be represented in the client as an error
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> head400() throws ServiceException {
-        try {
-            Call<Void> call = service.head400();
-            return head400Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> head400() throws ServiceException, IOException {
+        Call<Void> call = service.head400();
+        return head400Delegate(call.execute(), null);
     }
 
     /**
@@ -61,7 +57,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -69,7 +65,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> head400Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> head400Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .buildEmpty(response, retrofit);
@@ -78,18 +74,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     /**
      * Return 400 status code - should be represented in the client as an error
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> get400() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get400();
-            return get400Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> get400() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get400();
+        return get400Delegate(call.execute(), null);
     }
 
     /**
@@ -104,7 +95,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -112,7 +103,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> get400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> get400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -122,18 +113,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> put400(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.put400(booleanValue);
-            return put400Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> put400(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.put400(booleanValue);
+        return put400Delegate(call.execute(), null);
     }
 
     /**
@@ -149,7 +135,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(put400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -157,7 +143,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> put400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> put400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -167,18 +153,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> patch400(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.patch400(booleanValue);
-            return patch400Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> patch400(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.patch400(booleanValue);
+        return patch400Delegate(call.execute(), null);
     }
 
     /**
@@ -194,7 +175,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(patch400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -202,7 +183,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> patch400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> patch400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -212,18 +193,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> post400(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.post400(booleanValue);
-            return post400Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> post400(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.post400(booleanValue);
+        return post400Delegate(call.execute(), null);
     }
 
     /**
@@ -239,7 +215,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(post400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -247,7 +223,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> post400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> post400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -257,18 +233,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> delete400(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.delete400(booleanValue);
-            return delete400Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> delete400(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.delete400(booleanValue);
+        return delete400Delegate(call.execute(), null);
     }
 
     /**
@@ -284,7 +255,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(delete400Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -292,7 +263,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> delete400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> delete400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -301,18 +272,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     /**
      * Return 401 status code - should be represented in the client as an error
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> head401() throws ServiceException {
-        try {
-            Call<Void> call = service.head401();
-            return head401Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> head401() throws ServiceException, IOException {
+        Call<Void> call = service.head401();
+        return head401Delegate(call.execute(), null);
     }
 
     /**
@@ -327,7 +293,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head401Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -335,7 +301,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> head401Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> head401Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .buildEmpty(response, retrofit);
@@ -344,18 +310,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     /**
      * Return 402 status code - should be represented in the client as an error
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> get402() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get402();
-            return get402Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> get402() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get402();
+        return get402Delegate(call.execute(), null);
     }
 
     /**
@@ -370,7 +331,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get402Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -378,7 +339,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> get402Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> get402Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -387,18 +348,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     /**
      * Return 403 status code - should be represented in the client as an error
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> get403() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get403();
-            return get403Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> get403() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get403();
+        return get403Delegate(call.execute(), null);
     }
 
     /**
@@ -413,7 +369,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get403Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -421,7 +377,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> get403Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> get403Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -431,18 +387,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * Return 404 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> put404(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.put404(booleanValue);
-            return put404Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> put404(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.put404(booleanValue);
+        return put404Delegate(call.execute(), null);
     }
 
     /**
@@ -458,7 +409,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(put404Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -466,7 +417,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> put404Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> put404Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -476,18 +427,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * Return 405 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> patch405(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.patch405(booleanValue);
-            return patch405Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> patch405(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.patch405(booleanValue);
+        return patch405Delegate(call.execute(), null);
     }
 
     /**
@@ -503,7 +449,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(patch405Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -511,7 +457,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> patch405Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> patch405Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -521,18 +467,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * Return 406 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> post406(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.post406(booleanValue);
-            return post406Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> post406(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.post406(booleanValue);
+        return post406Delegate(call.execute(), null);
     }
 
     /**
@@ -548,7 +489,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(post406Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -556,7 +497,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> post406Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> post406Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -566,18 +507,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * Return 407 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> delete407(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.delete407(booleanValue);
-            return delete407Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> delete407(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.delete407(booleanValue);
+        return delete407Delegate(call.execute(), null);
     }
 
     /**
@@ -593,7 +529,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(delete407Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -601,7 +537,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> delete407Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> delete407Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -611,18 +547,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * Return 409 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> put409(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.put409(booleanValue);
-            return put409Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> put409(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.put409(booleanValue);
+        return put409Delegate(call.execute(), null);
     }
 
     /**
@@ -638,7 +569,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(put409Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -646,7 +577,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> put409Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> put409Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -655,18 +586,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     /**
      * Return 410 status code - should be represented in the client as an error
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> head410() throws ServiceException {
-        try {
-            Call<Void> call = service.head410();
-            return head410Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> head410() throws ServiceException, IOException {
+        Call<Void> call = service.head410();
+        return head410Delegate(call.execute(), null);
     }
 
     /**
@@ -681,7 +607,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head410Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -689,7 +615,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> head410Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> head410Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .buildEmpty(response, retrofit);
@@ -698,18 +624,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     /**
      * Return 411 status code - should be represented in the client as an error
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> get411() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get411();
-            return get411Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> get411() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get411();
+        return get411Delegate(call.execute(), null);
     }
 
     /**
@@ -724,7 +645,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get411Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -732,7 +653,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> get411Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> get411Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -741,18 +662,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     /**
      * Return 412 status code - should be represented in the client as an error
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> get412() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get412();
-            return get412Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> get412() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get412();
+        return get412Delegate(call.execute(), null);
     }
 
     /**
@@ -767,7 +683,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get412Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -775,7 +691,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> get412Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> get412Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -785,18 +701,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * Return 413 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> put413(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.put413(booleanValue);
-            return put413Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> put413(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.put413(booleanValue);
+        return put413Delegate(call.execute(), null);
     }
 
     /**
@@ -812,7 +723,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(put413Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -820,7 +731,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> put413Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> put413Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -830,18 +741,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * Return 414 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> patch414(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.patch414(booleanValue);
-            return patch414Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> patch414(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.patch414(booleanValue);
+        return patch414Delegate(call.execute(), null);
     }
 
     /**
@@ -857,7 +763,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(patch414Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -865,7 +771,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> patch414Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> patch414Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -875,18 +781,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * Return 415 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> post415(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.post415(booleanValue);
-            return post415Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> post415(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.post415(booleanValue);
+        return post415Delegate(call.execute(), null);
     }
 
     /**
@@ -902,7 +803,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(post415Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -910,7 +811,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> post415Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> post415Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -919,18 +820,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     /**
      * Return 416 status code - should be represented in the client as an error
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> get416() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get416();
-            return get416Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> get416() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get416();
+        return get416Delegate(call.execute(), null);
     }
 
     /**
@@ -945,7 +841,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get416Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -953,7 +849,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> get416Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> get416Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -963,18 +859,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
      * Return 417 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> delete417(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.delete417(booleanValue);
-            return delete417Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> delete417(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.delete417(booleanValue);
+        return delete417Delegate(call.execute(), null);
     }
 
     /**
@@ -990,7 +881,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(delete417Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -998,7 +889,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> delete417Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> delete417Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -1007,18 +898,13 @@ public class HttpClientFailureImpl implements HttpClientFailure {
     /**
      * Return 429 status code - should be represented in the client as an error
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> head429() throws ServiceException {
-        try {
-            Call<Void> call = service.head429();
-            return head429Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> head429() throws ServiceException, IOException {
+        Call<Void> call = service.head429();
+        return head429Delegate(call.execute(), null);
     }
 
     /**
@@ -1033,7 +919,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head429Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1041,7 +927,7 @@ public class HttpClientFailureImpl implements HttpClientFailure {
         return call;
     }
 
-    private ServiceResponse<Error> head429Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> head429Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .buildEmpty(response, retrofit);

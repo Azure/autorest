@@ -129,7 +129,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> PutAsyncRelativeRetrySucceededAsync( this ILRORetrysOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.PutAsyncRelativeRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product,LRORetrysPutAsyncRelativeRetrySucceededHeaders> result = await operations.PutAsyncRelativeRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -167,7 +167,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPutAsyncRelativeRetrySucceededAsync( this ILRORetrysOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.BeginPutAsyncRelativeRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product,LRORetrysPutAsyncRelativeRetrySucceededHeaders> result = await operations.BeginPutAsyncRelativeRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -199,7 +199,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> DeleteProvisioning202Accepted200SucceededAsync( this ILRORetrysOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.DeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product,LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> result = await operations.DeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -231,7 +231,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginDeleteProvisioning202Accepted200SucceededAsync( this ILRORetrysOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                AzureOperationResponse<Product,LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> result = await operations.BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

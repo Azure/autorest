@@ -33,4 +33,9 @@ public class @Model.TypeDefinitionName<T> implements Page<T> {
     public String getNextPageLink() {
         return this.nextPageLink;
     }
+    @EmptyLine
+    @@Override
+    public List<T> getItems() {
+        return items;
+    }
 }

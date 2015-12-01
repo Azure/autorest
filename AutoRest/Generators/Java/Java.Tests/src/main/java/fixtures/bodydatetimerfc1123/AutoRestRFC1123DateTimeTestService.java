@@ -10,6 +10,9 @@
 
 package fixtures.bodydatetimerfc1123;
 
+import java.util.List;
+import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 
 /**
  * The interface for AutoRestRFC1123DateTimeTestService class.
@@ -17,9 +20,24 @@ package fixtures.bodydatetimerfc1123;
 public interface AutoRestRFC1123DateTimeTestService {
     /**
      * Gets the URI used as the base for all cloud service requests.
-     * @return The BaseUri value.
+     *
+     * @return the BaseUri value.
      */
     String getBaseUri();
+
+    /**
+     * Gets the list of interceptors the OkHttp client will execute.
+     *
+     * @return the list of interceptors.
+     */
+    List<Interceptor> getClientInterceptors();
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum.
+     */
+    void setLogLevel(Level logLevel);
 
     /**
      * Gets the Datetimerfc1123 object to access its operations.

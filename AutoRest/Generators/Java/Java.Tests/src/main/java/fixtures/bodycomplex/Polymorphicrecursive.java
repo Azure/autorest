@@ -15,6 +15,8 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Fish;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -40,10 +42,11 @@ public interface Polymorphicrecursive {
     /**
      * Get complex types that are polymorphic and have recursive references
      *
-     * @return the Fish object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Fish object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Fish> getValid() throws ServiceException;
+    ServiceResponse<Fish> getValid() throws ServiceException, IOException;
 
     /**
      * Get complex types that are polymorphic and have recursive references
@@ -58,7 +61,7 @@ public interface Polymorphicrecursive {
      *
      * @param complexBody Please put a salmon that looks like this:
  {
-     "dtype": "salmon",
+     "fishtype": "salmon",
      "species": "king",
      "length": 1,
      "age": 1,
@@ -66,13 +69,13 @@ public interface Polymorphicrecursive {
      "iswild": true,
      "siblings": [
          {
-             "dtype": "shark",
+             "fishtype": "shark",
              "species": "predator",
              "length": 20,
              "age": 6,
              "siblings": [
                  {
-                     "dtype": "salmon",
+                     "fishtype": "salmon",
                      "species": "coho",
                      "length": 2,
                      "age": 2,
@@ -80,13 +83,13 @@ public interface Polymorphicrecursive {
                      "iswild": true,
                      "siblings": [
                          {
-                             "dtype": "shark",
+                             "fishtype": "shark",
                              "species": "predator",
                              "length": 20,
                              "age": 6
                          },
                          {
-                             "dtype": "sawshark",
+                             "fishtype": "sawshark",
                              "species": "dangerous",
                              "length": 10,
                              "age": 105
@@ -94,7 +97,7 @@ public interface Polymorphicrecursive {
                      ]
                  },
                  {
-                     "dtype": "sawshark",
+                     "fishtype": "sawshark",
                      "species": "dangerous",
                      "length": 10,
                      "age": 105
@@ -102,23 +105,26 @@ public interface Polymorphicrecursive {
              ]
          },
          {
-             "dtype": "sawshark",
+             "fishtype": "sawshark",
              "species": "dangerous",
              "length": 10,
              "age": 105
          }
      ]
  }
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putValid(Fish complexBody) throws ServiceException;
+    ServiceResponse<Void> putValid(Fish complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types that are polymorphic and have recursive references
      *
      * @param complexBody Please put a salmon that looks like this:
  {
-     "dtype": "salmon",
+     "fishtype": "salmon",
      "species": "king",
      "length": 1,
      "age": 1,
@@ -126,13 +132,13 @@ public interface Polymorphicrecursive {
      "iswild": true,
      "siblings": [
          {
-             "dtype": "shark",
+             "fishtype": "shark",
              "species": "predator",
              "length": 20,
              "age": 6,
              "siblings": [
                  {
-                     "dtype": "salmon",
+                     "fishtype": "salmon",
                      "species": "coho",
                      "length": 2,
                      "age": 2,
@@ -140,13 +146,13 @@ public interface Polymorphicrecursive {
                      "iswild": true,
                      "siblings": [
                          {
-                             "dtype": "shark",
+                             "fishtype": "shark",
                              "species": "predator",
                              "length": 20,
                              "age": 6
                          },
                          {
-                             "dtype": "sawshark",
+                             "fishtype": "sawshark",
                              "species": "dangerous",
                              "length": 10,
                              "age": 105
@@ -154,7 +160,7 @@ public interface Polymorphicrecursive {
                      ]
                  },
                  {
-                     "dtype": "sawshark",
+                     "fishtype": "sawshark",
                      "species": "dangerous",
                      "length": 10,
                      "age": 105
@@ -162,7 +168,7 @@ public interface Polymorphicrecursive {
              ]
          },
          {
-             "dtype": "sawshark",
+             "fishtype": "sawshark",
              "species": "dangerous",
              "length": 10,
              "age": 105

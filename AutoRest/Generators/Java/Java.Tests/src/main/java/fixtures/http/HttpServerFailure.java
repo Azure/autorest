@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.Error;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -48,10 +49,11 @@ public interface HttpServerFailure {
     /**
      * Return 501 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> head501() throws ServiceException;
+    ServiceResponse<Error> head501() throws ServiceException, IOException;
 
     /**
      * Return 501 status code - should be represented in the client as an error
@@ -64,10 +66,11 @@ public interface HttpServerFailure {
     /**
      * Return 501 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> get501() throws ServiceException;
+    ServiceResponse<Error> get501() throws ServiceException, IOException;
 
     /**
      * Return 501 status code - should be represented in the client as an error
@@ -81,10 +84,11 @@ public interface HttpServerFailure {
      * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> post505(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> post505(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 505 status code - should be represented in the client as an error
@@ -99,10 +103,11 @@ public interface HttpServerFailure {
      * Return 505 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> delete505(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> delete505(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 505 status code - should be represented in the client as an error

@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.Error;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -107,10 +108,11 @@ public interface HttpClientFailure {
     /**
      * Return 400 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> head400() throws ServiceException;
+    ServiceResponse<Error> head400() throws ServiceException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error
@@ -123,10 +125,11 @@ public interface HttpClientFailure {
     /**
      * Return 400 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> get400() throws ServiceException;
+    ServiceResponse<Error> get400() throws ServiceException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error
@@ -140,10 +143,11 @@ public interface HttpClientFailure {
      * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> put400(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> put400(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error
@@ -158,10 +162,11 @@ public interface HttpClientFailure {
      * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> patch400(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> patch400(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error
@@ -176,10 +181,11 @@ public interface HttpClientFailure {
      * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> post400(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> post400(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error
@@ -194,10 +200,11 @@ public interface HttpClientFailure {
      * Return 400 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> delete400(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> delete400(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error
@@ -211,10 +218,11 @@ public interface HttpClientFailure {
     /**
      * Return 401 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> head401() throws ServiceException;
+    ServiceResponse<Error> head401() throws ServiceException, IOException;
 
     /**
      * Return 401 status code - should be represented in the client as an error
@@ -227,10 +235,11 @@ public interface HttpClientFailure {
     /**
      * Return 402 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> get402() throws ServiceException;
+    ServiceResponse<Error> get402() throws ServiceException, IOException;
 
     /**
      * Return 402 status code - should be represented in the client as an error
@@ -243,10 +252,11 @@ public interface HttpClientFailure {
     /**
      * Return 403 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> get403() throws ServiceException;
+    ServiceResponse<Error> get403() throws ServiceException, IOException;
 
     /**
      * Return 403 status code - should be represented in the client as an error
@@ -260,10 +270,11 @@ public interface HttpClientFailure {
      * Return 404 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> put404(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> put404(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 404 status code - should be represented in the client as an error
@@ -278,10 +289,11 @@ public interface HttpClientFailure {
      * Return 405 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> patch405(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> patch405(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 405 status code - should be represented in the client as an error
@@ -296,10 +308,11 @@ public interface HttpClientFailure {
      * Return 406 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> post406(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> post406(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 406 status code - should be represented in the client as an error
@@ -314,10 +327,11 @@ public interface HttpClientFailure {
      * Return 407 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> delete407(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> delete407(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 407 status code - should be represented in the client as an error
@@ -332,10 +346,11 @@ public interface HttpClientFailure {
      * Return 409 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> put409(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> put409(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 409 status code - should be represented in the client as an error
@@ -349,10 +364,11 @@ public interface HttpClientFailure {
     /**
      * Return 410 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> head410() throws ServiceException;
+    ServiceResponse<Error> head410() throws ServiceException, IOException;
 
     /**
      * Return 410 status code - should be represented in the client as an error
@@ -365,10 +381,11 @@ public interface HttpClientFailure {
     /**
      * Return 411 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> get411() throws ServiceException;
+    ServiceResponse<Error> get411() throws ServiceException, IOException;
 
     /**
      * Return 411 status code - should be represented in the client as an error
@@ -381,10 +398,11 @@ public interface HttpClientFailure {
     /**
      * Return 412 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> get412() throws ServiceException;
+    ServiceResponse<Error> get412() throws ServiceException, IOException;
 
     /**
      * Return 412 status code - should be represented in the client as an error
@@ -398,10 +416,11 @@ public interface HttpClientFailure {
      * Return 413 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> put413(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> put413(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 413 status code - should be represented in the client as an error
@@ -416,10 +435,11 @@ public interface HttpClientFailure {
      * Return 414 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> patch414(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> patch414(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 414 status code - should be represented in the client as an error
@@ -434,10 +454,11 @@ public interface HttpClientFailure {
      * Return 415 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> post415(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> post415(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 415 status code - should be represented in the client as an error
@@ -451,10 +472,11 @@ public interface HttpClientFailure {
     /**
      * Return 416 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> get416() throws ServiceException;
+    ServiceResponse<Error> get416() throws ServiceException, IOException;
 
     /**
      * Return 416 status code - should be represented in the client as an error
@@ -468,10 +490,11 @@ public interface HttpClientFailure {
      * Return 417 status code - should be represented in the client as an error
      *
      * @param booleanValue Simple boolean value true
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> delete417(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Error> delete417(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 417 status code - should be represented in the client as an error
@@ -485,10 +508,11 @@ public interface HttpClientFailure {
     /**
      * Return 429 status code - should be represented in the client as an error
      *
-     * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> head429() throws ServiceException;
+    ServiceResponse<Error> head429() throws ServiceException, IOException;
 
     /**
      * Return 429 status code - should be represented in the client as an error

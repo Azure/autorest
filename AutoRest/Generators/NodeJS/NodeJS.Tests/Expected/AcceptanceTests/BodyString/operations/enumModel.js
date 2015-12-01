@@ -12,10 +12,7 @@
 
 var util = require('util');
 var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
 var WebResource = msRest.WebResource;
-
-var models = require('../models');
 
 /**
  * @class
@@ -173,8 +170,8 @@ EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) 
       if (!allowedValues.some( function(item) { return item === stringBody; })) {
         throw new Error(stringBody + ' is not a valid value. The valid values are: ' + allowedValues);
       }
-    }
-     else {  throw new Error('stringBody cannot be null or undefined.');
+    } else {
+      throw new Error('stringBody cannot be null or undefined.');
     }
   } catch (error) {
     return callback(error);
@@ -211,8 +208,8 @@ EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) 
         throw new Error(stringBody + ' is not a valid value. The valid values are: ' + allowedValues1);
       }
       requestModel = stringBody;
-    }
-     else {  throw new Error('stringBody cannot be null or undefined.');
+    } else {
+      throw new Error('stringBody cannot be null or undefined.');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {

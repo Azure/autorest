@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import java.util.List;
 import retrofit.Call;
 import retrofit.http.Body;
@@ -83,9 +84,11 @@ public interface HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> head300() throws ServiceException;
+    ServiceResponse<Void> head300() throws ServiceException, IOException;
 
     /**
      * Return 300 status code and redirect to /http/success/200
@@ -98,10 +101,11 @@ public interface HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200
      *
-     * @return the List&lt;String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<String>> get300() throws ServiceException;
+    ServiceResponse<List<String>> get300() throws ServiceException, IOException;
 
     /**
      * Return 300 status code and redirect to /http/success/200
@@ -114,9 +118,11 @@ public interface HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> head301() throws ServiceException;
+    ServiceResponse<Void> head301() throws ServiceException, IOException;
 
     /**
      * Return 301 status code and redirect to /http/success/200
@@ -129,9 +135,11 @@ public interface HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> get301() throws ServiceException;
+    ServiceResponse<Void> get301() throws ServiceException, IOException;
 
     /**
      * Return 301 status code and redirect to /http/success/200
@@ -145,9 +153,11 @@ public interface HttpRedirects {
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> put301(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> put301(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation
@@ -161,9 +171,11 @@ public interface HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> head302() throws ServiceException;
+    ServiceResponse<Void> head302() throws ServiceException, IOException;
 
     /**
      * Return 302 status code and redirect to /http/success/200
@@ -176,9 +188,11 @@ public interface HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> get302() throws ServiceException;
+    ServiceResponse<Void> get302() throws ServiceException, IOException;
 
     /**
      * Return 302 status code and redirect to /http/success/200
@@ -192,9 +206,11 @@ public interface HttpRedirects {
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> patch302(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> patch302(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation
@@ -209,9 +225,11 @@ public interface HttpRedirects {
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> post303(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> post303(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code
@@ -225,9 +243,11 @@ public interface HttpRedirects {
     /**
      * Redirect with 307, resulting in a 200 success
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> head307() throws ServiceException;
+    ServiceResponse<Void> head307() throws ServiceException, IOException;
 
     /**
      * Redirect with 307, resulting in a 200 success
@@ -240,9 +260,11 @@ public interface HttpRedirects {
     /**
      * Redirect get with 307, resulting in a 200 success
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> get307() throws ServiceException;
+    ServiceResponse<Void> get307() throws ServiceException, IOException;
 
     /**
      * Redirect get with 307, resulting in a 200 success
@@ -256,9 +278,11 @@ public interface HttpRedirects {
      * Put redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> put307(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> put307(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect
@@ -273,9 +297,11 @@ public interface HttpRedirects {
      * Patch redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> patch307(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> patch307(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect
@@ -290,9 +316,11 @@ public interface HttpRedirects {
      * Post redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> post307(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> post307(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect
@@ -307,9 +335,11 @@ public interface HttpRedirects {
      * Delete redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> delete307(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> delete307(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect

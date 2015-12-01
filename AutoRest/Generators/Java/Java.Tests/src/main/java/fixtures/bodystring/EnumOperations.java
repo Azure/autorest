@@ -15,6 +15,8 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodystring.models.Colors;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -40,10 +42,11 @@ public interface EnumOperations {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return the Colors object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Colors object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Colors> getNotExpandable() throws ServiceException;
+    ServiceResponse<Colors> getNotExpandable() throws ServiceException, IOException;
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -57,9 +60,12 @@ public interface EnumOperations {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
      *
      * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putNotExpandable(Colors stringBody) throws ServiceException;
+    ServiceResponse<Void> putNotExpandable(Colors stringBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'

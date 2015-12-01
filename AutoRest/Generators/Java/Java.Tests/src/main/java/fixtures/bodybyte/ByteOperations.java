@@ -14,6 +14,8 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -48,10 +50,11 @@ public interface ByteOperations {
     /**
      * Get null byte value
      *
-     * @return the byte[] object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<byte[]> getNull() throws ServiceException;
+    ServiceResponse<byte[]> getNull() throws ServiceException, IOException;
 
     /**
      * Get null byte value
@@ -64,10 +67,11 @@ public interface ByteOperations {
     /**
      * Get empty byte value ''
      *
-     * @return the byte[] object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<byte[]> getEmpty() throws ServiceException;
+    ServiceResponse<byte[]> getEmpty() throws ServiceException, IOException;
 
     /**
      * Get empty byte value ''
@@ -80,10 +84,11 @@ public interface ByteOperations {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
-     * @return the byte[] object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<byte[]> getNonAscii() throws ServiceException;
+    ServiceResponse<byte[]> getNonAscii() throws ServiceException, IOException;
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
@@ -97,9 +102,12 @@ public interface ByteOperations {
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putNonAscii(byte[] byteBody) throws ServiceException;
+    ServiceResponse<Void> putNonAscii(byte[] byteBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
@@ -113,10 +121,11 @@ public interface ByteOperations {
     /**
      * Get invalid byte value ':::SWAGGER::::'
      *
-     * @return the byte[] object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<byte[]> getInvalid() throws ServiceException;
+    ServiceResponse<byte[]> getInvalid() throws ServiceException, IOException;
 
     /**
      * Get invalid byte value ':::SWAGGER::::'

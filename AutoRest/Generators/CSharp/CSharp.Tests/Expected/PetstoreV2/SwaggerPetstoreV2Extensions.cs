@@ -523,7 +523,7 @@ namespace Fixtures.PetstoreV2
             /// </param>
             public static async Task<string> LoginUserAsync( this ISwaggerPetstoreV2 operations, string username, string password, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<string> result = await operations.LoginUserWithHttpMessagesAsync(username, password, null, cancellationToken).ConfigureAwait(false);
+                HttpOperationResponse<string,LoginUserHeaders> result = await operations.LoginUserWithHttpMessagesAsync(username, password, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

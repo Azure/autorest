@@ -12,7 +12,7 @@ package fixtures.requiredoptional;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.serializer.CollectionFormat;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -30,6 +30,8 @@ import fixtures.requiredoptional.models.IntWrapper;
 import fixtures.requiredoptional.models.Product;
 import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import java.util.List;
 import retrofit.Call;
 import retrofit.Response;
@@ -48,18 +50,13 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the int value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredIntegerParameter(int bodyParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postRequiredIntegerParameter(bodyParameter);
-            return postRequiredIntegerParameterDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> postRequiredIntegerParameter(int bodyParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.postRequiredIntegerParameter(bodyParameter);
+        return postRequiredIntegerParameterDelegate(call.execute(), null);
     }
 
     /**
@@ -75,7 +72,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postRequiredIntegerParameterDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -83,7 +80,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredIntegerParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> postRequiredIntegerParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -93,17 +90,12 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional integer. Please put null.
      *
      * @param bodyParameter the Integer value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> postOptionalIntegerParameter(Integer bodyParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
-            return postOptionalIntegerParameterDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postOptionalIntegerParameter(Integer bodyParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
+        return postOptionalIntegerParameterDelegate(call.execute(), null);
     }
 
     /**
@@ -119,7 +111,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postOptionalIntegerParameterDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -127,7 +119,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalIntegerParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> postOptionalIntegerParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -138,23 +130,18 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the IntWrapper value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredIntegerProperty(IntWrapper bodyParameter) throws ServiceException {
+    public ServiceResponse<Error> postRequiredIntegerProperty(IntWrapper bodyParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (bodyParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        try {
-            Call<ResponseBody> call = service.postRequiredIntegerProperty(bodyParameter);
-            return postRequiredIntegerPropertyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.postRequiredIntegerProperty(bodyParameter);
+        return postRequiredIntegerPropertyDelegate(call.execute(), null);
     }
 
     /**
@@ -165,8 +152,8 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredIntegerProperty(bodyParameter);
@@ -175,7 +162,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postRequiredIntegerPropertyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -183,7 +170,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredIntegerPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> postRequiredIntegerPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -193,17 +180,12 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter the IntOptionalWrapper value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
-            return postOptionalIntegerPropertyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
+        return postOptionalIntegerPropertyDelegate(call.execute(), null);
     }
 
     /**
@@ -219,7 +201,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postOptionalIntegerPropertyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -227,7 +209,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalIntegerPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> postOptionalIntegerPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -238,18 +220,13 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the int value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredIntegerHeader(int headerParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postRequiredIntegerHeader(headerParameter);
-            return postRequiredIntegerHeaderDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Error> postRequiredIntegerHeader(int headerParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.postRequiredIntegerHeader(headerParameter);
+        return postRequiredIntegerHeaderDelegate(call.execute(), null);
     }
 
     /**
@@ -265,7 +242,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postRequiredIntegerHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -273,7 +250,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredIntegerHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> postRequiredIntegerHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -283,17 +260,12 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the Integer value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> postOptionalIntegerHeader(Integer headerParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
-            return postOptionalIntegerHeaderDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postOptionalIntegerHeader(Integer headerParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
+        return postOptionalIntegerHeaderDelegate(call.execute(), null);
     }
 
     /**
@@ -309,7 +281,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postOptionalIntegerHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -317,7 +289,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalIntegerHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> postOptionalIntegerHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -328,22 +300,17 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the String value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredStringParameter(String bodyParameter) throws ServiceException {
+    public ServiceResponse<Error> postRequiredStringParameter(String bodyParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (bodyParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
-        try {
-            Call<ResponseBody> call = service.postRequiredStringParameter(bodyParameter);
-            return postRequiredStringParameterDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.postRequiredStringParameter(bodyParameter);
+        return postRequiredStringParameterDelegate(call.execute(), null);
     }
 
     /**
@@ -354,8 +321,8 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            return null;
         }
         Call<ResponseBody> call = service.postRequiredStringParameter(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
@@ -363,7 +330,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postRequiredStringParameterDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -371,7 +338,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredStringParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> postRequiredStringParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -381,17 +348,12 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional string. Please put null.
      *
      * @param bodyParameter the String value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> postOptionalStringParameter(String bodyParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
-            return postOptionalStringParameterDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postOptionalStringParameter(String bodyParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
+        return postOptionalStringParameterDelegate(call.execute(), null);
     }
 
     /**
@@ -407,7 +369,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postOptionalStringParameterDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -415,7 +377,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalStringParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> postOptionalStringParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -426,23 +388,18 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the StringWrapper value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredStringProperty(StringWrapper bodyParameter) throws ServiceException {
+    public ServiceResponse<Error> postRequiredStringProperty(StringWrapper bodyParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (bodyParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        try {
-            Call<ResponseBody> call = service.postRequiredStringProperty(bodyParameter);
-            return postRequiredStringPropertyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.postRequiredStringProperty(bodyParameter);
+        return postRequiredStringPropertyDelegate(call.execute(), null);
     }
 
     /**
@@ -453,8 +410,8 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredStringProperty(bodyParameter);
@@ -463,7 +420,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postRequiredStringPropertyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -471,7 +428,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredStringPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> postRequiredStringPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -481,17 +438,12 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter the StringOptionalWrapper value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
-            return postOptionalStringPropertyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
+        return postOptionalStringPropertyDelegate(call.execute(), null);
     }
 
     /**
@@ -507,7 +459,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postOptionalStringPropertyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -515,7 +467,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalStringPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> postOptionalStringPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -526,22 +478,17 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the String value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredStringHeader(String headerParameter) throws ServiceException {
+    public ServiceResponse<Error> postRequiredStringHeader(String headerParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (headerParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
-        try {
-            Call<ResponseBody> call = service.postRequiredStringHeader(headerParameter);
-            return postRequiredStringHeaderDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.postRequiredStringHeader(headerParameter);
+        return postRequiredStringHeaderDelegate(call.execute(), null);
     }
 
     /**
@@ -552,8 +499,8 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback) {
         if (headerParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter headerParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
+            return null;
         }
         Call<ResponseBody> call = service.postRequiredStringHeader(headerParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
@@ -561,7 +508,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postRequiredStringHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -569,7 +516,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredStringHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> postRequiredStringHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -579,17 +526,12 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter the String value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> postOptionalStringHeader(String bodyParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
-            return postOptionalStringHeaderDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postOptionalStringHeader(String bodyParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
+        return postOptionalStringHeaderDelegate(call.execute(), null);
     }
 
     /**
@@ -605,7 +547,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postOptionalStringHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -613,7 +555,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalStringHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> postOptionalStringHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -624,23 +566,18 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the Product value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredClassParameter(Product bodyParameter) throws ServiceException {
+    public ServiceResponse<Error> postRequiredClassParameter(Product bodyParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (bodyParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        try {
-            Call<ResponseBody> call = service.postRequiredClassParameter(bodyParameter);
-            return postRequiredClassParameterDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.postRequiredClassParameter(bodyParameter);
+        return postRequiredClassParameterDelegate(call.execute(), null);
     }
 
     /**
@@ -651,8 +588,8 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredClassParameter(bodyParameter);
@@ -661,7 +598,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postRequiredClassParameterDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -669,7 +606,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredClassParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> postRequiredClassParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -679,17 +616,12 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional complex object. Please put null.
      *
      * @param bodyParameter the Product value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> postOptionalClassParameter(Product bodyParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
-            return postOptionalClassParameterDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postOptionalClassParameter(Product bodyParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
+        return postOptionalClassParameterDelegate(call.execute(), null);
     }
 
     /**
@@ -705,7 +637,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postOptionalClassParameterDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -713,7 +645,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalClassParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> postOptionalClassParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -724,23 +656,18 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ClassWrapper value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredClassProperty(ClassWrapper bodyParameter) throws ServiceException {
+    public ServiceResponse<Error> postRequiredClassProperty(ClassWrapper bodyParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (bodyParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        try {
-            Call<ResponseBody> call = service.postRequiredClassProperty(bodyParameter);
-            return postRequiredClassPropertyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.postRequiredClassProperty(bodyParameter);
+        return postRequiredClassPropertyDelegate(call.execute(), null);
     }
 
     /**
@@ -751,8 +678,8 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredClassProperty(bodyParameter);
@@ -761,7 +688,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postRequiredClassPropertyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -769,7 +696,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredClassPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> postRequiredClassPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -779,17 +706,12 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter the ClassOptionalWrapper value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
-            return postOptionalClassPropertyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
+        return postOptionalClassPropertyDelegate(call.execute(), null);
     }
 
     /**
@@ -805,7 +727,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postOptionalClassPropertyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -813,7 +735,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalClassPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> postOptionalClassPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -824,23 +746,18 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the List&lt;String&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredArrayParameter(List<String> bodyParameter) throws ServiceException {
+    public ServiceResponse<Error> postRequiredArrayParameter(List<String> bodyParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (bodyParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        try {
-            Call<ResponseBody> call = service.postRequiredArrayParameter(bodyParameter);
-            return postRequiredArrayParameterDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.postRequiredArrayParameter(bodyParameter);
+        return postRequiredArrayParameterDelegate(call.execute(), null);
     }
 
     /**
@@ -851,8 +768,8 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredArrayParameter(bodyParameter);
@@ -861,7 +778,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postRequiredArrayParameterDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -869,7 +786,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredArrayParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> postRequiredArrayParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -879,17 +796,12 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional array. Please put null.
      *
      * @param bodyParameter the List&lt;String&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> postOptionalArrayParameter(List<String> bodyParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
-            return postOptionalArrayParameterDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postOptionalArrayParameter(List<String> bodyParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
+        return postOptionalArrayParameterDelegate(call.execute(), null);
     }
 
     /**
@@ -905,7 +817,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postOptionalArrayParameterDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -913,7 +825,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalArrayParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> postOptionalArrayParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -924,23 +836,18 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ArrayWrapper value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ServiceException {
+    public ServiceResponse<Error> postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (bodyParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        try {
-            Call<ResponseBody> call = service.postRequiredArrayProperty(bodyParameter);
-            return postRequiredArrayPropertyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.postRequiredArrayProperty(bodyParameter);
+        return postRequiredArrayPropertyDelegate(call.execute(), null);
     }
 
     /**
@@ -951,8 +858,8 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
+            return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredArrayProperty(bodyParameter);
@@ -961,7 +868,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postRequiredArrayPropertyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -969,7 +876,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredArrayPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> postRequiredArrayPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -979,17 +886,12 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter the ArrayOptionalWrapper value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
-            return postOptionalArrayPropertyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
+        return postOptionalArrayPropertyDelegate(call.execute(), null);
     }
 
     /**
@@ -1005,7 +907,7 @@ public class ExplicitImpl implements Explicit {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postOptionalArrayPropertyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1013,7 +915,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalArrayPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> postOptionalArrayPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -1024,23 +926,18 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the List&lt;String&gt; value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Error> postRequiredArrayHeader(List<String> headerParameter) throws ServiceException {
+    public ServiceResponse<Error> postRequiredArrayHeader(List<String> headerParameter) throws ServiceException, IOException, IllegalArgumentException {
         if (headerParameter == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
         Validator.validate(headerParameter);
-        try {
-            Call<ResponseBody> call = service.postRequiredArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
-            return postRequiredArrayHeaderDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.postRequiredArrayHeader(JacksonUtils.serializeList(headerParameter, CollectionFormat.CSV));
+        return postRequiredArrayHeaderDelegate(call.execute(), null);
     }
 
     /**
@@ -1051,17 +948,17 @@ public class ExplicitImpl implements Explicit {
      */
     public Call<ResponseBody> postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback) {
         if (headerParameter == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter headerParameter is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
+            return null;
         }
         Validator.validate(headerParameter, serviceCallback);
-        Call<ResponseBody> call = service.postRequiredArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.postRequiredArrayHeader(JacksonUtils.serializeList(headerParameter, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postRequiredArrayHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1069,7 +966,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredArrayHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Error> postRequiredArrayHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);
@@ -1079,17 +976,12 @@ public class ExplicitImpl implements Explicit {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the List&lt;String&gt; value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> postOptionalArrayHeader(List<String> headerParameter) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.postOptionalArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
-            return postOptionalArrayHeaderDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> postOptionalArrayHeader(List<String> headerParameter) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.postOptionalArrayHeader(JacksonUtils.serializeList(headerParameter, CollectionFormat.CSV));
+        return postOptionalArrayHeaderDelegate(call.execute(), null);
     }
 
     /**
@@ -1099,13 +991,13 @@ public class ExplicitImpl implements Explicit {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      */
     public Call<ResponseBody> postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.postOptionalArrayHeader(JacksonHelper.serializeList(headerParameter, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.postOptionalArrayHeader(JacksonUtils.serializeList(headerParameter, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(postOptionalArrayHeaderDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1113,7 +1005,7 @@ public class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalArrayHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> postOptionalArrayHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

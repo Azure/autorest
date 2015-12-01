@@ -21,7 +21,7 @@ package @(Settings.Namespace.ToLower());
 /**
  * Initializes a new instance of the @Model.Name class.
  */
-public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
+public class @(Model.Name)Impl extends AzureServiceClient implements @Model.Name {
 @if (Model.MethodTemplateModels.Any())
 {
 @:    private @Model.ServiceClientServiceType service;
@@ -74,14 +74,12 @@ if(!property.IsReadOnly)
 @foreach (var operation in Model.Operations)
 {
 @EmptyLine
-@:    private @(operation.MethodGroupType) @(operation.MethodGroupName.ToCamelCase());
-@EmptyLine
 @:    /**
 @:     * Gets the @(operation.MethodGroupType) object to access its operations.
 @:     * @@return the @(operation.MethodGroupName) value.
 @:     */
 @:    public @(operation.MethodGroupType) get@(operation.MethodGroupName.ToPascalCase())() {
-@:        return this.@(operation.MethodGroupName.ToCamelCase());
+@:        return new @(operation.MethodGroupType)Impl(this.retrofitBuilder.build(), this);
 @:    }
 }
 @EmptyLine
@@ -98,11 +96,54 @@ if(!property.IsReadOnly)
      * @@param baseUri the base URI of the host
      */
     public @(Model.Name)Impl(String baseUri) {
+        this(baseUri, null);
+    }
+@EmptyLine
+@if (Settings.AddCredentials)
+{
+<text>
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param credentials the management credentials for Azure
+     */
+    public @(Model.Name)Impl(ServiceClientCredentials credentials) {
+        this("@Model.BaseUrl", credentials);
+    }
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUri the base URI of the host
+     * @@param credentials the management credentials for Azure
+     */
+    public @(Model.Name)Impl(String baseUri, ServiceClientCredentials credentials) {
         super();
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 @EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUri the base URI of the host
+     * @@param credentials the management credentials for Azure
+     * @@param client the {@@link OkHttpClient} client to use for REST calls
+     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
+     */
+    public @(Model.Name)Impl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+        super(client, retrofitBuilder);
+        this.baseUri = baseUri;
+        this.credentials = credentials;
+        initialize();
+    }
+@EmptyLine
+</text>
+}
+else
+{
+<text>
     /**
      * Initializes an instance of @(Model.Name) client.
      *
@@ -116,6 +157,8 @@ if(!property.IsReadOnly)
         initialize();
     }
 @EmptyLine
+</text>
+}
     private void initialize() {
     @if (Settings.AddCredentials)
     {
@@ -124,19 +167,19 @@ if(!property.IsReadOnly)
 @:            this.credentials.applyCredentialsFilter(this.client);
 @:        }
     }
-
+    
+@foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+{
+        @:this.@(property.Name) = @(property.DefaultValue);
+}
+        @Model.SetDefaultHeaders
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
 
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
 @if (Model.MethodTemplateModels.Any())
 {
-@:        service = retrofit.create(@(Model.ServiceClientServiceType).class);
-}
-@foreach (var operation in Model.Operations)
-{
-@:        this.@(operation.MethodGroupName.ToCamelCase()) = new @(operation.MethodGroupType)Impl(retrofit, this);
+@:        service = this.retrofitBuilder.build().create(@(Model.ServiceClientServiceType).class);
 }
     }
 @if (Model.MethodTemplateModels.Any())

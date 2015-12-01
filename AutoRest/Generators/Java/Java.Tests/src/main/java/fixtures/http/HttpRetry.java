@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -61,9 +62,11 @@ public interface HttpRetry {
     /**
      * Return 408 status code, then 200 after retry
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> head408() throws ServiceException;
+    ServiceResponse<Void> head408() throws ServiceException, IOException;
 
     /**
      * Return 408 status code, then 200 after retry
@@ -77,9 +80,11 @@ public interface HttpRetry {
      * Return 500 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> put500(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> put500(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 500 status code, then 200 after retry
@@ -94,9 +99,11 @@ public interface HttpRetry {
      * Return 500 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> patch500(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> patch500(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 500 status code, then 200 after retry
@@ -110,9 +117,11 @@ public interface HttpRetry {
     /**
      * Return 502 status code, then 200 after retry
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> get502() throws ServiceException;
+    ServiceResponse<Void> get502() throws ServiceException, IOException;
 
     /**
      * Return 502 status code, then 200 after retry
@@ -126,9 +135,11 @@ public interface HttpRetry {
      * Return 503 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> post503(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> post503(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 503 status code, then 200 after retry
@@ -143,9 +154,11 @@ public interface HttpRetry {
      * Return 503 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> delete503(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> delete503(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 503 status code, then 200 after retry
@@ -160,9 +173,11 @@ public interface HttpRetry {
      * Return 504 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> put504(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> put504(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 504 status code, then 200 after retry
@@ -177,9 +192,11 @@ public interface HttpRetry {
      * Return 504 status code, then 200 after retry
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> patch504(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> patch504(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Return 504 status code, then 200 after retry

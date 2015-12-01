@@ -12,17 +12,21 @@ package fixtures.azurereport;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.AzureServiceClient;
+import com.microsoft.rest.AzureServiceResponseBuilder;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.CustomHeaderInterceptor;
+import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azurereport.models.Error;
+import java.io.IOException;
 import java.util.Map;
+import java.util.UUID;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -30,7 +34,7 @@ import retrofit.Retrofit;
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzure class.
  */
-public class AutoRestReportServiceForAzureImpl extends ServiceClient implements AutoRestReportServiceForAzure {
+public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implements AutoRestReportServiceForAzure {
     private AutoRestReportServiceForAzureService service;
     private String baseUri;
     private AzureClient azureClient;
@@ -115,8 +119,28 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
      * @param baseUri the base URI of the host
      */
     public AutoRestReportServiceForAzureImpl(String baseUri) {
+        this(baseUri, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestReportServiceForAzure client.
+     *
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestReportServiceForAzureImpl(ServiceClientCredentials credentials) {
+        this("http://localhost", credentials);
+    }
+
+    /**
+     * Initializes an instance of AutoRestReportServiceForAzure client.
+     *
+     * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestReportServiceForAzureImpl(String baseUri, ServiceClientCredentials credentials) {
         super();
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -124,12 +148,14 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
      * Initializes an instance of AutoRestReportServiceForAzure client.
      *
      * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
      * @param client the {@link OkHttpClient} client to use for REST calls
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestReportServiceForAzureImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+    public AutoRestReportServiceForAzureImpl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -138,28 +164,24 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
+        this.acceptLanguage = "en-US";
+        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        service = retrofit.create(AutoRestReportServiceForAzureService.class);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        service = this.retrofitBuilder.build().create(AutoRestReportServiceForAzureService.class);
     }
 
     /**
      * Get test coverage report
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Map<String, Integer>> getReport() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getReport(this.getAcceptLanguage());
-            return getReportDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Map<String, Integer>> getReport() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getReport(this.getAcceptLanguage());
+        return getReportDelegate(call.execute(), null);
     }
 
     /**
@@ -174,7 +196,7 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getReportDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -182,8 +204,8 @@ public class AutoRestReportServiceForAzureImpl extends ServiceClient implements 
         return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
-        return new ServiceResponseBuilder<Map<String, Integer>>()
+    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+        return new AzureServiceResponseBuilder<Map<String, Integer>>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Map<String, Integer>>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
                 .build(response, retrofit);

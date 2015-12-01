@@ -1,8 +1,8 @@
 package fixtures.bodydatetime;
 
-import com.microsoft.rest.ServiceException;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.IllegalFieldValueException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -27,8 +27,7 @@ public class DatetimeOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("Invalid format"));
+            Assert.assertEquals(IllegalArgumentException.class, exception.getClass());
         }
     }
 
@@ -48,9 +47,8 @@ public class DatetimeOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("IllegalFieldValueException"));
-        }
+            Assert.assertEquals(IllegalFieldValueException.class, exception.getClass());
+         }
     }
 
     @Test

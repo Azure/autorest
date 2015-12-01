@@ -3,7 +3,7 @@ package fixtures.lro;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.serializer.AzureJacksonHelper;
+import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.squareup.okhttp.OkHttpClient;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
@@ -29,17 +29,8 @@ public class LROsTests {
 
     @BeforeClass
     public static void setup() {
-        OkHttpClient httpClient = new OkHttpClient();
-        CookieManager cookieManager = new CookieManager();
-        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-        httpClient.setCookieHandler(cookieManager);
-        Executor executor = Executors.newCachedThreadPool();
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .addConverterFactory(JacksonConverterFactory.create(new AzureJacksonHelper().getObjectMapper()))
-                .callbackExecutor(executor);
-
-        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost.:3000", httpClient, builder);
-        client.setLongRunningOperationRetryTimeout(0);
+        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost.:3000");
+        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
     }
 
     @Test
@@ -241,16 +232,16 @@ public class LROsTests {
 
     @Test
     public void deleteProvisioning202DeletingFailed200() throws Exception {
-        ServiceResponse<Product> response = client.getLROs().deleteProvisioning202Accepted200Succeeded();
+        ServiceResponse<Product> response = client.getLROs().deleteProvisioning202DeletingFailed200();
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Failed", response.getBody().getProvisioningState());
     }
 
     @Test
     public void deleteProvisioning202Deletingcanceled200() throws Exception {
-        ServiceResponse<Product> response = client.getLROs().deleteProvisioning202Accepted200Succeeded();
+        ServiceResponse<Product> response = client.getLROs().deleteProvisioning202Deletingcanceled200();
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Canceled", response.getBody().getProvisioningState());
     }
 
     @Test

@@ -28,6 +28,7 @@
     <Compile Include="ClientModel\CollectionFormat.cs" />
     <Compile Include="ClientModel\EnumValue.cs" />
     <Compile Include="ClientModel\EnumType.cs" />
+    <Compile Include="ClientModel\Response.cs" />
     <Compile Include="ClientModel\ParameterTransformation.cs" />
     <Compile Include="ClientModel\ParameterMapping.cs" />
     <Compile Include="ClientModel\PrimaryType.cs" />

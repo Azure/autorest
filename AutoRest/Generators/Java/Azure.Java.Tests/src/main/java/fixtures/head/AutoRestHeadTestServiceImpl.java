@@ -11,15 +11,17 @@
 package fixtures.head;
 
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.CustomHeaderInterceptor;
 import com.squareup.okhttp.OkHttpClient;
+import java.util.UUID;
 import retrofit.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestHeadTestService class.
  */
-public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRestHeadTestService {
+public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements AutoRestHeadTestService {
     private String baseUri;
     private AzureClient azureClient;
 
@@ -90,14 +92,12 @@ public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRe
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private HttpSuccess httpSuccess;
-
     /**
-     * Gets the HttpSuccess object to access its operations.
+     * Gets the HttpSuccessOperations object to access its operations.
      * @return the httpSuccess value.
      */
-    public HttpSuccess getHttpSuccess() {
-        return this.httpSuccess;
+    public HttpSuccessOperations getHttpSuccess() {
+        return new HttpSuccessOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -113,8 +113,28 @@ public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRe
      * @param baseUri the base URI of the host
      */
     public AutoRestHeadTestServiceImpl(String baseUri) {
+        this(baseUri, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestHeadTestService client.
+     *
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestHeadTestServiceImpl(ServiceClientCredentials credentials) {
+        this("http://localhost", credentials);
+    }
+
+    /**
+     * Initializes an instance of AutoRestHeadTestService client.
+     *
+     * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestHeadTestServiceImpl(String baseUri, ServiceClientCredentials credentials) {
         super();
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -122,12 +142,14 @@ public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRe
      * Initializes an instance of AutoRestHeadTestService client.
      *
      * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
      * @param client the {@link OkHttpClient} client to use for REST calls
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestHeadTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+    public AutoRestHeadTestServiceImpl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -136,10 +158,10 @@ public class AutoRestHeadTestServiceImpl extends ServiceClient implements AutoRe
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
+        this.acceptLanguage = "en-US";
+        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.httpSuccess = new HttpSuccessImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

@@ -94,6 +94,22 @@ namespace Microsoft.Rest.Generator
             client.ModelTypes.Clear();
             normalizedModels.ForEach( (item) => client.ModelTypes.Add(item));
 
+            var normalizedErrors = new List<CompositeType>();
+            foreach (var modelType in client.ErrorTypes)
+            {
+                normalizedErrors.Add(NormalizeTypeDeclaration(modelType) as CompositeType);
+            }
+            client.ErrorTypes.Clear();
+            normalizedErrors.ForEach((item) => client.ErrorTypes.Add(item));
+
+            var normalizedHeaders = new List<CompositeType>();
+            foreach (var modelType in client.HeaderTypes)
+            {
+                normalizedHeaders.Add(NormalizeTypeDeclaration(modelType) as CompositeType);
+            }
+            client.HeaderTypes.Clear();
+            normalizedHeaders.ForEach((item) => client.HeaderTypes.Add(item));
+
             var normalizedEnums = new List<EnumType>();
             foreach (var enumType in client.EnumTypes)
             {
@@ -126,7 +142,7 @@ namespace Microsoft.Rest.Generator
             method.Group = GetMethodGroupName(method.Group);
             method.ReturnType = NormalizeTypeReference(method.ReturnType);
             method.DefaultResponse = NormalizeTypeReference(method.DefaultResponse);
-            var normalizedResponses = new Dictionary<HttpStatusCode, IType>();
+            var normalizedResponses = new Dictionary<HttpStatusCode, Response>();
             foreach (var statusCode in method.Responses.Keys)
             {
                 normalizedResponses[statusCode] = NormalizeTypeReference(method.Responses[statusCode]);
@@ -310,6 +326,17 @@ namespace Microsoft.Rest.Generator
         /// <summary>
         /// Returns language specific type reference name.
         /// </summary>
+        /// <param name="typePair"></param>
+        /// <returns></returns>
+        public virtual Response NormalizeTypeReference(Response typePair)
+        {
+            return new Response(NormalizeTypeReference(typePair.Body),
+                                NormalizeTypeReference(typePair.Headers));
+        }
+
+        /// <summary>
+        /// Returns language specific type reference name.
+        /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
         public abstract IType NormalizeTypeReference(IType type);
@@ -473,7 +500,6 @@ namespace Microsoft.Rest.Generator
 
             var models = new List<CompositeType>(serviceClient.ModelTypes);
             serviceClient.ModelTypes.Clear();
-
             foreach (var model in models)
             {
                 model.Name = ResolveNameConflict(
@@ -483,7 +509,25 @@ namespace Microsoft.Rest.Generator
                     "Model");
 
                 serviceClient.ModelTypes.Add(model);
+            }
 
+            models = new List<CompositeType>(serviceClient.HeaderTypes);
+            serviceClient.HeaderTypes.Clear();
+            foreach (var model in models)
+            {
+                model.Name = ResolveNameConflict(
+                    exclusionDictionary,
+                    model.Name,
+                    "Schema definition",
+                    "Model");
+
+                serviceClient.HeaderTypes.Add(model);
+            }
+
+            foreach (var model in serviceClient.ModelTypes
+                                                  .Concat(serviceClient.HeaderTypes)
+                                                  .Concat(serviceClient.ErrorTypes))
+            {
                 foreach (var property in model.Properties)
                 {
                     if (property.Name.Equals(model.Name, StringComparison.OrdinalIgnoreCase))

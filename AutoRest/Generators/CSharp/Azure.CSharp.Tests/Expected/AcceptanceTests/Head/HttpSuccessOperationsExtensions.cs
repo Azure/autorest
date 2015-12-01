@@ -19,6 +19,32 @@ namespace Fixtures.Azure.AcceptanceTestsHead
     public static partial class HttpSuccessOperationsExtensions
     {
             /// <summary>
+            /// Return 200 status code if successful
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static bool? Head200(this IHttpSuccessOperations operations)
+            {
+                return Task.Factory.StartNew(s => ((IHttpSuccessOperations)s).Head200Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Return 200 status code if successful
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<bool?> Head200Async( this IHttpSuccessOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                AzureOperationResponse<bool?> result = await operations.Head200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Body;
+            }
+
+            /// <summary>
             /// Return 204 status code if successful
             /// </summary>
             /// <param name='operations'>

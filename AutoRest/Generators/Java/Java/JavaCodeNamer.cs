@@ -300,6 +300,10 @@ namespace Microsoft.Rest.Generator.Java
             {
                 primaryType.Name = "Object";
             }
+            else if (primaryType == PrimaryType.Credentials)
+            {
+                primaryType.Name = "ServiceClientCredentials";
+            }
 
             return primaryType;
         }
@@ -409,8 +413,10 @@ namespace Microsoft.Rest.Generator.Java
                     return "com.microsoft.rest.ServiceException";
                 case "InterruptedException":
                     return "java.lang.InterruptedException";
+                case "IllegalArgumentException": 
+                    return "java.lang.IllegalArgumentException";
                 default:
-                    return null;
+                    return "java.lang.Exception";
             }
         }
     }

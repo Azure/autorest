@@ -62,10 +62,6 @@
       <Project>{9517265e-5127-460c-9dde-fe017d73121c}</Project>
       <Name>AutoRest.Modeler.Swagger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Azure.Common\Azure.Common\AutoRest.Generator.Azure.Common.csproj">
-      <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
-      <Name>AutoRest.Generator.Azure.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Azure.NodeJS\AutoRest.Generator.Azure.NodeJS.csproj">
       <Project>{909BF4EF-4ECA-4AC4-8E21-CDCF05393161}</Project>
       <Name>AutoRest.Generator.Azure.NodeJS</Name>
@@ -121,64 +117,7 @@
     <Content Include="Expected\**\*.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Expected\AcceptanceTests\Lro\models\resource.js" />
-    <Content Include="Expected\AcceptanceTests\Lro\models\subResource.js" />
-    <Content Include="Expected\AcceptanceTests\ResourceFlattening\models\resource.js" />
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\checkNameAvailabilityResult.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\customDomain.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\endpoints.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\foo.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\index.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccount.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountCheckNameAvailabilityParameters.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountCreateParameters.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountKeys.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountListResult.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountRegenerateKeyParameters.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountUpdateParameters.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\usage.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\usageListResult.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\usageName.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\operations\index.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\operations\storageAccounts.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\operations\usageOperations.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\storageManagementClient.js">
+    <Content Include="Expected\**\*.d.ts">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\microsoftAzureTestUrl.js" />

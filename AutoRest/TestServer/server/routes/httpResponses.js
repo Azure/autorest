@@ -313,6 +313,7 @@ var httpResponses = function(coverage, optionalCoverage) {
     coverage['HttpSuccess200Post'] = 0;
     coverage['HttpSuccess200Patch'] = 0;
     coverage['HttpSuccess200Delete'] = 0;
+	coverage['HttpSuccess200Head'] = 0;
     coverage['HttpSuccess201Put'] = 0;
     coverage['HttpSuccess201Post'] = 0;
     coverage['HttpSuccess202Put'] = 0;

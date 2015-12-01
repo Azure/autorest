@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -51,10 +52,11 @@ public interface Bool {
     /**
      * Get true Boolean value
      *
-     * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Boolean> getTrue() throws ServiceException;
+    ServiceResponse<Boolean> getTrue() throws ServiceException, IOException;
 
     /**
      * Get true Boolean value
@@ -68,9 +70,11 @@ public interface Bool {
      * Set Boolean value true
      *
      * @param boolBody the boolean value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putTrue(boolean boolBody) throws ServiceException;
+    ServiceResponse<Void> putTrue(boolean boolBody) throws ServiceException, IOException;
 
     /**
      * Set Boolean value true
@@ -84,10 +88,11 @@ public interface Bool {
     /**
      * Get false Boolean value
      *
-     * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Boolean> getFalse() throws ServiceException;
+    ServiceResponse<Boolean> getFalse() throws ServiceException, IOException;
 
     /**
      * Get false Boolean value
@@ -101,9 +106,11 @@ public interface Bool {
      * Set Boolean value false
      *
      * @param boolBody the boolean value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putFalse(boolean boolBody) throws ServiceException;
+    ServiceResponse<Void> putFalse(boolean boolBody) throws ServiceException, IOException;
 
     /**
      * Set Boolean value false
@@ -117,10 +124,11 @@ public interface Bool {
     /**
      * Get null Boolean value
      *
-     * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Boolean> getNull() throws ServiceException;
+    ServiceResponse<Boolean> getNull() throws ServiceException, IOException;
 
     /**
      * Get null Boolean value
@@ -133,10 +141,11 @@ public interface Bool {
     /**
      * Get invalid Boolean value
      *
-     * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Boolean> getInvalid() throws ServiceException;
+    ServiceResponse<Boolean> getInvalid() throws ServiceException, IOException;
 
     /**
      * Get invalid Boolean value

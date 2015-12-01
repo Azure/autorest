@@ -11,15 +11,17 @@
 package fixtures.azurespecials;
 
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.CustomHeaderInterceptor;
 import com.squareup.okhttp.OkHttpClient;
+import java.util.UUID;
 import retrofit.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
  */
-public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient implements AutoRestAzureSpecialParametersTestClient {
+public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceClient implements AutoRestAzureSpecialParametersTestClient {
     private String baseUri;
     private AzureClient azureClient;
 
@@ -121,74 +123,60 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private XMsClientRequestId xMsClientRequestId;
-
     /**
-     * Gets the XMsClientRequestId object to access its operations.
+     * Gets the XMsClientRequestIdOperations object to access its operations.
      * @return the xMsClientRequestId value.
      */
-    public XMsClientRequestId getXMsClientRequestId() {
-        return this.xMsClientRequestId;
+    public XMsClientRequestIdOperations getXMsClientRequestId() {
+        return new XMsClientRequestIdOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
-    private SubscriptionInCredentials subscriptionInCredentials;
-
     /**
-     * Gets the SubscriptionInCredentials object to access its operations.
+     * Gets the SubscriptionInCredentialsOperations object to access its operations.
      * @return the subscriptionInCredentials value.
      */
-    public SubscriptionInCredentials getSubscriptionInCredentials() {
-        return this.subscriptionInCredentials;
+    public SubscriptionInCredentialsOperations getSubscriptionInCredentials() {
+        return new SubscriptionInCredentialsOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
-    private SubscriptionInMethod subscriptionInMethod;
-
     /**
-     * Gets the SubscriptionInMethod object to access its operations.
+     * Gets the SubscriptionInMethodOperations object to access its operations.
      * @return the subscriptionInMethod value.
      */
-    public SubscriptionInMethod getSubscriptionInMethod() {
-        return this.subscriptionInMethod;
+    public SubscriptionInMethodOperations getSubscriptionInMethod() {
+        return new SubscriptionInMethodOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
-    private ApiVersionDefault apiVersionDefault;
-
     /**
-     * Gets the ApiVersionDefault object to access its operations.
+     * Gets the ApiVersionDefaultOperations object to access its operations.
      * @return the apiVersionDefault value.
      */
-    public ApiVersionDefault getApiVersionDefault() {
-        return this.apiVersionDefault;
+    public ApiVersionDefaultOperations getApiVersionDefault() {
+        return new ApiVersionDefaultOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
-    private ApiVersionLocal apiVersionLocal;
-
     /**
-     * Gets the ApiVersionLocal object to access its operations.
+     * Gets the ApiVersionLocalOperations object to access its operations.
      * @return the apiVersionLocal value.
      */
-    public ApiVersionLocal getApiVersionLocal() {
-        return this.apiVersionLocal;
+    public ApiVersionLocalOperations getApiVersionLocal() {
+        return new ApiVersionLocalOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
-    private SkipUrlEncoding skipUrlEncoding;
-
     /**
-     * Gets the SkipUrlEncoding object to access its operations.
+     * Gets the SkipUrlEncodingOperations object to access its operations.
      * @return the skipUrlEncoding value.
      */
-    public SkipUrlEncoding getSkipUrlEncoding() {
-        return this.skipUrlEncoding;
+    public SkipUrlEncodingOperations getSkipUrlEncoding() {
+        return new SkipUrlEncodingOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
-    private HeaderOperations headerOperations;
-
     /**
-     * Gets the HeaderOperations object to access its operations.
+     * Gets the HeaderOperationsOperations object to access its operations.
      * @return the headerOperations value.
      */
-    public HeaderOperations getHeaderOperations() {
-        return this.headerOperations;
+    public HeaderOperationsOperations getHeaderOperations() {
+        return new HeaderOperationsOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -204,8 +192,28 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
      * @param baseUri the base URI of the host
      */
     public AutoRestAzureSpecialParametersTestClientImpl(String baseUri) {
+        this(baseUri, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
+     *
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestAzureSpecialParametersTestClientImpl(ServiceClientCredentials credentials) {
+        this("http://localhost", credentials);
+    }
+
+    /**
+     * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
+     *
+     * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
+     */
+    public AutoRestAzureSpecialParametersTestClientImpl(String baseUri, ServiceClientCredentials credentials) {
         super();
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -213,12 +221,14 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
      * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
      *
      * @param baseUri the base URI of the host
+     * @param credentials the management credentials for Azure
      * @param client the {@link OkHttpClient} client to use for REST calls
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestAzureSpecialParametersTestClientImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+    public AutoRestAzureSpecialParametersTestClientImpl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
         this.baseUri = baseUri;
+        this.credentials = credentials;
         initialize();
     }
 
@@ -227,16 +237,11 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
         {
             this.credentials.applyCredentialsFilter(this.client);
         }
+        this.apiVersion = "2015-07-01-preview";
+        this.acceptLanguage = "en-US";
+        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.xMsClientRequestId = new XMsClientRequestIdImpl(retrofit, this);
-        this.subscriptionInCredentials = new SubscriptionInCredentialsImpl(retrofit, this);
-        this.subscriptionInMethod = new SubscriptionInMethodImpl(retrofit, this);
-        this.apiVersionDefault = new ApiVersionDefaultImpl(retrofit, this);
-        this.apiVersionLocal = new ApiVersionLocalImpl(retrofit, this);
-        this.skipUrlEncoding = new SkipUrlEncodingImpl(retrofit, this);
-        this.headerOperations = new HeaderOperationsImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

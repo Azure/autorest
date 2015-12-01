@@ -5,6 +5,7 @@ import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Salmon;
 import fixtures.bodycomplex.models.Sawshark;
 import fixtures.bodycomplex.models.Shark;
+import fixtures.bodycomplex.models.Goblinshark;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Assert;
@@ -29,6 +30,7 @@ public class PolymorphismTests {
         Salmon salmon = (Salmon)result;
         Assert.assertEquals("alaska", salmon.getLocation());
         Assert.assertEquals(1.0, salmon.getLength(), 0f);
+        Assert.assertEquals(3, salmon.getSiblings().size());
         Assert.assertEquals(Shark.class, salmon.getSiblings().get(0).getClass());
         Shark sib1 = (Shark)(salmon.getSiblings().get(0));
         Assert.assertEquals(new DateTime(2012, 1, 5, 1, 0, 0, DateTimeZone.UTC), sib1.getBirthday());
@@ -37,6 +39,9 @@ public class PolymorphismTests {
         Assert.assertArrayEquals(
                 new byte[]{(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254},
                 sib2.getPicture());
+        Goblinshark sib3 = (Goblinshark)(salmon.getSiblings().get(2));
+        Assert.assertEquals(1, sib3.getAge().longValue());
+        Assert.assertEquals(5, sib3.getJawsize().longValue());
     }
 
     @Ignore("Pending https://github.com/square/retrofit/issues/1192")
@@ -62,6 +67,14 @@ public class PolymorphismTests {
         sib2.setPicture(new byte[] {(byte)255, (byte)255, (byte)255, (byte)255, (byte)254});
         sib2.setSpecies("dangerous");
         body.getSiblings().add(sib2);
+
+        Goblinshark sib3 = new Goblinshark();
+        sib3.setAge(1);
+        sib3.setBirthday(new DateTime(2015, 8, 8, 0, 0, 0, DateTimeZone.UTC));
+        sib3.setLength(30.0);
+        sib3.setSpecies("scary");
+        sib3.setJawsize(5);
+        body.getSiblings().add(sib3);
 
         client.getPolymorphism().putValid(body);
     }
@@ -91,7 +104,7 @@ public class PolymorphismTests {
             body.getSiblings().add(sib2);
 
             client.getPolymorphism().putValidMissingRequired(body);
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             //expected
             Assert.assertTrue(ex.getMessage().contains("siblings.birthday is required and cannot be null."));
         }

@@ -22,6 +22,7 @@ import fixtures.http.models.B;
 import fixtures.http.models.C;
 import fixtures.http.models.D;
 import fixtures.http.models.Error;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -38,18 +39,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> get200Model204NoModelDefaultError200Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200Model204NoModelDefaultError200Valid();
-            return get200Model204NoModelDefaultError200ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> get200Model204NoModelDefaultError200Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200Model204NoModelDefaultError200Valid();
+        return get200Model204NoModelDefaultError200ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -64,7 +60,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200Model204NoModelDefaultError200ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -72,7 +68,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> get200Model204NoModelDefaultError200ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> get200Model204NoModelDefaultError200ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .register(204, new TypeToken<Void>(){}.getType())
@@ -83,18 +79,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> get200Model204NoModelDefaultError204Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200Model204NoModelDefaultError204Valid();
-            return get200Model204NoModelDefaultError204ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> get200Model204NoModelDefaultError204Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200Model204NoModelDefaultError204Valid();
+        return get200Model204NoModelDefaultError204ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -109,7 +100,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200Model204NoModelDefaultError204ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -117,7 +108,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> get200Model204NoModelDefaultError204ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> get200Model204NoModelDefaultError204ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .register(204, new TypeToken<Void>(){}.getType())
@@ -128,18 +119,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> get200Model204NoModelDefaultError201Invalid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200Model204NoModelDefaultError201Invalid();
-            return get200Model204NoModelDefaultError201InvalidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> get200Model204NoModelDefaultError201Invalid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200Model204NoModelDefaultError201Invalid();
+        return get200Model204NoModelDefaultError201InvalidDelegate(call.execute(), null);
     }
 
     /**
@@ -154,7 +140,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200Model204NoModelDefaultError201InvalidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -162,7 +148,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> get200Model204NoModelDefaultError201InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> get200Model204NoModelDefaultError201InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .register(204, new TypeToken<Void>(){}.getType())
@@ -173,18 +159,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with no payload:
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> get200Model204NoModelDefaultError202None() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200Model204NoModelDefaultError202None();
-            return get200Model204NoModelDefaultError202NoneDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> get200Model204NoModelDefaultError202None() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200Model204NoModelDefaultError202None();
+        return get200Model204NoModelDefaultError202NoneDelegate(call.execute(), null);
     }
 
     /**
@@ -199,7 +180,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200Model204NoModelDefaultError202NoneDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -207,7 +188,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> get200Model204NoModelDefaultError202NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> get200Model204NoModelDefaultError202NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .register(204, new TypeToken<Void>(){}.getType())
@@ -218,18 +199,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> get200Model204NoModelDefaultError400Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200Model204NoModelDefaultError400Valid();
-            return get200Model204NoModelDefaultError400ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> get200Model204NoModelDefaultError400Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200Model204NoModelDefaultError400Valid();
+        return get200Model204NoModelDefaultError400ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -244,7 +220,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200Model204NoModelDefaultError400ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -252,7 +228,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> get200Model204NoModelDefaultError400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> get200Model204NoModelDefaultError400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .register(204, new TypeToken<Void>(){}.getType())
@@ -263,18 +239,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> get200Model201ModelDefaultError200Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200Model201ModelDefaultError200Valid();
-            return get200Model201ModelDefaultError200ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> get200Model201ModelDefaultError200Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200Model201ModelDefaultError200Valid();
+        return get200Model201ModelDefaultError200ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -289,7 +260,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200Model201ModelDefaultError200ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -297,7 +268,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> get200Model201ModelDefaultError200ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> get200Model201ModelDefaultError200ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .register(201, new TypeToken<B>(){}.getType())
@@ -308,18 +279,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> get200Model201ModelDefaultError201Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200Model201ModelDefaultError201Valid();
-            return get200Model201ModelDefaultError201ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> get200Model201ModelDefaultError201Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200Model201ModelDefaultError201Valid();
+        return get200Model201ModelDefaultError201ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -334,7 +300,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200Model201ModelDefaultError201ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -342,7 +308,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> get200Model201ModelDefaultError201ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> get200Model201ModelDefaultError201ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .register(201, new TypeToken<B>(){}.getType())
@@ -353,18 +319,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> get200Model201ModelDefaultError400Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200Model201ModelDefaultError400Valid();
-            return get200Model201ModelDefaultError400ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> get200Model201ModelDefaultError400Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200Model201ModelDefaultError400Valid();
+        return get200Model201ModelDefaultError400ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -379,7 +340,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200Model201ModelDefaultError400ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -387,7 +348,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> get200Model201ModelDefaultError400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> get200Model201ModelDefaultError400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .register(201, new TypeToken<B>(){}.getType())
@@ -398,18 +359,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Object object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError200Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError200Valid();
-            return get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError200Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError200Valid();
+        return get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -424,7 +380,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -432,7 +388,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Object>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .register(201, new TypeToken<C>(){}.getType())
@@ -444,18 +400,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Object object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError201Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError201Valid();
-            return get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError201Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError201Valid();
+        return get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -470,7 +421,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -478,7 +429,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Object>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .register(201, new TypeToken<C>(){}.getType())
@@ -490,18 +441,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Object object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError404Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError404Valid();
-            return get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError404Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError404Valid();
+        return get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -516,7 +462,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -524,7 +470,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Object>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .register(201, new TypeToken<C>(){}.getType())
@@ -536,18 +482,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Object object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError400Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError400Valid();
-            return get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError400Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError400Valid();
+        return get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -562,7 +503,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -570,7 +511,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Object>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .register(201, new TypeToken<C>(){}.getType())
@@ -582,17 +523,12 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with no payload
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> get202None204NoneDefaultError202None() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get202None204NoneDefaultError202None();
-            return get202None204NoneDefaultError202NoneDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> get202None204NoneDefaultError202None() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get202None204NoneDefaultError202None();
+        return get202None204NoneDefaultError202NoneDelegate(call.execute(), null);
     }
 
     /**
@@ -607,7 +543,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get202None204NoneDefaultError202NoneDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -615,7 +551,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultError202NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> get202None204NoneDefaultError202NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .register(204, new TypeToken<Void>(){}.getType())
@@ -626,17 +562,12 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> get202None204NoneDefaultError204None() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get202None204NoneDefaultError204None();
-            return get202None204NoneDefaultError204NoneDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> get202None204NoneDefaultError204None() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get202None204NoneDefaultError204None();
+        return get202None204NoneDefaultError204NoneDelegate(call.execute(), null);
     }
 
     /**
@@ -651,7 +582,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get202None204NoneDefaultError204NoneDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -659,7 +590,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultError204NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> get202None204NoneDefaultError204NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .register(204, new TypeToken<Void>(){}.getType())
@@ -670,17 +601,12 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> get202None204NoneDefaultError400Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get202None204NoneDefaultError400Valid();
-            return get202None204NoneDefaultError400ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> get202None204NoneDefaultError400Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get202None204NoneDefaultError400Valid();
+        return get202None204NoneDefaultError400ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -695,7 +621,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get202None204NoneDefaultError400ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -703,7 +629,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultError400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> get202None204NoneDefaultError400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .register(204, new TypeToken<Void>(){}.getType())
@@ -714,17 +640,12 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> get202None204NoneDefaultNone202Invalid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get202None204NoneDefaultNone202Invalid();
-            return get202None204NoneDefaultNone202InvalidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> get202None204NoneDefaultNone202Invalid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get202None204NoneDefaultNone202Invalid();
+        return get202None204NoneDefaultNone202InvalidDelegate(call.execute(), null);
     }
 
     /**
@@ -739,7 +660,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get202None204NoneDefaultNone202InvalidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -747,7 +668,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone202InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> get202None204NoneDefaultNone202InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .register(204, new TypeToken<Void>(){}.getType())
@@ -757,17 +678,12 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> get202None204NoneDefaultNone204None() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get202None204NoneDefaultNone204None();
-            return get202None204NoneDefaultNone204NoneDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> get202None204NoneDefaultNone204None() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get202None204NoneDefaultNone204None();
+        return get202None204NoneDefaultNone204NoneDelegate(call.execute(), null);
     }
 
     /**
@@ -782,7 +698,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get202None204NoneDefaultNone204NoneDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -790,7 +706,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone204NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> get202None204NoneDefaultNone204NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .register(204, new TypeToken<Void>(){}.getType())
@@ -800,17 +716,12 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> get202None204NoneDefaultNone400None() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get202None204NoneDefaultNone400None();
-            return get202None204NoneDefaultNone400NoneDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> get202None204NoneDefaultNone400None() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get202None204NoneDefaultNone400None();
+        return get202None204NoneDefaultNone400NoneDelegate(call.execute(), null);
     }
 
     /**
@@ -825,7 +736,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get202None204NoneDefaultNone400NoneDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -833,7 +744,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone400NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> get202None204NoneDefaultNone400NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .register(204, new TypeToken<Void>(){}.getType())
@@ -843,17 +754,12 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> get202None204NoneDefaultNone400Invalid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get202None204NoneDefaultNone400Invalid();
-            return get202None204NoneDefaultNone400InvalidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> get202None204NoneDefaultNone400Invalid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get202None204NoneDefaultNone400Invalid();
+        return get202None204NoneDefaultNone400InvalidDelegate(call.execute(), null);
     }
 
     /**
@@ -868,7 +774,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get202None204NoneDefaultNone400InvalidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -876,7 +782,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone400InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> get202None204NoneDefaultNone400InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(202, new TypeToken<Void>(){}.getType())
                 .register(204, new TypeToken<Void>(){}.getType())
@@ -886,18 +792,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> getDefaultModelA200Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDefaultModelA200Valid();
-            return getDefaultModelA200ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> getDefaultModelA200Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDefaultModelA200Valid();
+        return getDefaultModelA200ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -912,7 +813,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDefaultModelA200ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -920,7 +821,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> getDefaultModelA200ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> getDefaultModelA200ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .registerError(new TypeToken<A>(){}.getType())
                 .build(response, retrofit);
@@ -929,18 +830,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> getDefaultModelA200None() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDefaultModelA200None();
-            return getDefaultModelA200NoneDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> getDefaultModelA200None() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDefaultModelA200None();
+        return getDefaultModelA200NoneDelegate(call.execute(), null);
     }
 
     /**
@@ -955,7 +851,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDefaultModelA200NoneDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -963,7 +859,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> getDefaultModelA200NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> getDefaultModelA200NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .registerError(new TypeToken<A>(){}.getType())
                 .build(response, retrofit);
@@ -972,18 +868,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> getDefaultModelA400Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDefaultModelA400Valid();
-            return getDefaultModelA400ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> getDefaultModelA400Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDefaultModelA400Valid();
+        return getDefaultModelA400ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -998,7 +889,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDefaultModelA400ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1006,7 +897,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> getDefaultModelA400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> getDefaultModelA400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .registerError(new TypeToken<A>(){}.getType())
                 .build(response, retrofit);
@@ -1015,18 +906,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> getDefaultModelA400None() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDefaultModelA400None();
-            return getDefaultModelA400NoneDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> getDefaultModelA400None() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDefaultModelA400None();
+        return getDefaultModelA400NoneDelegate(call.execute(), null);
     }
 
     /**
@@ -1041,7 +927,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDefaultModelA400NoneDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1049,7 +935,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> getDefaultModelA400NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> getDefaultModelA400NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .registerError(new TypeToken<A>(){}.getType())
                 .build(response, retrofit);
@@ -1058,17 +944,12 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> getDefaultNone200Invalid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDefaultNone200Invalid();
-            return getDefaultNone200InvalidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> getDefaultNone200Invalid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDefaultNone200Invalid();
+        return getDefaultNone200InvalidDelegate(call.execute(), null);
     }
 
     /**
@@ -1083,7 +964,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDefaultNone200InvalidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1091,7 +972,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<Void> getDefaultNone200InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getDefaultNone200InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .build(response, retrofit);
     }
@@ -1099,17 +980,12 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> getDefaultNone200None() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDefaultNone200None();
-            return getDefaultNone200NoneDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> getDefaultNone200None() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDefaultNone200None();
+        return getDefaultNone200NoneDelegate(call.execute(), null);
     }
 
     /**
@@ -1124,7 +1000,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDefaultNone200NoneDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1132,7 +1008,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<Void> getDefaultNone200NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getDefaultNone200NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .build(response, retrofit);
     }
@@ -1140,17 +1016,12 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> getDefaultNone400Invalid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDefaultNone400Invalid();
-            return getDefaultNone400InvalidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> getDefaultNone400Invalid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDefaultNone400Invalid();
+        return getDefaultNone400InvalidDelegate(call.execute(), null);
     }
 
     /**
@@ -1165,7 +1036,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDefaultNone400InvalidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1173,7 +1044,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<Void> getDefaultNone400InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getDefaultNone400InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .build(response, retrofit);
     }
@@ -1181,17 +1052,12 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> getDefaultNone400None() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getDefaultNone400None();
-            return getDefaultNone400NoneDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> getDefaultNone400None() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getDefaultNone400None();
+        return getDefaultNone400NoneDelegate(call.execute(), null);
     }
 
     /**
@@ -1206,7 +1072,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDefaultNone400NoneDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1214,7 +1080,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<Void> getDefaultNone400NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> getDefaultNone400NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .build(response, retrofit);
     }
@@ -1222,18 +1088,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> get200ModelA200None() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200ModelA200None();
-            return get200ModelA200NoneDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> get200ModelA200None() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200ModelA200None();
+        return get200ModelA200NoneDelegate(call.execute(), null);
     }
 
     /**
@@ -1248,7 +1109,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200ModelA200NoneDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1256,7 +1117,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> get200ModelA200NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> get200ModelA200NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .build(response, retrofit);
@@ -1265,18 +1126,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '200'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> get200ModelA200Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200ModelA200Valid();
-            return get200ModelA200ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> get200ModelA200Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200ModelA200Valid();
+        return get200ModelA200ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1291,7 +1147,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200ModelA200ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1299,7 +1155,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> get200ModelA200ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> get200ModelA200ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .build(response, retrofit);
@@ -1308,18 +1164,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> get200ModelA200Invalid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200ModelA200Invalid();
-            return get200ModelA200InvalidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> get200ModelA200Invalid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200ModelA200Invalid();
+        return get200ModelA200InvalidDelegate(call.execute(), null);
     }
 
     /**
@@ -1334,7 +1185,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200ModelA200InvalidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1342,7 +1193,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> get200ModelA200InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> get200ModelA200InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .build(response, retrofit);
@@ -1351,18 +1202,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> get200ModelA400None() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200ModelA400None();
-            return get200ModelA400NoneDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> get200ModelA400None() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200ModelA400None();
+        return get200ModelA400NoneDelegate(call.execute(), null);
     }
 
     /**
@@ -1377,7 +1223,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200ModelA400NoneDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1385,7 +1231,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> get200ModelA400NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> get200ModelA400NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .build(response, retrofit);
@@ -1394,18 +1240,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '400'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> get200ModelA400Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200ModelA400Valid();
-            return get200ModelA400ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> get200ModelA400Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200ModelA400Valid();
+        return get200ModelA400ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1420,7 +1261,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200ModelA400ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1428,7 +1269,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> get200ModelA400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> get200ModelA400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .build(response, retrofit);
@@ -1437,18 +1278,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> get200ModelA400Invalid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200ModelA400Invalid();
-            return get200ModelA400InvalidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> get200ModelA400Invalid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200ModelA400Invalid();
+        return get200ModelA400InvalidDelegate(call.execute(), null);
     }
 
     /**
@@ -1463,7 +1299,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200ModelA400InvalidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1471,7 +1307,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> get200ModelA400InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> get200ModelA400InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .build(response, retrofit);
@@ -1480,18 +1316,13 @@ public class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with payload {'statusCode': '202'}
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the A object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<A> get200ModelA202Valid() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get200ModelA202Valid();
-            return get200ModelA202ValidDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<A> get200ModelA202Valid() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get200ModelA202Valid();
+        return get200ModelA202ValidDelegate(call.execute(), null);
     }
 
     /**
@@ -1506,7 +1337,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200ModelA202ValidDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1514,7 +1345,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return call;
     }
 
-    private ServiceResponse<A> get200ModelA202ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<A> get200ModelA202ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A>()
                 .register(200, new TypeToken<A>(){}.getType())
                 .build(response, retrofit);

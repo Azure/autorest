@@ -82,6 +82,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 var client = new AutoRestHeadTestService(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
+                Assert.True(client.HttpSuccess.Head200());
                 Assert.True(client.HttpSuccess.Head204());
                 Assert.False(client.HttpSuccess.Head404());
             }
@@ -254,7 +255,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidJsonPolling(new Product {Location = "West US"}));
                 // TODO: 4103936 Fix exception type
 #if !MONO
-                Assert.Throws<UriFormatException>(
+                Assert.Throws<RestException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidHeader(new Product {Location = "West US"}));
                 // TODO: 4103936 Fix exception type
                 // UriFormatException invalidHeader = null;
@@ -694,7 +695,10 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         {
             SwaggerSpecHelper.RunTests<AzureCSharpCodeGenerator>(
                 SwaggerPath("body-duration.json"), ExpectedPath("AzureBodyDuration"));
-            using (var client = new AutoRestDurationTestService(Fixture.Uri))
+            const string validSubscription = "1234-5678-9012-3456";
+
+            using (var client = new AutoRestDurationTestService(Fixture.Uri,
+                new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
             {
                 Assert.Null(client.Duration.GetNull());
                 Assert.Throws<FormatException>(() => client.Duration.GetInvalid());
@@ -756,7 +760,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     HeaderOne = headerParameter,
                     QueryOne = queryParameter
                 };
-                SecondParameterGroup secondGroup = new SecondParameterGroup
+                var secondGroup = new ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup
                 {
                     HeaderTwo = "header2",
                     QueryTwo = 42
@@ -769,12 +773,14 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 {
                     HeaderOne = headerParameter
                 };
-                secondGroup = new SecondParameterGroup
+                secondGroup = new ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup
                 {
                     QueryTwo = 42
                 };
 
                 client.ParameterGrouping.PostMultipleParameterGroups(firstGroup, secondGroup);
+
+                client.ParameterGrouping.PostSharedParameterGroupObject(firstGroup);
             }
         }
     }

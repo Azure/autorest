@@ -14,7 +14,6 @@ namespace Microsoft.Rest.Generator
 {
     public abstract class CodeGenerator
     {
-        public const string SkipUrlEncodingExtension = "x-ms-skip-url-encoding";
         public const string EnumObject = "x-ms-enum";
 
         protected CodeGenerator(Settings settings)

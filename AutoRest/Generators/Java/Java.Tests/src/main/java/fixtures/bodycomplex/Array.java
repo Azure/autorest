@@ -15,6 +15,8 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.ArrayWrapper;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -49,10 +51,11 @@ public interface Array {
     /**
      * Get complex types with array property
      *
-     * @return the ArrayWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<ArrayWrapper> getValid() throws ServiceException;
+    ServiceResponse<ArrayWrapper> getValid() throws ServiceException, IOException;
 
     /**
      * Get complex types with array property
@@ -66,9 +69,12 @@ public interface Array {
      * Put complex types with array property
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putValid(ArrayWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putValid(ArrayWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with array property
@@ -82,10 +88,11 @@ public interface Array {
     /**
      * Get complex types with array property which is empty
      *
-     * @return the ArrayWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<ArrayWrapper> getEmpty() throws ServiceException;
+    ServiceResponse<ArrayWrapper> getEmpty() throws ServiceException, IOException;
 
     /**
      * Get complex types with array property which is empty
@@ -99,9 +106,12 @@ public interface Array {
      * Put complex types with array property which is empty
      *
      * @param complexBody Please put an empty array
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putEmpty(ArrayWrapper complexBody) throws ServiceException;
+    ServiceResponse<Void> putEmpty(ArrayWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with array property which is empty
@@ -115,10 +125,11 @@ public interface Array {
     /**
      * Get complex types with array property while server doesn't provide a response payload
      *
-     * @return the ArrayWrapper object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<ArrayWrapper> getNotProvided() throws ServiceException;
+    ServiceResponse<ArrayWrapper> getNotProvided() throws ServiceException, IOException;
 
     /**
      * Get complex types with array property while server doesn't provide a response payload

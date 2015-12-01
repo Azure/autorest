@@ -15,6 +15,8 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -61,10 +63,11 @@ public interface Datetimerfc1123 {
     /**
      * Get null datetime value
      *
-     * @return the DateTimeRfc1123 object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DateTimeRfc1123> getNull() throws ServiceException;
+    ServiceResponse<DateTimeRfc1123> getNull() throws ServiceException, IOException;
 
     /**
      * Get null datetime value
@@ -77,10 +80,11 @@ public interface Datetimerfc1123 {
     /**
      * Get invalid datetime value
      *
-     * @return the DateTimeRfc1123 object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DateTimeRfc1123> getInvalid() throws ServiceException;
+    ServiceResponse<DateTimeRfc1123> getInvalid() throws ServiceException, IOException;
 
     /**
      * Get invalid datetime value
@@ -93,10 +97,11 @@ public interface Datetimerfc1123 {
     /**
      * Get overflow datetime value
      *
-     * @return the DateTimeRfc1123 object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DateTimeRfc1123> getOverflow() throws ServiceException;
+    ServiceResponse<DateTimeRfc1123> getOverflow() throws ServiceException, IOException;
 
     /**
      * Get overflow datetime value
@@ -109,10 +114,11 @@ public interface Datetimerfc1123 {
     /**
      * Get underflow datetime value
      *
-     * @return the DateTimeRfc1123 object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DateTimeRfc1123> getUnderflow() throws ServiceException;
+    ServiceResponse<DateTimeRfc1123> getUnderflow() throws ServiceException, IOException;
 
     /**
      * Get underflow datetime value
@@ -126,9 +132,12 @@ public interface Datetimerfc1123 {
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT
      *
      * @param datetimeBody the DateTimeRfc1123 value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUtcMaxDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException;
+    ServiceResponse<Void> putUtcMaxDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT
@@ -142,10 +151,11 @@ public interface Datetimerfc1123 {
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt
      *
-     * @return the DateTimeRfc1123 object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DateTimeRfc1123> getUtcLowercaseMaxDateTime() throws ServiceException;
+    ServiceResponse<DateTimeRfc1123> getUtcLowercaseMaxDateTime() throws ServiceException, IOException;
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt
@@ -158,10 +168,11 @@ public interface Datetimerfc1123 {
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT
      *
-     * @return the DateTimeRfc1123 object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DateTimeRfc1123> getUtcUppercaseMaxDateTime() throws ServiceException;
+    ServiceResponse<DateTimeRfc1123> getUtcUppercaseMaxDateTime() throws ServiceException, IOException;
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT
@@ -175,9 +186,12 @@ public interface Datetimerfc1123 {
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT
      *
      * @param datetimeBody the DateTimeRfc1123 value
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUtcMinDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException;
+    ServiceResponse<Void> putUtcMinDateTime(DateTimeRfc1123 datetimeBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT
@@ -191,10 +205,11 @@ public interface Datetimerfc1123 {
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT
      *
-     * @return the DateTimeRfc1123 object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DateTimeRfc1123> getUtcMinDateTime() throws ServiceException;
+    ServiceResponse<DateTimeRfc1123> getUtcMinDateTime() throws ServiceException, IOException;
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT

@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -91,9 +92,11 @@ public interface HttpSuccess {
     /**
      * Return 200 status code if successful
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> head200() throws ServiceException;
+    ServiceResponse<Void> head200() throws ServiceException, IOException;
 
     /**
      * Return 200 status code if successful
@@ -106,10 +109,11 @@ public interface HttpSuccess {
     /**
      * Get 200 success
      *
-     * @return the Boolean object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Boolean> get200() throws ServiceException;
+    ServiceResponse<Boolean> get200() throws ServiceException, IOException;
 
     /**
      * Get 200 success
@@ -123,9 +127,11 @@ public interface HttpSuccess {
      * Put boolean value true returning 200 success
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> put200(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> put200(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Put boolean value true returning 200 success
@@ -140,9 +146,11 @@ public interface HttpSuccess {
      * Patch true Boolean value in request returning 200
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> patch200(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> patch200(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Patch true Boolean value in request returning 200
@@ -157,9 +165,11 @@ public interface HttpSuccess {
      * Post bollean value true in request that returns a 200
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> post200(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> post200(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Post bollean value true in request that returns a 200
@@ -174,9 +184,11 @@ public interface HttpSuccess {
      * Delete simple boolean value true returns 200
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> delete200(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> delete200(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Delete simple boolean value true returns 200
@@ -191,9 +203,11 @@ public interface HttpSuccess {
      * Put true Boolean value in request returns 201
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> put201(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> put201(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Put true Boolean value in request returns 201
@@ -208,9 +222,11 @@ public interface HttpSuccess {
      * Post true Boolean value in request returns 201 (Created)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> post201(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> post201(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Post true Boolean value in request returns 201 (Created)
@@ -225,9 +241,11 @@ public interface HttpSuccess {
      * Put true Boolean value in request returns 202 (Accepted)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> put202(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> put202(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Put true Boolean value in request returns 202 (Accepted)
@@ -242,9 +260,11 @@ public interface HttpSuccess {
      * Patch true Boolean value in request returns 202
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> patch202(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> patch202(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Patch true Boolean value in request returns 202
@@ -259,9 +279,11 @@ public interface HttpSuccess {
      * Post true Boolean value in request returns 202 (Accepted)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> post202(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> post202(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Post true Boolean value in request returns 202 (Accepted)
@@ -276,9 +298,11 @@ public interface HttpSuccess {
      * Delete true Boolean value in request returns 202 (accepted)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> delete202(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> delete202(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Delete true Boolean value in request returns 202 (accepted)
@@ -292,9 +316,11 @@ public interface HttpSuccess {
     /**
      * Return 204 status code if successful
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> head204() throws ServiceException;
+    ServiceResponse<Void> head204() throws ServiceException, IOException;
 
     /**
      * Return 204 status code if successful
@@ -308,9 +334,11 @@ public interface HttpSuccess {
      * Put true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> put204(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> put204(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Put true Boolean value in request returns 204 (no content)
@@ -325,9 +353,11 @@ public interface HttpSuccess {
      * Patch true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> patch204(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> patch204(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Patch true Boolean value in request returns 204 (no content)
@@ -342,9 +372,11 @@ public interface HttpSuccess {
      * Post true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> post204(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> post204(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Post true Boolean value in request returns 204 (no content)
@@ -359,9 +391,11 @@ public interface HttpSuccess {
      * Delete true Boolean value in request returns 204 (no content)
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> delete204(Boolean booleanValue) throws ServiceException;
+    ServiceResponse<Void> delete204(Boolean booleanValue) throws ServiceException, IOException;
 
     /**
      * Delete true Boolean value in request returns 204 (no content)
@@ -375,9 +409,11 @@ public interface HttpSuccess {
     /**
      * Return 404 status code
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> head404() throws ServiceException;
+    ServiceResponse<Void> head404() throws ServiceException, IOException;
 
     /**
      * Return 404 status code

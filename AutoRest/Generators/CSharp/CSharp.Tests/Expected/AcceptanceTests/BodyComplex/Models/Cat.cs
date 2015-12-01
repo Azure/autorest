@@ -27,7 +27,8 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Cat class.
         /// </summary>
-        public Cat(string color = default(string), IList<Dog> hates = default(IList<Dog>))
+        public Cat(int? id = default(int?), string name = default(string), string color = default(string), IList<Dog> hates = default(IList<Dog>))
+            : base(id, name)
         {
             Color = color;
             Hates = hates;

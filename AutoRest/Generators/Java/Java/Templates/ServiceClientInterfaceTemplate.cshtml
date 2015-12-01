@@ -23,9 +23,24 @@ package @(Settings.Namespace.ToLower());
 public interface @Model.Name {
     /**
      * Gets the URI used as the base for all cloud service requests.
-     * @@return The BaseUri value.
+     *
+     * @@return the BaseUri value.
      */
     String getBaseUri();
+@EmptyLine
+    /**
+     * Gets the list of interceptors the OkHttp client will execute.
+     *
+     * @@return the list of interceptors.
+     */
+    List<Interceptor> getClientInterceptors();
+@EmptyLine
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @@param logLevel the logging level enum.
+     */
+    void setLogLevel(Level logLevel);
 @foreach (var property in Model.Properties)
 {
 @EmptyLine
@@ -89,13 +104,13 @@ if(!property.IsReadOnly)
     {
     @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
     }
-    if (method.ReturnType != null)
+    if (method.ReturnType.Body != null)
     {
     @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object if successful.
     }
     @: * @@throws ServiceException the exception wrapped in ServiceException if failed.
     @: */
-    @:ServiceResponse<@method.GenericReturnTypeString> @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException;
+    @:ServiceResponse<@method.GenericReturnTypeString> @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException, IOException;
     @EmptyLine
     @:/**
     if (!String.IsNullOrEmpty(method.Summary))
