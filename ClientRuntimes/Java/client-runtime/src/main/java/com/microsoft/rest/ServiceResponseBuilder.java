@@ -121,8 +121,8 @@ public class ServiceResponseBuilder<T> {
 
         if (responseTypes.containsKey(statusCode)) {
             return new ServiceResponse<T>(buildBody(statusCode, responseBody), response);
-        } else if (response.isSuccess() &&
-                (responseTypes.isEmpty() || (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
+        } else if (response.isSuccess()
+                && (responseTypes.isEmpty() || (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
             return new ServiceResponse<T>(buildBody(statusCode, responseBody), response);
         } else {
             ServiceException exception = new ServiceException("Invalid status code " + statusCode);
@@ -136,8 +136,8 @@ public class ServiceResponseBuilder<T> {
         int statusCode = response.code();
         if (responseTypes.containsKey(statusCode)) {
             return new ServiceResponse<T>(null, response);
-        } else if (response.isSuccess() &&
-                (responseTypes.isEmpty() || (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
+        } else if (response.isSuccess()
+                 && (responseTypes.isEmpty() || (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
             return new ServiceResponse<T>(null, response);
         } else {
             ServiceException exception = new ServiceException();
@@ -158,7 +158,7 @@ public class ServiceResponseBuilder<T> {
         } else if (responseTypes.containsKey(0)) {
             type = responseTypes.get(0);
         } else {
-            type = new TypeReference<T>() {}.getType();
+            type = new TypeReference<T>() { }.getType();
         }
 
         // Void response
@@ -167,7 +167,7 @@ public class ServiceResponseBuilder<T> {
         }
         // Return raw response if InputStream is the target type
         else if (type == InputStream.class) {
-            return (T)responseBody.byteStream();
+            return (T) responseBody.byteStream();
         }
         // Deserialize
         else {

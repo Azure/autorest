@@ -15,15 +15,13 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Joiner;
+import retrofit.JacksonConverterFactory;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit.Converter;
-import retrofit.JacksonConverterFactory;
 
 /**
  * A serialization helper class wrapped around {@link JacksonConverterFactory} and {@link ObjectMapper}.
@@ -57,9 +55,9 @@ public class JacksonUtils {
     }
 
     /**
-     * Gets a static instance of {@link Converter.Factory}.
+     * Gets a static instance of JacksonConverter factory.
      *
-     * @return an instance of {@link Converter.Factory}.
+     * @return an instance of JacksonConverter factory.
      */
     public JacksonConverterFactory getConverterFactory() {
         if (converterFactory == null) {
@@ -75,7 +73,9 @@ public class JacksonUtils {
      * @return the serialized string. Null if the object to serialize is null.
      */
     public static String serialize(Object object) {
-        if (object == null) return null;
+        if (object == null) {
+            return null;
+        }
         try {
             StringWriter writer = new StringWriter();
             new JacksonUtils().getObjectMapper().writeValue(writer, object);
@@ -93,7 +93,9 @@ public class JacksonUtils {
      * @return the serialized string. Null if the object to serialize is null.
      */
     public static String serializeRaw(Object object) {
-        if (object == null) return null;
+        if (object == null) {
+            return null;
+        }
         return CharMatcher.is('"').trimFrom(serialize(object));
     }
 
@@ -107,7 +109,9 @@ public class JacksonUtils {
      * @return the serialized string
      */
     public static String serializeList(List<?> list, CollectionFormat format) {
-        if (list == null) return null;
+        if (list == null) {
+            return null;
+        }
         List<String> serialized = new ArrayList<String>();
         for (Object element : list) {
             String raw = serializeRaw(element);
@@ -127,8 +131,10 @@ public class JacksonUtils {
      */
     @SuppressWarnings("unchecked")
     public <T> T deserialize(String value, final Type type) throws IOException {
-        if (value == null || value.isEmpty()) return null;
-        return (T)getObjectMapper().readValue(value, new TypeReference<T>() {
+        if (value == null || value.isEmpty()) {
+            return null;
+        }
+        return (T) getObjectMapper().readValue(value, new TypeReference<T>() {
             @Override
             public Type getType() {
                 return type;

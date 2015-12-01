@@ -32,13 +32,13 @@ public abstract class RetryStrategy {
     /**
      * The name of the retry strategy.
      */
-    public String name;
+    private String name;
 
     /**
      * The value indicating whether the first retry attempt will be made immediately,
      * whereas subsequent retries will remain subject to the retry interval.
      */
-    public boolean fastFirstRetry;
+    private boolean fastFirstRetry;
 
     /**
      * Initializes a new instance of the {@link RetryStrategy} class.
@@ -60,4 +60,12 @@ public abstract class RetryStrategy {
      * @return true if the request should be retried; false otherwise.
      */
     public abstract boolean shouldRetry(int retryCount, Response response);
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isFastFirstRetry() {
+        return fastFirstRetry;
+    }
 }

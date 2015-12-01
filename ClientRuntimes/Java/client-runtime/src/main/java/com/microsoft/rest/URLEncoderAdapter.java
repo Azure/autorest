@@ -13,7 +13,9 @@ import java.net.URLEncoder;
 /**
  * An instance of this class holds a response object and a raw REST response.
  */
-public class URLEncoderAdapter {
+public final class URLEncoderAdapter {
+    private URLEncoderAdapter() { }
+
     public static String encode(String str) {
         if (str == null) {
             return null;

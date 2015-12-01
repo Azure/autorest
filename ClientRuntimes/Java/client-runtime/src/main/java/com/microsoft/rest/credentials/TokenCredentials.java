@@ -27,8 +27,7 @@ public class TokenCredentials implements ServiceClientCredentials {
      * @param token  valid token
      */
     public TokenCredentials(String scheme, String token) {
-        if (scheme == null)
-        {
+        if (scheme == null) {
             scheme = "Bearer";
         }
         this.scheme = scheme;

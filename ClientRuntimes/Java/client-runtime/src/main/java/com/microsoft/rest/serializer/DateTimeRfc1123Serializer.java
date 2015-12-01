@@ -12,9 +12,8 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import com.microsoft.rest.DateTimeRfc1123;
+
 import java.io.IOException;
 
 /**

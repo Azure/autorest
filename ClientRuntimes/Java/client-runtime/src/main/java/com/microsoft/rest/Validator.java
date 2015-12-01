@@ -22,7 +22,9 @@ import java.util.Map;
 /**
  * Validates user provided parameters are not null if they are required.
  */
-public class Validator {
+public final class Validator {
+    private Validator() { }
+
     /**
      * Validates a user provided required parameter to be not null.
      * An {@link IllegalArgumentException} is thrown if a property fails the validation.
@@ -41,18 +43,17 @@ public class Validator {
         if (Primitives.isWrapperType(parameterType)) {
             parameterToken = parameterToken.unwrap();
         }
-        if (parameterToken.isPrimitive() ||
-                parameterType.isEnum() ||
-                parameterToken.isAssignableFrom(LocalDate.class) ||
-                parameterToken.isAssignableFrom(DateTime.class) ||
-                parameterToken.isAssignableFrom(String.class) ||
-                parameterToken.isAssignableFrom(DateTimeRfc1123.class) ||
-                parameterToken.isAssignableFrom(Period.class)) {
+        if (parameterToken.isPrimitive()
+                || parameterType.isEnum()
+                || parameterToken.isAssignableFrom(LocalDate.class)
+                || parameterToken.isAssignableFrom(DateTime.class)
+                || parameterToken.isAssignableFrom(String.class)
+                || parameterToken.isAssignableFrom(DateTimeRfc1123.class)
+                || parameterToken.isAssignableFrom(Period.class)) {
             return;
         }
 
-
-        for (Class<?> c : parameterToken.getTypes().classes().rawTypes()){
+        for (Class<?> c : parameterToken.getTypes().classes().rawTypes()) {
             for (Field field : c.getDeclaredFields()) {
                 field.setAccessible(true);
                 JsonProperty annotation = field.getAnnotation(JsonProperty.class);
@@ -69,14 +70,14 @@ public class Validator {
                 } else {
                     try {
                         Class<?> propertyType = property.getClass();
-                        if (TypeToken.of(List.class).isAssignableFrom(propertyType)){
-                            List<?> items = (List<?>)property;
+                        if (TypeToken.of(List.class).isAssignableFrom(propertyType)) {
+                            List<?> items = (List<?>) property;
                             for (Object item : items) {
                                 Validator.validate(item);
                             }
                         }
                         else if (TypeToken.of(Map.class).isAssignableFrom(propertyType)) {
-                            Map<?, ?> entries = (Map<?, ?>)property;
+                            Map<?, ?> entries = (Map<?, ?>) property;
                             for (Map.Entry<?, ?> entry : entries.entrySet()) {
                                 Validator.validate(entry.getKey());
                                 Validator.validate(entry.getValue());

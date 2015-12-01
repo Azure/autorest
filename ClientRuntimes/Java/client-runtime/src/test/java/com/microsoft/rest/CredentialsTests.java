@@ -19,8 +19,8 @@ import java.io.IOException;
 
 public class CredentialsTests {
     @Test
-    public void BasicCredentialsTest() throws Exception {
-        ServiceClient serviceClient = new ServiceClient() {};
+    public void basicCredentialsTest() throws Exception {
+        ServiceClient serviceClient = new ServiceClient() { };
         BasicAuthenticationCredentials credentials = new BasicAuthenticationCredentials("user", "pass");
         credentials.applyCredentialsFilter(serviceClient.client);
         serviceClient.getClientInterceptors().add(new Interceptor() {
@@ -38,8 +38,8 @@ public class CredentialsTests {
     }
 
     @Test
-    public void TokenCredentialsTest() throws Exception {
-        ServiceClient serviceClient = new ServiceClient() {};
+    public void tokenCredentialsTest() throws Exception {
+        ServiceClient serviceClient = new ServiceClient() { };
         TokenCredentials credentials = new TokenCredentials(null, "this_is_a_token");
         credentials.applyCredentialsFilter(serviceClient.client);
         serviceClient.getClientInterceptors().add(new Interceptor() {

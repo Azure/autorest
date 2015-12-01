@@ -27,7 +27,7 @@ public class ByteArraySerializer extends JsonSerializer<Byte[]> {
     @Override
     public void serialize(Byte[] value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         byte[] bytes = new byte[value.length];
-        for(int i = 0; i < value.length; i++){
+        for (int i = 0; i < value.length; i++) {
             bytes[i] = value[i];
         }
         jgen.writeBinary(bytes);

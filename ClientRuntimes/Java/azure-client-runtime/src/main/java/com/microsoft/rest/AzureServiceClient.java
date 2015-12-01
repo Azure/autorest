@@ -31,7 +31,7 @@ public abstract class AzureServiceClient extends ServiceClient {
         this.client.setCookieHandler(cookieManager);
 
         Executor executor = Executors.newCachedThreadPool();
-        this.retrofitBuilder = this.retrofitBuilder
+        this.retrofitBuilder
                 .addConverterFactory(new AzureJacksonUtils().getConverterFactory())
                 .callbackExecutor(executor);
     }

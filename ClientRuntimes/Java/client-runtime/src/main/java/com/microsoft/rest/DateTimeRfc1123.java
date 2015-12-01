@@ -53,15 +53,15 @@ public class DateTimeRfc1123 {
     
     @Override
     public boolean equals(Object obj) {
-        if(obj == null) {
+        if (obj == null) {
             return false;
         }
         
-        if(!(obj instanceof DateTimeRfc1123)) {
+        if (!(obj instanceof DateTimeRfc1123)) {
             return false;
         }
         
-        DateTimeRfc1123 rhs = (DateTimeRfc1123)obj;
+        DateTimeRfc1123 rhs = (DateTimeRfc1123) obj;
         return this.dateTime.equals(rhs.getDateTime());
     }
 }
