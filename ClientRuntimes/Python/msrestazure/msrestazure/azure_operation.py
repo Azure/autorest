@@ -101,9 +101,21 @@ class AzureOperationPoller(object):
             if self._output.provisioning_state.lower() in self.done_states:
                 raise OperationFinished()
 
-    def _set_implicit_state(self):
-        if hasattr(self._output, 'provisioning_state'):
-            self._output.provisioning_state = 'Succeeded'
+    def _attempt_output_resolution(self, outputs):
+        if self._response.status_code == 204:
+            self._output = None
+            return
+        try:
+            self._output = outputs(self._response)
+        except Exception as err:
+            self._output = err
+            return
+
+        if hasattr(self._output, 'provisioning_state') and self._output.provisioning_state is None:
+            if self._response.status_code == 200:
+                self._output.provisioning_state = 'Succeeded'
+            elif self._response.status_code == 201:
+                self._output = CloudError(None, self._response)
 
     def _validate_url(self):
         parsed = urlparse(self._url)
@@ -137,8 +149,13 @@ class AzureOperationPoller(object):
 
         except NoRetryUrl:
             if self._response.status_code in self.accept_states:
-                if self._output:
-                    self._set_implicit_state()
+                self._attempt_output_resolution(outputs)
+                #if self._output:
+                #    self._set_implicit_state()
+                #else:
+                #    self._attempt_output_resolution()
+            else:
+                self._output = CloudError(None, self._response)
 
         except PollingFinished:
             pass
