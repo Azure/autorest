@@ -138,6 +138,12 @@ public interface AutoRestAzureSpecialParametersTestClient {
     SkipUrlEncodingOperations getSkipUrlEncoding();
 
     /**
+     * Gets the OdataOperations object to access its operations.
+     * @return the odata value.
+     */
+    OdataOperations getOdata();
+
+    /**
      * Gets the HeaderOperationsOperations object to access its operations.
      * @return the headerOperations value.
      */

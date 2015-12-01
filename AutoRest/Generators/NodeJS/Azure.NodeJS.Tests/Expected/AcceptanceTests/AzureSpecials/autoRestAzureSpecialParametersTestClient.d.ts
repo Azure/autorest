@@ -51,6 +51,7 @@ declare class AutoRestAzureSpecialParametersTestClient {
     apiVersionDefault: operations.ApiVersionDefault;
     apiVersionLocal: operations.ApiVersionLocal;
     skipUrlEncoding: operations.SkipUrlEncoding;
+    odata: operations.Odata;
     header: operations.Header;
     }
 

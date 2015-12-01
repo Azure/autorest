@@ -78,6 +78,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 
         ISkipUrlEncodingOperations SkipUrlEncoding { get; }
 
+        IOdataOperations Odata { get; }
+
         IHeaderOperations Header { get; }
 
     }

@@ -22,8 +22,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             {
                 if (IsODataFilterExpression)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, 
-                        "Expression<Func<{0}, bool>>", Type.Name);
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "ODataQuery<{0}>", Type.Name);
                 }
 
                 return base.DeclarationExpression;
@@ -42,15 +42,18 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         }
 
         /// <summary>
-        /// Gets True if parameter is OData $filter expression
+        /// Gets True if parameter is OData $filter, $top, $orderBy, $expand, $skip expression
         /// </summary>
         public virtual bool IsODataFilterExpression
         {
             get
             {
-                return SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
-                       Location == ParameterLocation.Query &&
-                       Type is CompositeType;
+                return (SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) ||
+                        SerializedName.Equals("$top", StringComparison.OrdinalIgnoreCase) ||
+                        SerializedName.Equals("$orderby", StringComparison.OrdinalIgnoreCase) ||
+                        SerializedName.Equals("$skip", StringComparison.OrdinalIgnoreCase) ||
+                        SerializedName.Equals("$expand", StringComparison.OrdinalIgnoreCase))
+                        && Location == ParameterLocation.Query;
             }
         }
     }
