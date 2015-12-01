@@ -131,11 +131,18 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             if ((int)statusCode != 200)
             {
                 var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -244,11 +251,18 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             if ((int)statusCode != 200)
             {
                 var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -364,11 +378,18 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             if ((int)statusCode != 200)
             {
                 var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -476,11 +497,18 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             if ((int)statusCode != 200)
             {
                 var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -588,11 +616,18 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             if ((int)statusCode != 200)
             {
                 var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;

@@ -232,8 +232,15 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Pet>(responseContent, this.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Pet>(responseContent, this.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -424,8 +431,15 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<IList<Pet>>(responseContent, this.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<IList<Pet>>(responseContent, this.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -525,8 +539,15 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<IList<Pet>>(responseContent, this.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<IList<Pet>>(responseContent, this.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -617,8 +638,15 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Pet>(responseContent, this.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Pet>(responseContent, this.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -889,8 +917,15 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<IDictionary<string, int?>>(responseContent, this.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<IDictionary<string, int?>>(responseContent, this.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -983,8 +1018,15 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Order>(responseContent, this.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Order>(responseContent, this.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -1087,8 +1129,15 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Order>(responseContent, this.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Order>(responseContent, this.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -1471,7 +1520,7 @@ namespace Fixtures.PetstoreV2
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<string>> LoginUserWithHttpMessagesAsync(string username, string password, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<string,LoginUserHeaders>> LoginUserWithHttpMessagesAsync(string username, string password, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (username == null)
             {
@@ -1551,14 +1600,29 @@ namespace Fixtures.PetstoreV2
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<string>();
+            var result = new HttpOperationResponse<string,LoginUserHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<string>(responseContent, this.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<string>(responseContent, this.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+            }
+            try
+            {
+                result.Headers = httpResponse.Headers.ToJson().ToObject<LoginUserHeaders>(JsonSerializer.Create(this.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -1724,8 +1788,15 @@ namespace Fixtures.PetstoreV2
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<User>(responseContent, this.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<User>(responseContent, this.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {

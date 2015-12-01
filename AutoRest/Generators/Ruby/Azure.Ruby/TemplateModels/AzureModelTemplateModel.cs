@@ -17,7 +17,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// </summary>
         /// <param name="source">The object to create model from.</param>
         /// <param name="allTypes">The list of all model types; Used to implement polymorphism.</param>
-        public AzureModelTemplateModel(CompositeType source, IList<CompositeType> allTypes)
+        public AzureModelTemplateModel(CompositeType source, ISet<CompositeType> allTypes)
             : base(source, allTypes)
         {
         }

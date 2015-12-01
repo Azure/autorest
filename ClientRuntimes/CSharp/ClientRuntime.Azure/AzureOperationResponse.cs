@@ -18,6 +18,18 @@ namespace Microsoft.Rest.Azure
     /// <summary>
     /// A standard service response including request ID.
     /// </summary>
+    public class AzureOperationResponse : HttpOperationResponse, IAzureOperationResponse
+    {
+        /// <summary>
+        /// Gets or sets the value that uniquely identifies a request 
+        /// made against the service.
+        /// </summary>
+        public string RequestId { get; set; }
+    }
+
+    /// <summary>
+    /// A standard service response including request ID.
+    /// </summary>
     public class AzureOperationResponse<T> : HttpOperationResponse<T>, IAzureOperationResponse
     {
         /// <summary>
@@ -30,7 +42,7 @@ namespace Microsoft.Rest.Azure
     /// <summary>
     /// A standard service response including request ID.
     /// </summary>
-    public class AzureOperationResponse : HttpOperationResponse, IAzureOperationResponse
+    public class AzureOperationResponse<TBody, THeader> : HttpOperationResponse<TBody, THeader>, IAzureOperationResponse
     {
         /// <summary>
         /// Gets or sets the value that uniquely identifies a request 
@@ -38,5 +50,4 @@ namespace Microsoft.Rest.Azure
         /// </summary>
         public string RequestId { get; set; }
     }
-
 }

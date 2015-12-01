@@ -27,7 +27,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <summary>
         /// List of all model types.
         /// </summary>
-        private readonly IList<CompositeType> allTypes;
+        private readonly ISet<CompositeType> allTypes;
 
         /// <summary>
         /// Gets the list of own properties of the object.
@@ -118,7 +118,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         /// <param name="source">The object to create model from.</param>
         /// <param name="allTypes">The list of all model types; Used to implement polymorphism.</param>
-        public ModelTemplateModel(CompositeType source, IList<CompositeType> allTypes)
+        public ModelTemplateModel(CompositeType source, ISet<CompositeType> allTypes)
         {
             this.LoadFrom(source);
             PropertyTemplateModels = new List<PropertyTemplateModel>();

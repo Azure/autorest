@@ -22,7 +22,7 @@
 {
 @: * @@throws @exception
 }
-@if (Model.ReturnType != null)
+@if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object if successful.
 }
@@ -87,7 +87,7 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
 @:    @outType @outProp = @(inParam).get@(inProp.ToPascalCase())();
 }
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
-    call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType).Name)>(serviceCallback) {
+    call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType.Body).Name)>(serviceCallback) {
         @@Override
         public void onResponse(Response<@Model.CallType> response, Retrofit retrofit) {
             try {
@@ -104,11 +104,11 @@ private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Re
     return new @Model.ResponseBuilder<@Model.GenericReturnTypeString>(@Model.ServiceResponseBuilderArgs)
 @foreach (var response in Model.Responses)
 {
-            @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.WrapPrimitiveType(response.Value).Name>(){}.getType())
+            @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.WrapPrimitiveType(response.Value.Body).Name>(){}.getType())
 }
-@if (Model.DefaultResponse != null)
+@if (Model.DefaultResponse.Body != null)
 {
-            @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(Model.DefaultResponse).Name)>(){}.getType())
+            @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(Model.DefaultResponse.Body).Name)>(){}.getType())
 }
 @if (Model.HttpMethod == HttpMethod.Head)
 {

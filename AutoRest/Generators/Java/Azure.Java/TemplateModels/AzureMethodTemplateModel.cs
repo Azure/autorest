@@ -158,12 +158,12 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Remove("com.microsoft.rest.ServiceResponseCallback");
                     imports.Remove("com.microsoft.rest.AzureServiceResponseBuilder");
                     imports.Add("retrofit.Callback");
-                    this.Responses.Select(r => r.Value).Concat(new IType[]{ DefaultResponse })
+                    this.Responses.Select(r => r.Value.Body).Concat(new IType[]{ DefaultResponse.Body })
                         .SelectMany(t => t.ImportFrom(ServiceClient.Namespace))
                         .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom(ServiceClient.Namespace).Contains(i)))
                         .ForEach(i => imports.Remove(i));
                     // return type may have been removed as a side effect
-                    imports.AddRange(this.ReturnType.ImportFrom(ServiceClient.Namespace));
+                    imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
                 }
                 else
                 {

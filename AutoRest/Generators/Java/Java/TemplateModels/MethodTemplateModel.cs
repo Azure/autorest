@@ -266,7 +266,7 @@ namespace Microsoft.Rest.Generator.Java
                     parameters += ", ";
                 }
                 parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
-                    ReturnType != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType).ToString() : "Void");
+                    ReturnType.Body != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).ToString() : "Void");
                 return parameters;
             }
         }
@@ -323,9 +323,9 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null)
                 {
-                    return JavaCodeNamer.WrapPrimitiveType(ReturnType).Name;
+                    return JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).Name;
                 }
                 return "void";
             }
@@ -335,9 +335,9 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null)
                 {
-                    return JavaCodeNamer.WrapPrimitiveType(ReturnType).Name;
+                    return JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).Name;
                 }
                 return "Void";
             }
@@ -412,7 +412,7 @@ namespace Microsoft.Rest.Generator.Java
                     }
                 });
                 // return type
-                imports.AddRange(this.ReturnType.ImportFrom(ServiceClient.Namespace));
+                imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
                 // Http verb annotations
                 imports.Add(this.HttpMethod.ImportFrom());
                 // exceptions
@@ -438,7 +438,7 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add("com.microsoft.rest.ServiceCallback");
 
                 // response type conversion
-                if (this.Responses.Any() || this.DefaultResponse != null)
+                if (this.Responses.Any() || this.DefaultResponse.Body != null)
                 {
                     imports.Add("com.google.common.reflect.TypeToken");
                 }
@@ -461,10 +461,10 @@ namespace Microsoft.Rest.Generator.Java
                 // parameter utils
                 this.LocalParameters.ForEach(p => imports.AddRange(p.ImportFrom()));
                 // return type
-                imports.AddRange(this.ReturnType.ImportFrom(ServiceClient.Namespace));
+                imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
                 // response type (can be different from return type)
-                this.Responses.ForEach(r => imports.AddRange(r.Value.ImportFrom(ServiceClient.Namespace)));
-                imports.AddRange(DefaultResponse.ImportFrom(ServiceClient.Namespace));
+                this.Responses.ForEach(r => imports.AddRange(r.Value.Body.ImportFrom(ServiceClient.Namespace)));
+                imports.AddRange(DefaultResponse.Body.ImportFrom(ServiceClient.Namespace));
                 // exceptions
                 this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex => imports.Add(JavaCodeNamer.GetJavaException(ex)));

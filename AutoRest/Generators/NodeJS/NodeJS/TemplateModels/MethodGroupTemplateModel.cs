@@ -44,7 +44,9 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public bool ContainsStream
         {
-            get { return this.Methods.FirstOrDefault(m => m.Parameters.FirstOrDefault(p => p.Type == PrimaryType.Stream) != null || m.ReturnType == PrimaryType.Stream) != null; }
+            get {
+                return this.Methods.Any(m => m.Parameters.FirstOrDefault(p => p.Type == PrimaryType.Stream) != null ||
+                        m.ReturnType.Body == PrimaryType.Stream); }
         }
     }
 }

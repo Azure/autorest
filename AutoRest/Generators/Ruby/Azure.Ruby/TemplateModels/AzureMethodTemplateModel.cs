@@ -165,7 +165,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             {
                 var sb = new IndentedStringBuilder();
 
-                if (this.HttpMethod == HttpMethod.Head && this.ReturnType != null)
+                if (this.HttpMethod == HttpMethod.Head && this.ReturnType.Body != null)
                 {
                     HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
                     sb.AppendLine("result.body = (status_code == {0})", (int)code);
@@ -242,7 +242,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         {
             get
             {
-                if (DefaultResponse == null || DefaultResponse.Name == "CloudError")
+                if (DefaultResponse.Body == null || DefaultResponse.Body.Name == "CloudError")
                 {
                     return "MsRestAzure::AzureOperationError";
                 }
