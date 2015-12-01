@@ -128,7 +128,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             var ext = extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
 
             string nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
-            string itemName = (string)ext["itemName"] ?? "values";
+            string itemName = (string)ext["itemName"] ?? "value";
             string className = (string)ext["className"];
             if (string.IsNullOrEmpty(className))
             {
