@@ -658,8 +658,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         public void AzureODataTests()
         {
             var validSubscription = "1234-5678-9012-3456";
-            SwaggerSpecHelper.RunTests<AzureCSharpCodeGenerator>(
-                SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"));
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"), generator: "Azure.CSharp");
             using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString()))
                 { SubscriptionId = validSubscription })

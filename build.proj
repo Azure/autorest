@@ -55,7 +55,7 @@
   <PropertyGroup>
     <ClientRuntimeSolution>ClientRuntime.sln</ClientRuntimeSolution>
     <ClientRuntimeWindowsSolution>ClientRuntimeWindows.sln</ClientRuntimeWindowsSolution>
-    <CodeGeneratorSolution>AutoRest.sln</CodeGeneratorSolution>
+    <CodeGeneratorSolution>CodeGenerator.sln</CodeGeneratorSolution>
     <LibraryRoot>$(MSBuildThisFileDirectory)</LibraryRoot>
     <LibrarySourceFolder>$(LibraryRoot)</LibrarySourceFolder>
     <LibraryToolsFolder>$(LibraryRoot)Tools</LibraryToolsFolder>
@@ -103,17 +103,14 @@
   </ItemGroup>
     
   <Target Name="Build" DependsOnTargets="RestoreNugetPackages">
+    <Exec Command="dnvm use $(DnxVersion) -r coreclr -a x64" ContinueOnError="false"/>
     <CallTarget Targets="BuildMsBuildTask" />
     <CallTarget Targets="BuildServerPreparation" Condition=" '$(CodeSign)' == 'true' " />
-    <Exec Command="dnvm use $(DnxVersion) -r coreclr -a x64" ContinueOnError="false"/>
+    <CallTarget Targets="BuildDnxLibraries" />
     <!--
     The solution file contains configurations for each platform such as Portable-Debug, Net45-Release, etc
         When invoking msbuild, provide the right configuration name.
     -->
-    <MSBuild Projects="$(ClientRuntimeSolution)"
-             Properties="Configuration=$(Configuration);CodeSign=$(CodeSign)"
-             Targets="Build"
-             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
     <MSBuild Projects="$(CodeGeneratorSolution)"
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
              Targets="Build"
@@ -141,10 +138,6 @@
   <!-- Project files import some targets coming from nuget packages, so need to restore them first to avoid errors
       such as "The imported project ....build\Microsoft.Bcl.Build.targets was not found. " -->
   <Target Name="Clean">
-    <MSBuild Projects="$(ClientRuntimeSolution)"
-             Properties="Configuration=$(Configuration)"
-             Targets="Clean"
-             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
     <MSBuild Projects="$(CodeGeneratorSolution)"
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU"
              Targets="Clean"
