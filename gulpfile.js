@@ -407,10 +407,8 @@ var xunitdnx = function(options){
       return path.basename(path.dirname(s))
     }
   };
-  return shell('dnvm use ' + DNX_VERSION + ' -r coreclr -a x64 && dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml"', options);
+  return shell('dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml"', options);
 }
-
-gulp.task('dnxinit', shell.task('dnvm install ' + DNX_VERSION + ' -r coreclr -a x64 && dnvm install ' + DNX_VERSION + ' -r clr -a x86', defaultShellOptions));
 
 gulp.task('test:xunit', ['test:xunit:dnx'], function () {
   return gulp.src(xunitTestsDlls).pipe(xunit('<%= file.path %> -noshadow -noappdomain -diagnostics', defaultShellOptions));
@@ -487,5 +485,9 @@ gulp.task('default', function(cb){
   // analysis runs rebuild under the covers, so this cause build to be run in debug
   // the build release causes release bits to be built, so we can package release dlls
   // test then runs in debug, but uses the packages created in package
-  runSequence('dnxinit', 'clean', 'build', 'analysis', 'build:release', 'package', 'test', cb);
+  if (isWindows) {
+    runSequence('clean', 'build', 'analysis', 'build:release', 'package', 'test', cb);
+  } else {
+    runSequence('clean', 'build', 'test', cb);
+  }
 });
