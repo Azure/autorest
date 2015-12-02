@@ -137,9 +137,9 @@ describe('nodejs', function () {
       it('should send and receive string type headers', function (done) {
         testClient.header.paramString('valid', <any>{ value: 'The quick brown fox jumps over the lazy dog' }, function (error, result) {
           should.not.exist(error);
-          testClient.header.paramString('null', <any>{ value: null }, function (error, result) {
+          testClient.header.paramString('null', { value: null }, function (error, result) {
             should.not.exist(error);
-            testClient.header.paramString('empty', <any>{ value: '' }, function (error, result) {
+            testClient.header.paramString('empty', { value: '' }, function (error, result) {
               should.not.exist(error);
               testClient.header.responseString('valid', function (error, result, request, response) {
                 should.not.exist(error);
@@ -161,7 +161,7 @@ describe('nodejs', function () {
       it('should send and receive enum type headers', function (done) {
         testClient.header.paramEnum('valid', { value: 'GREY' }, function (error, result) {
           should.not.exist(error);
-          testClient.header.paramEnum('null', <any>{ value: null }, function (error, result) {
+          testClient.header.paramEnum('null', { value: null }, function (error, result) {
             should.not.exist(error);
             testClient.header.responseEnum('valid', function (error, result, request, response) {
               should.not.exist(error);
@@ -212,7 +212,7 @@ describe('nodejs', function () {
       it('should send and receive datetimerfc1123 type headers', function (done) {
         testClient.header.paramDatetimeRfc1123('valid', <any>{ value: new Date('2010-01-01T12:34:56Z') }, function (error, result) {
           should.not.exist(error);
-          testClient.header.paramDatetimeRfc1123('min', <any>{ value: new Date('0001-01-01T00:00:00Z') }, function (error, result) {
+          testClient.header.paramDatetimeRfc1123('min', { value: new Date('0001-01-01T00:00:00Z') }, function (error, result) {
             should.not.exist(error);
             testClient.header.responseDatetimeRfc1123('valid', function (error, result, request, response) {
               should.not.exist(error);

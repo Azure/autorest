@@ -54,7 +54,7 @@ declare class AutoRestValidationTest {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        validationOfMethodParameters(resourceGroupName: string, id: number, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
+        validationOfMethodParameters(resourceGroupName: string, id: number, options: {customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
         validationOfMethodParameters(resourceGroupName: string, id: number, callback: ServiceCallback<models.Product>): void;
 
         /**
@@ -83,8 +83,8 @@ declare class AutoRestValidationTest {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        validationOfBody(resourceGroupName: string, id: number, body: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-        validationOfBody(resourceGroupName: string, id: number, body: models.Product, callback: ServiceCallback<models.Product>): void;
+        validationOfBody(resourceGroupName: string, id: number, options: {body?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+        validationOfBody(resourceGroupName: string, id: number, callback: ServiceCallback<models.Product>): void;
 }
 
 export = AutoRestValidationTest;

@@ -32,7 +32,7 @@ export interface Files {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getFile(options: RequestOptions, callback: ServiceCallback<stream.Readable>): void;
+    getFile(options: {customHeaders?: any}, callback: ServiceCallback<stream.Readable>): void;
     getFile(callback: ServiceCallback<stream.Readable>): void;
 
     /**
@@ -46,6 +46,6 @@ export interface Files {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getEmptyFile(options: RequestOptions, callback: ServiceCallback<stream.Readable>): void;
+    getEmptyFile(options: {customHeaders?: any}, callback: ServiceCallback<stream.Readable>): void;
     getEmptyFile(callback: ServiceCallback<stream.Readable>): void;
 }

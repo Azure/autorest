@@ -31,7 +31,7 @@ export interface DateModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getNull(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getNull(callback: ServiceCallback<Date>): void;
 
     /**
@@ -45,7 +45,7 @@ export interface DateModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getInvalidDate(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getInvalidDate(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getInvalidDate(callback: ServiceCallback<Date>): void;
 
     /**
@@ -59,7 +59,7 @@ export interface DateModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getOverflowDate(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getOverflowDate(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getOverflowDate(callback: ServiceCallback<Date>): void;
 
     /**
@@ -73,7 +73,7 @@ export interface DateModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getUnderflowDate(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getUnderflowDate(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getUnderflowDate(callback: ServiceCallback<Date>): void;
 
     /**
@@ -89,7 +89,7 @@ export interface DateModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putMaxDate(dateBody: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putMaxDate(dateBody: Date|string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putMaxDate(dateBody: Date|string, callback: ServiceCallback<void>): void;
 
     /**
@@ -103,7 +103,7 @@ export interface DateModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMaxDate(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getMaxDate(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getMaxDate(callback: ServiceCallback<Date>): void;
 
     /**
@@ -119,7 +119,7 @@ export interface DateModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putMinDate(dateBody: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putMinDate(dateBody: Date|string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putMinDate(dateBody: Date|string, callback: ServiceCallback<void>): void;
 
     /**
@@ -133,6 +133,6 @@ export interface DateModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMinDate(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getMinDate(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getMinDate(callback: ServiceCallback<Date>): void;
 }

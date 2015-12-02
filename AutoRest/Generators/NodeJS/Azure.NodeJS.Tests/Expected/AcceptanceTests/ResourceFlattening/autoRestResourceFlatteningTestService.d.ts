@@ -51,8 +51,8 @@ declare class AutoRestResourceFlatteningTestService {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        putArray(resourceArray: models.Resource[], options: RequestOptions, callback: ServiceCallback<void>): void;
-        putArray(resourceArray: models.Resource[], callback: ServiceCallback<void>): void;
+        putArray(options: {resourceArray?: models.Resource[], customHeaders?: any}, callback: ServiceCallback<void>): void;
+        putArray(callback: ServiceCallback<void>): void;
 
         /**
          * Get External Resource as an Array
@@ -65,7 +65,7 @@ declare class AutoRestResourceFlatteningTestService {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        getArray(options: RequestOptions, callback: ServiceCallback<models.FlattenedProduct[]>): void;
+        getArray(options: {customHeaders?: any}, callback: ServiceCallback<models.FlattenedProduct[]>): void;
         getArray(callback: ServiceCallback<models.FlattenedProduct[]>): void;
 
         /**
@@ -82,8 +82,8 @@ declare class AutoRestResourceFlatteningTestService {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        putDictionary(resourceDictionary: { [propertyName: string]: models.FlattenedProduct }, options: RequestOptions, callback: ServiceCallback<void>): void;
-        putDictionary(resourceDictionary: { [propertyName: string]: models.FlattenedProduct }, callback: ServiceCallback<void>): void;
+        putDictionary(options: {resourceDictionary?: { [propertyName: string]: models.FlattenedProduct }, customHeaders?: any}, callback: ServiceCallback<void>): void;
+        putDictionary(callback: ServiceCallback<void>): void;
 
         /**
          * Get External Resource as a Dictionary
@@ -96,7 +96,7 @@ declare class AutoRestResourceFlatteningTestService {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        getDictionary(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: models.FlattenedProduct }>): void;
+        getDictionary(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: models.FlattenedProduct }>): void;
         getDictionary(callback: ServiceCallback<{ [propertyName: string]: models.FlattenedProduct }>): void;
 
         /**
@@ -132,8 +132,8 @@ declare class AutoRestResourceFlatteningTestService {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        putResourceCollection(resourceComplexObject: models.ResourceCollection, options: RequestOptions, callback: ServiceCallback<void>): void;
-        putResourceCollection(resourceComplexObject: models.ResourceCollection, callback: ServiceCallback<void>): void;
+        putResourceCollection(options: {resourceComplexObject?: models.ResourceCollection, customHeaders?: any}, callback: ServiceCallback<void>): void;
+        putResourceCollection(callback: ServiceCallback<void>): void;
 
         /**
          * Get External Resource as a ResourceCollection
@@ -146,7 +146,7 @@ declare class AutoRestResourceFlatteningTestService {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        getResourceCollection(options: RequestOptions, callback: ServiceCallback<models.ResourceCollection>): void;
+        getResourceCollection(options: {customHeaders?: any}, callback: ServiceCallback<models.ResourceCollection>): void;
         getResourceCollection(callback: ServiceCallback<models.ResourceCollection>): void;
 }
 

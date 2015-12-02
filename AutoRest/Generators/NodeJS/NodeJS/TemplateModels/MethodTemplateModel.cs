@@ -156,7 +156,8 @@ namespace Microsoft.Rest.Generator.NodeJS
             StringBuilder declarations = new StringBuilder();
 
             bool first = true;
-            foreach (var parameter in LocalParameters)
+            IEnumerable<ParameterTemplateModel> requiredParameters = LocalParameters.Where(p => p.IsRequired);
+            foreach (var parameter in requiredParameters)
             {
                 if (!first)
                     declarations.Append(", ");
@@ -177,7 +178,19 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 if (!first)
                     declarations.Append(", ");
-                declarations.Append("options: RequestOptions");
+                declarations.Append("options: {");
+                var optionalParameters = ((CompositeType)OptionsParameterTemplateModel.Type).Properties;
+                for(int i = 0; i < optionalParameters.Count; i++)
+                {
+                    if (i != 0)
+                    {
+                        declarations.Append(", ");
+                    }
+                    declarations.Append(optionalParameters[i].Name);
+                    declarations.Append("?: ");
+                    declarations.Append(optionalParameters[i].Type.TSType(false));
+                }
+                declarations.Append("}");
             }
 
             return declarations.ToString();

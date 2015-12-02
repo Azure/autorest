@@ -41,7 +41,7 @@ declare class AutoRestReportService {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        getReport(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+        getReport(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
         getReport(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 }
 

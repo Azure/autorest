@@ -40,8 +40,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put200Succeeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    put200Succeeded(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    put200Succeeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    put200Succeeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -63,8 +63,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPut200Succeeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPut200Succeeded(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPut200Succeeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPut200Succeeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -86,8 +86,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put200SucceededNoState(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    put200SucceededNoState(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    put200SucceededNoState(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    put200SucceededNoState(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -109,8 +109,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPut200SucceededNoState(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPut200SucceededNoState(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPut200SucceededNoState(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPut200SucceededNoState(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 202 to the initial request,
@@ -133,8 +133,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put202Retry200(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    put202Retry200(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    put202Retry200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    put202Retry200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 202 to the initial request,
@@ -157,8 +157,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPut202Retry200(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPut202Retry200(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPut202Retry200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPut202Retry200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 201 to the initial request,
@@ -182,8 +182,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put201CreatingSucceeded200(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    put201CreatingSucceeded200(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    put201CreatingSucceeded200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    put201CreatingSucceeded200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 201 to the initial request,
@@ -207,8 +207,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPut201CreatingSucceeded200(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPut201CreatingSucceeded200(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPut201CreatingSucceeded200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPut201CreatingSucceeded200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 201 to the initial request,
@@ -232,8 +232,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put200UpdatingSucceeded204(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    put200UpdatingSucceeded204(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    put200UpdatingSucceeded204(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    put200UpdatingSucceeded204(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 201 to the initial request,
@@ -257,8 +257,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPut200UpdatingSucceeded204(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPut200UpdatingSucceeded204(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPut200UpdatingSucceeded204(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPut200UpdatingSucceeded204(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 201 to the initial request,
@@ -282,8 +282,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put201CreatingFailed200(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    put201CreatingFailed200(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    put201CreatingFailed200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    put201CreatingFailed200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 201 to the initial request,
@@ -307,8 +307,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPut201CreatingFailed200(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPut201CreatingFailed200(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPut201CreatingFailed200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPut201CreatingFailed200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 201 to the initial request,
@@ -332,8 +332,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put200Acceptedcanceled200(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    put200Acceptedcanceled200(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    put200Acceptedcanceled200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    put200Acceptedcanceled200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 201 to the initial request,
@@ -357,8 +357,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPut200Acceptedcanceled200(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPut200Acceptedcanceled200(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPut200Acceptedcanceled200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPut200Acceptedcanceled200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 202 to the initial request with
@@ -381,8 +381,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putNoHeaderInRetry(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putNoHeaderInRetry(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putNoHeaderInRetry(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putNoHeaderInRetry(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 202 to the initial request with
@@ -405,8 +405,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutNoHeaderInRetry(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutNoHeaderInRetry(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutNoHeaderInRetry(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutNoHeaderInRetry(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -429,8 +429,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putAsyncRetrySucceeded(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putAsyncRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putAsyncRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -453,8 +453,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutAsyncRetrySucceeded(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -477,8 +477,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncNoRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putAsyncNoRetrySucceeded(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putAsyncNoRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putAsyncNoRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -501,8 +501,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncNoRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutAsyncNoRetrySucceeded(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncNoRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncNoRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -525,8 +525,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncRetryFailed(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putAsyncRetryFailed(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putAsyncRetryFailed(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putAsyncRetryFailed(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -549,8 +549,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncRetryFailed(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutAsyncRetryFailed(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRetryFailed(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRetryFailed(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -573,8 +573,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncNoRetrycanceled(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putAsyncNoRetrycanceled(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putAsyncNoRetrycanceled(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putAsyncNoRetrycanceled(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -597,8 +597,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncNoRetrycanceled(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutAsyncNoRetrycanceled(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncNoRetrycanceled(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncNoRetrycanceled(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 202 to the initial request with
@@ -621,8 +621,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncNoHeaderInRetry(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putAsyncNoHeaderInRetry(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putAsyncNoHeaderInRetry(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putAsyncNoHeaderInRetry(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 202 to the initial request with
@@ -645,8 +645,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncNoHeaderInRetry(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutAsyncNoHeaderInRetry(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncNoHeaderInRetry(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncNoHeaderInRetry(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request with non resource.
@@ -665,8 +665,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putNonResource(sku: models.Sku, options: RequestOptions, callback: ServiceCallback<models.Sku>): void;
-    putNonResource(sku: models.Sku, callback: ServiceCallback<models.Sku>): void;
+    putNonResource(options: {sku?: models.Sku, customHeaders?: any}, callback: ServiceCallback<models.Sku>): void;
+    putNonResource(callback: ServiceCallback<models.Sku>): void;
 
     /**
      * Long running put request with non resource.
@@ -685,8 +685,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutNonResource(sku: models.Sku, options: RequestOptions, callback: ServiceCallback<models.Sku>): void;
-    beginPutNonResource(sku: models.Sku, callback: ServiceCallback<models.Sku>): void;
+    beginPutNonResource(options: {sku?: models.Sku, customHeaders?: any}, callback: ServiceCallback<models.Sku>): void;
+    beginPutNonResource(callback: ServiceCallback<models.Sku>): void;
 
     /**
      * Long running put request with non resource.
@@ -705,8 +705,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncNonResource(sku: models.Sku, options: RequestOptions, callback: ServiceCallback<models.Sku>): void;
-    putAsyncNonResource(sku: models.Sku, callback: ServiceCallback<models.Sku>): void;
+    putAsyncNonResource(options: {sku?: models.Sku, customHeaders?: any}, callback: ServiceCallback<models.Sku>): void;
+    putAsyncNonResource(callback: ServiceCallback<models.Sku>): void;
 
     /**
      * Long running put request with non resource.
@@ -725,8 +725,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncNonResource(sku: models.Sku, options: RequestOptions, callback: ServiceCallback<models.Sku>): void;
-    beginPutAsyncNonResource(sku: models.Sku, callback: ServiceCallback<models.Sku>): void;
+    beginPutAsyncNonResource(options: {sku?: models.Sku, customHeaders?: any}, callback: ServiceCallback<models.Sku>): void;
+    beginPutAsyncNonResource(callback: ServiceCallback<models.Sku>): void;
 
     /**
      * Long running put request with sub resource.
@@ -743,8 +743,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putSubResource(product: models.SubProduct, options: RequestOptions, callback: ServiceCallback<models.SubProduct>): void;
-    putSubResource(product: models.SubProduct, callback: ServiceCallback<models.SubProduct>): void;
+    putSubResource(options: {product?: models.SubProduct, customHeaders?: any}, callback: ServiceCallback<models.SubProduct>): void;
+    putSubResource(callback: ServiceCallback<models.SubProduct>): void;
 
     /**
      * Long running put request with sub resource.
@@ -761,8 +761,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutSubResource(product: models.SubProduct, options: RequestOptions, callback: ServiceCallback<models.SubProduct>): void;
-    beginPutSubResource(product: models.SubProduct, callback: ServiceCallback<models.SubProduct>): void;
+    beginPutSubResource(options: {product?: models.SubProduct, customHeaders?: any}, callback: ServiceCallback<models.SubProduct>): void;
+    beginPutSubResource(callback: ServiceCallback<models.SubProduct>): void;
 
     /**
      * Long running put request with sub resource.
@@ -779,8 +779,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncSubResource(product: models.SubProduct, options: RequestOptions, callback: ServiceCallback<models.SubProduct>): void;
-    putAsyncSubResource(product: models.SubProduct, callback: ServiceCallback<models.SubProduct>): void;
+    putAsyncSubResource(options: {product?: models.SubProduct, customHeaders?: any}, callback: ServiceCallback<models.SubProduct>): void;
+    putAsyncSubResource(callback: ServiceCallback<models.SubProduct>): void;
 
     /**
      * Long running put request with sub resource.
@@ -797,8 +797,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncSubResource(product: models.SubProduct, options: RequestOptions, callback: ServiceCallback<models.SubProduct>): void;
-    beginPutAsyncSubResource(product: models.SubProduct, callback: ServiceCallback<models.SubProduct>): void;
+    beginPutAsyncSubResource(options: {product?: models.SubProduct, customHeaders?: any}, callback: ServiceCallback<models.SubProduct>): void;
+    beginPutAsyncSubResource(callback: ServiceCallback<models.SubProduct>): void;
 
     /**
      * Long running delete request, service returns a 202 to the initial request,
@@ -814,7 +814,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteProvisioning202Accepted200Succeeded(options: RequestOptions, callback: ServiceCallback<models.Product>): void;
+    deleteProvisioning202Accepted200Succeeded(options: {customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
     deleteProvisioning202Accepted200Succeeded(callback: ServiceCallback<models.Product>): void;
 
     /**
@@ -831,7 +831,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteProvisioning202Accepted200Succeeded(options: RequestOptions, callback: ServiceCallback<models.Product>): void;
+    beginDeleteProvisioning202Accepted200Succeeded(options: {customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
     beginDeleteProvisioning202Accepted200Succeeded(callback: ServiceCallback<models.Product>): void;
 
     /**
@@ -848,7 +848,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteProvisioning202DeletingFailed200(options: RequestOptions, callback: ServiceCallback<models.Product>): void;
+    deleteProvisioning202DeletingFailed200(options: {customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
     deleteProvisioning202DeletingFailed200(callback: ServiceCallback<models.Product>): void;
 
     /**
@@ -865,7 +865,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteProvisioning202DeletingFailed200(options: RequestOptions, callback: ServiceCallback<models.Product>): void;
+    beginDeleteProvisioning202DeletingFailed200(options: {customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
     beginDeleteProvisioning202DeletingFailed200(callback: ServiceCallback<models.Product>): void;
 
     /**
@@ -882,7 +882,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteProvisioning202Deletingcanceled200(options: RequestOptions, callback: ServiceCallback<models.Product>): void;
+    deleteProvisioning202Deletingcanceled200(options: {customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
     deleteProvisioning202Deletingcanceled200(callback: ServiceCallback<models.Product>): void;
 
     /**
@@ -899,7 +899,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteProvisioning202Deletingcanceled200(options: RequestOptions, callback: ServiceCallback<models.Product>): void;
+    beginDeleteProvisioning202Deletingcanceled200(options: {customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
     beginDeleteProvisioning202Deletingcanceled200(callback: ServiceCallback<models.Product>): void;
 
     /**
@@ -913,7 +913,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete204Succeeded(options: RequestOptions, callback: ServiceCallback<void>): void;
+    delete204Succeeded(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     delete204Succeeded(callback: ServiceCallback<void>): void;
 
     /**
@@ -927,7 +927,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDelete204Succeeded(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDelete204Succeeded(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDelete204Succeeded(callback: ServiceCallback<void>): void;
 
     /**
@@ -943,7 +943,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete202Retry200(options: RequestOptions, callback: ServiceCallback<models.Product>): void;
+    delete202Retry200(options: {customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
     delete202Retry200(callback: ServiceCallback<models.Product>): void;
 
     /**
@@ -959,7 +959,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDelete202Retry200(options: RequestOptions, callback: ServiceCallback<models.Product>): void;
+    beginDelete202Retry200(options: {customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
     beginDelete202Retry200(callback: ServiceCallback<models.Product>): void;
 
     /**
@@ -975,7 +975,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete202NoRetry204(options: RequestOptions, callback: ServiceCallback<models.Product>): void;
+    delete202NoRetry204(options: {customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
     delete202NoRetry204(callback: ServiceCallback<models.Product>): void;
 
     /**
@@ -991,7 +991,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDelete202NoRetry204(options: RequestOptions, callback: ServiceCallback<models.Product>): void;
+    beginDelete202NoRetry204(options: {customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
     beginDelete202NoRetry204(callback: ServiceCallback<models.Product>): void;
 
     /**
@@ -1007,7 +1007,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteNoHeaderInRetry(options: RequestOptions, callback: ServiceCallback<void>): void;
+    deleteNoHeaderInRetry(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     deleteNoHeaderInRetry(callback: ServiceCallback<void>): void;
 
     /**
@@ -1023,7 +1023,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteNoHeaderInRetry(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDeleteNoHeaderInRetry(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDeleteNoHeaderInRetry(callback: ServiceCallback<void>): void;
 
     /**
@@ -1039,7 +1039,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteAsyncNoHeaderInRetry(options: RequestOptions, callback: ServiceCallback<void>): void;
+    deleteAsyncNoHeaderInRetry(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     deleteAsyncNoHeaderInRetry(callback: ServiceCallback<void>): void;
 
     /**
@@ -1055,7 +1055,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteAsyncNoHeaderInRetry(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDeleteAsyncNoHeaderInRetry(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDeleteAsyncNoHeaderInRetry(callback: ServiceCallback<void>): void;
 
     /**
@@ -1071,7 +1071,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteAsyncRetrySucceeded(options: RequestOptions, callback: ServiceCallback<void>): void;
+    deleteAsyncRetrySucceeded(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     deleteAsyncRetrySucceeded(callback: ServiceCallback<void>): void;
 
     /**
@@ -1087,7 +1087,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteAsyncRetrySucceeded(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDeleteAsyncRetrySucceeded(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDeleteAsyncRetrySucceeded(callback: ServiceCallback<void>): void;
 
     /**
@@ -1103,7 +1103,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteAsyncNoRetrySucceeded(options: RequestOptions, callback: ServiceCallback<void>): void;
+    deleteAsyncNoRetrySucceeded(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     deleteAsyncNoRetrySucceeded(callback: ServiceCallback<void>): void;
 
     /**
@@ -1119,7 +1119,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteAsyncNoRetrySucceeded(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDeleteAsyncNoRetrySucceeded(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDeleteAsyncNoRetrySucceeded(callback: ServiceCallback<void>): void;
 
     /**
@@ -1135,7 +1135,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteAsyncRetryFailed(options: RequestOptions, callback: ServiceCallback<void>): void;
+    deleteAsyncRetryFailed(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     deleteAsyncRetryFailed(callback: ServiceCallback<void>): void;
 
     /**
@@ -1151,7 +1151,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteAsyncRetryFailed(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDeleteAsyncRetryFailed(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDeleteAsyncRetryFailed(callback: ServiceCallback<void>): void;
 
     /**
@@ -1167,7 +1167,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteAsyncRetrycanceled(options: RequestOptions, callback: ServiceCallback<void>): void;
+    deleteAsyncRetrycanceled(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     deleteAsyncRetrycanceled(callback: ServiceCallback<void>): void;
 
     /**
@@ -1183,7 +1183,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteAsyncRetrycanceled(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDeleteAsyncRetrycanceled(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDeleteAsyncRetrycanceled(callback: ServiceCallback<void>): void;
 
     /**
@@ -1199,7 +1199,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post200WithPayload(options: RequestOptions, callback: ServiceCallback<models.Sku>): void;
+    post200WithPayload(options: {customHeaders?: any}, callback: ServiceCallback<models.Sku>): void;
     post200WithPayload(callback: ServiceCallback<models.Sku>): void;
 
     /**
@@ -1215,7 +1215,7 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPost200WithPayload(options: RequestOptions, callback: ServiceCallback<models.Sku>): void;
+    beginPost200WithPayload(options: {customHeaders?: any}, callback: ServiceCallback<models.Sku>): void;
     beginPost200WithPayload(callback: ServiceCallback<models.Sku>): void;
 
     /**
@@ -1239,8 +1239,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post202Retry200(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    post202Retry200(product: models.Product, callback: ServiceCallback<void>): void;
+    post202Retry200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    post202Retry200(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -1263,8 +1263,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPost202Retry200(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    beginPost202Retry200(product: models.Product, callback: ServiceCallback<void>): void;
+    beginPost202Retry200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    beginPost202Retry200(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -1286,8 +1286,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post202NoRetry204(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    post202NoRetry204(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    post202NoRetry204(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    post202NoRetry204(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -1309,8 +1309,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPost202NoRetry204(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPost202NoRetry204(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPost202NoRetry204(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPost202NoRetry204(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -1333,8 +1333,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postAsyncRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    postAsyncRetrySucceeded(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    postAsyncRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    postAsyncRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -1357,8 +1357,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPostAsyncRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPostAsyncRetrySucceeded(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPostAsyncRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPostAsyncRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -1381,8 +1381,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postAsyncNoRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    postAsyncNoRetrySucceeded(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    postAsyncNoRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    postAsyncNoRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -1405,8 +1405,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPostAsyncNoRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPostAsyncNoRetrySucceeded(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPostAsyncNoRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPostAsyncNoRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -1429,8 +1429,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postAsyncRetryFailed(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postAsyncRetryFailed(product: models.Product, callback: ServiceCallback<void>): void;
+    postAsyncRetryFailed(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postAsyncRetryFailed(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -1453,8 +1453,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPostAsyncRetryFailed(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    beginPostAsyncRetryFailed(product: models.Product, callback: ServiceCallback<void>): void;
+    beginPostAsyncRetryFailed(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    beginPostAsyncRetryFailed(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -1477,8 +1477,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postAsyncRetrycanceled(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postAsyncRetrycanceled(product: models.Product, callback: ServiceCallback<void>): void;
+    postAsyncRetrycanceled(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postAsyncRetrycanceled(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -1501,8 +1501,8 @@ export interface LROs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPostAsyncRetrycanceled(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    beginPostAsyncRetrycanceled(product: models.Product, callback: ServiceCallback<void>): void;
+    beginPostAsyncRetrycanceled(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    beginPostAsyncRetrycanceled(callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -1535,8 +1535,8 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put201CreatingSucceeded200(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    put201CreatingSucceeded200(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    put201CreatingSucceeded200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    put201CreatingSucceeded200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial
@@ -1560,8 +1560,8 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPut201CreatingSucceeded200(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPut201CreatingSucceeded200(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPut201CreatingSucceeded200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPut201CreatingSucceeded200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial
@@ -1585,8 +1585,8 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncRelativeRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putAsyncRelativeRetrySucceeded(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial
@@ -1610,8 +1610,8 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncRelativeRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutAsyncRelativeRetrySucceeded(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRelativeRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRelativeRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running delete request, service returns a 500, then a  202 to the
@@ -1627,7 +1627,7 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteProvisioning202Accepted200Succeeded(options: RequestOptions, callback: ServiceCallback<models.Product>): void;
+    deleteProvisioning202Accepted200Succeeded(options: {customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
     deleteProvisioning202Accepted200Succeeded(callback: ServiceCallback<models.Product>): void;
 
     /**
@@ -1644,7 +1644,7 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteProvisioning202Accepted200Succeeded(options: RequestOptions, callback: ServiceCallback<models.Product>): void;
+    beginDeleteProvisioning202Accepted200Succeeded(options: {customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
     beginDeleteProvisioning202Accepted200Succeeded(callback: ServiceCallback<models.Product>): void;
 
     /**
@@ -1660,7 +1660,7 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete202Retry200(options: RequestOptions, callback: ServiceCallback<void>): void;
+    delete202Retry200(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     delete202Retry200(callback: ServiceCallback<void>): void;
 
     /**
@@ -1676,7 +1676,7 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDelete202Retry200(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDelete202Retry200(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDelete202Retry200(callback: ServiceCallback<void>): void;
 
     /**
@@ -1692,7 +1692,7 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteAsyncRelativeRetrySucceeded(options: RequestOptions, callback: ServiceCallback<void>): void;
+    deleteAsyncRelativeRetrySucceeded(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     deleteAsyncRelativeRetrySucceeded(callback: ServiceCallback<void>): void;
 
     /**
@@ -1708,7 +1708,7 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteAsyncRelativeRetrySucceeded(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDeleteAsyncRelativeRetrySucceeded(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDeleteAsyncRelativeRetrySucceeded(callback: ServiceCallback<void>): void;
 
     /**
@@ -1732,8 +1732,8 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post202Retry200(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    post202Retry200(product: models.Product, callback: ServiceCallback<void>): void;
+    post202Retry200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    post202Retry200(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial
@@ -1756,8 +1756,8 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPost202Retry200(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    beginPost202Retry200(product: models.Product, callback: ServiceCallback<void>): void;
+    beginPost202Retry200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    beginPost202Retry200(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial
@@ -1781,8 +1781,8 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postAsyncRelativeRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postAsyncRelativeRetrySucceeded(product: models.Product, callback: ServiceCallback<void>): void;
+    postAsyncRelativeRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postAsyncRelativeRetrySucceeded(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial
@@ -1806,8 +1806,8 @@ export interface LRORetrys {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPostAsyncRelativeRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    beginPostAsyncRelativeRetrySucceeded(product: models.Product, callback: ServiceCallback<void>): void;
+    beginPostAsyncRelativeRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    beginPostAsyncRelativeRetrySucceeded(callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -1837,8 +1837,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putNonRetry400(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putNonRetry400(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putNonRetry400(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putNonRetry400(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 400 to the initial request
@@ -1859,8 +1859,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutNonRetry400(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutNonRetry400(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutNonRetry400(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutNonRetry400(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a Product with
@@ -1882,8 +1882,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putNonRetry201Creating400(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putNonRetry201Creating400(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putNonRetry201Creating400(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putNonRetry201Creating400(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a Product with
@@ -1905,8 +1905,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutNonRetry201Creating400(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutNonRetry201Creating400(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutNonRetry201Creating400(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutNonRetry201Creating400(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 with
@@ -1929,8 +1929,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncRelativeRetry400(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putAsyncRelativeRetry400(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetry400(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetry400(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 with
@@ -1953,8 +1953,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncRelativeRetry400(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutAsyncRelativeRetry400(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRelativeRetry400(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRelativeRetry400(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running delete request, service returns a 400 with an error body
@@ -1967,7 +1967,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteNonRetry400(options: RequestOptions, callback: ServiceCallback<void>): void;
+    deleteNonRetry400(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     deleteNonRetry400(callback: ServiceCallback<void>): void;
 
     /**
@@ -1981,7 +1981,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteNonRetry400(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDeleteNonRetry400(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDeleteNonRetry400(callback: ServiceCallback<void>): void;
 
     /**
@@ -1995,7 +1995,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete202NonRetry400(options: RequestOptions, callback: ServiceCallback<void>): void;
+    delete202NonRetry400(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     delete202NonRetry400(callback: ServiceCallback<void>): void;
 
     /**
@@ -2009,7 +2009,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDelete202NonRetry400(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDelete202NonRetry400(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDelete202NonRetry400(callback: ServiceCallback<void>): void;
 
     /**
@@ -2025,7 +2025,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteAsyncRelativeRetry400(options: RequestOptions, callback: ServiceCallback<void>): void;
+    deleteAsyncRelativeRetry400(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     deleteAsyncRelativeRetry400(callback: ServiceCallback<void>): void;
 
     /**
@@ -2041,7 +2041,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteAsyncRelativeRetry400(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDeleteAsyncRelativeRetry400(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDeleteAsyncRelativeRetry400(callback: ServiceCallback<void>): void;
 
     /**
@@ -2063,8 +2063,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postNonRetry400(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postNonRetry400(product: models.Product, callback: ServiceCallback<void>): void;
+    postNonRetry400(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postNonRetry400(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 400 with no error body
@@ -2085,8 +2085,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPostNonRetry400(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    beginPostNonRetry400(product: models.Product, callback: ServiceCallback<void>): void;
+    beginPostNonRetry400(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    beginPostNonRetry400(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 with a location header
@@ -2107,8 +2107,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post202NonRetry400(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    post202NonRetry400(product: models.Product, callback: ServiceCallback<void>): void;
+    post202NonRetry400(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    post202NonRetry400(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 with a location header
@@ -2129,8 +2129,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPost202NonRetry400(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    beginPost202NonRetry400(product: models.Product, callback: ServiceCallback<void>): void;
+    beginPost202NonRetry400(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    beginPost202NonRetry400(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request
@@ -2153,8 +2153,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postAsyncRelativeRetry400(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postAsyncRelativeRetry400(product: models.Product, callback: ServiceCallback<void>): void;
+    postAsyncRelativeRetry400(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postAsyncRelativeRetry400(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request
@@ -2177,8 +2177,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPostAsyncRelativeRetry400(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    beginPostAsyncRelativeRetry400(product: models.Product, callback: ServiceCallback<void>): void;
+    beginPostAsyncRelativeRetry400(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    beginPostAsyncRelativeRetry400(callback: ServiceCallback<void>): void;
 
     /**
      * Long running put request, service returns a 201 to the initial request with
@@ -2200,8 +2200,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putError201NoProvisioningStatePayload(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putError201NoProvisioningStatePayload(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putError201NoProvisioningStatePayload(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putError201NoProvisioningStatePayload(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 201 to the initial request with
@@ -2223,8 +2223,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutError201NoProvisioningStatePayload(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutError201NoProvisioningStatePayload(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutError201NoProvisioningStatePayload(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutError201NoProvisioningStatePayload(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -2247,8 +2247,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncRelativeRetryNoStatus(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putAsyncRelativeRetryNoStatus(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetryNoStatus(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetryNoStatus(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -2271,8 +2271,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncRelativeRetryNoStatus(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutAsyncRelativeRetryNoStatus(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRelativeRetryNoStatus(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRelativeRetryNoStatus(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -2295,8 +2295,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncRelativeRetryNoStatusPayload(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putAsyncRelativeRetryNoStatusPayload(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetryNoStatusPayload(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetryNoStatusPayload(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -2319,8 +2319,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncRelativeRetryNoStatusPayload(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutAsyncRelativeRetryNoStatusPayload(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRelativeRetryNoStatusPayload(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRelativeRetryNoStatusPayload(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running delete request, service returns a 204 to the initial request,
@@ -2334,7 +2334,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete204Succeeded(options: RequestOptions, callback: ServiceCallback<void>): void;
+    delete204Succeeded(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     delete204Succeeded(callback: ServiceCallback<void>): void;
 
     /**
@@ -2349,7 +2349,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDelete204Succeeded(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDelete204Succeeded(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDelete204Succeeded(callback: ServiceCallback<void>): void;
 
     /**
@@ -2365,7 +2365,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteAsyncRelativeRetryNoStatus(options: RequestOptions, callback: ServiceCallback<void>): void;
+    deleteAsyncRelativeRetryNoStatus(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     deleteAsyncRelativeRetryNoStatus(callback: ServiceCallback<void>): void;
 
     /**
@@ -2381,7 +2381,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteAsyncRelativeRetryNoStatus(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDeleteAsyncRelativeRetryNoStatus(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDeleteAsyncRelativeRetryNoStatus(callback: ServiceCallback<void>): void;
 
     /**
@@ -2404,8 +2404,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post202NoLocation(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    post202NoLocation(product: models.Product, callback: ServiceCallback<void>): void;
+    post202NoLocation(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    post202NoLocation(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -2427,8 +2427,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPost202NoLocation(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    beginPost202NoLocation(product: models.Product, callback: ServiceCallback<void>): void;
+    beginPost202NoLocation(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    beginPost202NoLocation(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -2451,8 +2451,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postAsyncRelativeRetryNoPayload(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postAsyncRelativeRetryNoPayload(product: models.Product, callback: ServiceCallback<void>): void;
+    postAsyncRelativeRetryNoPayload(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postAsyncRelativeRetryNoPayload(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -2475,8 +2475,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPostAsyncRelativeRetryNoPayload(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    beginPostAsyncRelativeRetryNoPayload(product: models.Product, callback: ServiceCallback<void>): void;
+    beginPostAsyncRelativeRetryNoPayload(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    beginPostAsyncRelativeRetryNoPayload(callback: ServiceCallback<void>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -2498,8 +2498,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put200InvalidJson(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    put200InvalidJson(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    put200InvalidJson(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    put200InvalidJson(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -2521,8 +2521,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPut200InvalidJson(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPut200InvalidJson(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPut200InvalidJson(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPut200InvalidJson(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -2545,8 +2545,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncRelativeRetryInvalidHeader(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putAsyncRelativeRetryInvalidHeader(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetryInvalidHeader(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetryInvalidHeader(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -2569,8 +2569,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncRelativeRetryInvalidHeader(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutAsyncRelativeRetryInvalidHeader(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRelativeRetryInvalidHeader(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRelativeRetryInvalidHeader(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -2593,8 +2593,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncRelativeRetryInvalidJsonPolling(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putAsyncRelativeRetryInvalidJsonPolling(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetryInvalidJsonPolling(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putAsyncRelativeRetryInvalidJsonPolling(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running put request, service returns a 200 to the initial request,
@@ -2617,8 +2617,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncRelativeRetryInvalidJsonPolling(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutAsyncRelativeRetryInvalidJsonPolling(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRelativeRetryInvalidJsonPolling(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRelativeRetryInvalidJsonPolling(callback: ServiceCallback<models.Product>): void;
 
     /**
      * Long running delete request, service returns a 202 to the initial request
@@ -2632,7 +2632,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete202RetryInvalidHeader(options: RequestOptions, callback: ServiceCallback<void>): void;
+    delete202RetryInvalidHeader(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     delete202RetryInvalidHeader(callback: ServiceCallback<void>): void;
 
     /**
@@ -2647,7 +2647,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDelete202RetryInvalidHeader(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDelete202RetryInvalidHeader(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDelete202RetryInvalidHeader(callback: ServiceCallback<void>): void;
 
     /**
@@ -2662,7 +2662,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteAsyncRelativeRetryInvalidHeader(options: RequestOptions, callback: ServiceCallback<void>): void;
+    deleteAsyncRelativeRetryInvalidHeader(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     deleteAsyncRelativeRetryInvalidHeader(callback: ServiceCallback<void>): void;
 
     /**
@@ -2677,7 +2677,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteAsyncRelativeRetryInvalidHeader(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDeleteAsyncRelativeRetryInvalidHeader(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDeleteAsyncRelativeRetryInvalidHeader(callback: ServiceCallback<void>): void;
 
     /**
@@ -2693,7 +2693,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteAsyncRelativeRetryInvalidJsonPolling(options: RequestOptions, callback: ServiceCallback<void>): void;
+    deleteAsyncRelativeRetryInvalidJsonPolling(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     deleteAsyncRelativeRetryInvalidJsonPolling(callback: ServiceCallback<void>): void;
 
     /**
@@ -2709,7 +2709,7 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginDeleteAsyncRelativeRetryInvalidJsonPolling(options: RequestOptions, callback: ServiceCallback<void>): void;
+    beginDeleteAsyncRelativeRetryInvalidJsonPolling(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     beginDeleteAsyncRelativeRetryInvalidJsonPolling(callback: ServiceCallback<void>): void;
 
     /**
@@ -2732,8 +2732,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post202RetryInvalidHeader(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    post202RetryInvalidHeader(product: models.Product, callback: ServiceCallback<void>): void;
+    post202RetryInvalidHeader(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    post202RetryInvalidHeader(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -2755,8 +2755,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPost202RetryInvalidHeader(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    beginPost202RetryInvalidHeader(product: models.Product, callback: ServiceCallback<void>): void;
+    beginPost202RetryInvalidHeader(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    beginPost202RetryInvalidHeader(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -2779,8 +2779,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postAsyncRelativeRetryInvalidHeader(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postAsyncRelativeRetryInvalidHeader(product: models.Product, callback: ServiceCallback<void>): void;
+    postAsyncRelativeRetryInvalidHeader(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postAsyncRelativeRetryInvalidHeader(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -2803,8 +2803,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPostAsyncRelativeRetryInvalidHeader(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    beginPostAsyncRelativeRetryInvalidHeader(product: models.Product, callback: ServiceCallback<void>): void;
+    beginPostAsyncRelativeRetryInvalidHeader(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    beginPostAsyncRelativeRetryInvalidHeader(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -2827,8 +2827,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postAsyncRelativeRetryInvalidJsonPolling(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postAsyncRelativeRetryInvalidJsonPolling(product: models.Product, callback: ServiceCallback<void>): void;
+    postAsyncRelativeRetryInvalidJsonPolling(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postAsyncRelativeRetryInvalidJsonPolling(callback: ServiceCallback<void>): void;
 
     /**
      * Long running post request, service returns a 202 to the initial request,
@@ -2851,8 +2851,8 @@ export interface LROSADs {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPostAsyncRelativeRetryInvalidJsonPolling(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    beginPostAsyncRelativeRetryInvalidJsonPolling(product: models.Product, callback: ServiceCallback<void>): void;
+    beginPostAsyncRelativeRetryInvalidJsonPolling(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    beginPostAsyncRelativeRetryInvalidJsonPolling(callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -2886,8 +2886,8 @@ export interface LROsCustomHeader {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putAsyncRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    putAsyncRetrySucceeded(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    putAsyncRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    putAsyncRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
@@ -2912,8 +2912,8 @@ export interface LROsCustomHeader {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPutAsyncRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPutAsyncRetrySucceeded(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPutAsyncRetrySucceeded(callback: ServiceCallback<models.Product>): void;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
@@ -2938,8 +2938,8 @@ export interface LROsCustomHeader {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put201CreatingSucceeded200(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    put201CreatingSucceeded200(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    put201CreatingSucceeded200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    put201CreatingSucceeded200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
@@ -2964,8 +2964,8 @@ export interface LROsCustomHeader {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPut201CreatingSucceeded200(product: models.Product, options: RequestOptions, callback: ServiceCallback<models.Product>): void;
-    beginPut201CreatingSucceeded200(product: models.Product, callback: ServiceCallback<models.Product>): void;
+    beginPut201CreatingSucceeded200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<models.Product>): void;
+    beginPut201CreatingSucceeded200(callback: ServiceCallback<models.Product>): void;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
@@ -2989,8 +2989,8 @@ export interface LROsCustomHeader {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post202Retry200(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    post202Retry200(product: models.Product, callback: ServiceCallback<void>): void;
+    post202Retry200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    post202Retry200(callback: ServiceCallback<void>): void;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
@@ -3014,8 +3014,8 @@ export interface LROsCustomHeader {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPost202Retry200(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    beginPost202Retry200(product: models.Product, callback: ServiceCallback<void>): void;
+    beginPost202Retry200(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    beginPost202Retry200(callback: ServiceCallback<void>): void;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
@@ -3040,8 +3040,8 @@ export interface LROsCustomHeader {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postAsyncRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postAsyncRetrySucceeded(product: models.Product, callback: ServiceCallback<void>): void;
+    postAsyncRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postAsyncRetrySucceeded(callback: ServiceCallback<void>): void;
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required
@@ -3066,6 +3066,6 @@ export interface LROsCustomHeader {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginPostAsyncRetrySucceeded(product: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    beginPostAsyncRetrySucceeded(product: models.Product, callback: ServiceCallback<void>): void;
+    beginPostAsyncRetrySucceeded(options: {product?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    beginPostAsyncRetrySucceeded(callback: ServiceCallback<void>): void;
 }

@@ -31,7 +31,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head200(options: RequestOptions, callback: ServiceCallback<boolean>): void;
+    head200(options: {customHeaders?: any}, callback: ServiceCallback<boolean>): void;
     head200(callback: ServiceCallback<boolean>): void;
 
     /**
@@ -45,7 +45,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head204(options: RequestOptions, callback: ServiceCallback<boolean>): void;
+    head204(options: {customHeaders?: any}, callback: ServiceCallback<boolean>): void;
     head204(callback: ServiceCallback<boolean>): void;
 
     /**
@@ -59,6 +59,6 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head404(options: RequestOptions, callback: ServiceCallback<boolean>): void;
+    head404(options: {customHeaders?: any}, callback: ServiceCallback<boolean>): void;
     head404(callback: ServiceCallback<boolean>): void;
 }

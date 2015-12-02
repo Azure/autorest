@@ -35,7 +35,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramExistingKey(userAgent: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    paramExistingKey(userAgent: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     paramExistingKey(userAgent: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -49,7 +49,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    responseExistingKey(options: RequestOptions, callback: ServiceCallback<void>): void;
+    responseExistingKey(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     responseExistingKey(callback: ServiceCallback<void>): void;
 
     /**
@@ -66,7 +66,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramProtectedKey(contentType: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    paramProtectedKey(contentType: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     paramProtectedKey(contentType: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -80,7 +80,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    responseProtectedKey(options: RequestOptions, callback: ServiceCallback<void>): void;
+    responseProtectedKey(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     responseProtectedKey(callback: ServiceCallback<void>): void;
 
     /**
@@ -100,7 +100,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramInteger(scenario: string, value: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    paramInteger(scenario: string, value: number, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     paramInteger(scenario: string, value: number, callback: ServiceCallback<void>): void;
 
     /**
@@ -117,7 +117,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    responseInteger(scenario: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    responseInteger(scenario: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     responseInteger(scenario: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -137,7 +137,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramLong(scenario: string, value: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    paramLong(scenario: string, value: number, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     paramLong(scenario: string, value: number, callback: ServiceCallback<void>): void;
 
     /**
@@ -154,7 +154,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    responseLong(scenario: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    responseLong(scenario: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     responseLong(scenario: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -174,7 +174,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramFloat(scenario: string, value: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    paramFloat(scenario: string, value: number, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     paramFloat(scenario: string, value: number, callback: ServiceCallback<void>): void;
 
     /**
@@ -191,7 +191,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    responseFloat(scenario: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    responseFloat(scenario: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     responseFloat(scenario: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -211,7 +211,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramDouble(scenario: string, value: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    paramDouble(scenario: string, value: number, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     paramDouble(scenario: string, value: number, callback: ServiceCallback<void>): void;
 
     /**
@@ -228,7 +228,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    responseDouble(scenario: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    responseDouble(scenario: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     responseDouble(scenario: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -248,7 +248,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramBool(scenario: string, value: boolean, options: RequestOptions, callback: ServiceCallback<void>): void;
+    paramBool(scenario: string, value: boolean, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     paramBool(scenario: string, value: boolean, callback: ServiceCallback<void>): void;
 
     /**
@@ -265,7 +265,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    responseBool(scenario: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    responseBool(scenario: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     responseBool(scenario: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -287,8 +287,8 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramString(scenario: string, value: string, options: RequestOptions, callback: ServiceCallback<void>): void;
-    paramString(scenario: string, value: string, callback: ServiceCallback<void>): void;
+    paramString(scenario: string, options: {value?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    paramString(scenario: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy
@@ -305,7 +305,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    responseString(scenario: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    responseString(scenario: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     responseString(scenario: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -326,7 +326,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramDate(scenario: string, value: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    paramDate(scenario: string, value: Date|string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     paramDate(scenario: string, value: Date|string, callback: ServiceCallback<void>): void;
 
     /**
@@ -343,7 +343,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    responseDate(scenario: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    responseDate(scenario: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     responseDate(scenario: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -365,7 +365,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramDatetime(scenario: string, value: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    paramDatetime(scenario: string, value: Date|string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     paramDatetime(scenario: string, value: Date|string, callback: ServiceCallback<void>): void;
 
     /**
@@ -383,7 +383,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    responseDatetime(scenario: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    responseDatetime(scenario: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     responseDatetime(scenario: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -405,8 +405,8 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramDatetimeRfc1123(scenario: string, value: Date, options: RequestOptions, callback: ServiceCallback<void>): void;
-    paramDatetimeRfc1123(scenario: string, value: Date, callback: ServiceCallback<void>): void;
+    paramDatetimeRfc1123(scenario: string, options: {value?: Date, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    paramDatetimeRfc1123(scenario: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon,
@@ -423,7 +423,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    responseDatetimeRfc1123(scenario: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    responseDatetimeRfc1123(scenario: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     responseDatetimeRfc1123(scenario: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -444,7 +444,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramDuration(scenario: string, value: moment.Duration, options: RequestOptions, callback: ServiceCallback<void>): void;
+    paramDuration(scenario: string, value: moment.Duration, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     paramDuration(scenario: string, value: moment.Duration, callback: ServiceCallback<void>): void;
 
     /**
@@ -461,7 +461,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    responseDuration(scenario: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    responseDuration(scenario: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     responseDuration(scenario: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -481,7 +481,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramByte(scenario: string, value: Buffer, options: RequestOptions, callback: ServiceCallback<void>): void;
+    paramByte(scenario: string, value: Buffer, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     paramByte(scenario: string, value: Buffer, callback: ServiceCallback<void>): void;
 
     /**
@@ -498,7 +498,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    responseByte(scenario: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    responseByte(scenario: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     responseByte(scenario: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -520,8 +520,8 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramEnum(scenario: string, value: string, options: RequestOptions, callback: ServiceCallback<void>): void;
-    paramEnum(scenario: string, value: string, callback: ServiceCallback<void>): void;
+    paramEnum(scenario: string, options: {value?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    paramEnum(scenario: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get a response with header values "GREY" or null
@@ -537,7 +537,7 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    responseEnum(scenario: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    responseEnum(scenario: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     responseEnum(scenario: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -552,6 +552,6 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    customRequestId(options: RequestOptions, callback: ServiceCallback<void>): void;
+    customRequestId(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     customRequestId(callback: ServiceCallback<void>): void;
 }
