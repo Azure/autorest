@@ -31,11 +31,11 @@ function HttpRedirects(client) {
 /**
  * Return 300 status code and redirect to /http/success/200
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -117,11 +117,11 @@ HttpRedirects.prototype.head300 = function (options, callback) {
 /**
  * Return 300 status code and redirect to /http/success/200
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -216,11 +216,11 @@ HttpRedirects.prototype.get300 = function (options, callback) {
 /**
  * Return 301 status code and redirect to /http/success/200
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -302,11 +302,11 @@ HttpRedirects.prototype.head301 = function (options, callback) {
 /**
  * Return 301 status code and redirect to /http/success/200
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -390,13 +390,13 @@ HttpRedirects.prototype.get301 = function (options, callback) {
  * automatically redirected, but should return the received 301 to the caller
  * for evaluation
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -409,7 +409,7 @@ HttpRedirects.prototype.get301 = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpRedirects.prototype.put301 = function (booleanValue, options, callback) {
+HttpRedirects.prototype.put301 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -418,6 +418,7 @@ HttpRedirects.prototype.put301 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = options ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -501,11 +502,11 @@ HttpRedirects.prototype.put301 = function (booleanValue, options, callback) {
 /**
  * Return 302 status code and redirect to /http/success/200
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -587,11 +588,11 @@ HttpRedirects.prototype.head302 = function (options, callback) {
 /**
  * Return 302 status code and redirect to /http/success/200
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -675,13 +676,13 @@ HttpRedirects.prototype.get302 = function (options, callback) {
  * be automatically redirected, but should return the received 302 to the
  * caller for evaluation
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -694,7 +695,7 @@ HttpRedirects.prototype.get302 = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
+HttpRedirects.prototype.patch302 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -703,6 +704,7 @@ HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = options ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -788,13 +790,13 @@ HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
  * automatically redirected usign a get, ultimately returning a 200 status
  * code
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -807,7 +809,7 @@ HttpRedirects.prototype.patch302 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpRedirects.prototype.post303 = function (booleanValue, options, callback) {
+HttpRedirects.prototype.post303 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -816,6 +818,7 @@ HttpRedirects.prototype.post303 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = options ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -899,11 +902,11 @@ HttpRedirects.prototype.post303 = function (booleanValue, options, callback) {
 /**
  * Redirect with 307, resulting in a 200 success
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -985,11 +988,11 @@ HttpRedirects.prototype.head307 = function (options, callback) {
 /**
  * Redirect get with 307, resulting in a 200 success
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1071,13 +1074,13 @@ HttpRedirects.prototype.get307 = function (options, callback) {
 /**
  * Put redirected with 307, resulting in a 200 after redirect
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1090,7 +1093,7 @@ HttpRedirects.prototype.get307 = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
+HttpRedirects.prototype.put307 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1099,6 +1102,7 @@ HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = options ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1182,13 +1186,13 @@ HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
 /**
  * Patch redirected with 307, resulting in a 200 after redirect
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1201,7 +1205,7 @@ HttpRedirects.prototype.put307 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
+HttpRedirects.prototype.patch307 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1210,6 +1214,7 @@ HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = options ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1293,13 +1298,13 @@ HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
 /**
  * Post redirected with 307, resulting in a 200 after redirect
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1312,7 +1317,7 @@ HttpRedirects.prototype.patch307 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
+HttpRedirects.prototype.post307 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1321,6 +1326,7 @@ HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = options ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1404,13 +1410,13 @@ HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
 /**
  * Delete redirected with 307, resulting in a 200 after redirect
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1423,7 +1429,7 @@ HttpRedirects.prototype.post307 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpRedirects.prototype.delete307 = function (booleanValue, options, callback) {
+HttpRedirects.prototype.delete307 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1432,6 +1438,7 @@ HttpRedirects.prototype.delete307 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = options ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {

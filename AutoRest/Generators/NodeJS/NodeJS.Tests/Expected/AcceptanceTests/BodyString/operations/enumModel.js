@@ -32,11 +32,11 @@ function EnumModel(client) {
  * Get enum value 'red color' from enumeration of 'red color', 'green-color',
  * 'blue_color'.
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -137,11 +137,11 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
  * @param {string} stringBody Possible values for this parameter include: 'red
  * color', 'green-color', 'blue_color'
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
