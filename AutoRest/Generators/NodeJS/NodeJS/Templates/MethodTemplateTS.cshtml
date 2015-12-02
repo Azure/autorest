@@ -23,10 +23,6 @@
                                         + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
                                         + " " + parameter.Documentation))
 }
-@WrapComment(" * ", " @param {object} [options]")
- *
-@WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
- *
 @WrapComment(" * ", " @param {ServiceCallback} [callback] callback function; see ServiceCallback doc in ms-rest index.d.ts for details")
  */
 @(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallbackTS(true))): void;

@@ -31,11 +31,11 @@ function BasicOperations(client) {
 /**
  * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -147,11 +147,11 @@ BasicOperations.prototype.getValid = function (options, callback) {
  * @param {string} [complexBody.color] Possible values for this property
  * include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -257,11 +257,11 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
 /**
  * Get a basic complex type that is invalid for the local strong type
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -363,11 +363,11 @@ BasicOperations.prototype.getInvalid = function (options, callback) {
 /**
  * Get a basic complex type that is empty
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -469,11 +469,11 @@ BasicOperations.prototype.getEmpty = function (options, callback) {
 /**
  * Get a basic complex type whose properties are null
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -575,11 +575,11 @@ BasicOperations.prototype.getNull = function (options, callback) {
 /**
  * Get a basic complex type while the server doesn't provide a response payload
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

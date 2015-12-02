@@ -31,11 +31,11 @@ function HttpRetry(client) {
 /**
  * Return 408 status code, then 200 after retry
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -117,13 +117,13 @@ HttpRetry.prototype.head408 = function (options, callback) {
 /**
  * Return 500 status code, then 200 after retry
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -136,7 +136,7 @@ HttpRetry.prototype.head408 = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpRetry.prototype.put500 = function (booleanValue, options, callback) {
+HttpRetry.prototype.put500 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -145,6 +145,7 @@ HttpRetry.prototype.put500 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = options ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -228,13 +229,13 @@ HttpRetry.prototype.put500 = function (booleanValue, options, callback) {
 /**
  * Return 500 status code, then 200 after retry
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -247,7 +248,7 @@ HttpRetry.prototype.put500 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpRetry.prototype.patch500 = function (booleanValue, options, callback) {
+HttpRetry.prototype.patch500 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -256,6 +257,7 @@ HttpRetry.prototype.patch500 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = options ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -339,11 +341,11 @@ HttpRetry.prototype.patch500 = function (booleanValue, options, callback) {
 /**
  * Return 502 status code, then 200 after retry
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -425,13 +427,13 @@ HttpRetry.prototype.get502 = function (options, callback) {
 /**
  * Return 503 status code, then 200 after retry
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -444,7 +446,7 @@ HttpRetry.prototype.get502 = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpRetry.prototype.post503 = function (booleanValue, options, callback) {
+HttpRetry.prototype.post503 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -453,6 +455,7 @@ HttpRetry.prototype.post503 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = options ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -536,13 +539,13 @@ HttpRetry.prototype.post503 = function (booleanValue, options, callback) {
 /**
  * Return 503 status code, then 200 after retry
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -555,7 +558,7 @@ HttpRetry.prototype.post503 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpRetry.prototype.delete503 = function (booleanValue, options, callback) {
+HttpRetry.prototype.delete503 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -564,6 +567,7 @@ HttpRetry.prototype.delete503 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = options ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -647,13 +651,13 @@ HttpRetry.prototype.delete503 = function (booleanValue, options, callback) {
 /**
  * Return 504 status code, then 200 after retry
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -666,7 +670,7 @@ HttpRetry.prototype.delete503 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpRetry.prototype.put504 = function (booleanValue, options, callback) {
+HttpRetry.prototype.put504 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -675,6 +679,7 @@ HttpRetry.prototype.put504 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = options ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -758,13 +763,13 @@ HttpRetry.prototype.put504 = function (booleanValue, options, callback) {
 /**
  * Return 504 status code, then 200 after retry
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -777,7 +782,7 @@ HttpRetry.prototype.put504 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpRetry.prototype.patch504 = function (booleanValue, options, callback) {
+HttpRetry.prototype.patch504 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -786,6 +791,7 @@ HttpRetry.prototype.patch504 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = options ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {

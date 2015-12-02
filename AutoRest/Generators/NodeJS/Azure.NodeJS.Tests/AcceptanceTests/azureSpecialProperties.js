@@ -126,10 +126,10 @@ describe('nodejs', function () {
         testClient.skipUrlEncoding.getPathQueryValid(unencodedQuery, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
-          testClient.skipUrlEncoding.getSwaggerQueryValid(unencodedQuery, function (error, result, request, response) {
+          testClient.skipUrlEncoding.getSwaggerQueryValid({ q1: unencodedQuery }, function (error, result, request, response) {
             should.not.exist(error);
             response.statusCode.should.equal(200);
-            testClient.skipUrlEncoding.getMethodQueryNull(null, function (error, result, request, response) {
+            testClient.skipUrlEncoding.getMethodQueryNull({ q1: null }, function (error, result, request, response) {
               should.not.exist(error);
               response.statusCode.should.equal(200);
               done();

@@ -72,11 +72,11 @@ util.inherits(AutoRestValidationTest, ServiceClient);
  * 
  * @param {number} id Required int multiple of 10 from 100 to 1000.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -208,20 +208,21 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
  * 
  * @param {number} id Required int multiple of 10 from 100 to 1000.
  * 
- * @param {object} [body]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {array} [body.displayNames] Non required array of unique items from
- * 0 to 6 elements.
+ * @param {object} [options.body]
  * 
- * @param {number} [body.capacity] Non required int betwen 0 and 100 exclusive.
+ * @param {array} [options.body.displayNames] Non required array of unique
+ * items from 0 to 6 elements.
  * 
- * @param {string} [body.image] Image URL representing the product.
+ * @param {number} [options.body.capacity] Non required int betwen 0 and 100
+ * exclusive.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.body.image] Image URL representing the product.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -235,7 +236,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName, id, body, options, callback) {
+AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName, id, options, callback) {
   var client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -244,6 +245,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var body = options ? options.body : undefined;
   // Validate
   try {
     if (this.subscriptionId === null || this.subscriptionId === undefined || typeof this.subscriptionId.valueOf() !== 'string') {

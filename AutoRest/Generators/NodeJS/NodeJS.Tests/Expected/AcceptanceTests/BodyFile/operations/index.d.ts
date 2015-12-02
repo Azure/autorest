@@ -24,28 +24,28 @@ export interface Files {
     /**
      * Get file
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getFile(options: RequestOptions, callback: ServiceCallback<stream.Readable>): void;
+    getFile(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<stream.Readable>): void;
     getFile(callback: ServiceCallback<stream.Readable>): void;
 
     /**
      * Get empty file
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getEmptyFile(options: RequestOptions, callback: ServiceCallback<stream.Readable>): void;
+    getEmptyFile(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<stream.Readable>): void;
     getEmptyFile(callback: ServiceCallback<stream.Readable>): void;
 }
