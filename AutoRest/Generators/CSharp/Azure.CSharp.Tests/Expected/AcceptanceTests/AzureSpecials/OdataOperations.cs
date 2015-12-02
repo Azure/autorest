@@ -53,7 +53,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Specify filter parameter with value '$filter=id gt 5 and name eq
         /// 'foo'&amp;$orderby=id&amp;$top=10'
         /// </summary>
-        /// <param name='filter'>
+        /// <param name='odataQuery'>
         /// The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
         /// </param>
         /// <param name='customHeaders'>
@@ -62,7 +62,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetWithFilterWithHttpMessagesAsync(ODataQuery<OdataFilter> filter = default(ODataQuery<OdataFilter>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetWithFilterWithHttpMessagesAsync(ODataQuery<OdataFilter> odataQuery = default(ODataQuery<OdataFilter>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -71,7 +71,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("filter", filter);
+                tracingParameters.Add("odataQuery", odataQuery);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(invocationId, this, "GetWithFilter", tracingParameters);
             }
@@ -79,9 +79,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/odata/filter").ToString();
             List<string> queryParameters = new List<string>();
-            if (filter != null)
+            if (odataQuery != null)
             {
-                queryParameters.Add(filter.ToString());
+                var _odataFilter = filter.ToString();
+                if (!string.IsNullOrEmpty(_odataFilter)) 
+                {
+                    queryParameters.Add(_odataFilter);
+                }
             }
             if (queryParameters.Count > 0)
             {

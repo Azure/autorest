@@ -86,7 +86,7 @@ namespace Microsoft.Rest.Azure.OData
         /// Initializes a new instance of ODataQuery with filter.
         /// </summary>
         /// <param name="filter">Filter expression.</param>
-        public ODataQuery(Expression<Func<T, bool>> filter)
+        public ODataQuery(Expression<Func<T, bool>> filter) : this()
         {
             SetFilter(filter);
         }

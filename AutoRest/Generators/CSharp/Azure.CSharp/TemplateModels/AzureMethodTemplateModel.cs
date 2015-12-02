@@ -279,17 +279,18 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             if (LogicalParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
             {
                 foreach (var queryParameter in LogicalParameterTemplateModels
-                    .Where(p => p.Location == ParameterLocation.Query))
+                    .Where(p => p.Location == ParameterLocation.Query).Select(p => p as AzureParameterTemplateModel))
                 {
                     string queryParametersAddString =
                         "queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));";
 
-                    if (queryParameter.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
-                        queryParameter.Type is CompositeType &&
-                        queryParameter.Location == ParameterLocation.Query)
+                    if (queryParameter.IsODataFilterExpression)
                     {
-                        queryParametersAddString =
-                            "queryParameters.Add(filter.ToString());";
+                        queryParametersAddString = @"var _odataFilter = filter.ToString();
+    if (!string.IsNullOrEmpty(_odataFilter)) 
+    {{
+        queryParameters.Add(_odataFilter);
+    }}";
                     }
                     else if (queryParameter.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension))
                     {

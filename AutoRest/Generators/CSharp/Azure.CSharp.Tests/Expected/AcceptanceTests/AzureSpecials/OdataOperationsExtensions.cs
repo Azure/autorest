@@ -27,12 +27,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='filter'>
+            /// <param name='odataQuery'>
             /// The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
             /// </param>
-            public static void GetWithFilter(this IOdataOperations operations, ODataQuery<OdataFilter> filter = default(ODataQuery<OdataFilter>))
+            public static void GetWithFilter(this IOdataOperations operations, ODataQuery<OdataFilter> odataQuery = default(ODataQuery<OdataFilter>))
             {
-                Task.Factory.StartNew(s => ((IOdataOperations)s).GetWithFilterAsync(filter), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IOdataOperations)s).GetWithFilterAsync(odataQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -42,15 +42,15 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='filter'>
+            /// <param name='odataQuery'>
             /// The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetWithFilterAsync( this IOdataOperations operations, ODataQuery<OdataFilter> filter = default(ODataQuery<OdataFilter>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetWithFilterAsync( this IOdataOperations operations, ODataQuery<OdataFilter> odataQuery = default(ODataQuery<OdataFilter>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetWithFilterWithHttpMessagesAsync(filter, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetWithFilterWithHttpMessagesAsync(odataQuery, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

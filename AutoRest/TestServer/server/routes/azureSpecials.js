@@ -32,7 +32,7 @@ var specials = function (coverage) {
   coverage['AzureXmsRequestClientOverwrite'] = 0;
   coverage['AzureXmsRequestClientOverwriteViaParameter'] = 0;
   coverage['AzureXmsCustomNamedRequestId'] = 0;
-  //coverage['AzureODataFilter'] = 0;
+  coverage['AzureODataFilter'] = 0;
 
   router.post('/subscriptionId/:location/string/none/path/:scope/:scenario/:subscription', function (req, res, next) {
     var location = req.params.location;

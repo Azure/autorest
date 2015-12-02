@@ -27,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Specify filter parameter with value '$filter=id gt 5 and name eq
         /// 'foo'&amp;$orderby=id&amp;$top=10'
         /// </summary>
-        /// <param name='filter'>
+        /// <param name='odataQuery'>
         /// The filter parameter with value '$filter=id gt 5 and name eq
         /// 'foo''.
         /// </param>
@@ -37,6 +37,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse> GetWithFilterWithHttpMessagesAsync(ODataQuery<OdataFilter> filter = default(ODataQuery<OdataFilter>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> GetWithFilterWithHttpMessagesAsync(ODataQuery<OdataFilter> odataQuery = default(ODataQuery<OdataFilter>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

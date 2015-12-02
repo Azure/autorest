@@ -11,6 +11,10 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
     {
         public AzureParameterTemplateModel(Parameter source) : base(source)
         {
+            if (IsODataFilterExpression)
+            {
+                this.Name = "odataQuery";
+            }
         }
 
         /// <summary>
