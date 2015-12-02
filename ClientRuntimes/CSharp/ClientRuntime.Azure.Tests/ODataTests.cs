@@ -20,7 +20,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
 
             var result = FilterString.Generate<Param1>(p => p.Foo == "foo" || p.Val < 20 || p.Foo == "bar" && p.Val == null &&
                 p.Date > date2 &&
-                p.Date < date && p.Values.Contains("x"));
+                p.Date < date && p.Values.Contains("x"), false);
             string time1 = Uri.EscapeDataString("2004-11-05T00:00:00Z");
             string time2 = Uri.EscapeDataString("2013-11-05T00:00:00Z");
             string expected = string.Format("foo eq 'foo' or Val lt 20 or foo eq 'bar' and Val eq null and d gt '{0}' " +
@@ -33,6 +33,36 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         {
             var result = FilterString.Generate<Param1>(p => p.Foo == "bar" && (p.Foo == "foo" || p.Val < 20));
             Assert.Equal("foo eq 'bar' and foo eq 'foo' or Val lt 20", result);
+        }
+
+        [Fact]
+        public void NullParametersAreIgnoredInTheBeginningOfExpression()
+        {
+            string foo = null;
+            var result = FilterString.Generate<Param1>(p => p.Foo == foo || p.Val == null || p.Val == 10);
+            Assert.Equal("Val eq 10", result);
+        }
+
+        [Fact]
+        public void NullParametersAreIgnoredInTheMiddleOfExpression()
+        {
+            var result = FilterString.Generate<Param1>(p => p.Foo == "bar" || p.Val == null || p.Val == 10);
+            Assert.Equal("foo eq 'bar' or Val eq 10", result);
+        }
+
+        [Fact]
+        public void NullParametersAreIgnoredInTheEndOfExpression()
+        {
+            var result = FilterString.Generate<Param1>(p => p.Foo == "bar" && p.Val == 20 || p.Val == null);
+            Assert.Equal("foo eq 'bar' and Val eq 20", result);
+        }
+
+        [Fact]
+        public void NullParametersAreNotIgnoredInExpression()
+        {
+            string foo = null;
+            var result = FilterString.Generate<Param1>(p => p.Foo == foo || p.Val == null || p.Val == 10, false);
+            Assert.Equal("foo eq null or Val eq null or Val eq 10", result);
         }
 
         [Fact]
@@ -93,6 +123,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal("Boolean eq true", result);
             result = FilterString.Generate<Param1>(p => p.Boolean && p.Foo == "foo");
             Assert.Equal("Boolean eq true and foo eq 'foo'", result);
+            result = FilterString.Generate<Param1>(p => p.Foo == "foo" && p.Boolean);
+            Assert.Equal("foo eq 'foo' and Boolean eq true", result);
         }
 
         [Fact]
