@@ -259,7 +259,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Throws<CloudException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidJsonPolling(new Product {Location = "West US"}));
                 // TODO: 4103936 Fix exception type
-#if !MONO
+#if !PORTABLE
                 Assert.Throws<RestException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidHeader(new Product {Location = "West US"}));
                 // TODO: 4103936 Fix exception type
@@ -374,7 +374,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 var report = client.GetReport();
-#if MONO
+#if PORTABLE
                 float totalTests = report.Count - 5;
 #else
                 float totalTests = report.Count;

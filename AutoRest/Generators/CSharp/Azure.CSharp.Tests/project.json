@@ -10,6 +10,7 @@
   },
   "frameworks": {
     "dnxcore50": {
+      "compilationOptions": { "define": [ "PORTABLE" ] },
       "dependencies": {
         "xunit.runner.dnx": "2.1.0-rc1-build198",
         "Microsoft.Rest.ClientRuntime": "",
