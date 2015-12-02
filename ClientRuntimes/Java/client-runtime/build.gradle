@@ -20,8 +20,9 @@ configurations {
 }
 
 checkstyle {
-    configProperties = [samedir: "config/checkstyle"]
-    reportsDir = new File("config/checkstyle/reports")
+    configFile = new File("$rootDir/tools/checkstyle/checkstyle.xml")
+    configProperties = [samedir: "$rootDir/tools/checkstyle"]
+    reportsDir = new File("$rootDir/tools/checkstyle/reports")
 }
 
 repositories {

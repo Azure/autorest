@@ -99,6 +99,7 @@ public class ExponentialBackoffRetryStrategy extends RetryStrategy {
     @Override
     public boolean shouldRetry(int retryCount, Response response) {
         int code = response.code();
+        //CHECKSTYLE IGNORE MagicNumber FOR NEXT 2 LINES
         return retryCount < this.retryCount
                 && (code == 408 || (code >= 500 && code != 501 && code != 505));
     }

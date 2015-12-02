@@ -21,11 +21,14 @@ import java.util.concurrent.Executors;
  * Token credentials filter for placing a token credential into request headers.
  */
 public class ApplicationTokenCredentialsInterceptor implements Interceptor {
+    /**
+     * The credentials instance to apply to the HTTP client pipeline.
+     */
     private ApplicationTokenCredentials credentials;
 
     /**
-     * Initialize a TokenCredentialsFilter class with a
-     * TokenCredentials credential.
+     * Initialize an ApplicationTokenCredentialsInterceptor class with a
+     * ApplicationTokenCredentials credential.
      *
      * @param credentials a TokenCredentials instance
      */

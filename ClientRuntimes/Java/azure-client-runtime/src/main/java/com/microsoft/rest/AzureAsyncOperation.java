@@ -25,27 +25,27 @@ public class AzureAsyncOperation {
     /**
      * Default delay in seconds for long running operations.
      */
-    static final int defaultDelay = 30;
+    static final int DEFAULT_DELAY = 30;
 
     /**
      * Successful status for long running operations.
      */
-    static final String successStatus = "Succeeded";
+    static final String SUCCESS_STATUS = "Succeeded";
 
     /**
      * In progress status for long running operations.
      */
-    static final String inProgressStatus = "InProgress";
+    static final String IN_PROGRESS_STATUS = "InProgress";
 
     /**
      * Failed status for long running operations.
      */
-    static final String failedStatus = "Failed";
+    static final String FAILED_STATUS = "Failed";
 
     /**
      * Canceled status for long running operations.
      */
-    static final String canceledStatus = "Canceled";
+    static final String CANCELED_STATUS = "Canceled";
 
     /**
      * Gets failed terminal statuses for long running operations.
@@ -53,7 +53,7 @@ public class AzureAsyncOperation {
      * @return a list of statuses indicating a failed operation.
      */
     public static List<String> getFailedStatuses() {
-        return Arrays.asList(failedStatus, canceledStatus);
+        return Arrays.asList(FAILED_STATUS, CANCELED_STATUS);
     }
 
     /**
@@ -62,7 +62,7 @@ public class AzureAsyncOperation {
      * @return a list of terminal statuses.
      */
     public static List<String> getTerminalStatuses() {
-        return Arrays.asList(failedStatus, canceledStatus, successStatus);
+        return Arrays.asList(FAILED_STATUS, CANCELED_STATUS, SUCCESS_STATUS);
     }
 
     /**
@@ -70,10 +70,20 @@ public class AzureAsyncOperation {
      */
     private String status;
 
+    /**
+     * Gets the status of the asynchronous request.
+     *
+     * @return the status of the asynchronous request.
+     */
     public String getStatus() {
         return this.status;
     }
 
+    /**
+     * Sets the status of the asynchronous request.
+     *
+     * @param status the status of the asynchronous request.
+     */
     public void setStatus(String status) {
         this.status = status;
     }
@@ -85,24 +95,44 @@ public class AzureAsyncOperation {
      */
     private CloudError error;
 
+    /**
+     * Gets the cloud error.
+     *
+     * @return the cloud error.
+     */
     public CloudError getError() {
         return this.error;
     }
 
+    /**
+     * Sets the cloud error.
+     *
+     * @param error the cloud error.
+     */
     public void setError(CloudError error) {
         this.error = error;
     }
 
     /**
-     * Gets or sets the delay in seconds that should be used when checking
+     * The delay in seconds that should be used when checking
      * for the status of the operation.
      */
     private int retryAfter;
 
+    /**
+     * Gets the delay in seconds.
+     *
+     * @return the delay in seconds.
+     */
     public int getRetryAfter() {
         return this.retryAfter;
     }
 
+    /**
+     * Sets the delay in seconds.
+     *
+     * @param retryAfter the delay in seconds.
+     */
     public void setRetryAfter(int retryAfter) {
         this.retryAfter = retryAfter;
     }
