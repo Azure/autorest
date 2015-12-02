@@ -24,15 +24,15 @@ export interface XMsClientRequestId {
      * Get method that overwrites x-ms-client-request header with value
      * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get(options: RequestOptions, callback: ServiceCallback<void>): void;
+    get(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     get(callback: ServiceCallback<void>): void;
 
     /**
@@ -42,15 +42,15 @@ export interface XMsClientRequestId {
      * @param {string} xMsClientRequestId This should appear as a method
      * parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramGet(xMsClientRequestId: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    paramGet(xMsClientRequestId: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     paramGet(xMsClientRequestId: string, callback: ServiceCallback<void>): void;
 }
 
@@ -66,15 +66,15 @@ export interface SubscriptionInCredentials {
      * POST method with subscriptionId modeled in credentials.  Set the credential
      * subscriptionId to '1234-5678-9012-3456' to succeed
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postMethodGlobalValid(options: RequestOptions, callback: ServiceCallback<void>): void;
+    postMethodGlobalValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postMethodGlobalValid(callback: ServiceCallback<void>): void;
 
     /**
@@ -82,60 +82,60 @@ export interface SubscriptionInCredentials {
      * subscriptionId to null, and client-side validation should prevent you from
      * making this call
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postMethodGlobalNull(options: RequestOptions, callback: ServiceCallback<void>): void;
+    postMethodGlobalNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postMethodGlobalNull(callback: ServiceCallback<void>): void;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential
      * subscriptionId to '1234-5678-9012-3456' to succeed
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postMethodGlobalNotProvidedValid(options: RequestOptions, callback: ServiceCallback<void>): void;
+    postMethodGlobalNotProvidedValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postMethodGlobalNotProvidedValid(callback: ServiceCallback<void>): void;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential
      * subscriptionId to '1234-5678-9012-3456' to succeed
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postPathGlobalValid(options: RequestOptions, callback: ServiceCallback<void>): void;
+    postPathGlobalValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postPathGlobalValid(callback: ServiceCallback<void>): void;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential
      * subscriptionId to '1234-5678-9012-3456' to succeed
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postSwaggerGlobalValid(options: RequestOptions, callback: ServiceCallback<void>): void;
+    postSwaggerGlobalValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postSwaggerGlobalValid(callback: ServiceCallback<void>): void;
 }
 
@@ -154,15 +154,15 @@ export interface SubscriptionInMethod {
      * @param {string} subscriptionId This should appear as a method parameter,
      * use value '1234-5678-9012-3456'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postMethodLocalValid(subscriptionId: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    postMethodLocalValid(subscriptionId: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postMethodLocalValid(subscriptionId: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -173,15 +173,15 @@ export interface SubscriptionInMethod {
      * @param {string} subscriptionId This should appear as a method parameter,
      * use value null, client-side validation should prvenet the call
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postMethodLocalNull(subscriptionId: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    postMethodLocalNull(subscriptionId: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postMethodLocalNull(subscriptionId: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -191,15 +191,15 @@ export interface SubscriptionInMethod {
      * @param {string} subscriptionId Should appear as a method parameter -use
      * value '1234-5678-9012-3456'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postPathLocalValid(subscriptionId: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    postPathLocalValid(subscriptionId: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postPathLocalValid(subscriptionId: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -209,15 +209,15 @@ export interface SubscriptionInMethod {
      * @param {string} subscriptionId The subscriptionId, which appears in the
      * path, the value is always '1234-5678-9012-3456'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postSwaggerLocalValid(subscriptionId: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    postSwaggerLocalValid(subscriptionId: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postSwaggerLocalValid(subscriptionId: string, callback: ServiceCallback<void>): void;
 }
 
@@ -232,57 +232,57 @@ export interface ApiVersionDefault {
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMethodGlobalValid(options: RequestOptions, callback: ServiceCallback<void>): void;
+    getMethodGlobalValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getMethodGlobalValid(callback: ServiceCallback<void>): void;
 
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMethodGlobalNotProvidedValid(options: RequestOptions, callback: ServiceCallback<void>): void;
+    getMethodGlobalNotProvidedValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getMethodGlobalNotProvidedValid(callback: ServiceCallback<void>): void;
 
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getPathGlobalValid(options: RequestOptions, callback: ServiceCallback<void>): void;
+    getPathGlobalValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getPathGlobalValid(callback: ServiceCallback<void>): void;
 
     /**
      * GET method with api-version modeled in global settings.
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSwaggerGlobalValid(options: RequestOptions, callback: ServiceCallback<void>): void;
+    getSwaggerGlobalValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getSwaggerGlobalValid(callback: ServiceCallback<void>): void;
 }
 
@@ -301,34 +301,34 @@ export interface ApiVersionLocal {
      * @param {string} apiVersion This should appear as a method parameter, use
      * value '2.0'. Possible values for this parameter include: '2.0'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMethodLocalValid(apiVersion: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getMethodLocalValid(apiVersion: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getMethodLocalValid(apiVersion: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version =
      * null to succeed
      *
-     * @param {string} [apiVersion] This should appear as a method parameter, use
-     * value null, this should result in no serialized parameter
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.apiVersion] This should appear as a method
+     * parameter, use value null, this should result in no serialized parameter
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMethodLocalNull(apiVersion: string, options: RequestOptions, callback: ServiceCallback<void>): void;
-    getMethodLocalNull(apiVersion: string, callback: ServiceCallback<void>): void;
+    getMethodLocalNull(options: { apiVersion? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getMethodLocalNull(callback: ServiceCallback<void>): void;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version =
@@ -337,15 +337,15 @@ export interface ApiVersionLocal {
      * @param {string} apiVersion This should appear as a method parameter, use
      * value '2.0'. Possible values for this parameter include: '2.0'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getPathLocalValid(apiVersion: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getPathLocalValid(apiVersion: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getPathLocalValid(apiVersion: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -355,15 +355,15 @@ export interface ApiVersionLocal {
      * @param {string} apiVersion The api version, which appears in the query, the
      * value is always '2.0'. Possible values for this parameter include: '2.0'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSwaggerLocalValid(apiVersion: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getSwaggerLocalValid(apiVersion: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getSwaggerLocalValid(apiVersion: string, callback: ServiceCallback<void>): void;
 }
 
@@ -381,15 +381,15 @@ export interface SkipUrlEncoding {
      * @param {string} unencodedPathParam Unencoded path parameter with value
      * 'path1/path2/path3'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMethodPathValid(unencodedPathParam: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getMethodPathValid(unencodedPathParam: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getMethodPathValid(unencodedPathParam: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -398,15 +398,15 @@ export interface SkipUrlEncoding {
      * @param {string} unencodedPathParam Unencoded path parameter with value
      * 'path1/path2/path3'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getPathPathValid(unencodedPathParam: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getPathPathValid(unencodedPathParam: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getPathPathValid(unencodedPathParam: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -416,15 +416,15 @@ export interface SkipUrlEncoding {
      * 'path1/path2/path3'. Possible values for this parameter include:
      * 'path1/path2/path3'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSwaggerPathValid(unencodedPathParam: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getSwaggerPathValid(unencodedPathParam: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getSwaggerPathValid(unencodedPathParam: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -434,32 +434,32 @@ export interface SkipUrlEncoding {
      * @param {string} q1 Unencoded query parameter with value
      * 'value1&q2=value2&q3=value3'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMethodQueryValid(q1: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getMethodQueryValid(q1: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getMethodQueryValid(q1: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get method with unencoded query parameter with value null
      *
-     * @param {string} [q1] Unencoded query parameter with value null
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.q1] Unencoded query parameter with value null
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMethodQueryNull(q1: string, options: RequestOptions, callback: ServiceCallback<void>): void;
-    getMethodQueryNull(q1: string, callback: ServiceCallback<void>): void;
+    getMethodQueryNull(options: { q1? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getMethodQueryNull(callback: ServiceCallback<void>): void;
 
     /**
      * Get method with unencoded query parameter with value
@@ -468,24 +468,59 @@ export interface SkipUrlEncoding {
      * @param {string} q1 Unencoded query parameter with value
      * 'value1&q2=value2&q3=value3'
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getPathQueryValid(q1: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getPathQueryValid(q1: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getPathQueryValid(q1: string, callback: ServiceCallback<void>): void;
 
     /**
      * Get method with unencoded query parameter with value
      * 'value1&q2=value2&q3=value3'
      *
-     * @param {string} [q1] An unencoded query parameter with value
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {string} [options.q1] An unencoded query parameter with value
      * 'value1&q2=value2&q3=value3'. Possible values for this parameter include:
      * 'value1&q2=value2&q3=value3'
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getSwaggerQueryValid(options: { q1? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getSwaggerQueryValid(callback: ServiceCallback<void>): void;
+}
+
+/**
+ * @class
+ * Odata
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the AutoRestAzureSpecialParametersTestClient.
+ */
+export interface Odata {
+
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq
+     * 'foo'&$orderby=id&$top=10'
+     *
+     * @param {object} [filter] The filter parameter with value '$filter=id gt 5
+     * and name eq 'foo''.
+     * 
+     * @param {number} [filter.id]
+     * 
+     * @param {string} [filter.name]
+     * 
+     * @param {number} [top] The top parameter with value 10.
+     * 
+     * @param {string} [orderby] The orderby parameter with value id.
      * 
      * @param {object} [options]
      *
@@ -495,8 +530,8 @@ export interface SkipUrlEncoding {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSwaggerQueryValid(q1: string, options: RequestOptions, callback: ServiceCallback<void>): void;
-    getSwaggerQueryValid(q1: string, callback: ServiceCallback<void>): void;
+    getWithFilter(filter: models.OdataFilter, top: number, orderby: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getWithFilter(filter: models.OdataFilter, top: number, orderby: string, callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -513,14 +548,14 @@ export interface Header {
      *
      * @param {string} fooClientRequestId The fooRequestId
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    customNamedRequestId(fooClientRequestId: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    customNamedRequestId(fooClientRequestId: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     customNamedRequestId(fooClientRequestId: string, callback: ServiceCallback<void>): void;
 }

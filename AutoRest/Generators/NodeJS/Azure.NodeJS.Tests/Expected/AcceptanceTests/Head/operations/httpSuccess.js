@@ -32,11 +32,11 @@ function HttpSuccess(client) {
 /**
  * Return 200 status code if successful
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -135,11 +135,11 @@ HttpSuccess.prototype.head200 = function (options, callback) {
 /**
  * Return 204 status code if successful
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -238,11 +238,11 @@ HttpSuccess.prototype.head204 = function (options, callback) {
 /**
  * Return 404 status code if successful
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

@@ -24,15 +24,15 @@ export interface Duration {
     /**
      * Get null duration value
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: ServiceCallback<moment.Duration>): void;
+    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<moment.Duration>): void;
     getNull(callback: ServiceCallback<moment.Duration>): void;
 
     /**
@@ -40,42 +40,42 @@ export interface Duration {
      *
      * @param {moment.duration} durationBody
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putPositiveDuration(durationBody: moment.Duration, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putPositiveDuration(durationBody: moment.Duration, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putPositiveDuration(durationBody: moment.Duration, callback: ServiceCallback<void>): void;
 
     /**
      * Get a positive duration value
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getPositiveDuration(options: RequestOptions, callback: ServiceCallback<moment.Duration>): void;
+    getPositiveDuration(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<moment.Duration>): void;
     getPositiveDuration(callback: ServiceCallback<moment.Duration>): void;
 
     /**
      * Get an invalid duration value
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: RequestOptions, callback: ServiceCallback<moment.Duration>): void;
+    getInvalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<moment.Duration>): void;
     getInvalid(callback: ServiceCallback<moment.Duration>): void;
 }

@@ -36,11 +36,11 @@ function SubscriptionInMethod(client) {
  * @param {string} subscriptionId This should appear as a method parameter,
  * use value '1234-5678-9012-3456'
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -147,11 +147,11 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
  * @param {string} subscriptionId This should appear as a method parameter,
  * use value null, client-side validation should prvenet the call
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -257,11 +257,11 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, o
  * @param {string} subscriptionId Should appear as a method parameter -use
  * value '1234-5678-9012-3456'
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -367,11 +367,11 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
  * @param {string} subscriptionId The subscriptionId, which appears in the
  * path, the value is always '1234-5678-9012-3456'
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

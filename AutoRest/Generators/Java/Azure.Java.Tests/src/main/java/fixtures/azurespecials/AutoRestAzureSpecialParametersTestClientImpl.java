@@ -172,6 +172,14 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
     }
 
     /**
+     * Gets the OdataOperations object to access its operations.
+     * @return the odata value.
+     */
+    public OdataOperations getOdata() {
+        return new OdataOperationsImpl(this.retrofitBuilder.build(), this);
+    }
+
+    /**
      * Gets the HeaderOperationsOperations object to access its operations.
      * @return the headerOperations value.
      */

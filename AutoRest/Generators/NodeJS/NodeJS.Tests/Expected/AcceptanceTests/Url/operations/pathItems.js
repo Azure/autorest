@@ -40,16 +40,17 @@ function PathItems(client) {
  * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
  * appears in the path
  * 
- * @param {string} [localStringQuery] should contain value 'localStringQuery'
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [pathItemStringQuery] A string value 'pathItemStringQuery'
- * that appears as a query parameter
+ * @param {string} [options.localStringQuery] should contain value
+ * 'localStringQuery'
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.pathItemStringQuery] A string value
+ * 'pathItemStringQuery' that appears as a query parameter
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -62,7 +63,7 @@ function PathItems(client) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PathItems.prototype.getAllWithValues = function (localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, options, callback) {
+PathItems.prototype.getAllWithValues = function (localStringPath, pathItemStringPath, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -71,6 +72,8 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var localStringQuery = options ? options.localStringQuery : undefined;
+  var pathItemStringQuery = options ? options.pathItemStringQuery : undefined;
   // Validate
   try {
     if (localStringPath === null || localStringPath === undefined || typeof localStringPath.valueOf() !== 'string') {
@@ -179,16 +182,17 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
  * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
  * appears in the path
  * 
- * @param {string} [localStringQuery] should contain value 'localStringQuery'
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [pathItemStringQuery] A string value 'pathItemStringQuery'
- * that appears as a query parameter
+ * @param {string} [options.localStringQuery] should contain value
+ * 'localStringQuery'
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.pathItemStringQuery] A string value
+ * 'pathItemStringQuery' that appears as a query parameter
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -201,7 +205,7 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, options, callback) {
+PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStringPath, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -210,6 +214,8 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var localStringQuery = options ? options.localStringQuery : undefined;
+  var pathItemStringQuery = options ? options.pathItemStringQuery : undefined;
   // Validate
   try {
     if (localStringPath === null || localStringPath === undefined || typeof localStringPath.valueOf() !== 'string') {
@@ -317,16 +323,16 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
  * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
  * appears in the path
  * 
- * @param {string} [localStringQuery] should contain null value
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [pathItemStringQuery] A string value 'pathItemStringQuery'
- * that appears as a query parameter
+ * @param {string} [options.localStringQuery] should contain null value
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.pathItemStringQuery] A string value
+ * 'pathItemStringQuery' that appears as a query parameter
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -339,7 +345,7 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, options, callback) {
+PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, pathItemStringPath, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -348,6 +354,8 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var localStringQuery = options ? options.localStringQuery : undefined;
+  var pathItemStringQuery = options ? options.pathItemStringQuery : undefined;
   // Validate
   try {
     if (localStringPath === null || localStringPath === undefined || typeof localStringPath.valueOf() !== 'string') {
@@ -455,15 +463,15 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
  * @param {string} pathItemStringPath A string value 'pathItemStringPath' that
  * appears in the path
  * 
- * @param {string} [localStringQuery] should contain value null
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [pathItemStringQuery] should contain value null
+ * @param {string} [options.localStringQuery] should contain value null
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.pathItemStringQuery] should contain value null
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -476,7 +484,7 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, options, callback) {
+PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathItemStringPath, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -485,6 +493,8 @@ PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathI
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var localStringQuery = options ? options.localStringQuery : undefined;
+  var pathItemStringQuery = options ? options.pathItemStringQuery : undefined;
   // Validate
   try {
     if (localStringPath === null || localStringPath === undefined || typeof localStringPath.valueOf() !== 'string') {

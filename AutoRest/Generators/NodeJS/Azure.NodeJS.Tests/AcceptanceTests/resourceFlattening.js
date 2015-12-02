@@ -65,7 +65,7 @@ describe('nodejs', function () {
           { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "pname": "Product1", "flattenedProductType": "Flat" },
           { "location": "Building 44", "pname": "Product2" }
         ];
-        testClient.putArray(resourceBody, function (error, result) {
+        testClient.putArray({ resourceArray: resourceBody }, function (error, result) {
           should.not.exist(error);
           done();
         });
@@ -106,7 +106,7 @@ describe('nodejs', function () {
           "Resource1": { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "pname": "Product1", "flattenedProductType": "Flat" },
           "Resource2": { "location": "Building 44", "pname": "Product2", "flattenedProductType": "Flat" }
         };
-        testClient.putDictionary(resourceBody, function (error, result) {
+        testClient.putDictionary({ resourceDictionary: resourceBody }, function (error, result) {
           should.not.exist(error);
           done();
         });
@@ -183,7 +183,7 @@ describe('nodejs', function () {
           },
           "productresource": { "location": "India", "pname": "Azure", "flattenedProductType": "Flat" }
         };
-        testClient.putResourceCollection(resourceBody, function (error, result) {
+        testClient.putResourceCollection({ resourceComplexObject: resourceBody }, function (error, result) {
           should.not.exist(error);
           done();
         });

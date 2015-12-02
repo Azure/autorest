@@ -40,11 +40,11 @@ function StorageAccounts(client) {
  * 
  * @param {string} [accountName.type]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -213,11 +213,11 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
  * 
  * @param {object} [parameters.tags] Resource tags
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -245,8 +245,6 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
   // Send request
   this.beginCreate(resourceGroupName, accountName, parameters, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-
-    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
 
     var initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
@@ -310,11 +308,11 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
  * 
  * @param {object} [parameters.tags] Resource tags
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -474,11 +472,11 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -597,11 +595,11 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -775,11 +773,11 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
  * 
  * @param {object} [parameters.tags] Resource tags
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -939,11 +937,11 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
  * 
  * @param {string} accountName The name of the storage account.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1078,11 +1076,11 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
  * Lists all the storage accounts available under the subscription. Note that
  * storage keys are not returned; use the ListKeys operation for this.
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1214,11 +1212,11 @@ StorageAccounts.prototype.list = function (options, callback) {
  * @param {string} resourceGroupName The name of the resource group within the
  * user’s subscription.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1356,14 +1354,14 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
  * 
- * @param {string} [keyName] Possible values for this property include:
- * 'key1', 'key2'.
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.keyName] Possible values for this property
+ * include: 'key1', 'key2'.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1377,7 +1375,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountName, keyName, options, callback) {
+StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountName, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1386,6 +1384,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var keyName = options ? options.keyName : undefined;
   // Validate
   try {
     if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
@@ -1529,11 +1528,11 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1656,11 +1655,11 @@ StorageAccounts.prototype.listNext = function (nextPageLink, options, callback) 
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

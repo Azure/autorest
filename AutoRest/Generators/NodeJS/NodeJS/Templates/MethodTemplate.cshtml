@@ -28,10 +28,6 @@
                                         + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
                                         + " " + parameter.Documentation))
 }
-@WrapComment(" * ", " @param {object} [options]")
- *
-@WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
- *
 @WrapComment(" * ", " @param {function} callback")
  *
 @WrapComment(" * ", " @returns {function} callback(err, result, request, response)")
@@ -54,7 +50,10 @@
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-
+  @if (((CompositeType)Model.OptionsParameterTemplateModel.Type).Properties.Count > 1)
+  {
+  @:@(Model.BuildOptionalMappings())
+  }
   @if (Model.ParameterTemplateModels.Any())
   {
       var validationBlock = Model.ValidationString;

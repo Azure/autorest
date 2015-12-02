@@ -44,10 +44,6 @@
       <Project>{9517265e-5127-460c-9dde-fe017d73121c}</Project>
       <Name>AutoRest.Modeler.Swagger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\NodeJS\NodeJS\AutoRest.Generator.NodeJS.csproj">
-      <Project>{77e73f37-9586-44ea-91b0-f244d08467d2}</Project>
-      <Name>AutoRest.Generator.NodeJS</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Extensions\AutoRest.Generator.Extensions.csproj">
       <Project>{7dd043eb-5e53-4180-b123-cc3cc5022e34}</Project>
       <Name>AutoRest.Generator.Extensions</Name>

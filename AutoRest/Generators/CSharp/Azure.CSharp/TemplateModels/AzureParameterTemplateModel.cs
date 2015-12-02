@@ -11,6 +11,10 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
     {
         public AzureParameterTemplateModel(Parameter source) : base(source)
         {
+            if (IsParameterODataExpression(source))
+            {
+                this.Name = "odataQuery";
+            }
         }
 
         /// <summary>
@@ -22,8 +26,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             {
                 if (IsODataFilterExpression)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, 
-                        "Expression<Func<{0}, bool>>", Type.Name);
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "ODataQuery<{0}>", Type.Name);
                 }
 
                 return base.DeclarationExpression;
@@ -42,16 +46,24 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         }
 
         /// <summary>
-        /// Gets True if parameter is OData $filter expression
+        /// Gets True if parameter is OData $filter, $top, $orderBy, $expand, $skip expression
         /// </summary>
         public virtual bool IsODataFilterExpression
         {
             get
             {
-                return SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
-                       Location == ParameterLocation.Query &&
-                       Type is CompositeType;
+                return IsParameterODataExpression(this);
             }
+        }
+
+        private static bool IsParameterODataExpression(Parameter source)
+        {
+            return (source.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$top", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$orderby", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$skip", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$expand", StringComparison.OrdinalIgnoreCase))
+                        && source.Location == ParameterLocation.Query;
         }
     }
 }

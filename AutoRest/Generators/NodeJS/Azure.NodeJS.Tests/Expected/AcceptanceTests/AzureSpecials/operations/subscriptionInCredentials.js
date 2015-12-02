@@ -33,11 +33,11 @@ function SubscriptionInCredentials(client) {
  * POST method with subscriptionId modeled in credentials.  Set the credential
  * subscriptionId to '1234-5678-9012-3456' to succeed
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -141,11 +141,11 @@ SubscriptionInCredentials.prototype.postMethodGlobalValid = function (options, c
  * subscriptionId to null, and client-side validation should prevent you from
  * making this call
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -248,11 +248,11 @@ SubscriptionInCredentials.prototype.postMethodGlobalNull = function (options, ca
  * POST method with subscriptionId modeled in credentials.  Set the credential
  * subscriptionId to '1234-5678-9012-3456' to succeed
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -359,11 +359,11 @@ SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function 
  * POST method with subscriptionId modeled in credentials.  Set the credential
  * subscriptionId to '1234-5678-9012-3456' to succeed
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -466,11 +466,11 @@ SubscriptionInCredentials.prototype.postPathGlobalValid = function (options, cal
  * POST method with subscriptionId modeled in credentials.  Set the credential
  * subscriptionId to '1234-5678-9012-3456' to succeed
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

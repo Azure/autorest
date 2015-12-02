@@ -26,6 +26,8 @@ using Xunit.Abstractions;
 using Microsoft.Rest.Azure;
 using AutoRest.Generator.CSharp.Tests.Utilities;
 using Microsoft.Framework.Logging;
+using Microsoft.Rest.Azure.OData;
+using Fixtures.Azure.AcceptanceTestsAzureSpecials.Models;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 {
@@ -649,6 +651,26 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 client.SkipUrlEncoding.GetSwaggerQueryValid(unencodedQuery);
                 client.SkipUrlEncoding.GetMethodQueryNull();
                 client.SkipUrlEncoding.GetMethodQueryNull(null);
+            }
+        }
+
+        [Fact]
+        public void AzureODataTests()
+        {
+            var validSubscription = "1234-5678-9012-3456";
+            SwaggerSpecHelper.RunTests<AzureCSharpCodeGenerator>(
+                SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"));
+            using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
+                    new TokenCredentials(Guid.NewGuid().ToString()))
+                { SubscriptionId = validSubscription })
+            {
+                var filter = new ODataQuery<OdataFilter>(f => f.Id > 5 && f.Name == "foo")
+                {
+                    Top = 10,
+                    OrderBy = "id"
+                };
+                Assert.Equal("$filter=id gt 5 and name eq 'foo'&$orderby=id&$top=10", filter.ToString());
+                client.Odata.GetWithFilter(filter);
             }
         }
 

@@ -36,11 +36,11 @@ function ApiVersionLocal(client) {
  * @param {string} apiVersion This should appear as a method parameter, use
  * value '2.0'. Possible values for this parameter include: '2.0'
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -143,14 +143,14 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
  * Get method with api-version modeled in the method.  pass in api-version =
  * null to succeed
  *
- * @param {string} [apiVersion] This should appear as a method parameter, use
- * value null, this should result in no serialized parameter
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.apiVersion] This should appear as a method
+ * parameter, use value null, this should result in no serialized parameter
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -163,7 +163,7 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, callback) {
+ApiVersionLocal.prototype.getMethodLocalNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -172,6 +172,7 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, ca
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var apiVersion = options ? options.apiVersion : undefined;
   // Validate
   try {
     if (apiVersion !== null && apiVersion !== undefined && typeof apiVersion.valueOf() !== 'string') {
@@ -258,11 +259,11 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (apiVersion, options, ca
  * @param {string} apiVersion This should appear as a method parameter, use
  * value '2.0'. Possible values for this parameter include: '2.0'
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -368,11 +369,11 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
  * @param {string} apiVersion The api version, which appears in the query, the
  * value is always '2.0'. Possible values for this parameter include: '2.0'
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
