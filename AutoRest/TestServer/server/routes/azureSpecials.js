@@ -175,12 +175,17 @@ var specials = function (coverage) {
   
   router.get('/odata/filter', function (req, res, next) {
         var scenario = 'AzureODataFilter';
-        if (req.query['$filter'] === 'id gt 5 and name eq \'foo\'' && req.query['$top'] == 10 && req.query['$orderby'] === 'id' ) {
-          coverage[scenario]++;
-          res.status(200).end();
-        } else {
-          utils.send400(res, next, 'Unexpected query values for scenario "' + scenario + '": "' + util.inspect(req.query) + '"');
+        if (req.query['$filter'] !== "id gt 5 and name eq 'foo'") {
+          utils.send400(res, next, 'Unexpected $filter value for "' + scenario + '": expect "id gt 5 and name eq \'foo\'" actual "' + req.query['$filter'] + '"');
         }
+        if (req.query['$top'] !== "10") {
+          utils.send400(res, next, 'Unexpected $top value for "' + scenario + '": expect "10" actual "' + req.query['$top'] + '"');
+        }
+        if (req.query['$orderby'] !== "id") {
+          utils.send400(res, next, 'Unexpected $top value for "' + scenario + '": expect "id" actual "' + req.query['$orderby'] + '"');
+        }
+        coverage[scenario]++;
+        res.status(200).end();        
   });
 
   router.get('/overwrite/x-ms-client-request-id/method/', function (req, res, next) {
