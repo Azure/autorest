@@ -428,7 +428,7 @@ namespace Microsoft.Rest.Azure.OData
         /// </summary>
         /// <param name="exprType">Expression type.</param>
         /// <returns>OData representation of the the ExpressionType.</returns>
-        private string GetODataOperatorName(ExpressionType exprType)
+        private static string GetODataOperatorName(ExpressionType exprType)
         {
             switch (exprType)
             {
