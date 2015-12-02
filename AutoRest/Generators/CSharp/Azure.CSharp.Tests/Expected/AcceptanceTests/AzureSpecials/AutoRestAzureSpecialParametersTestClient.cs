@@ -84,6 +84,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 
         public virtual ISkipUrlEncodingOperations SkipUrlEncoding { get; private set; }
 
+        public virtual IOdataOperations Odata { get; private set; }
+
         public virtual IHeaderOperations Header { get; private set; }
 
         /// <summary>
@@ -271,6 +273,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             this.ApiVersionDefault = new ApiVersionDefaultOperations(this);
             this.ApiVersionLocal = new ApiVersionLocalOperations(this);
             this.SkipUrlEncoding = new SkipUrlEncodingOperations(this);
+            this.Odata = new OdataOperations(this);
             this.Header = new HeaderOperations(this);
             this.BaseUri = new Uri("http://localhost");
             this.ApiVersion = "2015-07-01-preview";

@@ -501,6 +501,41 @@ export interface SkipUrlEncoding {
 
 /**
  * @class
+ * Odata
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the AutoRestAzureSpecialParametersTestClient.
+ */
+export interface Odata {
+
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq
+     * 'foo'&$orderby=id&$top=10'
+     *
+     * @param {object} [filter] The filter parameter with value '$filter=id gt 5
+     * and name eq 'foo''.
+     * 
+     * @param {number} [filter.id]
+     * 
+     * @param {string} [filter.name]
+     * 
+     * @param {number} [top] The top parameter with value 10.
+     * 
+     * @param {string} [orderby] The orderby parameter with value id.
+     * 
+     * @param {object} [options]
+     *
+     * @param {object} [options.customHeaders] headers that will be added to
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getWithFilter(filter: models.OdataFilter, top: number, orderby: string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    getWithFilter(filter: models.OdataFilter, top: number, orderby: string, callback: ServiceCallback<void>): void;
+}
+
+/**
+ * @class
  * Header
  * __NOTE__: An instance of this class is automatically created for an
  * instance of the AutoRestAzureSpecialParametersTestClient.

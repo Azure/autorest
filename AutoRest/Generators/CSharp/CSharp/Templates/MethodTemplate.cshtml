@@ -54,7 +54,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     {
         invocationId = ServiceClientTracing.NextInvocationId.ToString();
         Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-    @foreach (var parameter in Model.LogicalParameters.Where(p => p.ClientProperty == null))
+    @foreach (var parameter in Model.LogicalParameterTemplateModels.Where(p => p.ClientProperty == null))
     {
         @:tracingParameters.Add("@(parameter.Name)", @(parameter.Name));
     }
@@ -79,7 +79,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     httpRequest.RequestUri = new Uri(url);
     // Set Headers
     @(Model.SetDefaultHeaders)
-    @foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.Header))
+    @foreach (var parameter in Model.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Header))
     {
     @:if (@(parameter.Name) != null)
     @:{

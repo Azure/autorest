@@ -166,7 +166,7 @@ gulp.task('regenerate:expected:rubyazure', function(cb){
     'mappings': rubyAzureMappings,
     'outputDir': 'RspecTests/Generated',
     'codeGenerator': 'Azure.Ruby',
-	  'nsPrefix': 'MyNamespace'
+    'nsPrefix': 'MyNamespace'
   }, cb);
 })
 
@@ -253,7 +253,7 @@ var msbuildDefaults = {
   maxBuffer: MAX_BUFFER,
   verbosity: 'minimal',
   errorOnFail: true,
-  toolsVersion: 14.0
+  toolsVersion: 12.0
 };
 
 gulp.task('clean:node_modules', function(cb) {

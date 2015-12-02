@@ -20,19 +20,31 @@ namespace Microsoft.Rest.Azure.OData
     {
         private const string DefaultDateTimeFormat = "yyyy-MM-ddTHH:mm:ssZ";
         private const string PropertiesNode = "properties";
-        private readonly StringBuilder _generatedUrl = new StringBuilder();
+        private readonly Stack<StringBuilder> _fullExpressionStack = new Stack<StringBuilder>();
+        private StringBuilder _currentExpressionString = new StringBuilder();
+        private bool _currentExpressionContainsNull;
         private PropertyInfo _currentProperty;
         private readonly Expression _baseExpression;
+        private readonly bool _skipNullFilterParameters;
+
+        /// <summary>
+        /// Initializes a new instance of UrlExpressionVisitor. Skips null parameters.
+        /// </summary>
+        /// <param name="baseExpression">Base expression.</param>
+        public UrlExpressionVisitor(Expression baseExpression) : this(baseExpression, true)
+        { }
 
         /// <summary>
         /// Initializes a new instance of UrlExpressionVisitor.
         /// </summary>
         /// <param name="baseExpression">Base expression.</param>
-        public UrlExpressionVisitor(Expression baseExpression)
+        /// <param name="skipNullFilterParameters">Value indicating whether null values should be skipped.</param>
+        public UrlExpressionVisitor(Expression baseExpression, bool skipNullFilterParameters)
         {
             _baseExpression = baseExpression;
+            _skipNullFilterParameters = skipNullFilterParameters;
         }
-
+        
         /// <summary>
         /// Visits binary expression (e.g. ==, &amp;&amp;, >, etc).
         /// </summary>
@@ -44,15 +56,54 @@ namespace Microsoft.Rest.Azure.OData
             {
                 throw new ArgumentNullException("node");
             }
-            this.Visit(node.Left);
+            // For binary expression add current string to a stack
+            // so that if the expression contains cull it can be cleared
+            _fullExpressionStack.Push(_currentExpressionString);
+            _currentExpressionString = new StringBuilder();
+            _currentExpressionContainsNull = false;
 
-            _generatedUrl.Append(" " + GetODataOperatorName(node.NodeType) + " ");
+            this.Visit(node.Left);
+            CloseUnaryBooleanOperator(node.NodeType);
+            var leftExpressionString = _currentExpressionString;
+            _currentExpressionString = new StringBuilder();
 
             this.Visit(node.Right);
+            CloseUnaryBooleanOperator(node.NodeType);
+            var rightExpressionString = _currentExpressionString;
+            _currentExpressionString = new StringBuilder();
 
+            if (leftExpressionString.Length > 0)
+            {
+                _currentExpressionString.Append(leftExpressionString);
+            }
+            if (leftExpressionString.Length > 0 && rightExpressionString.Length > 0)
+            {
+                _currentExpressionString.Append(" " + GetODataOperatorName(node.NodeType) + " ");
+            }
+            if (rightExpressionString.Length > 0)
+            {
+                _currentExpressionString.Append(rightExpressionString);
+            }
+
+            // Merge expression back into the top expression from the stack
+            MergeExpressionsWithStack();
+            _currentExpressionContainsNull = false;
             _currentProperty = null;
 
             return node;
+        }
+
+        private void MergeExpressionsWithStack()
+        {
+            if (_fullExpressionStack.Count != 0)
+            {
+                var lastExpression = _fullExpressionStack.Pop();
+                if (!_currentExpressionContainsNull || !_skipNullFilterParameters)
+                {
+                    lastExpression.Append(_currentExpressionString);
+                }
+                _currentExpressionString = lastExpression;
+            }
         }
 
         /// <summary>
@@ -142,7 +193,7 @@ namespace Microsoft.Rest.Azure.OData
                 else
                 {
                     this.Visit(node.Expression);
-                    _generatedUrl.Append("/");
+                    _currentExpressionString.Append("/");
 
                     var nodeMemberProperty = node.Member as PropertyInfo;
                     PrintProperty(nodeMemberProperty);
@@ -171,7 +222,7 @@ namespace Microsoft.Rest.Azure.OData
             if (property != null)
             {
                 _currentProperty = property;
-                _generatedUrl.Append(GetPropertyName(property));
+                _currentExpressionString.Append(GetPropertyName(property));
             }
             else
             {
@@ -203,9 +254,9 @@ namespace Microsoft.Rest.Azure.OData
                     rightSide = node.Arguments[1];
                 }
                 Visit(leftSide);
-                _generatedUrl.Append("/any(c: c eq ");
+                _currentExpressionString.Append("/any(c: c eq ");
                 Visit(rightSide);
-                _generatedUrl.Append(")");
+                _currentExpressionString.Append(")");
                 return node;
             }
 
@@ -221,11 +272,11 @@ namespace Microsoft.Rest.Azure.OData
                     rightSide = node.Arguments[1];
                 }
 
-                _generatedUrl.Append("startswith(");
+                _currentExpressionString.Append("startswith(");
                 Visit(leftSide);
-                _generatedUrl.Append(", ");
+                _currentExpressionString.Append(", ");
                 Visit(rightSide);
-                _generatedUrl.Append(")");
+                _currentExpressionString.Append(")");
                 return node;
             }
 
@@ -241,11 +292,11 @@ namespace Microsoft.Rest.Azure.OData
                     rightSide = node.Arguments[1];
                 }
 
-                _generatedUrl.Append("endswith(");
+                _currentExpressionString.Append("endswith(");
                 Visit(leftSide);
-                _generatedUrl.Append(", ");
+                _currentExpressionString.Append(", ");
                 Visit(rightSide);
-                _generatedUrl.Append(")");
+                _currentExpressionString.Append(")");
                 return node;
             }
 
@@ -254,30 +305,35 @@ namespace Microsoft.Rest.Azure.OData
             {
                 methodName = node.Method.GetCustomAttribute<ODataMethodAttribute>().MethodName;
             }
-            _generatedUrl.Append(methodName + "(");
+            _currentExpressionString.Append(methodName + "(");
             for (var i = 0; i < node.Arguments.Count; i++)
             {
                 var argument = node.Arguments[i];
                 Visit(argument);
                 if (i != node.Arguments.Count - 1)
                 {
-                    _generatedUrl.Append(", ");
+                    _currentExpressionString.Append(", ");
                 }
             }
-            _generatedUrl.Append(")");
+            _currentExpressionString.Append(")");
             return node;
         }
 
         /// <summary>
         /// Appends 'eq true' to Boolean unary operators.
         /// </summary>
-        private void CloseUnaryBooleanOperator()
+        private void CloseUnaryBooleanOperator(ExpressionType expressionType)
         {
             if (_currentProperty != null)
             {
-                if (_currentProperty.PropertyType == typeof (bool))
+                // Reset unary operator if and/or node type
+                if (expressionType == ExpressionType.And || expressionType == ExpressionType.AndAlso ||
+                    expressionType == ExpressionType.Or || expressionType == ExpressionType.OrElse)
                 {
-                    _generatedUrl.Append(" eq true");
+                    if (_currentProperty.PropertyType == typeof (bool))
+                    {
+                        _currentExpressionString.Append(" eq true");
+                    }
                     _currentProperty = null;
                 }
             }
@@ -292,7 +348,8 @@ namespace Microsoft.Rest.Azure.OData
         {
             if (val == null)
             {
-                _generatedUrl.Append("null");
+                _currentExpressionString.Append("null");
+                _currentExpressionContainsNull = true;
             }
             else
             {
@@ -319,15 +376,15 @@ namespace Microsoft.Rest.Azure.OData
                     val is long ||
                     val is short)
                 {
-                    _generatedUrl.Append(formattedString.ToLowerInvariant());
+                    _currentExpressionString.Append(formattedString.ToLowerInvariant());
                 }
                 else if (val is TimeSpan)
                 {
-                    _generatedUrl.Append(formattedString);
+                    _currentExpressionString.Append(formattedString);
                 }
                 else
                 {
-                    _generatedUrl.AppendFormat(CultureInfo.InvariantCulture, "'{0}'", Uri.EscapeDataString(formattedString));
+                    _currentExpressionString.AppendFormat(CultureInfo.InvariantCulture, "'{0}'", Uri.EscapeDataString(formattedString));
                 }
             }
         }
@@ -361,8 +418,9 @@ namespace Microsoft.Rest.Azure.OData
         /// <returns></returns>
         public override string ToString()
         {
-            CloseUnaryBooleanOperator();
-            return _generatedUrl.ToString();
+            CloseUnaryBooleanOperator(ExpressionType.And);
+            MergeExpressionsWithStack();
+            return _currentExpressionString.ToString();
         }
 
         /// <summary>
@@ -370,7 +428,7 @@ namespace Microsoft.Rest.Azure.OData
         /// </summary>
         /// <param name="exprType">Expression type.</param>
         /// <returns>OData representation of the the ExpressionType.</returns>
-        private string GetODataOperatorName(ExpressionType exprType)
+        private static string GetODataOperatorName(ExpressionType exprType)
         {
             switch (exprType)
             {
@@ -384,22 +442,16 @@ namespace Microsoft.Rest.Azure.OData
                     return "le";
                 case ExpressionType.And:
                 case ExpressionType.AndAlso:
-                    // Reset current property
-                    CloseUnaryBooleanOperator();
-                    _currentProperty = null;
                     return "and";
                 case ExpressionType.Or:
                 case ExpressionType.OrElse:
-                    // Reset current property
-                    CloseUnaryBooleanOperator();
-                    _currentProperty = null;
                     return "or";
                 case ExpressionType.Equal:
                     return "eq";
                 case ExpressionType.NotEqual:
                     return "ne";
                 default:
-                    throw new System.NotSupportedException("Cannot get name for: " + exprType);
+                    throw new NotSupportedException("Cannot get name for: " + exprType);
             }
         }
 
