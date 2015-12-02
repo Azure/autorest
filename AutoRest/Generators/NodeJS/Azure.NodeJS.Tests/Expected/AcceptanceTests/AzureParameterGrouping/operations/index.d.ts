@@ -44,7 +44,7 @@ export interface ParameterGrouping {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequired(parameterGroupingPostRequiredParameters: models.ParameterGroupingPostRequiredParameters, options: RequestOptions, callback: ServiceCallback<void>): void;
+    postRequired(parameterGroupingPostRequiredParameters: models.ParameterGroupingPostRequiredParameters, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     postRequired(parameterGroupingPostRequiredParameters: models.ParameterGroupingPostRequiredParameters, callback: ServiceCallback<void>): void;
 
     /**
@@ -67,8 +67,8 @@ export interface ParameterGrouping {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptional(parameterGroupingPostOptionalParameters: models.ParameterGroupingPostOptionalParameters, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postOptional(parameterGroupingPostOptionalParameters: models.ParameterGroupingPostOptionalParameters, callback: ServiceCallback<void>): void;
+    postOptional(options: {parameterGroupingPostOptionalParameters?: models.ParameterGroupingPostOptionalParameters, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postOptional(callback: ServiceCallback<void>): void;
 
     /**
      * Post parameters from multiple different parameter groups
@@ -100,8 +100,8 @@ export interface ParameterGrouping {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postMultipleParameterGroups(firstParameterGroup: models.FirstParameterGroup, parameterGroupingPostMultipleParameterGroupsSecondParameterGroup: models.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postMultipleParameterGroups(firstParameterGroup: models.FirstParameterGroup, parameterGroupingPostMultipleParameterGroupsSecondParameterGroup: models.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup, callback: ServiceCallback<void>): void;
+    postMultipleParameterGroups(options: {firstParameterGroup?: models.FirstParameterGroup, parameterGroupingPostMultipleParameterGroupsSecondParameterGroup?: models.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postMultipleParameterGroups(callback: ServiceCallback<void>): void;
 
     /**
      * Post parameters with a shared parameter group object
@@ -122,6 +122,6 @@ export interface ParameterGrouping {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postSharedParameterGroupObject(firstParameterGroup: models.FirstParameterGroup, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postSharedParameterGroupObject(firstParameterGroup: models.FirstParameterGroup, callback: ServiceCallback<void>): void;
+    postSharedParameterGroupObject(options: {firstParameterGroup?: models.FirstParameterGroup, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postSharedParameterGroupObject(callback: ServiceCallback<void>): void;
 }

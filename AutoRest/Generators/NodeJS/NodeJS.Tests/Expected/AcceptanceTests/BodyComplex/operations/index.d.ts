@@ -32,7 +32,7 @@ export interface BasicOperations {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getValid(options: RequestOptions, callback: ServiceCallback<models.Basic>): void;
+    getValid(options: {customHeaders?: any}, callback: ServiceCallback<models.Basic>): void;
     getValid(callback: ServiceCallback<models.Basic>): void;
 
     /**
@@ -56,7 +56,7 @@ export interface BasicOperations {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putValid(complexBody: models.Basic, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putValid(complexBody: models.Basic, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putValid(complexBody: models.Basic, callback: ServiceCallback<void>): void;
 
     /**
@@ -70,7 +70,7 @@ export interface BasicOperations {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: RequestOptions, callback: ServiceCallback<models.Basic>): void;
+    getInvalid(options: {customHeaders?: any}, callback: ServiceCallback<models.Basic>): void;
     getInvalid(callback: ServiceCallback<models.Basic>): void;
 
     /**
@@ -84,7 +84,7 @@ export interface BasicOperations {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getEmpty(options: RequestOptions, callback: ServiceCallback<models.Basic>): void;
+    getEmpty(options: {customHeaders?: any}, callback: ServiceCallback<models.Basic>): void;
     getEmpty(callback: ServiceCallback<models.Basic>): void;
 
     /**
@@ -98,7 +98,7 @@ export interface BasicOperations {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: ServiceCallback<models.Basic>): void;
+    getNull(options: {customHeaders?: any}, callback: ServiceCallback<models.Basic>): void;
     getNull(callback: ServiceCallback<models.Basic>): void;
 
     /**
@@ -112,7 +112,7 @@ export interface BasicOperations {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNotProvided(options: RequestOptions, callback: ServiceCallback<models.Basic>): void;
+    getNotProvided(options: {customHeaders?: any}, callback: ServiceCallback<models.Basic>): void;
     getNotProvided(callback: ServiceCallback<models.Basic>): void;
 }
 
@@ -135,7 +135,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getInt(options: RequestOptions, callback: ServiceCallback<models.IntWrapper>): void;
+    getInt(options: {customHeaders?: any}, callback: ServiceCallback<models.IntWrapper>): void;
     getInt(callback: ServiceCallback<models.IntWrapper>): void;
 
     /**
@@ -155,7 +155,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putInt(complexBody: models.IntWrapper, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putInt(complexBody: models.IntWrapper, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putInt(complexBody: models.IntWrapper, callback: ServiceCallback<void>): void;
 
     /**
@@ -169,7 +169,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getLong(options: RequestOptions, callback: ServiceCallback<models.LongWrapper>): void;
+    getLong(options: {customHeaders?: any}, callback: ServiceCallback<models.LongWrapper>): void;
     getLong(callback: ServiceCallback<models.LongWrapper>): void;
 
     /**
@@ -189,7 +189,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putLong(complexBody: models.LongWrapper, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putLong(complexBody: models.LongWrapper, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putLong(complexBody: models.LongWrapper, callback: ServiceCallback<void>): void;
 
     /**
@@ -203,7 +203,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getFloat(options: RequestOptions, callback: ServiceCallback<models.FloatWrapper>): void;
+    getFloat(options: {customHeaders?: any}, callback: ServiceCallback<models.FloatWrapper>): void;
     getFloat(callback: ServiceCallback<models.FloatWrapper>): void;
 
     /**
@@ -223,7 +223,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putFloat(complexBody: models.FloatWrapper, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putFloat(complexBody: models.FloatWrapper, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putFloat(complexBody: models.FloatWrapper, callback: ServiceCallback<void>): void;
 
     /**
@@ -237,7 +237,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDouble(options: RequestOptions, callback: ServiceCallback<models.DoubleWrapper>): void;
+    getDouble(options: {customHeaders?: any}, callback: ServiceCallback<models.DoubleWrapper>): void;
     getDouble(callback: ServiceCallback<models.DoubleWrapper>): void;
 
     /**
@@ -259,7 +259,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putDouble(complexBody: models.DoubleWrapper, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putDouble(complexBody: models.DoubleWrapper, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putDouble(complexBody: models.DoubleWrapper, callback: ServiceCallback<void>): void;
 
     /**
@@ -273,7 +273,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getBool(options: RequestOptions, callback: ServiceCallback<models.BooleanWrapper>): void;
+    getBool(options: {customHeaders?: any}, callback: ServiceCallback<models.BooleanWrapper>): void;
     getBool(callback: ServiceCallback<models.BooleanWrapper>): void;
 
     /**
@@ -293,7 +293,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putBool(complexBody: models.BooleanWrapper, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putBool(complexBody: models.BooleanWrapper, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putBool(complexBody: models.BooleanWrapper, callback: ServiceCallback<void>): void;
 
     /**
@@ -307,7 +307,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getString(options: RequestOptions, callback: ServiceCallback<models.StringWrapper>): void;
+    getString(options: {customHeaders?: any}, callback: ServiceCallback<models.StringWrapper>): void;
     getString(callback: ServiceCallback<models.StringWrapper>): void;
 
     /**
@@ -329,7 +329,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putString(complexBody: models.StringWrapper, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putString(complexBody: models.StringWrapper, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putString(complexBody: models.StringWrapper, callback: ServiceCallback<void>): void;
 
     /**
@@ -343,7 +343,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDate(options: RequestOptions, callback: ServiceCallback<models.DateWrapper>): void;
+    getDate(options: {customHeaders?: any}, callback: ServiceCallback<models.DateWrapper>): void;
     getDate(callback: ServiceCallback<models.DateWrapper>): void;
 
     /**
@@ -363,7 +363,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putDate(complexBody: models.DateWrapper, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putDate(complexBody: models.DateWrapper, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putDate(complexBody: models.DateWrapper, callback: ServiceCallback<void>): void;
 
     /**
@@ -377,7 +377,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDateTime(options: RequestOptions, callback: ServiceCallback<models.DatetimeWrapper>): void;
+    getDateTime(options: {customHeaders?: any}, callback: ServiceCallback<models.DatetimeWrapper>): void;
     getDateTime(callback: ServiceCallback<models.DatetimeWrapper>): void;
 
     /**
@@ -398,7 +398,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putDateTime(complexBody: models.DatetimeWrapper, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putDateTime(complexBody: models.DatetimeWrapper, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putDateTime(complexBody: models.DatetimeWrapper, callback: ServiceCallback<void>): void;
 
     /**
@@ -412,7 +412,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDateTimeRfc1123(options: RequestOptions, callback: ServiceCallback<models.Datetimerfc1123Wrapper>): void;
+    getDateTimeRfc1123(options: {customHeaders?: any}, callback: ServiceCallback<models.Datetimerfc1123Wrapper>): void;
     getDateTimeRfc1123(callback: ServiceCallback<models.Datetimerfc1123Wrapper>): void;
 
     /**
@@ -433,7 +433,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putDateTimeRfc1123(complexBody: models.Datetimerfc1123Wrapper, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putDateTimeRfc1123(complexBody: models.Datetimerfc1123Wrapper, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putDateTimeRfc1123(complexBody: models.Datetimerfc1123Wrapper, callback: ServiceCallback<void>): void;
 
     /**
@@ -447,7 +447,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDuration(options: RequestOptions, callback: ServiceCallback<models.DurationWrapper>): void;
+    getDuration(options: {customHeaders?: any}, callback: ServiceCallback<models.DurationWrapper>): void;
     getDuration(callback: ServiceCallback<models.DurationWrapper>): void;
 
     /**
@@ -463,8 +463,8 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putDuration(field: moment.Duration, options: RequestOptions, callback: ServiceCallback<void>): void;
-    putDuration(field: moment.Duration, callback: ServiceCallback<void>): void;
+    putDuration(options: {field?: moment.Duration, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putDuration(callback: ServiceCallback<void>): void;
 
     /**
      * Get complex types with byte properties
@@ -477,7 +477,7 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getByte(options: RequestOptions, callback: ServiceCallback<models.ByteWrapper>): void;
+    getByte(options: {customHeaders?: any}, callback: ServiceCallback<models.ByteWrapper>): void;
     getByte(callback: ServiceCallback<models.ByteWrapper>): void;
 
     /**
@@ -493,8 +493,8 @@ export interface Primitive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putByte(field: Buffer, options: RequestOptions, callback: ServiceCallback<void>): void;
-    putByte(field: Buffer, callback: ServiceCallback<void>): void;
+    putByte(options: {field?: Buffer, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putByte(callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -516,7 +516,7 @@ export interface ArrayModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getValid(options: RequestOptions, callback: ServiceCallback<models.ArrayWrapper>): void;
+    getValid(options: {customHeaders?: any}, callback: ServiceCallback<models.ArrayWrapper>): void;
     getValid(callback: ServiceCallback<models.ArrayWrapper>): void;
 
     /**
@@ -532,8 +532,8 @@ export interface ArrayModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putValid(arrayParameter: string[], options: RequestOptions, callback: ServiceCallback<void>): void;
-    putValid(arrayParameter: string[], callback: ServiceCallback<void>): void;
+    putValid(options: {arrayParameter?: string[], customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putValid(callback: ServiceCallback<void>): void;
 
     /**
      * Get complex types with array property which is empty
@@ -546,7 +546,7 @@ export interface ArrayModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getEmpty(options: RequestOptions, callback: ServiceCallback<models.ArrayWrapper>): void;
+    getEmpty(options: {customHeaders?: any}, callback: ServiceCallback<models.ArrayWrapper>): void;
     getEmpty(callback: ServiceCallback<models.ArrayWrapper>): void;
 
     /**
@@ -562,8 +562,8 @@ export interface ArrayModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putEmpty(arrayParameter: string[], options: RequestOptions, callback: ServiceCallback<void>): void;
-    putEmpty(arrayParameter: string[], callback: ServiceCallback<void>): void;
+    putEmpty(options: {arrayParameter?: string[], customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putEmpty(callback: ServiceCallback<void>): void;
 
     /**
      * Get complex types with array property while server doesn't provide a
@@ -577,7 +577,7 @@ export interface ArrayModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNotProvided(options: RequestOptions, callback: ServiceCallback<models.ArrayWrapper>): void;
+    getNotProvided(options: {customHeaders?: any}, callback: ServiceCallback<models.ArrayWrapper>): void;
     getNotProvided(callback: ServiceCallback<models.ArrayWrapper>): void;
 }
 
@@ -600,7 +600,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getValid(options: RequestOptions, callback: ServiceCallback<models.DictionaryWrapper>): void;
+    getValid(options: {customHeaders?: any}, callback: ServiceCallback<models.DictionaryWrapper>): void;
     getValid(callback: ServiceCallback<models.DictionaryWrapper>): void;
 
     /**
@@ -616,8 +616,8 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putValid(defaultProgram: { [propertyName: string]: string }, options: RequestOptions, callback: ServiceCallback<void>): void;
-    putValid(defaultProgram: { [propertyName: string]: string }, callback: ServiceCallback<void>): void;
+    putValid(options: {defaultProgram?: { [propertyName: string]: string }, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putValid(callback: ServiceCallback<void>): void;
 
     /**
      * Get complex types with dictionary property which is empty
@@ -630,7 +630,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getEmpty(options: RequestOptions, callback: ServiceCallback<models.DictionaryWrapper>): void;
+    getEmpty(options: {customHeaders?: any}, callback: ServiceCallback<models.DictionaryWrapper>): void;
     getEmpty(callback: ServiceCallback<models.DictionaryWrapper>): void;
 
     /**
@@ -646,8 +646,8 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putEmpty(defaultProgram: { [propertyName: string]: string }, options: RequestOptions, callback: ServiceCallback<void>): void;
-    putEmpty(defaultProgram: { [propertyName: string]: string }, callback: ServiceCallback<void>): void;
+    putEmpty(options: {defaultProgram?: { [propertyName: string]: string }, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putEmpty(callback: ServiceCallback<void>): void;
 
     /**
      * Get complex types with dictionary property which is null
@@ -660,7 +660,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: ServiceCallback<models.DictionaryWrapper>): void;
+    getNull(options: {customHeaders?: any}, callback: ServiceCallback<models.DictionaryWrapper>): void;
     getNull(callback: ServiceCallback<models.DictionaryWrapper>): void;
 
     /**
@@ -675,7 +675,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNotProvided(options: RequestOptions, callback: ServiceCallback<models.DictionaryWrapper>): void;
+    getNotProvided(options: {customHeaders?: any}, callback: ServiceCallback<models.DictionaryWrapper>): void;
     getNotProvided(callback: ServiceCallback<models.DictionaryWrapper>): void;
 }
 
@@ -698,7 +698,7 @@ export interface Inheritance {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getValid(options: RequestOptions, callback: ServiceCallback<models.Siamese>): void;
+    getValid(options: {customHeaders?: any}, callback: ServiceCallback<models.Siamese>): void;
     getValid(callback: ServiceCallback<models.Siamese>): void;
 
     /**
@@ -723,7 +723,7 @@ export interface Inheritance {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putValid(complexBody: models.Siamese, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putValid(complexBody: models.Siamese, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putValid(complexBody: models.Siamese, callback: ServiceCallback<void>): void;
 }
 
@@ -746,7 +746,7 @@ export interface Polymorphism {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getValid(options: RequestOptions, callback: ServiceCallback<models.Fish>): void;
+    getValid(options: {customHeaders?: any}, callback: ServiceCallback<models.Fish>): void;
     getValid(callback: ServiceCallback<models.Fish>): void;
 
     /**
@@ -803,7 +803,7 @@ export interface Polymorphism {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putValid(complexBody: models.Fish, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putValid(complexBody: models.Fish, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putValid(complexBody: models.Fish, callback: ServiceCallback<void>): void;
 
     /**
@@ -854,7 +854,7 @@ export interface Polymorphism {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putValidMissingRequired(complexBody: models.Fish, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putValidMissingRequired(complexBody: models.Fish, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putValidMissingRequired(complexBody: models.Fish, callback: ServiceCallback<void>): void;
 }
 
@@ -877,7 +877,7 @@ export interface Polymorphicrecursive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getValid(options: RequestOptions, callback: ServiceCallback<models.Fish>): void;
+    getValid(options: {customHeaders?: any}, callback: ServiceCallback<models.Fish>): void;
     getValid(callback: ServiceCallback<models.Fish>): void;
 
     /**
@@ -953,6 +953,6 @@ export interface Polymorphicrecursive {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putValid(complexBody: models.Fish, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putValid(complexBody: models.Fish, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putValid(complexBody: models.Fish, callback: ServiceCallback<void>): void;
 }

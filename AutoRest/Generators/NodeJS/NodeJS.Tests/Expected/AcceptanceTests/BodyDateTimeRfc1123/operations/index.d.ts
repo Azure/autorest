@@ -31,7 +31,7 @@ export interface Datetimerfc1123 {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getNull(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getNull(callback: ServiceCallback<Date>): void;
 
     /**
@@ -45,7 +45,7 @@ export interface Datetimerfc1123 {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getInvalid(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getInvalid(callback: ServiceCallback<Date>): void;
 
     /**
@@ -59,7 +59,7 @@ export interface Datetimerfc1123 {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getOverflow(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getOverflow(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getOverflow(callback: ServiceCallback<Date>): void;
 
     /**
@@ -73,7 +73,7 @@ export interface Datetimerfc1123 {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getUnderflow(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getUnderflow(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getUnderflow(callback: ServiceCallback<Date>): void;
 
     /**
@@ -89,7 +89,7 @@ export interface Datetimerfc1123 {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putUtcMaxDateTime(datetimeBody: Date, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putUtcMaxDateTime(datetimeBody: Date, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putUtcMaxDateTime(datetimeBody: Date, callback: ServiceCallback<void>): void;
 
     /**
@@ -103,7 +103,7 @@ export interface Datetimerfc1123 {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getUtcLowercaseMaxDateTime(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getUtcLowercaseMaxDateTime(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getUtcLowercaseMaxDateTime(callback: ServiceCallback<Date>): void;
 
     /**
@@ -117,7 +117,7 @@ export interface Datetimerfc1123 {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getUtcUppercaseMaxDateTime(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getUtcUppercaseMaxDateTime(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getUtcUppercaseMaxDateTime(callback: ServiceCallback<Date>): void;
 
     /**
@@ -133,7 +133,7 @@ export interface Datetimerfc1123 {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putUtcMinDateTime(datetimeBody: Date, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putUtcMinDateTime(datetimeBody: Date, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putUtcMinDateTime(datetimeBody: Date, callback: ServiceCallback<void>): void;
 
     /**
@@ -147,6 +147,6 @@ export interface Datetimerfc1123 {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getUtcMinDateTime(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getUtcMinDateTime(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getUtcMinDateTime(callback: ServiceCallback<Date>): void;
 }

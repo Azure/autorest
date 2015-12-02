@@ -31,7 +31,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getNull(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getNull(callback: ServiceCallback<Date>): void;
 
     /**
@@ -45,7 +45,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getInvalid(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getInvalid(callback: ServiceCallback<Date>): void;
 
     /**
@@ -59,7 +59,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getOverflow(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getOverflow(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getOverflow(callback: ServiceCallback<Date>): void;
 
     /**
@@ -73,7 +73,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getUnderflow(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getUnderflow(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getUnderflow(callback: ServiceCallback<Date>): void;
 
     /**
@@ -89,7 +89,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putUtcMaxDateTime(datetimeBody: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putUtcMaxDateTime(datetimeBody: Date|string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putUtcMaxDateTime(datetimeBody: Date|string, callback: ServiceCallback<void>): void;
 
     /**
@@ -103,7 +103,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getUtcLowercaseMaxDateTime(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getUtcLowercaseMaxDateTime(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getUtcLowercaseMaxDateTime(callback: ServiceCallback<Date>): void;
 
     /**
@@ -117,7 +117,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getUtcUppercaseMaxDateTime(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getUtcUppercaseMaxDateTime(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getUtcUppercaseMaxDateTime(callback: ServiceCallback<Date>): void;
 
     /**
@@ -134,7 +134,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putLocalPositiveOffsetMaxDateTime(datetimeBody: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putLocalPositiveOffsetMaxDateTime(datetimeBody: Date|string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putLocalPositiveOffsetMaxDateTime(datetimeBody: Date|string, callback: ServiceCallback<void>): void;
 
     /**
@@ -149,7 +149,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getLocalPositiveOffsetLowercaseMaxDateTime(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getLocalPositiveOffsetLowercaseMaxDateTime(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getLocalPositiveOffsetLowercaseMaxDateTime(callback: ServiceCallback<Date>): void;
 
     /**
@@ -164,7 +164,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getLocalPositiveOffsetUppercaseMaxDateTime(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getLocalPositiveOffsetUppercaseMaxDateTime(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getLocalPositiveOffsetUppercaseMaxDateTime(callback: ServiceCallback<Date>): void;
 
     /**
@@ -181,7 +181,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putLocalNegativeOffsetMaxDateTime(datetimeBody: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putLocalNegativeOffsetMaxDateTime(datetimeBody: Date|string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putLocalNegativeOffsetMaxDateTime(datetimeBody: Date|string, callback: ServiceCallback<void>): void;
 
     /**
@@ -196,7 +196,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getLocalNegativeOffsetUppercaseMaxDateTime(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getLocalNegativeOffsetUppercaseMaxDateTime(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getLocalNegativeOffsetUppercaseMaxDateTime(callback: ServiceCallback<Date>): void;
 
     /**
@@ -211,7 +211,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getLocalNegativeOffsetLowercaseMaxDateTime(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getLocalNegativeOffsetLowercaseMaxDateTime(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getLocalNegativeOffsetLowercaseMaxDateTime(callback: ServiceCallback<Date>): void;
 
     /**
@@ -227,7 +227,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putUtcMinDateTime(datetimeBody: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putUtcMinDateTime(datetimeBody: Date|string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putUtcMinDateTime(datetimeBody: Date|string, callback: ServiceCallback<void>): void;
 
     /**
@@ -241,7 +241,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getUtcMinDateTime(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getUtcMinDateTime(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getUtcMinDateTime(callback: ServiceCallback<Date>): void;
 
     /**
@@ -257,7 +257,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putLocalPositiveOffsetMinDateTime(datetimeBody: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putLocalPositiveOffsetMinDateTime(datetimeBody: Date|string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putLocalPositiveOffsetMinDateTime(datetimeBody: Date|string, callback: ServiceCallback<void>): void;
 
     /**
@@ -271,7 +271,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getLocalPositiveOffsetMinDateTime(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getLocalPositiveOffsetMinDateTime(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getLocalPositiveOffsetMinDateTime(callback: ServiceCallback<Date>): void;
 
     /**
@@ -287,7 +287,7 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putLocalNegativeOffsetMinDateTime(datetimeBody: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putLocalNegativeOffsetMinDateTime(datetimeBody: Date|string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putLocalNegativeOffsetMinDateTime(datetimeBody: Date|string, callback: ServiceCallback<void>): void;
 
     /**
@@ -301,6 +301,6 @@ export interface Datetime {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getLocalNegativeOffsetMinDateTime(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getLocalNegativeOffsetMinDateTime(options: {customHeaders?: any}, callback: ServiceCallback<Date>): void;
     getLocalNegativeOffsetMinDateTime(callback: ServiceCallback<Date>): void;
 }

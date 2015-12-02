@@ -32,7 +32,7 @@ export interface Duration {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: ServiceCallback<moment.Duration>): void;
+    getNull(options: {customHeaders?: any}, callback: ServiceCallback<moment.Duration>): void;
     getNull(callback: ServiceCallback<moment.Duration>): void;
 
     /**
@@ -48,7 +48,7 @@ export interface Duration {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putPositiveDuration(durationBody: moment.Duration, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putPositiveDuration(durationBody: moment.Duration, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
     putPositiveDuration(durationBody: moment.Duration, callback: ServiceCallback<void>): void;
 
     /**
@@ -62,7 +62,7 @@ export interface Duration {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getPositiveDuration(options: RequestOptions, callback: ServiceCallback<moment.Duration>): void;
+    getPositiveDuration(options: {customHeaders?: any}, callback: ServiceCallback<moment.Duration>): void;
     getPositiveDuration(callback: ServiceCallback<moment.Duration>): void;
 
     /**
@@ -76,6 +76,6 @@ export interface Duration {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: RequestOptions, callback: ServiceCallback<moment.Duration>): void;
+    getInvalid(options: {customHeaders?: any}, callback: ServiceCallback<moment.Duration>): void;
     getInvalid(callback: ServiceCallback<moment.Duration>): void;
 }
