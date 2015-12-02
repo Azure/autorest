@@ -407,7 +407,11 @@ var xunitdnx = function(options){
       return path.basename(path.dirname(s))
     }
   };
-  return shell('dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml"', options);
+  var printStatusCodeCmd = 'echo Status code: %errorlevel%';
+  if (!isWindows) {
+      printStatusCodeCmd = 'echo Status code: $?';
+  }
+  return shell('dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml" && ' + printStatusCodeCmd, options);
 }
 
 gulp.task('test:xunit', ['test:xunit:dnx'], function () {
