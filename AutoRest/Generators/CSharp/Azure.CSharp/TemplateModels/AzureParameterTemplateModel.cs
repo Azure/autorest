@@ -11,7 +11,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
     {
         public AzureParameterTemplateModel(Parameter source) : base(source)
         {
-            if (IsODataFilterExpression)
+            if (IsParameterODataExpression(source))
             {
                 this.Name = "odataQuery";
             }
@@ -52,13 +52,18 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
-                return (SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) ||
-                        SerializedName.Equals("$top", StringComparison.OrdinalIgnoreCase) ||
-                        SerializedName.Equals("$orderby", StringComparison.OrdinalIgnoreCase) ||
-                        SerializedName.Equals("$skip", StringComparison.OrdinalIgnoreCase) ||
-                        SerializedName.Equals("$expand", StringComparison.OrdinalIgnoreCase))
-                        && Location == ParameterLocation.Query;
+                return IsParameterODataExpression(this);
             }
+        }
+
+        private static bool IsParameterODataExpression(Parameter source)
+        {
+            return (source.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$top", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$orderby", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$skip", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$expand", StringComparison.OrdinalIgnoreCase))
+                        && source.Location == ParameterLocation.Query;
         }
     }
 }
