@@ -286,7 +286,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 
                     if (queryParameter.IsODataFilterExpression)
                     {
-                        queryParametersAddString = @"var _odataFilter = filter.ToString();
+                        queryParametersAddString = @"var _odataFilter = {2}.ToString();
     if (!string.IsNullOrEmpty(_odataFilter)) 
     {{
         queryParameters.Add(_odataFilter);
@@ -300,7 +300,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                     builder.AppendLine("if ({0} != null)", queryParameter.Name)
                         .AppendLine("{").Indent()
                         .AppendLine(queryParametersAddString,
-                            queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference))
+                            queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference), queryParameter.Name)
                         .Outdent()
                         .AppendLine("}");
                 }

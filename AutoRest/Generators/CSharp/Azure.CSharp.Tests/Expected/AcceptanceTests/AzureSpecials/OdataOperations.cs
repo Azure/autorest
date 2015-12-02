@@ -81,7 +81,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             List<string> queryParameters = new List<string>();
             if (odataQuery != null)
             {
-                var _odataFilter = filter.ToString();
+                var _odataFilter = odataQuery.ToString();
                 if (!string.IsNullOrEmpty(_odataFilter)) 
                 {
                     queryParameters.Add(_odataFilter);
