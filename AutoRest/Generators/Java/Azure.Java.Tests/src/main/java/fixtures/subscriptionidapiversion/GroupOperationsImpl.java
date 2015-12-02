@@ -21,7 +21,6 @@ import com.squareup.okhttp.ResponseBody;
 import fixtures.subscriptionidapiversion.models.Error;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import java.io.IOException;
-import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -42,7 +41,7 @@ public class GroupOperationsImpl implements GroupOperations {
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the SampleResourceGroup object if successful.
+     * @return the SampleResourceGroup object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<SampleResourceGroup> getSampleResourceGroup(String resourceGroupName) throws ServiceException, IOException, IllegalArgumentException {
         if (this.client.getSubscriptionId() == null) {
@@ -63,6 +62,7 @@ public class GroupOperationsImpl implements GroupOperations {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback) {
         if (this.client.getSubscriptionId() == null) {
@@ -93,8 +93,8 @@ public class GroupOperationsImpl implements GroupOperations {
 
     private ServiceResponse<SampleResourceGroup> getSampleResourceGroupDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<SampleResourceGroup>(new AzureJacksonUtils())
-                .register(200, new TypeToken<SampleResourceGroup>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<SampleResourceGroup>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 

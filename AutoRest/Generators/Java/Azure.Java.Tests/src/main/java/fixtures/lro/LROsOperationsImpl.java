@@ -19,7 +19,6 @@ import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
 import java.io.IOException;
-import java.lang.InterruptedException;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;

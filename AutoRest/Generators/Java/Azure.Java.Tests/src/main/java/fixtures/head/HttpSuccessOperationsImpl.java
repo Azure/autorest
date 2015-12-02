@@ -34,11 +34,11 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     }
 
     /**
-     * Return 200 status code if successful
+     * Return 200 status code if successful.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object if successful.
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> head200() throws ServiceException, IOException {
         Call<Void> call = service.head200(this.client.getAcceptLanguage());
@@ -46,9 +46,10 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     }
 
     /**
-     * Return 200 status code if successful
+     * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<Void> head200Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<Void> call = service.head200(this.client.getAcceptLanguage());
@@ -67,18 +68,18 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
 
     private ServiceResponse<Boolean> head200Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Boolean>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .register(404, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .buildEmpty(response, retrofit);
     }
 
     /**
-     * Return 204 status code if successful
+     * Return 204 status code if successful.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object if successful.
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> head204() throws ServiceException, IOException {
         Call<Void> call = service.head204(this.client.getAcceptLanguage());
@@ -86,9 +87,10 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     }
 
     /**
-     * Return 204 status code if successful
+     * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<Void> head204Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<Void> call = service.head204(this.client.getAcceptLanguage());
@@ -107,18 +109,18 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
 
     private ServiceResponse<Boolean> head204Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Boolean>(new AzureJacksonUtils())
-                .register(204, new TypeToken<Void>(){}.getType())
-                .register(404, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .buildEmpty(response, retrofit);
     }
 
     /**
-     * Return 404 status code if successful
+     * Return 404 status code if successful.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object if successful.
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> head404() throws ServiceException, IOException {
         Call<Void> call = service.head404(this.client.getAcceptLanguage());
@@ -126,9 +128,10 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     }
 
     /**
-     * Return 404 status code if successful
+     * Return 404 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<Void> head404Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<Void> call = service.head404(this.client.getAcceptLanguage());
@@ -147,9 +150,9 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
 
     private ServiceResponse<Boolean> head404Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Boolean>(new AzureJacksonUtils())
-                .register(204, new TypeToken<Void>(){}.getType())
-                .register(404, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .buildEmpty(response, retrofit);
     }
 

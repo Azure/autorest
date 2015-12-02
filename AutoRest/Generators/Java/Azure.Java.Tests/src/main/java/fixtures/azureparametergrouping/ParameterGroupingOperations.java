@@ -19,7 +19,6 @@ import fixtures.azureparametergrouping.models.ParameterGroupingPostMultipleParam
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
 import java.io.IOException;
-import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.Header;
@@ -51,7 +50,7 @@ public interface ParameterGroupingOperations {
 
     }
     /**
-     * Post a bunch of required parameters grouped
+     * Post a bunch of required parameters grouped.
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
      * @throws ServiceException exception thrown from REST call
@@ -62,7 +61,7 @@ public interface ParameterGroupingOperations {
     ServiceResponse<Void> postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
-     * Post a bunch of required parameters grouped
+     * Post a bunch of required parameters grouped.
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -71,7 +70,7 @@ public interface ParameterGroupingOperations {
     Call<ResponseBody> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Post a bunch of optional parameters grouped
+     * Post a bunch of optional parameters grouped.
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @throws ServiceException exception thrown from REST call
@@ -81,7 +80,7 @@ public interface ParameterGroupingOperations {
     ServiceResponse<Void> postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) throws ServiceException, IOException;
 
     /**
-     * Post a bunch of optional parameters grouped
+     * Post a bunch of optional parameters grouped.
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -90,7 +89,7 @@ public interface ParameterGroupingOperations {
     Call<ResponseBody> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Post parameters from multiple different parameter groups
+     * Post parameters from multiple different parameter groups.
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultipleParameterGroupsSecondParameterGroup Additional parameters for the operation
@@ -101,7 +100,7 @@ public interface ParameterGroupingOperations {
     ServiceResponse<Void> postMultipleParameterGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup) throws ServiceException, IOException;
 
     /**
-     * Post parameters from multiple different parameter groups
+     * Post parameters from multiple different parameter groups.
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultipleParameterGroupsSecondParameterGroup Additional parameters for the operation
@@ -111,7 +110,7 @@ public interface ParameterGroupingOperations {
     Call<ResponseBody> postMultipleParameterGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Post parameters with a shared parameter group object
+     * Post parameters with a shared parameter group object.
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @throws ServiceException exception thrown from REST call
@@ -121,7 +120,7 @@ public interface ParameterGroupingOperations {
     ServiceResponse<Void> postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) throws ServiceException, IOException;
 
     /**
-     * Post parameters with a shared parameter group object
+     * Post parameters with a shared parameter group object.
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

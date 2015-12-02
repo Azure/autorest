@@ -22,7 +22,9 @@ import retrofit.Retrofit;
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
  */
 public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceClient implements AutoRestAzureSpecialParametersTestClient {
+    /** The URI used as the base for all cloud service requests. */
     private String baseUri;
+    /** the {@link AzureClient} used for long running operations .*/
     private AzureClient azureClient;
 
     /**
@@ -41,6 +43,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
         return this.azureClient;
     }
 
+    /** The management credentials for Azure. */
     private ServiceClientCredentials credentials;
 
     /**
@@ -52,10 +55,11 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
         return this.credentials;
     }
 
+    /** The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'. */
     private String subscriptionId;
 
     /**
-     * Gets The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
+     * Gets The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'.
      *
      * @return the subscriptionId value.
      */
@@ -64,7 +68,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
     }
 
     /**
-     * Sets The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
+     * Sets The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'.
      *
      * @param subscriptionId the subscriptionId value.
      */
@@ -72,10 +76,11 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
         this.subscriptionId = subscriptionId;
     }
 
+    /** The api version, which appears in the query, the value is always '2015-07-01-preview'. */
     private String apiVersion;
 
     /**
-     * Gets The api version, which appears in the query, the value is always '2015-07-01-preview'
+     * Gets The api version, which appears in the query, the value is always '2015-07-01-preview'.
      *
      * @return the apiVersion value.
      */
@@ -83,6 +88,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
         return this.apiVersion;
     }
 
+    /** Gets or sets the preferred language for the response. */
     private String acceptLanguage;
 
     /**
@@ -103,6 +109,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
         this.acceptLanguage = acceptLanguage;
     }
 
+    /** The retry timeout for Long Running Operations. */
     private int longRunningOperationRetryTimeout;
 
     /**

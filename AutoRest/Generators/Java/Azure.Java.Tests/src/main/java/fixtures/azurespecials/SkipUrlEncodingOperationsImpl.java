@@ -20,7 +20,6 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.Error;
 import java.io.IOException;
-import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -35,12 +34,13 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
     }
 
     /**
-     * Get method with unencoded path parameter with value 'path1/path2/path3'
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodPathValid(String unencodedPathParam) throws ServiceException, IOException, IllegalArgumentException {
         if (unencodedPathParam == null) {
@@ -51,10 +51,11 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
     }
 
     /**
-     * Get method with unencoded path parameter with value 'path1/path2/path3'
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
         if (unencodedPathParam == null) {
@@ -77,18 +78,19 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
 
     private ServiceResponse<Void> getMethodPathValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * Get method with unencoded path parameter with value 'path1/path2/path3'
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getPathPathValid(String unencodedPathParam) throws ServiceException, IOException, IllegalArgumentException {
         if (unencodedPathParam == null) {
@@ -99,10 +101,11 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
     }
 
     /**
-     * Get method with unencoded path parameter with value 'path1/path2/path3'
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
         if (unencodedPathParam == null) {
@@ -125,18 +128,19 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
 
     private ServiceResponse<Void> getPathPathValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * Get method with unencoded path parameter with value 'path1/path2/path3'
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getSwaggerPathValid(String unencodedPathParam) throws ServiceException, IOException, IllegalArgumentException {
         if (unencodedPathParam == null) {
@@ -147,10 +151,11 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
     }
 
     /**
-     * Get method with unencoded path parameter with value 'path1/path2/path3'
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getSwaggerPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
         if (unencodedPathParam == null) {
@@ -173,18 +178,19 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
 
     private ServiceResponse<Void> getSwaggerPathValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodQueryValid(String q1) throws ServiceException, IOException, IllegalArgumentException {
         if (q1 == null) {
@@ -195,10 +201,11 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
     }
 
     /**
-     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
         if (q1 == null) {
@@ -221,17 +228,18 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
 
     private ServiceResponse<Void> getMethodQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * Get method with unencoded query parameter with value null
+     * Get method with unencoded query parameter with value null.
      *
      * @param q1 Unencoded query parameter with value null
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodQueryNull(String q1) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
@@ -239,10 +247,11 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
     }
 
     /**
-     * Get method with unencoded query parameter with value null
+     * Get method with unencoded query parameter with value null.
      *
      * @param q1 Unencoded query parameter with value null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
@@ -261,18 +270,19 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
 
     private ServiceResponse<Void> getMethodQueryNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getPathQueryValid(String q1) throws ServiceException, IOException, IllegalArgumentException {
         if (q1 == null) {
@@ -283,10 +293,11 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
     }
 
     /**
-     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
         if (q1 == null) {
@@ -309,17 +320,18 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
 
     private ServiceResponse<Void> getPathQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter include: 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getSwaggerQueryValid(String q1) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
@@ -327,10 +339,11 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
     }
 
     /**
-     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter include: 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getSwaggerQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
@@ -349,8 +362,8 @@ public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations 
 
     private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 

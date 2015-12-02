@@ -40,7 +40,7 @@ public interface HttpSuccessOperations {
 
     }
     /**
-     * Return 200 status code if successful
+     * Return 200 status code if successful.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -49,7 +49,7 @@ public interface HttpSuccessOperations {
     ServiceResponse<Boolean> head200() throws ServiceException, IOException;
 
     /**
-     * Return 200 status code if successful
+     * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -57,7 +57,7 @@ public interface HttpSuccessOperations {
     Call<Void> head200Async(final ServiceCallback<Boolean> serviceCallback);
 
     /**
-     * Return 204 status code if successful
+     * Return 204 status code if successful.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -66,7 +66,7 @@ public interface HttpSuccessOperations {
     ServiceResponse<Boolean> head204() throws ServiceException, IOException;
 
     /**
-     * Return 204 status code if successful
+     * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
@@ -74,7 +74,7 @@ public interface HttpSuccessOperations {
     Call<Void> head204Async(final ServiceCallback<Boolean> serviceCallback);
 
     /**
-     * Return 404 status code if successful
+     * Return 404 status code if successful.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -83,7 +83,7 @@ public interface HttpSuccessOperations {
     ServiceResponse<Boolean> head404() throws ServiceException, IOException;
 
     /**
-     * Return 404 status code if successful
+     * Return 404 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object

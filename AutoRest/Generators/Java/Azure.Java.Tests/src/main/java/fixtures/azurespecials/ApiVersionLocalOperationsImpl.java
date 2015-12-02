@@ -20,7 +20,6 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.Error;
 import java.io.IOException;
-import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -35,12 +34,13 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodLocalValid(String apiVersion) throws ServiceException, IOException, IllegalArgumentException {
         if (apiVersion == null) {
@@ -51,10 +51,11 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMethodLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
         if (apiVersion == null) {
@@ -77,17 +78,18 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
 
     private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = null to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodLocalNull(String apiVersion) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
@@ -95,10 +97,11 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = null to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
@@ -117,18 +120,19 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
 
     private ServiceResponse<Void> getMethodLocalNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getPathLocalValid(String apiVersion) throws ServiceException, IOException, IllegalArgumentException {
         if (apiVersion == null) {
@@ -139,10 +143,11 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values for this parameter include: '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getPathLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
         if (apiVersion == null) {
@@ -165,18 +170,19 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
 
     private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param apiVersion The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getSwaggerLocalValid(String apiVersion) throws ServiceException, IOException, IllegalArgumentException {
         if (apiVersion == null) {
@@ -187,10 +193,11 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param apiVersion The api version, which appears in the query, the value is always '2.0'. Possible values for this parameter include: '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getSwaggerLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
         if (apiVersion == null) {
@@ -213,8 +220,8 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
 
     private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 

@@ -2,10 +2,11 @@
 @using Microsoft.Rest.Generator.Java
 @using Microsoft.Rest.Generator.Java.Templates
 @using Microsoft.Rest.Generator.Utilities
+@using Microsoft.Rest.Generator.Java.TemplateModels
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.ServiceClientTemplateModel>
 /**
-@Header(" * ")
+@Header(" * ").TrimMultilineHeader()
  */
 @EmptyLine
 
@@ -24,8 +25,14 @@ package @(Settings.Namespace.ToLower());
 public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
 @if (Model.MethodTemplateModels.Any())
 {
+@:    /**
+@:     * The Retrofit service to perform REST calls.
+@:     */
 @:    private @Model.ServiceClientServiceType service;
 }
+    /**
+     * The URI used as the base for all cloud service requests.
+     */
     private String baseUri;
 @EmptyLine
     /**
@@ -38,10 +45,11 @@ public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
 @foreach (var property in Model.Properties)
 {
 @EmptyLine
+@:    /** @(property.Documentation.Period()) */
 @:    private @(property.Type) @(property.Name.ToCamelCase());
 @EmptyLine
 @:    /**
-@:     * Gets @(property.Documentation)
+@:     * Gets @(property.Documentation.Period())
 @:     *
 @:     * @@return the @(property.Name) value.
 @:     */
@@ -52,7 +60,7 @@ if(!property.IsReadOnly)
 {
 @EmptyLine
 @:    /**
-@:     * Sets @(property.Documentation)
+@:     * Sets @(property.Documentation.Period())
 @:     *
 @:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
 @:     */

@@ -417,7 +417,10 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add(this.HttpMethod.ImportFrom());
                 // exceptions
                 this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
-                    .ForEach(ex => imports.Add(JavaCodeNamer.GetJavaException(ex)));
+                    .ForEach(ex => {
+                        string exceptionImport = JavaCodeNamer.GetJavaException(ex);
+                        if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex));
+                    });
                 return imports.ToList();
             }
         }
@@ -467,7 +470,11 @@ namespace Microsoft.Rest.Generator.Java
                 imports.AddRange(DefaultResponse.Body.ImportFrom(ServiceClient.Namespace));
                 // exceptions
                 this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
-                    .ForEach(ex => imports.Add(JavaCodeNamer.GetJavaException(ex)));
+                    .ForEach(ex =>
+                    {
+                        string exceptionImport = JavaCodeNamer.GetJavaException(ex);
+                        if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex));
+                    });
                 return imports.ToList();
             }
         }

@@ -39,8 +39,11 @@ import retrofit.Retrofit;
  * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
  */
 public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClient implements AutoRestResourceFlatteningTestService {
+    /** The Retrofit service to perform REST calls. */
     private AutoRestResourceFlatteningTestServiceService service;
+    /** The URI used as the base for all cloud service requests. */
     private String baseUri;
+    /** the {@link AzureClient} used for long running operations .*/
     private AzureClient azureClient;
 
     /**
@@ -59,6 +62,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
         return this.azureClient;
     }
 
+    /** The management credentials for Azure. */
     private ServiceClientCredentials credentials;
 
     /**
@@ -70,6 +74,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
         return this.credentials;
     }
 
+    /** Gets or sets the preferred language for the response. */
     private String acceptLanguage;
 
     /**
@@ -90,6 +95,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
         this.acceptLanguage = acceptLanguage;
     }
 
+    /** The retry timeout for Long Running Operations. */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -177,11 +183,12 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     }
 
     /**
-     * Put External Resource as an Array
+     * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putArray(List<Resource> resourceArray) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
@@ -189,10 +196,11 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     }
 
     /**
-     * Put External Resource as an Array
+     * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
@@ -211,17 +219,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
 
     private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * Get External Resource as an Array
+     * Get External Resource as an Array.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;FlattenedProduct&gt; object if successful.
+     * @return the List&lt;FlattenedProduct&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<List<FlattenedProduct>> getArray() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getArray(this.getAcceptLanguage());
@@ -229,9 +237,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     }
 
     /**
-     * Get External Resource as an Array
+     * Get External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
         Call<ResponseBody> call = service.getArray(this.getAcceptLanguage());
@@ -250,17 +259,18 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
 
     private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<List<FlattenedProduct>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<List<FlattenedProduct>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<List<FlattenedProduct>>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * Put External Resource as a Dictionary
+     * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
@@ -268,10 +278,11 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     }
 
     /**
-     * Put External Resource as a Dictionary
+     * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
@@ -290,17 +301,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
 
     private ServiceResponse<Void> putDictionaryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * Get External Resource as a Dictionary
+     * Get External Resource as a Dictionary.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
+     * @return the Map&lt;String, FlattenedProduct&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Map<String, FlattenedProduct>> getDictionary() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDictionary(this.getAcceptLanguage());
@@ -308,9 +319,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     }
 
     /**
-     * Get External Resource as a Dictionary
+     * Get External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionary(this.getAcceptLanguage());
@@ -329,17 +341,18 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
 
     private ServiceResponse<Map<String, FlattenedProduct>> getDictionaryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Map<String, FlattenedProduct>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Map<String, FlattenedProduct>>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Map<String, FlattenedProduct>>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * Put External Resource as a ResourceCollection
+     * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putResourceCollection(ResourceCollection resourceComplexObject) throws ServiceException, IOException {
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
@@ -347,10 +360,11 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     }
 
     /**
-     * Put External Resource as a ResourceCollection
+     * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
@@ -369,17 +383,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
 
     private ServiceResponse<Void> putResourceCollectionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * Get External Resource as a ResourceCollection
+     * Get External Resource as a ResourceCollection.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ResourceCollection object if successful.
+     * @return the ResourceCollection object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<ResourceCollection> getResourceCollection() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getResourceCollection(this.getAcceptLanguage());
@@ -387,9 +401,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     }
 
     /**
-     * Get External Resource as a ResourceCollection
+     * Get External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
         Call<ResponseBody> call = service.getResourceCollection(this.getAcceptLanguage());
@@ -408,8 +423,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
 
     private ServiceResponse<ResourceCollection> getResourceCollectionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<ResourceCollection>(new AzureJacksonUtils())
-                .register(200, new TypeToken<ResourceCollection>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<ResourceCollection>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 

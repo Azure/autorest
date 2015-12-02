@@ -15,7 +15,6 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import java.io.IOException;
-import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Header;
 import retrofit.http.POST;
@@ -35,7 +34,7 @@ public interface HeaderOperationsOperations {
 
     }
     /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId
      * @throws ServiceException exception thrown from REST call
@@ -46,7 +45,7 @@ public interface HeaderOperationsOperations {
     ServiceResponse<Void> customNamedRequestId(String fooClientRequestId) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

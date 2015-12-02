@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.fail;
 
 public class MultipleResponsesTests {
-    static AutoRestHttpInfrastructureTestService client;
+    private static AutoRestHttpInfrastructureTestService client;
     private CountDownLatch lock = new CountDownLatch(1);
 
     @BeforeClass
@@ -97,21 +97,21 @@ public class MultipleResponsesTests {
     @Test
     public void get200ModelA201ModelC404ModelDDefaultError200Valid() throws Exception {
         Object result = client.getMultipleResponses().get200ModelA201ModelC404ModelDDefaultError200Valid().getBody();
-        A actual = (A)result;
+        A actual = (A) result;
         Assert.assertEquals("200", actual.getStatusCode());
     }
 
     @Test
     public void get200ModelA201ModelC404ModelDDefaultError201Valid() throws Exception {
         Object result = client.getMultipleResponses().get200ModelA201ModelC404ModelDDefaultError201Valid().getBody();
-        C actual = (C)result;
+        C actual = (C) result;
         Assert.assertEquals("201", actual.getHttpCode());
     }
 
     @Test
     public void get200ModelA201ModelC404ModelDDefaultError404Valid() throws Exception {
         Object result = client.getMultipleResponses().get200ModelA201ModelC404ModelDDefaultError404Valid().getBody();
-        D actual = (D)result;
+        D actual = (D) result;
         Assert.assertEquals("404", actual.getHttpStatusCode());
     }
 

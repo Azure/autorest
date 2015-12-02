@@ -22,7 +22,6 @@ import com.squareup.okhttp.ResponseBody;
 import fixtures.paging.models.PageImpl;
 import fixtures.paging.models.Product;
 import java.io.IOException;
-import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -37,11 +36,11 @@ public class PagingOperationsImpl implements PagingOperations {
     }
 
     /**
-     * A paging operation that finishes on the first call without a nextlink
+     * A paging operation that finishes on the first call without a nextlink.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the PageImpl&lt;Product&gt; object if successful.
+     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PageImpl<Product>> getSinglePages() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getSinglePages(this.client.getAcceptLanguage());
@@ -49,9 +48,10 @@ public class PagingOperationsImpl implements PagingOperations {
     }
 
     /**
-     * A paging operation that finishes on the first call without a nextlink
+     * A paging operation that finishes on the first call without a nextlink.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getSinglePagesAsync(final ServiceCallback<PageImpl<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getSinglePages(this.client.getAcceptLanguage());
@@ -70,18 +70,18 @@ public class PagingOperationsImpl implements PagingOperations {
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages
+     * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param clientRequestId the String value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the PageImpl&lt;Product&gt; object if successful.
+     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PageImpl<Product>> getMultiplePages(String clientRequestId) throws ServiceException, IOException {
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage());
@@ -89,10 +89,11 @@ public class PagingOperationsImpl implements PagingOperations {
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages
+     * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param clientRequestId the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMultiplePagesAsync(String clientRequestId, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage());
@@ -111,17 +112,17 @@ public class PagingOperationsImpl implements PagingOperations {
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the PageImpl&lt;Product&gt; object if successful.
+     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirst() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.getAcceptLanguage());
@@ -129,9 +130,10 @@ public class PagingOperationsImpl implements PagingOperations {
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMultiplePagesRetryFirstAsync(final ServiceCallback<PageImpl<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.getAcceptLanguage());
@@ -150,8 +152,8 @@ public class PagingOperationsImpl implements PagingOperations {
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .build(response, retrofit);
     }
 
@@ -160,7 +162,7 @@ public class PagingOperationsImpl implements PagingOperations {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the PageImpl&lt;Product&gt; object if successful.
+     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecond() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.getAcceptLanguage());
@@ -171,6 +173,7 @@ public class PagingOperationsImpl implements PagingOperations {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMultiplePagesRetrySecondAsync(final ServiceCallback<PageImpl<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.getAcceptLanguage());
@@ -189,17 +192,17 @@ public class PagingOperationsImpl implements PagingOperations {
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * A paging operation that receives a 400 on the first call
+     * A paging operation that receives a 400 on the first call.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the PageImpl&lt;Product&gt; object if successful.
+     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PageImpl<Product>> getSinglePagesFailure() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getSinglePagesFailure(this.client.getAcceptLanguage());
@@ -207,9 +210,10 @@ public class PagingOperationsImpl implements PagingOperations {
     }
 
     /**
-     * A paging operation that receives a 400 on the first call
+     * A paging operation that receives a 400 on the first call.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getSinglePagesFailureAsync(final ServiceCallback<PageImpl<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getSinglePagesFailure(this.client.getAcceptLanguage());
@@ -228,17 +232,17 @@ public class PagingOperationsImpl implements PagingOperations {
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesFailureDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * A paging operation that receives a 400 on the second call
+     * A paging operation that receives a 400 on the second call.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the PageImpl&lt;Product&gt; object if successful.
+     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PageImpl<Product>> getMultiplePagesFailure() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.getAcceptLanguage());
@@ -246,9 +250,10 @@ public class PagingOperationsImpl implements PagingOperations {
     }
 
     /**
-     * A paging operation that receives a 400 on the second call
+     * A paging operation that receives a 400 on the second call.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMultiplePagesFailureAsync(final ServiceCallback<PageImpl<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.getAcceptLanguage());
@@ -267,17 +272,17 @@ public class PagingOperationsImpl implements PagingOperations {
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * A paging operation that receives an invalid nextLink
+     * A paging operation that receives an invalid nextLink.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the PageImpl&lt;Product&gt; object if successful.
+     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUri() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.getAcceptLanguage());
@@ -285,9 +290,10 @@ public class PagingOperationsImpl implements PagingOperations {
     }
 
     /**
-     * A paging operation that receives an invalid nextLink
+     * A paging operation that receives an invalid nextLink.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMultiplePagesFailureUriAsync(final ServiceCallback<PageImpl<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.getAcceptLanguage());
@@ -306,19 +312,19 @@ public class PagingOperationsImpl implements PagingOperations {
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * A paging operation that finishes on the first call without a nextlink
+     * A paging operation that finishes on the first call without a nextlink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the PageImpl&lt;Product&gt; object if successful.
+     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PageImpl<Product>> getSinglePagesNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
@@ -329,10 +335,11 @@ public class PagingOperationsImpl implements PagingOperations {
     }
 
     /**
-     * A paging operation that finishes on the first call without a nextlink
+     * A paging operation that finishes on the first call without a nextlink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getSinglePagesNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         if (nextPageLink == null) {
@@ -355,20 +362,20 @@ public class PagingOperationsImpl implements PagingOperations {
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages
+     * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the PageImpl&lt;Product&gt; object if successful.
+     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PageImpl<Product>> getMultiplePagesNext(String nextPageLink, String clientRequestId) throws ServiceException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
@@ -379,11 +386,12 @@ public class PagingOperationsImpl implements PagingOperations {
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages
+     * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMultiplePagesNextAsync(String nextPageLink, String clientRequestId, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         if (nextPageLink == null) {
@@ -406,19 +414,19 @@ public class PagingOperationsImpl implements PagingOperations {
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the PageImpl&lt;Product&gt; object if successful.
+     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
@@ -429,10 +437,11 @@ public class PagingOperationsImpl implements PagingOperations {
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMultiplePagesRetryFirstNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         if (nextPageLink == null) {
@@ -455,8 +464,8 @@ public class PagingOperationsImpl implements PagingOperations {
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .build(response, retrofit);
     }
 
@@ -467,7 +476,7 @@ public class PagingOperationsImpl implements PagingOperations {
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the PageImpl&lt;Product&gt; object if successful.
+     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
@@ -482,6 +491,7 @@ public class PagingOperationsImpl implements PagingOperations {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMultiplePagesRetrySecondNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         if (nextPageLink == null) {
@@ -504,19 +514,19 @@ public class PagingOperationsImpl implements PagingOperations {
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * A paging operation that receives a 400 on the first call
+     * A paging operation that receives a 400 on the first call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the PageImpl&lt;Product&gt; object if successful.
+     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PageImpl<Product>> getSinglePagesFailureNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
@@ -527,10 +537,11 @@ public class PagingOperationsImpl implements PagingOperations {
     }
 
     /**
-     * A paging operation that receives a 400 on the first call
+     * A paging operation that receives a 400 on the first call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getSinglePagesFailureNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         if (nextPageLink == null) {
@@ -553,19 +564,19 @@ public class PagingOperationsImpl implements PagingOperations {
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesFailureNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * A paging operation that receives a 400 on the second call
+     * A paging operation that receives a 400 on the second call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the PageImpl&lt;Product&gt; object if successful.
+     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
@@ -576,10 +587,11 @@ public class PagingOperationsImpl implements PagingOperations {
     }
 
     /**
-     * A paging operation that receives a 400 on the second call
+     * A paging operation that receives a 400 on the second call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMultiplePagesFailureNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         if (nextPageLink == null) {
@@ -602,19 +614,19 @@ public class PagingOperationsImpl implements PagingOperations {
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * A paging operation that receives an invalid nextLink
+     * A paging operation that receives an invalid nextLink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the PageImpl&lt;Product&gt; object if successful.
+     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
@@ -625,10 +637,11 @@ public class PagingOperationsImpl implements PagingOperations {
     }
 
     /**
-     * A paging operation that receives an invalid nextLink
+     * A paging operation that receives an invalid nextLink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMultiplePagesFailureUriNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         if (nextPageLink == null) {
@@ -651,8 +664,8 @@ public class PagingOperationsImpl implements PagingOperations {
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
-                .register(200, new TypeToken<PageImpl<Product>>(){}.getType())
-                .registerError(new TypeToken<CloudError>(){}.getType())
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(new TypeToken<CloudError>() { }.getType())
                 .build(response, retrofit);
     }
 

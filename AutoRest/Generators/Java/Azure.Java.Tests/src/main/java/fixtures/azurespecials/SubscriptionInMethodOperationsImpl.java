@@ -20,7 +20,6 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.Error;
 import java.io.IOException;
-import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -35,12 +34,13 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
     }
 
     /**
-     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postMethodLocalValid(String subscriptionId) throws ServiceException, IOException, IllegalArgumentException {
         if (subscriptionId == null) {
@@ -51,10 +51,11 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
     }
 
     /**
-     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
@@ -77,18 +78,19 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
 
     private ServiceResponse<Void> postMethodLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postMethodLocalNull(String subscriptionId) throws ServiceException, IOException, IllegalArgumentException {
         if (subscriptionId == null) {
@@ -99,10 +101,11 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
     }
 
     /**
-     * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
@@ -125,18 +128,19 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
 
     private ServiceResponse<Void> postMethodLocalNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postPathLocalValid(String subscriptionId) throws ServiceException, IOException, IllegalArgumentException {
         if (subscriptionId == null) {
@@ -147,10 +151,11 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
     }
 
     /**
-     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
@@ -173,18 +178,19 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
 
     private ServiceResponse<Void> postPathLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
     /**
-     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postSwaggerLocalValid(String subscriptionId) throws ServiceException, IOException, IllegalArgumentException {
         if (subscriptionId == null) {
@@ -195,10 +201,11 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
     }
 
     /**
-     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
@@ -221,8 +228,8 @@ public class SubscriptionInMethodOperationsImpl implements SubscriptionInMethodO
 
     private ServiceResponse<Void> postSwaggerLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 

@@ -10,7 +10,7 @@ import java.net.ProtocolException;
 import static org.junit.Assert.fail;
 
 public class HttpClientFailureTests {
-    static AutoRestHttpInfrastructureTestService client;
+    private static AutoRestHttpInfrastructureTestService client;
 
     @BeforeClass
     public static void setup() {

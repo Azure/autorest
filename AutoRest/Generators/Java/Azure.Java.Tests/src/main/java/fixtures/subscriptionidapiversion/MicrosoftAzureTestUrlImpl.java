@@ -22,7 +22,9 @@ import retrofit.Retrofit;
  * Initializes a new instance of the MicrosoftAzureTestUrl class.
  */
 public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements MicrosoftAzureTestUrl {
+    /** The URI used as the base for all cloud service requests. */
     private String baseUri;
+    /** the {@link AzureClient} used for long running operations .*/
     private AzureClient azureClient;
 
     /**
@@ -41,6 +43,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
         return this.azureClient;
     }
 
+    /** The management credentials for Azure. */
     private ServiceClientCredentials credentials;
 
     /**
@@ -52,6 +55,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
         return this.credentials;
     }
 
+    /** Subscription Id. */
     private String subscriptionId;
 
     /**
@@ -72,6 +76,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
         this.subscriptionId = subscriptionId;
     }
 
+    /** API Version with value '2014-04-01-preview'. */
     private String apiVersion;
 
     /**
@@ -83,6 +88,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
         return this.apiVersion;
     }
 
+    /** Gets or sets the preferred language for the response. */
     private String acceptLanguage;
 
     /**
@@ -103,6 +109,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
         this.acceptLanguage = acceptLanguage;
     }
 
+    /** The retry timeout for Long Running Operations. */
     private int longRunningOperationRetryTimeout;
 
     /**

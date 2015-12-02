@@ -1,7 +1,6 @@
 package fixtures.http;
 
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -15,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.fail;
 
 public class HttpRedirectsTests {
-    static AutoRestHttpInfrastructureTestService client;
+    private static AutoRestHttpInfrastructureTestService client;
     private CountDownLatch lock = new CountDownLatch(1);
 
     @BeforeClass

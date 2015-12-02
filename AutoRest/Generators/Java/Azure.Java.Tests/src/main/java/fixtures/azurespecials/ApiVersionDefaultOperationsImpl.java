@@ -20,7 +20,6 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.Error;
 import java.io.IOException;
-import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -40,6 +39,7 @@ public class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultOperati
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodGlobalValid() throws ServiceException, IOException, IllegalArgumentException {
         if (this.client.getApiVersion() == null) {
@@ -53,6 +53,7 @@ public class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultOperati
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getApiVersion() == null) {
@@ -75,8 +76,8 @@ public class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultOperati
 
     private ServiceResponse<Void> getMethodGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
@@ -86,6 +87,7 @@ public class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultOperati
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodGlobalNotProvidedValid() throws ServiceException, IOException, IllegalArgumentException {
         if (this.client.getApiVersion() == null) {
@@ -99,6 +101,7 @@ public class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultOperati
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getApiVersion() == null) {
@@ -121,8 +124,8 @@ public class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultOperati
 
     private ServiceResponse<Void> getMethodGlobalNotProvidedValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
@@ -132,6 +135,7 @@ public class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultOperati
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getPathGlobalValid() throws ServiceException, IOException, IllegalArgumentException {
         if (this.client.getApiVersion() == null) {
@@ -145,6 +149,7 @@ public class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultOperati
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getApiVersion() == null) {
@@ -167,8 +172,8 @@ public class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultOperati
 
     private ServiceResponse<Void> getPathGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 
@@ -178,6 +183,7 @@ public class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultOperati
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getSwaggerGlobalValid() throws ServiceException, IOException, IllegalArgumentException {
         if (this.client.getApiVersion() == null) {
@@ -191,6 +197,7 @@ public class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultOperati
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
      */
     public Call<ResponseBody> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getApiVersion() == null) {
@@ -213,8 +220,8 @@ public class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultOperati
 
     private ServiceResponse<Void> getSwaggerGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>(){}.getType())
-                .registerError(new TypeToken<Error>(){}.getType())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
     }
 

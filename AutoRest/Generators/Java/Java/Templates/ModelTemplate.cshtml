@@ -5,7 +5,7 @@
 @using Microsoft.Rest.Generator.Java.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.ModelTemplateModel>
 /**
-@Header(" * ")
+@Header(" * ").TrimMultilineHeader()
  */
 @EmptyLine
 
@@ -32,9 +32,9 @@ if (types.Any())
 for (int i = 0; i < types.Count - 1; i++)
 {
 var type = types[i];
-@:    @@JsonSubTypes.Type(name="@(type.SerializedName)", value=@(type.Name).class),
+@:    @@JsonSubTypes.Type(name = "@(type.SerializedName)", value = @(type.Name).class),
 }
-@:    @@JsonSubTypes.Type(name="@(types.Last().SerializedName)", value=@(types.Last().Name).class)
+@:    @@JsonSubTypes.Type(name = "@(types.Last().SerializedName)", value = @(types.Last().Name).class)
 @:})
 }
 }
@@ -59,7 +59,7 @@ if (!jsonSetting.IsNullOrEmpty())
 @:     * Get the @property.Name value.
 @:     *
 @:     * @@return the @property.Name value
-@:     */ 
+@:     */
 @:    public @property.Type get@(property.Name.ToPascalCase())() {
 @:        return this.@(property.Name);
 @:    }

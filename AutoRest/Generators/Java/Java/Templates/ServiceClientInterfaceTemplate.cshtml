@@ -2,10 +2,11 @@
 @using Microsoft.Rest.Generator.Java
 @using Microsoft.Rest.Generator.Java.Templates
 @using Microsoft.Rest.Generator.Utilities
+@using Microsoft.Rest.Generator.Java.TemplateModels
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.ServiceClientTemplateModel>
 /**
-@Header(" * ")
+@Header(" * ").TrimMultilineHeader()
  */
 @EmptyLine
 
@@ -93,33 +94,41 @@ if(!property.IsReadOnly)
     @:/**
     if (!String.IsNullOrEmpty(method.Summary))
     {
-    @: * @method.Summary.EscapeXmlComment()
+    @: * @method.Summary.EscapeXmlComment().Period()
     }
     if (!String.IsNullOrEmpty(method.Description))
     {
-    @: * @method.Description.EscapeXmlComment()
+    @: * @method.Description.EscapeXmlComment().Period()
     }
     @: *
     foreach (var param in method.LocalParameters)
     {
     @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
     }
-    if (method.ReturnType.Body != null)
+
+    @foreach (var exception in method.ExceptionStatements)
     {
-    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object if successful.
+    @: * @@throws @exception
     }
-    @: * @@throws ServiceException the exception wrapped in ServiceException if failed.
+    if (method.ReturnType != null && method.ReturnType.Body != null)
+    {
+    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link ServiceResponse} if successful.
+    }
+    else
+    {
+    @: * @@return the {@@link ServiceResponse} object if successful.
+    }
     @: */
-    @:ServiceResponse<@method.GenericReturnTypeString> @(method.Name)(@method.MethodParameterDeclaration) throws ServiceException, IOException;
+    @:ServiceResponse<@method.GenericReturnTypeString> @(method.Name)(@method.MethodParameterDeclaration) throws @method.Exceptions;
     @EmptyLine
     @:/**
     if (!String.IsNullOrEmpty(method.Summary))
     {
-    @: * @method.Summary.EscapeXmlComment()
+    @: * @method.Summary.EscapeXmlComment().Period()
     }
     if (!String.IsNullOrEmpty(method.Description))
     {
-    @: * @method.Description.EscapeXmlComment()
+    @: * @method.Description.EscapeXmlComment().Period()
     }
     @: *
     foreach (var param in method.LocalParameters)

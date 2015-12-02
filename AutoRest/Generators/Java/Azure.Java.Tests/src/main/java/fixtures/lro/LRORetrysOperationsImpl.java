@@ -17,7 +17,6 @@ import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.lro.models.Product;
 import java.io.IOException;
-import java.lang.InterruptedException;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
