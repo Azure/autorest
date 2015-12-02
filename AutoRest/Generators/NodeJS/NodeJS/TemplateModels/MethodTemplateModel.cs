@@ -178,7 +178,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 if (!first)
                     declarations.Append(", ");
-                declarations.Append("options: {");
+                declarations.Append("options: { ");
                 var optionalParameters = ((CompositeType)OptionsParameterTemplateModel.Type).Properties;
                 for(int i = 0; i < optionalParameters.Count; i++)
                 {
@@ -187,10 +187,17 @@ namespace Microsoft.Rest.Generator.NodeJS
                         declarations.Append(", ");
                     }
                     declarations.Append(optionalParameters[i].Name);
-                    declarations.Append("?: ");
-                    declarations.Append(optionalParameters[i].Type.TSType(false));
+                    declarations.Append("? : ");
+                    if (optionalParameters[i].Name.Equals("customHeaders", StringComparison.OrdinalIgnoreCase))
+                    {
+                        declarations.Append("{ [headerName: string]: string; }");
+                    }
+                    else
+                    {
+                        declarations.Append(optionalParameters[i].Type.TSType(false));
+                    }
                 }
-                declarations.Append("}");
+                declarations.Append(" }");
             }
 
             return declarations.ToString();

@@ -31,7 +31,7 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSinglePages(options: {customHeaders?: any}, callback: ServiceCallback<models.ProductResult>): void;
+    getSinglePages(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getSinglePages(callback: ServiceCallback<models.ProductResult>): void;
 
     /**
@@ -47,7 +47,7 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMultiplePages(options: {clientRequestId?: string, customHeaders?: any}, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePages(options: { clientRequestId? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getMultiplePages(callback: ServiceCallback<models.ProductResult>): void;
 
     /**
@@ -62,7 +62,7 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMultiplePagesRetryFirst(options: {customHeaders?: any}, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePagesRetryFirst(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getMultiplePagesRetryFirst(callback: ServiceCallback<models.ProductResult>): void;
 
     /**
@@ -78,7 +78,7 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMultiplePagesRetrySecond(options: {customHeaders?: any}, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePagesRetrySecond(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getMultiplePagesRetrySecond(callback: ServiceCallback<models.ProductResult>): void;
 
     /**
@@ -92,7 +92,7 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSinglePagesFailure(options: {customHeaders?: any}, callback: ServiceCallback<models.ProductResult>): void;
+    getSinglePagesFailure(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getSinglePagesFailure(callback: ServiceCallback<models.ProductResult>): void;
 
     /**
@@ -106,7 +106,7 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMultiplePagesFailure(options: {customHeaders?: any}, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePagesFailure(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getMultiplePagesFailure(callback: ServiceCallback<models.ProductResult>): void;
 
     /**
@@ -120,7 +120,7 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMultiplePagesFailureUri(options: {customHeaders?: any}, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePagesFailureUri(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getMultiplePagesFailureUri(callback: ServiceCallback<models.ProductResult>): void;
 
     /**
@@ -137,7 +137,7 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSinglePagesNext(nextPageLink: string, options: {customHeaders?: any}, callback: ServiceCallback<models.ProductResult>): void;
+    getSinglePagesNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getSinglePagesNext(nextPageLink: string, callback: ServiceCallback<models.ProductResult>): void;
 
     /**
@@ -156,7 +156,7 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMultiplePagesNext(nextPageLink: string, options: {clientRequestId?: string, customHeaders?: any}, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePagesNext(nextPageLink: string, options: { clientRequestId? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getMultiplePagesNext(nextPageLink: string, callback: ServiceCallback<models.ProductResult>): void;
 
     /**
@@ -174,7 +174,7 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMultiplePagesRetryFirstNext(nextPageLink: string, options: {customHeaders?: any}, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePagesRetryFirstNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getMultiplePagesRetryFirstNext(nextPageLink: string, callback: ServiceCallback<models.ProductResult>): void;
 
     /**
@@ -193,7 +193,7 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMultiplePagesRetrySecondNext(nextPageLink: string, options: {customHeaders?: any}, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePagesRetrySecondNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getMultiplePagesRetrySecondNext(nextPageLink: string, callback: ServiceCallback<models.ProductResult>): void;
 
     /**
@@ -210,7 +210,7 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSinglePagesFailureNext(nextPageLink: string, options: {customHeaders?: any}, callback: ServiceCallback<models.ProductResult>): void;
+    getSinglePagesFailureNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getSinglePagesFailureNext(nextPageLink: string, callback: ServiceCallback<models.ProductResult>): void;
 
     /**
@@ -227,7 +227,7 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMultiplePagesFailureNext(nextPageLink: string, options: {customHeaders?: any}, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePagesFailureNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getMultiplePagesFailureNext(nextPageLink: string, callback: ServiceCallback<models.ProductResult>): void;
 
     /**
@@ -244,6 +244,6 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMultiplePagesFailureUriNext(nextPageLink: string, options: {customHeaders?: any}, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePagesFailureUriNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getMultiplePagesFailureUriNext(nextPageLink: string, callback: ServiceCallback<models.ProductResult>): void;
 }

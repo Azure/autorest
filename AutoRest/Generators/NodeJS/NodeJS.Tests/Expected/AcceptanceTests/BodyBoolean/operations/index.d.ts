@@ -31,7 +31,7 @@ export interface Bool {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getTrue(options: {customHeaders?: any}, callback: ServiceCallback<boolean>): void;
+    getTrue(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
     getTrue(callback: ServiceCallback<boolean>): void;
 
     /**
@@ -47,7 +47,7 @@ export interface Bool {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putTrue(boolBody: boolean, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putTrue(boolBody: boolean, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putTrue(boolBody: boolean, callback: ServiceCallback<void>): void;
 
     /**
@@ -61,7 +61,7 @@ export interface Bool {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getFalse(options: {customHeaders?: any}, callback: ServiceCallback<boolean>): void;
+    getFalse(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
     getFalse(callback: ServiceCallback<boolean>): void;
 
     /**
@@ -77,7 +77,7 @@ export interface Bool {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putFalse(boolBody: boolean, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putFalse(boolBody: boolean, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putFalse(boolBody: boolean, callback: ServiceCallback<void>): void;
 
     /**
@@ -91,7 +91,7 @@ export interface Bool {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNull(options: {customHeaders?: any}, callback: ServiceCallback<boolean>): void;
+    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
     getNull(callback: ServiceCallback<boolean>): void;
 
     /**
@@ -105,6 +105,6 @@ export interface Bool {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: {customHeaders?: any}, callback: ServiceCallback<boolean>): void;
+    getInvalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
     getInvalid(callback: ServiceCallback<boolean>): void;
 }

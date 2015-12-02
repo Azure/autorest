@@ -32,7 +32,7 @@ export interface XMsClientRequestId {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    get(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     get(callback: ServiceCallback<void>): void;
 
     /**
@@ -50,7 +50,7 @@ export interface XMsClientRequestId {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    paramGet(xMsClientRequestId: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    paramGet(xMsClientRequestId: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     paramGet(xMsClientRequestId: string, callback: ServiceCallback<void>): void;
 }
 
@@ -74,7 +74,7 @@ export interface SubscriptionInCredentials {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postMethodGlobalValid(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postMethodGlobalValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postMethodGlobalValid(callback: ServiceCallback<void>): void;
 
     /**
@@ -90,7 +90,7 @@ export interface SubscriptionInCredentials {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postMethodGlobalNull(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postMethodGlobalNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postMethodGlobalNull(callback: ServiceCallback<void>): void;
 
     /**
@@ -105,7 +105,7 @@ export interface SubscriptionInCredentials {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postMethodGlobalNotProvidedValid(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postMethodGlobalNotProvidedValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postMethodGlobalNotProvidedValid(callback: ServiceCallback<void>): void;
 
     /**
@@ -120,7 +120,7 @@ export interface SubscriptionInCredentials {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postPathGlobalValid(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postPathGlobalValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postPathGlobalValid(callback: ServiceCallback<void>): void;
 
     /**
@@ -135,7 +135,7 @@ export interface SubscriptionInCredentials {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postSwaggerGlobalValid(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postSwaggerGlobalValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postSwaggerGlobalValid(callback: ServiceCallback<void>): void;
 }
 
@@ -162,7 +162,7 @@ export interface SubscriptionInMethod {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postMethodLocalValid(subscriptionId: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postMethodLocalValid(subscriptionId: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postMethodLocalValid(subscriptionId: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -181,7 +181,7 @@ export interface SubscriptionInMethod {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postMethodLocalNull(subscriptionId: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postMethodLocalNull(subscriptionId: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postMethodLocalNull(subscriptionId: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -199,7 +199,7 @@ export interface SubscriptionInMethod {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postPathLocalValid(subscriptionId: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postPathLocalValid(subscriptionId: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postPathLocalValid(subscriptionId: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -217,7 +217,7 @@ export interface SubscriptionInMethod {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postSwaggerLocalValid(subscriptionId: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postSwaggerLocalValid(subscriptionId: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postSwaggerLocalValid(subscriptionId: string, callback: ServiceCallback<void>): void;
 }
 
@@ -240,7 +240,7 @@ export interface ApiVersionDefault {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMethodGlobalValid(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getMethodGlobalValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getMethodGlobalValid(callback: ServiceCallback<void>): void;
 
     /**
@@ -254,7 +254,7 @@ export interface ApiVersionDefault {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMethodGlobalNotProvidedValid(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getMethodGlobalNotProvidedValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getMethodGlobalNotProvidedValid(callback: ServiceCallback<void>): void;
 
     /**
@@ -268,7 +268,7 @@ export interface ApiVersionDefault {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getPathGlobalValid(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getPathGlobalValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getPathGlobalValid(callback: ServiceCallback<void>): void;
 
     /**
@@ -282,7 +282,7 @@ export interface ApiVersionDefault {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSwaggerGlobalValid(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getSwaggerGlobalValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getSwaggerGlobalValid(callback: ServiceCallback<void>): void;
 }
 
@@ -309,7 +309,7 @@ export interface ApiVersionLocal {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMethodLocalValid(apiVersion: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getMethodLocalValid(apiVersion: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getMethodLocalValid(apiVersion: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -327,7 +327,7 @@ export interface ApiVersionLocal {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMethodLocalNull(options: {apiVersion?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getMethodLocalNull(options: { apiVersion? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getMethodLocalNull(callback: ServiceCallback<void>): void;
 
     /**
@@ -345,7 +345,7 @@ export interface ApiVersionLocal {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getPathLocalValid(apiVersion: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getPathLocalValid(apiVersion: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getPathLocalValid(apiVersion: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -363,7 +363,7 @@ export interface ApiVersionLocal {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSwaggerLocalValid(apiVersion: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getSwaggerLocalValid(apiVersion: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getSwaggerLocalValid(apiVersion: string, callback: ServiceCallback<void>): void;
 }
 
@@ -389,7 +389,7 @@ export interface SkipUrlEncoding {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMethodPathValid(unencodedPathParam: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getMethodPathValid(unencodedPathParam: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getMethodPathValid(unencodedPathParam: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -406,7 +406,7 @@ export interface SkipUrlEncoding {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getPathPathValid(unencodedPathParam: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getPathPathValid(unencodedPathParam: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getPathPathValid(unencodedPathParam: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -424,7 +424,7 @@ export interface SkipUrlEncoding {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSwaggerPathValid(unencodedPathParam: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getSwaggerPathValid(unencodedPathParam: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getSwaggerPathValid(unencodedPathParam: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -442,7 +442,7 @@ export interface SkipUrlEncoding {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMethodQueryValid(q1: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getMethodQueryValid(q1: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getMethodQueryValid(q1: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -458,7 +458,7 @@ export interface SkipUrlEncoding {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMethodQueryNull(options: {q1?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getMethodQueryNull(options: { q1? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getMethodQueryNull(callback: ServiceCallback<void>): void;
 
     /**
@@ -476,7 +476,7 @@ export interface SkipUrlEncoding {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getPathQueryValid(q1: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getPathQueryValid(q1: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getPathQueryValid(q1: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -495,7 +495,7 @@ export interface SkipUrlEncoding {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSwaggerQueryValid(options: {q1?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getSwaggerQueryValid(options: { q1? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getSwaggerQueryValid(callback: ServiceCallback<void>): void;
 }
 
@@ -521,6 +521,6 @@ export interface Header {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    customNamedRequestId(fooClientRequestId: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    customNamedRequestId(fooClientRequestId: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     customNamedRequestId(fooClientRequestId: string, callback: ServiceCallback<void>): void;
 }

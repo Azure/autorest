@@ -31,7 +31,7 @@ export interface ByteModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNull(options: {customHeaders?: any}, callback: ServiceCallback<Buffer>): void;
+    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Buffer>): void;
     getNull(callback: ServiceCallback<Buffer>): void;
 
     /**
@@ -45,7 +45,7 @@ export interface ByteModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getEmpty(options: {customHeaders?: any}, callback: ServiceCallback<Buffer>): void;
+    getEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Buffer>): void;
     getEmpty(callback: ServiceCallback<Buffer>): void;
 
     /**
@@ -59,7 +59,7 @@ export interface ByteModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNonAscii(options: {customHeaders?: any}, callback: ServiceCallback<Buffer>): void;
+    getNonAscii(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Buffer>): void;
     getNonAscii(callback: ServiceCallback<Buffer>): void;
 
     /**
@@ -76,7 +76,7 @@ export interface ByteModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putNonAscii(byteBody: Buffer, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putNonAscii(byteBody: Buffer, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putNonAscii(byteBody: Buffer, callback: ServiceCallback<void>): void;
 
     /**
@@ -90,6 +90,6 @@ export interface ByteModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: {customHeaders?: any}, callback: ServiceCallback<Buffer>): void;
+    getInvalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Buffer>): void;
     getInvalid(callback: ServiceCallback<Buffer>): void;
 }

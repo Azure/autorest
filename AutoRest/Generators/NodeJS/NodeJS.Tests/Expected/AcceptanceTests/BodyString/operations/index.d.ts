@@ -31,7 +31,7 @@ export interface String {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNull(options: {customHeaders?: any}, callback: ServiceCallback<string>): void;
+    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<string>): void;
     getNull(callback: ServiceCallback<string>): void;
 
     /**
@@ -48,7 +48,7 @@ export interface String {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putNull(options: {stringBody?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putNull(options: { stringBody? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putNull(callback: ServiceCallback<void>): void;
 
     /**
@@ -62,7 +62,7 @@ export interface String {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getEmpty(options: {customHeaders?: any}, callback: ServiceCallback<string>): void;
+    getEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<string>): void;
     getEmpty(callback: ServiceCallback<string>): void;
 
     /**
@@ -78,7 +78,7 @@ export interface String {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putEmpty(stringBody: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putEmpty(stringBody: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putEmpty(stringBody: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -93,7 +93,7 @@ export interface String {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMbcs(options: {customHeaders?: any}, callback: ServiceCallback<string>): void;
+    getMbcs(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<string>): void;
     getMbcs(callback: ServiceCallback<string>): void;
 
     /**
@@ -111,7 +111,7 @@ export interface String {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putMbcs(stringBody: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putMbcs(stringBody: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putMbcs(stringBody: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -127,7 +127,7 @@ export interface String {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getWhitespace(options: {customHeaders?: any}, callback: ServiceCallback<string>): void;
+    getWhitespace(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<string>): void;
     getWhitespace(callback: ServiceCallback<string>): void;
 
     /**
@@ -147,7 +147,7 @@ export interface String {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putWhitespace(stringBody: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putWhitespace(stringBody: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putWhitespace(stringBody: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -161,7 +161,7 @@ export interface String {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNotProvided(options: {customHeaders?: any}, callback: ServiceCallback<string>): void;
+    getNotProvided(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<string>): void;
     getNotProvided(callback: ServiceCallback<string>): void;
 }
 
@@ -185,7 +185,7 @@ export interface EnumModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNotExpandable(options: {customHeaders?: any}, callback: ServiceCallback<string>): void;
+    getNotExpandable(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<string>): void;
     getNotExpandable(callback: ServiceCallback<string>): void;
 
     /**
@@ -203,6 +203,6 @@ export interface EnumModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putNotExpandable(stringBody: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putNotExpandable(stringBody: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putNotExpandable(stringBody: string, callback: ServiceCallback<void>): void;
 }

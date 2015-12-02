@@ -33,7 +33,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getBooleanTrue(boolPath: boolean, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getBooleanTrue(boolPath: boolean, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getBooleanTrue(boolPath: boolean, callback: ServiceCallback<void>): void;
 
     /**
@@ -49,7 +49,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getBooleanFalse(boolPath: boolean, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getBooleanFalse(boolPath: boolean, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getBooleanFalse(boolPath: boolean, callback: ServiceCallback<void>): void;
 
     /**
@@ -65,7 +65,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getIntOneMillion(intPath: number, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getIntOneMillion(intPath: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getIntOneMillion(intPath: number, callback: ServiceCallback<void>): void;
 
     /**
@@ -81,7 +81,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getIntNegativeOneMillion(intPath: number, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getIntNegativeOneMillion(intPath: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getIntNegativeOneMillion(intPath: number, callback: ServiceCallback<void>): void;
 
     /**
@@ -97,7 +97,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getTenBillion(longPath: number, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getTenBillion(longPath: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getTenBillion(longPath: number, callback: ServiceCallback<void>): void;
 
     /**
@@ -113,7 +113,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNegativeTenBillion(longPath: number, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getNegativeTenBillion(longPath: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getNegativeTenBillion(longPath: number, callback: ServiceCallback<void>): void;
 
     /**
@@ -129,7 +129,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    floatScientificPositive(floatPath: number, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    floatScientificPositive(floatPath: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     floatScientificPositive(floatPath: number, callback: ServiceCallback<void>): void;
 
     /**
@@ -145,7 +145,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    floatScientificNegative(floatPath: number, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    floatScientificNegative(floatPath: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     floatScientificNegative(floatPath: number, callback: ServiceCallback<void>): void;
 
     /**
@@ -161,7 +161,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    doubleDecimalPositive(doublePath: number, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    doubleDecimalPositive(doublePath: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     doubleDecimalPositive(doublePath: number, callback: ServiceCallback<void>): void;
 
     /**
@@ -177,7 +177,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    doubleDecimalNegative(doublePath: number, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    doubleDecimalNegative(doublePath: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     doubleDecimalNegative(doublePath: number, callback: ServiceCallback<void>): void;
 
     /**
@@ -194,7 +194,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    stringUnicode(stringPath: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    stringUnicode(stringPath: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     stringUnicode(stringPath: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -212,7 +212,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    stringUrlEncoded(stringPath: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    stringUrlEncoded(stringPath: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     stringUrlEncoded(stringPath: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -229,7 +229,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    stringEmpty(stringPath: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    stringEmpty(stringPath: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     stringEmpty(stringPath: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -245,7 +245,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    stringNull(stringPath: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    stringNull(stringPath: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     stringNull(stringPath: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -262,7 +262,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    enumValid(enumPath: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    enumValid(enumPath: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     enumValid(enumPath: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -279,7 +279,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    enumNull(enumPath: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    enumNull(enumPath: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     enumNull(enumPath: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -296,7 +296,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    byteMultiByte(bytePath: Buffer, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    byteMultiByte(bytePath: Buffer, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     byteMultiByte(bytePath: Buffer, callback: ServiceCallback<void>): void;
 
     /**
@@ -312,7 +312,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    byteEmpty(bytePath: Buffer, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    byteEmpty(bytePath: Buffer, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     byteEmpty(bytePath: Buffer, callback: ServiceCallback<void>): void;
 
     /**
@@ -328,7 +328,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    byteNull(bytePath: Buffer, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    byteNull(bytePath: Buffer, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     byteNull(bytePath: Buffer, callback: ServiceCallback<void>): void;
 
     /**
@@ -344,7 +344,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    dateValid(datePath: Date|string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    dateValid(datePath: Date|string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     dateValid(datePath: Date|string, callback: ServiceCallback<void>): void;
 
     /**
@@ -361,7 +361,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    dateNull(datePath: Date|string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    dateNull(datePath: Date|string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     dateNull(datePath: Date|string, callback: ServiceCallback<void>): void;
 
     /**
@@ -377,7 +377,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    dateTimeValid(dateTimePath: Date|string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    dateTimeValid(dateTimePath: Date|string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     dateTimeValid(dateTimePath: Date|string, callback: ServiceCallback<void>): void;
 
     /**
@@ -394,7 +394,7 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    dateTimeNull(dateTimePath: Date|string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    dateTimeNull(dateTimePath: Date|string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     dateTimeNull(dateTimePath: Date|string, callback: ServiceCallback<void>): void;
 }
 
@@ -419,7 +419,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getBooleanTrue(options: {boolQuery?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getBooleanTrue(options: { boolQuery? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getBooleanTrue(callback: ServiceCallback<void>): void;
 
     /**
@@ -435,7 +435,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getBooleanFalse(options: {boolQuery?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getBooleanFalse(options: { boolQuery? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getBooleanFalse(callback: ServiceCallback<void>): void;
 
     /**
@@ -451,7 +451,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getBooleanNull(options: {boolQuery?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getBooleanNull(options: { boolQuery? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getBooleanNull(callback: ServiceCallback<void>): void;
 
     /**
@@ -467,7 +467,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getIntOneMillion(options: {intQuery?: number, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getIntOneMillion(options: { intQuery? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getIntOneMillion(callback: ServiceCallback<void>): void;
 
     /**
@@ -483,7 +483,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getIntNegativeOneMillion(options: {intQuery?: number, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getIntNegativeOneMillion(options: { intQuery? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getIntNegativeOneMillion(callback: ServiceCallback<void>): void;
 
     /**
@@ -499,7 +499,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getIntNull(options: {intQuery?: number, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getIntNull(options: { intQuery? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getIntNull(callback: ServiceCallback<void>): void;
 
     /**
@@ -515,7 +515,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getTenBillion(options: {longQuery?: number, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getTenBillion(options: { longQuery? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getTenBillion(callback: ServiceCallback<void>): void;
 
     /**
@@ -531,7 +531,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNegativeTenBillion(options: {longQuery?: number, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getNegativeTenBillion(options: { longQuery? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getNegativeTenBillion(callback: ServiceCallback<void>): void;
 
     /**
@@ -547,7 +547,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getLongNull(options: {longQuery?: number, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getLongNull(options: { longQuery? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getLongNull(callback: ServiceCallback<void>): void;
 
     /**
@@ -563,7 +563,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    floatScientificPositive(options: {floatQuery?: number, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    floatScientificPositive(options: { floatQuery? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     floatScientificPositive(callback: ServiceCallback<void>): void;
 
     /**
@@ -579,7 +579,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    floatScientificNegative(options: {floatQuery?: number, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    floatScientificNegative(options: { floatQuery? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     floatScientificNegative(callback: ServiceCallback<void>): void;
 
     /**
@@ -595,7 +595,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    floatNull(options: {floatQuery?: number, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    floatNull(options: { floatQuery? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     floatNull(callback: ServiceCallback<void>): void;
 
     /**
@@ -611,7 +611,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    doubleDecimalPositive(options: {doubleQuery?: number, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    doubleDecimalPositive(options: { doubleQuery? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     doubleDecimalPositive(callback: ServiceCallback<void>): void;
 
     /**
@@ -627,7 +627,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    doubleDecimalNegative(options: {doubleQuery?: number, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    doubleDecimalNegative(options: { doubleQuery? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     doubleDecimalNegative(callback: ServiceCallback<void>): void;
 
     /**
@@ -643,7 +643,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    doubleNull(options: {doubleQuery?: number, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    doubleNull(options: { doubleQuery? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     doubleNull(callback: ServiceCallback<void>): void;
 
     /**
@@ -660,7 +660,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    stringUnicode(options: {stringQuery?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    stringUnicode(options: { stringQuery? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     stringUnicode(callback: ServiceCallback<void>): void;
 
     /**
@@ -678,7 +678,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    stringUrlEncoded(options: {stringQuery?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    stringUrlEncoded(options: { stringQuery? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     stringUrlEncoded(callback: ServiceCallback<void>): void;
 
     /**
@@ -695,7 +695,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    stringEmpty(options: {stringQuery?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    stringEmpty(options: { stringQuery? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     stringEmpty(callback: ServiceCallback<void>): void;
 
     /**
@@ -711,7 +711,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    stringNull(options: {stringQuery?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    stringNull(options: { stringQuery? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     stringNull(callback: ServiceCallback<void>): void;
 
     /**
@@ -728,7 +728,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    enumValid(options: {enumQuery?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    enumValid(options: { enumQuery? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     enumValid(callback: ServiceCallback<void>): void;
 
     /**
@@ -745,7 +745,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    enumNull(options: {enumQuery?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    enumNull(options: { enumQuery? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     enumNull(callback: ServiceCallback<void>): void;
 
     /**
@@ -762,7 +762,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    byteMultiByte(options: {byteQuery?: Buffer, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    byteMultiByte(options: { byteQuery? : Buffer, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     byteMultiByte(callback: ServiceCallback<void>): void;
 
     /**
@@ -778,7 +778,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    byteEmpty(options: {byteQuery?: Buffer, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    byteEmpty(options: { byteQuery? : Buffer, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     byteEmpty(callback: ServiceCallback<void>): void;
 
     /**
@@ -795,7 +795,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    byteNull(options: {byteQuery?: Buffer, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    byteNull(options: { byteQuery? : Buffer, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     byteNull(callback: ServiceCallback<void>): void;
 
     /**
@@ -811,7 +811,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    dateValid(options: {dateQuery?: Date, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    dateValid(options: { dateQuery? : Date, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     dateValid(callback: ServiceCallback<void>): void;
 
     /**
@@ -827,7 +827,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    dateNull(options: {dateQuery?: Date, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    dateNull(options: { dateQuery? : Date, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     dateNull(callback: ServiceCallback<void>): void;
 
     /**
@@ -843,7 +843,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    dateTimeValid(options: {dateTimeQuery?: Date, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    dateTimeValid(options: { dateTimeQuery? : Date, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     dateTimeValid(callback: ServiceCallback<void>): void;
 
     /**
@@ -860,7 +860,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    dateTimeNull(options: {dateTimeQuery?: Date, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    dateTimeNull(options: { dateTimeQuery? : Date, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     dateTimeNull(callback: ServiceCallback<void>): void;
 
     /**
@@ -878,7 +878,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    arrayStringCsvValid(options: {arrayQuery?: string[], customHeaders?: any}, callback: ServiceCallback<void>): void;
+    arrayStringCsvValid(options: { arrayQuery? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     arrayStringCsvValid(callback: ServiceCallback<void>): void;
 
     /**
@@ -895,7 +895,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    arrayStringCsvNull(options: {arrayQuery?: string[], customHeaders?: any}, callback: ServiceCallback<void>): void;
+    arrayStringCsvNull(options: { arrayQuery? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     arrayStringCsvNull(callback: ServiceCallback<void>): void;
 
     /**
@@ -912,7 +912,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    arrayStringCsvEmpty(options: {arrayQuery?: string[], customHeaders?: any}, callback: ServiceCallback<void>): void;
+    arrayStringCsvEmpty(options: { arrayQuery? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     arrayStringCsvEmpty(callback: ServiceCallback<void>): void;
 
     /**
@@ -930,7 +930,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    arrayStringSsvValid(options: {arrayQuery?: string[], customHeaders?: any}, callback: ServiceCallback<void>): void;
+    arrayStringSsvValid(options: { arrayQuery? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     arrayStringSsvValid(callback: ServiceCallback<void>): void;
 
     /**
@@ -948,7 +948,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    arrayStringTsvValid(options: {arrayQuery?: string[], customHeaders?: any}, callback: ServiceCallback<void>): void;
+    arrayStringTsvValid(options: { arrayQuery? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     arrayStringTsvValid(callback: ServiceCallback<void>): void;
 
     /**
@@ -966,7 +966,7 @@ export interface Queries {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    arrayStringPipesValid(options: {arrayQuery?: string[], customHeaders?: any}, callback: ServiceCallback<void>): void;
+    arrayStringPipesValid(options: { arrayQuery? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     arrayStringPipesValid(callback: ServiceCallback<void>): void;
 }
 
@@ -1004,7 +1004,7 @@ export interface PathItems {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getAllWithValues(localStringPath: string, pathItemStringPath: string, options: {localStringQuery?: string, pathItemStringQuery?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getAllWithValues(localStringPath: string, pathItemStringPath: string, options: { localStringQuery? : string, pathItemStringQuery? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getAllWithValues(localStringPath: string, pathItemStringPath: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -1033,7 +1033,7 @@ export interface PathItems {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getGlobalQueryNull(localStringPath: string, pathItemStringPath: string, options: {localStringQuery?: string, pathItemStringQuery?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getGlobalQueryNull(localStringPath: string, pathItemStringPath: string, options: { localStringQuery? : string, pathItemStringQuery? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getGlobalQueryNull(localStringPath: string, pathItemStringPath: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -1060,7 +1060,7 @@ export interface PathItems {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getGlobalAndLocalQueryNull(localStringPath: string, pathItemStringPath: string, options: {localStringQuery?: string, pathItemStringQuery?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getGlobalAndLocalQueryNull(localStringPath: string, pathItemStringPath: string, options: { localStringQuery? : string, pathItemStringQuery? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getGlobalAndLocalQueryNull(localStringPath: string, pathItemStringPath: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -1086,6 +1086,6 @@ export interface PathItems {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getLocalPathItemQueryNull(localStringPath: string, pathItemStringPath: string, options: {localStringQuery?: string, pathItemStringQuery?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getLocalPathItemQueryNull(localStringPath: string, pathItemStringPath: string, options: { localStringQuery? : string, pathItemStringQuery? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getLocalPathItemQueryNull(localStringPath: string, pathItemStringPath: string, callback: ServiceCallback<void>): void;
 }

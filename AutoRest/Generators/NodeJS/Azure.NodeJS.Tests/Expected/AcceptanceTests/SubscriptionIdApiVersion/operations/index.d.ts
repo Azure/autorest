@@ -33,6 +33,6 @@ export interface Group {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSampleResourceGroup(resourceGroupName: string, options: {customHeaders?: any}, callback: ServiceCallback<models.SampleResourceGroup>): void;
+    getSampleResourceGroup(resourceGroupName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SampleResourceGroup>): void;
     getSampleResourceGroup(resourceGroupName: string, callback: ServiceCallback<models.SampleResourceGroup>): void;
 }

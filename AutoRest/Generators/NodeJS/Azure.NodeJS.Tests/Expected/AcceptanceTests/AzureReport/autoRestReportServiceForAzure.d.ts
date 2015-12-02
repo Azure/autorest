@@ -49,7 +49,7 @@ declare class AutoRestReportServiceForAzure {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        getReport(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+        getReport(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
         getReport(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 }
 

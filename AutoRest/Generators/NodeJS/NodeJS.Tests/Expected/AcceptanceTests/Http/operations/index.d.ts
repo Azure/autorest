@@ -31,7 +31,7 @@ export interface HttpFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getEmptyError(options: {customHeaders?: any}, callback: ServiceCallback<boolean>): void;
+    getEmptyError(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
     getEmptyError(callback: ServiceCallback<boolean>): void;
 }
 
@@ -54,7 +54,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head200(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    head200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     head200(callback: ServiceCallback<void>): void;
 
     /**
@@ -68,7 +68,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200(options: {customHeaders?: any}, callback: ServiceCallback<boolean>): void;
+    get200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
     get200(callback: ServiceCallback<boolean>): void;
 
     /**
@@ -84,7 +84,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put200(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    put200(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     put200(callback: ServiceCallback<void>): void;
 
     /**
@@ -100,7 +100,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    patch200(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    patch200(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     patch200(callback: ServiceCallback<void>): void;
 
     /**
@@ -116,7 +116,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post200(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    post200(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     post200(callback: ServiceCallback<void>): void;
 
     /**
@@ -132,7 +132,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete200(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    delete200(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     delete200(callback: ServiceCallback<void>): void;
 
     /**
@@ -148,7 +148,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put201(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    put201(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     put201(callback: ServiceCallback<void>): void;
 
     /**
@@ -164,7 +164,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post201(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    post201(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     post201(callback: ServiceCallback<void>): void;
 
     /**
@@ -180,7 +180,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put202(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    put202(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     put202(callback: ServiceCallback<void>): void;
 
     /**
@@ -196,7 +196,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    patch202(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    patch202(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     patch202(callback: ServiceCallback<void>): void;
 
     /**
@@ -212,7 +212,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post202(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    post202(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     post202(callback: ServiceCallback<void>): void;
 
     /**
@@ -228,7 +228,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete202(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    delete202(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     delete202(callback: ServiceCallback<void>): void;
 
     /**
@@ -242,7 +242,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head204(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    head204(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     head204(callback: ServiceCallback<void>): void;
 
     /**
@@ -258,7 +258,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put204(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    put204(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     put204(callback: ServiceCallback<void>): void;
 
     /**
@@ -274,7 +274,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    patch204(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    patch204(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     patch204(callback: ServiceCallback<void>): void;
 
     /**
@@ -290,7 +290,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post204(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    post204(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     post204(callback: ServiceCallback<void>): void;
 
     /**
@@ -306,7 +306,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete204(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    delete204(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     delete204(callback: ServiceCallback<void>): void;
 
     /**
@@ -320,7 +320,7 @@ export interface HttpSuccess {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head404(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    head404(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     head404(callback: ServiceCallback<void>): void;
 }
 
@@ -343,7 +343,7 @@ export interface HttpRedirects {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head300(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    head300(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     head300(callback: ServiceCallback<void>): void;
 
     /**
@@ -357,7 +357,7 @@ export interface HttpRedirects {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get300(options: {customHeaders?: any}, callback: ServiceCallback<string[]>): void;
+    get300(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<string[]>): void;
     get300(callback: ServiceCallback<string[]>): void;
 
     /**
@@ -371,7 +371,7 @@ export interface HttpRedirects {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head301(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    head301(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     head301(callback: ServiceCallback<void>): void;
 
     /**
@@ -385,7 +385,7 @@ export interface HttpRedirects {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get301(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    get301(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     get301(callback: ServiceCallback<void>): void;
 
     /**
@@ -403,7 +403,7 @@ export interface HttpRedirects {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put301(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    put301(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     put301(callback: ServiceCallback<void>): void;
 
     /**
@@ -417,7 +417,7 @@ export interface HttpRedirects {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head302(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    head302(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     head302(callback: ServiceCallback<void>): void;
 
     /**
@@ -431,7 +431,7 @@ export interface HttpRedirects {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get302(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    get302(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     get302(callback: ServiceCallback<void>): void;
 
     /**
@@ -449,7 +449,7 @@ export interface HttpRedirects {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    patch302(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    patch302(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     patch302(callback: ServiceCallback<void>): void;
 
     /**
@@ -467,7 +467,7 @@ export interface HttpRedirects {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post303(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    post303(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     post303(callback: ServiceCallback<void>): void;
 
     /**
@@ -481,7 +481,7 @@ export interface HttpRedirects {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head307(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    head307(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     head307(callback: ServiceCallback<void>): void;
 
     /**
@@ -495,7 +495,7 @@ export interface HttpRedirects {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get307(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    get307(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     get307(callback: ServiceCallback<void>): void;
 
     /**
@@ -511,7 +511,7 @@ export interface HttpRedirects {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put307(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    put307(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     put307(callback: ServiceCallback<void>): void;
 
     /**
@@ -527,7 +527,7 @@ export interface HttpRedirects {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    patch307(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    patch307(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     patch307(callback: ServiceCallback<void>): void;
 
     /**
@@ -543,7 +543,7 @@ export interface HttpRedirects {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post307(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    post307(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     post307(callback: ServiceCallback<void>): void;
 
     /**
@@ -559,7 +559,7 @@ export interface HttpRedirects {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete307(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    delete307(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     delete307(callback: ServiceCallback<void>): void;
 }
 
@@ -582,7 +582,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head400(options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    head400(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     head400(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -596,7 +596,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get400(options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    get400(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     get400(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -612,7 +612,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put400(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    put400(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     put400(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -628,7 +628,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    patch400(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    patch400(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     patch400(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -644,7 +644,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post400(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    post400(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     post400(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -660,7 +660,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete400(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    delete400(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     delete400(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -674,7 +674,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head401(options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    head401(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     head401(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -688,7 +688,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get402(options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    get402(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     get402(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -702,7 +702,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get403(options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    get403(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     get403(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -718,7 +718,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put404(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    put404(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     put404(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -734,7 +734,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    patch405(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    patch405(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     patch405(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -750,7 +750,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post406(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    post406(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     post406(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -766,7 +766,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete407(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    delete407(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     delete407(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -782,7 +782,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put409(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    put409(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     put409(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -796,7 +796,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head410(options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    head410(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     head410(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -810,7 +810,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get411(options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    get411(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     get411(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -824,7 +824,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get412(options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    get412(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     get412(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -840,7 +840,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put413(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    put413(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     put413(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -856,7 +856,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    patch414(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    patch414(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     patch414(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -872,7 +872,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post415(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    post415(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     post415(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -886,7 +886,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get416(options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    get416(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     get416(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -902,7 +902,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete417(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    delete417(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     delete417(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -916,7 +916,7 @@ export interface HttpClientFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head429(options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    head429(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     head429(callback: ServiceCallback<models.ErrorModel>): void;
 }
 
@@ -939,7 +939,7 @@ export interface HttpServerFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head501(options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    head501(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     head501(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -953,7 +953,7 @@ export interface HttpServerFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get501(options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    get501(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     get501(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -969,7 +969,7 @@ export interface HttpServerFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post505(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    post505(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     post505(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -985,7 +985,7 @@ export interface HttpServerFailure {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete505(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    delete505(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     delete505(callback: ServiceCallback<models.ErrorModel>): void;
 }
 
@@ -1008,7 +1008,7 @@ export interface HttpRetry {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head408(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    head408(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     head408(callback: ServiceCallback<void>): void;
 
     /**
@@ -1024,7 +1024,7 @@ export interface HttpRetry {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put500(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    put500(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     put500(callback: ServiceCallback<void>): void;
 
     /**
@@ -1040,7 +1040,7 @@ export interface HttpRetry {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    patch500(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    patch500(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     patch500(callback: ServiceCallback<void>): void;
 
     /**
@@ -1054,7 +1054,7 @@ export interface HttpRetry {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get502(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    get502(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     get502(callback: ServiceCallback<void>): void;
 
     /**
@@ -1070,7 +1070,7 @@ export interface HttpRetry {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    post503(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    post503(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     post503(callback: ServiceCallback<void>): void;
 
     /**
@@ -1086,7 +1086,7 @@ export interface HttpRetry {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    delete503(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    delete503(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     delete503(callback: ServiceCallback<void>): void;
 
     /**
@@ -1102,7 +1102,7 @@ export interface HttpRetry {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    put504(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    put504(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     put504(callback: ServiceCallback<void>): void;
 
     /**
@@ -1118,7 +1118,7 @@ export interface HttpRetry {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    patch504(options: {booleanValue?: boolean, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    patch504(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     patch504(callback: ServiceCallback<void>): void;
 }
 
@@ -1141,7 +1141,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200Model204NoModelDefaultError200Valid(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    get200Model204NoModelDefaultError200Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     get200Model204NoModelDefaultError200Valid(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1155,7 +1155,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200Model204NoModelDefaultError204Valid(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    get200Model204NoModelDefaultError204Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     get200Model204NoModelDefaultError204Valid(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1169,7 +1169,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200Model204NoModelDefaultError201Invalid(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    get200Model204NoModelDefaultError201Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     get200Model204NoModelDefaultError201Invalid(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1183,7 +1183,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200Model204NoModelDefaultError202None(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    get200Model204NoModelDefaultError202None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     get200Model204NoModelDefaultError202None(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1198,7 +1198,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200Model204NoModelDefaultError400Valid(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    get200Model204NoModelDefaultError400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     get200Model204NoModelDefaultError400Valid(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1212,7 +1212,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200Model201ModelDefaultError200Valid(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    get200Model201ModelDefaultError200Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     get200Model201ModelDefaultError200Valid(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1227,7 +1227,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200Model201ModelDefaultError201Valid(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    get200Model201ModelDefaultError201Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     get200Model201ModelDefaultError201Valid(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1242,7 +1242,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200Model201ModelDefaultError400Valid(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    get200Model201ModelDefaultError400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     get200Model201ModelDefaultError400Valid(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1256,7 +1256,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200ModelA201ModelC404ModelDDefaultError200Valid(options: {customHeaders?: any}, callback: ServiceCallback<any>): void;
+    get200ModelA201ModelC404ModelDDefaultError200Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<any>): void;
     get200ModelA201ModelC404ModelDDefaultError200Valid(callback: ServiceCallback<any>): void;
 
     /**
@@ -1270,7 +1270,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200ModelA201ModelC404ModelDDefaultError201Valid(options: {customHeaders?: any}, callback: ServiceCallback<any>): void;
+    get200ModelA201ModelC404ModelDDefaultError201Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<any>): void;
     get200ModelA201ModelC404ModelDDefaultError201Valid(callback: ServiceCallback<any>): void;
 
     /**
@@ -1284,7 +1284,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200ModelA201ModelC404ModelDDefaultError404Valid(options: {customHeaders?: any}, callback: ServiceCallback<any>): void;
+    get200ModelA201ModelC404ModelDDefaultError404Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<any>): void;
     get200ModelA201ModelC404ModelDDefaultError404Valid(callback: ServiceCallback<any>): void;
 
     /**
@@ -1299,7 +1299,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200ModelA201ModelC404ModelDDefaultError400Valid(options: {customHeaders?: any}, callback: ServiceCallback<any>): void;
+    get200ModelA201ModelC404ModelDDefaultError400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<any>): void;
     get200ModelA201ModelC404ModelDDefaultError400Valid(callback: ServiceCallback<any>): void;
 
     /**
@@ -1313,7 +1313,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get202None204NoneDefaultError202None(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultError202None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     get202None204NoneDefaultError202None(callback: ServiceCallback<void>): void;
 
     /**
@@ -1327,7 +1327,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get202None204NoneDefaultError204None(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultError204None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     get202None204NoneDefaultError204None(callback: ServiceCallback<void>): void;
 
     /**
@@ -1342,7 +1342,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get202None204NoneDefaultError400Valid(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultError400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     get202None204NoneDefaultError400Valid(callback: ServiceCallback<void>): void;
 
     /**
@@ -1356,7 +1356,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get202None204NoneDefaultNone202Invalid(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultNone202Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     get202None204NoneDefaultNone202Invalid(callback: ServiceCallback<void>): void;
 
     /**
@@ -1370,7 +1370,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get202None204NoneDefaultNone204None(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultNone204None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     get202None204NoneDefaultNone204None(callback: ServiceCallback<void>): void;
 
     /**
@@ -1384,7 +1384,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get202None204NoneDefaultNone400None(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultNone400None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     get202None204NoneDefaultNone400None(callback: ServiceCallback<void>): void;
 
     /**
@@ -1398,7 +1398,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get202None204NoneDefaultNone400Invalid(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultNone400Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     get202None204NoneDefaultNone400Invalid(callback: ServiceCallback<void>): void;
 
     /**
@@ -1412,7 +1412,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDefaultModelA200Valid(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    getDefaultModelA200Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     getDefaultModelA200Valid(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1426,7 +1426,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDefaultModelA200None(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    getDefaultModelA200None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     getDefaultModelA200None(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1440,7 +1440,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDefaultModelA400Valid(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    getDefaultModelA400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     getDefaultModelA400Valid(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1454,7 +1454,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDefaultModelA400None(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    getDefaultModelA400None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     getDefaultModelA400None(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1468,7 +1468,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDefaultNone200Invalid(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getDefaultNone200Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getDefaultNone200Invalid(callback: ServiceCallback<void>): void;
 
     /**
@@ -1482,7 +1482,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDefaultNone200None(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getDefaultNone200None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getDefaultNone200None(callback: ServiceCallback<void>): void;
 
     /**
@@ -1496,7 +1496,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDefaultNone400Invalid(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getDefaultNone400Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getDefaultNone400Invalid(callback: ServiceCallback<void>): void;
 
     /**
@@ -1510,7 +1510,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDefaultNone400None(options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    getDefaultNone400None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getDefaultNone400None(callback: ServiceCallback<void>): void;
 
     /**
@@ -1525,7 +1525,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200ModelA200None(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    get200ModelA200None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     get200ModelA200None(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1539,7 +1539,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200ModelA200Valid(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    get200ModelA200Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     get200ModelA200Valid(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1553,7 +1553,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200ModelA200Invalid(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    get200ModelA200Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     get200ModelA200Invalid(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1568,7 +1568,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200ModelA400None(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    get200ModelA400None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     get200ModelA400None(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1582,7 +1582,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200ModelA400Valid(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    get200ModelA400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     get200ModelA400Valid(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1596,7 +1596,7 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200ModelA400Invalid(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    get200ModelA400Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     get200ModelA400Invalid(callback: ServiceCallback<models.A>): void;
 
     /**
@@ -1610,6 +1610,6 @@ export interface MultipleResponses {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    get200ModelA202Valid(options: {customHeaders?: any}, callback: ServiceCallback<models.A>): void;
+    get200ModelA202Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
     get200ModelA202Valid(callback: ServiceCallback<models.A>): void;
 }

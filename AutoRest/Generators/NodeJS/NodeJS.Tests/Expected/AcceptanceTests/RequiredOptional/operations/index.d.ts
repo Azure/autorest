@@ -33,7 +33,7 @@ export interface Implicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getRequiredPath(pathParameter: string, options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    getRequiredPath(pathParameter: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     getRequiredPath(pathParameter: string, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -49,7 +49,7 @@ export interface Implicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putOptionalQuery(options: {queryParameter?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putOptionalQuery(options: { queryParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putOptionalQuery(callback: ServiceCallback<void>): void;
 
     /**
@@ -65,7 +65,7 @@ export interface Implicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putOptionalHeader(options: {queryParameter?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putOptionalHeader(options: { queryParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putOptionalHeader(callback: ServiceCallback<void>): void;
 
     /**
@@ -81,7 +81,7 @@ export interface Implicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putOptionalBody(options: {bodyParameter?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putOptionalBody(options: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putOptionalBody(callback: ServiceCallback<void>): void;
 
     /**
@@ -95,7 +95,7 @@ export interface Implicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getRequiredGlobalPath(options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    getRequiredGlobalPath(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     getRequiredGlobalPath(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -109,7 +109,7 @@ export interface Implicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getRequiredGlobalQuery(options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    getRequiredGlobalQuery(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     getRequiredGlobalQuery(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -123,7 +123,7 @@ export interface Implicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getOptionalGlobalQuery(options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    getOptionalGlobalQuery(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     getOptionalGlobalQuery(callback: ServiceCallback<models.ErrorModel>): void;
 }
 
@@ -149,7 +149,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredIntegerParameter(bodyParameter: number, options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredIntegerParameter(bodyParameter: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredIntegerParameter(bodyParameter: number, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -165,7 +165,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalIntegerParameter(options: {bodyParameter?: number, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postOptionalIntegerParameter(options: { bodyParameter? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postOptionalIntegerParameter(callback: ServiceCallback<void>): void;
 
     /**
@@ -183,7 +183,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredIntegerProperty(value: number, options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredIntegerProperty(value: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredIntegerProperty(value: number, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -200,7 +200,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalIntegerProperty(options: {value?: number, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postOptionalIntegerProperty(options: { value? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postOptionalIntegerProperty(callback: ServiceCallback<void>): void;
 
     /**
@@ -217,7 +217,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredIntegerHeader(headerParameter: number, options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredIntegerHeader(headerParameter: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredIntegerHeader(headerParameter: number, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -234,7 +234,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalIntegerHeader(options: {headerParameter?: number, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postOptionalIntegerHeader(options: { headerParameter? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postOptionalIntegerHeader(callback: ServiceCallback<void>): void;
 
     /**
@@ -251,7 +251,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredStringParameter(bodyParameter: string, options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredStringParameter(bodyParameter: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredStringParameter(bodyParameter: string, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -267,7 +267,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalStringParameter(options: {bodyParameter?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postOptionalStringParameter(options: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postOptionalStringParameter(callback: ServiceCallback<void>): void;
 
     /**
@@ -285,7 +285,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredStringProperty(value: string, options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredStringProperty(value: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredStringProperty(value: string, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -302,7 +302,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalStringProperty(options: {value?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postOptionalStringProperty(options: { value? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postOptionalStringProperty(callback: ServiceCallback<void>): void;
 
     /**
@@ -319,7 +319,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredStringHeader(headerParameter: string, options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredStringHeader(headerParameter: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredStringHeader(headerParameter: string, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -336,7 +336,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalStringHeader(options: {bodyParameter?: string, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postOptionalStringHeader(options: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postOptionalStringHeader(callback: ServiceCallback<void>): void;
 
     /**
@@ -357,7 +357,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredClassParameter(bodyParameter: models.Product, options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredClassParameter(bodyParameter: models.Product, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredClassParameter(bodyParameter: models.Product, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -377,7 +377,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalClassParameter(options: {bodyParameter?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postOptionalClassParameter(options: { bodyParameter? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postOptionalClassParameter(callback: ServiceCallback<void>): void;
 
     /**
@@ -399,7 +399,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredClassProperty(value: models.Product, options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredClassProperty(value: models.Product, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredClassProperty(value: models.Product, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -420,7 +420,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalClassProperty(options: {value?: models.Product, customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postOptionalClassProperty(options: { value? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postOptionalClassProperty(callback: ServiceCallback<void>): void;
 
     /**
@@ -437,7 +437,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredArrayParameter(bodyParameter: string[], options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredArrayParameter(bodyParameter: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredArrayParameter(bodyParameter: string[], callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -453,7 +453,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalArrayParameter(options: {bodyParameter?: string[], customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postOptionalArrayParameter(options: { bodyParameter? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postOptionalArrayParameter(callback: ServiceCallback<void>): void;
 
     /**
@@ -471,7 +471,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredArrayProperty(value: string[], options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredArrayProperty(value: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredArrayProperty(value: string[], callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -488,7 +488,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalArrayProperty(options: {value?: string[], customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postOptionalArrayProperty(options: { value? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postOptionalArrayProperty(callback: ServiceCallback<void>): void;
 
     /**
@@ -505,7 +505,7 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredArrayHeader(headerParameter: string[], options: {customHeaders?: any}, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredArrayHeader(headerParameter: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredArrayHeader(headerParameter: string[], callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
@@ -522,6 +522,6 @@ export interface Explicit {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalArrayHeader(options: {headerParameter?: string[], customHeaders?: any}, callback: ServiceCallback<void>): void;
+    postOptionalArrayHeader(options: { headerParameter? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postOptionalArrayHeader(callback: ServiceCallback<void>): void;
 }

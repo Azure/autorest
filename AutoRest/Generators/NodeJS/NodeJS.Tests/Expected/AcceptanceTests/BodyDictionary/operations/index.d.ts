@@ -32,7 +32,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
     getNull(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
@@ -46,7 +46,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getEmpty(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
     getEmpty(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
@@ -62,7 +62,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putEmpty(arrayBody: { [propertyName: string]: string }, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putEmpty(arrayBody: { [propertyName: string]: string }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putEmpty(arrayBody: { [propertyName: string]: string }, callback: ServiceCallback<void>): void;
 
     /**
@@ -76,7 +76,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNullValue(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
+    getNullValue(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
     getNullValue(callback: ServiceCallback<{ [propertyName: string]: string }>): void;
 
     /**
@@ -90,7 +90,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNullKey(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
+    getNullKey(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
     getNullKey(callback: ServiceCallback<{ [propertyName: string]: string }>): void;
 
     /**
@@ -104,7 +104,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getEmptyStringKey(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
+    getEmptyStringKey(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
     getEmptyStringKey(callback: ServiceCallback<{ [propertyName: string]: string }>): void;
 
     /**
@@ -118,7 +118,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
+    getInvalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
     getInvalid(callback: ServiceCallback<{ [propertyName: string]: string }>): void;
 
     /**
@@ -132,7 +132,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getBooleanTfft(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: boolean }>): void;
+    getBooleanTfft(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: boolean }>): void;
     getBooleanTfft(callback: ServiceCallback<{ [propertyName: string]: boolean }>): void;
 
     /**
@@ -148,7 +148,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putBooleanTfft(arrayBody: { [propertyName: string]: boolean }, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putBooleanTfft(arrayBody: { [propertyName: string]: boolean }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putBooleanTfft(arrayBody: { [propertyName: string]: boolean }, callback: ServiceCallback<void>): void;
 
     /**
@@ -162,7 +162,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getBooleanInvalidNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: boolean }>): void;
+    getBooleanInvalidNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: boolean }>): void;
     getBooleanInvalidNull(callback: ServiceCallback<{ [propertyName: string]: boolean }>): void;
 
     /**
@@ -176,7 +176,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getBooleanInvalidString(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: boolean }>): void;
+    getBooleanInvalidString(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: boolean }>): void;
     getBooleanInvalidString(callback: ServiceCallback<{ [propertyName: string]: boolean }>): void;
 
     /**
@@ -190,7 +190,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getIntegerValid(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getIntegerValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
     getIntegerValid(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
@@ -206,7 +206,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putIntegerValid(arrayBody: { [propertyName: string]: number }, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putIntegerValid(arrayBody: { [propertyName: string]: number }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putIntegerValid(arrayBody: { [propertyName: string]: number }, callback: ServiceCallback<void>): void;
 
     /**
@@ -220,7 +220,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getIntInvalidNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getIntInvalidNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
     getIntInvalidNull(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
@@ -234,7 +234,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getIntInvalidString(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getIntInvalidString(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
     getIntInvalidString(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
@@ -248,7 +248,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getLongValid(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getLongValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
     getLongValid(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
@@ -264,7 +264,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putLongValid(arrayBody: { [propertyName: string]: number }, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putLongValid(arrayBody: { [propertyName: string]: number }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putLongValid(arrayBody: { [propertyName: string]: number }, callback: ServiceCallback<void>): void;
 
     /**
@@ -278,7 +278,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getLongInvalidNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getLongInvalidNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
     getLongInvalidNull(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
@@ -292,7 +292,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getLongInvalidString(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getLongInvalidString(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
     getLongInvalidString(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
@@ -306,7 +306,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getFloatValid(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getFloatValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
     getFloatValid(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
@@ -322,7 +322,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putFloatValid(arrayBody: { [propertyName: string]: number }, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putFloatValid(arrayBody: { [propertyName: string]: number }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putFloatValid(arrayBody: { [propertyName: string]: number }, callback: ServiceCallback<void>): void;
 
     /**
@@ -336,7 +336,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getFloatInvalidNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getFloatInvalidNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
     getFloatInvalidNull(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
@@ -350,7 +350,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getFloatInvalidString(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getFloatInvalidString(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
     getFloatInvalidString(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
@@ -364,7 +364,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDoubleValid(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getDoubleValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
     getDoubleValid(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
@@ -380,7 +380,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putDoubleValid(arrayBody: { [propertyName: string]: number }, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putDoubleValid(arrayBody: { [propertyName: string]: number }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putDoubleValid(arrayBody: { [propertyName: string]: number }, callback: ServiceCallback<void>): void;
 
     /**
@@ -394,7 +394,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDoubleInvalidNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getDoubleInvalidNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
     getDoubleInvalidNull(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
@@ -408,7 +408,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDoubleInvalidString(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+    getDoubleInvalidString(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
     getDoubleInvalidString(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 
     /**
@@ -422,7 +422,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getStringValid(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
+    getStringValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
     getStringValid(callback: ServiceCallback<{ [propertyName: string]: string }>): void;
 
     /**
@@ -438,7 +438,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putStringValid(arrayBody: { [propertyName: string]: string }, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putStringValid(arrayBody: { [propertyName: string]: string }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putStringValid(arrayBody: { [propertyName: string]: string }, callback: ServiceCallback<void>): void;
 
     /**
@@ -452,7 +452,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getStringWithNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
+    getStringWithNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
     getStringWithNull(callback: ServiceCallback<{ [propertyName: string]: string }>): void;
 
     /**
@@ -466,7 +466,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getStringWithInvalid(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
+    getStringWithInvalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: string }>): void;
     getStringWithInvalid(callback: ServiceCallback<{ [propertyName: string]: string }>): void;
 
     /**
@@ -481,7 +481,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDateValid(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
+    getDateValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
     getDateValid(callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
 
     /**
@@ -498,7 +498,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putDateValid(arrayBody: { [propertyName: string]: Date }, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putDateValid(arrayBody: { [propertyName: string]: Date }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putDateValid(arrayBody: { [propertyName: string]: Date }, callback: ServiceCallback<void>): void;
 
     /**
@@ -512,7 +512,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDateInvalidNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
+    getDateInvalidNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
     getDateInvalidNull(callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
 
     /**
@@ -526,7 +526,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDateInvalidChars(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
+    getDateInvalidChars(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
     getDateInvalidChars(callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
 
     /**
@@ -541,7 +541,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDateTimeValid(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
+    getDateTimeValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
     getDateTimeValid(callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
 
     /**
@@ -558,7 +558,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putDateTimeValid(arrayBody: { [propertyName: string]: Date }, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putDateTimeValid(arrayBody: { [propertyName: string]: Date }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putDateTimeValid(arrayBody: { [propertyName: string]: Date }, callback: ServiceCallback<void>): void;
 
     /**
@@ -572,7 +572,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDateTimeInvalidNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
+    getDateTimeInvalidNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
     getDateTimeInvalidNull(callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
 
     /**
@@ -586,7 +586,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDateTimeInvalidChars(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
+    getDateTimeInvalidChars(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
     getDateTimeInvalidChars(callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
 
     /**
@@ -602,7 +602,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDateTimeRfc1123Valid(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
+    getDateTimeRfc1123Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
     getDateTimeRfc1123Valid(callback: ServiceCallback<{ [propertyName: string]: Date }>): void;
 
     /**
@@ -619,7 +619,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putDateTimeRfc1123Valid(arrayBody: { [propertyName: string]: Date }, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putDateTimeRfc1123Valid(arrayBody: { [propertyName: string]: Date }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putDateTimeRfc1123Valid(arrayBody: { [propertyName: string]: Date }, callback: ServiceCallback<void>): void;
 
     /**
@@ -634,7 +634,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDurationValid(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: moment.Duration }>): void;
+    getDurationValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: moment.Duration }>): void;
     getDurationValid(callback: ServiceCallback<{ [propertyName: string]: moment.Duration }>): void;
 
     /**
@@ -650,7 +650,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putDurationValid(arrayBody: { [propertyName: string]: moment.Duration }, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putDurationValid(arrayBody: { [propertyName: string]: moment.Duration }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putDurationValid(arrayBody: { [propertyName: string]: moment.Duration }, callback: ServiceCallback<void>): void;
 
     /**
@@ -665,7 +665,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getByteValid(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: Buffer }>): void;
+    getByteValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: Buffer }>): void;
     getByteValid(callback: ServiceCallback<{ [propertyName: string]: Buffer }>): void;
 
     /**
@@ -682,7 +682,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putByteValid(arrayBody: { [propertyName: string]: Buffer }, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putByteValid(arrayBody: { [propertyName: string]: Buffer }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putByteValid(arrayBody: { [propertyName: string]: Buffer }, callback: ServiceCallback<void>): void;
 
     /**
@@ -697,7 +697,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getByteInvalidNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: Buffer }>): void;
+    getByteInvalidNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: Buffer }>): void;
     getByteInvalidNull(callback: ServiceCallback<{ [propertyName: string]: Buffer }>): void;
 
     /**
@@ -711,7 +711,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getComplexNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
+    getComplexNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
     getComplexNull(callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
 
     /**
@@ -725,7 +725,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getComplexEmpty(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
+    getComplexEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
     getComplexEmpty(callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
 
     /**
@@ -740,7 +740,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getComplexItemNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
+    getComplexItemNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
     getComplexItemNull(callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
 
     /**
@@ -755,7 +755,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getComplexItemEmpty(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
+    getComplexItemEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
     getComplexItemEmpty(callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
 
     /**
@@ -770,7 +770,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getComplexValid(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
+    getComplexValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
     getComplexValid(callback: ServiceCallback<{ [propertyName: string]: models.Widget }>): void;
 
     /**
@@ -788,7 +788,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putComplexValid(arrayBody: { [propertyName: string]: models.Widget }, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putComplexValid(arrayBody: { [propertyName: string]: models.Widget }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putComplexValid(arrayBody: { [propertyName: string]: models.Widget }, callback: ServiceCallback<void>): void;
 
     /**
@@ -802,7 +802,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getArrayNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
+    getArrayNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
     getArrayNull(callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
 
     /**
@@ -816,7 +816,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getArrayEmpty(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
+    getArrayEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
     getArrayEmpty(callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
 
     /**
@@ -831,7 +831,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getArrayItemNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
+    getArrayItemNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
     getArrayItemNull(callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
 
     /**
@@ -846,7 +846,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getArrayItemEmpty(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
+    getArrayItemEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
     getArrayItemEmpty(callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
 
     /**
@@ -861,7 +861,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getArrayValid(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
+    getArrayValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
     getArrayValid(callback: ServiceCallback<{ [propertyName: string]: string[] }>): void;
 
     /**
@@ -878,7 +878,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putArrayValid(arrayBody: { [propertyName: string]: string[] }, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putArrayValid(arrayBody: { [propertyName: string]: string[] }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putArrayValid(arrayBody: { [propertyName: string]: string[] }, callback: ServiceCallback<void>): void;
 
     /**
@@ -892,7 +892,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDictionaryNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
+    getDictionaryNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
     getDictionaryNull(callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
 
     /**
@@ -906,7 +906,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDictionaryEmpty(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
+    getDictionaryEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
     getDictionaryEmpty(callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
 
     /**
@@ -922,7 +922,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDictionaryItemNull(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
+    getDictionaryItemNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
     getDictionaryItemNull(callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
 
     /**
@@ -938,7 +938,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDictionaryItemEmpty(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
+    getDictionaryItemEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
     getDictionaryItemEmpty(callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
 
     /**
@@ -954,7 +954,7 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getDictionaryValid(options: {customHeaders?: any}, callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
+    getDictionaryValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
     getDictionaryValid(callback: ServiceCallback<{ [propertyName: string]: { [propertyName: string]: string } }>): void;
 
     /**
@@ -972,6 +972,6 @@ export interface Dictionary {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putDictionaryValid(arrayBody: { [propertyName: string]: { [propertyName: string]: string } }, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    putDictionaryValid(arrayBody: { [propertyName: string]: { [propertyName: string]: string } }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putDictionaryValid(arrayBody: { [propertyName: string]: { [propertyName: string]: string } }, callback: ServiceCallback<void>): void;
 }

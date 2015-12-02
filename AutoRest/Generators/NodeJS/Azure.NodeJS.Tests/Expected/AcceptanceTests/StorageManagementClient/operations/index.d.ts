@@ -39,7 +39,7 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    checkNameAvailability(accountName: models.StorageAccountCheckNameAvailabilityParameters, options: {customHeaders?: any}, callback: ServiceCallback<models.CheckNameAvailabilityResult>): void;
+    checkNameAvailability(accountName: models.StorageAccountCheckNameAvailabilityParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.CheckNameAvailabilityResult>): void;
     checkNameAvailability(accountName: models.StorageAccountCheckNameAvailabilityParameters, callback: ServiceCallback<models.CheckNameAvailabilityResult>): void;
 
     /**
@@ -75,7 +75,7 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    create(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, options: {customHeaders?: any}, callback: ServiceCallback<models.StorageAccount>): void;
+    create(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccount>): void;
     create(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, callback: ServiceCallback<models.StorageAccount>): void;
 
     /**
@@ -111,7 +111,7 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginCreate(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, options: {customHeaders?: any}, callback: ServiceCallback<models.StorageAccount>): void;
+    beginCreate(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccount>): void;
     beginCreate(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, callback: ServiceCallback<models.StorageAccount>): void;
 
     /**
@@ -132,7 +132,7 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteMethod(resourceGroupName: string, accountName: string, options: {customHeaders?: any}, callback: ServiceCallback<void>): void;
+    deleteMethod(resourceGroupName: string, accountName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     deleteMethod(resourceGroupName: string, accountName: string, callback: ServiceCallback<void>): void;
 
     /**
@@ -155,7 +155,7 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getProperties(resourceGroupName: string, accountName: string, options: {customHeaders?: any}, callback: ServiceCallback<models.StorageAccount>): void;
+    getProperties(resourceGroupName: string, accountName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccount>): void;
     getProperties(resourceGroupName: string, accountName: string, callback: ServiceCallback<models.StorageAccount>): void;
 
     /**
@@ -209,7 +209,7 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    update(resourceGroupName: string, accountName: string, parameters: models.StorageAccountUpdateParameters, options: {customHeaders?: any}, callback: ServiceCallback<models.StorageAccount>): void;
+    update(resourceGroupName: string, accountName: string, parameters: models.StorageAccountUpdateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccount>): void;
     update(resourceGroupName: string, accountName: string, parameters: models.StorageAccountUpdateParameters, callback: ServiceCallback<models.StorageAccount>): void;
 
     /**
@@ -227,7 +227,7 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    listKeys(resourceGroupName: string, accountName: string, options: {customHeaders?: any}, callback: ServiceCallback<models.StorageAccountKeys>): void;
+    listKeys(resourceGroupName: string, accountName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccountKeys>): void;
     listKeys(resourceGroupName: string, accountName: string, callback: ServiceCallback<models.StorageAccountKeys>): void;
 
     /**
@@ -242,7 +242,7 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    list(options: {customHeaders?: any}, callback: ServiceCallback<models.StorageAccountListResult>): void;
+    list(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccountListResult>): void;
     list(callback: ServiceCallback<models.StorageAccountListResult>): void;
 
     /**
@@ -261,7 +261,7 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    listByResourceGroup(resourceGroupName: string, options: {customHeaders?: any}, callback: ServiceCallback<models.StorageAccountListResult>): void;
+    listByResourceGroup(resourceGroupName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccountListResult>): void;
     listByResourceGroup(resourceGroupName: string, callback: ServiceCallback<models.StorageAccountListResult>): void;
 
     /**
@@ -285,7 +285,7 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    regenerateKey(resourceGroupName: string, accountName: string, options: {keyName?: string, customHeaders?: any}, callback: ServiceCallback<models.StorageAccountKeys>): void;
+    regenerateKey(resourceGroupName: string, accountName: string, options: { keyName? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccountKeys>): void;
     regenerateKey(resourceGroupName: string, accountName: string, callback: ServiceCallback<models.StorageAccountKeys>): void;
 
     /**
@@ -303,7 +303,7 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    listNext(nextPageLink: string, options: {customHeaders?: any}, callback: ServiceCallback<models.StorageAccountListResult>): void;
+    listNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccountListResult>): void;
     listNext(nextPageLink: string, callback: ServiceCallback<models.StorageAccountListResult>): void;
 
     /**
@@ -322,7 +322,7 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    listByResourceGroupNext(nextPageLink: string, options: {customHeaders?: any}, callback: ServiceCallback<models.StorageAccountListResult>): void;
+    listByResourceGroupNext(nextPageLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccountListResult>): void;
     listByResourceGroupNext(nextPageLink: string, callback: ServiceCallback<models.StorageAccountListResult>): void;
 }
 
@@ -346,6 +346,6 @@ export interface UsageOperations {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    list(options: {customHeaders?: any}, callback: ServiceCallback<models.UsageListResult>): void;
+    list(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.UsageListResult>): void;
     list(callback: ServiceCallback<models.UsageListResult>): void;
 }
