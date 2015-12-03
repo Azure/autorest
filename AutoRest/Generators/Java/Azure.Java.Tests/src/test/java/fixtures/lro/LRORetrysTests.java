@@ -16,7 +16,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class LRORetrysTests {
-    static AutoRestLongRunningOperationTestService client;
+    private static AutoRestLongRunningOperationTestService client;
 
     @BeforeClass
     public static void setup() {

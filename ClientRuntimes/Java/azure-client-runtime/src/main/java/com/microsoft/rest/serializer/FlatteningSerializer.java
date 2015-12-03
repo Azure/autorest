@@ -27,10 +27,7 @@ import com.microsoft.rest.BaseResource;
 
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -39,22 +36,39 @@ import java.util.concurrent.LinkedBlockingQueue;
  * For example, a property with annotation @JsonProperty(value = "properties.name")
  * will be mapped from a top level "name" property in the POJO model to
  * {'properties' : { 'name' : 'my_name' }} in the serialized payload.
+ *
+ * @param <T> the type of the object to serialize.
  */
 public class FlatteningSerializer<T> extends StdSerializer<T> implements ResolvableSerializer {
+    /**
+     * The default deserializer for the current type.
+     */
     private final JsonSerializer<?> defaultSerializer;
 
-    protected FlatteningSerializer(Class<T> vc, JsonSerializer<?> defaultDeserializer) {
+    /**
+     * Creates an instance of FlatteningSerializer.
+     * @param vc handled type
+     * @param defaultSerializer the default JSON serializer
+     */
+    protected FlatteningSerializer(Class<T> vc, JsonSerializer<?> defaultSerializer) {
         super(vc);
-        this.defaultSerializer = defaultDeserializer;
+        this.defaultSerializer = defaultSerializer;
     }
 
+    /**
+     * Gets a module wrapping this serializer as an adapter for the Jackson
+     * ObjectMapper.
+     *
+     * @return a simple module to be plugged onto Jackson ObjectMapper.
+     */
     public static SimpleModule getModule() {
         SimpleModule module = new SimpleModule();
         module.setSerializerModifier(new BeanSerializerModifier() {
             @Override
             public JsonSerializer<?> modifySerializer(SerializationConfig config, BeanDescription beanDesc, JsonSerializer<?> serializer) {
-                if (BaseResource.class.isAssignableFrom(beanDesc.getBeanClass()) && BaseResource.class != beanDesc.getBeanClass())
+                if (BaseResource.class.isAssignableFrom(beanDesc.getBeanClass()) && BaseResource.class != beanDesc.getBeanClass()) {
                     return new FlatteningSerializer<BaseResource>(BaseResource.class, serializer);
+                }
                 return serializer;
             }
         });
@@ -89,7 +103,7 @@ public class FlatteningSerializer<T> extends StdSerializer<T> implements Resolva
                     for (int i = 0; i < values.length - 1; ++i) {
                         String val = values[i];
                         if (node.has(val)) {
-                            node = (ObjectNode)node.get(val);
+                            node = (ObjectNode) node.get(val);
                         } else {
                             ObjectNode child = new ObjectNode(JsonNodeFactory.instance);
                             node.put(val, child);
@@ -101,16 +115,16 @@ public class FlatteningSerializer<T> extends StdSerializer<T> implements Resolva
                     outNode = node.get(values[values.length - 1]);
                 }
                 if (field.getValue() instanceof ObjectNode) {
-                    source.add((ObjectNode)field.getValue());
-                    target.add((ObjectNode)outNode);
-                } else if (field.getValue() instanceof ArrayNode &&
-                    (field.getValue()).size() > 0 &&
-                    (field.getValue()).get(0) instanceof ObjectNode) {
+                    source.add((ObjectNode) field.getValue());
+                    target.add((ObjectNode) outNode);
+                } else if (field.getValue() instanceof ArrayNode
+                    && (field.getValue()).size() > 0
+                    && (field.getValue()).get(0) instanceof ObjectNode) {
                     Iterator<JsonNode> sourceIt = field.getValue().elements();
                     Iterator<JsonNode> targetIt = outNode.elements();
                     while (sourceIt.hasNext()) {
-                        source.add((ObjectNode)sourceIt.next());
-                        target.add((ObjectNode)targetIt.next());
+                        source.add((ObjectNode) sourceIt.next());
+                        target.add((ObjectNode) targetIt.next());
                     }
                 }
             }

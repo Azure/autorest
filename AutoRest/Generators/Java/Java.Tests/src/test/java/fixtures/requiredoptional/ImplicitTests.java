@@ -1,6 +1,5 @@
 package fixtures.requiredoptional;
 
-import com.microsoft.rest.ServiceException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -8,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.fail;
 
 public class ImplicitTests {
-    static AutoRestRequiredOptionalTestService client;
+    private static AutoRestRequiredOptionalTestService client;
 
     @BeforeClass
     public static void setup() {

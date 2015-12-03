@@ -9,6 +9,7 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'com.bmuschko.nexus'
+apply plugin: 'checkstyle'
 
 group = 'com.microsoft.rest'
 version = '0.0.1-SNAPSHOT'
@@ -22,6 +23,12 @@ repositories {
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     maven { url "../../../../ClientRuntimes/Java/client-runtime/build/repo-snapshots/"}
     maven { url "../../../../ClientRuntimes/Java/azure-client-runtime/build/repo-snapshots/"}
+}
+
+checkstyle {
+    configFile = new File("$rootDir/tools/checkstyle/checkstyle.xml")
+    configProperties = [samedir: "$rootDir/tools/checkstyle"]
+    reportsDir = new File("$rootDir/tools/checkstyle/reports")
 }
 
 dependencies {

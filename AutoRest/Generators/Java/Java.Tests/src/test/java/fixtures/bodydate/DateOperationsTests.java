@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 
 public class DateOperationsTests {
-    static AutoRestDateTestService client;
+    private static AutoRestDateTestService client;
     private CountDownLatch lock = new CountDownLatch(1);
 
     @BeforeClass

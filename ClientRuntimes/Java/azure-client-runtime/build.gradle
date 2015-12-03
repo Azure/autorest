@@ -9,12 +9,19 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'checkstyle'
 
 group = 'com.microsoft.rest'
 version = '0.0.1-SNAPSHOT'
 
 configurations {
     deployerJars
+}
+
+checkstyle {
+    configFile = new File("$rootDir/tools/checkstyle/checkstyle.xml")
+    configProperties = [samedir: "$rootDir/tools/checkstyle"]
+    reportsDir = new File("$rootDir/tools/checkstyle/reports")
 }
 
 repositories {

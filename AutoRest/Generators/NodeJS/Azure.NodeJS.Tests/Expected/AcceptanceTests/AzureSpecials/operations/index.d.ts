@@ -511,27 +511,27 @@ export interface Odata {
      * Specify filter parameter with value '$filter=id gt 5 and name eq
      * 'foo'&$orderby=id&$top=10'
      *
-     * @param {object} [filter] The filter parameter with value '$filter=id gt 5
-     * and name eq 'foo''.
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {number} [filter.id]
+     * @param {object} [options.filter] The filter parameter with value
+     * '$filter=id gt 5 and name eq 'foo''.
      * 
-     * @param {string} [filter.name]
+     * @param {number} [options.filter.id]
      * 
-     * @param {number} [top] The top parameter with value 10.
+     * @param {string} [options.filter.name]
      * 
-     * @param {string} [orderby] The orderby parameter with value id.
+     * @param {number} [options.top] The top parameter with value 10.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.orderby] The orderby parameter with value id.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getWithFilter(filter: models.OdataFilter, top: number, orderby: string, options: RequestOptions, callback: ServiceCallback<void>): void;
-    getWithFilter(filter: models.OdataFilter, top: number, orderby: string, callback: ServiceCallback<void>): void;
+    getWithFilter(options: { filter? : models.OdataFilter, top? : number, orderby? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getWithFilter(callback: ServiceCallback<void>): void;
 }
 
 /**

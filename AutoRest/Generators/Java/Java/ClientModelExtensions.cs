@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
+using System.Text;
 
 namespace Microsoft.Rest.Generator.Java.TemplateModels
 {
@@ -57,7 +58,35 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
         }
 
-        public static String GetJsonProperty(this Property property)
+        public static string Period(this string documentation)
+        {
+            if (string.IsNullOrEmpty(documentation))
+            {
+                return documentation;
+            }
+            documentation = documentation.Trim();
+            if (!documentation.EndsWith(".", StringComparison.Ordinal))
+            {
+                documentation += ".";
+            }
+            return documentation;
+        }
+
+        public static string TrimMultilineHeader(this string header)
+        {
+            if (string.IsNullOrEmpty(header))
+            {
+                return header;
+            }
+            StringBuilder builder = new StringBuilder();
+            foreach (var headerLine in header.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
+            {
+                builder.Append(headerLine.TrimEnd()).Append(Environment.NewLine);
+            }
+            return builder.ToString();
+        }
+
+        public static string GetJsonProperty(this Property property)
         {
             if (property == null)
             {
@@ -156,15 +185,16 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
                 return imports;
             }
             var type = parameter.Type;
-            if (type == PrimaryType.ByteArray ||
-                type.Name == "ByteArray")
-            {
-                imports.Add("org.apache.commons.codec.binary.Base64");
-            }
 
             SequenceType sequenceType = type as SequenceType;
-            if (parameter.Location != ParameterLocation.Body)
+            if (parameter.Location != ParameterLocation.Body
+                && parameter.Location != ParameterLocation.None)
             {
+                if (type == PrimaryType.ByteArray ||
+                    type.Name == "ByteArray")
+                {
+                    imports.Add("org.apache.commons.codec.binary.Base64");
+                }
                 if (type.Name == "LocalDate" ||
                     type.Name == "DateTime" ||
                     type is CompositeType ||

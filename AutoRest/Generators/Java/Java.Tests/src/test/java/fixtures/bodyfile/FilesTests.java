@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.io.InputStream;
 
 public class FilesTests {
-    static AutoRestSwaggerBATFileService client;
+    private static AutoRestSwaggerBATFileService client;
 
     @BeforeClass
     public static void setup() {

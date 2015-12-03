@@ -1,13 +1,12 @@
 package fixtures.bodynumber;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.microsoft.rest.ServiceException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class NumberTests {
-    static AutoRestNumberTestService client;
+    private static AutoRestNumberTestService client;
 
     @BeforeClass
     public static void setup() {
