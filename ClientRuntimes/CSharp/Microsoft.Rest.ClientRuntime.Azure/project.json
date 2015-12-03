@@ -10,9 +10,9 @@
   "projectUrl": "https://github.com/Azure/AutoRest",
   "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
   "requireLicenseAcceptance":  true,
-  
+
   "compilationOptions": {
-    "useOssSigning": true,
+    "delaySign": true,
     "keyFile": "../../../Tools/MSSharedLibKey.snk"
   },
 
