@@ -5,7 +5,9 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+#if PORTABLE
 using Microsoft.Extensions.Logging;
+#endif
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
@@ -22,20 +24,21 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         private ProcessOutputListener _listener;
 
         private object _sync = new object();
-        private static readonly ILogger _logger;
         public ServiceController()
         {
             Port = GetRandomPortNumber();
             EnsureService();
         }
 
+#if PORTABLE
+        private static readonly ILogger _logger;
         static ServiceController()
         {
             var factory = new LoggerFactory();
             _logger = factory.CreateLogger<ServiceController>();
             factory.AddConsole();
         }
-
+#endif
         /// <summary>
         /// Directory containing the acceptance test files.
         /// </summary>

@@ -65,7 +65,7 @@
   <Target Name="Publish">
     <Error Condition=" '$(NuGetKey)' == '' " Text="You must provide the NuGetKey parameter to the build: /p:NuGetKey=YOUR_PUBLISHING_KEY" />
     <ItemGroup>
-      <NugetPackagesToPublish Include="$(PackageOutputDir)\*.nuspec" />
+      <NugetPackagesToPublish Include="$(PackageOutputDir)\*.nupkg" />
     </ItemGroup>
     <PropertyGroup>
       <ActualSource Condition=" '$(NuGetPublishingSource)' == '' "></ActualSource>
