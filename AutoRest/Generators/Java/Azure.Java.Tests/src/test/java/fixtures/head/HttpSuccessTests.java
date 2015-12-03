@@ -5,7 +5,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class HttpSuccessTests {
-    static AutoRestHeadTestService client;
+    private static AutoRestHeadTestService client;
 
     @BeforeClass
     public static void setup() {

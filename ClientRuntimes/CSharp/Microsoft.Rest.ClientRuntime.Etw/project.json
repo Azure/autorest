@@ -10,12 +10,17 @@
   "projectUrl": "https://github.com/Azure/AutoRest",
   "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
 
-    "frameworks": {
+  "compilationOptions": {
+    "delaySign": true,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk"
+  },
+
+  "frameworks": {
     "net45": {
       "frameworkAssemblies": {
         "System": ""
       }
-    }    
+    }
   },
 
   "dependencies": {

@@ -27,7 +27,7 @@ public class ServiceException extends Exception {
     /**
      * Initializes a new instance of the ServiceException class.
      */
-    public ServiceException() {}
+    public ServiceException() { }
 
     /**
      * Initializes a new instance of the ServiceException class.

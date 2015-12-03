@@ -20,9 +20,9 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class LROsCustomHeaderTests {
-    static AutoRestLongRunningOperationTestService client;
-    static Map<String, String> customHeaders;
-    static CustomHeaderInterceptor customHeaderInterceptor;
+    private static AutoRestLongRunningOperationTestService client;
+    private static Map<String, String> customHeaders;
+    private static CustomHeaderInterceptor customHeaderInterceptor;
 
     @BeforeClass
     public static void setup() {

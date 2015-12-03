@@ -1,18 +1,15 @@
 package fixtures.bodycomplex;
 
-import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.Dog;
 import fixtures.bodycomplex.models.Siamese;
-import fixtures.http.models.A;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class InheritanceTests {
-    static AutoRestComplexTestService client;
+    private static AutoRestComplexTestService client;
 
     @BeforeClass
     public static void setup() {

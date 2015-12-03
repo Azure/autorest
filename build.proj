@@ -168,13 +168,11 @@
          make sure pathes do not end with a backslash -->
     <CorporateScanPaths>$(LibrarySourceFolder)ClientRuntimes;$(LibrarySourceFolder)AutoRest</CorporateScanPaths>
     <BinscopeScanPath>$(BinariesFolder)</BinscopeScanPath>
+    <!-- Public token of MSSharedLibKey.snk. -->
+    <StrongNameToken Condition=" '$(StrongNameToken)' == '' ">31bf3856ad364e35</StrongNameToken>
   </PropertyGroup>
   
   <Target Name="SignBinariesForAFxTarget">
-    <PropertyGroup>
-      <!-- Public token of MSSharedLibKey.snk. -->
-      <StrongNameToken Condition=" '$(StrongNameToken)' == '' ">31bf3856ad364e35</StrongNameToken>
-    </PropertyGroup>
     <GetFrameworkSdkPath>
       <Output TaskParameter="Path" PropertyName="SdkPath"/>
     </GetFrameworkSdkPath>
@@ -216,6 +214,12 @@
     <Message Text="Code signing" Importance="high" />
     <MSBuild Projects="$(MSBuildProjectFullPath)"
              Targets="SignBinariesForAFxTarget"
+             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'"
+             Properties="StrongNameToken=$(StrongNameToken)">
+    </MSBuild>
+    <MSBuild Projects="$(MSBuildProjectFullPath)"
+             Targets="SignAssembliesInDnxPackages"
+             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'"
              Properties="StrongNameToken=$(StrongNameToken)">
     </MSBuild>
     <CallTarget Targets="ValidateCorporateCompliance" Condition="!$(DelaySign)"/>
@@ -265,12 +269,15 @@
 
   <Target Name="SignAssembliesInDnxPackages">
     <ItemGroup>
-      <_DnxPackages Include="$(LibraryRoot)\dnx\*.nupkg" />
+      <_DnxPackages Include="$(LibraryRoot)\dnx\*.nupkg" Exclude="$(LibraryRoot)\dnx\*Tests*.nupkg" />
     </ItemGroup> 
     <PropertyGroup>
       <_UnsignedFolder>$(PackageOutputDir)\unsigned</_UnsignedFolder>
       <_SignedFolder>$(PackageOutputDir)\signed</_SignedFolder>
     </PropertyGroup>  
+    <GetFrameworkSdkPath>
+      <Output TaskParameter="Path" PropertyName="SdkPath"/>
+    </GetFrameworkSdkPath>
     
     <Message Text="%(_DnxPackages.Identity)" Importance="low" />
     
@@ -285,7 +292,7 @@
     <Delete Files="@(_DnxPackages->'%(RootDir)%(Directory)\%(Filename)\[Content_Types].xml')" />
 
     <ItemGroup>
-      <_TempBinaries Include="$(PackageOutputDir)\**\*.dll"/>
+      <_TempBinaries Include="$(PackageOutputDir)\**\*.dll" />
       <_PackageBinaries Include="@(_TempBinaries)">
         <!-- Flattened file for signing -->
         <UnsignedFlatFileName>$(_UnsignedFolder)\$([System.String]::new('%(RecursiveDir)%(FileName)%(Extension)').Replace('\', '__'))</UnsignedFlatFileName>
@@ -295,6 +302,13 @@
 
     <Copy SourceFiles="@(_PackageBinaries)" DestinationFiles="@(_PackageBinaries->'%(UnsignedFlatFileName)')"></Copy>
 
+    <ValidateStrongNameSignatureTask
+        SdkPath="$(SdkPath)"
+        Assembly="%(_PackageBinaries.UnsignedFlatFileName)"
+        ExpectedTokenSignature="$(StrongNameToken)"
+        ExpectedDelaySigned="true"
+        ContinueOnError="false"/>
+        
     <CodeSigningTask
       Description="Microsoft Azure SDK"
       Keywords="Microsoft Azure .NET SDK"
@@ -310,8 +324,9 @@
     <GetFrameworkSdkPath>
       <Output TaskParameter="Path" PropertyName="WindowsSdkPath"/>
     </GetFrameworkSdkPath>
+    
     <ValidateStrongNameSignatureTask
-        WindowsSdkPath="$(WindowsSdkPath)"
+        SdkPath="$(SdkPath)"
         Assembly="%(_PackageBinaries.SignedFlatFileName)"
         ExpectedTokenSignature="$(StrongNameToken)"
         ExpectedDelaySigned="false"
@@ -320,5 +335,7 @@
 
     <Copy SourceFiles="@(_PackageBinaries->'%(SignedFlatFileName)')" DestinationFiles="@(_PackageBinaries->'%(FullPath)')"></Copy>
     <Exec Command="$(ZipExe) a -tzip -mx9 -r -y $(PackageOutputDir)\%(_DnxPackages.Filename).nupkg" WorkingDirectory="$(PackageOutputDir)\%(_DnxPackages.Filename)" />
+    <Delete Files="@(_PackageBinaries->'%(UnsignedFlatFileName)')" />
+    <Delete Files="@(_PackageBinaries->'%(SignedFlatFileName)')" />
   </Target>
 </Project>

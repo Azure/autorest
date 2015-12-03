@@ -12,7 +12,7 @@
   "requireLicenseAcceptance":  true,
 
   "compilationOptions": {
-    "useOssSigning": true,
+    "delaySign": true,
     "keyFile": "../../../Tools/MSSharedLibKey.snk"
   },
 

@@ -13,7 +13,6 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +23,9 @@ import java.util.Map;
  * when added to the {@link com.squareup.okhttp.OkHttpClient} interceptors.
  */
 public class CustomHeaderInterceptor implements Interceptor {
+    /**
+     * A mapping of custom headers.
+     */
     private Map<String, List<String>> headers;
 
     /**

@@ -21,7 +21,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get
             {
                 var imports = base.ImportList.ToList();
-                imports.Add("com.microsoft.rest.BaseResource");
+                if (this.BaseModelType != null && 
+                    this.BaseModelType.Name == "BaseResource")
+                {
+                    imports.Add("com.microsoft.rest.BaseResource");
+                }
                 return imports;
             }
         }

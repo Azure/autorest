@@ -11,7 +11,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 public class IntOperationsTests {
-    static AutoRestIntegerTestService client;
+    private static AutoRestIntegerTestService client;
     private CountDownLatch lock = new CountDownLatch(1);
 
     @BeforeClass
@@ -78,7 +78,7 @@ public class IntOperationsTests {
     public void putMax32() throws Exception {
         client.getIntOperations().putMax32Async(Integer.MAX_VALUE, new ServiceCallback<Void>() {
             @Override
-            public void failure(Throwable t) {}
+            public void failure(Throwable t) { }
 
             @Override
             public void success(ServiceResponse<Void> response) {
@@ -109,7 +109,7 @@ public class IntOperationsTests {
     public void putMin32() throws Exception {
         client.getIntOperations().putMin32Async(Integer.MIN_VALUE, new ServiceCallback<Void>() {
             @Override
-            public void failure(Throwable t) {}
+            public void failure(Throwable t) { }
 
             @Override
             public void success(ServiceResponse<Void> response) {

@@ -11,7 +11,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 public class StringOperationsTests {
-    static AutoRestSwaggerBATService client;
+    private static AutoRestSwaggerBATService client;
     private CountDownLatch lock = new CountDownLatch(1);
 
     @BeforeClass

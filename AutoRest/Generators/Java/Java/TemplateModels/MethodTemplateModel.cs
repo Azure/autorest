@@ -396,7 +396,10 @@ namespace Microsoft.Rest.Generator.Java
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
                 imports.Add("retrofit.Call");
-                imports.Add("com.squareup.okhttp.ResponseBody");
+                if (this.HttpMethod != HttpMethod.Head)
+                {
+                    imports.Add("com.squareup.okhttp.ResponseBody");
+                }
                 imports.Add("com.microsoft.rest.ServiceResponse");
                 imports.Add("com.microsoft.rest.ServiceException");
                 imports.Add("com.microsoft.rest.ServiceCallback");
@@ -417,7 +420,10 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add(this.HttpMethod.ImportFrom());
                 // exceptions
                 this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
-                    .ForEach(ex => imports.Add(JavaCodeNamer.GetJavaException(ex)));
+                    .ForEach(ex => {
+                        string exceptionImport = JavaCodeNamer.GetJavaException(ex);
+                        if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex));
+                    });
                 return imports.ToList();
             }
         }
@@ -431,7 +437,10 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add("retrofit.Call");
                 imports.Add("retrofit.Response");
                 imports.Add("retrofit.Retrofit");
-                imports.Add("com.squareup.okhttp.ResponseBody");
+                if (this.HttpMethod != HttpMethod.Head)
+                {
+                    imports.Add("com.squareup.okhttp.ResponseBody");
+                }
                 imports.Add("com.microsoft.rest.ServiceResponse");
                 imports.Add("com.microsoft.rest." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceException");
@@ -467,7 +476,11 @@ namespace Microsoft.Rest.Generator.Java
                 imports.AddRange(DefaultResponse.Body.ImportFrom(ServiceClient.Namespace));
                 // exceptions
                 this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
-                    .ForEach(ex => imports.Add(JavaCodeNamer.GetJavaException(ex)));
+                    .ForEach(ex =>
+                    {
+                        string exceptionImport = JavaCodeNamer.GetJavaException(ex);
+                        if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex));
+                    });
                 return imports.ToList();
             }
         }

@@ -6,7 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ApiVersionLocalTests {
-    static AutoRestAzureSpecialParametersTestClient client;
+    private static AutoRestAzureSpecialParametersTestClient client;
 
     @BeforeClass
     public static void setup() {
@@ -14,7 +14,7 @@ public class ApiVersionLocalTests {
     }
 
     @Test
-    public void GetMethodLocalValid() throws Exception {
+    public void getMethodLocalValid() throws Exception {
         ServiceResponse<Void> response = client.getApiVersionLocal().getMethodLocalValid("2.0");
         Assert.assertEquals(200, response.getResponse().code());
     }

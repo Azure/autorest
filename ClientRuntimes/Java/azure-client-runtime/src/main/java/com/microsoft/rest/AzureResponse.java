@@ -16,7 +16,7 @@ import retrofit.Response;
  */
 public class AzureResponse<T> extends ServiceResponse<T> {
     /**
-     * Instantiate a ServiceResponse instance with a response object and a raw REST response
+     * Instantiate a ServiceResponse instance with a response object and a raw REST response.
      *
      * @param body     deserialized response object
      * @param response raw REST response
@@ -30,10 +30,20 @@ public class AzureResponse<T> extends ServiceResponse<T> {
      */
     private String requestId;
 
+    /**
+     * Gets the value that uniquely identifies a request made against the service.
+     *
+     * @return the request id value.
+     */
     public String getRequestId() {
         return requestId;
     }
 
+    /**
+     * Sets the value that uniquely identifies a request made against the service.
+     *
+     * @param requestId the request id value.
+     */
     public void setRequestId(String requestId) {
         this.requestId = requestId;
     }

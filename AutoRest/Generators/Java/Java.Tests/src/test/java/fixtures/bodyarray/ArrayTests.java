@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ArrayTests {
-    static AutoRestSwaggerBATArrayService client;
+    private static AutoRestSwaggerBATArrayService client;
 
     @BeforeClass
     public static void setup() {
@@ -122,13 +122,13 @@ public class ArrayTests {
     @Test
     public void getLongValid() throws Exception {
         List<Long> result = client.getArray().getLongValid().getBody();
-        Object[] expected = new Long[] {1l, -1l, 3l, 300l};
+        Object[] expected = new Long[] {1L, -1L, 3L, 300L};
         Assert.assertArrayEquals(expected, result.toArray());
     }
 
     @Test
     public void putLongValid() throws Exception {
-        client.getArray().putLongValid(Arrays.asList(1l, -1l, 3l, 300l));
+        client.getArray().putLongValid(Arrays.asList(1L, -1L, 3L, 300L));
     }
 
     @Test
@@ -368,9 +368,9 @@ public class ArrayTests {
     public void getByteValid() throws Exception {
         List<byte[]> result = client.getArray().getByteValid().getBody();
         Object[] expected = new byte[][] {
-                new byte[] {(byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFA},
-                new byte[] {(byte)0x01, (byte)0x02, (byte)0x03},
-                new byte[] {(byte)0x25, (byte)0x29, (byte)0x43}
+                new byte[] {(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFA},
+                new byte[] {(byte) 0x01, (byte) 0x02, (byte) 0x03},
+                new byte[] {(byte) 0x25, (byte) 0x29, (byte) 0x43}
         };
         Assert.assertArrayEquals(expected, result.toArray());
     }
@@ -378,9 +378,9 @@ public class ArrayTests {
     @Test
     public void putByteValid() throws Exception {
         client.getArray().putByteValid(Arrays.asList(
-                new byte[] {(byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFA},
-                new byte[] {(byte)0x01, (byte)0x02, (byte)0x03},
-                new byte[] {(byte)0x25, (byte)0x29, (byte)0x43}
+                new byte[] {(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFA},
+                new byte[] {(byte) 0x01, (byte) 0x02, (byte) 0x03},
+                new byte[] {(byte) 0x25, (byte) 0x29, (byte) 0x43}
         ));
     }
 
