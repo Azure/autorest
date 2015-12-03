@@ -122,6 +122,7 @@ class ServiceClient(object):
 
         redirect_logic = session.resolve_redirects
 
+        # TODO: Make this nicer!
         def wrapped_redirect(resp, req, **kwargs):
             attempt = self.config.redirect_policy.check_redirect(resp, req)
             if attempt:
