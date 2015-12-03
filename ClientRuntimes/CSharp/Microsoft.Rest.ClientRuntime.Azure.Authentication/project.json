@@ -10,15 +10,20 @@
   "requireLicenseAcceptance":  true,
 
   "dependencies": {
-    "Microsoft.Rest.ClientRuntime": "[1.5,2.0)",
-    "Microsoft.IdentityModel.Clients.ActiveDirectory": "3.6.210231457-alpha"
+    "Microsoft.Rest.ClientRuntime": "[1.5,2.0)"
    },
 
   "frameworks": {
     "dnxcore50": {
       "compilationOptions": { "define": [ "PORTABLE" ] },
       "dependencies": {
-        "Microsoft.Cci": "4.0.0-beta-23409"
+        "Microsoft.Cci": "4.0.0-beta-23409",
+        "Microsoft.IdentityModel.Clients.ActiveDirectory": "3.6.210231457-alpha"
+      }
+    },
+    "net45": {
+      "dependencies": {
+        "Microsoft.IdentityModel.Clients.ActiveDirectory": "2.18.206251556"
       }
     }
   }

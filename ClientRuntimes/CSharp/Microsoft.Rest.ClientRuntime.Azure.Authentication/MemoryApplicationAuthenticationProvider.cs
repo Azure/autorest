@@ -6,12 +6,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
-namespace Microsoft.Rest.Azure.Authentication
+namespace Microsoft.Rest.Azure.Authentication.Internal
 {
     /// <summary>
     /// In memory store for application credentials.
     /// </summary>
-    internal class MemoryApplicationAuthenticationProvider : IApplicationAuthenticationProvider
+    public class MemoryApplicationAuthenticationProvider : IApplicationAuthenticationProvider
     {
         private IDictionary<string, ClientCredential> _credentials;
 

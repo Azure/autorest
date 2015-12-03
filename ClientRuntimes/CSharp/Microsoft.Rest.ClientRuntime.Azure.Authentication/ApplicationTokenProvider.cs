@@ -9,11 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
-#if PORTABLE
-using ClientRuntime.Azure.Authentication.Properties;
-#else
-using Microsoft.Rest.Azure.Authentication.Properties;
-#endif
+using Microsoft.Rest.Azure.Authentication.Internal;
+using Microsoft.Rest.ClientRuntime.Azure.Authentication.Properties;
 
 namespace Microsoft.Rest.Azure.Authentication
 {
@@ -255,8 +252,14 @@ namespace Microsoft.Rest.Azure.Authentication
             string domain, string clientId, byte[] certificate, string password,
            ActiveDirectoryServiceSettings settings, TokenCache cache)
         {
+#if PORTABLE
             return await LoginSilentAsync(domain, new ClientAssertionCertificate(clientId, certificate, password), 
                 settings, cache);
+#else
+            return await LoginSilentAsync(domain, new ClientAssertionCertificate(clientId, 
+                new System.Security.Cryptography.X509Certificates.X509Certificate2(certificate)),
+                settings, cache);
+#endif
         }
 
         /// <summary>

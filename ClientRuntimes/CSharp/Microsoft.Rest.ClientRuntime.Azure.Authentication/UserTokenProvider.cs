@@ -7,11 +7,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
-#if PORTABLE
-using ClientRuntime.Azure.Authentication.Properties;
-#else
-using Microsoft.Rest.Azure.Authentication.Properties;
-#endif
+using Microsoft.Rest.ClientRuntime.Azure.Authentication.Properties;
 
 namespace Microsoft.Rest.Azure.Authentication
 {
@@ -266,26 +262,31 @@ namespace Microsoft.Rest.Azure.Authentication
             ActiveDirectoryServiceSettings serviceSettings, UserIdentifier userId, TokenCache cache)
         {
             var authenticationContext = GetAuthenticationContext(domain, serviceSettings, cache);
-
-            AuthenticationResult result = null;
-            try 
+            TaskScheduler scheduler = TaskScheduler.FromCurrentSynchronizationContext();
+            var task = new Task<AuthenticationResult>(() =>
             {
-                result = await authenticationContext.AcquireTokenAsync(
-                     serviceSettings.TokenAudience.ToString(),
-                     clientSettings.ClientId,
-                     clientSettings.ClientRedirectUri,
-                     new PlatformParameters(clientSettings.PromptBehavior, clientSettings.OwnerWindow),
-                     userId,
-                     clientSettings.AdditionalQueryParameters);
-            }
-            catch (AdalException e)
-            {
-                throw new AuthenticationException(
-                    string.Format(CultureInfo.CurrentCulture, Resources.ErrorAcquiringToken,
-                        e.Message), e);
-            }
+                try
+                {
+                    var result = authenticationContext.AcquireToken(
+                        serviceSettings.TokenAudience.ToString(),
+                        clientSettings.ClientId,
+                        clientSettings.ClientRedirectUri,
+                        clientSettings.PromptBehavior,
+                        userId,
+                        clientSettings.AdditionalQueryParameters);
+                    return result;
+                }
+                catch (Exception e)
+                {
+                    throw new AuthenticationException(
+                        string.Format(CultureInfo.CurrentCulture, Resources.ErrorAcquiringToken,
+                            e.Message), e);
+                }
+            });
 
-            var newUserId = new UserIdentifier(result.UserInfo.DisplayableId,
+            task.Start(scheduler);
+            var authResult = await task.ConfigureAwait(false);
+            var newUserId = new UserIdentifier(authResult.UserInfo.DisplayableId,
                 UserIdentifierType.RequiredDisplayableId);
             return new TokenCredentials(new UserTokenProvider(authenticationContext, clientSettings.ClientId,
                 serviceSettings.TokenAudience, newUserId));
