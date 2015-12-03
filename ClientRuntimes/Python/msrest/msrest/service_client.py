@@ -114,6 +114,8 @@ class ServiceClient(object):
         """
         Apply configuration to session.
         """
+
+        # TODO: Apply config from **config
         session.headers.update(self._headers)
         session.max_redirects = self.config.redirect_policy()
         session.proxies = self.config.proxies()

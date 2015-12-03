@@ -75,14 +75,13 @@ class CloudError(ClientException):
     def __str__(self):
         return str(self.message)
 
-    def __init__(self, deserializer, response, error=None, *args):
+    def __init__(self, response, error=None, *args):
 
-        deserialize = deserializer if deserializer else Deserializer()
+        deserialize = Deserializer()
         self.error = None
         self.message = None
         self.response = response
         self.status_code = self.response.status_code
-        raise_states = ['failed', 'canceled']
 
         if error:
             self.message = error

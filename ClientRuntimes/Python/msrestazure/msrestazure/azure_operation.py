@@ -23,6 +23,7 @@
 #--------------------------------------------------------------------------
 
 from msrest.serialization import Deserializer
+from msrest.pipeline import ClientRawResponse
 from msrest.exceptions import DeserializationError
 from msrestazure.azure_exceptions import CloudError
 from threading import Thread, Event
@@ -54,6 +55,7 @@ class LongRunningOperation(object):
         self.method = None
         self.async_url = None
         self.location_url = None
+        self.raw=None
 
     @property
     def status(self):
@@ -97,7 +99,13 @@ class LongRunningOperation(object):
             raise DeserializationError("Response json invalid.")
 
     def _deserialize(self, response, cmd):
-        self.resource = cmd(response)
+        resource = cmd(response)
+        if isinstance(resource, ClientRawResponse):
+            self.resource = resource.output
+            self.raw = resource
+
+        else:
+            self.resource = resource
         self._status = self.status
 
     def _get_body_status(self, response):
@@ -308,13 +316,18 @@ class AzureOperationPoller(object):
     finished_states = ['succeeded', 'failed', 'canceled']
     failed_states = ['failed', 'canceled']
 
-    def __init__(self, send_cmd, output_cmd, update_cmd, timeout=30):
+    def __init__(self, send_cmd, output_cmd, update_cmd,
+                 timeout=30, callback=None):
         """
         A container for polling long-running Azure requests.
         """
         self._timeout = timeout
         self._response = None
+
         self._callbacks = []
+        if callback:
+            self._callbacks.append(callback)
+
         self._operation = LongRunningOperation()
 
         self._done = Event()
@@ -334,15 +347,15 @@ class AzureOperationPoller(object):
 
         except BadStatus:
             self._operation.status = 'Failed'
-            self._operation.resource = CloudError(None, self._response)
+            self._operation.resource = CloudError(self._response)
 
         except BadResponse as err:
             self._operation.status = 'Failed'
-            self._operation.resource = CloudError(None, self._response, str(err))
+            self._operation.resource = CloudError(self._response, str(err))
 
         except OperationFailed:
             error = "Long running operation failed with status '{}'".format(self._operation.status)
-            self._operation.resource = CloudError(None, self._response, error)
+            self._operation.resource = CloudError(self._response, error)
 
         except Exception as err:
             self._operation.resource = err
@@ -401,6 +414,9 @@ class AzureOperationPoller(object):
 
         if isinstance(self._operation.resource, Exception):
             raise self._operation.resource
+
+        if self._operation.raw:
+            return self._operation.raw
 
         return self._operation.resource
 
