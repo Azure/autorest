@@ -465,17 +465,30 @@ gulp.task('test:nugetPackages:npm', ['test:nugetPackages:generate'], shell.task(
 gulp.task('test:nugetPackages', ['test:nugetPackages:npm', 'test:nugetPackages:xunit']);
 
 gulp.task('test', function(cb){
-  runSequence(
-    'test:xunit',
-    'test:clientruntime',
-    'test:node',
-    'test:node:azure',
-    'test:ruby',
-    'test:ruby:azure',
-    'test:java',
-    'test:java:azure',
-    'test:nugetPackages',
-    cb);
+  if (isWindows) {
+    runSequence(
+      'test:xunit',
+      'test:clientruntime',
+      'test:node',
+      'test:node:azure',
+      'test:ruby',
+      'test:ruby:azure',
+      'test:java',
+      'test:java:azure',
+      'test:nugetPackages',
+      cb);
+  } else {
+    runSequence(
+      'test:xunit',
+      'test:clientruntime',
+      'test:node',
+      'test:node:azure',
+      'test:ruby',
+      'test:ruby:azure',
+      'test:java',
+      'test:java:azure',
+      cb);
+  }
 });
 
 gulp.task('analysis', function(cb) {
