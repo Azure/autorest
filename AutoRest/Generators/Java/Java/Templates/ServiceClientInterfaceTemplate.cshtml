@@ -110,7 +110,7 @@ if(!property.IsReadOnly)
     {
     @: * @@throws @exception
     }
-    if (method.ReturnType != null && method.ReturnType.Body != null)
+    if (method.ReturnType.Body != null)
     {
     @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link ServiceResponse} if successful.
     }
