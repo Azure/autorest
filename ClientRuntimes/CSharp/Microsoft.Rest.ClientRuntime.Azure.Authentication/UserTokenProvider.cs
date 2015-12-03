@@ -336,7 +336,7 @@ namespace Microsoft.Rest.Azure.Authentication
         {
             return await LoginSilentAsync(clientId, domain, username, password, serviceSettings, TokenCache.DefaultShared);
         }
-
+        
         /// <summary>
         /// Log in to azure active directory in non-interactive mode using organizational id credentials.
         /// </summary>
@@ -369,6 +369,110 @@ namespace Microsoft.Rest.Azure.Authentication
                 throw new AuthenticationException(Resources.ErrorAcquiringToken, ex);
             }
         }
+
+        // please remove this preprocessor #if whenever ADAL will go public with the new library 
+#if PORTABLE
+        /// <summary>
+        /// Log in to azure active directory using device code authentication.
+        /// </summary>
+        /// <param name="clientId">The active directory client id for this application.</param>
+        /// <param name="domain">The active directory domain or tenant id to authenticate with.</param>
+        /// <param name="deviceCodeHandler">User provided callback to display device code request. if returns false no token will be acquired.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginByDeviceCodeAsync(
+            string clientId,
+            string domain,
+            Func<DeviceCodeResult, bool> deviceCodeHandler)
+        {
+            return await LoginByDeviceCodeAsync(clientId, domain, ActiveDirectoryServiceSettings.Azure, TokenCache.DefaultShared, deviceCodeHandler);
+        }
+
+        /// <summary>
+        /// Log in to azure active directory using device code authentication.
+        /// </summary>
+        /// <param name="clientId">The active directory client id for this application.</param>
+        /// <param name="domain">The active directory domain or tenant id to authenticate with.</param>
+        /// <param name="cache">The token cache to target during authentication.</param>
+        /// <param name="deviceCodeHandler">User provided callback to display device code request. if returns false no token will be acquired.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginByDeviceCodeAsync(
+            string clientId,
+            string domain,
+            TokenCache cache,
+            Func<DeviceCodeResult, bool> deviceCodeHandler)
+        {
+            return await LoginByDeviceCodeAsync(clientId, domain, ActiveDirectoryServiceSettings.Azure, cache, deviceCodeHandler);
+        }
+
+        /// <summary>
+        /// Log in to azure active directory using device code authentication.
+        /// </summary>
+        /// <param name="clientId">The active directory client id for this application.</param>
+        /// <param name="domain">The active directory domain or tenant id to authenticate with.</param>
+        /// <param name="serviceSettings">The active directory service details, including authentication endpoints and the intended token audience.</param>
+        /// <param name="deviceCodeHandler">User provided callback to display device code request. if returns false no token will be acquired.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginByDeviceCodeAsync(
+            string clientId,
+            string domain,
+            ActiveDirectoryServiceSettings serviceSettings,
+            Func<DeviceCodeResult, bool> deviceCodeHandler)
+        {
+            return await LoginByDeviceCodeAsync(clientId, domain, serviceSettings, TokenCache.DefaultShared, deviceCodeHandler);
+        }
+
+        /// <summary>
+        /// Log in to azure active directory using device code authentication.
+        /// </summary>
+        /// <param name="clientId">The active directory client id for this application.</param>
+        /// <param name="domain">The active directory domain or tenant id to authenticate with.</param>
+        /// <param name="serviceSettings">The active directory service details, including authentication endpoints and the intended token audience.</param>
+        /// <param name="cache">The token cache to target during authentication.</param>
+        /// <param name="deviceCodeHandler">User provided callback to display device code request. if returns false no token will be acquired.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginByDeviceCodeAsync(
+            string clientId, 
+            string domain, 
+            ActiveDirectoryServiceSettings serviceSettings, 
+            TokenCache cache, 
+            Func<DeviceCodeResult, bool> deviceCodeHandler)
+        {
+            if(deviceCodeHandler == null)
+            {
+                throw new ArgumentException("deviceCodeHandler");
+            }
+
+            var authenticationContext = GetAuthenticationContext(domain, serviceSettings, cache);
+
+            try
+            {
+                DeviceCodeResult codeResult = await authenticationContext.AcquireDeviceCodeAsync(serviceSettings.TokenAudience.ToString(),
+                      clientId).ConfigureAwait(false);
+
+                if (deviceCodeHandler(codeResult))
+                {
+                    AuthenticationResult authenticationResult = await authenticationContext.AcquireTokenByDeviceCodeAsync(codeResult);
+
+                    return new TokenCredentials(
+                        new UserTokenProvider(
+                            authenticationContext,
+                            clientId,
+                            serviceSettings.TokenAudience,
+                            new UserIdentifier(authenticationResult.UserInfo.DisplayableId, UserIdentifierType.RequiredDisplayableId)));
+                }
+
+                return null;
+            }
+            catch (AdalException ex)
+            {
+                throw new AuthenticationException(Resources.ErrorAcquiringToken, ex);
+            }
+            catch (FormatException ex)
+            {
+                throw new AuthenticationException(Resources.ErrorAcquiringToken, ex);
+            }
+        }
+#endif
 
         /// <summary>
         /// Create service client credentials using information cached from a previous login to azure resource manager using the default token cache. 
