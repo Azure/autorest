@@ -31,6 +31,12 @@ import chardet
 import re
 
 try:
+    basestring
+
+except NameError:
+    basestring = str
+
+try:
     from urllib import quote
 
 except ImportError:
@@ -73,6 +79,9 @@ class Model(object):
                 return False
 
         return True
+
+    def __str__(self):
+        return str(self.__dict__)
 
     def __getattribute__(self, attr):
 
@@ -494,11 +503,11 @@ class Deserializer(object):
         data = self._unpack_content(response_data)
         response, class_name = self._classify_target(target_obj, data)
 
-        if isinstance(response, str):
+        if isinstance(response, basestring):
             return self.deserialize_data(data, response)
 
         elif isinstance(response, Enum) or class_name == 'EnumMeta':
-            return self.deserialize_data(data, target_obj)
+            return self.deserialize_enum(data, response)
 
         try:
             if data is None:
@@ -539,7 +548,7 @@ class Deserializer(object):
         if target is None:
             return None, None
 
-        if isinstance(target, str):
+        if isinstance(target, basestring):
             try:
                 target = self.dependencies[target]
 
@@ -584,7 +593,8 @@ class Deserializer(object):
     def _unpack_content(self, raw_data):
 
         if isinstance(raw_data, bytes):
-            data = raw_data.decode(encoding=chardet.detect(raw_data))
+            data = raw_data.decode(
+                encoding=chardet.detect(raw_data)['encoding'])
 
         else:
             data = raw_data
@@ -638,7 +648,7 @@ class Deserializer(object):
 
             obj_type = self.dependencies[data_type]
             if issubclass(obj_type, Enum):
-                return obj_type(data)
+                return self.deserialize_enum(data, obj_type)
 
         except (ValueError, TypeError, AttributeError) as err:
             msg = "Unable to deserialize response data."
@@ -667,10 +677,12 @@ class Deserializer(object):
             if attr in [True, False, 1, 0]:
                 return bool(attr)
 
-            elif isinstance(attr, str) and attr.lower() in ['true', '1']:
+            elif isinstance(
+                    attr, basestring) and attr.lower() in ['true', '1']:
                 return True
 
-            elif isinstance(attr, str) and attr.lower() in ['false', '0']:
+            elif isinstance(
+                    attr, basestring) and attr.lower() in ['false', '0']:
                 return False
 
             raise TypeError("Invalid boolean value: {0}".format(attr))
@@ -690,6 +702,14 @@ class Deserializer(object):
 
         else:
             return str(data)
+
+    def deserialize_enum(self, data, enum_obj):
+        try:
+            return enum_obj(str(data))
+
+        except ValueError:
+            raise DeserializationError(
+                "'{}' is not valid value for enum '{}'".format(data, enum_obj))
 
     @staticmethod
     def deserialize_bytearray(attr):

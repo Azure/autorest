@@ -39,9 +39,12 @@ except ImportError:
 import unittest
 
 from msrestazure import AzureConfiguration
+from msrestazure import azure_active_directory
 from msrestazure.azure_active_directory import (
     AADMixin,
     InteractiveCredentials,
+    ServicePrincipalCredentials,
+    UserPassCredentials
     )
 
 from msrest.exceptions import (
@@ -57,6 +60,41 @@ class TestInteractiveCredentials(unittest.TestCase):
     def setUp(self):
         self.cfg = AzureConfiguration("https://my_service.com")
         return super(TestInteractiveCredentials, self).setUp()
+    
+    def test_http(self):
+
+        test_uri = "http://my_service.com"
+        build = azure_active_directory._http(test_uri, "path")
+
+        self.assertEqual(build, "http://my_service.com/path")
+
+        test_uri = "HTTPS://my_service.com"
+        build = azure_active_directory._http(test_uri, "path")
+
+        self.assertEqual(build, "http://my_service.com/path")
+
+        test_uri = "my_service.com"
+        build = azure_active_directory._http(test_uri, "path")
+
+        self.assertEqual(build, "http://my_service.com/path")
+
+    def test_https(self):
+
+        test_uri = "http://my_service.com"
+        build = azure_active_directory._https(test_uri, "path")
+
+        self.assertEqual(build, "https://my_service.com/path")
+
+        test_uri = "HTTPS://my_service.com"
+        build = azure_active_directory._https(test_uri, "path")
+
+        self.assertEqual(build, "https://my_service.com/path")
+
+        test_uri = "my_service.com"
+        build = azure_active_directory._https(test_uri, "path")
+
+        self.assertEqual(build, "https://my_service.com/path")
+
 
     def test_check_state(self):
 
@@ -78,10 +116,9 @@ class TestInteractiveCredentials(unittest.TestCase):
         mix.id = "client_id"
         mix._store_token({'token_type':'1', 'access_token':'2'})
 
-        mock_keyring.set_password.assert_called_with("store_name",
-                                                     "client_id",
-                                                     str({'token_type':'1',
-                                                          'access_token':'2'}))
+        mock_keyring.set_password.assert_called_with(
+            "store_name", "client_id",
+            str({'token_type':'1', 'access_token':'2'}))
 
     @mock.patch('msrestazure.azure_active_directory.keyring')
     def test_clear_token(self, mock_keyring):
@@ -91,8 +128,8 @@ class TestInteractiveCredentials(unittest.TestCase):
         mix.id = "client_id"
         mix._clear_token()
 
-        mock_keyring.delete_password.assert_called_with("store_name",
-                                                        "client_id")
+        mock_keyring.delete_password.assert_called_with(
+            "store_name", "client_id")
 
     @mock.patch('msrestazure.azure_active_directory.keyring')
     def test_credentials_get_stored_auth(self, mock_keyring):
@@ -106,11 +143,12 @@ class TestInteractiveCredentials(unittest.TestCase):
         with self.assertRaises(ValueError):
             mix._retrieve_stored_token()
 
-        mock_keyring.get_password.assert_called_with("store_name",
-                                                     "client_id")
+        mock_keyring.get_password.assert_called_with(
+            "store_name", "client_id")
 
-        mock_keyring.get_password.return_value = str({'token_type':'1',
-                                                      'access_token':'2'})
+        mock_keyring.get_password.return_value = str(
+            {'token_type':'1', 'access_token':'2'})
+
         mix._retrieve_stored_token()
         mock_keyring.get_password.assert_called_with("store_name", "client_id")
 
@@ -144,14 +182,13 @@ class TestInteractiveCredentials(unittest.TestCase):
         url, state = InteractiveCredentials.get_auth_url(creds)
         self.assertEqual(url, "a")
         self.assertEqual(state, "b")
-        session.authorization_url.assert_called_with("auth_uri",
-                                                     resource="auth_resource")
+        session.authorization_url.assert_called_with(
+            "auth_uri", resource="auth_resource")
 
         InteractiveCredentials.get_auth_url(creds, msa=True, test="extra_arg")
-        session.authorization_url.assert_called_with("auth_uri",
-                                                     resource="auth_resource",
-                                                     domain_hint='live.com',
-                                                     test='extra_arg')
+        session.authorization_url.assert_called_with(
+            "auth_uri", resource="auth_resource",
+            domain_hint='live.com', test='extra_arg')
 
     def test_credentials_get_token(self):
 
@@ -169,8 +206,8 @@ class TestInteractiveCredentials(unittest.TestCase):
         creds._check_state.return_value = True
         creds.verify=True
 
-        token = InteractiveCredentials.get_token(creds, "response")
-        self.assertEqual(token, session.fetch_token.return_value)
+        InteractiveCredentials.get_token(creds, "response")
+        self.assertEqual(creds.token, session.fetch_token.return_value)
         session.fetch_token.assert_called_with(
             "token_uri",
             authorization_response="https://my_service.com/response",
@@ -178,12 +215,12 @@ class TestInteractiveCredentials(unittest.TestCase):
 
         creds._check_state.return_value=False
         with self.assertRaises(ValueError):
-            token = InteractiveCredentials.get_token(creds, "response")
+            InteractiveCredentials.get_token(creds, "response")
 
         creds._check_state.return_value=True
         session.fetch_token.side_effect = oauthlib.oauth2.OAuth2Error
         with self.assertRaises(AuthenticationError):
-            token = InteractiveCredentials.get_token(creds, "response")
+            InteractiveCredentials.get_token(creds, "response")
 
     @mock.patch('msrestazure.azure_active_directory.oauth')
     def test_credentials_signed_session(self, mock_requests):
@@ -204,6 +241,110 @@ class TestInteractiveCredentials(unittest.TestCase):
             auto_refresh_url='token_uri',
             auto_refresh_kwargs={'client_id':'client_id', 'resource':'resource'},
             token_updater=creds._store_token)
+
+    def test_service_principal(self):
+
+        creds = mock.create_autospec(ServicePrincipalCredentials)
+        session = mock.create_autospec(OAuth2Session)
+        creds._setup_session.return_value = session
+
+        session.fetch_token.return_value = {
+            'expires_at':'1',
+            'expires_in':'2'}
+
+        creds.token_uri = "token_uri"
+        creds.verify=True
+        creds.id = 123
+        creds.secret = 'secret'
+        creds.resource = 'resource'
+
+        ServicePrincipalCredentials.get_token(creds)
+        self.assertEqual(creds.token, session.fetch_token.return_value)
+        session.fetch_token.assert_called_with(
+            "token_uri", client_id=123, client_secret='secret',
+            resource='resource', response_type="client_credentials",
+            verify=True)
+
+        session.fetch_token.side_effect = oauthlib.oauth2.OAuth2Error
+
+        with self.assertRaises(AuthenticationError):
+            ServicePrincipalCredentials.get_token(creds)
+
+        session = mock.create_autospec(OAuth2Session)
+        with mock.patch.object(
+            ServicePrincipalCredentials, '_setup_session', return_value=session):
+            
+            creds = ServicePrincipalCredentials("client_id", "secret", 
+                                                verify=False, tenant="private")
+
+            session.fetch_token.assert_called_with(
+                "https://login.microsoftonline.com/private/oauth2/token",
+                client_id="client_id", client_secret='secret',
+                resource='https://management.core.windows.net/',
+                response_type="client_credentials", verify=False)
+
+        with mock.patch.object(
+            ServicePrincipalCredentials, '_setup_session', return_value=session):
+            
+            creds = ServicePrincipalCredentials("client_id", "secret", china=True,
+                                                verify=False, tenant="private")
+
+            session.fetch_token.assert_called_with(
+                "https://login.chinacloudapi.cn/private/oauth2/token",
+                client_id="client_id", client_secret='secret',
+                resource='https://management.core.chinacloudapi.cn/',
+                response_type="client_credentials", verify=False)
+
+    def test_user_pass_credentails(self):
+
+        creds = mock.create_autospec(UserPassCredentials)
+        session = mock.create_autospec(OAuth2Session)
+        creds._setup_session.return_value = session
+
+        session.fetch_token.return_value = {
+            'expires_at':'1',
+            'expires_in':'2'}
+
+        creds.token_uri = "token_uri"
+        creds.verify=True
+        creds.username = "user"
+        creds.password = 'pass'
+        creds.secret = 'secret'
+        creds.id = "id"
+
+        UserPassCredentials.get_token(creds)
+        self.assertEqual(creds.token, session.fetch_token.return_value)
+        session.fetch_token.assert_called_with(
+            "token_uri", client_id="id", username='user',
+            client_secret="secret", password='pass')
+
+        session.fetch_token.side_effect = oauthlib.oauth2.OAuth2Error
+
+        with self.assertRaises(AuthenticationError):
+            UserPassCredentials.get_token(creds)
+
+        session = mock.create_autospec(OAuth2Session)
+        with mock.patch.object(
+            UserPassCredentials, '_setup_session', return_value=session):
+            
+            creds = UserPassCredentials("client_id", "my_username", "my_password", 
+                                        verify=False, tenant="private")
+
+            session.fetch_token.assert_called_with(
+                "https://login.microsoftonline.com/private/oauth2/token",
+                client_id="client_id", username='my_username',
+                password='my_password')
+
+        with mock.patch.object(
+            UserPassCredentials, '_setup_session', return_value=session):
+            
+            creds = UserPassCredentials("client_id", "my_username", "my_password", 
+                                        verify=False, tenant="private", china=True)
+
+            session.fetch_token.assert_called_with(
+                "https://login.chinacloudapi.cn/private/oauth2/token",
+                client_id="client_id", username='my_username',
+                password='my_password')
 
 if __name__ == '__main__':
     unittest.main()

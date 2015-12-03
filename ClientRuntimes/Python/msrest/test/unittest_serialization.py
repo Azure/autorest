@@ -58,7 +58,6 @@ class TestRuntimeSerialized(unittest.TestCase):
             'attr_c': {'key':'Key_C', 'type': 'bool'},
             'attr_d': {'key':'AttrD', 'type':'[int]'},
             'attr_e': {'key':'AttrE', 'type': '{float}'}
-            #TODO: Add more here as more types are defined in serialized
             }
 
         def __init__(self):
@@ -556,7 +555,6 @@ class TestRuntimeDeserialized(unittest.TestCase):
             'attr_d': {'key':'AttrD', 'type':'[int]'},
             'attr_e': {'key':'AttrE', 'type': '{float}'},
             'attr_f': {'key':'AttrF', 'type': '[[str]]'}
-            #TODO: Add more here as more types are defined in serialized
             }
 
         _header_map = {
@@ -913,7 +911,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
         self.assertEqual(a.microsecond, 0)
 
         #with self.assertRaises(DeserializationError):
-        #    a = Deserializer.deserialize_iso('1996-01-01T23:01:54-22:66')
+        #    a = Deserializer.deserialize_iso('1996-01-01T23:01:54-22:66') #TODO
 
         with self.assertRaises(DeserializationError):
             a = Deserializer.deserialize_iso('1996-01-01T23:01:54-24:30')
@@ -928,7 +926,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
             a = Deserializer.deserialize_iso('1996-01-01T24:01:01+00:30')
 
         #with self.assertRaises(DeserializationError):
-        #    a = Deserializer.deserialize_iso('1996-01-01t01:01:01/00:30') TODO
+        #    a = Deserializer.deserialize_iso('1996-01-01t01:01:01/00:30') #TODO
 
         with self.assertRaises(DeserializationError):
             a = Deserializer.deserialize_iso('1996-01-01F01:01:01+00:30')

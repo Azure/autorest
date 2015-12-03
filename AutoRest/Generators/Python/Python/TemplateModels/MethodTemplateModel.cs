@@ -252,9 +252,85 @@ namespace Microsoft.Rest.Generator.Python
             get
             {
                 var builder = new IndentedStringBuilder("    ");
-                builder.AppendLine("if raw:").Indent().AppendLine("return None, response").Outdent();
+                builder.AppendLine("if raw:").Indent().
+                    AppendLine("client_raw_response = ClientRawResponse(None, response)");
+                if (this.ReturnType.Headers != null)
+                {
+                    builder.AppendLine("client_raw_response.add_headers({").Indent();
+                    foreach (var prop in ((CompositeType)ReturnType.Headers).Properties)
+                    {
+                        builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': '{1}',", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
+                    }
+                    builder.AppendLine("})").Outdent();
+                }
+                builder.AppendLine("return client_raw_response").
+                    Outdent();
 
                 return builder.ToString();
+            }
+        }
+
+        protected bool HasResponseHeader
+        {
+            get
+            {
+                if (this.ReturnType.Headers != null || this.Responses.Any(r => r.Value.Headers != null))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        public virtual string AddResponseHeader()
+        {
+            if (HasResponseHeader)
+            {
+                var builder = new IndentedStringBuilder("    ");
+                builder.AppendLine("client_raw_response.add_headers(header_dict)");
+                return builder.ToString();
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        public virtual string AddIndividualResponseHeader(HttpStatusCode? code = null)
+        {
+            if (HasResponseHeader)
+            {
+                IType headersType = null;
+                if (code != null)
+                {
+                    headersType = this.ReturnType.Headers;
+                }
+                else
+                {
+                    headersType = this.Responses[code.Value].Headers;
+                }
+                var builder = new IndentedStringBuilder("    ");
+                if (headersType == null)
+                {
+                    builder.AppendLine("header_dict = {}");
+                }
+                else
+                {
+                    builder.AppendLine("header_dict = {").Indent();
+                    foreach (var prop in ((CompositeType)headersType).Properties)
+                    {
+                        builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': '{1}',", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
+                    }
+                    builder.AppendLine("}").Outdent();
+                }
+                return builder.ToString();
+            }
+            else
+            {
+                return string.Empty;
             }
         }
 

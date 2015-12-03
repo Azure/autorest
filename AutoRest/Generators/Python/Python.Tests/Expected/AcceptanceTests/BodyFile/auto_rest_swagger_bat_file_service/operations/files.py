@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 
 from .. import models
 
@@ -44,6 +45,12 @@ class files(object):
         concurrent.futures.Future
         """
 
+        def download_gen():
+            for data in response.iter_content(self.config.connection.data_block_size):
+                if not data:
+                    break
+                yield data
+
         # Construct URL
         url = '/files/stream/nonempty'
 
@@ -63,17 +70,16 @@ class files(object):
         if response.status_code not in [200]:
             raise models.ErrorException(self._deserialize, response)
 
-        def download_gen():
-            for data in response.iter_content(self.config.connection.data_block_size):
-                if not data:
-                    break
+        deserialized = None
 
-                yield data
+        if response.status_code == 200:
+            deserialized = download_gen()
 
         if raw:
-            return download_gen(), response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
-        return download_gen()
+        return deserialized
 
     @async_request
     def get_empty_file(
@@ -95,6 +101,12 @@ class files(object):
         concurrent.futures.Future
         """
 
+        def download_gen():
+            for data in response.iter_content(self.config.connection.data_block_size):
+                if not data:
+                    break
+                yield data
+
         # Construct URL
         url = '/files/stream/empty'
 
@@ -114,14 +126,13 @@ class files(object):
         if response.status_code not in [200]:
             raise models.ErrorException(self._deserialize, response)
 
-        def download_gen():
-            for data in response.iter_content(self.config.connection.data_block_size):
-                if not data:
-                    break
+        deserialized = None
 
-                yield data
+        if response.status_code == 200:
+            deserialized = download_gen()
 
         if raw:
-            return download_gen(), response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
-        return download_gen()
+        return deserialized

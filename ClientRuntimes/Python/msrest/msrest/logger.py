@@ -30,6 +30,7 @@ import shutil
 import logging
 import types
 
+DEFAULT_LOG_NAME = "ms-client-runtime"
 LOGGER = None
 
 

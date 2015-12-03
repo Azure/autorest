@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 
 from .. import models
 
@@ -63,7 +64,11 @@ class http_redirects(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
+            return client_raw_response
 
     @async_request
     def get300(
@@ -107,9 +112,14 @@ class http_redirects(object):
 
         if response.status_code == 300:
             deserialized = self._deserialize('[str]', response)
+            header_dict = {
+                'Location': 'str',
+                }
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            client_raw_response.add_headers(header_dict)
+            return client_raw_response
 
         return deserialized
 
@@ -152,7 +162,11 @@ class http_redirects(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
+            return client_raw_response
 
     @async_request
     def get301(
@@ -193,7 +207,11 @@ class http_redirects(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
+            return client_raw_response
 
     @async_request
     def put301(
@@ -245,7 +263,11 @@ class http_redirects(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
+            return client_raw_response
 
     @async_request
     def head302(
@@ -286,7 +308,11 @@ class http_redirects(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
+            return client_raw_response
 
     @async_request
     def get302(
@@ -327,7 +353,11 @@ class http_redirects(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
+            return client_raw_response
 
     @async_request
     def patch302(
@@ -379,7 +409,11 @@ class http_redirects(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
+            return client_raw_response
 
     @async_request
     def post303(
@@ -431,7 +465,11 @@ class http_redirects(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
+            return client_raw_response
 
     @async_request
     def head307(
@@ -472,7 +510,11 @@ class http_redirects(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
+            return client_raw_response
 
     @async_request
     def get307(
@@ -513,7 +555,11 @@ class http_redirects(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
+            return client_raw_response
 
     @async_request
     def put307(
@@ -563,7 +609,11 @@ class http_redirects(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
+            return client_raw_response
 
     @async_request
     def patch307(
@@ -613,7 +663,11 @@ class http_redirects(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
+            return client_raw_response
 
     @async_request
     def post307(
@@ -663,7 +717,11 @@ class http_redirects(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
+            return client_raw_response
 
     @async_request
     def delete307(
@@ -713,4 +771,8 @@ class http_redirects(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
+            return client_raw_response

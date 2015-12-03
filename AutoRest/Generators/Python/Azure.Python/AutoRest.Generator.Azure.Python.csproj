@@ -45,6 +45,12 @@
     <Compile Include="Templates\AzureMethodGroupTemplate.cs">
       <DependentUpon>AzureMethodGroupTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\AzureLongRunningMethodTemplate.cs">
+      <DependentUpon>AzureLongRunningMethodTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzurePagingMethodTemplate.cs">
+      <DependentUpon>AzurePagingMethodTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\AzureMethodTemplate.cs">
       <DependentUpon>AzureMethodTemplate.cshtml</DependentUpon>
     </Compile>
@@ -58,6 +64,8 @@
       <DependentUpon>PageTemplate.cshtml</DependentUpon>
     </Compile>
     <None Include="Templates\AzureMethodGroupTemplate.cshtml" />
+    <None Include="Templates\AzureLongRunningMethodTemplate.cshtml" />
+    <None Include="Templates\AzurePagingMethodTemplate.cshtml" />
     <None Include="Templates\AzureModelInitTemplate.cshtml" />
     <None Include="Templates\AzureServiceClientTemplate.cshtml" />
     <None Include="Templates\AzureMethodTemplate.cshtml" />

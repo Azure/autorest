@@ -54,7 +54,7 @@ class LroTests(unittest.TestCase):
             error = err.error
             self.assertIsNotNone(error)
             if isinstance(error, CloudException):
-                self.assertIsNone(error.code)
+                self.assertIsNone(error.error)
                 self.assertIsNotNone(error.message)
 
     def test_lro_happy_paths(self):
@@ -72,6 +72,19 @@ class LroTests(unittest.TestCase):
 
         self.assertRaisesWithMessage("Long running operation failed",
             self.client.lr_os.put200_acceptedcanceled200(product).result)
+
+        # Testing raw
+        process = self.client.lr_os.put201_creating_succeeded200(product, raw=True)
+        self.assertEqual("Succeeded", process.result().output.provisioning_state)
+
+        self.assertRaisesWithMessage("Long running operation failed",
+            self.client.lr_os.put201_creating_failed200(product, raw=True).result)
+
+        process = self.client.lr_os.put200_updating_succeeded204(product, raw=True)
+        self.assertEqual("Succeeded", process.result().output.provisioning_state)
+
+        self.assertRaisesWithMessage("Long running operation failed",
+            self.client.lr_os.put200_acceptedcanceled200(product, raw=True).result)
 
         process = self.client.lr_os.put_no_header_in_retry(product)
         self.assertEqual("Succeeded", process.result().provisioning_state)
@@ -193,31 +206,31 @@ class LroTests(unittest.TestCase):
 
         product = Product(location="West US")
 
-        self.assertRaisesWithMessage("Expected",
+        self.assertRaisesWithMessage("Expected bad request message",
             self.client.lrosa_ds.put_non_retry400(product).result)
 
         self.assertRaisesWithMessage("Error from the server",
             self.client.lrosa_ds.put_non_retry201_creating400(product).result)
 
-        self.assertRaisesWithMessage("Long running operation failed with status 'Bad Request'.",
+        self.assertRaisesWithMessage("Operation failed with status: 'Bad Request'",
             self.client.lrosa_ds.put_async_relative_retry400(product).result)
 
-        self.assertRaisesWithMessage("Expected",
+        self.assertRaisesWithMessage("Expected bad request message",
             self.client.lrosa_ds.delete_non_retry400().result)
 
-        self.assertRaisesWithMessage("Long running operation failed with status 'Bad Request'.",
+        self.assertRaisesWithMessage("Expected bad request message",
             self.client.lrosa_ds.delete202_non_retry400().result)
 
-        self.assertRaisesWithMessage("Long running operation failed with status 'Bad Request'.",
+        self.assertRaisesWithMessage("Expected bad request message",
             self.client.lrosa_ds.delete_async_relative_retry400().result)
 
         self.assertRaisesWithMessage("Expected bad request message",
             self.client.lrosa_ds.post_non_retry400(product).result)
 
-        self.assertRaisesWithMessage("Long running operation failed with status 'Bad Request'.",
+        self.assertRaisesWithMessage("Expected bad request message",
             self.client.lrosa_ds.post202_non_retry400(product).result)
 
-        self.assertRaisesWithMessage("Long running operation failed with status 'Bad Request'.",
+        self.assertRaisesWithMessage("Expected bad request message",
             self.client.lrosa_ds.post_async_relative_retry400(product).result)
 
         self.assertRaisesWithMessage("The response from long running operation does not contain a body.",

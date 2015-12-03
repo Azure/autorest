@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 from msrestazure.azure_exceptions import CloudError
 import uuid
 
@@ -72,7 +73,7 @@ class usageOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise CloudError(self._deserialize, response)
+            raise CloudError(response)
 
         deserialized = None
 
@@ -80,6 +81,7 @@ class usageOperations(object):
             deserialized = self._deserialize('UsageListResult', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized

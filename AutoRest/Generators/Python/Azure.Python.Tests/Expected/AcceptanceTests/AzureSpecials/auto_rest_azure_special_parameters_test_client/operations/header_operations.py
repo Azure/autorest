@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 import uuid
 
 from .. import models
@@ -71,4 +72,8 @@ class headerOperations(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'foo-request-id': 'str',
+                })
+            return client_raw_response

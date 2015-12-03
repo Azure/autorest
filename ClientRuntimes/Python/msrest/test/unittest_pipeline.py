@@ -25,6 +25,10 @@
 #--------------------------------------------------------------------------
 
 import json
+import requests
+import datetime
+
+from enum import Enum
 
 try:
     import unittest2 as unittest
@@ -39,7 +43,8 @@ except ImportError:
 from msrest.pipeline import (
     ClientHTTPAdapter,
     ClientPipelineHook,
-    ClientRequest)
+    ClientRequest,
+    ClientRawResponse)
 
 from msrest import Configuration
 
@@ -166,6 +171,26 @@ class TestClientRequest(unittest.TestCase):
 
         self.assertEqual(request.data, json.dumps("Lots of dataaaa"))
         self.assertEqual(request.headers.get('Content-Length'), 17)
+
+class TestClientResponse(unittest.TestCase):
+
+    class Colors(Enum):
+        red = 'red'
+        blue = 'blue'
+
+    def test_raw_response(self):
+
+        response = mock.create_autospec(requests.Response)
+        response.headers = {}
+        response.headers["my-test"] = '1999-12-31T23:59:59-23:59'
+        response.headers["colour"] = "red"
+
+        raw = ClientRawResponse([], response)
+
+        raw.add_headers({'my-test': 'iso-8601',
+                         'another_header': 'str',
+                         'colour': TestClientResponse.Colors})
+        self.assertIsInstance(raw.headers['my-test'], datetime.datetime)
 
 if __name__ == '__main__':
     unittest.main()

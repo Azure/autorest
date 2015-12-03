@@ -62,7 +62,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             {
                 if (DefaultResponse.Body != null && DefaultResponse.Body.Name == "CloudError")
                 {
-                    return "CloudError(self._deserialize, response)";
+                    return "CloudError(response)";
                 }
 
                 return base.RaisedException;
@@ -92,7 +92,19 @@ namespace Microsoft.Rest.Generator.Azure.Python
                     HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
                     var builder = new IndentedStringBuilder("    ");
                     builder.AppendFormat("deserialized = (response.status_code == {0})", (int)code).AppendLine();
-                    builder.AppendLine("if raw:").Indent().AppendLine("return deserialized, response").Outdent();
+                    builder.AppendLine("if raw:").Indent().
+                        AppendLine("client_raw_response = ClientRawResponse(deserialized, response)");
+                    if (this.Responses[code].Headers != null)
+                    {
+                        builder.AppendLine("client_raw_response.add_headers({").Indent();
+                        foreach (var prop in ((CompositeType)this.Responses[code].Headers).Properties)
+                        {
+                            builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': '{1}',", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
+                        }
+                        builder.AppendLine("})").Outdent();
+                    }
+                    builder.AppendLine("return client_raw_response").
+                        Outdent();
                     builder.AppendLine("return deserialized");
 
                     return builder.ToString();

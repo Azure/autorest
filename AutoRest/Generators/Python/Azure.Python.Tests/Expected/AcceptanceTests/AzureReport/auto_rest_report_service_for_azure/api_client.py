@@ -13,6 +13,7 @@ from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 import uuid
 from . import models
 
@@ -94,6 +95,7 @@ class AutoRestReportServiceForAzure(object):
             deserialized = self._deserialize('{int}', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized

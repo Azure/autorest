@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 from msrestazure.azure_exceptions import CloudError
 import uuid
 
@@ -63,11 +64,12 @@ class http_successOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200, 404]:
-            raise CloudError(self._deserialize, response)
+            raise CloudError(response)
 
         deserialized = (response.status_code == 200)
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
         return deserialized
 
     @async_request
@@ -109,11 +111,12 @@ class http_successOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [204, 404]:
-            raise CloudError(self._deserialize, response)
+            raise CloudError(response)
 
         deserialized = (response.status_code == 204)
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
         return deserialized
 
     @async_request
@@ -155,9 +158,10 @@ class http_successOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [204, 404]:
-            raise CloudError(self._deserialize, response)
+            raise CloudError(response)
 
         deserialized = (response.status_code == 204)
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
         return deserialized

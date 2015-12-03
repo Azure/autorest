@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 from msrest.exceptions import HttpOperationError
 from msrestazure.azure_exceptions import CloudError
 from msrestazure.azure_operation import AzureOperationPoller
@@ -81,7 +82,7 @@ class storage_accountsOperations(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
-            raise CloudError(self._deserialize, response)
+            raise CloudError(response)
 
         deserialized = None
 
@@ -89,7 +90,8 @@ class storage_accountsOperations(object):
             deserialized = self._deserialize('CheckNameAvailabilityResult', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -167,7 +169,7 @@ class storage_accountsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200, 202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -175,7 +177,8 @@ class storage_accountsOperations(object):
                 deserialized = self._deserialize('StorageAccount', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -184,7 +187,7 @@ class storage_accountsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     @async_request
     def delete(
@@ -242,7 +245,8 @@ class storage_accountsOperations(object):
             raise HttpOperationError(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_properties(
@@ -300,7 +304,7 @@ class storage_accountsOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise CloudError(self._deserialize, response)
+            raise CloudError(response)
 
         deserialized = None
 
@@ -308,7 +312,8 @@ class storage_accountsOperations(object):
             deserialized = self._deserialize('StorageAccount', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -382,7 +387,7 @@ class storage_accountsOperations(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
-            raise CloudError(self._deserialize, response)
+            raise CloudError(response)
 
         deserialized = None
 
@@ -390,7 +395,8 @@ class storage_accountsOperations(object):
             deserialized = self._deserialize('StorageAccount', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -445,7 +451,7 @@ class storage_accountsOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise CloudError(self._deserialize, response)
+            raise CloudError(response)
 
         deserialized = None
 
@@ -453,7 +459,8 @@ class storage_accountsOperations(object):
             deserialized = self._deserialize('StorageAccountKeys', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -512,7 +519,7 @@ class storage_accountsOperations(object):
                 request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             return response
 
@@ -522,7 +529,8 @@ class storage_accountsOperations(object):
         deserialized = models.StorageAccountPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -585,7 +593,7 @@ class storage_accountsOperations(object):
                 request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             return response
 
@@ -595,7 +603,8 @@ class storage_accountsOperations(object):
         deserialized = models.StorageAccountPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -664,7 +673,7 @@ class storage_accountsOperations(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
-            raise CloudError(self._deserialize, response)
+            raise CloudError(response)
 
         deserialized = None
 
@@ -672,6 +681,7 @@ class storage_accountsOperations(object):
             deserialized = self._deserialize('StorageAccountKeys', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized

@@ -33,6 +33,8 @@ import json
 import functools
 import types
 
+from .serialization import Deserializer
+
 from requests.packages.urllib3 import Retry
 from requests.packages.urllib3.poolmanager import pool_classes_by_scheme
 from requests.packages.urllib3 import HTTPConnectionPool
@@ -185,7 +187,7 @@ class ClientRequest(requests.Request):
         query = '?' + '&'.join(query_params)
         self.url = self.url + query
 
-    def add_content(self, data, **kwargs):
+    def add_content(self, data):
 
         if isinstance(data, types.GeneratorType):
             self.data = data
@@ -193,7 +195,26 @@ class ClientRequest(requests.Request):
         else:
             self.data = json.dumps(data)
             self.headers['Content-Length'] = len(self.data)
-        return kwargs
+
+
+class ClientRawResponse(object):
+
+    def __init__(self, output, response):
+
+        self.response = response
+        self.output = output
+        self.headers = {}
+
+        self._deserialize = Deserializer()
+
+    def add_headers(self, header_dict):
+
+        for name, data_type in header_dict.items():
+            value = self.response.headers.get(name)
+            if value:
+                value = self._deserialize(data_type, value)
+
+            self.headers[name] = value
 
 
 class ClientRetry(Retry):
@@ -210,14 +231,15 @@ class ClientRetry(Retry):
         increment = super(ClientRetry, self).increment(
             method, url, response, error, _pool, _stacktrace)
 
-        # Collect retry cookie - currently only used for non-HTTPS connections
-        # TODO: Look up correct cookie handling protocol
+        # Collect retry cookie - we only want to do this for the test server
+        # at this point, unless we implement a proper cookie policy.
+
         if response:
-            response_cookie = response.getheader("Set-Cookie")
-            if response_cookie:
-                self._log.debug("Adding cookie to pool headers for retry: "
-                                "{}".format(response_cookie))
-                increment.retry_cookie = response_cookie
+            # Fixes open socket warnings in Python 3
+            response.close()
+            response.release_conn()
+
+            increment.retry_cookie = response.getheader("Set-Cookie")
 
         return increment
 
@@ -356,13 +378,14 @@ class ClientConnection(object):
                 'cert': self.cert}
 
 
-# This is only used against test server
+# Cookie logic only used for test server (localhost)
 class ClientHTTPConnectionPool(HTTPConnectionPool):
 
     def urlopen(self, method, url, body=None, headers=None,
                 retries=None, *args, **kwargs):
 
-        if retries.retry_cookie:
+        host = self.host.strip('.')
+        if retries.retry_cookie and host == 'localhost':
             if headers:
                 headers['cookie'] = retries.retry_cookie
             else:
@@ -371,7 +394,7 @@ class ClientHTTPConnectionPool(HTTPConnectionPool):
         response = super(ClientHTTPConnectionPool, self).urlopen(
             method, url, body, headers, retries, *args, **kwargs)
 
-        if retries.retry_cookie:
+        if retries.retry_cookie and host == 'localhost':
             retries.retry_cookie = None
             if headers:
                 del headers['cookie']

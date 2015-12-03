@@ -114,14 +114,29 @@ class ServiceClient(object):
         """
         Apply configuration to session.
         """
+
+        kwargs = self.config.connection()
+        kwargs['timeout'] = config.get('timeout', kwargs['timeout'])
+        kwargs['verify'] = config.get('verify', kwargs['verify'])
+        kwargs['cert'] = config.get('verify', kwargs['cert'])
+        kwargs['cookies'] = config.get('cookies')
+        kwargs['stream'] = config.get('stream')
+        kwargs['allow_redirects'] = config.get(
+            'allow_redirects', bool(self.config.redirect_policy))
+
         session.headers.update(self._headers)
-        session.max_redirects = self.config.redirect_policy()
-        session.proxies = self.config.proxies()
-        session.trust_env = self.config.proxies.use_env_settings
+
+        session.max_redirects = config.get(
+            'max_redirects', self.config.redirect_policy())
+
+        session.proxies = config.get(
+            'proxies', self.config.proxies())
+
+        session.trust_env = config.get(
+            'use_env_proxies', self.config.proxies.use_env_settings)
 
         redirect_logic = session.resolve_redirects
 
-        # TODO: Make this nicer!
         def wrapped_redirect(resp, req, **kwargs):
             attempt = self.config.redirect_policy.check_redirect(resp, req)
             if attempt:
@@ -131,9 +146,13 @@ class ServiceClient(object):
 
         session.resolve_redirects = wrapped_redirect
 
-        self._adapter.max_retries = self.config.retry_policy()
+        self._adapter.max_retries = config.get(
+            'retries', self.config.retry_policy())
+
         for protocol in self._protocols:
             session.mount(protocol, self._adapter)
+
+        return kwargs
 
     def send_async(self, request_cmd, *args, **kwargs):
         """
@@ -143,17 +162,15 @@ class ServiceClient(object):
             future = executor.submit(request_cmd, *args, **kwargs)
             return future
 
-    def send(self, request, headers={}, content=None, **kwargs):
+    def send(self, request, headers={}, content=None, **config):
         """
         Prepare and send request object according to configuration.
         """
         session = self.creds.signed_session()
-        self._configure_session(session, **kwargs)
-
-        kwargs.update(self.config.connection())
+        kwargs = self._configure_session(session, **config)
 
         request.add_headers(headers)
-        request.add_content(content, **kwargs)
+        request.add_content(content)
 
         try:
 
@@ -162,7 +179,6 @@ class ServiceClient(object):
                     request.method, request.url,
                     data=request.data,
                     headers=request.headers,
-                    allow_redirects=bool(self.config.redirect_policy),
                     **kwargs)
 
                 return response
@@ -178,9 +194,9 @@ class ServiceClient(object):
                 self._configure_session(session)
 
                 response = session.request(
-                    request.method, request.url, request.data,
-                    request.headers, params=request.params,
-                    allow_redirects=bool(self.config.redirect_policy),
+                    request.method, request.url,
+                    request.data,
+                    request.headers,
                     **kwargs)
 
                 return response
