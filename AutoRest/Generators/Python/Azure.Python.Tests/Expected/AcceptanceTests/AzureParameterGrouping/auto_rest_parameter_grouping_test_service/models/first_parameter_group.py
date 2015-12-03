@@ -16,10 +16,6 @@ class FirstParameterGroup(Model):
 
     _required = []
 
-    _attribute_map = {
-        'header_one': {'key': '', 'type': 'str'},
-        'query_one': {'key': '', 'type': 'int'},
-    }
 
     def __init__(self, *args, **kwargs):
 

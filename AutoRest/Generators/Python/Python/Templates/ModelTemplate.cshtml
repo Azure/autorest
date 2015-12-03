@@ -48,18 +48,21 @@ else
     @:_required = [@requiredStr]
 }
 @EmptyLine
-    _attribute_map = {
 @{
   var propertyList = new List<Property>(Model.Properties);
-  if (propertyList.Count > 0)
+  if (!Model.IsParameterGroup)
   {
-    for (int i = 0; i < propertyList.Count; i++) 
+    @:_attribute_map = {
+    if (propertyList.Count > 0)
     {
+      for (int i = 0; i < propertyList.Count; i++) 
+      {
         @:@(ModelTemplateModel.InitializePythonProperty(propertyList[i]))
+      }
     }
+    @:}
   }
 }
-    }
 @if (Model.SubModelTypes.Any())
 {
 <text>

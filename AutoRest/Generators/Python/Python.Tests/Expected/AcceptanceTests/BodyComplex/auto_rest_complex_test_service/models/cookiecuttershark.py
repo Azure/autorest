@@ -16,8 +16,6 @@ class Cookiecuttershark(Shark):
 
     _required = []
 
-    _attribute_map = {
-    }
 
     def __init__(self, *args, **kwargs):
 

@@ -74,6 +74,21 @@ namespace Microsoft.Rest.Generator.Python
             get { return _isException; }
         }
 
+        public bool IsParameterGroup
+        {
+            get
+            {
+                foreach (var prop in this.Properties)
+                {
+                    if (prop.SerializedName != null)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
         public IScopeProvider Scope
         {
             get { return _scope; }

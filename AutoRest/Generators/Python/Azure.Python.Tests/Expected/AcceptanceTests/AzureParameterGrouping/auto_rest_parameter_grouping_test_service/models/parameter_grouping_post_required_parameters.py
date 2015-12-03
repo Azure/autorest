@@ -16,12 +16,6 @@ class ParameterGroupingPostRequiredParameters(Model):
 
     _required = ['body', 'path']
 
-    _attribute_map = {
-        'body': {'key': '', 'type': 'int'},
-        'custom_header': {'key': '', 'type': 'str'},
-        'query': {'key': '', 'type': 'int'},
-        'path': {'key': '', 'type': 'str'},
-    }
 
     def __init__(self, *args, **kwargs):
 
