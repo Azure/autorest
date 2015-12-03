@@ -65,7 +65,7 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
                 return documentation;
             }
             documentation = documentation.Trim();
-            if (!documentation.EndsWith("."))
+            if (!documentation.EndsWith(".", StringComparison.Ordinal))
             {
                 documentation += ".";
             }
@@ -74,6 +74,10 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
 
         public static string TrimMultilineHeader(this string header)
         {
+            if (string.IsNullOrEmpty(header))
+            {
+                return header;
+            }
             StringBuilder builder = new StringBuilder();
             foreach (var headerLine in header.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
             {

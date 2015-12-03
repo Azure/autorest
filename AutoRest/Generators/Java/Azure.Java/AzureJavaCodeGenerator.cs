@@ -19,7 +19,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
         private readonly AzureJavaCodeNamer _namer;
 
         private const string ClientRuntimePackage = "com.microsoft.rest:azure-client-runtime:0.0.1-SNAPSHOT";
-        private string _originalClientName = null;
         private const string _packageInfoFileName = "package-info.java";
 
         // page extensions class dictionary.
@@ -62,7 +61,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            this._originalClientName = serviceClient.Name;
             Settings.AddCredentials = true;
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
@@ -174,11 +172,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
             // package-info.java
             await Write(new PackageInfoTemplate
             {
-                Model = new PackageInfoTemplateModel(serviceClient, _originalClientName)
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name)
             }, _packageInfoFileName);
             await Write(new PackageInfoTemplate
             {
-                Model = new PackageInfoTemplateModel(serviceClient, _originalClientName, true)
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, true)
             }, Path.Combine("models", _packageInfoFileName));
         }
     }

@@ -15,7 +15,6 @@ namespace Microsoft.Rest.Generator.Java
     public class JavaCodeGenerator : CodeGenerator
     {
         private const string ClientRuntimePackage = "com.microsoft.rest:client-runtime:0.0.1-SNAPSHOT";
-        private string _originalClientName = null;
         private const string _packageInfoFileName = "package-info.java";
 
         public JavaCodeNamer Namer { get; private set; }
@@ -56,7 +55,6 @@ namespace Microsoft.Rest.Generator.Java
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            this._originalClientName = serviceClient.Name;
             PopulateAdditionalProperties(serviceClient);
             Namer.NormalizeClientModel(serviceClient);
             Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
@@ -142,11 +140,11 @@ namespace Microsoft.Rest.Generator.Java
             // package-info.java
             await Write(new PackageInfoTemplate
             {
-                Model = new PackageInfoTemplateModel(serviceClient, _originalClientName)
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name)
             }, _packageInfoFileName);
             await Write(new PackageInfoTemplate
             {
-                Model = new PackageInfoTemplateModel(serviceClient, _originalClientName, true)
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, true)
             }, Path.Combine("models", _packageInfoFileName));
         }
     }

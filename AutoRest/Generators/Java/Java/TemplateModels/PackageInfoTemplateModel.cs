@@ -8,7 +8,6 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class PackageInfoTemplateModel : ServiceClient
     {
-        public string Ns { get; private set; }
         public string Title { get; private set; }
         public string Description { get; private set; }
         public bool IsModel { get; private set; }
@@ -16,9 +15,11 @@ namespace Microsoft.Rest.Generator.Java
         public PackageInfoTemplateModel(ServiceClient serviceClient, string clientName, bool isModel = false)
         {
             this.LoadFrom(serviceClient);
-            this.Ns = serviceClient.Namespace;
             this.Title = clientName;
-            this.Description = serviceClient.Documentation;
+            if (serviceClient != null)
+            {
+                this.Description = serviceClient.Documentation;
+            }
             this.IsModel = isModel;
         }
     }
