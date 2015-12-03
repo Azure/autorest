@@ -32,13 +32,9 @@ from requests import RequestException
 
 class CloudException(object):
 
-    _response_map = {
-        'status_code': {'key':'status_code', 'type':'str'}
-        }
-
     _attribute_map = {
         'error': {'key':'code', 'type':'str'},
-        'message': {'key':'message', 'type':'{str}'},
+        'message': {'key':'message', 'type':'str'},
         'data': {'key':'values', 'type':'{str}'}
         }
 
@@ -79,27 +75,41 @@ class CloudError(ClientException):
     def __str__(self):
         return str(self.message)
 
-    def __init__(self, deserializer, response, output=None, *args):
+    def __init__(self, deserializer, response, status=None, *args):
 
         deserialize = deserializer if deserializer else Deserializer()
         self.error = None
         self.message = None
         self.response = response
+        self.status_code = self.response.status_code
+        raise_states = ['failed', 'canceled']
 
-        if output:
-            raise_states = ['failed', 'canceled']
+        if status:
 
-            if hasattr(output, 'provisioning_state'):
-                if output.provisioning_state.lower() in raise_states:
-                    self.error = output
+            if isinstance(status, str):
+                self.message = status
+                self.error = response
+            
+            #try:
+            #    if status.lower() in raise_states:
+            #        self.error = response
+            #        self.message = "Long running operation failed with status '{}'".format(status)
+
+            #except AttributeError:
+            #    pass
+
+            elif hasattr(status, 'provisioning_state'):
+                if status.provisioning_state.lower() in raise_states:
+                    self.error = status
                     self.message = "Long running operation failed"
 
         else:
             try:
-                self.error = deserialize(CloudException, response)
+                data = response.json()['error']
+                self.error = deserialize(CloudException, data)
                 self.message = self.error.message
 
-            except (DeserializationError, AttributeError, KeyError):
+            except (DeserializationError, AttributeError, KeyError, ValueError):
                 pass
 
 
@@ -107,15 +117,10 @@ class CloudError(ClientException):
 
             try:
                 content = response.json()
-                if not content:
-                    server_message = ("The response from long running "
-                                      "operation does not contain a body.")
-                else:
-                    server_message = content.get('message', "none")
+                server_message = content.get('message', "none")
 
             except ValueError as err:
-                server_message = ("The response from long running "
-                                  "operation does not contain a body.")
+                server_message = ("none")
 
             try:
                 response.raise_for_status()
@@ -132,7 +137,7 @@ class CloudError(ClientException):
 
             else:
                 if not self.error:
-                    self.error = output if output else response
+                    self.error = response
 
                 if not self.message:
                     self.message = ("Long running operation failed with "

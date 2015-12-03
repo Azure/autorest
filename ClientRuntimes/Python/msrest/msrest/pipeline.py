@@ -34,6 +34,9 @@ import functools
 import types
 
 from requests.packages.urllib3 import Retry
+from requests.packages.urllib3.poolmanager import pool_classes_by_scheme
+from requests.packages.urllib3 import HTTPConnectionPool
+
 from requests.models import REDIRECT_STATI
 REDIRECT_STATI = [300, 301, 302, 303, 307, 308]
 
@@ -203,19 +206,26 @@ class ClientRequest(requests.Request):
 class ClientRetry(Retry):
 
     def __init__(self, log_name=None, **kwargs):
+        self.retry_cookie = None
         self._log = logging.getLogger(log_name)
+
         return super(ClientRetry, self).__init__(**kwargs)
 
     def increment(self, method=None, url=None, response=None,
                   error=None, _pool=None, _stacktrace=None):
 
-        # TODO: This is a hacky way of updating the retry headers
+        increment = super(ClientRetry, self).increment(
+            method, url, response, error, _pool, _stacktrace)
+
+        # Collect retry cookie - currently only used for non-HTTPS connections
+        # TODO: Look up correct cookie handling protocol
         response_cookie = response.getheader("Set-Cookie")
         if response_cookie:
-            _pool.proxy_headers['cookie'] = response_cookie
+            self._log.debug("Adding cookie to pool headers for retry: "
+                            "{}".format(response_cookie))
+            increment.retry_cookie = response_cookie
 
-        return super(ClientRetry, self).increment(
-            method, url, response, error, _pool, _stacktrace)
+        return increment
 
     def is_forced_retry(self, method, status_code):
         self._log.debug(
@@ -350,3 +360,29 @@ class ClientConnection(object):
         return {'timeout': self.timeout,
                 'verify': self.verify,
                 'cert': self.cert}
+
+# This is only used against test server
+class ClientHTTPConnectionPool(HTTPConnectionPool):
+
+    def urlopen(self, method, url, body=None, headers=None,
+                retries=None, **kwargs):
+
+        if retries.retry_cookie:
+            if headers:
+                headers['cookie'] = retries.retry_cookie
+            else:
+                self.headers['cookie'] = retries.retry_cookie
+
+        response = super(ClientHTTPConnectionPool, self).urlopen(
+            method, url, body, headers, retries, **kwargs)
+
+        if retries.retry_cookie:
+            retries.retry_cookie = None
+            if headers:
+                del headers['cookie']
+            else:
+                del self.headers['cookie']
+
+        return response
+
+pool_classes_by_scheme['http'] = ClientHTTPConnectionPool
