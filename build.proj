@@ -337,6 +337,5 @@
     <Exec Command="$(ZipExe) a -tzip -mx9 -r -y $(PackageOutputDir)\%(_DnxPackages.Filename).nupkg" WorkingDirectory="$(PackageOutputDir)\%(_DnxPackages.Filename)" />
     <Delete Files="@(_PackageBinaries->'%(UnsignedFlatFileName)')" />
     <Delete Files="@(_PackageBinaries->'%(SignedFlatFileName)')" />
-    <RemoveDir Directories="@(_DnxPackages->'$(PackageOutputDir)\%(Filename)')" />
   </Target>
 </Project>
