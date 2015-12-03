@@ -3,7 +3,6 @@
 
 using System;
 using System.Linq;
-using System.Linq.Expressions;
 using Microsoft.Rest.Azure;
 using Microsoft.Rest.Azure.OData;
 using Newtonsoft.Json;
@@ -21,7 +20,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
 
             var result = FilterString.Generate<Param1>(p => p.Foo == "foo" || p.Val < 20 || p.Foo == "bar" && p.Val == null &&
                 p.Date > date2 &&
-                p.Date < date && p.Values.Contains("x"));
+                p.Date < date && p.Values.Contains("x"), false);
             string time1 = Uri.EscapeDataString("2004-11-05T00:00:00Z");
             string time2 = Uri.EscapeDataString("2013-11-05T00:00:00Z");
             string expected = string.Format("foo eq 'foo' or Val lt 20 or foo eq 'bar' and Val eq null and d gt '{0}' " +
@@ -34,6 +33,36 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         {
             var result = FilterString.Generate<Param1>(p => p.Foo == "bar" && (p.Foo == "foo" || p.Val < 20));
             Assert.Equal("foo eq 'bar' and foo eq 'foo' or Val lt 20", result);
+        }
+
+        [Fact]
+        public void NullParametersAreIgnoredInTheBeginningOfExpression()
+        {
+            string foo = null;
+            var result = FilterString.Generate<Param1>(p => p.Foo == foo || p.Val == null || p.Val == 10);
+            Assert.Equal("Val eq 10", result);
+        }
+
+        [Fact]
+        public void NullParametersAreIgnoredInTheMiddleOfExpression()
+        {
+            var result = FilterString.Generate<Param1>(p => p.Foo == "bar" || p.Val == null || p.Val == 10);
+            Assert.Equal("foo eq 'bar' or Val eq 10", result);
+        }
+
+        [Fact]
+        public void NullParametersAreIgnoredInTheEndOfExpression()
+        {
+            var result = FilterString.Generate<Param1>(p => p.Foo == "bar" && p.Val == 20 || p.Val == null);
+            Assert.Equal("foo eq 'bar' and Val eq 20", result);
+        }
+
+        [Fact]
+        public void NullParametersAreNotIgnoredInExpression()
+        {
+            string foo = null;
+            var result = FilterString.Generate<Param1>(p => p.Foo == foo || p.Val == null || p.Val == 10, false);
+            Assert.Equal("foo eq null or Val eq null or Val eq 10", result);
         }
 
         [Fact]
@@ -94,6 +123,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal("Boolean eq true", result);
             result = FilterString.Generate<Param1>(p => p.Boolean && p.Foo == "foo");
             Assert.Equal("Boolean eq true and foo eq 'foo'", result);
+            result = FilterString.Generate<Param1>(p => p.Foo == "foo" && p.Boolean);
+            Assert.Equal("foo eq 'foo' and Boolean eq true", result);
         }
 
         [Fact]
@@ -129,20 +160,6 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         {
             var result = FilterString.Generate<Param1>(p => p.Foo.EndsWith("foo"));
             Assert.Equal("endswith(foo, 'foo')", result);
-        }
-
-        [Fact]
-        public void UnsupportedMethodThrowsNotSupportedException()
-        {
-			new InputParam2
-            {
-                Param = new InputParam1
-                {
-                    Value = "foo"
-                }
-            };
-            Assert.Throws<NotSupportedException>(
-                () => FilterString.Generate<Param1>(p => p.Foo.Replace(" ", "") == "abc"));
         }
 
         [Fact]
@@ -211,6 +228,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         {
             var query = new ODataQuery<Param1>();
             Assert.Equal("", query.ToString());
+            query = new ODataQuery<Param1>(p => p.Foo == null);
+            Assert.Equal("", query.ToString());
         }
 
         [Fact]
@@ -245,6 +264,63 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             ODataQuery<Param1> query = "$filter=foo eq 'bar'&$top=100";
             Assert.Equal("$filter=foo eq 'bar'&$top=100", query.ToString());
         }
+
+        [Fact]
+        public void ODataQuerySupportsTimeSpan()
+        {
+            var timeSpan = TimeSpan.FromMinutes(5);
+            var filterString = FilterString.Generate<Parameters>(parameters => parameters.TimeGrain == timeSpan);
+ 
+            Assert.Equal(filterString, "timeGrain eq duration'PT5M'");
+        }
+ 
+        [Fact]
+        public void ODataQuerySupportsEnum()
+        {
+            var timeSpan = TimeSpan.FromMinutes(5);
+            var filterString = FilterString.Generate<Parameters>(parameters => parameters.EventChannels == EventChannels.Admin);
+            Console.WriteLine(filterString);
+
+            Assert.Equal(filterString, "eventChannels eq 'Admin'");
+        }
+
+        [Fact]
+        public void ODataQuerySupportsMethod()
+        {
+            var param = new InputParam1
+            {
+                Value = "Microsoft.Web/sites"
+            };
+            var filterString = FilterString.Generate<Param1>(parameters => parameters.AtScope() && 
+                parameters.AssignedTo(param.Value));
+
+            Assert.Equal(filterString, "atScope() and assignedTo('Microsoft.Web%2Fsites')");
+        }
+    }
+
+    [Flags]
+    public enum EventChannels
+    {
+        Admin = 1,
+        Operation = 2,
+        Debug = 4,
+        Analytics = 8
+    }
+
+    public class Parameters
+    {
+        [JsonProperty("startTime")]
+        public DateTime? StartTime { get; set; }
+
+        [JsonProperty("eventChannels")]
+        public EventChannels? EventChannels { get; set; }
+
+        [JsonProperty("status")]
+        public string Status { get; set; }
+
+        [JsonProperty("timeGrain")]
+        public TimeSpan? TimeGrain { get; set; }
+
     }
 
     public class Param1
@@ -260,6 +336,17 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         public string[] Values { get; set; }
         [JsonProperty("param2")]
         public Param2 Param2 { get; set; }
+
+        [ODataMethodAttribute("assignedTo")]
+        public bool AssignedTo(string parameter)
+        {
+            return true;
+        }
+        [ODataMethodAttribute("atScope")]
+        public bool AtScope()
+        {
+            return true;
+        }
     }
 
     public class Param2

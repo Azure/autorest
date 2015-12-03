@@ -145,7 +145,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.BoolModel.PutTrue(true);
             client.BoolModel.PutFalse(false);
             client.BoolModel.GetNull();
-            Assert.Throws<JsonReaderException>(() => client.BoolModel.GetInvalid());
+            Assert.Throws<RestException>(() => client.BoolModel.GetInvalid());
         }
 
         [Fact]
@@ -160,11 +160,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.IntModel.PutMax64(Int64.MaxValue);
             client.IntModel.PutMin64(Int64.MinValue);
             client.IntModel.GetNull();
-            Assert.Throws<JsonReaderException>(() => client.IntModel.GetInvalid());
-            Assert.Throws<JsonReaderException>(() => client.IntModel.GetOverflowInt32());
-            Assert.Throws<JsonReaderException>(() => client.IntModel.GetOverflowInt64());
-            Assert.Throws<JsonReaderException>(() => client.IntModel.GetUnderflowInt32());
-            Assert.Throws<JsonReaderException>(() => client.IntModel.GetUnderflowInt64());
+            Assert.Throws<RestException>(() => client.IntModel.GetInvalid());
+            Assert.Throws<RestException>(() => client.IntModel.GetOverflowInt32());
+            Assert.Throws<RestException>(() => client.IntModel.GetOverflowInt64());
+            Assert.Throws<RestException>(() => client.IntModel.GetUnderflowInt32());
+            Assert.Throws<RestException>(() => client.IntModel.GetUnderflowInt64());
         }
 
         [Fact]
@@ -186,8 +186,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             Assert.Equal(2.5976931e-101, client.Number.GetSmallDouble());
             Assert.Equal(-99999999.99, client.Number.GetBigDoubleNegativeDecimal());
             Assert.Equal(99999999.99, client.Number.GetBigDoublePositiveDecimal());
-            Assert.Throws<JsonReaderException>(() => client.Number.GetInvalidDouble());
-            Assert.Throws<JsonReaderException>(() => client.Number.GetInvalidFloat());
+            Assert.Throws<RestException>(() => client.Number.GetInvalidDouble());
+            Assert.Throws<RestException>(() => client.Number.GetInvalidFloat());
         }
 
         [Fact]
@@ -288,7 +288,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 client.Datetime.GetUtcMinDateTime();
                 client.Datetime.GetLocalNegativeOffsetMinDateTime();
                 //overflow-for-dotnet
-                Assert.Throws<JsonReaderException>(() => client.Datetime.GetLocalNegativeOffsetLowercaseMaxDateTime());
+                Assert.Throws<RestException>(() => client.Datetime.GetLocalNegativeOffsetLowercaseMaxDateTime());
                 client.Datetime.GetLocalNegativeOffsetUppercaseMaxDateTime();
                 //underflow-for-dotnet
                 client.Datetime.GetLocalPositiveOffsetMinDateTime();
@@ -296,12 +296,10 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 client.Datetime.GetLocalPositiveOffsetUppercaseMaxDateTime();
                 client.Datetime.GetNull();
                 client.Datetime.GetOverflow();
-                Assert.Throws<JsonReaderException>(() => client.Datetime.GetInvalid());
-                Assert.Throws<JsonReaderException>(() => client.Datetime.GetUnderflow());
+                Assert.Throws<RestException>(() => client.Datetime.GetInvalid());
+                Assert.Throws<RestException>(() => client.Datetime.GetUnderflow());
                 //The following two calls fail as datetimeoffset are always sent as local time i.e (+00:00) and not Z
-#if !MONO // todo: investigate mono failure
                 client.Datetime.PutUtcMaxDateTime(DateTime.MaxValue.ToUniversalTime());
-#endif
                 client.Datetime.PutUtcMinDateTime(DateTime.Parse("0001-01-01T00:00:00Z",
                     CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal));
                 //underflow-for-dotnet
@@ -326,9 +324,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             using (var client = new AutoRestRFC1123DateTimeTestService(Fixture.Uri))
             {
                 Assert.Null(client.Datetimerfc1123.GetNull());
-                Assert.Throws<JsonReaderException>(() => client.Datetimerfc1123.GetInvalid());
-                Assert.Throws<JsonReaderException>(() => client.Datetimerfc1123.GetUnderflow());
-                Assert.Throws<JsonReaderException>(() => client.Datetimerfc1123.GetOverflow());
+                Assert.Throws<RestException>(() => client.Datetimerfc1123.GetInvalid());
+                Assert.Throws<RestException>(() => client.Datetimerfc1123.GetUnderflow());
+                Assert.Throws<RestException>(() => client.Datetimerfc1123.GetOverflow());
                 client.Datetimerfc1123.GetUtcLowercaseMaxDateTime();
                 client.Datetimerfc1123.GetUtcUppercaseMaxDateTime();
                 client.Datetimerfc1123.GetUtcMinDateTime();
@@ -478,17 +476,17 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     new DictionaryEqualityComparer<string>()));
 
                 Assert.Null(client.Array.GetArrayNull());
-                Assert.Throws<JsonSerializationException>(() => client.Array.GetInvalid());
+                Assert.Throws<RestException>(() => client.Array.GetInvalid());
                 Assert.True(client.Array.GetBooleanInvalidNull().SequenceEqual(new List<bool?> {true, null, false}));
-                Assert.Throws<JsonSerializationException>(() => client.Array.GetBooleanInvalidString());
+                Assert.Throws<RestException>(() => client.Array.GetBooleanInvalidString());
                 Assert.True(client.Array.GetIntInvalidNull().SequenceEqual(new List<int?> {1, null, 0}));
-                Assert.Throws<JsonReaderException>(() => client.Array.GetIntInvalidString());
+                Assert.Throws<RestException>(() => client.Array.GetIntInvalidString());
                 Assert.True(client.Array.GetLongInvalidNull().SequenceEqual(new List<long?> {1, null, 0}));
-                Assert.Throws<JsonSerializationException>(() => client.Array.GetLongInvalidString());
+                Assert.Throws<RestException>(() => client.Array.GetLongInvalidString());
                 Assert.True(client.Array.GetFloatInvalidNull().SequenceEqual(new List<double?> {0.0, null, -1.2e20}));
-                Assert.Throws<JsonSerializationException>(() => client.Array.GetFloatInvalidString());
+                Assert.Throws<RestException>(() => client.Array.GetFloatInvalidString());
                 Assert.True(client.Array.GetDoubleInvalidNull().SequenceEqual(new List<double?> {0.0, null, -1.2e20}));
-                Assert.Throws<JsonSerializationException>(() => client.Array.GetDoubleInvalidString());
+                Assert.Throws<RestException>(() => client.Array.GetDoubleInvalidString());
                 Assert.True(client.Array.GetStringWithInvalid().SequenceEqual(new List<string> {"foo", "123", "foo2"}));
                 var dateNullArray = client.Array.GetDateInvalidNull();
                 Assert.True(dateNullArray.SequenceEqual(new List<DateTime?>
@@ -498,7 +496,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     null,
                     DateTime.Parse("1776-07-04", CultureInfo.InvariantCulture)
                 }));
-                Assert.Throws<JsonReaderException>(() => client.Array.GetDateInvalidChars());
+                Assert.Throws<RestException>(() => client.Array.GetDateInvalidChars());
                 var dateTimeNullArray = client.Array.GetDateTimeInvalidNull();
                 Assert.True(dateTimeNullArray.SequenceEqual(new List<DateTime?>
                 {
@@ -506,7 +504,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                         CultureInfo.InvariantCulture).ToUniversalTime(),
                     null
                 }));
-                Assert.Throws<JsonReaderException>(() => client.Array.GetDateTimeInvalidChars());
+                Assert.Throws<RestException>(() => client.Array.GetDateTimeInvalidChars());
             }
         }
 
@@ -688,7 +686,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             };
 
             Assert.Equal(invalidNullDict, client.Dictionary.GetBooleanInvalidNull());
-            Assert.Throws<JsonSerializationException>(() => client.Dictionary.GetBooleanInvalidString());
+            Assert.Throws<RestException>(() => client.Dictionary.GetBooleanInvalidString());
             var intValid = new Dictionary<string, int?> {{"0", 1}, {"1", -1}, {"2", 3}, {"3", 300}};
             // GET prim/integer/1.-1.3.300
             Assert.Equal(intValid, client.Dictionary.GetIntegerValid());
@@ -696,7 +694,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.Dictionary.PutIntegerValid(intValid);
             var intNullDict = new Dictionary<string, int?> {{"0", 1}, {"1", null}, {"2", 0}};
             Assert.Equal(intNullDict, client.Dictionary.GetIntInvalidNull());
-            Assert.Throws<JsonReaderException>(() => client.Dictionary.GetIntInvalidString());
+            Assert.Throws<RestException>(() => client.Dictionary.GetIntInvalidString());
 
             var longValid = new Dictionary<string, long?> {{"0", 1L}, {"1", -1}, {"2", 3}, {"3", 300}};
             // GET prim/long/1.-1.3.300
@@ -705,7 +703,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.Dictionary.PutLongValid(longValid);
             var longNullDict = new Dictionary<string, long?> {{"0", 1}, {"1", null}, {"2", 0}};
             Assert.Equal(longNullDict, client.Dictionary.GetLongInvalidNull());
-            Assert.Throws<JsonSerializationException>(() => client.Dictionary.GetLongInvalidString());
+            Assert.Throws<RestException>(() => client.Dictionary.GetLongInvalidString());
 
             var floatValid = new Dictionary<string, double?> {{"0", 0}, {"1", -0.01}, {"2", -1.2e20}};
             // GET prim/float/0--0.01-1.2e20
@@ -714,7 +712,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.Dictionary.PutFloatValid(floatValid);
             var floatNullDict = new Dictionary<string, double?> {{"0", 0.0}, {"1", null}, {"2", -1.2e20}};
             Assert.Equal(floatNullDict, client.Dictionary.GetFloatInvalidNull());
-            Assert.Throws<JsonSerializationException>(() => client.Dictionary.GetFloatInvalidString());
+            Assert.Throws<RestException>(() => client.Dictionary.GetFloatInvalidString());
             var doubleValid = new Dictionary<string, double?> {{"0", 0}, {"1", -0.01}, {"2", -1.2e20}};
             // GET prim/double/0--0.01-1.2e20
             Assert.Equal(doubleValid, client.Dictionary.GetDoubleValid());
@@ -722,7 +720,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.Dictionary.PutDoubleValid(doubleValid);
             floatNullDict = new Dictionary<string, double?> {{"0", 0.0}, {"1", null}, {"2", -1.2e20}};
             Assert.Equal(floatNullDict, client.Dictionary.GetDoubleInvalidNull());
-            Assert.Throws<JsonSerializationException>(() => client.Dictionary.GetDoubleInvalidString());
+            Assert.Throws<RestException>(() => client.Dictionary.GetDoubleInvalidString());
             var stringValid = new Dictionary<string, string> {{"0", "foo1"}, {"1", "foo2"}, {"2", "foo3"}};
             // GET prim/string/foo1.foo2.foo3
             Assert.Equal(stringValid, client.Dictionary.GetStringValid());
@@ -761,7 +759,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 {"2", new DateTime(1776, 7, 4, 0, 0, 0, DateTimeKind.Utc)}
             };
             Assert.Equal(dateNullDict, client.Dictionary.GetDateInvalidNull());
-            Assert.Throws<JsonReaderException>(() => client.Dictionary.GetDateInvalidChars());
+            Assert.Throws<RestException>(() => client.Dictionary.GetDateInvalidChars());
             // GET prim/datetime/valid
             Assert.Equal(new Dictionary<string, DateTime?> {{"0", datetime1}, {"1", datetime2}, {"2", datetime3}},
                 client.Dictionary.GetDateTimeValid());
@@ -777,7 +775,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 {"1", null}
             };
             Assert.Equal(datetimeNullDict, client.Dictionary.GetDateTimeInvalidNull());
-            Assert.Throws<JsonReaderException>(() => client.Dictionary.GetDateTimeInvalidChars());
+            Assert.Throws<RestException>(() => client.Dictionary.GetDateTimeInvalidChars());
             // GET prim/datetimerfc1123/valid
             Assert.Equal(new Dictionary<string, DateTime?> { { "0", rfcDatetime1 }, { "1", rfcDatetime2 }, { "2", rfcDatetime3 } },
                 client.Dictionary.GetDateTimeRfc1123Valid());
@@ -827,7 +825,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             // GET null
             Assert.Null(client.Dictionary.GetNull());
             // GET invalid
-            Assert.Throws<JsonReaderException>(() => client.Dictionary.GetInvalid());
+            Assert.Throws<RestException>(() => client.Dictionary.GetInvalid());
             // GET nullkey
             Assert.Equal(new Dictionary<string, string> {{"null", "val1"}}, client.Dictionary.GetNullKey());
             // GET nullvalue
@@ -866,7 +864,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Equal(null, basicResult.Id);
                 Assert.Equal(null, basicResult.Name);
                 // GET basic/invalid
-                Assert.Throws<JsonReaderException>(() => client.BasicOperations.GetInvalid());
+                Assert.Throws<RestException>(() => client.BasicOperations.GetInvalid());
 
                 /* COMPLEX TYPE WITH PRIMITIVE PROPERTIES */
                 // GET primitive/integer
@@ -1339,12 +1337,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                         "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
 
                 // POST param/existingkey
-#if MONO
-                Assert.Throws<Microsoft.Rest.HttpOperationException>(
-                    () => client.Header.ParamExistingKey("overwrite"));
-#else
                 client.Header.ParamExistingKey("overwrite");
-#endif
                 // POST response/existingkey
                 response = client.Header.ResponseExistingKeyWithHttpMessagesAsync().Result;
                 Assert.Equal("overwrite", response.Response.Headers.GetValues("User-Agent").FirstOrDefault());
@@ -1513,7 +1506,14 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             EnsureThrowsWithStatusCode(HttpStatusCode.HttpVersionNotSupported, () => client.HttpServerFailure.Post505(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.HttpVersionNotSupported, () => client.HttpServerFailure.Delete505(true));
             client.HttpRetry.Head408();
-            client.HttpRetry.Get502();
+            try
+            {
+                client.HttpRetry.Get502();
+            }
+            catch
+            {
+                // Ignore
+            }
             //TODO, 4042586: Support options operations in swagger modeler
             //client.HttpRetry.Options429();
             client.HttpRetry.Put500(true);
@@ -1556,14 +1556,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             EnsureThrowsWithStatusCode((HttpStatusCode) 429, () => client.HttpClientFailure.Head429());
         }
 
-        private void TestRedirectStatusCodes(AutoRestHttpInfrastructureTestService client)
+        private static void TestRedirectStatusCodes(AutoRestHttpInfrastructureTestService client)
         {
-#if MONO
-            Assert.ThrowsAsync<System.Net.WebException>(async () => await client.HttpRedirects.Head300WithHttpMessagesAsync());
-            Assert.ThrowsAsync<System.Net.WebException>(async () => await client.HttpRedirects.Get300WithHttpMessagesAsync());
-#else
+#if !PORTABLE
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head300WithHttpMessagesAsync());
-            EnsureStatusCode<IList<string>>(HttpStatusCode.OK, () => client.HttpRedirects.Get300WithHttpMessagesAsync());
+            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get300WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head302WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head301WithHttpMessagesAsync());
 #endif
@@ -1573,14 +1570,14 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get302WithHttpMessagesAsync());
             //TODO, 4048201: http client incorrectly redirects non-get/head requests when receiving a 301 or 302 response
             //EnsureStatusCode(HttpStatusCode.Found, () => client.HttpRedirects.Patch302WithHttpMessagesAsync(true));
-#if !MONO // this is caused because of https://github.com/mono/mono/blob/master/mcs/class/System/System.Net/HttpWebRequest.cs#L1107
+#if !PORTABLE // this is caused because of https://github.com/mono/mono/blob/master/mcs/class/System/System.Net/HttpWebRequest.cs#L1107
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post303WithHttpMessagesAsync(true));
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head307WithHttpMessagesAsync());
 #endif
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get307WithHttpMessagesAsync());
             //TODO, 4042586: Support options operations in swagger modeler
             //EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Options307WithHttpMessagesAsync());
-#if !MONO // this is caused because of https://github.com/mono/mono/blob/master/mcs/class/System/System.Net/HttpWebRequest.cs#L1107
+#if !PORTABLE // this is caused because of https://github.com/mono/mono/blob/master/mcs/class/System/System.Net/HttpWebRequest.cs#L1107
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Put307WithHttpMessagesAsync(true));
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post307WithHttpMessagesAsync(true));
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Patch307WithHttpMessagesAsync(true));
@@ -1590,7 +1587,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         private static void TestSuccessStatusCodes(AutoRestHttpInfrastructureTestService client)
         {
-            var ex = Assert.Throws<HttpOperationException>(() => client.HttpFailure.GetEmptyError());
+            var ex = Assert.Throws<Fixtures.AcceptanceTestsHttp.Models.ErrorException>(() => client.HttpFailure.GetEmptyError());
             Assert.Equal("Operation returned an invalid status code 'BadRequest'", ex.Message);
             client.HttpSuccess.Head200();
             Assert.True(client.HttpSuccess.Get200());
@@ -1718,7 +1715,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 {
                     Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "SKIPPED {0}.", item));
                 }
-#if MONO
+#if PORTABLE
                 float totalTests = report.Count - 9;  // there are 9 tests that fail in MONO
 #else
                 float totalTests = report.Count;
@@ -1735,7 +1732,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             var response = operation().GetAwaiter().GetResult();
             Assert.Equal(response.Response.StatusCode, expectedStatusCode);
         }
-        private void EnsureStatusCode<T>(HttpStatusCode expectedStatusCode, Func<Task<HttpOperationResponse<T>>> operation)
+
+        private static void EnsureStatusCode<TBody, THeader>(HttpStatusCode expectedStatusCode, Func<Task<HttpOperationResponse<TBody, THeader>>> operation)
         {
             var response = operation().GetAwaiter().GetResult();
             Assert.Equal(response.Response.StatusCode, expectedStatusCode);
@@ -1755,12 +1753,28 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 operation();
                 throw new InvalidOperationException("Operation did not throw as expected");
             }
-            catch (HttpOperationException exception)
+            catch (Fixtures.AcceptanceTestsHttp.Models.ErrorException exception)
             {
                 Assert.Equal(expectedStatusCode, exception.Response.StatusCode);
                 if (errorValidator != null)
                 {
                     errorValidator(exception.Body as T);
+                }
+            }
+            catch (MyException exception1)
+            {
+                Assert.Equal(expectedStatusCode, exception1.Response.StatusCode);
+                if (errorValidator != null)
+                {
+                    errorValidator(exception1.Body as T);
+                }
+            }
+            catch (HttpOperationException exception2)
+            {
+                Assert.Equal(expectedStatusCode, exception2.Response.StatusCode);
+                if (errorValidator != null)
+                {
+                    errorValidator(exception2.Body as T);
                 }
             }
         }

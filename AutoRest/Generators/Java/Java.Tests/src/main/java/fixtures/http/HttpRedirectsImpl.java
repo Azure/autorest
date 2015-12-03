@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.Error;
+import java.io.IOException;
 import java.util.List;
 import retrofit.Call;
 import retrofit.Response;
@@ -36,17 +37,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> head300() throws ServiceException {
-        try {
-            Call<Void> call = service.head300();
-            return head300Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> head300() throws ServiceException, IOException {
+        Call<Void> call = service.head300();
+        return head300Delegate(call.execute(), null);
     }
 
     /**
@@ -61,7 +57,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head300Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -69,7 +65,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> head300Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> head300Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(300, new TypeToken<Void>(){}.getType())
@@ -80,18 +76,13 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<List<String>> get300() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get300();
-            return get300Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<List<String>> get300() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get300();
+        return get300Delegate(call.execute(), null);
     }
 
     /**
@@ -106,7 +97,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get300Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -114,7 +105,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<List<String>> get300Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<List<String>> get300Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<List<String>>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(300, new TypeToken<List<String>>(){}.getType())
@@ -125,17 +116,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> head301() throws ServiceException {
-        try {
-            Call<Void> call = service.head301();
-            return head301Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> head301() throws ServiceException, IOException {
+        Call<Void> call = service.head301();
+        return head301Delegate(call.execute(), null);
     }
 
     /**
@@ -150,7 +136,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head301Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -158,7 +144,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> head301Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> head301Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(301, new TypeToken<Void>(){}.getType())
@@ -169,17 +155,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> get301() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get301();
-            return get301Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> get301() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get301();
+        return get301Delegate(call.execute(), null);
     }
 
     /**
@@ -194,7 +175,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get301Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -202,7 +183,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> get301Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> get301Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(301, new TypeToken<Void>(){}.getType())
@@ -214,17 +195,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> put301(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.put301(booleanValue);
-            return put301Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> put301(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.put301(booleanValue);
+        return put301Delegate(call.execute(), null);
     }
 
     /**
@@ -240,7 +216,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(put301Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -248,7 +224,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> put301Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> put301Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(301, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -258,17 +234,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> head302() throws ServiceException {
-        try {
-            Call<Void> call = service.head302();
-            return head302Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> head302() throws ServiceException, IOException {
+        Call<Void> call = service.head302();
+        return head302Delegate(call.execute(), null);
     }
 
     /**
@@ -283,7 +254,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head302Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -291,7 +262,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> head302Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> head302Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(302, new TypeToken<Void>(){}.getType())
@@ -302,17 +273,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> get302() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get302();
-            return get302Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> get302() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get302();
+        return get302Delegate(call.execute(), null);
     }
 
     /**
@@ -327,7 +293,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get302Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -335,7 +301,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> get302Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> get302Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(302, new TypeToken<Void>(){}.getType())
@@ -347,17 +313,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> patch302(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.patch302(booleanValue);
-            return patch302Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> patch302(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.patch302(booleanValue);
+        return patch302Delegate(call.execute(), null);
     }
 
     /**
@@ -373,7 +334,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(patch302Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -381,7 +342,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> patch302Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> patch302Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(302, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -392,17 +353,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> post303(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.post303(booleanValue);
-            return post303Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> post303(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.post303(booleanValue);
+        return post303Delegate(call.execute(), null);
     }
 
     /**
@@ -418,7 +374,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(post303Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -426,7 +382,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> post303Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> post303Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(303, new TypeToken<Void>(){}.getType())
@@ -437,17 +393,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect with 307, resulting in a 200 success
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> head307() throws ServiceException {
-        try {
-            Call<Void> call = service.head307();
-            return head307Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> head307() throws ServiceException, IOException {
+        Call<Void> call = service.head307();
+        return head307Delegate(call.execute(), null);
     }
 
     /**
@@ -462,7 +413,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head307Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -470,7 +421,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> head307Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> head307Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(307, new TypeToken<Void>(){}.getType())
@@ -481,17 +432,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
     /**
      * Redirect get with 307, resulting in a 200 success
      *
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> get307() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.get307();
-            return get307Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> get307() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.get307();
+        return get307Delegate(call.execute(), null);
     }
 
     /**
@@ -506,7 +452,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get307Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -514,7 +460,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> get307Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> get307Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(307, new TypeToken<Void>(){}.getType())
@@ -526,17 +472,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Put redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> put307(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.put307(booleanValue);
-            return put307Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> put307(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.put307(booleanValue);
+        return put307Delegate(call.execute(), null);
     }
 
     /**
@@ -552,7 +493,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(put307Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -560,7 +501,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> put307Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> put307Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(307, new TypeToken<Void>(){}.getType())
@@ -572,17 +513,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Patch redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> patch307(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.patch307(booleanValue);
-            return patch307Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> patch307(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.patch307(booleanValue);
+        return patch307Delegate(call.execute(), null);
     }
 
     /**
@@ -598,7 +534,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(patch307Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -606,7 +542,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> patch307Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> patch307Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(307, new TypeToken<Void>(){}.getType())
@@ -618,17 +554,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Post redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> post307(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.post307(booleanValue);
-            return post307Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> post307(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.post307(booleanValue);
+        return post307Delegate(call.execute(), null);
     }
 
     /**
@@ -644,7 +575,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(post307Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -652,7 +583,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> post307Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> post307Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(307, new TypeToken<Void>(){}.getType())
@@ -664,17 +595,12 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Delete redirected with 307, resulting in a 200 after redirect
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> delete307(Boolean booleanValue) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.delete307(booleanValue);
-            return delete307Delegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> delete307(Boolean booleanValue) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.delete307(booleanValue);
+        return delete307Delegate(call.execute(), null);
     }
 
     /**
@@ -690,7 +616,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(delete307Delegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -698,7 +624,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return call;
     }
 
-    private ServiceResponse<Void> delete307Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> delete307Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .register(307, new TypeToken<Void>(){}.getType())

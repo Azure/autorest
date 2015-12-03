@@ -26,6 +26,8 @@ using Xunit.Abstractions;
 using Microsoft.Rest.Azure;
 using AutoRest.Generator.CSharp.Tests.Utilities;
 using Microsoft.Framework.Logging;
+using Microsoft.Rest.Azure.OData;
+using Fixtures.Azure.AcceptanceTestsAzureSpecials.Models;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 {
@@ -257,8 +259,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Throws<CloudException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidJsonPolling(new Product {Location = "West US"}));
                 // TODO: 4103936 Fix exception type
-#if !MONO
-                Assert.Throws<UriFormatException>(
+#if !PORTABLE
+                Assert.Throws<RestException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidHeader(new Product {Location = "West US"}));
                 // TODO: 4103936 Fix exception type
                 // UriFormatException invalidHeader = null;
@@ -372,7 +374,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 var report = client.GetReport();
-#if MONO
+#if PORTABLE
                 float totalTests = report.Count - 5;
 #else
                 float totalTests = report.Count;
@@ -649,6 +651,26 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 client.SkipUrlEncoding.GetSwaggerQueryValid(unencodedQuery);
                 client.SkipUrlEncoding.GetMethodQueryNull();
                 client.SkipUrlEncoding.GetMethodQueryNull(null);
+            }
+        }
+
+        [Fact]
+        public void AzureODataTests()
+        {
+            var validSubscription = "1234-5678-9012-3456";
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"), generator: "Azure.CSharp");
+            using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
+                    new TokenCredentials(Guid.NewGuid().ToString()))
+                { SubscriptionId = validSubscription })
+            {
+                var filter = new ODataQuery<OdataFilter>(f => f.Id > 5 && f.Name == "foo")
+                {
+                    Top = 10,
+                    OrderBy = "id"
+                };
+                Assert.Equal("$filter=id gt 5 and name eq 'foo'&$orderby=id&$top=10", filter.ToString());
+                client.Odata.GetWithFilter(filter);
             }
         }
 

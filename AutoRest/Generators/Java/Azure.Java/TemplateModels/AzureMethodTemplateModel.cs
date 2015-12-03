@@ -75,30 +75,26 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
-        public string Exceptions
+        public override string Exceptions
         {
             get
             {
-                List<string> exceptions = new List<string>();
-                exceptions.Add("ServiceException");
+                string exceptions = base.Exceptions;
                 if (this.IsLongRunningOperation)
                 {
-                    exceptions.Add("IOException");
-                    exceptions.Add("InterruptedException");
+                    exceptions = string.Join(", ", exceptions, "InterruptedException");
                 }
-                return string.Join(", ", exceptions);
+                return exceptions;
             }
         }
 
-        public List<string> ExceptionStatements
+        public override List<string> ExceptionStatements
         {
             get
             {
-                List<string> exceptions = new List<string>();
-                exceptions.Add("ServiceException exception thrown from REST call");
+                List<string> exceptions = base.ExceptionStatements;
                 if (this.IsLongRunningOperation)
                 {
-                    exceptions.Add("IOException exception thrown from serialization/deserialization");
                     exceptions.Add("InterruptedException exception thrown when long running operation is interrupted");
                 }
                 return exceptions;
@@ -142,8 +138,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get
             {
                 var imports = base.InterfaceImports;
-                this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
-                    .ForEach(ex => imports.Add(JavaCodeNamer.GetJavaException(ex)));
                 if (IsPagingNextOperation)
                 {
                     imports.Remove("retrofit.http.Path");
@@ -158,18 +152,18 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get
             {
                 var imports = base.ImplImports;
-                this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
-                    .ForEach(ex => imports.Add(JavaCodeNamer.GetJavaException(ex)));
                 if (this.IsLongRunningOperation)
                 {
                     imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
                     imports.Remove("com.microsoft.rest.ServiceResponseCallback");
                     imports.Remove("com.microsoft.rest.AzureServiceResponseBuilder");
                     imports.Add("retrofit.Callback");
-                    this.Responses.Select(r => r.Value).Concat(new IType[]{ DefaultResponse })
+                    this.Responses.Select(r => r.Value.Body).Concat(new IType[]{ DefaultResponse.Body })
                         .SelectMany(t => t.ImportFrom(ServiceClient.Namespace))
                         .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom(ServiceClient.Namespace).Contains(i)))
                         .ForEach(i => imports.Remove(i));
+                    // return type may have been removed as a side effect
+                    imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
                 }
                 else
                 {

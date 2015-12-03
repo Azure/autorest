@@ -11,9 +11,9 @@
 package fixtures.lro;
 
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.CustomHeaderInterceptor;
-import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import java.util.UUID;
 import retrofit.Retrofit;
@@ -21,7 +21,7 @@ import retrofit.Retrofit;
 /**
  * Initializes a new instance of the AutoRestLongRunningOperationTestService class.
  */
-public class AutoRestLongRunningOperationTestServiceImpl extends ServiceClient implements AutoRestLongRunningOperationTestService {
+public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceClient implements AutoRestLongRunningOperationTestService {
     private String baseUri;
     private AzureClient azureClient;
 
@@ -92,44 +92,36 @@ public class AutoRestLongRunningOperationTestServiceImpl extends ServiceClient i
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private LROs lROs;
-
     /**
-     * Gets the LROs object to access its operations.
+     * Gets the LROsOperations object to access its operations.
      * @return the lROs value.
      */
-    public LROs getLROs() {
-        return this.lROs;
+    public LROsOperations getLROs() {
+        return new LROsOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
-    private LRORetrys lRORetrys;
-
     /**
-     * Gets the LRORetrys object to access its operations.
+     * Gets the LRORetrysOperations object to access its operations.
      * @return the lRORetrys value.
      */
-    public LRORetrys getLRORetrys() {
-        return this.lRORetrys;
+    public LRORetrysOperations getLRORetrys() {
+        return new LRORetrysOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
-    private LROSADs lROSADs;
-
     /**
-     * Gets the LROSADs object to access its operations.
+     * Gets the LROSADsOperations object to access its operations.
      * @return the lROSADs value.
      */
-    public LROSADs getLROSADs() {
-        return this.lROSADs;
+    public LROSADsOperations getLROSADs() {
+        return new LROSADsOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
-    private LROsCustomHeader lROsCustomHeader;
-
     /**
-     * Gets the LROsCustomHeader object to access its operations.
+     * Gets the LROsCustomHeaderOperations object to access its operations.
      * @return the lROsCustomHeader value.
      */
-    public LROsCustomHeader getLROsCustomHeader() {
-        return this.lROsCustomHeader;
+    public LROsCustomHeaderOperations getLROsCustomHeader() {
+        return new LROsCustomHeaderOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -194,11 +186,6 @@ public class AutoRestLongRunningOperationTestServiceImpl extends ServiceClient i
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.lROs = new LROsImpl(retrofit, this);
-        this.lRORetrys = new LRORetrysImpl(retrofit, this);
-        this.lROSADs = new LROSADsImpl(retrofit, this);
-        this.lROsCustomHeader = new LROsCustomHeaderImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

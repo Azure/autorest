@@ -6,13 +6,14 @@ using System.Globalization;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Templates;
+using System.Linq;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
     public class CSharpCodeGenerator : CodeGenerator
     {
         private readonly CSharpCodeNamer _namer;
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.1.4.1";
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.1.5.0";
 
         public CSharpCodeGenerator(Settings settings) : base(settings)
         {
@@ -125,7 +126,7 @@ namespace Microsoft.Rest.Generator.CSharp
             }
 
             // Models
-            foreach (var model in serviceClient.ModelTypes)
+            foreach (var model in serviceClient.ModelTypes.Concat(serviceClient.HeaderTypes))
             {
                 var modelTemplate = new ModelTemplate
                 {
@@ -142,6 +143,16 @@ namespace Microsoft.Rest.Generator.CSharp
                     Model = new EnumTemplateModel(enumType),
                 };
                 await Write(enumTemplate, Path.Combine("Models", enumTemplate.Model.TypeDefinitionName + ".cs"));
+            }
+
+            // Exception
+            foreach (var exceptionType in serviceClient.ErrorTypes)
+            {
+                var exceptionTemplate = new ExceptionTemplate
+                {
+                    Model = new ModelTemplateModel(exceptionType),
+                };
+                await Write(exceptionTemplate, Path.Combine("Models", exceptionTemplate.Model.ExceptionTypeDefinitionName + ".cs"));
             }
         }
     }

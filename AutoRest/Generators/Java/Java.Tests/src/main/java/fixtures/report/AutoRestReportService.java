@@ -12,10 +12,12 @@ package fixtures.report;
 
 import java.util.List;
 import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import java.util.Map;
 import retrofit.Call;
 import retrofit.http.GET;
@@ -26,15 +28,24 @@ import retrofit.http.GET;
 public interface AutoRestReportService {
     /**
      * Gets the URI used as the base for all cloud service requests.
+     *
      * @return the BaseUri value.
      */
     String getBaseUri();
 
     /**
      * Gets the list of interceptors the OkHttp client will execute.
+     *
      * @return the list of interceptors.
      */
     List<Interceptor> getClientInterceptors();
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum.
+     */
+    void setLogLevel(Level logLevel);
 
     /**
      * The interface defining all the services for AutoRestReportService to be
@@ -52,7 +63,7 @@ public interface AutoRestReportService {
      * @return the Map&lt;String, Integer&gt; object if successful.
      * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Map<String, Integer>> getReport() throws ServiceException;
+    ServiceResponse<Map<String, Integer>> getReport() throws ServiceException, IOException;
 
     /**
      * Get test coverage report

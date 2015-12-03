@@ -15,7 +15,15 @@ import java.util.List;
 public interface Page<E> {
     /**
      * Gets the link to the next page.
+     *
      * @return the link.
      */
     String getNextPageLink();
+
+    /**
+     * Gets the list of items.
+     *
+     * @return the list of items.
+     */
+    List<E> getItems();
 }

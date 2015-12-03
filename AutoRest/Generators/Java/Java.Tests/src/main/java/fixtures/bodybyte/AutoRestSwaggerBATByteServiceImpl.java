@@ -28,14 +28,12 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements 
         return this.baseUri;
     }
 
-    private ByteOperations byteOperations;
-
     /**
      * Gets the ByteOperations object to access its operations.
      * @return the byteOperations value.
      */
     public ByteOperations getByteOperations() {
-        return this.byteOperations;
+        return new ByteOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -70,7 +68,6 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements 
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.byteOperations = new ByteOperationsImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

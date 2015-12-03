@@ -28,14 +28,12 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements Au
         return this.baseUri;
     }
 
-    private DatetimeOperations datetimeOperations;
-
     /**
      * Gets the DatetimeOperations object to access its operations.
      * @return the datetimeOperations value.
      */
     public DatetimeOperations getDatetimeOperations() {
-        return this.datetimeOperations;
+        return new DatetimeOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -70,7 +68,6 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements Au
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.datetimeOperations = new DatetimeOperationsImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

@@ -95,7 +95,7 @@ namespace Microsoft.Rest.Generator.Azure
             }
 
             foreach (var method in serviceClient.Methods.Where(m => m.HttpMethod == HttpMethod.Head)
-                                                             .Where(m => m.ReturnType == null))
+                                                              .Where(m => m.ReturnType.Body == null))
             {
                 HttpStatusCode successStatusCode = method.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
 
@@ -103,7 +103,7 @@ namespace Microsoft.Rest.Generator.Azure
                     successStatusCode != default(HttpStatusCode) &&
                     method.Responses.ContainsKey(HttpStatusCode.NotFound))
                 {
-                    method.ReturnType = PrimaryType.Boolean;
+                    method.ReturnType = new Response(PrimaryType.Boolean, method.ReturnType.Headers);
                 }
                 else
                 {
@@ -141,10 +141,10 @@ namespace Microsoft.Rest.Generator.Azure
             // Set default response if not defined explicitly
             foreach (var method in serviceClient.Methods)
             {
-                if (method.DefaultResponse == null && method.ReturnType != null)
+                if (method.DefaultResponse.Body == null && method.ReturnType.Body != null)
                 {
-                    method.DefaultResponse = cloudError;
-                }
+                    method.DefaultResponse = new Response(cloudError, method.ReturnType.Headers);
+                }                
             }
         }
 
@@ -214,7 +214,7 @@ namespace Microsoft.Rest.Generator.Azure
                     if (isLongRunning is bool && (bool)isLongRunning)
                     {
                         serviceClient.Methods.Insert(i, (Method) method.Clone());
-                        method.Name = "Begin" + method.Name.ToPascalCase();
+                        method.Name = "Begin" + method.Name.ToPascalCase(); 
                         i++;
                    }
                    
@@ -510,7 +510,7 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 var typeToDelete = serviceClient.ModelTypes.First(t => t.Name == typeName);
 
-                var isUsedInResponses = serviceClient.Methods.Any(m => m.Responses.Any(r => r.Value == typeToDelete));
+                var isUsedInResponses = serviceClient.Methods.Any(m => m.Responses.Any(r => r.Value.Body == typeToDelete));
                 var isUsedInParameters = serviceClient.Methods.Any(m => m.Parameters.Any(p => p.Type == typeToDelete));
                 var isBaseType = serviceClient.ModelTypes.Any(t => t.BaseModelType == typeToDelete);
                 var isUsedInProperties = serviceClient.ModelTypes.Any(t => t.Properties

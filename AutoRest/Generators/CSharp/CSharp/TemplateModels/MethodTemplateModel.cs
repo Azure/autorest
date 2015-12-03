@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -8,7 +9,6 @@ using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using System;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -166,18 +166,29 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
-        /// Get the return type name for the underlyign interface method
+        /// Get the return type name for the underlying interface method
         /// </summary>
         public virtual string OperationResponseReturnTypeString
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "HttpOperationResponse<{0}>", ReturnType.Name);
+                    if (ReturnType.Headers != null)
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                            "HttpOperationResponse<{0},{1}>", ReturnType.Body.Name, ReturnType.Headers.Name);
+                    }
+                    else
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                            "HttpOperationResponse<{0}>", ReturnType.Body.Name);
+                    }
                 }
-                return "HttpOperationResponse";
+                else
+                {
+                    return "HttpOperationResponse";
+                }
             }
         }
 
@@ -188,12 +199,15 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "Task<{0}>", ReturnType.Name);
+                        "Task<{0}>", ReturnType.Body.Name);
                 }
-                return "Task";
+                else
+                {
+                    return "Task";
+                }
             }
         }
 
@@ -204,7 +218,23 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                return "HttpOperationException";
+                if (this.DefaultResponse.Body is CompositeType)
+                {
+                    CompositeType type = this.DefaultResponse.Body as CompositeType;
+                    if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
+                    {
+                        var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
+                        if (ext != null && ext["name"] != null)
+                        {
+                            return ext["name"].ToString();
+                        }
+                    }
+                    return type.Name + "Exception";
+                }
+                else
+                {
+                    return "HttpOperationException";
+                }
             }
         }
 
@@ -248,11 +278,14 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null)
                 {
-                    return ReturnType.Name;
+                    return ReturnType.Body.Name;
                 }
-                return "void";
+                else
+                {
+                    return "void";
+                }
             }
         }
 
@@ -341,17 +374,17 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             var builder = new IndentedStringBuilder();
 
-            foreach (var pathParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Path))
+            foreach (var pathParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
                 builder.AppendLine("{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));",
                     variableName,
                     pathParameter.SerializedName,
                     pathParameter.Type.ToString(ClientReference, pathParameter.Name));
             }
-            if (this.LogicalParameters.Any(p => p.Location == ParameterLocation.Query))
+            if (this.LogicalParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
             {
                 builder.AppendLine("List<string> queryParameters = new List<string>();");
-                foreach (var queryParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Query))
+                foreach (var queryParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query))
                 {
                     builder.AppendLine("if ({0} != null)", queryParameter.Name)
                         .AppendLine("{").Indent()

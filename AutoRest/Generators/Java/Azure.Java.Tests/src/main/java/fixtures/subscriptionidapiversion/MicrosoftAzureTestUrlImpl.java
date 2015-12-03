@@ -11,9 +11,9 @@
 package fixtures.subscriptionidapiversion;
 
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.CustomHeaderInterceptor;
-import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import java.util.UUID;
 import retrofit.Retrofit;
@@ -21,7 +21,7 @@ import retrofit.Retrofit;
 /**
  * Initializes a new instance of the MicrosoftAzureTestUrl class.
  */
-public class MicrosoftAzureTestUrlImpl extends ServiceClient implements MicrosoftAzureTestUrl {
+public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements MicrosoftAzureTestUrl {
     private String baseUri;
     private AzureClient azureClient;
 
@@ -123,14 +123,12 @@ public class MicrosoftAzureTestUrlImpl extends ServiceClient implements Microsof
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private Group group;
-
     /**
-     * Gets the Group object to access its operations.
+     * Gets the GroupOperations object to access its operations.
      * @return the group value.
      */
-    public Group getGroup() {
-        return this.group;
+    public GroupOperations getGroup() {
+        return new GroupOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -196,8 +194,6 @@ public class MicrosoftAzureTestUrlImpl extends ServiceClient implements Microsof
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.group = new GroupImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

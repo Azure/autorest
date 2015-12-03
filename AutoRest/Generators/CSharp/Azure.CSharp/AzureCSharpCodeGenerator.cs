@@ -133,7 +133,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             }
 
             // Models
-            foreach (var model in serviceClient.ModelTypes)
+            foreach (var model in serviceClient.ModelTypes.Concat(serviceClient.HeaderTypes))
             {
                 if (model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) && 
                     (bool) model.Extensions[AzureExtensions.ExternalExtension])
@@ -167,6 +167,21 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                     Model = new PageTemplateModel(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
                 };
                 await Write(pageTemplate, Path.Combine("Models", pageTemplate.Model.TypeDefinitionName + ".cs"));
+            }
+
+            // Exceptions
+            foreach (var exceptionType in serviceClient.ErrorTypes)
+            {
+                if (exceptionType.Name == "CloudError")
+                {
+                    continue;
+                }
+
+                var exceptionTemplate = new ExceptionTemplate
+                {
+                    Model = new ModelTemplateModel(exceptionType),
+                };
+                await Write(exceptionTemplate, Path.Combine("Models", exceptionTemplate.Model.ExceptionTypeDefinitionName + ".cs"));
             }
         }
     }

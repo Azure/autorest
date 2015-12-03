@@ -28,14 +28,12 @@ public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements 
         return this.baseUri;
     }
 
-    private Files files;
-
     /**
      * Gets the Files object to access its operations.
      * @return the files value.
      */
     public Files getFiles() {
-        return this.files;
+        return new FilesImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -70,7 +68,6 @@ public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements 
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.files = new FilesImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

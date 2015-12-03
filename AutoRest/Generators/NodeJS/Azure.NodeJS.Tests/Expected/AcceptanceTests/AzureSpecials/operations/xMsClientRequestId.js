@@ -33,11 +33,11 @@ function XMsClientRequestId(client) {
  * Get method that overwrites x-ms-client-request header with value
  * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -139,11 +139,11 @@ XMsClientRequestId.prototype.get = function (options, callback) {
  * @param {string} xMsClientRequestId This should appear as a method
  * parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

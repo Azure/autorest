@@ -18,6 +18,8 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodystring.models.Error;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -34,18 +36,13 @@ public class StringOperationsImpl implements StringOperations {
     /**
      * Get null string value value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the String object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<String> getNull() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getNull();
-            return getNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<String> getNull() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getNull();
+        return getNullDelegate(call.execute(), null);
     }
 
     /**
@@ -60,7 +57,7 @@ public class StringOperationsImpl implements StringOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -68,7 +65,7 @@ public class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<String> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<String> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<String>()
                 .register(200, new TypeToken<String>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -79,17 +76,12 @@ public class StringOperationsImpl implements StringOperations {
      * Set string value null
      *
      * @param stringBody Possible values for this parameter include: ''
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      */
-    public ServiceResponse<Void> putNull(String stringBody) throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.putNull(stringBody);
-            return putNullDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<Void> putNull(String stringBody) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.putNull(stringBody);
+        return putNullDelegate(call.execute(), null);
     }
 
     /**
@@ -105,7 +97,7 @@ public class StringOperationsImpl implements StringOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putNullDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -113,7 +105,7 @@ public class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -123,18 +115,13 @@ public class StringOperationsImpl implements StringOperations {
     /**
      * Get empty string value value ''
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the String object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<String> getEmpty() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getEmpty();
-            return getEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<String> getEmpty() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getEmpty();
+        return getEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -149,7 +136,7 @@ public class StringOperationsImpl implements StringOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -157,7 +144,7 @@ public class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<String> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<String> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<String>()
                 .register(200, new TypeToken<String>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -168,21 +155,16 @@ public class StringOperationsImpl implements StringOperations {
      * Set string value empty ''
      *
      * @param stringBody Possible values for this parameter include: ''
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putEmpty(String stringBody) throws ServiceException {
+    public ServiceResponse<Void> putEmpty(String stringBody) throws ServiceException, IOException, IllegalArgumentException {
         if (stringBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
-        try {
-            Call<ResponseBody> call = service.putEmpty(stringBody);
-            return putEmptyDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putEmpty(stringBody);
+        return putEmptyDelegate(call.execute(), null);
     }
 
     /**
@@ -193,8 +175,7 @@ public class StringOperationsImpl implements StringOperations {
      */
     public Call<ResponseBody> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter stringBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putEmpty(stringBody);
@@ -203,7 +184,7 @@ public class StringOperationsImpl implements StringOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putEmptyDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -211,7 +192,7 @@ public class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -221,18 +202,13 @@ public class StringOperationsImpl implements StringOperations {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the String object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<String> getMbcs() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getMbcs();
-            return getMbcsDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<String> getMbcs() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getMbcs();
+        return getMbcsDelegate(call.execute(), null);
     }
 
     /**
@@ -247,7 +223,7 @@ public class StringOperationsImpl implements StringOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getMbcsDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -255,7 +231,7 @@ public class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<String> getMbcsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<String> getMbcsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<String>()
                 .register(200, new TypeToken<String>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -266,21 +242,16 @@ public class StringOperationsImpl implements StringOperations {
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      *
      * @param stringBody Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putMbcs(String stringBody) throws ServiceException {
+    public ServiceResponse<Void> putMbcs(String stringBody) throws ServiceException, IOException, IllegalArgumentException {
         if (stringBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
-        try {
-            Call<ResponseBody> call = service.putMbcs(stringBody);
-            return putMbcsDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putMbcs(stringBody);
+        return putMbcsDelegate(call.execute(), null);
     }
 
     /**
@@ -291,8 +262,7 @@ public class StringOperationsImpl implements StringOperations {
      */
     public Call<ResponseBody> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter stringBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putMbcs(stringBody);
@@ -301,7 +271,7 @@ public class StringOperationsImpl implements StringOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putMbcsDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -309,7 +279,7 @@ public class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putMbcsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putMbcsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -319,18 +289,13 @@ public class StringOperationsImpl implements StringOperations {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the String object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<String> getWhitespace() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getWhitespace();
-            return getWhitespaceDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<String> getWhitespace() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getWhitespace();
+        return getWhitespaceDelegate(call.execute(), null);
     }
 
     /**
@@ -345,7 +310,7 @@ public class StringOperationsImpl implements StringOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getWhitespaceDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -353,7 +318,7 @@ public class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<String> getWhitespaceDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<String> getWhitespaceDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<String>()
                 .register(200, new TypeToken<String>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -364,21 +329,16 @@ public class StringOperationsImpl implements StringOperations {
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
      *
      * @param stringBody Possible values for this parameter include: '    Now is the time for all good men to come to the aid of their country    '
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public ServiceResponse<Void> putWhitespace(String stringBody) throws ServiceException {
+    public ServiceResponse<Void> putWhitespace(String stringBody) throws ServiceException, IOException, IllegalArgumentException {
         if (stringBody == null) {
-            throw new ServiceException(
-                new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
-        try {
-            Call<ResponseBody> call = service.putWhitespace(stringBody);
-            return putWhitespaceDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+        Call<ResponseBody> call = service.putWhitespace(stringBody);
+        return putWhitespaceDelegate(call.execute(), null);
     }
 
     /**
@@ -389,8 +349,7 @@ public class StringOperationsImpl implements StringOperations {
      */
     public Call<ResponseBody> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
-            serviceCallback.failure(new ServiceException(
-                new IllegalArgumentException("Parameter stringBody is required and cannot be null.")));
+            serviceCallback.failure(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putWhitespace(stringBody);
@@ -399,7 +358,7 @@ public class StringOperationsImpl implements StringOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putWhitespaceDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -407,7 +366,7 @@ public class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putWhitespaceDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<Void> putWhitespaceDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())
@@ -417,18 +376,13 @@ public class StringOperationsImpl implements StringOperations {
     /**
      * Get String value when no string value is sent in response payload
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the String object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    public ServiceResponse<String> getNotProvided() throws ServiceException {
-        try {
-            Call<ResponseBody> call = service.getNotProvided();
-            return getNotProvidedDelegate(call.execute(), null);
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new ServiceException(ex);
-        }
+    public ServiceResponse<String> getNotProvided() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getNotProvided();
+        return getNotProvidedDelegate(call.execute(), null);
     }
 
     /**
@@ -443,7 +397,7 @@ public class StringOperationsImpl implements StringOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNotProvidedDelegate(response, retrofit));
-                } catch (ServiceException exception) {
+                } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -451,7 +405,7 @@ public class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<String> getNotProvidedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    private ServiceResponse<String> getNotProvidedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         return new ServiceResponseBuilder<String>()
                 .register(200, new TypeToken<String>(){}.getType())
                 .registerError(new TypeToken<Error>(){}.getType())

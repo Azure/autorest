@@ -14,20 +14,22 @@ namespace Microsoft.Rest.Azure
     /// <summary>
     /// Defines long running operation polling state.
     /// </summary>
-    /// <typeparam name="T">Type of resource.</typeparam>
-    internal class PollingState<T> where T : class
+    /// <typeparam name="TBody">Type of resource body.</typeparam>
+    /// <typeparam name="THeader">Type of resource header.</typeparam>
+    internal class PollingState<TBody, THeader> where TBody : class where THeader : class
     {
         /// <summary>
         /// Initializes an instance of PollingState.
         /// </summary>
         /// <param name="response">First operation response.</param>
         /// <param name="retryTimeout">Default timeout.</param>
-        public PollingState(HttpOperationResponse<T> response, int? retryTimeout)
+        public PollingState(HttpOperationResponse<TBody, THeader> response, int? retryTimeout)
         {
             _retryTimeout = retryTimeout;
             Response = response.Response;
             Request = response.Request;
             Resource = response.Body;
+            ResourceHeaders = response.Headers;
 
             string raw = response.Response.Content.ReadAsStringAsync().ConfigureAwait(false)
                 .GetAwaiter().GetResult();
@@ -141,7 +143,12 @@ namespace Microsoft.Rest.Azure
         /// <summary>
         /// Gets or sets resource.
         /// </summary>
-        public T Resource { get; set; }
+        public TBody Resource { get; set; }
+
+        /// <summary>
+        /// Gets or sets resource header.
+        /// </summary>
+        public THeader ResourceHeaders { get; set; }
 
         private int? _retryTimeout;
 
@@ -185,13 +192,14 @@ namespace Microsoft.Rest.Azure
         /// <summary>
         /// Gets AzureOperationResponse from current instance. 
         /// </summary>
-        public AzureOperationResponse<T> AzureOperationResponse
+        public AzureOperationResponse<TBody, THeader> AzureOperationResponse
         {
             get
             {
-                return new AzureOperationResponse<T>
+                return new AzureOperationResponse<TBody, THeader>
                 {
                     Body = Resource,
+                    Headers = ResourceHeaders,
                     Request = Request,
                     Response = Response
                 };

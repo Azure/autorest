@@ -14,6 +14,8 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import org.joda.time.LocalDate;
 import retrofit.Call;
 import retrofit.http.Body;
@@ -58,10 +60,11 @@ public interface DateOperations {
     /**
      * Get null date value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<LocalDate> getNull() throws ServiceException;
+    ServiceResponse<LocalDate> getNull() throws ServiceException, IOException;
 
     /**
      * Get null date value
@@ -74,10 +77,11 @@ public interface DateOperations {
     /**
      * Get invalid date value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<LocalDate> getInvalidDate() throws ServiceException;
+    ServiceResponse<LocalDate> getInvalidDate() throws ServiceException, IOException;
 
     /**
      * Get invalid date value
@@ -90,10 +94,11 @@ public interface DateOperations {
     /**
      * Get overflow date value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<LocalDate> getOverflowDate() throws ServiceException;
+    ServiceResponse<LocalDate> getOverflowDate() throws ServiceException, IOException;
 
     /**
      * Get overflow date value
@@ -106,10 +111,11 @@ public interface DateOperations {
     /**
      * Get underflow date value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<LocalDate> getUnderflowDate() throws ServiceException;
+    ServiceResponse<LocalDate> getUnderflowDate() throws ServiceException, IOException;
 
     /**
      * Get underflow date value
@@ -123,10 +129,12 @@ public interface DateOperations {
      * Put max date value 9999-12-31
      *
      * @param dateBody the LocalDate value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putMaxDate(LocalDate dateBody) throws ServiceException;
+    ServiceResponse<Void> putMaxDate(LocalDate dateBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put max date value 9999-12-31
@@ -140,10 +148,11 @@ public interface DateOperations {
     /**
      * Get max date value 9999-12-31
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<LocalDate> getMaxDate() throws ServiceException;
+    ServiceResponse<LocalDate> getMaxDate() throws ServiceException, IOException;
 
     /**
      * Get max date value 9999-12-31
@@ -157,10 +166,12 @@ public interface DateOperations {
      * Put min date value 0000-01-01
      *
      * @param dateBody the LocalDate value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putMinDate(LocalDate dateBody) throws ServiceException;
+    ServiceResponse<Void> putMinDate(LocalDate dateBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put min date value 0000-01-01
@@ -174,10 +185,11 @@ public interface DateOperations {
     /**
      * Get min date value 0000-01-01
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<LocalDate> getMinDate() throws ServiceException;
+    ServiceResponse<LocalDate> getMinDate() throws ServiceException, IOException;
 
     /**
      * Get min date value 0000-01-01

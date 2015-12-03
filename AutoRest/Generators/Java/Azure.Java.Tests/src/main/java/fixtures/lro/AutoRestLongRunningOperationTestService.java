@@ -13,6 +13,7 @@ package fixtures.lro;
 import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import java.util.List;
 
 /**
@@ -30,6 +31,13 @@ public interface AutoRestLongRunningOperationTestService {
      * @return the list of interceptors.
      */
     List<Interceptor> getClientInterceptors();
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum.
+     */
+    void setLogLevel(Level logLevel);
 
     /**
      * Gets the {@link AzureClient} used for long running operations.
@@ -73,27 +81,27 @@ public interface AutoRestLongRunningOperationTestService {
     void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
-     * Gets the LROs object to access its operations.
+     * Gets the LROsOperations object to access its operations.
      * @return the lROs value.
      */
-    LROs getLROs();
+    LROsOperations getLROs();
 
     /**
-     * Gets the LRORetrys object to access its operations.
+     * Gets the LRORetrysOperations object to access its operations.
      * @return the lRORetrys value.
      */
-    LRORetrys getLRORetrys();
+    LRORetrysOperations getLRORetrys();
 
     /**
-     * Gets the LROSADs object to access its operations.
+     * Gets the LROSADsOperations object to access its operations.
      * @return the lROSADs value.
      */
-    LROSADs getLROSADs();
+    LROSADsOperations getLROSADs();
 
     /**
-     * Gets the LROsCustomHeader object to access its operations.
+     * Gets the LROsCustomHeaderOperations object to access its operations.
      * @return the lROsCustomHeader value.
      */
-    LROsCustomHeader getLROsCustomHeader();
+    LROsCustomHeaderOperations getLROsCustomHeader();
 
 }

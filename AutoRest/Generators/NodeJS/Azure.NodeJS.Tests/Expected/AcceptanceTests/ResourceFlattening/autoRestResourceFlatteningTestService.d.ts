@@ -41,111 +41,112 @@ declare class AutoRestResourceFlatteningTestService {
             /**
          * Put External Resource as an Array
          *
-         * @param {array} [resourceArray] External Resource as an Array to put
+         * @param {object} [options] Optional Parameters.
          * 
-         * @param {object} [options]
-         *
-         * @param {object} [options.customHeaders] headers that will be added to
+         * @param {array} [options.resourceArray] External Resource as an Array to put
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         *
+         * 
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        putArray(resourceArray: models.Resource[], options: RequestOptions, callback: ServiceCallback<void>): void;
-        putArray(resourceArray: models.Resource[], callback: ServiceCallback<void>): void;
+        putArray(options: { resourceArray? : models.Resource[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+        putArray(callback: ServiceCallback<void>): void;
 
         /**
          * Get External Resource as an Array
          *
-         * @param {object} [options]
-         *
-         * @param {object} [options.customHeaders] headers that will be added to
+         * @param {object} [options] Optional Parameters.
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         *
+         * 
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        getArray(options: RequestOptions, callback: ServiceCallback<models.FlattenedProduct[]>): void;
+        getArray(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.FlattenedProduct[]>): void;
         getArray(callback: ServiceCallback<models.FlattenedProduct[]>): void;
 
         /**
          * Put External Resource as a Dictionary
          *
-         * @param {object} [resourceDictionary] External Resource as a Dictionary to
-         * put
+         * @param {object} [options] Optional Parameters.
          * 
-         * @param {object} [options]
-         *
-         * @param {object} [options.customHeaders] headers that will be added to
+         * @param {object} [options.resourceDictionary] External Resource as a
+         * Dictionary to put
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         *
+         * 
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        putDictionary(resourceDictionary: { [propertyName: string]: models.FlattenedProduct }, options: RequestOptions, callback: ServiceCallback<void>): void;
-        putDictionary(resourceDictionary: { [propertyName: string]: models.FlattenedProduct }, callback: ServiceCallback<void>): void;
+        putDictionary(options: { resourceDictionary? : { [propertyName: string]: models.FlattenedProduct }, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+        putDictionary(callback: ServiceCallback<void>): void;
 
         /**
          * Get External Resource as a Dictionary
          *
-         * @param {object} [options]
-         *
-         * @param {object} [options.customHeaders] headers that will be added to
+         * @param {object} [options] Optional Parameters.
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         *
+         * 
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        getDictionary(options: RequestOptions, callback: ServiceCallback<{ [propertyName: string]: models.FlattenedProduct }>): void;
+        getDictionary(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: models.FlattenedProduct }>): void;
         getDictionary(callback: ServiceCallback<{ [propertyName: string]: models.FlattenedProduct }>): void;
 
         /**
          * Put External Resource as a ResourceCollection
          *
-         * @param {object} [resourceComplexObject] External Resource as a
+         * @param {object} [options] Optional Parameters.
+         * 
+         * @param {object} [options.resourceComplexObject] External Resource as a
          * ResourceCollection to put
          * 
-         * @param {object} [resourceComplexObject.productresource]
+         * @param {object} [options.resourceComplexObject.productresource]
          * 
-         * @param {string} [resourceComplexObject.productresource.pname]
+         * @param {string} [options.resourceComplexObject.productresource.pname]
          * 
          * @param {string}
-         * [resourceComplexObject.productresource.flattenedProductType]
+         * [options.resourceComplexObject.productresource.flattenedProductType]
          * 
-         * @param {string} [resourceComplexObject.productresource.provisioningState]
+         * @param {string}
+         * [options.resourceComplexObject.productresource.provisioningState]
          * 
-         * @param {object} [resourceComplexObject.productresource.tags]
+         * @param {object} [options.resourceComplexObject.productresource.tags]
          * 
-         * @param {string} [resourceComplexObject.productresource.location] Resource
-         * Location
+         * @param {string} [options.resourceComplexObject.productresource.location]
+         * Resource Location
          * 
-         * @param {array} [resourceComplexObject.arrayofresources]
+         * @param {array} [options.resourceComplexObject.arrayofresources]
          * 
-         * @param {object} [resourceComplexObject.dictionaryofresources]
+         * @param {object} [options.resourceComplexObject.dictionaryofresources]
          * 
-         * @param {object} [options]
-         *
-         * @param {object} [options.customHeaders] headers that will be added to
+         * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         *
+         * 
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        putResourceCollection(resourceComplexObject: models.ResourceCollection, options: RequestOptions, callback: ServiceCallback<void>): void;
-        putResourceCollection(resourceComplexObject: models.ResourceCollection, callback: ServiceCallback<void>): void;
+        putResourceCollection(options: { resourceComplexObject? : models.ResourceCollection, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+        putResourceCollection(callback: ServiceCallback<void>): void;
 
         /**
          * Get External Resource as a ResourceCollection
          *
-         * @param {object} [options]
-         *
-         * @param {object} [options.customHeaders] headers that will be added to
+         * @param {object} [options] Optional Parameters.
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
          * request
-         *
+         * 
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        getResourceCollection(options: RequestOptions, callback: ServiceCallback<models.ResourceCollection>): void;
+        getResourceCollection(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ResourceCollection>): void;
         getResourceCollection(callback: ServiceCallback<models.ResourceCollection>): void;
 }
 

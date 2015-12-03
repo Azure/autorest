@@ -18,7 +18,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
 {
     public class AzureNodeJSCodeGenerator : NodeJSCodeGenerator
     {
-        private const string ClientRuntimePackage = "ms-rest-azure version 1.1.0";
+        private const string ClientRuntimePackage = "ms-rest-azure version 1.2.0";
         public const string LongRunningExtension = "x-ms-long-running-operation";
 
         // List of models with paging extensions.
@@ -61,6 +61,10 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
+            // MethodNames are normalized explicitly to provide a consitent method name while 
+            // generating cloned methods for long running operations with reserved words. For
+            // example - beginDeleteMethod() insteadof beginDelete() as delete is a reserved word.
+            Namer.NormalizeMethodNames(serviceClient);
             AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
             base.NormalizeClientModel(serviceClient);
             NormalizeApiVersion(serviceClient);
@@ -79,35 +83,6 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                     {
                         model.BaseModelType = new CompositeType { Name = "BaseResource", SerializedName = "BaseResource" };
                     }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Creates long running operation methods.
-        /// </summary>
-        /// <param name="serviceClient"></param>
-        public void AddLongRunningOperations(ServiceClient serviceClient)
-        {
-            if (serviceClient == null)
-            {
-                throw new ArgumentNullException("serviceClient");
-            }
-
-            for (int i = 0; i < serviceClient.Methods.Count; i++)
-            {
-                var method = serviceClient.Methods[i];
-                if (method.Extensions.ContainsKey(LongRunningExtension))
-                {
-                    var isLongRunning = method.Extensions[LongRunningExtension];
-                    if (isLongRunning is bool && (bool)isLongRunning)
-                    {
-                        serviceClient.Methods.Insert(i, (Method)method.Clone());
-                        method.Name = "begin" + Namer.GetMethodName(method.Name.ToPascalCase());
-                        i++;
-                    }
-
-                    method.Extensions.Remove(LongRunningExtension);
                 }
             }
         }
@@ -145,9 +120,9 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 
                 nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
                 string itemName = (string)ext["itemName"] ?? "value";
-                foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key).ToArray())
+                foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
                 {
-                    var compositType = (CompositeType)method.Responses[responseStatus];
+                    var compositType = (CompositeType)method.Responses[responseStatus].Body;
                     var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
                     // if the type is a wrapper over page-able response

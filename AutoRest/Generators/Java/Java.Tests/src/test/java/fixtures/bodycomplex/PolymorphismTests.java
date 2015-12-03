@@ -104,7 +104,7 @@ public class PolymorphismTests {
             body.getSiblings().add(sib2);
 
             client.getPolymorphism().putValidMissingRequired(body);
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             //expected
             Assert.assertTrue(ex.getMessage().contains("siblings.birthday is required and cannot be null."));
         }

@@ -32,6 +32,7 @@ var specials = function (coverage) {
   coverage['AzureXmsRequestClientOverwrite'] = 0;
   coverage['AzureXmsRequestClientOverwriteViaParameter'] = 0;
   coverage['AzureXmsCustomNamedRequestId'] = 0;
+  coverage['AzureODataFilter'] = 0;
 
   router.post('/subscriptionId/:location/string/none/path/:scope/:scenario/:subscription', function (req, res, next) {
     var location = req.params.location;
@@ -170,6 +171,21 @@ var specials = function (coverage) {
         } else {
           utils.send400(res, next, 'Unexpected query values for scenario "' + scenario + '": "' + util.inspect(req.query) + '"');
         }
+  });
+  
+  router.get('/odata/filter', function (req, res, next) {
+        var scenario = 'AzureODataFilter';
+        if (req.query['$filter'] !== "id gt 5 and name eq 'foo'") {
+          utils.send400(res, next, 'Unexpected $filter value for "' + scenario + '": expect "id gt 5 and name eq \'foo\'" actual "' + req.query['$filter'] + '"');
+        }
+        if (req.query['$top'] !== "10") {
+          utils.send400(res, next, 'Unexpected $top value for "' + scenario + '": expect "10" actual "' + req.query['$top'] + '"');
+        }
+        if (req.query['$orderby'] !== "id") {
+          utils.send400(res, next, 'Unexpected $top value for "' + scenario + '": expect "id" actual "' + req.query['$orderby'] + '"');
+        }
+        coverage[scenario]++;
+        res.status(200).end();        
   });
 
   router.get('/overwrite/x-ms-client-request-id/method/', function (req, res, next) {

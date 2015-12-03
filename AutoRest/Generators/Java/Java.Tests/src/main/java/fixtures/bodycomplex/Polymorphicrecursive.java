@@ -15,6 +15,8 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Fish;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -40,10 +42,11 @@ public interface Polymorphicrecursive {
     /**
      * Get complex types that are polymorphic and have recursive references
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Fish object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Fish> getValid() throws ServiceException;
+    ServiceResponse<Fish> getValid() throws ServiceException, IOException;
 
     /**
      * Get complex types that are polymorphic and have recursive references
@@ -109,10 +112,12 @@ public interface Polymorphicrecursive {
          }
      ]
  }
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putValid(Fish complexBody) throws ServiceException;
+    ServiceResponse<Void> putValid(Fish complexBody) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types that are polymorphic and have recursive references

@@ -18,13 +18,15 @@ namespace Microsoft.Rest.Azure.OData
         /// Initializes a new instance of empty ODataQuery.
         /// </summary>
         public ODataQuery()
-        { }
+        {
+            SkipNullFilterParameters = true;
+        }
 
         /// <summary>
         /// Initializes a new instance of ODataQuery with filter.
         /// </summary>
         /// <param name="odataExpression">OData expression.</param>
-        public ODataQuery(string odataExpression)
+        public ODataQuery(string odataExpression) : this()
         {
             if (odataExpression != null)
             {
@@ -84,7 +86,7 @@ namespace Microsoft.Rest.Azure.OData
         /// Initializes a new instance of ODataQuery with filter.
         /// </summary>
         /// <param name="filter">Filter expression.</param>
-        public ODataQuery(Expression<Func<T, bool>> filter)
+        public ODataQuery(Expression<Func<T, bool>> filter) : this()
         {
             SetFilter(filter);
         }
@@ -115,12 +117,17 @@ namespace Microsoft.Rest.Azure.OData
         public int? Skip { get; set; }
 
         /// <summary>
+        /// Indicates whether null values in the Filter should be skipped. Default value is True.
+        /// </summary>
+        public bool SkipNullFilterParameters { get; set; }
+
+        /// <summary>
         /// Sets Filter from an expression.
         /// </summary>
         /// <param name="filter">Filter expression.</param>
         public void SetFilter(Expression<Func<T, bool>> filter)
         {
-            Filter = FilterString.Generate(filter);
+            Filter = FilterString.Generate(filter, SkipNullFilterParameters);
         }
 
         /// <summary>

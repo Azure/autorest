@@ -25,105 +25,105 @@ export interface Implicit {
      *
      * @param {string} pathParameter
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getRequiredPath(pathParameter: string, options: RequestOptions, callback: ServiceCallback<models.ErrorModel>): void;
+    getRequiredPath(pathParameter: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     getRequiredPath(pathParameter: string, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
      * Test implicitly optional query parameter
      *
-     * @param {string} [queryParameter]
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.queryParameter]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putOptionalQuery(queryParameter: string, options: RequestOptions, callback: ServiceCallback<void>): void;
-    putOptionalQuery(queryParameter: string, callback: ServiceCallback<void>): void;
+    putOptionalQuery(options: { queryParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putOptionalQuery(callback: ServiceCallback<void>): void;
 
     /**
      * Test implicitly optional header parameter
      *
-     * @param {string} [queryParameter]
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.queryParameter]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putOptionalHeader(queryParameter: string, options: RequestOptions, callback: ServiceCallback<void>): void;
-    putOptionalHeader(queryParameter: string, callback: ServiceCallback<void>): void;
+    putOptionalHeader(options: { queryParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putOptionalHeader(callback: ServiceCallback<void>): void;
 
     /**
      * Test implicitly optional body parameter
      *
-     * @param {string} [bodyParameter]
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.bodyParameter]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putOptionalBody(bodyParameter: string, options: RequestOptions, callback: ServiceCallback<void>): void;
-    putOptionalBody(bodyParameter: string, callback: ServiceCallback<void>): void;
+    putOptionalBody(options: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putOptionalBody(callback: ServiceCallback<void>): void;
 
     /**
      * Test implicitly required path parameter
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getRequiredGlobalPath(options: RequestOptions, callback: ServiceCallback<models.ErrorModel>): void;
+    getRequiredGlobalPath(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     getRequiredGlobalPath(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
      * Test implicitly required query parameter
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getRequiredGlobalQuery(options: RequestOptions, callback: ServiceCallback<models.ErrorModel>): void;
+    getRequiredGlobalQuery(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     getRequiredGlobalQuery(callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
      * Test implicitly optional query parameter
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getOptionalGlobalQuery(options: RequestOptions, callback: ServiceCallback<models.ErrorModel>): void;
+    getOptionalGlobalQuery(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     getOptionalGlobalQuery(callback: ServiceCallback<models.ErrorModel>): void;
 }
 
@@ -141,32 +141,32 @@ export interface Explicit {
      *
      * @param {number} bodyParameter
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredIntegerParameter(bodyParameter: number, options: RequestOptions, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredIntegerParameter(bodyParameter: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredIntegerParameter(bodyParameter: number, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
      * Test explicitly optional integer. Please put null.
      *
-     * @param {number} [bodyParameter]
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.bodyParameter]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalIntegerParameter(bodyParameter: number, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postOptionalIntegerParameter(bodyParameter: number, callback: ServiceCallback<void>): void;
+    postOptionalIntegerParameter(options: { bodyParameter? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalIntegerParameter(callback: ServiceCallback<void>): void;
 
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with
@@ -175,33 +175,33 @@ export interface Explicit {
      *
      * @param {number} value
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredIntegerProperty(value: number, options: RequestOptions, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredIntegerProperty(value: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredIntegerProperty(value: number, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with
      * 'value' = null.
      *
-     * @param {number} [value]
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.value]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalIntegerProperty(value: number, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postOptionalIntegerProperty(value: number, callback: ServiceCallback<void>): void;
+    postOptionalIntegerProperty(options: { value? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalIntegerProperty(callback: ServiceCallback<void>): void;
 
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =>
@@ -209,33 +209,33 @@ export interface Explicit {
      *
      * @param {number} headerParameter
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredIntegerHeader(headerParameter: number, options: RequestOptions, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredIntegerHeader(headerParameter: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredIntegerHeader(headerParameter: number, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =>
      * null.
      *
-     * @param {number} [headerParameter]
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.headerParameter]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalIntegerHeader(headerParameter: number, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postOptionalIntegerHeader(headerParameter: number, callback: ServiceCallback<void>): void;
+    postOptionalIntegerHeader(options: { headerParameter? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalIntegerHeader(callback: ServiceCallback<void>): void;
 
     /**
      * Test explicitly required string. Please put null and the client library
@@ -243,32 +243,32 @@ export interface Explicit {
      *
      * @param {string} bodyParameter
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredStringParameter(bodyParameter: string, options: RequestOptions, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredStringParameter(bodyParameter: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredStringParameter(bodyParameter: string, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
      * Test explicitly optional string. Please put null.
      *
-     * @param {string} [bodyParameter]
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.bodyParameter]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalStringParameter(bodyParameter: string, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postOptionalStringParameter(bodyParameter: string, callback: ServiceCallback<void>): void;
+    postOptionalStringParameter(options: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalStringParameter(callback: ServiceCallback<void>): void;
 
     /**
      * Test explicitly required string. Please put a valid string-wrapper with
@@ -277,33 +277,33 @@ export interface Explicit {
      *
      * @param {string} value
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredStringProperty(value: string, options: RequestOptions, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredStringProperty(value: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredStringProperty(value: string, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with
      * 'value' = null.
      *
-     * @param {string} [value]
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.value]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalStringProperty(value: string, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postOptionalStringProperty(value: string, callback: ServiceCallback<void>): void;
+    postOptionalStringProperty(options: { value? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalStringProperty(callback: ServiceCallback<void>): void;
 
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =>
@@ -311,33 +311,33 @@ export interface Explicit {
      *
      * @param {string} headerParameter
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredStringHeader(headerParameter: string, options: RequestOptions, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredStringHeader(headerParameter: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredStringHeader(headerParameter: string, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =>
      * null.
      *
-     * @param {string} [bodyParameter]
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.bodyParameter]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalStringHeader(bodyParameter: string, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postOptionalStringHeader(bodyParameter: string, callback: ServiceCallback<void>): void;
+    postOptionalStringHeader(options: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalStringHeader(callback: ServiceCallback<void>): void;
 
     /**
      * Test explicitly required complex object. Please put null and the client
@@ -349,36 +349,36 @@ export interface Explicit {
      * 
      * @param {string} [bodyParameter.name]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredClassParameter(bodyParameter: models.Product, options: RequestOptions, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredClassParameter(bodyParameter: models.Product, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredClassParameter(bodyParameter: models.Product, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
      * Test explicitly optional complex object. Please put null.
      *
-     * @param {object} [bodyParameter]
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {number} [bodyParameter.id]
+     * @param {object} [options.bodyParameter]
      * 
-     * @param {string} [bodyParameter.name]
+     * @param {number} [options.bodyParameter.id]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.bodyParameter.name]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalClassParameter(bodyParameter: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postOptionalClassParameter(bodyParameter: models.Product, callback: ServiceCallback<void>): void;
+    postOptionalClassParameter(options: { bodyParameter? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalClassParameter(callback: ServiceCallback<void>): void;
 
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper
@@ -391,37 +391,37 @@ export interface Explicit {
      * 
      * @param {string} [value.name]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredClassProperty(value: models.Product, options: RequestOptions, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredClassProperty(value: models.Product, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredClassProperty(value: models.Product, callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper
      * with 'value' = null.
      *
-     * @param {object} [value]
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {number} [value.id]
+     * @param {object} [options.value]
      * 
-     * @param {string} [value.name]
+     * @param {number} [options.value.id]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {string} [options.value.name]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalClassProperty(value: models.Product, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postOptionalClassProperty(value: models.Product, callback: ServiceCallback<void>): void;
+    postOptionalClassProperty(options: { value? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalClassProperty(callback: ServiceCallback<void>): void;
 
     /**
      * Test explicitly required array. Please put null and the client library
@@ -429,32 +429,32 @@ export interface Explicit {
      *
      * @param {array} bodyParameter
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredArrayParameter(bodyParameter: string[], options: RequestOptions, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredArrayParameter(bodyParameter: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredArrayParameter(bodyParameter: string[], callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
      * Test explicitly optional array. Please put null.
      *
-     * @param {array} [bodyParameter]
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {array} [options.bodyParameter]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalArrayParameter(bodyParameter: string[], options: RequestOptions, callback: ServiceCallback<void>): void;
-    postOptionalArrayParameter(bodyParameter: string[], callback: ServiceCallback<void>): void;
+    postOptionalArrayParameter(options: { bodyParameter? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalArrayParameter(callback: ServiceCallback<void>): void;
 
     /**
      * Test explicitly required array. Please put a valid array-wrapper with
@@ -463,33 +463,33 @@ export interface Explicit {
      *
      * @param {array} value
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredArrayProperty(value: string[], options: RequestOptions, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredArrayProperty(value: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredArrayProperty(value: string[], callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with
      * 'value' = null.
      *
-     * @param {array} [value]
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {array} [options.value]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalArrayProperty(value: string[], options: RequestOptions, callback: ServiceCallback<void>): void;
-    postOptionalArrayProperty(value: string[], callback: ServiceCallback<void>): void;
+    postOptionalArrayProperty(options: { value? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalArrayProperty(callback: ServiceCallback<void>): void;
 
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =>
@@ -497,31 +497,31 @@ export interface Explicit {
      *
      * @param {array} headerParameter
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequiredArrayHeader(headerParameter: string[], options: RequestOptions, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredArrayHeader(headerParameter: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
     postRequiredArrayHeader(headerParameter: string[], callback: ServiceCallback<models.ErrorModel>): void;
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =>
      * null.
      *
-     * @param {array} [headerParameter]
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {array} [options.headerParameter]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptionalArrayHeader(headerParameter: string[], options: RequestOptions, callback: ServiceCallback<void>): void;
-    postOptionalArrayHeader(headerParameter: string[], callback: ServiceCallback<void>): void;
+    postOptionalArrayHeader(options: { headerParameter? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalArrayHeader(callback: ServiceCallback<void>): void;
 }

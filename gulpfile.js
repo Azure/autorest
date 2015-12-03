@@ -254,7 +254,7 @@ var msbuildDefaults = {
   maxBuffer: MAX_BUFFER,
   verbosity: 'minimal',
   errorOnFail: true,
-  toolsVersion: 14.0
+  toolsVersion: 12.0
 };
 
 gulp.task('clean:node_modules', function(cb) {
@@ -346,8 +346,8 @@ gulp.task('test:clientruntime:node', shell.task('npm test', { cwd: './ClientRunt
 gulp.task('test:clientruntime:nodeazure', shell.task('npm test', { cwd: './ClientRuntimes/NodeJS/ms-rest-azure/', verbosity: 3 }));
 gulp.task('test:clientruntime:ruby', ['syncDependencies:runtime:ruby'], shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest/', verbosity: 3 }));
 gulp.task('test:clientruntime:rubyazure', ['syncDependencies:runtime:rubyazure'], shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest-azure/', verbosity: 3 }));
-gulp.task('test:clientruntime:java', shell.task('gradle build uploadArchives', { cwd: './ClientRuntimes/Java/client-runtime/', verbosity: 3 }));
-gulp.task('test:clientruntime:javaazure', shell.task('gradle build uploadArchives', { cwd: './ClientRuntimes/Java/azure-client-runtime/', verbosity: 3 }));
+gulp.task('test:clientruntime:java', shell.task(basePathOrThrow() + '/gradlew :client-runtime:build', { cwd: './', verbosity: 3 }));
+gulp.task('test:clientruntime:javaazure', shell.task(basePathOrThrow() + '/gradlew :azure-client-runtime:build', { cwd: './', verbosity: 3 }));
 gulp.task('test:clientruntime', function (cb) {
   runSequence('test:clientruntime:node', 'test:clientruntime:nodeazure',
     'test:clientruntime:ruby', 'test:clientruntime:rubyazure',
@@ -360,8 +360,8 @@ gulp.task('test:node:azure', shell.task('npm test', {cwd: './AutoRest/Generators
 gulp.task('test:ruby', ['regenerate:expected:ruby'], shell.task('ruby RspecTests/tests_runner.rb', { cwd: './AutoRest/Generators/Ruby/Ruby.Tests', verbosity: 3 }));
 gulp.task('test:ruby:azure', ['regenerate:expected:rubyazure'], shell.task('ruby RspecTests/tests_runner.rb', { cwd: './AutoRest/Generators/Ruby/Azure.Ruby.Tests', verbosity: 3 }));
 
-gulp.task('test:java', shell.task('gradle build', {cwd: './AutoRest/Generators/Java/Java.Tests/', verbosity: 3}));
-gulp.task('test:java:azure', shell.task('gradle build', {cwd: './AutoRest/Generators/Java/Azure.Java.Tests/', verbosity: 3}));
+gulp.task('test:java', shell.task(basePathOrThrow() + '/gradlew :codegen-tests:build', {cwd: './', verbosity: 3}));
+gulp.task('test:java:azure', shell.task(basePathOrThrow() + '/gradlew :azure-codegen-tests:build', {cwd: './', verbosity: 3}));
 
 var xunitTestsDlls = [
   'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
@@ -407,10 +407,12 @@ var xunitdnx = function(options){
       return path.basename(path.dirname(s))
     }
   };
-  return shell('dnvm use ' + DNX_VERSION + ' -r coreclr -a x64 && dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml"', options);
+  var printStatusCodeCmd = 'echo Status code: %errorlevel%';
+  if (!isWindows) {
+      printStatusCodeCmd = 'echo Status code: $?';
+  }
+  return shell('dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml" && ' + printStatusCodeCmd, options);
 }
-
-gulp.task('dnxinit', shell.task('dnvm install ' + DNX_VERSION + ' -r coreclr -a x64 && dnvm install ' + DNX_VERSION + ' -r clr -a x86', defaultShellOptions));
 
 gulp.task('test:xunit', ['test:xunit:dnx'], function () {
   return gulp.src(xunitTestsDlls).pipe(xunit('<%= file.path %> -noshadow -noappdomain -diagnostics', defaultShellOptions));
@@ -463,17 +465,30 @@ gulp.task('test:nugetPackages:npm', ['test:nugetPackages:generate'], shell.task(
 gulp.task('test:nugetPackages', ['test:nugetPackages:npm', 'test:nugetPackages:xunit']);
 
 gulp.task('test', function(cb){
-  runSequence(
-    'test:xunit',
-    'test:clientruntime',
-    'test:node',
-    'test:node:azure',
-    'test:ruby',
-    'test:ruby:azure',
-    'test:java',
-    'test:java:azure',
-    'test:nugetPackages',
-    cb);
+  if (isWindows) {
+    runSequence(
+      'test:xunit',
+      'test:clientruntime',
+      'test:node',
+      'test:node:azure',
+      'test:ruby',
+      'test:ruby:azure',
+      'test:java',
+      'test:java:azure',
+      'test:nugetPackages',
+      cb);
+  } else {
+    runSequence(
+      'test:xunit',
+      'test:clientruntime',
+      'test:node',
+      'test:node:azure',
+      'test:ruby',
+      'test:ruby:azure',
+      'test:java',
+      'test:java:azure',
+      cb);
+  }
 });
 
 gulp.task('analysis', function(cb) {
@@ -487,5 +502,9 @@ gulp.task('default', function(cb){
   // analysis runs rebuild under the covers, so this cause build to be run in debug
   // the build release causes release bits to be built, so we can package release dlls
   // test then runs in debug, but uses the packages created in package
-  runSequence('dnxinit', 'clean', 'build', 'analysis', 'build:release', 'package', 'test', cb);
+  if (isWindows) {
+    runSequence('clean', 'build', 'analysis', 'build:release', 'package', 'test', cb);
+  } else {
+    runSequence('clean', 'build', 'test', cb);
+  }
 });

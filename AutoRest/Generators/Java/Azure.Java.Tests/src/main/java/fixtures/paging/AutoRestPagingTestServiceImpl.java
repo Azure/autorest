@@ -11,9 +11,9 @@
 package fixtures.paging;
 
 import com.microsoft.rest.AzureClient;
+import com.microsoft.rest.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.CustomHeaderInterceptor;
-import com.microsoft.rest.ServiceClient;
 import com.squareup.okhttp.OkHttpClient;
 import java.util.UUID;
 import retrofit.Retrofit;
@@ -21,7 +21,7 @@ import retrofit.Retrofit;
 /**
  * Initializes a new instance of the AutoRestPagingTestService class.
  */
-public class AutoRestPagingTestServiceImpl extends ServiceClient implements AutoRestPagingTestService {
+public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements AutoRestPagingTestService {
     private String baseUri;
     private AzureClient azureClient;
 
@@ -92,14 +92,12 @@ public class AutoRestPagingTestServiceImpl extends ServiceClient implements Auto
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    private Paging paging;
-
     /**
-     * Gets the Paging object to access its operations.
+     * Gets the PagingOperations object to access its operations.
      * @return the paging value.
      */
-    public Paging getPaging() {
-        return this.paging;
+    public PagingOperations getPaging() {
+        return new PagingOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -164,8 +162,6 @@ public class AutoRestPagingTestServiceImpl extends ServiceClient implements Auto
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.azureClient.setLongRunningOperationRetryTimeout(this.longRunningOperationRetryTimeout);
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.paging = new PagingImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

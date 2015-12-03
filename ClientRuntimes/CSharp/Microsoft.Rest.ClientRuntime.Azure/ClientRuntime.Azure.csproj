@@ -33,6 +33,7 @@
     <Compile Include="CloudException.cs" />
     <Compile Include="IPage.cs" />
     <Compile Include="JsonSerializerExtensions.cs" />
+    <Compile Include="OData\ODataMethodAttribute.cs" />
     <Compile Include="OData\ODataQuery.cs" />
     <Compile Include="OData\FilterString.cs" />
     <Compile Include="OData\UrlExpressionVisitor.cs" />

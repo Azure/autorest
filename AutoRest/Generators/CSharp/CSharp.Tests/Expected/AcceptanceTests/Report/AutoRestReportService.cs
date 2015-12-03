@@ -196,12 +196,19 @@ namespace Fixtures.AcceptanceTestsReport
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)statusCode != 200)
             {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
-                if (errorBody != null)
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                try
                 {
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -218,8 +225,15 @@ namespace Fixtures.AcceptanceTestsReport
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<IDictionary<string, int?>>(responseContent, this.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<IDictionary<string, int?>>(responseContent, this.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {

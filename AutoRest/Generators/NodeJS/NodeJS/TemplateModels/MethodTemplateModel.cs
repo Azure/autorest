@@ -34,6 +34,59 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 OperationName = serviceClient.Name;
             }
+
+            BuildOptionsParameterTemplateModel();
+        }
+
+        private void BuildOptionsParameterTemplateModel()
+        {
+            CompositeType optionsType;
+            optionsType = new CompositeType
+            {
+                Name = "options",
+                SerializedName = "options",
+                Documentation = "Optional Parameters."
+            };
+            var optionsParmeter = new Parameter
+            {
+                Name = "options",
+                SerializedName = "options",
+                IsRequired = false,
+                Documentation = "Optional Parameters.",
+                Location = ParameterLocation.None,
+                Type = optionsType
+            };
+
+            IEnumerable<ParameterTemplateModel> optionalParameters = LocalParameters.Where(p => !p.IsRequired);
+            foreach (ParameterTemplateModel parameter in optionalParameters)
+            {
+                Property optionalProperty = new Property
+                {
+                    IsReadOnly = false,
+                    Name = parameter.Name,
+                    IsRequired = parameter.IsRequired,
+                    DefaultValue = parameter.DefaultValue,
+                    Documentation = parameter.Documentation,
+                    Type = parameter.Type,
+                    SerializedName = parameter.SerializedName   
+                };
+                parameter.Constraints.ToList().ForEach(x => optionalProperty.Constraints.Add(x.Key, x.Value));
+                parameter.Extensions.ToList().ForEach(x => optionalProperty.Extensions.Add(x.Key, x.Value));
+                ((CompositeType)optionsParmeter.Type).Properties.Add(optionalProperty);
+            }
+
+            //Adding customHeaders to the options object
+            Property customHeaders = new Property
+            {
+                IsReadOnly = false,
+                Name = "customHeaders",
+                IsRequired = false,
+                Documentation = "Headers that will be added to the request",
+                Type = PrimaryType.Object,
+                SerializedName = "customHeaders"
+            };
+            ((CompositeType)optionsParmeter.Type).Properties.Add(customHeaders);
+            OptionsParameterTemplateModel = new ParameterTemplateModel(optionsParmeter);
         }
 
         public string OperationName { get; set; }
@@ -41,6 +94,8 @@ namespace Microsoft.Rest.Generator.NodeJS
         public ServiceClient ServiceClient { get; set; }
 
         public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+
+        public ParameterTemplateModel OptionsParameterTemplateModel { get; private set; }
 
         protected List<ParameterTemplateModel> GroupedParameterTemplateModels { get; private set; }
 
@@ -81,12 +136,11 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in LocalParameters)
+                foreach (var parameter in LocalParametersWithOptions)
                 {
                     declarations.Add(parameter.Name);
                 }
 
-                declarations.Add("options");
                 var declaration = string.Join(", ", declarations);
                 declaration += ", ";
                 return declaration;
@@ -102,7 +156,8 @@ namespace Microsoft.Rest.Generator.NodeJS
             StringBuilder declarations = new StringBuilder();
 
             bool first = true;
-            foreach (var parameter in LocalParameters)
+            IEnumerable<ParameterTemplateModel> requiredParameters = LocalParameters.Where(p => p.IsRequired);
+            foreach (var parameter in requiredParameters)
             {
                 if (!first)
                     declarations.Append(", ");
@@ -123,7 +178,26 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 if (!first)
                     declarations.Append(", ");
-                declarations.Append("options: RequestOptions");
+                declarations.Append("options: { ");
+                var optionalParameters = ((CompositeType)OptionsParameterTemplateModel.Type).Properties;
+                for(int i = 0; i < optionalParameters.Count; i++)
+                {
+                    if (i != 0)
+                    {
+                        declarations.Append(", ");
+                    }
+                    declarations.Append(optionalParameters[i].Name);
+                    declarations.Append("? : ");
+                    if (optionalParameters[i].Name.Equals("customHeaders", StringComparison.OrdinalIgnoreCase))
+                    {
+                        declarations.Append("{ [headerName: string]: string; }");
+                    }
+                    else
+                    {
+                        declarations.Append(optionalParameters[i].Type.TSType(false));
+                    }
+                }
+                declarations.Append(" }");
             }
 
             return declarations.ToString();
@@ -149,7 +223,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         public string MethodParameterDeclarationWithCallbackTS(bool includeOptions)
         {
             //var parameters = MethodParameterDeclarationTS(includeOptions);
-            var returnTypeTSString = ReturnType == null ? "void" : ReturnType.TSType(false);
+            var returnTypeTSString = ReturnType.Body == null ? "void" : ReturnType.Body.TSType(false);
 
             StringBuilder parameters = new StringBuilder();
             parameters.Append(MethodParameterDeclarationTS(includeOptions));
@@ -163,15 +237,29 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         /// <summary>
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
-        /// exclude global parameters
+        /// exclude global parameters.
         /// </summary>
-        public IEnumerable<ParameterTemplateModel> LocalParameters
+        internal IEnumerable<ParameterTemplateModel> LocalParameters
         {
             get
             {
                 return ParameterTemplateModels.Where(
                     p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
                     .OrderBy(item => !item.IsRequired);
+            }
+        }
+
+        /// <summary>
+        /// Get the parameters that are actually method parameters in the order they appear in the method signature
+        /// exclude global parameters. All the optional parameters are pushed into the second last "options" parameter.
+        /// </summary>
+        public IEnumerable<ParameterTemplateModel> LocalParametersWithOptions
+        {
+            get
+            {
+                List<ParameterTemplateModel> requiredParamsWithOptionsList = LocalParameters.Where(p => p.IsRequired).ToList();
+                requiredParamsWithOptionsList.Add(OptionsParameterTemplateModel);
+                return requiredParamsWithOptionsList as IEnumerable<ParameterTemplateModel>;
             }
         }
 
@@ -187,7 +275,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 var visitedHash = new Dictionary<string, ParameterTemplateModel>();
                 var retValue = new Stack<ParameterTemplateModel>();
 
-                foreach (var param in LocalParameters)
+                foreach (var param in LocalParametersWithOptions)
                 {
                     traversalStack.Push(param);
                 }
@@ -246,17 +334,20 @@ namespace Microsoft.Rest.Generator.NodeJS
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null)
                 {
-                    return ReturnType.Name;
+                    return ReturnType.Body.Name;
                 }
-                return "null";
+                else
+                {
+                    return "null";
+                }
             }
         }
 
         /// <summary>
         /// The Deserialization Error handling code block that provides a useful Error 
-        /// message when exceptions occure in deserialization along with the request 
+        /// message when exceptions occur in deserialization along with the request 
         /// and response object
         /// </summary>
         public string DeserializationError
@@ -708,24 +799,27 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 string result = null;
-                if (ReturnType is EnumType)
+
+                if (ReturnType.Body is EnumType)
                 {
+                    var returnBodyType = ReturnType.Body as EnumType;
+
                     string enumValues = "";
-                    for (var i = 0; i < ((EnumType)ReturnType).Values.Count; i++)
+                    for (var i = 0; i < returnBodyType.Values.Count; i++)
                     {
-                        if (i == ((EnumType)ReturnType).Values.Count - 1)
+                        if (i == returnBodyType.Values.Count - 1)
                         {
-                            enumValues += ((EnumType)ReturnType).Values[i].SerializedName;
+                            enumValues += returnBodyType.Values[i].SerializedName;
                         }
                         else
                         {
-                            enumValues += ((EnumType)ReturnType).Values[i].SerializedName + ", ";
+                            enumValues += returnBodyType.Values[i].SerializedName + ", ";
                         }
                     }
                     result = string.Format(CultureInfo.InvariantCulture,
                         "Possible values for result are - {0}.", enumValues);
                 }
-                else if (ReturnType is CompositeType)
+                else if (ReturnType.Body is CompositeType)
                 {
                     result = string.Format(CultureInfo.InvariantCulture,
                         "See {{@link {0}}} for more information.", ReturnTypeString);
@@ -741,23 +835,25 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 string typeName = "object";
-                if (ReturnType == null)
+                IType returnBodyType = ReturnType.Body;
+
+                if (returnBodyType == null)
                 {
                     typeName = "null";
                 }
-                else if (ReturnType is PrimaryType)
+                else if (returnBodyType is PrimaryType)
                 {
-                    typeName = ReturnType.Name;
+                    typeName = returnBodyType.Name;
                 }
-                else if (ReturnType is SequenceType)
+                else if (returnBodyType is SequenceType)
                 {
                     typeName = "array";
                 }
-                else if (ReturnType is EnumType)
+                else if (returnBodyType is EnumType)
                 {
                     typeName = PrimaryType.String.Name;
                 }
-                else if (ReturnType is CompositeType || ReturnType is DictionaryType)
+                else if (returnBodyType is CompositeType || returnBodyType is DictionaryType)
                 {
                     typeName = PrimaryType.Object.Name;
                 }
@@ -814,6 +910,20 @@ namespace Microsoft.Rest.Generator.NodeJS
                 transformation.ParameterMappings.Select(m => 
                     string.Format(CultureInfo.InvariantCulture,
                     "({0} !== null && {0} !== undefined)", m.InputParameter.Name)));
+        }
+
+        public string  BuildOptionalMappings()
+        {
+            IEnumerable<Property> optionalParameters = 
+                ((CompositeType)OptionsParameterTemplateModel.Type)
+                .Properties.Where(p => p.Name != "customHeaders");
+            var builder = new IndentedStringBuilder("  ");
+            foreach (var optionalParam in optionalParameters)
+            {
+                builder.AppendLine("var {0} = {1} ? {1}.{2} : undefined;", 
+                    optionalParam.Name, OptionsParameterTemplateModel.Name, optionalParam.Name);
+            }
+            return builder.ToString();
         }
     }        
 }

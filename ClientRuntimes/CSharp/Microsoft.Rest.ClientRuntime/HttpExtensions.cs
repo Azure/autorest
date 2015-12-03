@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Rest
 {
@@ -133,6 +134,35 @@ namespace Microsoft.Rest
                                         "=" +
                                         (kv.Value == null ? string.Empty : kv.Value.ToString()))
                     .ToArray()) + "}";
+        }
+
+        /// <summary>
+        /// Serializes HttpResponseHeaders as Json dictionary.
+        /// </summary>
+        /// <param name="headers">HttpResponseHeaders</param>
+        /// <returns>Json string</returns>
+        public static JObject ToJson(this HttpResponseHeaders headers)
+        {
+            if (headers == null || !headers.Any())
+            {
+                return new JObject();
+            }
+            else
+            {
+                var jObject = new JObject();
+                foreach (var httpResponseHeader in headers)
+                {
+                    if (httpResponseHeader.Value.Count() > 1)
+                    {
+                        jObject[httpResponseHeader.Key] = new JArray(httpResponseHeader.Value);
+                    }
+                    else
+                    {
+                        jObject[httpResponseHeader.Key] = httpResponseHeader.Value.FirstOrDefault();
+                    }
+                }
+                return jObject;
+            }
         }
     }
 }

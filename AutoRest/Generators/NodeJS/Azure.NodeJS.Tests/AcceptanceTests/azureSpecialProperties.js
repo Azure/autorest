@@ -126,10 +126,10 @@ describe('nodejs', function () {
         testClient.skipUrlEncoding.getPathQueryValid(unencodedQuery, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
-          testClient.skipUrlEncoding.getSwaggerQueryValid(unencodedQuery, function (error, result, request, response) {
+          testClient.skipUrlEncoding.getSwaggerQueryValid({ q1: unencodedQuery }, function (error, result, request, response) {
             should.not.exist(error);
             response.statusCode.should.equal(200);
-            testClient.skipUrlEncoding.getMethodQueryNull(null, function (error, result, request, response) {
+            testClient.skipUrlEncoding.getMethodQueryNull({ q1: null }, function (error, result, request, response) {
               should.not.exist(error);
               response.statusCode.should.equal(200);
               done();
@@ -165,6 +165,14 @@ describe('nodejs', function () {
         response.statusCode.should.equal(200);
         should.not.exist(request.headers["x-ms-client-request-id"]);
         should.equal(response.headers["foo-request-id"], "123");
+        done();
+      });
+    });
+    
+    it('should support OData filter', function (done) {
+      testClient.odata.getWithFilter("id gt 5 and name eq 'foo'", 10, "id", function (error, result, request, response) {
+        should.not.exist(error);
+        response.statusCode.should.equal(200);
         done();
       });
     });

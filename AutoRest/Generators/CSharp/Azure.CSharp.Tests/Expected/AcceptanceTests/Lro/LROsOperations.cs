@@ -66,7 +66,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut200SucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -157,12 +157,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 200 && (int)statusCode != 204)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -183,8 +190,15 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -211,7 +225,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut200SucceededNoStateWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -302,12 +316,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -328,8 +349,15 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -357,7 +385,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut202Retry200WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -449,12 +477,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -475,8 +510,15 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 202)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -505,7 +547,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut201CreatingSucceeded200WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -598,12 +640,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 200 && (int)statusCode != 201)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -624,14 +673,28 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             // Deserialize Response
             if ((int)statusCode == 201)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -660,7 +723,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut200UpdatingSucceeded204WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -753,12 +816,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -779,8 +849,15 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -809,7 +886,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut201CreatingFailed200WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -902,12 +979,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 200 && (int)statusCode != 201)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -928,14 +1012,28 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             // Deserialize Response
             if ((int)statusCode == 201)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -964,7 +1062,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Product> response = await BeginPut200Acceptedcanceled200WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -1057,12 +1155,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -1083,8 +1188,15 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -1107,12 +1219,12 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutNoHeaderInRetryWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPutNoHeaderInRetryHeaders>> PutNoHeaderInRetryWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutNoHeaderInRetryWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROsPutNoHeaderInRetryHeaders> response = await BeginPutNoHeaderInRetryWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -1131,7 +1243,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutNoHeaderInRetryWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPutNoHeaderInRetryHeaders>> BeginPutNoHeaderInRetryWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1204,12 +1316,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -1220,7 +1339,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROsPutNoHeaderInRetryHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -1230,8 +1349,23 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 202)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+            }
+            try
+            {
+                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPutNoHeaderInRetryHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -1254,12 +1388,12 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPutAsyncRetrySucceededHeaders>> PutAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRetrySucceededWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROsPutAsyncRetrySucceededHeaders> response = await BeginPutAsyncRetrySucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -1278,7 +1412,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPutAsyncRetrySucceededHeaders>> BeginPutAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1351,12 +1485,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -1367,7 +1508,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROsPutAsyncRetrySucceededHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -1377,8 +1518,23 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+            }
+            try
+            {
+                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPutAsyncRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -1401,12 +1557,12 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPutAsyncNoRetrySucceededHeaders>> PutAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncNoRetrySucceededWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROsPutAsyncNoRetrySucceededHeaders> response = await BeginPutAsyncNoRetrySucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -1425,7 +1581,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPutAsyncNoRetrySucceededHeaders>> BeginPutAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1498,12 +1654,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -1514,7 +1677,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROsPutAsyncNoRetrySucceededHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -1524,8 +1687,23 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+            }
+            try
+            {
+                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPutAsyncNoRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -1548,12 +1726,12 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncRetryFailedWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPutAsyncRetryFailedHeaders>> PutAsyncRetryFailedWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncRetryFailedWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROsPutAsyncRetryFailedHeaders> response = await BeginPutAsyncRetryFailedWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -1572,7 +1750,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncRetryFailedWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPutAsyncRetryFailedHeaders>> BeginPutAsyncRetryFailedWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1645,12 +1823,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -1661,7 +1846,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROsPutAsyncRetryFailedHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -1671,8 +1856,23 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+            }
+            try
+            {
+                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPutAsyncRetryFailedHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -1695,12 +1895,12 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncNoRetrycanceledWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPutAsyncNoRetrycanceledHeaders>> PutAsyncNoRetrycanceledWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncNoRetrycanceledWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROsPutAsyncNoRetrycanceledHeaders> response = await BeginPutAsyncNoRetrycanceledWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -1719,7 +1919,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncNoRetrycanceledWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPutAsyncNoRetrycanceledHeaders>> BeginPutAsyncNoRetrycanceledWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1792,12 +1992,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -1808,7 +2015,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROsPutAsyncNoRetrycanceledHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -1818,8 +2025,23 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+            }
+            try
+            {
+                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPutAsyncNoRetrycanceledHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -1842,12 +2064,12 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PutAsyncNoHeaderInRetryWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPutAsyncNoHeaderInRetryHeaders>> PutAsyncNoHeaderInRetryWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPutAsyncNoHeaderInRetryWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROsPutAsyncNoHeaderInRetryHeaders> response = await BeginPutAsyncNoHeaderInRetryWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Product>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -1866,7 +2088,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPutAsyncNoHeaderInRetryWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPutAsyncNoHeaderInRetryHeaders>> BeginPutAsyncNoHeaderInRetryWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1939,12 +2161,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 201)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -1955,7 +2184,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROsPutAsyncNoHeaderInRetryHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -1965,8 +2194,23 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 201)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+            }
+            try
+            {
+                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPutAsyncNoHeaderInRetryHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -1992,7 +2236,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Sku> response = await BeginPutNonResourceWithHttpMessagesAsync(
                 sku, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Sku>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -2082,12 +2326,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -2108,8 +2359,15 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 202)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -2135,7 +2393,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<Sku> response = await BeginPutAsyncNonResourceWithHttpMessagesAsync(
                 sku, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<Sku>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -2225,12 +2483,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -2251,8 +2516,15 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 202)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -2278,7 +2550,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<SubProduct> response = await BeginPutSubResourceWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<SubProduct>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -2368,12 +2640,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -2394,8 +2673,15 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 202)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<SubProduct>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<SubProduct>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -2421,7 +2707,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Send Request
             AzureOperationResponse<SubProduct> response = await BeginPutAsyncSubResourceWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync<SubProduct>(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(response,
                 customHeaders,
                 cancellationToken);
         }
@@ -2511,12 +2797,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -2537,8 +2830,15 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 202)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<SubProduct>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<SubProduct>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -2559,10 +2859,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> DeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsDeleteProvisioning202Accepted200SucceededHeaders>> DeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse<Product> response = await BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROsDeleteProvisioning202Accepted200SucceededHeaders> response = await BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -2579,7 +2879,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsDeleteProvisioning202Accepted200SucceededHeaders>> BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2647,12 +2947,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 200 && (int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -2663,7 +2970,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROsDeleteProvisioning202Accepted200SucceededHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -2673,14 +2980,36 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             // Deserialize Response
             if ((int)statusCode == 202)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+            }
+            try
+            {
+                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsDeleteProvisioning202Accepted200SucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -2701,10 +3030,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> DeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsDeleteProvisioning202DeletingFailed200Headers>> DeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse<Product> response = await BeginDeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROsDeleteProvisioning202DeletingFailed200Headers> response = await BeginDeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -2721,7 +3050,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginDeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsDeleteProvisioning202DeletingFailed200Headers>> BeginDeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2789,12 +3118,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 200 && (int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -2805,7 +3141,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROsDeleteProvisioning202DeletingFailed200Headers>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -2815,14 +3151,36 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             // Deserialize Response
             if ((int)statusCode == 202)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+            }
+            try
+            {
+                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsDeleteProvisioning202DeletingFailed200Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -2843,10 +3201,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> DeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsDeleteProvisioning202Deletingcanceled200Headers>> DeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse<Product> response = await BeginDeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROsDeleteProvisioning202Deletingcanceled200Headers> response = await BeginDeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -2863,7 +3221,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginDeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsDeleteProvisioning202Deletingcanceled200Headers>> BeginDeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2931,12 +3289,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 200 && (int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -2947,7 +3312,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROsDeleteProvisioning202Deletingcanceled200Headers>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -2957,14 +3322,36 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             // Deserialize Response
             if ((int)statusCode == 202)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+            }
+            try
+            {
+                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsDeleteProvisioning202Deletingcanceled200Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -3067,12 +3454,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 204)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -3108,10 +3502,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> Delete202Retry200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsDelete202Retry200Headers>> Delete202Retry200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse<Product> response = await BeginDelete202Retry200WithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROsDelete202Retry200Headers> response = await BeginDelete202Retry200WithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -3127,7 +3521,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginDelete202Retry200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsDelete202Retry200Headers>> BeginDelete202Retry200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3195,12 +3589,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 200 && (int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -3211,7 +3612,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROsDelete202Retry200Headers>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -3221,8 +3622,23 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+            }
+            try
+            {
+                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsDelete202Retry200Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -3242,10 +3658,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> Delete202NoRetry204WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsDelete202NoRetry204Headers>> Delete202NoRetry204WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse<Product> response = await BeginDelete202NoRetry204WithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROsDelete202NoRetry204Headers> response = await BeginDelete202NoRetry204WithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -3261,7 +3677,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginDelete202NoRetry204WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsDelete202NoRetry204Headers>> BeginDelete202NoRetry204WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3329,12 +3745,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 200 && (int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -3345,7 +3768,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROsDelete202NoRetry204Headers>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -3355,8 +3778,23 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+            }
+            try
+            {
+                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsDelete202NoRetry204Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -3463,12 +3901,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 204 && (int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -3591,12 +4036,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 204 && (int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -3719,12 +4171,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -3847,12 +4306,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -3975,12 +4441,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -4103,12 +4576,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -4231,12 +4711,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202 && (int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -4257,14 +4744,28 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 202)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
             }
             if (shouldTrace)
             {
@@ -4382,12 +4883,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -4425,10 +4933,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> Post202NoRetry204WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPost202NoRetry204Headers>> Post202NoRetry204WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse<Product> response = await BeginPost202NoRetry204WithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROsPost202NoRetry204Headers> response = await BeginPost202NoRetry204WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -4446,7 +4954,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPost202NoRetry204WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPost202NoRetry204Headers>> BeginPost202NoRetry204WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4519,12 +5027,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -4535,7 +5050,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROsPost202NoRetry204Headers>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -4545,8 +5060,23 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 202)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+            }
+            try
+            {
+                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPost202NoRetry204Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -4569,10 +5099,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PostAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPostAsyncRetrySucceededHeaders>> PostAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse<Product> response = await BeginPostAsyncRetrySucceededWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROsPostAsyncRetrySucceededHeaders> response = await BeginPostAsyncRetrySucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -4591,7 +5121,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPostAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPostAsyncRetrySucceededHeaders>> BeginPostAsyncRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4664,12 +5194,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202 && (int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -4680,7 +5217,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROsPostAsyncRetrySucceededHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -4690,8 +5227,23 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+            }
+            try
+            {
+                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPostAsyncRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -4714,10 +5266,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> PostAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPostAsyncNoRetrySucceededHeaders>> PostAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse<Product> response = await BeginPostAsyncNoRetrySucceededWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LROsPostAsyncNoRetrySucceededHeaders> response = await BeginPostAsyncNoRetrySucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -4736,7 +5288,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Product>> BeginPostAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Product,LROsPostAsyncNoRetrySucceededHeaders>> BeginPostAsyncNoRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4809,12 +5361,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202 && (int)statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -4825,7 +5384,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse<Product>();
+            var result = new AzureOperationResponse<Product,LROsPostAsyncNoRetrySucceededHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
@@ -4835,8 +5394,23 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             // Deserialize Response
             if ((int)statusCode == 200)
             {
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                try
+                {
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+            }
+            try
+            {
+                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPostAsyncNoRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -4954,12 +5528,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;
@@ -5093,12 +5674,19 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             if ((int)statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
-                string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
-                if (errorBody != null)
+                try
                 {
-                    ex = new CloudException(errorBody.Message);
-                    ex.Body = errorBody;
+                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    if (errorBody != null)
+                    {
+                        ex = new CloudException(errorBody.Message);
+                        ex.Body = errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
                 }
                 ex.Request = httpRequest;
                 ex.Response = httpResponse;

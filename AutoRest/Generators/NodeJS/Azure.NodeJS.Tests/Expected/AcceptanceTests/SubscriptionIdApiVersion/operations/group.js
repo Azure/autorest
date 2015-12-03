@@ -34,11 +34,11 @@ function Group(client) {
  *
  * @param {string} resourceGroupName Resource Group name 'testgroup101'.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

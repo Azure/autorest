@@ -11,6 +11,7 @@
     "AutoRest/Generators/CSharp/Azure.CSharp.Tests"
   ],
   "sdk": {
+    "runtime": "coreclr",
     "version": "1.0.0-rc1-final"
   }
 }

@@ -28,14 +28,12 @@ public class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRe
         return this.baseUri;
     }
 
-    private DateOperations dateOperations;
-
     /**
      * Gets the DateOperations object to access its operations.
      * @return the dateOperations value.
      */
     public DateOperations getDateOperations() {
-        return this.dateOperations;
+        return new DateOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -70,7 +68,6 @@ public class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRe
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.dateOperations = new DateOperationsImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }

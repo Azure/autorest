@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -63,10 +64,11 @@ public interface IntOperations {
     /**
      * Get null Int value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Integer object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Integer> getNull() throws ServiceException;
+    ServiceResponse<Integer> getNull() throws ServiceException, IOException;
 
     /**
      * Get null Int value
@@ -79,10 +81,11 @@ public interface IntOperations {
     /**
      * Get invalid Int value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Integer object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Integer> getInvalid() throws ServiceException;
+    ServiceResponse<Integer> getInvalid() throws ServiceException, IOException;
 
     /**
      * Get invalid Int value
@@ -95,10 +98,11 @@ public interface IntOperations {
     /**
      * Get overflow Int32 value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Integer object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Integer> getOverflowInt32() throws ServiceException;
+    ServiceResponse<Integer> getOverflowInt32() throws ServiceException, IOException;
 
     /**
      * Get overflow Int32 value
@@ -111,10 +115,11 @@ public interface IntOperations {
     /**
      * Get underflow Int32 value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Integer object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Integer> getUnderflowInt32() throws ServiceException;
+    ServiceResponse<Integer> getUnderflowInt32() throws ServiceException, IOException;
 
     /**
      * Get underflow Int32 value
@@ -127,10 +132,11 @@ public interface IntOperations {
     /**
      * Get overflow Int64 value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Long object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Long> getOverflowInt64() throws ServiceException;
+    ServiceResponse<Long> getOverflowInt64() throws ServiceException, IOException;
 
     /**
      * Get overflow Int64 value
@@ -143,10 +149,11 @@ public interface IntOperations {
     /**
      * Get underflow Int64 value
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Long object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Long> getUnderflowInt64() throws ServiceException;
+    ServiceResponse<Long> getUnderflowInt64() throws ServiceException, IOException;
 
     /**
      * Get underflow Int64 value
@@ -160,10 +167,11 @@ public interface IntOperations {
      * Put max int32 value
      *
      * @param intBody the int value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putMax32(int intBody) throws ServiceException;
+    ServiceResponse<Void> putMax32(int intBody) throws ServiceException, IOException;
 
     /**
      * Put max int32 value
@@ -178,10 +186,11 @@ public interface IntOperations {
      * Put max int64 value
      *
      * @param intBody the long value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putMax64(long intBody) throws ServiceException;
+    ServiceResponse<Void> putMax64(long intBody) throws ServiceException, IOException;
 
     /**
      * Put max int64 value
@@ -196,10 +205,11 @@ public interface IntOperations {
      * Put min int32 value
      *
      * @param intBody the int value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putMin32(int intBody) throws ServiceException;
+    ServiceResponse<Void> putMin32(int intBody) throws ServiceException, IOException;
 
     /**
      * Put min int32 value
@@ -214,10 +224,11 @@ public interface IntOperations {
      * Put min int64 value
      *
      * @param intBody the long value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putMin64(long intBody) throws ServiceException;
+    ServiceResponse<Void> putMin64(long intBody) throws ServiceException, IOException;
 
     /**
      * Put min int64 value

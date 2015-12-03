@@ -33,7 +33,7 @@ else
 {
 @: * @@throws @exception
 }
-@if (Model.ReturnType != null)
+@if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object wrapped in ServiceResponse if successful.
 }

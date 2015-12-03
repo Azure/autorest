@@ -1,6 +1,6 @@
 package fixtures.bodydate;
 
-import com.microsoft.rest.ServiceException;
+import org.joda.time.IllegalFieldValueException;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -29,8 +29,7 @@ public class DateOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("Invalid format"));
+            Assert.assertEquals(IllegalArgumentException.class, exception.getClass());
         }
     }
 
@@ -41,8 +40,7 @@ public class DateOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("Invalid format"));
+            Assert.assertEquals(IllegalArgumentException.class, exception.getClass());
         }
     }
 
@@ -53,8 +51,7 @@ public class DateOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("IllegalFieldValueException"));
+            Assert.assertEquals(IllegalFieldValueException.class, exception.getClass());
         }
     }
 

@@ -100,6 +100,10 @@ namespace Microsoft.Rest.Modeler.Swagger
                         var method = BuildMethod(verb.ToHttpMethod(), path.Key, methodName, operation);
                         method.Group = methodGroup;
                         ServiceClient.Methods.Add(method);
+                        if (method.DefaultResponse.Body is CompositeType)
+                        {
+                            ServiceClient.ErrorTypes.Add((CompositeType)method.DefaultResponse.Body);
+                        }
                     }
                     else
                     {

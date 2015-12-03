@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
 
@@ -34,10 +35,11 @@ public interface HttpFailure {
     /**
      * Get empty error form server
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Boolean> getEmptyError() throws ServiceException;
+    ServiceResponse<Boolean> getEmptyError() throws ServiceException, IOException;
 
     /**
      * Get empty error form server

@@ -13,6 +13,7 @@ package fixtures.subscriptionidapiversion;
 import com.microsoft.rest.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import java.util.List;
 
 /**
@@ -30,6 +31,13 @@ public interface MicrosoftAzureTestUrl {
      * @return the list of interceptors.
      */
     List<Interceptor> getClientInterceptors();
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum.
+     */
+    void setLogLevel(Level logLevel);
 
     /**
      * Gets the {@link AzureClient} used for long running operations.
@@ -94,9 +102,9 @@ public interface MicrosoftAzureTestUrl {
     void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
-     * Gets the Group object to access its operations.
+     * Gets the GroupOperations object to access its operations.
      * @return the group value.
      */
-    Group getGroup();
+    GroupOperations getGroup();
 
 }

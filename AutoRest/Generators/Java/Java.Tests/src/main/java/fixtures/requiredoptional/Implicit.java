@@ -15,6 +15,8 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.requiredoptional.models.Error;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -59,10 +61,12 @@ public interface Implicit {
      * Test implicitly required path parameter
      *
      * @param pathParameter the String value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Error> getRequiredPath(String pathParameter) throws ServiceException;
+    ServiceResponse<Error> getRequiredPath(String pathParameter) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Test implicitly required path parameter
@@ -77,10 +81,11 @@ public interface Implicit {
      * Test implicitly optional query parameter
      *
      * @param queryParameter the String value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putOptionalQuery(String queryParameter) throws ServiceException;
+    ServiceResponse<Void> putOptionalQuery(String queryParameter) throws ServiceException, IOException;
 
     /**
      * Test implicitly optional query parameter
@@ -95,10 +100,11 @@ public interface Implicit {
      * Test implicitly optional header parameter
      *
      * @param queryParameter the String value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putOptionalHeader(String queryParameter) throws ServiceException;
+    ServiceResponse<Void> putOptionalHeader(String queryParameter) throws ServiceException, IOException;
 
     /**
      * Test implicitly optional header parameter
@@ -113,10 +119,11 @@ public interface Implicit {
      * Test implicitly optional body parameter
      *
      * @param bodyParameter the String value
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> putOptionalBody(String bodyParameter) throws ServiceException;
+    ServiceResponse<Void> putOptionalBody(String bodyParameter) throws ServiceException, IOException;
 
     /**
      * Test implicitly optional body parameter
@@ -130,10 +137,12 @@ public interface Implicit {
     /**
      * Test implicitly required path parameter
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Error> getRequiredGlobalPath() throws ServiceException;
+    ServiceResponse<Error> getRequiredGlobalPath() throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Test implicitly required path parameter
@@ -146,10 +155,12 @@ public interface Implicit {
     /**
      * Test implicitly required query parameter
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Error> getRequiredGlobalQuery() throws ServiceException;
+    ServiceResponse<Error> getRequiredGlobalQuery() throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Test implicitly required query parameter
@@ -162,10 +173,11 @@ public interface Implicit {
     /**
      * Test implicitly optional query parameter
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Error> getOptionalGlobalQuery() throws ServiceException;
+    ServiceResponse<Error> getOptionalGlobalQuery() throws ServiceException, IOException;
 
     /**
      * Test implicitly optional query parameter

@@ -55,7 +55,7 @@
   <PropertyGroup>
     <ClientRuntimeSolution>ClientRuntime.sln</ClientRuntimeSolution>
     <ClientRuntimeWindowsSolution>ClientRuntimeWindows.sln</ClientRuntimeWindowsSolution>
-    <CodeGeneratorSolution>AutoRest.sln</CodeGeneratorSolution>
+    <CodeGeneratorSolution>CodeGenerator.sln</CodeGeneratorSolution>
     <LibraryRoot>$(MSBuildThisFileDirectory)</LibraryRoot>
     <LibrarySourceFolder>$(LibraryRoot)</LibrarySourceFolder>
     <LibraryToolsFolder>$(LibraryRoot)Tools</LibraryToolsFolder>
@@ -95,7 +95,7 @@
   </PropertyGroup>
   <UsingTask Condition=" $(OnPremiseBuild) " TaskName="CodeSigningTask" AssemblyFile="$(CIToolsPath)\Microsoft.WindowsAzure.Tools.Build.Tasks.OnPremise.dll" />
   <UsingTask Condition=" $(OnPremiseBuild) " TaskName="CorporateValidation" AssemblyFile="$(CIToolsPath)\Microsoft.WindowsAzure.Tools.Build.Tasks.OnPremise.dll" />
-  <Import Condition=" $(OnPremiseBuild) " Project="$(CIToolsPath)\Microsoft.WindowsAzure.Build.OnPremise.msbuild" />
+  <Import Condition=" $(OnPremiseBuild) == 'true' " Project="$(CIToolsPath)\Microsoft.WindowsAzure.Build.OnPremise.msbuild" />
 
   <ItemGroup>
     <DnxLibraries Include="$(LibraryRoot)/ClientRuntimes/CSharp/*/project.json" />
@@ -105,15 +105,11 @@
   <Target Name="Build" DependsOnTargets="RestoreNugetPackages">
     <CallTarget Targets="BuildMsBuildTask" />
     <CallTarget Targets="BuildServerPreparation" Condition=" '$(CodeSign)' == 'true' " />
-    <Exec Command="dnvm use $(DnxVersion) -r coreclr -a x64" ContinueOnError="false"/>
+    <CallTarget Targets="BuildDnxLibraries" Condition=" '$(OS)' == 'Windows_NT' "/>
     <!--
     The solution file contains configurations for each platform such as Portable-Debug, Net45-Release, etc
         When invoking msbuild, provide the right configuration name.
     -->
-    <MSBuild Projects="$(ClientRuntimeSolution)"
-             Properties="Configuration=$(Configuration);CodeSign=$(CodeSign)"
-             Targets="Build"
-             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
     <MSBuild Projects="$(CodeGeneratorSolution)"
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
              Targets="Build"
@@ -129,7 +125,6 @@
   </Target>
   
   <Target Name="BuildDnxLibraries" DependsOnTargets="RestoreNugetPackages">
-    <Exec Command="dnvm use $(DnxVersion) -r coreclr -a x64" ContinueOnError="false"/>
     <Exec Command="dnu build" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"/>
     <Exec Command="dnu pack" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"/>
     <ItemGroup>
@@ -141,10 +136,6 @@
   <!-- Project files import some targets coming from nuget packages, so need to restore them first to avoid errors
       such as "The imported project ....build\Microsoft.Bcl.Build.targets was not found. " -->
   <Target Name="Clean">
-    <MSBuild Projects="$(ClientRuntimeSolution)"
-             Properties="Configuration=$(Configuration)"
-             Targets="Clean"
-             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />
     <MSBuild Projects="$(CodeGeneratorSolution)"
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU"
              Targets="Clean"
@@ -243,7 +234,6 @@
   </Target>
 
   <Target Name="RestoreNugetPackages">
-    <Exec Command="dnvm use $(DnxVersion) -r coreclr" ContinueOnError="false"/>
     <Exec Command="dnu restore %(DnxLibraries.FullPath)" ContinueOnError="false"/>
     <Exec Command="$(NuGetCommand) install xunit.runner.console -Version 2.1.0 -OutputDirectory $(LibraryRoot)packages" ContinueOnError="false"/>
     <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
@@ -270,7 +260,8 @@
     <Message Text="Source folder           : $(LibrarySourceFolder)" />
   </Target>
 
-  <Import Project="tools\NuGet.targets"/>
+  <!-- Conditional import due to a bug in mono related to asterisk -->
+  <Import Condition=" '$(OS)' == 'Windows_NT'" Project="tools\NuGet.targets"/>
 
   <Target Name="SignAssembliesInDnxPackages">
     <ItemGroup>

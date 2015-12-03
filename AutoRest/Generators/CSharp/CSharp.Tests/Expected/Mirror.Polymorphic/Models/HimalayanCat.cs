@@ -27,7 +27,8 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the HimalayanCat class.
         /// </summary>
-        public HimalayanCat(int? hairLength = default(int?))
+        public HimalayanCat(string id = default(string), string description = default(string), string color = default(string), int? length = default(int?), int? hairLength = default(int?))
+            : base(id, description, color, length)
         {
             HairLength = hairLength;
         }

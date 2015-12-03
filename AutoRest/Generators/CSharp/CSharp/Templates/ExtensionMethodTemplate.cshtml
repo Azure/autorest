@@ -27,7 +27,7 @@ foreach (var parameter in Model.LocalParameters)
 }
 @:public static @Model.ReturnTypeString @(Model.Name)(@Model.GetExtensionParameters(Model.SyncMethodParameterDeclaration))
 @:{
-    if (Model.ReturnType != null)
+    if (Model.ReturnType.Body != null)
     {
     @:return Task.Factory.StartNew(s => ((I@(Model.MethodGroupName))s).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
     }
@@ -61,7 +61,7 @@ foreach (var parameter in Model.LocalParameters)
 @:/// </param>
 @:public static async @Model.TaskExtensionReturnTypeString @(Model.Name)Async( @Model.GetExtensionParameters(Model.GetAsyncMethodParameterDeclaration()))
 @:{
-    if (Model.ReturnType != null)
+    if (Model.ReturnType.Body != null)
     {
     @:@Model.OperationResponseReturnTypeString result = await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
     @:return result.Body;

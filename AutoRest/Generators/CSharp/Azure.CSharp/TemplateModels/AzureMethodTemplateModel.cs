@@ -26,8 +26,36 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 
             ParameterTemplateModels.Clear();
             LogicalParameterTemplateModels.Clear();
-            source.Parameters.ForEach(p => ParameterTemplateModels.Add(new AzureParameterTemplateModel(p)));
-            source.LogicalParameters.ForEach(p => LogicalParameterTemplateModels.Add(new AzureParameterTemplateModel(p)));
+            bool filterParamaterExists = false;
+            foreach (var parameter in source.Parameters)
+            {
+                var parameterTemplateModel = new AzureParameterTemplateModel(parameter);
+                // Add only one filter parameter
+                if (!parameterTemplateModel.IsODataFilterExpression || !filterParamaterExists)
+                {
+                    ParameterTemplateModels.Add(parameterTemplateModel);
+                }
+
+                if (parameterTemplateModel.IsODataFilterExpression)
+                {
+                    filterParamaterExists = true;
+                }
+            }
+            bool logicalFilterParamaterExists = false;
+            foreach (var parameter in source.LogicalParameters)
+            {
+                var parameterTemplateModel = new AzureParameterTemplateModel(parameter);
+                // Add only one filter parameter
+                if (!parameterTemplateModel.IsODataFilterExpression || !logicalFilterParamaterExists)
+                {
+                    LogicalParameterTemplateModels.Add(parameterTemplateModel);
+                }
+
+                if (parameterTemplateModel.IsODataFilterExpression)
+                {
+                    logicalFilterParamaterExists = true;
+                }
+            }
             if (MethodGroupName != ServiceClient.Name)
             {
                 MethodGroupName = MethodGroupName + "Operations";
@@ -66,7 +94,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
-                if (DefaultResponse != null && DefaultResponse.Name == "CloudError")
+                if (DefaultResponse.Body != null && DefaultResponse.Body.Name == "CloudError")
                 {
                     return "ex = new CloudException(errorBody.Message);";
                 }
@@ -86,10 +114,10 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
-                if (ReturnType is CompositeType)
+                if (ReturnType.Body is CompositeType)
                 {
                     // Special handle Page class with IPage interface
-                    CompositeType compositeType = ReturnType as CompositeType;
+                    CompositeType compositeType = ReturnType.Body as CompositeType;
                     if (compositeType.Extensions.ContainsKey(AzureExtensions.PageableExtension))
                     {
                         return (string)compositeType.Extensions[AzureExtensions.PageableExtension];
@@ -106,15 +134,23 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null)
                 {
+                    string bodyName = ReturnType.Body.Name;
                     if (!string.IsNullOrEmpty(ReturnTypePageInterfaceName))
                     {
-                        return string.Format(CultureInfo.InvariantCulture,
-                            "AzureOperationResponse<{0}>", ReturnTypePageInterfaceName);
+                        bodyName = ReturnTypePageInterfaceName;
                     }
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "AzureOperationResponse<{0}>", ReturnType.Name);
+                    if (ReturnType.Headers != null)
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                                    "AzureOperationResponse<{0},{1}>", bodyName, ReturnType.Headers.Name);
+                    }
+                    else
+                    {
+                        return string.Format(CultureInfo.InvariantCulture,
+                                    "AzureOperationResponse<{0}>", bodyName);
+                    }
                 }
                 else
                 {
@@ -157,7 +193,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
-                if (DefaultResponse == null || DefaultResponse.Name == "CloudError")
+                if (DefaultResponse.Body == null || DefaultResponse.Body.Name == "CloudError")
                 {
                     return "CloudException";
                 }
@@ -175,7 +211,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             {
                 var sb = new IndentedStringBuilder();
                 if (this.HttpMethod == HttpMethod.Head &&
-                    this.ReturnType != null)
+                    this.ReturnType.Body != null)
                 {
                     HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
                     sb.AppendFormat("result.Body = (statusCode == HttpStatusCode.{0});", code.ToString()).AppendLine();
@@ -240,20 +276,21 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         private void AddQueryParametersToUri(string variableName, IndentedStringBuilder builder)
         {
             builder.AppendLine("List<string> queryParameters = new List<string>();");
-            if (LogicalParameters.Any(p => p.Location == ParameterLocation.Query))
+            if (LogicalParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
             {
-                foreach (var queryParameter in LogicalParameters
-                    .Where(p => p.Location == ParameterLocation.Query))
+                foreach (var queryParameter in LogicalParameterTemplateModels
+                    .Where(p => p.Location == ParameterLocation.Query).Select(p => p as AzureParameterTemplateModel))
                 {
                     string queryParametersAddString =
                         "queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));";
 
-                    if (queryParameter.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
-                        queryParameter.Type is CompositeType &&
-                        queryParameter.Location == ParameterLocation.Query)
+                    if (queryParameter.IsODataFilterExpression)
                     {
-                        queryParametersAddString =
-                            "queryParameters.Add(string.Format(\"{0}={{0}}\", FilterString.Generate(filter)));";
+                        queryParametersAddString = @"var _odataFilter = {2}.ToString();
+    if (!string.IsNullOrEmpty(_odataFilter)) 
+    {{
+        queryParameters.Add(_odataFilter);
+    }}";
                     }
                     else if (queryParameter.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension))
                     {
@@ -263,7 +300,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                     builder.AppendLine("if ({0} != null)", queryParameter.Name)
                         .AppendLine("{").Indent()
                         .AppendLine(queryParametersAddString,
-                            queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference))
+                            queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference), queryParameter.Name)
                         .Outdent()
                         .AppendLine("}");
                 }
@@ -277,7 +314,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 
         private void ReplacePathParametersInUri(string variableName, IndentedStringBuilder builder)
         {
-            foreach (var pathParameter in LogicalParameters.Where(p => p.Location == ParameterLocation.Path))
+            foreach (var pathParameter in LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
                 string replaceString = "{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));";
                 if (pathParameter.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension))

@@ -28,7 +28,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening.Models
         /// <summary>
         /// Initializes a new instance of the FlattenedProduct class.
         /// </summary>
-        public FlattenedProduct(string pname = default(string), string flattenedProductType = default(string), string provisioningStateValues = default(string), string provisioningState = default(string))
+        public FlattenedProduct(string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string location = default(string), string name = default(string), string pname = default(string), string flattenedProductType = default(string), string provisioningStateValues = default(string), string provisioningState = default(string))
+            : base(id, type, tags, location, name)
         {
             Pname = pname;
             FlattenedProductType = flattenedProductType;

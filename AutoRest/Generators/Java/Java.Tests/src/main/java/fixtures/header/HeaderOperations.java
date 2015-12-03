@@ -16,6 +16,8 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.header.models.GreyscaleColors;
+import java.io.IOException;
+import java.lang.IllegalArgumentException;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
@@ -125,10 +127,12 @@ public interface HeaderOperations {
      * Send a post request with header value "User-Agent": "overwrite"
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> paramExistingKey(String userAgent) throws ServiceException;
+    ServiceResponse<Void> paramExistingKey(String userAgent) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Send a post request with header value "User-Agent": "overwrite"
@@ -142,10 +146,11 @@ public interface HeaderOperations {
     /**
      * Get a response with header value "User-Agent": "overwrite"
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> responseExistingKey() throws ServiceException;
+    ServiceResponse<Void> responseExistingKey() throws ServiceException, IOException;
 
     /**
      * Get a response with header value "User-Agent": "overwrite"
@@ -159,10 +164,12 @@ public interface HeaderOperations {
      * Send a post request with header value "Content-Type": "text/html"
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> paramProtectedKey(String contentType) throws ServiceException;
+    ServiceResponse<Void> paramProtectedKey(String contentType) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Send a post request with header value "Content-Type": "text/html"
@@ -176,10 +183,11 @@ public interface HeaderOperations {
     /**
      * Get a response with header value "Content-Type": "text/html"
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> responseProtectedKey() throws ServiceException;
+    ServiceResponse<Void> responseProtectedKey() throws ServiceException, IOException;
 
     /**
      * Get a response with header value "Content-Type": "text/html"
@@ -194,10 +202,12 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> paramInteger(String scenario, int value) throws ServiceException;
+    ServiceResponse<Void> paramInteger(String scenario, int value) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2 
@@ -213,10 +223,12 @@ public interface HeaderOperations {
      * Get a response with header value "value": 1 or -2
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> responseInteger(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseInteger(String scenario) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header value "value": 1 or -2
@@ -232,10 +244,12 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> paramLong(String scenario, long value) throws ServiceException;
+    ServiceResponse<Void> paramLong(String scenario, long value) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2 
@@ -251,10 +265,12 @@ public interface HeaderOperations {
      * Get a response with header value "value": 105 or -2
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> responseLong(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseLong(String scenario) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header value "value": 105 or -2
@@ -270,10 +286,12 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> paramFloat(String scenario, double value) throws ServiceException;
+    ServiceResponse<Void> paramFloat(String scenario, double value) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0
@@ -289,10 +307,12 @@ public interface HeaderOperations {
      * Get a response with header value "value": 0.07 or -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> responseFloat(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseFloat(String scenario) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header value "value": 0.07 or -3.0
@@ -308,10 +328,12 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> paramDouble(String scenario, double value) throws ServiceException;
+    ServiceResponse<Void> paramDouble(String scenario, double value) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0
@@ -327,10 +349,12 @@ public interface HeaderOperations {
      * Get a response with header value "value": 7e120 or -3.0
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> responseDouble(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseDouble(String scenario) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header value "value": 7e120 or -3.0
@@ -346,10 +370,12 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> paramBool(String scenario, boolean value) throws ServiceException;
+    ServiceResponse<Void> paramBool(String scenario, boolean value) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false
@@ -365,10 +391,12 @@ public interface HeaderOperations {
      * Get a response with header value "value": true or false
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> responseBool(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseBool(String scenario) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header value "value": true or false
@@ -384,10 +412,12 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> paramString(String scenario, String value) throws ServiceException;
+    ServiceResponse<Void> paramString(String scenario, String value) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": ""
@@ -403,10 +433,12 @@ public interface HeaderOperations {
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or ""
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> responseString(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseString(String scenario) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or ""
@@ -422,10 +454,12 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> paramDate(String scenario, LocalDate value) throws ServiceException;
+    ServiceResponse<Void> paramDate(String scenario, LocalDate value) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01"
@@ -441,10 +475,12 @@ public interface HeaderOperations {
      * Get a response with header values "2010-01-01" or "0001-01-01"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> responseDate(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseDate(String scenario) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01"
@@ -460,10 +496,12 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> paramDatetime(String scenario, DateTime value) throws ServiceException;
+    ServiceResponse<Void> paramDatetime(String scenario, DateTime value) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z"
@@ -479,10 +517,12 @@ public interface HeaderOperations {
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> responseDatetime(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseDatetime(String scenario) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
@@ -498,10 +538,12 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> paramDatetimeRfc1123(String scenario, DateTimeRfc1123 value) throws ServiceException;
+    ServiceResponse<Void> paramDatetimeRfc1123(String scenario, DateTimeRfc1123 value) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT"
@@ -517,10 +559,12 @@ public interface HeaderOperations {
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> responseDatetimeRfc1123(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseDatetimeRfc1123(String scenario) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
@@ -536,10 +580,12 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> paramDuration(String scenario, Period value) throws ServiceException;
+    ServiceResponse<Void> paramDuration(String scenario, Period value) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S"
@@ -555,10 +601,12 @@ public interface HeaderOperations {
      * Get a response with header values "P123DT22H14M12.011S"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> responseDuration(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseDuration(String scenario) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header values "P123DT22H14M12.011S"
@@ -574,10 +622,12 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> paramByte(String scenario, byte[] value) throws ServiceException;
+    ServiceResponse<Void> paramByte(String scenario, byte[] value) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩"
@@ -593,10 +643,12 @@ public interface HeaderOperations {
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
      *
      * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> responseByte(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseByte(String scenario) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
@@ -612,10 +664,12 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY' . Possible values for this parameter include: 'White', 'black', 'GREY'
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> paramEnum(String scenario, GreyscaleColors value) throws ServiceException;
+    ServiceResponse<Void> paramEnum(String scenario, GreyscaleColors value) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null
@@ -631,10 +685,12 @@ public interface HeaderOperations {
      * Get a response with header values "GREY" or null
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> responseEnum(String scenario) throws ServiceException;
+    ServiceResponse<Void> responseEnum(String scenario) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header values "GREY" or null
@@ -648,10 +704,11 @@ public interface HeaderOperations {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request
      *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
-     * @throws ServiceException the exception wrapped in ServiceException if failed.
      */
-    ServiceResponse<Void> customRequestId() throws ServiceException;
+    ServiceResponse<Void> customRequestId() throws ServiceException, IOException;
 
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request

@@ -88,24 +88,20 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
         this.optionalGlobalQuery = optionalGlobalQuery;
     }
 
-    private Implicit implicit;
-
     /**
      * Gets the Implicit object to access its operations.
      * @return the implicit value.
      */
     public Implicit getImplicit() {
-        return this.implicit;
+        return new ImplicitImpl(this.retrofitBuilder.build(), this);
     }
-
-    private Explicit explicit;
 
     /**
      * Gets the Explicit object to access its operations.
      * @return the explicit value.
      */
     public Explicit getExplicit() {
-        return this.explicit;
+        return new ExplicitImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
@@ -140,8 +136,6 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
     }
 
     private void initialize() {
-        Retrofit retrofit = retrofitBuilder.baseUrl(baseUri).build();
-        this.implicit = new ImplicitImpl(retrofit, this);
-        this.explicit = new ExplicitImpl(retrofit, this);
+        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
     }
 }
