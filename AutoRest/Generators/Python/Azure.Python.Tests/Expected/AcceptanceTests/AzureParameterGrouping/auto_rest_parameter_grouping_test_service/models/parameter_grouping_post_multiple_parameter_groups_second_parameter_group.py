@@ -16,11 +16,6 @@ class ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup(Model):
 
     _required = []
 
-    _attribute_map = {
-        'header_two': {'key': '', 'type': 'str'},
-        'query_two': {'key': '', 'type': 'int'},
-    }
-
     def __init__(self, *args, **kwargs):
 
         self.header_two = None

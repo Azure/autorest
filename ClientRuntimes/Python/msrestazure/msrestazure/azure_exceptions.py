@@ -75,7 +75,7 @@ class CloudError(ClientException):
     def __str__(self):
         return str(self.message)
 
-    def __init__(self, deserializer, response, status=None, *args):
+    def __init__(self, deserializer, response, error=None, *args):
 
         deserialize = deserializer if deserializer else Deserializer()
         self.error = None
@@ -84,24 +84,9 @@ class CloudError(ClientException):
         self.status_code = self.response.status_code
         raise_states = ['failed', 'canceled']
 
-        if status:
-
-            if isinstance(status, str):
-                self.message = status
-                self.error = response
-            
-            #try:
-            #    if status.lower() in raise_states:
-            #        self.error = response
-            #        self.message = "Long running operation failed with status '{}'".format(status)
-
-            #except AttributeError:
-            #    pass
-
-            elif hasattr(status, 'provisioning_state'):
-                if status.provisioning_state.lower() in raise_states:
-                    self.error = status
-                    self.message = "Long running operation failed"
+        if error:
+            self.message = error
+            self.error = response
 
         else:
             try:

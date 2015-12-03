@@ -33,50 +33,55 @@ try:
 except ImportError:
     from urllib.parse import urlparse
 
-class PollingFinished(Exception):
+
+class BadStatus(Exception):
     pass
 
-class BadStatus(PollingFinished):
+
+class BadResponse(Exception):
     pass
 
-class BadResponse(PollingFinished):
+
+class OperationFailed(Exception):
     pass
 
-class OperationFailed(PollingFinished):
-    pass
 
 class LongRunningOperation(object):
 
     def __init__(self):
-        self.status = ""
+        self._status = ""
         self.resource = None
         self.method = None
         self.async_url = None
         self.location_url = None
 
+    @property
+    def status(self):
+        if hasattr(self.resource, 'provisioning_state'):
+            if self.resource.provisioning_state:
+                return self.resource.provisioning_state.lower()
+
+        return self._status.lower()
+
+    @status.setter
+    def status(self, value):
+        self._status = value
+
+        if hasattr(self.resource, 'provisioning_state'):
+            self.resource.provisioning_state = value
+
     def _validate(self, url):
+
         if url is None:
             return None
+
         parsed = urlparse(url)
         if not parsed.scheme or not parsed.netloc:
             raise ValueError
+
         return url
 
-    def get_body_status(self, response):
-
-        if self.is_empty(response):
-            return None
-
-        body = response.json()
-        if 'status' in body:
-            return body['status']
-
-        if 'provisioningState' in body:
-            return body['provisioningState']
-
-        return None
-
-    def is_empty(self, response):
+    def _is_empty(self, response):
 
         if not response.content:
             return True
@@ -89,9 +94,63 @@ class LongRunningOperation(object):
             return False
 
         except ValueError:
-            raise DeserializationError("Response invalid json.")
+            raise DeserializationError("Response json invalid.")
 
-    def check_status(self, response):
+    def _deserialize(self, response, cmd):
+        self.resource = cmd(response)
+        self._status = self.status
+
+    def _get_body_status(self, response):
+
+        if self._is_empty(response):
+            return None
+
+        body = response.json()
+        if 'status' in body:
+            return body['status']
+
+        if 'provisioningState' in body:
+            return body['provisioningState']
+
+        return None
+
+    def _object_from_response(self, response): 
+        if self.resource is None and self.method not in ['POST', 'DELETE']:
+            body = response.json()
+
+            self.resource = type("Resource", (), {})
+            for key, value in body.items():
+                setattr(self.resource, key, value)
+
+    def _status_200(self, response, outputs):
+        self.status = 'Succeeded'
+        try:
+            self._deserialize(response, outputs)
+
+        except CloudError:
+            status = self._get_body_status(response)
+            if status:
+                self.status = status
+            else:
+                self._object_from_response(response)
+
+    def _status_201(self, response, outputs):
+        try:
+            self._deserialize(response, outputs)
+            if not self.status:
+                self.status = 'Succeeded'
+
+        except CloudError:
+            raise BadResponse()
+
+    def _status_202(self, response):
+        self.status = 'InProgress'
+
+    def _status_204(self, response):
+        self.status = 'Succeeded'
+        self.resource = None
+    
+    def _check_status(self, response):
         code = response.status_code
 
         if self.method in ['PUT', 'PATCH']:
@@ -104,202 +163,150 @@ class LongRunningOperation(object):
 
     def get_initial_status(self, response, outputs):
 
-        self.check_status(response)
+        self.method = response.request.method
+        self._check_status(response)
 
         if response.status_code == 204:
-            self.status = 'Succeeded'
-            self.resource = None
+            self._status_204(response)
             return
 
         try:
-            self.resource = outputs(response)
-            if hasattr(self.resource, 'provisioning_state'):
-                if self.resource.provisioning_state:
-                    self.status = self.resource.provisioning_state
-                    return
+            self._deserialize(response, outputs)
+            if self.status:
+                return
 
-        except CloudError as err:
+        except CloudError:
             raise BadStatus()
 
 
-        status = self.get_body_status(response)
+        status = self._get_body_status(response)
         if status:
             self.status = status
             return
 
         if response.status_code == 200:
-            self.status = 'Succeeded'
-
-            if hasattr(self.resource, 'provisioning_state'):
-                self.resource.provisioning_state = self.status
+            self._status_200(response, outputs)
+            return
 
         if response.status_code == 202:
-            self.status = 'InProgress'
-
+            self._status_202(response)
+            return
 
     def get_status_from_location(self, response, outputs):
 
-        self.check_status(response)
+        self._check_status(response)
 
         if self.method in ['POST', 'DELETE']:
             if response.status_code == 202:
-                self.status = 'InProgress'
+                self._status_202(response)
                 return
 
             elif response.status_code == 204:
-                self.status = 'Succeeded'
-                self.resource = None
+                self._status_204(response)
                 return
 
             elif response.status_code == 201:
-                self.resource = outputs(response)
-                if hasattr(self.resource, 'provisioning_state') and self.resource.provisioning_state is not None:
-                    self.status = self.resource.provisioning_state
-                else:
-                    self.status = 'Succeeded'
+                self._status_201(response, outputs)
+                return
 
             elif response.status_code == 200:
-                self.status = 'Succeeded'
-                try:
-                    self.resource = outputs(response)
-                except CloudError:
-                    status = self.get_body_status(response)
-                    if status:
-                        self.status = status
-                    if hasattr(self.resource, 'provisioning_state'):
-                        self.resource.provisioning_state = self.status
+                self._status_200(response, outputs)
+                return
 
         if self.method in ['PUT', 'PATCH']:
 
             if response.status_code == 202:
-                self.status = 'InProgress'
+                self._status_202(response)
+                return
 
             elif response.status_code == 200:
-                if self.is_empty(response):
-                    raise BadResponse('The response from long running operation does not contain a body.')
+                if self._is_empty(response):
+                    raise BadResponse('The response from long running '
+                                      'operation does not contain a body.')
 
-                self.status = 'Succeeded'
-                try:
-                    self.resource = outputs(response)
-                    if hasattr(self.resource, 'provisioning_state'):
-                        if self.resource.provisioning_state:
-                            self.status = self.resource.provisioning_state
-
-                except CloudError:
-                    status = self.get_body_status(response)
-                    if status:
-                        self.status = status
-                    if hasattr(self.resource, 'provisioning_state'):
-                        self.resource.provisioning_state = self.status
+                self._status_200(response, outputs)
 
             elif response.status_code == 201:
-                if self.is_empty(response):
-                    raise BadResponse('The response from long running operation does not contain a body.')
+                if self._is_empty(response):
+                    raise BadResponse('The response from long running '
+                                      'operation does not contain a body.')
 
-                self.status = 'Succeeded'
-                self.resource = outputs(response)
-
-                if hasattr(self.resource, 'provisioning_state'):
-                    if self.resource.provisioning_state:
-                        self.status = self.resource.provisioning_state
+                self._status_201(response, outputs)
 
             else:
-                raise BadStatus('Long running operation failed with status {}.'.format(response.status_code))
+                raise BadStatus('Long running operation failed with status '
+                                '{}.'.format(response.status_code))
            
     def get_status_from_async(self, response, outputs):
-        self.check_status(response)
 
-        if self.is_empty(response):
-            raise BadResponse('The response from long running operation does not contain a body.')
+        self._check_status(response)
 
-        self.status = self.get_body_status(response)
+        if self._is_empty(response):
+            raise BadResponse('The response from long running operation '
+                              'does not contain a body.')
+
+        self.status = self._get_body_status(response)
 
         if not self.status:
             raise BadResponse("No status found in body")
 
-
         if self.method in ['POST', 'DELETE']:
             try:
-                self.resource = outputs(response)
-                if hasattr(self.resource, 'provisioning_state'):
-                    if self.resource.provisioning_state:
-                        self.status = self.resource.provisioning_state
+                self._deserialize(response, outputs)
 
             except CloudError:
-                if hasattr(self.resource, 'provisioning_state'):
-                    self.resource.provisioning_state = self.status
-
-        elif hasattr(self.resource, 'provisioning_state'):
-            self.resource.provisioning_state = self.status
+                pass # Not all accept status will deserialize
 
     def get_status_from_resource(self, response, outputs):
 
-        self.check_status(response)
+        self._check_status(response)
 
         if self.method in ['POST', 'DELETE']:
             if response.status_code == 204:
-                self.status = 'Succeeded'
-                self.resource = None
+                self._status_204(response)
                 return
 
             elif response.status_code == 200:
-                self.status = 'Succeeded'
-                try:
-                    self.resource = outputs(response)
-                    if hasattr(self.resource, 'provisioning_state'):
-                        if self.resource.provisioning_state:
-                            self.status = self.resource.provisioning_state
-
-                except CloudError:
-                    status = self.get_body_status(response)
-                    if status:
-                        self.status = status
-                    if hasattr(self.resource, 'provisioning_state'):
-                        self.resource.provisioning_state = self.status
+                self._status_200(response, outputs)
                 return
 
             else:
-                raise BadResponse('Location header is missing from long running operation.')
+                raise BadResponse('Location header is missing from '
+                                  'long running operation.')
 
-
-        if self.is_empty(response):
-            raise BadResponse('The response from long running operation does not contain a body.')
+        if self._is_empty(response):
+            raise BadResponse('The response from long running operation '
+                              'does not contain a body.')
         
-        self.status = 'Succeeded'
-
-        try:
-            self.resource = outputs(response)
-            if hasattr(self.resource, 'provisioning_state'):
-                if self.resource.provisioning_state:
-                    self.status = self.resource.provisioning_state
-
-        except CloudError:
-            status = self.get_body_status(response)
-            if status:
-                self.status = status
-            if hasattr(self.resource, 'provisioning_state'):
-                self.resource.provisioning_state = self.status
+        self._status_200(response, outputs)
 
     def get_retry(self, response):
 
         try:
-            self.async_url = self._validate(response.headers.get('azure-asyncoperation'))
+            self.async_url = self._validate(
+                response.headers.get('azure-asyncoperation'))
+
+            # Return if we have a url, in case location header raises error
             if self.async_url:
                 return
 
         except ValueError:
-            pass
+            pass # We can ignore as location header may still be valid
 
         self.location_url = self._validate(response.headers.get('location'))
 
         if not self.location_url:
-            if response.status_code not in [200, 204] and self.method in ['POST']:
-                raise BadResponse('Location header is missing from long running operation.')
+
+            # TODO: There must be a nicer way to handle this scenario...
+            code = response.status_code
+            if code not in [200, 204] and self.method in ['POST']:
+                raise BadResponse(
+                    'Location header is missing from long running operation.')
 
 class AzureOperationPoller(object):
 
-    accept_states = [200, 202, 201, 204]
-    finished_states = ['failed', 'canceled', 'succeeded']
+    finished_states = ['succeeded', 'failed', 'canceled']
+    failed_states = ['failed', 'canceled']
 
     def __init__(self, send_cmd, output_cmd, update_cmd, timeout=30):
         """
@@ -307,30 +314,27 @@ class AzureOperationPoller(object):
         """
         self._timeout = timeout
         self._response = None
-        self._no_retry = False
-        self._url = None
         self._callbacks = []
         self._operation = LongRunningOperation()
-        self._update_cmd = update_cmd
-        self._output_cmd = output_cmd
 
         self._done = Event()
 
-        self._thread = Thread(target=self._start, args=(send_cmd,))
+        self._thread = Thread(
+            target=self._start, args=(send_cmd, update_cmd, output_cmd))
+
         self._thread.start()
 
-    def _start(self, send_cmd):
+    def _start(self, send_cmd, update_cmd, output_cmd):
 
         try:
             self._response = send_cmd()
-            self._operation.method = self._response.request.method
-            self._operation.get_initial_status(self._response, self._output_cmd)      
+            self._operation.get_initial_status(self._response, output_cmd)      
 
-            self._poll()
+            self._poll(update_cmd, output_cmd)
 
         except BadStatus:
             self._operation.status = 'Failed'
-            self._operation.resource = CloudError(None, self._response, self._operation.resource)
+            self._operation.resource = CloudError(None, self._response)
 
         except BadResponse as err:
             self._operation.status = 'Failed'
@@ -340,10 +344,7 @@ class AzureOperationPoller(object):
             error = "Long running operation failed with status '{}'".format(self._operation.status)
             self._operation.resource = CloudError(None, self._response, error)
 
-        except DeserializationError as err:
-            self._operation.resource = err
-
-        except ValueError as err:
+        except Exception as err:
             self._operation.resource = err
 
         finally:
@@ -366,39 +367,41 @@ class AzureOperationPoller(object):
         else:
             time.sleep(self._timeout)
 
-    def _poll(self):
+    def _polling_cookie(self):
+        # TODO: Any cookie protocol to consider here?
+        if self._response.headers.get('set-cookie'):
+            return {'cookie': self._response.headers['set-cookie']}
+        return {}
 
-        while self._operation.status.lower() not in self.finished_states:
+    def _poll(self, update_cmd, output_cmd):
 
-            headers = {}
-            headers['cookie'] = self._response.headers.get('set-cookie', "")
+        while self._operation.status not in self.finished_states:
 
+            headers = self._polling_cookie()
             url = self._response.request.url
             self._operation.get_retry(self._response)
 
             if self._operation.async_url:
-                self._response = self._update_cmd(self._operation.async_url, headers)
-                self._operation.get_status_from_async(self._response, self._output_cmd)
+                self._response = update_cmd(self._operation.async_url, headers)
+                self._operation.get_status_from_async(self._response, output_cmd)
 
             elif self._operation.location_url:
-                self._response = self._update_cmd(self._operation.location_url, headers)
-                self._operation.get_status_from_location(self._response, self._output_cmd)
+                self._response = update_cmd(self._operation.location_url, headers)
+                self._operation.get_status_from_location(self._response, output_cmd)
 
             else:
-                self._response = self._update_cmd(url, headers)
-                self._operation.get_status_from_resource(self._response, self._output_cmd)
+                self._response = update_cmd(url, headers)
+                self._operation.get_status_from_resource(self._response, output_cmd)
 
-        if self._operation.status.lower() in ['failed', 'canceled']:
+        if self._operation.status in self.failed_states:
             raise OperationFailed()
-
-
-
-        
 
     def result(self, timeout=None):
         self.wait(timeout)
+
         if isinstance(self._operation.resource, Exception):
             raise self._operation.resource
+
         return self._operation.resource
 
     def wait(self, timeout=None):

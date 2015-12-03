@@ -13,7 +13,7 @@ cwd = dirname(realpath(__file__))
 root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrestazure"))
-log_level = 10#int(os.environ.get('PythonLogLevel', 30))
+log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "Lro"))
@@ -57,21 +57,6 @@ class LroTests(unittest.TestCase):
                 self.assertIsNone(error.code)
                 self.assertIsNotNone(error.message)
 
-    def assertRaisesWithServerErrorMessage(self, msg, func, *args, **kwargs):
-
-        try:
-            func(*args, **kwargs)
-            self.fail("CloudError wasn't raised as expected")
-
-        except CloudError as err:
-            self.assertIn(msg, err.response.content)
-            self.assertIsNotNone(err.response)
-            error = err.error
-            self.assertIsNotNone(error)
-            if isinstance(error, CloudException):
-                self.assertIsNone(error.code)
-                self.assertIsNotNone(error.message)
-
     def test_lro_happy_paths(self):
 
         product = Product(location="West US")
@@ -100,15 +85,13 @@ class LroTests(unittest.TestCase):
         process = self.client.lr_os.put_async_sub_resource(SubProduct())
         self.assertEqual("Succeeded", process.result().provisioning_state)
 
-        ## TODO: This wont deserialize a 200 response code - make body into object
         process = self.client.lr_os.put_non_resource(Sku())
-        #self.assertEqual("100", process.result().id)
+        self.assertEqual("100", process.result().id)
 
-        ## TODO: This wont deserialize a 200 response code (also not sure where the 100 comes from as it's not in the response)
+        ## TODO: Not sure where the 100 comes from as it's not in the response
         process = self.client.lr_os.put_async_non_resource(Sku())
         #self.assertEqual("100", process.result().id)
 
-        ## TODO: This wont deserialize a 200 response code - make body into object
         process = self.client.lr_os.post202_retry200(product)
         self.assertIsNone(process.result())
 
@@ -118,9 +101,8 @@ class LroTests(unittest.TestCase):
         process = self.client.lr_os.put200_succeeded_no_state(product)
         self.assertEqual("100", process.result().id)
 
-        ## TODO: This wont deserialize a 200 response code - make body into object
         process = self.client.lr_os.put202_retry200(product)
-        #self.assertEqual("100", process.result().id)
+        self.assertEqual("100", process.result().id)
 
         process = self.client.lr_os.put_async_retry_succeeded(product)
         self.assertEqual("Succeeded", process.result().provisioning_state)
@@ -154,18 +136,20 @@ class LroTests(unittest.TestCase):
         process = self.client.lr_os.delete_provisioning202_accepted200_succeeded()
         self.assertEqual("Succeeded", process.result().provisioning_state)
 
-        process = self.client.lr_os.delete_provisioning202_deletingcanceled200()
-        self.assertEqual("Canceled", process.result().provisioning_state)
+        # TODO: In C# this doesn't raise
+        self.assertRaisesWithMessage("Long running operation failed with status 'canceled'",
+            self.client.lr_os.delete_provisioning202_deletingcanceled200().result)
 
-        process = self.client.lr_os.delete_provisioning202_deleting_failed200()
-        self.assertEqual("Failed", process.result().provisioning_state)
+        # TODO: In C# this doesn't raise
+        self.assertRaisesWithMessage("Long running operation failed with status 'failed'",
+            self.client.lr_os.delete_provisioning202_deleting_failed200().result)
 
         self.assertIsNone(self.client.lr_os.post202_no_retry204(product).result())
 
-        self.assertRaisesWithMessage("Long running operation failed with status 'Failed'",
+        self.assertRaisesWithMessage("Long running operation failed with status 'failed'",
             self.client.lr_os.post_async_retry_failed().result)
 
-        self.assertRaisesWithMessage("Long running operation failed with status 'Canceled'",
+        self.assertRaisesWithMessage("Long running operation failed with status 'canceled'",
             self.client.lr_os.post_async_retrycanceled().result)
 
         prod = self.client.lr_os.post_async_retry_succeeded().result()
@@ -227,7 +211,7 @@ class LroTests(unittest.TestCase):
         self.assertRaisesWithMessage("Long running operation failed with status 'Bad Request'.",
             self.client.lrosa_ds.delete_async_relative_retry400().result)
 
-        self.assertRaisesWithServerErrorMessage("Expected bad request message",
+        self.assertRaisesWithMessage("Expected bad request message",
             self.client.lrosa_ds.post_non_retry400(product).result)
 
         self.assertRaisesWithMessage("Long running operation failed with status 'Bad Request'.",

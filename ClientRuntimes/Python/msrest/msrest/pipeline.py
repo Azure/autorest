@@ -37,10 +37,6 @@ from requests.packages.urllib3 import Retry
 from requests.packages.urllib3.poolmanager import pool_classes_by_scheme
 from requests.packages.urllib3 import HTTPConnectionPool
 
-from requests.models import REDIRECT_STATI
-REDIRECT_STATI = [300, 301, 302, 303, 307, 308]
-
-
 
 class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
     """
@@ -194,9 +190,6 @@ class ClientRequest(requests.Request):
         if isinstance(data, types.GeneratorType):
             self.data = data
 
-        elif data is None:
-            self.data = json.dumps(data)
-
         else:
             self.data = json.dumps(data)
             self.headers['Content-Length'] = len(self.data)
@@ -219,11 +212,12 @@ class ClientRetry(Retry):
 
         # Collect retry cookie - currently only used for non-HTTPS connections
         # TODO: Look up correct cookie handling protocol
-        response_cookie = response.getheader("Set-Cookie")
-        if response_cookie:
-            self._log.debug("Adding cookie to pool headers for retry: "
-                            "{}".format(response_cookie))
-            increment.retry_cookie = response_cookie
+        if response:
+            response_cookie = response.getheader("Set-Cookie")
+            if response_cookie:
+                self._log.debug("Adding cookie to pool headers for retry: "
+                                "{}".format(response_cookie))
+                increment.retry_cookie = response_cookie
 
         return increment
 
@@ -361,11 +355,12 @@ class ClientConnection(object):
                 'verify': self.verify,
                 'cert': self.cert}
 
+
 # This is only used against test server
 class ClientHTTPConnectionPool(HTTPConnectionPool):
 
     def urlopen(self, method, url, body=None, headers=None,
-                retries=None, **kwargs):
+                retries=None, *args, **kwargs):
 
         if retries.retry_cookie:
             if headers:
@@ -374,7 +369,7 @@ class ClientHTTPConnectionPool(HTTPConnectionPool):
                 self.headers['cookie'] = retries.retry_cookie
 
         response = super(ClientHTTPConnectionPool, self).urlopen(
-            method, url, body, headers, retries, **kwargs)
+            method, url, body, headers, retries, *args, **kwargs)
 
         if retries.retry_cookie:
             retries.retry_cookie = None
