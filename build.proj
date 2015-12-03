@@ -216,6 +216,12 @@
     <Message Text="Code signing" Importance="high" />
     <MSBuild Projects="$(MSBuildProjectFullPath)"
              Targets="SignBinariesForAFxTarget"
+             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'"
+             Properties="StrongNameToken=$(StrongNameToken)">
+    </MSBuild>
+    <MSBuild Projects="$(MSBuildProjectFullPath)"
+             Targets="SignAssembliesInDnxPackages"
+             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'"
              Properties="StrongNameToken=$(StrongNameToken)">
     </MSBuild>
     <CallTarget Targets="ValidateCorporateCompliance" Condition="!$(DelaySign)"/>
