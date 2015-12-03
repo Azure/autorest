@@ -25,4 +25,4 @@
 #--------------------------------------------------------------------------
 
 
-from .azure_configuration import AzureConfiguration, AzureChinaConfiguration
+from .azure_configuration import AzureConfiguration
