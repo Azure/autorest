@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the classes for AutoRestLong-runningOperationTestService.
+ * This package contains the classes for AutoRestLongRunningOperationTestService.
  * Long-running Operation for AutoRest.
  */
 package fixtures.lro;
