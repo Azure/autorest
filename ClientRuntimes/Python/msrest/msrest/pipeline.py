@@ -37,10 +37,6 @@ from requests.packages.urllib3 import Retry
 from requests.packages.urllib3.poolmanager import pool_classes_by_scheme
 from requests.packages.urllib3 import HTTPConnectionPool
 
-from requests.models import REDIRECT_STATI
-REDIRECT_STATI = [300, 301, 302, 303, 307, 308]
-
-
 
 class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
     """
@@ -193,9 +189,6 @@ class ClientRequest(requests.Request):
 
         if isinstance(data, types.GeneratorType):
             self.data = data
-
-        elif data is None:
-            self.data = json.dumps(data)
 
         else:
             self.data = json.dumps(data)
@@ -361,6 +354,7 @@ class ClientConnection(object):
         return {'timeout': self.timeout,
                 'verify': self.verify,
                 'cert': self.cert}
+
 
 # This is only used against test server
 class ClientHTTPConnectionPool(HTTPConnectionPool):

@@ -65,7 +65,7 @@ class Model(object):
 
     def __eq__(self, value):
 
-        for key,val in self.__dict__.items():
+        for key, val in self.__dict__.items():
             if not hasattr(value, key):
                 return False
 
@@ -140,10 +140,10 @@ class Model(object):
 class Serializer(object):
 
     basic_types = ['str', 'int', 'bool', 'float']
-    days = {0:"Mon", 1:"Tue", 2:"Wed", 3:"Thu", 4:"Fri", 5:"Sat", 6:"Sun"}
-    months = {1:"Jan", 2:"Feb", 3:"Mar", 4:"Apr", 5:"May", 6:"Jun",
-              7:"Jul", 8:"Aug", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"}
-
+    days = {0: "Mon", 1: "Tue", 2: "Wed", 3: "Thu",
+            4: "Fri", 5: "Sat", 6: "Sun"}
+    months = {1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun",
+              7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"}
 
     def __init__(self):
 
@@ -197,7 +197,7 @@ class Serializer(object):
                         attr in required_attrs, **kwargs)
 
                     for k in reversed(keys):
-                        unflattened = {k:new_attr}
+                        unflattened = {k: new_attr}
                         new_attr = unflattened
 
                     _new_attr = new_attr
@@ -253,7 +253,7 @@ class Serializer(object):
             if data_type == 'bool':
                 output = json.dumps(output)
 
-            if kwargs.get('skip_quote') == True:
+            if kwargs.get('skip_quote') is True:
                 output = str(output)
             else:
                 output = quote(str(output), safe='')
@@ -277,7 +277,7 @@ class Serializer(object):
             if data_type == 'bool':
                 output = json.dumps(output)
 
-            if kwargs.get('skip_quote') == True:
+            if kwargs.get('skip_quote') is True:
                 output = str(output)
             else:
                 output = quote(str(output), safe='')
@@ -286,7 +286,7 @@ class Serializer(object):
             raise TypeError("{} must be type {}.".format(name, data_type))
 
         else:
-            return output
+            return str(output)
 
     def header(self, name, data, data_type, **kwargs):
         if data is None:
@@ -305,7 +305,7 @@ class Serializer(object):
             raise TypeError("{} must be type {}.".format(name, data_type))
 
         else:
-            return output
+            return str(output)
 
     def serialize_data(self, data, data_type, required=False, **kwargs):
 
@@ -347,10 +347,19 @@ class Serializer(object):
     def serialize_basic(self, data, data_type):
 
         if data_type == 'str':
+            return self.serialize_unicode(data)
+        return eval(data_type)(data)
+
+    def serialize_unicode(self, data):
+        try:
             if isinstance(data, unicode):
                 return data.encode(encoding='utf-8')
+
+        except NameError:
             return str(data)
-        return eval(data_type)(data)
+
+        else:
+            return str(data)
 
     def serialize_iter(self, data, iter_type, required, div=None, **kwargs):
 
@@ -382,7 +391,7 @@ class Serializer(object):
 
     @staticmethod
     def serialize_bytearray(attr, **kwargs):
-        return b64encode(attr)
+        return b64encode(attr).decode()
 
     @staticmethod
     def serialize_decimal(attr, **kwargs):
@@ -398,7 +407,7 @@ class Serializer(object):
 
     @staticmethod
     def serialize_date(attr, **kwargs):
-        t =  "{:04}-{:02}-{:02}".format(attr.year, attr.month, attr.day)
+        t = "{:04}-{:02}-{:02}".format(attr.year, attr.month, attr.day)
         return t
 
     @staticmethod
@@ -416,7 +425,7 @@ class Serializer(object):
             Serializer.days[utc.tm_wday], utc.tm_mday,
             Serializer.months[utc.tm_mon], utc.tm_year,
             utc.tm_hour, utc.tm_min, utc.tm_sec)
-        
+
         return date_str
 
     @staticmethod
@@ -461,8 +470,8 @@ class Deserializer(object):
 
     basic_types = ['str', 'int', 'bool', 'float']
     valid_date = re.compile(
-            r'\d{4}[-]\d{2}[-]\d{2}T\d{2}:\d{2}:\d{2}'
-            '\.?\d*Z?[-+]?[\d{2}]?:?[\d{2}]?')
+        r'\d{4}[-]\d{2}[-]\d{2}T\d{2}:\d{2}:\d{2}'
+        '\.?\d*Z?[-+]?[\d{2}]?:?[\d{2}]?')
 
     def __init__(self, classes={}):
 
@@ -492,7 +501,7 @@ class Deserializer(object):
             return self.deserialize_data(data, target_obj)
 
         try:
-            if data == None:
+            if data is None:
                 return data
             else:
                 self._unpack_response(response, response_data)
@@ -592,10 +601,9 @@ class Deserializer(object):
                 data = raw_data.content
 
             try:
-                
                 return json.loads(data)
 
-            except (ValueError, TypeError) as err:
+            except (ValueError, TypeError):
                 return data
 
         return data
@@ -642,7 +650,7 @@ class Deserializer(object):
     def deserialize_iter(self, attr, iter_type):
         if not attr and not isinstance(attr, list):
             return None
-        #return DeserializedGenerator(self.deserialize_data, attr, iter_type)
+
         return [self.deserialize_data(a, iter_type) for a in attr]
 
     def deserialize_dict(self, attr, dict_type):
@@ -650,14 +658,8 @@ class Deserializer(object):
             return {str(x['key']): self.deserialize_data(
                 x['value'], dict_type) for x in attr}
 
-        v = {}
-        for x,t in attr.items():
-            d = self.deserialize_data(t, dict_type)
-            v[x] = d
-
-        return(v)
-        #return {str(x): self.deserialize_data(
-        #    attr[x], dict_type) for x in attr}
+        return {str(k): self.deserialize_data(
+            v, dict_type) for k, v in attr.items()}
 
     def deserialize_basic(self, attr, data_type):
 
@@ -674,14 +676,20 @@ class Deserializer(object):
             raise TypeError("Invalid boolean value: {0}".format(attr))
 
         if data_type == 'str':
-
-            if isinstance(attr, str) or isinstance(attr, unicode):
-                return attr
-
-            else:
-                return str(attr)
+            return self.deserialize_unicode(attr)
 
         return eval(data_type)(attr)
+
+    def deserialize_unicode(self, data):
+        try:
+            if isinstance(data, unicode):
+                return data
+
+        except NameError:
+            return str(data)
+
+        else:
+            return str(data)
 
     @staticmethod
     def deserialize_bytearray(attr):
@@ -760,22 +768,14 @@ class Deserializer(object):
         else:
             return date_obj
 
-class UTC(datetime.tzinfo): 
-    def utcoffset(self,dt): 
-        return datetime.timedelta(hours=0,minutes=0) 
 
-    def tzname(self,dt): 
-        return "Z" 
+class UTC(datetime.tzinfo):
 
-    def dst(self,dt): 
-        return datetime.timedelta(0) 
+    def utcoffset(self, dt):
+        return datetime.timedelta(hours=0, minutes=0)
 
-class GMT(datetime.tzinfo): 
-    def utcoffset(self,dt): 
-        return datetime.timedelta(hours=0,minutes=0) 
+    def tzname(self, dt):
+        return "Z"
 
-    def tzname(self,dt): 
-        return "GMT" 
-
-    def dst(self,dt): 
-        return datetime.timedelta(0) 
+    def dst(self, dt):
+        return datetime.timedelta(0)

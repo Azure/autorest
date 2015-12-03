@@ -94,7 +94,7 @@ class HttpOperationError(ClientException):
 
         except (DeserializationError, AttributeError, KeyError):
             pass
-        
+
         if not self.error or not self.message:
             try:
                 response.raise_for_status()
@@ -115,4 +115,5 @@ class HttpOperationError(ClientException):
                 if not self.message:
                     self.message = "Unknown error"
 
-        super(HttpOperationError, self).__init__(self.message, self.error, *args)
+        super(HttpOperationError, self).__init__(
+            self.message, self.error, *args)

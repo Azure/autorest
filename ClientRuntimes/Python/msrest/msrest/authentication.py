@@ -63,7 +63,7 @@ class BasicTokenAuthentication(Authentication):
         session = super(BasicTokenAuthentication, self).signed_session()
         header = "{0} {1}".format(self.scheme, self.token['access_token'])
         session.headers['Authorization'] = header
-        
+
         return session
 
 

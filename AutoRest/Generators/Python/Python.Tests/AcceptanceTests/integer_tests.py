@@ -32,12 +32,11 @@ class IntegerTests(unittest.TestCase):
         config.log_level = log_level
         client = AutoRestIntegerTestService(config)
 
-        client.int_model.put_max32(sys.maxint)
+        client.int_model.put_max32(2147483647) # sys.maxint
+        client.int_model.put_min32(-2147483648)
 
-        client.int_model.put_min32(0 - sys.maxint - 1)
-
-        client.int_model.put_max64(9223372036854776000)  #sys.maxsize
-        client.int_model.put_min64(-9223372036854776000)  #0 - sys.maxsize
+        client.int_model.put_max64(9223372036854776000)  # sys.maxsize
+        client.int_model.put_min64(-9223372036854776000)
         client.int_model.get_null()
 
         with self.assertRaises(DeserializationError):

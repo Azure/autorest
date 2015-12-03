@@ -13,7 +13,7 @@ cwd = dirname(realpath(__file__))
 root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrestazure"))
-log_level = 10#int(os.environ.get('PythonLogLevel', 30))
+log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "Lro"))
@@ -50,21 +50,6 @@ class LroTests(unittest.TestCase):
 
         except CloudError as err:
             self.assertTrue(msg in err.message)
-            self.assertIsNotNone(err.response)
-            error = err.error
-            self.assertIsNotNone(error)
-            if isinstance(error, CloudException):
-                self.assertIsNone(error.code)
-                self.assertIsNotNone(error.message)
-
-    def assertRaisesWithServerErrorMessage(self, msg, func, *args, **kwargs):
-
-        try:
-            func(*args, **kwargs)
-            self.fail("CloudError wasn't raised as expected")
-
-        except CloudError as err:
-            self.assertIn(msg, err.response.content)
             self.assertIsNotNone(err.response)
             error = err.error
             self.assertIsNotNone(error)
@@ -226,7 +211,7 @@ class LroTests(unittest.TestCase):
         self.assertRaisesWithMessage("Long running operation failed with status 'Bad Request'.",
             self.client.lrosa_ds.delete_async_relative_retry400().result)
 
-        self.assertRaisesWithServerErrorMessage("Expected bad request message",
+        self.assertRaisesWithMessage("Expected bad request message",
             self.client.lrosa_ds.post_non_retry400(product).result)
 
         self.assertRaisesWithMessage("Long running operation failed with status 'Bad Request'.",
