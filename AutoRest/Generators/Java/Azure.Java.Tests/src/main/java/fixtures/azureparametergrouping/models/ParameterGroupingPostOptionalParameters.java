@@ -11,7 +11,6 @@
 package fixtures.azureparametergrouping.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.rest.BaseResource;
 
 /**
  * Additional parameters for the postOptional operation.
@@ -24,7 +23,7 @@ public class ParameterGroupingPostOptionalParameters {
     private String customHeader;
 
     /**
-     * Query parameter with default
+     * Query parameter with default.
      */
     @JsonProperty(value = "")
     private Integer query;

@@ -60,6 +60,10 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
 
         public static string Period(this string documentation)
         {
+            if (string.IsNullOrEmpty(documentation))
+            {
+                return documentation;
+            }
             documentation = documentation.Trim();
             if (!documentation.EndsWith("."))
             {
@@ -179,7 +183,8 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             var type = parameter.Type;
 
             SequenceType sequenceType = type as SequenceType;
-            if (parameter.Location != ParameterLocation.Body)
+            if (parameter.Location != ParameterLocation.Body
+                && parameter.Location != ParameterLocation.None)
             {
                 if (type == PrimaryType.ByteArray ||
                     type.Name == "ByteArray")

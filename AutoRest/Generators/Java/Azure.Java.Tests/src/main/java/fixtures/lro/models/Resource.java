@@ -18,12 +18,12 @@ import com.microsoft.rest.BaseResource;
  */
 public class Resource extends BaseResource {
     /**
-     * Resource Id
+     * Resource Id.
      */
     private String id;
 
     /**
-     * Resource Type
+     * Resource Type.
      */
     private String type;
 
@@ -33,12 +33,12 @@ public class Resource extends BaseResource {
     private Map<String, String> tags;
 
     /**
-     * Resource Location
+     * Resource Location.
      */
     private String location;
 
     /**
-     * Resource Name
+     * Resource Name.
      */
     private String name;
 

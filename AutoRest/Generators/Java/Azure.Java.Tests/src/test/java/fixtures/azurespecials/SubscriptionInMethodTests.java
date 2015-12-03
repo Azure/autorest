@@ -1,6 +1,5 @@
 package fixtures.azurespecials;
 
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.credentials.TokenCredentials;
 import org.junit.Assert;
@@ -12,7 +11,7 @@ import java.util.UUID;
 import static org.junit.Assert.fail;
 
 public class SubscriptionInMethodTests {
-    static AutoRestAzureSpecialParametersTestClient client;
+    private static AutoRestAzureSpecialParametersTestClient client;
 
     @BeforeClass
     public static void setup() {

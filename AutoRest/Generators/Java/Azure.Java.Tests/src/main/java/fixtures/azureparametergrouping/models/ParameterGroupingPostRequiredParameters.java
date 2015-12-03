@@ -11,7 +11,6 @@
 package fixtures.azureparametergrouping.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.rest.BaseResource;
 
 /**
  * Additional parameters for the postRequired operation.
@@ -30,13 +29,13 @@ public class ParameterGroupingPostRequiredParameters {
     private String customHeader;
 
     /**
-     * Query parameter with default
+     * Query parameter with default.
      */
     @JsonProperty(value = "")
     private Integer query;
 
     /**
-     * Path parameter
+     * Path parameter.
      */
     @JsonProperty(value = "", required = true)
     private String path;

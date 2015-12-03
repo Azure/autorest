@@ -17,7 +17,7 @@ import com.microsoft.rest.BaseResource;
  */
 public class SubResource extends BaseResource {
     /**
-     * Sub Resource Id
+     * Sub Resource Id.
      */
     private String id;
 

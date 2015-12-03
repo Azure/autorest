@@ -19,7 +19,7 @@ package @(Settings.Namespace.ToLower()).models;
 @EmptyLine
 
 /**
-@WrapComment(" * ", Model.Documentation.EscapeXmlComment() ?? "The " + Model.Name + " model.")
+@WrapComment(" * ", Model.Documentation.EscapeXmlComment().Period() ?? "The " + Model.Name + " model.")
  */
 @if (Model.IsPolymorphic)
 {
@@ -42,7 +42,7 @@ public class @(Model.Name)@(Model.BaseModelType != null ? " extends " + Model.Ba
 @foreach (var property in Model.Properties)
 {
 @:    /**
-@:    @WrapComment(" * ", property.Documentation.EscapeXmlComment() ?? "The " + property.Name + " property.")
+@:    @WrapComment(" * ", property.Documentation.EscapeXmlComment().Period() ?? "The " + property.Name + " property.")
 @:     */
 var jsonSetting = property.GetJsonProperty();
 if (!jsonSetting.IsNullOrEmpty())

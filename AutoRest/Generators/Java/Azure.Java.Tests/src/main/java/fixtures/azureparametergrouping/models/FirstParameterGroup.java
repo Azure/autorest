@@ -11,7 +11,6 @@
 package fixtures.azureparametergrouping.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.rest.BaseResource;
 
 /**
  * Additional parameters for the postMultipleParameterGroups operation.
@@ -24,7 +23,7 @@ public class FirstParameterGroup {
     private String headerOne;
 
     /**
-     * Query parameter with default
+     * Query parameter with default.
      */
     @JsonProperty(value = "")
     private Integer queryOne;

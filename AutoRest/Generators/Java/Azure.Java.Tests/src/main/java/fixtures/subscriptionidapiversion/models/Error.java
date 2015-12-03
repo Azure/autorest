@@ -10,7 +10,6 @@
 
 package fixtures.subscriptionidapiversion.models;
 
-import com.microsoft.rest.BaseResource;
 
 /**
  * The Error model.

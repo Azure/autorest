@@ -10,19 +10,18 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.BaseResource;
 
 /**
  * The OperationResultError model.
  */
 public class OperationResultError {
     /**
-     * The error code for an operation failure
+     * The error code for an operation failure.
      */
     private Integer code;
 
     /**
-     * The detailed arror message
+     * The detailed arror message.
      */
     private String message;
 

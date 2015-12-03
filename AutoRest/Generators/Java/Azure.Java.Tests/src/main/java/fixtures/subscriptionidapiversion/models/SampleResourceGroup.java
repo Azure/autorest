@@ -10,19 +10,18 @@
 
 package fixtures.subscriptionidapiversion.models;
 
-import com.microsoft.rest.BaseResource;
 
 /**
  * The SampleResourceGroup model.
  */
 public class SampleResourceGroup {
     /**
-     * resource group name 'testgroup101'
+     * resource group name 'testgroup101'.
      */
     private String name;
 
     /**
-     * resource group location 'West US'
+     * resource group location 'West US'.
      */
     private String location;
 

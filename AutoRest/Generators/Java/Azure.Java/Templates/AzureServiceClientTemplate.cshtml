@@ -6,7 +6,7 @@
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.Azure.AzureServiceClientTemplateModel>
 /**
-@Header(" * ")
+@Header(" * ").TrimMultilineHeader()
  */
 @EmptyLine
 
@@ -167,8 +167,7 @@ else
     private void initialize() {
     @if (Settings.AddCredentials)
     {
-@:        if (this.credentials != null)
-@:        {
+@:        if (this.credentials != null) {
 @:            this.credentials.applyCredentialsFilter(this.client);
 @:        }
     }
