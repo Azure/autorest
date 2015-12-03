@@ -271,7 +271,7 @@
 
   <Target Name="SignAssembliesInDnxPackages">
     <ItemGroup>
-      <_DnxPackages Include="$(LibraryRoot)\dnx\*.nupkg" />
+      <_DnxPackages Include="$(LibraryRoot)\dnx\*.nupkg" Exclude="$(LibraryRoot)\dnx\*Tests*.nupkg" />
     </ItemGroup> 
     <PropertyGroup>
       <_UnsignedFolder>$(PackageOutputDir)\unsigned</_UnsignedFolder>

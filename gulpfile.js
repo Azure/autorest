@@ -411,7 +411,8 @@ var xunitdnx = function(options){
   if (!isWindows) {
       printStatusCodeCmd = 'echo Status code: $?';
   }
-  return shell('dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml" && ' + printStatusCodeCmd, options);
+  var dnxScript = 'dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml" && ' + printStatusCodeCmd;
+  return shell(dnxScript, options);
 }
 
 gulp.task('test:xunit', ['test:xunit:dnx'], function () {
@@ -419,7 +420,9 @@ gulp.task('test:xunit', ['test:xunit:dnx'], function () {
 });
 
 gulp.task('test:xunit:dnx', function () {
-  return gulp.src(xunitDnxXproj).pipe(xunitdnx(defaultShellOptions));
+  return gulp.src(xunitDnxXproj)
+        .pipe(debug())
+        .pipe(xunitdnx(defaultShellOptions));
 });
 
 var nugetPath = path.resolve('Tools/NuGet.exe');
