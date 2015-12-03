@@ -11,9 +11,9 @@ using System.Reflection;
 using System.Threading;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest.Azure.Authentication;
+using Microsoft.Rest.Azure.Authentication.Internal;
 using Xunit;
 using Xunit.Abstractions;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {
@@ -43,15 +43,16 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             }
         }
 
+#if !PORTABLE
         [EnvironmentDependentFact]
         public void CertificateTokenProviderRefreshWorks()
         {
             var thumbprint = "F064B7C7EACC942D10662A5115E047E94FA18498";
-            X509Certificate2Collection certificates;
-            Assert.True(TryFindCertificatesInStore(thumbprint, StoreLocation.LocalMachine, out certificates));
+            System.Security.Cryptography.X509Certificates.X509Certificate2Collection certificates;
+            Assert.True(TryFindCertificatesInStore(thumbprint, System.Security.Cryptography.X509Certificates.StoreLocation.LocalMachine, out certificates));
 
             var cache = new TestTokenCache();
-            byte[] certificate = certificates[0].Export(X509ContentType.Pkcs12, _certificatePassword);
+            byte[] certificate = certificates[0].Export(System.Security.Cryptography.X509Certificates.X509ContentType.Pkcs12, _certificatePassword);
             var credentials = ApplicationTokenProvider.LoginSilentAsync(
                                 "1449d5b7-8a83-47db-ae4c-9b03e888bad0", 
                                 "20c58db7-4501-44e8-8e76-6febdb400c6b",
@@ -103,8 +104,8 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             response = client.SendAsync(request).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
       }
+#endif
 
-        
         [EnvironmentDependentFact]
         public void OrgIdCredentialWorksWithoutDialog()
         {
@@ -140,6 +141,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(typeof(AdalServiceException), exception.InnerException.GetType());
         }
 
+#if !PORTABLE
         [EnvironmentDependentFact]
         public void CredentialsConstructorThrowsForInvalidValues()
         {
@@ -165,6 +167,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.ThrowsAsync<AuthenticationException>(() => UserTokenProvider.LoginSilentAsync("1950a258-227b-4e31-a9cf-717495945fc2", 
                 "microsoft.onmicrosoft.com", this._username, string.Empty, cache));
         }
+#endif
 
         [EnvironmentDependentFact]
         public void UserTokenProviderRefreshWorks()
@@ -196,13 +199,14 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-#if DEBUG
+#if !PORTABLE
         [EnvironmentDependentFact]
         public void ApplicationCredentialsCanBeRenewed()
         {
             var cache = new TestTokenCache();
-            var credentials = ApplicationTokenProvider.LoginSilentAsync(this._domain, this._applicationId, new MemoryApplicationAuthenticationProvider(new ClientCredential(this._applicationId, this._secret)),
-                 ActiveDirectoryServiceSettings.Azure, cache, DateTimeOffset.UtcNow - TimeSpan.FromMinutes(5)).GetAwaiter().GetResult();
+            var credentials = ApplicationTokenProvider.LoginSilentAsync(this._domain, this._applicationId, 
+                new MemoryApplicationAuthenticationProvider(new ClientCredential(this._applicationId, this._secret)),
+                 ActiveDirectoryServiceSettings.Azure, cache).GetAwaiter().GetResult();
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Get,
                 new Uri("https://management.azure.com/subscriptions?api-version=2014-04-01-preview"));
@@ -211,18 +215,19 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var response = client.SendAsync(request).ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
-#endif
+
         private static bool TryFindCertificatesInStore(string thumbprint,
-                     StoreLocation location, out X509Certificate2Collection certificates)
+                     System.Security.Cryptography.X509Certificates.StoreLocation location, out System.Security.Cryptography.X509Certificates.X509Certificate2Collection certificates)
         {
-            X509Store store = new X509Store(StoreName.My, location);
-            store.Open(OpenFlags.ReadOnly);
-            certificates = store.Certificates.Find(X509FindType.FindByThumbprint, thumbprint, false);
+            System.Security.Cryptography.X509Certificates.X509Store store = new System.Security.Cryptography.X509Certificates.X509Store(System.Security.Cryptography.X509Certificates.StoreName.My, location);
+            store.Open(System.Security.Cryptography.X509Certificates.OpenFlags.ReadOnly);
+            certificates = store.Certificates.Find(System.Security.Cryptography.X509Certificates.X509FindType.FindByThumbprint, thumbprint, false);
             store.Close();
 
 
             return certificates.Count > 0;
         } 
+#endif
 
         class TestTokenCache : TokenCache
         {

@@ -59,6 +59,18 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         }
 
         [Fact]
+        public void AzureEnvironmenThrowsOnQueryInUri()
+        {
+            var error = Assert.Throws<ArgumentOutOfRangeException>(() => new ActiveDirectoryServiceSettings
+            {
+                ValidateAuthority = true,
+                TokenAudience = new Uri("https://contoso.com/widgets/"),
+                AuthenticationEndpoint = new Uri("https://contoso.com/widgets/?api=123"),
+            });
+            Assert.True(error.Message.StartsWith("The authentication endpoint must not contain a query string.", StringComparison.CurrentCulture));
+        }
+
+        [Fact]
         public void AzureEnvironmenThrowsOnNullUri()
         {
             Assert.Throws<ArgumentNullException>(() => new ActiveDirectoryServiceSettings
@@ -77,7 +89,9 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var settings = ActiveDirectoryClientSettings.UsePromptOnly(clientId, clientUri);
             Assert.Equal(clientId, settings.ClientId);
             Assert.Equal(clientUri, settings.ClientRedirectUri);
+#if !PORTABLE
             Assert.Equal(PromptBehavior.Always, settings.PromptBehavior);
+#endif
             Assert.Equal(ActiveDirectoryClientSettings.EnableEbdMagicCookie, settings.AdditionalQueryParameters);
         }
 
@@ -89,7 +103,9 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var settings = ActiveDirectoryClientSettings.UseCacheOrCookiesOnly(clientId, clientUri);
             Assert.Equal(clientId, settings.ClientId);
             Assert.Equal(clientUri, settings.ClientRedirectUri);
+#if !PORTABLE
             Assert.Equal(PromptBehavior.Never, settings.PromptBehavior);
+#endif
             Assert.Equal(ActiveDirectoryClientSettings.EnableEbdMagicCookie, settings.AdditionalQueryParameters);
         }
 
@@ -101,7 +117,9 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var settings = ActiveDirectoryClientSettings.UseCacheCookiesOrPrompt(clientId, clientUri);
             Assert.Equal(clientId, settings.ClientId);
             Assert.Equal(clientUri, settings.ClientRedirectUri);
+#if !PORTABLE
             Assert.Equal(PromptBehavior.Auto, settings.PromptBehavior);
+#endif
             Assert.Equal(ActiveDirectoryClientSettings.EnableEbdMagicCookie, settings.AdditionalQueryParameters);
         }
 
@@ -113,7 +131,9 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var settings = new ActiveDirectoryClientSettings(clientId, clientUri);
             Assert.Equal(clientId, settings.ClientId);
             Assert.Equal(clientUri, settings.ClientRedirectUri);
+#if !PORTABLE
             Assert.Equal(PromptBehavior.Auto, settings.PromptBehavior);
+#endif
             Assert.Equal(ActiveDirectoryClientSettings.EnableEbdMagicCookie, settings.AdditionalQueryParameters);
         }
 }

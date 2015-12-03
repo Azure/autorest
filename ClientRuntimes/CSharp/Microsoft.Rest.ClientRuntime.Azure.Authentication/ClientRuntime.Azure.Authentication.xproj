@@ -7,7 +7,7 @@
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>6319205d-bbfc-4150-beae-31b1c9b911dd</ProjectGuid>
-    <RootNamespace>ClientRuntime.Azure.Authentication</RootNamespace>
+    <RootNamespace>Microsoft.Rest.ClientRuntime.Azure.Authentication</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">bin</OutputPath>
   </PropertyGroup>

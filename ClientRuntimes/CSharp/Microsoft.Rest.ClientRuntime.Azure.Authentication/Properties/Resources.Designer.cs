@@ -7,11 +7,8 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-#if PORTABLE
-namespace ClientRuntime.Azure.Authentication.Properties {
-#else
-namespace Microsoft.Rest.Azure.Authentication.Properties {
-#endif
+
+namespace Microsoft.Rest.ClientRuntime.Azure.Authentication.Properties {
     using System;
     using System.Reflection;
     
@@ -41,11 +38,7 @@ namespace Microsoft.Rest.Azure.Authentication.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-#if PORTABLE
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ClientRuntime.Azure.Authentication.Properties.Resources", typeof(Resources).GetTypeInfo().Assembly);
-#else
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.Rest.Azure.Authentication.Properties.Resources", typeof(Resources).Assembly);
-#endif
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.Rest.ClientRuntime.Azure.Authentication.Properties.Resources", typeof(Resources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

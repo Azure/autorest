@@ -8,8 +8,9 @@
   "commands": {
     "test": "xunit.runner.dnx"
   },
-  "frameworks": {   
+  "frameworks": {
     "dnxcore50": {
+      "compilationOptions": { "define": [ "PORTABLE" ] },
       "dependencies": {
         "System.Diagnostics.Tools": "4.0.0",
         "System.Net.Http": "4.0.0",
@@ -20,9 +21,9 @@
       }
     }
   },
-  "exclude": [ "ActiveDirectory*.*" ],
   "dependencies": {
     "Microsoft.Rest.ClientRuntime.Azure": "",
+    "Microsoft.Rest.ClientRuntime.Azure.Authentication": "",
     "xunit": "2.1.0"
   }
 }
