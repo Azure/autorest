@@ -266,7 +266,7 @@ HttpServerFailure.prototype.post505 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -395,7 +395,7 @@ HttpServerFailure.prototype.delete505 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {

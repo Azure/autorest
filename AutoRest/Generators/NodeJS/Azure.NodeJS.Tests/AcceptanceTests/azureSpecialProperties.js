@@ -170,7 +170,12 @@ describe('nodejs', function () {
     });
     
     it('should support OData filter', function (done) {
-      testClient.odata.getWithFilter("id gt 5 and name eq 'foo'", 10, "id", function (error, result, request, response) {
+      var options = {
+        filter: "id gt 5 and name eq 'foo'",
+        top: 10,
+        orderby: 'id'
+      };
+      testClient.odata.getWithFilter(options, function (error, result, request, response) {
         should.not.exist(error);
         response.statusCode.should.equal(200);
         done();

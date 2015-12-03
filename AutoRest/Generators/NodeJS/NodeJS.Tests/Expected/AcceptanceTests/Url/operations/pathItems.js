@@ -72,8 +72,8 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var localStringQuery = options ? options.localStringQuery : undefined;
-  var pathItemStringQuery = options ? options.pathItemStringQuery : undefined;
+  var localStringQuery = (options && options.localStringQuery !== undefined) ? options.localStringQuery : undefined;
+  var pathItemStringQuery = (options && options.pathItemStringQuery !== undefined) ? options.pathItemStringQuery : undefined;
   // Validate
   try {
     if (localStringPath === null || localStringPath === undefined || typeof localStringPath.valueOf() !== 'string') {
@@ -214,8 +214,8 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var localStringQuery = options ? options.localStringQuery : undefined;
-  var pathItemStringQuery = options ? options.pathItemStringQuery : undefined;
+  var localStringQuery = (options && options.localStringQuery !== undefined) ? options.localStringQuery : undefined;
+  var pathItemStringQuery = (options && options.pathItemStringQuery !== undefined) ? options.pathItemStringQuery : undefined;
   // Validate
   try {
     if (localStringPath === null || localStringPath === undefined || typeof localStringPath.valueOf() !== 'string') {
@@ -354,8 +354,8 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var localStringQuery = options ? options.localStringQuery : undefined;
-  var pathItemStringQuery = options ? options.pathItemStringQuery : undefined;
+  var localStringQuery = (options && options.localStringQuery !== undefined) ? options.localStringQuery : undefined;
+  var pathItemStringQuery = (options && options.pathItemStringQuery !== undefined) ? options.pathItemStringQuery : undefined;
   // Validate
   try {
     if (localStringPath === null || localStringPath === undefined || typeof localStringPath.valueOf() !== 'string') {
@@ -493,8 +493,8 @@ PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathI
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var localStringQuery = options ? options.localStringQuery : undefined;
-  var pathItemStringQuery = options ? options.pathItemStringQuery : undefined;
+  var localStringQuery = (options && options.localStringQuery !== undefined) ? options.localStringQuery : undefined;
+  var pathItemStringQuery = (options && options.pathItemStringQuery !== undefined) ? options.pathItemStringQuery : undefined;
   // Validate
   try {
     if (localStringPath === null || localStringPath === undefined || typeof localStringPath.valueOf() !== 'string') {

@@ -173,7 +173,7 @@ Implicit.prototype.putOptionalQuery = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var queryParameter = options ? options.queryParameter : undefined;
+  var queryParameter = (options && options.queryParameter !== undefined) ? options.queryParameter : undefined;
   // Validate
   try {
     if (queryParameter !== null && queryParameter !== undefined && typeof queryParameter.valueOf() !== 'string') {
@@ -277,7 +277,7 @@ Implicit.prototype.putOptionalHeader = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var queryParameter = options ? options.queryParameter : undefined;
+  var queryParameter = (options && options.queryParameter !== undefined) ? options.queryParameter : undefined;
   // Validate
   try {
     if (queryParameter !== null && queryParameter !== undefined && typeof queryParameter.valueOf() !== 'string') {
@@ -377,7 +377,7 @@ Implicit.prototype.putOptionalBody = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var bodyParameter = options ? options.bodyParameter : undefined;
+  var bodyParameter = (options && options.bodyParameter !== undefined) ? options.bodyParameter : undefined;
   // Validate
   try {
     if (bodyParameter !== null && bodyParameter !== undefined && typeof bodyParameter.valueOf() !== 'string') {

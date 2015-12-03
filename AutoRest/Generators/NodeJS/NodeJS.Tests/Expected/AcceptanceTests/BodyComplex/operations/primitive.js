@@ -2171,7 +2171,7 @@ Primitive.prototype.putDuration = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var field = options ? options.field : undefined;
+  var field = (options && options.field !== undefined) ? options.field : undefined;
   // Validate
   try {
     if(field && !moment.isDuration(field)) {
@@ -2396,7 +2396,7 @@ Primitive.prototype.putByte = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var field = options ? options.field : undefined;
+  var field = (options && options.field !== undefined) ? options.field : undefined;
   // Validate
   try {
     if (field && !Buffer.isBuffer(field)) {
