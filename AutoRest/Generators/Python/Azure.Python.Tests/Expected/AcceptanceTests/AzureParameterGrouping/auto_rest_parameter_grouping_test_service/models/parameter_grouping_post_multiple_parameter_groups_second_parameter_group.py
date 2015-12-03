@@ -16,7 +16,6 @@ class ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup(Model):
 
     _required = []
 
-
     def __init__(self, *args, **kwargs):
 
         self.header_two = None

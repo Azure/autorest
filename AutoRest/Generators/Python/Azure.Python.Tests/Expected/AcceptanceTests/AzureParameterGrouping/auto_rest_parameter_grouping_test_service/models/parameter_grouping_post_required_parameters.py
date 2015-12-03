@@ -16,7 +16,6 @@ class ParameterGroupingPostRequiredParameters(Model):
 
     _required = ['body', 'path']
 
-
     def __init__(self, *args, **kwargs):
 
         self.body = None

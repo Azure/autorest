@@ -47,11 +47,11 @@ else
 @EmptyLine
     @:_required = [@requiredStr]
 }
-@EmptyLine
 @{
   var propertyList = new List<Property>(Model.Properties);
   if (!Model.IsParameterGroup)
   {
+@EmptyLine
     @:_attribute_map = {
     if (propertyList.Count > 0)
     {

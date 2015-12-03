@@ -16,7 +16,6 @@ class ParameterGroupingPostOptionalParameters(Model):
 
     _required = []
 
-
     def __init__(self, *args, **kwargs):
 
         self.custom_header = None

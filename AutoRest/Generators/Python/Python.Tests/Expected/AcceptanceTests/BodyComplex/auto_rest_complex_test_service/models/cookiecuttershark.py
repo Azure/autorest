@@ -16,7 +16,6 @@ class Cookiecuttershark(Shark):
 
     _required = []
 
-
     def __init__(self, *args, **kwargs):
 
         super(Cookiecuttershark, self).__init__(*args, **kwargs)
