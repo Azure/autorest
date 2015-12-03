@@ -73,6 +73,19 @@ class LroTests(unittest.TestCase):
         self.assertRaisesWithMessage("Long running operation failed",
             self.client.lr_os.put200_acceptedcanceled200(product).result)
 
+        # Testing raw
+        process = self.client.lr_os.put201_creating_succeeded200(product, raw=True)
+        self.assertEqual("Succeeded", process.result().output.provisioning_state)
+
+        self.assertRaisesWithMessage("Long running operation failed",
+            self.client.lr_os.put201_creating_failed200(product, raw=True).result)
+
+        process = self.client.lr_os.put200_updating_succeeded204(product, raw=True)
+        self.assertEqual("Succeeded", process.result().output.provisioning_state)
+
+        self.assertRaisesWithMessage("Long running operation failed",
+            self.client.lr_os.put200_acceptedcanceled200(product, raw=True).result)
+
         process = self.client.lr_os.put_no_header_in_retry(product)
         self.assertEqual("Succeeded", process.result().provisioning_state)
 

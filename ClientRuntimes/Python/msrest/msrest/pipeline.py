@@ -33,6 +33,8 @@ import json
 import functools
 import types
 
+from .serialization import Deserializer
+
 from requests.packages.urllib3 import Retry
 from requests.packages.urllib3.poolmanager import pool_classes_by_scheme
 from requests.packages.urllib3 import HTTPConnectionPool
@@ -196,6 +198,25 @@ class ClientRequest(requests.Request):
         return kwargs
 
 
+class ClientRawResponse(object):
+
+    def __init__(self, output, response):
+
+        self.response = response
+        self.output = output
+        self.headers = {}
+
+        self._deserialize = Deserializer()
+
+    def add_header(self, name, data_type):
+
+        value = self.response.headers.get(name)
+        if value:
+            value = self._deserialize(data_type, value)
+
+        self.headers[name] = value
+
+
 class ClientRetry(Retry):
 
     def __init__(self, log_name=None, **kwargs):
@@ -212,7 +233,11 @@ class ClientRetry(Retry):
 
         # Collect retry cookie - currently only used for non-HTTPS connections
         # TODO: Look up correct cookie handling protocol
+
         if response:
+            # Fixes open socket warnings in Python 3 but makes it really slow
+            response.release_conn()
+
             response_cookie = response.getheader("Set-Cookie")
             if response_cookie:
                 self._log.debug("Adding cookie to pool headers for retry: "

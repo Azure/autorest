@@ -74,6 +74,9 @@ class Model(object):
 
         return True
 
+    def __str__(self):
+        return str(self.__dict__)
+
     def __getattribute__(self, attr):
 
         if attr in ['_attribute_map', '_header_map', '_response_map']:
@@ -584,7 +587,7 @@ class Deserializer(object):
     def _unpack_content(self, raw_data):
 
         if isinstance(raw_data, bytes):
-            data = raw_data.decode(encoding=chardet.detect(raw_data))
+            data = raw_data.decode(encoding=chardet.detect(raw_data)['encoding'])
 
         else:
             data = raw_data
