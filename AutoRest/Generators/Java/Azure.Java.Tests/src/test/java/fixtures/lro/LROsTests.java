@@ -3,8 +3,6 @@ package fixtures.lro;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.serializer.AzureJacksonUtils;
-import com.squareup.okhttp.OkHttpClient;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
@@ -12,20 +10,14 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import retrofit.JacksonConverterFactory;
-import retrofit.Retrofit;
 
-import java.net.CookieManager;
-import java.net.CookiePolicy;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.fail;
 
 public class LROsTests {
-    static AutoRestLongRunningOperationTestService client;
+    private static AutoRestLongRunningOperationTestService client;
 
     @BeforeClass
     public static void setup() {

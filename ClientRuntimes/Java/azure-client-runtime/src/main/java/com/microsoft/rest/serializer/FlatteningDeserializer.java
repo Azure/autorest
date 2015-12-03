@@ -30,23 +30,40 @@ import java.lang.reflect.Field;
  * Custom serializer for deserializing {@link BaseResource} with wrapped properties.
  * For example, a property with annotation @JsonProperty(value = "properties.name")
  * will be mapped to a top level "name" property in the POJO model.
+ *
+ * @param <T> the type to deserialize into.
  */
 public class FlatteningDeserializer<T> extends StdDeserializer<T> implements ResolvableDeserializer {
+    /**
+     * The default deserializer for the current type.
+     */
     private final JsonDeserializer<?> defaultDeserializer;
 
+    /**
+     * Creates an instance of FlatteningDeserializer.
+     * @param vc handled type
+     * @param defaultDeserializer the default JSON deserializer
+     */
     protected FlatteningDeserializer(Class<?> vc, JsonDeserializer<?> defaultDeserializer) {
         super(vc);
         this.defaultDeserializer = defaultDeserializer;
     }
 
+    /**
+     * Gets a module wrapping this serializer as an adapter for the Jackson
+     * ObjectMapper.
+     *
+     * @return a simple module to be plugged onto Jackson ObjectMapper.
+     */
     public static SimpleModule getModule() {
         final Class<?> vc = BaseResource.class;
         SimpleModule module = new SimpleModule();
         module.setDeserializerModifier(new BeanDeserializerModifier() {
             @Override
             public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BeanDescription beanDesc, JsonDeserializer<?> deserializer) {
-                if (vc.isAssignableFrom(beanDesc.getBeanClass()) && vc != beanDesc.getBeanClass())
+                if (vc.isAssignableFrom(beanDesc.getBeanClass()) && vc != beanDesc.getBeanClass()) {
                     return new FlatteningDeserializer<BaseResource>(beanDesc.getBeanClass(), deserializer);
+                }
                 return deserializer;
             }
         });
@@ -67,15 +84,17 @@ public class FlatteningDeserializer<T> extends StdDeserializer<T> implements Res
                     String[] values = value.split("\\.");
                     for (String val : values) {
                         node = node.get(val);
-                        if (node == null) break;
+                        if (node == null) {
+                            break;
+                        }
                     }
-                    ((ObjectNode)root).put(value, node);
+                    ((ObjectNode) root).put(value, node);
                 }
             }
         }
         JsonParser parser = new JsonFactory().createParser(root.toString());
         parser.nextToken();
-        return (T)defaultDeserializer.deserialize(parser, ctxt);
+        return (T) defaultDeserializer.deserialize(parser, ctxt);
     }
 
     @Override

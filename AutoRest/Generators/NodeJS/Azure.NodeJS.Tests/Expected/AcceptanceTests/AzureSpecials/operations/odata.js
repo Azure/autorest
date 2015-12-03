@@ -33,22 +33,22 @@ function Odata(client) {
  * Specify filter parameter with value '$filter=id gt 5 and name eq
  * 'foo'&$orderby=id&$top=10'
  *
- * @param {object} [filter] The filter parameter with value '$filter=id gt 5
- * and name eq 'foo''.
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {number} [filter.id]
+ * @param {object} [options.filter] The filter parameter with value
+ * '$filter=id gt 5 and name eq 'foo''.
  * 
- * @param {string} [filter.name]
+ * @param {number} [options.filter.id]
  * 
- * @param {number} [top] The top parameter with value 10.
+ * @param {string} [options.filter.name]
  * 
- * @param {string} [orderby] The orderby parameter with value id.
+ * @param {number} [options.top] The top parameter with value 10.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.orderby] The orderby parameter with value id.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -61,7 +61,7 @@ function Odata(client) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Odata.prototype.getWithFilter = function (filter, top, orderby, options, callback) {
+Odata.prototype.getWithFilter = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -70,6 +70,9 @@ Odata.prototype.getWithFilter = function (filter, top, orderby, options, callbac
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var filter = options ? options.filter : undefined;
+  var top = options ? options.top : undefined;
+  var orderby = options ? options.orderby : undefined;
   // Validate
   try {
     if (top !== null && top !== undefined && typeof top !== 'number') {

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class CoverageReporter {
-    static AutoRestReportService client = new AutoRestReportServiceImpl("http://localhost:3000");
+public final class CoverageReporter {
+    private static AutoRestReportService client = new AutoRestReportServiceImpl("http://localhost:3000");
+
+    private CoverageReporter() { }
 
     public static void main(String[] args) throws Exception {
         Map<String, Integer> report = client.getReport().getBody();

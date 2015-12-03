@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DateTimeRfc1123OperationsTests {
-    static AutoRestRFC1123DateTimeTestService client;
+    private static AutoRestRFC1123DateTimeTestService client;
 
     @BeforeClass
     public static void setup() {

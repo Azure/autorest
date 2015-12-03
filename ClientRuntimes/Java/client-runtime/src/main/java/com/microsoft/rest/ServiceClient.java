@@ -25,8 +25,16 @@ import java.util.concurrent.Executors;
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
  */
 public abstract class ServiceClient {
-    protected OkHttpClient client;
-    protected Retrofit.Builder retrofitBuilder;
+    /**
+     * The HTTP client object.
+     */
+    protected final OkHttpClient client;
+
+    /**
+     * The builder for building Retrofit services.
+     */
+    protected final Retrofit.Builder retrofitBuilder;
+
     /**
      * Initializes a new instance of the ServiceClient class.
      */
@@ -38,7 +46,7 @@ public abstract class ServiceClient {
         this.client.setCookieHandler(cookieManager);
 
         Executor executor = Executors.newCachedThreadPool();
-        this.retrofitBuilder = this.retrofitBuilder
+        this.retrofitBuilder
                 .addConverterFactory(new JacksonUtils().getConverterFactory())
                 .callbackExecutor(executor);
     }

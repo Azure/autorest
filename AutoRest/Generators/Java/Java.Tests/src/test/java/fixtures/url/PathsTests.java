@@ -1,18 +1,15 @@
 package fixtures.url;
 
-import com.microsoft.rest.ServiceException;
 import fixtures.url.models.UriColor;
-import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class PathsTests {
-    static AutoRestUrlTestService client;
+    private static AutoRestUrlTestService client;
 
     @BeforeClass
     public static void setup() {
@@ -41,12 +38,12 @@ public class PathsTests {
 
     @Test
     public void getTenBillion() throws Exception {
-        client.getPaths().getTenBillion(10000000000l);
+        client.getPaths().getTenBillion(10000000000L);
     }
 
     @Test
     public void getNegativeTenBillion() throws Exception {
-        client.getPaths().getNegativeTenBillion(-10000000000l);
+        client.getPaths().getNegativeTenBillion(-10000000000L);
     }
 
     @Test

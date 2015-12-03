@@ -7,11 +7,11 @@
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
-@: * @Model.Summary.EscapeXmlComment()
+@: * @Model.Summary.EscapeXmlComment().Period()
 }
 @if (!string.IsNullOrEmpty(Model.Description))
 {
-@: * @Model.Description.EscapeXmlComment()
+@: * @Model.Description.EscapeXmlComment().Period()
 }
  *
 @foreach (var param in Model.LocalParameters)
@@ -24,7 +24,11 @@
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object if successful.
+@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link ServiceResponse} if successful.
+}
+else
+{
+@: * @@return the {@@link ServiceResponse} object if successful.
 }
  */
 public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.Exceptions {
@@ -53,11 +57,11 @@ public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.Meth
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
-@: * @Model.Summary.EscapeXmlComment()
+@: * @Model.Summary.EscapeXmlComment().Period()
 }
 @if (!string.IsNullOrEmpty(Model.Description))
 {
-@: * @Model.Description.EscapeXmlComment()
+@: * @Model.Description.EscapeXmlComment().Period()
 }
  *
 @foreach (var param in Model.LocalParameters)
@@ -65,6 +69,7 @@ public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.Meth
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
  * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+ * @@return the {@@link Call} object
  */
 public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
 @foreach (var param in Model.RequiredNullableParameters)
@@ -104,11 +109,12 @@ private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Re
     return new @Model.ResponseBuilder<@Model.GenericReturnTypeString>(@Model.ServiceResponseBuilderArgs)
 @foreach (var response in Model.Responses)
 {
-            @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.WrapPrimitiveType(response.Value.Body).Name>(){}.getType())
+
+            @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.WrapPrimitiveType(response.Value.Body).Name>() { }.getType())
 }
 @if (Model.DefaultResponse.Body != null)
 {
-            @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(Model.DefaultResponse.Body).Name)>(){}.getType())
+            @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(Model.DefaultResponse.Body).Name)>() { }.getType())
 }
 @if (Model.HttpMethod == HttpMethod.Head)
 {

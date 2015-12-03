@@ -1,18 +1,15 @@
 package fixtures.bodycomplex;
 
-import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DictionaryTests {
-    static AutoRestComplexTestService client;
+    private static AutoRestComplexTestService client;
 
     @BeforeClass
     public static void setup() {

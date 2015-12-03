@@ -11,6 +11,8 @@ import java.util.List;
 
 /**
  * Defines a page interface in Azure responses.
+ *
+ * @param <E> the element type.
  */
 public interface Page<E> {
     /**

@@ -15,6 +15,7 @@ namespace Microsoft.Rest.Generator.Java
     public class JavaCodeGenerator : CodeGenerator
     {
         private const string ClientRuntimePackage = "com.microsoft.rest:client-runtime:0.0.1-SNAPSHOT";
+        private const string _packageInfoFileName = "package-info.java";
 
         public JavaCodeNamer Namer { get; private set; }
 
@@ -135,6 +136,16 @@ namespace Microsoft.Rest.Generator.Java
                 };
                 await Write(enumTemplate, Path.Combine("models", enumTemplate.Model.Name.ToPascalCase() + ".java"));
             }
+
+            // package-info.java
+            await Write(new PackageInfoTemplate
+            {
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name)
+            }, _packageInfoFileName);
+            await Write(new PackageInfoTemplate
+            {
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, true)
+            }, Path.Combine("models", _packageInfoFileName));
         }
     }
 }
