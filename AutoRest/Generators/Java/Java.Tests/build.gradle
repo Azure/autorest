@@ -25,9 +25,9 @@ repositories {
 }
 
 checkstyle {
-    configFile = new File("$rootDir/tools/checkstyle/checkstyle.xml")
-    configProperties = [samedir: "$rootDir/tools/checkstyle"]
-    reportsDir = new File("$rootDir/tools/checkstyle/reports")
+    configFile = new File("$rootDir/Tools/checkstyle/checkstyle.xml")
+    configProperties = [samedir: "$rootDir/Tools/checkstyle"]
+    reportsDir = new File("$rootDir/Tools/checkstyle/reports")
 }
 
 

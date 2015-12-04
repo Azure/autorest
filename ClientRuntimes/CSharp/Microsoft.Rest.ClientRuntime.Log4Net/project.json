@@ -1,0 +1,34 @@
+{
+  "version": "1.0.0-preview",
+  "iconUrl": "https://cdn.rawgit.com/Azure/AutoRest/7c1576dfb56974176223545cfac5762d168ded5f/Documentation/images/autorest-small-flat.png",
+  "title": "Log4Net Logger for Microsoft AutoRest Generated Clients",
+  "summary": "Provides Log4Net logging for AutoRest generated client libraries.",
+  "description": "Enables logging of event messages for AutoRest generated client libraries via Log4Net.",
+  "copyright": "Copyright (c) Microsoft Corporation",
+  "authors": [ "Microsoft" ],
+  "tags": [ "Microsoft AutoRest ClientRuntime REST ETW" ],
+  "projectUrl": "https://github.com/Azure/AutoRest",
+  "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+
+  "compilationOptions": {
+    "delaySign": true,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk"
+  },
+
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+        "System": "",
+        "System.Net": "",
+        "System.Net.Http": "",
+        "System.Net.Http.WebRequest": "",
+        "System.Xml": ""
+      }
+    }
+  },
+
+  "dependencies": {
+    "Microsoft.Rest.ClientRuntime": "",
+    "log4net": "2.0.3"
+  }
+}
