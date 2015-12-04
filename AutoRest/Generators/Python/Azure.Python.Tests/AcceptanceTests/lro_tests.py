@@ -86,6 +86,7 @@ class LroTests(unittest.TestCase):
         self.assertRaisesWithMessage("Long running operation failed",
             self.client.lr_os.put200_acceptedcanceled200(product, raw=True).result)
 
+        #TODO: bug in retry???
         process = self.client.lr_os.put_no_header_in_retry(product)
         self.assertEqual("Succeeded", process.result().provisioning_state)
 
