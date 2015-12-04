@@ -497,7 +497,7 @@ class Deserializer(object):
         data = self._unpack_content(response_data)
         response, class_name = self._classify_target(target_obj, data)
 
-        if isinstance(response, str):
+        if isinstance(response, basestring):
             return self.deserialize_data(data, response)
 
         elif isinstance(response, Enum) or class_name == 'EnumMeta':
@@ -542,7 +542,7 @@ class Deserializer(object):
         if target is None:
             return None, None
 
-        if isinstance(target, str):
+        if isinstance(target, basestring):
             try:
                 target = self.dependencies[target]
 
@@ -671,10 +671,10 @@ class Deserializer(object):
             if attr in [True, False, 1, 0]:
                 return bool(attr)
 
-            elif isinstance(attr, str) and attr.lower() in ['true', '1']:
+            elif isinstance(attr, basestring) and attr.lower() in ['true', '1']:
                 return True
 
-            elif isinstance(attr, str) and attr.lower() in ['false', '0']:
+            elif isinstance(attr, basestring) and attr.lower() in ['false', '0']:
                 return False
 
             raise TypeError("Invalid boolean value: {0}".format(attr))
