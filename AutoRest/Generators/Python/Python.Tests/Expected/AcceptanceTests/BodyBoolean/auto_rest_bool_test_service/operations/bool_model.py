@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 
 from .. import models
 
@@ -68,7 +69,8 @@ class bool_model(object):
             deserialized = self._deserialize('bool', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -117,7 +119,8 @@ class bool_model(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_false(
@@ -163,7 +166,8 @@ class bool_model(object):
             deserialized = self._deserialize('bool', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -212,7 +216,8 @@ class bool_model(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_null(
@@ -258,7 +263,8 @@ class bool_model(object):
             deserialized = self._deserialize('bool', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -306,6 +312,7 @@ class bool_model(object):
             deserialized = self._deserialize('bool', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized

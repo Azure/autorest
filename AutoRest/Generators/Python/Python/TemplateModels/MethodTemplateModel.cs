@@ -252,10 +252,18 @@ namespace Microsoft.Rest.Generator.Python
             get
             {
                 var builder = new IndentedStringBuilder("    ");
-                builder.AppendLine("if raw:").Indent().AppendLine("return None, response").Outdent();
+                builder.AppendLine("if raw:").Indent().
+                    AppendLine("client_raw_response = ClientRawResponse(None, response)").   //TODO: Add header
+                    AppendLine("return client_raw_response").
+                    Outdent();
 
                 return builder.ToString();
             }
+        }
+
+        public virtual string AddResponseHeader()
+        {
+            return string.Empty;
         }
 
         /// <summary>

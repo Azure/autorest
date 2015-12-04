@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 from msrestazure.azure_exceptions import CloudError
 import uuid
 
@@ -74,7 +75,7 @@ class pagingOperations(object):
                 request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             return response
 
@@ -84,7 +85,8 @@ class pagingOperations(object):
         deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -140,7 +142,7 @@ class pagingOperations(object):
                 request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             return response
 
@@ -150,7 +152,8 @@ class pagingOperations(object):
         deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -203,7 +206,7 @@ class pagingOperations(object):
                 request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             return response
 
@@ -213,7 +216,8 @@ class pagingOperations(object):
         deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -267,7 +271,7 @@ class pagingOperations(object):
                 request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             return response
 
@@ -277,7 +281,8 @@ class pagingOperations(object):
         deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -329,7 +334,7 @@ class pagingOperations(object):
                 request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             return response
 
@@ -339,7 +344,8 @@ class pagingOperations(object):
         deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -391,7 +397,7 @@ class pagingOperations(object):
                 request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             return response
 
@@ -401,7 +407,8 @@ class pagingOperations(object):
         deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -453,7 +460,7 @@ class pagingOperations(object):
                 request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             return response
 
@@ -463,6 +470,7 @@ class pagingOperations(object):
         deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized

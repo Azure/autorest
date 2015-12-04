@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 
 from .. import models
 
@@ -63,7 +64,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get200(
@@ -109,7 +111,8 @@ class http_success(object):
             deserialized = self._deserialize('bool', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -161,7 +164,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def patch200(
@@ -211,7 +215,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def post200(
@@ -261,7 +266,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def delete200(
@@ -311,7 +317,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def put201(
@@ -361,7 +368,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def post201(
@@ -411,7 +419,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def put202(
@@ -461,7 +470,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def patch202(
@@ -511,7 +521,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def post202(
@@ -561,7 +572,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def delete202(
@@ -611,7 +623,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def head204(
@@ -652,7 +665,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def put204(
@@ -702,7 +716,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def patch204(
@@ -752,7 +767,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def post204(
@@ -802,7 +818,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def delete204(
@@ -852,7 +869,8 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def head404(
@@ -893,4 +911,5 @@ class http_success(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response

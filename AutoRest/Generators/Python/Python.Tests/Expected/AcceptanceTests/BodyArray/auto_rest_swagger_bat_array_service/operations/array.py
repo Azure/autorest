@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 
 from .. import models
 
@@ -68,7 +69,8 @@ class array(object):
             deserialized = self._deserialize('[int]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -116,7 +118,8 @@ class array(object):
             deserialized = self._deserialize('[int]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -164,7 +167,8 @@ class array(object):
             deserialized = self._deserialize('[int]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -213,7 +217,8 @@ class array(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_boolean_tfft(
@@ -259,7 +264,8 @@ class array(object):
             deserialized = self._deserialize('[bool]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -308,7 +314,8 @@ class array(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_boolean_invalid_null(
@@ -354,7 +361,8 @@ class array(object):
             deserialized = self._deserialize('[bool]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -402,7 +410,8 @@ class array(object):
             deserialized = self._deserialize('[bool]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -450,7 +459,8 @@ class array(object):
             deserialized = self._deserialize('[int]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -499,7 +509,8 @@ class array(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_int_invalid_null(
@@ -545,7 +556,8 @@ class array(object):
             deserialized = self._deserialize('[int]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -593,7 +605,8 @@ class array(object):
             deserialized = self._deserialize('[int]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -641,7 +654,8 @@ class array(object):
             deserialized = self._deserialize('[long]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -690,7 +704,8 @@ class array(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_long_invalid_null(
@@ -736,7 +751,8 @@ class array(object):
             deserialized = self._deserialize('[long]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -784,7 +800,8 @@ class array(object):
             deserialized = self._deserialize('[long]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -832,7 +849,8 @@ class array(object):
             deserialized = self._deserialize('[float]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -881,7 +899,8 @@ class array(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_float_invalid_null(
@@ -927,7 +946,8 @@ class array(object):
             deserialized = self._deserialize('[float]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -975,7 +995,8 @@ class array(object):
             deserialized = self._deserialize('[float]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1023,7 +1044,8 @@ class array(object):
             deserialized = self._deserialize('[float]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1072,7 +1094,8 @@ class array(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_double_invalid_null(
@@ -1118,7 +1141,8 @@ class array(object):
             deserialized = self._deserialize('[float]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1166,7 +1190,8 @@ class array(object):
             deserialized = self._deserialize('[float]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1214,7 +1239,8 @@ class array(object):
             deserialized = self._deserialize('[str]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1263,7 +1289,8 @@ class array(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_string_with_null(
@@ -1309,7 +1336,8 @@ class array(object):
             deserialized = self._deserialize('[str]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1357,7 +1385,8 @@ class array(object):
             deserialized = self._deserialize('[str]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1405,7 +1434,8 @@ class array(object):
             deserialized = self._deserialize('[date]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1454,7 +1484,8 @@ class array(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_date_invalid_null(
@@ -1500,7 +1531,8 @@ class array(object):
             deserialized = self._deserialize('[date]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1548,7 +1580,8 @@ class array(object):
             deserialized = self._deserialize('[date]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1597,7 +1630,8 @@ class array(object):
             deserialized = self._deserialize('[iso-8601]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1647,7 +1681,8 @@ class array(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_date_time_invalid_null(
@@ -1693,7 +1728,8 @@ class array(object):
             deserialized = self._deserialize('[iso-8601]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1741,7 +1777,8 @@ class array(object):
             deserialized = self._deserialize('[iso-8601]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1790,7 +1827,8 @@ class array(object):
             deserialized = self._deserialize('[rfc-1123]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1840,7 +1878,8 @@ class array(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_duration_valid(
@@ -1886,7 +1925,8 @@ class array(object):
             deserialized = self._deserialize('[duration]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1935,7 +1975,8 @@ class array(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_byte_valid(
@@ -1982,7 +2023,8 @@ class array(object):
             deserialized = self._deserialize('[bytearray]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2032,7 +2074,8 @@ class array(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_byte_invalid_null(
@@ -2079,7 +2122,8 @@ class array(object):
             deserialized = self._deserialize('[bytearray]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2127,7 +2171,8 @@ class array(object):
             deserialized = self._deserialize('[Product]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2175,7 +2220,8 @@ class array(object):
             deserialized = self._deserialize('[Product]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2224,7 +2270,8 @@ class array(object):
             deserialized = self._deserialize('[Product]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2273,7 +2320,8 @@ class array(object):
             deserialized = self._deserialize('[Product]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2322,7 +2370,8 @@ class array(object):
             deserialized = self._deserialize('[Product]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2372,7 +2421,8 @@ class array(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_array_null(
@@ -2418,7 +2468,8 @@ class array(object):
             deserialized = self._deserialize('[[str]]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2466,7 +2517,8 @@ class array(object):
             deserialized = self._deserialize('[[str]]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2515,7 +2567,8 @@ class array(object):
             deserialized = self._deserialize('[[str]]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2563,7 +2616,8 @@ class array(object):
             deserialized = self._deserialize('[[str]]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2612,7 +2666,8 @@ class array(object):
             deserialized = self._deserialize('[[str]]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2662,7 +2717,8 @@ class array(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_dictionary_null(
@@ -2708,7 +2764,8 @@ class array(object):
             deserialized = self._deserialize('[{str}]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2756,7 +2813,8 @@ class array(object):
             deserialized = self._deserialize('[{str}]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2806,7 +2864,8 @@ class array(object):
             deserialized = self._deserialize('[{str}]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2856,7 +2915,8 @@ class array(object):
             deserialized = self._deserialize('[{str}]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2906,7 +2966,8 @@ class array(object):
             deserialized = self._deserialize('[{str}]', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -2957,4 +3018,5 @@ class array(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response

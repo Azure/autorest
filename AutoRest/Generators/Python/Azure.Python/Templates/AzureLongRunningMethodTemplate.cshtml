@@ -5,11 +5,11 @@
 @using Microsoft.Rest.Generator.Python
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Python.Templates
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodTemplateModel>
-    @@async_request
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Python.AzureMethodTemplateModel>
     def @(Model.Name.ToPythonCase())(
             self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):
         """
+@*need to fix comment here for long running function*@
 @if (!String.IsNullOrEmpty(Model.Summary))
 {
 @:        @WrapComment(string.Empty, Model.Summary)
@@ -39,17 +39,6 @@
 
         """
 @EmptyLine
-@if (Model.IsResponseStream)
-{
-<text>
-        def download_gen():
-            for data in response.iter_content(self.config.connection.data_block_size):
-                if not data:
-                    break
-                yield data
-</text>
-@EmptyLine
-}
         @Model.BuildInputMappings()
 @if (Model.InputParameterTransformation.Any())
 {
@@ -86,46 +75,72 @@
 @EmptyLine
 }
         # Construct and send request
-        request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query_parameters)
+        def long_running_send():
+@EmptyLine
+            request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query_parameters)
 @if (Model.RequestBody != null)
 {
-        @:response = self._client.send(
-            @:request, header_parameters, body_content, **operation_config)
+            @:return self._client.send(
+                @:request, header_parameters, body_content, **operation_config)
 }
 else
 {
-        @:response = self._client.send(request, header_parameters, **operation_config)
+            @:return self._client.send(request, header_parameters, **operation_config)
 }
 @EmptyLine
-        if @Model.FailureStatusCodePredicate:
-            raise @Model.RaisedException
+        def get_long_running_status(status_link, headers={}):
+@EmptyLine
+            request = self._client.get(status_link)
+            request.headers.update(headers)
+            return self._client.send(
+                request, header_parameters, **operation_config)
+@EmptyLine
+        def get_long_running_output(response):
+@EmptyLine
+@if (Model.IsResponseStream)
+{
+            @:def download_gen():
+                @:for data in response.iter_content(self.config.connection.data_block_size):
+                    @:if not data:
+                        @:break
+                    @:yield data
+@EmptyLine
+}
+            if @Model.FailureStatusCodePredicate:
+                raise @Model.RaisedException
 @EmptyLine
 @if (Model.HasAnyResponse)
 {
-        @:deserialized = None
+            @:deserialized = None
 @EmptyLine
   foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null))
   {
-        @:if response.status_code == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key):
+            @:if response.status_code == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key):
     if (responsePair.Value.Body == PrimaryType.Stream)
     {
-            @:deserialized = download_gen()
+                @:deserialized = download_gen()
     }
     else
     {
-            @:deserialized = self._deserialize('@responsePair.Value.Body.ToPythonRuntimeTypeString()', response)
+                @:deserialized = self._deserialize('@responsePair.Value.Body.ToPythonRuntimeTypeString()', response)
     }
-            @*Model.AddIndividualResponseHeader()*@
   }
 @EmptyLine
-        @:if raw:
-            @:client_raw_response = ClientRawResponse(deserialized, response)
-            @Model.AddResponseHeader()
-            @:return client_raw_response
+            @:if raw:
+                @:client_raw_response = ClientRawResponse(deserialized, response)
+                @Model.AddResponseHeader()
+                @:return client_raw_response
 @EmptyLine
-        @:return deserialized
+            @:return deserialized
 }
 else
 {
-        @:@Model.ReturnEmptyResponse
+            @:@Model.ReturnEmptyResponse
 }
+@EmptyLine
+        long_running_operation_timeout = operation_config.get(
+            'long_running_operation_timeout',
+            self.config.long_running_operation_timeout)
+        return AzureOperationPoller(
+            long_running_send, get_long_running_output,
+            get_long_running_status, long_running_operation_timeout, callback)

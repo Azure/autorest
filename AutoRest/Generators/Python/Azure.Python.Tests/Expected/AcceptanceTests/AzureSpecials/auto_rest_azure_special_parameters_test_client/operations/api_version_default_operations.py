@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 import uuid
 
 from .. import models
@@ -68,7 +69,8 @@ class api_version_defaultOperations(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_method_global_not_provided_valid(
@@ -113,7 +115,8 @@ class api_version_defaultOperations(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_path_global_valid(
@@ -158,7 +161,8 @@ class api_version_defaultOperations(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_swagger_global_valid(
@@ -203,4 +207,5 @@ class api_version_defaultOperations(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response

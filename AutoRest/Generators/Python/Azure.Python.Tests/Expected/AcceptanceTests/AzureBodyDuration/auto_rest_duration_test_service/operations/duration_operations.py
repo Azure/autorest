@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 import uuid
 
 from .. import models
@@ -73,7 +74,8 @@ class durationOperations(object):
             deserialized = self._deserialize('duration', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -125,7 +127,8 @@ class durationOperations(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_positive_duration(
@@ -175,7 +178,8 @@ class durationOperations(object):
             deserialized = self._deserialize('duration', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -227,6 +231,7 @@ class durationOperations(object):
             deserialized = self._deserialize('duration', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized

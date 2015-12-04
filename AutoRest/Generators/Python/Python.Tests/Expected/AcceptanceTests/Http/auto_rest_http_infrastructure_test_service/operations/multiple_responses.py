@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 from msrest.exceptions import HttpOperationError
 
 from .. import models
@@ -70,7 +71,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('A', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -119,7 +121,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('A', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -168,7 +171,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('A', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -217,7 +221,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('A', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -267,7 +272,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('A', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -318,7 +324,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('B', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -370,7 +377,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('B', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -422,7 +430,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('B', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -475,7 +484,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('D', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -528,7 +538,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('D', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -581,7 +592,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('D', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -635,7 +647,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('D', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -678,7 +691,8 @@ class multiple_responses(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get202_none204_none_default_error204_none(
@@ -719,7 +733,8 @@ class multiple_responses(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get202_none204_none_default_error400_valid(
@@ -761,7 +776,8 @@ class multiple_responses(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get202_none204_none_default_none202_invalid(
@@ -802,7 +818,8 @@ class multiple_responses(object):
             raise HttpOperationError(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get202_none204_none_default_none204_none(
@@ -843,7 +860,8 @@ class multiple_responses(object):
             raise HttpOperationError(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get202_none204_none_default_none400_none(
@@ -884,7 +902,8 @@ class multiple_responses(object):
             raise HttpOperationError(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get202_none204_none_default_none400_invalid(
@@ -925,7 +944,8 @@ class multiple_responses(object):
             raise HttpOperationError(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_default_model_a200_valid(
@@ -967,7 +987,8 @@ class multiple_responses(object):
             raise models.MyException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_default_model_a200_none(
@@ -1009,7 +1030,8 @@ class multiple_responses(object):
             raise models.MyException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_default_model_a400_valid(
@@ -1051,7 +1073,8 @@ class multiple_responses(object):
             raise models.MyException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_default_model_a400_none(
@@ -1093,7 +1116,8 @@ class multiple_responses(object):
             raise models.MyException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_default_none200_invalid(
@@ -1134,7 +1158,8 @@ class multiple_responses(object):
             raise HttpOperationError(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_default_none200_none(
@@ -1175,7 +1200,8 @@ class multiple_responses(object):
             raise HttpOperationError(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_default_none400_invalid(
@@ -1216,7 +1242,8 @@ class multiple_responses(object):
             raise HttpOperationError(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_default_none400_none(
@@ -1257,7 +1284,8 @@ class multiple_responses(object):
             raise HttpOperationError(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get200_model_a200_none(
@@ -1305,7 +1333,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('A', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1354,7 +1383,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('A', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1403,7 +1433,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('A', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1453,7 +1484,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('A', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1502,7 +1534,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('A', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1551,7 +1584,8 @@ class multiple_responses(object):
             deserialized = self._deserialize('A', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -1600,6 +1634,7 @@ class multiple_responses(object):
             deserialized = self._deserialize('A', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized

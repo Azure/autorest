@@ -8,6 +8,7 @@
 # --------------------------------------------------------------------------
 @EmptyLine
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 @if (Model.HasAnyDefaultExceptions)
 {
 @:from msrest.exceptions import HttpOperationError

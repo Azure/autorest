@@ -12,6 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 from . import models
 
 
@@ -102,7 +103,8 @@ class AutoRestValidationTest(object):
             deserialized = self._deserialize('Product', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -172,6 +174,7 @@ class AutoRestValidationTest(object):
             deserialized = self._deserialize('Product', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
