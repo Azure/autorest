@@ -194,9 +194,9 @@ class ServiceClient(object):
                 self._configure_session(session)
 
                 response = session.request(
-                    request.method, request.url, request.data,
-                    request.headers, params=request.params,
-                    allow_redirects=bool(self.config.redirect_policy),
+                    request.method, request.url,
+                    request.data,
+                    request.headers,
                     **kwargs)
 
                 return response
