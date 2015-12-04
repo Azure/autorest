@@ -104,6 +104,7 @@ else
 @EmptyLine
         # Deserialize response
         deserialized = @(Model.PagedResponseClassName)(response, internal_paging, self._deserialize.dependencies)
+        @Model.AddIndividualResponseHeader()
 @EmptyLine
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)

@@ -93,8 +93,17 @@ namespace Microsoft.Rest.Generator.Azure.Python
                     var builder = new IndentedStringBuilder("    ");
                     builder.AppendFormat("deserialized = (response.status_code == {0})", (int)code).AppendLine();
                     builder.AppendLine("if raw:").Indent().
-                        AppendLine("client_raw_response = ClientRawResponse(deserialized, response)").  //TODO: Add header
-                        AppendLine("return client_raw_response").
+                        AppendLine("client_raw_response = ClientRawResponse(deserialized, response)");
+                    if (this.Responses[code].Headers != null)
+                    {
+                        builder.AppendLine("client_raw_response.add_headers({").Indent();
+                        foreach (var prop in ((CompositeType)this.Responses[code].Headers).Properties)
+                        {
+                            builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': '{1}',", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
+                        }
+                        builder.AppendLine("})").Outdent();
+                    }
+                    builder.AppendLine("return client_raw_response").
                         Outdent();
                     builder.AppendLine("return deserialized");
 

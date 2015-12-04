@@ -124,11 +124,12 @@ else
     {
                 @:deserialized = self._deserialize('@responsePair.Value.Body.ToPythonRuntimeTypeString()', response)
     }
+                @:@Model.AddIndividualResponseHeader(responsePair.Key)
   }
 @EmptyLine
             @:if raw:
                 @:client_raw_response = ClientRawResponse(deserialized, response)
-                @Model.AddResponseHeader()
+                @:@Model.AddResponseHeader()
                 @:return client_raw_response
 @EmptyLine
             @:return deserialized
