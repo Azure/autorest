@@ -213,13 +213,14 @@ class ClientRawResponse(object):
 
         self._deserialize = Deserializer()
 
-    def add_header(self, name, data_type):
+    def add_headers(self, header_dict):
 
-        value = self.response.headers.get(name)
-        if value:
-            value = self._deserialize(data_type, value)
+        for name, data_type in header_dict.items():
+            value = self.response.headers.get(name)
+            if value:
+                value = self._deserialize(data_type, value)
 
-        self.headers[name] = value
+            self.headers[name] = value
 
 
 class ClientRetry(Retry):
