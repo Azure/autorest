@@ -35,6 +35,12 @@ import types
 
 from .serialization import Deserializer
 
+try:
+    from urlparse import urlparse
+
+except ImportError:
+    from urllib.parse import urlparse
+
 from requests.packages.urllib3 import Retry
 from requests.packages.urllib3.poolmanager import pool_classes_by_scheme
 from requests.packages.urllib3 import HTTPConnectionPool
@@ -187,7 +193,7 @@ class ClientRequest(requests.Request):
         query = '?' + '&'.join(query_params)
         self.url = self.url + query
 
-    def add_content(self, data, **kwargs):
+    def add_content(self, data):
 
         if isinstance(data, types.GeneratorType):
             self.data = data
@@ -195,7 +201,6 @@ class ClientRequest(requests.Request):
         else:
             self.data = json.dumps(data)
             self.headers['Content-Length'] = len(self.data)
-        return kwargs
 
 
 class ClientRawResponse(object):
@@ -231,19 +236,17 @@ class ClientRetry(Retry):
         increment = super(ClientRetry, self).increment(
             method, url, response, error, _pool, _stacktrace)
 
-        # Collect retry cookie - currently only used for non-HTTPS connections
-        # TODO: Look up correct cookie handling protocol
+        # Collect retry cookie - we only want to do this for the test server
+        # at this point, unless we implement a proper cookie policy.
 
         if response:
             # Fixes open socket warnings in Python 3
             response.close()
             response.release_conn()
 
-            response_cookie = response.getheader("Set-Cookie")
-            if response_cookie:
-                self._log.debug("Adding cookie to pool headers for retry: "
-                                "{}".format(response_cookie))
-                increment.retry_cookie = response_cookie
+            parsed_url = urlparse(url)
+            if parsed_url.hostname == 'localhost':
+                increment.retry_cookie = response.getheader("Set-Cookie")
 
         return increment
 
@@ -382,7 +385,7 @@ class ClientConnection(object):
                 'cert': self.cert}
 
 
-# This is only used against test server
+# Cookie logic only used for test server (localhost)
 class ClientHTTPConnectionPool(HTTPConnectionPool):
 
     def urlopen(self, method, url, body=None, headers=None,
