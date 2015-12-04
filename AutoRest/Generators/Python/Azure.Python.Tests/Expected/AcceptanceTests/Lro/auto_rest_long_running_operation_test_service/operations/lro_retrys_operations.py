@@ -180,9 +180,15 @@ class lro_retrysOperations(object):
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
+                header_dict = {
+                    'Azure-AsyncOperation': 'str',
+                    'Location': 'str',
+                    'Retry-After': 'int',
+                    }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
+                client_raw_response.add_headers(header_dict)
                 return client_raw_response
 
             return deserialized
@@ -253,11 +259,20 @@ class lro_retrysOperations(object):
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
+                header_dict = {
+                    'Location': 'str',
+                    'Retry-After': 'int',
+                    }
             if response.status_code == 202:
                 deserialized = self._deserialize('Product', response)
+                header_dict = {
+                    'Location': 'str',
+                    'Retry-After': 'int',
+                    }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
+                client_raw_response.add_headers(header_dict)
                 return client_raw_response
 
             return deserialized
@@ -324,6 +339,10 @@ class lro_retrysOperations(object):
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
+                client_raw_response.add_headers({
+                    'Location': 'str',
+                    'Retry-After': 'int',
+                    })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -388,6 +407,11 @@ class lro_retrysOperations(object):
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
+                client_raw_response.add_headers({
+                    'Azure-AsyncOperation': 'str',
+                    'Location': 'str',
+                    'Retry-After': 'int',
+                    })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -461,6 +485,10 @@ class lro_retrysOperations(object):
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
+                client_raw_response.add_headers({
+                    'Location': 'str',
+                    'Retry-After': 'int',
+                    })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -535,6 +563,11 @@ class lro_retrysOperations(object):
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
+                client_raw_response.add_headers({
+                    'Azure-AsyncOperation': 'str',
+                    'Location': 'str',
+                    'Retry-After': 'int',
+                    })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(

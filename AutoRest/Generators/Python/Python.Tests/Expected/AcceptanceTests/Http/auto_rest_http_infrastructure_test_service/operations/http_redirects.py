@@ -65,6 +65,9 @@ class http_redirects(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -109,9 +112,13 @@ class http_redirects(object):
 
         if response.status_code == 300:
             deserialized = self._deserialize('[str]', response)
+            header_dict = {
+                'Location': 'str',
+                }
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
+            client_raw_response.add_headers(header_dict)
             return client_raw_response
 
         return deserialized
@@ -156,6 +163,9 @@ class http_redirects(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -198,6 +208,9 @@ class http_redirects(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -251,6 +264,9 @@ class http_redirects(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -293,6 +309,9 @@ class http_redirects(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -335,6 +354,9 @@ class http_redirects(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -388,6 +410,9 @@ class http_redirects(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -441,6 +466,9 @@ class http_redirects(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -483,6 +511,9 @@ class http_redirects(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -525,6 +556,9 @@ class http_redirects(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -576,6 +610,9 @@ class http_redirects(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -627,6 +664,9 @@ class http_redirects(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -678,6 +718,9 @@ class http_redirects(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -729,4 +772,7 @@ class http_redirects(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Location': 'str',
+                })
             return client_raw_response

@@ -111,6 +111,9 @@ class header(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'User-Agent': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -199,6 +202,9 @@ class header(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'Content-Type': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -295,6 +301,9 @@ class header(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'value': 'int',
+                })
             return client_raw_response
 
     @async_request
@@ -391,6 +400,9 @@ class header(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'value': 'long',
+                })
             return client_raw_response
 
     @async_request
@@ -487,6 +499,9 @@ class header(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'value': 'float',
+                })
             return client_raw_response
 
     @async_request
@@ -583,6 +598,9 @@ class header(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'value': 'float',
+                })
             return client_raw_response
 
     @async_request
@@ -679,6 +697,9 @@ class header(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'value': 'bool',
+                })
             return client_raw_response
 
     @async_request
@@ -779,6 +800,9 @@ class header(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'value': 'str',
+                })
             return client_raw_response
 
     @async_request
@@ -876,6 +900,9 @@ class header(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'value': 'date',
+                })
             return client_raw_response
 
     @async_request
@@ -975,6 +1002,9 @@ class header(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'value': 'iso-8601',
+                })
             return client_raw_response
 
     @async_request
@@ -1075,6 +1105,9 @@ class header(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'value': 'rfc-1123',
+                })
             return client_raw_response
 
     @async_request
@@ -1172,6 +1205,9 @@ class header(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'value': 'duration',
+                })
             return client_raw_response
 
     @async_request
@@ -1268,6 +1304,9 @@ class header(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'value': 'bytearray',
+                })
             return client_raw_response
 
     @async_request
@@ -1366,6 +1405,9 @@ class header(object):
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
+            client_raw_response.add_headers({
+                'value': 'GreyscaleColors',
+                })
             return client_raw_response
 
     @async_request
