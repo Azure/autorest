@@ -137,6 +137,7 @@ local.properties
 .project
 target
 build
+reports
 .gradle
 .idea
 *.iml

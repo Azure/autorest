@@ -17,6 +17,9 @@ import java.io.IOException;
  * Token credentials filter for placing a token credential into request headers.
  */
 public class TokenCredentialsInterceptor implements Interceptor {
+    /**
+     * The credentials instance to apply to the HTTP client pipeline.
+     */
     private TokenCredentials credentials;
 
     /**

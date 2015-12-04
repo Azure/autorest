@@ -3,7 +3,6 @@ package fixtures.resourceflattening;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.squareup.okhttp.OkHttpClient;
-import fixtures.lro.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.resourceflattening.models.FlattenedProduct;
 import fixtures.resourceflattening.models.Resource;
 import fixtures.resourceflattening.models.ResourceCollection;
@@ -23,7 +22,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class ResourceFlatteningTests {
-    static AutoRestResourceFlatteningTestService client;
+    private static AutoRestResourceFlatteningTestService client;
 
     @BeforeClass
     public static void setup() {

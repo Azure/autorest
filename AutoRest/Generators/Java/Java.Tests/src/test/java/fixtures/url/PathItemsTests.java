@@ -4,7 +4,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PathItemsTests {
-    static AutoRestUrlTestService client;
+    private static AutoRestUrlTestService client;
 
     @BeforeClass
     public static void setup() {

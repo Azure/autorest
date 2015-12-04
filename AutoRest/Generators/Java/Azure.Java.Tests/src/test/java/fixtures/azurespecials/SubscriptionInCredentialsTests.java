@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.UUID;
 
 public class SubscriptionInCredentialsTests {
-    static AutoRestAzureSpecialParametersTestClient client;
+    private static AutoRestAzureSpecialParametersTestClient client;
 
     @BeforeClass
     public static void setup() {

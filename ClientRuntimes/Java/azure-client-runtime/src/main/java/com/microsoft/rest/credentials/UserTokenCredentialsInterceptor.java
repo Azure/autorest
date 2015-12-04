@@ -9,7 +9,6 @@ package com.microsoft.rest.credentials;
 
 import com.microsoft.aad.adal4j.AuthenticationContext;
 import com.microsoft.aad.adal4j.AuthenticationResult;
-import com.microsoft.rest.ServiceException;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -21,11 +20,14 @@ import java.util.concurrent.Executors;
  * Token credentials filter for placing a token credential into request headers.
  */
 public class UserTokenCredentialsInterceptor implements Interceptor {
+    /**
+     * The credentials instance to apply to the HTTP client pipeline.
+     */
     private UserTokenCredentials credentials;
 
     /**
-     * Initialize a TokenCredentialsFilter class with a
-     * TokenCredentials credential.
+     * Initialize a UserTokenCredentialsInterceptor class with a
+     * UserTokenCredentials credential.
      *
      * @param credentials a TokenCredentials instance
      */

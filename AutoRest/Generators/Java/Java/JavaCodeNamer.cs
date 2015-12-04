@@ -411,12 +411,8 @@ namespace Microsoft.Rest.Generator.Java
                     return "java.io.IOException";
                 case "ServiceException":
                     return "com.microsoft.rest.ServiceException";
-                case "InterruptedException":
-                    return "java.lang.InterruptedException";
-                case "IllegalArgumentException": 
-                    return "java.lang.IllegalArgumentException";
                 default:
-                    return "java.lang.Exception";
+                    return null;
             }
         }
     }

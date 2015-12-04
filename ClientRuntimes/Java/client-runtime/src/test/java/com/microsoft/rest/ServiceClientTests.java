@@ -8,8 +8,6 @@
 package com.microsoft.rest;
 
 import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.Protocol;
-import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,8 +16,8 @@ import java.io.IOException;
 
 public class ServiceClientTests {
     @Test
-    public void FilterTests() throws Exception {
-        ServiceClient serviceClient = new ServiceClient() {};
+    public void filterTests() throws Exception {
+        ServiceClient serviceClient = new ServiceClient() { };
         serviceClient.getClientInterceptors().add(0, new FirstFilter());
         serviceClient.getClientInterceptors().add(1, new SecondFilter());
         serviceClient.getClientInterceptors().add(new Interceptor() {

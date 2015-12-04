@@ -1,18 +1,15 @@
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.ServiceException;
 import fixtures.bodycomplex.models.ArrayWrapper;
-import fixtures.bodycomplex.models.Basic;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class ArrayTests {
-    static AutoRestComplexTestService client;
+    private static AutoRestComplexTestService client;
 
     @BeforeClass
     public static void setup() {
