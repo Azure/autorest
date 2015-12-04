@@ -53,7 +53,7 @@ class Configuration(object):
         self.base_url = base_url
 
         # Logging configuration
-        self._log_name = "ms-client-runtime"
+        self._log_name = logger.DEFAULT_LOG_NAME
         self._log_dir = None
 
         self._stream_logging = \

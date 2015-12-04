@@ -380,18 +380,22 @@ class AzureOperationPoller(object):
         else:
             time.sleep(self._timeout)
 
-    def _polling_cookie(self):
-        # TODO: Any cookie protocol to consider here?
-        if self._response.headers.get('set-cookie'):
-            return {'cookie': self._response.headers['set-cookie']}
+    def _polling_cookie(self, url):
+        # Collect retry cookie - we only want to do this for the test server
+        # at this point, unless we implement a proper cookie policy.
+
+        parsed_url = urlparse(url)
+        if parsed_url.hostname == 'localhost':
+            return {'cookie': self._response.headers.get('set-cookie', '')}
+
         return {}
 
     def _poll(self, update_cmd, output_cmd):
 
         while self._operation.status not in self.finished_states:
 
-            headers = self._polling_cookie()
             url = self._response.request.url
+            headers = self._polling_cookie(url)
             self._operation.get_retry(self._response)
 
             if self._operation.async_url:

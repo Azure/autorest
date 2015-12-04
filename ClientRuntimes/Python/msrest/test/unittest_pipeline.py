@@ -180,7 +180,8 @@ class TestClientResponse(unittest.TestCase):
 
         raw = ClientRawResponse([], response)
 
-        raw.add_header('my-test', 'iso-8601')
+        raw.add_headers({'my-test': 'iso-8601',
+                         'another_header': 'str'})
         self.assertIsInstance(raw.headers['my-test'], datetime.datetime)
 
 if __name__ == '__main__':
