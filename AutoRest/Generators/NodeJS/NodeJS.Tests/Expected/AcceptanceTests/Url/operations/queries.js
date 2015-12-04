@@ -59,7 +59,7 @@ Queries.prototype.getBooleanTrue = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var boolQuery = options ? options.boolQuery : undefined;
+  var boolQuery = (options && options.boolQuery !== undefined) ? options.boolQuery : undefined;
   // Validate
   try {
     if (boolQuery !== null && boolQuery !== undefined && typeof boolQuery !== 'boolean') {
@@ -163,7 +163,7 @@ Queries.prototype.getBooleanFalse = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var boolQuery = options ? options.boolQuery : undefined;
+  var boolQuery = (options && options.boolQuery !== undefined) ? options.boolQuery : undefined;
   // Validate
   try {
     if (boolQuery !== null && boolQuery !== undefined && typeof boolQuery !== 'boolean') {
@@ -267,7 +267,7 @@ Queries.prototype.getBooleanNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var boolQuery = options ? options.boolQuery : undefined;
+  var boolQuery = (options && options.boolQuery !== undefined) ? options.boolQuery : undefined;
   // Validate
   try {
     if (boolQuery !== null && boolQuery !== undefined && typeof boolQuery !== 'boolean') {
@@ -371,7 +371,7 @@ Queries.prototype.getIntOneMillion = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var intQuery = options ? options.intQuery : undefined;
+  var intQuery = (options && options.intQuery !== undefined) ? options.intQuery : undefined;
   // Validate
   try {
     if (intQuery !== null && intQuery !== undefined && typeof intQuery !== 'number') {
@@ -475,7 +475,7 @@ Queries.prototype.getIntNegativeOneMillion = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var intQuery = options ? options.intQuery : undefined;
+  var intQuery = (options && options.intQuery !== undefined) ? options.intQuery : undefined;
   // Validate
   try {
     if (intQuery !== null && intQuery !== undefined && typeof intQuery !== 'number') {
@@ -579,7 +579,7 @@ Queries.prototype.getIntNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var intQuery = options ? options.intQuery : undefined;
+  var intQuery = (options && options.intQuery !== undefined) ? options.intQuery : undefined;
   // Validate
   try {
     if (intQuery !== null && intQuery !== undefined && typeof intQuery !== 'number') {
@@ -683,7 +683,7 @@ Queries.prototype.getTenBillion = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var longQuery = options ? options.longQuery : undefined;
+  var longQuery = (options && options.longQuery !== undefined) ? options.longQuery : undefined;
   // Validate
   try {
     if (longQuery !== null && longQuery !== undefined && typeof longQuery !== 'number') {
@@ -787,7 +787,7 @@ Queries.prototype.getNegativeTenBillion = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var longQuery = options ? options.longQuery : undefined;
+  var longQuery = (options && options.longQuery !== undefined) ? options.longQuery : undefined;
   // Validate
   try {
     if (longQuery !== null && longQuery !== undefined && typeof longQuery !== 'number') {
@@ -891,7 +891,7 @@ Queries.prototype.getLongNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var longQuery = options ? options.longQuery : undefined;
+  var longQuery = (options && options.longQuery !== undefined) ? options.longQuery : undefined;
   // Validate
   try {
     if (longQuery !== null && longQuery !== undefined && typeof longQuery !== 'number') {
@@ -995,7 +995,7 @@ Queries.prototype.floatScientificPositive = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var floatQuery = options ? options.floatQuery : undefined;
+  var floatQuery = (options && options.floatQuery !== undefined) ? options.floatQuery : undefined;
   // Validate
   try {
     if (floatQuery !== null && floatQuery !== undefined && typeof floatQuery !== 'number') {
@@ -1099,7 +1099,7 @@ Queries.prototype.floatScientificNegative = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var floatQuery = options ? options.floatQuery : undefined;
+  var floatQuery = (options && options.floatQuery !== undefined) ? options.floatQuery : undefined;
   // Validate
   try {
     if (floatQuery !== null && floatQuery !== undefined && typeof floatQuery !== 'number') {
@@ -1203,7 +1203,7 @@ Queries.prototype.floatNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var floatQuery = options ? options.floatQuery : undefined;
+  var floatQuery = (options && options.floatQuery !== undefined) ? options.floatQuery : undefined;
   // Validate
   try {
     if (floatQuery !== null && floatQuery !== undefined && typeof floatQuery !== 'number') {
@@ -1307,7 +1307,7 @@ Queries.prototype.doubleDecimalPositive = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var doubleQuery = options ? options.doubleQuery : undefined;
+  var doubleQuery = (options && options.doubleQuery !== undefined) ? options.doubleQuery : undefined;
   // Validate
   try {
     if (doubleQuery !== null && doubleQuery !== undefined && typeof doubleQuery !== 'number') {
@@ -1411,7 +1411,7 @@ Queries.prototype.doubleDecimalNegative = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var doubleQuery = options ? options.doubleQuery : undefined;
+  var doubleQuery = (options && options.doubleQuery !== undefined) ? options.doubleQuery : undefined;
   // Validate
   try {
     if (doubleQuery !== null && doubleQuery !== undefined && typeof doubleQuery !== 'number') {
@@ -1515,7 +1515,7 @@ Queries.prototype.doubleNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var doubleQuery = options ? options.doubleQuery : undefined;
+  var doubleQuery = (options && options.doubleQuery !== undefined) ? options.doubleQuery : undefined;
   // Validate
   try {
     if (doubleQuery !== null && doubleQuery !== undefined && typeof doubleQuery !== 'number') {
@@ -1620,7 +1620,7 @@ Queries.prototype.stringUnicode = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var stringQuery = options ? options.stringQuery : undefined;
+  var stringQuery = (options && options.stringQuery !== undefined) ? options.stringQuery : undefined;
   // Validate
   try {
     if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
@@ -1726,7 +1726,7 @@ Queries.prototype.stringUrlEncoded = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var stringQuery = options ? options.stringQuery : undefined;
+  var stringQuery = (options && options.stringQuery !== undefined) ? options.stringQuery : undefined;
   // Validate
   try {
     if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
@@ -1831,7 +1831,7 @@ Queries.prototype.stringEmpty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var stringQuery = options ? options.stringQuery : undefined;
+  var stringQuery = (options && options.stringQuery !== undefined) ? options.stringQuery : undefined;
   // Validate
   try {
     if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
@@ -1935,7 +1935,7 @@ Queries.prototype.stringNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var stringQuery = options ? options.stringQuery : undefined;
+  var stringQuery = (options && options.stringQuery !== undefined) ? options.stringQuery : undefined;
   // Validate
   try {
     if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
@@ -2040,7 +2040,7 @@ Queries.prototype.enumValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var enumQuery = options ? options.enumQuery : undefined;
+  var enumQuery = (options && options.enumQuery !== undefined) ? options.enumQuery : undefined;
   // Validate
   try {
     if (enumQuery) {
@@ -2148,7 +2148,7 @@ Queries.prototype.enumNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var enumQuery = options ? options.enumQuery : undefined;
+  var enumQuery = (options && options.enumQuery !== undefined) ? options.enumQuery : undefined;
   // Validate
   try {
     if (enumQuery) {
@@ -2256,7 +2256,7 @@ Queries.prototype.byteMultiByte = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var byteQuery = options ? options.byteQuery : undefined;
+  var byteQuery = (options && options.byteQuery !== undefined) ? options.byteQuery : undefined;
   // Validate
   try {
     if (byteQuery && !Buffer.isBuffer(byteQuery)) {
@@ -2360,7 +2360,7 @@ Queries.prototype.byteEmpty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var byteQuery = options ? options.byteQuery : undefined;
+  var byteQuery = (options && options.byteQuery !== undefined) ? options.byteQuery : undefined;
   // Validate
   try {
     if (byteQuery && !Buffer.isBuffer(byteQuery)) {
@@ -2465,7 +2465,7 @@ Queries.prototype.byteNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var byteQuery = options ? options.byteQuery : undefined;
+  var byteQuery = (options && options.byteQuery !== undefined) ? options.byteQuery : undefined;
   // Validate
   try {
     if (byteQuery && !Buffer.isBuffer(byteQuery)) {
@@ -2569,7 +2569,7 @@ Queries.prototype.dateValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var dateQuery = options ? options.dateQuery : undefined;
+  var dateQuery = (options && options.dateQuery !== undefined) ? options.dateQuery : undefined;
   // Validate
   try {
     if (dateQuery && !(dateQuery instanceof Date || 
@@ -2674,7 +2674,7 @@ Queries.prototype.dateNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var dateQuery = options ? options.dateQuery : undefined;
+  var dateQuery = (options && options.dateQuery !== undefined) ? options.dateQuery : undefined;
   // Validate
   try {
     if (dateQuery && !(dateQuery instanceof Date || 
@@ -2779,7 +2779,7 @@ Queries.prototype.dateTimeValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var dateTimeQuery = options ? options.dateTimeQuery : undefined;
+  var dateTimeQuery = (options && options.dateTimeQuery !== undefined) ? options.dateTimeQuery : undefined;
   // Validate
   try {
     if (dateTimeQuery && !(dateTimeQuery instanceof Date || 
@@ -2885,7 +2885,7 @@ Queries.prototype.dateTimeNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var dateTimeQuery = options ? options.dateTimeQuery : undefined;
+  var dateTimeQuery = (options && options.dateTimeQuery !== undefined) ? options.dateTimeQuery : undefined;
   // Validate
   try {
     if (dateTimeQuery && !(dateTimeQuery instanceof Date || 
@@ -2992,7 +2992,7 @@ Queries.prototype.arrayStringCsvValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var arrayQuery = options ? options.arrayQuery : undefined;
+  var arrayQuery = (options && options.arrayQuery !== undefined) ? options.arrayQuery : undefined;
   // Validate
   try {
     if (util.isArray(arrayQuery)) {
@@ -3101,7 +3101,7 @@ Queries.prototype.arrayStringCsvNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var arrayQuery = options ? options.arrayQuery : undefined;
+  var arrayQuery = (options && options.arrayQuery !== undefined) ? options.arrayQuery : undefined;
   // Validate
   try {
     if (util.isArray(arrayQuery)) {
@@ -3210,7 +3210,7 @@ Queries.prototype.arrayStringCsvEmpty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var arrayQuery = options ? options.arrayQuery : undefined;
+  var arrayQuery = (options && options.arrayQuery !== undefined) ? options.arrayQuery : undefined;
   // Validate
   try {
     if (util.isArray(arrayQuery)) {
@@ -3320,7 +3320,7 @@ Queries.prototype.arrayStringSsvValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var arrayQuery = options ? options.arrayQuery : undefined;
+  var arrayQuery = (options && options.arrayQuery !== undefined) ? options.arrayQuery : undefined;
   // Validate
   try {
     if (util.isArray(arrayQuery)) {
@@ -3430,7 +3430,7 @@ Queries.prototype.arrayStringTsvValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var arrayQuery = options ? options.arrayQuery : undefined;
+  var arrayQuery = (options && options.arrayQuery !== undefined) ? options.arrayQuery : undefined;
   // Validate
   try {
     if (util.isArray(arrayQuery)) {
@@ -3540,7 +3540,7 @@ Queries.prototype.arrayStringPipesValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var arrayQuery = options ? options.arrayQuery : undefined;
+  var arrayQuery = (options && options.arrayQuery !== undefined) ? options.arrayQuery : undefined;
   // Validate
   try {
     if (util.isArray(arrayQuery)) {

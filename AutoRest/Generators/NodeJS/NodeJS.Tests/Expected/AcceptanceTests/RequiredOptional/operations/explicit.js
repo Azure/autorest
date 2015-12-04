@@ -186,7 +186,7 @@ Explicit.prototype.postOptionalIntegerParameter = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var bodyParameter = options ? options.bodyParameter : undefined;
+  var bodyParameter = (options && options.bodyParameter !== undefined) ? options.bodyParameter : undefined;
   // Validate
   try {
     if (bodyParameter !== null && bodyParameter !== undefined && typeof bodyParameter !== 'number') {
@@ -436,7 +436,7 @@ Explicit.prototype.postOptionalIntegerProperty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var value = options ? options.value : undefined;
+  var value = (options && options.value !== undefined) ? options.value : undefined;
   // Validate
   try {
     if (value !== null && value !== undefined && typeof value !== 'number') {
@@ -673,7 +673,7 @@ Explicit.prototype.postOptionalIntegerHeader = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var headerParameter = options ? options.headerParameter : undefined;
+  var headerParameter = (options && options.headerParameter !== undefined) ? options.headerParameter : undefined;
   // Validate
   try {
     if (headerParameter !== null && headerParameter !== undefined && typeof headerParameter !== 'number') {
@@ -900,7 +900,7 @@ Explicit.prototype.postOptionalStringParameter = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var bodyParameter = options ? options.bodyParameter : undefined;
+  var bodyParameter = (options && options.bodyParameter !== undefined) ? options.bodyParameter : undefined;
   // Validate
   try {
     if (bodyParameter !== null && bodyParameter !== undefined && typeof bodyParameter.valueOf() !== 'string') {
@@ -1150,7 +1150,7 @@ Explicit.prototype.postOptionalStringProperty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var value = options ? options.value : undefined;
+  var value = (options && options.value !== undefined) ? options.value : undefined;
   // Validate
   try {
     if (value !== null && value !== undefined && typeof value.valueOf() !== 'string') {
@@ -1387,7 +1387,7 @@ Explicit.prototype.postOptionalStringHeader = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var bodyParameter = options ? options.bodyParameter : undefined;
+  var bodyParameter = (options && options.bodyParameter !== undefined) ? options.bodyParameter : undefined;
   // Validate
   try {
     if (bodyParameter !== null && bodyParameter !== undefined && typeof bodyParameter.valueOf() !== 'string') {
@@ -1625,7 +1625,7 @@ Explicit.prototype.postOptionalClassParameter = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var bodyParameter = options ? options.bodyParameter : undefined;
+  var bodyParameter = (options && options.bodyParameter !== undefined) ? options.bodyParameter : undefined;
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -1876,7 +1876,7 @@ Explicit.prototype.postOptionalClassProperty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var value = options ? options.value : undefined;
+  var value = (options && options.value !== undefined) ? options.value : undefined;
   var bodyParameter;
   if ((value !== null && value !== undefined))
   {
@@ -2127,7 +2127,7 @@ Explicit.prototype.postOptionalArrayParameter = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var bodyParameter = options ? options.bodyParameter : undefined;
+  var bodyParameter = (options && options.bodyParameter !== undefined) ? options.bodyParameter : undefined;
   // Validate
   try {
     if (util.isArray(bodyParameter)) {
@@ -2391,7 +2391,7 @@ Explicit.prototype.postOptionalArrayProperty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var value = options ? options.value : undefined;
+  var value = (options && options.value !== undefined) ? options.value : undefined;
   // Validate
   try {
     if (util.isArray(value)) {
@@ -2637,7 +2637,7 @@ Explicit.prototype.postOptionalArrayHeader = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var headerParameter = options ? options.headerParameter : undefined;
+  var headerParameter = (options && options.headerParameter !== undefined) ? options.headerParameter : undefined;
   // Validate
   try {
     if (util.isArray(headerParameter)) {

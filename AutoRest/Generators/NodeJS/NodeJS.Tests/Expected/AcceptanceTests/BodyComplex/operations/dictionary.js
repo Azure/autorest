@@ -165,7 +165,7 @@ Dictionary.prototype.putValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var defaultProgram = options ? options.defaultProgram : undefined;
+  var defaultProgram = (options && options.defaultProgram !== undefined) ? options.defaultProgram : undefined;
   // Validate
   try {
     if (defaultProgram && typeof defaultProgram === 'object') {
@@ -394,7 +394,7 @@ Dictionary.prototype.putEmpty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var defaultProgram = options ? options.defaultProgram : undefined;
+  var defaultProgram = (options && options.defaultProgram !== undefined) ? options.defaultProgram : undefined;
   // Validate
   try {
     if (defaultProgram && typeof defaultProgram === 'object') {

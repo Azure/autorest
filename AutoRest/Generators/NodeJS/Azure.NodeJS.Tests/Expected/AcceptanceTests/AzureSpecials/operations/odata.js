@@ -70,9 +70,9 @@ Odata.prototype.getWithFilter = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var filter = options ? options.filter : undefined;
-  var top = options ? options.top : undefined;
-  var orderby = options ? options.orderby : undefined;
+  var filter = (options && options.filter !== undefined) ? options.filter : undefined;
+  var top = (options && options.top !== undefined) ? options.top : undefined;
+  var orderby = (options && options.orderby !== undefined) ? options.orderby : undefined;
   // Validate
   try {
     if (top !== null && top !== undefined && typeof top !== 'number') {

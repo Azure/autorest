@@ -498,7 +498,7 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var q1 = options ? options.q1 : undefined;
+  var q1 = (options && options.q1 !== undefined) ? options.q1 : undefined;
   // Validate
   try {
     if (q1 !== null && q1 !== undefined && typeof q1.valueOf() !== 'string') {
@@ -722,7 +722,7 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var q1 = options ? options.q1 : undefined;
+  var q1 = (options && options.q1 !== undefined) ? options.q1 : undefined;
   // Validate
   try {
     if (q1 !== null && q1 !== undefined && typeof q1.valueOf() !== 'string') {

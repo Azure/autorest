@@ -245,7 +245,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var body = options ? options.body : undefined;
+  var body = (options && options.body !== undefined) ? options.body : undefined;
   // Validate
   try {
     if (this.subscriptionId === null || this.subscriptionId === undefined || typeof this.subscriptionId.valueOf() !== 'string') {

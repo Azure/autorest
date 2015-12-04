@@ -93,7 +93,7 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var resourceArray = options ? options.resourceArray : undefined;
+  var resourceArray = (options && options.resourceArray !== undefined) ? options.resourceArray : undefined;
   // Validate
   try {
     if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage.valueOf() !== 'string') {
@@ -358,7 +358,7 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var resourceDictionary = options ? options.resourceDictionary : undefined;
+  var resourceDictionary = (options && options.resourceDictionary !== undefined) ? options.resourceDictionary : undefined;
   // Validate
   try {
     if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage.valueOf() !== 'string') {
@@ -639,7 +639,7 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var resourceComplexObject = options ? options.resourceComplexObject : undefined;
+  var resourceComplexObject = (options && options.resourceComplexObject !== undefined) ? options.resourceComplexObject : undefined;
   // Validate
   try {
     if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage.valueOf() !== 'string') {

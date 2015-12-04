@@ -14,13 +14,13 @@
  * @class
  * Initializes a new instance of the StorageAccountCheckNameAvailabilityParameters class.
  * @constructor
- * @member {string} [name]
+ * @member {string} name
  * 
  * @member {string} [type]
  * 
  */
 export interface StorageAccountCheckNameAvailabilityParameters {
-    name?: string;
+    name: string;
     type?: string;
 }
 

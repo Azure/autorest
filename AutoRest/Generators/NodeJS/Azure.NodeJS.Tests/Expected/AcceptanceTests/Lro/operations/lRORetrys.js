@@ -155,7 +155,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (options, callbac
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -409,7 +409,7 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (options, cal
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -1171,7 +1171,7 @@ LRORetrys.prototype.beginPost202Retry200 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -1369,7 +1369,7 @@ LRORetrys.prototype.beginPostAsyncRelativeRetrySucceeded = function (options, ca
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {

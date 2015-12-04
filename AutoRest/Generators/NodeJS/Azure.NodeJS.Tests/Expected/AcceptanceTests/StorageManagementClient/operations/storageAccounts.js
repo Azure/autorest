@@ -1384,7 +1384,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var keyName = options ? options.keyName : undefined;
+  var keyName = (options && options.keyName !== undefined) ? options.keyName : undefined;
   // Validate
   try {
     if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {

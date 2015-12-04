@@ -1483,7 +1483,7 @@ Header.prototype.paramString = function (scenario, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var value = options ? options.value : undefined;
+  var value = (options && options.value !== undefined) ? options.value : undefined;
   // Validate
   try {
     if (scenario === null || scenario === undefined || typeof scenario.valueOf() !== 'string') {
@@ -2120,7 +2120,7 @@ Header.prototype.paramDatetimeRfc1123 = function (scenario, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var value = options ? options.value : undefined;
+  var value = (options && options.value !== undefined) ? options.value : undefined;
   // Validate
   try {
     if (scenario === null || scenario === undefined || typeof scenario.valueOf() !== 'string') {
@@ -2753,7 +2753,7 @@ Header.prototype.paramEnum = function (scenario, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var value = options ? options.value : undefined;
+  var value = (options && options.value !== undefined) ? options.value : undefined;
   // Validate
   try {
     if (scenario === null || scenario === undefined || typeof scenario.valueOf() !== 'string') {

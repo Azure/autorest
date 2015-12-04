@@ -149,7 +149,7 @@ LROSADs.prototype.beginPutNonRetry400 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -399,7 +399,7 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (options, callback) 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -651,7 +651,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -1343,7 +1343,7 @@ LROSADs.prototype.beginPostNonRetry400 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -1535,7 +1535,7 @@ LROSADs.prototype.beginPost202NonRetry400 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -1731,7 +1731,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (options, callback) 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -1943,7 +1943,7 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (options
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -2195,7 +2195,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (options, callba
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -2428,7 +2428,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (options,
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -2965,7 +2965,7 @@ LROSADs.prototype.beginPost202NoLocation = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -3161,7 +3161,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (options, call
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -3373,7 +3373,7 @@ LROSADs.prototype.beginPut200InvalidJson = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -3606,7 +3606,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (options, c
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -3839,7 +3839,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (optio
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -4537,7 +4537,7 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (options, callback) 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -4733,7 +4733,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (options, 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -4929,7 +4929,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (opti
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {

@@ -183,7 +183,7 @@ Paging.prototype.getMultiplePages = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var clientRequestId = options ? options.clientRequestId : undefined;
+  var clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
   // Validate
   try {
     if (clientRequestId !== null && clientRequestId !== undefined && typeof clientRequestId.valueOf() !== 'string') {
@@ -1054,7 +1054,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var clientRequestId = options ? options.clientRequestId : undefined;
+  var clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
   // Validate
   try {
     if (nextPageLink === null || nextPageLink === undefined || typeof nextPageLink.valueOf() !== 'string') {

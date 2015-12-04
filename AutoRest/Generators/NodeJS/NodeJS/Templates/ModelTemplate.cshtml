@@ -35,11 +35,12 @@
     @ModelTemplateModel.ConstructPropertyDocumentation(
               WrapComment(" * ", "@member {" + ModelTemplateModel.GetPropertyDocumentationType(property)
                                              + "} " + ModelTemplateModel.GetPropertyDocumentationName(property)
-                                             + " " + property.Documentation))
+                                             + " " + ModelTemplateModel.GetPropertyDocumentationString(property)))
 }
  */
 function @(Model.Name)(parameters) {
 @{
+  @:@(Model.AssignDefaultValues())
   if (Model.BaseModelType != null)
   {
   @:@(Model.Name)['super_'].call(this, parameters);

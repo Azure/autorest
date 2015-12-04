@@ -157,7 +157,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (options, call
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -394,7 +394,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (options, 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -630,7 +630,7 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -830,7 +830,7 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (options, cal
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var product = options ? options.product : undefined;
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {

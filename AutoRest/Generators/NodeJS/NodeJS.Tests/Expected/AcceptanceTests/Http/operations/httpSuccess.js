@@ -244,7 +244,7 @@ HttpSuccess.prototype.put200 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -356,7 +356,7 @@ HttpSuccess.prototype.patch200 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -468,7 +468,7 @@ HttpSuccess.prototype.post200 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -580,7 +580,7 @@ HttpSuccess.prototype.delete200 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -692,7 +692,7 @@ HttpSuccess.prototype.put201 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -804,7 +804,7 @@ HttpSuccess.prototype.post201 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -916,7 +916,7 @@ HttpSuccess.prototype.put202 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1028,7 +1028,7 @@ HttpSuccess.prototype.patch202 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1140,7 +1140,7 @@ HttpSuccess.prototype.post202 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1252,7 +1252,7 @@ HttpSuccess.prototype.delete202 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1450,7 +1450,7 @@ HttpSuccess.prototype.put204 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1562,7 +1562,7 @@ HttpSuccess.prototype.patch204 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1674,7 +1674,7 @@ HttpSuccess.prototype.post204 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1786,7 +1786,7 @@ HttpSuccess.prototype.delete204 = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var booleanValue = options ? options.booleanValue : undefined;
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
