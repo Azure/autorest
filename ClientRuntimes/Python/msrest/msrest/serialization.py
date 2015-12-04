@@ -31,6 +31,12 @@ import chardet
 import re
 
 try:
+    basestring
+
+except NameError:
+    basestring = str
+
+try:
     from urllib import quote
 
 except ImportError:
@@ -671,10 +677,12 @@ class Deserializer(object):
             if attr in [True, False, 1, 0]:
                 return bool(attr)
 
-            elif isinstance(attr, basestring) and attr.lower() in ['true', '1']:
+            elif isinstance(
+                    attr, basestring) and attr.lower() in ['true', '1']:
                 return True
 
-            elif isinstance(attr, basestring) and attr.lower() in ['false', '0']:
+            elif isinstance(
+                    attr, basestring) and attr.lower() in ['false', '0']:
                 return False
 
             raise TypeError("Invalid boolean value: {0}".format(attr))
