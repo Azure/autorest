@@ -1,12 +1,14 @@
-﻿# Copyright (c) Microsoft Corporation. All rights reserved. 
+﻿# --------------------------------------------------------------------------
+#
+# Copyright (c) Microsoft Corporation. All rights reserved.
 #
 # The MIT License (MIT)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the ""Software""), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
+# of this software and associated documentation files (the ""Software""), to
+# deal in the Software without restriction, including without limitation the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+# sell copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
 #
 # The above copyright notice and this permission notice shall be included in
@@ -16,13 +18,12 @@
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-# THE SOFTWARE.
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+# IN THE SOFTWARE.
 #
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 
-from msrest.serialization import Deserializer
 from msrest.pipeline import ClientRawResponse
 from msrest.exceptions import DeserializationError
 from msrestazure.azure_exceptions import CloudError
@@ -55,7 +56,7 @@ class LongRunningOperation(object):
         self.method = None
         self.async_url = None
         self.location_url = None
-        self.raw=None
+        self.raw = None
 
     @property
     def status(self):
@@ -122,7 +123,7 @@ class LongRunningOperation(object):
 
         return None
 
-    def _object_from_response(self, response): 
+    def _object_from_response(self, response):
         if self.resource is None and self.method not in ['POST', 'DELETE']:
             body = response.json()
 
@@ -157,7 +158,7 @@ class LongRunningOperation(object):
     def _status_204(self, response):
         self.status = 'Succeeded'
         self.resource = None
-    
+
     def _check_status(self, response):
         code = response.status_code
 
@@ -185,7 +186,6 @@ class LongRunningOperation(object):
 
         except CloudError:
             raise BadStatus()
-
 
         status = self._get_body_status(response)
         if status:
@@ -244,7 +244,7 @@ class LongRunningOperation(object):
             else:
                 raise BadStatus('Long running operation failed with status '
                                 '{}.'.format(response.status_code))
-           
+
     def get_status_from_async(self, response, outputs):
 
         self._check_status(response)
@@ -263,7 +263,7 @@ class LongRunningOperation(object):
                 self._deserialize(response, outputs)
 
             except CloudError:
-                pass # Not all accept status will deserialize
+                pass  # Not all accept status will deserialize
 
     def get_status_from_resource(self, response, outputs):
 
@@ -285,7 +285,7 @@ class LongRunningOperation(object):
         if self._is_empty(response):
             raise BadResponse('The response from long running operation '
                               'does not contain a body.')
-        
+
         self._status_200(response, outputs)
 
     def get_retry(self, response):
@@ -299,7 +299,7 @@ class LongRunningOperation(object):
                 return
 
         except ValueError:
-            pass # We can ignore as location header may still be valid
+            pass  # We can ignore as location header may still be valid
 
         self.location_url = self._validate(response.headers.get('location'))
 
@@ -310,6 +310,7 @@ class LongRunningOperation(object):
             if code not in [200, 204] and self.method in ['POST']:
                 raise BadResponse(
                     'Location header is missing from long running operation.')
+
 
 class AzureOperationPoller(object):
 
@@ -341,7 +342,7 @@ class AzureOperationPoller(object):
 
         try:
             self._response = send_cmd()
-            self._operation.get_initial_status(self._response, output_cmd)      
+            self._operation.get_initial_status(self._response, output_cmd)
 
             self._poll(update_cmd, output_cmd)
 
@@ -354,7 +355,9 @@ class AzureOperationPoller(object):
             self._operation.resource = CloudError(self._response, str(err))
 
         except OperationFailed:
-            error = "Long running operation failed with status '{}'".format(self._operation.status)
+            error = "Long running operation failed with status '{}'".format(
+                self._operation.status)
+
             self._operation.resource = CloudError(self._response, error)
 
         except Exception as err:
@@ -372,7 +375,7 @@ class AzureOperationPoller(object):
 
     def _delay(self):
         if self._response is None:
-            return 
+            return
 
         if self._response.headers.get('retry-after'):
             time.sleep(int(self._response.headers['retry-after']))
@@ -399,16 +402,26 @@ class AzureOperationPoller(object):
             self._operation.get_retry(self._response)
 
             if self._operation.async_url:
-                self._response = update_cmd(self._operation.async_url, headers)
-                self._operation.get_status_from_async(self._response, output_cmd)
+
+                self._response = update_cmd(
+                    self._operation.async_url, headers)
+
+                self._operation.get_status_from_async(
+                    self._response, output_cmd)
 
             elif self._operation.location_url:
-                self._response = update_cmd(self._operation.location_url, headers)
-                self._operation.get_status_from_location(self._response, output_cmd)
+
+                self._response = update_cmd(
+                    self._operation.location_url, headers)
+
+                self._operation.get_status_from_location(
+                    self._response, output_cmd)
 
             else:
                 self._response = update_cmd(url, headers)
-                self._operation.get_status_from_resource(self._response, output_cmd)
+
+                self._operation.get_status_from_resource(
+                    self._response, output_cmd)
 
         if self._operation.status in self.failed_states:
             raise OperationFailed()
@@ -434,12 +447,12 @@ class AzureOperationPoller(object):
 
         if self._done.is_set():
             raise ValueError("Process is complete.")
-        
+
         self._callbacks.append(func)
 
     def remove_done_callback(self, func):
 
         if self._done.is_set():
             raise ValueError("Process is complete.")
-        
+
         self._callbacks = [c for c in self._callbacks if c != func]
