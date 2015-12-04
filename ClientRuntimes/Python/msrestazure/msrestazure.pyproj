@@ -40,6 +40,8 @@
     <Compile Include="test\unittest_auth.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="test\unittest_exceptions.py" />
+    <Compile Include="test\unittest_operation.py" />
     <Compile Include="test\__init__.py">
       <SubType>Code</SubType>
     </Compile>
