@@ -235,7 +235,8 @@ class ClientRetry(Retry):
         # TODO: Look up correct cookie handling protocol
 
         if response:
-            # Fixes open socket warnings in Python 3 but makes it really slow
+            # Fixes open socket warnings in Python 3
+            response.close()
             response.release_conn()
 
             response_cookie = response.getheader("Set-Cookie")
