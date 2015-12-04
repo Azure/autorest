@@ -39,8 +39,8 @@ class HttpTests(unittest.TestCase):
 
     def assertStatus(self, code, func, *args, **kwargs):
         kwargs['raw'] = True
-        response, raw = func(*args, **kwargs)
-        self.assertEqual(raw.status_code, code)
+        raw = func(*args, **kwargs)
+        self.assertEqual(raw.response.status_code, code)
 
     def assertRaisesWithMessage(self, msg, func, *args, **kwargs):
         try:

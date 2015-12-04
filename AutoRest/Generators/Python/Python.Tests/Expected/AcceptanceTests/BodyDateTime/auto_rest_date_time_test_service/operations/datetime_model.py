@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 
 from .. import models
 
@@ -69,7 +70,8 @@ class datetime_model(object):
             deserialized = self._deserialize('iso-8601', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -118,7 +120,8 @@ class datetime_model(object):
             deserialized = self._deserialize('iso-8601', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -167,7 +170,8 @@ class datetime_model(object):
             deserialized = self._deserialize('iso-8601', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -216,7 +220,8 @@ class datetime_model(object):
             deserialized = self._deserialize('iso-8601', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -265,7 +270,8 @@ class datetime_model(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_utc_lowercase_max_date_time(
@@ -312,7 +318,8 @@ class datetime_model(object):
             deserialized = self._deserialize('iso-8601', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -361,7 +368,8 @@ class datetime_model(object):
             deserialized = self._deserialize('iso-8601', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -411,7 +419,8 @@ class datetime_model(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_local_positive_offset_lowercase_max_date_time(
@@ -459,7 +468,8 @@ class datetime_model(object):
             deserialized = self._deserialize('iso-8601', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -509,7 +519,8 @@ class datetime_model(object):
             deserialized = self._deserialize('iso-8601', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -559,7 +570,8 @@ class datetime_model(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_local_negative_offset_uppercase_max_date_time(
@@ -607,7 +619,8 @@ class datetime_model(object):
             deserialized = self._deserialize('iso-8601', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -657,7 +670,8 @@ class datetime_model(object):
             deserialized = self._deserialize('iso-8601', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -706,7 +720,8 @@ class datetime_model(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_utc_min_date_time(
@@ -753,7 +768,8 @@ class datetime_model(object):
             deserialized = self._deserialize('iso-8601', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -802,7 +818,8 @@ class datetime_model(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_local_positive_offset_min_date_time(
@@ -849,7 +866,8 @@ class datetime_model(object):
             deserialized = self._deserialize('iso-8601', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized
 
@@ -898,7 +916,8 @@ class datetime_model(object):
             raise models.ErrorException(self._deserialize, response)
 
         if raw:
-            return None, response
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
 
     @async_request
     def get_local_negative_offset_min_date_time(
@@ -945,6 +964,7 @@ class datetime_model(object):
             deserialized = self._deserialize('iso-8601', response)
 
         if raw:
-            return deserialized, response
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
 
         return deserialized

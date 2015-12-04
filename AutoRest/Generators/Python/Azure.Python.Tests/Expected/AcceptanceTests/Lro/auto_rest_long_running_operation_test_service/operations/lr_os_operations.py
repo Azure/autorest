@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 from msrestazure.azure_exceptions import CloudError
 from msrestazure.azure_operation import AzureOperationPoller
 import uuid
@@ -87,7 +88,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200, 204]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -95,7 +96,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -104,7 +106,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put200_succeeded_no_state(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -167,7 +169,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -175,7 +177,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -184,7 +187,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put202_retry200(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -247,7 +250,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -255,7 +258,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -264,7 +268,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put201_creating_succeeded200(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -328,7 +332,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200, 201]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -338,7 +342,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -347,7 +352,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put200_updating_succeeded204(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -411,7 +416,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -419,7 +424,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -428,7 +434,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put201_creating_failed200(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -492,7 +498,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200, 201]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -502,7 +508,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -511,7 +518,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put200_acceptedcanceled200(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -575,7 +582,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -583,7 +590,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -592,7 +600,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put_no_header_in_retry(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -655,7 +663,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -663,7 +671,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -672,7 +681,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put_async_retry_succeeded(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -736,7 +745,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -744,7 +753,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -753,7 +763,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put_async_no_retry_succeeded(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -817,7 +827,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -825,7 +835,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -834,7 +845,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put_async_retry_failed(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -898,7 +909,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -906,7 +917,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -915,7 +927,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put_async_no_retrycanceled(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -979,7 +991,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -987,7 +999,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -996,7 +1009,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put_async_no_header_in_retry(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -1059,7 +1072,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [201]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -1067,7 +1080,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -1076,7 +1090,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put_non_resource(
             self, sku=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -1137,7 +1151,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -1145,7 +1159,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Sku', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -1154,7 +1169,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put_async_non_resource(
             self, sku=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -1215,7 +1230,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -1223,7 +1238,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Sku', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -1232,7 +1248,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put_sub_resource(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -1293,7 +1309,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -1301,7 +1317,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('SubProduct', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -1310,7 +1327,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def put_async_sub_resource(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -1371,7 +1388,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -1379,7 +1396,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('SubProduct', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -1388,7 +1406,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def delete_provisioning202_accepted200_succeeded(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -1443,7 +1461,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200, 202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -1453,7 +1471,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -1462,7 +1481,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def delete_provisioning202_deleting_failed200(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -1517,7 +1536,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200, 202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -1527,7 +1546,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -1536,7 +1556,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def delete_provisioning202_deletingcanceled200(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -1591,7 +1611,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200, 202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -1601,7 +1621,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -1610,7 +1631,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def delete204_succeeded(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -1661,17 +1682,18 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [204]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             if raw:
-                return None, response
+                client_raw_response = ClientRawResponse(None, response)
+                return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def delete202_retry200(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -1725,7 +1747,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200, 202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -1733,7 +1755,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -1742,7 +1765,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def delete202_no_retry204(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -1796,7 +1819,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200, 202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -1804,7 +1827,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -1813,7 +1837,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def delete_no_header_in_retry(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -1866,17 +1890,18 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [204, 202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             if raw:
-                return None, response
+                client_raw_response = ClientRawResponse(None, response)
+                return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def delete_async_no_header_in_retry(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -1929,17 +1954,18 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [204, 202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             if raw:
-                return None, response
+                client_raw_response = ClientRawResponse(None, response)
+                return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def delete_async_retry_succeeded(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -1992,17 +2018,18 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             if raw:
-                return None, response
+                client_raw_response = ClientRawResponse(None, response)
+                return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def delete_async_no_retry_succeeded(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -2055,17 +2082,18 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             if raw:
-                return None, response
+                client_raw_response = ClientRawResponse(None, response)
+                return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def delete_async_retry_failed(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -2118,17 +2146,18 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             if raw:
-                return None, response
+                client_raw_response = ClientRawResponse(None, response)
+                return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def delete_async_retrycanceled(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -2181,17 +2210,18 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             if raw:
-                return None, response
+                client_raw_response = ClientRawResponse(None, response)
+                return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def post200_with_payload(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -2245,7 +2275,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202, 200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -2255,7 +2285,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Sku', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -2264,7 +2295,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def post202_retry200(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -2326,17 +2357,18 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             if raw:
-                return None, response
+                client_raw_response = ClientRawResponse(None, response)
+                return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def post202_no_retry204(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -2399,7 +2431,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -2407,7 +2439,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -2416,7 +2449,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def post_async_retry_succeeded(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -2480,7 +2513,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202, 200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -2488,7 +2521,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -2497,7 +2531,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def post_async_no_retry_succeeded(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -2561,7 +2595,7 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202, 200]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             deserialized = None
 
@@ -2569,7 +2603,8 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
 
             if raw:
-                return deserialized, response
+                client_raw_response = ClientRawResponse(deserialized, response)
+                return client_raw_response
 
             return deserialized
 
@@ -2578,7 +2613,7 @@ class lr_osOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def post_async_retry_failed(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -2641,17 +2676,18 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             if raw:
-                return None, response
+                client_raw_response = ClientRawResponse(None, response)
+                return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)
 
     def post_async_retrycanceled(
             self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
@@ -2714,14 +2750,15 @@ class lr_osOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(self._deserialize, response)
+                raise CloudError(response)
 
             if raw:
-                return None, response
+                client_raw_response = ClientRawResponse(None, response)
+                return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
             'long_running_operation_timeout',
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout)
+            get_long_running_status, long_running_operation_timeout, callback)

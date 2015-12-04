@@ -16,6 +16,7 @@ from msrestazure import AzureConfiguration
 {
 <text>
 from msrest.service_client import async_request
+from msrest.pipeline import ClientRawResponse
 @if(Model.HasAnyCloudErrors)
 {
 @:from msrestazure.azure_exceptions import CloudError
