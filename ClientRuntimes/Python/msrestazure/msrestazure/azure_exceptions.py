@@ -41,7 +41,6 @@ class CloudException(object):
     def __init__(self, *args, **kwargs):
 
         self.error = None
-        self.status_code = None
         self._message = None
         self.request_id = None
         self.error_time = None

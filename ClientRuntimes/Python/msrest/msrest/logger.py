@@ -31,7 +31,7 @@ import logging
 import types
 
 DEFAULT_LOG_NAME = "ms-client-runtime"
-LOGGER = logging.getLogger(DEFAULT_LOG_NAME)
+LOGGER = None
 
 
 def check_invalid_directory(dirname):

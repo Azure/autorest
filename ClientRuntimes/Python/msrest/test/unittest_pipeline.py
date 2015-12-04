@@ -28,6 +28,8 @@ import json
 import requests
 import datetime
 
+from enum import Enum
+
 try:
     import unittest2 as unittest
 except ImportError:
@@ -172,16 +174,22 @@ class TestClientRequest(unittest.TestCase):
 
 class TestClientResponse(unittest.TestCase):
 
+    class Colors(Enum):
+        red = 'red'
+        blue = 'blue'
+
     def test_raw_response(self):
 
         response = mock.create_autospec(requests.Response)
         response.headers = {}
         response.headers["my-test"] = '1999-12-31T23:59:59-23:59'
+        response.headers["colour"] = "red"
 
         raw = ClientRawResponse([], response)
 
         raw.add_headers({'my-test': 'iso-8601',
-                         'another_header': 'str'})
+                         'another_header': 'str',
+                         'colour': TestClientResponse.Colors})
         self.assertIsInstance(raw.headers['my-test'], datetime.datetime)
 
 if __name__ == '__main__':

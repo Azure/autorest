@@ -507,7 +507,7 @@ class Deserializer(object):
             return self.deserialize_data(data, response)
 
         elif isinstance(response, Enum) or class_name == 'EnumMeta':
-            return self.deserialize_data(data, target_obj)
+            return self.deserialize_enum(data, response)
 
         try:
             if data is None:
@@ -648,7 +648,7 @@ class Deserializer(object):
 
             obj_type = self.dependencies[data_type]
             if issubclass(obj_type, Enum):
-                return obj_type(data)
+                return self.deserialize_enum(data, obj_type)
 
         except (ValueError, TypeError, AttributeError) as err:
             msg = "Unable to deserialize response data."
@@ -702,6 +702,14 @@ class Deserializer(object):
 
         else:
             return str(data)
+
+    def deserialize_enum(self, data, enum_obj):
+        try:
+            return enum_obj(str(data))
+
+        except ValueError:
+            raise DeserializationError(
+                "'{}' is not valid value for enum '{}'".format(data, enum_obj))
 
     @staticmethod
     def deserialize_bytearray(attr):

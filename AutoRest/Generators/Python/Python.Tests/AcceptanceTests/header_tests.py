@@ -86,11 +86,12 @@ class HeaderTests(unittest.TestCase):
         client.header.param_enum("valid", GreyscaleColors.grey)
         client.header.param_enum("null", None)
 
-        #TODO: investigate!!
-        #raw = client.header.response_enum("valid", raw=True)
-        #self.assertEqual("GREY", raw.headers.get("value"))
-        #raw = client.header.response_enum("null", raw=True)
-        #self.assertEqual(None, raw.headers.get("value"))
+        raw = client.header.response_enum("valid", raw=True)
+        self.assertEqual(GreyscaleColors.grey, raw.headers.get("value"))
+
+        # We can't deserialize 'null'
+        with self.assertRaises(DeserializationError):
+            raw = client.header.response_enum("null", raw=True)
 
         client.header.param_date("valid", isodate.parse_date("2010-01-01"))
         client.header.param_date("min", datetime.min)
