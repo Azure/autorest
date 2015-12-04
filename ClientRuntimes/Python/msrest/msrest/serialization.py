@@ -507,7 +507,7 @@ class Deserializer(object):
             return self.deserialize_data(data, response)
 
         elif isinstance(response, Enum) or class_name == 'EnumMeta':
-            return self.deserialize_data(data, target_obj)
+            return response(str(data))
 
         try:
             if data is None:
