@@ -35,12 +35,6 @@ import types
 
 from .serialization import Deserializer
 
-try:
-    from urlparse import urlparse
-
-except ImportError:
-    from urllib.parse import urlparse
-
 from requests.packages.urllib3 import Retry
 from requests.packages.urllib3.poolmanager import pool_classes_by_scheme
 from requests.packages.urllib3 import HTTPConnectionPool
@@ -245,9 +239,7 @@ class ClientRetry(Retry):
             response.close()
             response.release_conn()
 
-            parsed_url = urlparse(url)
-            if parsed_url.hostname == 'localhost':
-                increment.retry_cookie = response.getheader("Set-Cookie")
+            increment.retry_cookie = response.getheader("Set-Cookie")
 
         return increment
 
@@ -392,7 +384,7 @@ class ClientHTTPConnectionPool(HTTPConnectionPool):
     def urlopen(self, method, url, body=None, headers=None,
                 retries=None, *args, **kwargs):
 
-        if retries.retry_cookie:
+        if retries.retry_cookie and self.host == 'localhost':
             if headers:
                 headers['cookie'] = retries.retry_cookie
             else:
@@ -401,7 +393,7 @@ class ClientHTTPConnectionPool(HTTPConnectionPool):
         response = super(ClientHTTPConnectionPool, self).urlopen(
             method, url, body, headers, retries, *args, **kwargs)
 
-        if retries.retry_cookie:
+        if retries.retry_cookie and self.host == 'localhost':
             retries.retry_cookie = None
             if headers:
                 del headers['cookie']
