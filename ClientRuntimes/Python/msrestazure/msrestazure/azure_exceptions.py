@@ -1,14 +1,14 @@
-﻿#--------------------------------------------------------------------------
+﻿# --------------------------------------------------------------------------
 #
-# Copyright (c) Microsoft Corporation. All rights reserved. 
+# Copyright (c) Microsoft Corporation. All rights reserved.
 #
 # The MIT License (MIT)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the ""Software""), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
+# of this software and associated documentation files (the ""Software""), to
+# deal in the Software without restriction, including without limitation the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+# sell copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
 #
 # The above copyright notice and this permission notice shall be included in
@@ -18,11 +18,11 @@
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-# THE SOFTWARE.
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+# IN THE SOFTWARE.
 #
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 
 from msrest.exceptions import ClientException
 from msrest.serialization import Deserializer
@@ -33,11 +33,10 @@ from requests import RequestException
 class CloudException(object):
 
     _attribute_map = {
-        'error': {'key':'code', 'type':'str'},
-        'message': {'key':'message', 'type':'str'},
-        'data': {'key':'values', 'type':'{str}'}
+        'error': {'key': 'code', 'type': 'str'},
+        'message': {'key': 'message', 'type': 'str'},
+        'data': {'key': 'values', 'type': '{str}'}
         }
-
 
     def __init__(self, *args, **kwargs):
 
@@ -48,7 +47,14 @@ class CloudException(object):
         self.error_time = None
         self.data = None
 
-        super(CloudError, self).__init__(*args)
+        super(CloudException, self).__init__(*args)
+
+    def __setattr__(self, attr, value):
+        if attr == 'message':
+            self._set_message(value)
+
+        else:
+            super(CloudException, self).__setattr__(attr, value)
 
     def __str__(self):
         return self._message
@@ -57,18 +63,28 @@ class CloudException(object):
     def message(self):
         return self._message
 
-    @message.setter
-    def message(self,value):
+    def _set_message(self, value):
+
+        try:
+            value = eval(value)
+
+        except (SyntaxError, TypeError):
+            pass
+
         try:
             if value.get('value'):
                 msg_data = value['value'].split('\n')
                 self._message = msg_data[0]
                 self.request_id = msg_data[1].split(':')[1]
-                self.error_time = Deserializer.deserialize_iso(
-                    msg_data[2].split(':')[1])
 
-        except (AttributeError, IndexError):
+                time_str = msg_data[2].split(':')
+                self.error_time = Deserializer.deserialize_iso(
+                    ":".join(time_str[1:]))
+
+        except (AttributeError, IndexError,
+                DeserializationError):
             self._message = value
+
 
 class CloudError(ClientException):
 
@@ -89,13 +105,14 @@ class CloudError(ClientException):
 
         else:
             try:
-                data = response.json()['error']
+                data = response.json()
+                data = data.get('error', data)
                 self.error = deserialize(CloudException, data)
                 self.message = self.error.message
 
-            except (DeserializationError, AttributeError, KeyError, ValueError):
+            except (DeserializationError, AttributeError,
+                    KeyError, ValueError):
                 pass
-
 
         if not self.error or not self.message:
 
@@ -114,7 +131,11 @@ class CloudError(ClientException):
                     self.error = err
 
                 if not self.message:
-                    msg = ("Long running operation failed with status "
+
+                    if server_message == "none":
+                        server_message = str(err)
+
+                    msg = ("Operation failed with status: "
                            "'{}'. Details: {}".format(response.reason,
                                                       server_message))
                     self.message = msg
@@ -124,7 +145,7 @@ class CloudError(ClientException):
                     self.error = response
 
                 if not self.message:
-                    self.message = ("Long running operation failed with "
+                    self.message = ("Operation failed with "
                                     "status: '{}'. Details: {}".format(
                                         response.status_code, server_message))
 
