@@ -97,10 +97,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
                     if (this.Responses[code].Headers != null)
                     {
                         builder.AppendLine("client_raw_response.add_headers({").Indent();
-                        foreach (var prop in ((CompositeType)this.Responses[code].Headers).Properties)
-                        {
-                            builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': '{1}',", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
-                        }
+                        AddHeaderDictionary(builder, (CompositeType)this.Responses[code].Headers);
                         builder.AppendLine("})").Outdent();
                     }
                     builder.AppendLine("return client_raw_response").

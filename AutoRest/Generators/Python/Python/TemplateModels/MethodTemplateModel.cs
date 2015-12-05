@@ -257,10 +257,7 @@ namespace Microsoft.Rest.Generator.Python
                 if (this.ReturnType.Headers != null)
                 {
                     builder.AppendLine("client_raw_response.add_headers({").Indent();
-                    foreach (var prop in ((CompositeType)ReturnType.Headers).Properties)
-                    {
-                        builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': '{1}',", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
-                    }
+                    AddHeaderDictionary(builder, (CompositeType)ReturnType.Headers);
                     builder.AppendLine("})").Outdent();
                 }
                 builder.AppendLine("return client_raw_response").
@@ -299,6 +296,21 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        protected void AddHeaderDictionary(IndentedStringBuilder builder, CompositeType headersType)
+        {
+            foreach (var prop in headersType.Properties)
+            {
+                if (this.ServiceClient.EnumTypes.Contains(prop.Type))
+                {
+                    builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': models.{1},", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
+                }
+                else
+                {
+                    builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': '{1}',", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
+                }
+            }
+        }
+
         public virtual string AddIndividualResponseHeader(HttpStatusCode? code = null)
         {
             if (HasResponseHeader)
@@ -320,10 +332,7 @@ namespace Microsoft.Rest.Generator.Python
                 else
                 {
                     builder.AppendLine("header_dict = {").Indent();
-                    foreach (var prop in ((CompositeType)headersType).Properties)
-                    {
-                        builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': '{1}',", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
-                    }
+                    AddHeaderDictionary(builder, (CompositeType)headersType);
                     builder.AppendLine("}").Outdent();
                 }
                 return builder.ToString();
