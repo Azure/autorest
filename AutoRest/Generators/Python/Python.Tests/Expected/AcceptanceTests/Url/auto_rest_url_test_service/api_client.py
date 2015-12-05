@@ -29,6 +29,8 @@ class AutoRestUrlTestServiceConfiguration(Configuration):
 
         super(AutoRestUrlTestServiceConfiguration, self).__init__(base_url, filepath)
 
+        self.user_agent = 'auto_rest_url_test_service/1.0.0'
+
         self.global_string_path = global_string_path
         self.global_string_query = global_string_query
 

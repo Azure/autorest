@@ -30,6 +30,8 @@ class AutoRestValidationTestConfiguration(Configuration):
 
         super(AutoRestValidationTestConfiguration, self).__init__(base_url, filepath)
 
+        self.user_agent = 'auto_rest_validation_test/1.0.0'
+
         self.subscription_id = subscription_id
         self.api_version = api_version
 

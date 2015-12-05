@@ -25,6 +25,8 @@ class AutoRestRFC1123DateTimeTestServiceConfiguration(Configuration):
 
         super(AutoRestRFC1123DateTimeTestServiceConfiguration, self).__init__(base_url, filepath)
 
+        self.user_agent = 'auto_rest_rfc1123_date_time_test_service/1.0.0'
+
 
 class AutoRestRFC1123DateTimeTestService(object):
 

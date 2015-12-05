@@ -111,5 +111,21 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        public virtual string UserAgent
+        {
+            get
+            {
+                return string.Format(CultureInfo.InvariantCulture, "{0}/{1}", this.Name.ToPythonCase(), this.Version);
+            }
+        }
+
+        public virtual string Version
+        {
+            get
+            {
+                // TODO: Should be able to override the version from setting
+                return this.ApiVersion;
+            }
+        }
     }
 }

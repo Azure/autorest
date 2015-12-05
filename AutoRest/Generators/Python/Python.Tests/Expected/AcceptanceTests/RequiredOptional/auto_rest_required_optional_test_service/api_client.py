@@ -30,6 +30,8 @@ class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
 
         super(AutoRestRequiredOptionalTestServiceConfiguration, self).__init__(base_url, filepath)
 
+        self.user_agent = 'auto_rest_required_optional_test_service/1.0.0'
+
         self.required_global_path = required_global_path
         self.required_global_query = required_global_query
         self.optional_global_query = optional_global_query
