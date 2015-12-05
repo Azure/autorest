@@ -26,6 +26,8 @@ class AutoRestSwaggerBATServiceConfiguration(Configuration):
 
         super(AutoRestSwaggerBATServiceConfiguration, self).__init__(base_url, filepath)
 
+        self.user_agent = 'auto_rest_swagger_bat_service/1.0.0'
+
 
 class AutoRestSwaggerBATService(object):
 

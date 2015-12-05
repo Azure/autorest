@@ -85,13 +85,17 @@ namespace Microsoft.Rest.Generator.Python
                 {
                     return "HttpOperationError(self._deserialize, response)";
                 }
-                else if (body is CompositeType)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "models.{0}(self._deserialize, response)", ((CompositeType)body).GetExceptionDefineType());
-                }
                 else
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "HttpOperationError(self._deserialize, response, '{0}')", body.ToPythonRuntimeTypeString());
+                    CompositeType compType = body as CompositeType;
+                    if (compType != null)
+                    {
+                        return string.Format(CultureInfo.InvariantCulture, "models.{0}(self._deserialize, response)", compType.GetExceptionDefineType());
+                    }
+                    else
+                    {
+                        return string.Format(CultureInfo.InvariantCulture, "HttpOperationError(self._deserialize, response, '{0}')", body.ToPythonRuntimeTypeString());
+                    }
                 }
             }
         }
@@ -246,7 +250,7 @@ namespace Microsoft.Rest.Generator.Python
             return builder.ToString();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "addheaders"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ClientRawResponse"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "clientrawresponse"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)")]
         public virtual string ReturnEmptyResponse
         {
             get
@@ -257,10 +261,7 @@ namespace Microsoft.Rest.Generator.Python
                 if (this.ReturnType.Headers != null)
                 {
                     builder.AppendLine("client_raw_response.add_headers({").Indent();
-                    foreach (var prop in ((CompositeType)ReturnType.Headers).Properties)
-                    {
-                        builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': '{1}',", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
-                    }
+                    AddHeaderDictionary(builder, (CompositeType)ReturnType.Headers);
                     builder.AppendLine("})").Outdent();
                 }
                 builder.AppendLine("return client_raw_response").
@@ -285,6 +286,7 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "addheaders"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "headerdict"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "clientrawresponse")]
         public virtual string AddResponseHeader()
         {
             if (HasResponseHeader)
@@ -299,7 +301,33 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        public virtual string AddIndividualResponseHeader(HttpStatusCode? code = null)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)")]
+        protected void AddHeaderDictionary(IndentedStringBuilder builder, CompositeType headersType)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException("builder");
+            }
+            if (headersType == null)
+            {
+                throw new ArgumentNullException("headersType");
+            }
+
+            foreach (var prop in headersType.Properties)
+            {
+                if (this.ServiceClient.EnumTypes.Contains(prop.Type))
+                {
+                    builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': models.{1},", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
+                }
+                else
+                {
+                    builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': '{1}',", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
+                }
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "headerdict")]
+        public virtual string AddIndividualResponseHeader(HttpStatusCode? code)
         {
             if (HasResponseHeader)
             {
@@ -320,10 +348,7 @@ namespace Microsoft.Rest.Generator.Python
                 else
                 {
                     builder.AppendLine("header_dict = {").Indent();
-                    foreach (var prop in ((CompositeType)headersType).Properties)
-                    {
-                        builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': '{1}',", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
-                    }
+                    AddHeaderDictionary(builder, (CompositeType)headersType);
                     builder.AppendLine("}").Outdent();
                 }
                 return builder.ToString();
@@ -529,19 +554,20 @@ namespace Microsoft.Rest.Generator.Python
             {
                 string result = null;
                 IType body = ReturnType.Body;
+                EnumType enumType = body as EnumType;
 
-                if (body is EnumType)
+                if (enumType != null)
                 {
                     string enumValues = "";
-                    for (var i = 0; i < ((EnumType)body).Values.Count; i++)
+                    for (var i = 0; i < enumType.Values.Count; i++)
                     {
-                        if (i == ((EnumType)body).Values.Count - 1)
+                        if (i == enumType.Values.Count - 1)
                         {
-                            enumValues += ((EnumType)body).Values[i].SerializedName;
+                            enumValues += enumType.Values[i].SerializedName;
                         }
                         else
                         {
-                            enumValues += ((EnumType)body).Values[i].SerializedName + ", ";
+                            enumValues += enumType.Values[i].SerializedName + ", ";
                         }
                     }
                     result = string.Format(CultureInfo.InvariantCulture,

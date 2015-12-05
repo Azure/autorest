@@ -26,6 +26,8 @@ class AutoRestReportServiceConfiguration(Configuration):
 
         super(AutoRestReportServiceConfiguration, self).__init__(base_url, filepath)
 
+        self.user_agent = 'auto_rest_report_service/1.0.0'
+
 
 class AutoRestReportService(object):
 

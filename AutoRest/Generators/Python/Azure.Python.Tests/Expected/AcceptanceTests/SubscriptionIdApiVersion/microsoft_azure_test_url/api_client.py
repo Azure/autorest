@@ -30,6 +30,8 @@ class MicrosoftAzureTestUrlConfiguration(AzureConfiguration):
 
         super(MicrosoftAzureTestUrlConfiguration, self).__init__(base_url, filepath)
 
+        self.user_agent = 'microsoft_azure_test_url/2014-04-01-preview'
+
         self.credentials = credentials
         self.subscription_id = subscription_id
         self.api_version = api_version

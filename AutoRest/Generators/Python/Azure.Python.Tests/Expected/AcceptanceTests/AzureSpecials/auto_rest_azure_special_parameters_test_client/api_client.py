@@ -36,6 +36,8 @@ class AutoRestAzureSpecialParametersTestClientConfiguration(AzureConfiguration):
 
         super(AutoRestAzureSpecialParametersTestClientConfiguration, self).__init__(base_url, filepath)
 
+        self.user_agent = 'auto_rest_azure_special_parameters_test_client/2015-07-01-preview'
+
         self.credentials = credentials
         self.subscription_id = subscription_id
         self.api_version = api_version

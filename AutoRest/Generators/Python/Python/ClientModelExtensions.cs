@@ -200,6 +200,16 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
 
         public static string GetExceptionDefinitionTypeIfExists(this CompositeType type, ServiceClient serviceClient)
         {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             if (serviceClient.ErrorTypes.Contains(type))
             {
                 return type.GetExceptionDefineType();

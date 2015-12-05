@@ -1406,7 +1406,7 @@ class header(object):
         if raw:
             client_raw_response = ClientRawResponse(None, response)
             client_raw_response.add_headers({
-                'value': 'GreyscaleColors',
+                'value': models.GreyscaleColors,
                 })
             return client_raw_response
 

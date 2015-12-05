@@ -38,13 +38,12 @@ class XmsRequestClientIdTests(unittest.TestCase):
         client = AutoRestAzureSpecialParametersTestClient(config)
 
         custom_headers = {"x-ms-client-request-id": validClientId }
-        result1 = client.xms_client_request_id.get(custom_headers = custom_headers)
-        #TODO: investigate on return default request_id as other language
-        #self.assertEqual("123", result1.request_id)
+        result1 = client.xms_client_request_id.get(custom_headers = custom_headers, raw=True)
+        #TODO: should we put the x-ms-request-id into response header of swagger spec?
+        self.assertEqual("123", result1.response.headers.get("x-ms-request-id"))
 
-        result2 = client.xms_client_request_id.param_get(validClientId)
-        #TODO: investigate on return default request_id as other language
-        #self.assertEqual("123", result2.request_id)
+        result2 = client.xms_client_request_id.param_get(validClientId, raw=True)
+        self.assertEqual("123", result2.response.headers.get("x-ms-request-id"))
 
     def test_custom_named_request_id(self):
 
@@ -56,9 +55,9 @@ class XmsRequestClientIdTests(unittest.TestCase):
         config.log_level = log_level
         client = AutoRestAzureSpecialParametersTestClient(config)
 
-        response = client.header.custom_named_request_id(expectedRequestId)
-        #TODO: investigate on return default request_id as other language
-        #self.assertEqual("123", result1.request_id)
+        response = client.header.custom_named_request_id(expectedRequestId, raw=True)
+        #TODO: should update swagger spec include the response header
+        self.assertEqual("123", response.response.headers.get("foo-request-id"))
 
 if __name__ == '__main__':
     unittest.main()

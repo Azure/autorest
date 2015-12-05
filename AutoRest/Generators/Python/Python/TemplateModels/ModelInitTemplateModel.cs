@@ -21,7 +21,7 @@ namespace Microsoft.Rest.Generator.Python
 
         public ServiceClient ServiceClient { get; set; }
 
-        public virtual string GetExceptionNameIfExist(IType type, bool needsQuote = false)
+        public virtual string GetExceptionNameIfExist(IType type, bool needsQuote)
         {
             CompositeType compType = type as CompositeType;
             if (compType != null)

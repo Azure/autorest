@@ -25,6 +25,8 @@ class AutoRestDurationTestServiceConfiguration(Configuration):
 
         super(AutoRestDurationTestServiceConfiguration, self).__init__(base_url, filepath)
 
+        self.user_agent = 'auto_rest_duration_test_service/1.0.0'
+
 
 class AutoRestDurationTestService(object):
 

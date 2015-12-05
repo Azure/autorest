@@ -28,6 +28,8 @@ class AutoRestPagingTestServiceConfiguration(AzureConfiguration):
 
         super(AutoRestPagingTestServiceConfiguration, self).__init__(base_url, filepath)
 
+        self.user_agent = 'auto_rest_paging_test_service/1.0.0'
+
         self.credentials = credentials
         self.accept_language = accept_language
         self.long_running_operation_retry_timeout = long_running_operation_retry_timeout

@@ -25,6 +25,8 @@ class AutoRestIntegerTestServiceConfiguration(Configuration):
 
         super(AutoRestIntegerTestServiceConfiguration, self).__init__(base_url, filepath)
 
+        self.user_agent = 'auto_rest_integer_test_service/1.0.0'
+
 
 class AutoRestIntegerTestService(object):
 

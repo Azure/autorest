@@ -31,6 +31,8 @@ class AutoRestComplexTestServiceConfiguration(Configuration):
 
         super(AutoRestComplexTestServiceConfiguration, self).__init__(base_url, filepath)
 
+        self.user_agent = 'auto_rest_complex_test_service/1.0.0'
+
 
 class AutoRestComplexTestService(object):
 

@@ -25,6 +25,8 @@ class AutoRestDateTestServiceConfiguration(Configuration):
 
         super(AutoRestDateTestServiceConfiguration, self).__init__(base_url, filepath)
 
+        self.user_agent = 'auto_rest_date_test_service/1.0.0'
+
 
 class AutoRestDateTestService(object):
 
