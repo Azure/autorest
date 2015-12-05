@@ -168,7 +168,7 @@ describe('nodejs', function () {
               response.headers['value'].should.be.exactly('GREY');
               testClient.header.responseEnum('null', function (error, result, request, response) {
                 should.not.exist(error);
-                should.not.exist(JSON.parse(response.headers['value']));
+                response.headers['value'].should.be.exactly('');
                 done();
               });
             });

@@ -40,7 +40,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<Siamese> GetValidAsync( this IInheritance operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Siamese> result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

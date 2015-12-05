@@ -44,7 +44,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task<Error> GetRequiredPathAsync( this IImplicitModel operations, string pathParameter, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.GetRequiredPathWithHttpMessagesAsync(pathParameter, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetRequiredPathWithHttpMessagesAsync(pathParameter, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -157,7 +157,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task<Error> GetRequiredGlobalPathAsync( this IImplicitModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.GetRequiredGlobalPathWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetRequiredGlobalPathWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -183,7 +183,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task<Error> GetRequiredGlobalQueryAsync( this IImplicitModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.GetRequiredGlobalQueryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetRequiredGlobalQueryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -209,7 +209,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task<Error> GetOptionalGlobalQueryAsync( this IImplicitModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Error> result = await operations.GetOptionalGlobalQueryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetOptionalGlobalQueryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

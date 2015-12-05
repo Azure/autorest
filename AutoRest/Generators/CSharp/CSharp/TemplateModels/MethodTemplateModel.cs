@@ -172,18 +172,20 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                if (ReturnType.Body != null)
+                if (ReturnType.Body != null && ReturnType.Headers != null)
                 {
-                    if (ReturnType.Headers != null)
-                    {
-                        return string.Format(CultureInfo.InvariantCulture,
+                    return string.Format(CultureInfo.InvariantCulture,
                             "HttpOperationResponse<{0},{1}>", ReturnType.Body.Name, ReturnType.Headers.Name);
-                    }
-                    else
-                    {
-                        return string.Format(CultureInfo.InvariantCulture,
-                            "HttpOperationResponse<{0}>", ReturnType.Body.Name);
-                    }
+                }
+                else if (ReturnType.Body != null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "HttpOperationResponse<{0}>", ReturnType.Body.Name);
+                }
+                else if (ReturnType.Headers != null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "HttpOperationHeaderResponse<{0}>", ReturnType.Headers.Name);
                 }
                 else
                 {

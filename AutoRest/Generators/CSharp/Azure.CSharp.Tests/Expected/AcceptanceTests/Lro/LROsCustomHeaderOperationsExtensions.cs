@@ -55,7 +55,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> PutAsyncRetrySucceededAsync( this ILROsCustomHeaderOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsCustomHeaderPutAsyncRetrySucceededHeaders> result = await operations.PutAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PutAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -95,7 +95,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPutAsyncRetrySucceededAsync( this ILROsCustomHeaderOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsCustomHeaderPutAsyncRetrySucceededHeaders> result = await operations.BeginPutAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPutAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -135,7 +135,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> Put201CreatingSucceeded200Async( this ILROsCustomHeaderOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.Put201CreatingSucceeded200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Put201CreatingSucceeded200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -175,7 +175,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPut201CreatingSucceeded200Async( this ILROsCustomHeaderOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.BeginPut201CreatingSucceeded200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPut201CreatingSucceeded200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

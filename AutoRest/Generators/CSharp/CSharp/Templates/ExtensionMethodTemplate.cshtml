@@ -63,7 +63,7 @@ foreach (var parameter in Model.LocalParameters)
 @:{
     if (Model.ReturnType.Body != null)
     {
-    @:@Model.OperationResponseReturnTypeString result = await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
+    @:var result = await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
     @:return result.Body;
     }
     else

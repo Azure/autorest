@@ -593,7 +593,7 @@ public class HeaderOperationsTests {
             public void success(ServiceResponse<Void> response) {
                 Headers headers = response.getResponse().headers();
                 if (headers.get("value") != null) {
-                    Assert.assertEquals("null", headers.get("value"));
+                    Assert.assertEquals("", headers.get("value"));
                     lock.countDown();
                 }
             }

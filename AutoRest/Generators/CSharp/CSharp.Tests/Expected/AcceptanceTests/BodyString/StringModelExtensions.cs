@@ -40,7 +40,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task<string> GetNullAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<string> result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -97,7 +97,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task<string> GetEmptyAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<string> result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -156,7 +156,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task<string> GetMbcsAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<string> result = await operations.GetMbcsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetMbcsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -221,7 +221,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task<string> GetWhitespaceAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<string> result = await operations.GetWhitespaceWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetWhitespaceWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -284,7 +284,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task<string> GetNotProvidedAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<string> result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
