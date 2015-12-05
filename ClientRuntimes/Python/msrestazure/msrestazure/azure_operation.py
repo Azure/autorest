@@ -388,7 +388,8 @@ class AzureOperationPoller(object):
         # at this point, unless we implement a proper cookie policy.
 
         parsed_url = urlparse(url)
-        if parsed_url.hostname == 'localhost':
+        host = parsed_url.hostname.strip('.')
+        if host == 'localhost':
             return {'cookie': self._response.headers.get('set-cookie', '')}
 
         return {}

@@ -53,17 +53,15 @@ class PagingTests(unittest.TestCase):
         items = [i for i in pages]
         self.assertEqual(len(items), 10)
 
-        #TODO: retry bug!!!
-        #pages = self.client.paging.get_multiple_pages_retry_first()
-        #self.assertIsNotNone(pages.next_link)
-        #items = [i for i in pages]
-        #self.assertEqual(len(items), 10)
+        pages = self.client.paging.get_multiple_pages_retry_first()
+        self.assertIsNotNone(pages.next_link)
+        items = [i for i in pages]
+        self.assertEqual(len(items), 10)
 
-        #TODO: bugg!!!
-        #pages = self.client.paging.get_multiple_pages_retry_second()
-        #self.assertIsNotNone(pages.next_link)
-        #items = [i for i in pages]
-        #self.assertEqual(len(items), 10)
+        pages = self.client.paging.get_multiple_pages_retry_second()
+        self.assertIsNotNone(pages.next_link)
+        items = [i for i in pages]
+        self.assertEqual(len(items), 10)
 
         pages = self.client.paging.get_single_pages(raw=True).output
         self.assertIsNone(pages.next_link)

@@ -34,6 +34,7 @@ import functools
 import types
 
 from .serialization import Deserializer
+from .exceptions import DeserializationError
 
 from requests.packages.urllib3 import Retry
 from requests.packages.urllib3.poolmanager import pool_classes_by_scheme
@@ -384,7 +385,8 @@ class ClientHTTPConnectionPool(HTTPConnectionPool):
     def urlopen(self, method, url, body=None, headers=None,
                 retries=None, *args, **kwargs):
 
-        if retries.retry_cookie and self.host == 'localhost':
+        host = self.host.strip('.')
+        if retries.retry_cookie and host == 'localhost':
             if headers:
                 headers['cookie'] = retries.retry_cookie
             else:
@@ -393,7 +395,7 @@ class ClientHTTPConnectionPool(HTTPConnectionPool):
         response = super(ClientHTTPConnectionPool, self).urlopen(
             method, url, body, headers, retries, *args, **kwargs)
 
-        if retries.retry_cookie and self.host == 'localhost':
+        if retries.retry_cookie and host == 'localhost':
             retries.retry_cookie = None
             if headers:
                 del headers['cookie']
