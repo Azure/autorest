@@ -76,6 +76,9 @@ class Configuration(object):
         # Redirect configuration
         self.redirect_policy = ClientRedirectPolicy(self._log_name)
 
+        # User-Agent Header
+        self.user_agent = "msrest/0.0.1"
+
         self._config = configparser.ConfigParser()
         self._config.optionxform = str
 

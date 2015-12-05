@@ -31,6 +31,8 @@ class StorageManagementClientConfiguration(AzureConfiguration):
 
         super(StorageManagementClientConfiguration, self).__init__(base_url, filepath)
 
+        self.user_agent = 'storage_management_client/2015-05-01-preview'
+
         self.credentials = credentials
         self.subscription_id = subscription_id
         self.api_version = api_version

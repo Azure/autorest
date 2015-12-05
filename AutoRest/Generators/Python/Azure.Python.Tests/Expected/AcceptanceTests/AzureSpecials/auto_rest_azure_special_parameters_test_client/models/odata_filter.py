@@ -9,10 +9,21 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .error import Error, ErrorException
-from .odata_filter import OdataFilter
+from msrest.serialization import Model
 
-__all__ = [
-    'Error', 'ErrorException',
-    'OdataFilter',
-]
+
+class OdataFilter(Model):
+
+    _required = []
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'int'},
+        'name': {'key': 'name', 'type': 'str'},
+    }
+
+    def __init__(self, *args, **kwargs):
+
+        self.id = None
+        self.name = None
+
+        super(OdataFilter, self).__init__(*args, **kwargs)

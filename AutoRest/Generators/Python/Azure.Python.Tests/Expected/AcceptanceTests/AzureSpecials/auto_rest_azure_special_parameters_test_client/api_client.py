@@ -18,6 +18,7 @@ from .operations.subscription_in_method_operations import subscription_in_method
 from .operations.api_version_default_operations import api_version_defaultOperations
 from .operations.api_version_local_operations import api_version_localOperations
 from .operations.skip_url_encoding_operations import skip_url_encodingOperations
+from .operations.odata_operations import odataOperations
 from .operations.header_operations import headerOperations
 from . import models
 
@@ -35,6 +36,8 @@ class AutoRestAzureSpecialParametersTestClientConfiguration(AzureConfiguration):
             base_url = 'http://localhost'
 
         super(AutoRestAzureSpecialParametersTestClientConfiguration, self).__init__(base_url, filepath)
+
+        self.user_agent = 'auto_rest_azure_special_parameters_test_client/2015-07-01-preview'
 
         self.credentials = credentials
         self.subscription_id = subscription_id
@@ -65,6 +68,8 @@ class AutoRestAzureSpecialParametersTestClient(object):
         self.api_version_local = api_version_localOperations(
             self._client, self.config, self._serialize, self._deserialize)
         self.skip_url_encoding = skip_url_encodingOperations(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.odata = odataOperations(
             self._client, self.config, self._serialize, self._deserialize)
         self.header = headerOperations(
             self._client, self.config, self._serialize, self._deserialize)

@@ -9,71 +9,61 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import ServiceClient
-from msrest import Serializer, Deserializer
-from msrestazure import AzureConfiguration
 from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 import uuid
-from . import models
+
+from .. import models
 
 
-class AutoRestReportServiceForAzureConfiguration(AzureConfiguration):
+class odataOperations(object):
 
-    def __init__(
-            self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
+    def __init__(self, client, config, serializer, derserializer):
 
-        if credentials is None:
-            raise ValueError('credentials must not be None.')
-        if not base_url:
-            base_url = 'http://localhost'
-
-        super(AutoRestReportServiceForAzureConfiguration, self).__init__(base_url, filepath)
-
-        self.user_agent = 'auto_rest_report_service_for_azure/1.0.0'
-
-        self.credentials = credentials
-        self.accept_language = accept_language
-        self.long_running_operation_retry_timeout = long_running_operation_retry_timeout
-
-
-class AutoRestReportServiceForAzure(object):
-
-    def __init__(self, config):
-
-        self._client = ServiceClient(config.credentials, config)
-
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self._serialize = Serializer()
-        self._deserialize = Deserializer(client_models)
+        self._client = client
+        self._serialize = serializer
+        self._deserialize = derserializer
 
         self.config = config
 
     @async_request
-    def get_report(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+    def get_with_filter(
+            self, filter=None, top=None, orderby=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
 
-        Get test coverage report
+        Specify filter parameter with value '$filter=id gt 5 and name eq
+        'foo'&$orderby=id&$top=10'
 
+        :param filter: The filter parameter with value '$filter=id gt 5 and
+        name eq 'foo''.
+        :param top: The top parameter with value 10.
+        :param orderby: The orderby parameter with value id.
         :param custom_headers: headers that will be added to the request
         :param raw: returns the direct response alongside the deserialized
         response
         :param callback: if provided, the call will run asynchronously and
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
+        :type filter: object or none
+        :type top: int or none
+        :type orderby: str or none
         :type custom_headers: dict
         :type raw: boolean
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: object or (object, requests.response) or
-        concurrent.futures.Future
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
 
         # Construct URL
-        url = '/report/azure'
+        url = '/azurespecials/odata/filter'
 
         # Construct parameters
         query_parameters = {}
+        if filter is not None:
+            query_parameters['$filter'] = self._serialize.query("filter", filter, 'OdataFilter')
+        if top is not None:
+            query_parameters['$top'] = self._serialize.query("top", top, 'int')
+        if orderby is not None:
+            query_parameters['$orderby'] = self._serialize.query("orderby", orderby, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -91,13 +81,6 @@ class AutoRestReportServiceForAzure(object):
         if response.status_code not in [200]:
             raise models.ErrorException(self._deserialize, response)
 
-        deserialized = None
-
-        if response.status_code == 200:
-            deserialized = self._deserialize('{int}', response)
-
         if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
+            client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
-
-        return deserialized

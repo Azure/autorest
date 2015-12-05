@@ -25,6 +25,8 @@ class AutoRestSwaggerBATdictionaryServiceConfiguration(Configuration):
 
         super(AutoRestSwaggerBATdictionaryServiceConfiguration, self).__init__(base_url, filepath)
 
+        self.user_agent = 'auto_rest_swagger_ba_tdictionary_service/1.0.0'
+
 
 class AutoRestSwaggerBATdictionaryService(object):
 

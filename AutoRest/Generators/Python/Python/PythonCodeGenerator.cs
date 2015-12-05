@@ -94,6 +94,12 @@ namespace Microsoft.Rest.Generator.Python
         public override async Task Generate(ServiceClient serviceClient)
         {
             var serviceClientTemplateModel = new ServiceClientTemplateModel(serviceClient);
+
+            if (Settings.CustomSettings.ContainsKey("Version"))
+            {
+                serviceClientTemplateModel.Version = Settings.CustomSettings["Version"];
+            }
+
             // Service client
             var setupTemplate = new SetupTemplate
             {

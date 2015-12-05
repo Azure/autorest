@@ -13,7 +13,7 @@
 from setuptools import setup, find_packages
 
 NAME = "storage_management_client"
-VERSION = "1.0.0"
+VERSION = "2015-05-01-preview"
 
 # To install the library, run the following
 #

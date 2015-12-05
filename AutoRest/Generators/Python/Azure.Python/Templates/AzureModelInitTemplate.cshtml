@@ -16,7 +16,7 @@
     {
       continue;
     }
-@:from .@(modelType.Name.ToPythonCase()) import @modelType.Name@Model.GetExceptionNameIfExist(modelType)
+@:from .@(modelType.Name.ToPythonCase()) import @modelType.Name@Model.GetExceptionNameIfExist(modelType, false)
   }
   foreach (var pagedName in Model.PagedClasses)
   {

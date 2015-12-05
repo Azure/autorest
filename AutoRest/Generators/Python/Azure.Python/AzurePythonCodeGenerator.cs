@@ -68,19 +68,6 @@ namespace Microsoft.Rest.Generator.Azure.Python
             base.NormalizeClientModel(serviceClient);
             NormalizeApiVersion(serviceClient);
             NormalizePaginatedMethods(serviceClient);
-
-            // TODO: need to figure out whether we need BaseResource for azure resource.
-            //if (serviceClient != null)
-            //{
-            //    foreach (var model in serviceClient.ModelTypes)
-            //    {
-            //        if (model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
-            //            (bool)model.Extensions[AzureExtensions.AzureResourceExtension])
-            //        {
-            //            model.BaseModelType = new CompositeType { Name = "BaseResource", SerializedName = "BaseResource" };
-            //        }
-            //    }
-            //}
         }
 
         private static void NormalizeApiVersion(ServiceClient serviceClient)
@@ -200,6 +187,12 @@ namespace Microsoft.Rest.Generator.Azure.Python
             try
             {
                 var serviceClientTemplateModel = new AzureServiceClientTemplateModel(serviceClient);
+
+                if (Settings.CustomSettings.ContainsKey("Version"))
+                {
+                    serviceClientTemplateModel.Version = Settings.CustomSettings["Version"];
+                }
+
                 // Service client
                 var setupTemplate = new SetupTemplate
                 {

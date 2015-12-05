@@ -11,7 +11,7 @@
 @{
   foreach (var modelType in Model.ServiceClient.ModelTypes)
   {
-@:from .@(modelType.Name.ToPythonCase()) import @modelType.Name@Model.GetExceptionNameIfExist(modelType)
+@:from .@(modelType.Name.ToPythonCase()) import @modelType.Name@Model.GetExceptionNameIfExist(modelType, false)
   }
   if (Model.ServiceClient.EnumTypes.Any())
   {

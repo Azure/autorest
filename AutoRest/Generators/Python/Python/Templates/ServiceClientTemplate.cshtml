@@ -42,6 +42,8 @@ class @(Model.Name)Configuration(Configuration):
             base_url = '@Model.BaseUrl'
 @EmptyLine
         super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
+@EmptyLine
+        self.user_agent = '@Model.UserAgent'
 @if (Model.Properties.Any())
 {
 @EmptyLine

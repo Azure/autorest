@@ -34,3 +34,5 @@ __all__ = [
     "Deserializer",
     "Configuration"
     ]
+
+__version__ = "0.0.1"
