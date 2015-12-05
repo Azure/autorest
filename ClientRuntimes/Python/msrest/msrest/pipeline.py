@@ -34,7 +34,6 @@ import functools
 import types
 
 from .serialization import Deserializer
-from .exceptions import DeserializationError
 
 from requests.packages.urllib3 import Retry
 from requests.packages.urllib3.poolmanager import pool_classes_by_scheme
