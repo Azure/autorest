@@ -187,6 +187,12 @@ namespace Microsoft.Rest.Generator.Azure.Python
             try
             {
                 var serviceClientTemplateModel = new AzureServiceClientTemplateModel(serviceClient);
+
+                if (Settings.CustomSettings.ContainsKey("Version"))
+                {
+                    serviceClientTemplateModel.Version = Settings.CustomSettings["Version"];
+                }
+
                 // Service client
                 var setupTemplate = new SetupTemplate
                 {

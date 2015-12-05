@@ -22,6 +22,7 @@ namespace Microsoft.Rest.Generator.Python
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
 
             ModelTypes.ForEach(m => ModelTemplateModels.Add(new ModelTemplateModel(m, serviceClient)));
+            this.Version = this.ApiVersion;
         }
 
         public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
@@ -119,13 +120,6 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        public virtual string Version
-        {
-            get
-            {
-                // TODO: Should be able to override the version from setting
-                return this.ApiVersion;
-            }
-        }
+        public string Version { get; set; }
     }
 }
