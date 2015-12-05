@@ -79,9 +79,7 @@ class ServiceClient(object):
 
         self._adapter = ClientHTTPAdapter(config)
         self._protocols = ['http://', 'https://']
-
-        # TODO - Add correct default User-Agent
-        self._headers = {'User-Agent': 'msrest'}
+        self._headers = {}
 
         self._adapter.add_hook("request", log_request)
         self._adapter.add_hook("response", log_response, precall=False)
@@ -125,6 +123,7 @@ class ServiceClient(object):
             'allow_redirects', bool(self.config.redirect_policy))
 
         session.headers.update(self._headers)
+        session.headers['User-Agent'] = self.config.user_agent
 
         session.max_redirects = config.get(
             'max_redirects', self.config.redirect_policy())
