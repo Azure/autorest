@@ -47,7 +47,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Azure.Extensions\AutoRest.Generator.Azure.Extensions.csproj">
       <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
-      <Name>AutoRest.Generator.Azure.Common</Name>
+      <Name>AutoRest.Generator.Azure.Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Modelers\Swagger\AutoRest.Modeler.Swagger.csproj">
       <Project>{9517265e-5127-460c-9dde-fe017d73121c}</Project>
