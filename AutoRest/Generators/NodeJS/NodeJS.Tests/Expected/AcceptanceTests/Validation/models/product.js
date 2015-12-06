@@ -103,7 +103,7 @@ Product.prototype.serialize = function () {
     }
     if (this['image'].match(/http:\/\/\w+/) === null)
     {
-      throw new Error('"this[\'image\']" should satisfy the constraint - "Pattern": /http://\w+/');
+      throw new Error('"this[\'image\']" should satisfy the constraint - "Pattern": /http:\/\/\w+/');
     }
     payload['image'] = this['image'];
   }

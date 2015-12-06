@@ -21,9 +21,7 @@ var clientOptions: msRest.ServiceClientOptions = {};
 var baseUri = 'http://localhost:3000';
 describe('nodejs', function () {
   describe('Swagger BAT Validation', function () {
-    var testClient = new validationClient(baseUri, clientOptions);
-    testClient.subsciptionId = "abc123";
-    testClient.apiVersion = "12-34-5678";
+    var testClient = new validationClient("abc123", "12-34-5678", baseUri, clientOptions);
     describe('Of Method Parameters', function () {
       it('should test the minimum length constraint on resourceGroupName', function (done) {
         testClient.validationOfMethodParameters("1", 100, function (err, result) {
@@ -72,13 +70,38 @@ describe('nodejs', function () {
           done();
         });
       });
+
+      it('should test the pattern constraint on apiVersion', function (done) {
+        var testClient2 = new validationClient("abc123", "12345", baseUri, clientOptions);
+        testClient2.validationOfMethodParameters("123", 150, function (err, result) {
+          should.exist(err);
+          err.message.should.match(/.*apiVersion.*constraint.*Pattern.*/ig);
+          done();
+        });
+      });
     });
 
     describe('Of Body Parameters', function () {
-      it('should test the ExclusiveMinimum constraint on id', function (done) {
+      it('should test the ExclusiveMinimum constraint on capacity', function (done) {
         testClient.validationOfBody("123", 150, { body: {capacity : 0}}, function (err, result) {
           should.exist(err);
           err.message.should.match(/.*capacity.*constraint.*ExclusiveMinimum.*0.*/ig);
+          done();
+        });
+      });
+
+      it('should test the ExclusiveMaximum constraint on capacity', function (done) {
+        testClient.validationOfBody("123", 150, { body: { capacity: 2000 } }, function (err, result) {
+          should.exist(err);
+          err.message.should.match(/.*capacity.*constraint.*ExclusiveMaximum.*100.*/ig);
+          done();
+        });
+      });
+
+      it('should test the MaxItems constraint on displayNames', function (done) {
+        testClient.validationOfBody("123", 150, { body: { displayNames: ["item1", "item2", "item3", "item4", "item5", "item6", "item7"] } }, function (err, result) {
+          should.exist(err);
+          err.message.should.match(/.*displayNames.*constraint.*MaxItems.*6.*/ig);
           done();
         });
       });

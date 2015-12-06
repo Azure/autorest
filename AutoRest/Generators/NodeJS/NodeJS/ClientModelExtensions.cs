@@ -579,7 +579,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                             constraints[constraint]);
                         break;
                     case Constraint.Pattern:
-                        constraintValue = "/" + constraintValue + "/";
+
+                        constraintValue = "/" + constraintValue.Replace("/", "\\/") + "/";
                         constraintCheck = string.Format(CultureInfo.InvariantCulture,
                             "{0}.match({1}) === null", valueReference, constraintValue);
                         break;
