@@ -14,7 +14,7 @@ from msrest.serialization import Model
 
 class StorageAccountCheckNameAvailabilityParameters(Model):
 
-    _required = []
+    _required = ['name']
 
     _attribute_map = {
         'name': {'key': 'name', 'type': 'str'},

@@ -118,6 +118,15 @@ class AcceptanceTests(unittest.TestCase):
         client.skip_url_encoding.get_method_query_null()
         client.skip_url_encoding.get_method_query_null(None)
 
+    def test_azure_odata(self):
+
+        validSubscription = '1234-5678-9012-3456'
+        cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
+        config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
+        config.log_level = log_level
+        client = AutoRestAzureSpecialParametersTestClient(config)
+        client.odata.get_with_filter(filter="id gt 5 and name eq 'foo'", top=10, orderby="id")
+
     #@unittest.skip("For now, skip this test since it'll always fail")
     def test_ensure_coverage(self):
 
