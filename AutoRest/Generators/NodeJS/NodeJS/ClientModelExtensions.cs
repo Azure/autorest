@@ -534,7 +534,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         }
 
         public static IndentedStringBuilder AppendConstraintValidations(this IType type, string valueReference, Dictionary<Constraint, string> constraints, 
-            IndentedStringBuilder builder, bool existsCheck = true)
+            IndentedStringBuilder builder)
         {
             foreach (var constraint in constraints.Keys)
             {
@@ -559,27 +559,27 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                             constraints[constraint]);
                         break;
                     case Constraint.MaxItems:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.length <= {1}", valueReference,
+                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.length > {1}", valueReference,
                             constraints[constraint]);
                         break;
                     case Constraint.MaxLength:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.length <= {1}", valueReference,
+                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.length > {1}", valueReference,
                             constraints[constraint]);
                         break;
                     case Constraint.MinItems:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.length >= {1}", valueReference,
+                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.length < {1}", valueReference,
                             constraints[constraint]);
                         break;
                     case Constraint.MinLength:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.length >= {1}", valueReference,
+                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.length < {1}", valueReference,
                             constraints[constraint]);
                         break;
                     case Constraint.MultipleOf:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} % {1} != 0", valueReference,
+                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} % {1} !== 0", valueReference,
                             constraints[constraint]);
                         break;
                     case Constraint.Pattern:
-                        constraintValue = "\"" + constraintValue.Replace("\\", "\\\\") + "\"";
+                        constraintValue = "/" + constraintValue + "/";
                         constraintCheck = string.Format(CultureInfo.InvariantCulture,
                             "{0}.match({1}) === null", valueReference, constraintValue);
                         break;
@@ -587,7 +587,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                         if ("true".Equals(constraints[constraint], StringComparison.OrdinalIgnoreCase))
                         {
                             constraintCheck = string.Format(CultureInfo.InvariantCulture,
-                                "{0}.Count != {0}.Distinct().Count()", valueReference);
+                                "{0}.length !== {0}.filter(function(item, i, ar) {{ return ar.indexOf(item) === i; }}).length", valueReference);
                         }
                         else
                         {
@@ -599,31 +599,22 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 }
                 if (constraintCheck != null)
                 {
-                    if (existsCheck)
-                    {
-                        builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", valueReference).Indent();
-                    }
-                    
+                    var escapedValueReference = valueReference.EscapeSingleQuotes();
                     if (constraint != Constraint.UniqueItems)
                     {
                         builder.AppendLine("if ({0})", constraintCheck)
                             .AppendLine("{").Indent()
-                            .AppendLine("throw new ValidationException(ValidationRules.{0}, \"{1}\", {2});",
-                                constraint, valueReference.Replace("this.", ""), constraintValue).Outdent()
+                            .AppendLine("throw new Error('\"{0}\" should satisfy the constraint - \"{1}\": {2}');",
+                                escapedValueReference, constraint, constraintValue).Outdent()
                             .AppendLine("}");
                     }
                     else
                     {
                         builder.AppendLine("if ({0})", constraintCheck)
                             .AppendLine("{").Indent()
-                            .AppendLine("throw new ValidationException(ValidationRules.{0}, \"{1}\");",
-                                constraint, valueReference.Replace("this.", "")).Outdent()
+                            .AppendLine("throw new Error('\"{0}\" should satisfy the constraint - \"{1}\"');",
+                                escapedValueReference, constraint).Outdent()
                             .AppendLine("}");
-                    }
-
-                    if (existsCheck)
-                    {
-                        builder.Outdent().AppendLine("}");
                     }
                 }
             }
@@ -663,7 +654,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .Indent()
                          .AppendLine("if (typeof {0} !== '{1}') {{", objectReference, lowercaseTypeName);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
-                builder = primary.AppendConstraintValidations(objectReference, constraints, builder, false);
+                builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
                 builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = {1};", valueReference, objectReference)
                             .Outdent()
@@ -685,7 +676,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .Indent()
                          .AppendLine("if (typeof {0}.valueOf() !== '{1}') {{", objectReference, lowercaseTypeName);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
-                builder = primary.AppendConstraintValidations(objectReference, constraints, builder, false);
+                builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
                 builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = {1};", valueReference, objectReference)
                             .Outdent()
@@ -705,7 +696,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .Indent()
                          .AppendLine("if (!Buffer.isBuffer({0})) {{", objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
-                builder = primary.AppendConstraintValidations(objectReference, constraints, builder, false);
+                builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
                 builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = {1}.toString('base64');", valueReference, objectReference)
                             .Outdent()
@@ -729,7 +720,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0})))) {{", 
                          objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
-                builder = primary.AppendConstraintValidations(objectReference, constraints, builder, false);
+                builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
                 builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString().substring(0,10) : {1};", valueReference, objectReference)
                                 .Outdent()
@@ -753,7 +744,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0})))) {{",
                          objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
-                builder = primary.AppendConstraintValidations(objectReference, constraints, builder, false);
+                builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
                 builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString() : {1};", valueReference, objectReference)
                                 .Outdent()
@@ -777,7 +768,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0})))) {{",
                          objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
-                builder = primary.AppendConstraintValidations(objectReference, constraints, builder, false);
+                builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
                 builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toUTCString() : {1};", valueReference, objectReference)
                                 .Outdent()
@@ -799,7 +790,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .AppendLine("if (!moment.isDuration({0})) {{",
                          objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
-                builder = primary.AppendConstraintValidations(objectReference, constraints, builder, false);
+                builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
                 builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = {1}.toISOString();", valueReference, objectReference)
                                 .Outdent()
@@ -839,7 +830,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var allowedValues = scope.GetVariableName("allowedValues");
             string tempReference = objectReference;
             builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", objectReference).Indent();
-            builder = enumType.AppendConstraintValidations(objectReference, constraints, builder, false);
+            builder = enumType.AppendConstraintValidations(objectReference, constraints, builder);
             builder.AppendLine("var {0} = {1};", allowedValues, enumType.GetEnumValuesArray());
             if (objectReference.IndexOfAny(new char[] { '.', '[', ']'}) >= 0)
             {
@@ -881,7 +872,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var escapedObjectReference = objectReference.EscapeSingleQuotes();
 
             builder.AppendLine("if ({0}) {{", objectReference).Indent();
-            builder = composite.AppendConstraintValidations(objectReference, constraints, builder, false);
+            builder = composite.AppendConstraintValidations(objectReference, constraints, builder);
             if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
             {
                 builder.AppendLine("if({0}['{1}'] !== null && {0}['{1}'] !== undefined && {2}.discriminators[{0}['{1}']]) {{",
@@ -942,7 +933,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                              escapedObjectReference, sequence.Name.ToLower(CultureInfo.InvariantCulture))
                            .Outdent()
                            .AppendLine("}");
-                    builder = sequence.AppendConstraintValidations(objectReference, constraints, builder, false);
+                    builder = sequence.AppendConstraintValidations(objectReference, constraints, builder);
                     builder.AppendLine("{0} = [];", valueReference)
                            .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", objectReference, indexVar)
                              .Indent()
@@ -953,7 +944,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 }
 
                 builder.AppendLine("if (util.isArray({0})) {{", objectReference).Indent();
-                builder = sequence.AppendConstraintValidations(objectReference, constraints, builder, false);
+                builder = sequence.AppendConstraintValidations(objectReference, constraints, builder);
                 builder.AppendLine("{0} = [];", valueReference)
                        .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", objectReference, indexVar)
                          .Indent()
@@ -992,7 +983,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                              escapedObjectReference, dictionary.Name.ToLower(CultureInfo.InvariantCulture))
                            .Outdent()
                            .AppendLine("}");
-                    builder = dictionary.AppendConstraintValidations(objectReference, constraints, builder, false);
+                    builder = dictionary.AppendConstraintValidations(objectReference, constraints, builder);
                     builder.AppendLine("{0} = {{}};", valueReference)
                       .AppendLine("for(var {0} in {1}) {{", valueVar, objectReference)
                         .Indent()
@@ -1003,7 +994,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 }
 
                 builder.AppendLine("if ({0} && typeof {0} === 'object') {{", objectReference).Indent();
-                builder = dictionary.AppendConstraintValidations(objectReference, constraints, builder, false);
+                builder = dictionary.AppendConstraintValidations(objectReference, constraints, builder);
                 builder.AppendLine("{0} = {{}};", valueReference)
                        .AppendLine("for(var {0} in {1}) {{", valueVar, objectReference)
                          .Indent()
