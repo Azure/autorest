@@ -545,9 +545,11 @@ namespace Microsoft.Rest.Generator.NodeJS
                                    .AppendLine("}");
                         }
                     }
-
+                    else
                     {
                         builder.AppendLine(parameter.Type.ValidateType(Scope, parameter.Name, parameter.IsRequired));
+                        builder = parameter.Type.AppendConstraintValidations(parameter.Name, parameter.Constraints, builder);
+                               
                     }
                 }
                 return builder.ToString();
