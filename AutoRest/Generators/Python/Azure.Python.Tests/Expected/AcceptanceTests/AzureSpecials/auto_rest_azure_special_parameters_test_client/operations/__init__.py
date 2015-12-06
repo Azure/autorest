@@ -15,6 +15,7 @@ from .subscription_in_method_operations import subscription_in_methodOperations
 from .api_version_default_operations import api_version_defaultOperations
 from .api_version_local_operations import api_version_localOperations
 from .skip_url_encoding_operations import skip_url_encodingOperations
+from .odata_operations import odataOperations
 from .header_operations import headerOperations
 
 __all__ = [
@@ -24,5 +25,6 @@ __all__ = [
     'api_version_defaultOperations',
     'api_version_localOperations',
     'skip_url_encodingOperations',
+    'odataOperations',
     'headerOperations',
 ]
