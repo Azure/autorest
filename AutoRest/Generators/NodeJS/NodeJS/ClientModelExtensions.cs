@@ -536,6 +536,10 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         public static IndentedStringBuilder AppendConstraintValidations(this IType type, string valueReference, Dictionary<Constraint, string> constraints, 
             IndentedStringBuilder builder)
         {
+            if (constraints == null)
+            {
+                throw new ArgumentNullException("constraints");
+            }
             foreach (var constraint in constraints.Keys)
             {
                 string constraintCheck;
