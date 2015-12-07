@@ -107,11 +107,45 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
     if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
       throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
     }
+    if (resourceGroupName !== null && resourceGroupName !== undefined) {
+      if (resourceGroupName.length > 10)
+      {
+        throw new Error('"resourceGroupName" should satisfy the constraint - "MaxLength": 10');
+      }
+      if (resourceGroupName.length < 3)
+      {
+        throw new Error('"resourceGroupName" should satisfy the constraint - "MinLength": 3');
+      }
+      if (resourceGroupName.match(/[a-zA-Z0-9]+/) === null)
+      {
+        throw new Error('"resourceGroupName" should satisfy the constraint - "Pattern": /[a-zA-Z0-9]+/');
+      }
+    }
     if (id === null || id === undefined || typeof id !== 'number') {
       throw new Error('id cannot be null or undefined and it must be of type number.');
     }
+    if (id !== null && id !== undefined) {
+      if (id > 1000)
+      {
+        throw new Error('"id" should satisfy the constraint - "InclusiveMaximum": 1000');
+      }
+      if (id < 100)
+      {
+        throw new Error('"id" should satisfy the constraint - "InclusiveMinimum": 100');
+      }
+      if (id % 10 !== 0)
+      {
+        throw new Error('"id" should satisfy the constraint - "MultipleOf": 10');
+      }
+    }
     if (this.apiVersion === null || this.apiVersion === undefined || typeof this.apiVersion.valueOf() !== 'string') {
       throw new Error('this.apiVersion cannot be null or undefined and it must be of type string.');
+    }
+    if (this.apiVersion !== null && this.apiVersion !== undefined) {
+      if (this.apiVersion.match(/\d{2}-\d{2}-\d{4}/) === null)
+      {
+        throw new Error('"this.apiVersion" should satisfy the constraint - "Pattern": /\d{2}-\d{2}-\d{4}/');
+      }
     }
   } catch (error) {
     return callback(error);
@@ -254,11 +288,45 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
     if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
       throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
     }
+    if (resourceGroupName !== null && resourceGroupName !== undefined) {
+      if (resourceGroupName.length > 10)
+      {
+        throw new Error('"resourceGroupName" should satisfy the constraint - "MaxLength": 10');
+      }
+      if (resourceGroupName.length < 3)
+      {
+        throw new Error('"resourceGroupName" should satisfy the constraint - "MinLength": 3');
+      }
+      if (resourceGroupName.match(/[a-zA-Z0-9]+/) === null)
+      {
+        throw new Error('"resourceGroupName" should satisfy the constraint - "Pattern": /[a-zA-Z0-9]+/');
+      }
+    }
     if (id === null || id === undefined || typeof id !== 'number') {
       throw new Error('id cannot be null or undefined and it must be of type number.');
     }
+    if (id !== null && id !== undefined) {
+      if (id > 1000)
+      {
+        throw new Error('"id" should satisfy the constraint - "InclusiveMaximum": 1000');
+      }
+      if (id < 100)
+      {
+        throw new Error('"id" should satisfy the constraint - "InclusiveMinimum": 100');
+      }
+      if (id % 10 !== 0)
+      {
+        throw new Error('"id" should satisfy the constraint - "MultipleOf": 10');
+      }
+    }
     if (this.apiVersion === null || this.apiVersion === undefined || typeof this.apiVersion.valueOf() !== 'string') {
       throw new Error('this.apiVersion cannot be null or undefined and it must be of type string.');
+    }
+    if (this.apiVersion !== null && this.apiVersion !== undefined) {
+      if (this.apiVersion.match(/\d{2}-\d{2}-\d{4}/) === null)
+      {
+        throw new Error('"this.apiVersion" should satisfy the constraint - "Pattern": /\d{2}-\d{2}-\d{4}/');
+      }
     }
   } catch (error) {
     return callback(error);

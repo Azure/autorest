@@ -545,9 +545,15 @@ namespace Microsoft.Rest.Generator.NodeJS
                                    .AppendLine("}");
                         }
                     }
-
+                    else
                     {
                         builder.AppendLine(parameter.Type.ValidateType(Scope, parameter.Name, parameter.IsRequired));
+                        if (parameter.Constraints != null && parameter.Constraints.Count > 0 && parameter.Location != ParameterLocation.Body)
+                        {
+                            builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", parameter.Name).Indent();
+                            builder = parameter.Type.AppendConstraintValidations(parameter.Name, parameter.Constraints, builder);
+                            builder.Outdent().AppendLine("}");
+                        }        
                     }
                 }
                 return builder.ToString();
