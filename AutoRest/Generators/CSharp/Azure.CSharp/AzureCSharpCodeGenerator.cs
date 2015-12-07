@@ -65,6 +65,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
             _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
+            _namer.NormalizeODataMethods(serviceClient);
 
             if (serviceClient != null)
             {

@@ -28,7 +28,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// The operations group for this extension method.
             /// </param>
             /// <param name='odataQuery'>
-            /// The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
+            /// OData parameters to apply to the operation.
             /// </param>
             public static void GetWithFilter(this IOdataOperations operations, ODataQuery<OdataFilter> odataQuery = default(ODataQuery<OdataFilter>))
             {
@@ -43,7 +43,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// The operations group for this extension method.
             /// </param>
             /// <param name='odataQuery'>
-            /// The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
+            /// OData parameters to apply to the operation.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
