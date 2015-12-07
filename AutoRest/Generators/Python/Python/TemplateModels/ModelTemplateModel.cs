@@ -39,7 +39,7 @@ namespace Microsoft.Rest.Generator.Python
             this.LoadFrom(source);
             ServiceClient = serviceClient;
             
-            if (ServiceClient.Exceptions.Contains(source))
+            if (ServiceClient.ErrorTypes.Contains(source))
             {
                 _isException = true;
             }
@@ -95,19 +95,6 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         public ServiceClient ServiceClient { get; set; }
-
-        public IEnumerable<Property> ComposedProperties
-        {
-            get
-            {
-                if(this._parent != null)
-                {
-                    return _parent.ComposedProperties
-                                  .Union(this.Properties);
-                }
-                return this.Properties;
-            }
-        }
 
         public bool IsPolymorphic
         {
