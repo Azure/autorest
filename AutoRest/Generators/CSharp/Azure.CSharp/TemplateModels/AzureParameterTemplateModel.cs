@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure
@@ -10,29 +11,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
     public class AzureParameterTemplateModel : ParameterTemplateModel
     {
         public AzureParameterTemplateModel(Parameter source) : base(source)
-        {
-            if (IsParameterODataExpression(source))
-            {
-                this.Name = "odataQuery";
-            }
-        }
-
-        /// <summary>
-        /// Gets declaration for the parameter.
-        /// </summary>
-        public override string DeclarationExpression
-        {
-            get
-            {
-                if (IsODataFilterExpression)
-                {
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "ODataQuery<{0}>", Type.Name);
-                }
-
-                return base.DeclarationExpression;
-            }
-        }
+        { }        
 
         /// <summary>
         /// Gets True if parameter can call .Validate method
@@ -52,18 +31,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
-                return IsParameterODataExpression(this);
+                return base.Extensions.ContainsKey(AzureExtensions.ODataExtension);
             }
-        }
-
-        private static bool IsParameterODataExpression(Parameter source)
-        {
-            return (source.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) ||
-                        source.SerializedName.Equals("$top", StringComparison.OrdinalIgnoreCase) ||
-                        source.SerializedName.Equals("$orderby", StringComparison.OrdinalIgnoreCase) ||
-                        source.SerializedName.Equals("$skip", StringComparison.OrdinalIgnoreCase) ||
-                        source.SerializedName.Equals("$expand", StringComparison.OrdinalIgnoreCase))
-                        && source.Location == ParameterLocation.Query;
         }
     }
 }
