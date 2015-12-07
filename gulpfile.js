@@ -350,8 +350,8 @@ gulp.task('syncDependencies:runtime', ['syncDependencies:runtime:cs', 'syncDepen
 
 gulp.task('syncDependencies', ['syncDependencies:nugetProj', 'syncDependencies:nuspec', 'syncDependencies:runtime']);
 
-gulp.task('syncDependencies:runtime:python', shell.task('pip install tox', { verbosity: 3 }));
-gulp.task('syncDependencies:runtime:pythonazure', shell.task('pip install tox', { verbosity: 3 }));
+gulp.task('syncDependencies:runtime:python', shell.task('pip install --user tox', { verbosity: 3 }));
+gulp.task('syncDependencies:runtime:pythonazure', shell.task('pip install --user tox', { verbosity: 3 }));
 
 gulp.task('build', function(cb) {
   // warning 0219 is for unused variables, which causes the build to fail on xbuild
@@ -401,8 +401,10 @@ gulp.task('test:ruby:azure', ['regenerate:expected:rubyazure'], shell.task('ruby
 gulp.task('test:java', shell.task(basePathOrThrow() + '/gradlew :codegen-tests:check', {cwd: './', verbosity: 3}));
 gulp.task('test:java:azure', shell.task(basePathOrThrow() + '/gradlew :azure-codegen-tests:check', {cwd: './', verbosity: 3}));
 
-gulp.task('test:python', shell.task('tox', {cwd: './AutoRest/Generators/Python/Python.Tests', verbosity: 3}));
-gulp.task('test:python:azure', shell.task('tox', {cwd: './AutoRest/Generators/Python/Azure.Python.Tests', verbosity: 3}));
+gulp.task('test:python:installtox', shell.task('pip install tox'));
+
+gulp.task('test:python', ['test:python:installtox'], shell.task('tox', {cwd: './AutoRest/Generators/Python/Python.Tests', verbosity: 3}));
+gulp.task('test:python:azure', ['test:python:installtox'], shell.task('tox', {cwd: './AutoRest/Generators/Python/Azure.Python.Tests', verbosity: 3}));
 
 var xunitTestsDlls = [
   'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
