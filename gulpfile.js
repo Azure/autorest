@@ -401,8 +401,10 @@ gulp.task('test:ruby:azure', ['regenerate:expected:rubyazure'], shell.task('ruby
 gulp.task('test:java', shell.task(basePathOrThrow() + '/gradlew :codegen-tests:check', {cwd: './', verbosity: 3}));
 gulp.task('test:java:azure', shell.task(basePathOrThrow() + '/gradlew :azure-codegen-tests:check', {cwd: './', verbosity: 3}));
 
-gulp.task('test:python', shell.task('tox', {cwd: './AutoRest/Generators/Python/Python.Tests', verbosity: 3}));
-gulp.task('test:python:azure', shell.task('tox', {cwd: './AutoRest/Generators/Python/Azure.Python.Tests', verbosity: 3}));
+gulp.task('test:python:installtox', shell.task('pip install tox'));
+
+gulp.task('test:python', ['test:python:installtox'], shell.task('tox', {cwd: './AutoRest/Generators/Python/Python.Tests', verbosity: 3}));
+gulp.task('test:python:azure', ['test:python:installtox'], shell.task('tox', {cwd: './AutoRest/Generators/Python/Azure.Python.Tests', verbosity: 3}));
 
 var xunitTestsDlls = [
   'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
