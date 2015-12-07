@@ -24,10 +24,10 @@
 #
 # --------------------------------------------------------------------------
 
-import re
-import os
-import shutil
 import logging
+import os
+import re
+import shutil
 import types
 
 DEFAULT_LOG_NAME = "ms-client-runtime"
@@ -48,7 +48,7 @@ def check_invalid_directory(dirname):
         os.remove(os.path.join(dirname, "ms_test"))
 
     except (IOError, OSError, EnvironmentError) as exp:
-        raise ValueError("Log directory '{0}' cannot be accessed:1{".format(
+        raise ValueError("Log directory '{}' cannot be accessed:{}".format(
             dirname, exp))
 
 
@@ -117,15 +117,12 @@ def set_log_level(logger, level):
               'error': 40,
               'critical': 50}
 
-    if isinstance(level, str) and level.lower() in levels:
-            level = levels[level.lower()]
-
     try:
-        logger.setLevel(level)
+        level = levels[level.lower()]
+    except (AttributeError, KeyError):
+        pass
 
-    except ValueError:
-        raise
-
+    logger.setLevel(level)
     return logger.level
 
 
@@ -159,7 +156,7 @@ def log_request(adapter, request, *args, **kwargs):
         LOGGER.debug("Request method: {}".format(request.method))
         LOGGER.debug("Request headers:")
         for header, value in request.headers.items():
-            LOGGER.debug("    {0}: {1}".format(header, value))
+            LOGGER.debug("    {}: {}".format(header, value))
         LOGGER.debug("Request body:")
 
         # We don't want to log the binary data of a file upload
@@ -180,7 +177,7 @@ def log_response(adapter, request, response, *args, **kwargs):
         LOGGER.debug("Response status: {}".format(result.status_code))
         LOGGER.debug("Response headers:")
         for header, value in result.headers.items():
-            LOGGER.debug("    {0}: {1}".format(header, value))
+            LOGGER.debug("    {}: {}".format(header, value))
 
         # We don't want to log binary data if the response is a file
         LOGGER.debug("Response content:")
@@ -199,5 +196,5 @@ def log_response(adapter, request, response, *args, **kwargs):
         return result
 
     except Exception as err:
-        LOGGER.debug("Failed to log response: '{0}'".format(err))
+        LOGGER.debug("Failed to log response: '{}'".format(err))
         return kwargs['result']

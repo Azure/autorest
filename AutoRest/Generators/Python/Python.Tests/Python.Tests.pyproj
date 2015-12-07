@@ -12,6 +12,10 @@
     <OutputPath>.</OutputPath>
     <Name>Python.Tests</Name>
     <RootNamespace>Python.Tests</RootNamespace>
+    <InterpreterId>
+    </InterpreterId>
+    <InterpreterVersion>
+    </InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>

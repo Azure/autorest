@@ -24,12 +24,11 @@
 #
 # --------------------------------------------------------------------------
 
-import logging
-import requests
-from oauthlib import oauth2
-import functools
-
 from concurrent.futures import ThreadPoolExecutor
+import functools
+import logging
+from oauthlib import oauth2
+import requests
 
 try:
     from urlparse import urljoin, urlparse

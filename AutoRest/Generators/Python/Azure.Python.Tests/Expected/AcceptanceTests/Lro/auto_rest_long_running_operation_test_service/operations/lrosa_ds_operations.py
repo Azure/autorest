@@ -262,7 +262,7 @@ class lrosa_dsOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -334,7 +334,7 @@ class lrosa_dsOperations(object):
                 client_raw_response.add_headers({
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -401,7 +401,7 @@ class lrosa_dsOperations(object):
                 client_raw_response.add_headers({
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -470,7 +470,7 @@ class lrosa_dsOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -545,7 +545,7 @@ class lrosa_dsOperations(object):
                 client_raw_response.add_headers({
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -620,7 +620,7 @@ class lrosa_dsOperations(object):
                 client_raw_response.add_headers({
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -698,7 +698,7 @@ class lrosa_dsOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -862,7 +862,7 @@ class lrosa_dsOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -950,7 +950,7 @@ class lrosa_dsOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -1088,7 +1088,7 @@ class lrosa_dsOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -1164,7 +1164,7 @@ class lrosa_dsOperations(object):
                 client_raw_response.add_headers({
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -1243,7 +1243,7 @@ class lrosa_dsOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -1404,7 +1404,7 @@ class lrosa_dsOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -1492,7 +1492,7 @@ class lrosa_dsOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -1566,7 +1566,7 @@ class lrosa_dsOperations(object):
                 client_raw_response.add_headers({
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -1635,7 +1635,7 @@ class lrosa_dsOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -1704,7 +1704,7 @@ class lrosa_dsOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -1780,7 +1780,7 @@ class lrosa_dsOperations(object):
                 client_raw_response.add_headers({
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -1858,7 +1858,7 @@ class lrosa_dsOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -1937,7 +1937,7 @@ class lrosa_dsOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(

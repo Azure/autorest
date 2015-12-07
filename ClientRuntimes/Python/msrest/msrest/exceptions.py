@@ -24,9 +24,9 @@
 #
 # --------------------------------------------------------------------------
 
-import sys
 from . import logger
 from requests import RequestException
+import sys
 
 
 def raise_with_traceback(exception, message="", *args):
@@ -37,7 +37,6 @@ def raise_with_traceback(exception, message="", *args):
 
     try:
         raise error.with_traceback(exc_traceback)
-
     except AttributeError:
         error.__traceback__ = exc_traceback
         raise error
@@ -46,9 +45,7 @@ def raise_with_traceback(exception, message="", *args):
 class ClientException(Exception):
 
     def __init__(self, message, inner_exception=None, *args):
-
         self.inner_exception = inner_exception
-
         logger.LOGGER.debug(message)
         super(ClientException, self).__init__(message, *args)
 
@@ -79,7 +76,6 @@ class HttpOperationError(ClientException):
         return str(self.message)
 
     def __init__(self, deserialize, response, resp_type=None, *args):
-
         self.error = None
         self.message = None
         self.response = response
@@ -89,16 +85,13 @@ class HttpOperationError(ClientException):
                 self.error = deserialize(resp_type, response)
                 if self.error is None:
                     self.error = deserialize.dependencies[resp_type]()
-
                 self.message = self.error.message
-
         except (DeserializationError, AttributeError, KeyError):
             pass
 
         if not self.error or not self.message:
             try:
                 response.raise_for_status()
-
             except RequestException as err:
                 if not self.error:
                     self.error = err
@@ -107,7 +100,6 @@ class HttpOperationError(ClientException):
                     msg = ("Operation returned an invalid status code "
                            "'{}'".format(response.reason))
                     self.message = msg
-
             else:
                 if not self.error:
                     self.error = response

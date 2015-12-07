@@ -1,3 +1,4 @@
+
 import unittest
 import subprocess
 import sys
@@ -38,6 +39,7 @@ class XmsRequestClientIdTests(unittest.TestCase):
         client = AutoRestAzureSpecialParametersTestClient(config)
 
         custom_headers = {"x-ms-client-request-id": validClientId }
+
         result1 = client.xms_client_request_id.get(custom_headers = custom_headers, raw=True)
         #TODO: should we put the x-ms-request-id into response header of swagger spec?
         self.assertEqual("123", result1.response.headers.get("x-ms-request-id"))

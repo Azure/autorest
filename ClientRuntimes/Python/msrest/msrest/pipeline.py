@@ -27,10 +27,10 @@
 """
 Define custom HTTP Adapter
 """
-import requests
-import logging
-import json
 import functools
+import json
+import logging
+import requests
 import types
 
 from .serialization import Deserializer
@@ -90,20 +90,20 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
 
         if event not in self._client_hooks:
             raise KeyError(
-                "Event: '{0}' is not able to be hooked.".format(event))
+                "Event: '{}' is not able to be hooked.".format(event))
 
         if precall:
-            self._log.debug("Adding '{0}' callback before event: "
-                            "{1}".format(callback.__name__, event))
+            self._log.debug("Adding '{}' callback before event: "
+                            "{}".format(callback.__name__, event))
             self._client_hooks[event].precalls.append(callback)
 
         else:
-            self._log.debug("Adding '{0}' callback after event: "
-                            "{1}".format(callback.__name__, event))
+            self._log.debug("Adding '{}' callback after event: "
+                            "{}".format(callback.__name__, event))
             self._client_hooks[event].postcalls.append(callback)
 
         self._log.debug("Callback to overwrite original call: "
-                        "{0}".format(overwrite))
+                        "{}".format(overwrite))
         self._client_hooks[event].overwrite_call = overwrite
 
     def remove_hook(self, event, hook):
@@ -117,7 +117,7 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
 
         except KeyError:
             raise KeyError(
-                "Event: '{0}' is not able to be hooked.".format(event))
+                "Event: '{}' is not able to be hooked.".format(event))
 
     @event_hook("request")
     def send(self, request, stream=False, timeout=None, verify=True,
@@ -211,8 +211,7 @@ class ClientRawResponse(object):
 
         for name, data_type in header_dict.items():
             value = self.response.headers.get(name)
-            if value:
-                value = self._deserialize(data_type, value)
+            value = self._deserialize(data_type, value)
 
             self.headers[name] = value
 
@@ -248,7 +247,7 @@ class ClientRetry(Retry):
             "Received status: {} for method {}".format(status_code, method))
         output = super(ClientRetry, self).is_forced_retry(method, status_code)
 
-        self._log.debug("Is forced retry: {0}".format(output))
+        self._log.debug("Is forced retry: {}".format(output))
         return output
 
     def is_exhausted(self):

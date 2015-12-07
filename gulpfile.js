@@ -350,8 +350,8 @@ gulp.task('syncDependencies:runtime', ['syncDependencies:runtime:cs', 'syncDepen
 
 gulp.task('syncDependencies', ['syncDependencies:nugetProj', 'syncDependencies:nuspec', 'syncDependencies:runtime']);
 
-gulp.task('syncDependencies:runtime:python', shell.task('pip install --user tox', { verbosity: 3 }));
-gulp.task('syncDependencies:runtime:pythonazure', shell.task('pip install --user tox', { verbosity: 3 }));
+gulp.task('syncDependencies:runtime:python', shell.task('pip install tox', { verbosity: 3 }));
+gulp.task('syncDependencies:runtime:pythonazure', shell.task('pip install tox', { verbosity: 3 }));
 
 gulp.task('build', function(cb) {
   // warning 0219 is for unused variables, which causes the build to fail on xbuild

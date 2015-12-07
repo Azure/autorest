@@ -12,7 +12,7 @@
 from .error import Error, ErrorException
 from .enums import (
     GreyscaleColors,
-    )
+)
 
 __all__ = [
     'Error', 'ErrorException',

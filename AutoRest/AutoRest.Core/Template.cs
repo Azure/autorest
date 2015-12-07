@@ -206,7 +206,7 @@ namespace Microsoft.Rest.Generator
                 prefix.Length - // - Prefix //'s length
                 1; // - Extra space between prefix and text
             return string.Join(Environment.NewLine, comment.WordWrap(available)
-                .Select(s => string.Format(CultureInfo.InvariantCulture, "{0}{1}", prefix, s).TrimEnd()));
+                .Select(s => string.Format(CultureInfo.InvariantCulture, "{0}{1}", prefix, s)));
         }
 
         private string GetIndentation()

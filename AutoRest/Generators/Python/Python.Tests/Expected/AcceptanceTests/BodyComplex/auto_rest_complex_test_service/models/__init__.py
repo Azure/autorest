@@ -36,7 +36,7 @@ from .array_wrapper import ArrayWrapper
 from .dictionary_wrapper import DictionaryWrapper
 from .enums import (
     CMYKColors,
-    )
+)
 
 __all__ = [
     'Error', 'ErrorException',

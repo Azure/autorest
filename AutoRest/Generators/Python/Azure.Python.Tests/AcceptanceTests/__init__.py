@@ -32,7 +32,9 @@ if __name__ == '__main__':
         test_loader.sortTestMethodsUsing = sort_test
 
         suite = test_loader.discover(cwd, pattern="*_tests.py")
-        runner.run(suite)
-    
+        result = runner.run(suite)
+        if not result.wasSuccessful():
+            sys.exit(1)
+
     finally:
         server.kill()

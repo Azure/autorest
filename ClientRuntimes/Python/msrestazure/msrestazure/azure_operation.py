@@ -35,6 +35,22 @@ try:
 except ImportError:
     from urllib.parse import urlparse
 
+FINISHED = ['succeeded', 'canceled', 'failed']
+FAILED = ['canceled', 'failed']
+SUCCEEDED = ['succeeded']
+
+
+def finished(status):
+    return str(status).lower() in FINISHED
+
+
+def failed(status):
+    return str(status).lower() in FAILED
+
+
+def succeeded(status):
+    return str(status).lower() in SUCCEEDED
+
 
 class BadStatus(Exception):
     pass
@@ -48,30 +64,19 @@ class OperationFailed(Exception):
     pass
 
 
+class OperationFinished(Exception):
+    pass
+
+
 class LongRunningOperation(object):
 
     def __init__(self):
-        self._status = ""
+        self.status = ""
         self.resource = None
         self.method = None
         self.async_url = None
         self.location_url = None
         self.raw = None
-
-    @property
-    def status(self):
-        if hasattr(self.resource, 'provisioning_state'):
-            if self.resource.provisioning_state:
-                return self.resource.provisioning_state.lower()
-
-        return self._status.lower()
-
-    @status.setter
-    def status(self, value):
-        self._status = value
-
-        if hasattr(self.resource, 'provisioning_state'):
-            self.resource.provisioning_state = value
 
     def _validate(self, url):
 
@@ -104,10 +109,19 @@ class LongRunningOperation(object):
         if isinstance(resource, ClientRawResponse):
             self.resource = resource.output
             self.raw = resource
-
         else:
             self.resource = resource
-        self._status = self.status
+
+        try:
+            if failed(self.resource.provisioning_state):
+                self.status = self.resource.provisioning_state
+                raise OperationFailed()
+            elif succeeded(self.resource.provisioning_state):
+                raise OperationFinished()
+            elif self.resource.provisioning_state:
+                self.status = self.resource.provisioning_state
+        except AttributeError:
+            pass
 
     def _get_body_status(self, response):
 
@@ -124,12 +138,19 @@ class LongRunningOperation(object):
         return None
 
     def _object_from_response(self, response):
-        if self.resource is None and self.method not in ['POST', 'DELETE']:
-            body = response.json()
+        if self.method in ['POST', 'DELETE']:
+            return
 
+        body = response.json()
+        state = body.get('properties', body).get('provisioningState')
+
+        if self.resource is None:
             self.resource = type("Resource", (), {})
             for key, value in body.items():
                 setattr(self.resource, key, value)
+        elif state:
+            if hasattr(self.resource, 'provisioning_state'):
+                self.resource.provisioning_state = state
 
     def _status_200(self, response, outputs):
         self.status = 'Succeeded'
@@ -169,6 +190,13 @@ class LongRunningOperation(object):
         elif self.method in ['POST', 'DELETE']:
             if code not in [200, 202, 204]:
                 raise BadStatus()
+
+    def is_done(self):
+        try:
+            return self.status.lower() == \
+                self.resource.provisioning_state.lower()
+        except AttributeError:
+            return True
 
     def get_initial_status(self, response, outputs):
 
@@ -314,9 +342,6 @@ class LongRunningOperation(object):
 
 class AzureOperationPoller(object):
 
-    finished_states = ['succeeded', 'failed', 'canceled']
-    failed_states = ['failed', 'canceled']
-
     def __init__(self, send_cmd, output_cmd, update_cmd,
                  timeout=30, callback=None):
         """
@@ -360,6 +385,9 @@ class AzureOperationPoller(object):
 
             self._operation.resource = CloudError(self._response, error)
 
+        except OperationFinished:
+            pass
+
         except Exception as err:
             self._operation.resource = err
 
@@ -396,7 +424,9 @@ class AzureOperationPoller(object):
 
     def _poll(self, update_cmd, output_cmd):
 
-        while self._operation.status not in self.finished_states:
+        initial_url = self._response.request.url
+
+        while not finished(self._operation.status):
 
             url = self._response.request.url
             headers = self._polling_cookie(url)
@@ -424,8 +454,13 @@ class AzureOperationPoller(object):
                 self._operation.get_status_from_resource(
                     self._response, output_cmd)
 
-        if self._operation.status in self.failed_states:
+        if failed(self._operation.status):
             raise OperationFailed()
+
+        elif not self._operation.is_done():
+            self._response = update_cmd(initial_url)
+            self._operation.get_status_from_resource(
+                self._response, output_cmd)
 
     def result(self, timeout=None):
         self.wait(timeout)

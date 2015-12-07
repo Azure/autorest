@@ -8,7 +8,7 @@
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ModelTemplateModel>
 # coding=utf-8
 # --------------------------------------------------------------------------
-@Header("# ")
+@Header("# ").TrimMultilineHeader()
 # --------------------------------------------------------------------------
 @EmptyLine
 @if (Model.BaseModelType != null)
