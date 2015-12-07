@@ -19,6 +19,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using Microsoft.Rest.Azure.OData;
     using Microsoft.Rest.Azure;

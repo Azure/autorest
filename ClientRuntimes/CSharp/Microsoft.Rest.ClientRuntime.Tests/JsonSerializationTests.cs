@@ -258,7 +258,9 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             message.Headers.Add("h2", "");
             message.Headers.Add("h3", new string[] {"value1", "value2"});
             var json = message.Headers.ToJson().ToString();
-            Assert.Equal("{\r\n  \"h1\": \"value\",\r\n  \"h2\": \"\",\r\n  \"h3\": [\r\n    \"value1\",\r\n    \"value2\"\r\n  ]\r\n}", json);
+            var expectedJsonString = string.Format("{{{0}  \"h1\": \"value\",{0}  \"h2\": \"\",{0}  \"h3\": [{0}    \"value1\",{0}    \"value2\"{0}  ]{0}}}", 
+                Environment.NewLine);
+            Assert.Equal(expectedJsonString, json);
         }
     }
 }
