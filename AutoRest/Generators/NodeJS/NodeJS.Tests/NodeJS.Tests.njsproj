@@ -13,6 +13,9 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <Name>NodeJS.Tests</Name>
+    <EnableTypeScript>true</EnableTypeScript>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
@@ -316,6 +319,7 @@
     <Folder Include="Swagger" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="AcceptanceTests\validationTests.ts" />
     <TypeScriptCompile Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\autoRestRFC1123DateTimeTestService.d.ts" />
     <TypeScriptCompile Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\models\index.d.ts" />
     <TypeScriptCompile Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\operations\index.d.ts" />

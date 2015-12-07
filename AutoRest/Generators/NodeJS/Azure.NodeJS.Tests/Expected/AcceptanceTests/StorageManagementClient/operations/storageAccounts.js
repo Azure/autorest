@@ -811,9 +811,6 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
     if (parameters === null || parameters === undefined) {
       throw new Error('parameters cannot be null or undefined.');
     }
-    if (parameters === null || parameters === undefined) {
-      throw new Error('parameters cannot be null or undefined.');
-    }
     if (this.client.apiVersion === null || this.client.apiVersion === undefined || typeof this.client.apiVersion.valueOf() !== 'string') {
       throw new Error('this.client.apiVersion cannot be null or undefined and it must be of type string.');
     }

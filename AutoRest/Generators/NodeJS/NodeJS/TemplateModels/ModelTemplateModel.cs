@@ -256,7 +256,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             var serializedPropertyName = string.Format(CultureInfo.InvariantCulture,
                 "{0}['{1}']", serializedName, property.SerializedName.Replace(".", "']['"));
 
-            return property.Type.SerializeType(_scope, propertyName, serializedPropertyName, property.IsRequired, "models");
+            return property.Type.SerializeType(_scope, propertyName, serializedPropertyName, property.IsRequired, property.Constraints, "models");
         }
 
         public string DeserializeProperty(string objectName, string valueName, Property property)
