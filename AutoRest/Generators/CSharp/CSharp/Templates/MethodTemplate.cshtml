@@ -228,7 +228,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
         }
     }
 
-    @if (Model.ReturnType.Body != null && Model.ReturnType.Headers != null)
+    @if (Model.ReturnType.Headers != null)
     {
     @:try
     @:{

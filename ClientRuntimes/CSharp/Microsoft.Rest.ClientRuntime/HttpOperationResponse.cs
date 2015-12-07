@@ -33,14 +33,23 @@ namespace Microsoft.Rest
     }
 
     /// <summary>
-    /// Represents the base return type of all ServiceClient REST operations with response body and header.
+    /// Represents the base return type of all ServiceClient REST operations with a header response.
     /// </summary>
-    public interface IHttpOperationResponse<TBody, THeader> : IHttpOperationResponse<TBody>
+    /// <typeparam name="T"></typeparam>
+    public interface IHttpOperationHeaderResponse<T> : IHttpOperationResponse
     {
         /// <summary>
         /// Gets or sets the response header object.
         /// </summary>
-        THeader Headers { get; set; }
+        T Headers { get; set; }
+    }
+
+    /// <summary>
+    /// Represents the base return type of all ServiceClient REST operations with response body and header.
+    /// </summary>
+    public interface IHttpOperationResponse<TBody, THeader> : IHttpOperationResponse<TBody>, IHttpOperationHeaderResponse<THeader>
+    {
+        
     }
     
     /// <summary>
@@ -68,6 +77,14 @@ namespace Microsoft.Rest
         /// Gets or sets the response object.
         /// </summary>
         public T Body { get; set; }
+    }
+
+    /// <summary>
+    /// Represents the base return type of all ServiceClient REST operations.
+    /// </summary>
+    public class HttpOperationHeaderResponse<THeader> : HttpOperationResponse, IHttpOperationHeaderResponse<THeader>
+    {
+        public THeader Headers { get; set; }
     }
 
     /// <summary>

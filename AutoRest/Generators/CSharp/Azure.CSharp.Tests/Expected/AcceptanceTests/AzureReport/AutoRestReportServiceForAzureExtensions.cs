@@ -41,7 +41,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
             /// </param>
             public static async Task<IDictionary<string, int?>> GetReportAsync( this IAutoRestReportServiceForAzure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IDictionary<string, int?>> result = await operations.GetReportWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetReportWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

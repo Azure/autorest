@@ -37,7 +37,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 }
                 yield return "Microsoft.Rest.Azure";
 
-                if (this.ModelTypes.Any(m => !m.Extensions.ContainsKey(AzureExtensions.ExternalExtension)))
+                if (this.ModelTypes.Any(m => !m.Extensions.ContainsKey(AzureExtensions.ExternalExtension)) || this.HeaderTypes.Any())
                 {
                     yield return "Models";
                 }

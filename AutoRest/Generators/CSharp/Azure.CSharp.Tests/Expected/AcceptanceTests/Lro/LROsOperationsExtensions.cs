@@ -49,7 +49,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> Put200SucceededAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.Put200SucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Put200SucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -83,7 +83,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPut200SucceededAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.BeginPut200SucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPut200SucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -117,7 +117,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> Put200SucceededNoStateAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.Put200SucceededNoStateWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Put200SucceededNoStateWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -151,7 +151,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPut200SucceededNoStateAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.BeginPut200SucceededNoStateWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPut200SucceededNoStateWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -187,7 +187,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> Put202Retry200Async( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.Put202Retry200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Put202Retry200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -223,7 +223,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPut202Retry200Async( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.BeginPut202Retry200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPut202Retry200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -261,7 +261,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> Put201CreatingSucceeded200Async( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.Put201CreatingSucceeded200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Put201CreatingSucceeded200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -299,7 +299,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPut201CreatingSucceeded200Async( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.BeginPut201CreatingSucceeded200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPut201CreatingSucceeded200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -337,7 +337,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> Put200UpdatingSucceeded204Async( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.Put200UpdatingSucceeded204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Put200UpdatingSucceeded204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -375,7 +375,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPut200UpdatingSucceeded204Async( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.BeginPut200UpdatingSucceeded204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPut200UpdatingSucceeded204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -413,7 +413,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> Put201CreatingFailed200Async( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.Put201CreatingFailed200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Put201CreatingFailed200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -451,7 +451,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPut201CreatingFailed200Async( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.BeginPut201CreatingFailed200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPut201CreatingFailed200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -489,7 +489,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> Put200Acceptedcanceled200Async( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.Put200Acceptedcanceled200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Put200Acceptedcanceled200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -527,7 +527,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPut200Acceptedcanceled200Async( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product> result = await operations.BeginPut200Acceptedcanceled200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPut200Acceptedcanceled200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -563,7 +563,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> PutNoHeaderInRetryAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPutNoHeaderInRetryHeaders> result = await operations.PutNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PutNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -599,7 +599,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPutNoHeaderInRetryAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPutNoHeaderInRetryHeaders> result = await operations.BeginPutNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPutNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -635,7 +635,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> PutAsyncRetrySucceededAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPutAsyncRetrySucceededHeaders> result = await operations.PutAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PutAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -671,7 +671,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPutAsyncRetrySucceededAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPutAsyncRetrySucceededHeaders> result = await operations.BeginPutAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPutAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -707,7 +707,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> PutAsyncNoRetrySucceededAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPutAsyncNoRetrySucceededHeaders> result = await operations.PutAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PutAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -743,7 +743,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPutAsyncNoRetrySucceededAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPutAsyncNoRetrySucceededHeaders> result = await operations.BeginPutAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPutAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -779,7 +779,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> PutAsyncRetryFailedAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPutAsyncRetryFailedHeaders> result = await operations.PutAsyncRetryFailedWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PutAsyncRetryFailedWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -815,7 +815,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPutAsyncRetryFailedAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPutAsyncRetryFailedHeaders> result = await operations.BeginPutAsyncRetryFailedWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPutAsyncRetryFailedWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -851,7 +851,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> PutAsyncNoRetrycanceledAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPutAsyncNoRetrycanceledHeaders> result = await operations.PutAsyncNoRetrycanceledWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PutAsyncNoRetrycanceledWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -887,7 +887,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPutAsyncNoRetrycanceledAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPutAsyncNoRetrycanceledHeaders> result = await operations.BeginPutAsyncNoRetrycanceledWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPutAsyncNoRetrycanceledWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -923,7 +923,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> PutAsyncNoHeaderInRetryAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPutAsyncNoHeaderInRetryHeaders> result = await operations.PutAsyncNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PutAsyncNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -959,7 +959,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPutAsyncNoHeaderInRetryAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPutAsyncNoHeaderInRetryHeaders> result = await operations.BeginPutAsyncNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPutAsyncNoHeaderInRetryWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -991,7 +991,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Sku> PutNonResourceAsync( this ILROsOperations operations, Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Sku> result = await operations.PutNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PutNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1023,7 +1023,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Sku> BeginPutNonResourceAsync( this ILROsOperations operations, Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Sku> result = await operations.BeginPutNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPutNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1055,7 +1055,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Sku> PutAsyncNonResourceAsync( this ILROsOperations operations, Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Sku> result = await operations.PutAsyncNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PutAsyncNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1087,7 +1087,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Sku> BeginPutAsyncNonResourceAsync( this ILROsOperations operations, Sku sku = default(Sku), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Sku> result = await operations.BeginPutAsyncNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPutAsyncNonResourceWithHttpMessagesAsync(sku, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1119,7 +1119,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<SubProduct> PutSubResourceAsync( this ILROsOperations operations, SubProduct product = default(SubProduct), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<SubProduct> result = await operations.PutSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PutSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1151,7 +1151,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<SubProduct> BeginPutSubResourceAsync( this ILROsOperations operations, SubProduct product = default(SubProduct), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<SubProduct> result = await operations.BeginPutSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPutSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1183,7 +1183,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<SubProduct> PutAsyncSubResourceAsync( this ILROsOperations operations, SubProduct product = default(SubProduct), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<SubProduct> result = await operations.PutAsyncSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PutAsyncSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1215,7 +1215,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<SubProduct> BeginPutAsyncSubResourceAsync( this ILROsOperations operations, SubProduct product = default(SubProduct), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<SubProduct> result = await operations.BeginPutAsyncSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPutAsyncSubResourceWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1247,7 +1247,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> DeleteProvisioning202Accepted200SucceededAsync( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsDeleteProvisioning202Accepted200SucceededHeaders> result = await operations.DeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.DeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1279,7 +1279,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginDeleteProvisioning202Accepted200SucceededAsync( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsDeleteProvisioning202Accepted200SucceededHeaders> result = await operations.BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1311,7 +1311,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> DeleteProvisioning202DeletingFailed200Async( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsDeleteProvisioning202DeletingFailed200Headers> result = await operations.DeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.DeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1343,7 +1343,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginDeleteProvisioning202DeletingFailed200Async( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsDeleteProvisioning202DeletingFailed200Headers> result = await operations.BeginDeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginDeleteProvisioning202DeletingFailed200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1375,7 +1375,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> DeleteProvisioning202Deletingcanceled200Async( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsDeleteProvisioning202Deletingcanceled200Headers> result = await operations.DeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.DeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1407,7 +1407,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginDeleteProvisioning202Deletingcanceled200Async( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsDeleteProvisioning202Deletingcanceled200Headers> result = await operations.BeginDeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginDeleteProvisioning202Deletingcanceled200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1487,7 +1487,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> Delete202Retry200Async( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsDelete202Retry200Headers> result = await operations.Delete202Retry200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Delete202Retry200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1517,7 +1517,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginDelete202Retry200Async( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsDelete202Retry200Headers> result = await operations.BeginDelete202Retry200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginDelete202Retry200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1547,7 +1547,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> Delete202NoRetry204Async( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsDelete202NoRetry204Headers> result = await operations.Delete202NoRetry204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Delete202NoRetry204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1577,7 +1577,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginDelete202NoRetry204Async( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsDelete202NoRetry204Headers> result = await operations.BeginDelete202NoRetry204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginDelete202NoRetry204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1955,7 +1955,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Sku> Post200WithPayloadAsync( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Sku> result = await operations.Post200WithPayloadWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Post200WithPayloadWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -1985,7 +1985,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Sku> BeginPost200WithPayloadAsync( this ILROsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Sku> result = await operations.BeginPost200WithPayloadWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPost200WithPayloadWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -2089,7 +2089,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> Post202NoRetry204Async( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPost202NoRetry204Headers> result = await operations.Post202NoRetry204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Post202NoRetry204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -2123,7 +2123,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPost202NoRetry204Async( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPost202NoRetry204Headers> result = await operations.BeginPost202NoRetry204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPost202NoRetry204WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -2159,7 +2159,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> PostAsyncRetrySucceededAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPostAsyncRetrySucceededHeaders> result = await operations.PostAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PostAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -2195,7 +2195,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPostAsyncRetrySucceededAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPostAsyncRetrySucceededHeaders> result = await operations.BeginPostAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPostAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -2231,7 +2231,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> PostAsyncNoRetrySucceededAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPostAsyncNoRetrySucceededHeaders> result = await operations.PostAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PostAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -2267,7 +2267,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task<Product> BeginPostAsyncNoRetrySucceededAsync( this ILROsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<Product,LROsPostAsyncNoRetrySucceededHeaders> result = await operations.BeginPostAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPostAsyncNoRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

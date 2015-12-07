@@ -40,7 +40,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             /// </param>
             public static async Task<byte[]> GetNullAsync( this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<byte[]> result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -66,7 +66,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             /// </param>
             public static async Task<byte[]> GetEmptyAsync( this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<byte[]> result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -92,7 +92,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             /// </param>
             public static async Task<byte[]> GetNonAsciiAsync( this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<byte[]> result = await operations.GetNonAsciiWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetNonAsciiWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -149,7 +149,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             /// </param>
             public static async Task<byte[]> GetInvalidAsync( this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<byte[]> result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

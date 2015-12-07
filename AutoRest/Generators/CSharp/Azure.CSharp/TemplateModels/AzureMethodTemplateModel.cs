@@ -124,6 +124,11 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                                     "AzureOperationResponse<{0}>", bodyName);
                     }
                 }
+                else if (ReturnType.Headers != null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                                    "AzureOperationHeaderResponse<{0}>", ReturnType.Headers.Name);
+                }
                 else
                 {
                     return "AzureOperationResponse";

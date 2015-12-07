@@ -40,7 +40,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             /// </param>
             public static async Task<TimeSpan?> GetNullAsync( this IDuration operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<TimeSpan?> result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -95,7 +95,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             /// </param>
             public static async Task<TimeSpan?> GetPositiveDurationAsync( this IDuration operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<TimeSpan?> result = await operations.GetPositiveDurationWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetPositiveDurationWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -121,7 +121,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             /// </param>
             public static async Task<TimeSpan?> GetInvalidAsync( this IDuration operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<TimeSpan?> result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

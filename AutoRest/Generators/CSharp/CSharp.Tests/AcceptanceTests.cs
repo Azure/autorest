@@ -1219,133 +1219,199 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 // POST param/prim/integer
                 client.Header.ParamInteger("positive", 1);
                 client.Header.ParamInteger("negative", -2);
+                
                 // POST response/prim/integer
-                var response = client.Header.ResponseIntegerWithHttpMessagesAsync("positive").Result;
-                Assert.Equal(1, int.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(),
+                var responseInteger = client.Header.ResponseIntegerWithHttpMessagesAsync("positive").Result;
+                Assert.Equal(1, int.Parse(responseInteger.Response.Headers.GetValues("value").FirstOrDefault(),
                     CultureInfo.InvariantCulture));
-                response = client.Header.ResponseIntegerWithHttpMessagesAsync("negative").Result;
-                Assert.Equal(-2, int.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(),
+                Assert.Equal(1, responseInteger.Headers.Value);
+
+                responseInteger = client.Header.ResponseIntegerWithHttpMessagesAsync("negative").Result;
+                Assert.Equal(-2, int.Parse(responseInteger.Response.Headers.GetValues("value").FirstOrDefault(),
                     CultureInfo.InvariantCulture));
+                Assert.Equal(-2, responseInteger.Headers.Value);
+
                 // POST param/prim/long
                 client.Header.ParamLong("positive", 105);
                 client.Header.ParamLong("negative", -2);
+
                 // POST response/prim/long
-                response = client.Header.ResponseLongWithHttpMessagesAsync("positive").Result;
-                Assert.Equal(105, long.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(),
+                var responseLong = client.Header.ResponseLongWithHttpMessagesAsync("positive").Result;
+                Assert.Equal(105, long.Parse(responseLong.Response.Headers.GetValues("value").FirstOrDefault(),
                     CultureInfo.InvariantCulture));
-                response = client.Header.ResponseLongWithHttpMessagesAsync("negative").Result;
-                Assert.Equal(-2, long.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(),
+                Assert.Equal(105, responseLong.Headers.Value);
+
+                responseLong = client.Header.ResponseLongWithHttpMessagesAsync("negative").Result;
+                Assert.Equal(-2, long.Parse(responseLong.Response.Headers.GetValues("value").FirstOrDefault(),
                     CultureInfo.InvariantCulture));
+                Assert.Equal(-2, responseLong.Headers.Value);
+
                 // POST param/prim/float
                 client.Header.ParamFloat("positive", 0.07);
                 client.Header.ParamFloat("negative", -3.0);
+                
                 // POST response/prim/float
-                response = client.Header.ResponseFloatWithHttpMessagesAsync("positive").Result;
-                Assert.True(Math.Abs(0.07 - float.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(),
+                var responseFloat = client.Header.ResponseFloatWithHttpMessagesAsync("positive").Result;
+                Assert.True(Math.Abs(0.07 - float.Parse(responseFloat.Response.Headers.GetValues("value").FirstOrDefault(),
                     CultureInfo.InvariantCulture)) < 0.00001);
-                response = client.Header.ResponseFloatWithHttpMessagesAsync("negative").Result;
-                Assert.True(Math.Abs(-3 - float.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(),
+                Assert.True(Math.Abs(0.07 - responseFloat.Headers.Value.Value) < 0.00001);
+
+                responseFloat = client.Header.ResponseFloatWithHttpMessagesAsync("negative").Result;
+                Assert.True(Math.Abs(-3 - float.Parse(responseFloat.Response.Headers.GetValues("value").FirstOrDefault(),
                     CultureInfo.InvariantCulture)) < 0.00001);
+                Assert.True(Math.Abs(-3 - responseFloat.Headers.Value.Value) < 0.00001);
+
                 // POST param/prim/double
                 client.Header.ParamDouble("positive", 7e120);
                 client.Header.ParamDouble("negative", -3.0);
+
                 // POST response/prim/double
-                response = client.Header.ResponseDoubleWithHttpMessagesAsync("positive").Result;
-                Assert.Equal(7e120, double.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(),
+                var responseDouble = client.Header.ResponseDoubleWithHttpMessagesAsync("positive").Result;
+                Assert.Equal(7e120, double.Parse(responseDouble.Response.Headers.GetValues("value").FirstOrDefault(),
                     CultureInfo.InvariantCulture));
-                response = client.Header.ResponseDoubleWithHttpMessagesAsync("negative").Result;
-                Assert.Equal(-3, double.Parse(response.Response.Headers.GetValues("value").FirstOrDefault(),
+                Assert.Equal(7e120, responseDouble.Headers.Value);
+
+                responseDouble = client.Header.ResponseDoubleWithHttpMessagesAsync("negative").Result;
+                Assert.Equal(-3, double.Parse(responseDouble.Response.Headers.GetValues("value").FirstOrDefault(),
                     CultureInfo.InvariantCulture));
+                Assert.Equal(-3, responseDouble.Headers.Value);
+
                 // POST param/prim/bool
                 client.Header.ParamBool("true", true);
                 client.Header.ParamBool("false", false);
+
                 // POST response/prim/bool
-                response = client.Header.ResponseBoolWithHttpMessagesAsync("true").Result;
-                Assert.Equal(true, bool.Parse(response.Response.Headers.GetValues("value").FirstOrDefault()));
-                response = client.Header.ResponseBoolWithHttpMessagesAsync("false").Result;
-                Assert.Equal(false, bool.Parse(response.Response.Headers.GetValues("value").FirstOrDefault()));
+                var responseBool = client.Header.ResponseBoolWithHttpMessagesAsync("true").Result;
+                Assert.Equal(true, bool.Parse(responseBool.Response.Headers.GetValues("value").FirstOrDefault()));
+                Assert.Equal(true, responseBool.Headers.Value);
+
+                responseBool = client.Header.ResponseBoolWithHttpMessagesAsync("false").Result;
+                Assert.Equal(false, bool.Parse(responseBool.Response.Headers.GetValues("value").FirstOrDefault()));
+                Assert.Equal(false, responseBool.Headers.Value);
+
                 // POST param/prim/string
                 client.Header.ParamString("valid", "The quick brown fox jumps over the lazy dog");
                 client.Header.ParamString("null", null);
                 client.Header.ParamString("empty", "");
+
                 // POST response/prim/string
-                response = client.Header.ResponseStringWithHttpMessagesAsync("valid").Result;
+                var responseString = client.Header.ResponseStringWithHttpMessagesAsync("valid").Result;
                 Assert.Equal("The quick brown fox jumps over the lazy dog",
-                    response.Response.Headers.GetValues("value").FirstOrDefault());
-                response = client.Header.ResponseStringWithHttpMessagesAsync("null").Result;
-                Assert.Equal("null", response.Response.Headers.GetValues("value").FirstOrDefault());
-                response = client.Header.ResponseStringWithHttpMessagesAsync("empty").Result;
-                Assert.Equal("", response.Response.Headers.GetValues("value").FirstOrDefault());
+                    responseString.Response.Headers.GetValues("value").FirstOrDefault());
+                Assert.Equal("The quick brown fox jumps over the lazy dog", responseString.Headers.Value);
+
+                responseString = client.Header.ResponseStringWithHttpMessagesAsync("null").Result;
+                Assert.Equal("null", responseString.Response.Headers.GetValues("value").FirstOrDefault());
+                Assert.Equal("null", responseString.Headers.Value);
+
+                responseString = client.Header.ResponseStringWithHttpMessagesAsync("empty").Result;
+                Assert.Equal("", responseString.Response.Headers.GetValues("value").FirstOrDefault());
+                Assert.Equal("", responseString.Headers.Value);
+
                 // POST param/prim/enum
                 client.Header.ParamEnum("valid", GreyscaleColors.GREY);
                 client.Header.ParamEnum("null", null);
+
                 // POST response/prim/enum
-                response = client.Header.ResponseEnumWithHttpMessagesAsync("valid").Result;
-                Assert.Equal("GREY", response.Response.Headers.GetValues("value").FirstOrDefault());
-                response = client.Header.ResponseEnumWithHttpMessagesAsync("null").Result;
-                Assert.Equal("null", response.Response.Headers.GetValues("value").FirstOrDefault());
+                var responseEnum = client.Header.ResponseEnumWithHttpMessagesAsync("valid").Result;
+                Assert.Equal("GREY", responseEnum.Response.Headers.GetValues("value").FirstOrDefault());
+                Assert.Equal(GreyscaleColors.GREY, responseEnum.Headers.Value);
+
+                responseEnum = client.Header.ResponseEnumWithHttpMessagesAsync("null").Result;
+                
+                Assert.Equal("", responseEnum.Response.Headers.GetValues("value").FirstOrDefault());
+                Assert.Equal(null, responseEnum.Headers.Value);
+
                 // POST param/prim/date
                 client.Header.ParamDate("valid", new DateTime(2010, 1, 1, 0, 0, 0, DateTimeKind.Utc));
                 client.Header.ParamDate("min", DateTime.MinValue);
+
                 // POST response/prim/date
-                response = client.Header.ResponseDateWithHttpMessagesAsync("valid").Result;
+                var responseDate = client.Header.ResponseDateWithHttpMessagesAsync("valid").Result;
                 Assert.Equal(new DateTimeOffset(new DateTime(2010, 1, 1, 0, 0, 0, DateTimeKind.Local)),
                     JsonConvert.DeserializeObject<DateTimeOffset>(
-                        "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
-                response = client.Header.ResponseStringWithHttpMessagesAsync("min").Result;
+                        "\"" + responseDate.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                Assert.Equal(new DateTime(2010, 1, 1, 0, 0, 0, DateTimeKind.Local), responseDate.Headers.Value);
+                
+                responseDate = client.Header.ResponseDateWithHttpMessagesAsync("min").Result;
                 Assert.Equal(DateTime.MinValue,
                     JsonConvert.DeserializeObject<DateTime>(
-                        "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                        "\"" + responseDate.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                Assert.Equal(DateTime.MinValue, responseDate.Headers.Value);
+
                 // POST param/prim/datetime
                 client.Header.ParamDatetime("valid", new DateTime(2010, 1, 1, 12, 34, 56, DateTimeKind.Utc));
                 client.Header.ParamDatetime("min", DateTime.MinValue);
+
                 // POST response/prim/datetime
-                response = client.Header.ResponseDatetimeWithHttpMessagesAsync("valid").Result;
+                var responseDateTime = client.Header.ResponseDatetimeWithHttpMessagesAsync("valid").Result;
                 Assert.Equal(new DateTimeOffset(new DateTime(2010, 1, 1, 12, 34, 56, DateTimeKind.Utc)),
                     JsonConvert.DeserializeObject<DateTimeOffset>(
-                        "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
-                response = client.Header.ResponseDatetimeWithHttpMessagesAsync("min").Result;
+                        "\"" + responseDateTime.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                Assert.Equal(new DateTime(2010, 1, 1, 12, 34, 56, DateTimeKind.Utc), responseDateTime.Headers.Value);
+
+                responseDateTime = client.Header.ResponseDatetimeWithHttpMessagesAsync("min").Result;
                 Assert.Equal(DateTimeOffset.MinValue,
                     JsonConvert.DeserializeObject<DateTimeOffset>(
-                        "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                        "\"" + responseDateTime.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                Assert.Equal(DateTime.MinValue, responseDateTime.Headers.Value);
+
                 // POST param/prim/datetimerfc1123
                 client.Header.ParamDatetimeRfc1123("valid", new DateTime(2010, 1, 1, 12, 34, 56, DateTimeKind.Utc));
                 client.Header.ParamDatetimeRfc1123("min", DateTime.MinValue);
+
                 //POST response/prim/datetimerfc1123
-                response = client.Header.ResponseDatetimeRfc1123WithHttpMessagesAsync("valid").Result;
+                var responseDateTimeRfc1123 = client.Header.ResponseDatetimeRfc1123WithHttpMessagesAsync("valid").Result;
                 Assert.Equal(new DateTimeOffset(new DateTime(2010, 1, 1, 12, 34, 56, DateTimeKind.Utc)),
                     JsonConvert.DeserializeObject<DateTimeOffset>(
-                        "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
-                response = client.Header.ResponseDatetimeRfc1123WithHttpMessagesAsync("min").Result;
+                        "\"" + responseDateTimeRfc1123.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                Assert.Equal(new DateTime(2010, 1, 1, 12, 34, 56, DateTimeKind.Utc),
+                    responseDateTimeRfc1123.Headers.Value);
+
+                responseDateTimeRfc1123 = client.Header.ResponseDatetimeRfc1123WithHttpMessagesAsync("min").Result;
                 Assert.Equal(DateTimeOffset.MinValue,
                     JsonConvert.DeserializeObject<DateTimeOffset>(
-                        "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                        "\"" + responseDateTimeRfc1123.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                Assert.Equal(DateTime.MinValue,
+                    responseDateTimeRfc1123.Headers.Value);
+
                 // POST param/prim/duration
                 client.Header.ParamDuration("valid", new TimeSpan(123, 22, 14, 12, 11));
+
                 // POST response/prim/duration
-                response = client.Header.ResponseDurationWithHttpMessagesAsync("valid").Result;
+                var responseDuration = client.Header.ResponseDurationWithHttpMessagesAsync("valid").Result;
                 Assert.Equal(new TimeSpan(123, 22, 14, 12, 11),
                     JsonConvert.DeserializeObject<TimeSpan?>(
-                    "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\"", 
+                    "\"" + responseDuration.Response.Headers.GetValues("value").FirstOrDefault() + "\"", 
                     new Iso8601TimeSpanConverter()));
+                Assert.Equal(new TimeSpan(123, 22, 14, 12, 11),
+                    responseDuration.Headers.Value);
+
                 // POST param/prim/string
                 client.Header.ParamByte("valid", Encoding.UTF8.GetBytes("啊齄丂狛狜隣郎隣兀﨩"));
-                // POST response/prim/string
-                response = client.Header.ResponseByteWithHttpMessagesAsync("valid").Result;
+
+                // POST response/prim/byte
+                var responseByte = client.Header.ResponseByteWithHttpMessagesAsync("valid").Result;
                 Assert.Equal(Encoding.UTF8.GetBytes("啊齄丂狛狜隣郎隣兀﨩"),
                     JsonConvert.DeserializeObject<Byte[]>(
-                        "\"" + response.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                        "\"" + responseByte.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
+                Assert.Equal(Encoding.UTF8.GetBytes("啊齄丂狛狜隣郎隣兀﨩"),
+                    responseByte.Headers.Value);
 
                 // POST param/existingkey
                 client.Header.ParamExistingKey("overwrite");
+
                 // POST response/existingkey
-                response = client.Header.ResponseExistingKeyWithHttpMessagesAsync().Result;
-                Assert.Equal("overwrite", response.Response.Headers.GetValues("User-Agent").FirstOrDefault());
+                var responseExistingKey = client.Header.ResponseExistingKeyWithHttpMessagesAsync().Result;
+                Assert.Equal("overwrite", responseExistingKey.Response.Headers.GetValues("User-Agent").FirstOrDefault());
+                Assert.Equal("overwrite", responseExistingKey.Headers.UserAgent);
+
                 // POST param/existingkey
                 Assert.Throws<InvalidOperationException>(() => client.Header.ParamProtectedKey("text/html"));
-                // POST response/existingkey
-                response = client.Header.ResponseProtectedKeyWithHttpMessagesAsync().Result;
-                Assert.False(response.Response.Headers.Any(header => header.Key == "Content-Type"));
+
+                // POST response/protectedkey
+                var responseProtectedKey = client.Header.ResponseProtectedKeyWithHttpMessagesAsync().Result;
+                Assert.False(responseProtectedKey.Response.Headers.Any(header => header.Key == "Content-Type"));
 
                 var customHeader = new Dictionary<string, List<string>>
                 {
@@ -1734,6 +1800,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         }
 
         private static void EnsureStatusCode<TBody, THeader>(HttpStatusCode expectedStatusCode, Func<Task<HttpOperationResponse<TBody, THeader>>> operation)
+        {
+            var response = operation().GetAwaiter().GetResult();
+            Assert.Equal(response.Response.StatusCode, expectedStatusCode);
+        }
+
+        private static void EnsureStatusCode<THeader>(HttpStatusCode expectedStatusCode, Func<Task<HttpOperationHeaderResponse<THeader>>> operation)
         {
             var response = operation().GetAwaiter().GetResult();
             Assert.Equal(response.Response.StatusCode, expectedStatusCode);
