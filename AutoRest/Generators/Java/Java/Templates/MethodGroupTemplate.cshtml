@@ -2,36 +2,38 @@
 @using Microsoft.Rest.Generator.Java
 @using Microsoft.Rest.Generator.Java.Templates
 @using Microsoft.Rest.Generator.Utilities
+@using Microsoft.Rest.Generator.Java.TemplateModels
 @using System.Linq;
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.MethodGroupTemplateModel>
 /**
-@Header(" * ")
+@Header(" * ").TrimMultilineHeader()
  */
 @EmptyLine
 
 package @(Settings.Namespace.ToLower());
 @EmptyLine
-import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
-import com.squareup.okhttp.ResponseBody;
-import retrofit.Retrofit;
-import retrofit.Call;
-import retrofit.Response;
 @foreach (var importClass in Model.ImplImports)
 {
 @:import @importClass;
 }
 @EmptyLine
 
+/**
+ * An instance of this class provides access to all the operations defined
+ * in @(Model.MethodGroupType).
+ */
 public class @(Model.MethodGroupType)Impl implements @Model.MethodGroupType {
+    /** The Retrofit service to perform REST calls. */
     private @Model.MethodGroupServiceType service;
-    @Model.Name client;
+    /** The service client containing this operation class. */
+    private @Model.Name client;
     @EmptyLine
+    /**
+     * Initializes an instance of @(Model.MethodGroupType).
+     *
+     * @@param retrofit the Retrofit instance built from a Retrofit Builder.
+     * @@param client the instance of the service client containing this operation class.
+     */
     public @(Model.MethodGroupType)Impl(Retrofit retrofit, @Model.Name client) {
         this.service = retrofit.create(@(Model.MethodGroupServiceType).class);
         this.client = client;

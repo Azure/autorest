@@ -1,6 +1,13 @@
 language: csharp
+sudo: false
 mono:
-  - alpha
+  - beta
+addons:
+  apt:
+    sources:
+    - debian-sid
+    packages:
+    - libunwind8
 install:
   - curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | sh && source ~/.dnx/dnvm/dnvm.sh && dnvm upgrade
   - npm install -g npm@'>=1.4.3'
@@ -8,15 +15,16 @@ install:
   - rvm use 2.2.1 --install --binary --fuzzy
   - gem install bundler
   - bundle install
-  - wget https://services.gradle.org/distributions/gradle-2.6-bin.zip
-  - unzip gradle-2.6-bin.zip
-  - PATH=$PATH:$(pwd)/gradle-2.6/bin
 script:
-  - dnvm install 1.0.0-beta7
-  - dnvm use 1.0.0-beta7 -persistent
+  - dnvm install 1.0.0-rc1-final -r mono
+  - dnvm install 1.0.0-rc1-final -r coreclr
+  - dnvm use 1.0.0-rc1-final -r coreclr -persistent
   - gulp
-after_failure:
+after_script:
   - echo "========== Server log: ============"
+  - pwd
+  - ls -al
+  - ls -al TestResults
   - cat TestResults/*.log
 notifications:
   slack:

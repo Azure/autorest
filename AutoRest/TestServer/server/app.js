@@ -32,6 +32,7 @@ var paging = require('./routes/paging');
 var resourceFlatten = require('./routes/resource-flatten');
 var azureUrl = require('./routes/azureUrl');
 var azureSpecial = require('./routes/azureSpecials');
+var parameterGrouping = require('./routes/azureParameterGrouping.js');
 var util = require('util');
 
 var app = express();
@@ -40,7 +41,7 @@ var app = express();
 var now = new Date();
 var logFileName = 'AccTestServer-' + now.getHours() +
     now.getMinutes() + now.getSeconds() + '.log';
-var testResultDir = '../../../../TestResults';
+var testResultDir = path.join(__dirname, '../../../TestResults');
 if (!fs.existsSync(testResultDir)) {
   fs.mkdirSync(testResultDir);
 }
@@ -88,6 +89,8 @@ var coverage = {
   "getArrayDateTimeWithInvalidChars": 0,
   "getArrayDateTimeRfc1123Valid": 0,
   "putArrayDateTimeRfc1123Valid": 0,
+  "getArrayDurationValid": 0,
+  "putArrayDurationValid": 0,
   "getArrayByteValid": 0,
   "putArrayByteValid": 0,
   "getArrayByteWithNull": 0,
@@ -203,6 +206,7 @@ var coverage = {
   "putComplexPrimitiveDate": 0,
   "putComplexPrimitiveDateTime": 0,
   "putComplexPrimitiveDateTimeRfc1123": 0,
+  "putComplexPrimitiveDuration": 0,
   "putComplexPrimitiveByte": 0,
   "getComplexPrimitiveInteger": 0,
   "getComplexPrimitiveLong": 0,
@@ -213,6 +217,7 @@ var coverage = {
   "getComplexPrimitiveDate": 0,
   "getComplexPrimitiveDateTime": 0,
   "getComplexPrimitiveDateTimeRfc1123": 0,
+  "getComplexPrimitiveDuration": 0,
   "getComplexPrimitiveByte": 0,
   "putComplexArrayValid": 0,
   "putComplexArrayEmpty": 0,
@@ -317,6 +322,7 @@ var coverage = {
   "getDictionaryDateTimeWithNull": 0,
   "getDictionaryDateTimeWithInvalidChars": 0,
   "getDictionaryDateTimeRfc1123Valid": 0,
+  "getDictionaryDurationValid": 0,
   "getDictionaryByteValid": 0,
   "getDictionaryByteWithNull": 0,
   "putDictionaryBooleanValid": 0,
@@ -328,6 +334,7 @@ var coverage = {
   "putDictionaryDateValid": 0,
   "putDictionaryDateTimeValid": 0,
   "putDictionaryDateTimeRfc1123Valid": 0,
+  "putDictionaryDurationValid": 0,
   "putDictionaryByteValid": 0,
   "getDictionaryComplexNull": 0,
   "getDictionaryComplexEmpty": 0,
@@ -440,6 +447,7 @@ app.use('/azure/resource-flatten', new resourceFlatten(azurecoverage).router);
 app.use('/azurespecials', new azureSpecial(azurecoverage).router);
 app.use('/report', new report(coverage, azurecoverage).router);
 app.use('/subscriptions', new azureUrl(azurecoverage).router);
+app.use('/parameterGrouping', new parameterGrouping(azurecoverage).router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

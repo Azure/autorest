@@ -1175,6 +1175,67 @@
         }
       }
     },
+    "/dictionary/prim/duration/valid": {
+      "get": {
+        "operationId": "dictionary_getDurationValid",
+        "description": "Get duration dictionary value {\"0\": \"P123DT22H14M12.011S\", \"1\": \"P5DT1H0M0S\"}",
+        "tags": [
+          "Dictionary operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The dictionary value {\"0\": \"P123DT22H14M12.011S\", \"1\": \"P5DT1H0M0S\"}",
+            "schema": {
+              "description": "The dictionary value {\"0\": \"P123DT22H14M12.011S\", \"1\": \"P5DT1H0M0S\"}",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string",
+                "format": "duration"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "dictionary_putDurationValid",
+        "description": "Set dictionary value  {\"0\": \"P123DT22H14M12.011S\", \"1\": \"P5DT1H0M0S\"}",
+        "parameters": [
+          {
+            "name": "arrayBody",
+            "in": "body",
+            "schema": {
+              "description": "The dictionary value {\"0\": \"P123DT22H14M12.011S\", \"1\": \"P5DT1H0M0S\"}",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string",
+                "format": "duration"
+              }
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "Dictionary operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/dictionary/prim/byte/valid": {
       "get": {
         "operationId": "dictionary_getByteValid",

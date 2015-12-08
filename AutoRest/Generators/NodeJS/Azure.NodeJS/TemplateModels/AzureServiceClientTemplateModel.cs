@@ -17,10 +17,14 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
-            ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureCodeGenerator.ExternalExtension));
-            ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureCodeGenerator.AzureResourceExtension));
+            // Removing all models that contain the extension "x-ms-external", as they will be 
+            // generated in nodejs client runtime for azure - "ms-rest-azure".
+            ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension));
+            ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.ExternalExtension));
+            PageTemplateModels = new List<PageTemplateModel>();
         }
 
+        public IList<PageTemplateModel> PageTemplateModels { get; set; }
         public override IEnumerable<MethodGroupTemplateModel> MethodGroupModels
         {
             get

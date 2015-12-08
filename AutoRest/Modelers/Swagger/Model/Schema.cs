@@ -20,7 +20,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// property serviceTypeName that is used to differentiate between other schemas 
         /// that inherit this schema. The property serviceTypeName used MUST be defined 
         /// at this schema and it MUST be in the required property list. When used, 
-        /// the value MUST be the serviceTypeName of this schema or any schema that inherits it.
+        /// the value MUST be the serviceTypeName of this schema or any schema that inherits it,
+        /// or it can be overridden with the x-ms-discriminator-value extension.
         /// </summary>
         public string Discriminator { get; set; }
 

@@ -9,7 +9,6 @@ package com.microsoft.rest;
 
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.Protocol;
-import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,7 +18,7 @@ import java.io.IOException;
 public class UserAgentTests {
     @Test
     public void defaultUserAgentTests() throws Exception {
-        ServiceClient serviceClient = new ServiceClient() {};
+        ServiceClient serviceClient = new ServiceClient() { };
         serviceClient.getClientInterceptors().add(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -36,7 +35,7 @@ public class UserAgentTests {
 
     @Test
     public void customUserAgentTests() throws Exception {
-        ServiceClient serviceClient = new ServiceClient() {};
+        ServiceClient serviceClient = new ServiceClient() { };
         serviceClient.getClientInterceptors().add(new UserAgentInterceptor("Awesome"));
         serviceClient.getClientInterceptors().add(new Interceptor() {
             @Override

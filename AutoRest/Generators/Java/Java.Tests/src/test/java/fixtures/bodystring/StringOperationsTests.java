@@ -3,18 +3,15 @@ package fixtures.bodystring;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodyinteger.AutoRestIntegerTestService;
-import fixtures.bodyinteger.AutoRestIntegerTestServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 public class StringOperationsTests {
-    static AutoRestSwaggerBATService client;
+    private static AutoRestSwaggerBATService client;
     private CountDownLatch lock = new CountDownLatch(1);
 
     @BeforeClass
@@ -24,7 +21,7 @@ public class StringOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getStringOperations().getNull());
+        Assert.assertNull(client.getStringOperations().getNull().getBody());
     }
 
     @Test
@@ -32,14 +29,14 @@ public class StringOperationsTests {
         try {
             client.getStringOperations().putNull(null);
         } catch (Exception ex) {
-            Assert.assertEquals(ServiceException.class, ex.getClass());
-            Assert.assertTrue(ex.getCause().getMessage().contains("Body parameter value must not be null"));
+            Assert.assertEquals(IllegalArgumentException.class, ex.getClass());
+            Assert.assertTrue(ex.getMessage().contains("Body parameter value must not be null"));
         }
     }
 
     @Test
     public void getEmpty() throws Exception {
-        String result = client.getStringOperations().getEmpty();
+        String result = client.getStringOperations().getEmpty().getBody();
         Assert.assertEquals("", result);
     }
 
@@ -47,7 +44,7 @@ public class StringOperationsTests {
     public void putEmpty() throws Exception {
         client.getStringOperations().putEmptyAsync("", new ServiceCallback<Void>() {
             @Override
-            public void failure(ServiceException exception) {
+            public void failure(Throwable t) {
             }
 
             @Override
@@ -61,7 +58,7 @@ public class StringOperationsTests {
 
     @Test
     public void getMbcs() throws Exception {
-        String result = client.getStringOperations().getMbcs();
+        String result = client.getStringOperations().getMbcs().getBody();
         String expected = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑ\uE7C7ɡ〇〾⿻⺁\uE843䜣\uE864€";
         Assert.assertEquals(expected, result);
     }
@@ -74,7 +71,7 @@ public class StringOperationsTests {
 
     @Test
     public void getWhitespace() throws Exception {
-        String result = client.getStringOperations().getWhitespace();
+        String result = client.getStringOperations().getWhitespace().getBody();
         Assert.assertEquals("    Now is the time for all good men to come to the aid of their country    ", result);
     }
 

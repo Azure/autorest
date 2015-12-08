@@ -8,10 +8,11 @@
 package com.microsoft.rest;
 
 import com.microsoft.rest.retry.RetryHandler;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
-import retrofit.JacksonConverterFactory;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import retrofit.Retrofit;
 
 import java.net.CookieManager;
@@ -24,8 +25,16 @@ import java.util.concurrent.Executors;
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
  */
 public abstract class ServiceClient {
-    protected OkHttpClient client;
-    protected Retrofit.Builder retrofitBuilder;
+    /**
+     * The HTTP client object.
+     */
+    protected final OkHttpClient client;
+
+    /**
+     * The builder for building Retrofit services.
+     */
+    protected final Retrofit.Builder retrofitBuilder;
+
     /**
      * Initializes a new instance of the ServiceClient class.
      */
@@ -37,8 +46,8 @@ public abstract class ServiceClient {
         this.client.setCookieHandler(cookieManager);
 
         Executor executor = Executors.newCachedThreadPool();
-        this.retrofitBuilder = this.retrofitBuilder
-                .addConverterFactory(JacksonConverterFactory.create(JacksonHelper.getObjectMapper()))
+        this.retrofitBuilder
+                .addConverterFactory(new JacksonUtils().getConverterFactory())
                 .callbackExecutor(executor);
     }
 
@@ -71,5 +80,16 @@ public abstract class ServiceClient {
      */
     public List<Interceptor> getClientInterceptors() {
         return this.client.interceptors();
+    }
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum
+     */
+    public void setLogLevel(Level logLevel) {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(logLevel);
+        this.getClientInterceptors().add(loggingInterceptor);
     }
 }

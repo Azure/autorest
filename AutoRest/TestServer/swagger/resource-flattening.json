@@ -153,12 +153,12 @@
             "schema": {
               "$ref": "#/definitions/ResourceCollection"
             }
-          }
-        },
-        "default": {
-          "description": "Unexpected error",
-          "schema": {
-            "$ref": "#/definitions/Error"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }

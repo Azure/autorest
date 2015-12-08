@@ -43,82 +43,23 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IEnumerable<string> ImplImports
+        public virtual IEnumerable<string> ImplImports
         {
             get
             {
-                var parameters = this.MethodTemplateModels
-                    .SelectMany(m => m.ParameterTemplateModels);
-
-                var types = parameters.Select(p => p.Type)
-                    .Concat(this.MethodTemplateModels.SelectMany(mtm => mtm.Responses.Select(res => res.Value)))
-                    .Concat(this.MethodTemplateModels.Select(mtm => mtm.DefaultResponse))
-                    .Distinct()
-                    .ToList();
-
-                HashSet<string> classes = types.TypeImports(this.Namespace);
-
-                if (this.MethodTemplateModels.Any(m => !m.ParametersToValidate.IsNullOrEmpty()))
-                {
-                    classes.Add("com.microsoft.rest.Validator");
-                }
-
-                IEnumerable<ParameterTemplateModel> nonBodyParams = parameters.Where(p => p.Location != ParameterLocation.Body);
-
-                foreach (var param in nonBodyParams)
-                {
-                    if (param.Type.Name == "LocalDate" ||
-                        param.Type.Name == "DateTime" ||
-                        param.Type is CompositeType ||
-                        param.Type is SequenceType ||
-                        param.Type is DictionaryType)
-                    {
-                        classes.Add("com.microsoft.rest.serializer.JacksonHelper");
-                    }
-                    if (param.Type is SequenceType)
-                    {
-                        classes.Add("com.microsoft.rest.serializer.CollectionFormat");
-                    }
-                    if (param.Type == PrimaryType.ByteArray)
-                    {
-                        classes.Add("org.apache.commons.codec.binary.Base64");
-                    }
-                }
-                
-                return classes.AsEnumerable();
+                return this.MethodTemplateModels
+                    .SelectMany(m => m.ImplImports)
+                    .OrderBy(i => i).Distinct();
             }
         }
 
-        public IEnumerable<string> InterfaceImports
+        public virtual IEnumerable<string> InterfaceImports
         {
             get
             {
-                IList<IType> types = this.MethodTemplateModels
-                    .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
-                    .Concat(this.MethodTemplateModels.Select(mtm => mtm.ReturnType))
-                    .Distinct()
-                    .ToList();
-
-                HashSet<string> classes = types.TypeImports(this.Namespace);
-
-                foreach (var method in this.MethodTemplateModels)
-                {
-                    if (method.HttpMethod == HttpMethod.Delete)
-                    {
-                        classes.Add("retrofit.http.HTTP");
-                    }
-                    else
-                    {
-                        classes.Add("retrofit.http." + method.HttpMethod.ToString().ToUpper(CultureInfo.InvariantCulture));
-                    }
-                    foreach (var param in method.Parameters)
-                    {
-                        if (param.Location != ParameterLocation.None &&
-                            param.Location != ParameterLocation.FormData)
-                            classes.Add("retrofit.http." + param.Location.ToString());
-                    }
-                }
-                return classes.AsEnumerable();
+                return this.MethodTemplateModels
+                    .SelectMany(m => m.InterfaceImports)
+                    .OrderBy(i => i).Distinct();
             }
         }
     }

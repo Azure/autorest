@@ -145,6 +145,13 @@ var array = function(coverage) {
             } else {
                 res.status(400).send('Request scenario for date-time-rfc1123 primitive type must contain valid');
             }
+        } else if (req.params.type == 'duration') {
+            if (req.params.scenario === 'valid') {
+                coverage['getArrayDurationValid']++;
+                res.status(200).end('[\"P123DT22H14M12.011S\", \"P5DT1H0M0S\"]');
+            } else {
+                res.status(400).send('Request scenario for duration primitive type must contain valid');
+            }
         } else if (req.params.type == 'byte') {
             if (req.params.scenario === 'valid') {
                 var bytes1 = new Buffer([255, 255, 255, 250]);
@@ -267,6 +274,17 @@ var array = function(coverage) {
             } else {
                 res.status(400).send('Request scenario for date-time-rfc1123 primitive type must contain valid');
             }
+        } else if (req.params.type == 'duration') {
+            if (req.params.scenario === 'valid') {
+                if (_.isEqual(req.body, ['P123DT22H14M12.011S', 'P5DT1H']) || _.isEqual(req.body, ['P123DT22H14M12.010999999998603S', 'P5DT1H'])) {
+                    coverage['putArrayDurationValid']++;
+                    res.status(200).end();
+                } else {
+                    utils.send400(res, next, "Did not like duration array req '" + util.inspect(req.body) + "'");
+                }
+            } else {
+                res.status(400).send('Request scenario for duration primitive type must contain valid');
+            }
         } else if (req.params.type == 'byte') {
             if (req.params.scenario === 'valid') {
                 var bytes1 = new Buffer([255, 255, 255, 250]);
@@ -310,7 +328,7 @@ var array = function(coverage) {
 
     router.put('/complex/:scenario', function(req, res, next) {
         if (req.params.scenario === 'valid') {
-            if (util.inspect(req.body) === util.inspect([{
+            if (_.isEqual(req.body, [{
                     'integer': 1,
                     'string': '2'
                 }, {
@@ -353,7 +371,7 @@ var array = function(coverage) {
 
     router.put('/array/:scenario', function(req, res, next) {
         if (req.params.scenario === 'valid') {
-            if (util.inspect(req.body) === util.inspect([
+            if (_.isEqual(req.body, [
                     ['1', '2', '3'],
                     ['4', '5', '6'],
                     ['7', '8', '9']
@@ -391,7 +409,7 @@ var array = function(coverage) {
 
     router.put('/dictionary/:scenario', function(req, res, next) {
         if (req.params.scenario === 'valid') {
-            if (util.inspect(req.body) === util.inspect([{
+            if (_.isEqual(req.body, [{
                     '1': 'one',
                     '2': 'two',
                     '3': 'three'

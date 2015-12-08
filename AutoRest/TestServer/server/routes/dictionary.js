@@ -153,7 +153,14 @@ var dictionary = function(coverage) {
                 res.status(200).end('{"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}');
             } else {
                 res.status(400).send('Request scenario for date-time-rfc1123 primitive type must contain valid');
-            }        
+            }
+        } else if (req.params.type == 'duration') {
+            if (req.params.scenario === 'valid') {
+                coverage['getDictionaryDurationValid']++;
+                res.status(200).end('{"0": "P123DT22H14M12.011S", "1": "P5DT1H"}');
+            } else {
+                res.status(400).send('Request scenario for duration primitive type must contain valid');
+            }            
         } else if (req.params.type == 'byte') {
             if (req.params.scenario === 'valid') {
                 var bytes1 = new Buffer([255, 255, 255, 250]);
@@ -177,7 +184,7 @@ var dictionary = function(coverage) {
     router.put('/prim/:type/:scenario', function(req, res, next) {
 	if (req.params.type == 'boolean') {
             if (req.params.scenario === 'tfft') {
-		    if (util.inspect(req.body) !== util.inspect({"0": true, "1": false, "2": false, "3": true})) {
+		    if (!_.isEqual(req.body, {"0": true, "1": false, "2": false, "3": true})) {
 			utils.send400(res, next, "Did not like empty req '" + util.inspect(req.body) + "'");
 		    } else {
 			coverage['putDictionaryBooleanValid']++;
@@ -188,7 +195,7 @@ var dictionary = function(coverage) {
 	    }
 	} else if (req.params.type == 'integer') {
             if (req.params.scenario === '1.-1.3.300') {
-		    if (util.inspect(req.body) !== util.inspect({ "0": 1,  "1": -1,  "2": 3,  "3": 300})) {
+		    if (!_.isEqual(req.body, { "0": 1,  "1": -1,  "2": 3,  "3": 300})) {
 			utils.send400(res, next, "Did not like integer dictionary req '" + util.inspect(req.body) + "'");
 		    } else {
 			coverage['putDictionaryIntegerValid']++;
@@ -199,7 +206,7 @@ var dictionary = function(coverage) {
 	    }
 	} else if (req.params.type == 'long') {
             if (req.params.scenario === '1.-1.3.300') {
-		    if (util.inspect(req.body) !== util.inspect({"0": 1, "1": -1, "2": 3, "3": 300})) {
+		    if (!_.isEqual(req.body, {"0": 1, "1": -1, "2": 3, "3": 300})) {
 			utils.send400(res, next, "Did not like long dictionary req '" + util.inspect(req.body) + "'");
 		    } else {
 			coverage['putDictionaryLongValid']++;
@@ -210,7 +217,7 @@ var dictionary = function(coverage) {
 	    }
 	} else if (req.params.type == 'float') {
             if (req.params.scenario === '0--0.01-1.2e20') {
-		    if (util.inspect(req.body) !== util.inspect({"0": 0, "1": -0.01, "2": -1.2e20})) {
+		    if (!_.isEqual(req.body, {"0": 0, "1": -0.01, "2": -1.2e20})) {
 			utils.send400(res, next, "Did not like float dictionary req '" + util.inspect(req.body) + "'");
 		    } else {
 			coverage['putDictionaryFloatValid']++;
@@ -221,7 +228,7 @@ var dictionary = function(coverage) {
 	    }
 	} else if (req.params.type == 'double') {
             if (req.params.scenario === '0--0.01-1.2e20') {
-		    if (util.inspect(req.body) !== util.inspect({"0": 0, "1": -0.01, "2": -1.2e20})) {
+		    if (!_.isEqual(req.body, {"0": 0, "1": -0.01, "2": -1.2e20})) {
 			utils.send400(res, next, "Did not like double dictionary req '" + util.inspect(req.body) + "'");
 		    } else {
 			coverage['putDictionaryDoubleValid']++;
@@ -232,7 +239,7 @@ var dictionary = function(coverage) {
 	    }
 	} else if (req.params.type == 'string') {
             if (req.params.scenario === 'foo1.foo2.foo3') {
-		    if (util.inspect(req.body) !== util.inspect({"0": 'foo1', "1": 'foo2', "2": 'foo3'})) {
+		    if (!_.isEqual(req.body, {"0": 'foo1', "1": 'foo2', "2": 'foo3'})) {
 			utils.send400(res, next, "Did not like string dictionary req '" + util.inspect(req.body) + "'");
 		    } else {
 			coverage['putDictionaryStringValid']++;
@@ -243,7 +250,7 @@ var dictionary = function(coverage) {
 	    }
 	} else if (req.params.type == 'date') {
             if (req.params.scenario === 'valid') {
-		    if (util.inspect(req.body) !== util.inspect({"0": '2000-12-01', "1": '1980-01-02', "2": '1492-10-12'})) {
+		    if (!_.isEqual(req.body, {"0": '2000-12-01', "1": '1980-01-02', "2": '1492-10-12'})) {
 			utils.send400(res, next, "Did not like date dictionary req '" + util.inspect(req.body) + "'");
 		    } else {
 			coverage['putDictionaryDateValid']++;
@@ -275,12 +282,23 @@ var dictionary = function(coverage) {
         } else {
             res.status(400).send('Request scenario for date-time-rfc1123 primitive type must contain valid');
         }
+    } else if (req.params.type == 'duration') {
+        if (req.params.scenario === 'valid') {
+            if (_.isEqual(req.body, {'0': 'P123DT22H14M12.011S', '1': 'P5DT1H'}) || _.isEqual(req.body, {'0': 'P123DT22H14M12.010999999998603S', '1': 'P5DT1H'})) {
+                coverage['putDictionaryDurationValid']++;
+                res.status(200).end();
+            } else {
+              utils.send400(res, next, "Did not like duration dictionary req '" + util.inspect(req.body) + "'");
+            }
+        } else {
+            res.status(400).send('Request scenario for duration primitive type must contain valid');
+        }
 	} else if (req.params.type == 'byte') {
             if (req.params.scenario === 'valid') {
 		var bytes1 = new Buffer([255, 255, 255, 250]);
 		    var bytes2 = new Buffer([1, 2, 3]);
 		    var bytes3 = new Buffer([37, 41 , 67]);
-		    if (util.inspect(req.body) !== util.inspect({"0": bytes1.toString('base64') , "1": bytes2.toString('base64') , "2": bytes3.toString('base64') })) {
+		    if (!_.isEqual(req.body, {"0": bytes1.toString('base64') , "1": bytes2.toString('base64') , "2": bytes3.toString('base64') })) {
 			utils.send400(res, next, "Did not like byte[] dictionary req '" + util.inspect(req.body) + "'");
 		    } else {
 			coverage['putDictionaryByteValid']++;
@@ -317,7 +335,7 @@ var dictionary = function(coverage) {
 
     router.put('/complex/:scenario', function(req, res, next) {
 	if (req.params.scenario === 'valid') {
-		if (util.inspect(req.body) === util.inspect({"0": {'integer': 1, 'string': '2'}, "1": {'integer': 3, 'string': '4'}, "2": {'integer': 5, 'string': '6'}})) {
+		if (_.isEqual(req.body, {"0": {'integer': 1, 'string': '2'}, "1": {'integer': 3, 'string': '4'}, "2": {'integer': 5, 'string': '6'}})) {
 			coverage['putDictionaryComplexValid']++;
                 res.status(200).end();
 		} else {
@@ -351,7 +369,7 @@ var dictionary = function(coverage) {
 
     router.put('/array/:scenario', function(req, res, next) {
 	if (req.params.scenario === 'valid') {
-		if (util.inspect(req.body) === util.inspect({"0": ['1', '2', '3'], "1": ['4', '5', '6'], "2": ['7', '8', '9']})) {
+		if (_.isEqual(req.body, {"0": ['1', '2', '3'], "1": ['4', '5', '6'], "2": ['7', '8', '9']})) {
 			coverage['putDictionaryArrayValid']++;
                 res.status(200).end();
 		} else {
@@ -385,7 +403,7 @@ var dictionary = function(coverage) {
 
     router.put('/dictionary/:scenario', function(req, res, next) {
 	if (req.params.scenario === 'valid') {
-		if (util.inspect(req.body) === util.inspect({"0": {'1': 'one', '2': 'two', '3': 'three'}, "1": {'4': 'four', '5': 'five', '6': 'six'}, "2": {'7': 'seven', '8': 'eight', '9': 'nine'}})) {
+		if (_.isEqual(req.body, {"0": {'1': 'one', '2': 'two', '3': 'three'}, "1": {'4': 'four', '5': 'five', '6': 'six'}, "2": {'7': 'seven', '8': 'eight', '9': 'nine'}})) {
 			coverage['putDictionaryDictionaryValid']++;
                 res.status(200).end();
 		} else {

@@ -45,52 +45,54 @@ var complex = function(coverage) {
     /**
      * Put and get for primitive
      */
-    var intBody = '{"field1":-1,"field2":2}';
-    var longBody = '{"field1":1099511627775,"field2":-999511627788}';
-    var floatBody = '{"field1":1.05,"field2":-0.003}';
-    var doubleBody = '{"field1":3e-100,"field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose":-0.000000000000000000000000000000000000000000000000000000005}';
-    var doubleBodyInbound = '{"field1":3e-100,"field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose":-5e-57}';
-    var boolBody = '{"field_true":true,"field_false":false}';
-    var stringBody = '{"field":"goodrequest","empty":"","null":null}';
-    var stringBodyInbound = '{"field":"goodrequest","empty":""}';
-    var dateBody = '{"field":"0001-01-01","leap":"2016-02-29"}';
-    var datetimeBody = '{"field":"0001-01-01T00:00:00Z","now":"2015-05-18T18:38:00Z"}';
-    var datetimeRfc1123Body = '{"field":"Mon, 01 Jan 0001 00:00:00 GMT","now":"Mon, 18 May 2015 11:38:00 GMT"}';
-    var datetimeRfc1123BodyAlternate = '{"field":"Mon, 01 Jan 1 00:00:00 GMT","now":"Mon, 18 May 2015 11:38:00 GMT"}';
-    var datetimeBodyExact = '{"field":"0001-01-01T00:00:00.000Z","now":"2015-05-18T18:38:00.000Z"}';
+    var intBody = {"field1":-1,"field2":2};
+    var longBody = {"field1":1099511627775,"field2":-999511627788};
+    var floatBody = {"field1":1.05,"field2":-0.003};
+    var doubleBody = {"field1":3e-100,"field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose":-0.000000000000000000000000000000000000000000000000000000005};
+    var doubleBodyInbound = {"field1":3e-100,"field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose":-5e-57};
+    var boolBody = {"field_true":true,"field_false":false};
+    var stringBody = {"field":"goodrequest","empty":"","null":null};
+    var stringBodyInbound = {"field":"goodrequest","empty":""};
+    var dateBody = {"field":"0001-01-01","leap":"2016-02-29"};
+    var datetimeBody = {"field":"0001-01-01T00:00:00Z","now":"2015-05-18T18:38:00Z"};
+    var datetimeRfc1123Body = {"field":"Mon, 01 Jan 0001 00:00:00 GMT","now":"Mon, 18 May 2015 11:38:00 GMT"};
+    var datetimeRfc1123BodyAlternate = {"field":"Mon, 01 Jan 1 00:00:00 GMT","now":"Mon, 18 May 2015 11:38:00 GMT"};
+    var durationBody = {"field":"P123DT22H14M12.011S"};
+    var durationBodyAlternate = {"field":"P123DT22H14M12.010999999998603S"};
+    var datetimeBodyExact = {"field":"0001-01-01T00:00:00.000Z","now":"2015-05-18T18:38:00.000Z"};
     var byteString = new Buffer([255, 254, 253, 252, 0, 250, 249, 248, 247, 246]).toString('base64');
     var byteBody = '{"field":"' + byteString + '"}';
     router.put('/primitive/:scenario', function(req, res, next) {
         if (req.params.scenario === 'integer') {
-            if (JSON.stringify(req.body) === intBody) {
+            if (_.isEqual(req.body, intBody)) {
                 coverage['putComplexPrimitiveInteger']++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like integer req " + util.inspect(req.body));
             }
         } else if (req.params.scenario === 'long') {
-            if (JSON.stringify(req.body) === longBody) {
+            if (_.isEqual(req.body, longBody)) {
                 coverage['putComplexPrimitiveLong']++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like long req " + util.inspect(req.body));
             }
         } else if (req.params.scenario === 'float') {
-            if (JSON.stringify(req.body) === floatBody) {
+            if (_.isEqual(req.body, floatBody)) {
                 coverage['putComplexPrimitiveFloat']++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like float req " + util.inspect(req.body));
             }
         } else if (req.params.scenario === 'double') {
-            if (JSON.stringify(req.body) === doubleBodyInbound) {
+            if (_.isEqual(req.body, doubleBodyInbound)) {
                 coverage['putComplexPrimitiveDouble']++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like double req " + util.inspect(req.body));
             }
         } else if (req.params.scenario === 'bool') {
-            if (JSON.stringify(req.body) === boolBody) {
+            if (_.isEqual(req.body, boolBody)) {
                 coverage['putComplexPrimitiveBool']++;
                 res.status(200).end();
             } else {
@@ -98,32 +100,39 @@ var complex = function(coverage) {
             }
         } else if (req.params.scenario === 'string') {
             console.log(JSON.stringify(req.body));
-            if (JSON.stringify(req.body) === stringBody || JSON.stringify(req.body) === stringBodyInbound) {
+            if (_.isEqual(req.body, stringBody) || _.isEqual(req.body, stringBodyInbound)) {
                 coverage['putComplexPrimitiveString']++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like string req " + util.inspect(req.body));
             }
         } else if (req.params.scenario === 'date') {
-            if (JSON.stringify(req.body) === dateBody) {
+            if (_.isEqual(req.body, dateBody)) {
                 coverage['putComplexPrimitiveDate']++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like date req " + util.inspect(req.body));
             }
         } else if (req.params.scenario === 'datetime') {
-            if (JSON.stringify(req.body) === datetimeBody || JSON.stringify(req.body) === datetimeBodyExact) {
+            if (_.isEqual(req.body, datetimeBody) || _.isEqual(req.body, datetimeBodyExact)) {
                 coverage['putComplexPrimitiveDateTime']++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like datetime req " + util.inspect(req.body));
             }
         } else if (req.params.scenario === 'datetimerfc1123') {
-            if (JSON.stringify(req.body) === datetimeRfc1123Body || JSON.stringify(req.body) === datetimeRfc1123BodyAlternate) {
+            if (_.isEqual(req.body, datetimeRfc1123Body) || _.isEqual(req.body, datetimeRfc1123BodyAlternate)) {
                 coverage['putComplexPrimitiveDateTimeRfc1123']++;
                 res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like datetimerfc1123 req " + util.inspect(req.body));
+            }
+        } else if (req.params.scenario === 'duration') {
+            if (_.isEqual(req.body, durationBody) || _.isEqual(req.body, durationBodyAlternate)) {
+                coverage['putComplexPrimitiveDuration']++;
+                res.status(200).end();
+            } else {
+                utils.send400(res, next, "Did not like duration req " + util.inspect(req.body));
             }
         } else if (req.params.scenario === 'byte') {
             if (JSON.stringify(req.body) === byteBody) {
@@ -140,31 +149,34 @@ var complex = function(coverage) {
     router.get('/primitive/:scenario', function(req, res, next) {
         if (req.params.scenario === 'integer') {
             coverage['getComplexPrimitiveInteger']++;
-            res.status(200).end(intBody);
+            res.status(200).end(JSON.stringify(intBody));
         } else if (req.params.scenario === 'long') {
             coverage['getComplexPrimitiveLong']++;
-            res.status(200).end(longBody);
+            res.status(200).end(JSON.stringify(longBody));
         } else if (req.params.scenario === 'float') {
             coverage['getComplexPrimitiveFloat']++;
-            res.status(200).end(floatBody);
+            res.status(200).end(JSON.stringify(floatBody));
         } else if (req.params.scenario === 'double') {
             coverage['getComplexPrimitiveDouble']++;
-            res.status(200).end(doubleBody);
+            res.status(200).end(JSON.stringify(doubleBody));
         } else if (req.params.scenario === 'bool') {
             coverage['getComplexPrimitiveBool']++;
-            res.status(200).end(boolBody);
+            res.status(200).end(JSON.stringify(boolBody));
         } else if (req.params.scenario === 'string') {
             coverage['getComplexPrimitiveString']++;
-            res.status(200).end(stringBody);
+            res.status(200).end(JSON.stringify(stringBody));
         } else if (req.params.scenario === 'date') {
             coverage['getComplexPrimitiveDate']++;
-            res.status(200).end(dateBody);
+            res.status(200).end(JSON.stringify(dateBody));
         } else if (req.params.scenario === 'datetime') {
             coverage['getComplexPrimitiveDateTime']++;
-            res.status(200).end(datetimeBody);
+            res.status(200).end(JSON.stringify(datetimeBody));
         } else if (req.params.scenario === 'datetimerfc1123') {
             coverage['getComplexPrimitiveDateTimeRfc1123']++;
-            res.status(200).end(datetimeRfc1123Body);
+            res.status(200).end(JSON.stringify(datetimeRfc1123Body));
+        } else if (req.params.scenario === 'duration') {
+            coverage['getComplexPrimitiveDuration']++;
+            res.status(200).end(JSON.stringify(durationBody));
         } else if (req.params.scenario === 'byte') {
             coverage['getComplexPrimitiveByte']++;
             res.status(200).end(byteBody);
@@ -297,26 +309,34 @@ var complex = function(coverage) {
      */
     var rawFish =
       {
-        'dtype':'salmon',
+        'fishtype':'salmon',
         'location':'alaska',
         'iswild':true,
         'species':'king',
         'length':1.0,
         'siblings':[
           {
-            'dtype':'shark',
+            'fishtype':'shark',
             'age':6,
             'birthday': '2012-01-05T01:00:00Z',
             'length':20.0,
             'species':'predator',
           },
           {
-            'dtype':'sawshark',
+            'fishtype':'sawshark',
             'age':105,
             'birthday': '1900-01-05T01:00:00Z',
             'length':10.0,
             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
             'species':'dangerous',
+          },
+          {
+            'fishtype': 'goblin',
+            'age': 1,
+            'birthday': '2015-08-08T00:00:00Z',
+            'length': 30.0,
+            'species': 'scary',
+            'jawsize': 5
           }
         ]
       };
@@ -353,35 +373,35 @@ var complex = function(coverage) {
      * Put and get for recursive reference.
      */
     var bigfishRaw = {
-        "dtype":"salmon",
+        "fishtype":"salmon",
         "location":"alaska",
         "iswild":true,
         "species":"king",
         "length":1,
         "siblings":[
           {
-            "dtype":"shark",
+            "fishtype":"shark",
             "age":6,
             'birthday': '2012-01-05T01:00:00Z',
             "species":"predator",
             "length":20,
             "siblings":[
                 {
-                    "dtype":"salmon",
+                    "fishtype":"salmon",
                     "location":"atlantic",
                     "iswild":true,
                     "species":"coho",
                     "length":2,
                     "siblings":[
                       {
-                        "dtype":"shark",
+                        "fishtype":"shark",
                         "age":6,
                         'birthday': '2012-01-05T01:00:00Z',
                         "species":"predator",
                         "length":20
                       },
                       {
-                        "dtype":"sawshark",
+                        "fishtype":"sawshark",
                         "age":105,
                         'birthday': '1900-01-05T01:00:00Z',
                         'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
@@ -391,7 +411,7 @@ var complex = function(coverage) {
                     ]
                 },
                 {
-                    "dtype":"sawshark",
+                    "fishtype":"sawshark",
                     "age":105,
                     'birthday': '1900-01-05T01:00:00Z',
                     'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
@@ -402,7 +422,7 @@ var complex = function(coverage) {
             ]
           },
           {
-            "dtype":"sawshark",
+            "fishtype":"sawshark",
             "age":105,
             'birthday': '1900-01-05T01:00:00Z',
             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),

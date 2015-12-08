@@ -7,54 +7,61 @@
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
-@: * @Model.Summary.EscapeXmlComment()
+@: * @Model.Summary.EscapeXmlComment().Period()
 }
 @if (!string.IsNullOrEmpty(Model.Description))
 {
-@: * @Model.Description.EscapeXmlComment()
+@: * @Model.Description.EscapeXmlComment().Period()
 }
  *
 @foreach (var param in Model.LocalParameters)
 {
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
-@if (Model.ReturnType != null)
+@foreach (var exception in Model.ExceptionStatements)
 {
-@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object if successful.
+@: * @@throws @exception
 }
- * @@throws ServiceException the exception wrapped in ServiceException if failed.
+@if (Model.ReturnType.Body != null)
+{
+@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link ServiceResponse} if successful.
+}
+else
+{
+@: * @@return the {@@link ServiceResponse} object if successful.
+}
  */
-public @Model.ReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws ServiceException {
+public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.Exceptions {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
-@:        throw new ServiceException(
-@:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null."));
+@:        throw new IllegalArgumentException("Parameter @param.Name is required and cannot be null.");
 @:    }
 }
 @foreach (var param in Model.ParametersToValidate)
 {
 @:    Validator.validate(@(param.Name));
 }
-    try {
-        Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
-        ServiceResponse<@Model.GenericReturnTypeString> response = @(Model.Name)Delegate(call.execute(), null);
-        @Model.ReturnStatement
-    } catch (ServiceException ex) {
-        throw ex;
-    } catch (Exception ex) {
-        throw new ServiceException(ex);
-    }
+@foreach (var transformation in Model.InputParameterTransformation)
+{
+    var outType = transformation.OutputParameter.Type.Name;
+    var outProp = transformation.OutputParameter.Name;
+    var inParam = transformation.ParameterMappings[0].InputParameter.Name;
+    var inProp = transformation.ParameterMappings[0].InputParameterProperty;
+@:    @outType @outProp = @(inParam).get@(inProp.ToPascalCase())();
+}
+    Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
+    return @(Model.Name)Delegate(call.execute(), null);
 }
 @EmptyLine
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
-@: * @Model.Summary.EscapeXmlComment()
+@: * @Model.Summary.EscapeXmlComment().Period()
 }
 @if (!string.IsNullOrEmpty(Model.Description))
 {
-@: * @Model.Description.EscapeXmlComment()
+@: * @Model.Description.EscapeXmlComment().Period()
 }
  *
 @foreach (var param in Model.LocalParameters)
@@ -62,26 +69,35 @@ public @Model.ReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) 
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
  * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+ * @@return the {@@link Call} object
  */
 public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
-@:        serviceCallback.failure(new ServiceException(
-@:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null.")));
+@:        serviceCallback.failure(new IllegalArgumentException("Parameter @param.Name is required and cannot be null."));
+@:        return null;
 @:    }
 }
 @foreach (var param in Model.ParametersToValidate)
 {
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
+@foreach (var transformation in Model.InputParameterTransformation)
+{
+    var outType = transformation.OutputParameter.Type.Name;
+    var outProp = transformation.OutputParameter.Name;
+    var inParam = transformation.ParameterMappings[0].InputParameter.Name;
+    var inProp = transformation.ParameterMappings[0].InputParameterProperty;
+@:    @outType @outProp = @(inParam).get@(inProp.ToPascalCase())();
+}
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
-    call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType).Name)>(serviceCallback) {
+    call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType.Body).Name)>(serviceCallback) {
         @@Override
         public void onResponse(Response<@Model.CallType> response, Retrofit retrofit) {
             try {
                 serviceCallback.success(@(Model.Name)Delegate(response, retrofit));
-            } catch (ServiceException exception) {
+            } catch (ServiceException | IOException exception) {
                 serviceCallback.failure(exception);
             }
         }
@@ -89,17 +105,18 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
     return call;
 }
 @EmptyLine
-private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws ServiceException {
-    return new ServiceResponseBuilder<@Model.GenericReturnTypeString>()
+private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws ServiceException, IOException {
+    return new @Model.ResponseBuilder<@Model.GenericReturnTypeString>(@Model.ServiceResponseBuilderArgs)
 @foreach (var response in Model.Responses)
 {
-            @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.WrapPrimitiveType(response.Value).Name>(){}.getType())
+
+            @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.WrapPrimitiveType(response.Value.Body).Name>() { }.getType())
 }
-@if (Model.DefaultResponse != null)
+@if (Model.DefaultResponse.Body != null)
 {
-            @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(Model.DefaultResponse).Name)>(){}.getType())
+            @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(Model.DefaultResponse.Body).Name)>() { }.getType())
 }
-@if (Model.CallType == "Void")
+@if (Model.HttpMethod == HttpMethod.Head)
 {
             @:.buildEmpty(response, retrofit);
 }

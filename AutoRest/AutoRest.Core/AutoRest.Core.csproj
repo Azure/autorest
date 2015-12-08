@@ -28,6 +28,9 @@
     <Compile Include="ClientModel\CollectionFormat.cs" />
     <Compile Include="ClientModel\EnumValue.cs" />
     <Compile Include="ClientModel\EnumType.cs" />
+    <Compile Include="ClientModel\Response.cs" />
+    <Compile Include="ClientModel\ParameterTransformation.cs" />
+    <Compile Include="ClientModel\ParameterMapping.cs" />
     <Compile Include="ClientModel\PrimaryType.cs" />
     <Compile Include="ClientModel\ParameterLocation.cs" />
     <Compile Include="ClientModel\Constraint.cs" />
@@ -35,6 +38,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Modeler.cs" />
+    <Compile Include="SettingsAliasAttribute.cs" />
     <Compile Include="Template.cs" />
     <Compile Include="ClientModel\ServiceClient.cs" />
     <Compile Include="ClientModel\DictionaryType.cs" />

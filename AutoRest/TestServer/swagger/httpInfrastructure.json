@@ -1874,7 +1874,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully received the true boolean value",
+            "description": "Successfully received the true boolean value"
           },
           "default": {
             "description": "Unexpected error",
@@ -2795,6 +2795,9 @@
       }
     },
     "A": {
+      "x-ms-client-name": {
+        "name": "MyException"
+      },
       "properties": {
         "statusCode": {
           "type": "string"

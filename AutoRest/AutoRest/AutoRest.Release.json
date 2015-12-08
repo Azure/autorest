@@ -4,21 +4,19 @@
       "type": "CSharpCodeGenerator, AutoRest.Generator.CSharp"
     },
     "Azure.CSharp": {
-      "type": "AzureCSharpCodeGenerator, AutoRest.Generator.Azure.CSharp",
-      "settings": {
-        "includeCredentials": "true",
-        "requireOperationId": "true"
-      }
+      "type": "AzureCSharpCodeGenerator, AutoRest.Generator.Azure.CSharp"
     },
     "NodeJS": {
       "type": "NodeJSCodeGenerator, AutoRest.Generator.NodeJS"
     },
     "Azure.NodeJS": {
-      "type": "AzureNodeJSCodeGenerator, AutoRest.Generator.Azure.NodeJS",
-      "settings": {
-        "includeCredentials": "true",
-        "requireOperationId": "true"
-      }
+      "type": "AzureNodeJSCodeGenerator, AutoRest.Generator.Azure.NodeJS"
+    },
+    "Ruby": {
+      "type": "RubyCodeGenerator, AutoRest.Generator.Ruby"
+    },
+    "Azure.Ruby": {
+      "type": "AzureRubyCodeGenerator, AutoRest.Generator.Azure.Ruby"
     }
   },
   "modelers": {

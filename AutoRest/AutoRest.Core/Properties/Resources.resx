@@ -171,6 +171,9 @@
   <data name="NamingConflictsSuggestion" xml:space="preserve">
     <value>Please consider changing your swagger specification to avoid naming conflicts.</value>
   </data>
+  <data name="ParameterIsNotValid" xml:space="preserve">
+    <value>Parameter '{0}' is not expected.</value>
+  </data>
   <data name="ParameterValueIsMissing" xml:space="preserve">
     <value>Parameter '{0}' is required.</value>
   </data>

@@ -33,165 +33,7 @@ namespace @Settings.Namespace
     /// </summary>
     public partial class @Model.Name : ServiceClient<@Model.Name>, I@(Model.Name), IAzureClient
     {
-        /// <summary>
-        /// The base URI of the service.
-        /// </summary>
-        public Uri BaseUri { get; set; }
-        @EmptyLine
-
-        /// <summary>
-        /// Gets or sets json serialization settings.
-        /// </summary>
-        public JsonSerializerSettings SerializationSettings { get; private set; }
-        @EmptyLine
-
-        /// <summary>
-        /// Gets or sets json deserialization settings.
-        /// </summary>
-        public JsonSerializerSettings DeserializationSettings { get; private set; }        
-        @EmptyLine
-        
-        @foreach (var property in Model.Properties)
-        {
-        @:/// <summary>
-        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
-        @:/// </summary>
-        @:public @property.Type @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
-        @EmptyLine
-        }
-        
-        @foreach (var operation in Model.Operations) 
-        {
-        @:public virtual I@(operation.MethodGroupType) @(operation.MethodGroupName) { get; private set; }
-        @EmptyLine
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the @Model.Name class.
-        /// </summary>
-        public @(Model.Name)() : base()
-        {
-            this.Initialize();
-        }
-        @EmptyLine
-        /// <summary>
-        /// Initializes a new instance of the @Model.Name class.
-        /// </summary>
-        /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
-        /// </param>
-        public @(Model.Name)(params DelegatingHandler[] handlers) : base(handlers)
-        {
-            this.Initialize();
-        }
-        @EmptyLine
-
-        /// <summary>
-        /// Initializes a new instance of the @Model.Name class.
-        /// </summary>
-        /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
-        /// </param>
-        /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
-        /// </param>
-        public @(Model.Name)(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
-        {
-            this.Initialize();
-        }
-        @EmptyLine
-
-        /// <summary>
-        /// Initializes a new instance of the @Model.Name class.
-        /// </summary>
-        /// <param name='baseUri'>
-        /// Optional. The base URI of the service.
-        /// </param>
-        /// <param name='handlers'>
-        /// Optional. The set of delegating handlers to insert in the http
-        /// client pipeline.
-        /// </param>
-        public @(Model.Name)(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
-        {
-            if (baseUri == null)
-            {
-                throw new ArgumentNullException("baseUri");
-            }
-            this.BaseUri = baseUri;
-        }
-        @EmptyLine
-
-        @{var parameters = Model.Properties.Where(p => p.IsRequired && p.IsReadOnly);}
-        @if (parameters.Any())
-        {
-        @:/// <summary>
-        @:/// Initializes a new instance of the @Model.Name class.
-        @:/// </summary>
-        foreach (var param in parameters)
-        {
-        @:/// <param name='@(param.Name.ToCamelCase())'>
-        @:/// Required. @(param.Documentation)
-        @:/// </param>
-        }
-        @:/// <param name='handlers'>
-        @:/// Optional. The set of delegating handlers to insert in the http
-        @:/// client pipeline.
-        @:/// </param>
-        @:public @(Model.Name)(@(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
-        @:{
-        foreach (var param in parameters)
-        {
-        @:    if (@(param.Name.ToCamelCase()) == null)
-        @:    {
-        @:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
-        @:    }
-        }
-        foreach (var param in parameters)
-        {
-        @:    this.@(param.Name) = @(param.Name.ToCamelCase());
-        }
-        @:}
-        @:@EmptyLine
-
-        @:/// <summary>
-        @:/// Initializes a new instance of the @Model.Name class.
-        @:/// </summary>
-        @:/// <param name='baseUri'>
-        @:/// Optional. The base URI of the service.
-        @:/// </param>
-        foreach (var param in parameters)
-        {
-        @:/// <param name='@(param.Name.ToCamelCase())'>
-        @:/// Required. @(param.Documentation)
-        @:/// </param>
-        }
-        @:/// <param name='handlers'>
-        @:/// Optional. The set of delegating handlers to insert in the http
-        @:/// client pipeline.
-        @:/// </param>
-        @:public @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
-        @:{
-        @:    if (baseUri == null)
-        @:    {
-        @:        throw new ArgumentNullException("baseUri");
-        @:    }
-        foreach (var param in parameters)
-        {
-        @:    if (@(param.Name.ToCamelCase()) == null)
-        @:    {
-        @:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
-        @:    }
-        }
-        @:    this.BaseUri = baseUri;
-        foreach (var param in parameters)
-        {
-        @:    this.@(param.Name) = @(param.Name.ToCamelCase());
-        }
-        @:}
-        @:@EmptyLine
-        }
+        @(Include(new ServiceClientBodyTemplate(), (ServiceClientTemplateModel)Model))
     
         /// <summary>
         /// Initializes client properties.
@@ -208,14 +50,6 @@ namespace @Settings.Namespace
             @:this.@(property.Name) = @(property.DefaultValue);
         }
 
-        @if (Model.Properties.Any(p => "Credentials".Equals(p.Name, StringComparison.OrdinalIgnoreCase) &&
-            "ServiceClientCredentials".Equals(p.Type.Name, StringComparison.OrdinalIgnoreCase)))
-        {
-            @:if (this.Credentials != null)
-            @:{
-            @:    this.Credentials.InitializeServiceClient(this);
-            @:}
-        }
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
@@ -223,15 +57,24 @@ namespace @Settings.Namespace
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
             SerializationSettings.Converters.Add(new ResourceJsonConverter()); 
-            DeserializationSettings = new JsonSerializerSettings{
+            DeserializationSettings = new JsonSerializerSettings
+            {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Ignore,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver()
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
             };
             @foreach (var polymorphicType in Model.ModelTypes.Where(t => t.PolymorphicDiscriminator != null))
             {

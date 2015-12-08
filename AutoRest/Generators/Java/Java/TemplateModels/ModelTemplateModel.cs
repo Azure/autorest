@@ -26,19 +26,6 @@ namespace Microsoft.Rest.Generator.Java
 
         public ServiceClient ServiceClient { get; set; }
 
-        public IEnumerable<Property> ComposedProperties
-        {
-            get
-            {
-                if(this._parent != null)
-                {
-                    return _parent.ComposedProperties
-                                  .Union(this.Properties);
-                }
-                return this.Properties;
-            }
-        }
-
         public bool IsPolymorphic
         {
             get
@@ -125,7 +112,7 @@ namespace Microsoft.Rest.Generator.Java
             return false;
         }
 
-        public IEnumerable<String> Imports {
+        public virtual IEnumerable<String> ImportList {
             get
             {
                 HashSet<String> classes = new HashSet<string>();
@@ -139,9 +126,9 @@ namespace Microsoft.Rest.Generator.Java
                     {
                         classes.Add("java.util.Map");
                     }
-                    else if (property.Type is PrimaryType && property.Type != PrimaryType.ByteArray)
+                    else if (property.Type is PrimaryType)
                     {
-                        var importedFrom = JavaCodeNamer.ImportedFrom(property.Type as PrimaryType);
+                        var importedFrom = JavaCodeNamer.GetJavaType(property.Type as PrimaryType);
                         if (importedFrom != null)
                         {
                             classes.Add(importedFrom);

@@ -25,9 +25,10 @@
     "moment": "2.10.6",
     "should": "5.2.0",
     "underscore": "*"
-
   },
   "devDependencies": {
+    "tslint": "^2.5.1",
+    "typescript": "^1.6.2"
   },
   "homepage": "https://github.com/Azure/AutoRest",
   "repository": {
@@ -39,7 +40,8 @@
   },
   "scripts": {
     "pretest": "npm install --prefix ../../../TestServer/server && npm install",
-    "test": "npm -s run-script jshint && npm -s run-script unit",
+    "build": "tsc",
+    "test": "npm -s run-script build && npm -s run-script unit",
     "unit": "node unit.js testlist.txt list",
     "xunit": "node unit.js testlist.txt",
     "jshint": "jshint Expected --reporter=jslint"

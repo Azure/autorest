@@ -4,14 +4,18 @@
 
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Swagger](http://github.com/swagger-api/swagger-spec) format.
 
-##Getting AutoRest##
-The AutoRest tools can be installed with Nuget for use in a Visual Studio project.
-
-    nuget.exe install AutoRest
+##Getting AutoRest
+The AutoRest tools can be installed with Nuget for use in a Visual Studio project:
+[![AutoRest NuGet](https://img.shields.io/nuget/v/autorest.svg)](https://www.nuget.org/packages/autorest/)
+[![AutoRest NuGet](https://img.shields.io/nuget/v/autorest.svg?style=flat-square)](https://www.nuget.org/packages/autorest/)
 
 Alternatively it can be installed from [Chocolatey](https://chocolatey.org/) by running:
+[![AutoRest Chocolatey](https://img.shields.io/chocolatey/v/autorest.svg?style=flat-square)](https://chocolatey.org/packages/AutoRest)
 
     choco install autorest
+    
+Nightlies are available via MyGet:
+[![AutoRest MyGet](https://img.shields.io/myget/autorest/vpre/autorest.svg?style=flat-square)](https://www.myget.org/gallery/autorest)
 
 ## Build Prerequisites
 AutoRest is developed primarily in C# but generates code for multiple languages. To build and test AutoRest requires a few things be installed locally.
@@ -20,13 +24,14 @@ AutoRest is developed primarily in C# but generates code for multiple languages.
 #### on Windows 
 Install the [Microsoft Build Tools](http://go.microsoft.com/?linkid=9832060) or get them with [Visual Studio](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
 Ensure that msbuild is in your path by running vcvarsall.bat
->C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat
+>C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat
 
-If you are using Visual Studio 2013, 
+To compile the code in Visual Studio IDE, 
+- Ensure you are using Visual Studio 2015
 - Ensure "Nuget Package Manager For Visual Studio" is updated to a newer version, like "2.8.60723.765", which is needed to install xunit.
 - Install [Task Runner Explorer](https://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) to run gulp tasks such as synchonize nuget version, assembly info, etc.
 
-Install DNVM using [these steps](https://docs.asp.net/en/latest/getting-started/installing-on-windows.html).
+Install DNVM using [these steps](https://docs.asp.net/en/latest/getting-started/installing-on-windows.html) and configure DNX 1.0.0-rc1.
 
 #### on Mac or Linux
 Install Mono 4.3.0 (MonoFramework-MDK-4.3.0.372.macos10.xamarin.x86.pkg)
@@ -70,6 +75,11 @@ ruby dk.rb init
 ruby dk.rb install
 gem install bundler
 ```
+
+### Python
+Install [Python 2.7 and Python 3.5](https://www.python.org/downloads/), and add one of them to your PATH (we recommend 3.5).
+>set PATH=PATH;C:\Python35
+
 ## Gulp
 We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. Install for global use with
 >npm install gulp -g

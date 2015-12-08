@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": true
+    },
+    "exclude": [
+        "node_modules/typescript",
+        "node_modules/tslint"
+    ]
+}

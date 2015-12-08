@@ -13,11 +13,10 @@ import com.squareup.okhttp.OkHttpClient;
  * Token based credentials for use with a REST Service Client.
  */
 public class TokenCredentials implements ServiceClientCredentials {
-
     /** The authentication scheme. */
     private String scheme;
-    
-    /** The secure token */
+
+    /** The secure token. */
     private String token;
 
     /**
@@ -27,8 +26,7 @@ public class TokenCredentials implements ServiceClientCredentials {
      * @param token  valid token
      */
     public TokenCredentials(String scheme, String token) {
-        if (scheme == null)
-        {
+        if (scheme == null) {
             scheme = "Bearer";
         }
         this.scheme = scheme;
@@ -45,6 +43,15 @@ public class TokenCredentials implements ServiceClientCredentials {
     }
 
     /**
+     * Set the secure token.
+     *
+     * @param token the token string
+     */
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    /**
      * Get the authentication scheme.
      *
      * @return the authentication scheme
@@ -53,6 +60,7 @@ public class TokenCredentials implements ServiceClientCredentials {
         return scheme;
     }
 
+    @Override
     public void applyCredentialsFilter(OkHttpClient client) {
         client.interceptors().add(new TokenCredentialsInterceptor(this));
     }

@@ -89,22 +89,57 @@ namespace Microsoft.Rest.Modeler.Swagger
                 }
             }
 
+            // Build header object
+            var responseHeaders = new Dictionary<string, Header>();
+            foreach (var response in _operation.Responses.Values)
+            {
+                if (response.Headers != null)
+                {
+                    response.Headers.ForEach( h => responseHeaders[h.Key] = h.Value);
+                }
+            }
+
+            var headerTypeName = string.Format(CultureInfo.InvariantCulture,
+                "{0}-{1}-Headers", methodGroup, methodName).Trim('-');
+            var headerType = new CompositeType
+            {
+                Name = headerTypeName,
+                SerializedName = headerTypeName,
+                Documentation = string.Format(CultureInfo.InvariantCulture, "Defines headers for {0} operation.", methodName)
+            };
+            responseHeaders.ForEach(h =>
+            {
+                var property = new Property
+                {
+                    Name = h.Key,
+                    SerializedName = h.Key,
+                    Type = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key),
+                    Documentation = h.Value.Description
+                };
+                headerType.Properties.Add(property);
+            });
+
+            if (!headerType.Properties.Any())
+            {
+                headerType = null;
+            }
+
             // Response format
             var typesList = new List<Stack<IType>>();
-            _operation.Responses.ForEach(response =>
+            foreach (var response in _operation.Responses)
             {
                 if (string.Equals(response.Key, "default", StringComparison.OrdinalIgnoreCase))
                 {
-                    TryBuildDefaultResponse(methodName, response.Value, method);
+                    TryBuildDefaultResponse(methodName, response.Value, method, headerType);
                 }
                 else
                 {
                     if (
                         !(TryBuildResponse(methodName, response.Key.ToHttpStatusCode(), response.Value, method,
-                            typesList) ||
-                          TryBuildStreamResponse(response.Key.ToHttpStatusCode(), response.Value, method, typesList) ||
+                            typesList, headerType) ||
+                          TryBuildStreamResponse(response.Key.ToHttpStatusCode(), response.Value, method, typesList, headerType) ||
                           TryBuildEmptyResponse(methodName, response.Key.ToHttpStatusCode(), response.Value, method,
-                              typesList)))
+                              typesList, headerType)))
                     {
                         throw new InvalidOperationException(
                             string.Format(CultureInfo.InvariantCulture,
@@ -113,13 +148,17 @@ namespace Microsoft.Rest.Modeler.Swagger
                             response.Key));
                     }
                 }
-            });
+            }
 
-            method.ReturnType = BuildMethodReturnType(typesList);
-            if (method.Responses.Count == 0 &&
-                method.DefaultResponse != null)
+            method.ReturnType = BuildMethodReturnType(typesList, headerType);
+            if (method.Responses.Count == 0)
             {
                 method.ReturnType = method.DefaultResponse;
+            }
+
+            if (method.ReturnType.Headers != null)
+            {
+                _swaggerModeler.ServiceClient.HeaderTypes.Add(method.ReturnType.Headers as CompositeType);
             }
 
             // Copy extensions
@@ -165,18 +204,18 @@ namespace Microsoft.Rest.Modeler.Swagger
             types.Add(typeStack);
         }
 
-        private IType BuildMethodReturnType(List<Stack<IType>> types)
+        private Response BuildMethodReturnType(List<Stack<IType>> types, IType headerType)
         {
             IType baseType = PrimaryType.Object;
             // Return null if no response is specified
             if (types.Count == 0)
             {
-                return null;
+                return new Response(null, headerType);
             }
             // Return first if only one return type
             if (types.Count == 1)
             {
-                return types.First().Pop();
+                return new Response(types.First().Pop(), headerType);
             }
 
             // BuildParameter up type inheritance tree
@@ -206,17 +245,17 @@ namespace Microsoft.Rest.Modeler.Swagger
                     IType t = typeStack.Pop();
                     if (!Equals(t, currentType))
                     {
-                        return baseType;
+                        return new Response(baseType, headerType);
                     }
                 }
                 baseType = currentType;
             }
 
-            return baseType;
+            return new Response(baseType, headerType);
         }
 
-        private bool TryBuildStreamResponse(HttpStatusCode responseStatusCode, Response response,
-            Method method, List<Stack<IType>> types)
+        private bool TryBuildStreamResponse(HttpStatusCode responseStatusCode, OperationResponse response,
+            Method method, List<Stack<IType>> types, IType headerType)
         {
             bool handled = false;
             if (SwaggerOperationProducesNotEmpty())
@@ -235,7 +274,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     {
                         VerifyFirstPropertyIsByteArray(compositeType);
                     }
-                    method.Responses[responseStatusCode] = serviceType;
+                    method.Responses[responseStatusCode] = new Response(serviceType, headerType);
                     handled = true;
                 }
             }
@@ -255,7 +294,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         }
 
         private bool TryBuildResponse(string methodName, HttpStatusCode responseStatusCode,
-            Response response, Method method, List<Stack<IType>> types)
+            OperationResponse response, Method method, List<Stack<IType>> types, IType headerType)
         {
             bool handled = false;
             IType serviceType;
@@ -264,7 +303,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 if (TryBuildResponseBody(methodName, response,
                     s => GenerateResponseObjectName(s, responseStatusCode), out serviceType))
                 {
-                    method.Responses[responseStatusCode] = serviceType;
+                    method.Responses[responseStatusCode] = new Response(serviceType, headerType);
                     BuildMethodReturnTypeStack(serviceType, types);
                     handled = true;
                 }
@@ -274,20 +313,20 @@ namespace Microsoft.Rest.Modeler.Swagger
         }
 
         private bool TryBuildEmptyResponse(string methodName, HttpStatusCode responseStatusCode,
-            Response response, Method method, List<Stack<IType>> types)
+            OperationResponse response, Method method, List<Stack<IType>> types, IType headerType)
         {
             bool handled = false;
 
             if (response.Schema == null)
             {
-                method.Responses[responseStatusCode] = null;
+                method.Responses[responseStatusCode] = new Response(null, headerType);
                 handled = true;
             }
             else
             {
                 if (_operation.Produces.IsNullOrEmpty())
                 {
-                    method.Responses[responseStatusCode] = PrimaryType.Object;
+                    method.Responses[responseStatusCode] = new Response(PrimaryType.Object, headerType);
                     BuildMethodReturnTypeStack(PrimaryType.Object, types);
                     handled = true;
                 }
@@ -304,19 +343,19 @@ namespace Microsoft.Rest.Modeler.Swagger
             return handled;
         }
 
-        private void TryBuildDefaultResponse(string methodName, Response response, Method method)
+        private void TryBuildDefaultResponse(string methodName, OperationResponse response, Method method, IType headerType)
         {
             IType errorModel = null;
             if (SwaggerOperationProducesJson())
             {
                 if (TryBuildResponseBody(methodName, response, s => GenerateErrorModelName(s), out errorModel))
                 {
-                    method.DefaultResponse = errorModel;
+                    method.DefaultResponse = new Response(errorModel, headerType);
                 }
             }
         }
 
-        private bool TryBuildResponseBody(string methodName, Response response,
+        private bool TryBuildResponseBody(string methodName, OperationResponse response,
             Func<string, string> typeNamer, out IType responseType)
         {
             bool handled = false;

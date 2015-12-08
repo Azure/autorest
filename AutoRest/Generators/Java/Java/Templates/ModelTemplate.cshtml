@@ -5,21 +5,21 @@
 @using Microsoft.Rest.Generator.Java.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.ModelTemplateModel>
 /**
-@Header(" * ")
+@Header(" * ").TrimMultilineHeader()
  */
 @EmptyLine
 
 package @(Settings.Namespace.ToLower()).models;
 @EmptyLine
 
-@foreach (var importClass in Model.Imports)
+@foreach (var importClass in Model.ImportList)
 {
 @:import @importClass;
 }
 @EmptyLine
 
 /**
-@WrapComment(" * ", Model.Documentation.EscapeXmlComment() ?? "The " + Model.Name + " model.")
+@WrapComment(" * ", Model.Documentation.EscapeXmlComment().Period() ?? "The " + Model.Name + " model.")
  */
 @if (Model.IsPolymorphic)
 {
@@ -32,9 +32,9 @@ if (types.Any())
 for (int i = 0; i < types.Count - 1; i++)
 {
 var type = types[i];
-@:    @@JsonSubTypes.Type(name="@(type.SerializedName)", value=@(type.Name).class),
+@:    @@JsonSubTypes.Type(name = "@(type.SerializedName)", value = @(type.Name).class),
 }
-@:    @@JsonSubTypes.Type(name="@(types.Last().SerializedName)", value=@(types.Last().Name).class)
+@:    @@JsonSubTypes.Type(name = "@(types.Last().SerializedName)", value = @(types.Last().Name).class)
 @:})
 }
 }
@@ -42,7 +42,7 @@ public class @(Model.Name)@(Model.BaseModelType != null ? " extends " + Model.Ba
 @foreach (var property in Model.Properties)
 {
 @:    /**
-@:    @WrapComment(" * ", property.Documentation.EscapeXmlComment() ?? "The " + property.Name + " property.")
+@:    @WrapComment(" * ", property.Documentation.EscapeXmlComment().Period() ?? "The " + property.Name + " property.")
 @:     */
 var jsonSetting = property.GetJsonProperty();
 if (!jsonSetting.IsNullOrEmpty())
@@ -59,7 +59,7 @@ if (!jsonSetting.IsNullOrEmpty())
 @:     * Get the @property.Name value.
 @:     *
 @:     * @@return the @property.Name value
-@:     */ 
+@:     */
 @:    public @property.Type get@(property.Name.ToPascalCase())() {
 @:        return this.@(property.Name);
 @:    }

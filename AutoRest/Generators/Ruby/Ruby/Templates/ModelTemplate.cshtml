@@ -21,6 +21,16 @@ module @(Settings.Namespace)
         }
       @EmptyLine
     }
+    
+    @if (Model.IsPolymorphic && Model.BaseModelType == null)
+    {
+      @:@@@@discriminatorMap = Hash.new
+      @:@@@@discriminatorMap["@Model.SerializedName"] = "@Model.Name.ToLowerInvariant()"
+      foreach (var derivedType in Model.DerivedTypes)
+      {
+      @:@@@@discriminatorMap["@derivedType.SerializedName"] = "@derivedType.Name.ToLowerInvariant()"
+      }
+    }
 
     @foreach (var property in Model.PropertyTemplateModels)
     {
@@ -64,18 +74,29 @@ module @(Settings.Namespace)
       def self.serialize_object(object)
         object.validate
         output_object = {}
+
+        @if (Model.IsPolymorphic)
+        {
+        @EmptyLine
+        @:unless object.@(Model.PolymorphicDiscriminatorProperty).nil? or object.@(Model.PolymorphicDiscriminatorProperty) == "@Model.SerializedName"
+          @:class_name = @@@@discriminatorMap[object.@Model.PolymorphicDiscriminatorProperty].capitalize
+          @:class_instance = Models.const_get(class_name)
+          @foreach (var ns in Model.ClassNamespaces)
+          {
+          @:class_instance = @(ns).const_get(class_name) if class_instance.nil?
+          }
+          @:output_object = class_instance.serialize_object(object)
+        @:else
+          @:output_object['@Model.PolymorphicDiscriminatorProperty'] = object.@Model.PolymorphicDiscriminatorProperty
+        @:end
+        }
+
         @foreach (var property in Model.ComposedProperties.OrderByDescending(x => x.IsRequired))
         {
         @EmptyLine
         @:serialized_property = @("object." + property.Name)
         @:@Model.SerializeProperty("serialized_property", property.Type)
         @:output_object['@(property.SerializedName)'] = serialized_property unless serialized_property.nil?
-        }
-
-        @if (Model.IsPolymorphic)
-        {
-        @EmptyLine
-        @:output_object['dtype'] = object.dtype
         }
 
         @EmptyLine
@@ -90,8 +111,23 @@ module @(Settings.Namespace)
       #
       def self.deserialize_object(object)
         return if object.nil?
-
         output_object = @(Model.Name).new
+
+        @if (Model.IsPolymorphic)
+        {
+        @EmptyLine
+        @:unless object['@(Model.PolymorphicDiscriminatorProperty)'].nil? or object['@(Model.PolymorphicDiscriminatorProperty)'] == "@Model.SerializedName"
+          @:class_name = @@@@discriminatorMap[object['@Model.PolymorphicDiscriminatorProperty']].capitalize
+          @:class_instance = Models.const_get(class_name)
+          @foreach (var ns in Model.ClassNamespaces)
+          {
+          @:class_instance = @(ns).const_get(class_name) if class_instance.nil?
+          }
+          @:output_object = class_instance.deserialize_object(object)
+        @:else
+          @:output_object.@Model.PolymorphicDiscriminatorProperty = object['@Model.PolymorphicDiscriminatorProperty']
+        @:end
+        }
 
         @foreach (var property in Model.ComposedProperties.OrderByDescending(x => x.IsRequired))
         {
@@ -99,12 +135,6 @@ module @(Settings.Namespace)
         @:deserialized_property = @(string.Format("object['{0}']", property.SerializedName))
         @:@Model.DeserializeProperty("deserialized_property", property.Type)
         @:output_object.@(property.Name) = deserialized_property
-        }
-
-        @if (Model.IsPolymorphic)
-        {
-        @EmptyLine
-        @:output_object.dtype = object['dtype']
         }
 
         @EmptyLine
@@ -118,10 +148,10 @@ module @(Settings.Namespace)
       {
       @EmptyLine
       @:def initialize
-      @:  @@dtype = "@Model.Name.ToLower()"
+      @:  @@@Model.PolymorphicDiscriminatorProperty = "@Model.SerializedName"
       @:end
       @EmptyLine
-      @:attr_accessor :dtype
+      @:attr_accessor :@Model.PolymorphicDiscriminatorProperty
       }
     end
   end

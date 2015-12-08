@@ -285,7 +285,7 @@
             }
           }
         },
-        "x-ms-pageable": { "path": "nextLink" }
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts": {
@@ -318,7 +318,7 @@
             }
           }
         },
-        "x-ms-pageable": { "path": "nextLink" }
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey": {
@@ -402,9 +402,13 @@
           "type": "string"
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "default": "Microsoft.Storage/storageAccounts"
         }
-      }
+      },
+      "required": [
+        "name"
+      ]    
     },
     "CheckNameAvailabilityResult": {
       "properties": {
@@ -452,7 +456,7 @@
       },
       "allOf": [
         {
-          "$ref": "Resource"
+            "$ref": "#/definitions/Resource"
         }
       ],
       "description": "The parameters to provide for the account."
@@ -595,7 +599,7 @@
       },
       "allOf": [
         {
-          "$ref": "Resource"
+            "$ref": "#/definitions/Resource"
         }
       ],
       "description": "The storage account."
@@ -657,7 +661,7 @@
       },
       "allOf": [
         {
-          "$ref": "Resource"
+            "$ref": "#/definitions/Resource"
         }
       ],
       "description": "The parameters to update on the account."
@@ -784,11 +788,11 @@
       "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "Client Api Version."
     }
   }
 }

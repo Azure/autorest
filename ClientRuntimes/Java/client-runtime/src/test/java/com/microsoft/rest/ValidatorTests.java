@@ -37,7 +37,7 @@ public class ValidatorTests {
             body.value = null;
             Validator.validate(body); // fail
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("value is required"));
         }
     }
@@ -51,7 +51,7 @@ public class ValidatorTests {
             body.value = null;
             Validator.validate(body); // fail
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("value is required"));
         }
     }
@@ -65,7 +65,7 @@ public class ValidatorTests {
             body.value = null;
             Validator.validate(body); // fail
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("value is required"));
         }
     }
@@ -77,7 +77,7 @@ public class ValidatorTests {
             body.list = null;
             Validator.validate(body); // fail
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("list is required"));
         }
         body.list = new ArrayList<StringWrapper>();
@@ -92,7 +92,7 @@ public class ValidatorTests {
         try {
             Validator.validate(body); // fail
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("list.value is required"));
         }
     }
@@ -104,7 +104,7 @@ public class ValidatorTests {
             body.map = null;
             Validator.validate(body); // fail
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("map is required"));
         }
         body.map = new HashMap<LocalDate, StringWrapper>();
@@ -119,39 +119,45 @@ public class ValidatorTests {
         try {
             Validator.validate(body); // fail
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("map.value is required"));
         }
     }
 
-    public class IntWrapper {
+    public final class IntWrapper {
         @JsonProperty(required = true)
+        // CHECKSTYLE IGNORE VisibilityModifier FOR NEXT 2 LINES
         public int value;
         public Object nullable;
     }
 
-    public class IntegerWrapper {
+    public final class IntegerWrapper {
         @JsonProperty(required = true)
+        // CHECKSTYLE IGNORE VisibilityModifier FOR NEXT 1 LINE
         public Integer value;
     }
 
-    public class StringWrapper {
+    public final class StringWrapper {
         @JsonProperty(required = true)
+        // CHECKSTYLE IGNORE VisibilityModifier FOR NEXT 1 LINE
         public String value;
     }
 
-    public class LocalDateWrapper {
+    public final class LocalDateWrapper {
         @JsonProperty(required = true)
+        // CHECKSTYLE IGNORE VisibilityModifier FOR NEXT 1 LINE
         public LocalDate value;
     }
 
-    public class ListWrapper {
+    public final class ListWrapper {
         @JsonProperty(required = true)
+        // CHECKSTYLE IGNORE VisibilityModifier FOR NEXT 1 LINE
         public List<StringWrapper> list;
     }
 
-    public class MapWrapper {
+    public final class MapWrapper {
         @JsonProperty(required = true)
+        // CHECKSTYLE IGNORE VisibilityModifier FOR NEXT 1 LINE
         public Map<LocalDate, StringWrapper> map;
     }
 
@@ -161,8 +167,9 @@ public class ValidatorTests {
         Blue
     }
 
-    public class EnumWrapper {
+    public final class EnumWrapper {
         @JsonProperty(required = true)
-        Color color;
+        // CHECKSTYLE IGNORE VisibilityModifier FOR NEXT 1 LINE
+        public Color color;
     }
 }

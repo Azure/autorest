@@ -1,5 +1,7 @@
 @using System
+@using System.Globalization
 @using System.Linq;
+@using Microsoft.Rest.Generator
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.Utilities
 @using Microsoft.Rest.Generator.NodeJS
@@ -26,10 +28,6 @@
                                         + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
                                         + " " + parameter.Documentation))
 }
-@WrapComment(" * ", " @param {object} [options]")
- *
-@WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
- *
 @WrapComment(" * ", " @param {function} callback")
  *
 @WrapComment(" * ", " @returns {function} callback(err, result, request, response)")
@@ -52,6 +50,10 @@
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  @if (((CompositeType)Model.OptionsParameterTemplateModel.Type).Properties.Count > 1)
+  {
+  @:@(Model.BuildOptionalMappings())
+  }
   @if (Model.ParameterTemplateModels.Any())
   {
       var validationBlock = Model.ValidationString;
@@ -67,6 +69,8 @@
   </text>
   }
   }
+
+  @Model.BuildInputMappings()
   @EmptyLine
   // Construct URL
   @if (Model.IsAbsoluteUrl)
@@ -89,9 +93,9 @@
 
   // Set Headers
   @(Model.SetDefaultHeaders)
-  @foreach (var parameter in Model.Parameters.Where(p => p.Location == ParameterLocation.Header))
+  @foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.Header))
   {
-  @:if (@(parameter.Name) !== null) {
+  @:if (@(parameter.Name) !== undefined && @(parameter.Name) !== null) {
   @:  httpRequest.headers['@(parameter.SerializedName)'] = @parameter.Type.ToString(parameter.Name);
   @:}
   }
@@ -124,7 +128,7 @@
   }
   else
   {
-    @:@(Model.RequestBody.Type.SerializeType(Model.Scope, Model.RequestBody.Name, "requestModel", Model.RequestBody.IsRequired))
+    @:@(Model.RequestBody.Type.SerializeType(Model.Scope, Model.RequestBody.Name, "requestModel", Model.RequestBody.IsRequired, Model.RequestBody.Constraints))
     @:requestContent = JSON.stringify(requestModel);
   }
   } catch (error) {
@@ -144,7 +148,7 @@
   </text>
   }
 
-  @if (Model.Responses.Any(r => r.Value == PrimaryType.Stream))
+  @if (Model.Responses.Any(r => r.Value.Body == PrimaryType.Stream))
   {
 @:  @Include(new MethodStreamPipelineTemplate(), Model)
   }

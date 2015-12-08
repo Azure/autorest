@@ -12,6 +12,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Properties;
 using Microsoft.Rest.Generator.Utilities;
+using System.Text.RegularExpressions;
 
 namespace Microsoft.Rest.Generator
 {
@@ -28,6 +29,46 @@ namespace Microsoft.Rest.Generator
         /// Gets collection of reserved words.
         /// </summary>
         public HashSet<string> ReservedWords { get; private set; }
+
+        // "joined_lower" for functions, methods, attributes
+        // do not invoke this for a class name which should be "StudlyCaps"
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        public static string PythonCase(string name)
+        {
+            name = Regex.Replace(name, @"[A-Z]+", m =>
+            {
+                string matchedStr = m.ToString().ToLowerInvariant();
+                if (m.Index > 0 && name[m.Index - 1] == '_')
+                {
+                    //we are good if a '_' already exists 
+                    return matchedStr;
+                }
+                else
+                {
+                    // The first letter should not have _
+                    string prefix = m.Index > 0 ? "_" : string.Empty;
+                    if (ShouldInsertExtraLowerScoreInTheMiddle(name, m, matchedStr))
+                    {
+                        // We will add extra _ if there are multiple capital chars together
+                        return prefix + matchedStr.Substring(0, matchedStr.Length - 1) + "_" + matchedStr.Substring(matchedStr.Length - 1);
+                    }
+                    else
+                    {
+                        return prefix + matchedStr;
+                    }
+                }
+            });
+            return name;
+        }
+
+        private static bool ShouldInsertExtraLowerScoreInTheMiddle(string name, Match m, string matchedStr)
+        {
+            //For name like "SQLConnection", we will insert an extra '_' between "SQL" and "Connection"
+            //we will only insert if there are more than 2 consecutive upper cases, because 2 upper cases
+            //most likely means one single word. 
+            int nextNonUpperCaseCharLocation = m.Index + matchedStr.Length;
+            return matchedStr.Length > 2 && nextNonUpperCaseCharLocation < name.Length && char.IsLetter(name[nextNonUpperCaseCharLocation]);
+        }
 
         /// <summary>
         /// Formats segments of a string split by underscores or hyphens into "Camel" case strings.
@@ -83,24 +124,40 @@ namespace Microsoft.Rest.Generator
             foreach (var property in client.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
-                property.Type = NormalizeType(property.Type);
+                property.Type = NormalizeTypeReference(property.Type);
             }
 
             var normalizedModels = new List<CompositeType>();
             foreach (var modelType in client.ModelTypes)
             {
-                normalizedModels.Add(NormalizeType(modelType) as CompositeType);
+                normalizedModels.Add(NormalizeTypeDeclaration(modelType) as CompositeType);
             }
             client.ModelTypes.Clear();
             normalizedModels.ForEach( (item) => client.ModelTypes.Add(item));
 
+            var normalizedErrors = new List<CompositeType>();
+            foreach (var modelType in client.ErrorTypes)
+            {
+                normalizedErrors.Add(NormalizeTypeDeclaration(modelType) as CompositeType);
+            }
+            client.ErrorTypes.Clear();
+            normalizedErrors.ForEach((item) => client.ErrorTypes.Add(item));
+
+            var normalizedHeaders = new List<CompositeType>();
+            foreach (var modelType in client.HeaderTypes)
+            {
+                normalizedHeaders.Add(NormalizeTypeDeclaration(modelType) as CompositeType);
+            }
+            client.HeaderTypes.Clear();
+            normalizedHeaders.ForEach((item) => client.HeaderTypes.Add(item));
+
             var normalizedEnums = new List<EnumType>();
             foreach (var enumType in client.EnumTypes)
             {
-                var normalizedType = NormalizeType(enumType) as EnumType;
+                var normalizedType = NormalizeTypeDeclaration(enumType) as EnumType;
                 if (normalizedType != null)
                 {
-                    normalizedEnums.Add(NormalizeType(enumType) as EnumType);
+                    normalizedEnums.Add(NormalizeTypeDeclaration(enumType) as EnumType);
                 }
             }
             client.EnumTypes.Clear();
@@ -108,25 +165,61 @@ namespace Microsoft.Rest.Generator
 
             foreach (var method in client.Methods)
             {
-                method.Name = GetMethodName(method.Name);
-                method.Group = GetMethodGroupName(method.Group);
-                method.ReturnType = NormalizeType(method.ReturnType);
-                method.DefaultResponse = NormalizeType(method.DefaultResponse);
-                var normalizedResponses = new Dictionary<HttpStatusCode, IType>();
-                foreach (var statusCode in method.Responses.Keys)
-                {
-                    normalizedResponses[statusCode] = NormalizeType(method.Responses[statusCode]);
-                }
+                NormalizeMethod(method);
+            }
+        }
 
-                method.Responses.Clear();
-                foreach (var statusCode in normalizedResponses.Keys)
+        /// <summary>
+        /// Normalizes names in the method
+        /// </summary>
+        /// <param name="method"></param>
+        public virtual void NormalizeMethod(Method method)
+        {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+            method.Name = GetMethodName(method.Name);
+            method.Group = GetMethodGroupName(method.Group);
+            method.ReturnType = NormalizeTypeReference(method.ReturnType);
+            method.DefaultResponse = NormalizeTypeReference(method.DefaultResponse);
+            var normalizedResponses = new Dictionary<HttpStatusCode, Response>();
+            foreach (var statusCode in method.Responses.Keys)
+            {
+                normalizedResponses[statusCode] = NormalizeTypeReference(method.Responses[statusCode]);
+            }
+
+            method.Responses.Clear();
+            foreach (var statusCode in normalizedResponses.Keys)
+            {
+                method.Responses[statusCode] = normalizedResponses[statusCode];
+            }
+            foreach (var parameter in method.Parameters)
+            {
+                parameter.Name = GetParameterName(parameter.Name);
+                parameter.Type = NormalizeTypeReference(parameter.Type);
+            }
+
+            foreach (var parameterTransformation in method.InputParameterTransformation)
+            {
+                parameterTransformation.OutputParameter.Name = GetParameterName(parameterTransformation.OutputParameter.Name);
+                parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
+
+                foreach (var parameterMapping in parameterTransformation.ParameterMappings)
                 {
-                    method.Responses[statusCode] = normalizedResponses[statusCode];
-                }
-                foreach (var parameter in method.Parameters)
-                {
-                    parameter.Name = GetParameterName(parameter.Name);
-                    parameter.Type = NormalizeType(parameter.Type);
+                    if (parameterMapping.InputParameterProperty != null)
+                    {
+                        parameterMapping.InputParameterProperty = string.Join(".",
+                            parameterMapping.InputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
+                                .Select(p => GetPropertyName(p)));
+                    }
+
+                    if (parameterMapping.OutputParameterProperty != null)
+                    {
+                        parameterMapping.OutputParameterProperty = string.Join(".",
+                            parameterMapping.OutputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
+                                .Select(p => GetPropertyName(p)));
+                    }
                 }
             }
         }
@@ -272,11 +365,30 @@ namespace Microsoft.Rest.Generator
         }
 
         /// <summary>
-        /// Returns language specific type name.
+        /// Returns language specific type reference name.
+        /// </summary>
+        /// <param name="typePair"></param>
+        /// <returns></returns>
+        public virtual Response NormalizeTypeReference(Response typePair)
+        {
+            return new Response(NormalizeTypeReference(typePair.Body),
+                                NormalizeTypeReference(typePair.Headers));
+        }
+
+        /// <summary>
+        /// Returns language specific type reference name.
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public abstract IType NormalizeType(IType type);
+        public abstract IType NormalizeTypeReference(IType type);
+
+        /// <summary>
+        /// Returns language specific type declaration name.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public abstract IType NormalizeTypeDeclaration(IType type);
+
 
         /// <summary>
         /// Formats a string as upper or lower case. Two-letter inputs that are all upper case are both lowered.
@@ -313,6 +425,21 @@ namespace Microsoft.Rest.Generator
         public static string RemoveInvalidCharacters(string name)
         {
             return GetValidName(name, '_', '-');
+        }
+
+        /// <summary>
+        /// Removes invalid characters from the name. Everything but alpha-numeral, underscore.
+        /// </summary>
+        /// <param name="name">String to parse.</param>
+        /// <returns>Name with invalid characters removed.</returns>
+        public static string RemoveInvalidPythonCharacters(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, Resources.InvalidIdentifierName, name));
+            }
+
+            return GetValidName(name.Replace('-', '_'), '_');
         }
 
         /// <summary>
@@ -429,7 +556,6 @@ namespace Microsoft.Rest.Generator
 
             var models = new List<CompositeType>(serviceClient.ModelTypes);
             serviceClient.ModelTypes.Clear();
-
             foreach (var model in models)
             {
                 model.Name = ResolveNameConflict(
@@ -439,7 +565,25 @@ namespace Microsoft.Rest.Generator
                     "Model");
 
                 serviceClient.ModelTypes.Add(model);
+            }
 
+            models = new List<CompositeType>(serviceClient.HeaderTypes);
+            serviceClient.HeaderTypes.Clear();
+            foreach (var model in models)
+            {
+                model.Name = ResolveNameConflict(
+                    exclusionDictionary,
+                    model.Name,
+                    "Schema definition",
+                    "Model");
+
+                serviceClient.HeaderTypes.Add(model);
+            }
+
+            foreach (var model in serviceClient.ModelTypes
+                                                  .Concat(serviceClient.HeaderTypes)
+                                                  .Concat(serviceClient.ErrorTypes))
+            {
                 foreach (var property in model.Properties)
                 {
                     if (property.Name.Equals(model.Name, StringComparison.OrdinalIgnoreCase))

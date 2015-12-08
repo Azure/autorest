@@ -19,6 +19,9 @@
   <ItemGroup>
     <Content Include=".jshintrc" />
     <Content Include="package.json" />
+    <Compile Include="AcceptanceTests\parameterGrouping.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
     <Compile Include="AcceptanceTests\coverage.js">
       <TestFramework>
       </TestFramework>
@@ -38,76 +41,7 @@
     <Compile Include="AcceptanceTests\resourceFlattening.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
-    <Compile Include="Expected\AcceptanceTests\AzureReport\autoRestReportServiceForAzure.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureReport\models\errorModel.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureReport\models\index.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\autoRestAzureSpecialParametersTestClient.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\models\errorModel.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\models\index.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\operations\apiVersionDefault.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\operations\apiVersionLocal.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\operations\index.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\operations\skipUrlEncoding.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\operations\subscriptionInCredentials.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\operations\subscriptionInMethod.js" />
-    <Compile Include="Expected\AcceptanceTests\AzureSpecials\operations\xMsClientRequestId.js" />
-    <Compile Include="Expected\AcceptanceTests\Head\autoRestHeadTestService.js" />
-    <Compile Include="Expected\AcceptanceTests\Head\models\index.js" />
-    <Compile Include="Expected\AcceptanceTests\Head\operations\httpSuccess.js" />
-    <Compile Include="Expected\AcceptanceTests\Head\operations\index.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\autoRestLongRunningOperationTestService.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\index.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\operationResult.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\operationResultError.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\product.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\productProperties.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\sku.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\subProduct.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\models\subProductProperties.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\operations\dONOTCALLs.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\operations\index.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\operations\lRORetrys.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\operations\lROs.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\operations\lROSADs.js" />
-    <Compile Include="Expected\AcceptanceTests\Lro\operations\lROsCustomHeader.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\autoRestPagingTestService.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\models\index.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\models\operationResult.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\models\product.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\models\productProperties.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\models\productResult.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\operations\index.js" />
-    <Compile Include="Expected\AcceptanceTests\Paging\operations\paging.js" />
-    <Compile Include="Expected\AcceptanceTests\ResourceFlattening\autoRestResourceFlatteningTestService.js" />
-    <Compile Include="Expected\AcceptanceTests\ResourceFlattening\models\errorModel.js" />
-    <Compile Include="Expected\AcceptanceTests\ResourceFlattening\models\flattenedProduct.js" />
-    <Compile Include="Expected\AcceptanceTests\ResourceFlattening\models\flattenedProductProperties.js" />
-    <Compile Include="Expected\AcceptanceTests\ResourceFlattening\models\index.js" />
-    <Compile Include="Expected\AcceptanceTests\ResourceFlattening\models\resourceCollection.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\checkNameAvailabilityResult.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\customDomain.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\endpoints.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\index.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccount.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountCheckNameAvailabilityParameters.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountCreateParameters.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountKeys.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountListResult.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountRegenerateKeyParameters.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountUpdateParameters.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\usage.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\usageListResult.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\models\usageName.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\operations\index.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\operations\storageAccounts.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\operations\usageOperations.js" />
-    <Compile Include="Expected\AcceptanceTests\StorageManagementClient\storageManagementClient.js" />
-    <Compile Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\microsoftAzureTestUrl.js" />
-    <Compile Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\errorModel.js" />
-    <Compile Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\index.js" />
-    <Compile Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\sampleResourceGroup.js" />
-    <Compile Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\operations\group.js" />
-    <Compile Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\operations\index.js" />
+    <Compile Include="Expected\**\*.js" />
     <Compile Include="unit.js" />
     <Content Include="AcceptanceTests\testlist.txt" />
     <Compile Include="AcceptanceTests\lro.js">
@@ -139,7 +73,8 @@
     <Content Include="bin\Net45-Debug\Swagger\swagger-recursive-type.json" />
     <Content Include="bin\Net45-Debug\Swagger\swagger-simple-spec.json" />
     <Content Include="bin\Net45-Debug\Swagger\swagger-streaming.json" />
-    <Content Include="packages.config" />
+    <Content Include="tsconfig.json" />
+    <Content Include="tsd.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AcceptanceTests" />
@@ -148,6 +83,9 @@
     <Folder Include="bin\Net45-Debug\Swagger" />
     <Folder Include="Expected" />
     <Folder Include="Expected\AcceptanceTests\" />
+    <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\" />
+    <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\models\" />
+    <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\operations\" />
     <Folder Include="Expected\AcceptanceTests\AzureReport\" />
     <Folder Include="Expected\AcceptanceTests\AzureReport\models\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\" />
