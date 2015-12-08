@@ -383,7 +383,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LRORetrysPutAsyncRelativeRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LRORetrysPutAsyncRelativeRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -554,7 +554,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -697,7 +697,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LRORetrysDelete202Retry200Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LRORetrysDelete202Retry200Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -840,7 +840,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -994,7 +994,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LRORetrysPost202Retry200Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LRORetrysPost202Retry200Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -1150,7 +1150,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LRORetrysPostAsyncRelativeRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LRORetrysPostAsyncRelativeRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {

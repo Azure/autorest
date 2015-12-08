@@ -1618,7 +1618,7 @@ namespace Fixtures.PetstoreV2
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LoginUserHeaders>(JsonSerializer.Create(this.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LoginUserHeaders>(JsonSerializer.Create(this.DeserializationSettings));
             }
             catch (JsonException ex)
             {

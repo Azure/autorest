@@ -237,7 +237,7 @@ namespace Fixtures.AcceptanceTestsHeader
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HeaderResponseExistingKeyHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseExistingKeyHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -439,7 +439,7 @@ namespace Fixtures.AcceptanceTestsHeader
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HeaderResponseProtectedKeyHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseProtectedKeyHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -674,7 +674,7 @@ namespace Fixtures.AcceptanceTestsHeader
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HeaderResponseIntegerHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseIntegerHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -909,7 +909,7 @@ namespace Fixtures.AcceptanceTestsHeader
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HeaderResponseLongHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseLongHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -1144,7 +1144,7 @@ namespace Fixtures.AcceptanceTestsHeader
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HeaderResponseFloatHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseFloatHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -1379,7 +1379,7 @@ namespace Fixtures.AcceptanceTestsHeader
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HeaderResponseDoubleHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDoubleHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -1614,7 +1614,7 @@ namespace Fixtures.AcceptanceTestsHeader
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HeaderResponseBoolHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseBoolHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -1850,7 +1850,7 @@ namespace Fixtures.AcceptanceTestsHeader
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HeaderResponseStringHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseStringHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -2085,7 +2085,7 @@ namespace Fixtures.AcceptanceTestsHeader
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HeaderResponseDateHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDateHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -2323,7 +2323,7 @@ namespace Fixtures.AcceptanceTestsHeader
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HeaderResponseDatetimeHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDatetimeHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -2557,7 +2557,7 @@ namespace Fixtures.AcceptanceTestsHeader
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HeaderResponseDatetimeRfc1123Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDatetimeRfc1123Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -2792,7 +2792,7 @@ namespace Fixtures.AcceptanceTestsHeader
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HeaderResponseDurationHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDurationHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -3027,7 +3027,7 @@ namespace Fixtures.AcceptanceTestsHeader
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HeaderResponseByteHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseByteHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -3261,7 +3261,7 @@ namespace Fixtures.AcceptanceTestsHeader
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HeaderResponseEnumHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseEnumHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {

@@ -132,7 +132,7 @@ namespace Fixtures.AcceptanceTestsHttp
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsHead300Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HttpRedirectsHead300Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -242,7 +242,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsGet300Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HttpRedirectsGet300Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -339,7 +339,7 @@ namespace Fixtures.AcceptanceTestsHttp
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsHead301Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HttpRedirectsHead301Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -436,7 +436,7 @@ namespace Fixtures.AcceptanceTestsHttp
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsGet301Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HttpRedirectsGet301Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -543,7 +543,7 @@ namespace Fixtures.AcceptanceTestsHttp
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsPut301Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HttpRedirectsPut301Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -640,7 +640,7 @@ namespace Fixtures.AcceptanceTestsHttp
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsHead302Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HttpRedirectsHead302Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -737,7 +737,7 @@ namespace Fixtures.AcceptanceTestsHttp
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsGet302Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HttpRedirectsGet302Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -844,7 +844,7 @@ namespace Fixtures.AcceptanceTestsHttp
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsPatch302Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HttpRedirectsPatch302Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -951,7 +951,7 @@ namespace Fixtures.AcceptanceTestsHttp
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsPost303Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HttpRedirectsPost303Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -1048,7 +1048,7 @@ namespace Fixtures.AcceptanceTestsHttp
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsHead307Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HttpRedirectsHead307Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -1145,7 +1145,7 @@ namespace Fixtures.AcceptanceTestsHttp
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsGet307Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HttpRedirectsGet307Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -1250,7 +1250,7 @@ namespace Fixtures.AcceptanceTestsHttp
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsPut307Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HttpRedirectsPut307Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -1355,7 +1355,7 @@ namespace Fixtures.AcceptanceTestsHttp
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsPatch307Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HttpRedirectsPatch307Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -1460,7 +1460,7 @@ namespace Fixtures.AcceptanceTestsHttp
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsPost307Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HttpRedirectsPost307Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -1565,7 +1565,7 @@ namespace Fixtures.AcceptanceTestsHttp
             result.Response = httpResponse;
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HttpRedirectsDelete307Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HttpRedirectsDelete307Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {

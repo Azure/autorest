@@ -174,7 +174,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<HeaderCustomNamedRequestIdHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderCustomNamedRequestIdHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
