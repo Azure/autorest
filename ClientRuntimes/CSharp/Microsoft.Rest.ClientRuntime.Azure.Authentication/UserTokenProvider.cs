@@ -376,6 +376,19 @@ namespace Microsoft.Rest.Azure.Authentication
         /// Log in to azure active directory using device code authentication.
         /// </summary>
         /// <param name="clientId">The active directory client id for this application.</param>
+        /// <param name="deviceCodeHandler">User provided callback to display device code request. if returns false no token will be acquired.</param>
+        /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
+        public static async Task<ServiceClientCredentials> LoginByDeviceCodeAsync(
+            string clientId,
+            Func<DeviceCodeResult, bool> deviceCodeHandler)
+        {
+            return await LoginByDeviceCodeAsync(clientId, CommonTenantId, ActiveDirectoryServiceSettings.Azure, TokenCache.DefaultShared, deviceCodeHandler);
+        }
+
+        /// <summary>
+        /// Log in to azure active directory using device code authentication.
+        /// </summary>
+        /// <param name="clientId">The active directory client id for this application.</param>
         /// <param name="domain">The active directory domain or tenant id to authenticate with.</param>
         /// <param name="deviceCodeHandler">User provided callback to display device code request. if returns false no token will be acquired.</param>
         /// <returns>A ServiceClientCredentials object that can be used to authenticate http requests using the given credentials.</returns>
@@ -446,12 +459,15 @@ namespace Microsoft.Rest.Azure.Authentication
 
             try
             {
-                DeviceCodeResult codeResult = await authenticationContext.AcquireDeviceCodeAsync(serviceSettings.TokenAudience.ToString(),
-                      clientId).ConfigureAwait(false);
+                DeviceCodeResult codeResult = await authenticationContext.AcquireDeviceCodeAsync(
+                                                                                serviceSettings.TokenAudience.ToString(),
+                                                                                clientId)
+                                                                         .ConfigureAwait(false);
 
                 if (deviceCodeHandler(codeResult))
                 {
-                    AuthenticationResult authenticationResult = await authenticationContext.AcquireTokenByDeviceCodeAsync(codeResult);
+                    AuthenticationResult authenticationResult = await authenticationContext.AcquireTokenByDeviceCodeAsync(codeResult)
+                                                                                           .ConfigureAwait(false);
 
                     return new TokenCredentials(
                         new UserTokenProvider(
