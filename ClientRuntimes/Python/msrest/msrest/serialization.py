@@ -592,7 +592,7 @@ class Deserializer(object):
 
     def _unpack_content(self, raw_data):
 
-        if isinstance(raw_data, bytes):
+        if raw_data and isinstance(raw_data, bytes):
             data = raw_data.decode(
                 encoding=chardet.detect(raw_data)['encoding'])
 

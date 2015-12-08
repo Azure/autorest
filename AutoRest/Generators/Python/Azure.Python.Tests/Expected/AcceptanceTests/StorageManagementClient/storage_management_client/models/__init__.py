@@ -33,7 +33,7 @@ from .enums import (
     AccountStatus,
     KeyName,
     UsageUnit,
-    )
+)
 
 __all__ = [
     'StorageAccountCheckNameAvailabilityParameters',

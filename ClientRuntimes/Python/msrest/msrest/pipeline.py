@@ -211,8 +211,7 @@ class ClientRawResponse(object):
 
         for name, data_type in header_dict.items():
             value = self.response.headers.get(name)
-            if value:
-                value = self._deserialize(data_type, value)
+            value = self._deserialize(data_type, value)
 
             self.headers[name] = value
 

@@ -262,7 +262,7 @@ namespace Microsoft.Rest.Generator.Python
                 {
                     builder.AppendLine("client_raw_response.add_headers({").Indent();
                     AddHeaderDictionary(builder, (CompositeType)ReturnType.Headers);
-                    builder.AppendLine("})").Outdent();
+                    builder.Outdent().AppendLine("})");
                 }
                 builder.AppendLine("return client_raw_response").
                     Outdent();
@@ -349,7 +349,7 @@ namespace Microsoft.Rest.Generator.Python
                 {
                     builder.AppendLine("header_dict = {").Indent();
                     AddHeaderDictionary(builder, (CompositeType)headersType);
-                    builder.AppendLine("}").Outdent();
+                    builder.Outdent().AppendLine("}");
                 }
                 return builder.ToString();
             }

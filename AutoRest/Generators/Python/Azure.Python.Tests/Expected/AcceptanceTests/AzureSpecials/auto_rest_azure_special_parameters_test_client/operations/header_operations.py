@@ -75,5 +75,5 @@ class headerOperations(object):
             client_raw_response = ClientRawResponse(None, response)
             client_raw_response.add_headers({
                 'foo-request-id': 'str',
-                })
+            })
             return client_raw_response

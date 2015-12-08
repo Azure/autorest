@@ -671,7 +671,7 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
                 header_dict = {
                     'location': 'str',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -759,7 +759,7 @@ class lr_osOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -846,7 +846,7 @@ class lr_osOperations(object):
                 header_dict = {
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -934,7 +934,7 @@ class lr_osOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -1021,7 +1021,7 @@ class lr_osOperations(object):
                 header_dict = {
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -1106,7 +1106,7 @@ class lr_osOperations(object):
                 deserialized = self._deserialize('Product', response)
                 header_dict = {
                     'Azure-AsyncOperation': 'str',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -1500,13 +1500,13 @@ class lr_osOperations(object):
                 header_dict = {
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
             if response.status_code == 202:
                 deserialized = self._deserialize('Product', response)
                 header_dict = {
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -1584,13 +1584,13 @@ class lr_osOperations(object):
                 header_dict = {
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
             if response.status_code == 202:
                 deserialized = self._deserialize('Product', response)
                 header_dict = {
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -1668,13 +1668,13 @@ class lr_osOperations(object):
                 header_dict = {
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
             if response.status_code == 202:
                 deserialized = self._deserialize('Product', response)
                 header_dict = {
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -1813,7 +1813,7 @@ class lr_osOperations(object):
                 header_dict = {
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -1890,7 +1890,7 @@ class lr_osOperations(object):
                 header_dict = {
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -1963,7 +1963,7 @@ class lr_osOperations(object):
                 client_raw_response = ClientRawResponse(None, response)
                 client_raw_response.add_headers({
                     'Location': 'str',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -2030,7 +2030,7 @@ class lr_osOperations(object):
                 client_raw_response = ClientRawResponse(None, response)
                 client_raw_response.add_headers({
                     'Location': 'str',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -2099,7 +2099,7 @@ class lr_osOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -2168,7 +2168,7 @@ class lr_osOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -2237,7 +2237,7 @@ class lr_osOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -2306,7 +2306,7 @@ class lr_osOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -2457,7 +2457,7 @@ class lr_osOperations(object):
                 client_raw_response.add_headers({
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -2537,7 +2537,7 @@ class lr_osOperations(object):
                 header_dict = {
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -2625,7 +2625,7 @@ class lr_osOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -2713,7 +2713,7 @@ class lr_osOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    }
+                }
 
             if raw:
                 client_raw_response = ClientRawResponse(deserialized, response)
@@ -2798,7 +2798,7 @@ class lr_osOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
@@ -2877,7 +2877,7 @@ class lr_osOperations(object):
                     'Azure-AsyncOperation': 'str',
                     'Location': 'str',
                     'Retry-After': 'int',
-                    })
+                })
                 return client_raw_response
 
         long_running_operation_timeout = operation_config.get(
