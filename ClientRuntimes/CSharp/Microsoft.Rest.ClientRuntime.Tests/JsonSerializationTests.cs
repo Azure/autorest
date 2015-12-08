@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
 using System.Globalization;
 using System.Net.Http;
 using Microsoft.Rest.ClientRuntime.Tests.Resources;
@@ -259,6 +260,22 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             message.Headers.Add("h3", new string[] {"value1", "value2"});
             var json = message.Headers.ToJson().ToString();
             var expectedJsonString = string.Format("{{{0}  \"h1\": \"value\",{0}  \"h2\": \"\",{0}  \"h3\": [{0}    \"value1\",{0}    \"value2\"{0}  ]{0}}}", 
+                Environment.NewLine);
+            Assert.Equal(expectedJsonString, json);
+        }
+
+        [Fact]
+        public void HeaderKnownValuesGetSerializedToJson()
+        {
+            var message = new HttpResponseMessage();
+            message.Content = new StringContent("Test");
+            message.Headers.Add("h1", "value");
+            message.Headers.Add("h2", "");
+            message.Headers.Add("h3", new string[] { "value1", "value2" });
+
+            var json = message.GetHeadersAsJson().ToString();
+
+            var expectedJsonString = string.Format("{{{0}  \"h1\": \"value\",{0}  \"h2\": \"\",{0}  \"h3\": [{0}    \"value1\",{0}    \"value2\"{0}  ],{0}  \"Content-Type\": \"text/plain; charset=utf-8\"{0}}}",
                 Environment.NewLine);
             Assert.Equal(expectedJsonString, json);
         }
