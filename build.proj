@@ -87,7 +87,7 @@
 
   <!-- CI build related. -->
   <PropertyGroup>
-    <ContinueOnPoliCheckError>false</ContinueOnPoliCheckError>
+    <ContinueOnPoliCheckError>true</ContinueOnPoliCheckError>
     <!--OnPremiseBuildTasks is not a good name, but CI server is using that, will update across soon-->
     <CIToolsPath>$(OnPremiseBuildTasks)</CIToolsPath>
     <OnPremiseBuild Condition=" Exists('$(OnPremiseBuildTasks)') ">true</OnPremiseBuild>
