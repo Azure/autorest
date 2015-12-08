@@ -18,6 +18,8 @@ import java.util.Map;
 
 /**
  * The builder for building a {@link ServiceResponse}.
+ *
+ * @param <T> the return type from caller.
  */
 public class AzureServiceResponseBuilder<T> extends ServiceResponseBuilder<T> {
     /**
@@ -51,8 +53,8 @@ public class AzureServiceResponseBuilder<T> extends ServiceResponseBuilder<T> {
     public ServiceResponse<T> buildEmpty(Response<Void> response, Retrofit retrofit) throws ServiceException {
         int statusCode = response.code();
         if (responseTypes.containsKey(statusCode)) {
-            if (new TypeToken<T>(getClass()){}.getRawType().isAssignableFrom(Boolean.class)) {
-                return new ServiceResponse<T>((T)(Object)(statusCode / 100 == 2), response);
+            if (new TypeToken<T>(getClass()) { }.getRawType().isAssignableFrom(Boolean.class)) {
+                return new ServiceResponse<T>((T) (Object) (statusCode / 100 == 2), response);
             } else {
                 return new ServiceResponse<T>(null, response);
             }

@@ -5,6 +5,9 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+#if PORTABLE
+using Microsoft.Extensions.Logging;
+#endif
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
@@ -27,6 +30,15 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             EnsureService();
         }
 
+#if PORTABLE
+        private static readonly ILogger _logger;
+        static ServiceController()
+        {
+            var factory = new LoggerFactory();
+            _logger = factory.CreateLogger<ServiceController>();
+            factory.AddConsole();
+        }
+#endif
         /// <summary>
         /// Directory containing the acceptance test files.
         /// </summary>
@@ -62,12 +74,22 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public void Dispose()
         {
-            if (TearDown != null)
+            try
             {
-                TearDown();
+                if (TearDown != null)
+                {
+                    TearDown();
+                }
             }
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                Dispose(true);
+                GC.SuppressFinalize(this);
+            }
         }
 
         protected virtual void Dispose(bool disposing)
@@ -195,9 +217,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         private static void EndServiceProcess(Process process)
         {
+            //_logger.LogInformation("Begin killing process...");
             process.Kill();
             process.WaitForExit(2000);
             process.Dispose();
+            //_logger.LogInformation("Process killed...");
         }
     }
 }

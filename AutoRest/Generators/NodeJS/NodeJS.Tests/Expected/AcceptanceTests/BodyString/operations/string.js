@@ -159,7 +159,7 @@ String.prototype.putNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var stringBody = options ? options.stringBody : undefined;
+  var stringBody = (options && options.stringBody !== undefined) ? options.stringBody : undefined;
   // Validate
   try {
     if (stringBody !== null && stringBody !== undefined && typeof stringBody.valueOf() !== 'string') {

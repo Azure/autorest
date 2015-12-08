@@ -12,15 +12,20 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import com.microsoft.rest.DateTimeRfc1123;
+
 import java.io.IOException;
 
 /**
  * Custom serializer for serializing {@link DateTimeRfc1123} object into RFC1123 formats.
  */
 public class DateTimeRfc1123Serializer extends JsonSerializer<DateTimeRfc1123> {
+    /**
+     * Gets a module wrapping this serializer as an adapter for the Jackson
+     * ObjectMapper.
+     *
+     * @return a simple module to be plugged onto Jackson ObjectMapper.
+     */
     public static SimpleModule getModule() {
         SimpleModule module = new SimpleModule();
         module.addSerializer(DateTimeRfc1123.class, new DateTimeRfc1123Serializer());

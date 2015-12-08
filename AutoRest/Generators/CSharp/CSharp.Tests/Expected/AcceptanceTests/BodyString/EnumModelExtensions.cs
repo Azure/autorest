@@ -42,7 +42,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task<Colors?> GetNotExpandableAsync( this IEnumModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Colors?> result = await operations.GetNotExpandableWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetNotExpandableWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

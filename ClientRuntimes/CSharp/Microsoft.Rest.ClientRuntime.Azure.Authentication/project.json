@@ -7,11 +7,16 @@
   "projectUrl": "https://github.com/Azure/AutoRest",
   "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
   "copyright": "Copyright (c) Microsoft Corporation",
-  "requireLicenseAcceptance":  true,
+  "requireLicenseAcceptance": true,
+
+  "compilationOptions": {
+    "delaySign": true,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk"
+  },
 
   "dependencies": {
-    "Microsoft.Rest.ClientRuntime": "[1.5,2.0)"
-   },
+    "Microsoft.Rest.ClientRuntime": "[1.6.0,2.0)"
+  },
 
   "frameworks": {
     "dnxcore50": {

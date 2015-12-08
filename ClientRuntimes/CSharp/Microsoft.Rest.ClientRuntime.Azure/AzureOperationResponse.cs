@@ -39,6 +39,15 @@ namespace Microsoft.Rest.Azure
         public string RequestId { get; set; }
     }
 
+    public class AzureOperationHeaderResponse<THeader> : HttpOperationHeaderResponse<THeader>, IAzureOperationResponse
+    {
+        /// <summary>
+        /// Gets or sets the value that uniquely identifies a request 
+        /// made against the service.
+        /// </summary>
+        public string RequestId { get; set; }
+    }
+
     /// <summary>
     /// A standard service response including request ID.
     /// </summary>

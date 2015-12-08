@@ -17,10 +17,16 @@
  * Additional parameters for the postOptional operation.
  * @member {string} [customHeader]
  * 
- * @member {number} [query] Query parameter with default
+ * @member {number} [query] Query parameter with default. Default value: 30 .
  * 
  */
 function ParameterGroupingPostOptionalParameters(parameters) {
+  if (parameters === null || parameters === undefined) {
+    parameters = {};
+  }
+  if (parameters.query === undefined) {
+    parameters.query = 30;
+  }
   if (parameters !== null && parameters !== undefined) {
     if (parameters.customHeader !== undefined) {
       this.customHeader = parameters.customHeader;

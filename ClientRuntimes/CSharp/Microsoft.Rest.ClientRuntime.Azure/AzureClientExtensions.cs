@@ -160,6 +160,42 @@ namespace Microsoft.Rest.Azure
         /// <summary>
         /// Gets operation result for DELETE and POST operations.
         /// </summary>
+        /// <typeparam name="THeader">Type of the resource headers</typeparam>
+        /// <param name="client">IAzureClient</param>
+        /// <param name="response">Response from the begin operation</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Operation response</returns>
+        public static async Task<AzureOperationHeaderResponse<THeader>> GetPostOrDeleteOperationResultAsync<THeader>(
+            this IAzureClient client,
+            AzureOperationHeaderResponse<THeader> response,
+            Dictionary<string, List<string>> customHeaders,
+            CancellationToken cancellationToken) where THeader : class
+        {
+            if (response == null)
+            {
+                throw new ArgumentNullException("response");
+            }
+            var headerlessResponse = new AzureOperationResponse<object, THeader>
+            {
+                Headers = response.Headers,
+                Request = response.Request,
+                RequestId = response.RequestId,
+                Response = response.Response
+            };
+            var longRunningResponse = await GetPostOrDeleteOperationResultAsync(client, headerlessResponse, customHeaders, cancellationToken);
+            return new AzureOperationHeaderResponse<THeader>
+            {
+                Headers = longRunningResponse.Headers,
+                Request = longRunningResponse.Request,
+                RequestId = longRunningResponse.RequestId,
+                Response = longRunningResponse.Response
+            };
+        }
+
+        /// <summary>
+        /// Gets operation result for DELETE and POST operations.
+        /// </summary>
         /// <typeparam name="TBody">Type of the resource body</typeparam>
         /// <typeparam name="THeader">Type of the resource header</typeparam>
         /// <param name="client">IAzureClient</param>

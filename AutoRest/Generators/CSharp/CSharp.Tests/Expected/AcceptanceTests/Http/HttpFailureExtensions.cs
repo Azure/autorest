@@ -40,7 +40,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static async Task<bool?> GetEmptyErrorAsync( this IHttpFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<bool?> result = await operations.GetEmptyErrorWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetEmptyErrorWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

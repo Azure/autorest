@@ -11,7 +11,7 @@ import org.junit.Test;
 import java.util.UUID;
 
 public class XMsClientRequestIdTests {
-    static AutoRestAzureSpecialParametersTestClient client;
+    private static AutoRestAzureSpecialParametersTestClient client;
 
     @BeforeClass
     public static void setup() {
@@ -23,7 +23,7 @@ public class XMsClientRequestIdTests {
     public void get() throws Exception {
         for (Interceptor i : client.getClientInterceptors()) {
             if (i instanceof CustomHeaderInterceptor) {
-                ((CustomHeaderInterceptor)i).removeHeader("x-ms-client-request-id");
+                ((CustomHeaderInterceptor) i).removeHeader("x-ms-client-request-id");
             }
         }
         CustomHeaderInterceptor interceptor = new CustomHeaderInterceptor("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
@@ -37,7 +37,7 @@ public class XMsClientRequestIdTests {
     public void paramGet() throws Exception {
         for (Interceptor i : client.getClientInterceptors()) {
             if (i instanceof CustomHeaderInterceptor) {
-                ((CustomHeaderInterceptor)i).removeHeader("x-ms-client-request-id");
+                ((CustomHeaderInterceptor) i).removeHeader("x-ms-client-request-id");
             }
         }
         ServiceResponse<Void> response = client.getXMsClientRequestId().paramGet("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");

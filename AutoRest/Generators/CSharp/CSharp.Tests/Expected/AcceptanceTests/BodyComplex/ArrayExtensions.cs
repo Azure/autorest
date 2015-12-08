@@ -40,7 +40,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<ArrayWrapper> GetValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<ArrayWrapper> result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -95,7 +95,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<ArrayWrapper> GetEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<ArrayWrapper> result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -152,7 +152,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<ArrayWrapper> GetNotProvidedAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<ArrayWrapper> result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

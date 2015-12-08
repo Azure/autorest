@@ -707,7 +707,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
                 new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
             {
-                AzureOperationResponse response = client.Header.CustomNamedRequestIdWithHttpMessagesAsync(expectedRequestId).Result;
+                IAzureOperationResponse response = client.Header.CustomNamedRequestIdWithHttpMessagesAsync(expectedRequestId).Result;
 
                 Assert.Equal("123", response.RequestId);
             }

@@ -4,7 +4,7 @@
 @using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.Azure.PageTemplateModel>
 /**
-@Header(" * ")
+@Header(" * ").TrimMultilineHeader()
  */
 @EmptyLine
 
@@ -16,24 +16,40 @@ package @(Settings.Namespace.ToLower()).models;
 }
 @EmptyLine
 
+/**
+ * An instance of this class defines a page of Azure resources and a link to
+ * get the next page of resources, if any.
+ *
+ * @@param <T> type of Azure resource
+ */
 public class @Model.TypeDefinitionName<T> implements Page<T> {
-    /*
+    /**
      * The link to the next page.
      */
     @@JsonProperty("@Model.NextLinkName")
     private String nextPageLink;
     @EmptyLine
-    /*
+    /**
      * The list of items.
      */
     @@JsonProperty("@Model.ItemName")
     private List<T> items;
     @EmptyLine
+    /**
+     * Gets the link to the next page.
+     *
+     * @@return the link to the next page.
+     */
     @@Override
     public String getNextPageLink() {
         return this.nextPageLink;
     }
     @EmptyLine
+    /**
+     * Gets the list of items.
+     *
+     * @@return the list of items in {@@link List}.
+     */
     @@Override
     public List<T> getItems() {
         return items;

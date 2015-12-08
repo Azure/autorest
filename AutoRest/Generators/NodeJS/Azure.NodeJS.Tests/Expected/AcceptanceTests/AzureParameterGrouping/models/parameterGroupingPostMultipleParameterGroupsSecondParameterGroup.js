@@ -17,10 +17,17 @@
  * Additional parameters for the postMultipleParameterGroups operation.
  * @member {string} [headerTwo]
  * 
- * @member {number} [queryTwo] Query parameter with default
+ * @member {number} [queryTwo] Query parameter with default. Default value: 30
+ * .
  * 
  */
 function ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup(parameters) {
+  if (parameters === null || parameters === undefined) {
+    parameters = {};
+  }
+  if (parameters.queryTwo === undefined) {
+    parameters.queryTwo = 30;
+  }
   if (parameters !== null && parameters !== undefined) {
     if (parameters.headerTwo !== undefined) {
       this.headerTwo = parameters.headerTwo;

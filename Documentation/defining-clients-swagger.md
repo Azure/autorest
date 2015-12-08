@@ -25,7 +25,7 @@ The primitive types are based on [JSON-Schema Draft 4](JSON-primitive-types). Mo
 
 **Example:**
 ```json
-"defitions": {
+"definitions": {
   "pet": {
     "properties": {
       "name": {

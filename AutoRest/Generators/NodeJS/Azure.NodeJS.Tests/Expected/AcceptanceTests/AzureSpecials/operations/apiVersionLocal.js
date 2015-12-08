@@ -172,7 +172,7 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var apiVersion = options ? options.apiVersion : undefined;
+  var apiVersion = (options && options.apiVersion !== undefined) ? options.apiVersion : undefined;
   // Validate
   try {
     if (apiVersion !== null && apiVersion !== undefined && typeof apiVersion.valueOf() !== 'string') {

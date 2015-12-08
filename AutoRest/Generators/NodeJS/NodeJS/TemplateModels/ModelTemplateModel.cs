@@ -215,6 +215,35 @@ namespace Microsoft.Rest.Generator.NodeJS
             return property.Type.InitializeType(_scope, objectName + "." + property.Name, valueName + "." + property.Name);
         }
 
+        public string AssignDefaultValues()
+        {
+            IEnumerable<Property> optionalParamsWithDefaultsList = Properties.Where(p => !p.IsRequired && !string.IsNullOrWhiteSpace(p.DefaultValue));
+            var builder = new IndentedStringBuilder("  ");
+            if (optionalParamsWithDefaultsList.Count() > 0)
+            {
+                builder.AppendLine("if (parameters === null || parameters === undefined) {")
+                         .Indent()
+                         .AppendLine("parameters = {};")
+                       .Outdent()
+                       .AppendLine("}");
+                foreach (var optionalParamWithDefault in optionalParamsWithDefaultsList)
+                {
+                    builder.AppendLine("if (parameters.{0} === undefined) {{", optionalParamWithDefault.Name).Indent();
+                    if (optionalParamWithDefault.Type == PrimaryType.String || optionalParamWithDefault.Type is EnumType)
+                    {
+                        builder.AppendLine("parameters.{0} = '{1}';", optionalParamWithDefault.Name, optionalParamWithDefault.DefaultValue);
+                    }
+                    else
+                    {
+                        builder.AppendLine("parameters.{0} = {1};", optionalParamWithDefault.Name, optionalParamWithDefault.DefaultValue);
+                    }
+                             
+                    builder.Outdent().AppendLine("}");
+                }
+            }
+            return builder.ToString();
+        }
+
         public string SerializeProperty(string objectName, string serializedName, Property property)
         {
             if (property == null || property.Type == null)
@@ -227,7 +256,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             var serializedPropertyName = string.Format(CultureInfo.InvariantCulture,
                 "{0}['{1}']", serializedName, property.SerializedName.Replace(".", "']['"));
 
-            return property.Type.SerializeType(_scope, propertyName, serializedPropertyName, property.IsRequired, "models");
+            return property.Type.SerializeType(_scope, propertyName, serializedPropertyName, property.IsRequired, property.Constraints, "models");
         }
 
         public string DeserializeProperty(string objectName, string valueName, Property property)
@@ -268,6 +297,32 @@ namespace Microsoft.Rest.Generator.NodeJS
         }
 
         /// <summary>
+        /// Provides the property documentation string along with default value if any.
+        /// </summary>
+        /// <param name="property">Parameter to be documented</param>
+        /// <returns>Parameter documentation string along with default value if any 
+        /// in correct jsdoc notation</returns>
+        public static string GetPropertyDocumentationString(Property property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
+            string documentation = property.Documentation;
+            if (!string.IsNullOrWhiteSpace(property.DefaultValue))
+            {
+                if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))
+                {
+                    documentation += ".";
+                }
+                documentation += " Default value: " + property.DefaultValue + " .";
+            }
+            
+            return documentation;
+        }
+
+        /// <summary>
         /// Provides the type of the property
         /// </summary>
         /// <param name="property">Parameter to be documented</param>
@@ -294,6 +349,6 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
 
             return typeName.ToLower(CultureInfo.InvariantCulture);
-        }
+        } 
     }
 }

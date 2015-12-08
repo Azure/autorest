@@ -165,7 +165,7 @@ ArrayModel.prototype.putValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var arrayParameter = options ? options.arrayParameter : undefined;
+  var arrayParameter = (options && options.arrayParameter !== undefined) ? options.arrayParameter : undefined;
   // Validate
   try {
     if (util.isArray(arrayParameter)) {
@@ -394,7 +394,7 @@ ArrayModel.prototype.putEmpty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var arrayParameter = options ? options.arrayParameter : undefined;
+  var arrayParameter = (options && options.arrayParameter !== undefined) ? options.arrayParameter : undefined;
   // Validate
   try {
     if (util.isArray(arrayParameter)) {

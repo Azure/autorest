@@ -225,7 +225,7 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var parameterGroupingPostOptionalParameters = options ? options.parameterGroupingPostOptionalParameters : undefined;
+  var parameterGroupingPostOptionalParameters = (options && options.parameterGroupingPostOptionalParameters !== undefined) ? options.parameterGroupingPostOptionalParameters : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -363,8 +363,8 @@ ParameterGrouping.prototype.postMultipleParameterGroups = function (options, cal
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var firstParameterGroup = options ? options.firstParameterGroup : undefined;
-  var parameterGroupingPostMultipleParameterGroupsSecondParameterGroup = options ? options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup : undefined;
+  var firstParameterGroup = (options && options.firstParameterGroup !== undefined) ? options.firstParameterGroup : undefined;
+  var parameterGroupingPostMultipleParameterGroupsSecondParameterGroup = (options && options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup !== undefined) ? options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -507,7 +507,7 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var firstParameterGroup = options ? options.firstParameterGroup : undefined;
+  var firstParameterGroup = (options && options.firstParameterGroup !== undefined) ? options.firstParameterGroup : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {

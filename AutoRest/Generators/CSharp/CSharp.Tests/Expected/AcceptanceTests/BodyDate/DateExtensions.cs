@@ -40,7 +40,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static async Task<DateTime?> GetNullAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -66,7 +66,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static async Task<DateTime?> GetInvalidDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetInvalidDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetInvalidDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -92,7 +92,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static async Task<DateTime?> GetOverflowDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetOverflowDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetOverflowDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -118,7 +118,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static async Task<DateTime?> GetUnderflowDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetUnderflowDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetUnderflowDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -173,7 +173,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static async Task<DateTime?> GetMaxDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetMaxDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetMaxDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -228,7 +228,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static async Task<DateTime?> GetMinDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateTime?> result = await operations.GetMinDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetMinDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

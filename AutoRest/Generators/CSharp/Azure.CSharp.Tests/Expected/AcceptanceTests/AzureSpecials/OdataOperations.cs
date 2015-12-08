@@ -19,6 +19,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using Microsoft.Rest.Azure.OData;
     using Microsoft.Rest.Azure;
@@ -54,7 +55,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// 'foo'&amp;$orderby=id&amp;$top=10'
         /// </summary>
         /// <param name='odataQuery'>
-        /// The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
+        /// OData parameters to apply to the operation.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.

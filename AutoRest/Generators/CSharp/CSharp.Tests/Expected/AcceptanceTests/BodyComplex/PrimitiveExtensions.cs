@@ -40,7 +40,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<IntWrapper> GetIntAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<IntWrapper> result = await operations.GetIntWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetIntWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -97,7 +97,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<LongWrapper> GetLongAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<LongWrapper> result = await operations.GetLongWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetLongWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -154,7 +154,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<FloatWrapper> GetFloatAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<FloatWrapper> result = await operations.GetFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -211,7 +211,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<DoubleWrapper> GetDoubleAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DoubleWrapper> result = await operations.GetDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -270,7 +270,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<BooleanWrapper> GetBoolAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<BooleanWrapper> result = await operations.GetBoolWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetBoolWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -327,7 +327,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<StringWrapper> GetStringAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<StringWrapper> result = await operations.GetStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -384,7 +384,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<DateWrapper> GetDateAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DateWrapper> result = await operations.GetDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -441,7 +441,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<DatetimeWrapper> GetDateTimeAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DatetimeWrapper> result = await operations.GetDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -498,7 +498,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<Datetimerfc1123Wrapper> GetDateTimeRfc1123Async( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Datetimerfc1123Wrapper> result = await operations.GetDateTimeRfc1123WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetDateTimeRfc1123WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -557,7 +557,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<DurationWrapper> GetDurationAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<DurationWrapper> result = await operations.GetDurationWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetDurationWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -612,7 +612,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<ByteWrapper> GetByteAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<ByteWrapper> result = await operations.GetByteWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetByteWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

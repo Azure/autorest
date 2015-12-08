@@ -128,7 +128,7 @@
   }
   else
   {
-    @:@(Model.RequestBody.Type.SerializeType(Model.Scope, Model.RequestBody.Name, "requestModel", Model.RequestBody.IsRequired))
+    @:@(Model.RequestBody.Type.SerializeType(Model.Scope, Model.RequestBody.Name, "requestModel", Model.RequestBody.IsRequired, Model.RequestBody.Constraints))
     @:requestContent = JSON.stringify(requestModel);
   }
   } catch (error) {

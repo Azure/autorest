@@ -26,36 +26,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 
             ParameterTemplateModels.Clear();
             LogicalParameterTemplateModels.Clear();
-            bool filterParamaterExists = false;
-            foreach (var parameter in source.Parameters)
-            {
-                var parameterTemplateModel = new AzureParameterTemplateModel(parameter);
-                // Add only one filter parameter
-                if (!parameterTemplateModel.IsODataFilterExpression || !filterParamaterExists)
-                {
-                    ParameterTemplateModels.Add(parameterTemplateModel);
-                }
-
-                if (parameterTemplateModel.IsODataFilterExpression)
-                {
-                    filterParamaterExists = true;
-                }
-            }
-            bool logicalFilterParamaterExists = false;
-            foreach (var parameter in source.LogicalParameters)
-            {
-                var parameterTemplateModel = new AzureParameterTemplateModel(parameter);
-                // Add only one filter parameter
-                if (!parameterTemplateModel.IsODataFilterExpression || !logicalFilterParamaterExists)
-                {
-                    LogicalParameterTemplateModels.Add(parameterTemplateModel);
-                }
-
-                if (parameterTemplateModel.IsODataFilterExpression)
-                {
-                    logicalFilterParamaterExists = true;
-                }
-            }
+            source.Parameters.ForEach(p => ParameterTemplateModels.Add(new AzureParameterTemplateModel(p)));
+            source.LogicalParameters.ForEach(p => LogicalParameterTemplateModels.Add(new AzureParameterTemplateModel(p)));
             if (MethodGroupName != ServiceClient.Name)
             {
                 MethodGroupName = MethodGroupName + "Operations";
@@ -151,6 +123,11 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                         return string.Format(CultureInfo.InvariantCulture,
                                     "AzureOperationResponse<{0}>", bodyName);
                     }
+                }
+                else if (ReturnType.Headers != null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                                    "AzureOperationHeaderResponse<{0}>", ReturnType.Headers.Name);
                 }
                 else
                 {

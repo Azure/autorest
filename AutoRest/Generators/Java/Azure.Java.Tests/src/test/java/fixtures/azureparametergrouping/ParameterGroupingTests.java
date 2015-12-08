@@ -5,15 +5,11 @@ import fixtures.azureparametergrouping.models.FirstParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
-import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.UUID;
-
 public class ParameterGroupingTests {
-    static AutoRestParameterGroupingTestService client;
+    private static AutoRestParameterGroupingTestService client;
 
     @BeforeClass
     public static void setup() {

@@ -9,6 +9,8 @@ package com.microsoft.rest;
 
 /**
  * The callback used for client side asynchronous operations.
+ *
+ * @param <T> the type of the response
  */
 public abstract class ServiceCallback<T> {
     /**

@@ -14,6 +14,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * functionality useful for Azure operations.
  */
 public final class AzureJacksonUtils extends JacksonUtils {
+    /**
+     * An instance of {@link ObjectMapper} to serialize/deserialize objects.
+     */
     private ObjectMapper azureObjectMapper;
 
     @Override

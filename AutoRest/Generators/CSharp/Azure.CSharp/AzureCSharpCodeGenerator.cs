@@ -18,7 +18,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
     {
         private readonly AzureCSharpCodeNamer _namer;
 
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.2.1.0";
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.2.3.0";
 
         // page extensions class dictionary.
         private IDictionary<KeyValuePair<string, string>, string> pageClasses;
@@ -65,6 +65,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
             _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
+            _namer.NormalizeODataMethods(serviceClient);
 
             if (serviceClient != null)
             {

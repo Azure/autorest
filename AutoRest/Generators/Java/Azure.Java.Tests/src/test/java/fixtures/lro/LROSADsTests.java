@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
 import static org.junit.Assert.fail;
 
 public class LROSADsTests {
-    static AutoRestLongRunningOperationTestService client;
+    private static AutoRestLongRunningOperationTestService client;
 
     @BeforeClass
     public static void setup() {
