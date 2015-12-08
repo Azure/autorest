@@ -11,6 +11,7 @@ AutoRest/**/Templates/*.cs
 *.sln.docstates
 .vs
 developer/
+launchSettings.json
 
 # Build results
 binaries/
