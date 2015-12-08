@@ -20,12 +20,11 @@
     <Content Include="README.md" />
     <Compile Include="lib\azureEnvironment.js" />
     <Compile Include="lib\azureServiceClient.js" />
+    <Compile Include="lib\baseResource.js" />
     <Compile Include="lib\cloudError.js" />
     <Compile Include="lib\constants.js" />
     <Compile Include="lib\msRestAzure.js" />
     <Compile Include="lib\pollingState.js" />
-    <Compile Include="lib\resource.js" />
-    <Compile Include="lib\subResource.js" />
     <Compile Include="lib\utils.js" />
     <Content Include="test\testlist.txt" />
     <Content Include="test\package.json" />

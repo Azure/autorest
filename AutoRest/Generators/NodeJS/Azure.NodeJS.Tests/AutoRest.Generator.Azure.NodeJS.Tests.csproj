@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(SolutionDir)\packages\xunit.core.2.1.0-beta4-build3109\build\portable-net45+netcore45+wp8+wpa81\xunit.core.props" Condition="Exists('$(SolutionDir)\packages\xunit.core.2.1.0-beta4-build3109\build\portable-net45+netcore45+wp8+wpa81\xunit.core.props')" />
-  <Import Project="$(SolutionDir)\packages\xunit.runner.visualstudio.2.1.0-beta4-build1109\build\net20\xunit.runner.visualstudio.props" Condition="Exists('$(SolutionDir)\packages\xunit.runner.visualstudio.2.1.0-beta4-build1109\build\net20\xunit.runner.visualstudio.props')" />
+  <Import Project="..\..\..\..\packages\xunit.runner.msbuild.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.runner.msbuild.props" Condition="Exists('..\..\..\..\packages\xunit.runner.msbuild.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.runner.msbuild.props')" />
+  <Import Project="..\..\..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
+  <Import Project="..\..\..\..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props" Condition="Exists('..\..\..\..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -14,7 +16,7 @@
     <AssemblyName>AutoRest.Generator.Azure.NodeJS.Tests</AssemblyName>
     <RestorePackages>true</RestorePackages>
     <AutoRestTest>true</AutoRestTest>
-    <NuGetPackageImportStamp>2c7e2ccf</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>7df0f363</NuGetPackageImportStamp>
     <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
@@ -30,11 +32,18 @@
     <Reference Include="xunit.abstractions">
       <HintPath>$(SolutionDir)\packages\xunit.abstractions.2.0.0\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.assert">
-      <HintPath>$(SolutionDir)\packages\xunit.assert.2.1.0-beta4-build3109\lib\portable-net45+netcore45+wp8+wpa81\xunit.assert.dll</HintPath>
+    <Reference Include="xunit.assert, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\xunit.assert.2.1.0\lib\portable-net45+win8+wp8+wpa81\xunit.assert.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="xunit.core">
-      <HintPath>$(SolutionDir)\packages\xunit.extensibility.core.2.1.0-beta4-build3109\lib\portable-net45+netcore45+wp8+wpa81\xunit.core.dll</HintPath>
+    <Reference Include="xunit.core, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\xunit.extensibility.core.2.1.0\lib\portable-net45+win8+wp8+wpa81\xunit.core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.execution.desktop, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\packages\xunit.extensibility.execution.2.1.0\lib\net45\xunit.execution.desktop.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -52,10 +61,6 @@
     <ProjectReference Include="..\..\..\Modelers\Swagger\AutoRest.Modeler.Swagger.csproj">
       <Project>{9517265e-5127-460c-9dde-fe017d73121c}</Project>
       <Name>AutoRest.Modeler.Swagger</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Azure.Common\Azure.Common\AutoRest.Generator.Azure.Common.csproj">
-      <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
-      <Name>AutoRest.Generator.Azure.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Azure.NodeJS\AutoRest.Generator.Azure.NodeJS.csproj">
       <Project>{909BF4EF-4ECA-4AC4-8E21-CDCF05393161}</Project>
@@ -109,106 +114,10 @@
     <Content Include="AcceptanceTests\startServer.js" />
     <Content Include="AcceptanceTests\subscriptionIdApiVersion.js" />
     <Content Include="AcceptanceTests\testlist.txt" />
-    <Content Include="Expected\AcceptanceTests\AzureReport\autoRestReportServiceForAzure.js" />
-    <Content Include="Expected\AcceptanceTests\AzureReport\models\errorModel.js" />
-    <Content Include="Expected\AcceptanceTests\AzureReport\models\index.js" />
-    <Content Include="Expected\AcceptanceTests\AzureSpecials\autoRestAzureSpecialParametersTestClient.js" />
-    <Content Include="Expected\AcceptanceTests\AzureSpecials\models\errorModel.js" />
-    <Content Include="Expected\AcceptanceTests\AzureSpecials\models\index.js" />
-    <Content Include="Expected\AcceptanceTests\AzureSpecials\operations\apiVersionDefault.js" />
-    <Content Include="Expected\AcceptanceTests\AzureSpecials\operations\apiVersionLocal.js" />
-    <Content Include="Expected\AcceptanceTests\AzureSpecials\operations\index.js" />
-    <Content Include="Expected\AcceptanceTests\AzureSpecials\operations\skipUrlEncoding.js" />
-    <Content Include="Expected\AcceptanceTests\AzureSpecials\operations\subscriptionInCredentials.js" />
-    <Content Include="Expected\AcceptanceTests\AzureSpecials\operations\subscriptionInMethod.js" />
-    <Content Include="Expected\AcceptanceTests\AzureSpecials\operations\xMsClientRequestId.js" />
-    <Content Include="Expected\AcceptanceTests\Head\autoRestHeadTestService.js" />
-    <Content Include="Expected\AcceptanceTests\Head\models\index.js" />
-    <Content Include="Expected\AcceptanceTests\Head\operations\httpSuccess.js" />
-    <Content Include="Expected\AcceptanceTests\Head\operations\index.js" />
-    <Content Include="Expected\AcceptanceTests\Lro\autoRestLongRunningOperationTestService.js" />
-    <Content Include="Expected\AcceptanceTests\Lro\models\index.js" />
-    <Content Include="Expected\AcceptanceTests\Lro\models\operationResult.js" />
-    <Content Include="Expected\AcceptanceTests\Lro\models\operationResultError.js" />
-    <Content Include="Expected\AcceptanceTests\Lro\models\product.js" />
-    <Content Include="Expected\AcceptanceTests\Lro\models\sku.js" />
-    <Content Include="Expected\AcceptanceTests\Lro\models\subProduct.js" />
-    <Content Include="Expected\AcceptanceTests\Lro\operations\index.js" />
-    <Content Include="Expected\AcceptanceTests\Lro\operations\lRORetrys.js" />
-    <Content Include="Expected\AcceptanceTests\Lro\operations\lROs.js" />
-    <Content Include="Expected\AcceptanceTests\Lro\operations\lROSADs.js" />
-    <Content Include="Expected\AcceptanceTests\Lro\operations\lROsCustomHeader.js" />
-    <Content Include="Expected\AcceptanceTests\Paging\autoRestPagingTestService.js" />
-    <Content Include="Expected\AcceptanceTests\Paging\models\index.js" />
-    <Content Include="Expected\AcceptanceTests\Paging\models\operationResult.js" />
-    <Content Include="Expected\AcceptanceTests\Paging\models\product.js" />
-    <Content Include="Expected\AcceptanceTests\Paging\models\productProperties.js" />
-    <Content Include="Expected\AcceptanceTests\Paging\models\productResult.js" />
-    <Content Include="Expected\AcceptanceTests\Paging\operations\index.js" />
-    <Content Include="Expected\AcceptanceTests\Paging\operations\paging.js" />
-    <Content Include="Expected\AcceptanceTests\ResourceFlattening\autoRestResourceFlatteningTestService.js" />
-    <Content Include="Expected\AcceptanceTests\ResourceFlattening\models\errorModel.js" />
-    <Content Include="Expected\AcceptanceTests\ResourceFlattening\models\flattenedProduct.js" />
-    <Content Include="Expected\AcceptanceTests\ResourceFlattening\models\index.js" />
-    <Content Include="Expected\AcceptanceTests\ResourceFlattening\models\resourceCollection.js" />
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\bar.js">
+    <Content Include="Expected\**\*.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\checkNameAvailabilityResult.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\customDomain.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\endpoints.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\foo.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\index.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccount.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountCheckNameAvailabilityParameters.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountCreateParameters.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountKeys.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountListResult.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountRegenerateKeyParameters.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\storageAccountUpdateParameters.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\usage.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\usageListResult.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\models\usageName.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\operations\index.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\operations\storageAccounts.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\operations\usageOperations.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Expected\AcceptanceTests\StorageManagementClient\storageManagementClient.js">
+    <Content Include="Expected\**\*.d.ts">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\microsoftAzureTestUrl.js" />
@@ -219,4 +128,12 @@
     <Content Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\operations\index.js" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props'))" />
+    <Error Condition="!Exists('..\..\..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
+    <Error Condition="!Exists('..\..\..\..\packages\xunit.runner.msbuild.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.runner.msbuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\xunit.runner.msbuild.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.runner.msbuild.props'))" />
+  </Target>
 </Project>

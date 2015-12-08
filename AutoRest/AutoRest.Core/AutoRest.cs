@@ -39,9 +39,9 @@ namespace Microsoft.Rest.Generator
             }
             Logger.Entries.Clear();
             Logger.LogInfo(Resources.AutoRestCore, Version);
-            settings.Validate();
             CodeGenerator codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
             Modeler modeler = ExtensionsLoader.GetModeler(settings);
+            settings.Validate();
             ServiceClient serviceClient;
             try
             {

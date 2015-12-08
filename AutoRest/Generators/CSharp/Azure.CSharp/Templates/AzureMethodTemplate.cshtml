@@ -15,17 +15,17 @@
 }
 else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
 {
-@if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
 {
 @:/// <summary>
 @:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
 @:/// </summary>
 }
-@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
 {
 @:@WrapComment("/// ", Model.Description.EscapeXmlComment())
 }
-@foreach (var parameter in Model.LocalParameters)
+foreach (var parameter in Model.LocalParameters)
 {
 @:/// <param name='@parameter.Name'>
 @WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
@@ -50,17 +50,17 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
 }
 else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Patch)
 {
-@if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
 {
 @:/// <summary>
 @:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
 @:/// </summary>
 }
-@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
 {
 @:@WrapComment("/// ", Model.Description.EscapeXmlComment())
 }
-@foreach (var parameter in Model.LocalParameters)
+foreach (var parameter in Model.LocalParameters)
 {
 @:/// <param name='@parameter.Name'>
 @WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
@@ -79,7 +79,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithHttpMessagesAsync(
         @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
 
-    return await @(Model.ClientReference).GetPutOrPatchOperationResultAsync<@(Model.ReturnType.Name)>(response,
+    return await @(Model.ClientReference).GetPutOrPatchOperationResultAsync(response,
         customHeaders,
         cancellationToken);
 }

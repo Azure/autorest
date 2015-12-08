@@ -78,6 +78,27 @@
         }
       }
     },
+    "/number/invaliddecimal": {
+      "get": {
+        "operationId": "number_getInvalidDecimal",
+        "description": "Get invalid decimal Number value",
+        "responses": {
+          "200": {
+            "description": "The invalid decimal number value",
+            "schema": {
+              "type": "number",
+              "format": "decimal"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/number/big/float/3.402823e+20": {
       "put": {
         "operationId": "number_putBigFloat",
@@ -272,6 +293,152 @@
         }
       }
     },
+    "/number/big/decimal/2.5976931e+101": {
+      "put": {
+        "operationId": "number_putBigDecimal",
+        "description": "Put big decimal value 2.5976931e+101",
+        "parameters": [
+          {
+            "name": "numberBody",
+            "in": "body",
+            "schema": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The big decimal value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "number_getBigDecimal",
+        "description": "Get big decimal value 2.5976931e+101",
+        "responses": {
+          "200": {
+            "description": "The big decimal value 2.5976931e+101",
+            "schema": {
+              "type": "number",
+              "format": "decimal",
+              "enum":  [2.5976931e+101]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/number/big/decimal/99999999.99": {
+      "put": {
+        "operationId": "number_putBigDecimalPositiveDecimal",
+        "description": "Put big decimal value 99999999.99",
+        "parameters": [
+          {
+            "name": "numberBody",
+            "in": "body",
+            "schema": {
+              "type": "number",
+              "format": "decimal",
+              "enum":  [99999999.99]
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The big decimal value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "number_getBigDecimalPositiveDecimal",
+        "description": "Get big decimal value 99999999.99",
+        "responses": {
+          "200": {
+            "description": "The big decimal value 99999999.99",
+            "schema": {
+              "type": "number",
+              "format": "decimal",
+              "enum":  [99999999.99]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/number/big/decimal/-99999999.99": {
+      "put": {
+        "operationId": "number_putBigDecimalNegativeDecimal",
+        "description": "Put big decimal value -99999999.99",
+        "parameters": [
+          {
+            "name": "numberBody",
+            "in": "body",
+            "schema": {
+              "type": "number",
+              "format": "decimal",
+              "enum":  [-99999999.99]
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The big decimal value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "number_getBigDecimalNegativeDecimal",
+        "description": "Get big decimal value -99999999.99",
+        "responses": {
+          "200": {
+            "description": "The big decimal value -99999999.99",
+            "schema": {
+              "type": "number",
+              "format": "decimal",
+              "enum":  [-99999999.99]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/number/small/float/3.402823e-20": {
       "put": {
         "operationId": "number_putSmallFloat",
@@ -356,6 +523,54 @@
             "schema": {
               "type": "number",
               "format": "double",
+              "enum":  [2.5976931e-101]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/number/small/decimal/2.5976931e-101": {
+      "put": {
+        "operationId": "number_putSmallDecimal",
+        "description": "Put small decimal value 2.5976931e-101",
+        "parameters": [
+          {
+            "name": "numberBody",
+            "in": "body",
+            "schema": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The small decimal value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "number_getSmallDecimal",
+        "description": "Get small decimal value 2.5976931e-101",
+        "responses": {
+          "200": {
+            "description": "The small decimal value 2.5976931e-101",
+            "schema": {
+              "type": "number",
+              "format": "decimal",
               "enum":  [2.5976931e-101]
             }
           },

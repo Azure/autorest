@@ -79,7 +79,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         public override string UsageInstructions
         {
-            get { return "The gem 'ms-rest' is required for working with generated code."; }
+            get { return "The gem 'ms_rest' is required for working with generated code."; }
         }
 
         /// <summary>
@@ -113,10 +113,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 serviceClientModel.Properties.Add(new Property
                 {
                     Name = "Credentials",
-                    Type = new CompositeType
-                    {
-                        Name = "ServiceClient"
-                    },
+                    Type = PrimaryType.Credentials,
                     IsRequired = true,
                     Documentation = "Subscription credentials which uniquely identify client subscription."
                 });
@@ -154,7 +151,7 @@ namespace Microsoft.Rest.Generator.Ruby
             {
                 var modelTemplate = new ModelTemplate
                 {
-                    Model = new ModelTemplateModel(model)
+                    Model = new ModelTemplateModel(model, serviceClient.ModelTypes)
                 };
                 await Write(modelTemplate,
                     Path.Combine(modelsPath, RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));

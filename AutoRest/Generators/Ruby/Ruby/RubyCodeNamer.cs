@@ -163,13 +163,17 @@ namespace Microsoft.Rest.Generator.Ruby
                 }
             }
         }
+        public override IType NormalizeTypeDeclaration(IType type)
+        {
+            return NormalizeTypeReference(type);
+        }
 
         /// <summary>
         /// Normalizes given type.
         /// </summary>
         /// <param name="type">Type to normalize.</param>
         /// <returns>Normalized type.</returns>
-        public override IType NormalizeType(IType type)
+        public override IType NormalizeTypeReference(IType type)
         {
             if (type == null)
             {
@@ -222,7 +226,7 @@ namespace Microsoft.Rest.Generator.Ruby
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
-                property.Type = NormalizeType(property.Type);
+                property.Type = NormalizeTypeReference(property.Type);
             }
 
             return compositeType;
@@ -273,6 +277,10 @@ namespace Microsoft.Rest.Generator.Ruby
             {
                 primaryType.Name = "Float";
             }
+            else if (primaryType == PrimaryType.Decimal)
+            {
+                primaryType.Name = "Float";
+            }
             else if (primaryType == PrimaryType.Int)
             {
                 primaryType.Name = "Number";
@@ -309,7 +317,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <returns>Normalized sequence type.</returns>
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
-            sequenceType.ElementType = NormalizeType(sequenceType.ElementType);
+            sequenceType.ElementType = NormalizeTypeReference(sequenceType.ElementType);
             sequenceType.NameFormat = "Array";
             return sequenceType;
         }
@@ -321,7 +329,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <returns>Normalized dictionary type.</returns>
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
-            dictionaryType.ValueType = NormalizeType(dictionaryType.ValueType);
+            dictionaryType.ValueType = NormalizeTypeReference(dictionaryType.ValueType);
             dictionaryType.NameFormat = "Hash";
             return dictionaryType;
         }

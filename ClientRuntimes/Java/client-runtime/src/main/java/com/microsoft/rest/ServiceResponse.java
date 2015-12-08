@@ -11,13 +11,22 @@ import retrofit.Response;
 
 /**
  * An instance of this class holds a response object and a raw REST response.
+ *
+ * @param <T> the type of the response
  */
 public class ServiceResponse<T> {
+    /**
+     * The response body object.
+     */
     private T body;
-    private Response response;
 
     /**
-     * Instantiate a ServiceResponse instance with a response object and a raw REST response
+     * The retrofit response wrapper containing information about the REST response.
+     */
+    private Response<T> response;
+
+    /**
+     * Instantiate a ServiceResponse instance with a response object and a raw REST response.
      * @param body deserialized response object
      * @param response raw REST response
      */
@@ -38,7 +47,7 @@ public class ServiceResponse<T> {
      * Gets the raw REST response.
      * @return the raw REST response.
      */
-    public Response getResponse() {
+    public Response<T> getResponse() {
         return this.response;
     }
 }

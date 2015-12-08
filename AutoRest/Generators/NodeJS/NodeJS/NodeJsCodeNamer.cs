@@ -157,7 +157,12 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
-        public override IType NormalizeType(IType type)
+        public override IType NormalizeTypeDeclaration(IType type)
+        {
+            return NormalizeTypeReference(type);
+        }
+
+        public override IType NormalizeTypeReference(IType type)
         {
             if (type == null)
             {
@@ -202,6 +207,23 @@ namespace Microsoft.Rest.Generator.NodeJS
                 "Type {0} is not supported.", type.GetType()));
         }
 
+        /// <summary>
+        /// Normalizes the method name if it is a reserved word in javascript.
+        /// </summary>
+        /// <param name="client">The service client.</param>
+        public void NormalizeMethodNames(ServiceClient client)
+        {
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
+
+            foreach (var method in client.Methods)
+            {
+                method.Name = GetMethodName(method.Name);
+            }
+        }
+
         private static IType NormalizeEnumType(EnumType enumType)
         {
             return enumType;
@@ -214,7 +236,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
-                property.Type = NormalizeType(property.Type);
+                property.Type = NormalizeTypeReference(property.Type);
             }
 
             return compositeType;
@@ -243,6 +265,10 @@ namespace Microsoft.Rest.Generator.NodeJS
                 primaryType.Name = "Date";
             }
             else if (primaryType == PrimaryType.Double)
+            {
+                primaryType.Name = "Number";
+            }
+            else if (primaryType == PrimaryType.Decimal)
             {
                 primaryType.Name = "Number";
             }
@@ -276,14 +302,14 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
-            sequenceType.ElementType = NormalizeType(sequenceType.ElementType);
+            sequenceType.ElementType = NormalizeTypeReference(sequenceType.ElementType);
             sequenceType.NameFormat = "Array";
             return sequenceType;
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
-            dictionaryType.ValueType = NormalizeType(dictionaryType.ValueType);
+            dictionaryType.ValueType = NormalizeTypeReference(dictionaryType.ValueType);
             dictionaryType.NameFormat = "Object";
             return dictionaryType;
         }

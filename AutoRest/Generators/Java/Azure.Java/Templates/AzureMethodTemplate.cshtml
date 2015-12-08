@@ -1,0 +1,94 @@
+@using System
+@using Microsoft.Rest.Generator.Java
+@using Microsoft.Rest.Generator.Java.Templates
+@using Microsoft.Rest.Generator.Java.TemplateModels
+@using Microsoft.Rest.Generator.Java.Azure
+@using Microsoft.Rest.Generator.Java.Azure.Templates
+@using Microsoft.Rest.Generator.Utilities
+@using Microsoft.Rest.Generator.ClientModel
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.Azure.AzureMethodTemplateModel>
+@if (!Model.IsLongRunningOperation)
+{
+@:@(Include(new MethodTemplate(), (MethodTemplateModel)Model))
+}
+else
+{
+<text>
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters)
+{
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+}
+@foreach (var exception in Model.ExceptionStatements)
+{
+@: * @@throws @exception
+}
+@if (Model.ReturnType.Body != null)
+{
+@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object wrapped in ServiceResponse if successful.
+}
+else
+{
+@: * @@return the ServiceResponse object if successful.
+}
+ */
+public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.Exceptions {
+    Response<ResponseBody> result = service.@(Model.Name)(@Model.MethodParameterInvocation).execute();
+    return client.getAzureClient().@(Model.PollingMethod)(result, new TypeToken<@Model.GenericReturnTypeString>() { }.getType());
+}
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters)
+{
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+}
+ * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+ * @@return the {@@link Call} object
+ */
+public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
+@foreach (var param in Model.RequiredNullableParameters)
+{
+@:    if (@param.Name == null) {
+@:        serviceCallback.failure(new ServiceException(
+@:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null.")));
+@:    }
+}
+@foreach (var param in Model.ParametersToValidate)
+{
+@:    Validator.validate(@(param.Name), serviceCallback);
+}
+    Call<ResponseBody> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
+    call.enqueue(new Callback<ResponseBody>() {
+        @@Override
+        public void onFailure(Throwable t) {
+            serviceCallback.failure(t);
+        }
+
+        @@Override
+        public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            client.getAzureClient().@(Model.PollingMethod)Async(response, new TypeToken<@Model.GenericReturnTypeString>() { }.getType(), serviceCallback);
+        }
+    });
+    return call;
+}
+</text>
+}

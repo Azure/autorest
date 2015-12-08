@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -19,7 +20,9 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             this.LoadFrom(source);
             ParameterTemplateModels = new List<ParameterTemplateModel>();
+            LogicalParameterTemplateModels = new List<ParameterTemplateModel>();
             source.Parameters.ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
+            source.LogicalParameters.ForEach(p => LogicalParameterTemplateModels.Add(new ParameterTemplateModel(p)));
             ServiceClient = serviceClient;
             MethodGroupName = source.Group ?? serviceClient.Name;
         }
@@ -30,15 +33,17 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
 
+        public List<ParameterTemplateModel> LogicalParameterTemplateModels { get; private set; }
+
         public IScopeProvider Scope
         {
             get { return _scopeProvider; }
         }
 
         /// <summary>
-        /// Get the predicate to determine of the http operation status code indicates success
+        /// Get the predicate to determine of the http operation status code indicates failure
         /// </summary>
-        public string SuccessStatusCodePredicate
+        public string FailureStatusCodePredicate
         {
             get
             {
@@ -48,12 +53,12 @@ namespace Microsoft.Rest.Generator.CSharp
                     foreach (var responseStatus in Responses.Keys)
                     {
                         predicates.Add(string.Format(CultureInfo.InvariantCulture,
-                            "statusCode == {0}", GetStatusCodeReference(responseStatus)));
+                            "(int)statusCode != {0}", GetStatusCodeReference(responseStatus)));
                     }
 
-                    return string.Join(" || ", predicates);
+                    return string.Join(" && ", predicates);
                 }
-                return "httpResponse.IsSuccessStatusCode";
+                return "!httpResponse.IsSuccessStatusCode";
             }
         }
 
@@ -65,7 +70,7 @@ namespace Microsoft.Rest.Generator.CSharp
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in  LocalParameters)
+                foreach (var parameter in LocalParameters)
                 {
                     string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = {2}");
                     string defaultValue = string.Format(CultureInfo.InvariantCulture, "default({0})", parameter.DeclarationExpression);
@@ -146,7 +151,7 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
-        /// Get the parameters that are actually method parameters in the order they apopear in the method signatur
+        /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters
         /// </summary>
         public IEnumerable<ParameterTemplateModel> LocalParameters
@@ -161,34 +166,50 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
-        /// Get the return type name for the underlyign interface method
+        /// Get the return type name for the underlying interface method
         /// </summary>
         public virtual string OperationResponseReturnTypeString
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null && ReturnType.Headers != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "HttpOperationResponse<{0}>", ReturnType.Name);
+                            "HttpOperationResponse<{0},{1}>", ReturnType.Body.Name, ReturnType.Headers.Name);
                 }
-                return "HttpOperationResponse";
+                else if (ReturnType.Body != null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "HttpOperationResponse<{0}>", ReturnType.Body.Name);
+                }
+                else if (ReturnType.Headers != null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "HttpOperationHeaderResponse<{0}>", ReturnType.Headers.Name);
+                }
+                else
+                {
+                    return "HttpOperationResponse";
+                }
             }
         }
 
         /// <summary>
         /// Get the return type for the async extension method
         /// </summary>
-        public string TaskExtensionReturnTypeString
+        public virtual string TaskExtensionReturnTypeString
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "Task<{0}>", ReturnType.Name);
+                        "Task<{0}>", ReturnType.Body.Name);
                 }
-                return "Task";
+                else
+                {
+                    return "Task";
+                }
             }
         }
 
@@ -199,7 +220,23 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                return "HttpOperationException";
+                if (this.DefaultResponse.Body is CompositeType)
+                {
+                    CompositeType type = this.DefaultResponse.Body as CompositeType;
+                    if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
+                    {
+                        var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
+                        if (ext != null && ext["name"] != null)
+                        {
+                            return ext["name"].ToString();
+                        }
+                    }
+                    return type.Name + "Exception";
+                }
+                else
+                {
+                    return "HttpOperationException";
+                }
             }
         }
 
@@ -239,15 +276,18 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <summary>
         /// Get the type name for the method's return type
         /// </summary>
-        public string ReturnTypeString
+        public virtual string ReturnTypeString
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null)
                 {
-                    return ReturnType.Name;
+                    return ReturnType.Body.Name;
                 }
-                return "void";
+                else
+                {
+                    return "void";
+                }
             }
         }
 
@@ -256,7 +296,10 @@ namespace Microsoft.Rest.Generator.CSharp
         /// </summary>
         public ParameterTemplateModel RequestBody
         {
-            get { return ParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.Body); }
+            get
+            {
+                return this.Body != null ? new ParameterTemplateModel(this.Body) : null;                
+            }
         }
 
         /// <summary>
@@ -321,8 +364,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public static string GetStatusCodeReference(HttpStatusCode code)
         {
-            return string.Format(CultureInfo.InvariantCulture,
-                "(HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), \"{0}\")", code);
+            return ((int)code).ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -334,18 +376,17 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             var builder = new IndentedStringBuilder();
 
-            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
+            foreach (var pathParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
                 builder.AppendLine("{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));",
                     variableName,
                     pathParameter.SerializedName,
                     pathParameter.Type.ToString(ClientReference, pathParameter.Name));
             }
-            if (ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
+            if (this.LogicalParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
             {
                 builder.AppendLine("List<string> queryParameters = new List<string>();");
-                foreach (var queryParameter in ParameterTemplateModels
-                    .Where(p => p.Location == ParameterLocation.Query))
+                foreach (var queryParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query))
                 {
                     builder.AppendLine("if ({0} != null)", queryParameter.Name)
                         .AppendLine("{").Indent()
@@ -363,13 +404,53 @@ namespace Microsoft.Rest.Generator.CSharp
             return builder.ToString();
         }
 
-        public virtual string RemoveDuplicateForwardSlashes(string urlVariableName)
+        /// <summary>
+        /// Generates input mapping code block.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string BuildInputMappings()
         {
             var builder = new IndentedStringBuilder();
+            foreach (var transformation in InputParameterTransformation)
+            {
+                builder.AppendLine("{0} {1} = null;", 
+                        transformation.OutputParameter.Type.Name,
+                        transformation.OutputParameter.Name);
 
-            builder.AppendLine("// trim all duplicate forward slashes in the url");
-            builder.AppendLine("{0} = Regex.Replace({0}, \"([^:]/)/+\", \"$1\");", urlVariableName);
+                builder.AppendLine("if ({0})", BuildNullCheckExpression(transformation))
+                       .AppendLine("{").Indent();
+
+                if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
+                    transformation.OutputParameter.Type is CompositeType)
+                {
+                    builder.AppendLine("{0} = new {1}();",
+                        transformation.OutputParameter.Name,
+                        transformation.OutputParameter.Type.Name);
+                }
+
+                foreach(var mapping in transformation.ParameterMappings)
+                {
+                    builder.AppendLine("{0}{1};",
+                        transformation.OutputParameter.Name,
+                        mapping);
+                }
+
+                builder.Outdent()
+                       .AppendLine("}");
+            }
+
             return builder.ToString();
+        }
+
+        private static string BuildNullCheckExpression(ParameterTransformation transformation)
+        {
+            if (transformation == null)
+            {
+                throw new ArgumentNullException("transformation");
+            }
+
+            return string.Join(" || ",
+                transformation.ParameterMappings.Select(m => m.InputParameter.Name + " != null"));
         }
     }
 }

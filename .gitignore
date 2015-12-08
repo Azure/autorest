@@ -1,5 +1,6 @@
-## Ignore generated code
+## Ignore generated code 
 AutoRest/NugetPackageTest/Generated
+AutoRest/Generators/NodeJS/NodeJS.Tests/AcceptanceTests/*.js
 
 ## Ignore user-specific files, temporary files, build results, etc.
 AutoRest/**/Templates/*.cs
@@ -136,6 +137,7 @@ local.properties
 .project
 target
 build
+reports
 .gradle
 .idea
 *.iml
@@ -174,3 +176,5 @@ AutoRest/Generators/Ruby/*/RspecTests/Generated/*
 #dnx installation
 dnx-clr-win-x86*/
 dnx-coreclr-win-x86*/
+*.lock.json
+/dnx

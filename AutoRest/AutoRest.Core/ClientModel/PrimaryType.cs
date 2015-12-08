@@ -63,6 +63,11 @@ namespace Microsoft.Rest.Generator.ClientModel
             get { return KnownTypes[SupportedPrimaryType.Double]; }
         }
 
+        public static PrimaryType Decimal
+        {
+            get { return KnownTypes[SupportedPrimaryType.Decimal]; }
+        }
+
         public static PrimaryType String
         {
             get { return KnownTypes[SupportedPrimaryType.String]; }
@@ -101,6 +106,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         public static PrimaryType Boolean
         {
             get { return KnownTypes[SupportedPrimaryType.Boolean]; }
+        }
+
+        public static PrimaryType Credentials
+        {
+            get { return KnownTypes[SupportedPrimaryType.Credentials]; }
         }
 
         /// <summary>
@@ -157,6 +167,7 @@ namespace Microsoft.Rest.Generator.ClientModel
             Int,
             Long,
             Double,
+            Decimal,
             String,
             Stream,
             ByteArray,
@@ -164,7 +175,8 @@ namespace Microsoft.Rest.Generator.ClientModel
             DateTime,
             DateTimeRfc1123,
             TimeSpan,
-            Boolean
+            Boolean,
+            Credentials
         }
     }
 }

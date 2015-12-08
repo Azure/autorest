@@ -1,0 +1,39 @@
+projects/*
+targets/*
+
+# Visual Studio #
+/app.js
+.ntvs_analysis.*
+
+# Node #
+node_modules/
+npm-debug.log
+
+# Builds #
+out/*
+tmp/*
+obj/
+out/
+checkstyle-result.xml
+test-result.xml
+iisnode.yml
+
+# Mac OS #
+.DS_Store
+.DS_Store?
+
+# Windows #
+Thumbs.db
+
+# WebStorm #
+.idea/
+
+# Linux #
+*.swp
+
+# Test Logs #
+test/output/*
+
+# Test Files#
+netconfig.json
+xunit.xml

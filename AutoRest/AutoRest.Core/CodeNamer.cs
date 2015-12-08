@@ -83,24 +83,40 @@ namespace Microsoft.Rest.Generator
             foreach (var property in client.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
-                property.Type = NormalizeType(property.Type);
+                property.Type = NormalizeTypeReference(property.Type);
             }
 
             var normalizedModels = new List<CompositeType>();
             foreach (var modelType in client.ModelTypes)
             {
-                normalizedModels.Add(NormalizeType(modelType) as CompositeType);
+                normalizedModels.Add(NormalizeTypeDeclaration(modelType) as CompositeType);
             }
             client.ModelTypes.Clear();
             normalizedModels.ForEach( (item) => client.ModelTypes.Add(item));
 
+            var normalizedErrors = new List<CompositeType>();
+            foreach (var modelType in client.ErrorTypes)
+            {
+                normalizedErrors.Add(NormalizeTypeDeclaration(modelType) as CompositeType);
+            }
+            client.ErrorTypes.Clear();
+            normalizedErrors.ForEach((item) => client.ErrorTypes.Add(item));
+
+            var normalizedHeaders = new List<CompositeType>();
+            foreach (var modelType in client.HeaderTypes)
+            {
+                normalizedHeaders.Add(NormalizeTypeDeclaration(modelType) as CompositeType);
+            }
+            client.HeaderTypes.Clear();
+            normalizedHeaders.ForEach((item) => client.HeaderTypes.Add(item));
+
             var normalizedEnums = new List<EnumType>();
             foreach (var enumType in client.EnumTypes)
             {
-                var normalizedType = NormalizeType(enumType) as EnumType;
+                var normalizedType = NormalizeTypeDeclaration(enumType) as EnumType;
                 if (normalizedType != null)
                 {
-                    normalizedEnums.Add(NormalizeType(enumType) as EnumType);
+                    normalizedEnums.Add(NormalizeTypeDeclaration(enumType) as EnumType);
                 }
             }
             client.EnumTypes.Clear();
@@ -108,25 +124,61 @@ namespace Microsoft.Rest.Generator
 
             foreach (var method in client.Methods)
             {
-                method.Name = GetMethodName(method.Name);
-                method.Group = GetMethodGroupName(method.Group);
-                method.ReturnType = NormalizeType(method.ReturnType);
-                method.DefaultResponse = NormalizeType(method.DefaultResponse);
-                var normalizedResponses = new Dictionary<HttpStatusCode, IType>();
-                foreach (var statusCode in method.Responses.Keys)
-                {
-                    normalizedResponses[statusCode] = NormalizeType(method.Responses[statusCode]);
-                }
+                NormalizeMethod(method);
+            }
+        }
 
-                method.Responses.Clear();
-                foreach (var statusCode in normalizedResponses.Keys)
+        /// <summary>
+        /// Normalizes names in the method
+        /// </summary>
+        /// <param name="method"></param>
+        public virtual void NormalizeMethod(Method method)
+        {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+            method.Name = GetMethodName(method.Name);
+            method.Group = GetMethodGroupName(method.Group);
+            method.ReturnType = NormalizeTypeReference(method.ReturnType);
+            method.DefaultResponse = NormalizeTypeReference(method.DefaultResponse);
+            var normalizedResponses = new Dictionary<HttpStatusCode, Response>();
+            foreach (var statusCode in method.Responses.Keys)
+            {
+                normalizedResponses[statusCode] = NormalizeTypeReference(method.Responses[statusCode]);
+            }
+
+            method.Responses.Clear();
+            foreach (var statusCode in normalizedResponses.Keys)
+            {
+                method.Responses[statusCode] = normalizedResponses[statusCode];
+            }
+            foreach (var parameter in method.Parameters)
+            {
+                parameter.Name = GetParameterName(parameter.Name);
+                parameter.Type = NormalizeTypeReference(parameter.Type);
+            }
+
+            foreach (var parameterTransformation in method.InputParameterTransformation)
+            {
+                parameterTransformation.OutputParameter.Name = GetParameterName(parameterTransformation.OutputParameter.Name);
+                parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
+
+                foreach (var parameterMapping in parameterTransformation.ParameterMappings)
                 {
-                    method.Responses[statusCode] = normalizedResponses[statusCode];
-                }
-                foreach (var parameter in method.Parameters)
-                {
-                    parameter.Name = GetParameterName(parameter.Name);
-                    parameter.Type = NormalizeType(parameter.Type);
+                    if (parameterMapping.InputParameterProperty != null)
+                    {
+                        parameterMapping.InputParameterProperty = string.Join(".",
+                            parameterMapping.InputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
+                                .Select(p => GetPropertyName(p)));
+                    }
+
+                    if (parameterMapping.OutputParameterProperty != null)
+                    {
+                        parameterMapping.OutputParameterProperty = string.Join(".",
+                            parameterMapping.OutputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
+                                .Select(p => GetPropertyName(p)));
+                    }
                 }
             }
         }
@@ -272,11 +324,30 @@ namespace Microsoft.Rest.Generator
         }
 
         /// <summary>
-        /// Returns language specific type name.
+        /// Returns language specific type reference name.
+        /// </summary>
+        /// <param name="typePair"></param>
+        /// <returns></returns>
+        public virtual Response NormalizeTypeReference(Response typePair)
+        {
+            return new Response(NormalizeTypeReference(typePair.Body),
+                                NormalizeTypeReference(typePair.Headers));
+        }
+
+        /// <summary>
+        /// Returns language specific type reference name.
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public abstract IType NormalizeType(IType type);
+        public abstract IType NormalizeTypeReference(IType type);
+
+        /// <summary>
+        /// Returns language specific type declaration name.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public abstract IType NormalizeTypeDeclaration(IType type);
+
 
         /// <summary>
         /// Formats a string as upper or lower case. Two-letter inputs that are all upper case are both lowered.
@@ -429,7 +500,6 @@ namespace Microsoft.Rest.Generator
 
             var models = new List<CompositeType>(serviceClient.ModelTypes);
             serviceClient.ModelTypes.Clear();
-
             foreach (var model in models)
             {
                 model.Name = ResolveNameConflict(
@@ -439,7 +509,25 @@ namespace Microsoft.Rest.Generator
                     "Model");
 
                 serviceClient.ModelTypes.Add(model);
+            }
 
+            models = new List<CompositeType>(serviceClient.HeaderTypes);
+            serviceClient.HeaderTypes.Clear();
+            foreach (var model in models)
+            {
+                model.Name = ResolveNameConflict(
+                    exclusionDictionary,
+                    model.Name,
+                    "Schema definition",
+                    "Model");
+
+                serviceClient.HeaderTypes.Add(model);
+            }
+
+            foreach (var model in serviceClient.ModelTypes
+                                                  .Concat(serviceClient.HeaderTypes)
+                                                  .Concat(serviceClient.ErrorTypes))
+            {
                 foreach (var property in model.Properties)
                 {
                     if (property.Name.Equals(model.Name, StringComparison.OrdinalIgnoreCase))

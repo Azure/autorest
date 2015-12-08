@@ -418,7 +418,8 @@
             "name": "stringPath",
             "in": "path",
             "description": "null string value",
-            "type": "string"
+            "type": "string",
+            "required": true
           }
         ],
         "responses": {
@@ -571,7 +572,8 @@
             "in": "path",
             "description": "null as byte array (should throw)",
             "type": "string",
-            "format": "byte"
+            "format": "byte",
+            "required": true
           }
         ],
         "responses": {
@@ -1748,7 +1750,8 @@
             "name": "localStringPath",
             "in": "path",
             "description": "should contain value 'localStringPath'",
-            "type": "string"
+            "type": "string",
+            "required": true
           },
           {
             "name": "localStringQuery",
@@ -1799,7 +1802,8 @@
             "name": "localStringPath",
             "in": "path",
             "description": "should contain value 'localStringPath'",
-            "type": "string"
+            "type": "string",
+            "required": true
           },
           {
             "name": "localStringQuery",
@@ -1850,7 +1854,8 @@
             "name": "localStringPath",
             "in": "path",
             "description": "should contain value 'localStringPath'",
-            "type": "string"
+            "type": "string",
+            "required": true
           },
           {
             "name": "localStringQuery",
@@ -1901,7 +1906,8 @@
             "name": "localStringPath",
             "in": "path",
             "description": "should contain value 'localStringPath'",
-            "type": "string"
+            "type": "string",
+            "required": true
           },
           {
             "name": "localStringQuery",

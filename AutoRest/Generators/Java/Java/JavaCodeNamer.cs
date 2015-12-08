@@ -15,6 +15,8 @@ namespace Microsoft.Rest.Generator.Java
     {
         private readonly HashSet<IType> _normalizedTypes;
 
+        public static HashSet<string> PrimaryTypes {get; private set;}
+
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
         /// </summary>
@@ -39,6 +41,26 @@ namespace Microsoft.Rest.Generator.Java
             }.ForEach(s => ReservedWords.Add(s));
 
             _normalizedTypes = new HashSet<IType>();
+            PrimaryTypes = new HashSet<string>();
+            new HashSet<string>
+            {
+                "int", "Integer",
+                "long", "Long",
+                "object", "Object",
+                "bool", "Boolean",
+                "double", "Double",
+                "float", "Float",
+                "byte", "Byte",
+                "byte[]", "Byte[]",
+                "String",
+                "LocalDate",
+                "DateTime",
+                "DateTimeRfc1123",
+                "Duration",
+                "Period",
+                "BigDecimal",
+                "InputStream"
+            }.ForEach(s => PrimaryTypes.Add(s));
         }
 
         public override string GetFieldName(string name)
@@ -139,8 +161,12 @@ namespace Microsoft.Rest.Generator.Java
                 }
             }
         }
+        public override IType NormalizeTypeDeclaration(IType type)
+        {
+            return NormalizeTypeReference(type);
+        }
 
-        public override IType NormalizeType(IType type)
+        public override IType NormalizeTypeReference(IType type)
         {
             if (type == null)
             {
@@ -210,7 +236,7 @@ namespace Microsoft.Rest.Generator.Java
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
-                property.Type = NormalizeType(property.Type);
+                property.Type = NormalizeTypeReference(property.Type);
                 if (!property.IsRequired)
                 {
                     property.Type = WrapPrimitiveType(property.Type);
@@ -246,6 +272,10 @@ namespace Microsoft.Rest.Generator.Java
             {
                 primaryType.Name = "double";
             }
+            else if (primaryType == PrimaryType.Decimal)
+            {
+                primaryType.Name = "BigDecimal";
+            }
             else if (primaryType == PrimaryType.Int)
             {
                 primaryType.Name = "int";
@@ -269,6 +299,10 @@ namespace Microsoft.Rest.Generator.Java
             else if (primaryType == PrimaryType.Object)
             {
                 primaryType.Name = "Object";
+            }
+            else if (primaryType == PrimaryType.Credentials)
+            {
+                primaryType.Name = "ServiceClientCredentials";
             }
 
             return primaryType;
@@ -315,19 +349,19 @@ namespace Microsoft.Rest.Generator.Java
 
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
-            sequenceType.ElementType = WrapPrimitiveType(NormalizeType(sequenceType.ElementType));
+            sequenceType.ElementType = WrapPrimitiveType(NormalizeTypeReference(sequenceType.ElementType));
             sequenceType.NameFormat = "List<{0}>";
             return sequenceType;
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
-            dictionaryType.ValueType = WrapPrimitiveType(NormalizeType(dictionaryType.ValueType));
+            dictionaryType.ValueType = WrapPrimitiveType(NormalizeTypeReference(dictionaryType.ValueType));
             dictionaryType.NameFormat = "Map<String, {0}>";
             return dictionaryType;
         }
 
-        public static String ImportedFrom(PrimaryType primaryType)
+        public static string GetJavaType(PrimaryType primaryType)
         {
             if (primaryType == null)
             {
@@ -343,6 +377,11 @@ namespace Microsoft.Rest.Generator.Java
                 primaryType.Name == "DateTime")
             {
                 return "org.joda.time.DateTime";
+            }
+            else if (primaryType == PrimaryType.Decimal ||
+                primaryType.Name == "Decimal")
+            {
+                return "java.math.BigDecimal";
             }
             else if (primaryType == PrimaryType.DateTimeRfc1123 ||
                primaryType.Name == "DateTimeRfc1123")
@@ -362,6 +401,18 @@ namespace Microsoft.Rest.Generator.Java
             else
             {
                 return null;
+            }
+        }
+
+        public static string GetJavaException(string exception)
+        {
+            switch (exception) {
+                case "IOException": 
+                    return "java.io.IOException";
+                case "ServiceException":
+                    return "com.microsoft.rest.ServiceException";
+                default:
+                    return null;
             }
         }
     }

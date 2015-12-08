@@ -1,0 +1,231 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Parameter Grouping Test Service",
+    "description": "Test Infrastructure for AutoRest",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/parameterGrouping/postRequired/{path}": {
+      "post": {
+        "operationId": "parameterGrouping_postRequired",
+        "description": "Post a bunch of required parameters grouped",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "required": true,
+            "x-ms-parameter-grouping": {
+            }
+          },
+          {
+            "name": "customHeader",
+            "in": "header",
+            "type": "string",
+            "required": false,
+            "x-ms-parameter-grouping": {
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "Query parameter with default",
+            "x-ms-parameter-grouping": {
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Path parameter",
+            "x-ms-parameter-grouping": {
+              "value": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/parameterGrouping/postOptional": {
+      "post": {
+        "operationId": "parameterGrouping_postOptional",
+        "description": "Post a bunch of optional parameters grouped",
+        "parameters": [
+          {
+            "name": "customHeader",
+            "in": "header",
+            "type": "string",
+            "required": false,
+            "x-ms-parameter-grouping": {
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "Query parameter with default",
+            "x-ms-parameter-grouping": {
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/parameterGrouping/postMultipleParameterGroups": {
+      "post": {
+        "operationId": "parameterGrouping_postMultipleParameterGroups",
+        "description": "Post parameters from multiple different parameter groups",
+        "parameters": [
+          {
+            "name": "header-one",
+            "in": "header",
+            "type": "string",
+            "required": false,
+            "x-ms-parameter-grouping": {
+              "name": "first-parameter-group"
+            }
+          },
+          {
+            "name": "query-one",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "Query parameter with default",
+            "x-ms-parameter-grouping": {
+              "name": "first-parameter-group"
+            }
+          },
+          {
+            "name": "header-two",
+            "in": "header",
+            "type": "string",
+            "required": false,
+            "x-ms-parameter-grouping": {
+              "postfix": "second-parameter-group"
+            }
+          },
+          {
+            "name": "query-two",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "Query parameter with default",
+            "x-ms-parameter-grouping": {
+              "postfix": "second-parameter-group"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/parameterGrouping/sharedParameterGroupObject": {
+      "post": {
+        "operationId": "parameterGrouping_postSharedParameterGroupObject",
+        "description": "Post parameters with a shared parameter group object",
+        "parameters": [
+          {
+            "name": "header-one",
+            "in": "header",
+            "type": "string",
+            "required": false,
+            "x-ms-parameter-grouping": {
+              "name": "first-parameter-group"
+            }
+          },
+          {
+            "name": "query-one",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "Query parameter with default",
+            "x-ms-parameter-grouping": {
+              "name": "first-parameter-group"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

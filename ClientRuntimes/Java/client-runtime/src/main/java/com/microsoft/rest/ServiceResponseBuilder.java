@@ -8,7 +8,7 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.microsoft.rest.serializer.JacksonHelper;
+import com.microsoft.rest.serializer.JacksonUtils;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -21,23 +21,44 @@ import java.util.Map;
 
 /**
  * The builder for building a {@link ServiceResponse}.
+ *
+ * @param <T> The return type the caller expects from the REST response
  */
 public class ServiceResponseBuilder<T> {
-    private Map<Integer, TypeReference<?>> responseTypes;
+    /**
+     * A mapping of HTTP status codes and their corresponding return types.
+     */
+    protected Map<Integer, Type> responseTypes;
+
+    /**
+     * The deserializer used for deserializing the response.
+     */
+    protected JacksonUtils deserializer;
 
     /**
      * Create a ServiceResponseBuilder instance.
      */
     public ServiceResponseBuilder() {
-        this(new HashMap<Integer, TypeReference<?>>());
+        this(new JacksonUtils());
     }
 
     /**
      * Create a ServiceResponseBuilder instance.
      *
-     * @param responseTypes a mapping of response status codes and response destination types.
+     * @param deserializer the serialization utils to use for deserialization operations
      */
-    public ServiceResponseBuilder(Map<Integer, TypeReference<?>> responseTypes) {
+    public ServiceResponseBuilder(JacksonUtils deserializer) {
+        this(deserializer, new HashMap<Integer, Type>());
+    }
+
+    /**
+     * Create a ServiceResponseBuilder instance.
+     *
+     * @param deserializer the serialization utils to use for deserialization operations
+     * @param responseTypes a mapping of response status codes and response destination types
+     */
+    public ServiceResponseBuilder(JacksonUtils deserializer, Map<Integer, Type> responseTypes) {
+        this.deserializer = deserializer;
         this.responseTypes = responseTypes;
     }
 
@@ -45,17 +66,11 @@ public class ServiceResponseBuilder<T> {
      * Register a mapping from a response status code to a response destination type.
      *
      * @param statusCode the status code.
-     * @param <V> the response destination type.
      * @param type the type to deserialize.
      * @return the same builder instance.
      */
-    public <V> ServiceResponseBuilder<T> register(int statusCode, final Type type) {
-        this.responseTypes.put(statusCode, new TypeReference<V>() {
-            @Override
-            public Type getType() {
-                return type;
-            }
-        });
+    public ServiceResponseBuilder<T> register(int statusCode, final Type type) {
+        this.responseTypes.put(statusCode, type);
         return this;
     }
 
@@ -67,12 +82,7 @@ public class ServiceResponseBuilder<T> {
      * @return the same builder instance.
      */
     public <V> ServiceResponseBuilder<T> registerError(final Type type) {
-        this.responseTypes.put(0, new TypeReference<V>() {
-            @Override
-            public Type getType() {
-                return type;
-            }
-        });
+        this.responseTypes.put(0, type);
         return this;
     }
 
@@ -83,7 +93,7 @@ public class ServiceResponseBuilder<T> {
      * @param responseTypes the mapping from response status codes to response types.
      * @return the same builder instance.
      */
-    public ServiceResponseBuilder<T> registerAll(Map<Integer, TypeReference<?>> responseTypes) {
+    public ServiceResponseBuilder<T> registerAll(Map<Integer, Type> responseTypes) {
         this.responseTypes.putAll(responseTypes);
         return this;
     }
@@ -103,48 +113,56 @@ public class ServiceResponseBuilder<T> {
      * @param response the {@link Response} instance from REST call
      * @param retrofit the {@link Retrofit} instance from REST call
      * @return a ServiceResponse instance of generic type {@link T}
-     * @throws ServiceException all exceptions will be wrapped in ServiceException
+     * @throws ServiceException exceptions from the REST call
+     * @throws IOException exceptions from deserialization
      */
-    public ServiceResponse<T> build(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException {
+    public ServiceResponse<T> build(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
         if (response == null) {
             throw new ServiceException("no response");
         }
 
-        try {
-            int statusCode = response.code();
-            ResponseBody responseBody;
-            if (response.isSuccess()) {
-                responseBody = response.body();
-            } else {
-                responseBody = response.errorBody();
-            }
+        int statusCode = response.code();
+        ResponseBody responseBody;
+        if (response.isSuccess()) {
+            responseBody = response.body();
+        } else {
+            responseBody = response.errorBody();
+        }
 
-            if (responseTypes.containsKey(statusCode)) {
-                return new ServiceResponse<T>(buildBody(statusCode, responseBody), response);
-            } else if (response.isSuccess() &&
-                    (responseTypes.isEmpty() || (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
-                return new ServiceResponse<T>(buildBody(statusCode, responseBody), response);
-            } else {
-                ServiceException exception = new ServiceException();
-                exception.setResponse(response);
-                exception.setErrorModel(buildBody(statusCode, responseBody));
-                throw exception;
-            }
-        } catch (ServiceException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            ServiceException exception = new ServiceException(ex);
+        if (responseTypes.containsKey(statusCode)) {
+            return new ServiceResponse<T>(buildBody(statusCode, responseBody), response);
+        } else if (response.isSuccess()
+                && (responseTypes.isEmpty() || (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
+            return new ServiceResponse<T>(buildBody(statusCode, responseBody), response);
+        } else {
+            ServiceException exception = new ServiceException("Invalid status code " + statusCode);
             exception.setResponse(response);
+            exception.setErrorModel(buildBody(statusCode, responseBody));
             throw exception;
         }
     }
 
+    /**
+     * Build a ServiceResponse instance from a REST call response and a
+     * possible error, which does not have a response body.
+     *
+     * <p>
+     *     If the status code in the response is registered, the response will
+     *     be considered valid. If the status code is not registered, the
+     *     response will be considered invalid. A ServiceException is also thrown.
+     * </p>
+     *
+     * @param response the {@link Response} instance from REST call
+     * @param retrofit the {@link Retrofit} instance from REST call
+     * @return a ServiceResponse instance of generic type {@link T}
+     * @throws ServiceException exceptions from the REST call
+     */
     public ServiceResponse<T> buildEmpty(Response<Void> response, Retrofit retrofit) throws ServiceException {
         int statusCode = response.code();
         if (responseTypes.containsKey(statusCode)) {
             return new ServiceResponse<T>(null, response);
-        } else if (response.isSuccess() &&
-                (responseTypes.isEmpty() || (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
+        } else if (response.isSuccess()
+                 && (responseTypes.isEmpty() || (responseTypes.size() == 1 && responseTypes.containsKey(0)))) {
             return new ServiceResponse<T>(null, response);
         } else {
             ServiceException exception = new ServiceException();
@@ -153,28 +171,37 @@ public class ServiceResponseBuilder<T> {
         }
     }
 
+    /**
+     * Builds the body object from the HTTP status code and returned response
+     * body undeserialized and wrapped in {@link ResponseBody}.
+     *
+     * @param statusCode the HTTP status code
+     * @param responseBody the response body
+     * @return the response body, deserialized
+     * @throws IOException thrown for any deserialization errors
+     */
     @SuppressWarnings("unchecked")
-    private T buildBody(int statusCode, ResponseBody responseBody) throws IOException {
+    protected T buildBody(int statusCode, ResponseBody responseBody) throws IOException {
         if (responseBody == null) {
             return null;
         }
 
-        TypeReference<?> type = null;
+        Type type;
         if (responseTypes.containsKey(statusCode)) {
             type = responseTypes.get(statusCode);
         } else if (responseTypes.containsKey(0)) {
             type = responseTypes.get(0);
         } else {
-            type = new TypeReference<T>() {};
+            type = new TypeReference<T>() { }.getType();
         }
 
         // Void response
-        if (type.getType() == new TypeReference<Void>(){}.getType()) {
+        if (type == Void.class) {
             return null;
         }
         // Return raw response if InputStream is the target type
-        else if (type.getType() == new TypeReference<InputStream>(){}.getType()) {
-            return (T)responseBody.byteStream();
+        else if (type == InputStream.class) {
+            return (T) responseBody.byteStream();
         }
         // Deserialize
         else {
@@ -182,8 +209,7 @@ public class ServiceResponseBuilder<T> {
             if (responseContent.length() <= 0) {
                 return null;
             }
-            return JacksonHelper.deserialize(responseContent, type);
+            return deserializer.deserialize(responseContent, type);
         }
     }
-
 }

@@ -7,10 +7,10 @@
 
 package com.microsoft.rest.credentials;
 
+import com.google.common.io.BaseEncoding;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-import org.apache.commons.codec.binary.Base64;
 
 import java.io.IOException;
 
@@ -18,6 +18,9 @@ import java.io.IOException;
  * Basic Auth credentials interceptor for placing a basic auth credential into request headers.
  */
 public class BasicAuthenticationCredentialsInterceptor implements Interceptor {
+    /**
+     * The credentials instance to apply to the HTTP client pipeline.
+     */
     private BasicAuthenticationCredentials credentials;
 
     /**
@@ -33,7 +36,7 @@ public class BasicAuthenticationCredentialsInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         String auth = credentials.getUserName() + ":" + credentials.getPassword();
-        auth = Base64.encodeBase64String(auth.getBytes("UTF8"));
+        auth = BaseEncoding.base64().encode(auth.getBytes("UTF8"));
         Request newRequest = chain.request().newBuilder()
                 .header("Authorization", "Basic " + auth)
                 .build();

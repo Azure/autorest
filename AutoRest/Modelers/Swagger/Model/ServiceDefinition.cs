@@ -22,7 +22,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             Produces = new List<string>();
             Paths = new Dictionary<string, Dictionary<string, Operation>>();
             Parameters = new Dictionary<string, SwaggerParameter>();
-            Responses = new Dictionary<string, Response>();
+            Responses = new Dictionary<string, OperationResponse>();
             SecurityDefinitions = new Dictionary<string, SecurityDefinition>();
             Security = new List<Dictionary<string, List<string>>>();
             Tags = new List<Tag>();
@@ -83,7 +83,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// Dictionary of responses that can be used across operations. The key indicates status code.
         /// </summary>
-        public Dictionary<string, Response> Responses { get; set; }
+        public Dictionary<string, OperationResponse> Responses { get; set; }
 
         /// <summary>
         /// Key is the object serviceTypeName and the value is swagger security definition.

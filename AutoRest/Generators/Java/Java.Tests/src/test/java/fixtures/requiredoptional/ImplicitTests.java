@@ -1,6 +1,5 @@
 package fixtures.requiredoptional;
 
-import com.microsoft.rest.ServiceException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -8,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.fail;
 
 public class ImplicitTests {
-    static AutoRestRequiredOptionalTestService client;
+    private static AutoRestRequiredOptionalTestService client;
 
     @BeforeClass
     public static void setup() {
@@ -20,8 +19,8 @@ public class ImplicitTests {
         try {
             client.getImplicit().getRequiredPath(null);
             fail();
-        } catch (ServiceException ex) {
-            Assert.assertTrue(ex.getCause().getMessage().contains("Parameter pathParameter is required"));
+        } catch (IllegalArgumentException ex) {
+            Assert.assertTrue(ex.getMessage().contains("Parameter pathParameter is required"));
         }
     }
 
@@ -40,8 +39,8 @@ public class ImplicitTests {
         try {
             client.getImplicit().putOptionalBody(null);
             fail();
-        } catch (ServiceException ex) {
-            Assert.assertTrue(ex.getCause().getMessage().contains("Body parameter value must not be null"));
+        } catch (IllegalArgumentException ex) {
+            Assert.assertTrue(ex.getMessage().contains("Body parameter value must not be null"));
         }
     }
 
@@ -50,7 +49,7 @@ public class ImplicitTests {
         try {
             client.getImplicit().getRequiredGlobalPath();
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("this.client.getRequiredGlobalPath() is required"));
         }
     }
@@ -60,7 +59,7 @@ public class ImplicitTests {
         try {
             client.getImplicit().getRequiredGlobalQuery();
             fail();
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("this.client.getRequiredGlobalQuery() is required"));
         }
     }

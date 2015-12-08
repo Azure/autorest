@@ -28,7 +28,7 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                if (this.ModelTypes.Any())
+                if (this.ModelTypes.Any() || this.HeaderTypes.Any())
                 {
                     yield return "Models";
                 }

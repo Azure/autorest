@@ -6,5 +6,6 @@ acceptanceTests.js
 complexTypesTests.js
 requiredOptionalTests.js
 headerTests.js
+validationTests.js
 ##########The following test should always be the last test as it calculates the test coverage.
 coverageTest.js

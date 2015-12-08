@@ -61,6 +61,15 @@ namespace Microsoft.Rest.Generator.Java.Azure.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Long running operations for &apos;{0}&apos; requires a GET operation under the same path and same operation group &apos;{1}&apos;..
+        /// </summary>
+        internal static string InvalidLongRunningOperationForCreateOrUpdate {
+            get {
+                return ResourceManager.GetString("InvalidLongRunningOperationForCreateOrUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The {0} maven dependency is required to compile and run the generated code..
         /// </summary>
         internal static string UsageInformation {

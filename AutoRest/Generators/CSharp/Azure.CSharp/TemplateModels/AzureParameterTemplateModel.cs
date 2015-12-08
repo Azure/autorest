@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure
@@ -10,25 +11,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
     public class AzureParameterTemplateModel : ParameterTemplateModel
     {
         public AzureParameterTemplateModel(Parameter source) : base(source)
-        {
-        }
-
-        /// <summary>
-        /// Gets declaration for the parameter.
-        /// </summary>
-        public override string DeclarationExpression
-        {
-            get
-            {
-                if (IsODataFilterExpression)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, 
-                        "Expression<Func<{0}, bool>>", Type.Name);
-                }
-
-                return base.DeclarationExpression;
-            }
-        }
+        { }        
 
         /// <summary>
         /// Gets True if parameter can call .Validate method
@@ -42,15 +25,13 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         }
 
         /// <summary>
-        /// Gets True if parameter is OData $filter expression
+        /// Gets True if parameter is OData $filter, $top, $orderBy, $expand, $skip expression
         /// </summary>
         public virtual bool IsODataFilterExpression
         {
             get
             {
-                return SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
-                       Location == ParameterLocation.Query &&
-                       Type is CompositeType;
+                return base.Extensions.ContainsKey(AzureExtensions.ODataExtension);
             }
         }
     }

@@ -1,6 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
+using System.Linq;
+using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS;
 using Microsoft.Rest.Generator.Utilities;
@@ -12,8 +15,13 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
             : base(source, serviceClient)
         {
-            this.ClientRequestIdString = AzureCodeGenerator.GetClientRequestIdString(source);
-            this.RequestIdString = AzureCodeGenerator.GetRequestIdString(source);
+            if (source == null)
+            {
+                throw new ArgumentNullException("source");
+            }
+            
+            this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
+            this.RequestIdString = AzureExtensions.GetRequestIdString(source);
         }
         
         public string ClientRequestIdString { get; private set; }
@@ -25,7 +33,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         /// </summary>
         public bool IsLongRunningOperation
         {
-            get { return Extensions.ContainsKey(AzureCodeGenerator.LongRunningExtension); }
+            get { return Extensions.ContainsKey(AzureExtensions.LongRunningExtension); }
         }
 
         /// <summary>
@@ -44,9 +52,10 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             {
                 var sb = new IndentedStringBuilder();
                 if (this.HttpMethod == HttpMethod.Head &&
-                    this.ReturnType != null)
+                    this.ReturnType.Body != null)
                 {
-                    sb.AppendLine("result = (statusCode === 204);");
+                    HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
+                    sb.AppendFormat("result = (statusCode === {0});", (int)code).AppendLine();
                 }
 
                 return sb.ToString();

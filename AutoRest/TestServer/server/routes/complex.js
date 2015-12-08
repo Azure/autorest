@@ -57,6 +57,8 @@ var complex = function(coverage) {
     var datetimeBody = '{"field":"0001-01-01T00:00:00Z","now":"2015-05-18T18:38:00Z"}';
     var datetimeRfc1123Body = '{"field":"Mon, 01 Jan 0001 00:00:00 GMT","now":"Mon, 18 May 2015 11:38:00 GMT"}';
     var datetimeRfc1123BodyAlternate = '{"field":"Mon, 01 Jan 1 00:00:00 GMT","now":"Mon, 18 May 2015 11:38:00 GMT"}';
+    var durationBody = '{"field":"P123DT22H14M12.011S"}';
+    var durationBodyAlternate = '{"field":"P123DT22H14M12.010999999998603S"}';
     var datetimeBodyExact = '{"field":"0001-01-01T00:00:00.000Z","now":"2015-05-18T18:38:00.000Z"}';
     var byteString = new Buffer([255, 254, 253, 252, 0, 250, 249, 248, 247, 246]).toString('base64');
     var byteBody = '{"field":"' + byteString + '"}';
@@ -125,6 +127,13 @@ var complex = function(coverage) {
             } else {
                 utils.send400(res, next, "Did not like datetimerfc1123 req " + util.inspect(req.body));
             }
+        } else if (req.params.scenario === 'duration') {
+            if (JSON.stringify(req.body) === durationBody || JSON.stringify(req.body) === durationBodyAlternate) {
+                coverage['putComplexPrimitiveDuration']++;
+                res.status(200).end();
+            } else {
+                utils.send400(res, next, "Did not like duration req " + util.inspect(req.body));
+            }
         } else if (req.params.scenario === 'byte') {
             if (JSON.stringify(req.body) === byteBody) {
                 coverage['putComplexPrimitiveByte']++;
@@ -165,6 +174,9 @@ var complex = function(coverage) {
         } else if (req.params.scenario === 'datetimerfc1123') {
             coverage['getComplexPrimitiveDateTimeRfc1123']++;
             res.status(200).end(datetimeRfc1123Body);
+        } else if (req.params.scenario === 'duration') {
+            coverage['getComplexPrimitiveDuration']++;
+            res.status(200).end(durationBody);
         } else if (req.params.scenario === 'byte') {
             coverage['getComplexPrimitiveByte']++;
             res.status(200).end(byteBody);
@@ -297,26 +309,34 @@ var complex = function(coverage) {
      */
     var rawFish =
       {
-        'dtype':'salmon',
+        'fishtype':'salmon',
         'location':'alaska',
         'iswild':true,
         'species':'king',
         'length':1.0,
         'siblings':[
           {
-            'dtype':'shark',
+            'fishtype':'shark',
             'age':6,
             'birthday': '2012-01-05T01:00:00Z',
             'length':20.0,
             'species':'predator',
           },
           {
-            'dtype':'sawshark',
+            'fishtype':'sawshark',
             'age':105,
             'birthday': '1900-01-05T01:00:00Z',
             'length':10.0,
             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
             'species':'dangerous',
+          },
+          {
+            'fishtype': 'goblin',
+            'age': 1,
+            'birthday': '2015-08-08T00:00:00Z',
+            'length': 30.0,
+            'species': 'scary',
+            'jawsize': 5
           }
         ]
       };
@@ -353,35 +373,35 @@ var complex = function(coverage) {
      * Put and get for recursive reference.
      */
     var bigfishRaw = {
-        "dtype":"salmon",
+        "fishtype":"salmon",
         "location":"alaska",
         "iswild":true,
         "species":"king",
         "length":1,
         "siblings":[
           {
-            "dtype":"shark",
+            "fishtype":"shark",
             "age":6,
             'birthday': '2012-01-05T01:00:00Z',
             "species":"predator",
             "length":20,
             "siblings":[
                 {
-                    "dtype":"salmon",
+                    "fishtype":"salmon",
                     "location":"atlantic",
                     "iswild":true,
                     "species":"coho",
                     "length":2,
                     "siblings":[
                       {
-                        "dtype":"shark",
+                        "fishtype":"shark",
                         "age":6,
                         'birthday': '2012-01-05T01:00:00Z',
                         "species":"predator",
                         "length":20
                       },
                       {
-                        "dtype":"sawshark",
+                        "fishtype":"sawshark",
                         "age":105,
                         'birthday': '1900-01-05T01:00:00Z',
                         'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
@@ -391,7 +411,7 @@ var complex = function(coverage) {
                     ]
                 },
                 {
-                    "dtype":"sawshark",
+                    "fishtype":"sawshark",
                     "age":105,
                     'birthday': '1900-01-05T01:00:00Z',
                     'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
@@ -402,7 +422,7 @@ var complex = function(coverage) {
             ]
           },
           {
-            "dtype":"sawshark",
+            "fishtype":"sawshark",
             "age":105,
             'birthday': '1900-01-05T01:00:00Z',
             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
