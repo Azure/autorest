@@ -29,9 +29,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='fooClientRequestId'>
             /// The fooRequestId
             /// </param>
-            public static void CustomNamedRequestId(this IHeaderOperations operations, string fooClientRequestId)
+            public static HeaderCustomNamedRequestIdHeaders CustomNamedRequestId(this IHeaderOperations operations, string fooClientRequestId)
             {
-                Task.Factory.StartNew(s => ((IHeaderOperations)s).CustomNamedRequestIdAsync(fooClientRequestId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IHeaderOperations)s).CustomNamedRequestIdAsync(fooClientRequestId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -47,9 +47,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task CustomNamedRequestIdAsync( this IHeaderOperations operations, string fooClientRequestId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HeaderCustomNamedRequestIdHeaders> CustomNamedRequestIdAsync( this IHeaderOperations operations, string fooClientRequestId, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.CustomNamedRequestIdWithHttpMessagesAsync(fooClientRequestId, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.CustomNamedRequestIdWithHttpMessagesAsync(fooClientRequestId, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
     }

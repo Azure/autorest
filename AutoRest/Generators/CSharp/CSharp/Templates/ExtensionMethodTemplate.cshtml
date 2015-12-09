@@ -33,7 +33,7 @@ foreach (var parameter in Model.LocalParameters)
     }
     else if (Model.ReturnType.Headers != null)
     {
-        @:return Task.Factory.StartNew(s => ((I@(Model.MethodGroupName))s).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+    @:return Task.Factory.StartNew(s => ((I@(Model.MethodGroupName))s).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
     }
     else
     {
@@ -72,8 +72,8 @@ foreach (var parameter in Model.LocalParameters)
     }
     else if (Model.ReturnType.Headers != null)
     {
-        @:var result = await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
-        @:return result.Headers;
+    @:var result = await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
+    @:return result.Headers;
     }
     else
     {

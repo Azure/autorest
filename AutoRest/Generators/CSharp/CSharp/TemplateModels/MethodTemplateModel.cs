@@ -289,6 +289,10 @@ namespace Microsoft.Rest.Generator.CSharp
                 {
                     return ReturnType.Body.Name;
                 }
+                if (ReturnType.Headers != null)
+                {
+                    return ReturnType.Headers.Name;
+                }
                 else
                 {
                     return "void";
