@@ -229,9 +229,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void DeleteNonRetry400(this ILROSADsOperations operations)
+            public static LROSADsDeleteNonRetry400Headers DeleteNonRetry400(this ILROSADsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).DeleteNonRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).DeleteNonRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -243,9 +243,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeleteNonRetry400Async( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsDeleteNonRetry400Headers> DeleteNonRetry400Async( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DeleteNonRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.DeleteNonRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -254,9 +255,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void BeginDeleteNonRetry400(this ILROSADsOperations operations)
+            public static LROSADsDeleteNonRetry400Headers BeginDeleteNonRetry400(this ILROSADsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDeleteNonRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDeleteNonRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -268,9 +269,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginDeleteNonRetry400Async( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsDeleteNonRetry400Headers> BeginDeleteNonRetry400Async( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginDeleteNonRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginDeleteNonRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -279,34 +281,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void Delete202NonRetry400(this ILROSADsOperations operations)
+            public static LROSADsDelete202NonRetry400Headers Delete202NonRetry400(this ILROSADsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).Delete202NonRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 with a location header
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task Delete202NonRetry400Async( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                await operations.Delete202NonRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 with a location header
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static void BeginDelete202NonRetry400(this ILROSADsOperations operations)
-            {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDelete202NonRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).Delete202NonRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -318,28 +295,25 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginDelete202NonRetry400Async( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsDelete202NonRetry400Headers> Delete202NonRetry400Async( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginDelete202NonRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Delete202NonRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
-            /// operation status
+            /// Long running delete request, service returns a 202 with a location header
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void DeleteAsyncRelativeRetry400(this ILROSADsOperations operations)
+            public static LROSADsDelete202NonRetry400Headers BeginDelete202NonRetry400(this ILROSADsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).DeleteAsyncRelativeRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDelete202NonRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
-            /// operation status
+            /// Long running delete request, service returns a 202 with a location header
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -347,9 +321,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeleteAsyncRelativeRetry400Async( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsDelete202NonRetry400Headers> BeginDelete202NonRetry400Async( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DeleteAsyncRelativeRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginDelete202NonRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -360,9 +335,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void BeginDeleteAsyncRelativeRetry400(this ILROSADsOperations operations)
+            public static LROSADsDeleteAsyncRelativeRetry400Headers DeleteAsyncRelativeRetry400(this ILROSADsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDeleteAsyncRelativeRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).DeleteAsyncRelativeRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -376,9 +351,40 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginDeleteAsyncRelativeRetry400Async( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsDeleteAsyncRelativeRetry400Headers> DeleteAsyncRelativeRetry400Async( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginDeleteAsyncRelativeRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.DeleteAsyncRelativeRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+            /// operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static LROSADsDeleteAsyncRelativeRetry400Headers BeginDeleteAsyncRelativeRetry400(this ILROSADsOperations operations)
+            {
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDeleteAsyncRelativeRetry400Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+            /// operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<LROSADsDeleteAsyncRelativeRetry400Headers> BeginDeleteAsyncRelativeRetry400Async( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                var result = await operations.BeginDeleteAsyncRelativeRetry400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -390,40 +396,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static void PostNonRetry400(this ILROSADsOperations operations, Product product = default(Product))
+            public static LROSADsPostNonRetry400Headers PostNonRetry400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).PostNonRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 400 with no error body
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task PostNonRetry400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                await operations.PostNonRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 400 with no error body
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            public static void BeginPostNonRetry400(this ILROSADsOperations operations, Product product = default(Product))
-            {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPostNonRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PostNonRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -438,9 +413,42 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginPostNonRetry400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsPostNonRetry400Headers> PostNonRetry400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginPostNonRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PostNonRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 400 with no error body
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static LROSADsPostNonRetry400Headers BeginPostNonRetry400(this ILROSADsOperations operations, Product product = default(Product))
+            {
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPostNonRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 400 with no error body
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<LROSADsPostNonRetry400Headers> BeginPostNonRetry400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                var result = await operations.BeginPostNonRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -452,9 +460,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static void Post202NonRetry400(this ILROSADsOperations operations, Product product = default(Product))
+            public static LROSADsPost202NonRetry400Headers Post202NonRetry400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).Post202NonRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).Post202NonRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -469,9 +477,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Post202NonRetry400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsPost202NonRetry400Headers> Post202NonRetry400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Post202NonRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Post202NonRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -483,9 +492,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static void BeginPost202NonRetry400(this ILROSADsOperations operations, Product product = default(Product))
+            public static LROSADsPost202NonRetry400Headers BeginPost202NonRetry400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPost202NonRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPost202NonRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -500,9 +509,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginPost202NonRetry400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsPost202NonRetry400Headers> BeginPost202NonRetry400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginPost202NonRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPost202NonRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -516,44 +526,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static void PostAsyncRelativeRetry400(this ILROSADsOperations operations, Product product = default(Product))
+            public static LROSADsPostAsyncRelativeRetry400Headers PostAsyncRelativeRetry400(this ILROSADsOperations operations, Product product = default(Product))
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).PostAsyncRelativeRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request
-            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
-            /// operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task PostAsyncRelativeRetry400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                await operations.PostAsyncRelativeRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request
-            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
-            /// operation status
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            public static void BeginPostAsyncRelativeRetry400(this ILROSADsOperations operations, Product product = default(Product))
-            {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPostAsyncRelativeRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PostAsyncRelativeRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -570,9 +545,46 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginPostAsyncRelativeRetry400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsPostAsyncRelativeRetry400Headers> PostAsyncRelativeRetry400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginPostAsyncRelativeRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PostAsyncRelativeRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request
+            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+            /// operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static LROSADsPostAsyncRelativeRetry400Headers BeginPostAsyncRelativeRetry400(this ILROSADsOperations operations, Product product = default(Product))
+            {
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPostAsyncRelativeRetry400Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request
+            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+            /// operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<LROSADsPostAsyncRelativeRetry400Headers> BeginPostAsyncRelativeRetry400Async( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                var result = await operations.BeginPostAsyncRelativeRetry400WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -849,9 +861,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void DeleteAsyncRelativeRetryNoStatus(this ILROSADsOperations operations)
+            public static LROSADsDeleteAsyncRelativeRetryNoStatusHeaders DeleteAsyncRelativeRetryNoStatus(this ILROSADsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).DeleteAsyncRelativeRetryNoStatusAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).DeleteAsyncRelativeRetryNoStatusAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -865,9 +877,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeleteAsyncRelativeRetryNoStatusAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsDeleteAsyncRelativeRetryNoStatusHeaders> DeleteAsyncRelativeRetryNoStatusAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DeleteAsyncRelativeRetryNoStatusWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.DeleteAsyncRelativeRetryNoStatusWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -878,9 +891,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void BeginDeleteAsyncRelativeRetryNoStatus(this ILROSADsOperations operations)
+            public static LROSADsDeleteAsyncRelativeRetryNoStatusHeaders BeginDeleteAsyncRelativeRetryNoStatus(this ILROSADsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDeleteAsyncRelativeRetryNoStatusAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDeleteAsyncRelativeRetryNoStatusAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -894,9 +907,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginDeleteAsyncRelativeRetryNoStatusAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsDeleteAsyncRelativeRetryNoStatusHeaders> BeginDeleteAsyncRelativeRetryNoStatusAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginDeleteAsyncRelativeRetryNoStatusWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginDeleteAsyncRelativeRetryNoStatusWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -909,42 +923,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static void Post202NoLocation(this ILROSADsOperations operations, Product product = default(Product))
+            public static LROSADsPost202NoLocationHeaders Post202NoLocation(this ILROSADsOperations operations, Product product = default(Product))
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).Post202NoLocationAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// without a location header.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task Post202NoLocationAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                await operations.Post202NoLocationWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// without a location header.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            public static void BeginPost202NoLocation(this ILROSADsOperations operations, Product product = default(Product))
-            {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPost202NoLocationAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).Post202NoLocationAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -960,15 +941,15 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginPost202NoLocationAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsPost202NoLocationHeaders> Post202NoLocationAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginPost202NoLocationWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Post202NoLocationWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
             /// Long running post request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// without a location header.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -976,15 +957,14 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static void PostAsyncRelativeRetryNoPayload(this ILROSADsOperations operations, Product product = default(Product))
+            public static LROSADsPost202NoLocationHeaders BeginPost202NoLocation(this ILROSADsOperations operations, Product product = default(Product))
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).PostAsyncRelativeRetryNoPayloadAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPost202NoLocationAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
             /// Long running post request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. Poll the
-            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// without a location header.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -995,9 +975,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostAsyncRelativeRetryNoPayloadAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsPost202NoLocationHeaders> BeginPost202NoLocationAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostAsyncRelativeRetryNoPayloadWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPost202NoLocationWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -1011,9 +992,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static void BeginPostAsyncRelativeRetryNoPayload(this ILROSADsOperations operations, Product product = default(Product))
+            public static LROSADsPostAsyncRelativeRetryNoPayloadHeaders PostAsyncRelativeRetryNoPayload(this ILROSADsOperations operations, Product product = default(Product))
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPostAsyncRelativeRetryNoPayloadAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PostAsyncRelativeRetryNoPayloadAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1030,9 +1011,46 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginPostAsyncRelativeRetryNoPayloadAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsPostAsyncRelativeRetryNoPayloadHeaders> PostAsyncRelativeRetryNoPayloadAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginPostAsyncRelativeRetryNoPayloadWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PostAsyncRelativeRetryNoPayloadWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static LROSADsPostAsyncRelativeRetryNoPayloadHeaders BeginPostAsyncRelativeRetryNoPayload(this ILROSADsOperations operations, Product product = default(Product))
+            {
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPostAsyncRelativeRetryNoPayloadAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. Poll the
+            /// endpoint indicated in the Azure-AsyncOperation header for operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<LROSADsPostAsyncRelativeRetryNoPayloadHeaders> BeginPostAsyncRelativeRetryNoPayloadAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                var result = await operations.BeginPostAsyncRelativeRetryNoPayloadWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -1254,9 +1272,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void Delete202RetryInvalidHeader(this ILROSADsOperations operations)
+            public static LROSADsDelete202RetryInvalidHeaderHeaders Delete202RetryInvalidHeader(this ILROSADsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).Delete202RetryInvalidHeaderAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).Delete202RetryInvalidHeaderAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1269,9 +1287,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Delete202RetryInvalidHeaderAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsDelete202RetryInvalidHeaderHeaders> Delete202RetryInvalidHeaderAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Delete202RetryInvalidHeaderWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Delete202RetryInvalidHeaderWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -1281,9 +1300,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void BeginDelete202RetryInvalidHeader(this ILROSADsOperations operations)
+            public static LROSADsDelete202RetryInvalidHeaderHeaders BeginDelete202RetryInvalidHeader(this ILROSADsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDelete202RetryInvalidHeaderAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDelete202RetryInvalidHeaderAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1296,9 +1315,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginDelete202RetryInvalidHeaderAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsDelete202RetryInvalidHeaderHeaders> BeginDelete202RetryInvalidHeaderAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginDelete202RetryInvalidHeaderWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginDelete202RetryInvalidHeaderWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -1308,36 +1328,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void DeleteAsyncRelativeRetryInvalidHeader(this ILROSADsOperations operations)
+            public static LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders DeleteAsyncRelativeRetryInvalidHeader(this ILROSADsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).DeleteAsyncRelativeRetryInvalidHeaderAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// The endpoint indicated in the Azure-AsyncOperation header is invalid
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task DeleteAsyncRelativeRetryInvalidHeaderAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                await operations.DeleteAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-            }
-
-            /// <summary>
-            /// Long running delete request, service returns a 202 to the initial request.
-            /// The endpoint indicated in the Azure-AsyncOperation header is invalid
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static void BeginDeleteAsyncRelativeRetryInvalidHeader(this ILROSADsOperations operations)
-            {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDeleteAsyncRelativeRetryInvalidHeaderAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).DeleteAsyncRelativeRetryInvalidHeaderAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1350,28 +1343,27 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginDeleteAsyncRelativeRetryInvalidHeaderAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders> DeleteAsyncRelativeRetryInvalidHeaderAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginDeleteAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.DeleteAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
             /// Long running delete request, service returns a 202 to the initial request.
-            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
-            /// operation status
+            /// The endpoint indicated in the Azure-AsyncOperation header is invalid
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void DeleteAsyncRelativeRetryInvalidJsonPolling(this ILROSADsOperations operations)
+            public static LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders BeginDeleteAsyncRelativeRetryInvalidHeader(this ILROSADsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).DeleteAsyncRelativeRetryInvalidJsonPollingAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDeleteAsyncRelativeRetryInvalidHeaderAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
             /// Long running delete request, service returns a 202 to the initial request.
-            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
-            /// operation status
+            /// The endpoint indicated in the Azure-AsyncOperation header is invalid
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -1379,9 +1371,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeleteAsyncRelativeRetryInvalidJsonPollingAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders> BeginDeleteAsyncRelativeRetryInvalidHeaderAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DeleteAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginDeleteAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -1392,9 +1385,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void BeginDeleteAsyncRelativeRetryInvalidJsonPolling(this ILROSADsOperations operations)
+            public static LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders DeleteAsyncRelativeRetryInvalidJsonPolling(this ILROSADsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).DeleteAsyncRelativeRetryInvalidJsonPollingAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1408,9 +1401,40 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginDeleteAsyncRelativeRetryInvalidJsonPollingAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders> DeleteAsyncRelativeRetryInvalidJsonPollingAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginDeleteAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.DeleteAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+            /// operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders BeginDeleteAsyncRelativeRetryInvalidJsonPolling(this ILROSADsOperations operations)
+            {
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running delete request, service returns a 202 to the initial request.
+            /// Poll the endpoint indicated in the Azure-AsyncOperation header for
+            /// operation status
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders> BeginDeleteAsyncRelativeRetryInvalidJsonPollingAsync( this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                var result = await operations.BeginDeleteAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -1423,42 +1447,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static void Post202RetryInvalidHeader(this ILROSADsOperations operations, Product product = default(Product))
+            public static LROSADsPost202RetryInvalidHeaderHeaders Post202RetryInvalidHeader(this ILROSADsOperations operations, Product product = default(Product))
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).Post202RetryInvalidHeaderAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with invalid 'Location' and 'Retry-After' headers.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task Post202RetryInvalidHeaderAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                await operations.Post202RetryInvalidHeaderWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with invalid 'Location' and 'Retry-After' headers.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            public static void BeginPost202RetryInvalidHeader(this ILROSADsOperations operations, Product product = default(Product))
-            {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPost202RetryInvalidHeaderAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).Post202RetryInvalidHeaderAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1474,9 +1465,44 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginPost202RetryInvalidHeaderAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsPost202RetryInvalidHeaderHeaders> Post202RetryInvalidHeaderAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginPost202RetryInvalidHeaderWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.Post202RetryInvalidHeaderWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with invalid 'Location' and 'Retry-After' headers.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static LROSADsPost202RetryInvalidHeaderHeaders BeginPost202RetryInvalidHeader(this ILROSADsOperations operations, Product product = default(Product))
+            {
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPost202RetryInvalidHeaderAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with invalid 'Location' and 'Retry-After' headers.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<LROSADsPost202RetryInvalidHeaderHeaders> BeginPost202RetryInvalidHeaderAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                var result = await operations.BeginPost202RetryInvalidHeaderWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -1490,44 +1516,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static void PostAsyncRelativeRetryInvalidHeader(this ILROSADsOperations operations, Product product = default(Product))
+            public static LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders PostAsyncRelativeRetryInvalidHeader(this ILROSADsOperations operations, Product product = default(Product))
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).PostAsyncRelativeRetryInvalidHeaderAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. The endpoint
-            /// indicated in the Azure-AsyncOperation header is invalid.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task PostAsyncRelativeRetryInvalidHeaderAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                await operations.PostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
-            }
-
-            /// <summary>
-            /// Long running post request, service returns a 202 to the initial request,
-            /// with an entity that contains ProvisioningState=’Creating’. The endpoint
-            /// indicated in the Azure-AsyncOperation header is invalid.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='product'>
-            /// Product to put
-            /// </param>
-            public static void BeginPostAsyncRelativeRetryInvalidHeader(this ILROSADsOperations operations, Product product = default(Product))
-            {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPostAsyncRelativeRetryInvalidHeaderAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PostAsyncRelativeRetryInvalidHeaderAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1544,9 +1535,46 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginPostAsyncRelativeRetryInvalidHeaderAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> PostAsyncRelativeRetryInvalidHeaderAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginPostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. The endpoint
+            /// indicated in the Azure-AsyncOperation header is invalid.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders BeginPostAsyncRelativeRetryInvalidHeader(this ILROSADsOperations operations, Product product = default(Product))
+            {
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPostAsyncRelativeRetryInvalidHeaderAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running post request, service returns a 202 to the initial request,
+            /// with an entity that contains ProvisioningState=’Creating’. The endpoint
+            /// indicated in the Azure-AsyncOperation header is invalid.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> BeginPostAsyncRelativeRetryInvalidHeaderAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                var result = await operations.BeginPostAsyncRelativeRetryInvalidHeaderWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -1560,9 +1588,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static void PostAsyncRelativeRetryInvalidJsonPolling(this ILROSADsOperations operations, Product product = default(Product))
+            public static LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders PostAsyncRelativeRetryInvalidJsonPolling(this ILROSADsOperations operations, Product product = default(Product))
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).PostAsyncRelativeRetryInvalidJsonPollingAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PostAsyncRelativeRetryInvalidJsonPollingAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1579,9 +1607,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostAsyncRelativeRetryInvalidJsonPollingAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> PostAsyncRelativeRetryInvalidJsonPollingAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.PostAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
             /// <summary>
@@ -1595,9 +1624,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static void BeginPostAsyncRelativeRetryInvalidJsonPolling(this ILROSADsOperations operations, Product product = default(Product))
+            public static LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders BeginPostAsyncRelativeRetryInvalidJsonPolling(this ILROSADsOperations operations, Product product = default(Product))
             {
-                Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPostAsyncRelativeRetryInvalidJsonPollingAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPostAsyncRelativeRetryInvalidJsonPollingAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1614,9 +1643,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BeginPostAsyncRelativeRetryInvalidJsonPollingAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> BeginPostAsyncRelativeRetryInvalidJsonPollingAsync( this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginPostAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.BeginPostAsyncRelativeRetryInvalidJsonPollingWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false);
+                return result.Headers;
             }
 
     }

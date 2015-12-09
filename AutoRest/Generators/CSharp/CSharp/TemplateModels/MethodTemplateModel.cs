@@ -206,6 +206,11 @@ namespace Microsoft.Rest.Generator.CSharp
                     return string.Format(CultureInfo.InvariantCulture,
                         "Task<{0}>", ReturnType.Body.Name);
                 }
+                else if(ReturnType.Headers != null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "Task<{0}>", ReturnType.Headers.Name);
+                }
                 else
                 {
                     return "Task";
@@ -283,6 +288,10 @@ namespace Microsoft.Rest.Generator.CSharp
                 if (ReturnType.Body != null)
                 {
                     return ReturnType.Body.Name;
+                }
+                if (ReturnType.Headers != null)
+                {
+                    return ReturnType.Headers.Name;
                 }
                 else
                 {
