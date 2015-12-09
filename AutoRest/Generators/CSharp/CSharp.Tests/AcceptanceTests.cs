@@ -52,14 +52,18 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         "AutoRest.Generator.CSharp.Tests")]
     public class AcceptanceTests : IClassFixture<ServiceController>
     {
-        private readonly TestTracingInterceptor _interceptor;
+        private static readonly TestTracingInterceptor _interceptor;
+
+        static AcceptanceTests()
+        {
+            _interceptor = new TestTracingInterceptor();
+            ServiceClientTracing.AddTracingInterceptor(_interceptor);
+        }
 
         public AcceptanceTests(ServiceController data)
         {
             this.Fixture = data;
             this.Fixture.TearDown = EnsureTestCoverage;
-            _interceptor = new TestTracingInterceptor();
-            ServiceClientTracing.AddTracingInterceptor(_interceptor);
             ServiceClientTracing.IsEnabled = false;
         }
 
@@ -1572,14 +1576,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             EnsureThrowsWithStatusCode(HttpStatusCode.HttpVersionNotSupported, () => client.HttpServerFailure.Post505(true));
             EnsureThrowsWithStatusCode(HttpStatusCode.HttpVersionNotSupported, () => client.HttpServerFailure.Delete505(true));
             client.HttpRetry.Head408();
-            try
-            {
-                client.HttpRetry.Get502();
-            }
-            catch
-            {
-                // Ignore
-            }
+            client.HttpRetry.Get502();
             //TODO, 4042586: Support options operations in swagger modeler
             //client.HttpRetry.Options429();
             client.HttpRetry.Put500(true);
