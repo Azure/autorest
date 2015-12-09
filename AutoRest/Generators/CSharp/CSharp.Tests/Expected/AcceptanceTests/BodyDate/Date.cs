@@ -108,7 +108,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -136,7 +136,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<DateTime?>(responseContent, new DateJsonConverter());
+                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, new DateJsonConverter());
                 }
                 catch (JsonException ex)
                 {
@@ -210,7 +210,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -238,7 +238,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<DateTime?>(responseContent, new DateJsonConverter());
+                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, new DateJsonConverter());
                 }
                 catch (JsonException ex)
                 {
@@ -312,7 +312,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -340,7 +340,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<DateTime?>(responseContent, new DateJsonConverter());
+                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, new DateJsonConverter());
                 }
                 catch (JsonException ex)
                 {
@@ -414,7 +414,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -442,7 +442,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<DateTime?>(responseContent, new DateJsonConverter());
+                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, new DateJsonConverter());
                 }
                 catch (JsonException ex)
                 {
@@ -505,7 +505,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(dateBody, new DateJsonConverter());
+            string requestContent = SafeJsonConvert.SerializeObject(dateBody, new DateJsonConverter());
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -527,7 +527,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -616,7 +616,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -644,7 +644,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<DateTime?>(responseContent, new DateJsonConverter());
+                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, new DateJsonConverter());
                 }
                 catch (JsonException ex)
                 {
@@ -707,7 +707,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(dateBody, new DateJsonConverter());
+            string requestContent = SafeJsonConvert.SerializeObject(dateBody, new DateJsonConverter());
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -729,7 +729,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -818,7 +818,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -846,7 +846,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<DateTime?>(responseContent, new DateJsonConverter());
+                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, new DateJsonConverter());
                 }
                 catch (JsonException ex)
                 {

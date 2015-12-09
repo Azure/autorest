@@ -124,7 +124,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -213,7 +213,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -326,7 +326,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -415,7 +415,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -512,7 +512,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -545,7 +545,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -650,7 +650,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -747,7 +747,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -780,7 +780,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -885,7 +885,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -982,7 +982,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -1015,7 +1015,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1120,7 +1120,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1217,7 +1217,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -1250,7 +1250,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1355,7 +1355,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1452,7 +1452,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -1485,7 +1485,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1590,7 +1590,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1719,7 +1719,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1826,7 +1826,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1923,7 +1923,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, new DateJsonConverter()).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, new DateJsonConverter()).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -1956,7 +1956,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2061,7 +2061,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2160,7 +2160,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -2193,7 +2193,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2299,7 +2299,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2394,7 +2394,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, new DateTimeRfc1123JsonConverter()).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, new DateTimeRfc1123JsonConverter()).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -2427,7 +2427,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2533,7 +2533,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2630,7 +2630,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -2663,7 +2663,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2768,7 +2768,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2865,7 +2865,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -2898,7 +2898,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -3003,7 +3003,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -3098,7 +3098,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -3131,7 +3131,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -3237,7 +3237,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -3335,7 +3335,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;

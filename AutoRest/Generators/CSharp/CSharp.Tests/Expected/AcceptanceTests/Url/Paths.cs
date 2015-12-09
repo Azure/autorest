@@ -80,7 +80,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/bool/true/{boolPath}").ToString();
-            url = url.Replace("{boolPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(boolPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{boolPath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolPath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -117,7 +117,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -178,7 +178,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/bool/false/{boolPath}").ToString();
-            url = url.Replace("{boolPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(boolPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{boolPath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolPath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -215,7 +215,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -276,7 +276,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/int/1000000/{intPath}").ToString();
-            url = url.Replace("{intPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(intPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{intPath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intPath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -313,7 +313,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -374,7 +374,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/int/-1000000/{intPath}").ToString();
-            url = url.Replace("{intPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(intPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{intPath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intPath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -411,7 +411,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -472,7 +472,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/long/10000000000/{longPath}").ToString();
-            url = url.Replace("{longPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(longPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{longPath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longPath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -509,7 +509,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -570,7 +570,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/long/-10000000000/{longPath}").ToString();
-            url = url.Replace("{longPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(longPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{longPath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longPath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -607,7 +607,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -668,7 +668,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/float/1.034E+20/{floatPath}").ToString();
-            url = url.Replace("{floatPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(floatPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{floatPath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatPath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -705,7 +705,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -766,7 +766,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/float/-1.034E-20/{floatPath}").ToString();
-            url = url.Replace("{floatPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(floatPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{floatPath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatPath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -803,7 +803,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -864,7 +864,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/double/9999999.999/{doublePath}").ToString();
-            url = url.Replace("{doublePath}", Uri.EscapeDataString(JsonConvert.SerializeObject(doublePath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{doublePath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doublePath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -901,7 +901,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -962,7 +962,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/double/-9999999.999/{doublePath}").ToString();
-            url = url.Replace("{doublePath}", Uri.EscapeDataString(JsonConvert.SerializeObject(doublePath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{doublePath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doublePath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -999,7 +999,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1098,7 +1098,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1197,7 +1197,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1295,7 +1295,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1393,7 +1393,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1455,7 +1455,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/enum/green%20color/{enumPath}").ToString();
-            url = url.Replace("{enumPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(enumPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{enumPath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(enumPath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1492,7 +1492,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1554,7 +1554,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/string/null/{enumPath}").ToString();
-            url = url.Replace("{enumPath}", Uri.EscapeDataString(JsonConvert.SerializeObject(enumPath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{enumPath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(enumPath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1591,7 +1591,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1652,7 +1652,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/byte/multibyte/{bytePath}").ToString();
-            url = url.Replace("{bytePath}", Uri.EscapeDataString(JsonConvert.SerializeObject(bytePath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{bytePath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(bytePath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1689,7 +1689,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1750,7 +1750,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/byte/empty/{bytePath}").ToString();
-            url = url.Replace("{bytePath}", Uri.EscapeDataString(JsonConvert.SerializeObject(bytePath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{bytePath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(bytePath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1787,7 +1787,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1848,7 +1848,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/byte/null/{bytePath}").ToString();
-            url = url.Replace("{bytePath}", Uri.EscapeDataString(JsonConvert.SerializeObject(bytePath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{bytePath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(bytePath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1885,7 +1885,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1946,7 +1946,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/date/2012-01-01/{datePath}").ToString();
-            url = url.Replace("{datePath}", Uri.EscapeDataString(JsonConvert.SerializeObject(datePath, new DateJsonConverter()).Trim('"')));
+            url = url.Replace("{datePath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(datePath, new DateJsonConverter()).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -1983,7 +1983,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2045,7 +2045,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/date/null/{datePath}").ToString();
-            url = url.Replace("{datePath}", Uri.EscapeDataString(JsonConvert.SerializeObject(datePath, new DateJsonConverter()).Trim('"')));
+            url = url.Replace("{datePath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(datePath, new DateJsonConverter()).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2082,7 +2082,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2143,7 +2143,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}").ToString();
-            url = url.Replace("{dateTimePath}", Uri.EscapeDataString(JsonConvert.SerializeObject(dateTimePath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{dateTimePath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateTimePath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2180,7 +2180,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2242,7 +2242,7 @@ namespace Fixtures.AcceptanceTestsUrl
             // Construct URL
             var baseUrl = this.Client.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "paths/datetime/null/{dateTimePath}").ToString();
-            url = url.Replace("{dateTimePath}", Uri.EscapeDataString(JsonConvert.SerializeObject(dateTimePath, this.Client.SerializationSettings).Trim('"')));
+            url = url.Replace("{dateTimePath}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateTimePath, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -2279,7 +2279,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;

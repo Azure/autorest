@@ -350,7 +350,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -382,7 +382,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<IDictionary<string, int?>>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {

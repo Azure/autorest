@@ -107,7 +107,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     {
         <text>
     // Serialize Request
-    string requestContent = JsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
+    string requestContent = SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
     httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
     httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.ContentType)");
         </text>
@@ -154,7 +154,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
             else
             {
             @:string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            @:@(Model.DefaultResponse.Body.Name) errorBody = JsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+            @:@(Model.DefaultResponse.Body.Name) errorBody = SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
             }
             @:if (errorBody != null)
             @:{
@@ -198,7 +198,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
         @:try
         @:{
             @:string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            @:result.Body = JsonConvert.DeserializeObject<@(responsePair.Value.Body.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
+            @:result.Body = SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
         @:}
         @:catch (JsonException ex)
         @:{
@@ -219,7 +219,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     @:try
     @:{
         @:string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-        @:result.Body = JsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+        @:result.Body = SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
     @:}
     @:catch (JsonException ex)
     @:{

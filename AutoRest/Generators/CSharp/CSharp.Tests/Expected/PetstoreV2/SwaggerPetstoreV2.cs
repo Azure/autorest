@@ -198,7 +198,7 @@ namespace Fixtures.PetstoreV2
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(body, this.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -235,7 +235,7 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Pet>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Pet>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -303,7 +303,7 @@ namespace Fixtures.PetstoreV2
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(body, this.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -434,7 +434,7 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<IList<Pet>>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -542,7 +542,7 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<IList<Pet>>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -589,7 +589,7 @@ namespace Fixtures.PetstoreV2
             // Construct URL
             var baseUrl = this.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "pet/{petId}").ToString();
-            url = url.Replace("{petId}", Uri.EscapeDataString(JsonConvert.SerializeObject(petId, this.SerializationSettings).Trim('"')));
+            url = url.Replace("{petId}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(petId, this.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("GET");
@@ -641,7 +641,7 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Pet>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Pet>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -695,7 +695,7 @@ namespace Fixtures.PetstoreV2
             // Construct URL
             var baseUrl = this.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "pet/{petId}").ToString();
-            url = url.Replace("{petId}", Uri.EscapeDataString(JsonConvert.SerializeObject(petId, this.SerializationSettings).Trim('"')));
+            url = url.Replace("{petId}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(petId, this.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("POST");
@@ -783,7 +783,7 @@ namespace Fixtures.PetstoreV2
             // Construct URL
             var baseUrl = this.BaseUri.AbsoluteUri;
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "pet/{petId}").ToString();
-            url = url.Replace("{petId}", Uri.EscapeDataString(JsonConvert.SerializeObject(petId, this.SerializationSettings).Trim('"')));
+            url = url.Replace("{petId}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(petId, this.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage httpRequest = new HttpRequestMessage();
             httpRequest.Method = new HttpMethod("DELETE");
@@ -920,7 +920,7 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<IDictionary<string, int?>>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -984,7 +984,7 @@ namespace Fixtures.PetstoreV2
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(body, this.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -1021,7 +1021,7 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Order>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Order>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1132,7 +1132,7 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Order>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Order>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1291,7 +1291,7 @@ namespace Fixtures.PetstoreV2
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(body, this.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -1379,7 +1379,7 @@ namespace Fixtures.PetstoreV2
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(body, this.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -1467,7 +1467,7 @@ namespace Fixtures.PetstoreV2
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(body, this.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -1609,7 +1609,7 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<string>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<string>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1791,7 +1791,7 @@ namespace Fixtures.PetstoreV2
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<User>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<User>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1865,7 +1865,7 @@ namespace Fixtures.PetstoreV2
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(body, this.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request

@@ -79,7 +79,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (boolQuery != null)
             {
-                queryParameters.Add(string.Format("boolQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(boolQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("boolQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -121,7 +121,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -181,7 +181,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (boolQuery != null)
             {
-                queryParameters.Add(string.Format("boolQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(boolQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("boolQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -223,7 +223,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -283,7 +283,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (boolQuery != null)
             {
-                queryParameters.Add(string.Format("boolQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(boolQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("boolQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -325,7 +325,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -385,7 +385,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (intQuery != null)
             {
-                queryParameters.Add(string.Format("intQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(intQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("intQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -427,7 +427,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -487,7 +487,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (intQuery != null)
             {
-                queryParameters.Add(string.Format("intQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(intQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("intQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -529,7 +529,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -589,7 +589,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (intQuery != null)
             {
-                queryParameters.Add(string.Format("intQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(intQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("intQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -631,7 +631,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -691,7 +691,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (longQuery != null)
             {
-                queryParameters.Add(string.Format("longQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(longQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("longQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -733,7 +733,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -793,7 +793,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (longQuery != null)
             {
-                queryParameters.Add(string.Format("longQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(longQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("longQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -835,7 +835,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -895,7 +895,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (longQuery != null)
             {
-                queryParameters.Add(string.Format("longQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(longQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("longQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -937,7 +937,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -997,7 +997,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (floatQuery != null)
             {
-                queryParameters.Add(string.Format("floatQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(floatQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("floatQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -1039,7 +1039,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1099,7 +1099,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (floatQuery != null)
             {
-                queryParameters.Add(string.Format("floatQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(floatQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("floatQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -1141,7 +1141,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1201,7 +1201,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (floatQuery != null)
             {
-                queryParameters.Add(string.Format("floatQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(floatQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("floatQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -1243,7 +1243,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1303,7 +1303,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (doubleQuery != null)
             {
-                queryParameters.Add(string.Format("doubleQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(doubleQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("doubleQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doubleQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -1345,7 +1345,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1405,7 +1405,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (doubleQuery != null)
             {
-                queryParameters.Add(string.Format("doubleQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(doubleQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("doubleQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doubleQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -1447,7 +1447,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1507,7 +1507,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (doubleQuery != null)
             {
-                queryParameters.Add(string.Format("doubleQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(doubleQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("doubleQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doubleQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -1549,7 +1549,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1652,7 +1652,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1755,7 +1755,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1857,7 +1857,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1959,7 +1959,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2020,7 +2020,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (enumQuery != null)
             {
-                queryParameters.Add(string.Format("enumQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(enumQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("enumQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(enumQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -2062,7 +2062,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2123,7 +2123,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (enumQuery != null)
             {
-                queryParameters.Add(string.Format("enumQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(enumQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("enumQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(enumQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -2165,7 +2165,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2225,7 +2225,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (byteQuery != null)
             {
-                queryParameters.Add(string.Format("byteQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(byteQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("byteQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(byteQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -2267,7 +2267,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2327,7 +2327,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (byteQuery != null)
             {
-                queryParameters.Add(string.Format("byteQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(byteQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("byteQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(byteQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -2369,7 +2369,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2429,7 +2429,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (byteQuery != null)
             {
-                queryParameters.Add(string.Format("byteQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(byteQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("byteQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(byteQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -2471,7 +2471,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2531,7 +2531,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (dateQuery != null)
             {
-                queryParameters.Add(string.Format("dateQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(dateQuery, new DateJsonConverter()).Trim('"'))));
+                queryParameters.Add(string.Format("dateQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateQuery, new DateJsonConverter()).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -2573,7 +2573,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2633,7 +2633,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (dateQuery != null)
             {
-                queryParameters.Add(string.Format("dateQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(dateQuery, new DateJsonConverter()).Trim('"'))));
+                queryParameters.Add(string.Format("dateQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateQuery, new DateJsonConverter()).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -2675,7 +2675,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2735,7 +2735,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (dateTimeQuery != null)
             {
-                queryParameters.Add(string.Format("dateTimeQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(dateTimeQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("dateTimeQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateTimeQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -2777,7 +2777,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2837,7 +2837,7 @@ namespace Fixtures.AcceptanceTestsUrl
             List<string> queryParameters = new List<string>();
             if (dateTimeQuery != null)
             {
-                queryParameters.Add(string.Format("dateTimeQuery={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(dateTimeQuery, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("dateTimeQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateTimeQuery, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -2879,7 +2879,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2983,7 +2983,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -3085,7 +3085,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -3187,7 +3187,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -3291,7 +3291,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -3395,7 +3395,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -3499,7 +3499,7 @@ namespace Fixtures.AcceptanceTestsUrl
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;

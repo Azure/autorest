@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Rest.ClientRuntime.Azure.Properties;
+using Microsoft.Rest.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -598,7 +599,7 @@ namespace Microsoft.Rest.Azure
                 statusCode != HttpStatusCode.Created &&
                 statusCode != HttpStatusCode.NoContent)
             {
-                CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, client.DeserializationSettings);
+                CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, client.DeserializationSettings);
                 throw new CloudException(string.Format(CultureInfo.InvariantCulture,
                     Resources.LongRunningOperationFailed, statusCode))
                 {
