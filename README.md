@@ -6,7 +6,6 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 
 ##Getting AutoRest
 The AutoRest tools can be installed with Nuget for use in a Visual Studio project:
-[![AutoRest NuGet](https://img.shields.io/nuget/v/autorest.svg)](https://www.nuget.org/packages/autorest/)
 [![AutoRest NuGet](https://img.shields.io/nuget/v/autorest.svg?style=flat-square)](https://www.nuget.org/packages/autorest/)
 
 Alternatively it can be installed from [Chocolatey](https://chocolatey.org/) by running:
