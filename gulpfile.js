@@ -415,7 +415,7 @@ var xunitdnx = function(options){
   return shell(dnxScript, options);
 }
 
-gulp.task('test:xunit', ['test:xunit:dnx'], function () {
+gulp.task('test:xunit', ['regenerate:expected:cs', 'regenerate:expected:csazure', 'test:xunit:dnx'], function () {
   return gulp.src(xunitTestsDlls).pipe(xunit('<%= file.path %> -noshadow -noappdomain -diagnostics', defaultShellOptions));
 });
 
