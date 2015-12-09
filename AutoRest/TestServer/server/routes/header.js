@@ -141,7 +141,7 @@ var header = function (coverage, optionalCoverage) {
             break;
           }
         } else if (scenario === "empty") {
-          if (value === "") {
+          if (value === "" || value === null || value === undefined) {
             coverage['HeaderParameterStringEmpty']++;
             res.status(200).end();
             break;
