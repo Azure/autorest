@@ -24,9 +24,9 @@
 #
 # --------------------------------------------------------------------------
 
+from .configuration import Configuration
 from .service_client import ServiceClient
 from .serialization import Serializer, Deserializer
-from .configuration import Configuration
 
 __all__ = [
     "ServiceClient",

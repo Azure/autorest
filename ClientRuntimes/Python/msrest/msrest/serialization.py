@@ -24,10 +24,13 @@
 #
 # --------------------------------------------------------------------------
 
-import json
-import isodate
-import datetime
+from base64 import b64decode, b64encode
 import chardet
+import datetime
+from decimal import Decimal
+from enum import Enum
+import isodate
+import json
 import re
 
 try:
@@ -41,10 +44,6 @@ try:
 
 except ImportError:
     from urllib.parse import quote
-
-from base64 import b64decode, b64encode
-from enum import Enum
-from decimal import Decimal
 
 from .exceptions import (
     SerializationError,
@@ -221,7 +220,7 @@ class Serializer(object):
                     continue
 
         except (AttributeError, KeyError, TypeError) as err:
-            msg = "Attribute {0} in object {1} cannot be serialized.".format(
+            msg = "Attribute {} in object {} cannot be serialized.".format(
                 attr_name, class_name)
 
             raise_with_traceback(SerializationError, msg, err)
@@ -345,7 +344,7 @@ class Serializer(object):
                     data, data_type[1:-1], required, **kwargs)
 
         except (ValueError, TypeError) as err:
-            msg = "Unable to serialize value: '{0}' as type: '{1}'.".format(
+            msg = "Unable to serialize value: '{}' as type: '{}'.".format(
                 data, data_type)
 
             raise_with_traceback(SerializationError, msg, err)
@@ -685,7 +684,7 @@ class Deserializer(object):
                     attr, basestring) and attr.lower() in ['false', '0']:
                 return False
 
-            raise TypeError("Invalid boolean value: {0}".format(attr))
+            raise TypeError("Invalid boolean value: {}".format(attr))
 
         if data_type == 'str':
             return self.deserialize_unicode(attr)
