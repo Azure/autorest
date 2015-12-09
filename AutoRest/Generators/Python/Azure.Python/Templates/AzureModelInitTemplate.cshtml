@@ -1,11 +1,12 @@
 ﻿@using Microsoft.Rest.Generator.Python
 @using Microsoft.Rest.Generator.Python.Templates
+@using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Python.AzureModelInitTemplateModel>
 # coding=utf-8
 # --------------------------------------------------------------------------
-@Header("# ")
+@Header("# ").TrimMultilineHeader()
 # --------------------------------------------------------------------------
 @EmptyLine
 @{

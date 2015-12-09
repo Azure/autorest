@@ -1,10 +1,11 @@
 ﻿@using Microsoft.Rest.Generator.Python
 @using Microsoft.Rest.Generator.Python.Templates
+@using Microsoft.Rest.Generator.Python.TemplateModels
 @using System.Linq;
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Python.AzureMethodGroupTemplateModel>
 # coding=utf-8
 # --------------------------------------------------------------------------
-@Header("# ")
+@Header("# ").TrimMultilineHeader()
 # --------------------------------------------------------------------------
 @EmptyLine
 from msrest.service_client import async_request

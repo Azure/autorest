@@ -9,6 +9,8 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.Text;
+
 namespace Microsoft.Rest.Generator.Python.TemplateModels
 {
     public static class ClientModelExtensions
@@ -70,6 +72,20 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                     throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
                         "Collection format {0} is not supported.", format));
             }
+        }
+
+        public static string TrimMultilineHeader(this string header)
+        {
+            if (string.IsNullOrEmpty(header))
+            {
+                return header;
+            }
+            StringBuilder builder = new StringBuilder();
+            foreach (var headerLine in header.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
+            {
+                builder.Append(headerLine.TrimEnd()).Append(Environment.NewLine);
+            }
+            return builder.ToString();
         }
 
         /// <summary>

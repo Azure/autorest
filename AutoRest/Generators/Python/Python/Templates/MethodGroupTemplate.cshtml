@@ -5,7 +5,7 @@
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodGroupTemplateModel>
 # coding=utf-8
 # --------------------------------------------------------------------------
-@Header("# ")
+@Header("# ").TrimMultilineHeader()
 # --------------------------------------------------------------------------
 @EmptyLine
 from msrest.service_client import async_request
