@@ -28,7 +28,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Duration.
  */
-public class DurationImpl implements Duration {
+public final class DurationImpl implements Duration {
     /** The Retrofit service to perform REST calls. */
     private DurationService service;
     /** The service client containing this operation class. */

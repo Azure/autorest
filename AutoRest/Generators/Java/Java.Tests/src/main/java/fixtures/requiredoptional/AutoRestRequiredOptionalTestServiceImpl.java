@@ -17,11 +17,11 @@ import retrofit.Retrofit;
 /**
  * Initializes a new instance of the AutoRestRequiredOptionalTestService class.
  */
-public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient implements AutoRestRequiredOptionalTestService {
+public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient implements AutoRestRequiredOptionalTestService {
     /**
      * The URI used as the base for all cloud service requests.
      */
-    private String baseUri;
+    private final String baseUri;
 
     /**
      * Gets the URI used as the base for all cloud service requests.

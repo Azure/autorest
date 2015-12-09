@@ -28,7 +28,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in SubscriptionInCredentialsOperations.
  */
-public class SubscriptionInCredentialsOperationsImpl implements SubscriptionInCredentialsOperations {
+public final class SubscriptionInCredentialsOperationsImpl implements SubscriptionInCredentialsOperations {
     /** The Retrofit service to perform REST calls. */
     private SubscriptionInCredentialsService service;
     /** The service client containing this operation class. */

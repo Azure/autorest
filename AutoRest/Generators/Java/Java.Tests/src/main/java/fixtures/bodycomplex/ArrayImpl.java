@@ -29,7 +29,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Array.
  */
-public class ArrayImpl implements Array {
+public final class ArrayImpl implements Array {
     /** The Retrofit service to perform REST calls. */
     private ArrayService service;
     /** The service client containing this operation class. */

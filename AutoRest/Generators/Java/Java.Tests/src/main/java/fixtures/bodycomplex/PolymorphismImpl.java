@@ -29,7 +29,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Polymorphism.
  */
-public class PolymorphismImpl implements Polymorphism {
+public final class PolymorphismImpl implements Polymorphism {
     /** The Retrofit service to perform REST calls. */
     private PolymorphismService service;
     /** The service client containing this operation class. */

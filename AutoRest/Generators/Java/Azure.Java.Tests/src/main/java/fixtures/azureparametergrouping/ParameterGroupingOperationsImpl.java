@@ -33,7 +33,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in ParameterGroupingOperations.
  */
-public class ParameterGroupingOperationsImpl implements ParameterGroupingOperations {
+public final class ParameterGroupingOperationsImpl implements ParameterGroupingOperations {
     /** The Retrofit service to perform REST calls. */
     private ParameterGroupingService service;
     /** The service client containing this operation class. */

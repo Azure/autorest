@@ -27,7 +27,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Implicit.
  */
-public class ImplicitImpl implements Implicit {
+public final class ImplicitImpl implements Implicit {
     /** The Retrofit service to perform REST calls. */
     private ImplicitService service;
     /** The service client containing this operation class. */

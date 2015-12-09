@@ -39,7 +39,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Primitive.
  */
-public class PrimitiveImpl implements Primitive {
+public final class PrimitiveImpl implements Primitive {
     /** The Retrofit service to perform REST calls. */
     private PrimitiveService service;
     /** The service client containing this operation class. */

@@ -28,7 +28,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Datetimerfc1123.
  */
-public class Datetimerfc1123Impl implements Datetimerfc1123 {
+public final class Datetimerfc1123Impl implements Datetimerfc1123 {
     /** The Retrofit service to perform REST calls. */
     private Datetimerfc1123Service service;
     /** The service client containing this operation class. */

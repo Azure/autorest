@@ -30,7 +30,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in PagingOperations.
  */
-public class PagingOperationsImpl implements PagingOperations {
+public final class PagingOperationsImpl implements PagingOperations {
     /** The Retrofit service to perform REST calls. */
     private PagingService service;
     /** The service client containing this operation class. */

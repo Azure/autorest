@@ -27,7 +27,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in StringOperations.
  */
-public class StringOperationsImpl implements StringOperations {
+public final class StringOperationsImpl implements StringOperations {
     /** The Retrofit service to perform REST calls. */
     private StringService service;
     /** The service client containing this operation class. */

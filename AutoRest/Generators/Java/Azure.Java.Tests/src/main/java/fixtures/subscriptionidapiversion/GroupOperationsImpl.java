@@ -29,7 +29,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in GroupOperations.
  */
-public class GroupOperationsImpl implements GroupOperations {
+public final class GroupOperationsImpl implements GroupOperations {
     /** The Retrofit service to perform REST calls. */
     private GroupService service;
     /** The service client containing this operation class. */

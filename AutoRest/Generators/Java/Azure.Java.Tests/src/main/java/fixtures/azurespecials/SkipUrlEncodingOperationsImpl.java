@@ -28,7 +28,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in SkipUrlEncodingOperations.
  */
-public class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations {
+public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOperations {
     /** The Retrofit service to perform REST calls. */
     private SkipUrlEncodingService service;
     /** The service client containing this operation class. */

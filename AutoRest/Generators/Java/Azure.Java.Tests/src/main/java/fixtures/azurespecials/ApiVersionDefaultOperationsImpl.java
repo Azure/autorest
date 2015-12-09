@@ -28,7 +28,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in ApiVersionDefaultOperations.
  */
-public class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultOperations {
+public final class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultOperations {
     /** The Retrofit service to perform REST calls. */
     private ApiVersionDefaultService service;
     /** The service client containing this operation class. */

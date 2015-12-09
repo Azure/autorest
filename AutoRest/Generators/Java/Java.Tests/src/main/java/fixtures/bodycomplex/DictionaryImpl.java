@@ -29,7 +29,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Dictionary.
  */
-public class DictionaryImpl implements Dictionary {
+public final class DictionaryImpl implements Dictionary {
     /** The Retrofit service to perform REST calls. */
     private DictionaryService service;
     /** The service client containing this operation class. */

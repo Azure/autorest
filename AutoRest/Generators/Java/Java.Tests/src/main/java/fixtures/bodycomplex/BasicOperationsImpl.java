@@ -29,7 +29,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in BasicOperations.
  */
-public class BasicOperationsImpl implements BasicOperations {
+public final class BasicOperationsImpl implements BasicOperations {
     /** The Retrofit service to perform REST calls. */
     private BasicService service;
     /** The service client containing this operation class. */

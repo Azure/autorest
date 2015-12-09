@@ -27,7 +27,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in ByteOperations.
  */
-public class ByteOperationsImpl implements ByteOperations {
+public final class ByteOperationsImpl implements ByteOperations {
     /** The Retrofit service to perform REST calls. */
     private ByteService service;
     /** The service client containing this operation class. */

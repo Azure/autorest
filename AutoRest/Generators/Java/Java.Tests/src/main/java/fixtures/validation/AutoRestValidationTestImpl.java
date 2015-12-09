@@ -29,7 +29,7 @@ import retrofit.Response;
 /**
  * Initializes a new instance of the AutoRestValidationTest class.
  */
-public class AutoRestValidationTestImpl extends ServiceClient implements AutoRestValidationTest {
+public final class AutoRestValidationTestImpl extends ServiceClient implements AutoRestValidationTest {
     /**
      * The Retrofit service to perform REST calls.
      */
@@ -37,7 +37,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     /**
      * The URI used as the base for all cloud service requests.
      */
-    private String baseUri;
+    private final String baseUri;
 
     /**
      * Gets the URI used as the base for all cloud service requests.

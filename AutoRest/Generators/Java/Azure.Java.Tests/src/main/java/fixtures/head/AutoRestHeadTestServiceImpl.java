@@ -21,10 +21,10 @@ import retrofit.Retrofit;
 /**
  * Initializes a new instance of the AutoRestHeadTestService class.
  */
-public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements AutoRestHeadTestService {
+public final class AutoRestHeadTestServiceImpl extends AzureServiceClient implements AutoRestHeadTestService {
     /** The URI used as the base for all cloud service requests. */
-    private String baseUri;
-    /** the {@link AzureClient} used for long running operations .*/
+    private final String baseUri;
+    /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 
     /**

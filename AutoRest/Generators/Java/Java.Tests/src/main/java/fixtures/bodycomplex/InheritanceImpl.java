@@ -29,7 +29,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Inheritance.
  */
-public class InheritanceImpl implements Inheritance {
+public final class InheritanceImpl implements Inheritance {
     /** The Retrofit service to perform REST calls. */
     private InheritanceService service;
     /** The service client containing this operation class. */

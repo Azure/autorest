@@ -29,7 +29,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Polymorphicrecursive.
  */
-public class PolymorphicrecursiveImpl implements Polymorphicrecursive {
+public final class PolymorphicrecursiveImpl implements Polymorphicrecursive {
     /** The Retrofit service to perform REST calls. */
     private PolymorphicrecursiveService service;
     /** The service client containing this operation class. */

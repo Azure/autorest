@@ -31,7 +31,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in MultipleResponses.
  */
-public class MultipleResponsesImpl implements MultipleResponses {
+public final class MultipleResponsesImpl implements MultipleResponses {
     /** The Retrofit service to perform REST calls. */
     private MultipleResponsesService service;
     /** The service client containing this operation class. */

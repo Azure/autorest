@@ -29,7 +29,7 @@ import retrofit.Response;
 /**
  * Initializes a new instance of the AutoRestReportService class.
  */
-public class AutoRestReportServiceImpl extends ServiceClient implements AutoRestReportService {
+public final class AutoRestReportServiceImpl extends ServiceClient implements AutoRestReportService {
     /**
      * The Retrofit service to perform REST calls.
      */
@@ -37,7 +37,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     /**
      * The URI used as the base for all cloud service requests.
      */
-    private String baseUri;
+    private final String baseUri;
 
     /**
      * Gets the URI used as the base for all cloud service requests.

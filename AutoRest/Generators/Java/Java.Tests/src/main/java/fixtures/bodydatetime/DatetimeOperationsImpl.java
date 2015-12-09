@@ -28,7 +28,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in DatetimeOperations.
  */
-public class DatetimeOperationsImpl implements DatetimeOperations {
+public final class DatetimeOperationsImpl implements DatetimeOperations {
     /** The Retrofit service to perform REST calls. */
     private DatetimeService service;
     /** The service client containing this operation class. */

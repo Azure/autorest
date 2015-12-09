@@ -28,7 +28,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in HttpRetry.
  */
-public class HttpRetryImpl implements HttpRetry {
+public final class HttpRetryImpl implements HttpRetry {
     /** The Retrofit service to perform REST calls. */
     private HttpRetryService service;
     /** The service client containing this operation class. */

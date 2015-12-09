@@ -28,7 +28,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in HeaderOperationsOperations.
  */
-public class HeaderOperationsOperationsImpl implements HeaderOperationsOperations {
+public final class HeaderOperationsOperationsImpl implements HeaderOperationsOperations {
     /** The Retrofit service to perform REST calls. */
     private HeaderOperationsService service;
     /** The service client containing this operation class. */

@@ -40,7 +40,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Explicit.
  */
-public class ExplicitImpl implements Explicit {
+public final class ExplicitImpl implements Explicit {
     /** The Retrofit service to perform REST calls. */
     private ExplicitService service;
     /** The service client containing this operation class. */
