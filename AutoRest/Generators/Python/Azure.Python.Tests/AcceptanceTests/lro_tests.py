@@ -150,19 +150,19 @@ class LroTests(unittest.TestCase):
         self.assertEqual("Succeeded", process.result().provisioning_state)
 
         # TODO: In C# this doesn't raise
-        self.assertRaisesWithMessage("Long running operation failed with status 'canceled'",
+        self.assertRaisesWithMessage("Long running operation failed with status 'Canceled'",
             self.client.lr_os.delete_provisioning202_deletingcanceled200().result)
 
         # TODO: In C# this doesn't raise
-        self.assertRaisesWithMessage("Long running operation failed with status 'failed'",
+        self.assertRaisesWithMessage("Long running operation failed with status 'Failed'",
             self.client.lr_os.delete_provisioning202_deleting_failed200().result)
 
         self.assertIsNone(self.client.lr_os.post202_no_retry204(product).result())
 
-        self.assertRaisesWithMessage("Long running operation failed with status 'failed'",
+        self.assertRaisesWithMessage("Long running operation failed with status 'Failed'",
             self.client.lr_os.post_async_retry_failed().result)
 
-        self.assertRaisesWithMessage("Long running operation failed with status 'canceled'",
+        self.assertRaisesWithMessage("Long running operation failed with status 'Canceled'",
             self.client.lr_os.post_async_retrycanceled().result)
 
         prod = self.client.lr_os.post_async_retry_succeeded().result()

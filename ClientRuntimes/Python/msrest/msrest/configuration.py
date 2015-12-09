@@ -31,7 +31,6 @@ Configuration of ServiceClient and session.
 try:
     import configparser
     from configparser import NoOptionError
-
 except ImportError:
     import ConfigParser as configparser
     from ConfigParser import NoOptionError
@@ -48,7 +47,6 @@ from .pipeline import (
 class Configuration(object):
 
     def __init__(self, base_url, filepath=None):
-
         # Service
         self.base_url = base_url
 
@@ -56,9 +54,7 @@ class Configuration(object):
         self._log_name = logger.DEFAULT_LOG_NAME
         self._log_dir = None
 
-        self._stream_logging = \
-            "%(asctime)-15s [%(levelname)s] %(module)s: %(message)s"
-        self._file_logging = \
+        self._stream_logging = self._file_logging = \
             "%(asctime)-15s [%(levelname)s] %(module)s: %(message)s"
 
         self._level = 30
@@ -131,17 +127,19 @@ class Configuration(object):
         self._log_name = value
 
     def _clear_config(self):
-
         for section in self._config.sections():
             self._config.remove_section(section)
 
     def save(self, filepath):
+        sections = [
+            "Logging",
+            "Connection",
+            "Proxies",
+            "RetryPolicy",
+            "RedirectPolicy"]
 
-        self._config.add_section("Logging")
-        self._config.add_section("Connection")
-        self._config.add_section("Proxies")
-        self._config.add_section("RetryPolicy")
-        self._config.add_section("RedirectPolicy")
+        for section in sections:
+            self._config.add_section(section)
 
         self._config.set("Logging", "log_name", self._log_name)
         self._config.set("Logging", "log_dir", self._log_dir)
@@ -173,15 +171,12 @@ class Configuration(object):
                 self._config.write(configfile)
 
         except (KeyError, EnvironmentError):
-
             raise_with_traceback(
                 ValueError, "Supplied config filepath invalid.")
-
         finally:
             self._clear_config()
 
     def load(self, filepath):
-
         try:
             self._config.read(filepath)
 
@@ -225,9 +220,7 @@ class Configuration(object):
             self._log = logger.setup_logger(self)
 
         except (ValueError, EnvironmentError, NoOptionError):
-
             raise_with_traceback(
                 ValueError, "Supplied config file incompatible.")
-
         finally:
             self._clear_config()

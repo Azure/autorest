@@ -24,10 +24,10 @@
 #
 # --------------------------------------------------------------------------
 
-import time
 import requests
-import requests_oauthlib as oauth
 from requests.auth import HTTPBasicAuth
+import requests_oauthlib as oauth
+import time
 
 
 class Authentication(object):
@@ -35,16 +35,15 @@ class Authentication(object):
     header = "Authorization"
 
     def signed_session(self):
-        session = requests.Session()
-        return session
+        return requests.Session()
 
 
 class BasicAuthentication(Authentication):
 
-    def __init__(self, username, passw):
+    def __init__(self, username, password):
         self.scheme = 'Basic'
         self.username = username
-        self.password = passw
+        self.password = password
 
     def signed_session(self):
         session = super(BasicAuthentication, self).signed_session()
@@ -61,7 +60,7 @@ class BasicTokenAuthentication(Authentication):
 
     def signed_session(self):
         session = super(BasicTokenAuthentication, self).signed_session()
-        header = "{0} {1}".format(self.scheme, self.token['access_token'])
+        header = "{} {}".format(self.scheme, self.token['access_token'])
         session.headers['Authorization'] = header
 
         return session
@@ -75,7 +74,7 @@ class OAuthTokenAuthentication(Authentication):
         self.token = token
 
     def construct_auth(self):
-        return "{0} {1}".format(self.scheme, self.token)
+        return "{} {}".format(self.scheme, self.token)
 
     def refresh_session(self):
         return self.signed_session()

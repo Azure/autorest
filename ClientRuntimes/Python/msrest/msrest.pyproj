@@ -12,8 +12,10 @@
     <OutputPath>.</OutputPath>
     <Name>msrest</Name>
     <RootNamespace>msrest</RootNamespace>
-    <InterpreterId>{fbe7d93b-dee1-494a-94e7-e3b56b8d6b61}</InterpreterId>
-    <InterpreterVersion>2.7</InterpreterVersion>
+    <InterpreterId>
+    </InterpreterId>
+    <InterpreterVersion>
+    </InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -76,19 +78,6 @@
   <ItemGroup>
     <Folder Include="msrest\" />
     <Folder Include="test\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Interpreter Include="..\..\..\..\..\..\Users\antisch\Documents\GitHub\PythonEnv\Python27-64\">
-      <Id>{fbe7d93b-dee1-494a-94e7-e3b56b8d6b61}</Id>
-      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
-      <Version>2.7</Version>
-      <Description>Python27-64 (Python 64-bit 2.7)</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <LibraryPath>Lib\</LibraryPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>Amd64</Architecture>
-    </Interpreter>
   </ItemGroup>
   <ItemGroup>
     <Content Include="readme.rst">

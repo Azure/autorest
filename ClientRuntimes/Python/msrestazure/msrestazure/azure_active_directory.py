@@ -128,7 +128,7 @@ class AADMixin(object):
         Validate state returned by AAD server.
         """
         state_check = re.compile(
-            "[&?][sS][tT][aA][tT][eE]={0}&".format(self.state))
+            "[&?][sS][tT][aA][tT][eE]={}&".format(self.state))
 
         match = state_check.search(response+'&')
 

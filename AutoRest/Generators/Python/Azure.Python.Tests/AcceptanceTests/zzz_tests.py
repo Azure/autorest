@@ -1,3 +1,4 @@
+﻿
 import unittest
 import sys
 import datetime
@@ -28,7 +29,9 @@ from auto_rest_duration_test_service import AutoRestDurationTestService, AutoRes
 from auto_rest_azure_special_parameters_test_client import AutoRestAzureSpecialParametersTestClient, AutoRestAzureSpecialParametersTestClientConfiguration
 
 from auto_rest_parameter_grouping_test_service.models import ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup, ParameterGroupingPostOptionalParameters, ParameterGroupingPostRequiredParameters, FirstParameterGroup
+
 from msrest.authentication import BasicTokenAuthentication
+
 
 class AcceptanceTests(unittest.TestCase):
 
@@ -54,6 +57,7 @@ class AcceptanceTests(unittest.TestCase):
 
         #Required parameters object is not null, but a required property of the object is
         requiredParameters = ParameterGroupingPostRequiredParameters(body = None, path = pathParameter)
+
         with self.assertRaises(ValueError):
             client.parameter_grouping.post_required(requiredParameters)
         with self.assertRaises(ValueError):
@@ -134,9 +138,7 @@ class AcceptanceTests(unittest.TestCase):
         config.log_level = log_level
         client = AutoRestReportServiceForAzure(config)
         report = client.get_report()
-        # TODO: temporary pass these test case, will remove once Anna fix the bug
-        report['LRORetryErrorPutAsyncSucceeded']=1
-        report['LROPutAsyncNoHeaderInRetry']=1
+
         skipped = [k for k, v in report.items() if v == 0]
 
         for s in skipped:
