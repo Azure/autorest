@@ -513,12 +513,8 @@ export interface Odata {
      *
      * @param {object} [options] Optional Parameters.
      * 
-     * @param {object} [options.filter] The filter parameter with value
+     * @param {string} [options.filter] The filter parameter with value
      * '$filter=id gt 5 and name eq 'foo''.
-     * 
-     * @param {number} [options.filter.id]
-     * 
-     * @param {string} [options.filter.name]
      * 
      * @param {number} [options.top] The top parameter with value 10.
      * 
@@ -530,7 +526,7 @@ export interface Odata {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getWithFilter(options: { filter? : models.OdataFilter, top? : number, orderby? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getWithFilter(options: { filter? : string, top? : number, orderby? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getWithFilter(callback: ServiceCallback<void>): void;
 }
 
