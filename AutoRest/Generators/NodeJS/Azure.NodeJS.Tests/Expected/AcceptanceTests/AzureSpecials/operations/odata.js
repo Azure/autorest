@@ -35,12 +35,8 @@ function Odata(client) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options.filter] The filter parameter with value
+ * @param {string} [options.filter] The filter parameter with value
  * '$filter=id gt 5 and name eq 'foo''.
- * 
- * @param {number} [options.filter.id]
- * 
- * @param {string} [options.filter.name]
  * 
  * @param {number} [options.top] The top parameter with value 10.
  * 
@@ -75,6 +71,9 @@ Odata.prototype.getWithFilter = function (options, callback) {
   var orderby = (options && options.orderby !== undefined) ? options.orderby : undefined;
   // Validate
   try {
+    if (filter !== null && filter !== undefined && typeof filter.valueOf() !== 'string') {
+      throw new Error('filter must be of type string.');
+    }
     if (top !== null && top !== undefined && typeof top !== 'number') {
       throw new Error('top must be of type number.');
     }
@@ -93,7 +92,7 @@ Odata.prototype.getWithFilter = function (options, callback) {
                    '//azurespecials/odata/filter';
   var queryParameters = [];
   if (filter !== null && filter !== undefined) {
-    queryParameters.push('$filter=' + encodeURIComponent(filter.toString()));
+    queryParameters.push('$filter=' + encodeURIComponent(filter));
   }
   if (top !== null && top !== undefined) {
     queryParameters.push('$top=' + encodeURIComponent(top.toString()));

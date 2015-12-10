@@ -64,6 +64,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             Namer.NormalizeClientModel(serviceClient);
             Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
+            Namer.NormalizeOdataFilterParameter(serviceClient);
         }
 
         private void PopulateAdditionalProperties(ServiceClient serviceClient)
