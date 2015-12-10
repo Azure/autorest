@@ -33,7 +33,7 @@ public class PolymorphismrecursiveTests {
                 sib3.getBirthday());
     }
 
-    @Ignore("Pending https://github.com/square/retrofit/issues/1192")
+    @Test
     public void putValid() throws Exception {
         Salmon body = new Salmon();
         body.setLocation("alaska");
