@@ -130,7 +130,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -261,7 +261,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;

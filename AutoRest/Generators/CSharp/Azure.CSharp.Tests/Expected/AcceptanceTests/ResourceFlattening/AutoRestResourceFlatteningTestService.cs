@@ -330,7 +330,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(resourceArray, this.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(resourceArray, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -358,7 +358,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -471,7 +471,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -503,7 +503,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<IList<FlattenedProduct>>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<IList<FlattenedProduct>>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -577,7 +577,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(resourceDictionary, this.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(resourceDictionary, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -605,7 +605,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -718,7 +718,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -750,7 +750,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<IDictionary<string, FlattenedProduct>>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, FlattenedProduct>>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -824,7 +824,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(resourceComplexObject, this.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(resourceComplexObject, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -852,7 +852,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -965,7 +965,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -997,7 +997,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<ResourceCollection>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<ResourceCollection>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {

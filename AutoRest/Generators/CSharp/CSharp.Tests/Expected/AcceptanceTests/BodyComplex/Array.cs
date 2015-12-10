@@ -108,7 +108,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -136,7 +136,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<ArrayWrapper>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<ArrayWrapper>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -201,7 +201,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(complexBody, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(complexBody, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -223,7 +223,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -312,7 +312,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -340,7 +340,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<ArrayWrapper>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<ArrayWrapper>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -405,7 +405,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(complexBody, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(complexBody, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -427,7 +427,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -517,7 +517,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -545,7 +545,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<ArrayWrapper>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<ArrayWrapper>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
