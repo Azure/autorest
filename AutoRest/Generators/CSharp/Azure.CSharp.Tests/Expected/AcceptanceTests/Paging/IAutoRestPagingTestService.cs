@@ -21,7 +21,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
     /// <summary>
     /// Long-running Operation for AutoRest
     /// </summary>
-    public partial interface IAutoRestPagingTestService
+    public partial interface IAutoRestPagingTestService : IDisposable
     {
         /// <summary>
         /// The base URI of the service.

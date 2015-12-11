@@ -9,6 +9,8 @@
 * Added custom polymorphic discriminator support (x-ms-discriminator-value)
 * Added method parameter grouping via x-ms-parameter-grouping extension (#381)
 * Added support for decimal type (#83)
+* Changed generated C# code does not depend on JsonConvert (#372)
+* Changed service interface in C# to implement IDisposable (#278)
 * Bug fixes and to all code generators (#415, #419, #426, #447, #463, #491, #493, #497)
   
 2015.10.23 Version 0.12.0

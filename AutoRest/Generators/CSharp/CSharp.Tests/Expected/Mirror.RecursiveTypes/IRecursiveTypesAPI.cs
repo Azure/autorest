@@ -20,7 +20,7 @@ namespace Fixtures.MirrorRecursiveTypes
     /// <summary>
     /// Some cool documentation.
     /// </summary>
-    public partial interface IRecursiveTypesAPI
+    public partial interface IRecursiveTypesAPI : IDisposable
     {
         /// <summary>
         /// The base URI of the service.

@@ -20,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestHeadTestService
+    public partial interface IAutoRestHeadTestService : IDisposable
     {
         /// <summary>
         /// The base URI of the service.

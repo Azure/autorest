@@ -21,7 +21,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
     /// <summary>
     /// Some cool documentation.
     /// </summary>
-    public partial interface IMicrosoftAzureTestUrl
+    public partial interface IMicrosoftAzureTestUrl : IDisposable
     {
         /// <summary>
         /// The base URI of the service.

@@ -21,7 +21,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
     /// <summary>
     /// Resource Flattening for AutoRest
     /// </summary>
-    public partial interface IAutoRestResourceFlatteningTestService
+    public partial interface IAutoRestResourceFlatteningTestService : IDisposable
     {
         /// <summary>
         /// The base URI of the service.

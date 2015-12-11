@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestIntegerTestService
+    public partial interface IAutoRestIntegerTestService : IDisposable
     {
         /// <summary>
         /// The base URI of the service.
