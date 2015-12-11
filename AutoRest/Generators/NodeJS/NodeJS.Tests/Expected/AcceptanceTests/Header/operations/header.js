@@ -35,11 +35,11 @@ function Header(client) {
  * @param {string} userAgent Send a post request with header value
  * "User-Agent": "overwrite"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -132,11 +132,11 @@ Header.prototype.paramExistingKey = function (userAgent, options, callback) {
 /**
  * Get a response with header value "User-Agent": "overwrite"
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -221,11 +221,11 @@ Header.prototype.responseExistingKey = function (options, callback) {
  * @param {string} contentType Send a post request with header value
  * "Content-Type": "text/html"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -318,11 +318,11 @@ Header.prototype.paramProtectedKey = function (contentType, options, callback) {
 /**
  * Get a response with header value "Content-Type": "text/html"
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -410,11 +410,11 @@ Header.prototype.responseProtectedKey = function (options, callback) {
  * 
  * @param {number} value Send a post request with header values 1 or -2
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -516,11 +516,11 @@ Header.prototype.paramInteger = function (scenario, value, options, callback) {
  * @param {string} scenario Send a post request with header values "scenario":
  * "positive" or "negative"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -619,11 +619,11 @@ Header.prototype.responseInteger = function (scenario, options, callback) {
  * 
  * @param {number} value Send a post request with header values 105 or -2
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -725,11 +725,11 @@ Header.prototype.paramLong = function (scenario, value, options, callback) {
  * @param {string} scenario Send a post request with header values "scenario":
  * "positive" or "negative"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -828,11 +828,11 @@ Header.prototype.responseLong = function (scenario, options, callback) {
  * 
  * @param {number} value Send a post request with header values 0.07 or -3.0
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -934,11 +934,11 @@ Header.prototype.paramFloat = function (scenario, value, options, callback) {
  * @param {string} scenario Send a post request with header values "scenario":
  * "positive" or "negative"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1037,11 +1037,11 @@ Header.prototype.responseFloat = function (scenario, options, callback) {
  * 
  * @param {number} value Send a post request with header values 7e120 or -3.0
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1143,11 +1143,11 @@ Header.prototype.paramDouble = function (scenario, value, options, callback) {
  * @param {string} scenario Send a post request with header values "scenario":
  * "positive" or "negative"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1246,11 +1246,11 @@ Header.prototype.responseDouble = function (scenario, options, callback) {
  * 
  * @param {boolean} value Send a post request with header values true or false
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1352,11 +1352,11 @@ Header.prototype.paramBool = function (scenario, value, options, callback) {
  * @param {string} scenario Send a post request with header values "scenario":
  * "true" or "false"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1454,14 +1454,14 @@ Header.prototype.responseBool = function (scenario, options, callback) {
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "null" or "empty"
  * 
- * @param {string} [value] Send a post request with header values "The quick
- * brown fox jumps over the lazy dog" or null or ""
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.value] Send a post request with header values "The
+ * quick brown fox jumps over the lazy dog" or null or ""
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1474,7 +1474,7 @@ Header.prototype.responseBool = function (scenario, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Header.prototype.paramString = function (scenario, value, options, callback) {
+Header.prototype.paramString = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1483,6 +1483,7 @@ Header.prototype.paramString = function (scenario, value, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var value = (options && options.value !== undefined) ? options.value : undefined;
   // Validate
   try {
     if (scenario === null || scenario === undefined || typeof scenario.valueOf() !== 'string') {
@@ -1564,11 +1565,11 @@ Header.prototype.paramString = function (scenario, value, options, callback) {
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "null" or "empty"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1668,11 +1669,11 @@ Header.prototype.responseString = function (scenario, options, callback) {
  * @param {date} value Send a post request with header values "2010-01-01" or
  * "0001-01-01"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1775,11 +1776,11 @@ Header.prototype.paramDate = function (scenario, value, options, callback) {
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "min"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1880,11 +1881,11 @@ Header.prototype.responseDate = function (scenario, options, callback) {
  * @param {date} value Send a post request with header values
  * "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1988,11 +1989,11 @@ Header.prototype.paramDatetime = function (scenario, value, options, callback) {
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "min"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2090,14 +2091,14 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "min"
  * 
- * @param {date} [value] Send a post request with header values "Wed, 01 Jan
- * 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {date} [options.value] Send a post request with header values "Wed,
+ * 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2110,7 +2111,7 @@ Header.prototype.responseDatetime = function (scenario, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Header.prototype.paramDatetimeRfc1123 = function (scenario, value, options, callback) {
+Header.prototype.paramDatetimeRfc1123 = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2119,6 +2120,7 @@ Header.prototype.paramDatetimeRfc1123 = function (scenario, value, options, call
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var value = (options && options.value !== undefined) ? options.value : undefined;
   // Validate
   try {
     if (scenario === null || scenario === undefined || typeof scenario.valueOf() !== 'string') {
@@ -2201,11 +2203,11 @@ Header.prototype.paramDatetimeRfc1123 = function (scenario, value, options, call
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "min"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2305,11 +2307,11 @@ Header.prototype.responseDatetimeRfc1123 = function (scenario, options, callback
  * @param {moment.duration} value Send a post request with header values
  * "P123DT22H14M12.011S"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2411,11 +2413,11 @@ Header.prototype.paramDuration = function (scenario, value, options, callback) {
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2514,11 +2516,11 @@ Header.prototype.responseDuration = function (scenario, options, callback) {
  * 
  * @param {buffer} value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2620,11 +2622,11 @@ Header.prototype.paramByte = function (scenario, value, options, callback) {
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2721,14 +2723,15 @@ Header.prototype.responseByte = function (scenario, options, callback) {
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "null" or "empty"
  * 
- * @param {string} [value] Send a post request with header values 'GREY' .
- * Possible values for this parameter include: 'White', 'black', 'GREY'
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.value] Send a post request with header values
+ * 'GREY' . Possible values for this parameter include: 'White', 'black',
+ * 'GREY'
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2741,7 +2744,7 @@ Header.prototype.responseByte = function (scenario, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Header.prototype.paramEnum = function (scenario, value, options, callback) {
+Header.prototype.paramEnum = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2750,6 +2753,7 @@ Header.prototype.paramEnum = function (scenario, value, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var value = (options && options.value !== undefined) ? options.value : undefined;
   // Validate
   try {
     if (scenario === null || scenario === undefined || typeof scenario.valueOf() !== 'string') {
@@ -2833,11 +2837,11 @@ Header.prototype.paramEnum = function (scenario, value, options, callback) {
  * @param {string} scenario Send a post request with header values "scenario":
  * "valid" or "null" or "empty"
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2931,11 +2935,11 @@ Header.prototype.responseEnum = function (scenario, options, callback) {
  * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the
  * header of the request
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

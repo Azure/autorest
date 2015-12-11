@@ -124,7 +124,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -162,7 +162,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseExistingKeyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationHeaderResponse<HeaderResponseExistingKeyHeaders>> ResponseExistingKeyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -213,7 +213,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -232,9 +232,17 @@ namespace Fixtures.AcceptanceTestsHeader
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new HttpOperationHeaderResponse<HeaderResponseExistingKeyHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseExistingKeyHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -318,7 +326,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -356,7 +364,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseProtectedKeyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationHeaderResponse<HeaderResponseProtectedKeyHeaders>> ResponseProtectedKeyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -407,7 +415,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -426,9 +434,17 @@ namespace Fixtures.AcceptanceTestsHeader
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new HttpOperationHeaderResponse<HeaderResponseProtectedKeyHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseProtectedKeyHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -496,7 +512,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -529,7 +545,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -570,7 +586,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseIntegerWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationHeaderResponse<HeaderResponseIntegerHeaders>> ResponseIntegerWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -634,7 +650,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -653,9 +669,17 @@ namespace Fixtures.AcceptanceTestsHeader
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new HttpOperationHeaderResponse<HeaderResponseIntegerHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseIntegerHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -723,7 +747,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -756,7 +780,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -797,7 +821,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseLongWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationHeaderResponse<HeaderResponseLongHeaders>> ResponseLongWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -861,7 +885,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -880,9 +904,17 @@ namespace Fixtures.AcceptanceTestsHeader
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new HttpOperationHeaderResponse<HeaderResponseLongHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseLongHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -950,7 +982,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -983,7 +1015,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1024,7 +1056,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseFloatWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationHeaderResponse<HeaderResponseFloatHeaders>> ResponseFloatWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -1088,7 +1120,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1107,9 +1139,17 @@ namespace Fixtures.AcceptanceTestsHeader
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new HttpOperationHeaderResponse<HeaderResponseFloatHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseFloatHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -1177,7 +1217,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -1210,7 +1250,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1251,7 +1291,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseDoubleWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationHeaderResponse<HeaderResponseDoubleHeaders>> ResponseDoubleWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -1315,7 +1355,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1334,9 +1374,17 @@ namespace Fixtures.AcceptanceTestsHeader
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new HttpOperationHeaderResponse<HeaderResponseDoubleHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDoubleHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -1404,7 +1452,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -1437,7 +1485,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1478,7 +1526,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseBoolWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationHeaderResponse<HeaderResponseBoolHeaders>> ResponseBoolWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -1542,7 +1590,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1561,9 +1609,17 @@ namespace Fixtures.AcceptanceTestsHeader
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new HttpOperationHeaderResponse<HeaderResponseBoolHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseBoolHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -1663,7 +1719,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1706,7 +1762,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseStringWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationHeaderResponse<HeaderResponseStringHeaders>> ResponseStringWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -1770,7 +1826,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1789,9 +1845,17 @@ namespace Fixtures.AcceptanceTestsHeader
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new HttpOperationHeaderResponse<HeaderResponseStringHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseStringHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -1859,7 +1923,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, new DateJsonConverter()).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, new DateJsonConverter()).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -1892,7 +1956,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -1933,7 +1997,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseDateWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationHeaderResponse<HeaderResponseDateHeaders>> ResponseDateWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -1997,7 +2061,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2016,9 +2080,17 @@ namespace Fixtures.AcceptanceTestsHeader
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new HttpOperationHeaderResponse<HeaderResponseDateHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDateHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -2088,7 +2160,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -2121,7 +2193,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2163,7 +2235,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseDatetimeWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationHeaderResponse<HeaderResponseDatetimeHeaders>> ResponseDatetimeWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -2227,7 +2299,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2246,9 +2318,17 @@ namespace Fixtures.AcceptanceTestsHeader
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new HttpOperationHeaderResponse<HeaderResponseDatetimeHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDatetimeHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -2314,7 +2394,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, new DateTimeRfc1123JsonConverter()).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, new DateTimeRfc1123JsonConverter()).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -2347,7 +2427,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2389,7 +2469,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseDatetimeRfc1123WithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationHeaderResponse<HeaderResponseDatetimeRfc1123Headers>> ResponseDatetimeRfc1123WithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -2453,7 +2533,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2472,9 +2552,17 @@ namespace Fixtures.AcceptanceTestsHeader
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new HttpOperationHeaderResponse<HeaderResponseDatetimeRfc1123Headers>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDatetimeRfc1123Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -2542,7 +2630,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -2575,7 +2663,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2616,7 +2704,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseDurationWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationHeaderResponse<HeaderResponseDurationHeaders>> ResponseDurationWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -2680,7 +2768,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2699,9 +2787,17 @@ namespace Fixtures.AcceptanceTestsHeader
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new HttpOperationHeaderResponse<HeaderResponseDurationHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDurationHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -2769,7 +2865,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -2802,7 +2898,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2843,7 +2939,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseByteWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationHeaderResponse<HeaderResponseByteHeaders>> ResponseByteWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -2907,7 +3003,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -2926,9 +3022,17 @@ namespace Fixtures.AcceptanceTestsHeader
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new HttpOperationHeaderResponse<HeaderResponseByteHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseByteHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -2994,7 +3098,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 {
                     httpRequest.Headers.Remove("value");
                 }
-                httpRequest.Headers.TryAddWithoutValidation("value", JsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -3027,7 +3131,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -3069,7 +3173,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ResponseEnumWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationHeaderResponse<HeaderResponseEnumHeaders>> ResponseEnumWithHttpMessagesAsync(string scenario, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
@@ -3133,7 +3237,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -3152,9 +3256,17 @@ namespace Fixtures.AcceptanceTestsHeader
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
+            var result = new HttpOperationHeaderResponse<HeaderResponseEnumHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<HeaderResponseEnumHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
+            }
             if (shouldTrace)
             {
                 ServiceClientTracing.Exit(invocationId, result);
@@ -3223,7 +3335,7 @@ namespace Fixtures.AcceptanceTestsHeader
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;

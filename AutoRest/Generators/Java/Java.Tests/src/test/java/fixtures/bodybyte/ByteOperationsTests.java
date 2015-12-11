@@ -6,7 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ByteOperationsTests {
-    static AutoRestSwaggerBATByteService client;
+    private static AutoRestSwaggerBATByteService client;
 
     @BeforeClass
     public static void setup() {

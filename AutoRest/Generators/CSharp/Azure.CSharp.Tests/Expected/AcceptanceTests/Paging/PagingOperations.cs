@@ -19,6 +19,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using Microsoft.Rest.Azure;
     using Models;
@@ -128,7 +129,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -161,7 +162,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -266,7 +267,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -299,7 +300,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -394,7 +395,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -427,7 +428,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -523,7 +524,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -556,7 +557,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -650,7 +651,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -683,7 +684,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -777,7 +778,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -810,7 +811,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -904,7 +905,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -937,7 +938,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1039,7 +1040,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -1072,7 +1073,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1185,7 +1186,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -1218,7 +1219,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1321,7 +1322,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -1354,7 +1355,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1458,7 +1459,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -1491,7 +1492,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1593,7 +1594,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -1626,7 +1627,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1728,7 +1729,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -1761,7 +1762,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1863,7 +1864,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -1896,7 +1897,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Page<Product>>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {

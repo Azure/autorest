@@ -31,11 +31,11 @@ function Datetimerfc1123(client) {
 /**
  * Get null datetime value
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -133,11 +133,11 @@ Datetimerfc1123.prototype.getNull = function (options, callback) {
 /**
  * Get invalid datetime value
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -235,11 +235,11 @@ Datetimerfc1123.prototype.getInvalid = function (options, callback) {
 /**
  * Get overflow datetime value
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -337,11 +337,11 @@ Datetimerfc1123.prototype.getOverflow = function (options, callback) {
 /**
  * Get underflow datetime value
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -441,11 +441,11 @@ Datetimerfc1123.prototype.getUnderflow = function (options, callback) {
  *
  * @param {date} datetimeBody
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -549,11 +549,11 @@ Datetimerfc1123.prototype.putUtcMaxDateTime = function (datetimeBody, options, c
 /**
  * Get max datetime value fri, 31 dec 9999 23:59:59 gmt
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -651,11 +651,11 @@ Datetimerfc1123.prototype.getUtcLowercaseMaxDateTime = function (options, callba
 /**
  * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -755,11 +755,11 @@ Datetimerfc1123.prototype.getUtcUppercaseMaxDateTime = function (options, callba
  *
  * @param {date} datetimeBody
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -863,11 +863,11 @@ Datetimerfc1123.prototype.putUtcMinDateTime = function (datetimeBody, options, c
 /**
  * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

@@ -19,12 +19,18 @@
  * 
  * @member {string} [customHeader]
  * 
- * @member {number} [query] Query parameter with default
+ * @member {number} [query] Query parameter with default. Default value: 30 .
  * 
  * @member {string} path Path parameter
  * 
  */
 function ParameterGroupingPostRequiredParameters(parameters) {
+  if (parameters === null || parameters === undefined) {
+    parameters = {};
+  }
+  if (parameters.query === undefined) {
+    parameters.query = 30;
+  }
   if (parameters !== null && parameters !== undefined) {
     if (parameters.body !== undefined) {
       this.body = parameters.body;

@@ -23,3 +23,17 @@ export interface ErrorModel {
     status?: number;
     message?: string;
 }
+
+/**
+ * @class
+ * Initializes a new instance of the OdataFilter class.
+ * @constructor
+ * @member {number} [id]
+ * 
+ * @member {string} [name]
+ * 
+ */
+export interface OdataFilter {
+    id?: number;
+    name?: string;
+}

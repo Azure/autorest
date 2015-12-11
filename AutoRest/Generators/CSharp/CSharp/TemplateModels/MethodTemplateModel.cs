@@ -172,18 +172,20 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                if (ReturnType.Body != null)
+                if (ReturnType.Body != null && ReturnType.Headers != null)
                 {
-                    if (ReturnType.Headers != null)
-                    {
-                        return string.Format(CultureInfo.InvariantCulture,
+                    return string.Format(CultureInfo.InvariantCulture,
                             "HttpOperationResponse<{0},{1}>", ReturnType.Body.Name, ReturnType.Headers.Name);
-                    }
-                    else
-                    {
-                        return string.Format(CultureInfo.InvariantCulture,
-                            "HttpOperationResponse<{0}>", ReturnType.Body.Name);
-                    }
+                }
+                else if (ReturnType.Body != null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "HttpOperationResponse<{0}>", ReturnType.Body.Name);
+                }
+                else if (ReturnType.Headers != null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "HttpOperationHeaderResponse<{0}>", ReturnType.Headers.Name);
                 }
                 else
                 {
@@ -203,6 +205,11 @@ namespace Microsoft.Rest.Generator.CSharp
                 {
                     return string.Format(CultureInfo.InvariantCulture,
                         "Task<{0}>", ReturnType.Body.Name);
+                }
+                else if(ReturnType.Headers != null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "Task<{0}>", ReturnType.Headers.Name);
                 }
                 else
                 {
@@ -281,6 +288,10 @@ namespace Microsoft.Rest.Generator.CSharp
                 if (ReturnType.Body != null)
                 {
                     return ReturnType.Body.Name;
+                }
+                if (ReturnType.Headers != null)
+                {
+                    return ReturnType.Headers.Name;
                 }
                 else
                 {
@@ -374,17 +385,17 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             var builder = new IndentedStringBuilder();
 
-            foreach (var pathParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Path))
+            foreach (var pathParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
                 builder.AppendLine("{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));",
                     variableName,
                     pathParameter.SerializedName,
                     pathParameter.Type.ToString(ClientReference, pathParameter.Name));
             }
-            if (this.LogicalParameters.Any(p => p.Location == ParameterLocation.Query))
+            if (this.LogicalParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
             {
                 builder.AppendLine("List<string> queryParameters = new List<string>();");
-                foreach (var queryParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Query))
+                foreach (var queryParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query))
                 {
                     builder.AppendLine("if ({0} != null)", queryParameter.Name)
                         .AppendLine("{").Indent()

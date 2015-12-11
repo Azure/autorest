@@ -31,11 +31,11 @@ function String(client) {
 /**
  * Get null string value value
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -130,13 +130,14 @@ String.prototype.getNull = function (options, callback) {
 /**
  * Set string value null
  *
- * @param {string} [stringBody] Possible values for this parameter include: ''
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.stringBody] Possible values for this parameter
+ * include: ''
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -149,7 +150,7 @@ String.prototype.getNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-String.prototype.putNull = function (stringBody, options, callback) {
+String.prototype.putNull = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -158,6 +159,7 @@ String.prototype.putNull = function (stringBody, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var stringBody = (options && options.stringBody !== undefined) ? options.stringBody : undefined;
   // Validate
   try {
     if (stringBody !== null && stringBody !== undefined && typeof stringBody.valueOf() !== 'string') {
@@ -241,11 +243,11 @@ String.prototype.putNull = function (stringBody, options, callback) {
 /**
  * Get empty string value value ''
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -342,11 +344,11 @@ String.prototype.getEmpty = function (options, callback) {
  *
  * @param {string} stringBody Possible values for this parameter include: ''
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -450,11 +452,11 @@ String.prototype.putEmpty = function (stringBody, options, callback) {
  * Get mbcs string value
  * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -553,11 +555,11 @@ String.prototype.getMbcs = function (options, callback) {
  * @param {string} stringBody Possible values for this parameter include:
  * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -662,11 +664,11 @@ String.prototype.putMbcs = function (stringBody, options, callback) {
  * '<tab><space><space>Now is the time for all good men to come to the aid of
  * their country<tab><space><space>'
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -767,11 +769,11 @@ String.prototype.getWhitespace = function (options, callback) {
  * Now is the time for all good men to come to the aid of their country
  * '
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -874,11 +876,11 @@ String.prototype.putWhitespace = function (stringBody, options, callback) {
 /**
  * Get String value when no string value is sent in response payload
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

@@ -34,11 +34,11 @@ function Explicit(client) {
  *
  * @param {number} bodyParameter
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -158,13 +158,13 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
 /**
  * Test explicitly optional integer. Please put null.
  *
- * @param {number} [bodyParameter]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.bodyParameter]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -177,7 +177,7 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, options, callback) {
+Explicit.prototype.postOptionalIntegerParameter = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -186,6 +186,7 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var bodyParameter = (options && options.bodyParameter !== undefined) ? options.bodyParameter : undefined;
   // Validate
   try {
     if (bodyParameter !== null && bodyParameter !== undefined && typeof bodyParameter !== 'number') {
@@ -273,11 +274,11 @@ Explicit.prototype.postOptionalIntegerParameter = function (bodyParameter, optio
  *
  * @param {number} value
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -407,13 +408,13 @@ Explicit.prototype.postRequiredIntegerProperty = function (value, options, callb
  * Test explicitly optional integer. Please put a valid int-wrapper with
  * 'value' = null.
  *
- * @param {number} [value]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.value]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -426,7 +427,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (value, options, callb
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postOptionalIntegerProperty = function (value, options, callback) {
+Explicit.prototype.postOptionalIntegerProperty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -435,6 +436,7 @@ Explicit.prototype.postOptionalIntegerProperty = function (value, options, callb
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var value = (options && options.value !== undefined) ? options.value : undefined;
   // Validate
   try {
     if (value !== null && value !== undefined && typeof value !== 'number') {
@@ -528,11 +530,11 @@ Explicit.prototype.postOptionalIntegerProperty = function (value, options, callb
  *
  * @param {number} headerParameter
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -643,13 +645,13 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
  * Test explicitly optional integer. Please put a header 'headerParameter' =>
  * null.
  *
- * @param {number} [headerParameter]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.headerParameter]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -662,7 +664,7 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, options, callback) {
+Explicit.prototype.postOptionalIntegerHeader = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -671,6 +673,7 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, option
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var headerParameter = (options && options.headerParameter !== undefined) ? options.headerParameter : undefined;
   // Validate
   try {
     if (headerParameter !== null && headerParameter !== undefined && typeof headerParameter !== 'number') {
@@ -745,11 +748,11 @@ Explicit.prototype.postOptionalIntegerHeader = function (headerParameter, option
  *
  * @param {string} bodyParameter
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -869,13 +872,13 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
 /**
  * Test explicitly optional string. Please put null.
  *
- * @param {string} [bodyParameter]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.bodyParameter]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -888,7 +891,7 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postOptionalStringParameter = function (bodyParameter, options, callback) {
+Explicit.prototype.postOptionalStringParameter = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -897,6 +900,7 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var bodyParameter = (options && options.bodyParameter !== undefined) ? options.bodyParameter : undefined;
   // Validate
   try {
     if (bodyParameter !== null && bodyParameter !== undefined && typeof bodyParameter.valueOf() !== 'string') {
@@ -984,11 +988,11 @@ Explicit.prototype.postOptionalStringParameter = function (bodyParameter, option
  *
  * @param {string} value
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1118,13 +1122,13 @@ Explicit.prototype.postRequiredStringProperty = function (value, options, callba
  * Test explicitly optional integer. Please put a valid string-wrapper with
  * 'value' = null.
  *
- * @param {string} [value]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.value]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1137,7 +1141,7 @@ Explicit.prototype.postRequiredStringProperty = function (value, options, callba
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postOptionalStringProperty = function (value, options, callback) {
+Explicit.prototype.postOptionalStringProperty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1146,6 +1150,7 @@ Explicit.prototype.postOptionalStringProperty = function (value, options, callba
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var value = (options && options.value !== undefined) ? options.value : undefined;
   // Validate
   try {
     if (value !== null && value !== undefined && typeof value.valueOf() !== 'string') {
@@ -1239,11 +1244,11 @@ Explicit.prototype.postOptionalStringProperty = function (value, options, callba
  *
  * @param {string} headerParameter
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1354,13 +1359,13 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
  * Test explicitly optional string. Please put a header 'headerParameter' =>
  * null.
  *
- * @param {string} [bodyParameter]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.bodyParameter]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1373,7 +1378,7 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, callback) {
+Explicit.prototype.postOptionalStringHeader = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1382,6 +1387,7 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var bodyParameter = (options && options.bodyParameter !== undefined) ? options.bodyParameter : undefined;
   // Validate
   try {
     if (bodyParameter !== null && bodyParameter !== undefined && typeof bodyParameter.valueOf() !== 'string') {
@@ -1460,11 +1466,11 @@ Explicit.prototype.postOptionalStringHeader = function (bodyParameter, options, 
  * 
  * @param {string} [bodyParameter.name]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1587,17 +1593,17 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
 /**
  * Test explicitly optional complex object. Please put null.
  *
- * @param {object} [bodyParameter]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {number} [bodyParameter.id]
+ * @param {object} [options.bodyParameter]
  * 
- * @param {string} [bodyParameter.name]
+ * @param {number} [options.bodyParameter.id]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.bodyParameter.name]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1610,7 +1616,7 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options, callback) {
+Explicit.prototype.postOptionalClassParameter = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1619,6 +1625,7 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var bodyParameter = (options && options.bodyParameter !== undefined) ? options.bodyParameter : undefined;
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -1703,11 +1710,11 @@ Explicit.prototype.postOptionalClassParameter = function (bodyParameter, options
  * 
  * @param {string} [value.name]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1837,17 +1844,17 @@ Explicit.prototype.postRequiredClassProperty = function (value, options, callbac
  * Test explicitly optional complex object. Please put a valid class-wrapper
  * with 'value' = null.
  *
- * @param {object} [value]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {number} [value.id]
+ * @param {object} [options.value]
  * 
- * @param {string} [value.name]
+ * @param {number} [options.value.id]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.value.name]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1860,7 +1867,7 @@ Explicit.prototype.postRequiredClassProperty = function (value, options, callbac
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postOptionalClassProperty = function (value, options, callback) {
+Explicit.prototype.postOptionalClassProperty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1869,6 +1876,7 @@ Explicit.prototype.postOptionalClassProperty = function (value, options, callbac
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var value = (options && options.value !== undefined) ? options.value : undefined;
   var bodyParameter;
   if ((value !== null && value !== undefined))
   {
@@ -1954,11 +1962,11 @@ Explicit.prototype.postOptionalClassProperty = function (value, options, callbac
  *
  * @param {array} bodyParameter
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2091,13 +2099,13 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
 /**
  * Test explicitly optional array. Please put null.
  *
- * @param {array} [bodyParameter]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {array} [options.bodyParameter]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2110,7 +2118,7 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options, callback) {
+Explicit.prototype.postOptionalArrayParameter = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2119,6 +2127,7 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var bodyParameter = (options && options.bodyParameter !== undefined) ? options.bodyParameter : undefined;
   // Validate
   try {
     if (util.isArray(bodyParameter)) {
@@ -2215,11 +2224,11 @@ Explicit.prototype.postOptionalArrayParameter = function (bodyParameter, options
  *
  * @param {array} value
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2354,13 +2363,13 @@ Explicit.prototype.postRequiredArrayProperty = function (value, options, callbac
  * Test explicitly optional array. Please put a valid array-wrapper with
  * 'value' = null.
  *
- * @param {array} [value]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {array} [options.value]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2373,7 +2382,7 @@ Explicit.prototype.postRequiredArrayProperty = function (value, options, callbac
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postOptionalArrayProperty = function (value, options, callback) {
+Explicit.prototype.postOptionalArrayProperty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2382,6 +2391,7 @@ Explicit.prototype.postOptionalArrayProperty = function (value, options, callbac
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var value = (options && options.value !== undefined) ? options.value : undefined;
   // Validate
   try {
     if (util.isArray(value)) {
@@ -2479,11 +2489,11 @@ Explicit.prototype.postOptionalArrayProperty = function (value, options, callbac
  *
  * @param {array} headerParameter
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2599,13 +2609,13 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
  * Test explicitly optional integer. Please put a header 'headerParameter' =>
  * null.
  *
- * @param {array} [headerParameter]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {array} [options.headerParameter]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2618,7 +2628,7 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Explicit.prototype.postOptionalArrayHeader = function (headerParameter, options, callback) {
+Explicit.prototype.postOptionalArrayHeader = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2627,6 +2637,7 @@ Explicit.prototype.postOptionalArrayHeader = function (headerParameter, options,
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var headerParameter = (options && options.headerParameter !== undefined) ? options.headerParameter : undefined;
   // Validate
   try {
     if (util.isArray(headerParameter)) {

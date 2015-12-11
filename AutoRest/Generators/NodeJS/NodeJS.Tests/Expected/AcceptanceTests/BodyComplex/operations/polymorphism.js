@@ -31,11 +31,11 @@ function Polymorphism(client) {
 /**
  * Get complex types that are polymorphic
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -180,11 +180,11 @@ Polymorphism.prototype.getValid = function (options, callback) {
  * 
  * @param {string} [complexBody.fishtype] Polymorhpic Discriminator
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -327,11 +327,11 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
  * 
  * @param {string} [complexBody.fishtype] Polymorhpic Discriminator
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

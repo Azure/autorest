@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 
 public class EnumOperationsTests {
-    static AutoRestSwaggerBATService client;
+    private static AutoRestSwaggerBATService client;
     private CountDownLatch lock = new CountDownLatch(1);
 
     @BeforeClass

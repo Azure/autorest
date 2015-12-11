@@ -1,3 +1,16 @@
+2015.12.10 Version 0.13.0
+* Added support for flattening body parameters when the number of properties is small (controlled via -ft parameter)
+* Implemented support for strongly typed response headers
+* Updated Microsoft.Rest.Azure.Authentication to support CoreClr
+* Updated autorest.exe with aliases (e.g. -i for input, -o for output, -g for code generation)
+* Added TypeScript support to NodeJS generator
+* Improved OData support in Azure C# generator
+* Added custom exception support in C# generator
+* Added custom polymorphic discriminator support (x-ms-discriminator-value)
+* Added method parameter grouping via x-ms-parameter-grouping extension (#381)
+* Added support for decimal type (#83)
+* Bug fixes and to all code generators (#415, #419, #426, #447, #463, #491, #493, #497)
+  
 2015.10.23 Version 0.12.0
 * Added Ruby language support
 * Implemented validation in C#

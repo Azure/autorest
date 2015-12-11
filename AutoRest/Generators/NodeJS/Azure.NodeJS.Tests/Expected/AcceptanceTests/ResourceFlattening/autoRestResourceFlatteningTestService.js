@@ -65,13 +65,13 @@ util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
 /**
  * Put External Resource as an Array
  *
- * @param {array} [resourceArray] External Resource as an Array to put
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {array} [options.resourceArray] External Resource as an Array to put
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -84,7 +84,7 @@ util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArray, options, callback) {
+AutoRestResourceFlatteningTestService.prototype.putArray = function (options, callback) {
   var client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -93,6 +93,7 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var resourceArray = (options && options.resourceArray !== undefined) ? options.resourceArray : undefined;
   // Validate
   try {
     if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage.valueOf() !== 'string') {
@@ -196,11 +197,11 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (resourceArr
 /**
  * Get External Resource as an Array
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -328,14 +329,14 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
 /**
  * Put External Resource as a Dictionary
  *
- * @param {object} [resourceDictionary] External Resource as a Dictionary to
- * put
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options.resourceDictionary] External Resource as a
+ * Dictionary to put
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -348,7 +349,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resourceDictionary, options, callback) {
+AutoRestResourceFlatteningTestService.prototype.putDictionary = function (options, callback) {
   var client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -357,6 +358,7 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var resourceDictionary = (options && options.resourceDictionary !== undefined) ? options.resourceDictionary : undefined;
   // Validate
   try {
     if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage.valueOf() !== 'string') {
@@ -460,11 +462,11 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (resour
 /**
  * Get External Resource as a Dictionary
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -589,32 +591,33 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
 /**
  * Put External Resource as a ResourceCollection
  *
- * @param {object} [resourceComplexObject] External Resource as a
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.resourceComplexObject] External Resource as a
  * ResourceCollection to put
  * 
- * @param {object} [resourceComplexObject.productresource]
+ * @param {object} [options.resourceComplexObject.productresource]
  * 
- * @param {string} [resourceComplexObject.productresource.pname]
+ * @param {string} [options.resourceComplexObject.productresource.pname]
  * 
  * @param {string}
- * [resourceComplexObject.productresource.flattenedProductType]
+ * [options.resourceComplexObject.productresource.flattenedProductType]
  * 
- * @param {string} [resourceComplexObject.productresource.provisioningState]
+ * @param {string}
+ * [options.resourceComplexObject.productresource.provisioningState]
  * 
- * @param {object} [resourceComplexObject.productresource.tags]
+ * @param {object} [options.resourceComplexObject.productresource.tags]
  * 
- * @param {string} [resourceComplexObject.productresource.location] Resource
- * Location
+ * @param {string} [options.resourceComplexObject.productresource.location]
+ * Resource Location
  * 
- * @param {array} [resourceComplexObject.arrayofresources]
+ * @param {array} [options.resourceComplexObject.arrayofresources]
  * 
- * @param {object} [resourceComplexObject.dictionaryofresources]
+ * @param {object} [options.resourceComplexObject.dictionaryofresources]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -627,7 +630,7 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function (resourceComplexObject, options, callback) {
+AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function (options, callback) {
   var client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -636,6 +639,7 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var resourceComplexObject = (options && options.resourceComplexObject !== undefined) ? options.resourceComplexObject : undefined;
   // Validate
   try {
     if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage.valueOf() !== 'string') {
@@ -728,11 +732,11 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
 /**
  * Get External Resource as a ResourceCollection
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

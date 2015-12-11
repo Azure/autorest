@@ -37,19 +37,19 @@ function LROsCustomHeader(client) {
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
  *
- * @param {object} [product] Product to put
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [product.provisioningState]
+ * @param {object} [options.product] Product to put
  * 
- * @param {object} [product.tags]
+ * @param {string} [options.product.provisioningState]
  * 
- * @param {string} [product.location] Resource Location
+ * @param {object} [options.product.tags]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.product.location] Resource Location
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -63,7 +63,7 @@ function LROsCustomHeader(client) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, callback) {
+LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -75,10 +75,8 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, 
   }
 
   // Send request
-  this.beginPutAsyncRetrySucceeded(product, options, function (err, parsedResult, httpRequest, response){
+  this.beginPutAsyncRetrySucceeded(options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-
-    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
 
     var initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
@@ -124,19 +122,19 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, 
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
  *
- * @param {object} [product] Product to put
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [product.provisioningState]
+ * @param {object} [options.product] Product to put
  * 
- * @param {object} [product.tags]
+ * @param {string} [options.product.provisioningState]
  * 
- * @param {string} [product.location] Resource Location
+ * @param {object} [options.product.tags]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.product.location] Resource Location
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -150,7 +148,7 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (product, options, 
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, options, callback) {
+LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -159,6 +157,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -275,19 +274,19 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
  * ProvisioningState=’Creating’.  Polls return this value until the last poll
  * returns a ‘200’ with ProvisioningState=’Succeeded’
  *
- * @param {object} [product] Product to put
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [product.provisioningState]
+ * @param {object} [options.product] Product to put
  * 
- * @param {object} [product.tags]
+ * @param {string} [options.product.provisioningState]
  * 
- * @param {string} [product.location] Resource Location
+ * @param {object} [options.product.tags]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.product.location] Resource Location
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -301,7 +300,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (product, opti
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, options, callback) {
+LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -313,10 +312,8 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, optio
   }
 
   // Send request
-  this.beginPut201CreatingSucceeded200(product, options, function (err, parsedResult, httpRequest, response){
+  this.beginPut201CreatingSucceeded200(options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-
-    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
 
     var initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
@@ -362,19 +359,19 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, optio
  * ProvisioningState=’Creating’.  Polls return this value until the last poll
  * returns a ‘200’ with ProvisioningState=’Succeeded’
  *
- * @param {object} [product] Product to put
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [product.provisioningState]
+ * @param {object} [options.product] Product to put
  * 
- * @param {object} [product.tags]
+ * @param {string} [options.product.provisioningState]
  * 
- * @param {string} [product.location] Resource Location
+ * @param {object} [options.product.tags]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.product.location] Resource Location
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -388,7 +385,7 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (product, optio
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, options, callback) {
+LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -397,6 +394,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -531,19 +529,19 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
  * returns a 202 to the initial request, with 'Location' and 'Retry-After'
  * headers, Polls return a 200 with a response body after success
  *
- * @param {object} [product] Product to put
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [product.provisioningState]
+ * @param {object} [options.product] Product to put
  * 
- * @param {object} [product.tags]
+ * @param {string} [options.product.provisioningState]
  * 
- * @param {string} [product.location] Resource Location
+ * @param {object} [options.product.tags]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.product.location] Resource Location
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -556,7 +554,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (product, 
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-LROsCustomHeader.prototype.post202Retry200 = function (product, options, callback) {
+LROsCustomHeader.prototype.post202Retry200 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -568,10 +566,8 @@ LROsCustomHeader.prototype.post202Retry200 = function (product, options, callbac
   }
 
   // Send request
-  this.beginPost202Retry200(product, options, function (err, parsedResult, httpRequest, response){
+  this.beginPost202Retry200(options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-
-    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
 
     var initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
@@ -600,19 +596,19 @@ LROsCustomHeader.prototype.post202Retry200 = function (product, options, callbac
  * returns a 202 to the initial request, with 'Location' and 'Retry-After'
  * headers, Polls return a 200 with a response body after success
  *
- * @param {object} [product] Product to put
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [product.provisioningState]
+ * @param {object} [options.product] Product to put
  * 
- * @param {object} [product.tags]
+ * @param {string} [options.product.provisioningState]
  * 
- * @param {string} [product.location] Resource Location
+ * @param {object} [options.product.tags]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.product.location] Resource Location
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -625,7 +621,7 @@ LROsCustomHeader.prototype.post202Retry200 = function (product, options, callbac
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, callback) {
+LROsCustomHeader.prototype.beginPost202Retry200 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -634,6 +630,7 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -731,19 +728,19 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
  *
- * @param {object} [product] Product to put
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [product.provisioningState]
+ * @param {object} [options.product] Product to put
  * 
- * @param {object} [product.tags]
+ * @param {string} [options.product.provisioningState]
  * 
- * @param {string} [product.location] Resource Location
+ * @param {object} [options.product.tags]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.product.location] Resource Location
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -756,7 +753,7 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (product, options, ca
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options, callback) {
+LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -768,10 +765,8 @@ LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options,
   }
 
   // Send request
-  this.beginPostAsyncRetrySucceeded(product, options, function (err, parsedResult, httpRequest, response){
+  this.beginPostAsyncRetrySucceeded(options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
-
-    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
 
     var initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
@@ -801,19 +796,19 @@ LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options,
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
  *
- * @param {object} [product] Product to put
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [product.provisioningState]
+ * @param {object} [options.product] Product to put
  * 
- * @param {object} [product.tags]
+ * @param {string} [options.product.provisioningState]
  * 
- * @param {string} [product.location] Resource Location
+ * @param {object} [options.product.tags]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.product.location] Resource Location
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -826,7 +821,7 @@ LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (product, options,
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (product, options, callback) {
+LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -835,6 +830,7 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (product, opt
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var product = (options && options.product !== undefined) ? options.product : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {

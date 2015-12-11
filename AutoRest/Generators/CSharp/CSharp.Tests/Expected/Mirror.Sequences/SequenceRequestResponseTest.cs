@@ -201,7 +201,7 @@ namespace Fixtures.MirrorSequences
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(pets, this.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(pets, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -223,7 +223,7 @@ namespace Fixtures.MirrorSequences
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    ErrorModel errorBody = JsonConvert.DeserializeObject<ErrorModel>(responseContent, this.DeserializationSettings);
+                    ErrorModel errorBody = SafeJsonConvert.DeserializeObject<ErrorModel>(responseContent, this.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -251,7 +251,7 @@ namespace Fixtures.MirrorSequences
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<IList<Pet>>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -315,7 +315,7 @@ namespace Fixtures.MirrorSequences
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(petStyle, this.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(petStyle, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -337,7 +337,7 @@ namespace Fixtures.MirrorSequences
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    IList<ErrorModel> errorBody = JsonConvert.DeserializeObject<IList<ErrorModel>>(responseContent, this.DeserializationSettings);
+                    IList<ErrorModel> errorBody = SafeJsonConvert.DeserializeObject<IList<ErrorModel>>(responseContent, this.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -365,7 +365,7 @@ namespace Fixtures.MirrorSequences
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<IList<int?>>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<IList<int?>>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -429,7 +429,7 @@ namespace Fixtures.MirrorSequences
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(petStyle, this.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(petStyle, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -451,7 +451,7 @@ namespace Fixtures.MirrorSequences
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    IList<ErrorModel> errorBody = JsonConvert.DeserializeObject<IList<ErrorModel>>(responseContent, this.DeserializationSettings);
+                    IList<ErrorModel> errorBody = SafeJsonConvert.DeserializeObject<IList<ErrorModel>>(responseContent, this.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -479,7 +479,7 @@ namespace Fixtures.MirrorSequences
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<IList<int?>>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<IList<int?>>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {

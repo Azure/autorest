@@ -1,0 +1,17 @@
+{
+  "projects": [
+    "ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime",
+    "ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure",
+    "ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure.Authentication",
+    "ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure.Tests",
+    "ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Etw",
+    "ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Log4Net",
+    "ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Tracing.Tests",
+    "AutoRest/Generators/CSharp/CSharp.Tests",
+    "AutoRest/Generators/CSharp/Azure.CSharp.Tests"
+  ],
+  "sdk": {
+    "runtime": "coreclr",
+    "version": "1.0.0-rc1-final"
+  }
+}

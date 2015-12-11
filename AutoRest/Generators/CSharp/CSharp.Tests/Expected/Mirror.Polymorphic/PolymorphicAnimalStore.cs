@@ -192,7 +192,7 @@ namespace Fixtures.MirrorPolymorphic
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(animalCreateOrUpdateParameter, this.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(animalCreateOrUpdateParameter, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -214,7 +214,7 @@ namespace Fixtures.MirrorPolymorphic
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error2 errorBody = JsonConvert.DeserializeObject<Error2>(responseContent, this.DeserializationSettings);
+                    Error2 errorBody = SafeJsonConvert.DeserializeObject<Error2>(responseContent, this.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -242,7 +242,7 @@ namespace Fixtures.MirrorPolymorphic
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Animal>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Animal>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {

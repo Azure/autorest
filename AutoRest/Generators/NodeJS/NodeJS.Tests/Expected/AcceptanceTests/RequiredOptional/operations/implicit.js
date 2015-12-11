@@ -33,11 +33,11 @@ function Implicit(client) {
  *
  * @param {string} pathParameter
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -145,13 +145,13 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
 /**
  * Test implicitly optional query parameter
  *
- * @param {string} [queryParameter]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.queryParameter]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -164,7 +164,7 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Implicit.prototype.putOptionalQuery = function (queryParameter, options, callback) {
+Implicit.prototype.putOptionalQuery = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -173,6 +173,7 @@ Implicit.prototype.putOptionalQuery = function (queryParameter, options, callbac
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var queryParameter = (options && options.queryParameter !== undefined) ? options.queryParameter : undefined;
   // Validate
   try {
     if (queryParameter !== null && queryParameter !== undefined && typeof queryParameter.valueOf() !== 'string') {
@@ -248,13 +249,13 @@ Implicit.prototype.putOptionalQuery = function (queryParameter, options, callbac
 /**
  * Test implicitly optional header parameter
  *
- * @param {string} [queryParameter]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.queryParameter]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -267,7 +268,7 @@ Implicit.prototype.putOptionalQuery = function (queryParameter, options, callbac
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Implicit.prototype.putOptionalHeader = function (queryParameter, options, callback) {
+Implicit.prototype.putOptionalHeader = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -276,6 +277,7 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, options, callba
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var queryParameter = (options && options.queryParameter !== undefined) ? options.queryParameter : undefined;
   // Validate
   try {
     if (queryParameter !== null && queryParameter !== undefined && typeof queryParameter.valueOf() !== 'string') {
@@ -347,13 +349,13 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, options, callba
 /**
  * Test implicitly optional body parameter
  *
- * @param {string} [bodyParameter]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.bodyParameter]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -366,7 +368,7 @@ Implicit.prototype.putOptionalHeader = function (queryParameter, options, callba
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback) {
+Implicit.prototype.putOptionalBody = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -375,6 +377,7 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var bodyParameter = (options && options.bodyParameter !== undefined) ? options.bodyParameter : undefined;
   // Validate
   try {
     if (bodyParameter !== null && bodyParameter !== undefined && typeof bodyParameter.valueOf() !== 'string') {
@@ -458,11 +461,11 @@ Implicit.prototype.putOptionalBody = function (bodyParameter, options, callback)
 /**
  * Test implicitly required path parameter
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -570,11 +573,11 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
 /**
  * Test implicitly required query parameter
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -686,11 +689,11 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
 /**
  * Test implicitly optional query parameter
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

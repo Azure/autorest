@@ -8,9 +8,7 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
-import com.microsoft.rest.serializer.JacksonUtils;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Response;
 
@@ -23,13 +21,21 @@ import java.lang.reflect.Type;
  * @param <T> the type of the resource the operation returns.
  */
 public class PollingState<T> {
+    /** The Retrofit response object. */
     private Response response;
+    /** The polling status. */
     private String status;
+    /** The link in 'Azure-AsyncOperation' header. */
     private String azureAsyncOperationHeaderLink;
+    /** The link in 'Location' Header. */
     private String locationHeaderLink;
+    /** The timeout interval between two polling operations. */
     private Integer retryTimeout;
+    /** The response resource object. */
     private T resource;
+    /** The type of the response resource object. */
     private Type resourceType;
+    /** The error during the polling operations. */
     private CloudError error;
 
     /**
@@ -54,21 +60,21 @@ public class PollingState<T> {
             this.resource = new AzureJacksonUtils().deserialize(responseContent, resourceType);
             resource = new AzureJacksonUtils().deserialize(responseContent, PollingResource.class);
         }
-        if (resource != null && resource.getProperties() != null &&
-                resource.getProperties().getProvisioningState() != null) {
+        if (resource != null && resource.getProperties() != null
+                && resource.getProperties().getProvisioningState() != null) {
             setStatus(resource.getProperties().getProvisioningState());
         } else {
             switch (this.response.code()) {
                 case 202:
-                    setStatus(AzureAsyncOperation.inProgressStatus);
+                    setStatus(AzureAsyncOperation.IN_PROGRESS_STATUS);
                     break;
                 case 204:
                 case 201:
                 case 200:
-                    setStatus(AzureAsyncOperation.successStatus);
+                    setStatus(AzureAsyncOperation.SUCCESS_STATUS);
                     break;
                 default:
-                    setStatus(AzureAsyncOperation.failedStatus);
+                    setStatus(AzureAsyncOperation.FAILED_STATUS);
             }
         }
     }
@@ -96,7 +102,7 @@ public class PollingState<T> {
         if (resource != null && resource.getProperties() != null && resource.getProperties().getProvisioningState() != null) {
             this.setStatus(resource.getProperties().getProvisioningState());
         } else {
-            this.setStatus(AzureAsyncOperation.successStatus);
+            this.setStatus(AzureAsyncOperation.SUCCESS_STATUS);
         }
 
         CloudError error = new CloudError();
@@ -121,7 +127,7 @@ public class PollingState<T> {
             responseContent = response.body().string();
         }
         this.setResource(new AzureJacksonUtils().<T>deserialize(responseContent, resourceType));
-        setStatus(AzureAsyncOperation.successStatus);
+        setStatus(AzureAsyncOperation.SUCCESS_STATUS);
     }
 
     /**
@@ -136,7 +142,7 @@ public class PollingState<T> {
         if (this.response != null && response.headers().get("Retry-After") != null) {
             return Integer.parseInt(response.headers().get("Retry-After")) * 1000;
         }
-        return AzureAsyncOperation.defaultDelay * 1000;
+        return AzureAsyncOperation.DEFAULT_DELAY * 1000;
     }
 
     /**
@@ -153,6 +159,7 @@ public class PollingState<T> {
      * Sets the polling status.
      *
      * @param status the polling status.
+     * @throws IllegalArgumentException thrown if status is null.
      */
     public void setStatus(String status) throws IllegalArgumentException {
         if (status == null) {
@@ -249,25 +256,50 @@ public class PollingState<T> {
      * and is returned from server each time.
      */
     static class PollingResource {
+        /** Inner properties object. */
         @JsonProperty(value = "properties")
         private Properties properties;
 
+        /**
+         * Gets the inner properties object.
+         *
+         * @return the inner properties.
+         */
         public Properties getProperties() {
             return properties;
         }
 
+        /**
+         * Sets the inner properties object.
+         *
+         * @param properties the inner properties.
+         */
         public void setProperties(Properties properties) {
             this.properties = properties;
         }
 
+        /**
+         * Inner properties class.
+         */
         static class Properties {
+            /** The provisioning state of the resource. */
             @JsonProperty(value = "provisioningState")
             private String provisioningState;
 
+            /**
+             * Gets the provisioning state of the resource.
+             *
+             * @return the provisioning state.
+             */
             public String getProvisioningState() {
                 return provisioningState;
             }
 
+            /**
+             * Sets the provisioning state of the resource.
+             *
+             * @param provisioningState the provisioning state.
+             */
             public void setProvisioningState(String provisioningState) {
                 this.provisioningState = provisioningState;
             }

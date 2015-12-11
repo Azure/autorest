@@ -54,7 +54,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     {
         invocationId = ServiceClientTracing.NextInvocationId.ToString();
         Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-    @foreach (var parameter in Model.LogicalParameters.Where(p => p.ClientProperty == null))
+    @foreach (var parameter in Model.LogicalParameterTemplateModels.Where(p => p.ClientProperty == null))
     {
         @:tracingParameters.Add("@(parameter.Name)", @(parameter.Name));
     }
@@ -79,7 +79,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     httpRequest.RequestUri = new Uri(url);
     // Set Headers
     @(Model.SetDefaultHeaders)
-    @foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.Header))
+    @foreach (var parameter in Model.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Header))
     {
     @:if (@(parameter.Name) != null)
     @:{
@@ -107,7 +107,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     {
         <text>
     // Serialize Request
-    string requestContent = JsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
+    string requestContent = SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
     httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
     httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.ContentType)");
         </text>
@@ -154,7 +154,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
             else
             {
             @:string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            @:@(Model.DefaultResponse.Body.Name) errorBody = JsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+            @:@(Model.DefaultResponse.Body.Name) errorBody = SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
             }
             @:if (errorBody != null)
             @:{
@@ -198,7 +198,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
         @:try
         @:{
             @:string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            @:result.Body = JsonConvert.DeserializeObject<@(responsePair.Value.Body.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
+            @:result.Body = SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.Name)>(responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
         @:}
         @:catch (JsonException ex)
         @:{
@@ -219,7 +219,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     @:try
     @:{
         @:string defaultResponseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-        @:result.Body = JsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+        @:result.Body = SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
     @:}
     @:catch (JsonException ex)
     @:{
@@ -228,11 +228,11 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
         }
     }
 
-    @if (Model.ReturnType.Body != null && Model.ReturnType.Headers != null)
+    @if (Model.ReturnType.Headers != null)
     {
     @:try
     @:{
-        @:result.Headers = httpResponse.Headers.ToJson().ToObject<@(Model.ReturnType.Headers.Name)>(JsonSerializer.Create(@(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body))));
+        @:result.Headers = httpResponse.GetHeadersAsJson().ToObject<@(Model.ReturnType.Headers.Name)>(JsonSerializer.Create(@(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body))));
     @:}
     @:catch (JsonException ex)
     @:{

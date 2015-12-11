@@ -31,11 +31,11 @@ function HttpSuccess(client) {
 /**
  * Return 200 status code if successful
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -117,11 +117,11 @@ HttpSuccess.prototype.head200 = function (options, callback) {
 /**
  * Get 200 success
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -216,13 +216,13 @@ HttpSuccess.prototype.get200 = function (options, callback) {
 /**
  * Put boolean value true returning 200 success
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -235,7 +235,7 @@ HttpSuccess.prototype.get200 = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpSuccess.prototype.put200 = function (booleanValue, options, callback) {
+HttpSuccess.prototype.put200 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -244,6 +244,7 @@ HttpSuccess.prototype.put200 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -327,13 +328,13 @@ HttpSuccess.prototype.put200 = function (booleanValue, options, callback) {
 /**
  * Patch true Boolean value in request returning 200
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -346,7 +347,7 @@ HttpSuccess.prototype.put200 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpSuccess.prototype.patch200 = function (booleanValue, options, callback) {
+HttpSuccess.prototype.patch200 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -355,6 +356,7 @@ HttpSuccess.prototype.patch200 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -438,13 +440,13 @@ HttpSuccess.prototype.patch200 = function (booleanValue, options, callback) {
 /**
  * Post bollean value true in request that returns a 200
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -457,7 +459,7 @@ HttpSuccess.prototype.patch200 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpSuccess.prototype.post200 = function (booleanValue, options, callback) {
+HttpSuccess.prototype.post200 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -466,6 +468,7 @@ HttpSuccess.prototype.post200 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -549,13 +552,13 @@ HttpSuccess.prototype.post200 = function (booleanValue, options, callback) {
 /**
  * Delete simple boolean value true returns 200
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -568,7 +571,7 @@ HttpSuccess.prototype.post200 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpSuccess.prototype.delete200 = function (booleanValue, options, callback) {
+HttpSuccess.prototype.delete200 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -577,6 +580,7 @@ HttpSuccess.prototype.delete200 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -660,13 +664,13 @@ HttpSuccess.prototype.delete200 = function (booleanValue, options, callback) {
 /**
  * Put true Boolean value in request returns 201
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -679,7 +683,7 @@ HttpSuccess.prototype.delete200 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpSuccess.prototype.put201 = function (booleanValue, options, callback) {
+HttpSuccess.prototype.put201 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -688,6 +692,7 @@ HttpSuccess.prototype.put201 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -771,13 +776,13 @@ HttpSuccess.prototype.put201 = function (booleanValue, options, callback) {
 /**
  * Post true Boolean value in request returns 201 (Created)
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -790,7 +795,7 @@ HttpSuccess.prototype.put201 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpSuccess.prototype.post201 = function (booleanValue, options, callback) {
+HttpSuccess.prototype.post201 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -799,6 +804,7 @@ HttpSuccess.prototype.post201 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -882,13 +888,13 @@ HttpSuccess.prototype.post201 = function (booleanValue, options, callback) {
 /**
  * Put true Boolean value in request returns 202 (Accepted)
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -901,7 +907,7 @@ HttpSuccess.prototype.post201 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpSuccess.prototype.put202 = function (booleanValue, options, callback) {
+HttpSuccess.prototype.put202 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -910,6 +916,7 @@ HttpSuccess.prototype.put202 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -993,13 +1000,13 @@ HttpSuccess.prototype.put202 = function (booleanValue, options, callback) {
 /**
  * Patch true Boolean value in request returns 202
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1012,7 +1019,7 @@ HttpSuccess.prototype.put202 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpSuccess.prototype.patch202 = function (booleanValue, options, callback) {
+HttpSuccess.prototype.patch202 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1021,6 +1028,7 @@ HttpSuccess.prototype.patch202 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1104,13 +1112,13 @@ HttpSuccess.prototype.patch202 = function (booleanValue, options, callback) {
 /**
  * Post true Boolean value in request returns 202 (Accepted)
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1123,7 +1131,7 @@ HttpSuccess.prototype.patch202 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpSuccess.prototype.post202 = function (booleanValue, options, callback) {
+HttpSuccess.prototype.post202 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1132,6 +1140,7 @@ HttpSuccess.prototype.post202 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1215,13 +1224,13 @@ HttpSuccess.prototype.post202 = function (booleanValue, options, callback) {
 /**
  * Delete true Boolean value in request returns 202 (accepted)
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1234,7 +1243,7 @@ HttpSuccess.prototype.post202 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpSuccess.prototype.delete202 = function (booleanValue, options, callback) {
+HttpSuccess.prototype.delete202 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1243,6 +1252,7 @@ HttpSuccess.prototype.delete202 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1326,11 +1336,11 @@ HttpSuccess.prototype.delete202 = function (booleanValue, options, callback) {
 /**
  * Return 204 status code if successful
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1412,13 +1422,13 @@ HttpSuccess.prototype.head204 = function (options, callback) {
 /**
  * Put true Boolean value in request returns 204 (no content)
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1431,7 +1441,7 @@ HttpSuccess.prototype.head204 = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpSuccess.prototype.put204 = function (booleanValue, options, callback) {
+HttpSuccess.prototype.put204 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1440,6 +1450,7 @@ HttpSuccess.prototype.put204 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1523,13 +1534,13 @@ HttpSuccess.prototype.put204 = function (booleanValue, options, callback) {
 /**
  * Patch true Boolean value in request returns 204 (no content)
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1542,7 +1553,7 @@ HttpSuccess.prototype.put204 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpSuccess.prototype.patch204 = function (booleanValue, options, callback) {
+HttpSuccess.prototype.patch204 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1551,6 +1562,7 @@ HttpSuccess.prototype.patch204 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1634,13 +1646,13 @@ HttpSuccess.prototype.patch204 = function (booleanValue, options, callback) {
 /**
  * Post true Boolean value in request returns 204 (no content)
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1653,7 +1665,7 @@ HttpSuccess.prototype.patch204 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpSuccess.prototype.post204 = function (booleanValue, options, callback) {
+HttpSuccess.prototype.post204 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1662,6 +1674,7 @@ HttpSuccess.prototype.post204 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1745,13 +1758,13 @@ HttpSuccess.prototype.post204 = function (booleanValue, options, callback) {
 /**
  * Delete true Boolean value in request returns 204 (no content)
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1764,7 +1777,7 @@ HttpSuccess.prototype.post204 = function (booleanValue, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpSuccess.prototype.delete204 = function (booleanValue, options, callback) {
+HttpSuccess.prototype.delete204 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1773,6 +1786,7 @@ HttpSuccess.prototype.delete204 = function (booleanValue, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1856,11 +1870,11 @@ HttpSuccess.prototype.delete204 = function (booleanValue, options, callback) {
 /**
  * Return 404 status code
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

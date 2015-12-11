@@ -2,10 +2,11 @@
 @using Microsoft.Rest.Generator.Java.Azure
 @using Microsoft.Rest.Generator.Java.Azure.Templates
 @using Microsoft.Rest.Generator.Utilities
+@using Microsoft.Rest.Generator.Java.TemplateModels
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.Azure.AzureServiceClientTemplateModel>
 /**
-@Header(" * ")
+@Header(" * ").TrimMultilineHeader()
  */
 @EmptyLine
 
@@ -24,9 +25,12 @@ package @(Settings.Namespace.ToLower());
 public class @(Model.Name)Impl extends AzureServiceClient implements @Model.Name {
 @if (Model.MethodTemplateModels.Any())
 {
+@:    /** The Retrofit service to perform REST calls. */
 @:    private @Model.ServiceClientServiceType service;
 }
+    /** The URI used as the base for all cloud service requests. */
     private String baseUri;
+    /** the {@@link AzureClient} used for long running operations .*/
     private AzureClient azureClient;
 @EmptyLine
     /**
@@ -47,10 +51,11 @@ public class @(Model.Name)Impl extends AzureServiceClient implements @Model.Name
 @foreach (var property in Model.Properties)
 {
 @EmptyLine
+@:    /** @(property.Documentation.Period()) */
 @:    private @(property.Type) @(property.Name.ToCamelCase());
 @EmptyLine
 @:    /**
-@:     * Gets @(property.Documentation)
+@:     * Gets @(property.Documentation.Period())
 @:     *
 @:     * @@return the @(property.Name) value.
 @:     */
@@ -61,7 +66,7 @@ if(!property.IsReadOnly)
 {
 @EmptyLine
 @:    /**
-@:     * Sets @(property.Documentation)
+@:     * Sets @(property.Documentation.Period())
 @:     *
 @:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
 @:     */
@@ -162,8 +167,7 @@ else
     private void initialize() {
     @if (Settings.AddCredentials)
     {
-@:        if (this.credentials != null)
-@:        {
+@:        if (this.credentials != null) {
 @:            this.credentials.applyCredentialsFilter(this.client);
 @:        }
     }
@@ -176,7 +180,7 @@ else
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
 
-        this.retrofitBuilder = retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUri);
 @if (Model.MethodTemplateModels.Any())
 {
 @:        service = this.retrofitBuilder.build().create(@(Model.ServiceClientServiceType).class);

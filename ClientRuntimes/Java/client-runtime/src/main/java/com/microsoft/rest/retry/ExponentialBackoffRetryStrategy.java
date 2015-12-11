@@ -9,8 +9,6 @@ package com.microsoft.rest.retry;
 
 import com.squareup.okhttp.Response;
 
-import java.io.IOException;
-
 /**
  * A retry strategy with backoff parameters for calculating the exponential delay between retries.
  */
@@ -31,9 +29,22 @@ public class ExponentialBackoffRetryStrategy extends RetryStrategy {
      */
     public static final int DEFAULT_MIN_BACKOFF = 1000;
 
+    /**
+     * The value that will be used to calculate a random delta in the exponential delay
+     * between retries.
+     */
     private final int deltaBackoff;
+    /**
+     * The maximum backoff time.
+     */
     private final int maxBackoff;
+    /**
+     * The minimum backoff time.
+     */
     private final int minBackoff;
+    /**
+     * The maximum number of retry attempts.
+     */
     private final int retryCount;
 
     /**
@@ -88,7 +99,8 @@ public class ExponentialBackoffRetryStrategy extends RetryStrategy {
     @Override
     public boolean shouldRetry(int retryCount, Response response) {
         int code = response.code();
-        return retryCount < this.retryCount &&
-                (code == 408 || (code >= 500 && code != 501 && code != 505));
+        //CHECKSTYLE IGNORE MagicNumber FOR NEXT 2 LINES
+        return retryCount < this.retryCount
+                && (code == 408 || (code >= 500 && code != 501 && code != 505));
     }
 }

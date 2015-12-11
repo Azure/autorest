@@ -19,6 +19,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using Microsoft.Rest.Azure;
     using Models;
@@ -132,7 +133,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -160,7 +161,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -193,7 +194,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -291,7 +292,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -319,7 +320,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -352,7 +353,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -452,7 +453,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -480,7 +481,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -513,7 +514,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -615,7 +616,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -643,7 +644,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -676,7 +677,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -689,7 +690,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -791,7 +792,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -819,7 +820,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -852,7 +853,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -954,7 +955,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -982,7 +983,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -1015,7 +1016,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1028,7 +1029,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1130,7 +1131,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -1158,7 +1159,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -1191,7 +1192,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1291,7 +1292,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -1319,7 +1320,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -1352,7 +1353,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1361,7 +1362,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPutNoHeaderInRetryHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsPutNoHeaderInRetryHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -1460,7 +1461,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -1488,7 +1489,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -1521,7 +1522,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1530,7 +1531,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPutAsyncRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsPutAsyncRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -1629,7 +1630,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -1657,7 +1658,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -1690,7 +1691,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1699,7 +1700,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPutAsyncNoRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsPutAsyncNoRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -1798,7 +1799,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -1826,7 +1827,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -1859,7 +1860,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -1868,7 +1869,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPutAsyncRetryFailedHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsPutAsyncRetryFailedHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -1967,7 +1968,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -1995,7 +1996,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -2028,7 +2029,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -2037,7 +2038,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPutAsyncNoRetrycanceledHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsPutAsyncNoRetrycanceledHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -2136,7 +2137,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -2164,7 +2165,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -2197,7 +2198,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -2206,7 +2207,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPutAsyncNoHeaderInRetryHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsPutAsyncNoHeaderInRetryHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -2301,7 +2302,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(sku, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(sku, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -2329,7 +2330,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -2362,7 +2363,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -2458,7 +2459,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(sku, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(sku, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -2486,7 +2487,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -2519,7 +2520,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -2615,7 +2616,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -2643,7 +2644,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -2676,7 +2677,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<SubProduct>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<SubProduct>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -2772,7 +2773,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -2800,7 +2801,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -2833,7 +2834,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<SubProduct>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<SubProduct>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -2950,7 +2951,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -2983,7 +2984,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -2996,7 +2997,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -3005,7 +3006,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsDeleteProvisioning202Accepted200SucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsDeleteProvisioning202Accepted200SucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -3121,7 +3122,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -3154,7 +3155,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -3167,7 +3168,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -3176,7 +3177,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsDeleteProvisioning202DeletingFailed200Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsDeleteProvisioning202DeletingFailed200Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -3292,7 +3293,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -3325,7 +3326,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -3338,7 +3339,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -3347,7 +3348,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsDeleteProvisioning202Deletingcanceled200Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsDeleteProvisioning202Deletingcanceled200Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -3457,7 +3458,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -3592,7 +3593,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -3625,7 +3626,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -3634,7 +3635,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsDelete202Retry200Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsDelete202Retry200Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -3748,7 +3749,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -3781,7 +3782,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -3790,7 +3791,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsDelete202NoRetry204Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsDelete202NoRetry204Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -3814,10 +3815,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteNoHeaderInRetryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsDeleteNoHeaderInRetryHeaders>> DeleteNoHeaderInRetryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteNoHeaderInRetryWithHttpMessagesAsync(
+            AzureOperationHeaderResponse<LROsDeleteNoHeaderInRetryHeaders> response = await BeginDeleteNoHeaderInRetryWithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -3833,7 +3834,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteNoHeaderInRetryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsDeleteNoHeaderInRetryHeaders>> BeginDeleteNoHeaderInRetryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -3904,7 +3905,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -3924,12 +3925,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse();
+            var result = new AzureOperationHeaderResponse<LROsDeleteNoHeaderInRetryHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsDeleteNoHeaderInRetryHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -3949,10 +3958,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteAsyncNoHeaderInRetryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsDeleteAsyncNoHeaderInRetryHeaders>> DeleteAsyncNoHeaderInRetryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteAsyncNoHeaderInRetryWithHttpMessagesAsync(
+            AzureOperationHeaderResponse<LROsDeleteAsyncNoHeaderInRetryHeaders> response = await BeginDeleteAsyncNoHeaderInRetryWithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -3968,7 +3977,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteAsyncNoHeaderInRetryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsDeleteAsyncNoHeaderInRetryHeaders>> BeginDeleteAsyncNoHeaderInRetryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4039,7 +4048,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -4059,12 +4068,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse();
+            var result = new AzureOperationHeaderResponse<LROsDeleteAsyncNoHeaderInRetryHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsDeleteAsyncNoHeaderInRetryHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -4084,10 +4101,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteAsyncRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsDeleteAsyncRetrySucceededHeaders>> DeleteAsyncRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteAsyncRetrySucceededWithHttpMessagesAsync(
+            AzureOperationHeaderResponse<LROsDeleteAsyncRetrySucceededHeaders> response = await BeginDeleteAsyncRetrySucceededWithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -4103,7 +4120,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteAsyncRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsDeleteAsyncRetrySucceededHeaders>> BeginDeleteAsyncRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4174,7 +4191,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -4194,12 +4211,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse();
+            var result = new AzureOperationHeaderResponse<LROsDeleteAsyncRetrySucceededHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsDeleteAsyncRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -4219,10 +4244,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteAsyncNoRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsDeleteAsyncNoRetrySucceededHeaders>> DeleteAsyncNoRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteAsyncNoRetrySucceededWithHttpMessagesAsync(
+            AzureOperationHeaderResponse<LROsDeleteAsyncNoRetrySucceededHeaders> response = await BeginDeleteAsyncNoRetrySucceededWithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -4238,7 +4263,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteAsyncNoRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsDeleteAsyncNoRetrySucceededHeaders>> BeginDeleteAsyncNoRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4309,7 +4334,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -4329,12 +4354,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse();
+            var result = new AzureOperationHeaderResponse<LROsDeleteAsyncNoRetrySucceededHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsDeleteAsyncNoRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -4354,10 +4387,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteAsyncRetryFailedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsDeleteAsyncRetryFailedHeaders>> DeleteAsyncRetryFailedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteAsyncRetryFailedWithHttpMessagesAsync(
+            AzureOperationHeaderResponse<LROsDeleteAsyncRetryFailedHeaders> response = await BeginDeleteAsyncRetryFailedWithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -4373,7 +4406,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteAsyncRetryFailedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsDeleteAsyncRetryFailedHeaders>> BeginDeleteAsyncRetryFailedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4444,7 +4477,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -4464,12 +4497,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse();
+            var result = new AzureOperationHeaderResponse<LROsDeleteAsyncRetryFailedHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsDeleteAsyncRetryFailedHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -4489,10 +4530,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> DeleteAsyncRetrycanceledWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsDeleteAsyncRetrycanceledHeaders>> DeleteAsyncRetrycanceledWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginDeleteAsyncRetrycanceledWithHttpMessagesAsync(
+            AzureOperationHeaderResponse<LROsDeleteAsyncRetrycanceledHeaders> response = await BeginDeleteAsyncRetrycanceledWithHttpMessagesAsync(
                 customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -4508,7 +4549,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginDeleteAsyncRetrycanceledWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsDeleteAsyncRetrycanceledHeaders>> BeginDeleteAsyncRetrycanceledWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4579,7 +4620,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -4599,12 +4640,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse();
+            var result = new AzureOperationHeaderResponse<LROsDeleteAsyncRetrycanceledHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsDeleteAsyncRetrycanceledHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -4714,7 +4763,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -4747,7 +4796,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -4760,7 +4809,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -4788,10 +4837,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> Post202Retry200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsPost202Retry200Headers>> Post202Retry200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPost202Retry200WithHttpMessagesAsync(
+            AzureOperationHeaderResponse<LROsPost202Retry200Headers> response = await BeginPost202Retry200WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -4810,7 +4859,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPost202Retry200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsPost202Retry200Headers>> BeginPost202Retry200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -4858,7 +4907,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -4886,7 +4935,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -4906,12 +4955,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse();
+            var result = new AzureOperationHeaderResponse<LROsPost202Retry200Headers>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsPost202Retry200Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -5002,7 +5059,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -5030,7 +5087,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -5063,7 +5120,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -5072,7 +5129,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPost202NoRetry204Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsPost202NoRetry204Headers>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -5169,7 +5226,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -5197,7 +5254,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -5230,7 +5287,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -5239,7 +5296,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPostAsyncRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsPostAsyncRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -5336,7 +5393,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -5364,7 +5421,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -5397,7 +5454,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -5406,7 +5463,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                result.Headers = httpResponse.Headers.ToJson().ToObject<LROsPostAsyncNoRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsPostAsyncNoRetrySucceededHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -5433,10 +5490,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostAsyncRetryFailedWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsPostAsyncRetryFailedHeaders>> PostAsyncRetryFailedWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPostAsyncRetryFailedWithHttpMessagesAsync(
+            AzureOperationHeaderResponse<LROsPostAsyncRetryFailedHeaders> response = await BeginPostAsyncRetryFailedWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -5455,7 +5512,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPostAsyncRetryFailedWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsPostAsyncRetryFailedHeaders>> BeginPostAsyncRetryFailedWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -5503,7 +5560,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -5531,7 +5588,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -5551,12 +5608,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse();
+            var result = new AzureOperationHeaderResponse<LROsPostAsyncRetryFailedHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsPostAsyncRetryFailedHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {
@@ -5579,10 +5644,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostAsyncRetrycanceledWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsPostAsyncRetrycanceledHeaders>> PostAsyncRetrycanceledWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse response = await BeginPostAsyncRetrycanceledWithHttpMessagesAsync(
+            AzureOperationHeaderResponse<LROsPostAsyncRetrycanceledHeaders> response = await BeginPostAsyncRetrycanceledWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
             return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
         }
@@ -5601,7 +5666,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> BeginPostAsyncRetrycanceledWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<LROsPostAsyncRetrycanceledHeaders>> BeginPostAsyncRetrycanceledWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -5649,7 +5714,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -5677,7 +5742,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -5697,12 +5762,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 throw ex;
             }
             // Create Result
-            var result = new AzureOperationResponse();
+            var result = new AzureOperationHeaderResponse<LROsPostAsyncRetrycanceledHeaders>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             if (httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 result.RequestId = httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+            }
+            try
+            {
+                result.Headers = httpResponse.GetHeadersAsJson().ToObject<LROsPostAsyncRetrycanceledHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
+            {
+                throw new RestException("Unable to deserialize the headers.", ex);
             }
             if (shouldTrace)
             {

@@ -1,15 +1,12 @@
 package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceResponse;
-import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.UUID;
-
 public class ApiVersionDefaultTests {
-    static AutoRestAzureSpecialParametersTestClient client;
+    private static AutoRestAzureSpecialParametersTestClient client;
 
     @BeforeClass
     public static void setup() {

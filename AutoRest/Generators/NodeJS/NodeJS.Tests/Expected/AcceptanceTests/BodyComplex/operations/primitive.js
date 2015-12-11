@@ -32,11 +32,11 @@ function Primitive(client) {
 /**
  * Get complex types with integer properties
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -144,11 +144,11 @@ Primitive.prototype.getInt = function (options, callback) {
  * 
  * @param {number} [complexBody.field2]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -254,11 +254,11 @@ Primitive.prototype.putInt = function (complexBody, options, callback) {
 /**
  * Get complex types with long properties
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -366,11 +366,11 @@ Primitive.prototype.getLong = function (options, callback) {
  * 
  * @param {number} [complexBody.field2]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -476,11 +476,11 @@ Primitive.prototype.putLong = function (complexBody, options, callback) {
 /**
  * Get complex types with float properties
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -588,11 +588,11 @@ Primitive.prototype.getFloat = function (options, callback) {
  * 
  * @param {number} [complexBody.field2]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -698,11 +698,11 @@ Primitive.prototype.putFloat = function (complexBody, options, callback) {
 /**
  * Get complex types with double properties
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -812,11 +812,11 @@ Primitive.prototype.getDouble = function (options, callback) {
  * @param {number}
  * [complexBody.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -922,11 +922,11 @@ Primitive.prototype.putDouble = function (complexBody, options, callback) {
 /**
  * Get complex types with bool properties
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1034,11 +1034,11 @@ Primitive.prototype.getBool = function (options, callback) {
  * 
  * @param {boolean} [complexBody.fieldFalse]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1144,11 +1144,11 @@ Primitive.prototype.putBool = function (complexBody, options, callback) {
 /**
  * Get complex types with string properties
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1258,11 +1258,11 @@ Primitive.prototype.getString = function (options, callback) {
  * 
  * @param {string} [complexBody.null]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1368,11 +1368,11 @@ Primitive.prototype.putString = function (complexBody, options, callback) {
 /**
  * Get complex types with date properties
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1480,11 +1480,11 @@ Primitive.prototype.getDate = function (options, callback) {
  * 
  * @param {date} [complexBody.leap]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1590,11 +1590,11 @@ Primitive.prototype.putDate = function (complexBody, options, callback) {
 /**
  * Get complex types with datetime properties
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1703,11 +1703,11 @@ Primitive.prototype.getDateTime = function (options, callback) {
  * 
  * @param {date} [complexBody.now]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1813,11 +1813,11 @@ Primitive.prototype.putDateTime = function (complexBody, options, callback) {
 /**
  * Get complex types with datetimeRfc1123 properties
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1927,11 +1927,11 @@ Primitive.prototype.getDateTimeRfc1123 = function (options, callback) {
  * 
  * @param {date} [complexBody.now]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2037,11 +2037,11 @@ Primitive.prototype.putDateTimeRfc1123 = function (complexBody, options, callbac
 /**
  * Get complex types with duration properties
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2143,13 +2143,13 @@ Primitive.prototype.getDuration = function (options, callback) {
 /**
  * Put complex types with duration properties
  *
- * @param {moment.duration} [field]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {moment.duration} [options.field]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2162,7 +2162,7 @@ Primitive.prototype.getDuration = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Primitive.prototype.putDuration = function (field, options, callback) {
+Primitive.prototype.putDuration = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2171,6 +2171,7 @@ Primitive.prototype.putDuration = function (field, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var field = (options && options.field !== undefined) ? options.field : undefined;
   // Validate
   try {
     if(field && !moment.isDuration(field)) {
@@ -2261,11 +2262,11 @@ Primitive.prototype.putDuration = function (field, options, callback) {
 /**
  * Get complex types with byte properties
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2367,13 +2368,13 @@ Primitive.prototype.getByte = function (options, callback) {
 /**
  * Put complex types with byte properties
  *
- * @param {buffer} [field]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {buffer} [options.field]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2386,7 +2387,7 @@ Primitive.prototype.getByte = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Primitive.prototype.putByte = function (field, options, callback) {
+Primitive.prototype.putByte = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2395,6 +2396,7 @@ Primitive.prototype.putByte = function (field, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var field = (options && options.field !== undefined) ? options.field : undefined;
   // Validate
   try {
     if (field && !Buffer.isBuffer(field)) {

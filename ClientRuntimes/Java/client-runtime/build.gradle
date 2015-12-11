@@ -10,6 +10,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'checkstyle'
 
 group = 'com.microsoft.rest'
 version = '0.0.1-SNAPSHOT'
@@ -18,11 +19,15 @@ configurations {
     deployerJars
 }
 
+checkstyle {
+    configFile = new File("$rootDir/Tools/checkstyle/checkstyle.xml")
+    configProperties = [samedir: "$rootDir/Tools/checkstyle"]
+    reportsDir = new File("$rootDir/Tools/checkstyle/reports")
+}
+
 repositories {
     mavenCentral()
-    maven {
-        url "https://oss.sonatype.org/content/repositories/snapshots/"
-    }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 dependencies {

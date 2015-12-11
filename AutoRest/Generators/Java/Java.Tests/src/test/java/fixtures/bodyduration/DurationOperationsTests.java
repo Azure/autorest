@@ -7,7 +7,7 @@ import org.junit.Test;
 
 
 public class DurationOperationsTests {
-    static AutoRestDurationTestService client;
+    private static AutoRestDurationTestService client;
 
     @BeforeClass
     public static void setup() {
@@ -25,11 +25,11 @@ public class DurationOperationsTests {
             client.getDuration().getInvalid();
             Assert.fail(); //Should not reach here
         }
-        catch(IllegalArgumentException e) {
+        catch (IllegalArgumentException e) {
             //Swallow exceptions
         }
     }
-    
+
     @Test
     public void getPositiveDuration() throws Exception {
         client.getDuration().getPositiveDuration();
@@ -39,5 +39,4 @@ public class DurationOperationsTests {
     public void putPositiveDuration() throws Exception {
         client.getDuration().putPositiveDuration(new Period(0, 0, 0, 123, 22, 14, 12, 11));
     }
-    
 }

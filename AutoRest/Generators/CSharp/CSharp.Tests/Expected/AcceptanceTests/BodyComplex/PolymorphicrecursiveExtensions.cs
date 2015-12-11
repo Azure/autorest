@@ -40,7 +40,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<Fish> GetValidAsync( this IPolymorphicrecursive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                HttpOperationResponse<Fish> result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

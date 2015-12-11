@@ -23,85 +23,85 @@ export interface IntModel {
     /**
      * Get null Int value
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
     getNull(callback: ServiceCallback<number>): void;
 
     /**
      * Get invalid Int value
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getInvalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
     getInvalid(callback: ServiceCallback<number>): void;
 
     /**
      * Get overflow Int32 value
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getOverflowInt32(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getOverflowInt32(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
     getOverflowInt32(callback: ServiceCallback<number>): void;
 
     /**
      * Get underflow Int32 value
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getUnderflowInt32(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getUnderflowInt32(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
     getUnderflowInt32(callback: ServiceCallback<number>): void;
 
     /**
      * Get overflow Int64 value
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getOverflowInt64(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getOverflowInt64(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
     getOverflowInt64(callback: ServiceCallback<number>): void;
 
     /**
      * Get underflow Int64 value
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getUnderflowInt64(options: RequestOptions, callback: ServiceCallback<number>): void;
+    getUnderflowInt64(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
     getUnderflowInt64(callback: ServiceCallback<number>): void;
 
     /**
@@ -109,15 +109,15 @@ export interface IntModel {
      *
      * @param {number} intBody
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putMax32(intBody: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putMax32(intBody: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putMax32(intBody: number, callback: ServiceCallback<void>): void;
 
     /**
@@ -125,15 +125,15 @@ export interface IntModel {
      *
      * @param {number} intBody
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putMax64(intBody: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putMax64(intBody: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putMax64(intBody: number, callback: ServiceCallback<void>): void;
 
     /**
@@ -141,15 +141,15 @@ export interface IntModel {
      *
      * @param {number} intBody
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putMin32(intBody: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putMin32(intBody: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putMin32(intBody: number, callback: ServiceCallback<void>): void;
 
     /**
@@ -157,14 +157,14 @@ export interface IntModel {
      *
      * @param {number} intBody
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putMin64(intBody: number, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putMin64(intBody: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putMin64(intBody: number, callback: ServiceCallback<void>): void;
 }

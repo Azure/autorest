@@ -25,14 +25,14 @@ export interface Group {
      *
      * @param {string} resourceGroupName Resource Group name 'testgroup101'.
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSampleResourceGroup(resourceGroupName: string, options: RequestOptions, callback: ServiceCallback<models.SampleResourceGroup>): void;
+    getSampleResourceGroup(resourceGroupName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SampleResourceGroup>): void;
     getSampleResourceGroup(resourceGroupName: string, callback: ServiceCallback<models.SampleResourceGroup>): void;
 }

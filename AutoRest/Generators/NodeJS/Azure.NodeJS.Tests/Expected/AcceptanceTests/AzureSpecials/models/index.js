@@ -19,3 +19,4 @@ var msRestAzure = require('ms-rest-azure');
 exports.BaseResource = msRestAzure.BaseResource;
 exports.CloudError = msRestAzure.CloudError;
 exports.ErrorModel = require('./errorModel');
+exports.OdataFilter = require('./odataFilter');

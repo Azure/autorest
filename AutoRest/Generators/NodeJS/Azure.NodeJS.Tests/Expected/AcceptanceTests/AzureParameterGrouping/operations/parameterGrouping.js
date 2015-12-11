@@ -45,11 +45,11 @@ function ParameterGrouping(client) {
  * @param {string} [parameterGroupingPostRequiredParameters.path] Path
  * parameter
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -190,19 +190,20 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
 /**
  * Post a bunch of optional parameters grouped
  *
- * @param {object} [parameterGroupingPostOptionalParameters] Additional
- * parameters for the operation
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [parameterGroupingPostOptionalParameters.customHeader]
+ * @param {object} [options.parameterGroupingPostOptionalParameters]
+ * Additional parameters for the operation
  * 
- * @param {number} [parameterGroupingPostOptionalParameters.query] Query
- * parameter with default
+ * @param {string}
+ * [options.parameterGroupingPostOptionalParameters.customHeader]
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {number} [options.parameterGroupingPostOptionalParameters.query]
+ * Query parameter with default
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -215,7 +216,7 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ParameterGrouping.prototype.postOptional = function (parameterGroupingPostOptionalParameters, options, callback) {
+ParameterGrouping.prototype.postOptional = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -224,6 +225,7 @@ ParameterGrouping.prototype.postOptional = function (parameterGroupingPostOption
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var parameterGroupingPostOptionalParameters = (options && options.parameterGroupingPostOptionalParameters !== undefined) ? options.parameterGroupingPostOptionalParameters : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -316,29 +318,30 @@ ParameterGrouping.prototype.postOptional = function (parameterGroupingPostOption
 /**
  * Post parameters from multiple different parameter groups
  *
- * @param {object} [firstParameterGroup] Additional parameters for the
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.firstParameterGroup] Additional parameters for the
  * operation
  * 
- * @param {string} [firstParameterGroup.headerOne]
+ * @param {string} [options.firstParameterGroup.headerOne]
  * 
- * @param {number} [firstParameterGroup.queryOne] Query parameter with default
+ * @param {number} [options.firstParameterGroup.queryOne] Query parameter with
+ * default
  * 
  * @param {object}
- * [parameterGroupingPostMultipleParameterGroupsSecondParameterGroup]
+ * [options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup]
  * Additional parameters for the operation
  * 
  * @param {string}
- * [parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.headerTwo]
+ * [options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.headerTwo]
  * 
  * @param {number}
- * [parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.queryTwo]
+ * [options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.queryTwo]
  * Query parameter with default
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -351,7 +354,7 @@ ParameterGrouping.prototype.postOptional = function (parameterGroupingPostOption
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ParameterGrouping.prototype.postMultipleParameterGroups = function (firstParameterGroup, parameterGroupingPostMultipleParameterGroupsSecondParameterGroup, options, callback) {
+ParameterGrouping.prototype.postMultipleParameterGroups = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -360,6 +363,8 @@ ParameterGrouping.prototype.postMultipleParameterGroups = function (firstParamet
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var firstParameterGroup = (options && options.firstParameterGroup !== undefined) ? options.firstParameterGroup : undefined;
+  var parameterGroupingPostMultipleParameterGroupsSecondParameterGroup = (options && options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup !== undefined) ? options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -468,18 +473,19 @@ ParameterGrouping.prototype.postMultipleParameterGroups = function (firstParamet
 /**
  * Post parameters with a shared parameter group object
  *
- * @param {object} [firstParameterGroup] Additional parameters for the
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.firstParameterGroup] Additional parameters for the
  * operation
  * 
- * @param {string} [firstParameterGroup.headerOne]
+ * @param {string} [options.firstParameterGroup.headerOne]
  * 
- * @param {number} [firstParameterGroup.queryOne] Query parameter with default
+ * @param {number} [options.firstParameterGroup.queryOne] Query parameter with
+ * default
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -492,7 +498,7 @@ ParameterGrouping.prototype.postMultipleParameterGroups = function (firstParamet
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ParameterGrouping.prototype.postSharedParameterGroupObject = function (firstParameterGroup, options, callback) {
+ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -501,6 +507,7 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (firstPara
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var firstParameterGroup = (options && options.firstParameterGroup !== undefined) ? options.firstParameterGroup : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {

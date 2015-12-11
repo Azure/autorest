@@ -23,42 +23,42 @@ export interface HttpSuccess {
     /**
      * Return 200 status code if successful
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head200(options: RequestOptions, callback: ServiceCallback<boolean>): void;
+    head200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
     head200(callback: ServiceCallback<boolean>): void;
 
     /**
      * Return 204 status code if successful
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head204(options: RequestOptions, callback: ServiceCallback<boolean>): void;
+    head204(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
     head204(callback: ServiceCallback<boolean>): void;
 
     /**
      * Return 404 status code if successful
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    head404(options: RequestOptions, callback: ServiceCallback<boolean>): void;
+    head404(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
     head404(callback: ServiceCallback<boolean>): void;
 }

@@ -1,7 +1,17 @@
 package fixtures.bodycomplex;
 
 import com.microsoft.rest.DateTimeRfc1123;
-import fixtures.bodycomplex.models.*;
+import fixtures.bodycomplex.models.BooleanWrapper;
+import fixtures.bodycomplex.models.ByteWrapper;
+import fixtures.bodycomplex.models.DateWrapper;
+import fixtures.bodycomplex.models.DatetimeWrapper;
+import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
+import fixtures.bodycomplex.models.DoubleWrapper;
+import fixtures.bodycomplex.models.DurationWrapper;
+import fixtures.bodycomplex.models.FloatWrapper;
+import fixtures.bodycomplex.models.IntWrapper;
+import fixtures.bodycomplex.models.LongWrapper;
+import fixtures.bodycomplex.models.StringWrapper;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -11,7 +21,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PrimitiveTests {
-    static AutoRestComplexTestService client;
+    private static AutoRestComplexTestService client;
 
     @BeforeClass
     public static void setup() {
@@ -36,15 +46,15 @@ public class PrimitiveTests {
     @Test
     public void getLong() throws Exception {
         LongWrapper result = client.getPrimitive().getLong().getBody();
-        Assert.assertEquals(Long.valueOf(1099511627775l), result.getField1());
-        Assert.assertEquals(Long.valueOf(-999511627788l), result.getField2());
+        Assert.assertEquals(Long.valueOf(1099511627775L), result.getField1());
+        Assert.assertEquals(Long.valueOf(-999511627788L), result.getField2());
     }
 
     @Test
     public void putLong() throws Exception {
         LongWrapper body = new LongWrapper();
-        body.setField1(1099511627775l);
-        body.setField2(-999511627788l);
+        body.setField1(1099511627775L);
+        body.setField2(-999511627788L);
         client.getPrimitive().putLong(body);
     }
 
@@ -173,8 +183,8 @@ public class PrimitiveTests {
     public void getByte() throws Exception {
         ByteWrapper result = client.getPrimitive().getByte().getBody();
         byte[] expected = new byte[] {
-                (byte)255, (byte)254, (byte)253, (byte)252, (byte)0,
-                (byte)250, (byte)249, (byte)248, (byte)247, (byte)246
+                (byte) 255, (byte) 254, (byte) 253, (byte) 252, (byte) 0,
+                (byte) 250, (byte) 249, (byte) 248, (byte) 247, (byte) 246
         };
         Assert.assertArrayEquals(expected, result.getField());
     }
@@ -183,8 +193,8 @@ public class PrimitiveTests {
     public void putByte() throws Exception {
         ByteWrapper body = new ByteWrapper();
         byte[] byteArray = new byte[] {
-                (byte)255, (byte)254, (byte)253, (byte)252, (byte)0,
-                (byte)250, (byte)249, (byte)248, (byte)247, (byte)246
+                (byte) 255, (byte) 254, (byte) 253, (byte) 252, (byte) 0,
+                (byte) 250, (byte) 249, (byte) 248, (byte) 247, (byte) 246
         };
         body.setField(byteArray);
         client.getPrimitive().putByte(body);

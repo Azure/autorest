@@ -21,7 +21,7 @@ import java.util.Map;
 import static org.junit.Assert.fail;
 
 public class DictionaryTests {
-    static AutoRestSwaggerBATdictionaryService client;
+    private static AutoRestSwaggerBATdictionaryService client;
 
     @BeforeClass
     public static void setup() {
@@ -52,7 +52,7 @@ public class DictionaryTests {
 
     @Test
     public void putEmpty() throws Exception {
-        client.getDictionary().putEmpty(new HashMap<String,String>());
+        client.getDictionary().putEmpty(new HashMap<String, String>());
     }
 
     @Test
@@ -157,20 +157,20 @@ public class DictionaryTests {
     public void getLongValid() throws Exception {
         Map<String, Long> result = client.getDictionary().getLongValid().getBody();
         HashMap<String, Long> expected = new HashMap<String, Long>();
-        expected.put("0", 1l);
-        expected.put("1", -1l);
-        expected.put("2", 3l);
-        expected.put("3", 300l);
+        expected.put("0", 1L);
+        expected.put("1", -1L);
+        expected.put("2", 3L);
+        expected.put("3", 300L);
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void putLongValid() throws Exception {
         HashMap<String, Long> expected = new HashMap<String, Long>();
-        expected.put("0", 1l);
-        expected.put("1", -1l);
-        expected.put("2", 3l);
-        expected.put("3", 300l);
+        expected.put("0", 1L);
+        expected.put("1", -1L);
+        expected.put("2", 3L);
+        expected.put("3", 300L);
         client.getDictionary().putLongValid(expected);
     }
 
@@ -409,9 +409,9 @@ public class DictionaryTests {
     public void getByteValid() throws Exception {
         Map<String, byte[]> result = client.getDictionary().getByteValid().getBody();
         Map<String, byte[]> expected = new HashMap<String, byte[]>();
-        expected.put("0", new byte[] {(byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFA});
-        expected.put("1", new byte[] {(byte)0x01, (byte)0x02, (byte)0x03});
-        expected.put("2", new byte[] {(byte)0x25, (byte)0x29, (byte)0x43});
+        expected.put("0", new byte[] {(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFA});
+        expected.put("1", new byte[] {(byte) 0x01, (byte) 0x02, (byte) 0x03});
+        expected.put("2", new byte[] {(byte) 0x25, (byte) 0x29, (byte) 0x43});
         Assert.assertArrayEquals(expected.get("0"), result.get("0"));
         Assert.assertArrayEquals(expected.get("1"), result.get("1"));
         Assert.assertArrayEquals(expected.get("2"), result.get("2"));
@@ -512,9 +512,9 @@ public class DictionaryTests {
     @Test
     public void getArrayValid() throws  Exception {
         Map<String, List<String>> result = client.getDictionary().getArrayValid().getBody();
-        Assert.assertArrayEquals(new String[] { "1", "2", "3"}, result.get("0").toArray());
-        Assert.assertArrayEquals(new String[] { "4", "5", "6"}, result.get("1").toArray());
-        Assert.assertArrayEquals(new String[] { "7", "8", "9"}, result.get("2").toArray());
+        Assert.assertArrayEquals(new String[] {"1", "2", "3" }, result.get("0").toArray());
+        Assert.assertArrayEquals(new String[] {"4", "5", "6" }, result.get("1").toArray());
+        Assert.assertArrayEquals(new String[] {"7", "8", "9" }, result.get("2").toArray());
     }
 
     @Test

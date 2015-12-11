@@ -31,11 +31,11 @@ function ByteModel(client) {
 /**
  * Get null byte value
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -133,11 +133,11 @@ ByteModel.prototype.getNull = function (options, callback) {
 /**
  * Get empty byte value ''
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -235,11 +235,11 @@ ByteModel.prototype.getEmpty = function (options, callback) {
 /**
  * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -340,11 +340,11 @@ ByteModel.prototype.getNonAscii = function (options, callback) {
  * @param {buffer} byteBody Base64-encoded non-ascii byte string hex(FF FE FD
  * FC FB FA F9 F8 F7 F6)
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -447,11 +447,11 @@ ByteModel.prototype.putNonAscii = function (byteBody, options, callback) {
 /**
  * Get invalid byte value ':::SWAGGER::::'
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

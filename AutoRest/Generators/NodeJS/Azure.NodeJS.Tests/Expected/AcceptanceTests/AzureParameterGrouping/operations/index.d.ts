@@ -36,89 +36,92 @@ export interface ParameterGrouping {
      * @param {string} [parameterGroupingPostRequiredParameters.path] Path
      * parameter
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postRequired(parameterGroupingPostRequiredParameters: models.ParameterGroupingPostRequiredParameters, options: RequestOptions, callback: ServiceCallback<void>): void;
+    postRequired(parameterGroupingPostRequiredParameters: models.ParameterGroupingPostRequiredParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     postRequired(parameterGroupingPostRequiredParameters: models.ParameterGroupingPostRequiredParameters, callback: ServiceCallback<void>): void;
 
     /**
      * Post a bunch of optional parameters grouped
      *
-     * @param {object} [parameterGroupingPostOptionalParameters] Additional
-     * parameters for the operation
+     * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [parameterGroupingPostOptionalParameters.customHeader]
+     * @param {object} [options.parameterGroupingPostOptionalParameters]
+     * Additional parameters for the operation
      * 
-     * @param {number} [parameterGroupingPostOptionalParameters.query] Query
-     * parameter with default
+     * @param {string}
+     * [options.parameterGroupingPostOptionalParameters.customHeader]
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {number} [options.parameterGroupingPostOptionalParameters.query]
+     * Query parameter with default
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postOptional(parameterGroupingPostOptionalParameters: models.ParameterGroupingPostOptionalParameters, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postOptional(parameterGroupingPostOptionalParameters: models.ParameterGroupingPostOptionalParameters, callback: ServiceCallback<void>): void;
+    postOptional(options: { parameterGroupingPostOptionalParameters? : models.ParameterGroupingPostOptionalParameters, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptional(callback: ServiceCallback<void>): void;
 
     /**
      * Post parameters from multiple different parameter groups
      *
-     * @param {object} [firstParameterGroup] Additional parameters for the
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.firstParameterGroup] Additional parameters for the
      * operation
      * 
-     * @param {string} [firstParameterGroup.headerOne]
+     * @param {string} [options.firstParameterGroup.headerOne]
      * 
-     * @param {number} [firstParameterGroup.queryOne] Query parameter with default
+     * @param {number} [options.firstParameterGroup.queryOne] Query parameter with
+     * default
      * 
      * @param {object}
-     * [parameterGroupingPostMultipleParameterGroupsSecondParameterGroup]
+     * [options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup]
      * Additional parameters for the operation
      * 
      * @param {string}
-     * [parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.headerTwo]
+     * [options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.headerTwo]
      * 
      * @param {number}
-     * [parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.queryTwo]
+     * [options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.queryTwo]
      * Query parameter with default
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postMultipleParameterGroups(firstParameterGroup: models.FirstParameterGroup, parameterGroupingPostMultipleParameterGroupsSecondParameterGroup: models.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postMultipleParameterGroups(firstParameterGroup: models.FirstParameterGroup, parameterGroupingPostMultipleParameterGroupsSecondParameterGroup: models.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup, callback: ServiceCallback<void>): void;
+    postMultipleParameterGroups(options: { firstParameterGroup? : models.FirstParameterGroup, parameterGroupingPostMultipleParameterGroupsSecondParameterGroup? : models.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postMultipleParameterGroups(callback: ServiceCallback<void>): void;
 
     /**
      * Post parameters with a shared parameter group object
      *
-     * @param {object} [firstParameterGroup] Additional parameters for the
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.firstParameterGroup] Additional parameters for the
      * operation
      * 
-     * @param {string} [firstParameterGroup.headerOne]
+     * @param {string} [options.firstParameterGroup.headerOne]
      * 
-     * @param {number} [firstParameterGroup.queryOne] Query parameter with default
+     * @param {number} [options.firstParameterGroup.queryOne] Query parameter with
+     * default
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postSharedParameterGroupObject(firstParameterGroup: models.FirstParameterGroup, options: RequestOptions, callback: ServiceCallback<void>): void;
-    postSharedParameterGroupObject(firstParameterGroup: models.FirstParameterGroup, callback: ServiceCallback<void>): void;
+    postSharedParameterGroupObject(options: { firstParameterGroup? : models.FirstParameterGroup, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postSharedParameterGroupObject(callback: ServiceCallback<void>): void;
 }

@@ -6,7 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BoolTests {
-    static AutoRestBoolTestService client;
+    private static AutoRestBoolTestService client;
 
     @BeforeClass
     public static void setup() {

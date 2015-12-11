@@ -19,6 +19,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using Microsoft.Rest.Azure;
 
@@ -127,7 +128,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -242,7 +243,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);
@@ -357,7 +358,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    CloudError errorBody = JsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
+                    CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex = new CloudException(errorBody.Message);

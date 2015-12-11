@@ -53,6 +53,7 @@ public class BasicAuthenticationCredentials implements ServiceClientCredentials 
         return password;
     }
 
+    @Override
     public void applyCredentialsFilter(OkHttpClient client) {
         client.interceptors().add(new BasicAuthenticationCredentialsInterceptor(this));
     }

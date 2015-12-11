@@ -31,11 +31,11 @@ function HttpClientFailure(client) {
 /**
  * Return 400 status code - should be represented in the client as an error
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -134,11 +134,11 @@ HttpClientFailure.prototype.head400 = function (options, callback) {
 /**
  * Return 400 status code - should be represented in the client as an error
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -237,13 +237,13 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
 /**
  * Return 400 status code - should be represented in the client as an error
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -257,7 +257,7 @@ HttpClientFailure.prototype.get400 = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) {
+HttpClientFailure.prototype.put400 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -266,6 +266,7 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -365,13 +366,13 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
 /**
  * Return 400 status code - should be represented in the client as an error
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -385,7 +386,7 @@ HttpClientFailure.prototype.put400 = function (booleanValue, options, callback) 
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback) {
+HttpClientFailure.prototype.patch400 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -394,6 +395,7 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -493,13 +495,13 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
 /**
  * Return 400 status code - should be represented in the client as an error
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -513,7 +515,7 @@ HttpClientFailure.prototype.patch400 = function (booleanValue, options, callback
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpClientFailure.prototype.post400 = function (booleanValue, options, callback) {
+HttpClientFailure.prototype.post400 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -522,6 +524,7 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -621,13 +624,13 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
 /**
  * Return 400 status code - should be represented in the client as an error
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -641,7 +644,7 @@ HttpClientFailure.prototype.post400 = function (booleanValue, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpClientFailure.prototype.delete400 = function (booleanValue, options, callback) {
+HttpClientFailure.prototype.delete400 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -650,6 +653,7 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -749,11 +753,11 @@ HttpClientFailure.prototype.delete400 = function (booleanValue, options, callbac
 /**
  * Return 401 status code - should be represented in the client as an error
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -852,11 +856,11 @@ HttpClientFailure.prototype.head401 = function (options, callback) {
 /**
  * Return 402 status code - should be represented in the client as an error
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -955,11 +959,11 @@ HttpClientFailure.prototype.get402 = function (options, callback) {
 /**
  * Return 403 status code - should be represented in the client as an error
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1058,13 +1062,13 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
 /**
  * Return 404 status code - should be represented in the client as an error
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1078,7 +1082,7 @@ HttpClientFailure.prototype.get403 = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) {
+HttpClientFailure.prototype.put404 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1087,6 +1091,7 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1186,13 +1191,13 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
 /**
  * Return 405 status code - should be represented in the client as an error
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1206,7 +1211,7 @@ HttpClientFailure.prototype.put404 = function (booleanValue, options, callback) 
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback) {
+HttpClientFailure.prototype.patch405 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1215,6 +1220,7 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1314,13 +1320,13 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
 /**
  * Return 406 status code - should be represented in the client as an error
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1334,7 +1340,7 @@ HttpClientFailure.prototype.patch405 = function (booleanValue, options, callback
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpClientFailure.prototype.post406 = function (booleanValue, options, callback) {
+HttpClientFailure.prototype.post406 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1343,6 +1349,7 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1442,13 +1449,13 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
 /**
  * Return 407 status code - should be represented in the client as an error
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1462,7 +1469,7 @@ HttpClientFailure.prototype.post406 = function (booleanValue, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpClientFailure.prototype.delete407 = function (booleanValue, options, callback) {
+HttpClientFailure.prototype.delete407 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1471,6 +1478,7 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1570,13 +1578,13 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
 /**
  * Return 409 status code - should be represented in the client as an error
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1590,7 +1598,7 @@ HttpClientFailure.prototype.delete407 = function (booleanValue, options, callbac
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) {
+HttpClientFailure.prototype.put409 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1599,6 +1607,7 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -1698,11 +1707,11 @@ HttpClientFailure.prototype.put409 = function (booleanValue, options, callback) 
 /**
  * Return 410 status code - should be represented in the client as an error
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1801,11 +1810,11 @@ HttpClientFailure.prototype.head410 = function (options, callback) {
 /**
  * Return 411 status code - should be represented in the client as an error
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1904,11 +1913,11 @@ HttpClientFailure.prototype.get411 = function (options, callback) {
 /**
  * Return 412 status code - should be represented in the client as an error
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2007,13 +2016,13 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
 /**
  * Return 413 status code - should be represented in the client as an error
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2027,7 +2036,7 @@ HttpClientFailure.prototype.get412 = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) {
+HttpClientFailure.prototype.put413 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2036,6 +2045,7 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -2135,13 +2145,13 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
 /**
  * Return 414 status code - should be represented in the client as an error
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2155,7 +2165,7 @@ HttpClientFailure.prototype.put413 = function (booleanValue, options, callback) 
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback) {
+HttpClientFailure.prototype.patch414 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2164,6 +2174,7 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -2263,13 +2274,13 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
 /**
  * Return 415 status code - should be represented in the client as an error
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2283,7 +2294,7 @@ HttpClientFailure.prototype.patch414 = function (booleanValue, options, callback
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpClientFailure.prototype.post415 = function (booleanValue, options, callback) {
+HttpClientFailure.prototype.post415 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2292,6 +2303,7 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -2391,11 +2403,11 @@ HttpClientFailure.prototype.post415 = function (booleanValue, options, callback)
 /**
  * Return 416 status code - should be represented in the client as an error
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2494,13 +2506,13 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
 /**
  * Return 417 status code - should be represented in the client as an error
  *
- * @param {boolean} [booleanValue] Simple boolean value true
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {boolean} [options.booleanValue] Simple boolean value true
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -2514,7 +2526,7 @@ HttpClientFailure.prototype.get416 = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HttpClientFailure.prototype.delete417 = function (booleanValue, options, callback) {
+HttpClientFailure.prototype.delete417 = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2523,6 +2535,7 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var booleanValue = (options && options.booleanValue !== undefined) ? options.booleanValue : undefined;
   // Validate
   try {
     if (booleanValue !== null && booleanValue !== undefined && typeof booleanValue !== 'boolean') {
@@ -2622,11 +2635,11 @@ HttpClientFailure.prototype.delete417 = function (booleanValue, options, callbac
 /**
  * Return 429 status code - should be represented in the client as an error
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

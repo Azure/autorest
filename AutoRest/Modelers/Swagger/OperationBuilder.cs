@@ -156,7 +156,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 method.ReturnType = method.DefaultResponse;
             }
 
-            if (method.ReturnType.Body != null && method.ReturnType.Headers != null)
+            if (method.ReturnType.Headers != null)
             {
                 _swaggerModeler.ServiceClient.HeaderTypes.Add(method.ReturnType.Headers as CompositeType);
             }

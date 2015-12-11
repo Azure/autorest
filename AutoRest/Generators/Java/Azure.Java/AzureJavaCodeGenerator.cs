@@ -19,6 +19,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         private readonly AzureJavaCodeNamer _namer;
 
         private const string ClientRuntimePackage = "com.microsoft.rest:azure-client-runtime:0.0.1-SNAPSHOT";
+        private const string _packageInfoFileName = "package-info.java";
 
         // page extensions class dictionary.
         private IDictionary<KeyValuePair<string, string>, string> pageClasses;
@@ -167,6 +168,16 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 };
                 await Write(pageTemplate, Path.Combine("models", pageTemplate.Model.TypeDefinitionName + ".java"));
             }
+
+            // package-info.java
+            await Write(new PackageInfoTemplate
+            {
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name)
+            }, _packageInfoFileName);
+            await Write(new PackageInfoTemplate
+            {
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, true)
+            }, Path.Combine("models", _packageInfoFileName));
         }
     }
 }

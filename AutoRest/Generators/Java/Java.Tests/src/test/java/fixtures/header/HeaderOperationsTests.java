@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.fail;
 
 public class HeaderOperationsTests {
-    static AutoRestSwaggerBATHeaderService client;
+    private static AutoRestSwaggerBATHeaderService client;
     private CountDownLatch lock;
 
     @BeforeClass
@@ -431,7 +431,6 @@ public class HeaderOperationsTests {
             public void success(ServiceResponse<Void> response) {
                 Headers headers = response.getResponse().headers();
                 if (headers.get("value") != null) {
-                    //TODO: It's not really a great experience to have this as a string (rather it be a Period)
                     Assert.assertEquals("P123DT22H14M12.011S", headers.get("value"));
                     lock.countDown();
                 }
@@ -594,7 +593,7 @@ public class HeaderOperationsTests {
             public void success(ServiceResponse<Void> response) {
                 Headers headers = response.getResponse().headers();
                 if (headers.get("value") != null) {
-                    Assert.assertEquals("null", headers.get("value"));
+                    Assert.assertEquals("", headers.get("value"));
                     lock.countDown();
                 }
             }

@@ -19,6 +19,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using Microsoft.Rest.Azure;
     using Models;
@@ -111,7 +112,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             List<string> queryParameters = new List<string>();
             if (query != null)
             {
-                queryParameters.Add(string.Format("query={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(query, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("query={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(query, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -152,7 +153,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(body, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(body, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -180,7 +181,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -255,7 +256,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             List<string> queryParameters = new List<string>();
             if (query != null)
             {
-                queryParameters.Add(string.Format("query={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(query, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("query={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(query, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -320,7 +321,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -410,11 +411,11 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             List<string> queryParameters = new List<string>();
             if (queryOne != null)
             {
-                queryParameters.Add(string.Format("query-one={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(queryOne, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("query-one={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(queryOne, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryTwo != null)
             {
-                queryParameters.Add(string.Format("query-two={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(queryTwo, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("query-two={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(queryTwo, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -487,7 +488,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -562,7 +563,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             List<string> queryParameters = new List<string>();
             if (queryOne != null)
             {
-                queryParameters.Add(string.Format("query-one={0}", Uri.EscapeDataString(JsonConvert.SerializeObject(queryOne, this.Client.SerializationSettings).Trim('"'))));
+                queryParameters.Add(string.Format("query-one={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(queryOne, this.Client.SerializationSettings).Trim('"'))));
             }
             if (queryParameters.Count > 0)
             {
@@ -627,7 +628,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;

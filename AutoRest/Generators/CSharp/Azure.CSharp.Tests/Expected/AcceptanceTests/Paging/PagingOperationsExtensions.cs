@@ -41,7 +41,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static async Task<IPage<Product>> GetSinglePagesAsync( this IPagingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IPage<Product>> result = await operations.GetSinglePagesWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetSinglePagesWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -71,7 +71,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static async Task<IPage<Product>> GetMultiplePagesAsync( this IPagingOperations operations, string clientRequestId = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IPage<Product>> result = await operations.GetMultiplePagesWithHttpMessagesAsync(clientRequestId, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetMultiplePagesWithHttpMessagesAsync(clientRequestId, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -99,7 +99,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static async Task<IPage<Product>> GetMultiplePagesRetryFirstAsync( this IPagingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IPage<Product>> result = await operations.GetMultiplePagesRetryFirstWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetMultiplePagesRetryFirstWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -129,7 +129,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static async Task<IPage<Product>> GetMultiplePagesRetrySecondAsync( this IPagingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IPage<Product>> result = await operations.GetMultiplePagesRetrySecondWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetMultiplePagesRetrySecondWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -155,7 +155,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static async Task<IPage<Product>> GetSinglePagesFailureAsync( this IPagingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IPage<Product>> result = await operations.GetSinglePagesFailureWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetSinglePagesFailureWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -181,7 +181,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static async Task<IPage<Product>> GetMultiplePagesFailureAsync( this IPagingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IPage<Product>> result = await operations.GetMultiplePagesFailureWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetMultiplePagesFailureWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -207,7 +207,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static async Task<IPage<Product>> GetMultiplePagesFailureUriAsync( this IPagingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IPage<Product>> result = await operations.GetMultiplePagesFailureUriWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetMultiplePagesFailureUriWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -239,7 +239,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static async Task<IPage<Product>> GetSinglePagesNextAsync( this IPagingOperations operations, string nextPageLink, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IPage<Product>> result = await operations.GetSinglePagesNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetSinglePagesNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -275,7 +275,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static async Task<IPage<Product>> GetMultiplePagesNextAsync( this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IPage<Product>> result = await operations.GetMultiplePagesNextWithHttpMessagesAsync(nextPageLink, clientRequestId, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetMultiplePagesNextWithHttpMessagesAsync(nextPageLink, clientRequestId, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -309,7 +309,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static async Task<IPage<Product>> GetMultiplePagesRetryFirstNextAsync( this IPagingOperations operations, string nextPageLink, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IPage<Product>> result = await operations.GetMultiplePagesRetryFirstNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetMultiplePagesRetryFirstNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -345,7 +345,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static async Task<IPage<Product>> GetMultiplePagesRetrySecondNextAsync( this IPagingOperations operations, string nextPageLink, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IPage<Product>> result = await operations.GetMultiplePagesRetrySecondNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetMultiplePagesRetrySecondNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -377,7 +377,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static async Task<IPage<Product>> GetSinglePagesFailureNextAsync( this IPagingOperations operations, string nextPageLink, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IPage<Product>> result = await operations.GetSinglePagesFailureNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetSinglePagesFailureNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -409,7 +409,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static async Task<IPage<Product>> GetMultiplePagesFailureNextAsync( this IPagingOperations operations, string nextPageLink, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IPage<Product>> result = await operations.GetMultiplePagesFailureNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetMultiplePagesFailureNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 
@@ -441,7 +441,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             public static async Task<IPage<Product>> GetMultiplePagesFailureUriNextAsync( this IPagingOperations operations, string nextPageLink, CancellationToken cancellationToken = default(CancellationToken))
             {
-                AzureOperationResponse<IPage<Product>> result = await operations.GetMultiplePagesFailureUriNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false);
+                var result = await operations.GetMultiplePagesFailureUriNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false);
                 return result.Body;
             }
 

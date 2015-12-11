@@ -238,7 +238,7 @@ namespace Fixtures.AcceptanceTestsValidation
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}").ToString();
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(this.SubscriptionId));
             url = url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
-            url = url.Replace("{id}", Uri.EscapeDataString(JsonConvert.SerializeObject(id, this.SerializationSettings).Trim('"')));
+            url = url.Replace("{id}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(id, this.SerializationSettings).Trim('"')));
             List<string> queryParameters = new List<string>();
             if (this.ApiVersion != null)
             {
@@ -284,7 +284,7 @@ namespace Fixtures.AcceptanceTestsValidation
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -312,7 +312,7 @@ namespace Fixtures.AcceptanceTestsValidation
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -420,7 +420,7 @@ namespace Fixtures.AcceptanceTestsValidation
             var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}").ToString();
             url = url.Replace("{subscriptionId}", Uri.EscapeDataString(this.SubscriptionId));
             url = url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
-            url = url.Replace("{id}", Uri.EscapeDataString(JsonConvert.SerializeObject(id, this.SerializationSettings).Trim('"')));
+            url = url.Replace("{id}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(id, this.SerializationSettings).Trim('"')));
             List<string> queryParameters = new List<string>();
             if (this.ApiVersion != null)
             {
@@ -448,7 +448,7 @@ namespace Fixtures.AcceptanceTestsValidation
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(body, this.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -470,7 +470,7 @@ namespace Fixtures.AcceptanceTestsValidation
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -498,7 +498,7 @@ namespace Fixtures.AcceptanceTestsValidation
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = JsonConvert.DeserializeObject<Product>(responseContent, this.DeserializationSettings);
+                    result.Body = SafeJsonConvert.DeserializeObject<Product>(responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {

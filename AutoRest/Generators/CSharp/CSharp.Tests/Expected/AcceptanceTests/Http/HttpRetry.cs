@@ -108,7 +108,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -183,7 +183,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(booleanValue, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(booleanValue, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -205,7 +205,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -280,7 +280,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(booleanValue, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(booleanValue, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -302,7 +302,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -391,7 +391,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -466,7 +466,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(booleanValue, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(booleanValue, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -488,7 +488,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -563,7 +563,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(booleanValue, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(booleanValue, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -585,7 +585,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -660,7 +660,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(booleanValue, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(booleanValue, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -682,7 +682,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;
@@ -757,7 +757,7 @@ namespace Fixtures.AcceptanceTestsHttp
             }
 
             // Serialize Request
-            string requestContent = JsonConvert.SerializeObject(booleanValue, this.Client.SerializationSettings);
+            string requestContent = SafeJsonConvert.SerializeObject(booleanValue, this.Client.SerializationSettings);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -779,7 +779,7 @@ namespace Fixtures.AcceptanceTestsHttp
                 try
                 {
                     string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = JsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
+                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
                     if (errorBody != null)
                     {
                         ex.Body = errorBody;

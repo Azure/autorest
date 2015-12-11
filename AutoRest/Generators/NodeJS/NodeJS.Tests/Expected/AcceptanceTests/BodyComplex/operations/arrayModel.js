@@ -31,11 +31,11 @@ function ArrayModel(client) {
 /**
  * Get complex types with array property
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -137,13 +137,13 @@ ArrayModel.prototype.getValid = function (options, callback) {
 /**
  * Put complex types with array property
  *
- * @param {array} [arrayParameter]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {array} [options.arrayParameter]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -156,7 +156,7 @@ ArrayModel.prototype.getValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ArrayModel.prototype.putValid = function (arrayParameter, options, callback) {
+ArrayModel.prototype.putValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -165,6 +165,7 @@ ArrayModel.prototype.putValid = function (arrayParameter, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var arrayParameter = (options && options.arrayParameter !== undefined) ? options.arrayParameter : undefined;
   // Validate
   try {
     if (util.isArray(arrayParameter)) {
@@ -259,11 +260,11 @@ ArrayModel.prototype.putValid = function (arrayParameter, options, callback) {
 /**
  * Get complex types with array property which is empty
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -365,13 +366,13 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
 /**
  * Put complex types with array property which is empty
  *
- * @param {array} [arrayParameter]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {array} [options.arrayParameter]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -384,7 +385,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ArrayModel.prototype.putEmpty = function (arrayParameter, options, callback) {
+ArrayModel.prototype.putEmpty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -393,6 +394,7 @@ ArrayModel.prototype.putEmpty = function (arrayParameter, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var arrayParameter = (options && options.arrayParameter !== undefined) ? options.arrayParameter : undefined;
   // Validate
   try {
     if (util.isArray(arrayParameter)) {
@@ -488,11 +490,11 @@ ArrayModel.prototype.putEmpty = function (arrayParameter, options, callback) {
  * Get complex types with array property while server doesn't provide a
  * response payload
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

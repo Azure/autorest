@@ -11,6 +11,7 @@ AutoRest/**/Templates/*.cs
 *.sln.docstates
 .vs
 developer/
+launchSettings.json
 
 # Build results
 binaries/
@@ -137,6 +138,7 @@ local.properties
 .project
 target
 build
+reports
 .gradle
 .idea
 *.iml
@@ -175,3 +177,5 @@ AutoRest/Generators/Ruby/*/RspecTests/Generated/*
 #dnx installation
 dnx-clr-win-x86*/
 dnx-coreclr-win-x86*/
+*.lock.json
+/dnx

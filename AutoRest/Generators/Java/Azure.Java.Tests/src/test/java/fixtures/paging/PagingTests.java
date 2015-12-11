@@ -10,7 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.fail;
 
 public class PagingTests {
-    static AutoRestPagingTestService client;
+    private static AutoRestPagingTestService client;
 
     @BeforeClass
     public static void setup() {
@@ -30,7 +30,7 @@ public class PagingTests {
         int count = 1;
         while (response.getNextPageLink() != null) {
             response = client.getPaging().getMultiplePagesNext(response.getNextPageLink(), "client-id").getBody();
-            count ++;
+            count++;
         }
         Assert.assertEquals(10, count);
     }
@@ -42,7 +42,7 @@ public class PagingTests {
         int count = 1;
         while (response.getNextPageLink() != null) {
             response = client.getPaging().getMultiplePagesNext(response.getNextPageLink(), "client-id").getBody();
-            count ++;
+            count++;
         }
         Assert.assertEquals(10, count);
     }
@@ -54,7 +54,7 @@ public class PagingTests {
         int count = 1;
         while (response.getNextPageLink() != null) {
             response = client.getPaging().getMultiplePagesNext(response.getNextPageLink(), "client-id").getBody();
-            count ++;
+            count++;
         }
         Assert.assertEquals(10, count);
     }

@@ -234,7 +234,7 @@ describe('nodejs', function () {
       it('should support valid null value', function (done) {
         testClient.string.getNull(function (error, result) {
           should.not.exist(result);
-          testClient.string.putNull(null, function (error, result) {
+          testClient.string.putNull({ stringBody: null }, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -1588,7 +1588,6 @@ describe('nodejs', function () {
         });
       });
     });
-
     describe('Url Client', function () {
       var testClient = new urlClient('globalStringPath', baseUri, clientOptions);
       testClient.globalStringQuery = 'globalStringQuery';
@@ -1602,10 +1601,9 @@ describe('nodejs', function () {
               should.not.exist(error);
               done();
             });
-          });;
+          });
         });
       });
-
       it('should work when path has string', function (done) {
         testClient.paths.stringEmpty('', function (error, result) {
           should.not.exist(error);
@@ -1694,131 +1692,121 @@ describe('nodejs', function () {
       });
 
       it('should work when use values in different portion of url', function (done) {
-        testClient.pathItems.getAllWithValues('localStringPath', 'pathItemStringPath',
-                'localStringQuery', 'pathItemStringQuery', function (error, result) {
+        var optionalParams = { localStringQuery: 'localStringQuery', pathItemStringQuery : 'pathItemStringQuery' };
+        testClient.pathItems.getAllWithValues('localStringPath', 'pathItemStringPath', optionalParams, function (error, result) {
           should.not.exist(error);
           done();
         });
       });
-
       it('should work when use null values in different portion of url', function (done) {
         testClient.globalStringQuery = null;
-        testClient.pathItems.getGlobalAndLocalQueryNull('localStringPath', 'pathItemStringPath',
-                null, 'pathItemStringQuery', function (error, result) {
+        var optionalParams = { localStringQuery: <string> null, pathItemStringQuery : 'pathItemStringQuery' };
+        testClient.pathItems.getGlobalAndLocalQueryNull('localStringPath', 'pathItemStringPath', optionalParams, function (error, result) {
           should.not.exist(error);
-          testClient.pathItems.getGlobalQueryNull('localStringPath', 'pathItemStringPath',
-                                'localStringQuery', 'pathItemStringQuery', function (error, result) {
+          optionalParams = { localStringQuery: 'localStringQuery', pathItemStringQuery : 'pathItemStringQuery' };
+          testClient.pathItems.getGlobalQueryNull('localStringPath', 'pathItemStringPath', optionalParams, function (error, result) {
             should.not.exist(error);
             testClient.globalStringQuery = 'globalStringQuery';
-            testClient.pathItems.getLocalPathItemQueryNull('localStringPath', 'pathItemStringPath', null, null, function (error, result) {
+            optionalParams = { localStringQuery: null, pathItemStringQuery : null };
+            testClient.pathItems.getLocalPathItemQueryNull('localStringPath', 'pathItemStringPath', optionalParams, function (error, result) {
               should.not.exist(error);
               done();
             });
           });
         });
       });
-
       it('should work when query has bool', function (done) {
-        testClient.queries.getBooleanTrue(true, function (error, result) {
+        testClient.queries.getBooleanTrue({ boolQuery : true }, function (error, result) {
           should.not.exist(error);
-          testClient.queries.getBooleanFalse(false, function (error, result) {
+          testClient.queries.getBooleanFalse({ boolQuery : false }, function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
-
       it('should work when query has double values', function (done) {
-        testClient.queries.doubleDecimalNegative(-9999999.999, function (error, result) {
+        testClient.queries.doubleDecimalNegative({ doubleQuery: -9999999.999 }, function (error, result) {
           should.not.exist(error);
-          testClient.queries.doubleDecimalPositive(9999999.999, function (error, result) {
+          testClient.queries.doubleDecimalPositive({ doubleQuery: 9999999.999 }, function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
-
       it('should work when query has float values', function (done) {
-        testClient.queries.floatScientificNegative(-1.034e-20, function (error, result) {
+        testClient.queries.floatScientificNegative({ floatQuery: -1.034e-20 }, function (error, result) {
           should.not.exist(error);
-          testClient.queries.floatScientificPositive(1.034e20, function (error, result) {
+          testClient.queries.floatScientificPositive({ floatQuery: 1.034e20 }, function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
-
       it('should work when query has int values', function (done) {
-        testClient.queries.getIntNegativeOneMillion(-1000000, function (error, result) {
+        testClient.queries.getIntNegativeOneMillion({ intQuery: -1000000 }, function (error, result) {
           should.not.exist(error);
-          testClient.queries.getIntOneMillion(1000000, function (error, result) {
+          testClient.queries.getIntOneMillion({ intQuery: 1000000 }, function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
-
       it('should work when query has billion values', function (done) {
-        testClient.queries.getNegativeTenBillion(-10000000000, function (error, result) {
+        testClient.queries.getNegativeTenBillion({ longQuery: -10000000000 }, function (error, result) {
           should.not.exist(error);
-          testClient.queries.getTenBillion(10000000000, function (error, result) {
+          testClient.queries.getTenBillion({ longQuery: 10000000000 }, function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
-
       it('should work when query has string values', function (done) {
-        testClient.queries.stringEmpty('', function (error, result) {
+        testClient.queries.stringEmpty({ stringQuery: '' }, function (error, result) {
           should.not.exist(error);
-          testClient.queries.stringUrlEncoded('begin!*\'();:@ &=+$,/?#[]end', function (error, result) {
+          testClient.queries.stringUrlEncoded({ stringQuery: 'begin!*\'();:@ &=+$,/?#[]end' }, function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
-
       it('should work when query has datetime', function (done) {
-        testClient.queries.dateTimeValid(new Date('2012-01-01T01:01:01Z'), function (error, result) {
+        testClient.queries.dateTimeValid({ dateTimeQuery: new Date('2012-01-01T01:01:01Z') }, function (error, result) {
           should.not.exist(error);
           done();
         });
       });
-
       it('should work when query has byte values', function (done) {
-        testClient.queries.byteEmpty(new Buffer(''), function (error, result) {
+        testClient.queries.byteEmpty({ byteQuery: new Buffer('') }, function (error, result) {
           should.not.exist(error);
-          testClient.queries.byteMultiByte(new Buffer('啊齄丂狛狜隣郎隣兀﨩'), function (error, result) {
+          testClient.queries.byteMultiByte({ byteQuery: new Buffer('啊齄丂狛狜隣郎隣兀﨩') }, function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
-
       it('should work when query has enum values', function (done) {
-        testClient.queries.enumValid('', function (error, result) {
+        testClient.queries.enumValid({ enumQuery: '' }, function (error, result) {
           should.exist(error);
-          testClient.queries.enumNull(null, function (error, result) {
+          testClient.queries.enumNull({ enumQuery: null }, function (error, result) {
             should.not.exist(error);
-            testClient.queries.enumValid('green color', function (error, result) {
+            testClient.queries.enumValid({ enumQuery: 'green color' }, function (error, result) {
               should.not.exist(error);
               done();
             });
           });
         });
       });
-
       it('should work when query has string array values', function (done) {
         var testArray = ['ArrayQuery1', 'begin!*\'();:@ &=+$,/?#[]end', null, ''];
-        testClient.queries.arrayStringCsvEmpty([], function (error, result) {
+        testClient.queries.arrayStringCsvEmpty({ arrayQuery: [] }, function (error, result) {
           should.not.exist(error);
-          testClient.queries.arrayStringCsvValid(testArray, function (error, result) {
+          testClient.queries.arrayStringCsvValid({ arrayQuery: testArray }, function (error, result) {
             should.not.exist(error);
-            testClient.queries.arrayStringPipesValid(testArray, function (error, result) {
+            testClient.queries.arrayStringPipesValid({ arrayQuery: testArray }, function (error, result) {
               should.not.exist(error);
-              testClient.queries.arrayStringSsvValid(testArray, function (error, result) {
+              testClient.queries.arrayStringSsvValid({ arrayQuery: testArray }, function (error, result) {
                 should.not.exist(error);
-                testClient.queries.arrayStringTsvValid(testArray, function (error, result) {
+                testClient.queries.arrayStringTsvValid({ arrayQuery: testArray }, function (error, result) {
                   should.not.exist(error);
                   done();
                 });
@@ -1827,27 +1815,26 @@ describe('nodejs', function () {
           });
         });
       });
-
       it('should work when use null values in url query', function (done) {
-        testClient.queries.byteNull(null, function (error, result) {
+        testClient.queries.byteNull({ byteQuery: null }, function (error, result) {
           should.not.exist(error);
-          testClient.queries.dateNull(null, function (error, result) {
+          testClient.queries.dateNull({ dateQuery: null }, function (error, result) {
             should.not.exist(error);
-            testClient.queries.dateTimeNull(null, function (error, result) {
+            testClient.queries.dateTimeNull({ dateTimeQuery: null }, function (error, result) {
               should.not.exist(error);
-              testClient.queries.doubleNull(null, function (error, result) {
+              testClient.queries.doubleNull({ doubleQuery: null }, function (error, result) {
                 should.not.exist(error);
-                testClient.queries.floatNull(null, function (error, result) {
+                testClient.queries.floatNull({ floatQuery: null }, function (error, result) {
                   should.not.exist(error);
-                  testClient.queries.getBooleanNull(null, function (error, result) {
+                  testClient.queries.getBooleanNull({ boolQuery: null }, function (error, result) {
                     should.not.exist(error);
-                    testClient.queries.getIntNull(null, function (error, result) {
+                    testClient.queries.getIntNull({ intQuery: null }, function (error, result) {
                       should.not.exist(error);
-                      testClient.queries.getLongNull(null, function (error, result) {
+                      testClient.queries.getLongNull({ longQuery: null }, function (error, result) {
                         should.not.exist(error);
-                        testClient.queries.stringNull(null, function (error, result) {
+                        testClient.queries.stringNull({ stringQuery: null }, function (error, result) {
                           should.not.exist(error);
-                          testClient.queries.arrayStringCsvNull(null, function (error, result) {
+                          testClient.queries.arrayStringCsvNull({ arrayQuery: null }, function (error, result) {
                             should.not.exist(error);
                             done();
                           });
@@ -1862,12 +1849,11 @@ describe('nodejs', function () {
         });
       });
     });
-
     describe('Http infrastructure Client', function () {
       var testOptions = clientOptions;
       testOptions.requestOptions = { jar: true };
       testOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0, 0, 0)];
-      testOptions.noRetryPolicy = true
+      testOptions.noRetryPolicy = true;
       var testClient = new httpClient(baseUri, testOptions);
       it('should work for all http success status codes with different verbs', function (done) {
         testClient.httpSuccess.head200(function (error, result) {
@@ -1926,7 +1912,6 @@ describe('nodejs', function () {
           });
         });
       });
-
       it('should work for all http redirect status codes with different verbs', function (done) {
         testClient.httpRedirects.head300(function (error, result, request, response) {
           should.not.exist(error);

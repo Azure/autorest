@@ -31,11 +31,11 @@ function Datetime(client) {
 /**
  * Get null datetime value
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -133,11 +133,11 @@ Datetime.prototype.getNull = function (options, callback) {
 /**
  * Get invalid datetime value
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -235,11 +235,11 @@ Datetime.prototype.getInvalid = function (options, callback) {
 /**
  * Get overflow datetime value
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -337,11 +337,11 @@ Datetime.prototype.getOverflow = function (options, callback) {
 /**
  * Get underflow datetime value
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -441,11 +441,11 @@ Datetime.prototype.getUnderflow = function (options, callback) {
  *
  * @param {date} datetimeBody
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -549,11 +549,11 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
 /**
  * Get max datetime value 9999-12-31t23:59:59.9999999z
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -651,11 +651,11 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
 /**
  * Get max datetime value 9999-12-31T23:59:59.9999999Z
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -756,11 +756,11 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
  *
  * @param {date} datetimeBody
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -865,11 +865,11 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
  * Get max datetime value with positive num offset
  * 9999-12-31t23:59:59.9999999+14:00
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -968,11 +968,11 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
  * Get max datetime value with positive num offset
  * 9999-12-31T23:59:59.9999999+14:00
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1073,11 +1073,11 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
  *
  * @param {date} datetimeBody
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1182,11 +1182,11 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
  * Get max datetime value with positive num offset
  * 9999-12-31T23:59:59.9999999-14:00
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1285,11 +1285,11 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
  * Get max datetime value with positive num offset
  * 9999-12-31t23:59:59.9999999-14:00
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1389,11 +1389,11 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
  *
  * @param {date} datetimeBody
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1497,11 +1497,11 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
 /**
  * Get min datetime value 0001-01-01T00:00:00Z
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1601,11 +1601,11 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
  *
  * @param {date} datetimeBody
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1709,11 +1709,11 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
 /**
  * Get min datetime value 0001-01-01T00:00:00+14:00
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1813,11 +1813,11 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
  *
  * @param {date} datetimeBody
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1921,11 +1921,11 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
 /**
  * Get min datetime value 0001-01-01T00:00:00-14:00
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

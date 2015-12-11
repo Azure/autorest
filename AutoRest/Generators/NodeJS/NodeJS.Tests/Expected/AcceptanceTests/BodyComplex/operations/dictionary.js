@@ -31,11 +31,11 @@ function Dictionary(client) {
 /**
  * Get complex types with dictionary property
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -137,13 +137,13 @@ Dictionary.prototype.getValid = function (options, callback) {
 /**
  * Put complex types with dictionary property
  *
- * @param {object} [defaultProgram]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options.defaultProgram]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -156,7 +156,7 @@ Dictionary.prototype.getValid = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putValid = function (defaultProgram, options, callback) {
+Dictionary.prototype.putValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -165,6 +165,7 @@ Dictionary.prototype.putValid = function (defaultProgram, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var defaultProgram = (options && options.defaultProgram !== undefined) ? options.defaultProgram : undefined;
   // Validate
   try {
     if (defaultProgram && typeof defaultProgram === 'object') {
@@ -259,11 +260,11 @@ Dictionary.prototype.putValid = function (defaultProgram, options, callback) {
 /**
  * Get complex types with dictionary property which is empty
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -365,13 +366,13 @@ Dictionary.prototype.getEmpty = function (options, callback) {
 /**
  * Put complex types with dictionary property which is empty
  *
- * @param {object} [defaultProgram]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options.defaultProgram]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -384,7 +385,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putEmpty = function (defaultProgram, options, callback) {
+Dictionary.prototype.putEmpty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -393,6 +394,7 @@ Dictionary.prototype.putEmpty = function (defaultProgram, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var defaultProgram = (options && options.defaultProgram !== undefined) ? options.defaultProgram : undefined;
   // Validate
   try {
     if (defaultProgram && typeof defaultProgram === 'object') {
@@ -487,11 +489,11 @@ Dictionary.prototype.putEmpty = function (defaultProgram, options, callback) {
 /**
  * Get complex types with dictionary property which is null
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -594,11 +596,11 @@ Dictionary.prototype.getNull = function (options, callback) {
  * Get complex types with dictionary property while server doesn't provide a
  * response payload
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

@@ -71,6 +71,54 @@ namespace Microsoft.Rest.Generator.CSharp
             }
         }
 
+        public virtual void NormalizeODataMethods(ServiceClient client)
+        {
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
+
+            foreach (var method in client.Methods)
+            {
+                if (method.Extensions.ContainsKey(AzureExtensions.ODataExtension))
+                {
+                    var odataFilter = method.Parameters.FirstOrDefault(p =>
+                        p.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
+                        p.Location == ParameterLocation.Query &&
+                        p.Type is CompositeType);
+
+                    if (odataFilter == null)
+                    {
+                        continue;
+                    }
+
+                    // Remove all odata parameters
+                    method.Parameters.RemoveAll(source =>
+                        (source.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$top", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$orderby", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$skip", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$expand", StringComparison.OrdinalIgnoreCase))
+                        && source.Location == ParameterLocation.Query);
+
+                    var odataQuery = new Parameter
+                    {
+                        SerializedName = "$filter",
+                        Name = "odataQuery",
+                        Type = new CompositeType
+                        {
+                            Name = string.Format(CultureInfo.InvariantCulture, "ODataQuery<{0}>", odataFilter.Type.Name)
+                        },
+                        Documentation = "OData parameters to apply to the operation.",
+                        Location = ParameterLocation.Query,
+                        IsRequired = odataFilter.IsRequired
+                    };
+                    odataQuery.Extensions[AzureExtensions.ODataExtension] = method.Extensions[AzureExtensions.ODataExtension];
+                    method.Parameters.Insert(0, odataQuery);
+                }
+            }
+        }
+
         /// <summary>
         /// Changes paginated method signatures to return Page type.
         /// </summary>

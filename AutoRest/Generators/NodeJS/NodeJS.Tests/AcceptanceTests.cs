@@ -38,6 +38,7 @@ namespace Microsoft.Rest.Generator.NodeJS.Tests
                     OutputDirectory = "X:\\Output",
                     Header = "MICROSOFT_MIT",
                     Modeler = "Swagger",
+                    CodeGenerator = "NodeJS",
                     PayloadFlatteningThreshold = 1
                 }, ExpectedPath("BodyComplex"));
         }

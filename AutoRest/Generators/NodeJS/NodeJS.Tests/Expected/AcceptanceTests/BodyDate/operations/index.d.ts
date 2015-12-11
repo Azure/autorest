@@ -23,57 +23,57 @@ export interface DateModel {
     /**
      * Get null date value
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
     getNull(callback: ServiceCallback<Date>): void;
 
     /**
      * Get invalid date value
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getInvalidDate(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getInvalidDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
     getInvalidDate(callback: ServiceCallback<Date>): void;
 
     /**
      * Get overflow date value
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getOverflowDate(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getOverflowDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
     getOverflowDate(callback: ServiceCallback<Date>): void;
 
     /**
      * Get underflow date value
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getUnderflowDate(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getUnderflowDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
     getUnderflowDate(callback: ServiceCallback<Date>): void;
 
     /**
@@ -81,29 +81,29 @@ export interface DateModel {
      *
      * @param {date} dateBody
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putMaxDate(dateBody: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putMaxDate(dateBody: Date|string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putMaxDate(dateBody: Date|string, callback: ServiceCallback<void>): void;
 
     /**
      * Get max date value 9999-12-31
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMaxDate(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getMaxDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
     getMaxDate(callback: ServiceCallback<Date>): void;
 
     /**
@@ -111,28 +111,28 @@ export interface DateModel {
      *
      * @param {date} dateBody
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putMinDate(dateBody: Date|string, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putMinDate(dateBody: Date|string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putMinDate(dateBody: Date|string, callback: ServiceCallback<void>): void;
 
     /**
      * Get min date value 0000-01-01
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMinDate(options: RequestOptions, callback: ServiceCallback<Date>): void;
+    getMinDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
     getMinDate(callback: ServiceCallback<Date>): void;
 }

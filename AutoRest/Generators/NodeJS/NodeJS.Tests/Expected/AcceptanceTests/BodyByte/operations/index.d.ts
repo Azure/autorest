@@ -23,43 +23,43 @@ export interface ByteModel {
     /**
      * Get null byte value
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNull(options: RequestOptions, callback: ServiceCallback<Buffer>): void;
+    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Buffer>): void;
     getNull(callback: ServiceCallback<Buffer>): void;
 
     /**
      * Get empty byte value ''
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getEmpty(options: RequestOptions, callback: ServiceCallback<Buffer>): void;
+    getEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Buffer>): void;
     getEmpty(callback: ServiceCallback<Buffer>): void;
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNonAscii(options: RequestOptions, callback: ServiceCallback<Buffer>): void;
+    getNonAscii(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Buffer>): void;
     getNonAscii(callback: ServiceCallback<Buffer>): void;
 
     /**
@@ -68,28 +68,28 @@ export interface ByteModel {
      * @param {buffer} byteBody Base64-encoded non-ascii byte string hex(FF FE FD
      * FC FB FA F9 F8 F7 F6)
      * 
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putNonAscii(byteBody: Buffer, options: RequestOptions, callback: ServiceCallback<void>): void;
+    putNonAscii(byteBody: Buffer, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putNonAscii(byteBody: Buffer, callback: ServiceCallback<void>): void;
 
     /**
      * Get invalid byte value ':::SWAGGER::::'
      *
-     * @param {object} [options]
-     *
-     * @param {object} [options.customHeaders] headers that will be added to
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
      * request
-     *
+     * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: RequestOptions, callback: ServiceCallback<Buffer>): void;
+    getInvalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Buffer>): void;
     getInvalid(callback: ServiceCallback<Buffer>): void;
 }

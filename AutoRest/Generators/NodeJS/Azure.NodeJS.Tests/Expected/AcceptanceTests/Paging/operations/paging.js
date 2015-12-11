@@ -32,11 +32,11 @@ function Paging(client) {
 /**
  * A paging operation that finishes on the first call without a nextlink
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -154,13 +154,13 @@ Paging.prototype.getSinglePages = function (options, callback) {
 /**
  * A paging operation that includes a nextLink that has 10 pages
  *
- * @param {string} [clientRequestId]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.clientRequestId]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -174,7 +174,7 @@ Paging.prototype.getSinglePages = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePages = function (clientRequestId, options, callback) {
+Paging.prototype.getMultiplePages = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -183,6 +183,7 @@ Paging.prototype.getMultiplePages = function (clientRequestId, options, callback
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
   // Validate
   try {
     if (clientRequestId !== null && clientRequestId !== undefined && typeof clientRequestId.valueOf() !== 'string') {
@@ -285,11 +286,11 @@ Paging.prototype.getMultiplePages = function (clientRequestId, options, callback
  * A paging operation that fails on the first call with 500 and then retries
  * and then get a response including a nextLink that has 10 pages
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -409,11 +410,11 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
  * 2nd call fails first with 500. The client should retry and finish all 10
  * pages eventually.
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -531,11 +532,11 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
 /**
  * A paging operation that receives a 400 on the first call
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -653,11 +654,11 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
 /**
  * A paging operation that receives a 400 on the second call
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -775,11 +776,11 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
 /**
  * A paging operation that receives an invalid nextLink
  *
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -900,11 +901,11 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1024,13 +1025,13 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
- * @param {string} [clientRequestId]
+ * @param {object} [options] Optional Parameters.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {string} [options.clientRequestId]
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1044,7 +1045,7 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePagesNext = function (nextPageLink, clientRequestId, options, callback) {
+Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1053,6 +1054,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, clientRequestId,
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
   // Validate
   try {
     if (nextPageLink === null || nextPageLink === undefined || typeof nextPageLink.valueOf() !== 'string') {
@@ -1157,11 +1159,11 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, clientRequestId,
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1283,11 +1285,11 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1407,11 +1409,11 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1531,11 +1533,11 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)
@@ -1655,11 +1657,11 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
  * @param {string} nextPageLink The NextLink from the previous successful call
  * to List operation.
  * 
- * @param {object} [options]
- *
- * @param {object} [options.customHeaders] headers that will be added to
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
  * request
- *
+ * 
  * @param {function} callback
  *
  * @returns {function} callback(err, result, request, response)

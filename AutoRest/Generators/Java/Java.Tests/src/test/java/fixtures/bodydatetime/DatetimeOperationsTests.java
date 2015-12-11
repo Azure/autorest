@@ -8,7 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DatetimeOperationsTests {
-    static AutoRestDateTimeTestService client;
+    private static AutoRestDateTimeTestService client;
 
     @BeforeClass
     public static void setup() {
@@ -126,7 +126,7 @@ public class DatetimeOperationsTests {
 
     @Test
     public void putLocalPositiveOffsetMinDateTime() throws Exception {
-        DateTime body =new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.forOffsetHours(14));
+        DateTime body = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.forOffsetHours(14));
         client.getDatetimeOperations().putLocalPositiveOffsetMinDateTime(body);
     }
 
@@ -139,7 +139,7 @@ public class DatetimeOperationsTests {
 
     @Test
     public void putLocalNegativeOffsetMinDateTime() throws Exception {
-        DateTime body =new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.forOffsetHours(-14));
+        DateTime body = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.forOffsetHours(-14));
         client.getDatetimeOperations().putLocalNegativeOffsetMinDateTime(body);
     }
 
