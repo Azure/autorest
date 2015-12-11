@@ -71,7 +71,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/datetimerfc1123/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetimerfc1123/null").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             _httpRequest.Method = new HttpMethod("GET");
@@ -173,7 +173,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/datetimerfc1123/invalid").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetimerfc1123/invalid").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             _httpRequest.Method = new HttpMethod("GET");
@@ -275,7 +275,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/datetimerfc1123/overflow").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetimerfc1123/overflow").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             _httpRequest.Method = new HttpMethod("GET");
@@ -377,7 +377,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/datetimerfc1123/underflow").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetimerfc1123/underflow").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             _httpRequest.Method = new HttpMethod("GET");
@@ -486,7 +486,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/datetimerfc1123/max").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetimerfc1123/max").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             _httpRequest.Method = new HttpMethod("PUT");
@@ -579,7 +579,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/datetimerfc1123/max/lowercase").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetimerfc1123/max/lowercase").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             _httpRequest.Method = new HttpMethod("GET");
@@ -681,7 +681,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/datetimerfc1123/max/uppercase").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetimerfc1123/max/uppercase").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             _httpRequest.Method = new HttpMethod("GET");
@@ -790,7 +790,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/datetimerfc1123/min").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetimerfc1123/min").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             _httpRequest.Method = new HttpMethod("PUT");
@@ -883,7 +883,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/datetimerfc1123/min").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetimerfc1123/min").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             _httpRequest.Method = new HttpMethod("GET");

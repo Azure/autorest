@@ -80,7 +80,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}").ToString();
             _url = _url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
@@ -202,7 +202,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}").ToString();
             _url = _url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
@@ -325,7 +325,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}").ToString();
             _url = _url.Replace("{unencodedPathParam}", unencodedPathParam);
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
@@ -448,7 +448,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/skipUrlEncoding/method/query/valid").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/skipUrlEncoding/method/query/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (q1 != null)
             {
@@ -569,7 +569,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/skipUrlEncoding/method/query/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/skipUrlEncoding/method/query/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (q1 != null)
             {
@@ -695,7 +695,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/skipUrlEncoding/path/query/valid").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/skipUrlEncoding/path/query/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (q1 != null)
             {
@@ -819,7 +819,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/skipUrlEncoding/swagger/query/valid").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/skipUrlEncoding/swagger/query/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (q1 != null)
             {

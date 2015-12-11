@@ -76,7 +76,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview").ToString();
             List<string> _queryParameters = new List<string>();
             if (this.Client.ApiVersion != null)
             {
@@ -197,7 +197,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview").ToString();
             List<string> _queryParameters = new List<string>();
             if (this.Client.ApiVersion != null)
             {
@@ -318,7 +318,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview").ToString();
             List<string> _queryParameters = new List<string>();
             if (this.Client.ApiVersion != null)
             {
@@ -439,7 +439,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview").ToString();
             List<string> _queryParameters = new List<string>();
             if (this.Client.ApiVersion != null)
             {

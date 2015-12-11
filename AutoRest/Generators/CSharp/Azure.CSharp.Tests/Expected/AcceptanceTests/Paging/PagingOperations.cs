@@ -72,7 +72,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/paging/single").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/single").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -202,7 +202,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/paging/multiple").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -338,7 +338,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/paging/multiple/retryfirst").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple/retryfirst").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -467,7 +467,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/paging/multiple/retrysecond").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple/retrysecond").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -594,7 +594,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/paging/single/failure").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/single/failure").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -721,7 +721,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/paging/multiple/failure").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple/failure").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -848,7 +848,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/paging/multiple/failureuri").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "paging/multiple/failureuri").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {

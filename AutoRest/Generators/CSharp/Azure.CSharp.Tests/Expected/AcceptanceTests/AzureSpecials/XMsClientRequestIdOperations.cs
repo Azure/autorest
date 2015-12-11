@@ -73,7 +73,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/overwrite/x-ms-client-request-id/method/").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/overwrite/x-ms-client-request-id/method/").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -196,7 +196,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/overwrite/x-ms-client-request-id/via-param/method/").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/overwrite/x-ms-client-request-id/via-param/method/").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {

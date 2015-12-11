@@ -81,7 +81,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/customNamedRequestId").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/customNamedRequestId").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {

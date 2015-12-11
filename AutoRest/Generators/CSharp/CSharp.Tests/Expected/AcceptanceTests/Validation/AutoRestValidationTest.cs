@@ -235,7 +235,7 @@ namespace Fixtures.AcceptanceTestsValidation
             }
             // Construct URL
             var _baseUrl = this.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}").ToString();
             _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(this.SubscriptionId));
             _url = _url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             _url = _url.Replace("{id}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(id, this.SerializationSettings).Trim('"')));
@@ -417,7 +417,7 @@ namespace Fixtures.AcceptanceTestsValidation
             }
             // Construct URL
             var _baseUrl = this.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}").ToString();
             _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(this.SubscriptionId));
             _url = _url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             _url = _url.Replace("{id}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(id, this.SerializationSettings).Trim('"')));

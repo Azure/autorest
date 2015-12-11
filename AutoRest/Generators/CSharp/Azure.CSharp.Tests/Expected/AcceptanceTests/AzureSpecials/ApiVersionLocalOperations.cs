@@ -82,7 +82,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/apiVersion/method/string/none/query/local/2.0").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/method/string/none/query/local/2.0").ToString();
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
             {
@@ -205,7 +205,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/apiVersion/method/string/none/query/local/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/method/string/none/query/local/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
             {
@@ -332,7 +332,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/apiVersion/path/string/none/query/local/2.0").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/path/string/none/query/local/2.0").ToString();
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
             {
@@ -459,7 +459,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/apiVersion/swagger/string/none/query/local/2.0").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/apiVersion/swagger/string/none/query/local/2.0").ToString();
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
             {

@@ -75,7 +75,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/bool/true").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/bool/true").ToString();
             List<string> _queryParameters = new List<string>();
             if (boolQuery != null)
             {
@@ -177,7 +177,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/bool/false").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/bool/false").ToString();
             List<string> _queryParameters = new List<string>();
             if (boolQuery != null)
             {
@@ -279,7 +279,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/bool/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/bool/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (boolQuery != null)
             {
@@ -381,7 +381,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/int/1000000").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/int/1000000").ToString();
             List<string> _queryParameters = new List<string>();
             if (intQuery != null)
             {
@@ -483,7 +483,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/int/-1000000").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/int/-1000000").ToString();
             List<string> _queryParameters = new List<string>();
             if (intQuery != null)
             {
@@ -585,7 +585,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/int/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/int/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (intQuery != null)
             {
@@ -687,7 +687,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/long/10000000000").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/long/10000000000").ToString();
             List<string> _queryParameters = new List<string>();
             if (longQuery != null)
             {
@@ -789,7 +789,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/long/-10000000000").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/long/-10000000000").ToString();
             List<string> _queryParameters = new List<string>();
             if (longQuery != null)
             {
@@ -891,7 +891,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/long/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/long/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (longQuery != null)
             {
@@ -993,7 +993,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/float/1.034E+20").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/float/1.034E+20").ToString();
             List<string> _queryParameters = new List<string>();
             if (floatQuery != null)
             {
@@ -1095,7 +1095,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/float/-1.034E-20").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/float/-1.034E-20").ToString();
             List<string> _queryParameters = new List<string>();
             if (floatQuery != null)
             {
@@ -1197,7 +1197,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/float/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/float/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (floatQuery != null)
             {
@@ -1299,7 +1299,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/double/9999999.999").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/double/9999999.999").ToString();
             List<string> _queryParameters = new List<string>();
             if (doubleQuery != null)
             {
@@ -1401,7 +1401,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/double/-9999999.999").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/double/-9999999.999").ToString();
             List<string> _queryParameters = new List<string>();
             if (doubleQuery != null)
             {
@@ -1503,7 +1503,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/double/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/double/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (doubleQuery != null)
             {
@@ -1606,7 +1606,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/string/unicode/").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/string/unicode/").ToString();
             List<string> _queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -1709,7 +1709,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend").ToString();
             List<string> _queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -1811,7 +1811,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/string/empty").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/string/empty").ToString();
             List<string> _queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -1913,7 +1913,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/string/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/string/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (stringQuery != null)
             {
@@ -2016,7 +2016,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/enum/green%20color").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/enum/green%20color").ToString();
             List<string> _queryParameters = new List<string>();
             if (enumQuery != null)
             {
@@ -2119,7 +2119,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/enum/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/enum/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (enumQuery != null)
             {
@@ -2221,7 +2221,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/byte/multibyte").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/byte/multibyte").ToString();
             List<string> _queryParameters = new List<string>();
             if (byteQuery != null)
             {
@@ -2323,7 +2323,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/byte/empty").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/byte/empty").ToString();
             List<string> _queryParameters = new List<string>();
             if (byteQuery != null)
             {
@@ -2425,7 +2425,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/byte/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/byte/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (byteQuery != null)
             {
@@ -2527,7 +2527,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/date/2012-01-01").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/date/2012-01-01").ToString();
             List<string> _queryParameters = new List<string>();
             if (dateQuery != null)
             {
@@ -2629,7 +2629,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/date/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/date/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (dateQuery != null)
             {
@@ -2731,7 +2731,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/datetime/2012-01-01T01%3A01%3A01Z").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/datetime/2012-01-01T01%3A01%3A01Z").ToString();
             List<string> _queryParameters = new List<string>();
             if (dateTimeQuery != null)
             {
@@ -2833,7 +2833,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/datetime/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/datetime/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (dateTimeQuery != null)
             {
@@ -2937,7 +2937,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/array/csv/string/valid").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/array/csv/string/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -3039,7 +3039,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/array/csv/string/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/array/csv/string/null").ToString();
             List<string> _queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -3141,7 +3141,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/array/csv/string/empty").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/array/csv/string/empty").ToString();
             List<string> _queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -3245,7 +3245,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/array/ssv/string/valid").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/array/ssv/string/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -3349,7 +3349,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/array/tsv/string/valid").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/array/tsv/string/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (arrayQuery != null)
             {
@@ -3453,7 +3453,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/queries/array/pipes/string/valid").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/array/pipes/string/valid").ToString();
             List<string> _queryParameters = new List<string>();
             if (arrayQuery != null)
             {

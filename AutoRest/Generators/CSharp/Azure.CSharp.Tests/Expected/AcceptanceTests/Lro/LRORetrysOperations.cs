@@ -67,9 +67,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         public async Task<AzureOperationResponse<Product>> Put201CreatingSucceeded200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product> response = await BeginPut201CreatingSucceeded200WithHttpMessagesAsync(
+            AzureOperationResponse<Product> _response = await BeginPut201CreatingSucceeded200WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(_response,
                 customHeaders,
                 cancellationToken);
         }
@@ -104,7 +104,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/lro/retryerror/put/201/creating/succeeded/200").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "lro/retryerror/put/201/creating/succeeded/200").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -243,9 +243,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         public async Task<AzureOperationResponse<Product,LRORetrysPutAsyncRelativeRetrySucceededHeaders>> PutAsyncRelativeRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
-            AzureOperationResponse<Product,LRORetrysPutAsyncRelativeRetrySucceededHeaders> response = await BeginPutAsyncRelativeRetrySucceededWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LRORetrysPutAsyncRelativeRetrySucceededHeaders> _response = await BeginPutAsyncRelativeRetrySucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPutOrPatchOperationResultAsync(response,
+            return await this.Client.GetPutOrPatchOperationResultAsync(_response,
                 customHeaders,
                 cancellationToken);
         }
@@ -280,7 +280,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/lro/retryerror/putasync/retry/succeeded").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "lro/retryerror/putasync/retry/succeeded").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -411,9 +411,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         public async Task<AzureOperationResponse<Product,LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>> DeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationResponse<Product,LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> response = await BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(
+            AzureOperationResponse<Product,LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> _response = await BeginDeleteProvisioning202Accepted200SucceededWithHttpMessagesAsync(
                 customHeaders, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -442,7 +442,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/lro/retryerror/delete/provisioning/202/accepted/200/succeeded").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "lro/retryerror/delete/provisioning/202/accepted/200/succeeded").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -581,9 +581,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         public async Task<AzureOperationHeaderResponse<LRORetrysDelete202Retry200Headers>> Delete202Retry200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationHeaderResponse<LRORetrysDelete202Retry200Headers> response = await BeginDelete202Retry200WithHttpMessagesAsync(
+            AzureOperationHeaderResponse<LRORetrysDelete202Retry200Headers> _response = await BeginDelete202Retry200WithHttpMessagesAsync(
                 customHeaders, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -611,7 +611,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/lro/retryerror/delete/202/retry/200").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "lro/retryerror/delete/202/retry/200").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -724,9 +724,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         public async Task<AzureOperationHeaderResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>> DeleteAsyncRelativeRetrySucceededWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationHeaderResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeaders> response = await BeginDeleteAsyncRelativeRetrySucceededWithHttpMessagesAsync(
+            AzureOperationHeaderResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeaders> _response = await BeginDeleteAsyncRelativeRetrySucceededWithHttpMessagesAsync(
                 customHeaders, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -754,7 +754,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/lro/retryerror/deleteasync/retry/succeeded").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "lro/retryerror/deleteasync/retry/succeeded").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -870,9 +870,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         public async Task<AzureOperationHeaderResponse<LRORetrysPost202Retry200Headers>> Post202Retry200WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationHeaderResponse<LRORetrysPost202Retry200Headers> response = await BeginPost202Retry200WithHttpMessagesAsync(
+            AzureOperationHeaderResponse<LRORetrysPost202Retry200Headers> _response = await BeginPost202Retry200WithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -904,7 +904,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/lro/retryerror/post/202/retry/200").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "lro/retryerror/post/202/retry/200").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {
@@ -1025,9 +1025,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         public async Task<AzureOperationHeaderResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders>> PostAsyncRelativeRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send request
-            AzureOperationHeaderResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders> response = await BeginPostAsyncRelativeRetrySucceededWithHttpMessagesAsync(
+            AzureOperationHeaderResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders> _response = await BeginPostAsyncRelativeRetrySucceededWithHttpMessagesAsync(
                 product, customHeaders, cancellationToken);
-            return await this.Client.GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
+            return await this.Client.GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken);
         }
 
         /// <summary>
@@ -1060,7 +1060,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/lro/retryerror/postasync/retry/succeeded").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "lro/retryerror/postasync/retry/succeeded").ToString();
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
             {

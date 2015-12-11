@@ -78,7 +78,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/reqopt/implicit/required/path/{pathParameter}").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/implicit/required/path/{pathParameter}").ToString();
             _url = _url.Replace("{pathParameter}", Uri.EscapeDataString(pathParameter));
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
@@ -180,7 +180,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/reqopt/implicit/optional/query").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/implicit/optional/query").ToString();
             List<string> _queryParameters = new List<string>();
             if (queryParameter != null)
             {
@@ -281,7 +281,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/reqopt/implicit/optional/header").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/implicit/optional/header").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             _httpRequest.Method = new HttpMethod("PUT");
@@ -381,7 +381,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/reqopt/implicit/optional/body").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/implicit/optional/body").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             _httpRequest.Method = new HttpMethod("PUT");
@@ -478,7 +478,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/reqopt/global/required/path/{required-global-path}").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/global/required/path/{required-global-path}").ToString();
             _url = _url.Replace("{required-global-path}", Uri.EscapeDataString(this.Client.RequiredGlobalPath));
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
@@ -581,7 +581,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/reqopt/global/required/query").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/global/required/query").ToString();
             List<string> _queryParameters = new List<string>();
             if (this.Client.RequiredGlobalQuery != null)
             {
@@ -688,7 +688,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/reqopt/global/optional/query").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/global/optional/query").ToString();
             List<string> _queryParameters = new List<string>();
             if (this.Client.OptionalGlobalQuery != null)
             {

@@ -81,7 +81,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}").ToString();
             _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
@@ -206,7 +206,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}").ToString();
             _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
@@ -329,7 +329,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}").ToString();
             _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)
@@ -453,7 +453,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}").ToString();
             _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
             List<string> _queryParameters = new List<string>();
             if (_queryParameters.Count > 0)

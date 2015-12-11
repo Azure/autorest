@@ -107,7 +107,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/parameterGrouping/postRequired/{path}").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "parameterGrouping/postRequired/{path}").ToString();
             _url = _url.Replace("{path}", Uri.EscapeDataString(path));
             List<string> _queryParameters = new List<string>();
             if (query != null)
@@ -252,7 +252,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/parameterGrouping/postOptional").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "parameterGrouping/postOptional").ToString();
             List<string> _queryParameters = new List<string>();
             if (query != null)
             {
@@ -407,7 +407,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/parameterGrouping/postMultipleParameterGroups").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "parameterGrouping/postMultipleParameterGroups").ToString();
             List<string> _queryParameters = new List<string>();
             if (queryOne != null)
             {
@@ -559,7 +559,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/parameterGrouping/sharedParameterGroupObject").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "parameterGrouping/sharedParameterGroupObject").ToString();
             List<string> _queryParameters = new List<string>();
             if (queryOne != null)
             {

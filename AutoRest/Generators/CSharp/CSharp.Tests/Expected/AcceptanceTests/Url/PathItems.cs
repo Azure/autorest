@@ -103,7 +103,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery").ToString();
             _url = _url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             _url = _url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
             _url = _url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
@@ -244,7 +244,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery").ToString();
             _url = _url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             _url = _url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
             _url = _url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
@@ -384,7 +384,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null").ToString();
             _url = _url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             _url = _url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
             _url = _url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
@@ -524,7 +524,7 @@ namespace Fixtures.AcceptanceTestsUrl
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null").ToString();
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null").ToString();
             _url = _url.Replace("{localStringPath}", Uri.EscapeDataString(localStringPath));
             _url = _url.Replace("{pathItemStringPath}", Uri.EscapeDataString(pathItemStringPath));
             _url = _url.Replace("{globalStringPath}", Uri.EscapeDataString(this.Client.GlobalStringPath));
