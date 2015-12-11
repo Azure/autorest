@@ -68,7 +68,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             {
                 if (DefaultResponse.Body != null && DefaultResponse.Body.Name == "CloudError")
                 {
-                    return "ex = new CloudException(errorBody.Message);";
+                    return "ex = new CloudException(_errorBody.Message);";
                 }
                 return base.InitializeExceptionWithMessage;
             }
@@ -191,11 +191,11 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                     this.ReturnType.Body != null)
                 {
                     HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
-                    sb.AppendFormat("result.Body = (statusCode == HttpStatusCode.{0});", code.ToString()).AppendLine();
+                    sb.AppendFormat("_result.Body = (_statusCode == HttpStatusCode.{0});", code.ToString()).AppendLine();
                 }
-                sb.AppendLine("if (httpResponse.Headers.Contains(\"{0}\"))", this.RequestIdString)
+                sb.AppendLine("if (_httpResponse.Headers.Contains(\"{0}\"))", this.RequestIdString)
                     .AppendLine("{").Indent()
-                        .AppendLine("result.RequestId = httpResponse.Headers.GetValues(\"{0}\").FirstOrDefault();", this.RequestIdString).Outdent()
+                        .AppendLine("_result.RequestId = _httpResponse.Headers.GetValues(\"{0}\").FirstOrDefault();", this.RequestIdString).Outdent()
                     .AppendLine("}")
                     .AppendLine(base.InitializeResponseBody);
                 return sb.ToString();
@@ -210,7 +210,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             get
             {
                 var sb= new IndentedStringBuilder();
-                sb.AppendLine("httpRequest.Headers.TryAddWithoutValidation(\"{0}\", Guid.NewGuid().ToString());", this.ClientRequestIdString)
+                sb.AppendLine("_httpRequest.Headers.TryAddWithoutValidation(\"{0}\", Guid.NewGuid().ToString());", this.ClientRequestIdString)
                   .AppendLine(base.SetDefaultHeaders);
                 return sb.ToString();
             }
@@ -252,26 +252,26 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 
         private void AddQueryParametersToUri(string variableName, IndentedStringBuilder builder)
         {
-            builder.AppendLine("List<string> queryParameters = new List<string>();");
+            builder.AppendLine("List<string> _queryParameters = new List<string>();");
             if (LogicalParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
             {
                 foreach (var queryParameter in LogicalParameterTemplateModels
                     .Where(p => p.Location == ParameterLocation.Query).Select(p => p as AzureParameterTemplateModel))
                 {
                     string queryParametersAddString =
-                        "queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));";
+                        "_queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));";
 
                     if (queryParameter.IsODataFilterExpression)
                     {
                         queryParametersAddString = @"var _odataFilter = {2}.ToString();
     if (!string.IsNullOrEmpty(_odataFilter)) 
     {{
-        queryParameters.Add(_odataFilter);
+        _queryParameters.Add(_odataFilter);
     }}";
                     }
                     else if (queryParameter.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension))
                     {
-                        queryParametersAddString = "queryParameters.Add(string.Format(\"{0}={{0}}\", {1}));";
+                        queryParametersAddString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", {1}));";
                     }
 
                     builder.AppendLine("if ({0} != null)", queryParameter.Name)
@@ -283,9 +283,9 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 }
             }
 
-            builder.AppendLine("if (queryParameters.Count > 0)")
+            builder.AppendLine("if (_queryParameters.Count > 0)")
                 .AppendLine("{").Indent()
-                .AppendLine("{0} += \"?\" + string.Join(\"&\", queryParameters);", variableName).Outdent()
+                .AppendLine("{0} += \"?\" + string.Join(\"&\", _queryParameters);", variableName).Outdent()
                 .AppendLine("}");
         }
 

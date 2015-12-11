@@ -40,8 +40,8 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<Basic> GetValidAsync( this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -97,8 +97,8 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<Basic> GetInvalidAsync( this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -123,8 +123,8 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<Basic> GetEmptyAsync( this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -149,8 +149,8 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<Basic> GetNullAsync( this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -177,8 +177,8 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<Basic> GetNotProvidedAsync( this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
     }

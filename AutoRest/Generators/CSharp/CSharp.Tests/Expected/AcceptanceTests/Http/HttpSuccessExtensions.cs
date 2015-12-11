@@ -65,8 +65,8 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static async Task<bool?> Get200Async( this IHttpSuccess operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.Get200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.Get200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>

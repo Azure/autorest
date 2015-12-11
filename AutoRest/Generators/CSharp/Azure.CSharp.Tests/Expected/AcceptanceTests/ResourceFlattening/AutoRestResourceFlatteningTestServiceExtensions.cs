@@ -72,8 +72,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             /// </param>
             public static async Task<IList<FlattenedProduct>> GetArrayAsync( this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetArrayWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetArrayWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -129,8 +129,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             /// </param>
             public static async Task<IDictionary<string, FlattenedProduct>> GetDictionaryAsync( this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDictionaryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDictionaryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -186,8 +186,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             /// </param>
             public static async Task<ResourceCollection> GetResourceCollectionAsync( this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetResourceCollectionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetResourceCollectionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
     }

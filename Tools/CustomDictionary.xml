@@ -8,7 +8,7 @@
       <Word>Js</Word>
       <Word>npm</Word>
       <Word>Infos</Word>
-      <Word>queryParameters</Word>
+      <Word>_queryParameters</Word>
       <Word>Cli</Word>
       <Word>Api</Word>
       <Word>Etw</Word>
@@ -20,13 +20,13 @@
       <Word>ToString</Word>
       <Word>TryAddWithoutValidation</Word>
       <Word>NewGuid</Word>
-      <Word>httpRequest</Word>
+      <Word>_httpRequest</Word>
       <Word>msRestAzure</Word>
       <Word>generateUuid</Word>
       <Word>HttpStatusCode</Word>
       <Word>NoContent</Word>
-      <Word>statusCode</Word>
-      <Word>httpResponse</Word>
+      <Word>_statusCode</Word>
+      <Word>_httpResponse</Word>
       <Word>RequestId</Word>
       <Word>GetValues</Word>
       <Word>FirstOrDefault</Word>
