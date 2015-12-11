@@ -500,6 +500,7 @@ namespace Microsoft.Rest.Generator.Azure
             return requestIdName;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         private static void CheckAzureResourceProperties(CompositeType compositeType)
         {
             // If derived from resource with x-ms-azure-resource then resource should have resource specific properties
